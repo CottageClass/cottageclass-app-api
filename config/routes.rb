@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  devise_for :users
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  # if problems arise see: https://github.com/lynndylanhurley/devise_token_auth/blob/master/docs/faq.md#can-i-use-this-gem-alongside-standard-devise
+
+  #devise_for :users
+  mount_devise_token_auth_for 'User', at: 'auth'
+
   root "null#index"
 end
