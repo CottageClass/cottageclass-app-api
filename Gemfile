@@ -22,6 +22,7 @@ gem 'dotenv-rails'
 gem 'devise'
 gem 'devise_token_auth'
 gem 'omniauth'
+gem 'omniauth-facebook'
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # - this is required by devise_token_auth, as requests to our API come from an authorized client (the CareShare app)
