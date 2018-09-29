@@ -26,7 +26,8 @@ module CottageclassAppApi
     # - See: https://github.com/cyu/rack-cors#rails-configuration
     config.middleware.use Rack::Cors, debug: true do
       allow do
-        origins 'https://app.cottageclass.com', 'https://88f5065d.ngrok.io', 'http://localhost:8077', 'https://localhost:8077'
+        #origins 'https://app.cottageclass.com', 'https://88f5065d.ngrok.io', 'http://localhost:8077', 'https://localhost:8077'
+        origins '*'
         resource '*',
           headers: :any,
           expose: ['access-token', 'expiry', 'token-type', 'uid', 'client'],
