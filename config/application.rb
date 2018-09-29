@@ -24,9 +24,9 @@ module CottageclassAppApi
 
     # configure CORS to allow our client-side domain requests
     # - See: https://github.com/cyu/rack-cors#rails-configuration
-    config.middleware.use Rack::Cors do
+    config.middleware.use Rack::Cors, debug: true do
       allow do
-        origins 'app.cottageclass.com'
+        origins 'app.cottageclass.com', 'https://5ce51bed.ngrok.io', 'http://localhost:8077'
         resource '*',
           headers: :any,
           expose: ['access-token', 'expiry', 'token-type', 'uid', 'client'],
@@ -43,5 +43,13 @@ module CottageclassAppApi
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+
+    # add in Session middleware for OmniAuth to work
+    # - something about redirects not being handled properly without sessions
+    # - See: https://github.com/lynndylanhurley/devise_token_auth/issues/183
+    # - See: https://github.com/omniauth/omniauth#integrating-omniauth-into-your-rails-api
+    config.session_store :cookie_store, key: '_interslice_session'
+    config.middleware.use ActionDispatch::Cookies # Required for all session management
+    config.middleware.use ActionDispatch::Session::CookieStore, config.session_options
   end
 end
