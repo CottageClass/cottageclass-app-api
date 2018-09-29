@@ -44,6 +44,7 @@ module CottageclassAppApi
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+    config.navigational_formats = []
 
     # add in Session middleware for OmniAuth to work
     # - something about redirects not being handled properly without sessions
