@@ -250,6 +250,7 @@ Devise.setup do |config|
   #
   # The "*/*" below is required to match Internet Explorer requests.
   # config.navigational_formats = ['*/*', :html]
+  config.navigational_formats = [:json]
 
   # The default HTTP method used to sign out a resource. Default is :delete.
   config.sign_out_via = :delete
@@ -258,7 +259,17 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
-  config.omniauth :facebook,      ENV['FACEBOOK_KEY'], ENV['FACEBOOK_SECRET'], scope: ':email'
+  config.omniauth :facebook,      ENV['FACEBOOK_KEY'], ENV['FACEBOOK_SECRET'], scope: 'email'
+
+  Rails.application.config.to_prepare do              # to_prepare ensures that the monkey patching happens before the first request
+    Devise::OmniauthCallbacksController.class_eval do # reopen the class
+      def failure                                     # redefine the failure method
+        Rails.logger.debug(["IN OmniCallbacksFail: ", OmniAuth::Utils.camelize(failed_strategy.name), failure_message])
+        byebug
+        redirect_to after_omniauth_failure_path_for(resource_name)
+      end
+    end
+  end
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

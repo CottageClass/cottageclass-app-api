@@ -27,9 +27,10 @@ module CottageclassAppApi
     config.middleware.use Rack::Cors, debug: true do
       allow do
         #origins 'https://app.cottageclass.com', 'https://88f5065d.ngrok.io', 'http://localhost:8077', 'https://localhost:8077'
-        origins '*', 'null'
+        origins 'localhost:3000', 'localhost:8077', 'facebook.com', 'cottageclass-app-api.herokuapp.com', 'cottageclass-map-vue.herokuapp.com'
         resource '*',
           headers: :any,
+          credentials: true,
           expose: ['access-token', 'expiry', 'token-type', 'uid', 'client'],
           methods: [:get, :post, :put, :delete, :options]
       end
@@ -44,13 +45,12 @@ module CottageclassAppApi
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
-    config.navigational_formats = []
 
     # add in Session middleware for OmniAuth to work
     # - something about redirects not being handled properly without sessions
     # - See: https://github.com/lynndylanhurley/devise_token_auth/issues/183
     # - See: https://github.com/omniauth/omniauth#integrating-omniauth-into-your-rails-api
-    config.session_store :cookie_store, key: '_interslice_session'
+    config.session_store :cookie_store, key: '_interslice_session', domain: :all
     config.middleware.use ActionDispatch::Cookies # Required for all session management
     config.middleware.use ActionDispatch::Session::CookieStore, config.session_options
   end
