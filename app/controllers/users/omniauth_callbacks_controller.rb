@@ -4,46 +4,30 @@ module Users
 
     def omniauth_success
       Rails.logger.info "IN OMNIAUTH SUCCESS"
+      super
+    end
 
-      super do |resource|
-        if omniauth_window_type.present?      # auth requested via AJAX
-          sign_in resource
-        else                                  # auth requested from backend standalone
-          Rails.logger.info "ABOUT TO LOG IN IN OMNIAUTH SUCCESS"
-          remember_me resource
-          sign_in_and_redirect resource and return
-        end
-      end
+    def auth_origin_url
+      ENV['OAUTH_RECEIVE_TOKEN_ENDPOINT'] || 'https://localhost:8077/auth/callback'
+    end
+
+    # We are overriding this method to allow us to access /auth/facebook/callbacks directly.
+    # - Copy some functionality over from https://github.com/lynndylanhurley/devise_token_auth/blob/master/app/controllers/devise_token_auth/omniauth_callbacks_controller.rb#L11
+    # - to allow omniauth_success to have intended parameters
+    def redirect_callbacks
+      # preserve omniauth info for success route. ignore 'extra' in twitter
+      #   auth response to avoid CookieOverflow.
+      session['dta.omniauth.auth'] = request.env['omniauth.auth'].except('extra')
+      session['dta.omniauth.params'] = request.env['omniauth.params']
+
+      omniauth_success
     end
 
     protected
 
-    def get_resource_from_auth_hash
-      # We don't need that since we trust the email of unique provider google
-      # @resource = resource_class.where({
-      #                                    uid:      auth_hash['uid'],
-      #                                    provider: auth_hash['provider']
-      #                                  }).first
-
-      @resource = resource_class.where(email: auth_hash['info']['email']).first
-
-      # TODO : handle properly fail
-      if @resource.nil?
-        redirect_to root_path, alert: "Unkown email!" and return
-      end
-
-      # sync user info with provider, update/generate auth token
-      # assign_provider_attrs(@resource, auth_hash)
-
-      # @resource.uid = auth_hash['uid']
-      # @resource.provider = auth_hash['provider']
-      @resource.save
-
-      # assign any additional (whitelisted) attributes
-      # extra_params = whitelisted_params
-      # @resource.assign_attributes(extra_params) if extra_params
-      #
-      @resource
+    # override as we only have a single user
+    def resource_class
+      'User'.constantize
     end
   end
 end
