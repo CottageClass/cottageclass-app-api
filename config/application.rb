@@ -22,6 +22,22 @@ module CottageclassAppApi
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.2
 
+    # TODO: ALTERNATIVE TO RACK-CORS
+    # - https://www.meetup.com/NYC-rb/messages/77281438/
+    # - TRY to use to get past FACEBOOK ORIGINULL CSRF error
+    # - and allow to use just GET /auth/facebook and do entire OAuth flow the DTA way
+    # - otherwise everything works!
+    # - TODO: just need FE route to store the token at :8077/auth/callback
+    #
+    #   config.action_dispatch.default_headers = {
+    #     "Access-Control-Allow-Origin" => "*",
+    #     "Access-Control-Request-Method" => "*",
+    #     "Access-Control-Allow-Methods" => "POST, PUT, DELETE, GET, OPTIONS",
+    #     "Access-Control-Allow-Headers" => "Origin, X-Requested-With, Content-Type, Accept, Authorization",
+    #     "Access-Control-Max-Age" => "[masked]",
+    #     "X-Frame-Options" => "http://localhost"
+    #   }
+
     # configure CORS to allow our client-side domain requests
     # - See: https://github.com/cyu/rack-cors#rails-configuration
     config.middleware.use Rack::Cors, debug: true do
