@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  post 'user_token' => 'user_token#create'
+  use_doorkeeper
+  post 'auth/user_token' => 'user_token#create'
+  post 'auth/facebook' => 'facebook_token#facebook'
 
   root "null#index"
 end

@@ -29,16 +29,18 @@ module CottageclassAppApi
     # - otherwise everything works!
     # - TODO: just need FE route to store the token at :8077/auth/callback
     #
-    config.action_dispatch.default_headers = {
-      "Access-Control-Allow-Origin" => "https://localhost:3000, https://localhost:8077, https://facebook.com, cottageclass-app-api.herokuapp.com, cottageclass-map-vue.herokuapp.com",
-      "Access-Control-Request-Method" => "*",
-      "Access-Control-Allow-Methods" => "POST, PUT, DELETE, GET, OPTIONS",
-      "Access-Control-Allow-Headers" => "Origin, X-Requested-With, Content-Type, Accept, Authorization",
-      "Access-Control-Expose-Headers" => "Access-Token, Expiry, Token-Type, uid, UID, Client",
-      "Access-Control-Max-Age" => "[masked]",
-      "X-Frame-Options" => "ALLOW_FROM https://localhost:8077",
-      "Content-Security-Policy" => "frame-ancestors facebook.com"
-    }
+
+    # CORS - allow requests from only our client domain
+    config.middleware.use Rack::Cors, debug: true do
+      allow do
+        origins 'https://localhost:3000', 'https://localhost:8077', 'https://facebook.com', 'cottageclass-app-api.herokuapp.com', 'cottageclass-map-vue.herokuapp.com'
+        resource '*',
+          headers: :any,
+          credentials: true,
+          expose: ['access-token', 'expiry', 'token-type', 'uid', 'client'],
+          methods: [:get, :post, :put, :delete, :options]
+      end
+    end
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers

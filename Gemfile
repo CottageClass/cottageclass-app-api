@@ -21,6 +21,12 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'dotenv-rails'
 gem 'knock', github: 'nsarno/knock'
 
+# FB's Graph API access gem, also has an OAuth code<>access_token exchange module
+gem 'koala'
+# OAuth provider, partnered with Knock
+# - skip until we need OAuth sessions monitored, eg to save a FB access token for subsequent requests (a session, this is what OmniAuth wants you to do)
+#gem 'doorkeeper'
+
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 gem 'rack-cors', require: 'rack/cors'
 
