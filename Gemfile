@@ -19,13 +19,9 @@ gem 'puma', '~> 3.11'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'dotenv-rails'
-gem 'devise'
-gem 'devise_token_auth'
-gem 'omniauth'
-gem 'omniauth-facebook'
+gem 'knock', github: 'nsarno/knock'
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
-# - this is required by devise_token_auth, as requests to our API come from an authorized client (the CareShare app)
 gem 'rack-cors', require: 'rack/cors'
 
 group :production do

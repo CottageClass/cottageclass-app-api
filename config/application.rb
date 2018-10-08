@@ -40,7 +40,6 @@ module CottageclassAppApi
       "Content-Security-Policy" => "frame-ancestors facebook.com"
     }
 
-
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
@@ -50,13 +49,5 @@ module CottageclassAppApi
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
-
-    # add in Session middleware for OmniAuth to work
-    # - something about redirects not being handled properly without sessions
-    # - See: https://github.com/lynndylanhurley/devise_token_auth/issues/183
-    # - See: https://github.com/omniauth/omniauth#integrating-omniauth-into-your-rails-api
-    config.session_store :cookie_store, key: '_interslice_session', domain: :all
-    config.middleware.use ActionDispatch::Cookies # Required for all session management
-    config.middleware.use ActionDispatch::Session::CookieStore, config.session_options
   end
 end
