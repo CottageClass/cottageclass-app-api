@@ -2,6 +2,10 @@ module Users
   class OmniauthCallbacksController < DeviseTokenAuth::OmniauthCallbacksController
     include Devise::Controllers::Rememberable
 
+    # - finds user
+    # - saves token for session matching
+    # - redirects to auth_origin_url
+    # - original: https://github.com/lynndylanhurley/devise_token_auth/blob/master/app/controllers/devise_token_auth/omniauth_callbacks_controller.rb#L29
     def omniauth_success
       Rails.logger.info "IN OMNIAUTH SUCCESS"
       super
