@@ -1,8 +1,8 @@
 class ApplicationController < ActionController::API
   include Knock::Authenticable
 
-  def new_jwt
-    Knock::AuthToken.new(payload: { sub: current_user.id }).token
+  def new_jwt(entity=current_user)
+    Knock::AuthToken.new(payload: { sub: entity.id })
   end
 
   # override response render to return new JWT w/ successful logged in requests
@@ -12,7 +12,7 @@ class ApplicationController < ActionController::API
     # if the user is logged in and we're returning a JSON object,
     # send a new JWT with it
     if json_response?(options) && logged_in?
-      options[:json].merge!({jwt: new_jwt})
+      options[:json].merge!( new_token.to_json )
     end
 
     super(options, extra_options, &block)

@@ -22,18 +22,10 @@ module CottageclassAppApi
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.2
 
-    # TODO: ALTERNATIVE TO RACK-CORS
-    # - https://www.meetup.com/NYC-rb/messages/77281438/
-    # - TRY to use to get past FACEBOOK ORIGINULL CSRF error
-    # - and allow to use just GET /auth/facebook and do entire OAuth flow the DTA way
-    # - otherwise everything works!
-    # - TODO: just need FE route to store the token at :8077/auth/callback
-    #
-
     # CORS - allow requests from only our client domain
     config.middleware.use Rack::Cors, debug: true do
       allow do
-        origins 'https://localhost:3000', 'https://localhost:8077', 'https://facebook.com', 'cottageclass-app-api.herokuapp.com', 'cottageclass-map-vue.herokuapp.com'
+        origins 'https://localhost:8077', 'https://app.cottageclass.com'
         resource '*',
           headers: :any,
           credentials: true,

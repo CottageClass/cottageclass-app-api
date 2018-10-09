@@ -1,39 +1,75 @@
-class FacebookTokenController < ApplicationController
-  # Look up user and any needed user info and log in via access token
-  def facebook
-    Rails.logger.info "Hit FB!"
-    pp params
-    #render json: auth_token, status: :created
-    render json: {}, code: 200
+require_relative '../../lib/services/facebook_service.rb'
+#
+# JWT & FB AUTH CONTRACTS
+#
+# - our only contract with the client is via JWT
+# - requests to FB are rare so all reqs to FB go through our server (and require auth from the JWT)
+# - requests to FB can try looking up the saved FB/provider_token, and if expired, can create a new one
+# (perhaps just create a new one every time to avoid having failed request wait time)
+#
+# Useful links:
+# - https://github.com/nsarno/knock/issues/11
+# - https://github.com/arsduo/koala/wiki/OAuth
 
-    # add access token via Koala
-    # https://github.com/arsduo/koala/wiki/OAuth
-    #
-    # @oauth.get_access_token(code)
-    # => #{access_token}
-    # or, if you want the expiration date as well:
-    # @oauth.get_access_token_info(code)
-    # => {"expires" => #{seconds_from_now}, "access_token" => #{access_token}}
-    #
-    # return a JWT
-    # - save access token to the user
-    # - and expire it when the user logs out (if not expired before)
-    #
-    # - return JWT to the user
-    # - will be stored in localStorage and set as an interceptor on VueAxios
-    # - FILL ME IN
-    #
-    # I don't believe there is any reason to have client examine the payload of the JWT, so could also store the OAuth token as the JWT;
-    # - but rather store it here and send it on subseq requests to FB
-    # - or just generate new token via session
-    # -> Our Only Contract with the Client should be via JWT -> if you're logged in, you can get a new token anytime and send that (if your current token is expired)
-    # - Basically requests to FB are rare, and so go through our servers
-    #
-    # OK, so send a JWT and use that for auth
-    # Store these notes:
-    # - our only contract with the client is via JWT
-    # - requests to FB are rare so all reqs to FB go through our server (and require auth from the JWT)
-    # - requests to FB can try looking up the saved FB/provider_token, and if expired, can create a new one
-    # (perhaps just create a new one every time to avoid having failed request wait time)
+class FacebookTokenController < ApplicationController
+  # log user in using code before hitting CRUD actions
+  before_action :authenticate
+
+  after_action do
+    puts "RESP BODY"
+    puts response.body
+  end
+
+  # Create a JWT from a valid FB token
+  # - Currently, FB token is regenerated from code each time, not saved to DB
+  # - TODO: save FB token to db for subsequent data requests
+  def create
+    render json: auth_token, status: :created
+  end
+
+  private
+
+  def authenticate
+    unless entity.present?
+      raise Knock.not_found_exception_class
+    end
+  end
+
+  def auth_token
+    new_jwt(entity)
+  end
+
+  def entity
+    if !@entity
+      data = FacebookService.fetch_data(access_token)
+      @entity = User.find_or_create_by facebook_uid: data['id'] do |user|
+        # the following data are passed only on create
+        user.name = data['first_name']
+        user.first_name = data['first_name']
+        user.last_name = data['last_name']
+        user.email = data['email']
+        user.password = SecureRandom.base64(15)
+      end
+    end
+
+    @entity
+  end
+
+  # refresh the access token if isn't valid
+  # - NB: currently will always be valid since we are always providing the code to #create
+  def access_token
+    if !@access_token || !FacebookService.valid_token?(@access_token)
+      @access_token = oauth.get_access_token(auth_params[:code], { redirect_uri: auth_params[:redirectUri]})
+    end
+
+    @access_token
+  end
+
+  def oauth
+    @oauth = Koala::Facebook::OAuth.new(auth_params[:clientId], Koala.config.app_secret, auth_params[:redirectUri])
+  end
+
+  def auth_params
+    params.require(:facebook_token).permit(:code, :clientId, :redirectUri)
   end
 end
