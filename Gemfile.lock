@@ -1,8 +1,8 @@
 GIT
-  remote: https://github.com/nsarno/knock.git
-  revision: 66b60437a5acc28e4863f011ab59324dc1b5d0ae
+  remote: https://github.com/ngty/knock.git
+  revision: 9e9416c3745fc5e8fa73bbb901b69729d45aef9b
   specs:
-    knock (2.1.1)
+    knock (2.1.1.pre.multitokensecrets)
       bcrypt (~> 3.1)
       jwt (~> 1.5)
       rails (>= 4.2)

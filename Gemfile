@@ -19,7 +19,7 @@ gem 'puma', '~> 3.11'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'dotenv-rails'
-gem 'knock', github: 'nsarno/knock'
+gem 'knock', github: 'ngty/knock' # forked from ngty version, which fixes https://github.com/nsarno/knock/issues/156
 
 # FB's Graph API access gem, also has an OAuth code<>access_token exchange module
 gem 'koala'
