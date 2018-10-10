@@ -15,11 +15,6 @@ class FacebookTokenController < ApplicationController
   # log user in using code before hitting CRUD actions
   before_action :authenticate
 
-  after_action do
-    puts "RESP BODY"
-    puts response.body
-  end
-
   # Create a JWT from a valid FB token
   # - Currently, FB token is regenerated from code each time, not saved to DB
   # - TODO: save FB token to db for subsequent data requests

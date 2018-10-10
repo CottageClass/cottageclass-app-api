@@ -23,7 +23,7 @@ module CottageclassAppApi
     config.load_defaults 5.2
 
     # CORS - allow requests from only our client domain
-    config.middleware.use Rack::Cors, debug: true do
+    config.middleware.use Rack::Cors do
       allow do
         origins 'https://localhost:8077', 'https://app.cottageclass.com'
         resource '*',
