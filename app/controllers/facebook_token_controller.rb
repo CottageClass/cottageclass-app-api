@@ -54,17 +54,17 @@ class FacebookTokenController < ApplicationController
   # - NB: currently will always be valid since we are always providing the code to #create
   def access_token
     if !@access_token || !FacebookService.valid_token?(@access_token)
-      @access_token = oauth.get_access_token(auth_params[:code], { redirect_uri: auth_params[:redirectUri]})
+      @access_token = oauth.get_access_token(auth_params[:code], { redirect_uri: auth_params[:redirect_uri]})
     end
 
     @access_token
   end
 
   def oauth
-    @oauth = Koala::Facebook::OAuth.new(auth_params[:clientId], Koala.config.app_secret, auth_params[:redirectUri])
+    @oauth = Koala::Facebook::OAuth.new(auth_params[:client_id], Koala.config.app_secret, auth_params[:redirect_uri])
   end
 
   def auth_params
-    params.require(:facebook_token).permit(:code, :clientId, :redirectUri)
+    params.require(:facebook_token).permit(:code, :client_id, :redirect_uri)
   end
 end
