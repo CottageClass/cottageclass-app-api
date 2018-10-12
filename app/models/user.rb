@@ -14,8 +14,17 @@ class User < ApplicationRecord
     populate_fname_from_name!
     populate_lname_from_name!
   }
-  # Make sure email is present and unique.
-  validates :email, presence: true, uniqueness: true
+
+  validates :email,
+    presence: true,
+    uniqueness: true,
+    format: {with: /\A.+@.+\..+\z/, message: "Please provide a valid email"}
+
+  def phone(country_code=false)
+    formatted_ph = "(#{phone_area_code}) #{phone_number[0..2]}-#{phone_number[3..-1]}"
+    formatted_ph += "+#{phone_country_code} " if country_code
+    formatted_ph
+  end
 
   private
 

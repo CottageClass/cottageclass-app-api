@@ -12,7 +12,7 @@ class ApplicationController < ActionController::API
     # if the user is logged in and we're returning a JSON object,
     # send a new JWT with it
     if json_response?(options) && logged_in?
-      options[:json].merge!( new_token.to_json )
+      options[:json].merge!( JSON.parse(new_jwt.to_json) )
     end
 
     super(options, extra_options, &block)
