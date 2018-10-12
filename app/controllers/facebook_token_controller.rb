@@ -61,7 +61,7 @@ class FacebookTokenController < ApplicationController
   end
 
   def oauth
-    @oauth = Koala::Facebook::OAuth.new(auth_params[:client_id], Koala.config.app_secret, auth_params[:redirect_uri])
+    @oauth ||= Koala::Facebook::OAuth.new(auth_params[:client_id], Koala.config.app_secret, auth_params[:redirect_uri])
   end
 
   def auth_params

@@ -2,13 +2,15 @@ class FacebookService
 
   def self.valid_token?(access_token)
     status = false
-    begin
-      # We need to check if the access_token is valid for our FB APP. Source: https://developers.facebook.com/docs/facebook-login/manually-build-a-login-flow#checktoken
-      debug_token = Koala::Facebook::API.new(access_token).debug_token(app_access_token_info['access_token'])
-      status = true if debug_token['data']['is_valid']
-    ensure
-      return status
-    end
+
+    # We need to check if the access_token is valid for our FB APP. Source: https://developers.facebook.com/docs/facebook-login/manually-build-a-login-flow#checktoken
+    # - use app access token to new up API, so can test user access_token
+    debug_token = Koala::Facebook::API
+      .new(app_access_token_info['access_token'])
+      .debug_token(access_token)
+    status = true if debug_token['data']['is_valid']
+
+    status
   end
 
   def self.fetch_data(access_token)
