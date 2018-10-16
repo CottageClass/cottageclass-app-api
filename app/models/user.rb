@@ -20,6 +20,11 @@ class User < ApplicationRecord
     uniqueness: true,
     format: {with: /\A.+@.+\..+\z/, message: "Please provide a valid email"}
 
+  has_many :children, class_name: 'Child', inverse_of: :parent
+  accepts_nested_attributes_for :children,
+    allow_destroy: true,
+    reject_if: :child_with_same_name_exists?
+
   def phone(country_code=false)
     formatted_ph = "(#{phone_area_code}) #{phone_number[0..2]}-#{phone_number[3..-1]}"
     formatted_ph += "+#{phone_country_code} " if country_code
@@ -27,6 +32,12 @@ class User < ApplicationRecord
   end
 
   private
+
+  def child_with_same_name_exists?(new_child_attrs)
+    parent = self.find(child_attrs[:user_id].to_i)
+    child_names = parent.children.pluck(:first_name)
+    child_names.include? child_attrs[:first_name]
+  end
 
   def populate_full_name!
     if (!self.name || self.name.length < 1) &&

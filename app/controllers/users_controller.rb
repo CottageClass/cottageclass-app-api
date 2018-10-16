@@ -40,6 +40,12 @@ class UsersController < ApplicationController
       :phone_country_code,
       :phone_area_code,
       :phone_number,
+      children_attributes: [
+        :id,
+        :user_id,
+        :first_name,
+        :birthday,
+      ],
     )
   end
 end
