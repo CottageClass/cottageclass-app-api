@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_12_200622) do
+ActiveRecord::Schema.define(version: 2018_10_19_003740) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,12 @@ ActiveRecord::Schema.define(version: 2018_10_12_200622) do
     t.string "phone_area_code"
     t.string "phone_country_code", default: "1"
     t.string "phone_number"
+    t.text "activities", default: [], array: true
+    t.boolean "available_mornings"
+    t.boolean "available_afternoons"
+    t.boolean "available_evenings"
+    t.boolean "available_weekends"
+    t.string "network_code"
   end
 
   add_foreign_key "children", "users"

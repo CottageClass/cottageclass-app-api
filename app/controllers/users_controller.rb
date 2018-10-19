@@ -40,6 +40,12 @@ class UsersController < ApplicationController
       :phone_country_code,
       :phone_area_code,
       :phone_number,
+      :available_mornings,
+      :available_afternoons,
+      :available_evenings,
+      :available_weekends,
+      :network_code,
+      activities: [],
       children_attributes: [
         :id,
         :user_id,

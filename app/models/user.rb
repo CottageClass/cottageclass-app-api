@@ -34,9 +34,8 @@ class User < ApplicationRecord
   private
 
   def child_with_same_name_exists?(new_child_attrs)
-    parent = self.find(child_attrs[:user_id].to_i)
-    child_names = parent.children.pluck(:first_name)
-    child_names.include? child_attrs[:first_name]
+    child_names = children.pluck(:first_name)
+    child_names.include? new_child_attrs[:first_name]
   end
 
   def populate_full_name!
