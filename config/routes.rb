@@ -5,5 +5,7 @@ Rails.application.routes.draw do
   get '/users/:id' => 'users#show'
   post '/users/:id' => 'users#update'
 
+  get '/networks/:network_code/users' => 'users#index'
+
   root "null#index"
 end

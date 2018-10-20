@@ -8,6 +8,7 @@ class User < ApplicationRecord
 
   before_validation {
     (self.email = self.email.to_s.downcase)
+    (self.network_code = self.network_code.to_s.downcase)
   }
   before_create {
     populate_full_name!

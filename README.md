@@ -4,6 +4,12 @@
 
 ### Users
 
+GET `/networks/:network_code/users`
+- returns array of all users with desired networkCode
+- requires current user to belong to desired networkCode
+- accepts no other params
+- returns: list of users, with subset of params (first, last, lat, long, address, availability)
+
 GET `/users/:id`
 - returns user with desired ID
 - requires current user to have permissions for desired user
@@ -36,4 +42,4 @@ POST `/users/:id`
   - network_code
   - activities: [],
   - children: [:id, :parent_id, :first_name, :birthday]
-
+- returns: updated user, includes: children

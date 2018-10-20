@@ -1,6 +1,15 @@
 class UsersController < ApplicationController
   before_action :authenticate_user
   before_action :reject_nonmatching_user, only: [:show, :update]
+  before_action :reject_user_not_in_network, only: [:index]
+
+  def index
+    # false defends against returning users who have network
+    # - TODO: write some tests for this
+    desired_network_code = params[:network_code] || false
+    @users = User.where(network_code: desired_network_code)
+    render json: Serializers::UserInNetworkSerializer.json_for(@users), status: 200
+  end
 
   def show
     @user = current_user
@@ -21,6 +30,19 @@ class UsersController < ApplicationController
   def reject_nonmatching_user
     if !current_user || current_user.id.to_i != params[:id].to_i
       render json: { errors: ["No matching user found"] }, status: 404
+    end
+  end
+
+  def reject_user_not_in_network
+    desired_network_code = params[:network_code]
+
+    if (
+      !current_user ||
+      !desired_network_code ||
+      desired_network_code.length < 1 ||
+      current_user.network_code != desired_network_code
+    )
+      render json: { errors: ["No users found in network"]}, status: 404
     end
   end
 
