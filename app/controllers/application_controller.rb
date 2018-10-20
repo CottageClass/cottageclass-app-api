@@ -2,7 +2,12 @@ class ApplicationController < ActionController::API
   include Knock::Authenticable
 
   def new_jwt(entity=current_user)
-    Knock::AuthToken.new(payload: { sub: entity.id })
+    Knock::AuthToken.new(
+      payload: {
+        sub: entity.id,
+        network_code: entity.try(:network_code)
+      }
+    )
   end
 
   # override response render to return new JWT w/ successful logged in requests
