@@ -46,6 +46,10 @@ class FacebookTokenController < ApplicationController
         user.email = data['email']
         user.password = SecureRandom.base64(15)
       end
+
+      if !@entity.try(:facebook_id) && data['id']
+        @entity.update_attributes!(facebook_id: data['id'])
+      end
     end
 
     @entity
