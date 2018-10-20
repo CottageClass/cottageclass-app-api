@@ -8,7 +8,7 @@ GET `/networks/:network_code/users`
 - returns array of all users with desired networkCode
 - requires current user to belong to desired networkCode
 - accepts no other params
-- returns: list of users, with subset of params (first, last, lat, long, address, availability)
+- returns: list of users, with subset of params (first, last, lat, long, address, phone, availability, activities)
 
 GET `/users/:id`
 - returns user with desired ID
