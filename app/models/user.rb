@@ -31,6 +31,12 @@ class User < ApplicationRecord
     formatted_ph
   end
 
+  def full_address
+    admin_area_level_2_str = admin_area_level_2 ? ", #{admin_area_level_2}" : ''
+
+    "#{street_number} #{route}, #{locality}, #{admin_area_level_1}#{admin_area_level_2_str}, #{country} #{postal_code}"
+  end
+
   private
 
   def child_with_same_name_exists?(new_child_attrs)

@@ -3,13 +3,14 @@ class UsersController < ApplicationController
   before_action :reject_nonmatching_user, only: [:show, :update]
 
   def show
-    render json: current_user, status: 200
+    @user = current_user
+    render json: Serializers::UserSerializer.json_for(@user, include: [:children]), status: 200
   end
 
   def update
     @user = current_user
     if @user = @user.update_attributes(user_params)
-      render json: @user, status: 200
+      render json: Serializers::UserSerializer.json_for(@user, include: [:children]), status: 200
     else
       render json: { errors: @user.errors.full_messages }, status: 400
     end

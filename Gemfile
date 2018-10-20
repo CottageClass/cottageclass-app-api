@@ -26,6 +26,7 @@ gem 'koala'
 # OAuth provider for social login, can return Knock JWTs
 # - skip until we perhaps need OAuth sessions monitored, eg to save a FB access token for subsequent requests (a session, this is what OmniAuth wants you to do)
 #gem 'doorkeeper'
+gem 'fast_jsonapi'
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 gem 'rack-cors', require: 'rack/cors'
