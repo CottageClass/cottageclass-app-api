@@ -11,6 +11,7 @@ module Serializers
       :activities,
       :full_address,
       :phone,
-      :network_code
+      :network_code,
+      :facebook_id
   end
 end

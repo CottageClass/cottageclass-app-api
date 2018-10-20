@@ -22,6 +22,7 @@ module Serializers
       :available_evenings,
       :available_weekends,
       :network_code,
+      :facebook_id,
       :activities,
       :phone,
       :full_address
