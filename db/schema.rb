@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_19_003740) do
+ActiveRecord::Schema.define(version: 2018_10_20_053717) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,10 +18,10 @@ ActiveRecord::Schema.define(version: 2018_10_19_003740) do
   create_table "children", force: :cascade do |t|
     t.string "first_name"
     t.datetime "birthday"
-    t.bigint "user_id"
+    t.bigint "parent_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_children_on_user_id"
+    t.index ["parent_id"], name: "index_children_on_parent_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -54,5 +54,5 @@ ActiveRecord::Schema.define(version: 2018_10_19_003740) do
     t.string "network_code"
   end
 
-  add_foreign_key "children", "users"
+  add_foreign_key "children", "users", column: "parent_id"
 end

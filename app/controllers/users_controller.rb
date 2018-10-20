@@ -49,7 +49,7 @@ class UsersController < ApplicationController
       activities: [],
       children_attributes: [
         :id,
-        :user_id,
+        :parent_id,
         :first_name,
         :birthday,
       ],
