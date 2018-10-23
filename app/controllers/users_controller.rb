@@ -18,7 +18,7 @@ class UsersController < ApplicationController
 
   def update
     @user = current_user
-    if @user = @user.update_attributes(user_params)
+    if @user.update_attributes(user_params)
       render json: Serializers::UserSerializer.json_for(@user, include: [:children]), status: 200
     else
       render json: { errors: @user.errors.full_messages }, status: 400
