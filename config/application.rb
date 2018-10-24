@@ -34,8 +34,13 @@ module CottageclassAppApi
       end
     end
 
-    # load lib/
-    config.autoload_paths << "#{Rails.root}/lib"
+    # load lib/ in production
+    config.eager_load_paths << "#{Rails.root}/lib"
+
+    # eager load to view autoload_paths errors in development
+    # - https://stackoverflow.com/questions/38198668/rails-5-load-lib-files-in-production
+    # - can be turned off for dev/test if this slows them down
+    #config.eager_load = true
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
