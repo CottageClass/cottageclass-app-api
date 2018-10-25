@@ -1,5 +1,7 @@
 module Serializers
   class UserInNetworkSerializer < BaseSerializer
+    has_many :children
+
     attributes :first_name,
       :last_name,
       :latitude,

@@ -8,7 +8,7 @@ class UsersController < ApplicationController
     # - TODO: write some tests for this
     desired_network_code = params[:network_code] || false
     @users = User.where(network_code: desired_network_code)
-    render json: Serializers::UserInNetworkSerializer.json_for(@users), status: 200
+    render json: Serializers::UserInNetworkSerializer.json_for(@users, include: [:children]), status: 200
   end
 
   def show
