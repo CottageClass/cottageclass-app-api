@@ -1,5 +1,3 @@
-require_relative '../../lib/services/facebook_service.rb'
-#
 # JWT & FB AUTH CONTRACTS
 #
 # - our only contract with the client is via JWT

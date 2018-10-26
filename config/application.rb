@@ -34,9 +34,6 @@ module CottageclassAppApi
       end
     end
 
-    # load lib/ in production
-    config.eager_load_paths << "#{Rails.root}/lib"
-
     # eager load to view autoload_paths errors in development
     # - https://stackoverflow.com/questions/38198668/rails-5-load-lib-files-in-production
     # - can be turned off for dev/test if this slows them down
