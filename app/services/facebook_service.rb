@@ -27,8 +27,18 @@ class FacebookService
     end
   end
 
+  #https://stackoverflow.com/questions/8995035/renew-facebook-access-token-with-koala
+  def self.refresh_access_token_info(access_token)
+    new_token_info = oauth.exchange_access_token_info(access_token)
+    new_token_info
+  end
+
   def self.app_access_token_info
     @app_access_token ||= Koala::Facebook::OAuth.new.get_app_access_token_info
+  end
+
+  def self.oauth(redirect_uri=Koala.config.oauth_callback_url)
+    Koala::Facebook::OAuth.new(Koala.config.app_id, Koala.config.app_secret, redirect_uri)
   end
 
 end

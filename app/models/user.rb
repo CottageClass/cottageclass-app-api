@@ -40,6 +40,32 @@ class User < ApplicationRecord
     "#{street_number} #{route}, #{locality}, #{admin_area_level_1}#{admin_area_level_2_str}, #{country} #{postal_code}"
   end
 
+  def facebook_token_expired?
+    # fb_access_token_expires_at is a DateTime, so use DateTime to compare
+    !facebook_access_token || (DateTime.now.utc > fb_access_token_expires_at.utc)
+  end
+
+  def facebook_token_invalid?
+    !facebook_access_token || facebook_token_expired? || !FacebookService.valid_token?(facebook_access_token)
+  end
+
+  def refresh_facebook_access_token!
+    if facebook_token_invalid?
+      token_info = FacebookService.refresh_access_token_info(facebook_access_token)
+      access_token = token_info['access_token']
+      sec_til_expiry = token_info['expires_in'].to_i
+
+      update_facebook_access_token!(access_token, sec_til_expiry)
+    end
+  end
+
+  def update_facebook_access_token!(new_access_token, sec_til_expiry)
+    update_attributes!(
+      facebook_access_token: access_token,
+      fb_access_token_expires_at: (Time.now.utc + sec_til_expiry).to_datetime,
+    )
+  end
+
   private
 
   def child_with_same_name_exists?(new_child_attrs)

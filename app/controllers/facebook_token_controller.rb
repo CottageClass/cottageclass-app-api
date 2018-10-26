@@ -43,23 +43,30 @@ class FacebookTokenController < ApplicationController
         user.email = data['email']
         user.password = SecureRandom.base64(15)
       end
+
+      # save fb access token to user
+      @entity.update_facebook_access_token!(access_token, sec_til_expiry)
     end
 
     @entity
   end
 
-  # refresh the access token if isn't valid
-  # - NB: currently will always be valid since we are always providing the code to #create
-  def access_token
-    if !@access_token || !FacebookService.valid_token?(@access_token)
-      @access_token = oauth.get_access_token(auth_params[:code], { redirect_uri: auth_params[:redirect_uri]})
-    end
+  # exchange code for access token
+  # - contains expiry date
+  def access_token_info
+    @access_token_info ||= oauth.get_access_token_info(auth_params[:code], { redirect_uri: auth_params[:redirect_uri]})
+  end
 
-    @access_token
+  def access_token
+    @access_token ||= access_token_info['access_token']
+  end
+
+  def sec_til_expiry
+    @expiry ||= access_token_info['expires_in'].to_i
   end
 
   def oauth
-    @oauth ||= Koala::Facebook::OAuth.new(auth_params[:client_id], Koala.config.app_secret, auth_params[:redirect_uri])
+    @oauth ||= FacebookService.oauth(auth_params[:redirect_uri])
   end
 
   def auth_params
