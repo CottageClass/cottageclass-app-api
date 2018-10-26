@@ -39,16 +39,11 @@ class FacebookTokenController < ApplicationController
       data = FacebookService.fetch_data(access_token)
       @entity = User.find_or_create_by facebook_uid: data['id'] do |user|
         # the following data are passed only on create
-        user.facebook_id = data['id']
         user.name = data['name']
         user.first_name = data['first_name']
         user.last_name = data['last_name']
         user.email = data['email']
         user.password = SecureRandom.base64(15)
-      end
-
-      if !@entity.try(:facebook_id) && data['id']
-        @entity.update_attributes!(facebook_id: data['id'])
       end
     end
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_20_074345) do
+ActiveRecord::Schema.define(version: 2018_10_26_032108) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,7 +52,6 @@ ActiveRecord::Schema.define(version: 2018_10_20_074345) do
     t.boolean "available_evenings"
     t.boolean "available_weekends"
     t.string "network_code"
-    t.string "facebook_id"
     t.index ["network_code"], name: "index_users_on_network_code"
   end
 

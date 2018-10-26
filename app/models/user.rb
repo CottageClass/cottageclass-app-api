@@ -26,6 +26,8 @@ class User < ApplicationRecord
     allow_destroy: true,
     reject_if: :child_with_same_name_exists?
 
+  alias_attribute :facebook_id, :facebook_uid
+
   def phone(country_code=false)
     formatted_ph = "(#{phone_area_code}) #{phone_number[0..2]}-#{phone_number[3..-1]}"
     formatted_ph += "+#{phone_country_code} " if country_code
