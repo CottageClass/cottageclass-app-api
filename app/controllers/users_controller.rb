@@ -8,18 +8,18 @@ class UsersController < ApplicationController
     # - TODO: write some tests for this
     desired_network_code = params[:network_code] || false
     @users = User.where(network_code: desired_network_code)
-    render json: Serializers::UserInNetworkSerializer.json_for(@users, include: [:children]), status: 200
+    render json: UserInNetworkSerializer.json_for(@users, include: [:children]), status: 200
   end
 
   def show
     @user = current_user
-    render json: Serializers::UserSerializer.json_for(@user, include: [:children]), status: 200
+    render json: UserSerializer.json_for(@user, include: [:children]), status: 200
   end
 
   def update
     @user = current_user
     if @user.update_attributes(user_params)
-      render json: Serializers::UserSerializer.json_for(@user, include: [:children]), status: 200
+      render json: UserSerializer.json_for(@user, include: [:children]), status: 200
     else
       render json: { errors: @user.errors.full_messages }, status: 400
     end
