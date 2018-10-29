@@ -49,6 +49,7 @@ class User < ApplicationRecord
     !facebook_access_token || facebook_token_expired? || !FacebookService.valid_token?(facebook_access_token)
   end
 
+  # facebook_access_token is a database attr
   def refresh_facebook_access_token!
     if facebook_token_invalid?
       token_info = FacebookService.refresh_access_token_info(facebook_access_token)
@@ -61,7 +62,7 @@ class User < ApplicationRecord
 
   def update_facebook_access_token!(new_access_token, sec_til_expiry)
     update_attributes!(
-      facebook_access_token: access_token,
+      facebook_access_token: new_access_token,
       fb_access_token_expires_at: (Time.now.utc + sec_til_expiry).to_datetime,
     )
   end
