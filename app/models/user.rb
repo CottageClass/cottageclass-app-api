@@ -21,7 +21,7 @@ class User < ApplicationRecord
     uniqueness: true,
     format: {with: /\A.+@.+\..+\z/, message: "Please provide a valid email"}
 
-  has_many :children, class_name: 'Child', inverse_of: :parent
+  has_many :children, class_name: 'Child', inverse_of: :parent, dependent: :destroy
   accepts_nested_attributes_for :children,
     allow_destroy: true,
     reject_if: :child_with_same_name_exists?
