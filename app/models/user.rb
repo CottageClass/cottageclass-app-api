@@ -31,7 +31,7 @@ class User < ApplicationRecord
   def phone(country_code=false)
     return nil if !phone_number || phone_number.length == 0
 
-    formatted_ph += "(#{phone_area_code}) #{phone_number[0..2]}-#{phone_number[3..-1]}"
+    formatted_ph = "(#{phone_area_code}) #{phone_number[0..2]}-#{phone_number[3..-1]}"
     formatted_ph = "+#{phone_country_code} #{formatted_ph}" if country_code
     formatted_ph
   end
