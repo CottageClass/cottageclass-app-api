@@ -25,7 +25,7 @@ module CottageclassAppApi
     # CORS - allow requests from only our client domain
     config.middleware.use Rack::Cors do
       allow do
-        origins 'https://localhost:8077', 'https://app.cottageclass.com', 'https://192.168.1.4:8077'
+        origins 'https://localhost:8077', 'https://app.cottageclass.com', 'https://192.168.1.4:8077', 'https://cottageclass-app-staging.herokuapp.com', 'https://cottageclass-app.herokuapp.com'
         resource '*',
           headers: :any,
           credentials: true,
