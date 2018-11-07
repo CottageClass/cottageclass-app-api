@@ -1,13 +1,14 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user
-  before_action :reject_nonmatching_user, only: [:show, :update]
-  before_action :reject_user_not_in_network, only: [:index]
+  #before_action :authenticate_user
+  #before_action :reject_nonmatching_user, only: [:show, :update]
+  #before_action :reject_user_not_in_network, only: [:index]
 
   def index
     # false defends against returning users who have network
     # - TODO: write some tests for this
     desired_network_code = params[:network_code] || false
     @users = User.where(network_code: desired_network_code)
+    byebug
     render json: UserInNetworkSerializer.json_for(@users, include: [:children]), status: 200
   end
 

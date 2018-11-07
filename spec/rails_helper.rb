@@ -54,4 +54,24 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+
+  # DatabaseCleaner
+  # - config ref: https://github.com/DatabaseCleaner/database_cleaner#rspec-example
+  config.before(:suite) do
+    DatabaseCleaner.clean_with(:truncation)
+    DatabaseCleaner.strategy = :transaction
+  end
+  config.around(:each) do |example|
+    DatabaseCleaner.cleaning do
+      example.run
+    end
+  end
+end
+
+def authenticated_header(user)
+  token = Knock::AuthToken.new(payload: { sub: user.id }).token
+
+  {
+    'Authorization': "Bearer #{token}"
+  }
 end

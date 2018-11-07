@@ -27,6 +27,7 @@ gem 'koala'
 # - skip until we perhaps need OAuth sessions monitored, eg to save a FB access token for subsequent requests (a session, this is what OmniAuth wants you to do)
 #gem 'doorkeeper'
 gem 'fast_jsonapi'
+gem 'twilio-ruby', '~> 5.15.2'
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 gem 'rack-cors', require: 'rack/cors'
@@ -40,6 +41,12 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 
   gem 'rspec-rails'
+  gem 'factory_bot_rails'
+  gem 'ffaker'
+end
+
+group :test do
+  gem 'database_cleaner'
 end
 
 group :development do

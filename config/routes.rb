@@ -7,5 +7,7 @@ Rails.application.routes.draw do
 
   get '/networks/:network_code/users' => 'users#index'
 
+  post '/users/:id/messages' => 'messages#create', as: 'messages'
+
   root "null#index"
 end

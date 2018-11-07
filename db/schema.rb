@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_26_055056) do
+ActiveRecord::Schema.define(version: 2018_11_06_223035) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,26 @@ ActiveRecord::Schema.define(version: 2018_10_26_055056) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["parent_id"], name: "index_children_on_parent_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.bigint "sender_id"
+    t.bigint "receiver_id"
+    t.text "content"
+    t.bigint "cc_twilio_session_id"
+    t.string "twilio_interaction_sid"
+    t.index ["cc_twilio_session_id"], name: "index_messages_on_cc_twilio_session_id"
+    t.index ["receiver_id"], name: "index_messages_on_receiver_id"
+    t.index ["sender_id"], name: "index_messages_on_sender_id"
+  end
+
+  create_table "twilio_sessions", force: :cascade do |t|
+    t.string "friendly_name"
+    t.string "twilio_id"
+    t.string "participant_ids", array: true
+    t.datetime "expires_at"
+    t.string "twilio_sid_sender"
+    t.string "twilio_sid_receiver"
   end
 
   create_table "users", force: :cascade do |t|
@@ -58,4 +78,7 @@ ActiveRecord::Schema.define(version: 2018_10_26_055056) do
   end
 
   add_foreign_key "children", "users", column: "parent_id"
+  add_foreign_key "messages", "twilio_sessions", column: "cc_twilio_session_id"
+  add_foreign_key "messages", "users", column: "receiver_id"
+  add_foreign_key "messages", "users", column: "sender_id"
 end

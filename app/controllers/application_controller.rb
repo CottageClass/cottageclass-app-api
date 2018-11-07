@@ -1,6 +1,12 @@
 class ApplicationController < ActionController::API
   include Knock::Authenticable
 
+  before_action do
+    pp "REQ BODY"
+    pp params
+    pp request.body
+  end
+
   def new_jwt(entity=current_user)
     Knock::AuthToken.new(
       payload: {

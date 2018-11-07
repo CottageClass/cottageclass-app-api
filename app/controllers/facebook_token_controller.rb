@@ -17,7 +17,7 @@ class FacebookTokenController < ApplicationController
   # - Currently, FB token is regenerated from code each time, not saved to DB
   # - TODO: save FB token to db for subsequent data requests
   def create
-    render json: auth_token, status: :created
+    render json: auth_token, status: 201
   end
 
   private
