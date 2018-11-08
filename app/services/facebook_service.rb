@@ -37,6 +37,10 @@ class FacebookService
     @app_access_token ||= Koala::Facebook::OAuth.new.get_app_access_token_info
   end
 
+  def self.get_access_token_info(code, options)
+    oauth(options[:redirect_uri]).get_access_token_info(code, options)
+  end
+
   def self.oauth(redirect_uri=Koala.config.oauth_callback_url)
     Koala::Facebook::OAuth.new(Koala.config.app_id, Koala.config.app_secret, redirect_uri)
   end

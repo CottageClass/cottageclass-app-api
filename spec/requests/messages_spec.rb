@@ -60,7 +60,7 @@ RSpec.describe 'Twilio proxy messages', type: :request do
     context 'when a session already exists for the participants' do
       before(:each) do
         TwilioSession.create!(
-          expires_at: 4.days.from_now,
+          last_action_at: DateTime.now,
           participant_ids: [sender.id, receiver.id],
           twilio_sid: 'KCXXXX',
           twilio_sid_receiver: 'KPXXXXreceiver',

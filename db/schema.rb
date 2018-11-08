@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_06_223035) do
+ActiveRecord::Schema.define(version: 2018_11_07_221551) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,9 +39,9 @@ ActiveRecord::Schema.define(version: 2018_11_06_223035) do
     t.string "friendly_name"
     t.string "twilio_id"
     t.string "participant_ids", array: true
-    t.datetime "expires_at"
     t.string "twilio_sid_sender"
     t.string "twilio_sid_receiver"
+    t.datetime "last_action_at"
   end
 
   create_table "users", force: :cascade do |t|
