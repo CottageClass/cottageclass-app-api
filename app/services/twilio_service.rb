@@ -16,8 +16,10 @@ class TwilioService
       # create a new session
       session_obj = create_twilio_proxy_session!(session_name)
       # add the participants to the session
-      sender_participant_sid = add_participant_to_session!(session_obj.sid, sender.name, sender.phone(true))
-      receiver_participant_sid = add_participant_to_session!(session_obj.sid, receiver.name, receiver.phone(true))
+      twilio_sender_obj = add_participant_to_session!(session_obj.sid, sender.name, sender.phone(true))
+      twilio_receiver_obj = add_participant_to_session!(session_obj.sid, receiver.name, receiver.phone(true))
+      sender_participant_sid = twilio_sender_obj.sid
+      receiver_participant_sid = twilio_receiver_obj.sid
       # save the session SID and name
       proxy_session = TwilioSession.create(
         twilio_sid: session_obj.sid,
@@ -25,27 +27,40 @@ class TwilioService
         participant_ids: [receiver.id, sender.id],
         twilio_sid_sender: sender_participant_sid,
         twilio_sid_receiver: receiver_participant_sid,
-        last_action_at: DateTime.now,
+        last_action_at: DateTime.now.utc,
       )
     end
 
     proxy_session
   end
 
-  def send_introductory_message_to!(session:, receiver:, sender:)
+  def send_introductory_message_to!(cc_twilio_session:, receiver:, sender:)
     # send an introductory message to the receiver
-    msg = introductory_message_text(receiver.name, sender.name)
-    twilio_msg_obj = send_message_to_participant!(
-      session.twilio_sid,
-      session.twilio_sid_receiver,
-      msg,
+    message_text = introductory_message_text(receiver.name, sender.name)
+
+    send_message_to_participant!(
+      cc_twilio_session: cc_twilio_session,
+      sender: sender,
+      receiver: receiver,
+      message: message_text,
     )
+  end
+
+  def send_message_to_participant!(cc_twilio_session:, sender:, receiver:, message:)
+    twilio_session_sid = cc_twilio_session.twilio_sid
+    twilio_participant_sid = cc_twilio_session.twilio_sid_receiver
+
+    # TODO: may not need to actually push the message in, may be enough to send user to SMS with the twilio session number
+    # - return the receiver's proxy identifier
+    # - See: https://www.twilio.com/docs/proxy/quickstart#create-participants
+    twilio_msg_obj = send_twilio_message_to_participant!(twilio_session_sid, twilio_participant_sid, message)
+
     msg = Message.create(
       sender_id: sender.id,
       receiver_id: receiver.id,
-      cc_twilio_session_id: session.id,
+      cc_twilio_session_id: cc_twilio_session.id,
       twilio_interaction_sid: twilio_msg_obj.sid,
-      content: twilio_msg_obj.data,
+      content: JSON.parse(twilio_msg_obj.data)['body'],
     )
     msg
   end
@@ -63,13 +78,14 @@ class TwilioService
     HEREDOC
   end
 
-  def send_message_to_participant!(twilio_session_sid, twilio_participant_sid, message_text)
+  def send_twilio_message_to_participant!(twilio_session_sid, twilio_participant_sid, message)
     proxy_service
       .sessions(twilio_session_sid)
       .participants(twilio_participant_sid)
       .message_interactions
-      .create(body: message_text)
+      .create(body: message)
   end
+
 
   def add_participant_to_session!(session_id, name, phone_w_country_code)
     proxy_service

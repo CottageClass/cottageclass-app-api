@@ -10,10 +10,13 @@ class MessagesController < ApplicationController
     sender = current_user
     receiver = User.find_by(id: params[:id])
     twilio_session = service.proxy_session_for(sender: sender, receiver: receiver)
-    service.send_introductory_message_to!(
-      session: twilio_session,
+    content = message_params[:content]
+
+    service.send_message_to_participant!(
+      cc_twilio_session: twilio_session,
       receiver: receiver,
-      sender: sender
+      sender: sender,
+      message: content,
     )
 
     # return session ID? message? -> no, just needs to be GETable later
@@ -34,8 +37,6 @@ class MessagesController < ApplicationController
 
   def message_params
     params.require(:message).permit(
-      :receiver_id,
-      :sender_id,
       :content,
     )
   end

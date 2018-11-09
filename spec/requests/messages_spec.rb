@@ -8,13 +8,15 @@ RSpec.describe 'Twilio proxy messages', type: :request do
     let(:twilio_msg_obj)  { OpenStruct.new(session_sid: 'KCXXXX1', sid: 'KIXXXX', data: 'message body') }
 
     before(:each) do
+      twilio_participant_response_1 = OpenStruct.new(sid: "KPXXXX1")
+      twilio_participant_response_2 = OpenStruct.new(sid: "KPXXXX2")
       allow_any_instance_of(TwilioService).to receive(:create_twilio_proxy_session!)
         .and_return twilio_session
       allow_any_instance_of(TwilioService).to receive(:add_participant_to_session!)
-        .and_return "sender_sid"
+        .and_return twilio_participant_response_1
       allow_any_instance_of(TwilioService).to receive(:add_participant_to_session!)
-        .and_return "receiver_sid"
-      allow_any_instance_of(TwilioService).to receive(:send_message_to_participant!)
+        .and_return twilio_participant_response_2
+      allow_any_instance_of(TwilioService).to receive(:send_twilio_message_to_participant!)
         .and_return twilio_msg_obj
     end
 
@@ -45,8 +47,8 @@ RSpec.describe 'Twilio proxy messages', type: :request do
     end
 
     it 'sends an introductory message to the receiver' do
-      expect_any_instance_of(TwilioService).to receive(:send_message_to_participant!)
-        .with("KCXXXX1", "receiver_sid", anything)
+      expect_any_instance_of(TwilioService).to receive(:send_twilio_message_to_participant!)
+        .with("KCXXXX1", "KPXXXX2", anything)
 
       post messages_path(receiver), headers: authenticated_header(sender)
 
@@ -62,8 +64,8 @@ RSpec.describe 'Twilio proxy messages', type: :request do
         TwilioSession.create!(
           last_action_at: DateTime.now,
           participant_ids: [sender.id, receiver.id],
-          twilio_sid: 'KCXXXX',
-          twilio_sid_receiver: 'KPXXXXreceiver',
+          twilio_sid: 'KCXXXX1',
+          twilio_sid_receiver: 'KPXXXX2',
         )
       end
 
@@ -89,8 +91,8 @@ RSpec.describe 'Twilio proxy messages', type: :request do
 
       # this is up for debate whether it should send a second message
       it '*does* send a second introductory message' do
-        expect_any_instance_of(TwilioService).to receive(:send_message_to_participant!)
-          .with("KCXXXX", "KPXXXXreceiver", anything)
+        expect_any_instance_of(TwilioService).to receive(:send_twilio_message_to_participant!)
+          .with("KCXXXX1", "KPXXXX2", anything)
 
         post messages_path(receiver), headers: authenticated_header(sender)
 
