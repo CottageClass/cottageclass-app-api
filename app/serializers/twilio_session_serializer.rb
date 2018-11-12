@@ -6,5 +6,6 @@ class TwilioSessionSerializer < BaseSerializer
     :twilio_sid_receiver,
     :proxy_identifier_sender,
     :proxy_identifier_receiver,
-    :participant_ids
+    :sender_id,
+    :receiver_id
 end

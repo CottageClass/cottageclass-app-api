@@ -5,7 +5,7 @@ RSpec.describe TwilioSession do
     describe 'ensure_last_action_utc' do
       it 'converts the last_action_at time to utc before saving' do
         yesterday = 1.day.ago.in_time_zone("Tokyo")
-        session = TwilioSession.create!(last_action_at: yesterday)
+        session = FactoryBot.create(:twilio_session, last_action_at: yesterday)
 
         expect(session.last_action_at.zone).to eq "UTC"
         expect(session.last_action_at.zone).to_not eq "JST"
@@ -29,52 +29,19 @@ RSpec.describe TwilioSession do
       end
     end
 
-    describe 'for_users' do
+    describe 'with_participants' do
       let!(:p1) { FactoryBot.create(:user) }
       let!(:p2) { FactoryBot.create(:user) }
       let!(:p3) { FactoryBot.create(:user) }
-      let!(:session_with_p1) { FactoryBot.create(:twilio_session, participant_ids: [p1.id]) }
-      let!(:session_with_p2) { FactoryBot.create(:twilio_session, participant_ids: [p2.id]) }
-      let!(:session_with_p1_p2) { FactoryBot.create(:twilio_session, participant_ids: [p1.id, p2.id]) }
-      let!(:session_with_p1_p3) { FactoryBot.create(:twilio_session, participant_ids: [p1.id, p3.id]) }
+      let!(:session_with_p1_p2) { FactoryBot.create(:twilio_session, sender_id: p1.id, receiver_id: p2.id) }
+      let!(:session_with_p2_p1) { FactoryBot.create(:twilio_session, sender_id: p2.id, receiver_id: p1.id) }
+      let!(:session_with_p1_p3) { FactoryBot.create(:twilio_session, sender_id: p1.id, receiver_id: p3.id) }
 
-      context 'when only one participant is specified' do
-        it 'returns sessions containing the desired participant ID' do
-          sessions = TwilioSession.with_participants([p1.id])
-          expect(sessions).to include session_with_p1
-          expect(sessions).to_not include session_with_p2
-          expect(sessions).to include session_with_p1_p2
-          expect(sessions).to include session_with_p1_p3
-        end
-      end
-
-      context 'when two participants are specified' do
-        it 'returns sessions containing both desired participant IDs' do
-          sessions = TwilioSession.with_participants([p1.id, p2.id])
-          expect(sessions).to_not include session_with_p1
-          expect(sessions).to_not include session_with_p2
-          expect(sessions).to include session_with_p1_p2
-          expect(sessions).to_not include session_with_p1_p3
-        end
-      end
-
-      context 'when more than two participants are specified' do
-        # this should be handled by a validation in TwilioSession
-        it 'finds no sessions because more than two participants is forbidden' do
-          expect {
-            FactoryBot.create(:twilio_session, participant_ids: [p1.id, p2.id, p3.id])
-          }.to raise_error(/A session can have up to two participants max/)
-
-          sessions = TwilioSession.with_participants([p1.id, p2.id, p3.id])
-          expect(sessions.count).to eq 0
-        end
-      end
-
-      context 'when no participant IDs are specified' do
-        it 'returns all sessions' do
-          sessions = TwilioSession.with_participants([])
-          expect(sessions.count).to eq 4
-        end
+      it 'returns sessions containing the sender and receiver, in either order' do
+        sessions = TwilioSession.with_participants(p1.id, p2.id)
+        expect(sessions).to include session_with_p1_p2
+        expect(sessions).to include session_with_p2_p1
+        expect(sessions).to_not include session_with_p1_p3
       end
     end
   end

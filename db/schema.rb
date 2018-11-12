@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_09_080844) do
+ActiveRecord::Schema.define(version: 2018_11_12_100907) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,12 +38,15 @@ ActiveRecord::Schema.define(version: 2018_11_09_080844) do
   create_table "twilio_sessions", force: :cascade do |t|
     t.string "friendly_name"
     t.string "twilio_id"
-    t.string "participant_ids", array: true
     t.string "twilio_sid_sender"
     t.string "twilio_sid_receiver"
     t.datetime "last_action_at"
     t.string "proxy_identifier_sender"
     t.string "proxy_identifier_receiver"
+    t.bigint "sender_id"
+    t.bigint "receiver_id"
+    t.index ["receiver_id"], name: "index_twilio_sessions_on_receiver_id"
+    t.index ["sender_id"], name: "index_twilio_sessions_on_sender_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -83,4 +86,6 @@ ActiveRecord::Schema.define(version: 2018_11_09_080844) do
   add_foreign_key "messages", "twilio_sessions", column: "cc_twilio_session_id"
   add_foreign_key "messages", "users", column: "receiver_id"
   add_foreign_key "messages", "users", column: "sender_id"
+  add_foreign_key "twilio_sessions", "users", column: "receiver_id"
+  add_foreign_key "twilio_sessions", "users", column: "sender_id"
 end

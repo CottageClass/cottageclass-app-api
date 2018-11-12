@@ -7,7 +7,7 @@ class TwilioService
     # -> and query for last_action_at + TTL_SECONDS > now
     existing_sessions = TwilioSession
       .live
-      .with_participants([sender.id, receiver.id])
+      .with_participants(sender.id, receiver.id)
 
     if existing_sessions.count > 0
       proxy_session = existing_sessions.first
@@ -22,7 +22,8 @@ class TwilioService
       proxy_session = TwilioSession.create(
         twilio_sid: session_obj.sid,
         friendly_name: session_obj.unique_name,
-        participant_ids: [receiver.id, sender.id],
+        sender_id: sender.id,
+        receiver_id: receiver.id,
         twilio_sid_sender: twilio_sender_obj.sid,
         twilio_sid_receiver: twilio_receiver_obj.sid,
         proxy_identifier_sender: twilio_sender_obj.proxy_identifier,

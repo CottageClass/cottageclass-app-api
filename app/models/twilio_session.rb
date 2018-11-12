@@ -5,12 +5,11 @@ class TwilioSession < ApplicationRecord
   alias_attribute :unique_name, :friendly_name
   alias_attribute :twilio_sid, :twilio_id
 
-  before_validation :ensure_last_action_utc
+  belongs_to :sender, class_name: 'User'
+  belongs_to :receiver, class_name: 'User'
+  has_many :messages
 
-  validates :participant_ids, length: {
-    maximum: 2,
-    message: 'A session can have up to two participants max',
-  }
+  before_validation :ensure_last_action_utc
 
   scope :live, -> {
     where(
@@ -19,10 +18,11 @@ class TwilioSession < ApplicationRecord
       live_session_cutoff,
     )
   }
-  scope :with_participants, -> (*participant_ids) {
+  scope :with_participants, -> (p1_id, p2_id) {
     where(
-      'participant_ids @> ?',
-      "{#{participant_ids.join(',')}}",
+      '(sender_id = ? AND receiver_id = ?) OR (receiver_id = ? AND sender_id = ?)',
+      p1_id, p2_id,
+      p1_id, p2_id,
     )
   }
 

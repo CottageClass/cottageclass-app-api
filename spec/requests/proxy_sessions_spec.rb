@@ -42,7 +42,8 @@ RSpec.describe 'Twilio proxy messages', type: :request do
 
       post proxy_sessions_path(receiver), headers: authenticated_header(sender)
 
-      expect(TwilioSession.first.participant_ids.map(&:to_i)).to match_array [sender.id, receiver.id].map(&:to_i)
+      expect(TwilioSession.first.sender_id).to eq sender.id
+      expect(TwilioSession.first.receiver_id).to eq receiver.id
       expect(response.status).to eq 201
     end
 
@@ -50,7 +51,8 @@ RSpec.describe 'Twilio proxy messages', type: :request do
       before(:each) do
         TwilioSession.create!(
           last_action_at: DateTime.now,
-          participant_ids: [sender.id, receiver.id],
+          sender: sender,
+          receiver: receiver,
           twilio_sid: 'KCXXXX1',
           twilio_sid_receiver: 'KPXXXX2',
         )
