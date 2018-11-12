@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :authenticate_user
   before_action :reject_nonmatching_user, only: [:show, :update]
-  before_action :reject_user_not_in_network, only: [:index]
+  before_action :reject_user_not_in_network, only: [:index, :inquiries]
 
   def index
     # false defends against returning users who have network `""
@@ -23,6 +23,14 @@ class UsersController < ApplicationController
     else
       render json: { errors: @user.errors.full_messages }, status: 400
     end
+  end
+
+  def inquiries
+    @users = current_user
+      .inquirers
+      .in_network(current_user.network_code)
+
+    render json: UserInNetworkSerializer.json_for(@users), status: 200
   end
 
   private

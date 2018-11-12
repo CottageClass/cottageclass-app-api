@@ -6,6 +6,8 @@ class User < ApplicationRecord
   # - via: https://api.rubyonrails.org/classes/ActiveModel/SecurePassword/ClassMethods.html#method-i-has_secure_password
   has_secure_password
 
+  alias_attribute :facebook_id, :facebook_uid
+
   before_validation {
     (self.email = self.email.to_s.downcase)
     (self.network_code = self.network_code.to_s.downcase)
@@ -22,14 +24,18 @@ class User < ApplicationRecord
     format: {with: /\A.+@.+\..+\z/, message: "Please provide a valid email"}
 
   has_many :children, class_name: 'Child', inverse_of: :parent, dependent: :destroy
-  has_many :sent_messages, class_name: 'Message', inverse_of: :sender
-  has_many :received_messages, class_name: 'Message', inverse_of: :receiver
+  has_many :sent_messages, class_name: 'Message', foreign_key: :sender_id, inverse_of: :sender
+  has_many :received_messages, class_name: 'Message', foreign_key: :receiver_id, inverse_of: :receiver
+  has_many :inquirers, through: :received_messages, source: :sender
 
   accepts_nested_attributes_for :children,
     allow_destroy: true,
     reject_if: :child_with_same_name_exists?
 
-  alias_attribute :facebook_id, :facebook_uid
+  scope :in_network, -> (code) {
+    where(network_code: code)
+  }
+
 
   def phone(country_code=false)
     return nil if !phone_number || phone_number.length == 0
