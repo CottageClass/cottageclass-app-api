@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get '/networks/:network_code/users' => 'users#index'
 
   post '/users/:id/proxy_sessions' => 'twilio_sessions#create', as: 'proxy_sessions'
+  get '/proxy_callback' => 'twilio_sessions#callback'
 
   root "null#index"
 end

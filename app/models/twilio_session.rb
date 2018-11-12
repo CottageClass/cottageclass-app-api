@@ -20,9 +20,9 @@ class TwilioSession < ApplicationRecord
   }
   scope :with_participants, -> (p1_id, p2_id) {
     where(
-      '(sender_id = ? AND receiver_id = ?) OR (receiver_id = ? AND sender_id = ?)',
+      '(sender_id = ? AND receiver_id = ?) OR (sender_id = ? AND receiver_id = ?)',
       p1_id, p2_id,
-      p1_id, p2_id,
+      p2_id, p1_id,
     )
   }
 
