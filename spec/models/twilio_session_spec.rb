@@ -33,9 +33,9 @@ RSpec.describe TwilioSession do
       let!(:p1) { FactoryBot.create(:user) }
       let!(:p2) { FactoryBot.create(:user) }
       let!(:p3) { FactoryBot.create(:user) }
-      let!(:session_with_p1_p2) { FactoryBot.create(:twilio_session, sender_id: p1.id, receiver_id: p2.id) }
-      let!(:session_with_p2_p1) { FactoryBot.create(:twilio_session, sender_id: p2.id, receiver_id: p1.id) }
-      let!(:session_with_p1_p3) { FactoryBot.create(:twilio_session, sender_id: p1.id, receiver_id: p3.id) }
+      let!(:session_with_p1_p2) { FactoryBot.create(:twilio_session, initiator_id: p1.id, client_id: p2.id) }
+      let!(:session_with_p2_p1) { FactoryBot.create(:twilio_session, initiator_id: p2.id, client_id: p1.id) }
+      let!(:session_with_p1_p3) { FactoryBot.create(:twilio_session, initiator_id: p1.id, client_id: p3.id) }
 
       it 'returns sessions containing the sender and receiver, in either order' do
         sessions = TwilioSession.with_participants(p1.id, p2.id)

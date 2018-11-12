@@ -5,7 +5,8 @@ RSpec.describe 'Twilio proxy messages', type: :request do
     let(:sender)          { FactoryBot.create(:user) }
     let(:receiver)        { FactoryBot.create(:user) }
     let(:twilio_session)  { OpenStruct.new(sid: "KCXXXX1", unique_name: 'demo', date_expiry: '2022-07-30T20:00:00Z') }
-    let(:twilio_msg_obj)  { OpenStruct.new(session_sid: 'KCXXXX1', sid: 'KIXXXX', data: 'message body') }
+    let(:twilio_msg_obj)  { OpenStruct.new(session_sid: 'KCXXXX1', sid: 'KIXXXX', data: {'body': 'message body'}.to_json) }
+    let(:post_data)       { {twilio_session: {request_message: 'request', acknowledgment_message: 'ack'}} }
 
     before(:each) do
       twilio_participant_response_1 = OpenStruct.new(sid: "KPXXXX1")
@@ -21,14 +22,14 @@ RSpec.describe 'Twilio proxy messages', type: :request do
     end
 
     it 'requires authorization' do
-      post proxy_sessions_path(receiver)
+      post proxy_sessions_path(receiver), params: post_data
       expect(response.status).to eq 401
     end
 
     it 'creates a new session' do
       expect_any_instance_of(TwilioService).to receive(:create_twilio_proxy_session!)
 
-      post proxy_sessions_path(receiver), headers: authenticated_header(sender)
+      post proxy_sessions_path(receiver), params: post_data, headers: authenticated_header(sender)
 
       expect(TwilioSession.count).to equal 1
       expect(response.status).to eq 201
@@ -40,10 +41,10 @@ RSpec.describe 'Twilio proxy messages', type: :request do
       expect_any_instance_of(TwilioService).to receive(:add_participant_to_session!)
         .with("KCXXXX1", receiver.name, receiver.phone(true))
 
-      post proxy_sessions_path(receiver), headers: authenticated_header(sender)
+      post proxy_sessions_path(receiver), params: post_data, headers: authenticated_header(sender)
 
-      expect(TwilioSession.first.sender_id).to eq sender.id
-      expect(TwilioSession.first.receiver_id).to eq receiver.id
+      expect(TwilioSession.first.initiator_id).to eq sender.id
+      expect(TwilioSession.first.client_id).to eq receiver.id
       expect(response.status).to eq 201
     end
 
@@ -51,10 +52,10 @@ RSpec.describe 'Twilio proxy messages', type: :request do
       before(:each) do
         TwilioSession.create!(
           last_action_at: DateTime.now,
-          sender: sender,
-          receiver: receiver,
+          initiator: sender,
+          client: receiver,
           twilio_sid: 'KCXXXX1',
-          twilio_sid_receiver: 'KPXXXX2',
+          twilio_sid_client: 'KPXXXX2',
         )
       end
 
@@ -62,7 +63,7 @@ RSpec.describe 'Twilio proxy messages', type: :request do
         expect_any_instance_of(TwilioService).to_not receive(:create_twilio_proxy_session!)
 
         expect {
-          post proxy_sessions_path(receiver), headers: authenticated_header(sender)
+          post proxy_sessions_path(receiver), params: post_data, headers: authenticated_header(sender)
         }.to_not change {
           TwilioSession.count
         }
@@ -73,7 +74,7 @@ RSpec.describe 'Twilio proxy messages', type: :request do
       it 'does not add participants to the conversation' do
         expect_any_instance_of(TwilioService).to_not receive(:add_participant_to_session!)
 
-        post proxy_sessions_path(receiver), headers: authenticated_header(sender)
+        post proxy_sessions_path(receiver), params: post_data, headers: authenticated_header(sender)
 
         expect(response.status).to eq 201
       end

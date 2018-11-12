@@ -3,31 +3,31 @@ class TwilioService
     @client = twilio_client
   end
 
-  def proxy_session_for(sender: , receiver: )
+  def proxy_session_for(initiator: , client: )
     # -> and query for last_action_at + TTL_SECONDS > now
     existing_sessions = TwilioSession
       .live
-      .with_participants(sender.id, receiver.id)
+      .with_participants(initiator.id, client.id)
 
     if existing_sessions.count > 0
       proxy_session = existing_sessions.first
     else
-      session_name = unique_name_for_session(sender.id, receiver.id)
+      session_name = unique_name_for_session(initiator.id, client.id)
       # create a new session
       session_obj = create_twilio_proxy_session!(session_name)
       # add the participants to the session
-      twilio_sender_obj = add_participant_to_session!(session_obj.sid, sender.name, sender.phone(true))
-      twilio_receiver_obj = add_participant_to_session!(session_obj.sid, receiver.name, receiver.phone(true))
+      twilio_initiator_obj = add_participant_to_session!(session_obj.sid, initiator.name, initiator.phone(true))
+      twilio_client_obj = add_participant_to_session!(session_obj.sid, client.name, client.phone(true))
       # save the session SID and name
       proxy_session = TwilioSession.create(
         twilio_sid: session_obj.sid,
         friendly_name: session_obj.unique_name,
-        sender_id: sender.id,
-        receiver_id: receiver.id,
-        twilio_sid_sender: twilio_sender_obj.sid,
-        twilio_sid_receiver: twilio_receiver_obj.sid,
-        proxy_identifier_sender: twilio_sender_obj.proxy_identifier,
-        proxy_identifier_receiver: twilio_receiver_obj.proxy_identifier,
+        initiator_id: initiator.id,
+        client_id: client.id,
+        twilio_sid_initiator: twilio_initiator_obj.sid,
+        twilio_sid_client: twilio_client_obj.sid,
+        proxy_identifier_initiator: twilio_initiator_obj.proxy_identifier,
+        proxy_identifier_client: twilio_client_obj.proxy_identifier,
         last_action_at: DateTime.now.utc,
       )
     end
@@ -35,26 +35,34 @@ class TwilioService
     proxy_session
   end
 
-  def send_introductory_message_to!(cc_twilio_session:, receiver:, sender:)
-    # send an introductory message to the receiver
-    message_text = introductory_message_text(receiver.name, sender.name)
+  # retrieve correct twilio_sid for participant from TwilioSession object
+  def twilio_sid_for_participant(cc_twilio_session:, participant:)
+    participant_sid = nil
 
-    send_message_to_participant!(
-      cc_twilio_session: cc_twilio_session,
-      sender: sender,
-      receiver: receiver,
-      message: message_text,
-    )
+    if participant.id == cc_twilio_session.client_id
+      participant_sid = cc_twilio_session.twilio_sid_client
+    elsif participant.id == cc_twilio_session.initiator_id
+      participant_sid = cc_twilio_session.twilio_sid_initiator
+    end
+
+    participant_sid
   end
 
   def send_message_to_participant!(cc_twilio_session:, sender:, receiver:, message:)
     twilio_session_sid = cc_twilio_session.twilio_sid
-    twilio_participant_sid = cc_twilio_session.twilio_sid_receiver
+    twilio_receiver_sid = twilio_sid_for_participant(
+      cc_twilio_session: cc_twilio_session,
+      participant: receiver,
+    )
 
-    # TODO: may not need to actually push the message in, may be enough to send user to SMS with the twilio session number
+    # Send message to ppant
     # - return the receiver's proxy identifier
     # - See: https://www.twilio.com/docs/proxy/quickstart#create-participants
-    twilio_msg_obj = send_twilio_message_to_participant!(twilio_session_sid, twilio_participant_sid, message)
+    twilio_msg_obj = send_twilio_message_to_participant!(
+      twilio_session_sid,
+      twilio_receiver_sid,
+      message
+    )
 
     msg = Message.create(
       sender_id: sender.id,
@@ -68,16 +76,6 @@ class TwilioService
 
 
   private
-
-  def introductory_message_text(receiver_name, sender_name)
-    <<~HEREDOC
-      Hi #{receiver_name}! Would you be available for childcare today?
-
-      Thanks!
-
-      #{sender_name}
-    HEREDOC
-  end
 
   def send_twilio_message_to_participant!(twilio_session_sid, twilio_participant_sid, message)
     proxy_service
@@ -107,8 +105,8 @@ class TwilioService
       )
   end
 
-  def unique_name_for_session(sender_id, receiver_id, timestamp=DateTime.now)
-    "#{sender_id}_#{receiver_id}_#{timestamp.to_i}"
+  def unique_name_for_session(initiator_id, client_id, timestamp=DateTime.now)
+    "#{initiator_id}_#{client_id}_#{timestamp.to_i}"
   end
 
   def client

@@ -9,10 +9,10 @@ RSpec.describe TwilioService do
 
     context 'when an active session for the participants exists' do
       let!(:active_session_p1_p2) {
-        FactoryBot.create(:twilio_session, sender: p1, receiver: p2)
+        FactoryBot.create(:twilio_session, initiator: p1, client: p2)
       }
       it 'returns the active session' do
-        sess = service.proxy_session_for(sender: p1, receiver: p2)
+        sess = service.proxy_session_for(initiator: p1, client: p2)
         expect(sess).to eq active_session_p1_p2
         expect(TwilioSession.count).to eq 1
       end
@@ -20,7 +20,7 @@ RSpec.describe TwilioService do
 
     context 'when a session for the participants exists, but is not active' do
       let!(:inactive_session_p1_p2) {
-        FactoryBot.create(:twilio_session, sender: p1, receiver: p2, last_action_at: 3.days.ago)
+        FactoryBot.create(:twilio_session, initiator: p1, client: p2, last_action_at: 3.days.ago)
       }
 
       before(:each) do
@@ -37,12 +37,12 @@ RSpec.describe TwilioService do
         expect(service).to receive(:add_participant_to_session!).with(anything, p1.name, anything)
         expect(service).to receive(:add_participant_to_session!).with(anything, p2.name, anything)
 
-        sess = service.proxy_session_for(sender: p1, receiver: p2)
+        sess = service.proxy_session_for(initiator: p1, client: p2)
 
         expect(TwilioSession.count).to eq 2
         expect(sess).to_not eq inactive_session_p1_p2
-        expect(sess.sender).to eq p1
-        expect(sess.receiver).to eq p2
+        expect(sess.initiator).to eq p1
+        expect(sess.client).to eq p2
       end
     end
   end

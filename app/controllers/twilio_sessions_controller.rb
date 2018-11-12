@@ -5,9 +5,13 @@ class TwilioSessionsController < ApplicationController
   # - adds participants to the session
   # - does not send a kickoff message - relies on SMS to send that and back to the server for saving
   def create
-    sender = current_user
-    receiver = User.find_by(id: params[:id])
-    twilio_session = service.proxy_session_for(sender: sender, receiver: receiver)
+    careseeker = current_user
+    provider = User.find_by(id: params[:id])
+    twilio_session = service.proxy_session_for(initiator: careseeker, client: provider)
+    # send request message to provider
+    service.send_message_to_participant!(cc_twilio_session: twilio_session, sender: careseeker, receiver: provider, message: twilio_params[:request_message])
+    # send acknowledgement message to careseeker
+    service.send_message_to_participant!(cc_twilio_session: twilio_session, sender: provider, receiver: careseeker, message: twilio_params[:acknowledgment_message])
 
     # return receiver's textable number (proxy ID)
     render json: TwilioSessionSerializer.json_for(twilio_session), status: 201
@@ -20,19 +24,21 @@ class TwilioSessionsController < ApplicationController
     twilio_session_sid = params['interactionSessionSid']
     outbound_participant_sid = params['outboundParticipantSid']
     interaction_sid = params['interactionSid']
-    content = JSON.parse(params['interactionData'])['body']
+    message_content = JSON.parse(params['interactionData'])['body']
 
     # find twilio session and determine which participant sent message
     # - set sender and receiver based on outbound_ppant_id
     twilio_session = TwilioSession.find_by(twilio_sid: twilio_session_sid)
     sender = nil
     receiver = nil
-    if outbound_participant_sid == twilio_session.twilio_sid_receiver
-      receiver = twilio_session.receiver
-      sender = twilio_session.sender
-    else
-      receiver = twilio_session.sender
-      sender = twilio_session.receiver
+    # if message is going to the client, set receiver as client
+    if outbound_participant_sid == twilio_session.twilio_sid_client
+      receiver = twilio_session.client
+      sender = twilio_session.initiator
+    # if message is not going to the client, set receiver as initiator
+    elsif outbound_participant_sid == twilio_session.twilio_sid_initiator
+      receiver = twilio_session.initiator
+      sender = twilio_session.client
     end
 
     Message.find_or_create_by(
@@ -40,7 +46,7 @@ class TwilioSessionsController < ApplicationController
       receiver: receiver,
       cc_twilio_session: twilio_session,
       twilio_interaction_sid: interaction_sid,
-      content: content,
+      content: message_content,
     )
 
     # update session's last_action_at
@@ -64,7 +70,8 @@ class TwilioSessionsController < ApplicationController
 
   def twilio_params
     params.require(:twilio_session).permit(
-      :content,
+      :request_message,
+      :acknowledgment_message,
     )
   end
 end

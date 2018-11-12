@@ -4,9 +4,16 @@ class TwilioSession < ApplicationRecord
 
   alias_attribute :unique_name, :friendly_name
   alias_attribute :twilio_sid, :twilio_id
+  # rename sender->initiator, receiver->client
+  alias_attribute :initiator_id, :sender_id
+  alias_attribute :client_id, :receiver_id
+  alias_attribute :twilio_sid_initiator, :twilio_sid_sender
+  alias_attribute :twilio_sid_client, :twilio_sid_receiver
+  alias_attribute :proxy_identifier_initiator, :proxy_identifier_sender
+  alias_attribute :proxy_identifier_client, :proxy_identifier_receiver
 
-  belongs_to :sender, class_name: 'User'
-  belongs_to :receiver, class_name: 'User'
+  belongs_to :initiator, class_name: 'User', foreign_key: :sender_id
+  belongs_to :client, class_name: 'User', foreign_key: :receiver_id
   has_many :messages, class_name: 'Message', foreign_key: :cc_twilio_session_id
 
   before_validation :ensure_last_action_utc
