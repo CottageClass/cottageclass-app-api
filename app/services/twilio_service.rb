@@ -18,15 +18,15 @@ class TwilioService
       # add the participants to the session
       twilio_sender_obj = add_participant_to_session!(session_obj.sid, sender.name, sender.phone(true))
       twilio_receiver_obj = add_participant_to_session!(session_obj.sid, receiver.name, receiver.phone(true))
-      sender_participant_sid = twilio_sender_obj.sid
-      receiver_participant_sid = twilio_receiver_obj.sid
       # save the session SID and name
       proxy_session = TwilioSession.create(
         twilio_sid: session_obj.sid,
         friendly_name: session_obj.unique_name,
         participant_ids: [receiver.id, sender.id],
-        twilio_sid_sender: sender_participant_sid,
-        twilio_sid_receiver: receiver_participant_sid,
+        twilio_sid_sender: twilio_sender_obj.sid,
+        twilio_sid_receiver: twilio_receiver_obj.sid,
+        proxy_identifier_sender: twilio_sender_obj.proxy_identifier,
+        proxy_identifier_receiver: twilio_receiver_obj.proxy_identifier,
         last_action_at: DateTime.now.utc,
       )
     end
