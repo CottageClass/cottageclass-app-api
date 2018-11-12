@@ -30,7 +30,7 @@ class UsersController < ApplicationController
       .inquirers
       .in_network(current_user.network_code)
 
-    render json: UserInNetworkSerializer.json_for(@users), status: 200
+    render json: UserInNetworkSerializer.json_for(@users, include: [:children]), status: 200
   end
 
   private
