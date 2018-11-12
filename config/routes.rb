@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   get '/users/:id/inquiries' => 'users#inquiries', as: 'inquiries'
 
   post '/users/:id/proxy_sessions' => 'twilio_sessions#create', as: 'proxy_sessions'
-  get '/proxy_callback' => 'twilio_sessions#callback'
+  post '/proxy_callback' => 'twilio_sessions#callback'
 
   root "null#index"
 end
