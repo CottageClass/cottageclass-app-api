@@ -43,6 +43,9 @@ class TwilioSessionsController < ApplicationController
       content: content,
     )
 
+    # update session's last_action_at
+    twilio_session.record_action!
+
     render status: 201
   end
 

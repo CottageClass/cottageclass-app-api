@@ -30,6 +30,10 @@ class TwilioSession < ApplicationRecord
     TTL_SECONDS.seconds.ago.utc
   end
 
+  def record_action!(time=DateTime.now.utc)
+    update_attributes(last_action_at: time)
+  end
+
 
   private
 
