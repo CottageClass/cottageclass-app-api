@@ -21,6 +21,11 @@ class TwilioSessionsController < ApplicationController
   # - save Messages as they are sent
   # - See: https://www.twilio.com/docs/proxy/api/webhooks#callbackurl
   def callback
+    # Twilio doesn't give us a test CallbackUrl
+    # - return here to prevent Twilio missing-session errors
+    # - comment this out if testing callbacks in dev
+    return if ENV['RAILS_ENV'] != 'production'
+
     twilio_session_sid = params['interactionSessionSid']
     outbound_participant_sid = params['outboundParticipantSid']
     interaction_sid = params['interactionSid']
