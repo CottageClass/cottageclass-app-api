@@ -1,6 +1,6 @@
 class TwilioSession < ApplicationRecord
-  # Twilio sessions last 1 day from last action
-  TTL_SECONDS = 60 * 60 * 24
+  # Twilio sessions last 7 days from last action
+  TTL_SECONDS = 60 * 60 * 24 * 7
 
   alias_attribute :unique_name, :friendly_name
   alias_attribute :twilio_sid, :twilio_id
