@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :authenticate_user
-  before_action :reject_nonmatching_user, only: [:show, :update]
-  before_action :reject_user_not_in_network, only: [:index, :inquiries]
+  before_action :reject_nonmatching_user, only: [:show, :update, :inquiries]
+  before_action :reject_user_not_in_network, only: [:index]
 
   def index
     # false defends against returning users who have network `""
