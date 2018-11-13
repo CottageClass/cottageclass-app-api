@@ -18,6 +18,7 @@ class TwilioService
       # add the participants to the session
       twilio_initiator_obj = add_participant_to_session!(session_obj.sid, initiator.name, initiator.phone(true))
       twilio_client_obj = add_participant_to_session!(session_obj.sid, client.name, client.phone(true))
+
       # save the session SID and name
       proxy_session = TwilioSession.create(
         twilio_sid: session_obj.sid,
@@ -87,13 +88,28 @@ class TwilioService
 
 
   def add_participant_to_session!(session_id, name, phone_w_country_code)
-    proxy_service
-      .sessions(session_id)
-      .participants
-      .create(
-        friendly_name: name,
-        identifier: phone_w_country_code,
-      )
+    begin
+      proxy_service
+        .sessions(session_id)
+        .participants
+        .create(
+          friendly_name: name,
+          identifier: phone_w_country_code,
+        )
+    rescue Twilio::REST::RestError => e
+      # skip retry if participant is already added
+      if has_existing_participant?(e)
+        # do nothing
+      else
+        # retry
+        add_participant_to_session!(session_id, name, phone_w_country_code)
+      end
+    end
+  end
+
+  def has_existing_participant?(twilio_rest_error)
+    twilio_rest_error.error_message.match(/Participant has already been added/) ||
+      twilio_rest_error.code == "80103"
   end
 
   def create_twilio_proxy_session!(session_name)
