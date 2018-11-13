@@ -20,7 +20,7 @@ RSpec.describe TwilioService do
 
     context 'when a session for the participants exists, but is not active' do
       let!(:inactive_session_p1_p2) {
-        FactoryBot.create(:twilio_session, initiator: p1, client: p2, last_action_at: 3.days.ago)
+        FactoryBot.create(:twilio_session, initiator: p1, client: p2, last_action_at: 2.weeks.ago)
       }
 
       before(:each) do
