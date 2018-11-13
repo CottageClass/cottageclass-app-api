@@ -33,7 +33,8 @@ module CottageclassAppApi
           'https://cottageclass-app-staging.herokuapp.com',
           'https://cottageclass-app.herokuapp.com',
           'https://192.168.1.4:8077',
-          'https://192.168.1.12:3001'
+          'https://192.168.1.12:3001',
+          'https://twilio.com'
 
         resource '*',
           headers: :any,
