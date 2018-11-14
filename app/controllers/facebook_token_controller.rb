@@ -54,7 +54,10 @@ class FacebookTokenController < ApplicationController
   # exchange code for access token
   # - contains expiry date
   def access_token_info
-    @access_token_info ||= FacebookService.get_access_token_info(auth_params[:code], { redirect_uri: auth_params[:redirect_uri]})
+    @access_token_info ||= FacebookService.get_access_token_info(
+      auth_params[:code],
+      { redirect_uri: auth_params[:redirect_uri]}
+    )
   end
 
   def access_token
