@@ -9,8 +9,8 @@ class User < ApplicationRecord
   alias_attribute :facebook_id, :facebook_uid
 
   before_validation {
-    (self.email = self.email.to_s.downcase)
-    (self.network_code = self.network_code.to_s.downcase)
+    self.email = self.email.to_s.downcase
+    self.network_code = self.network_code.to_s.downcase
   }
   before_create {
     populate_full_name!
@@ -23,7 +23,7 @@ class User < ApplicationRecord
     uniqueness: true,
     format: {with: /\A.+@.+\..+\z/, message: "Please provide a valid email"}
 
-  has_many :children, class_name: 'Child', inverse_of: :parent, dependent: :destroy
+  has_many :children, class_name: 'Child', foreign_key: :parent_id, inverse_of: :parent, dependent: :destroy
   has_many :sent_messages, class_name: 'Message', foreign_key: :sender_id, inverse_of: :sender
   has_many :received_messages, class_name: 'Message', foreign_key: :receiver_id, inverse_of: :receiver
   has_many :inquirers, -> { distinct }, through: :received_messages, source: :sender
