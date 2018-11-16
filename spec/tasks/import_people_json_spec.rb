@@ -11,7 +11,7 @@ RSpec.describe 'import:people_json' do
       subject.invoke(path_to_json)
     }.to change {
       User.count
-    }.from(0).to(131)
+    }.from(0).to(130)
 
     marixsa = User.find_by(email: 'marixsa@gmail.com')
 
@@ -43,7 +43,7 @@ RSpec.describe 'import:people_json' do
         subject.invoke(path_to_json)
       }.to change {
         User.count
-      }.from(1).to(131)
+      }.from(1).to(130)
 
       marixsa = User.where(email: 'marixsa@gmail.com')
       marixsa = marixsa.first

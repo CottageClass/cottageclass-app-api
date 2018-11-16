@@ -1,6 +1,4 @@
-require 'rails_helper'
 require 'ostruct'
-require 'ffaker'
 
 namespace :import do
   desc "Import users from people.json from old app"
@@ -8,6 +6,7 @@ namespace :import do
     date_format_year_last = "%m/%d/%Y"
     date_format_year_first = "%Y/%m/%d"
 
+    created_user_emails = []
     created_network_codes = []
 
     path_to_json = File.join(Rails.root.to_s, args[:path_to_json])
@@ -16,7 +15,7 @@ namespace :import do
 
     json.each do |user_attrs|
       u = OpenStruct.new(user_attrs)
-      email = u.email || FFaker::Internet.email
+      email = u.email.downcase
       ph = u.phone || ""
       ph = ph.gsub(/\D/, '')
       area_code = ph[0..2]
@@ -72,11 +71,12 @@ namespace :import do
         )
 
         created_network_codes << user.network_code
+        created_user_emails << user.email
       end
     end
 
     created_network_codes = created_network_codes.compact.uniq
-    pp "Added Users to #{created_network_codes.length} Network Codes:"
+    pp "Added #{created_user_emails.length} Users to #{created_network_codes.length} Network Codes:"
     pp created_network_codes
   end
 end
