@@ -92,7 +92,7 @@ class TwilioService
       yield
     rescue => e
       # do not alert for errors in dev
-      return if ENV['RAILS_ENV'] != production
+      return if ENV['RAILS_ENV'] != 'production'
 
       # send message to developer, Holmes containing error
       # - TODO: if webhook for "out of proxy numbers" is added, trigger that instead
