@@ -1,4 +1,4 @@
-class NullController < ApplicationController
+class NullController < ApiController
   def index
   end
 end

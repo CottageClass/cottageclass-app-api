@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class UsersController < ApiController
   before_action :authenticate_user
   before_action :reject_nonmatching_user, only: [:show, :update, :inquiries]
   before_action :reject_user_not_in_network, only: [:index]

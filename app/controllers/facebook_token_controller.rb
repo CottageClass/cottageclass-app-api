@@ -9,7 +9,7 @@
 # - https://github.com/nsarno/knock/issues/11
 # - https://github.com/arsduo/koala/wiki/OAuth
 
-class FacebookTokenController < ApplicationController
+class FacebookTokenController < ApiController
   # log user in using code before hitting CRUD actions
   before_action :authenticate
 
