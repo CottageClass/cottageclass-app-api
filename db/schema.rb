@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_12_100907) do
+ActiveRecord::Schema.define(version: 2018_11_20_213424) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -79,6 +79,8 @@ ActiveRecord::Schema.define(version: 2018_11_12_100907) do
     t.string "network_code"
     t.string "facebook_access_token"
     t.datetime "fb_access_token_expires_at", default: -> { "now()" }
+    t.text "profile_blurb"
+    t.string "onboarding_care_type"
     t.index ["network_code"], name: "index_users_on_network_code"
   end
 

@@ -24,5 +24,7 @@ class UserSerializer < BaseSerializer
     :facebook_id,
     :activities,
     :phone,
-    :full_address
+    :full_address,
+    :profile_blurb,
+    :onboarding_care_type
 end

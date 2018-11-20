@@ -13,5 +13,7 @@ class UserInNetworkSerializer < BaseSerializer
     :full_address,
     :phone,
     :network_code,
-    :facebook_id
+    :facebook_id,
+    :profile_blurb,
+    :onboarding_care_type
 end

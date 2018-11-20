@@ -76,6 +76,8 @@ class UsersController < ApplicationController
       :available_evenings,
       :available_weekends,
       :network_code,
+      :profile_blurb,
+      :onboarding_care_type,
       activities: [],
       children_attributes: [
         :id,
