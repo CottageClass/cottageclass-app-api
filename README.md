@@ -10,6 +10,11 @@ GET `/networks/:network_code/users`
 - accepts no other params
 - returns: list of users, with subset of params (first, last, lat, long, address, phone, availability, activities)
 
+GET `/users/:id/inquiries`
+- requires current user
+- accepts no params
+- returns: list of all users *in user's current network* who have messaged the current user
+
 GET `/users/:id`
 - returns user with desired ID
 - requires current user to have permissions for desired user
