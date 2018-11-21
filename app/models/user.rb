@@ -27,6 +27,8 @@ class User < ApplicationRecord
   has_many :sent_messages, class_name: 'Message', foreign_key: :sender_id, inverse_of: :sender
   has_many :received_messages, class_name: 'Message', foreign_key: :receiver_id, inverse_of: :receiver
   has_many :inquirers, -> { distinct }, through: :received_messages, source: :sender
+  has_many :initiated_sessions, class_name: 'TwilioSession', foreign_key: :sender_id, inverse_of: :initiator
+  has_many :client_sessions, class_name: 'TwilioSession', foreign_key: :receiver_id, inverse_of: :client
 
   accepts_nested_attributes_for :children,
     allow_destroy: true,
