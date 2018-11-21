@@ -27,4 +27,6 @@ class UserSerializer < BaseSerializer
     :full_address,
     :profile_blurb,
     :onboarding_care_type
+
+  attribute :date_created, &:created_at
 end
