@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get '/users/:id' => 'users#show'
   get '/networks/:network_code/users' => 'users#index'
   get '/users/:id/inquiries' => 'users#inquiries', as: 'inquiries'
+  get '/users/:sender_id/messages/:receiver_id' => 'messages#for_pair', as: 'messages_for_pair'
 
   # post
   post '/users/:id' => 'users#update'
