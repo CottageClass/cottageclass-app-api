@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  ActiveAdmin.routes(self)
+
   post 'auth/user_token' => 'user_token#create'
   post 'auth/facebook' => 'facebook_token#create'
 
