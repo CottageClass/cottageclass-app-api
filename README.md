@@ -43,3 +43,21 @@ POST `/users/:id`
   - activities: [],
   - children: [:id, :parent_id, :first_name, :birthday]
 - returns: updated user, includes: children
+
+### Proxy Sessions
+
+POST `/users/:id/proxy_sessions`
+- finds a live session or creates a new proxy session for current_user and User.find(:id)
+- accepts:
+  - request_message
+  - acknowledgement_message
+
+### Auth
+
+POST `/auth/user_token`
+- fetches a new user auth token
+- currently not used
+
+POST `/auth/facebook`
+- exchanges an OAuth 2 authorization code (obtained via popup on frontend) for a user auth token
+- used by VueAuthenticate and Facebook Login
