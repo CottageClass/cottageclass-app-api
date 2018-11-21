@@ -14,5 +14,7 @@ Rails.application.routes.draw do
   post '/users/:id/proxy_sessions' => 'twilio_sessions#create', as: 'proxy_sessions'
   post '/proxy_callback' => 'twilio_sessions#callback'
 
+  get '/static' => 'static#index', as: 'static'
+
   root "null#index"
 end

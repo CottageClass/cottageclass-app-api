@@ -57,7 +57,7 @@ ActiveAdmin.setup do |config|
   # config.authentication_method = :authenticate_admin_user!
   #
   # TODO: Figure out how to talk to Knock
-  config.authentication_method = false
+  config.authentication_method = :authenticate_admin!
 
   # == User Authorization
   #
