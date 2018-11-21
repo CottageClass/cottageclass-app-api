@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_21_001651) do
+ActiveRecord::Schema.define(version: 2018_11_21_190223) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,8 @@ ActiveRecord::Schema.define(version: 2018_11_21_001651) do
     t.text "content"
     t.bigint "cc_twilio_session_id"
     t.string "twilio_interaction_sid"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["cc_twilio_session_id"], name: "index_messages_on_cc_twilio_session_id"
     t.index ["receiver_id"], name: "index_messages_on_receiver_id"
     t.index ["sender_id"], name: "index_messages_on_sender_id"
@@ -59,6 +61,8 @@ ActiveRecord::Schema.define(version: 2018_11_21_001651) do
     t.string "proxy_identifier_receiver"
     t.bigint "sender_id"
     t.bigint "receiver_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["receiver_id"], name: "index_twilio_sessions_on_receiver_id"
     t.index ["sender_id"], name: "index_twilio_sessions_on_sender_id"
   end
