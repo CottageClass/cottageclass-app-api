@@ -8,10 +8,15 @@ class TwilioSessionsController < ApiController
     careseeker = current_user
     provider = User.find_by(id: params[:id])
     twilio_session = service.proxy_session_for(initiator: careseeker, client: provider)
+
     # send request message to provider
     service.send_message_to_participant!(cc_twilio_session: twilio_session, sender: careseeker, receiver: provider, message: twilio_params[:request_message])
+
     # send acknowledgement message to careseeker
-    service.send_message_to_participant!(cc_twilio_session: twilio_session, sender: provider, receiver: careseeker, message: twilio_params[:acknowledgment_message])
+    ack_msg = twilio_params[:acknowledgment_message]
+    if ack_msg && ack_msg.length > 0
+      service.send_message_to_participant!(cc_twilio_session: twilio_session, sender: provider, receiver: careseeker, message: twilio_params[:acknowledgment_message])
+    end
 
     # return receiver's textable number (proxy ID)
     render json: TwilioSessionSerializer.json_for(twilio_session), status: 201
