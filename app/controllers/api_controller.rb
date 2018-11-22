@@ -11,7 +11,8 @@ class ApiController < ActionController::API
     Knock::AuthToken.new(
       payload: {
         sub: entity.id,
-        network_code: entity.try(:network_code)
+        email: entity.email,
+        network_code: entity.try(:network_code),
       }
     )
   end
