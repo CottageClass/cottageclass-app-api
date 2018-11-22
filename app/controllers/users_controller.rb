@@ -2,6 +2,7 @@ class UsersController < ApiController
   before_action :authenticate_user
   before_action :reject_nonmatching_user, only: [:show, :update, :inquiries]
   before_action :reject_user_not_in_network, only: [:index]
+  before_action :require_admin!, only: [:admin_index]
 
   def index
     # false defends against returning users who have network `""
@@ -31,6 +32,11 @@ class UsersController < ApiController
       .in_network(current_user.network_code)
 
     render json: UserInNetworkSerializer.json_for(@users, include: [:children]), status: 200
+  end
+
+  def admin_index
+    @users = User.all
+    render json: MinimallyIdentifiableUserSerializer.json_for(@users), status: 200
   end
 
   private
