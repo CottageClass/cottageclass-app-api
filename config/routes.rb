@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   # auth
   post 'auth/login' => 'user_token#create'
-  post 'auth/user_token' => 'user_token#create'
+  post 'auth/register' => 'users#create'
   post 'auth/facebook' => 'facebook_token#create'
 
   # get

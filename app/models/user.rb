@@ -6,6 +6,8 @@ class User < ApplicationRecord
   # - via: https://api.rubyonrails.org/classes/ActiveModel/SecurePassword/ClassMethods.html#method-i-has_secure_password
   has_secure_password
 
+  attr_accessor :direct
+
   alias_attribute :facebook_id, :facebook_uid
 
   before_validation {
@@ -18,6 +20,11 @@ class User < ApplicationRecord
     populate_lname_from_name!
   }
 
+  with_options if: proc { |instance| instance.direct == true } do |user|
+    user.validates :password, presence: true
+    user.validates :first_name, presence: true
+    user.validates :last_name, presence: true
+  end
   validates :email,
     presence: true,
     uniqueness: true,
