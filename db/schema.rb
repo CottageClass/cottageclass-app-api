@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_21_190223) do
+ActiveRecord::Schema.define(version: 2018_12_17_065809) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,7 +56,7 @@ ActiveRecord::Schema.define(version: 2018_11_21_190223) do
     t.string "twilio_id"
     t.string "twilio_sid_sender"
     t.string "twilio_sid_receiver"
-    t.datetime "last_action_at"
+    t.datetime "last_action_at", default: -> { "CURRENT_TIMESTAMP" }
     t.string "proxy_identifier_sender"
     t.string "proxy_identifier_receiver"
     t.bigint "sender_id"
@@ -96,9 +96,10 @@ ActiveRecord::Schema.define(version: 2018_11_21_190223) do
     t.boolean "available_weekends"
     t.string "network_code"
     t.string "facebook_access_token"
-    t.datetime "fb_access_token_expires_at", default: -> { "now()" }
+    t.datetime "fb_access_token_expires_at", default: -> { "CURRENT_TIMESTAMP" }
     t.text "profile_blurb"
     t.string "onboarding_care_type"
+    t.string "avatar"
     t.index ["network_code"], name: "index_users_on_network_code"
   end
 

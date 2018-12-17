@@ -71,7 +71,7 @@ class UsersController < ApiController
   end
 
   def signup_params
-    params.permit :first_name, :last_name, :email, :password
+    params.permit :first_name, :last_name, :email, :password, :avatar
   end
 
   def user_params
