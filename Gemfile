@@ -1,6 +1,6 @@
 git_source(:github) { |repo| format 'https://github.com/%s.git', repo }
 
-ruby '2.4.0'
+ruby '2.4.1'
 source 'https://rubygems.org'
 
 gem 'activeadmin', github: 'activeadmin/activeadmin', ref: '9292dfb548b7779db962ab7992ea4b1342ea69d4'
