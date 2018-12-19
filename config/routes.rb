@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   ActiveAdmin.routes(self)
 
+  namespace :api, defaults: { format: :json } do
+    resources :event_series, only: %i[create show]
+  end
+
   # auth
   post 'auth/login' => 'user_token#create'
   post 'auth/register' => 'users#create'
@@ -23,5 +27,5 @@ Rails.application.routes.draw do
 
   get '/static' => 'static#index', as: 'static'
 
-  root "null#index"
+  root 'null#index'
 end

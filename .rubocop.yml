@@ -1,0 +1,125 @@
+require: rubocop-rspec
+
+AllCops:
+  Exclude:
+    - db/schema.rb
+    - node_modules/**/*
+  TargetRubyVersion: 2.4
+  TargetRailsVersion: 5.2
+
+Layout/ExtraSpacing:
+  Enabled: true
+Layout/IndentHash:
+  EnforcedStyle: consistent
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+Layout/MultilineOperationIndentation:
+  EnforcedStyle: aligned
+Layout/SpaceAroundOperators:
+  AllowForAlignment: false
+Layout/SpaceBeforeFirstArg:
+  AllowForAlignment: false
+
+Lint/AmbiguousBlockAssociation:
+  Enabled: false
+Style/RescueStandardError:
+  Enabled: false
+
+Metrics/AbcSize:
+  Enabled: false
+  Max: 40
+Metrics/BlockLength:
+  Enabled: false
+Metrics/BlockNesting:
+  Enabled: false
+  Max: 50
+Metrics/ClassLength:
+  Enabled: false
+Metrics/CyclomaticComplexity:
+  Enabled: false
+Metrics/LineLength:
+  Max: 120
+  Exclude:
+    - bin/*
+    - db/seeds.rb
+    - db/migrate/*
+    - config/application.rb
+    - config/initializers/*
+    - config/environments/*
+Metrics/MethodLength:
+  Max: 50
+  Enabled: false
+Metrics/PerceivedComplexity:
+  Enabled: false
+
+Naming/AccessorMethodName:
+  Enabled: false
+Naming/UncommunicativeMethodParamName:
+  Enabled: false
+
+Rails:
+  Enabled: true
+Rails/FindEach:
+  Enabled: false
+Rails/HasAndBelongsToMany:
+  Enabled: false
+Rails/HasManyOrHasOneDependent:
+  Enabled: false
+Rails/InverseOf:
+  Enabled: false
+Rails/SkipsModelValidations:
+  Enabled: false
+Rails/CreateTableWithTimestamps:
+  Enabled: false
+Rails/LexicallyScopedActionFilter:
+  Enabled: false
+Rails/HttpStatus:
+  Enabled: true
+
+RSpec/ContextWording:
+  Enabled: false
+RSpec/MultipleExpectations:
+  Enabled: false
+RSpec/NamedSubject:
+  Enabled: false
+RSpec/ScatteredSetup:
+  Enabled: false
+RSpec/EmptyExampleGroup:
+  Enabled: false
+RSpec/ExampleLength:
+  Enabled: false
+
+Style/AccessModifierDeclarations:
+  Enabled: true
+Style/ClassAndModuleChildren:
+  Enabled: false
+Style/ConditionalAssignment:
+  Enabled: true
+Style/Documentation:
+  Enabled: false
+Style/EachWithObject:
+  Enabled: false
+Style/Encoding:
+  Enabled: true
+Style/FormatString:
+  Enabled: true
+  EnforcedStyle: format
+Style/FormatStringToken:
+  Enabled: false
+Style/FrozenStringLiteralComment:
+  Enabled: false
+Style/GuardClause:
+  Enabled: false
+Style/IfInsideElse:
+  Enabled: false
+Style/MixinUsage:
+  Enabled: false
+Style/MultilineBlockChain:
+  Enabled: false
+Style/StringLiterals:
+  EnforcedStyle: single_quotes
+Style/TernaryParentheses:
+  Exclude:
+    - db/migrate/*
+Style/WordArray:
+  EnforcedStyle: percent

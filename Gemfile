@@ -1,68 +1,45 @@
-source 'https://rubygems.org'
-git_source(:github) { |repo| "https://github.com/#{repo}.git" }
+git_source(:github) { |repo| format 'https://github.com/%s.git', repo }
 
 ruby '2.4.0'
+source 'https://rubygems.org'
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.2.1'
-gem 'pg'
-gem 'puma', '~> 3.11'
-
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-# gem 'jbuilder', '~> 2.5'
-# Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 4.0'
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
-
-# Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', '>= 1.1.0', require: false
-
-gem 'dotenv-rails'
-gem 'knock', github: 'ngty/knock' # forked from ngty version, which fixes https://github.com/nsarno/knock/issues/156
-
-# FB's Graph API access gem, also has an OAuth code<>access_token exchange module
-gem 'koala'
-# OAuth provider for social login, can return Knock JWTs
-# - skip until we perhaps need OAuth sessions monitored, eg to save a FB access token for subsequent requests (a session, this is what OmniAuth wants you to do)
-#gem 'doorkeeper'
+gem 'activeadmin', github: 'activeadmin/activeadmin', ref: '9292dfb548b7779db962ab7992ea4b1342ea69d4'
+gem 'activeadmin_addons'
+gem 'addressable'
 gem 'fast_jsonapi'
+gem 'inherited_resources', github: 'activeadmin/inherited_resources', ref: 'db6eb312b7cac6baf0023f720cf6785a9849fa85'
+gem 'knock', github: 'ngty/knock', ref: '9e9416c3745fc5e8fa73bbb901b69729d45aef9b'
+gem 'koala'
+gem 'pg'
+gem 'puma_worker_killer'
+gem 'rack-cors', require: 'rack/cors'
+gem 'rails', '~> 5.2.2'
 gem 'twilio-ruby', '~> 5.15.2'
 
-# ActiveAdmin
-gem 'activeadmin', github: 'activeadmin/activeadmin'
-gem 'inherited_resources', git: 'https://github.com/activeadmin/inherited_resources'
-gem 'country_select', '~> 3.1'
-
-# Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
-gem 'rack-cors', require: 'rack/cors'
+gem 'apitome'
+gem 'country_select'
 
 group :production do
+  gem 'lograge'
+  gem 'puma-heroku'
   gem 'rails_12factor'
+  gem 'uglifier'
 end
 
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-
-  gem 'rspec-rails'
-  gem 'factory_bot_rails'
-  gem 'ffaker'
-end
-
-group :test do
+  gem 'brakeman', require: false
+  gem 'bullet'
   gem 'database_cleaner'
+  gem 'dotenv-rails'
+  gem 'factory_bot_rails'
+  gem 'faker'
+  gem 'ffaker'
+  gem 'mry', require: false
+  gem 'rspec-rails'
+  gem 'rspec_api_documentation'
+  gem 'rubocop', require: false
+  gem 'rubocop-rspec', require: false
+  gem 'shoulda-matchers'
+  gem 'therubyracer', platforms: :ruby
+  gem 'webmock'
 end
-
-group :development do
-  gem 'listen', '>= 3.0.5', '< 3.2'
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
-
-  gem 'web-console'
-end
-
-
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
