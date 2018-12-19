@@ -4,27 +4,45 @@ require 'rspec_api_documentation/dsl'
 RSpec.resource 'EventSeries' do
   include_context 'json headers'
 
-  let(:user) { build :user }
-  let(:subject) { build :event_series }
+  let(:user) { create :user }
+  let(:subject) { build :event_series, :with_event_hosts, user: user }
 
-  post api_event_series_index_path, format: :json do
-    before { user.save }
-
-    parameter :event_series, 'Event series data'
-    let(:event_series) { subject }
-
-    context 'authorized' do
-      include_context 'authorization token'
-
-      example_request 'create:success' do
-        Utils.log response_body
-        expect(response_status).to eq(201)
-      end
+  context 'write operations' do
+    with_options scope: :event_series, with_example: true do
+      parameter :name, 'Name', required: true
+      parameter :start_date, 'Start Date', required: true
+      parameter :starts_at, 'Start Time', required: true
+      parameter :ends_at, 'End Time', required: true
+      parameter :has_pet, 'Has Pet?'
+      parameter :activity_names, 'Activity Names'
+      parameter :foods, 'Food Names'
+      parameter :house_rules, 'House Rules'
+      parameter :pet_description, 'Pet Description'
+      parameter :event_hosts_attributes, 'Array of adults present at host venue'
     end
 
-    context 'unauthorized' do
-      example_request 'authentication:failure', document: false do
-        expect(response_status).to eq(401)
+    %i[name start_date has_pet activity_names foods house_rules pet_description].each do |attribute|
+      let(attribute) { subject.send attribute }
+    end
+    %i[starts_at ends_at].each { |attribute| let(attribute) { subject.send(attribute).to_s :time } }
+    let :event_hosts_attributes do
+      subject.event_hosts.map { |event_host| event_host.attributes.with_indifferent_access.slice :name, :email, :phone }
+    end
+
+    post api_event_series_index_path, format: :json do
+      context 'authorized' do
+        include_context 'authorization token'
+
+        example_request 'create:success' do
+          expect(response_status).to eq(201)
+        end
+      end
+
+      context 'unauthorized' do
+        example 'authentication:failure', document: false do
+          do_request
+          expect(response_status).to eq(401)
+        end
       end
     end
   end

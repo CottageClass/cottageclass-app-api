@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_17_065809) do
+ActiveRecord::Schema.define(version: 2018_12_19_115804) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,41 @@ ActiveRecord::Schema.define(version: 2018_12_17_065809) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["parent_id"], name: "index_children_on_parent_id"
+  end
+
+  create_table "event_hosts", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "email"
+    t.string "phone"
+    t.boolean "verified", default: false
+    t.json "meta"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "event_hosts_series", id: false, force: :cascade do |t|
+    t.bigint "event_host_id", null: false
+    t.bigint "event_series_id", null: false
+    t.index ["event_host_id", "event_series_id"], name: "index_event_hosts_series_on_event_host_id_and_event_series_id", unique: true
+  end
+
+  create_table "event_series", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "name", null: false
+    t.date "start_date", null: false
+    t.time "starts_at", null: false
+    t.time "ends_at", null: false
+    t.integer "repeat_for", null: false
+    t.integer "interval", null: false
+    t.boolean "has_pet", default: false
+    t.text "activity_names", default: [], array: true
+    t.text "foods", default: [], array: true
+    t.text "house_rules"
+    t.text "pet_description"
+    t.json "meta"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["user_id"], name: "index_event_series_on_user_id"
   end
 
   create_table "messages", force: :cascade do |t|

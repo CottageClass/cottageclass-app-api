@@ -1,16 +1,22 @@
 FactoryBot.define do
   factory :event_series do
-    user { nil }
-    name { 'MyString' }
-    start_date { '2018-12-19' }
-    starts_at { '2018-12-19 12:51:23' }
-    ends_at { '2018-12-19 12:51:23' }
-    repeat_for { 1 }
-    interval { 1 }
-    activity_names { 'MyText' }
-    foods { 'MyText' }
-    house_rules { 'MyText' }
-    has_pet { false }
-    pet_description { 'MyText' }
+    user
+    name { Faker::FunnyName.unique.name }
+    start_date { Faker::Date.unique.between 2.weeks.since, 3.weeks.since }
+    starts_at { Faker::Time.unique.between 2.weeks.since, 3.weeks.since }
+    ends_at { 3.hours.since starts_at }
+    repeat_for { 6 }
+    interval { 4 }
+    activity_names { [Faker::FunnyName.unique.name] }
+    foods { [Faker::Food.unique.dish] }
+    house_rules { Faker::Lorem.unique.paragraph }
+    has_pet { true }
+    pet_description { Faker::Lorem.unique.paragraph }
+
+    trait :with_event_hosts do
+      transient { event_hosts_count { 2 } }
+
+      after(:build) { |instance, evaluator| instance.event_hosts = build_list :event_host, evaluator.event_hosts_count }
+    end
   end
 end

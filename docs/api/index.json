@@ -1,0 +1,17 @@
+{
+  "resources": [
+    {
+      "name": "EventSeries",
+      "explanation": null,
+      "examples": [
+        {
+          "description": "create:success",
+          "link": "eventseries/create:success.json",
+          "groups": "all",
+          "route": "/api/event_series",
+          "method": "post"
+        }
+      ]
+    }
+  ]
+}

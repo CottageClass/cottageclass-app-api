@@ -9,6 +9,7 @@ class CreateEventSeries < ActiveRecord::Migration[5.2]
       t.boolean :has_pet, default: false
       t.text :activity_names, :foods, array: true, default: []
       t.text :house_rules, :pet_description
+      t.json :meta
       t.timestamps null: true
     end
   end
