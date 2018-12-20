@@ -19,6 +19,13 @@
           "method": "post"
         },
         {
+          "description": "index:success",
+          "link": "eventseries/index:success.json",
+          "groups": "all",
+          "route": "/api/event_series",
+          "method": "get"
+        },
+        {
           "description": "show:failure",
           "link": "eventseries/show:failure.json",
           "groups": "all",

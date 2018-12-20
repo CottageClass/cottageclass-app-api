@@ -18,12 +18,12 @@
   "requests": [
     {
       "request_method": "GET",
-      "request_path": "/api/event_series/2",
+      "request_path": "/api/event_series/3",
       "request_body": null,
       "request_headers": {
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDUzNzQ3NjMsInN1YiI6NH0.IO2TNGwYR4rV60FqyQ_ElkA4JUh4Y0NUj38rJubwoO0"
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDUzNzYxMTYsInN1YiI6NH0.38jQyivqEjV-JKPtWj5VSWWmXt_OFC6_3Nktg1hr7dY"
       },
       "request_query_parameters": {
         "{}": null
@@ -31,7 +31,7 @@
       "request_content_type": "application/json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\n  \"data\": {\n    \"id\": \"2\",\n    \"type\": \"event_series\",\n    \"attributes\": {\n      \"name\": \"Agatha L. Outtathere\",\n      \"start_date\": \"2019-01-09\",\n      \"has_pet\": true,\n      \"activity_names\": [\n        \"Rhea Curran\"\n      ],\n      \"foods\": [\n        \"Caesar Salad\"\n      ],\n      \"house_rules\": \"Repudiandae doloribus odio. Qui quidem exercitationem. Vitae omnis perspiciatis.\",\n      \"pet_description\": \"Illum et voluptatem. Sint cum quia. Fugit corrupti quis.\",\n      \"starts_at\": \"23:02\",\n      \"ends_at\": \"02:02\"\n    },\n    \"relationships\": {\n      \"event_hosts\": {\n        \"data\": [\n          {\n            \"id\": \"3\",\n            \"type\": \"event_host\"\n          },\n          {\n            \"id\": \"4\",\n            \"type\": \"event_host\"\n          }\n        ]\n      }\n    }\n  },\n  \"included\": [\n    {\n      \"id\": \"3\",\n      \"type\": \"event_host\",\n      \"attributes\": {\n        \"name\": \"Aurelia Hammes\",\n        \"email\": \"madalyn_runte@yahoo.com\",\n        \"phone\": \"343.080.7167\"\n      }\n    },\n    {\n      \"id\": \"4\",\n      \"type\": \"event_host\",\n      \"attributes\": {\n        \"name\": \"Digna Langosh\",\n        \"email\": \"alden_simonis@hotmail.com\",\n        \"phone\": \"152.422.0897\"\n      }\n    }\n  ]\n}",
+      "response_body": "{\n  \"data\": {\n    \"id\": \"3\",\n    \"type\": \"event_series\",\n    \"attributes\": {\n      \"name\": \"Mary Ott\",\n      \"start_date\": \"2019-01-08\",\n      \"has_pet\": true,\n      \"activity_names\": [\n        \"Candy Kane\"\n      ],\n      \"foods\": [\n        \"French Fries with Sausages\"\n      ],\n      \"house_rules\": \"Dolor assumenda et. Expedita recusandae sunt. Fuga impedit blanditiis.\",\n      \"pet_description\": \"Maiores nostrum ut. Fuga distinctio dignissimos. Magnam enim aliquid.\",\n      \"starts_at\": \"19:05\",\n      \"ends_at\": \"22:05\"\n    },\n    \"relationships\": {\n      \"event_hosts\": {\n        \"data\": [\n          {\n            \"id\": \"5\",\n            \"type\": \"event_host\"\n          },\n          {\n            \"id\": \"6\",\n            \"type\": \"event_host\"\n          }\n        ]\n      }\n    }\n  },\n  \"included\": [\n    {\n      \"id\": \"5\",\n      \"type\": \"event_host\",\n      \"attributes\": {\n        \"name\": \"Kacey Johns\",\n        \"email\": \"jc_jakubowski@yahoo.com\",\n        \"phone\": \"(444) 904-4470\"\n      }\n    },\n    {\n      \"id\": \"6\",\n      \"type\": \"event_host\",\n      \"attributes\": {\n        \"name\": \"Anamaria Schmitt Jr.\",\n        \"email\": \"arvilla.wilkinson@hotmail.com\",\n        \"phone\": \"(220) 306-9869\"\n      }\n    }\n  ]\n}",
       "response_headers": {
         "Content-Type": "application/vnd.api+json; charset=utf-8"
       },

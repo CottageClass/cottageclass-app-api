@@ -1,6 +1,11 @@
 class API::EventSeriesController < API::BaseController
   before_action :authenticate_user
 
+  def index
+    render json: EventSeriesSerializer.new(current_user.event_series, include: %i[event_hosts]).serializable_hash,
+           status: :ok
+  end
+
   def create
     event_series = current_user.event_series.build safe_params
     if event_series.save

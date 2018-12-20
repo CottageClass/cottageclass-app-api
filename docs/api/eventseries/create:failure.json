@@ -78,11 +78,11 @@
     {
       "request_method": "POST",
       "request_path": "/api/event_series",
-      "request_body": "{\"event_series\":{\"name\":null,\"start_date\":\"2019-01-07\",\"starts_at\":\"10:37\",\"ends_at\":\"13:37\",\"has_pet\":true,\"activity_names\":[\"Pearl E White\"],\"foods\":[\"Fettuccine Alfredo\"],\"house_rules\":\"Perferendis molestias porro. Totam dolores non. Quis soluta nulla.\",\"pet_description\":\"Voluptate tenetur repudiandae. Qui repudiandae praesentium. Ipsam qui voluptas.\",\"event_hosts_attributes\":[{\"name\":\"Eddie Weimann\",\"email\":\"carli.wisoky@gmail.com\",\"phone\":\"825.236.0661\"},{\"name\":\"Gregg Konopelski\",\"email\":\"roberto.legros@hotmail.com\",\"phone\":\"1-516-069-4448\"}]}}",
+      "request_body": "{\"event_series\":{\"name\":null,\"start_date\":\"2019-01-03\",\"starts_at\":\"21:13\",\"ends_at\":\"00:13\",\"has_pet\":true,\"activity_names\":[\"Reid Enright\"],\"foods\":[\"Salmon Nigiri\"],\"house_rules\":\"Exercitationem dicta nostrum. Et laudantium vitae. Consectetur dolorem iste.\",\"pet_description\":\"Velit voluptatem minima. Ex quisquam neque. Labore aut quia.\",\"event_hosts_attributes\":[{\"name\":\"Barb Schmitt\",\"email\":\"lindsy_schamberger@yahoo.com\",\"phone\":\"(160) 064-5208\"},{\"name\":\"Dale Bahringer Jr.\",\"email\":\"karl@yahoo.com\",\"phone\":\"521-048-4151\"}]}}",
       "request_headers": {
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDUzNzQ3NjMsInN1YiI6Mn0.2YC41OFzKBGy8x1MalN4SbgMd5rVQV4maJyXoEULYTs"
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDUzNzYxMTYsInN1YiI6Mn0.tzyYSic11j9YTg0hYXffmBNyQ69a3kqIkUhSoULFw5w"
       },
       "request_query_parameters": {
       },

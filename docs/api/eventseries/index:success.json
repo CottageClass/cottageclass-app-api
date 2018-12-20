@@ -1,0 +1,38 @@
+{
+  "resource": "EventSeries",
+  "resource_explanation": null,
+  "http_method": "GET",
+  "route": "/api/event_series",
+  "description": "index:success",
+  "explanation": null,
+  "parameters": [
+
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "GET",
+      "request_path": "/api/event_series",
+      "request_body": null,
+      "request_headers": {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDUzNzYxMTYsInN1YiI6M30.DcyG3iYDYG085ZdujIBbEhJhsVMvfizIn3lkfeTIepU"
+      },
+      "request_query_parameters": {
+        "{}": null
+      },
+      "request_content_type": "application/json",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "{\n  \"data\": [\n    {\n      \"id\": \"2\",\n      \"type\": \"event_series\",\n      \"attributes\": {\n        \"name\": \"Candice B. Fureal\",\n        \"start_date\": \"2019-01-04\",\n        \"has_pet\": true,\n        \"activity_names\": [\n          \"Ben Crobbery\"\n        ],\n        \"foods\": [\n          \"Linguine with Clams\"\n        ],\n        \"house_rules\": \"Quidem fugiat non. Fugiat neque voluptas. Possimus soluta aperiam.\",\n        \"pet_description\": \"Nihil minima rerum. Cupiditate ut quidem. Sapiente iure perspiciatis.\",\n        \"starts_at\": \"20:34\",\n        \"ends_at\": \"23:34\"\n      },\n      \"relationships\": {\n        \"event_hosts\": {\n          \"data\": [\n            {\n              \"id\": \"3\",\n              \"type\": \"event_host\"\n            },\n            {\n              \"id\": \"4\",\n              \"type\": \"event_host\"\n            }\n          ]\n        }\n      }\n    }\n  ],\n  \"included\": [\n    {\n      \"id\": \"3\",\n      \"type\": \"event_host\",\n      \"attributes\": {\n        \"name\": \"Dr. Clifton Wiegand\",\n        \"email\": \"aubrey@gmail.com\",\n        \"phone\": \"(588) 596-5586\"\n      }\n    },\n    {\n      \"id\": \"4\",\n      \"type\": \"event_host\",\n      \"attributes\": {\n        \"name\": \"Miss Adela Runolfsson\",\n        \"email\": \"chieko_okuneva@yahoo.com\",\n        \"phone\": \"708.216.8048\"\n      }\n    }\n  ]\n}",
+      "response_headers": {
+        "Content-Type": "application/vnd.api+json; charset=utf-8"
+      },
+      "response_content_type": "application/vnd.api+json; charset=utf-8",
+      "curl": null
+    }
+  ]
+}
