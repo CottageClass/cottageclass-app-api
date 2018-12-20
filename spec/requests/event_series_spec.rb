@@ -13,6 +13,8 @@ RSpec.resource 'EventSeries' do
       parameter :start_date, 'Start Date', required: true
       parameter :starts_at, 'Start Time', required: true
       parameter :ends_at, 'End Time', required: true
+      parameter :repeat_for, 'Number of events this series. Default: 6'
+      parameter :interval, 'Interval in weeks between events. Default: 4'
       parameter :has_pet, 'Has Pet?'
       parameter :activity_names, 'Activity Names'
       parameter :foods, 'Food Names'
@@ -21,7 +23,7 @@ RSpec.resource 'EventSeries' do
       parameter :event_hosts_attributes, 'Array of adults present at host venue'
     end
 
-    %i[name start_date has_pet activity_names foods house_rules pet_description].each do |attribute|
+    %i[name start_date repeat_for interval has_pet activity_names foods house_rules pet_description].each do |attribute|
       let(attribute) { subject.send attribute }
     end
     %i[starts_at ends_at].each { |attribute| let(attribute) { subject.send(attribute).to_s :time } }

@@ -3,8 +3,8 @@ class EventSeries < ApplicationRecord
   validates :start_date, presence: true
   validates :starts_at, presence: true
   validates :ends_at, presence: true
-  validates :repeat_for, presence: true
-  validates :interval, presence: true
+  validates :repeat_for, presence: true, numericality: { only_integer: true, greater_than: 0 }
+  validates :interval, presence: true, numericality: { only_integer: true, greater_than: 0 }
 
   belongs_to :user, inverse_of: :event_series
   has_many :events, inverse_of: :event_series, dependent: :destroy

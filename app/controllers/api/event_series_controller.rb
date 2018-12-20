@@ -9,7 +9,8 @@ class API::EventSeriesController < API::BaseController
   def create
     event_series = current_user.event_series.build safe_params
     if event_series.save
-      render json: EventSeriesSerializer.new(event_series, include: %i[event_hosts]).serializable_hash, status: :created
+      render json: EventSeriesSerializer.new(event_series, include: %i[events event_hosts]).serializable_hash,
+             status: :created
     else
       render json: { errors: event_series.errors.full_messages }, status: :unprocessable_entity
     end
@@ -17,7 +18,7 @@ class API::EventSeriesController < API::BaseController
 
   def show
     event_series = current_user.event_series.find params[:id]
-    render json: EventSeriesSerializer.new(event_series, include: %i[event_hosts]).serializable_hash, status: :ok
+    render json: EventSeriesSerializer.new(event_series, include: %i[events event_hosts]).serializable_hash, status: :ok
   rescue ActiveRecord::RecordNotFound
     render json: {}, status: :not_found
   end
