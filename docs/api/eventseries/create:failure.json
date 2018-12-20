@@ -78,11 +78,11 @@
     {
       "request_method": "POST",
       "request_path": "/api/event_series",
-      "request_body": "{\"event_series\":{\"name\":null,\"start_date\":\"2019-01-03\",\"starts_at\":\"21:13\",\"ends_at\":\"00:13\",\"has_pet\":true,\"activity_names\":[\"Reid Enright\"],\"foods\":[\"Salmon Nigiri\"],\"house_rules\":\"Exercitationem dicta nostrum. Et laudantium vitae. Consectetur dolorem iste.\",\"pet_description\":\"Velit voluptatem minima. Ex quisquam neque. Labore aut quia.\",\"event_hosts_attributes\":[{\"name\":\"Barb Schmitt\",\"email\":\"lindsy_schamberger@yahoo.com\",\"phone\":\"(160) 064-5208\"},{\"name\":\"Dale Bahringer Jr.\",\"email\":\"karl@yahoo.com\",\"phone\":\"521-048-4151\"}]}}",
+      "request_body": "{\"event_series\":{\"name\":null,\"start_date\":\"2019-01-09\",\"starts_at\":\"04:50\",\"ends_at\":\"07:50\",\"has_pet\":true,\"activity_names\":[\"Ima Hogg\"],\"foods\":[\"Pasta with Tomato and Basil\"],\"house_rules\":\"Delectus excepturi harum. Voluptatibus consequuntur laboriosam. Ipsam odio accusamus.\",\"pet_description\":\"Cupiditate ducimus odit. Suscipit voluptas neque. Magnam esse provident.\",\"event_hosts_attributes\":[{\"name\":\"Shad Spinka\",\"email\":\"my_kiehn@gmail.com\",\"phone\":\"1-261-029-5253\"},{\"name\":\"Dierdre Lebsack\",\"email\":\"rick@hotmail.com\",\"phone\":\"1-555-108-9219\"}]}}",
       "request_headers": {
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDUzNzYxMTYsInN1YiI6Mn0.tzyYSic11j9YTg0hYXffmBNyQ69a3kqIkUhSoULFw5w"
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDUzOTIxOTgsInN1YiI6Mn0.gbcSYWKpKgGOjv7CeKT2md8X2lbcnNrszzR9UPifaHE"
       },
       "request_query_parameters": {
       },

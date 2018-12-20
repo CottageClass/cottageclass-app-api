@@ -2,7 +2,8 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
 
   namespace :api, defaults: { format: :json } do
-    resources :event_series, only: %i[index create show]
+    resources :event_series, only: %i[index show create]
+    resources :events, only: %i[index]
   end
 
   # auth

@@ -7,14 +7,27 @@ class EventSeries < ApplicationRecord
   validates :interval, presence: true
 
   belongs_to :user, inverse_of: :event_series
+  has_many :events, inverse_of: :event_series, dependent: :destroy
   has_and_belongs_to_many :event_hosts
 
   accepts_nested_attributes_for :event_hosts, allow_destroy: true,
                                               reject_if: proc { |attributes| attributes['name'].blank? }
 
   before_validation :cleanup
+  after_create :create_events
 
   private
+
+  def create_events
+    0.step(by: interval).take(repeat_for).each do |number|
+      new_date = number.weeks.since start_date
+      events.create name: name, starts_at: date_time(new_date, starts_at), ends_at: date_time(new_date, ends_at)
+    end
+  end
+
+  def date_time(date, time)
+    Time.zone.parse format('%s %s', date.strftime('%F'), time.strftime('%T'))
+  end
 
   def cleanup
     self.name = name.try :squish

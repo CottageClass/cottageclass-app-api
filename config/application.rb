@@ -56,6 +56,9 @@ module CottageclassAppApi
       g.scaffold_controller :scaffold_controller
     end
 
+    # set TimeZone
+    config.time_zone = 'UTC'
+
     # Don't generate system test files.
     config.generators.system_tests = nil
     config.i18n.available_locales = %w[en]

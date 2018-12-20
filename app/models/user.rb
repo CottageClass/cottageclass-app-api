@@ -37,6 +37,7 @@ class User < ApplicationRecord
   has_many :initiated_sessions, class_name: 'TwilioSession', foreign_key: :sender_id, inverse_of: :initiator
   has_many :client_sessions, class_name: 'TwilioSession', foreign_key: :receiver_id, inverse_of: :client
   has_many :event_series, inverse_of: :user, dependent: :destroy
+  has_many :events, through: :event_series
 
   accepts_nested_attributes_for :children,
     allow_destroy: true,

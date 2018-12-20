@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_20_072246) do
+ActiveRecord::Schema.define(version: 2018_12_20_102317) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,11 +31,11 @@ ActiveRecord::Schema.define(version: 2018_12_20_072246) do
 
   create_table "children", force: :cascade do |t|
     t.string "first_name"
+    t.string "school_name"
     t.datetime "birthday"
     t.bigint "parent_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "school_name"
     t.index ["parent_id"], name: "index_children_on_parent_id"
   end
 
@@ -72,6 +72,18 @@ ActiveRecord::Schema.define(version: 2018_12_20_072246) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["user_id"], name: "index_event_series_on_user_id"
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.bigint "event_series_id", null: false
+    t.string "name", null: false
+    t.datetime "starts_at", null: false
+    t.datetime "ends_at", null: false
+    t.boolean "modified", default: false
+    t.json "meta"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["event_series_id"], name: "index_events_on_event_series_id"
   end
 
   create_table "messages", force: :cascade do |t|

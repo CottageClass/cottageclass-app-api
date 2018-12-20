@@ -23,7 +23,7 @@
       "request_headers": {
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDUzNzYxMTYsInN1YiI6NH0.38jQyivqEjV-JKPtWj5VSWWmXt_OFC6_3Nktg1hr7dY"
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDUzOTIxOTgsInN1YiI6NH0.pGXbzomc-liJu-RyWWrTGZjZCMqNCOWbYGWPn1ObDDk"
       },
       "request_query_parameters": {
         "{}": null
@@ -31,7 +31,7 @@
       "request_content_type": "application/json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\n  \"data\": {\n    \"id\": \"3\",\n    \"type\": \"event_series\",\n    \"attributes\": {\n      \"name\": \"Mary Ott\",\n      \"start_date\": \"2019-01-08\",\n      \"has_pet\": true,\n      \"activity_names\": [\n        \"Candy Kane\"\n      ],\n      \"foods\": [\n        \"French Fries with Sausages\"\n      ],\n      \"house_rules\": \"Dolor assumenda et. Expedita recusandae sunt. Fuga impedit blanditiis.\",\n      \"pet_description\": \"Maiores nostrum ut. Fuga distinctio dignissimos. Magnam enim aliquid.\",\n      \"starts_at\": \"19:05\",\n      \"ends_at\": \"22:05\"\n    },\n    \"relationships\": {\n      \"event_hosts\": {\n        \"data\": [\n          {\n            \"id\": \"5\",\n            \"type\": \"event_host\"\n          },\n          {\n            \"id\": \"6\",\n            \"type\": \"event_host\"\n          }\n        ]\n      }\n    }\n  },\n  \"included\": [\n    {\n      \"id\": \"5\",\n      \"type\": \"event_host\",\n      \"attributes\": {\n        \"name\": \"Kacey Johns\",\n        \"email\": \"jc_jakubowski@yahoo.com\",\n        \"phone\": \"(444) 904-4470\"\n      }\n    },\n    {\n      \"id\": \"6\",\n      \"type\": \"event_host\",\n      \"attributes\": {\n        \"name\": \"Anamaria Schmitt Jr.\",\n        \"email\": \"arvilla.wilkinson@hotmail.com\",\n        \"phone\": \"(220) 306-9869\"\n      }\n    }\n  ]\n}",
+      "response_body": "{\n  \"data\": {\n    \"id\": \"3\",\n    \"type\": \"event_series\",\n    \"attributes\": {\n      \"name\": \"Dee Kay\",\n      \"start_date\": \"2019-01-06\",\n      \"has_pet\": true,\n      \"activity_names\": [\n        \"Hare Brain\"\n      ],\n      \"foods\": [\n        \"Bruschette with Tomato\"\n      ],\n      \"house_rules\": \"Ipsa tempora beatae. Tempora ipsam amet. Sed qui aut.\",\n      \"pet_description\": \"Voluptatem et rerum. Soluta quia ut. Quo similique et.\",\n      \"starts_at\": \"17:55\",\n      \"ends_at\": \"20:55\"\n    },\n    \"relationships\": {\n      \"event_hosts\": {\n        \"data\": [\n          {\n            \"id\": \"5\",\n            \"type\": \"event_host\"\n          },\n          {\n            \"id\": \"6\",\n            \"type\": \"event_host\"\n          }\n        ]\n      }\n    }\n  },\n  \"included\": [\n    {\n      \"id\": \"5\",\n      \"type\": \"event_host\",\n      \"attributes\": {\n        \"name\": \"Ronnie Larkin\",\n        \"email\": \"kyoko@gmail.com\",\n        \"phone\": \"343.508.5327\"\n      }\n    },\n    {\n      \"id\": \"6\",\n      \"type\": \"event_host\",\n      \"attributes\": {\n        \"name\": \"Simona Schinner\",\n        \"email\": \"shirlene_kutch@gmail.com\",\n        \"phone\": \"584.923.1233\"\n      }\n    }\n  ]\n}",
       "response_headers": {
         "Content-Type": "application/vnd.api+json; charset=utf-8"
       },

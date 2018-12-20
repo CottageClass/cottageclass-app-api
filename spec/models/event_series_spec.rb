@@ -13,6 +13,11 @@ RSpec.describe EventSeries, type: :model do
 
   context 'associations' do
     it { is_expected.to belong_to(:user).inverse_of(:event_series) }
+    it { is_expected.to have_many(:events).inverse_of(:event_series).dependent(:destroy) }
     it { is_expected.to have_and_belong_to_many(:event_hosts) }
+  end
+
+  context 'create' do
+    it { expect { subject.save }.to change(subject.events, :count).from(0).to(subject.repeat_for) }
   end
 end

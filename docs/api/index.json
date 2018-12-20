@@ -1,6 +1,19 @@
 {
   "resources": [
     {
+      "name": "Event",
+      "explanation": null,
+      "examples": [
+        {
+          "description": "index:success",
+          "link": "event/index:success.json",
+          "groups": "all",
+          "route": "/api/events",
+          "method": "get"
+        }
+      ]
+    },
+    {
       "name": "EventSeries",
       "explanation": null,
       "examples": [
