@@ -1,6 +1,6 @@
 class UsersController < ApiController
   before_action :authenticate_user, except: %i[create]
-  before_action :reject_nonmatching_user, only: [:show, :update, :inquiries]
+  before_action :reject_nonmatching_user, only: %i[show update inquiries]
   before_action :reject_user_not_in_network, only: [:index]
   before_action :require_admin!, only: [:admin_index]
 
@@ -29,7 +29,7 @@ class UsersController < ApiController
 
   def update
     @user = current_user
-    if @user.update_attributes(user_params)
+    if @user.update(user_params)
       render json: UserSerializer.json_for(@user, include: [:children]), status: 200
     else
       render json: { errors: @user.errors.full_messages }, status: 400
@@ -53,20 +53,19 @@ class UsersController < ApiController
 
   def reject_nonmatching_user
     if !current_user || current_user.id.to_i != params[:id].to_i
-      render json: { errors: ["No matching user found"] }, status: 404
+      render json: { errors: ['No matching user found'] }, status: 404
     end
   end
 
   def reject_user_not_in_network
     desired_network_code = params[:network_code]
 
-    if (
-      !current_user ||
-      !desired_network_code ||
-      desired_network_code.length < 1 ||
-      current_user.network_code != desired_network_code
-    )
-      render json: { errors: ["No users found in network"]}, status: 404
+    if !current_user ||
+       !desired_network_code ||
+       desired_network_code.empty? ||
+       current_user.network_code != desired_network_code
+
+      render json: { errors: ['No users found in network'] }, status: 404
     end
   end
 
@@ -99,12 +98,13 @@ class UsersController < ApiController
       :profile_blurb,
       :onboarding_care_type,
       activities: [],
-      children_attributes: [
-        :id,
-        :parent_id,
-        :first_name,
-        :birthday,
-      ],
+      children_attributes: %i[
+        id
+        parent_id
+        first_name
+        birthday
+        school_name
+      ]
     )
   end
 end
