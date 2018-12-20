@@ -1,0 +1,42 @@
+{
+  "resource": "EventSeries",
+  "resource_explanation": null,
+  "http_method": "GET",
+  "route": "/api/event_series/:id",
+  "description": "show:success",
+  "explanation": null,
+  "parameters": [
+    {
+      "required": true,
+      "name": "id",
+      "description": "Unique Identifier"
+    }
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "GET",
+      "request_path": "/api/event_series/2",
+      "request_body": null,
+      "request_headers": {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDUzNzQ3NjMsInN1YiI6NH0.IO2TNGwYR4rV60FqyQ_ElkA4JUh4Y0NUj38rJubwoO0"
+      },
+      "request_query_parameters": {
+        "{}": null
+      },
+      "request_content_type": "application/json",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "{\n  \"data\": {\n    \"id\": \"2\",\n    \"type\": \"event_series\",\n    \"attributes\": {\n      \"name\": \"Agatha L. Outtathere\",\n      \"start_date\": \"2019-01-09\",\n      \"has_pet\": true,\n      \"activity_names\": [\n        \"Rhea Curran\"\n      ],\n      \"foods\": [\n        \"Caesar Salad\"\n      ],\n      \"house_rules\": \"Repudiandae doloribus odio. Qui quidem exercitationem. Vitae omnis perspiciatis.\",\n      \"pet_description\": \"Illum et voluptatem. Sint cum quia. Fugit corrupti quis.\",\n      \"starts_at\": \"23:02\",\n      \"ends_at\": \"02:02\"\n    },\n    \"relationships\": {\n      \"event_hosts\": {\n        \"data\": [\n          {\n            \"id\": \"3\",\n            \"type\": \"event_host\"\n          },\n          {\n            \"id\": \"4\",\n            \"type\": \"event_host\"\n          }\n        ]\n      }\n    }\n  },\n  \"included\": [\n    {\n      \"id\": \"3\",\n      \"type\": \"event_host\",\n      \"attributes\": {\n        \"name\": \"Aurelia Hammes\",\n        \"email\": \"madalyn_runte@yahoo.com\",\n        \"phone\": \"343.080.7167\"\n      }\n    },\n    {\n      \"id\": \"4\",\n      \"type\": \"event_host\",\n      \"attributes\": {\n        \"name\": \"Digna Langosh\",\n        \"email\": \"alden_simonis@hotmail.com\",\n        \"phone\": \"152.422.0897\"\n      }\n    }\n  ]\n}",
+      "response_headers": {
+        "Content-Type": "application/vnd.api+json; charset=utf-8"
+      },
+      "response_content_type": "application/vnd.api+json; charset=utf-8",
+      "curl": null
+    }
+  ]
+}

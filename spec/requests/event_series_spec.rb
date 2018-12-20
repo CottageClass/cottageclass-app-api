@@ -36,6 +36,11 @@ RSpec.resource 'EventSeries' do
         example_request 'create:success' do
           expect(response_status).to eq(201)
         end
+
+        example 'create:failure' do
+          do_request params.tap { |p| p['event_series']['name'] = nil }
+          expect(response_status).to eq(422)
+        end
       end
 
       context 'unauthorized' do
@@ -43,6 +48,33 @@ RSpec.resource 'EventSeries' do
           do_request
           expect(response_status).to eq(401)
         end
+      end
+    end
+  end
+
+  get '/api/event_series/:id', format: :json do
+    before { subject.save }
+
+    parameter :id, 'Unique Identifier', required: true
+    let(:id) { subject.id }
+
+    context 'authorized' do
+      include_context 'authorization token'
+
+      example_request 'show:success' do
+        expect(response_status).to eq(200)
+      end
+
+      example 'show:failure' do
+        do_request id: Faker::Number.number(2)
+        expect(response_status).to eq(404)
+      end
+    end
+
+    context 'unauthorized' do
+      example 'authentication:failure', document: false do
+        do_request
+        expect(response_status).to eq(401)
       end
     end
   end

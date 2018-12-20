@@ -5,11 +5,32 @@
       "explanation": null,
       "examples": [
         {
+          "description": "create:failure",
+          "link": "eventseries/create:failure.json",
+          "groups": "all",
+          "route": "/api/event_series",
+          "method": "post"
+        },
+        {
           "description": "create:success",
           "link": "eventseries/create:success.json",
           "groups": "all",
           "route": "/api/event_series",
           "method": "post"
+        },
+        {
+          "description": "show:failure",
+          "link": "eventseries/show:failure.json",
+          "groups": "all",
+          "route": "/api/event_series/:id",
+          "method": "get"
+        },
+        {
+          "description": "show:success",
+          "link": "eventseries/show:success.json",
+          "groups": "all",
+          "route": "/api/event_series/:id",
+          "method": "get"
         }
       ]
     }

@@ -10,6 +10,13 @@ class API::EventSeriesController < API::BaseController
     end
   end
 
+  def show
+    event_series = current_user.event_series.find params[:id]
+    render json: EventSeriesSerializer.new(event_series, include: %i[event_hosts]).serializable_hash, status: :ok
+  rescue ActiveRecord::RecordNotFound
+    render json: {}, status: :not_found
+  end
+
   private
 
   def safe_params
