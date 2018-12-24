@@ -26,8 +26,9 @@ class API::EventSeriesController < API::BaseController
   private
 
   def safe_params
-    params.require(:event_series).permit :name, :start_date, :starts_at, :ends_at, :has_pet, :house_rules,
-                                         :pet_description,
+    params.require(:event_series).permit :name, :start_date, :starts_at, :ends_at, :has_pet, :house_rules, :interval,
+                                         :pet_description, :maximum_children, :child_age_minimum, :child_age_maximum,
+                                         :repeat_for,
                                          activity_names: [],
                                          foods: [],
                                          event_hosts_attributes: %i[id name email phone _destroy]

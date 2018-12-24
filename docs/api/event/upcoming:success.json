@@ -1,0 +1,38 @@
+{
+  "resource": "Event",
+  "resource_explanation": null,
+  "http_method": "GET",
+  "route": "/api/events/:skope",
+  "description": "upcoming:success",
+  "explanation": null,
+  "parameters": [
+
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "GET",
+      "request_path": "/api/events/upcoming",
+      "request_body": null,
+      "request_headers": {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDU3NTU1MjUsInN1YiI6OX0.NXF1hIweNsyFi4cZOjpH_3cF0SLB21NSg-BW_jrC1HY"
+      },
+      "request_query_parameters": {
+        "{}": null
+      },
+      "request_content_type": "application/json",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "{\n  \"data\": [\n    {\n      \"id\": \"44\",\n      \"type\": \"event\",\n      \"attributes\": {\n        \"name\": \"Lucy Fer\",\n        \"maximum_children\": 0,\n        \"child_age_minimum\": 0,\n        \"child_age_maximum\": 0,\n        \"has_pet\": true,\n        \"activity_names\": [\n          \"golf\"\n        ],\n        \"foods\": [\n          \"Ricotta Stuffed Ravioli\"\n        ],\n        \"house_rules\": \"Eius ducimus nisi. Quasi doloribus aut. Cumque eius qui.\",\n        \"pet_description\": \"Maiores recusandae minus. Quis minus similique. Optio atque laudantium.\",\n        \"host_facebook_uid\": \"2577551\",\n        \"host_avatar\": \"https://robohash.org/malborn-krex.png?size=300x300&set=set1\",\n        \"host_first_name\": \"Malborn\",\n        \"host_fuzzy_latitude\": \"86.64560380364335\",\n        \"host_fuzzy_longitude\": \"-46.93078858603022\",\n        \"host_locality\": \"Waylonton\",\n        \"host_admin_area_level_1\": \"SD\",\n        \"host_child_ages\": [\n          4,\n          4\n        ],\n        \"starts_at\": \"2019-01-10T11:55:09Z\",\n        \"ends_at\": \"2019-01-10T14:55:09Z\"\n      }\n    },\n    {\n      \"id\": \"45\",\n      \"type\": \"event\",\n      \"attributes\": {\n        \"name\": \"Lucy Fer\",\n        \"maximum_children\": 0,\n        \"child_age_minimum\": 0,\n        \"child_age_maximum\": 0,\n        \"has_pet\": true,\n        \"activity_names\": [\n          \"golf\"\n        ],\n        \"foods\": [\n          \"Ricotta Stuffed Ravioli\"\n        ],\n        \"house_rules\": \"Eius ducimus nisi. Quasi doloribus aut. Cumque eius qui.\",\n        \"pet_description\": \"Maiores recusandae minus. Quis minus similique. Optio atque laudantium.\",\n        \"host_facebook_uid\": \"2577551\",\n        \"host_avatar\": \"https://robohash.org/malborn-krex.png?size=300x300&set=set1\",\n        \"host_first_name\": \"Malborn\",\n        \"host_fuzzy_latitude\": \"86.64560380364335\",\n        \"host_fuzzy_longitude\": \"-46.93078858603022\",\n        \"host_locality\": \"Waylonton\",\n        \"host_admin_area_level_1\": \"SD\",\n        \"host_child_ages\": [\n          4,\n          4\n        ],\n        \"starts_at\": \"2019-02-07T11:55:09Z\",\n        \"ends_at\": \"2019-02-07T14:55:09Z\"\n      }\n    },\n    {\n      \"id\": \"46\",\n      \"type\": \"event\",\n      \"attributes\": {\n        \"name\": \"Lucy Fer\",\n        \"maximum_children\": 0,\n        \"child_age_minimum\": 0,\n        \"child_age_maximum\": 0,\n        \"has_pet\": true,\n        \"activity_names\": [\n          \"golf\"\n        ],\n        \"foods\": [\n          \"Ricotta Stuffed Ravioli\"\n        ],\n        \"house_rules\": \"Eius ducimus nisi. Quasi doloribus aut. Cumque eius qui.\",\n        \"pet_description\": \"Maiores recusandae minus. Quis minus similique. Optio atque laudantium.\",\n        \"host_facebook_uid\": \"2577551\",\n        \"host_avatar\": \"https://robohash.org/malborn-krex.png?size=300x300&set=set1\",\n        \"host_first_name\": \"Malborn\",\n        \"host_fuzzy_latitude\": \"86.64560380364335\",\n        \"host_fuzzy_longitude\": \"-46.93078858603022\",\n        \"host_locality\": \"Waylonton\",\n        \"host_admin_area_level_1\": \"SD\",\n        \"host_child_ages\": [\n          4,\n          4\n        ],\n        \"starts_at\": \"2019-03-07T11:55:09Z\",\n        \"ends_at\": \"2019-03-07T14:55:09Z\"\n      }\n    },\n    {\n      \"id\": \"47\",\n      \"type\": \"event\",\n      \"attributes\": {\n        \"name\": \"Lucy Fer\",\n        \"maximum_children\": 0,\n        \"child_age_minimum\": 0,\n        \"child_age_maximum\": 0,\n        \"has_pet\": true,\n        \"activity_names\": [\n          \"golf\"\n        ],\n        \"foods\": [\n          \"Ricotta Stuffed Ravioli\"\n        ],\n        \"house_rules\": \"Eius ducimus nisi. Quasi doloribus aut. Cumque eius qui.\",\n        \"pet_description\": \"Maiores recusandae minus. Quis minus similique. Optio atque laudantium.\",\n        \"host_facebook_uid\": \"2577551\",\n        \"host_avatar\": \"https://robohash.org/malborn-krex.png?size=300x300&set=set1\",\n        \"host_first_name\": \"Malborn\",\n        \"host_fuzzy_latitude\": \"86.64560380364335\",\n        \"host_fuzzy_longitude\": \"-46.93078858603022\",\n        \"host_locality\": \"Waylonton\",\n        \"host_admin_area_level_1\": \"SD\",\n        \"host_child_ages\": [\n          4,\n          4\n        ],\n        \"starts_at\": \"2019-04-04T11:55:09Z\",\n        \"ends_at\": \"2019-04-04T14:55:09Z\"\n      }\n    },\n    {\n      \"id\": \"48\",\n      \"type\": \"event\",\n      \"attributes\": {\n        \"name\": \"Lucy Fer\",\n        \"maximum_children\": 0,\n        \"child_age_minimum\": 0,\n        \"child_age_maximum\": 0,\n        \"has_pet\": true,\n        \"activity_names\": [\n          \"golf\"\n        ],\n        \"foods\": [\n          \"Ricotta Stuffed Ravioli\"\n        ],\n        \"house_rules\": \"Eius ducimus nisi. Quasi doloribus aut. Cumque eius qui.\",\n        \"pet_description\": \"Maiores recusandae minus. Quis minus similique. Optio atque laudantium.\",\n        \"host_facebook_uid\": \"2577551\",\n        \"host_avatar\": \"https://robohash.org/malborn-krex.png?size=300x300&set=set1\",\n        \"host_first_name\": \"Malborn\",\n        \"host_fuzzy_latitude\": \"86.64560380364335\",\n        \"host_fuzzy_longitude\": \"-46.93078858603022\",\n        \"host_locality\": \"Waylonton\",\n        \"host_admin_area_level_1\": \"SD\",\n        \"host_child_ages\": [\n          4,\n          4\n        ],\n        \"starts_at\": \"2019-05-02T11:55:09Z\",\n        \"ends_at\": \"2019-05-02T14:55:09Z\"\n      }\n    }\n  ]\n}",
+      "response_headers": {
+        "Content-Type": "application/vnd.api+json; charset=utf-8"
+      },
+      "response_content_type": "application/vnd.api+json; charset=utf-8",
+      "curl": null
+    }
+  ]
+}

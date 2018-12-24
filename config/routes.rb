@@ -3,7 +3,11 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: :json } do
     resources :event_series, only: %i[index show create]
-    resources :events, only: %i[index]
+    resources :events, only: %i[] do
+      collection do
+        get '(/:skope)', to: 'events#index', skope: /upcoming|past/i, defaults: { skope: 'all' }, as: :index
+      end
+    end
   end
 
   # auth

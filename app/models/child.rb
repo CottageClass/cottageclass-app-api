@@ -5,4 +5,8 @@ class Child < ApplicationRecord
 
   validates :first_name, presence: true
   validates :birthday, presence: true
+
+  def age
+    ((Time.current - birthday.in_time_zone) / 1.year.seconds).floor
+  end
 end

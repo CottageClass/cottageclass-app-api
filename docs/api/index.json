@@ -5,10 +5,24 @@
       "explanation": null,
       "examples": [
         {
-          "description": "index:success",
-          "link": "event/index:success.json",
+          "description": "all:success",
+          "link": "event/all:success.json",
           "groups": "all",
-          "route": "/api/events",
+          "route": "/api/events/:skope",
+          "method": "get"
+        },
+        {
+          "description": "past:success",
+          "link": "event/past:success.json",
+          "groups": "all",
+          "route": "/api/events/:skope",
+          "method": "get"
+        },
+        {
+          "description": "upcoming:success",
+          "link": "event/upcoming:success.json",
+          "groups": "all",
+          "route": "/api/events/:skope",
           "method": "get"
         }
       ]

@@ -10,25 +10,25 @@ class User < ApplicationRecord
 
   alias_attribute :facebook_id, :facebook_uid
 
-  before_validation {
-    self.email = self.email.to_s.downcase
-    self.network_code = self.network_code.to_s.downcase
-  }
-  before_create {
+  before_validation do
+    self.email = email.to_s.downcase
+    self.network_code = network_code.to_s.downcase
+  end
+  before_create do
     populate_full_name!
     populate_fname_from_name!
     populate_lname_from_name!
-  }
+  end
 
-  with_options if: proc { |instance| instance.direct == true } do |user|
-    user.validates :password, presence: true
-    user.validates :first_name, presence: true
-    user.validates :last_name, presence: true
+  with_options if: proc { |instance| instance.direct == true } do
+    validates :password, presence: true
+    validates :first_name, presence: true
+    validates :last_name, presence: true
   end
   validates :email,
-    presence: true,
-    uniqueness: true,
-    format: {with: /\A.+@.+\..+\z/, message: "Please provide a valid email"}
+            presence: true,
+            uniqueness: true,
+            format: { with: /\A.+@.+\..+\z/, message: 'Please provide a valid email' }
 
   has_many :children, class_name: 'Child', foreign_key: :parent_id, inverse_of: :parent, dependent: :destroy
   has_many :sent_messages, class_name: 'Message', foreign_key: :sender_id, inverse_of: :sender
@@ -40,16 +40,25 @@ class User < ApplicationRecord
   has_many :events, through: :event_series
 
   accepts_nested_attributes_for :children,
-    allow_destroy: true,
-    reject_if: :child_with_same_name_exists?
+                                allow_destroy: true,
+                                reject_if: :child_with_same_name_exists?
 
-  scope :in_network, -> (code) {
-    where(network_code: code)
-  }
+  scope :in_network, ->(code) { where network_code: code }
 
+  def child_ages
+    children.map(&:age)
+  end
 
-  def phone(country_code=false)
-    return nil if !phone_number || phone_number.length == 0
+  def fuzzy_latitude
+    latitude
+  end
+
+  def fuzzy_longitude
+    longitude
+  end
+
+  def phone(country_code = false)
+    return nil if phone_number.blank?
 
     formatted_ph = "(#{phone_area_code}) #{phone_number[0..2]}-#{phone_number[3..-1]}"
     formatted_ph = "+#{phone_country_code} #{formatted_ph}" if country_code
@@ -83,10 +92,8 @@ class User < ApplicationRecord
   end
 
   def update_facebook_access_token!(new_access_token, sec_til_expiry)
-    update_attributes!(
-      facebook_access_token: new_access_token,
-      fb_access_token_expires_at: (Time.now.utc + sec_til_expiry).to_datetime,
-    )
+    update! facebook_access_token: new_access_token,
+            fb_access_token_expires_at: (Time.now.utc + sec_til_expiry).to_datetime
   end
 
   private
@@ -97,24 +104,14 @@ class User < ApplicationRecord
   end
 
   def populate_full_name!
-    if (!self.name || self.name.length < 1) &&
-        (self.first_name && self.first_name.length > 0) &&
-        (self.last_name && self.last_name.length > 0)
-      self.name = "#{self.first_name} #{self.last_name}"
-    end
+    self.name = [first_name, last_name].join(' ') if name.blank? && first_name.present? && last_name.present?
   end
 
   def populate_fname_from_name!
-    if (self.name && self.name.length > 0) &&
-        (!self.first_name || self.first_name.length < 0)
-      self.first_name = self.name.split(' ').first
-    end
+    self.first_name = name.split(' ').first if name.present? && first_name.blank?
   end
 
   def populate_lname_from_name!
-    if (self.name && self.name.length > 0) &&
-        (!self.last_name || self.last_name.length < 0)
-      self.last_name = self.name.split(' ').last
-    end
+    self.last_name = name.split(' ').last if name.present? && last_name.blank?
   end
 end

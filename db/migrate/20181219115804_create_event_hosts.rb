@@ -9,5 +9,6 @@ class CreateEventHosts < ActiveRecord::Migration[5.2]
     end
 
     create_join_table(:event_hosts, :event_series) { |t| t.index(%i[event_host_id event_series_id], unique: true) }
+    create_join_table(:event_hosts, :events) { |t| t.index(%i[event_host_id event_id], unique: true) }
   end
 end

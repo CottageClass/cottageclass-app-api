@@ -1,0 +1,38 @@
+{
+  "resource": "Event",
+  "resource_explanation": null,
+  "http_method": "GET",
+  "route": "/api/events/:skope",
+  "description": "past:success",
+  "explanation": null,
+  "parameters": [
+
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "GET",
+      "request_path": "/api/events/past",
+      "request_body": null,
+      "request_headers": {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDU3NTU1MjUsInN1YiI6OH0.unKLuvbhZ3w2TidM_DXzkxxSXc-m3Fl8HVOZ7E7_dz8"
+      },
+      "request_query_parameters": {
+        "{}": null
+      },
+      "request_content_type": "application/json",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "{\n  \"data\": [\n    {\n      \"id\": \"37\",\n      \"type\": \"event\",\n      \"attributes\": {\n        \"name\": \"Marlon Fisher\",\n        \"maximum_children\": 0,\n        \"child_age_minimum\": 0,\n        \"child_age_maximum\": 0,\n        \"has_pet\": true,\n        \"activity_names\": [\n          \"bandy\"\n        ],\n        \"foods\": [\n          \"Caesar Salad\"\n        ],\n        \"house_rules\": \"Temporibus id qui. Qui deleniti ullam. Maxime consequatur repellendus.\",\n        \"pet_description\": \"Fugiat illo voluptatum. Sint ut voluptate. Voluptas in modi.\",\n        \"host_facebook_uid\": \"5218656\",\n        \"host_avatar\": \"https://robohash.org/arnbjorn-gray-mane.png?size=300x300&set=set1\",\n        \"host_first_name\": \"Arnbjorn\",\n        \"host_fuzzy_latitude\": \"42.75135398463402\",\n        \"host_fuzzy_longitude\": \"-87.66993332744269\",\n        \"host_locality\": \"West Sonny\",\n        \"host_admin_area_level_1\": \"CT\",\n        \"host_child_ages\": [\n          4,\n          4\n        ],\n        \"starts_at\": \"2018-12-14T08:43:40Z\",\n        \"ends_at\": \"2018-12-14T11:43:40Z\"\n      }\n    }\n  ]\n}",
+      "response_headers": {
+        "Content-Type": "application/vnd.api+json; charset=utf-8"
+      },
+      "response_content_type": "application/vnd.api+json; charset=utf-8",
+      "curl": null
+    }
+  ]
+}
