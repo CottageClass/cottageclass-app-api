@@ -4,13 +4,13 @@ RSpec.describe 'Twilio proxy messages', type: :request do
   describe 'create' do
     let(:sender)          { FactoryBot.create(:user) }
     let(:receiver)        { FactoryBot.create(:user) }
-    let(:twilio_session)  { OpenStruct.new(sid: "KCXXXX1", unique_name: 'demo', date_expiry: '2022-07-30T20:00:00Z') }
-    let(:twilio_msg_obj)  { OpenStruct.new(session_sid: 'KCXXXX1', sid: 'KIXXXX', data: {'body': 'message body'}.to_json) }
-    let(:post_data)       { {twilio_session: {request_message: 'request', acknowledgment_message: 'ack'}} }
+    let(:twilio_session)  { OpenStruct.new(sid: 'KCXXXX1', unique_name: 'demo', date_expiry: '2022-07-30T20:00:00Z') }
+    let(:twilio_msg_obj)  { OpenStruct.new(session_sid: 'KCXXXX1', sid: 'KIXXXX', data: { 'body': 'message body' }.to_json) }
+    let(:post_data)       { { twilio_session: { request_message: 'request', acknowledgment_message: 'ack' } } }
 
-    before(:each) do
-      twilio_participant_response_1 = OpenStruct.new(sid: "KPXXXX1")
-      twilio_participant_response_2 = OpenStruct.new(sid: "KPXXXX2")
+    before do
+      twilio_participant_response_1 = OpenStruct.new(sid: 'KPXXXX1')
+      twilio_participant_response_2 = OpenStruct.new(sid: 'KPXXXX2')
       allow_any_instance_of(TwilioService).to receive(:create_twilio_proxy_session!)
         .and_return twilio_session
       allow_any_instance_of(TwilioService).to receive(:add_participant_to_session!)
@@ -37,9 +37,9 @@ RSpec.describe 'Twilio proxy messages', type: :request do
 
     it 'adds both participants to the conversation' do
       expect_any_instance_of(TwilioService).to receive(:add_participant_to_session!)
-        .with("KCXXXX1", sender.name, sender.phone(true))
+        .with('KCXXXX1', sender.name, sender.phone(true))
       expect_any_instance_of(TwilioService).to receive(:add_participant_to_session!)
-        .with("KCXXXX1", receiver.name, receiver.phone(true))
+        .with('KCXXXX1', receiver.name, receiver.phone(true))
 
       post proxy_sessions_path(receiver), params: post_data, headers: authenticated_header(sender)
 
@@ -49,30 +49,28 @@ RSpec.describe 'Twilio proxy messages', type: :request do
     end
 
     context 'when a session already exists for the participants' do
-      before(:each) do
+      before do
         TwilioSession.create!(
           last_action_at: DateTime.now,
           initiator: sender,
           client: receiver,
           twilio_sid: 'KCXXXX1',
-          twilio_sid_client: 'KPXXXX2',
+          twilio_sid_client: 'KPXXXX2'
         )
       end
 
       it 'finds the session instead of creating a new one' do
-        expect_any_instance_of(TwilioService).to_not receive(:create_twilio_proxy_session!)
+        expect_any_instance_of(TwilioService).not_to receive(:create_twilio_proxy_session!)
 
-        expect {
+        expect do
           post proxy_sessions_path(receiver), params: post_data, headers: authenticated_header(sender)
-        }.to_not change {
-          TwilioSession.count
-        }
+        end.not_to change(TwilioSession, :count)
 
         expect(response.status).to eq 201
       end
 
       it 'does not add participants to the conversation' do
-        expect_any_instance_of(TwilioService).to_not receive(:add_participant_to_session!)
+        expect_any_instance_of(TwilioService).not_to receive(:add_participant_to_session!)
 
         post proxy_sessions_path(receiver), params: post_data, headers: authenticated_header(sender)
 

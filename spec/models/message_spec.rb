@@ -10,7 +10,7 @@ RSpec.describe Message do
       let!(:message_from_2) { FactoryBot.create(:message, sender: user_2, receiver: user_1, cc_twilio_session: twilio_session) }
 
       it 'returns messages where the user was the sender or the receiver, regardless of the order of participant ids' do
-        msgs = Message.with_participants(user_1.id, user_2.id)
+        msgs = described_class.with_participants(user_1.id, user_2.id)
         expect(msgs).to include message_from_1
         expect(msgs).to include message_from_2
       end

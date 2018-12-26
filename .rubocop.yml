@@ -4,7 +4,7 @@ AllCops:
   Exclude:
     - db/schema.rb
     - node_modules/**/*
-  TargetRubyVersion: 2.4
+  TargetRubyVersion: 2.5
   TargetRailsVersion: 5.2
 
 Layout/ExtraSpacing:

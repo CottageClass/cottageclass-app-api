@@ -1,9 +1,9 @@
 # spec/support/shared_contexts/rake.rb
-require "rake"
+require 'rake'
 
-shared_context "rake" do
+shared_context 'rake' do
   let(:task_name) { self.class.top_level_description }
-  let(:task_path) { "lib/tasks/#{task_name.gsub(":", "_")}.rake" }
+  let(:task_path) { "lib/tasks/#{task_name.tr(':', '_')}.rake" }
   let(:subject)   { Rake::Task[task_name] }
 
   before(:all) do
@@ -16,7 +16,7 @@ shared_context "rake" do
     Rake::Task.define_task(:environment)
   end
 
-  before(:each) do
+  before do
     DatabaseCleaner.clean_with :truncation
     subject.reenable
   end

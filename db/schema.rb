@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_20_102317) do
+ActiveRecord::Schema.define(version: 2018_12_24_072540) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,6 +49,12 @@ ActiveRecord::Schema.define(version: 2018_12_20_102317) do
     t.datetime "updated_at"
   end
 
+  create_table "event_hosts_events", id: false, force: :cascade do |t|
+    t.bigint "event_host_id", null: false
+    t.bigint "event_id", null: false
+    t.index ["event_host_id", "event_id"], name: "index_event_hosts_events_on_event_host_id_and_event_id", unique: true
+  end
+
   create_table "event_hosts_series", id: false, force: :cascade do |t|
     t.bigint "event_host_id", null: false
     t.bigint "event_series_id", null: false
@@ -63,6 +69,9 @@ ActiveRecord::Schema.define(version: 2018_12_20_102317) do
     t.time "ends_at", null: false
     t.integer "repeat_for", null: false
     t.integer "interval", null: false
+    t.integer "maximum_children", default: 0
+    t.integer "child_age_minimum", default: 0
+    t.integer "child_age_maximum", default: 0
     t.boolean "has_pet", default: false
     t.text "activity_names", default: [], array: true
     t.text "foods", default: [], array: true
@@ -79,7 +88,15 @@ ActiveRecord::Schema.define(version: 2018_12_20_102317) do
     t.string "name", null: false
     t.datetime "starts_at", null: false
     t.datetime "ends_at", null: false
+    t.integer "maximum_children", default: 0
+    t.integer "child_age_minimum", default: 0
+    t.integer "child_age_maximum", default: 0
     t.boolean "modified", default: false
+    t.boolean "has_pet", default: false
+    t.text "activity_names", default: [], array: true
+    t.text "foods", default: [], array: true
+    t.text "house_rules"
+    t.text "pet_description"
     t.json "meta"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -117,6 +134,7 @@ ActiveRecord::Schema.define(version: 2018_12_20_102317) do
 
   create_table "users", force: :cascade do |t|
     t.string "email"
+    t.string "avatar"
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -147,7 +165,6 @@ ActiveRecord::Schema.define(version: 2018_12_20_102317) do
     t.datetime "fb_access_token_expires_at", default: -> { "CURRENT_TIMESTAMP" }
     t.text "profile_blurb"
     t.string "onboarding_care_type"
-    t.string "avatar"
     t.index ["network_code"], name: "index_users_on_network_code"
   end
 

@@ -4,6 +4,6 @@ FactoryBot.define do
     association :receiver, factory: :user
     association :cc_twilio_session, factory: :twilio_session
 
-    content {FFaker::Internet.slug}
+    content { Faker::Internet.slug }
   end
 end
