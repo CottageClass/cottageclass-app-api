@@ -19,7 +19,7 @@
       "request_headers": {
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDU3OTY3MzgsInN1YiI6OH0.tMuIwq1yRUAcW-5TojW7t0eB3NG2WGocO2l_BaONrL4"
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDU4OTAxNjQsInN1YiI6OH0.pumoND2LpN_TDMOld13xnw5cjkyhvMuVtCEk1zbD-DY"
       },
       "request_query_parameters": {
         "{}": null
@@ -27,7 +27,7 @@
       "request_content_type": "application/json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\n  \"data\": [\n    {\n      \"id\": \"37\",\n      \"type\": \"event\",\n      \"attributes\": {\n        \"name\": \"Deleniti optio aut veniam.\",\n        \"maximum_children\": 0,\n        \"child_age_minimum\": 0,\n        \"child_age_maximum\": 0,\n        \"has_pet\": true,\n        \"activity_names\": [\n          \"dandi biyo\"\n        ],\n        \"foods\": [\n          \"Fettuccine Alfredo\"\n        ],\n        \"house_rules\": \"Cum ea minima. Hic eos qui. Ex id assumenda.\",\n        \"pet_description\": \"Amet similique itaque. Consequatur repudiandae placeat. Expedita incidunt magnam.\",\n        \"host_facebook_uid\": \"1931839\",\n        \"host_avatar\": \"https://robohash.org/brynjolf-lothaire.png?size=300x300&set=set1\",\n        \"host_first_name\": \"Brynjolf\",\n        \"host_fuzzy_latitude\": \"-22.05221520764391\",\n        \"host_fuzzy_longitude\": \"-23.12117117066296\",\n        \"host_locality\": \"North Michal\",\n        \"host_admin_area_level_1\": \"MT\",\n        \"host_child_ages\": [\n          2,\n          4\n        ],\n        \"starts_at\": \"2018-12-11T09:23:33Z\",\n        \"ends_at\": \"2018-12-11T12:23:33Z\"\n      }\n    }\n  ]\n}",
+      "response_body": "{\n  \"data\": [\n    {\n      \"id\": \"37\",\n      \"type\": \"event\",\n      \"attributes\": {\n        \"name\": \"Sequi fugit tempora voluptate.\",\n        \"maximum_children\": 0,\n        \"child_age_minimum\": 0,\n        \"child_age_maximum\": 0,\n        \"has_pet\": true,\n        \"activity_names\": [\n          \"oil wrestling\"\n        ],\n        \"foods\": [\n          \"Pork Belly Buns\"\n        ],\n        \"house_rules\": \"Omnis sed optio. Quae dolor rerum. Accusantium ducimus labore.\",\n        \"pet_description\": \"Quam ullam non. A libero perspiciatis. Quisquam in sapiente.\",\n        \"host_facebook_uid\": \"9533774\",\n        \"host_avatar\": \"https://robohash.org/enthir-endell.png?size=300x300&set=set1\",\n        \"host_first_name\": \"Enthir\",\n        \"host_fuzzy_latitude\": \"85.62536818681454\",\n        \"host_fuzzy_longitude\": \"-6.333955637155896\",\n        \"host_locality\": \"New Winford\",\n        \"host_admin_area_level_1\": \"CO\",\n        \"host_child_ages\": [\n          3,\n          2\n        ],\n        \"starts_at\": \"2018-12-18T20:28:30Z\",\n        \"ends_at\": \"2018-12-18T23:28:30Z\"\n      }\n    }\n  ]\n}",
       "response_headers": {
         "Content-Type": "application/vnd.api+json; charset=utf-8"
       },

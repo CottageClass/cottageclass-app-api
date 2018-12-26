@@ -1,0 +1,38 @@
+{
+  "resource": "User",
+  "resource_explanation": null,
+  "http_method": "GET",
+  "route": "/users/:id",
+  "description": "show:success",
+  "explanation": null,
+  "parameters": [
+
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "GET",
+      "request_path": "/users/20",
+      "request_body": null,
+      "request_headers": {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDU4OTAxNjUsInN1YiI6MjB9.LQO0fG3B_OESFHJEQxqVrsTGAlFvRhNNqjb9ldSAddk"
+      },
+      "request_query_parameters": {
+        "{}": null
+      },
+      "request_content_type": "application/json",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "{\n  \"data\": {\n    \"id\": \"20\",\n    \"type\": \"user\",\n    \"attributes\": {\n      \"agree_tos\": false,\n      \"first_name\": \"Ralof\",\n      \"last_name\": \"Golden-Hilt\",\n      \"avatar\": \"https://robohash.org/ralof-golden-hilt.png?size=300x300&set=set1\",\n      \"street_number\": null,\n      \"route\": null,\n      \"locality\": \"East Abel\",\n      \"admin_area_level_1\": \"VT\",\n      \"admin_area_level_2\": null,\n      \"country\": \"United States\",\n      \"postal_code\": null,\n      \"latitude\": \"42.979154625056765\",\n      \"longitude\": \"133.3134668358407\",\n      \"phone_country_code\": \"1\",\n      \"phone_area_code\": null,\n      \"phone_number\": \"850.744.2783 x88687\",\n      \"available_mornings\": null,\n      \"available_afternoons\": null,\n      \"available_evenings\": null,\n      \"available_weekends\": null,\n      \"network_code\": \"demo\",\n      \"facebook_id\": \"2575357\",\n      \"activities\": [\n\n      ],\n      \"phone\": \"() 850-.744.2783 x88687\",\n      \"full_address\": \" , East Abel, VT, United States \",\n      \"profile_blurb\": null,\n      \"onboarding_care_type\": null,\n      \"date_created\": \"2018-12-26T05:56:05.608Z\"\n    },\n    \"relationships\": {\n      \"children\": {\n        \"data\": [\n          {\n            \"id\": \"9\",\n            \"type\": \"child\"\n          },\n          {\n            \"id\": \"10\",\n            \"type\": \"child\"\n          }\n        ]\n      }\n    }\n  },\n  \"included\": [\n    {\n      \"id\": \"9\",\n      \"type\": \"child\",\n      \"attributes\": {\n        \"parent_id\": 20,\n        \"age\": 4\n      },\n      \"relationships\": {\n        \"parent\": {\n          \"data\": {\n            \"id\": \"20\",\n            \"type\": \"user\"\n          }\n        }\n      }\n    },\n    {\n      \"id\": \"10\",\n      \"type\": \"child\",\n      \"attributes\": {\n        \"parent_id\": 20,\n        \"age\": 3\n      },\n      \"relationships\": {\n        \"parent\": {\n          \"data\": {\n            \"id\": \"20\",\n            \"type\": \"user\"\n          }\n        }\n      }\n    }\n  ],\n  \"jwt\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDU4OTAxNjUsInN1YiI6MjAsImVtYWlsIjoiZGFtb25AZXhhbXBsZS5uZXQiLCJuZXR3b3JrX2NvZGUiOiJkZW1vIn0.n0c9-BzlICjPyrkpg3TDwctHD6K2mJTfkCJoU0um-Ps\"\n}",
+      "response_headers": {
+        "Content-Type": "application/vnd.api+json; charset=utf-8"
+      },
+      "response_content_type": "application/vnd.api+json; charset=utf-8",
+      "curl": null
+    }
+  ]
+}

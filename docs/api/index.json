@@ -67,6 +67,19 @@
           "method": "get"
         }
       ]
+    },
+    {
+      "name": "User",
+      "explanation": null,
+      "examples": [
+        {
+          "description": "show:success",
+          "link": "user/show:success.json",
+          "groups": "all",
+          "route": "/users/:id",
+          "method": "get"
+        }
+      ]
     }
   ]
 }
