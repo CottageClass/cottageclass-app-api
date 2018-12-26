@@ -73,6 +73,13 @@
       "explanation": null,
       "examples": [
         {
+          "description": "index:success",
+          "link": "user/index:success.json",
+          "groups": "all",
+          "route": "/networks/:network_code/users",
+          "method": "get"
+        },
+        {
           "description": "show:success",
           "link": "user/show:success.json",
           "groups": "all",

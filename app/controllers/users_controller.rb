@@ -41,7 +41,8 @@ class UsersController < ApiController
       .inquirers
       .in_network(current_user.network_code)
 
-    render json: UserInNetworkSerializer.json_for(@users, include: [:children]), status: 200
+    render json: UserInNetworkSerializer.json_for(@users, include: [:children], params: { personal_information: true }),
+           status: 200
   end
 
   def admin_index

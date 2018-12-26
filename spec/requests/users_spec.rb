@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'requesting users' do
+RSpec.describe 'requesting users', type: :request do
   describe 'inquiries' do
     let!(:provider)               { FactoryBot.create(:user) }
     let!(:non_messaged_provider)  { FactoryBot.create(:user) }
@@ -22,7 +22,7 @@ RSpec.describe 'requesting users' do
     it 'returns only users who have requested care (messaged) the provider before' do
       get inquiries_path(provider), headers: authenticated_header(provider)
 
-      inquiry_phones = JSON.parse(response.body)['data'].map { |u| u['attributes']['phone'] }
+      inquiry_phones = JSON.parse(response.body).fetch('data', []).map { |u| u.dig('attributes', 'phone') }.compact
       expect(response.status).to eq 200
       expect(inquiry_phones).to include seeker_1.phone
       expect(inquiry_phones).to include seeker_2.phone

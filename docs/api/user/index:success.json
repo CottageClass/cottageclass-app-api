@@ -1,0 +1,38 @@
+{
+  "resource": "User",
+  "resource_explanation": null,
+  "http_method": "GET",
+  "route": "/networks/:network_code/users",
+  "description": "index:success",
+  "explanation": null,
+  "parameters": [
+
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "GET",
+      "request_path": "/networks/demo/users",
+      "request_body": null,
+      "request_headers": {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDU4OTI4OTgsInN1YiI6MjB9.OO3AAXgxaUQGH3VxQq42CRy3v_OYAzCS8PuAtYZWnYA"
+      },
+      "request_query_parameters": {
+        "{}": null
+      },
+      "request_content_type": "application/json",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "{\n  \"data\": [\n    {\n      \"id\": \"20\",\n      \"type\": \"user_in_network\",\n      \"attributes\": {\n        \"first_name\": \"Ralof\",\n        \"last_name\": \"Lothaire\",\n        \"avatar\": \"https://robohash.org/ralof-lothaire.png?size=300x300&set=set1\",\n        \"latitude\": \"-72.7074948292018\",\n        \"longitude\": \"51.88982421719891\",\n        \"available_mornings\": null,\n        \"available_afternoons\": null,\n        \"available_evenings\": null,\n        \"available_weekends\": null,\n        \"activities\": [\n\n        ],\n        \"full_address\": \" , South Quintinview, OR, United States \",\n        \"network_code\": \"demo\",\n        \"facebook_id\": \"9390740\",\n        \"profile_blurb\": null,\n        \"onboarding_care_type\": null\n      },\n      \"relationships\": {\n        \"children\": {\n          \"data\": [\n            {\n              \"id\": \"9\",\n              \"type\": \"child\"\n            },\n            {\n              \"id\": \"10\",\n              \"type\": \"child\"\n            }\n          ]\n        }\n      }\n    }\n  ],\n  \"included\": [\n    {\n      \"id\": \"9\",\n      \"type\": \"child\",\n      \"attributes\": {\n        \"parent_id\": 20,\n        \"age\": 2\n      },\n      \"relationships\": {\n        \"parent\": {\n          \"data\": {\n            \"id\": \"20\",\n            \"type\": \"user\"\n          }\n        }\n      }\n    },\n    {\n      \"id\": \"10\",\n      \"type\": \"child\",\n      \"attributes\": {\n        \"parent_id\": 20,\n        \"age\": 5\n      },\n      \"relationships\": {\n        \"parent\": {\n          \"data\": {\n            \"id\": \"20\",\n            \"type\": \"user\"\n          }\n        }\n      }\n    }\n  ],\n  \"jwt\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDU4OTI4OTgsInN1YiI6MjAsImVtYWlsIjoiY2FybWEub3J0aXpAZXhhbXBsZS5jb20iLCJuZXR3b3JrX2NvZGUiOiJkZW1vIn0.JY13pac6-TCBjHdz9bLkA_eNEQHSazuBdBi8X5T-qN0\"\n}",
+      "response_headers": {
+        "Content-Type": "application/vnd.api+json; charset=utf-8"
+      },
+      "response_content_type": "application/vnd.api+json; charset=utf-8",
+      "curl": null
+    }
+  ]
+}
