@@ -1,5 +1,5 @@
 class API::EventsController < API::BaseController
-  before_action :authenticate_user
+  before_action :authenticate_user, except: %i[index]
 
   def index
     skope = params[:skope] || 'all'
