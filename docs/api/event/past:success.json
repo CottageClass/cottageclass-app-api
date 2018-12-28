@@ -18,8 +18,7 @@
       "request_body": null,
       "request_headers": {
         "Content-Type": "application/json",
-        "Accept": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDU4OTI4OTcsInN1YiI6OH0.b_fO4TdFkYQHQ4nqDZrbtRQXHpCQARAtzEEewjgncbA"
+        "Accept": "application/json"
       },
       "request_query_parameters": {
         "{}": null
@@ -27,7 +26,7 @@
       "request_content_type": "application/json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\n  \"data\": [\n    {\n      \"id\": \"37\",\n      \"type\": \"event\",\n      \"attributes\": {\n        \"name\": \"Recusandae qui quod qui.\",\n        \"maximum_children\": 0,\n        \"child_age_minimum\": 0,\n        \"child_age_maximum\": 0,\n        \"has_pet\": true,\n        \"activity_names\": [\n          \"association\"\n        ],\n        \"foods\": [\n          \"Pork Belly Buns\"\n        ],\n        \"house_rules\": \"Deserunt voluptatem laboriosam. Qui quo tempora. A laboriosam quidem.\",\n        \"pet_description\": \"Maxime tempora possimus. Quia aliquid doloribus. Qui recusandae modi.\",\n        \"host_facebook_uid\": \"9092552\",\n        \"host_avatar\": \"https://robohash.org/veezara-black-briar.png?size=300x300&set=set1\",\n        \"host_first_name\": \"Veezara\",\n        \"host_fuzzy_latitude\": \"-51.580625888950266\",\n        \"host_fuzzy_longitude\": \"-111.9524949831388\",\n        \"host_locality\": \"Mosehaven\",\n        \"host_admin_area_level_1\": \"ME\",\n        \"host_child_ages\": [\n          3,\n          2\n        ],\n        \"starts_at\": \"2018-12-13T02:41:48Z\",\n        \"ends_at\": \"2018-12-13T05:41:48Z\"\n      }\n    }\n  ]\n}",
+      "response_body": "{\n  \"data\": [\n    {\n      \"id\": \"37\",\n      \"type\": \"event\",\n      \"attributes\": {\n        \"name\": \"Inventore aliquid magnam beatae.\",\n        \"maximum_children\": 0,\n        \"child_age_minimum\": 0,\n        \"child_age_maximum\": 0,\n        \"has_pet\": true,\n        \"activity_names\": [\n          \"gymnastics\"\n        ],\n        \"foods\": [\n          \"Chicken Fajitas\"\n        ],\n        \"house_rules\": \"Maiores unde culpa. Ab qui tenetur. Ipsum inventore nesciunt.\",\n        \"pet_description\": \"Fugiat consequuntur praesentium. Distinctio aut cum. Quasi sed quas.\",\n        \"host_facebook_uid\": \"6351605\",\n        \"host_avatar\": \"https://robohash.org/thrynn-the-haggard.png?size=300x300&set=set1\",\n        \"host_first_name\": \"Thrynn\",\n        \"host_fuzzy_latitude\": \"-39.35843637024858\",\n        \"host_fuzzy_longitude\": \"-128.98931782189015\",\n        \"host_locality\": \"East Rory\",\n        \"host_admin_area_level_1\": \"OK\",\n        \"host_child_ages\": [\n          2,\n          4\n        ],\n        \"starts_at\": \"2018-12-20T10:51:18Z\",\n        \"ends_at\": \"2018-12-20T13:51:18Z\"\n      }\n    }\n  ]\n}",
       "response_headers": {
         "Content-Type": "application/vnd.api+json; charset=utf-8"
       },

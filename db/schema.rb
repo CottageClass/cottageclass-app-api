@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_24_072540) do
+ActiveRecord::Schema.define(version: 2018_12_28_091932) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -114,6 +114,26 @@ ActiveRecord::Schema.define(version: 2018_12_24_072540) do
     t.index ["cc_twilio_session_id"], name: "index_messages_on_cc_twilio_session_id"
     t.index ["receiver_id"], name: "index_messages_on_receiver_id"
     t.index ["sender_id"], name: "index_messages_on_sender_id"
+  end
+
+  create_table "participant_children", force: :cascade do |t|
+    t.bigint "participant_id", null: false
+    t.string "participable_type", null: false
+    t.bigint "participable_id", null: false
+    t.bigint "child_id", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["participable_type", "participable_id", "child_id"], name: "idx_participants_on_participable_type_participable_id_child_id", unique: true
+    t.index ["participant_id"], name: "index_participant_children_on_participant_id"
+  end
+
+  create_table "participants", force: :cascade do |t|
+    t.string "participable_type", null: false
+    t.bigint "participable_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["participable_type", "participable_id", "user_id"], name: "index_participants_on_participable_type_participable_id_user_id", unique: true
   end
 
   create_table "twilio_sessions", force: :cascade do |t|

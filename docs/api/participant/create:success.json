@@ -1,0 +1,47 @@
+{
+  "resource": "Participant",
+  "resource_explanation": null,
+  "http_method": "POST",
+  "route": "/api/event_series/:event_series_id/participants",
+  "description": "create:success",
+  "explanation": null,
+  "parameters": [
+    {
+      "required": true,
+      "name": "event_series_id",
+      "description": "Event Series Identifier"
+    },
+    {
+      "scope": "participant",
+      "required": true,
+      "name": "participant_children_attributes",
+      "description": "Participant children attributes"
+    }
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "POST",
+      "request_path": "/api/event_series/9/participants",
+      "request_body": "{\"participant\":{\"participant_children_attributes\":[{\"child_id\":7}]}}",
+      "request_headers": {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDYwNzg0OTYsInN1YiI6MTF9.U7uoDiTj7N39PQYNoooE0lKZYHv4DN_LLiYBJgohAbk"
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/json",
+      "response_status": 201,
+      "response_status_text": "Created",
+      "response_body": "{\n}",
+      "response_headers": {
+        "Content-Type": "application/vnd.api+json; charset=utf-8"
+      },
+      "response_content_type": "application/vnd.api+json; charset=utf-8",
+      "curl": null
+    }
+  ]
+}

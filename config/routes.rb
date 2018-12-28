@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
-  ActiveAdmin.routes(self)
+  ActiveAdmin.routes self
 
   namespace :api, defaults: { format: :json } do
-    resources :event_series, only: %i[index show create]
+    resources :event_series, only: %i[index show create] do
+      resources :participants, only: %i[create]
+    end
     resources :events, only: %i[] do
       collection do
         get '(/:skope)', to: 'events#index', skope: /upcoming|past/i, defaults: { skope: 'all' }, as: :index

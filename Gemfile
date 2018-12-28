@@ -18,6 +18,7 @@ gem 'twilio-ruby', '~> 5.15.2'
 
 gem 'apitome'
 gem 'country_select'
+gem 'sassc-rails'
 
 group :production do
   gem 'lograge'

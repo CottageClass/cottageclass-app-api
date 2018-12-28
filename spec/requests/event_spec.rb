@@ -12,25 +12,14 @@ RSpec.resource 'Event' do
     get '/api/events/:skope', format: :json do
       let(:skope) { nil }
 
-      context 'authorized' do
-        include_context 'authorization token'
+      [nil, 'past', 'upcoming'].each do |skope|
+        name = skope || 'all'
+        context name do
+          let(:skope) { skope }
 
-        [nil, 'past', 'upcoming'].each do |skope|
-          name = skope || 'all'
-          context name do
-            let(:skope) { skope }
-
-            example_request format('%s:success', name) do
-              expect(response_status).to eq(200)
-            end
+          example_request format('%s:success', name) do
+            expect(response_status).to eq(200)
           end
-        end
-      end
-
-      context 'unauthorized' do
-        example 'authentication:failure', document: false do
-          do_request
-          expect(response_status).to eq(401)
         end
       end
     end

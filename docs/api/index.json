@@ -69,6 +69,19 @@
       ]
     },
     {
+      "name": "Participant",
+      "explanation": null,
+      "examples": [
+        {
+          "description": "create:success",
+          "link": "participant/create:success.json",
+          "groups": "all",
+          "route": "/api/event_series/:event_series_id/participants",
+          "method": "post"
+        }
+      ]
+    },
+    {
       "name": "User",
       "explanation": null,
       "examples": [
