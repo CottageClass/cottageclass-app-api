@@ -15,8 +15,8 @@ RSpec.describe 'import:people_json' do
     expect(marixsa.name).to eq 'Marixsa R'
     expect(marixsa.phone).to eq '(212) 920-4828'
     expect(marixsa.facebook_id).to eq '538259947'
-    expect(marixsa.latitude).to eq '40.642485'
-    expect(marixsa.longitude).to eq '-73.944122'
+    expect(marixsa.latitude.to_f).to eq(40.642485)
+    expect(marixsa.longitude.to_f).to eq(-73.944122)
     expect(marixsa.network_code).to eq 'flatbushfamilies'
     expect(marixsa.activities).to match_array %w[spanish art music sports]
     expect(marixsa.available_mornings).to eq true

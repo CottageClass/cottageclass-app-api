@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_28_091932) do
+ActiveRecord::Schema.define(version: 2018_12_31_051109) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -155,6 +155,8 @@ ActiveRecord::Schema.define(version: 2018_12_28_091932) do
   create_table "users", force: :cascade do |t|
     t.string "email"
     t.string "avatar"
+    t.decimal "fuzzy_latitude"
+    t.decimal "fuzzy_longitude"
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -163,18 +165,18 @@ ActiveRecord::Schema.define(version: 2018_12_28_091932) do
     t.string "last_name"
     t.string "name"
     t.boolean "agree_tos", default: false
+    t.decimal "latitude"
+    t.decimal "longitude"
     t.string "street_number"
     t.string "route"
     t.string "locality"
     t.string "admin_area_level_1"
     t.string "admin_area_level_2"
-    t.string "country", default: "United States"
     t.string "postal_code"
-    t.string "latitude"
-    t.string "longitude"
     t.string "phone_area_code"
-    t.string "phone_country_code", default: "1"
     t.string "phone_number"
+    t.string "country", default: "United States"
+    t.string "phone_country_code", default: "1"
     t.text "activities", default: [], array: true
     t.boolean "available_mornings"
     t.boolean "available_afternoons"
@@ -185,6 +187,8 @@ ActiveRecord::Schema.define(version: 2018_12_28_091932) do
     t.datetime "fb_access_token_expires_at", default: -> { "CURRENT_TIMESTAMP" }
     t.text "profile_blurb"
     t.string "onboarding_care_type"
+    t.index ["fuzzy_latitude", "fuzzy_longitude"], name: "index_users_on_fuzzy_latitude_and_fuzzy_longitude"
+    t.index ["latitude", "longitude"], name: "index_users_on_latitude_and_longitude"
     t.index ["network_code"], name: "index_users_on_network_code"
   end
 

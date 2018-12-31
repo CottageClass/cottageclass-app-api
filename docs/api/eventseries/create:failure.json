@@ -108,11 +108,11 @@
     {
       "request_method": "POST",
       "request_path": "/api/event_series",
-      "request_body": "{\"event_series\":{\"name\":null,\"start_date\":\"2018-12-19\",\"starts_at\":\"05:51\",\"ends_at\":\"08:51\",\"maximum_children\":0,\"child_age_minimum\":0,\"child_age_maximum\":0,\"repeat_for\":6,\"interval\":4,\"has_pet\":true,\"activity_names\":[\"bandy\"],\"foods\":[\"Ricotta Stuffed Ravioli\"],\"house_rules\":\"Debitis numquam dolor. Inventore aut consectetur. Ratione odit a.\",\"pet_description\":\"Dolores quia quaerat. Hic quia qui. Deserunt sit est.\",\"event_hosts_attributes\":[{\"name\":\"Jenine Anderson\",\"email\":\"asley_thiel@yahoo.com\",\"phone\":\"1-843-944-7145\"},{\"name\":\"Ethyl Muller II\",\"email\":\"ambrose@yahoo.com\",\"phone\":\"882.479.6047\"}]}}",
+      "request_body": "{\"event_series\":{\"name\":null,\"start_date\":\"2018-12-17\",\"starts_at\":\"19:47\",\"ends_at\":\"22:47\",\"maximum_children\":0,\"child_age_minimum\":0,\"child_age_maximum\":0,\"repeat_for\":6,\"interval\":4,\"has_pet\":true,\"activity_names\":[\"wrestling\"],\"foods\":[\"Bruschette with Tomato\"],\"house_rules\":\"Quia voluptate quia. Nisi accusamus est. Unde ut et.\",\"pet_description\":\"Laboriosam eligendi sequi. Exercitationem tenetur et. Eaque illum et.\",\"event_hosts_attributes\":[{\"name\":\"Emmett Kirlin\",\"email\":\"nobuko@gmail.com\",\"phone\":\"409-334-3729\"},{\"name\":\"Ms. Lesha Mohr\",\"email\":\"catherine@hotmail.com\",\"phone\":\"1-259-261-8753\"}]}}",
       "request_headers": {
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDYzMTQ0MDgsInN1YiI6Mn0.CVWjApPCrO9vdxV5BEXi54G2iiShK1iwXNM8mmu8NaA"
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDYzMzQxNjcsInN1YiI6Mn0.qFcoy0Kc_MOFCRxAKv2_bPYS049wjzDNnHqT170mhFI"
       },
       "request_query_parameters": {
       },

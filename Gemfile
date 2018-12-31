@@ -7,6 +7,7 @@ gem 'activeadmin', github: 'activeadmin/activeadmin', ref: '9292dfb548b7779db962
 gem 'activeadmin_addons'
 gem 'addressable'
 gem 'fast_jsonapi'
+gem 'geocoder'
 gem 'inherited_resources', github: 'activeadmin/inherited_resources', ref: 'db6eb312b7cac6baf0023f720cf6785a9849fa85'
 gem 'knock', github: 'ngty/knock', ref: '9e9416c3745fc5e8fa73bbb901b69729d45aef9b'
 gem 'koala'

@@ -10,10 +10,9 @@ class User < ApplicationRecord
 
   alias_attribute :facebook_id, :facebook_uid
 
-  before_validation do
-    self.email = email.to_s.downcase
-    self.network_code = network_code.to_s.downcase
-  end
+  before_validation :cleanup
+  after_save :obfuscate_location
+
   before_create do
     populate_full_name!
     populate_fname_from_name!
@@ -48,14 +47,6 @@ class User < ApplicationRecord
 
   def child_ages
     children.map(&:age)
-  end
-
-  def fuzzy_latitude
-    latitude
-  end
-
-  def fuzzy_longitude
-    longitude
   end
 
   def phone(country_code = false)
@@ -98,6 +89,19 @@ class User < ApplicationRecord
   end
 
   private
+
+  def cleanup
+    self.email = email.to_s.downcase
+    self.network_code = network_code.to_s.downcase
+  end
+
+  def obfuscate_location
+    if (latitude.present? && latitude.nonzero?) && (longitude.present? && longitude.nonzero?) &&
+       (saved_change_to_latitude? || saved_change_to_longitude?)
+      location = LocationObfuscator.obfuscate latitude: latitude, longitude: longitude
+      update_columns location
+    end
+  end
 
   def child_with_same_name_exists?(new_child_attrs)
     child_names = children.pluck(:first_name)

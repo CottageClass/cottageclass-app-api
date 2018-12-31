@@ -9,6 +9,18 @@ RSpec.describe User, type: :model do
     it { is_expected.to have_many(:participants).inverse_of(:user).dependent(:destroy) }
   end
 
+  context 'save' do
+    it 'obfuscates location' do
+      expect(subject.fuzzy_latitude).to be_blank
+      expect(subject.fuzzy_longitude).to be_blank
+
+      subject.save
+
+      expect(subject.fuzzy_latitude).not_to be_blank
+      expect(subject.fuzzy_longitude).not_to be_blank
+    end
+  end
+
   context 'inquiries' do
     it 'returns users who have messaged the user for childcare' do
       parent1 = FactoryBot.create(:user)
