@@ -1,7 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe ParticipantChild, type: :model do
-  let(:subject) { build :participant_child }
+  let(:user) { build :user, :with_children }
+  let(:event) { build :event }
+  let(:participant) { build :participant, :with_participant_children, participable: event, user: user }
+  let(:subject) { participant.participant_children.sample }
 
   context 'validations' do
     it { is_expected.to validate_presence_of(:participant).with_message(:required) }

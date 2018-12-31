@@ -17,7 +17,7 @@ class UserInNetworkSerializer < BaseSerializer
              :profile_blurb,
              :onboarding_care_type
 
-  with_options if: proc { |_, params| params && params[:personal_information] == true } do
+  with_options if: proc { |_, params| params.dig(:personal_information) == true } do
     attribute :phone
   end
 end

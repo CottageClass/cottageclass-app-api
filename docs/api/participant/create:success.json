@@ -2,14 +2,14 @@
   "resource": "Participant",
   "resource_explanation": null,
   "http_method": "POST",
-  "route": "/api/event_series/:event_series_id/participants",
+  "route": "/api/events/:event_id/participants",
   "description": "create:success",
   "explanation": null,
   "parameters": [
     {
       "required": true,
-      "name": "event_series_id",
-      "description": "Event Series Identifier"
+      "name": "event_id",
+      "description": "Event Identifier"
     },
     {
       "scope": "participant",
@@ -24,19 +24,19 @@
   "requests": [
     {
       "request_method": "POST",
-      "request_path": "/api/event_series/9/participants",
-      "request_body": "{\"participant\":{\"participant_children_attributes\":[{\"child_id\":7}]}}",
+      "request_path": "/api/events/61/participants",
+      "request_body": "{\"participant\":{\"participant_children_attributes\":[{\"child_id\":9}]}}",
       "request_headers": {
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDYwNzg0OTYsInN1YiI6MTF9.U7uoDiTj7N39PQYNoooE0lKZYHv4DN_LLiYBJgohAbk"
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDYzMTQ0MDksInN1YiI6MTJ9.wjvIuGU7_bVVRrBN64DYTYwiuoKGi3uX6nuEbayp2TU"
       },
       "request_query_parameters": {
       },
       "request_content_type": "application/json",
       "response_status": 201,
       "response_status_text": "Created",
-      "response_body": "{\n}",
+      "response_body": "{\n  \"data\": {\n    \"id\": \"1\",\n    \"type\": \"participant\",\n    \"attributes\": {\n      \"user_id\": 12,\n      \"event_id\": 61\n    },\n    \"relationships\": {\n      \"participant_children\": {\n        \"data\": [\n          {\n            \"id\": \"1\",\n            \"type\": \"participant_child\"\n          }\n        ]\n      }\n    }\n  },\n  \"included\": [\n    {\n      \"id\": \"1\",\n      \"type\": \"participant_child\",\n      \"attributes\": {\n        \"child_id\": 9\n      }\n    }\n  ]\n}",
       "response_headers": {
         "Content-Type": "application/vnd.api+json; charset=utf-8"
       },

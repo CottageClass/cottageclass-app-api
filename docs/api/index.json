@@ -12,6 +12,13 @@
           "method": "get"
         },
         {
+          "description": "authorized:success",
+          "link": "event/authorized:success.json",
+          "groups": "all",
+          "route": "/api/events/:skope",
+          "method": "get"
+        },
+        {
           "description": "past:success",
           "link": "event/past:success.json",
           "groups": "all",
@@ -76,7 +83,7 @@
           "description": "create:success",
           "link": "participant/create:success.json",
           "groups": "all",
-          "route": "/api/event_series/:event_series_id/participants",
+          "route": "/api/events/:event_id/participants",
           "method": "post"
         }
       ]

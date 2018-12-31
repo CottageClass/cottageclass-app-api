@@ -6,4 +6,9 @@ class EventSerializer
              :host_fuzzy_latitude, :host_fuzzy_longitude, :host_locality, :host_admin_area_level_1, :host_child_ages
   attribute(:starts_at) { |object| object.starts_at.to_s :iso8601 }
   attribute(:ends_at) { |object| object.ends_at.to_s :iso8601 }
+  attribute(:participants_count) { |instance| instance.participants.count }
+  attribute :full, &:full?
+  attribute :participated, if: proc { |_, params| params.dig(:current_user).present? } do |instance, params|
+    instance.participated? params[:current_user]
+  end
 end

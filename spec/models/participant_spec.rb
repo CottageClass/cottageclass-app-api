@@ -1,11 +1,18 @@
 require 'rails_helper'
 
 RSpec.describe Participant, type: :model do
-  let(:subject) { build :participant }
+  let(:user) { create :user, :with_children }
+  let(:event) { create :event, maximum_children: 2 }
+  let(:subject) { build :participant, :with_participant_children, participable: event, user: user }
 
   context 'validations' do
     it { is_expected.to validate_presence_of(:participable).with_message(:required) }
     it { is_expected.to validate_presence_of(:user).with_message(:required) }
+    it {
+      event.update maximum_children: 1
+      subject.valid?
+      expect(subject.errors).to include(:base)
+    }
   end
 
   context 'associations' do

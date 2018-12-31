@@ -22,6 +22,16 @@ RSpec.resource 'Event' do
           end
         end
       end
+
+      context 'authorized' do
+        include_context 'authorization token'
+
+        example 'authorized:success' do
+          explanation 'Response to authenticated requests will contain the extra attribute: participated'
+          do_request
+          expect(response_status).to eq(200)
+        end
+      end
     end
   end
 end

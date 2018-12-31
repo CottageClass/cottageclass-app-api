@@ -4,17 +4,17 @@ require 'rspec_api_documentation/dsl'
 RSpec.resource 'Participant' do
   include_context 'json headers'
 
-  let(:event_series) { create :event_series }
+  let(:event) { create :event }
   let(:user) { create :user, :with_children }
   let(:subject) { build :participant, participable: event_series, user: user }
 
-  post '/api/event_series/:event_series_id/participants', format: :json do
-    parameter :event_series_id, 'Event Series Identifier', required: true
+  post '/api/events/:event_id/participants', format: :json do
+    parameter :event_id, 'Event Identifier', required: true
     with_options scope: :participant do
       parameter :participant_children_attributes, 'Participant children attributes', required: true
     end
 
-    let(:event_series_id) { event_series.id }
+    let(:event_id) { event.id }
     let :participant_children_attributes do
       user.children.take(1).map { |child| { child_id: child.id } }
     end
@@ -27,7 +27,7 @@ RSpec.resource 'Participant' do
       end
 
       context 'failure' do
-        let(:event_series_id) { Faker::Number.number 2 }
+        let(:event_id) { Faker::Number.number 2 }
 
         example 'create:failure', document: false do
           do_request
