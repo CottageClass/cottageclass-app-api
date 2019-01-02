@@ -15,6 +15,7 @@ gem 'pg'
 gem 'puma_worker_killer'
 gem 'rack-cors', require: 'rack/cors'
 gem 'rails', '~> 5.2.2'
+gem 'timezone'
 gem 'twilio-ruby', '~> 5.15.2'
 
 gem 'apitome'

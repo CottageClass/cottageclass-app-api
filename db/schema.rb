@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_31_051109) do
+ActiveRecord::Schema.define(version: 2019_01_02_050813) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,6 +64,7 @@ ActiveRecord::Schema.define(version: 2018_12_31_051109) do
   create_table "event_series", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "name", null: false
+    t.string "time_zone"
     t.date "start_date", null: false
     t.time "starts_at", null: false
     t.time "ends_at", null: false
@@ -86,6 +87,7 @@ ActiveRecord::Schema.define(version: 2018_12_31_051109) do
   create_table "events", force: :cascade do |t|
     t.bigint "event_series_id", null: false
     t.string "name", null: false
+    t.string "time_zone"
     t.datetime "starts_at", null: false
     t.datetime "ends_at", null: false
     t.integer "maximum_children", default: 0
@@ -158,6 +160,7 @@ ActiveRecord::Schema.define(version: 2018_12_31_051109) do
     t.decimal "fuzzy_latitude"
     t.decimal "fuzzy_longitude"
     t.string "password_digest"
+    t.string "time_zone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "facebook_uid"

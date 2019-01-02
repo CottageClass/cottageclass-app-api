@@ -19,6 +19,11 @@ RSpec.describe User, type: :model do
       expect(subject.fuzzy_latitude).not_to be_blank
       expect(subject.fuzzy_longitude).not_to be_blank
     end
+
+    it 'generates time zone' do
+      subject.time_zone = nil
+      expect { subject.save }.to change(subject, :time_zone).from(nil)
+    end
   end
 
   context 'inquiries' do

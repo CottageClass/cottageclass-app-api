@@ -1,4 +1,4 @@
-module LocationObfuscator
+module Locator
   def obfuscate(latitude:, longitude:, range: 0.1..0.2)
     fuzzy_latitude = 0
     fuzzy_longitude = 0
@@ -12,5 +12,16 @@ module LocationObfuscator
     { fuzzy_latitude: fuzzy_latitude, fuzzy_longitude: fuzzy_longitude }
   end
 
-  module_function :obfuscate
+  def time_zone_for(latitude:, longitude:)
+    name = nil
+    begin
+      timezone = Timezone.lookup latitude, longitude
+      name = timezone.name
+    rescue Timezone::Error::InvalidZone => e
+      Rails.logger.error e
+    end
+    name
+  end
+
+  module_function :obfuscate, :time_zone_for
 end

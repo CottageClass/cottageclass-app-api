@@ -20,4 +20,11 @@ RSpec.describe Event, type: :model do
     it { is_expected.to have_many(:participating_users).through(:participants) }
     it { is_expected.to have_and_belong_to_many(:event_hosts) }
   end
+
+  context 'create' do
+    it 'generates time zone' do
+      subject.time_zone = nil
+      expect { subject.save }.to change(subject, :time_zone).from(nil)
+    end
+  end
 end

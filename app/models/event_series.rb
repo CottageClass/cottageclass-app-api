@@ -27,6 +27,7 @@ class EventSeries < ApplicationRecord
       foods
       house_rules
       pet_description
+      time_zone
       event_hosts
     ]
     0.step(by: interval).take(repeat_for).each do |number|
@@ -39,7 +40,7 @@ class EventSeries < ApplicationRecord
   end
 
   def date_time(date, time)
-    Time.zone.parse format('%s %s', date.strftime('%F'), time.strftime('%T'))
+    with_instance_time_zone { Time.zone.parse format('%s %s', date.strftime('%F'), time.strftime('%T')) }
   end
 
   def cleanup

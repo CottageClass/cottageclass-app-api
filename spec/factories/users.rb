@@ -3,6 +3,7 @@ FactoryBot.define do
     email { Faker::Internet.unique.safe_email }
     name { Faker::ElderScrolls.unique.name }
     password { 'demo' }
+    time_zone { Faker::Address.time_zone }
     network_code { 'demo' }
     phone_number { Faker::PhoneNumber.phone_number }
     phone_area_code { Faker::PhoneNumber.area_code }
@@ -10,8 +11,8 @@ FactoryBot.define do
     avatar { Faker::Avatar.image Faker::Internet.slug(name, '-'), '300x300', 'png' }
     locality { Faker::Address.city }
     admin_area_level_1 { Faker::Address.state_abbr }
-    latitude { Faker::Address.latitude }
-    longitude { Faker::Address.longitude }
+    latitude { 40.730610 }
+    longitude { -73.935242 }
 
     trait :with_children do
       transient { children_count { 2 } }

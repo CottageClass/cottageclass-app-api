@@ -108,11 +108,11 @@
     {
       "request_method": "POST",
       "request_path": "/api/event_series",
-      "request_body": "{\"event_series\":{\"name\":null,\"start_date\":\"2018-12-17\",\"starts_at\":\"19:47\",\"ends_at\":\"22:47\",\"maximum_children\":0,\"child_age_minimum\":0,\"child_age_maximum\":0,\"repeat_for\":6,\"interval\":4,\"has_pet\":true,\"activity_names\":[\"wrestling\"],\"foods\":[\"Bruschette with Tomato\"],\"house_rules\":\"Quia voluptate quia. Nisi accusamus est. Unde ut et.\",\"pet_description\":\"Laboriosam eligendi sequi. Exercitationem tenetur et. Eaque illum et.\",\"event_hosts_attributes\":[{\"name\":\"Emmett Kirlin\",\"email\":\"nobuko@gmail.com\",\"phone\":\"409-334-3729\"},{\"name\":\"Ms. Lesha Mohr\",\"email\":\"catherine@hotmail.com\",\"phone\":\"1-259-261-8753\"}]}}",
+      "request_body": "{\"event_series\":{\"name\":null,\"start_date\":\"2018-12-19\",\"starts_at\":\"01:25\",\"ends_at\":\"04:25\",\"maximum_children\":0,\"child_age_minimum\":0,\"child_age_maximum\":0,\"repeat_for\":6,\"interval\":4,\"has_pet\":true,\"activity_names\":[\"rugby\"],\"foods\":[\"Salmon Nigiri\"],\"house_rules\":\"Ipsa sequi nesciunt. Accusamus velit et. Esse voluptas officiis.\",\"pet_description\":\"Veniam et ipsam. Fugit deserunt et. Molestiae quos doloribus.\",\"event_hosts_attributes\":[{\"name\":\"Burma Collins\",\"email\":\"iac_herman@gmail.com\",\"phone\":\"966-771-1941\"},{\"name\":\"Dr. Guadalupe Rohan\",\"email\":\"shawana.konopelski@yahoo.com\",\"phone\":\"163.285.2122\"}]}}",
       "request_headers": {
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDYzMzQxNjcsInN1YiI6Mn0.qFcoy0Kc_MOFCRxAKv2_bPYS049wjzDNnHqT170mhFI"
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDY0OTkzNTgsInN1YiI6Mn0.32tm3ep8UD3muMfVzVGLndp28e9nmE9yvwadli_UEOY"
       },
       "request_query_parameters": {
       },

@@ -11,7 +11,8 @@ class User < ApplicationRecord
   alias_attribute :facebook_id, :facebook_uid
 
   before_validation :cleanup
-  after_save :obfuscate_location
+  before_save :obfuscate_location, :generate_time_zone,
+              if: proc { |instance| instance.latitude_changed? || instance.longitude_changed? }
 
   before_create do
     populate_full_name!
@@ -96,11 +97,18 @@ class User < ApplicationRecord
   end
 
   def obfuscate_location
-    if (latitude.present? && latitude.nonzero?) && (longitude.present? && longitude.nonzero?) &&
-       (saved_change_to_latitude? || saved_change_to_longitude?)
-      location = LocationObfuscator.obfuscate latitude: latitude, longitude: longitude
-      update_columns location
-    end
+    location = if (latitude.present? && latitude.nonzero?) && (longitude.present? && longitude.nonzero?)
+                 Locator.obfuscate latitude: latitude, longitude: longitude
+               else
+                 { fuzzy_latitude: nil, fuzzy_longitude: nil }
+               end
+    assign_attributes location
+  end
+
+  def generate_time_zone
+    self.time_zone = if (latitude.present? && latitude.nonzero?) && (longitude.present? && longitude.nonzero?)
+                       Locator.time_zone_for latitude: latitude, longitude: longitude
+                     end
   end
 
   def child_with_same_name_exists?(new_child_attrs)

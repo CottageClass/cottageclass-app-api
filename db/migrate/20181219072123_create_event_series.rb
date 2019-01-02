@@ -3,6 +3,7 @@ class CreateEventSeries < ActiveRecord::Migration[5.2]
     create_table :event_series do |t|
       t.belongs_to :user, null: false
       t.string :name, null: false
+      t.string :time_zone
       t.date :start_date, null: false
       t.time :starts_at, :ends_at, null: false
       t.integer :repeat_for, :interval, null: false
