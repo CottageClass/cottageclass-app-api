@@ -1,5 +1,5 @@
 class EventHostSerializer
   include FastJsonapi::ObjectSerializer
 
-  attributes :name, :email, :phone
+  attributes :name, :email, :phone, :verified
 end

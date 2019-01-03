@@ -7,6 +7,8 @@ ActiveAdmin.register Participant do
 
   permit_params participant_children_attributes: %i[id child_id _destroy]
 
+  filter :created_at
+
   index do
     selectable_column
     column :id
@@ -25,6 +27,14 @@ ActiveAdmin.register Participant do
       f.li do
         f.label 'User'
         f.span link_to(f.object.user.name, admin_user_path(f.object.participable))
+      end
+      f.li do
+        f.label :created_at
+        f.span f.object.created_at
+      end
+      f.li do
+        f.label :updated_at
+        f.span f.object.updated_at
       end
       f.has_many :participant_children, allow_destroy: true do |participant_child_f|
         participant_child_f.input :child, collection: f.object.user.children

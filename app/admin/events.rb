@@ -7,8 +7,8 @@ ActiveAdmin.register Event do
   actions :index, :new, :create, :edit, :update, :destroy
 
   permit_params :name, :starts_at, :ends_at, :maximum_children, :child_age_minimum, :child_age_maximum, :has_pet,
-                :house_rules, :pet_description, :activity_names, :foods,
-                event_hosts_attributes: %i[id verified _destroy]
+                :house_rules, :pet_description,
+                activity_names: [], foods: [], event_hosts_attributes: %i[id verified _destroy]
 
   filter :name
 

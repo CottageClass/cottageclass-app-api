@@ -11,4 +11,6 @@ class EventSerializer
   attribute :participated, if: proc { |_, params| params.dig(:current_user).present? } do |instance, params|
     instance.participated? params[:current_user]
   end
+
+  has_many :event_hosts
 end

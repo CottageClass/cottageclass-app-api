@@ -16,8 +16,7 @@ module Eventable
 
     has_and_belongs_to_many :event_hosts
 
-    accepts_nested_attributes_for :event_hosts, allow_destroy: true,
-                                                reject_if: proc { |attributes| attributes['name'].blank? }
+    accepts_nested_attributes_for :event_hosts, allow_destroy: true
   end
 
   def with_instance_time_zone
