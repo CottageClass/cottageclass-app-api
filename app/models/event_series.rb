@@ -8,9 +8,6 @@ class EventSeries < ApplicationRecord
   belongs_to :user, inverse_of: :event_series
   has_many :events, inverse_of: :event_series, dependent: :destroy
 
-  accepts_nested_attributes_for :event_hosts, allow_destroy: true,
-                                              reject_if: proc { |attributes| attributes['name'].blank? }
-
   before_validation :cleanup
   after_create :create_events
 

@@ -4,6 +4,8 @@ module Eventable
   extend ActiveSupport::Concern
 
   included do
+    before_validation :common_cleanup, :generate_time_zone
+
     validates :name, presence: true
     validates :starts_at, presence: true
     validates :ends_at, presence: true
@@ -14,7 +16,8 @@ module Eventable
 
     has_and_belongs_to_many :event_hosts
 
-    before_validation :common_cleanup, :generate_time_zone
+    accepts_nested_attributes_for :event_hosts, allow_destroy: true,
+                                                reject_if: proc { |attributes| attributes['name'].blank? }
   end
 
   def with_instance_time_zone
