@@ -10,7 +10,7 @@ class Event < ApplicationRecord
   scope :upcoming, -> { where(Event.arel_table[:starts_at].gt(Time.current)).order starts_at: :asc }
 
   delegate :user, to: :event_series, allow_nil: true
-  delegate :facebook_uid, :avatar, :first_name, :fuzzy_latitude, :fuzzy_longitude, :locality, :admin_area_level_1,
+  delegate :id, :facebook_uid, :avatar, :first_name, :fuzzy_latitude, :fuzzy_longitude, :locality, :admin_area_level_1,
            :child_ages, :verified,
            to: :user, prefix: :host, allow_nil: true
 
