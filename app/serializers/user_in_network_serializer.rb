@@ -3,7 +3,9 @@ class UserInNetworkSerializer < BaseSerializer
 
   attributes :first_name,
              :last_name,
+             :verified,
              :avatar,
+             :facebook_id,
              :fuzzy_latitude,
              :fuzzy_longitude,
              :available_mornings,
@@ -13,7 +15,6 @@ class UserInNetworkSerializer < BaseSerializer
              :activities,
              :full_address,
              :network_code,
-             :facebook_id,
              :profile_blurb,
              :onboarding_care_type
 
