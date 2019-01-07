@@ -1,5 +1,5 @@
 class UserSerializer < BaseSerializer
-  has_many :children
+  has_many :children, serializer: ChildUnrestrictedSerializer
 
   attributes :agree_tos,
              :first_name,
