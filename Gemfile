@@ -36,6 +36,7 @@ group :development, :test do
   gem 'dotenv-rails'
   gem 'factory_bot_rails'
   gem 'faker'
+  gem 'httplog'
   gem 'mry', require: false
   gem 'rspec-rails'
   gem 'rspec_api_documentation'

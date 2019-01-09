@@ -150,6 +150,9 @@ GEM
       actionpack (>= 4.1)
       activesupport (>= 4.1)
     hashdiff (0.3.8)
+    httplog (1.2.0)
+      rack (>= 1.0)
+      rainbow (>= 2.0.0)
     i18n (1.5.1)
       concurrent-ruby (~> 1.0)
     i18n_data (0.8.0)
@@ -379,6 +382,7 @@ DEPENDENCIES
   faker
   fast_jsonapi
   geocoder
+  httplog
   inherited_resources!
   knock!
   koala
