@@ -27,6 +27,7 @@ module CottageclassAppApi
       allow do
         origins 'https://localhost:8077',
                 'https://app.cottageclass.com',
+                'https://www.kidsclub.io',
                 'https://cottageclass-app-staging.herokuapp.com',
                 'https://cottageclass-app.herokuapp.com',
                 'https://192.168.1.4:8077',
