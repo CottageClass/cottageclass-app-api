@@ -13,8 +13,8 @@ ActiveAdmin.register Event do
   filter :name
 
   before_save do |instance|
-    instance.activity_names = params[:event_series][:activity_names].split(',')
-    instance.foods = params[:event_series][:foods].split(',')
+    instance.activity_names = (params.dig(:event, :activity_names) || '').split(',').try :flatten
+    instance.foods = (params.dig(:event, :foods) || '').split(',').try :flatten
   end
 
   index do
@@ -23,8 +23,8 @@ ActiveAdmin.register Event do
     column :name
     column :event_series
     column :user
-    column(:starts_at) { |instance| instance.starts_at.strftime('%T') }
-    column(:ends_at) { |instance| instance.ends_at.strftime('%T') }
+    column :starts_at
+    column :ends_at
     column :created_at
     actions do |instance|
       item 'Participants', admin_event_participants_path(instance), class: 'member_link'
