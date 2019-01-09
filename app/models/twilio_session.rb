@@ -14,22 +14,22 @@ class TwilioSession < ApplicationRecord
 
   belongs_to :initiator, class_name: 'User', foreign_key: :sender_id
   belongs_to :client, class_name: 'User', foreign_key: :receiver_id
-  has_many :messages, class_name: 'Message', foreign_key: :cc_twilio_session_id
+  has_many :messages, class_name: 'Message', foreign_key: :cc_twilio_session_id, dependent: :destroy
 
   before_validation :ensure_last_action_utc
 
-  scope :live, -> {
+  scope :live, lambda {
     where(
       'last_action_at > ?',
       # remember to normalize all times to UTC for comparison
-      live_session_cutoff,
+      live_session_cutoff
     )
   }
-  scope :with_participants, -> (p1_id, p2_id) {
+  scope :with_participants, lambda { |p1_id, p2_id|
     where(
       '(sender_id = ? AND receiver_id = ?) OR (sender_id = ? AND receiver_id = ?)',
       p1_id, p2_id,
-      p2_id, p1_id,
+      p2_id, p1_id
     )
   }
 
@@ -37,14 +37,13 @@ class TwilioSession < ApplicationRecord
     TTL_SECONDS.seconds.ago.utc
   end
 
-  def record_action!(time=DateTime.now.utc)
-    update_attributes(last_action_at: time)
+  def record_action!(time = DateTime.now.utc)
+    update(last_action_at: time)
   end
-
 
   private
 
   def ensure_last_action_utc
-    self.last_action_at = self.last_action_at.utc
+    self.last_action_at = last_action_at.utc
   end
 end
