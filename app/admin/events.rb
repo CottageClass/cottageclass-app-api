@@ -23,8 +23,8 @@ ActiveAdmin.register Event do
     column :name
     column :event_series
     column :user
-    column :starts_at
-    column :ends_at
+    column(:starts_at) { |instance| instance.with_instance_time_zone { instance.starts_at } }
+    column(:ends_at) { |instance| instance.with_instance_time_zone { instance.ends_at } }
     column :created_at
     actions do |instance|
       item 'Participants', admin_event_participants_path(instance), class: 'member_link'
@@ -39,12 +39,16 @@ ActiveAdmin.register Event do
         f.label :time_zone
         f.span f.object.time_zone
       end
-      f.input :starts_at
-      f.input :ends_at
+      f.input :starts_at, hint: 'This is in UTC'
+      f.input :ends_at, hint: 'This is in UTC'
       f.input :has_pet
       f.input :pet_description
-      f.input :activity_names, as: :tags
-      f.input :foods, as: :tags
+      f.input :activity_names,
+              as: :tags,
+              hint: 'Though this input allows more than 1 item, entering more than 1 can lead to unexpected behavior'
+      f.input :foods,
+              as: :tags,
+              hint: 'Though this input allows more than 1 item, entering more than 1 can lead to unexpected behavior'
       f.input :house_rules
       f.input :maximum_children
       f.input :child_age_minimum
