@@ -3,6 +3,6 @@ class ChildUnrestrictedSerializer
 
   set_type :child
 
-  attributes :first_name, :school_name
+  attributes :first_name, :school_name, :age
   attribute(:birthday) { |instance| instance.birthday.to_date }
 end

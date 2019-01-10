@@ -10,7 +10,10 @@ FactoryBot.define do
     facebook_uid { Faker::Omniauth.facebook[:uid] }
     avatar { Faker::Avatar.image Faker::Internet.slug(name, '-'), '300x300', 'png' }
     locality { Faker::Address.city }
-    admin_area_level_1 { Faker::Address.state_abbr }
+    admin_area_level_1 { Faker::Address.state }
+    admin_area_level_2 { Faker::Address.street_name }
+    neighborhood { Faker::Address.street_name }
+    sublocality { Faker::Address.community }
     latitude { 40.730610 }
     longitude { -73.935242 }
 

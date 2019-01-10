@@ -27,6 +27,8 @@ RSpec.resource 'User' do
         include_context 'authorization token'
 
         example_request 'show:success' do
+          expect((json_body.dig('included') || []).map { |included| included.dig('attributes', 'first_name') }.compact)
+            .not_to be_blank
           expect(response_status).to eq(200)
         end
       end

@@ -108,11 +108,11 @@
     {
       "request_method": "POST",
       "request_path": "/api/event_series",
-      "request_body": "{\"event_series\":{\"name\":null,\"start_date\":\"2018-12-24\",\"starts_at\":\"19:36\",\"ends_at\":\"22:36\",\"maximum_children\":0,\"child_age_minimum\":0,\"child_age_maximum\":0,\"repeat_for\":6,\"interval\":4,\"has_pet\":true,\"activity_names\":[\"rugby union\"],\"foods\":[\"Chicken Wings\"],\"house_rules\":\"Sit fuga reiciendis. Aut saepe vitae. Non qui ipsam.\",\"pet_description\":\"Fuga consequatur labore. Deleniti sed laborum. Aut ut iusto.\",\"event_hosts_attributes\":[{\"name\":\"Miss Dawn Little\",\"email\":\"shin@gmail.com\",\"phone\":\"1-460-717-7436\"},{\"name\":\"Mrs. Marylin Barton\",\"email\":\"cinderella_fahey@gmail.com\",\"phone\":\"(244) 530-4218\"}]}}",
+      "request_body": "{\"event_series\":{\"name\":null,\"start_date\":\"2018-12-30\",\"starts_at\":\"05:39\",\"ends_at\":\"08:39\",\"maximum_children\":0,\"child_age_minimum\":0,\"child_age_maximum\":0,\"repeat_for\":6,\"interval\":4,\"has_pet\":true,\"activity_names\":[\"rugby\"],\"foods\":[\"Chicken Fajitas\"],\"house_rules\":\"Eos nobis dicta. Consequatur fuga quasi. In qui quidem.\",\"pet_description\":\"Velit quibusdam tempora. Eius et quam. Doloremque quis recusandae.\",\"event_hosts_attributes\":[{\"name\":\"Leon Hansen\",\"email\":\"ilene@hotmail.com\",\"phone\":\"869-149-3922\"},{\"name\":\"Susann Mueller\",\"email\":\"rhett@gmail.com\",\"phone\":\"838-161-6496\"}]}}",
       "request_headers": {
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDY5MzA5NzYsInN1YiI6Mn0.L6CHuSOYstDaUAe9Al32mvRT-3uxO_l6WT-JfHFQGFE"
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDcxOTQzMzQsInN1YiI6Mn0.r-js90Y_Wbt6bRigAnUuhInoAu3RdbZWwX59eqPI18I"
       },
       "request_query_parameters": {
       },

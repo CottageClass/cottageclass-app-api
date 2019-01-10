@@ -82,6 +82,8 @@ class UsersController < ApiController
       :street_number,
       :route,
       :locality,
+      :sublocality,
+      :neighborhood,
       :admin_area_level_1,
       :admin_area_level_2,
       :country,
