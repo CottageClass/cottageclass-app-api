@@ -9,6 +9,9 @@ Rails.application.routes.draw do
         get '(/:skope)', to: 'events#index', skope: /upcoming|past/i, defaults: { skope: 'all' }, as: :index
       end
     end
+    resources :users, only: %i[] do
+      resources :notifications, only: %i[create]
+    end
   end
 
   # auth

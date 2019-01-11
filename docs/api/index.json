@@ -76,6 +76,19 @@
       ]
     },
     {
+      "name": "Notification",
+      "explanation": null,
+      "examples": [
+        {
+          "description": "create:success",
+          "link": "notification/create:success.json",
+          "groups": "all",
+          "route": "/api/users/:user_id/notifications",
+          "method": "post"
+        }
+      ]
+    },
+    {
       "name": "Participant",
       "explanation": null,
       "examples": [

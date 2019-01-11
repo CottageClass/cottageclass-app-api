@@ -1,0 +1,47 @@
+{
+  "resource": "Notification",
+  "resource_explanation": null,
+  "http_method": "POST",
+  "route": "/api/users/:user_id/notifications",
+  "description": "create:success",
+  "explanation": null,
+  "parameters": [
+    {
+      "required": true,
+      "name": "user_id",
+      "description": "User Identifier"
+    },
+    {
+      "scope": "notification",
+      "required": true,
+      "name": "body",
+      "description": "Notification Body"
+    }
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "POST",
+      "request_path": "/api/users/11/notifications",
+      "request_body": "{\"notification\":{\"body\":\"Voluptas et autem eaque.\"}}",
+      "request_headers": {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDcyMzIwNTAsInN1YiI6MTF9.QYOMblaK1z23sxTXG13Pfbpf30yY2ZeTP640wzHlcb4"
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/json",
+      "response_status": 201,
+      "response_status_text": "Created",
+      "response_body": "{\n  \"data\": {\n    \"id\": \"1\",\n    \"type\": \"notification\",\n    \"attributes\": {\n      \"id\": 1,\n      \"body\": \"Voluptas et autem eaque.\"\n    }\n  }\n}",
+      "response_headers": {
+        "Content-Type": "application/vnd.api+json; charset=utf-8"
+      },
+      "response_content_type": "application/vnd.api+json; charset=utf-8",
+      "curl": null
+    }
+  ]
+}

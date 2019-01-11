@@ -42,6 +42,7 @@ class User < ApplicationRecord
   has_many :event_series, inverse_of: :user, dependent: :destroy
   has_many :events, through: :event_series
   has_many :participants, inverse_of: :user, dependent: :destroy
+  has_many :notifications, foreign_key: :recipient_id, inverse_of: :recipient, dependent: :destroy
 
   accepts_nested_attributes_for :children, allow_destroy: true, reject_if: :child_with_same_name_exists?
 
