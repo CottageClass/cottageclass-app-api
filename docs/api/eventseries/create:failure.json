@@ -108,11 +108,11 @@
     {
       "request_method": "POST",
       "request_path": "/api/event_series",
-      "request_body": "{\"event_series\":{\"name\":null,\"start_date\":\"2018-12-31\",\"starts_at\":\"04:19\",\"ends_at\":\"07:19\",\"maximum_children\":0,\"child_age_minimum\":0,\"child_age_maximum\":0,\"repeat_for\":6,\"interval\":4,\"has_pet\":true,\"activity_names\":[\"sumo\"],\"foods\":[\"Katsu Curry\"],\"house_rules\":\"Praesentium assumenda quo. Eligendi consectetur quam. Ut cumque id.\",\"pet_description\":\"Et voluptatem facilis. Ut modi velit. Ab quisquam reiciendis.\",\"event_hosts_attributes\":[{\"name\":\"May Skiles\",\"email\":\"wanda@hotmail.com\",\"phone\":\"(208) 878-7431\"},{\"name\":\"Tai Reichel\",\"email\":\"candyce_gusikowski@hotmail.com\",\"phone\":\"635.452.4907\"}]}}",
+      "request_body": "{\"event_series\":{\"name\":null,\"start_date\":\"2019-01-07\",\"starts_at\":\"18:50\",\"ends_at\":\"21:50\",\"maximum_children\":0,\"child_age_minimum\":0,\"child_age_maximum\":0,\"repeat_for\":6,\"interval\":4,\"has_pet\":true,\"activity_names\":[\"rugby\"],\"foods\":[\"Vegetable Soup\"],\"house_rules\":\"Est iure reprehenderit. Ullam aliquid id. Odio rerum et.\",\"pet_description\":\"Accusantium sequi aspernatur. Voluptatem molestias maxime. Cum ratione ut.\",\"event_hosts_attributes\":[{\"name\":\"Bryant Swaniawski Jr.\",\"email\":\"toby_emmerich@hotmail.com\",\"phone\":\"269-774-7553\"},{\"name\":\"Sherrie Streich\",\"email\":\"ignacia@gmail.com\",\"phone\":\"810-302-9136\"}]}}",
       "request_headers": {
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDcyMzIwNDcsInN1YiI6Mn0.24GoFL469DpqTzjKon5DIG6aR7cXRmuWDwCb5RFUlhE"
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDc1MzIwNjgsInN1YiI6Mn0.WKBPGiC6Rna4wJsmnffrRZMGkeVU-UZsDlLJ3SHRoAw"
       },
       "request_query_parameters": {
       },
