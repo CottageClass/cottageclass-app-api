@@ -11,7 +11,7 @@ class Notification < ApplicationRecord
       twilio_client = Twilio::REST::Client.new ENV.fetch('TWILIO_ACCOUNT_SID'), ENV.fetch('TWILIO_AUTH_TOKEN')
 
       message = twilio_client.api.account.messages.create from: ENV.fetch('TWILIO_SENDER_NUMBER'),
-                                                          to: recipient.phone_number,
+                                                          to: recipient.phone,
                                                           body: body
       self.remote_identifier = message.sid
     end
