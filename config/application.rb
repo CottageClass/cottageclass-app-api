@@ -46,7 +46,7 @@ module CottageclassAppApi
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
-    config.eager_load_paths += Dir.glob(%W[#{config.root}/lib/**/])
+    config.eager_load_paths << config.root.join('lib')
 
     config.generators do |g|
       g.helper false

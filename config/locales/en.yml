@@ -30,4 +30,5 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  messages:
+    event_reminder_previous_day_participant: 'Hi %{participant_first_name}, just a reminder that you booked a playdate with %{host_first_name} tomorrow from %{event_time_range}! We can’t wait to hear how it goes!'

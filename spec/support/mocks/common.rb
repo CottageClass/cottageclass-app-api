@@ -18,9 +18,13 @@ module Mocks
       WebMock.stub_request(method, url)
         .with(params)
         .to_return(
-          status: response[:status],
-          body: JSON.generate(response[:body]),
-          headers: response[:headers] || { 'Content-Type' => 'application/json' }
+          lambda { |_|
+            {
+              status: response[:status],
+              body: JSON.generate(response[:body]),
+              headers: response[:headers] || { 'Content-Type' => 'application/json' }
+            }
+          }
         )
     end
   end

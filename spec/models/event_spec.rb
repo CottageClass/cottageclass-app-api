@@ -17,6 +17,7 @@ RSpec.describe Event, type: :model do
     it { is_expected.to belong_to(:event_series).inverse_of(:events) }
     it { is_expected.to have_many(:participants).dependent(:destroy) }
     it { is_expected.to have_many(:participant_children) }
+    it { is_expected.to have_many(:notifications) }
     it { is_expected.to have_many(:participating_users).through(:participants) }
     it { is_expected.to have_and_belong_to_many(:event_hosts) }
   end
@@ -25,6 +26,24 @@ RSpec.describe Event, type: :model do
     it 'generates time zone' do
       subject.time_zone = nil
       expect { subject.save }.to change(subject, :time_zone).from(nil)
+    end
+  end
+
+  context 'notify' do
+    before do
+      subject.save
+      participants
+    end
+
+    let(:participants) { create_list :participant, 2, :with_participant_children, participable: subject }
+
+    it 'event_reminder_previous_day_participant' do
+      expect { subject.notify }.not_to change(subject.notifications, :count)
+
+      Timecop.freeze(subject.starts_at) do
+        expect { subject.notify }.to change(subject.notifications, :count).by(participants.size)
+        expect { subject.notify }.not_to change(subject.notifications, :count)
+      end
     end
   end
 end

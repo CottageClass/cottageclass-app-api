@@ -32,6 +32,7 @@ end
 group :development, :test do
   gem 'brakeman', require: false
   gem 'bullet'
+  gem 'climate_control'
   gem 'database_cleaner'
   gem 'dotenv-rails'
   gem 'factory_bot_rails'
@@ -44,5 +45,6 @@ group :development, :test do
   gem 'rubocop-rspec', require: false
   gem 'shoulda-matchers'
   gem 'therubyracer', platforms: :ruby
+  gem 'timecop'
   gem 'webmock'
 end

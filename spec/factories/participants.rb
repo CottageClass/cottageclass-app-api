@@ -4,11 +4,10 @@ FactoryBot.define do
     association :user, :with_children
 
     trait :with_participant_children do
-      transient { participant_children_count { 2 } }
-
-      after :build do |instance, evaluator|
-        instance.participant_children = build_list :participant_child, evaluator.participant_children_count,
-                                                   participant: instance
+      after :build do |instance, _|
+        instance.user.children.each do |child|
+          instance.participant_children << build(:participant_child, participant: instance, child: child)
+        end
       end
     end
   end
