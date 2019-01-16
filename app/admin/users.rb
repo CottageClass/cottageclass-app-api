@@ -4,7 +4,8 @@ ActiveAdmin.register User do
 
   includes :children
 
-  permit_params :email, :facebook_uid, :verified, :first_name, :last_name, :name, :network_code, :profile_blurb
+  permit_params :email, :facebook_uid, :verified, :first_name, :last_name, :name, :network_code, :profile_blurb,
+                :apartment_number
 
   filter :name
   filter :first_name

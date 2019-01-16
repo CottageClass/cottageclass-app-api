@@ -1,0 +1,41 @@
+{
+  "resource": "User",
+  "resource_explanation": null,
+  "http_method": "POST",
+  "route": "/users/:id",
+  "description": "update:success",
+  "explanation": null,
+  "parameters": [
+    {
+      "scope": "user",
+      "name": "apartment_number",
+      "description": "Apartment Number"
+    }
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "POST",
+      "request_path": "/users/33",
+      "request_body": "{\"user\":{\"apartment_number\":\"202\"}}",
+      "request_headers": {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDc3NDUxOTgsInN1YiI6MzN9.NuEM7v1uIb6jrrI4a25201hlXVGVoQaC2UYvn7jRrdQ"
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/json",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "{\n  \"data\": {\n    \"id\": \"33\",\n    \"type\": \"user\",\n    \"attributes\": {\n      \"agree_tos\": false,\n      \"first_name\": \"Cynric\",\n      \"last_name\": \"Unbroken\",\n      \"verified\": false,\n      \"avatar\": \"https://robohash.org/cynric-the-unbroken.png?size=300x300&set=set1\",\n      \"facebook_id\": \"3213653\",\n      \"street_number\": null,\n      \"route\": null,\n      \"locality\": \"West Yung\",\n      \"sublocality\": \"Willow Acres\",\n      \"neighborhood\": \"Keebler Street\",\n      \"admin_area_level_1\": \"Illinois\",\n      \"admin_area_level_2\": \"Denesik Ville\",\n      \"country\": \"United States\",\n      \"postal_code\": null,\n      \"latitude\": \"40.73061\",\n      \"longitude\": \"-73.935242\",\n      \"phone_country_code\": \"1\",\n      \"phone_area_code\": null,\n      \"phone_number\": \"179-281-0587\",\n      \"available_mornings\": null,\n      \"available_afternoons\": null,\n      \"available_evenings\": null,\n      \"available_weekends\": null,\n      \"network_code\": \"demo\",\n      \"activities\": [\n\n      ],\n      \"phone\": \"() 179--281-0587\",\n      \"full_address\": \" , West Yung, Illinois, Denesik Ville, United States \",\n      \"profile_blurb\": null,\n      \"onboarding_care_type\": null,\n      \"date_created\": \"2019-01-16T17:13:18.515Z\"\n    },\n    \"relationships\": {\n      \"children\": {\n        \"data\": [\n          {\n            \"id\": \"21\",\n            \"type\": \"child\"\n          },\n          {\n            \"id\": \"22\",\n            \"type\": \"child\"\n          }\n        ]\n      }\n    }\n  },\n  \"included\": [\n    {\n      \"id\": \"21\",\n      \"type\": \"child\",\n      \"attributes\": {\n        \"first_name\": \"Bret\",\n        \"school_name\": \"Brighthurst High\",\n        \"age\": 5,\n        \"birthday\": \"2013-06-24\"\n      }\n    },\n    {\n      \"id\": \"22\",\n      \"type\": \"child\",\n      \"attributes\": {\n        \"first_name\": \"Farah\",\n        \"school_name\": \"Iceborough High School\",\n        \"age\": 5,\n        \"birthday\": \"2013-09-14\"\n      }\n    }\n  ],\n  \"jwt\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDc3NDUxOTgsInN1YiI6MzMsImVtYWlsIjoiZnJhbmtseW5AZXhhbXBsZS5jb20iLCJuZXR3b3JrX2NvZGUiOiJkZW1vIn0.it1t1OVKh1Kf2nq_D7E9_IbKvBL1m0sXLMv8MHpaTJQ\"\n}",
+      "response_headers": {
+        "Content-Type": "application/vnd.api+json; charset=utf-8"
+      },
+      "response_content_type": "application/vnd.api+json; charset=utf-8",
+      "curl": null
+    }
+  ]
+}

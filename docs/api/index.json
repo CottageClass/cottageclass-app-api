@@ -118,6 +118,13 @@
           "groups": "all",
           "route": "/users/:id",
           "method": "get"
+        },
+        {
+          "description": "update:success",
+          "link": "user/update:success.json",
+          "groups": "all",
+          "route": "/users/:id",
+          "method": "post"
         }
       ]
     }

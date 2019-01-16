@@ -10,9 +10,8 @@ RSpec.resource 'User' do
     before { user.save }
 
     get '/networks/:network_code/users', format: :json do
-      let(:network_code) { user.network_code }
-
       include_context 'authorization token'
+      let(:network_code) { user.network_code }
 
       example_request 'index:success' do
         expect(response_status).to eq(200)
@@ -38,6 +37,22 @@ RSpec.resource 'User' do
           do_request
           expect(response_status).to eq(401)
         end
+      end
+    end
+
+    post '/users/:id', format: :json do
+      include_context 'authorization token'
+      before { user.save }
+
+      with_options scope: :user do
+        parameter :apartment_number, 'Apartment Number'
+      end
+
+      let(:id) { user.id }
+      let(:apartment_number) { Faker::Address.building_number }
+
+      example_request 'update:success' do
+        expect(response_status).to eq(200)
       end
     end
   end

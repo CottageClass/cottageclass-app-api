@@ -12,6 +12,7 @@ FactoryBot.define do
     locality { Faker::Address.city }
     admin_area_level_1 { Faker::Address.state }
     admin_area_level_2 { Faker::Address.street_name }
+    apartment_number { Faker::Address.building_number }
     neighborhood { Faker::Address.street_name }
     sublocality { Faker::Address.community }
     latitude { 40.730610 }

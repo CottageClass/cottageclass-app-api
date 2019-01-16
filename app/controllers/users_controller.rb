@@ -75,39 +75,38 @@ class UsersController < ApiController
   end
 
   def user_params
-    params.require(:user).permit(
-      :agree_tos,
-      :first_name,
-      :last_name,
-      :street_number,
-      :route,
-      :locality,
-      :sublocality,
-      :neighborhood,
-      :admin_area_level_1,
-      :admin_area_level_2,
-      :country,
-      :postal_code,
-      :latitude,
-      :longitude,
-      :phone_country_code,
-      :phone_area_code,
-      :phone_number,
-      :available_mornings,
-      :available_afternoons,
-      :available_evenings,
-      :available_weekends,
-      :network_code,
-      :profile_blurb,
-      :onboarding_care_type,
-      activities: [],
-      children_attributes: %i[
-        id
-        parent_id
-        first_name
-        birthday
-        school_name
-      ]
-    )
+    params.require(:user).permit :agree_tos,
+                                 :first_name,
+                                 :last_name,
+                                 :street_number,
+                                 :route,
+                                 :locality,
+                                 :sublocality,
+                                 :apartment_number,
+                                 :neighborhood,
+                                 :admin_area_level_1,
+                                 :admin_area_level_2,
+                                 :country,
+                                 :postal_code,
+                                 :latitude,
+                                 :longitude,
+                                 :phone_country_code,
+                                 :phone_area_code,
+                                 :phone_number,
+                                 :available_mornings,
+                                 :available_afternoons,
+                                 :available_evenings,
+                                 :available_weekends,
+                                 :network_code,
+                                 :profile_blurb,
+                                 :onboarding_care_type,
+                                 activities: [],
+                                 children_attributes: %i[
+                                   id
+                                   parent_id
+                                   first_name
+                                   birthday
+                                   school_name
+                                 ]
   end
 end

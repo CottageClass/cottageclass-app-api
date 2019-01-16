@@ -25,18 +25,18 @@
     {
       "request_method": "POST",
       "request_path": "/api/users/11/notifications",
-      "request_body": "{\"notification\":{\"body\":\"Error voluptatem nisi neque.\"}}",
+      "request_body": "{\"notification\":{\"body\":\"Est facilis cumque harum.\"}}",
       "request_headers": {
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDc1MzIwNjksInN1YiI6MTF9.XS-COxyFYMVb1_w1_Aq5CT_Jm1IHGh70hwBv4YdmTlU"
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDc3NDUxOTcsInN1YiI6MTF9.DRGW0_waEr1aRYCE8BGZIueJJgJUwEGrZTf2VbWXAh4"
       },
       "request_query_parameters": {
       },
       "request_content_type": "application/json",
       "response_status": 201,
       "response_status_text": "Created",
-      "response_body": "{\n  \"data\": {\n    \"id\": \"1\",\n    \"type\": \"notification\",\n    \"attributes\": {\n      \"id\": 1,\n      \"body\": \"Error voluptatem nisi neque.\"\n    }\n  }\n}",
+      "response_body": "{\n  \"data\": {\n    \"id\": \"1\",\n    \"type\": \"notification\",\n    \"attributes\": {\n      \"id\": 1,\n      \"body\": \"Est facilis cumque harum.\"\n    }\n  }\n}",
       "response_headers": {
         "Content-Type": "application/vnd.api+json; charset=utf-8"
       },
