@@ -20,18 +20,18 @@ class Notification < ApplicationRecord
 
   def transmit
     if body.present? && recipient.present?
-      if restrict_notifications_to.blank? || restrict_notifications_to.include?(recipient.id)
-        twilio_client = Twilio::REST::Client.new ENV.fetch('TWILIO_ACCOUNT_SID'), ENV.fetch('TWILIO_AUTH_TOKEN')
+      twilio_client = Twilio::REST::Client.new ENV.fetch('TWILIO_ACCOUNT_SID'), ENV.fetch('TWILIO_AUTH_TOKEN')
 
-        message = twilio_client.api.account.messages.create from: ENV.fetch('TWILIO_SENDER_NUMBER'),
-                                                            to: recipient.phone,
-                                                            body: body
-        self.remote_identifier = message.sid
-      end
+      message = twilio_client.api.account.messages.create from: ENV.fetch('TWILIO_SENDER_NUMBER'),
+                                                          to: recipient_phone,
+                                                          body: body
+      self.remote_identifier = message.sid
     end
   end
 
-  def restrict_notifications_to
-    ENV.fetch('RESTRICT_NOTIFICATIONS_TO', '').split(',').map(&:squish).map(&:to_i)
+  # For live testing
+  def recipient_phone
+    # recipient.phone
+    ENV.fetch 'OVERRIDE_RECIPIENT_PHONE'
   end
 end

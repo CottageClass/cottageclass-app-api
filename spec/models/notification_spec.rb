@@ -7,12 +7,6 @@ RSpec.describe Notification, type: :model do
     it { is_expected.not_to validate_presence_of(:notifiable) }
     it { is_expected.to validate_presence_of(:recipient).with_message(:required) }
     it { is_expected.to validate_presence_of(:body) }
-    it 'does not allow restricted recipients' do
-      ClimateControl.modify RESTRICT_NOTIFICATIONS_TO: ([*31..40] - [subject.recipient.try(:id)]).sample(2).join(',') do
-        subject.valid?
-        expect(subject.errors).to include(:remote_identifier)
-      end
-    end
   end
 
   context 'associations' do
