@@ -1,32 +1,4 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# The following keys must be escaped otherwise they will not be retrieved by
-# the default I18n backend:
-#
-# true, false, on, off, yes, no
-#
-# Instead, surround them with single quotes.
-#
-# en:
-#   'true': 'foo'
-#
-# To learn more, please read the Rails Internationalization guide
+# Please read the Rails Internationalization guide
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
@@ -34,3 +6,7 @@ en:
     event_reminder_previous_day_participant: 'Hi %{participant_first_name}, just a reminder that you booked a playdate with %{host_first_name} tomorrow from %{event_time_range}! We can’t wait to hear how it goes!'
     event_reminder_same_day_participant: 'Hi %{participant_first_name}, just one last reminder: your playdate with %{host_first_name} is today from %{event_time_range}. This is exciting!'
     event_feedback_participant: 'Hi %{participant_first_name}, how did your playdate go? If you have a moment, we’d love to hear feedback on your experience: https://cottageclass1.typeform.com/to/AFmLWj'
+    event_reminder_previous_week_host: 'Hi %{host_first_name}, just a reminder that you are hosting a playdate on %{event_start_date} from %{event_time_range}. Please let us know if you need any help!'
+    event_reminder_previous_day_host: 'Hi %{host_first_name}, we’re excited for you. Your first playdate is tomorrow from %{event_time_range}! Please let us know if you have any questions and have a wonderful time!'
+    event_feedback_host: 'How did your playdate go? We’d love to hear feedback on your experience if you get a chance. https://cottageclass1.typeform.com/to/fINuSZ'
+    event_congratulation_host: 'Hi %{host_first_name}, congratulations on hosting your first playdate! You earned credit to book 2 more playdates here! https://www.kidsclub.io/home'

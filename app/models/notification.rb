@@ -3,7 +3,11 @@ class Notification < ApplicationRecord
     direct: 0,
     event_reminder_previous_day_participant: 1,
     event_reminder_same_day_participant: 2,
-    event_feedback_participant: 3
+    event_feedback_participant: 3,
+    event_reminder_previous_week_host: 4,
+    event_reminder_previous_day_host: 5,
+    event_feedback_host: 6,
+    event_congratulation_host: 7
   }
 
   validates :body, presence: true

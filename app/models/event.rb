@@ -29,11 +29,27 @@ class Event < ApplicationRecord
     user.present? ? participating_users.include?(user) : false
   end
 
+  def start_date
+    starts_at.strftime('%B %e, %Y').try :squish
+  end
+
   def time_range
-    [starts_at.strftime('%I:%M'), ends_at.strftime('%I:%M %p')].join '-'
+    [starts_at.strftime('%l:%M'), ends_at.strftime('%l:%M %p')].join(' - ').try :squish
   end
 
   def notify
+    if ends_at <= Time.current
+      # after event has ended
+      Notifier::EventFeedbackHost.new(user: user, event: self).transmit
+      Notifier::EventCongratulationHost.new(user: user, event: self).transmit
+    elsif starts_at <= 1.day.since(Time.current)
+      # 24 hours before event will start
+      Notifier::EventReminderPreviousDayHost.new(user: user, event: self).transmit
+    elsif 1.week.ago(starts_at) <= Time.current
+      # 1 week before event will start
+      Notifier::EventReminderPreviousWeekHost.new(user: user, event: self).transmit
+    end
+
     if 30.minutes.since(ends_at) <= Time.current
       # 30 minutes after event has ended
       participants.each do |participant|

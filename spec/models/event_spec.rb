@@ -40,13 +40,23 @@ RSpec.describe Event, type: :model do
     it 'event_reminder_previous_day_participant' do
       expect { subject.notify }.not_to change(subject.notifications, :count)
 
+      Timecop.freeze(1.week.before(subject.starts_at)) do
+        expect { subject.notify }.to change(subject.notifications, :count).by(1)
+        expect { subject.notify }.not_to change(subject.notifications, :count)
+      end
+
       Timecop.freeze(1.day.ago(subject.starts_at)) do
-        expect { subject.notify }.to change(subject.notifications, :count).by(participants.size)
+        expect { subject.notify }.to change(subject.notifications, :count).by(participants.size + 1)
         expect { subject.notify }.not_to change(subject.notifications, :count)
       end
 
       Timecop.freeze(2.hours.ago(subject.starts_at)) do
         expect { subject.notify }.to change(subject.notifications, :count).by(participants.size)
+        expect { subject.notify }.not_to change(subject.notifications, :count)
+      end
+
+      Timecop.freeze(subject.ends_at) do
+        expect { subject.notify }.to change(subject.notifications, :count).by(2)
         expect { subject.notify }.not_to change(subject.notifications, :count)
       end
 
