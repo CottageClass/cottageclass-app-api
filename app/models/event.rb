@@ -34,7 +34,18 @@ class Event < ApplicationRecord
   end
 
   def notify
-    if starts_at <= 1.day.since(Time.current)
+    if 30.minutes.since(ends_at) <= Time.current
+      # 30 minutes after event has ended
+      participants.each do |participant|
+        Notifier::EventFeedbackParticipant.new(user: participant.user, event: self).transmit
+      end
+    elsif starts_at <= 2.hours.since(Time.current)
+      # 2 hours before event will start
+      participants.each do |participant|
+        Notifier::EventReminderSameDayParticipant.new(user: participant.user, event: self).transmit
+      end
+    elsif starts_at <= 1.day.since(Time.current)
+      # 24 hours before event will start
       participants.each do |participant|
         Notifier::EventReminderPreviousDayParticipant.new(user: participant.user, event: self).transmit
       end

@@ -1,5 +1,10 @@
 class Notification < ApplicationRecord
-  enum kind: { direct: 0, event_reminder_previous_day_participant: 1 }
+  enum kind: {
+    direct: 0,
+    event_reminder_previous_day_participant: 1,
+    event_reminder_same_day_participant: 2,
+    event_feedback_participant: 3
+  }
 
   validates :body, presence: true
   validates :remote_identifier, presence: true, uniqueness: { case_sensitive: false }

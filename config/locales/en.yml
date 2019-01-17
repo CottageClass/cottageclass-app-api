@@ -32,3 +32,5 @@
 en:
   messages:
     event_reminder_previous_day_participant: 'Hi %{participant_first_name}, just a reminder that you booked a playdate with %{host_first_name} tomorrow from %{event_time_range}! We can’t wait to hear how it goes!'
+    event_reminder_same_day_participant: 'Hi %{participant_first_name}, just one last reminder: your playdate with %{host_first_name} is today from %{event_time_range}. This is exciting!'
+    event_feedback_participant: 'Hi %{participant_first_name}, how did your playdate go? If you have a moment, we’d love to hear feedback on your experience: https://cottageclass1.typeform.com/to/AFmLWj'
