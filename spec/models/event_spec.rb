@@ -30,39 +30,68 @@ RSpec.describe Event, type: :model do
   end
 
   context 'notify' do
-    before do
-      subject.save
-      participants
+    before { subject.save }
+
+    context 'host' do
+      it 'event_reminder_previous_week_host' do
+        Timecop.freeze(1.week.before(subject.starts_at)) do
+          subject.notify
+
+          expect(subject.notifications.event_reminder_previous_week_host.count).to eq(1)
+          expect(subject.notifications.count).to eq(1)
+        end
+      end
+
+      it 'event_reminder_previous_day_host' do
+        Timecop.freeze(24.hours.before(subject.starts_at)) do
+          subject.notify
+
+          expect(subject.notifications.event_reminder_previous_day_host.count).to eq(1)
+          expect(subject.notifications.count).to eq(1)
+        end
+      end
+
+      it 'event_feedback_host/event_congratulation_host' do
+        Timecop.freeze(subject.ends_at) do
+          subject.notify
+
+          expect(subject.notifications.event_feedback_host.count).to eq(1)
+          expect(subject.notifications.event_congratulation_host.count).to eq(1)
+          expect(subject.notifications.count).to eq(2)
+        end
+      end
     end
 
-    let(:participants) { create_list :participant, 2, :with_participant_children, participable: subject }
+    context 'participants' do
+      before { participants }
 
-    it 'event_reminder_previous_day_participant' do
-      expect { subject.notify }.not_to change(subject.notifications, :count)
+      let(:participants) { create_list :participant, 2, :with_participant_children, participable: subject }
 
-      Timecop.freeze(1.week.before(subject.starts_at)) do
-        expect { subject.notify }.to change(subject.notifications, :count).by(1)
-        expect { subject.notify }.not_to change(subject.notifications, :count)
+      it 'event_reminder_previous_day_participant' do
+        Timecop.freeze(24.hours.before(subject.starts_at)) do
+          subject.notify
+
+          expect(subject.notifications.event_reminder_previous_day_participant.count).to eq(participants.size)
+          expect(subject.notifications.count).to eq(participants.size + 1)
+        end
       end
 
-      Timecop.freeze(1.day.ago(subject.starts_at)) do
-        expect { subject.notify }.to change(subject.notifications, :count).by(participants.size + 1)
-        expect { subject.notify }.not_to change(subject.notifications, :count)
+      it 'event_reminder_same_day_participant' do
+        Timecop.freeze(2.hours.ago(subject.starts_at)) do
+          subject.notify
+
+          expect(subject.notifications.event_reminder_same_day_participant.count).to eq(participants.size)
+          expect(subject.notifications.count).to eq(participants.size + 1)
+        end
       end
 
-      Timecop.freeze(2.hours.ago(subject.starts_at)) do
-        expect { subject.notify }.to change(subject.notifications, :count).by(participants.size)
-        expect { subject.notify }.not_to change(subject.notifications, :count)
-      end
+      it 'event_feedback_participant' do
+        Timecop.freeze(30.minutes.since(subject.ends_at)) do
+          subject.notify
 
-      Timecop.freeze(subject.ends_at) do
-        expect { subject.notify }.to change(subject.notifications, :count).by(2)
-        expect { subject.notify }.not_to change(subject.notifications, :count)
-      end
-
-      Timecop.freeze(30.minutes.since(subject.ends_at)) do
-        expect { subject.notify }.to change(subject.notifications, :count).by(participants.size)
-        expect { subject.notify }.not_to change(subject.notifications, :count)
+          expect(subject.notifications.event_feedback_participant.count).to eq(participants.size)
+          expect(subject.notifications.count).to eq(participants.size + 2)
+        end
       end
     end
   end
