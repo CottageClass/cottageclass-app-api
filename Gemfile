@@ -23,7 +23,9 @@ gem 'country_select'
 gem 'sassc-rails'
 
 group :production do
+  gem 'airbrake'
   gem 'lograge'
+  gem 'newrelic_rpm'
   gem 'puma-heroku'
   gem 'rails_12factor'
   gem 'uglifier'
