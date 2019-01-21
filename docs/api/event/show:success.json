@@ -1,0 +1,38 @@
+{
+  "resource": "Event",
+  "resource_explanation": null,
+  "http_method": "GET",
+  "route": "/api/events/:id",
+  "description": "show:success",
+  "explanation": null,
+  "parameters": [
+
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "GET",
+      "request_path": "/api/events/241",
+      "request_body": null,
+      "request_headers": {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDgxNDU1OTUsInN1YiI6MTR9.FOAVgBs3vhB0Kn2Bid_LIhFYJQ7o0Z6fu23OdMTNoW4"
+      },
+      "request_query_parameters": {
+        "{}": null
+      },
+      "request_content_type": "application/json",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "{\n  \"data\": {\n    \"id\": \"241\",\n    \"type\": \"event\",\n    \"attributes\": {\n      \"name\": \"Repudiandae dolores eum aut.\",\n      \"maximum_children\": 0,\n      \"child_age_minimum\": 0,\n      \"child_age_maximum\": 0,\n      \"has_pet\": true,\n      \"activity_names\": [\n        \"bull fighting\"\n      ],\n      \"foods\": [\n        \"Ebiten maki\"\n      ],\n      \"house_rules\": \"Aspernatur esse quod. Perferendis id aut. Quas maxime doloremque.\",\n      \"pet_description\": \"Accusamus aut aspernatur. Earum alias ad. Molestiae numquam consectetur.\",\n      \"host_id\": 14,\n      \"host_facebook_uid\": \"6851491\",\n      \"host_avatar\": \"https://robohash.org/askar-hunter.png?size=300x300&set=set1\",\n      \"host_first_name\": \"Askar\",\n      \"host_verified\": false,\n      \"host_fuzzy_latitude\": \"40.7302486636369\",\n      \"host_fuzzy_longitude\": \"-73.9323905397105\",\n      \"host_locality\": \"South Tiachester\",\n      \"host_sublocality\": \"Paradise Place\",\n      \"host_neighborhood\": \"Kacy Spurs\",\n      \"host_admin_area_level_1\": \"Utah\",\n      \"host_admin_area_level_2\": \"Wiegand Turnpike\",\n      \"host_child_ages\": [\n        4,\n        4\n      ],\n      \"starts_at\": \"2019-01-12T23:54:29+06:00\",\n      \"ends_at\": \"2019-01-12T02:54:29+06:00\",\n      \"participants_count\": 0,\n      \"full\": false,\n      \"participated\": false\n    },\n    \"relationships\": {\n      \"event_hosts\": {\n        \"data\": [\n          {\n            \"id\": \"81\",\n            \"type\": \"event_host\"\n          },\n          {\n            \"id\": \"82\",\n            \"type\": \"event_host\"\n          }\n        ]\n      }\n    }\n  },\n  \"included\": [\n    {\n      \"id\": \"81\",\n      \"type\": \"event_host\",\n      \"attributes\": {\n        \"name\": \"Dr. Noemi Lindgren\",\n        \"email\": \"terresa@yahoo.com\",\n        \"phone\": \"(813) 741-5027\",\n        \"verified\": false\n      }\n    },\n    {\n      \"id\": \"82\",\n      \"type\": \"event_host\",\n      \"attributes\": {\n        \"name\": \"Bud Renner\",\n        \"email\": \"dong@yahoo.com\",\n        \"phone\": \"409.262.2337\",\n        \"verified\": false\n      }\n    }\n  ]\n}",
+      "response_headers": {
+        "Content-Type": "application/vnd.api+json; charset=utf-8"
+      },
+      "response_content_type": "application/vnd.api+json; charset=utf-8",
+      "curl": null
+    }
+  ]
+}

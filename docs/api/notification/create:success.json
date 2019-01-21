@@ -24,19 +24,19 @@
   "requests": [
     {
       "request_method": "POST",
-      "request_path": "/api/users/11/notifications",
-      "request_body": "{\"notification\":{\"body\":\"Enim ut impedit blanditiis.\"}}",
+      "request_path": "/api/users/16/notifications",
+      "request_body": "{\"notification\":{\"body\":\"Ullam id aut ad.\"}}",
       "request_headers": {
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDgxNDEzNzUsInN1YiI6MTF9.AXz1PN4gRagzuitv4AarZzqTpzZat6-Is-O4Dm_nirQ"
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDgxNDU1OTYsInN1YiI6MTZ9.BEr_iWZBaD298DaK1kTsHJnGSUV6o4ewdJISujyLEkE"
       },
       "request_query_parameters": {
       },
       "request_content_type": "application/json",
       "response_status": 201,
       "response_status_text": "Created",
-      "response_body": "{\n  \"data\": {\n    \"id\": \"1\",\n    \"type\": \"notification\",\n    \"attributes\": {\n      \"id\": 1,\n      \"body\": \"Enim ut impedit blanditiis.\"\n    }\n  }\n}",
+      "response_body": "{\n  \"data\": {\n    \"id\": \"1\",\n    \"type\": \"notification\",\n    \"attributes\": {\n      \"id\": 1,\n      \"body\": \"Ullam id aut ad.\"\n    }\n  }\n}",
       "response_headers": {
         "Content-Type": "application/vnd.api+json; charset=utf-8"
       },

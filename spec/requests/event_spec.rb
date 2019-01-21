@@ -6,7 +6,7 @@ RSpec.resource 'Event' do
 
   let(:user) { create :user, :with_children }
 
-  context 'read operations' do
+  context 'index' do
     before { create_list :event_series, 5, :with_event_hosts, user: user }
 
     get '/api/events/:skope', format: :json do
@@ -51,6 +51,28 @@ RSpec.resource 'Event' do
           explanation 'Response to authenticated requests will contain the extra attribute: participated'
           do_request
           expect(response_status).to eq(200)
+        end
+      end
+    end
+  end
+
+  context 'show' do
+    include_context 'authorization token'
+
+    get '/api/events/:id', format: :json do
+      let(:event_series) { create :event_series, :with_event_hosts, user: user }
+      let(:id) { event_series.events.sample.id }
+
+      example_request 'show:success' do
+        expect(response_status).to eq(200)
+      end
+
+      context 'failure' do
+        let(:id) { Faker::Number.between 100, 200 }
+
+        example 'show:not_found', document: false do
+          do_request
+          expect(response_status).to eq(404)
         end
       end
     end

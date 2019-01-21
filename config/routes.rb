@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: :json } do
     resources :event_series, only: %i[index show create]
-    resources :events, only: %i[] do
+    resources :events, only: %i[show] do
       resources :participants, only: %i[create]
       collection do
         get '(/:skope)(/page/:page/page_size/:page_size)', to: 'events#index',

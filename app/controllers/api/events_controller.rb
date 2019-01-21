@@ -25,4 +25,13 @@ class API::EventsController < API::BaseController
                                              meta: meta
     render json: serializer.serializable_hash, status: :ok
   end
+
+  def show
+    event = Event.find params[:id]
+
+    serializer = EventSerializer.new event, include: %i[event_hosts], params: { current_user: current_user }
+    render json: serializer.serializable_hash, status: :ok
+  rescue ActiveRecord::RecordNotFound
+    render json: {}, status: :not_found
+  end
 end

@@ -26,6 +26,13 @@
           "method": "get"
         },
         {
+          "description": "show:success",
+          "link": "event/show:success.json",
+          "groups": "all",
+          "route": "/api/events/:id",
+          "method": "get"
+        },
+        {
           "description": "upcoming:success",
           "link": "event/upcoming:success.json",
           "groups": "all",
