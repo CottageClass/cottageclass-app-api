@@ -42,14 +42,29 @@ RSpec.resource 'User' do
 
     post '/users/:id', format: :json do
       include_context 'authorization token'
-      before { user.save }
 
       with_options scope: :user do
         parameter :apartment_number, 'Apartment Number'
+        parameter :children_attributes, 'Array of children'
       end
 
+      let(:user) { create :user }
       let(:id) { user.id }
-      let(:apartment_number) { Faker::Address.building_number }
+      let(:user_data) { build :user, :with_children }
+      let(:apartment_number) { user_data.apartment_number }
+      let :children_attributes do
+        user_data.children.map do |child|
+          child.attributes.with_indifferent_access.slice :first_name,
+                                                         :birthday,
+                                                         :school_name,
+                                                         :emergency_contact_name,
+                                                         :emergency_contact_phone_number,
+                                                         :emergency_contact_relationship,
+                                                         :allergies,
+                                                         :dietary_restrictions,
+                                                         :special_needs
+        end
+      end
 
       example_request 'update:success' do
         expect(response_status).to eq(200)

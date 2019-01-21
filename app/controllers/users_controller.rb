@@ -101,12 +101,16 @@ class UsersController < ApiController
                                  :profile_blurb,
                                  :onboarding_care_type,
                                  activities: [],
-                                 children_attributes: %i[
-                                   id
-                                   parent_id
-                                   first_name
-                                   birthday
-                                   school_name
+                                 children_attributes: [
+                                   :first_name,
+                                   :birthday,
+                                   :school_name,
+                                   :emergency_contact_name,
+                                   :emergency_contact_phone_number,
+                                   :emergency_contact_relationship,
+                                   { allergies: [] },
+                                   { dietary_restrictions: [] },
+                                   :special_needs
                                  ]
   end
 end
