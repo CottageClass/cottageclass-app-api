@@ -7,7 +7,7 @@ RSpec.resource 'Event' do
   let(:user) { create :user, :with_children }
 
   context 'read operations' do
-    before { create :event_series, :with_event_hosts, user: user }
+    before { create_list :event_series, 5, :with_event_hosts, user: user }
 
     get '/api/events/:skope', format: :json do
       let(:skope) { nil }
@@ -17,7 +17,28 @@ RSpec.resource 'Event' do
         context name do
           let(:skope) { skope }
 
-          example_request format('%s:success', name) do
+          example format('%s:success', name), document: false do
+            do_request
+            expect(response_status).to eq(200)
+          end
+        end
+      end
+    end
+
+    get '/api/events/:skope/page/:page/page_size/:page_size', format: :json do
+      let(:skope) { nil }
+      let(:page) { 1 }
+      let(:page_size) { 10 }
+
+      [nil, 'past', 'upcoming'].each do |skope|
+        name = skope || 'all'
+        context name do
+          let(:skope) { skope }
+
+          example format('%s:success', name) do
+            explanation ':page and :page_size are optional parameters.'\
+            'If :page is omitted, the endpoint returns all records for the scope. Default value for :page_size is 10.'
+            do_request
             expect(response_status).to eq(200)
           end
         end

@@ -20,6 +20,7 @@ gem 'twilio-ruby', '~> 5.15.2'
 
 gem 'apitome'
 gem 'country_select'
+gem 'kaminari'
 gem 'sassc-rails'
 
 group :production do

@@ -396,6 +396,7 @@ DEPENDENCIES
   geocoder
   httplog
   inherited_resources!
+  kaminari
   knock!
   koala
   lograge

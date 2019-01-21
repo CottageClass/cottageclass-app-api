@@ -6,7 +6,10 @@ Rails.application.routes.draw do
     resources :events, only: %i[] do
       resources :participants, only: %i[create]
       collection do
-        get '(/:skope)', to: 'events#index', skope: /upcoming|past/i, defaults: { skope: 'all' }, as: :index
+        get '(/:skope)(/page/:page/page_size/:page_size)', to: 'events#index',
+                                                           skope: /upcoming|past/i,
+                                                           defaults: { skope: 'all' },
+                                                           as: :index
       end
     end
     resources :users, only: %i[] do
