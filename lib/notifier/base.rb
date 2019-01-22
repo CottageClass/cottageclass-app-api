@@ -9,9 +9,8 @@ class Notifier::Base
     @sender_phone = ENV.fetch 'TWILIO_SENDER_NUMBER'
     @sender_email = OpenStruct.new email: Rails.configuration.x.noreply_email, name: 'KidsClub.io'
 
-    # overriden for debugging
+    # [TODO] replace with user.phone after testing
     @user_phone = ENV.fetch 'OVERRIDE_RECIPIENT_PHONE'
-    @user_email = ENV.fetch 'OVERRIDE_RECIPIENT_EMAIL'
   end
 
   def transmit

@@ -21,7 +21,16 @@ RSpec.describe Participant, type: :model do
     it { is_expected.to have_many(:participant_children).inverse_of(:participant).dependent(:destroy) }
   end
 
-  context 'create' do
+  context 'notify' do
     it { expect { subject.save }.to change(Notification.participant_creation, :count).from(0).to(1) }
+
+    it 'participant_creation_next_day' do
+      subject.save
+
+      expect { subject.next_day_notify }.not_to change(Notification.participant_creation_next_day, :count)
+      Timecop.freeze(1.day.since(subject.created_at)) do
+        expect { subject.next_day_notify }.to change(Notification.participant_creation_next_day, :count).by(1)
+      end
+    end
   end
 end
