@@ -23,6 +23,8 @@ ActiveAdmin.register User do
     column :network_code
     column :facebook_uid
     column :created_at
-    actions
+    actions do |instance|
+      item 'Notifications', admin_user_notifications_path(instance), class: 'member_link'
+    end
   end
 end
