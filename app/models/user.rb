@@ -48,6 +48,8 @@ class User < ApplicationRecord
 
   scope :in_network, ->(code) { where network_code: code }
 
+  after_create :notify
+
   def child_ages
     children.map(&:age)
   end
@@ -96,6 +98,10 @@ class User < ApplicationRecord
   def cleanup
     self.email = email.to_s.downcase
     self.network_code = network_code.to_s.downcase
+  end
+
+  def notify
+    notifications.user_creation.where(recipient: self).first_or_create
   end
 
   def obfuscate_location

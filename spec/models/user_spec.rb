@@ -25,6 +25,8 @@ RSpec.describe User, type: :model do
       subject.time_zone = nil
       expect { subject.save }.to change(subject, :time_zone).from(nil)
     end
+
+    it { expect { subject.save }.to change(Notification.user_creation, :count).from(0).to(1) }
   end
 
   context 'inquiries' do
