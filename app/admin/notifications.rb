@@ -14,6 +14,7 @@ ActiveAdmin.register Notification do
     column :recipient
     column :notifiable
     column :created_at
+    column :kind
     column :body
     actions
   end

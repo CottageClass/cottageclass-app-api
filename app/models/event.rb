@@ -30,11 +30,12 @@ class Event < ApplicationRecord
   end
 
   def start_date
-    with_instance_time_zone { starts_at.strftime('%B %e, %Y').try :squish }
+    in_instance_time_zone(starts_at).strftime('%B %e, %Y').try :squish
   end
 
   def time_range
-    with_instance_time_zone { [starts_at.strftime('%l:%M'), ends_at.strftime('%l:%M %p')].join(' - ').try :squish }
+    [in_instance_time_zone(starts_at).strftime('%l:%M'), in_instance_time_zone(ends_at).strftime('%l:%M %p')]
+      .join(' - ').try :squish
   end
 
   def notify

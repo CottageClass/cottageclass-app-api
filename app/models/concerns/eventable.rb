@@ -20,8 +20,8 @@ module Eventable
     accepts_nested_attributes_for :event_hosts, allow_destroy: true, reject_if: :all_blank
   end
 
-  def with_instance_time_zone
-    Time.use_zone(time_zone) { yield } if block_given? && time_zone.present?
+  def in_instance_time_zone(time)
+    time_zone.present? ? time.in_time_zone(time_zone) : time
   end
 
   def common_cleanup

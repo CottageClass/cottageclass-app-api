@@ -23,8 +23,8 @@ ActiveAdmin.register Event do
     column :name
     column :event_series
     column :user
-    column(:starts_at) { |instance| instance.with_instance_time_zone { instance.starts_at } }
-    column(:ends_at) { |instance| instance.with_instance_time_zone { instance.ends_at } }
+    column(:starts_at) { |instance| instance.in_instance_time_zone instance.starts_at }
+    column(:ends_at) { |instance| instance.in_instance_time_zone instance.ends_at }
     column :created_at
     actions do |instance|
       item 'Participants', admin_event_participants_path(instance), class: 'member_link'

@@ -25,18 +25,18 @@
     {
       "request_method": "POST",
       "request_path": "/api/users/16/notifications",
-      "request_body": "{\"notification\":{\"body\":\"Ullam id aut ad.\"}}",
+      "request_body": "{\"notification\":{\"body\":\"Vitae eligendi enim ab.\"}}",
       "request_headers": {
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDgxNDU1OTYsInN1YiI6MTZ9.BEr_iWZBaD298DaK1kTsHJnGSUV6o4ewdJISujyLEkE"
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDgyNTg2NTMsInN1YiI6MTZ9._h0akbmbdq7DeZ0QcHcyhX6rV3oPnA1asKAl0vYQx3s"
       },
       "request_query_parameters": {
       },
       "request_content_type": "application/json",
       "response_status": 201,
       "response_status_text": "Created",
-      "response_body": "{\n  \"data\": {\n    \"id\": \"1\",\n    \"type\": \"notification\",\n    \"attributes\": {\n      \"id\": 1,\n      \"body\": \"Ullam id aut ad.\"\n    }\n  }\n}",
+      "response_body": "{\n  \"data\": {\n    \"id\": \"18\",\n    \"type\": \"notification\",\n    \"attributes\": {\n      \"id\": 18,\n      \"body\": \"Vitae eligendi enim ab.\"\n    }\n  }\n}",
       "response_headers": {
         "Content-Type": "application/vnd.api+json; charset=utf-8"
       },

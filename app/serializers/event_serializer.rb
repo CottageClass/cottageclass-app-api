@@ -5,8 +5,8 @@ class EventSerializer
              :house_rules, :pet_description, :host_id, :host_facebook_uid, :host_avatar, :host_first_name,
              :host_verified, :host_fuzzy_latitude, :host_fuzzy_longitude, :host_locality, :host_sublocality,
              :host_neighborhood, :host_admin_area_level_1, :host_admin_area_level_2, :host_child_ages
-  attribute(:starts_at) { |instance| instance.with_instance_time_zone { instance.starts_at.to_s :iso8601 } }
-  attribute(:ends_at) { |instance| instance.with_instance_time_zone { instance.ends_at.to_s :iso8601 } }
+  attribute(:starts_at) { |instance| (instance.in_instance_time_zone instance.starts_at).to_s :iso8601 }
+  attribute(:ends_at) { |instance| (instance.in_instance_time_zone instance.ends_at).to_s :iso8601 }
   attribute(:participants_count) { |instance| instance.participants.count }
   attribute :full, &:full?
   attribute :participated, if: proc { |_, params| params.dig(:current_user).present? } do |instance, params|

@@ -37,7 +37,9 @@ class EventSeries < ApplicationRecord
   end
 
   def date_time(date, time)
-    with_instance_time_zone { Time.zone.parse format('%s %s', date.strftime('%F'), time.strftime('%T')) }
+    if time_zone.present?
+      Time.use_zone(time_zone) { Time.zone.parse format('%s %s', date.strftime('%F'), time.strftime('%T')) }
+    end
   end
 
   def cleanup
