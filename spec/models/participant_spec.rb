@@ -20,4 +20,8 @@ RSpec.describe Participant, type: :model do
     it { is_expected.to belong_to(:user).inverse_of(:participants) }
     it { is_expected.to have_many(:participant_children).inverse_of(:participant).dependent(:destroy) }
   end
+
+  context 'create' do
+    it { expect { subject.save }.to change(Notification.participant_creation, :count).from(0).to(1) }
+  end
 end

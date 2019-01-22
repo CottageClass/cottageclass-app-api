@@ -17,4 +17,12 @@ class Participant < ApplicationRecord
   accepts_nested_attributes_for :participant_children,
                                 allow_destroy: true,
                                 reject_if: proc { |attributes| attributes['child_id'].blank? }
+
+  after_create :notify
+
+  private
+
+  def notify
+    participable.notifications.participant_creation.where(recipient: user).first_or_create
+  end
 end

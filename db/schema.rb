@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_17_140516) do
+ActiveRecord::Schema.define(version: 2019_01_22_055903) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -130,7 +130,8 @@ ActiveRecord::Schema.define(version: 2019_01_17_140516) do
     t.string "notifiable_type"
     t.bigint "notifiable_id"
     t.integer "kind", default: 0
-    t.string "remote_identifier", null: false
+    t.string "sms_provider_identifier"
+    t.string "email_provider_identifier"
     t.string "status"
     t.json "meta"
     t.datetime "created_at"

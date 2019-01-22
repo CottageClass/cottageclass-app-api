@@ -7,7 +7,8 @@ class Notification < ApplicationRecord
     event_reminder_previous_week_host: 4,
     event_reminder_previous_day_host: 5,
     event_feedback_host: 6,
-    event_congratulation_host: 7
+    event_congratulation_host: 7,
+    participant_creation: 8
   }
 
   validates :body, presence: true
@@ -57,6 +58,9 @@ class Notification < ApplicationRecord
                when :event_congratulation_host
                  self.body = I18n.t 'messages.event_congratulation_host', host_first_name: recipient.first_name
                  Notifier::Base.new user: recipient, body: body
+               when :participant_creation
+                 self.body = 'placeholder for body'
+                 Notifier::ParticipantCreation.new user: recipient, body: body
                end
 
     if notifier.present?
