@@ -11,7 +11,10 @@ class Notification < ApplicationRecord
   }
 
   validates :body, presence: true
-  validates :remote_identifier, presence: true, uniqueness: { case_sensitive: false }
+  validates :sms_provider_identifier, presence: { if: proc { |instance| instance.email_provider_identifier.blank? } },
+                                      uniqueness: { case_sensitive: false, allow_blank: true }
+  validates :email_provider_identifier, presence: { if: proc { |instance| instance.sms_provider_identifier.blank? } },
+                                        uniqueness: { case_sensitive: false, allow_blank: true }
 
   belongs_to :recipient, class_name: 'User', inverse_of: :notifications
   belongs_to :notifiable, polymorphic: true, inverse_of: :notifications, optional: true
@@ -19,19 +22,47 @@ class Notification < ApplicationRecord
   before_validation :transmit
 
   def transmit
-    if body.present? && recipient.present?
-      twilio_client = Twilio::REST::Client.new ENV.fetch('TWILIO_ACCOUNT_SID'), ENV.fetch('TWILIO_AUTH_TOKEN')
+    notifier = case kind.to_sym
+               when :direct
+                 Notifier::Base.new user: recipient, body: body
+               when :event_reminder_previous_day_participant
+                 self.body = I18n.t 'messages.event_reminder_previous_day_participant',
+                                    participant_first_name: recipient.first_name,
+                                    host_first_name: notifiable.host_first_name,
+                                    event_time_range: notifiable.time_range
+                 Notifier::Base.new user: recipient, body: body
+               when :event_reminder_same_day_participant
+                 self.body = I18n.t 'messages.event_reminder_same_day_participant',
+                                    participant_first_name: recipient.first_name,
+                                    host_first_name: notifiable.host_first_name,
+                                    event_time_range: notifiable.time_range
+                 Notifier::Base.new user: recipient, body: body
+               when :event_feedback_participant
+                 self.body = I18n.t 'messages.event_feedback_participant', participant_first_name: recipient.first_name
+                 Notifier::EventFeedbackParticipant.new user: recipient, body: body
+               when :event_reminder_previous_week_host
+                 self.body = I18n.t 'messages.event_reminder_previous_week_host',
+                                    host_first_name: recipient.first_name,
+                                    event_start_date: notifiable.start_date,
+                                    event_time_range: notifiable.time_range
+                 Notifier::Base.new user: recipient, body: body
+               when :event_reminder_previous_day_host
+                 self.body = I18n.t 'messages.event_reminder_previous_day_host',
+                                    host_first_name: notifiable.host_first_name,
+                                    event_time_range: notifiable.time_range
+                 Notifier::Base.new user: recipient, body: body
+               when :event_feedback_host
+                 self.body = I18n.t 'messages.event_feedback_host'
+                 Notifier::EventFeedbackHost.new user: recipient, body: body
+               when :event_congratulation_host
+                 self.body = I18n.t 'messages.event_congratulation_host', host_first_name: recipient.first_name
+                 Notifier::Base.new user: recipient, body: body
+               end
 
-      message = twilio_client.api.account.messages.create from: ENV.fetch('TWILIO_SENDER_NUMBER'),
-                                                          to: recipient_phone,
-                                                          body: body
-      self.remote_identifier = message.sid
+    if notifier.present?
+      identifier_hash = notifier.transmit
+      self.email_provider_identifier = identifier_hash.dig :email
+      self.sms_provider_identifier = identifier_hash.dig :message
     end
-  end
-
-  # For live testing
-  def recipient_phone
-    # recipient.phone
-    ENV.fetch 'OVERRIDE_RECIPIENT_PHONE'
   end
 end

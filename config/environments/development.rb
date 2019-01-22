@@ -65,4 +65,14 @@ Rails.application.configure do
     Bullet.enable = true
     Bullet.rails_logger = true
   end
+
+  HttpLog.configure do |config|
+    config.enabled = true
+
+    config.log_request = true
+    config.log_headers = true
+    config.log_data = true
+    config.log_status = true
+    config.log_response = true
+  end
 end

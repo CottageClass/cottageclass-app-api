@@ -76,5 +76,7 @@ module CottageclassAppApi
     config.middleware.use ActionDispatch::Cookies
     config.middleware.use ActionDispatch::Session::CookieStore
     # END Review block, needs to be cleaned up
+
+    config.x.noreply_email = format 'no-reply@%s', ENV.fetch('APP_HOST')
   end
 end

@@ -1,11 +1,12 @@
 class Notifier::EventFeedbackHost < Notifier::Base
-  def initialize(user:, event:)
-    super user: user
-    @event = event
-  end
+  def email
+    response = @sendgrid_client.send_mail to: [@user],
+                                          from: @sender_email,
+                                          template_id: ENV.fetch('SENDGRID_TEMPLATE_EVENT_FEEDBACK_HOST'),
+                                          parameters: {
+                                            recipient_name: @user.name
+                                          }
 
-  def message
-    body = I18n.t 'messages.event_feedback_host'
-    @event.notifications.event_feedback_host.where(recipient: @user).first_or_create body: body
+    (response.try(:headers) || {}).dig('x-message-id').try :first
   end
 end

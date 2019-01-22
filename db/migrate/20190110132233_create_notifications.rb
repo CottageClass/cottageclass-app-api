@@ -5,7 +5,7 @@ class CreateNotifications < ActiveRecord::Migration[5.2]
       t.references :recipient, null: false
       t.references :notifiable, polymorphic: true, null: true
       t.integer :kind, default: 0
-      t.string :remote_identifier, null: false
+      t.string :sms_provider_identifier, :email_provider_identifier
       t.string :status
       t.json :meta
       t.timestamps null: true

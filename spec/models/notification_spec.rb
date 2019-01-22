@@ -15,6 +15,8 @@ RSpec.describe Notification, type: :model do
   end
 
   context 'create' do
-    it('populates remote_identifier') { expect { subject.save }.to change(subject, :remote_identifier).from(nil) }
+    it('sms_provider_identifier') {
+      expect { subject.save }.to change(subject, :sms_provider_identifier).from(nil)
+    }
   end
 end

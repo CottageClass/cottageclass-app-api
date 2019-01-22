@@ -2,7 +2,7 @@ class API::NotificationsController < API::BaseController
   before_action :authenticate_user, :verify_user
 
   def create
-    notification = user.notifications.build safe_params
+    notification = user.notifications.direct.build safe_params
     if notification.save
       render json: NotificationSerializer.new(notification).serializable_hash, status: :created
     else
