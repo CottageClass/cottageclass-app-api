@@ -1,4 +1,7 @@
 class API::EventsController < API::BaseController
+  before_action :authenticate_user, only: %i[update]
+  before_action :load_event, only: %i[show update]
+
   def index
     skope = params[:skope] || 'all'
     events = Event.send skope
@@ -27,11 +30,40 @@ class API::EventsController < API::BaseController
   end
 
   def show
-    event = Event.find params[:id]
-
-    serializer = EventSerializer.new event, include: %i[event_hosts], params: { current_user: current_user }
+    serializer = EventSerializer.new @event, include: %i[event_hosts], params: { current_user: current_user }
     render json: serializer.serializable_hash, status: :ok
-  rescue ActiveRecord::RecordNotFound
-    render json: {}, status: :not_found
+  end
+
+  def update
+    json = {}
+    status = if @event.user == current_user
+               if @event.update(safe_params)
+                 serializer = EventSerializer.new @event, include: %i[event_hosts],
+                                                          params: { current_user: current_user }
+                 json = serializer.serializable_hash
+                 :ok
+               else
+                 json = { errors: @event.errors.full_messages }
+                 :unprocessable_entity
+               end
+             else
+               :forbidden
+             end
+    render json: json, status: status
+  end
+
+  private
+
+  def load_event
+    @event = Event.find_by id: params[:id]
+    render(json: {}, status: :not_found) if @event.blank?
+  end
+
+  def safe_params
+    params.require(:event).permit :name, :starts_at, :ends_at, :has_pet, :house_rules, :pet_description,
+                                  :maximum_children, :child_age_minimum, :child_age_maximum,
+                                  activity_names: [],
+                                  foods: [],
+                                  event_hosts_attributes: %i[id name email phone _destroy]
   end
 end

@@ -38,6 +38,13 @@
           "groups": "all",
           "route": "/api/events/:skope/page/:page/page_size/:page_size",
           "method": "get"
+        },
+        {
+          "description": "update:success",
+          "link": "event/update:success.json",
+          "groups": "all",
+          "route": "/api/events/:id",
+          "method": "put"
         }
       ]
     },

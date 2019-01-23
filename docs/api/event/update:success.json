@@ -1,0 +1,111 @@
+{
+  "resource": "Event",
+  "resource_explanation": null,
+  "http_method": "PUT",
+  "route": "/api/events/:id",
+  "description": "update:success",
+  "explanation": null,
+  "parameters": [
+    {
+      "scope": "event",
+      "with_example": true,
+      "required": true,
+      "name": "name",
+      "description": "Name"
+    },
+    {
+      "scope": "event",
+      "with_example": true,
+      "required": true,
+      "name": "starts_at",
+      "description": "Start Time"
+    },
+    {
+      "scope": "event",
+      "with_example": true,
+      "required": true,
+      "name": "ends_at",
+      "description": "End Time"
+    },
+    {
+      "scope": "event",
+      "with_example": true,
+      "name": "maximum_children",
+      "description": "Maximum number of children allowed. Default: 0 (no limit)"
+    },
+    {
+      "scope": "event",
+      "with_example": true,
+      "name": "child_age_minimum",
+      "description": "Minimum age of child. Default: 0 (no limit)"
+    },
+    {
+      "scope": "event",
+      "with_example": true,
+      "name": "child_age_maximum",
+      "description": "Maximum age of child. Default: 0 (no limit)"
+    },
+    {
+      "scope": "event",
+      "with_example": true,
+      "name": "has_pet",
+      "description": "Has Pet?"
+    },
+    {
+      "scope": "event",
+      "with_example": true,
+      "name": "activity_names",
+      "description": "Activity Names"
+    },
+    {
+      "scope": "event",
+      "with_example": true,
+      "name": "foods",
+      "description": "Food Names"
+    },
+    {
+      "scope": "event",
+      "with_example": true,
+      "name": "house_rules",
+      "description": "House Rules"
+    },
+    {
+      "scope": "event",
+      "with_example": true,
+      "name": "pet_description",
+      "description": "Pet Description"
+    },
+    {
+      "scope": "event",
+      "with_example": true,
+      "name": "event_hosts_attributes",
+      "description": "Array of adults present at host venue"
+    }
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "PUT",
+      "request_path": "/api/events/252",
+      "request_body": "{\"event\":{\"name\":\"Placeat quas magni voluptas.\",\"starts_at\":\"2019-06-03 00:49:40 UTC\",\"ends_at\":\"2019-06-03 03:49:40 UTC\",\"maximum_children\":0,\"child_age_minimum\":0,\"child_age_maximum\":0,\"has_pet\":true,\"activity_names\":[\"gymnastics\"],\"foods\":[\"French Fries with Sausages\"],\"house_rules\":\"Ipsum quia odit. Quisquam aut est. Vero amet facilis.\",\"pet_description\":\"Eius adipisci ducimus. Accusamus ut facere. Sint porro enim.\",\"event_hosts_attributes\":[{\"id\":83,\"name\":\"Dorothea Krajcik\",\"email\":\"mertie_gislason@gmail.com\",\"phone\":\"1-453-778-4559\",\"_destroy\":1},{\"id\":84,\"name\":\"Kim Tillman\",\"email\":\"madge@gmail.com\",\"phone\":\"1-580-083-4331\"}]}}",
+      "request_headers": {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDgzMTA4NDgsInN1YiI6MTZ9.RKlP19mdSvX9VTWoyfwY6-doVe5zBzLQNN1wRjYnGPc"
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/json",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "{\n  \"data\": {\n    \"id\": \"252\",\n    \"type\": \"event\",\n    \"attributes\": {\n      \"name\": \"Placeat quas magni voluptas.\",\n      \"maximum_children\": 0,\n      \"child_age_minimum\": 0,\n      \"child_age_maximum\": 0,\n      \"has_pet\": true,\n      \"activity_names\": [\n        \"gymnastics\"\n      ],\n      \"foods\": [\n        \"French Fries with Sausages\"\n      ],\n      \"house_rules\": \"Ipsum quia odit. Quisquam aut est. Vero amet facilis.\",\n      \"pet_description\": \"Eius adipisci ducimus. Accusamus ut facere. Sint porro enim.\",\n      \"host_id\": 16,\n      \"host_facebook_uid\": \"2979243\",\n      \"host_avatar\": \"https://robohash.org/askar-hunter.png?size=300x300&set=set1\",\n      \"host_first_name\": \"Askar\",\n      \"host_verified\": false,\n      \"host_fuzzy_latitude\": \"40.72944150441\",\n      \"host_fuzzy_longitude\": \"-73.9326524267311\",\n      \"host_locality\": \"Port Ozziebury\",\n      \"host_sublocality\": \"Paradise Creek\",\n      \"host_neighborhood\": \"Herzog Inlet\",\n      \"host_admin_area_level_1\": \"Massachusetts\",\n      \"host_admin_area_level_2\": \"Kasha Mission\",\n      \"host_child_ages\": [\n        3,\n        5\n      ],\n      \"starts_at\": \"2019-06-03T06:19:40+05:30\",\n      \"ends_at\": \"2019-06-03T09:19:40+05:30\",\n      \"participants_count\": 0,\n      \"full\": false,\n      \"participated\": false\n    },\n    \"relationships\": {\n      \"event_hosts\": {\n        \"data\": [\n          {\n            \"id\": \"84\",\n            \"type\": \"event_host\"\n          }\n        ]\n      }\n    }\n  },\n  \"included\": [\n    {\n      \"id\": \"84\",\n      \"type\": \"event_host\",\n      \"attributes\": {\n        \"name\": \"Kim Tillman\",\n        \"email\": \"madge@gmail.com\",\n        \"phone\": \"1-580-083-4331\",\n        \"verified\": false\n      }\n    }\n  ]\n}",
+      "response_headers": {
+        "Content-Type": "application/vnd.api+json; charset=utf-8"
+      },
+      "response_content_type": "application/vnd.api+json; charset=utf-8",
+      "curl": null
+    }
+  ]
+}

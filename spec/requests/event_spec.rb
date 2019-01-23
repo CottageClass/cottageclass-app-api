@@ -56,23 +56,80 @@ RSpec.resource 'Event' do
     end
   end
 
-  context 'show' do
+  context 'member operations' do
     include_context 'authorization token'
 
-    get '/api/events/:id', format: :json do
-      let(:event_series) { create :event_series, :with_event_hosts, user: user }
-      let(:id) { event_series.events.sample.id }
+    let(:event_series) { create :event_series, :with_event_hosts, user: user }
+    let(:subject) { event_series.events.sample }
+    let(:id) { subject.id }
 
-      example_request 'show:success' do
-        expect(response_status).to eq(200)
+    context 'show' do
+      get '/api/events/:id', format: :json do
+        example_request 'show:success' do
+          expect(response_status).to eq(200)
+        end
+
+        context 'failure' do
+          let(:id) { Faker::Number.between 100, 200 }
+
+          example 'show:not_found', document: false do
+            do_request
+            expect(response_status).to eq(404)
+          end
+        end
+      end
+    end
+
+    context 'update' do
+      with_options scope: :event, with_example: true do
+        parameter :name, 'Name', required: true
+        parameter :starts_at, 'Start Time', required: true
+        parameter :ends_at, 'End Time', required: true
+        parameter :maximum_children, 'Maximum number of children allowed. Default: 0 (no limit)'
+        parameter :child_age_minimum, 'Minimum age of child. Default: 0 (no limit)'
+        parameter :child_age_maximum, 'Maximum age of child. Default: 0 (no limit)'
+        parameter :has_pet, 'Has Pet?'
+        parameter :activity_names, 'Activity Names'
+        parameter :foods, 'Food Names'
+        parameter :house_rules, 'House Rules'
+        parameter :pet_description, 'Pet Description'
+        parameter :event_hosts_attributes, 'Array of adults present at host venue'
       end
 
-      context 'failure' do
-        let(:id) { Faker::Number.between 100, 200 }
+      %i[
+        name
+        maximum_children
+        child_age_minimum
+        child_age_maximum
+        has_pet
+        activity_names
+        foods
+        house_rules
+        pet_description
+      ].each do |attribute|
+        let(attribute) { subject.send attribute }
+      end
+      %i[starts_at ends_at].each { |attribute| let(attribute) { subject.send(attribute).to_s :rfc2822 } }
+      let :event_hosts_attributes do
+        subject.event_hosts.map.with_index do |event_host, index|
+          event_host_attributes = event_host.attributes.with_indifferent_access.slice :id, :name, :email, :phone
+          event_host_attributes.update(_destroy: 1) if index.zero?
+          event_host_attributes
+        end
+      end
 
-        example 'show:not_found', document: false do
-          do_request
-          expect(response_status).to eq(404)
+      put '/api/events/:id', format: :json do
+        example_request 'update:success' do
+          expect(response_status).to eq(200)
+        end
+
+        context 'failure' do
+          let(:id) { Faker::Number.between 100, 200 }
+
+          example 'update:not_found', document: false do
+            do_request
+            expect(response_status).to eq(404)
+          end
         end
       end
     end
