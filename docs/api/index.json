@@ -105,6 +105,13 @@
           "groups": "all",
           "route": "/api/events/:event_id/participants",
           "method": "post"
+        },
+        {
+          "description": "destroy:success",
+          "link": "participant/destroy:success.json",
+          "groups": "all",
+          "route": "/api/events/:event_id/participants",
+          "method": "delete"
         }
       ]
     },

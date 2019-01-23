@@ -6,7 +6,7 @@ RSpec.resource 'Participant' do
 
   let(:event) { create :event }
   let(:user) { create :user, :with_children }
-  let(:subject) { build :participant, participable: event_series, user: user }
+  let(:subject) { build :participant, :with_participant_children, participable: event, user: user }
 
   post '/api/events/:event_id/participants', format: :json do
     parameter :event_id, 'Event Identifier', required: true
@@ -41,6 +41,19 @@ RSpec.resource 'Participant' do
         do_request
         expect(response_status).to eq(401)
       end
+    end
+  end
+
+  delete '/api/events/:event_id/participants', format: :json do
+    include_context 'authorization token'
+
+    before { subject.save }
+
+    parameter :event_id, 'Event Identifier', required: true
+    let(:event_id) { event.id }
+
+    example_request 'destroy:success' do
+      expect(response_status).to eq(200)
     end
   end
 end
