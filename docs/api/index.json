@@ -19,6 +19,13 @@
           "method": "get"
         },
         {
+          "description": "destroy:success",
+          "link": "event/destroy:success.json",
+          "groups": "all",
+          "route": "/api/events/:id",
+          "method": "delete"
+        },
+        {
           "description": "past:success",
           "link": "event/past:success.json",
           "groups": "all",

@@ -24,19 +24,19 @@
   "requests": [
     {
       "request_method": "POST",
-      "request_path": "/api/events/279/participants",
-      "request_body": "{\"participant\":{\"participant_children_attributes\":[{\"child_id\":23}]}}",
+      "request_path": "/api/events/291/participants",
+      "request_body": "{\"participant\":{\"participant_children_attributes\":[{\"child_id\":27}]}}",
       "request_headers": {
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDgzMTA4NDgsInN1YiI6MjR9.G3Nrkp_Ve6OdgB1seEllbOLdtgvTtB3OczteIzP6g-U"
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDgzMTE4NDEsInN1YiI6Mjh9.DqzM6-haVknncCA-obVqqj0mgbE010vgOZr0zS_p3gY"
       },
       "request_query_parameters": {
       },
       "request_content_type": "application/json",
       "response_status": 201,
       "response_status_text": "Created",
-      "response_body": "{\n  \"data\": {\n    \"id\": \"1\",\n    \"type\": \"participant\",\n    \"attributes\": {\n      \"user_id\": 24,\n      \"event_id\": 279\n    },\n    \"relationships\": {\n      \"participant_children\": {\n        \"data\": [\n          {\n            \"id\": \"1\",\n            \"type\": \"participant_child\"\n          }\n        ]\n      }\n    }\n  },\n  \"included\": [\n    {\n      \"id\": \"1\",\n      \"type\": \"participant_child\",\n      \"attributes\": {\n        \"child_id\": 23\n      }\n    }\n  ]\n}",
+      "response_body": "{\n  \"data\": {\n    \"id\": \"1\",\n    \"type\": \"participant\",\n    \"attributes\": {\n      \"user_id\": 28,\n      \"event_id\": 291\n    },\n    \"relationships\": {\n      \"participant_children\": {\n        \"data\": [\n          {\n            \"id\": \"1\",\n            \"type\": \"participant_child\"\n          }\n        ]\n      }\n    }\n  },\n  \"included\": [\n    {\n      \"id\": \"1\",\n      \"type\": \"participant_child\",\n      \"attributes\": {\n        \"child_id\": 27\n      }\n    }\n  ]\n}",
       "response_headers": {
         "Content-Type": "application/vnd.api+json; charset=utf-8"
       },

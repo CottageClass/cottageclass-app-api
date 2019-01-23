@@ -80,6 +80,20 @@ RSpec.resource 'Event' do
       end
     end
 
+    context 'destroy' do
+      delete '/api/events/:id', format: :json do
+        example_request 'destroy:success' do
+          expect(response_status).to eq(200)
+        end
+
+        example 'destroy:forbidden', document: false do
+          event_series.update user: create(:user)
+          do_request
+          expect(response_status).to eq(403)
+        end
+      end
+    end
+
     context 'update' do
       with_options scope: :event, with_example: true do
         parameter :name, 'Name', required: true
@@ -123,13 +137,10 @@ RSpec.resource 'Event' do
           expect(response_status).to eq(200)
         end
 
-        context 'failure' do
-          let(:id) { Faker::Number.between 100, 200 }
-
-          example 'update:not_found', document: false do
-            do_request
-            expect(response_status).to eq(404)
-          end
+        example 'update:forbidden', document: false do
+          event_series.update user: create(:user)
+          do_request
+          expect(response_status).to eq(403)
         end
       end
     end

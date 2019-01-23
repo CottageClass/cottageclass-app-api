@@ -1,6 +1,7 @@
 class API::EventsController < API::BaseController
-  before_action :authenticate_user, only: %i[update]
-  before_action :load_event, only: %i[show update]
+  before_action :authenticate_user, only: %i[update destroy]
+  before_action :load_event, only: %i[show update destroy]
+  before_action :requires_event_owner, only: %i[update destroy]
 
   def index
     skope = params[:skope] || 'all'
@@ -35,21 +36,20 @@ class API::EventsController < API::BaseController
   end
 
   def update
-    json = {}
-    status = if @event.user == current_user
-               if @event.update(safe_params)
-                 serializer = EventSerializer.new @event, include: %i[event_hosts],
-                                                          params: { current_user: current_user }
-                 json = serializer.serializable_hash
-                 :ok
-               else
-                 json = { errors: @event.errors.full_messages }
-                 :unprocessable_entity
-               end
-             else
-               :forbidden
-             end
-    render json: json, status: status
+    if @event.update(safe_params)
+      serializer = EventSerializer.new @event, include: %i[event_hosts], params: { current_user: current_user }
+      render json: serializer.serializable_hash, status: :ok
+    else
+      render json: { errors: @event.errors.full_messages }, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    if @event.destroy
+      render json: {}, status: :ok
+    else
+      render json: { errors: @event.errors.full_messages }, status: :unprocessable_entity
+    end
   end
 
   private
@@ -57,6 +57,10 @@ class API::EventsController < API::BaseController
   def load_event
     @event = Event.find_by id: params[:id]
     render(json: {}, status: :not_found) if @event.blank?
+  end
+
+  def requires_event_owner
+    render(json: {}, status: :forbidden) unless @event.user == current_user
   end
 
   def safe_params

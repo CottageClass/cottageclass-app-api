@@ -108,11 +108,11 @@
     {
       "request_method": "POST",
       "request_path": "/api/event_series",
-      "request_body": "{\"event_series\":{\"name\":null,\"start_date\":\"2019-01-12\",\"starts_at\":\"23:39\",\"ends_at\":\"02:39\",\"maximum_children\":0,\"child_age_minimum\":0,\"child_age_maximum\":0,\"repeat_for\":6,\"interval\":4,\"has_pet\":true,\"activity_names\":[\"handball\"],\"foods\":[\"Chicken Fajitas\"],\"house_rules\":\"Minima iure quidem. Adipisci quo et. Ea natus cumque.\",\"pet_description\":\"Natus qui tenetur. Delectus sunt nobis. Ad qui ducimus.\",\"event_hosts_attributes\":[{\"name\":\"Mollie Bogisich\",\"email\":\"billy.mueller@yahoo.com\",\"phone\":\"544.720.9424\"},{\"name\":\"Ronny Kreiger\",\"email\":\"franklin@hotmail.com\",\"phone\":\"(920) 790-4471\"}]}}",
+      "request_body": "{\"event_series\":{\"name\":null,\"start_date\":\"2019-01-14\",\"starts_at\":\"09:25\",\"ends_at\":\"12:25\",\"maximum_children\":0,\"child_age_minimum\":0,\"child_age_maximum\":0,\"repeat_for\":6,\"interval\":4,\"has_pet\":true,\"activity_names\":[\"association\"],\"foods\":[\"Chicken Fajitas\"],\"house_rules\":\"Sint ut labore. Ex ratione et. Et quos autem.\",\"pet_description\":\"Soluta dolorem blanditiis. Sint aut atque. Vitae assumenda placeat.\",\"event_hosts_attributes\":[{\"name\":\"Abel Dietrich\",\"email\":\"carter.yundt@gmail.com\",\"phone\":\"(467) 670-4524\"},{\"name\":\"Antony Lesch MD\",\"email\":\"doretha@gmail.com\",\"phone\":\"1-778-758-5882\"}]}}",
       "request_headers": {
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDgzMTA4NDQsInN1YiI6Mn0.ph7e71cQBOIsp2R2KX3_yV1bai3zxllWe0ecjERBaMk"
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDgzMTE4MzYsInN1YiI6Mn0.gK1rSbvwbnHRfSdyyYAyxeLSvMQVnJs5aI1hWKFBlFo"
       },
       "request_query_parameters": {
       },

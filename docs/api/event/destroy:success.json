@@ -1,36 +1,31 @@
 {
-  "resource": "EventSeries",
+  "resource": "Event",
   "resource_explanation": null,
-  "http_method": "GET",
-  "route": "/api/event_series/:id",
-  "description": "show:failure",
+  "http_method": "DELETE",
+  "route": "/api/events/:id",
+  "description": "destroy:success",
   "explanation": null,
   "parameters": [
-    {
-      "required": true,
-      "name": "id",
-      "description": "Unique Identifier"
-    }
+
   ],
   "response_fields": [
 
   ],
   "requests": [
     {
-      "request_method": "GET",
-      "request_path": "/api/event_series/76",
-      "request_body": null,
+      "request_method": "DELETE",
+      "request_path": "/api/events/249",
+      "request_body": "{}",
       "request_headers": {
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDgzMTE4MzYsInN1YiI6NX0.uC7WnbXpffWvBqAM52BmAP-BYZ5HO8hVmGSgOxtCY0Y"
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDgzMTE4NDAsInN1YiI6MTZ9.K0mIh7fkvFsgvy4KCdHMukYDteQhbUAlNhILUUx1t1I"
       },
       "request_query_parameters": {
-        "{}": null
       },
       "request_content_type": "application/json",
-      "response_status": 404,
-      "response_status_text": "Not Found",
+      "response_status": 200,
+      "response_status_text": "OK",
       "response_body": "{\n}",
       "response_headers": {
         "Content-Type": "application/vnd.api+json; charset=utf-8"

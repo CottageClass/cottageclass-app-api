@@ -24,19 +24,19 @@
   "requests": [
     {
       "request_method": "POST",
-      "request_path": "/api/users/18/notifications",
-      "request_body": "{\"notification\":{\"body\":\"Eum saepe laudantium velit.\"}}",
+      "request_path": "/api/users/22/notifications",
+      "request_body": "{\"notification\":{\"body\":\"Ab expedita est voluptas.\"}}",
       "request_headers": {
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDgzMTA4NDgsInN1YiI6MTh9.jC64FqOVzhAX5BQE9MwMtSybQEHUQCJGAcIkbd7zfxY"
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDgzMTE4NDEsInN1YiI6MjJ9.ihUNuKeExB6uT5e745bRnqiiu39yxYyCJ6JYBdxY-Pw"
       },
       "request_query_parameters": {
       },
       "request_content_type": "application/json",
       "response_status": 201,
       "response_status_text": "Created",
-      "response_body": "{\n  \"data\": {\n    \"id\": \"20\",\n    \"type\": \"notification\",\n    \"attributes\": {\n      \"id\": 20,\n      \"body\": \"Eum saepe laudantium velit.\"\n    }\n  }\n}",
+      "response_body": "{\n  \"data\": {\n    \"id\": \"24\",\n    \"type\": \"notification\",\n    \"attributes\": {\n      \"id\": 24,\n      \"body\": \"Ab expedita est voluptas.\"\n    }\n  }\n}",
       "response_headers": {
         "Content-Type": "application/vnd.api+json; charset=utf-8"
       },
