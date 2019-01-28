@@ -78,6 +78,7 @@ class UsersController < ApiController
     params.require(:user).permit :agree_tos,
                                  :first_name,
                                  :last_name,
+                                 :avatar,
                                  :street_number,
                                  :route,
                                  :locality,

@@ -44,6 +44,7 @@ RSpec.resource 'User' do
       include_context 'authorization token'
 
       with_options scope: :user do
+        parameter :avatar, 'Avatar URL'
         parameter :apartment_number, 'Apartment Number'
         parameter :children_attributes, 'Array of children'
       end
@@ -51,6 +52,7 @@ RSpec.resource 'User' do
       let(:user) { create :user }
       let(:id) { user.id }
       let(:user_data) { build :user, :with_children }
+      let(:avatar) { user_data.avatar }
       let(:apartment_number) { user_data.apartment_number }
       let :children_attributes do
         user_data.children.map do |child|
