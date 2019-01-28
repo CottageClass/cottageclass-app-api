@@ -8,7 +8,7 @@ class Event < ApplicationRecord
   has_many :participating_users, through: :participants, source: :user
 
   scope :past, -> { where(Event.arel_table[:starts_at].lt(Time.current)).order starts_at: :desc }
-  scope :upcoming, -> { where(Event.arel_table[:starts_at].gt(Time.current)).order starts_at: :asc }
+  scope :upcoming, -> { where(Event.arel_table[:starts_at].gteq(1.hour.ago(Time.current))).order starts_at: :asc }
   scope :notifiable, lambda {
     where(
       Event.arel_table[:ends_at].between(1.hour.ago(Time.current)..1.hour.since(Time.current))
