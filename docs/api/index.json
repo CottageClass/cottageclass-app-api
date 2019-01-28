@@ -19,11 +19,25 @@
           "method": "get"
         },
         {
+          "description": "created:success",
+          "link": "event/created:success.json",
+          "groups": "all",
+          "route": "/api/user/created_events/:skope/page/:page/page_size/:page_size",
+          "method": "get"
+        },
+        {
           "description": "destroy:success",
           "link": "event/destroy:success.json",
           "groups": "all",
           "route": "/api/events/:id",
           "method": "delete"
+        },
+        {
+          "description": "participated:success",
+          "link": "event/participated:success.json",
+          "groups": "all",
+          "route": "/api/user/participated_events/:skope/page/:page/page_size/:page_size",
+          "method": "get"
         },
         {
           "description": "past:success",

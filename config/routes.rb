@@ -17,6 +17,18 @@ Rails.application.routes.draw do
     resources :users, only: %i[] do
       resources :notifications, only: %i[create]
     end
+    resource :user, only: %i[] do
+      collection do
+        get 'created_events(/:skope)(/page/:page/page_size/:page_size)', to: 'events#created',
+                                                                         skope: /upcoming|past/i,
+                                                                         defaults: { skope: 'all' },
+                                                                         as: :created_events
+        get 'participated_events(/:skope)(/page/:page/page_size/:page_size)', to: 'events#participated',
+                                                                              skope: /upcoming|past/i,
+                                                                              defaults: { skope: 'all' },
+                                                                              as: :participated_events
+      end
+    end
   end
 
   # auth

@@ -54,6 +54,62 @@ RSpec.resource 'Event' do
         end
       end
     end
+
+    get '/api/user/created_events/:skope/page/:page/page_size/:page_size', format: :json do
+      let(:skope) { 'upcoming' }
+      let(:page) { 1 }
+      let(:page_size) { 10 }
+
+      context 'authorized' do
+        include_context 'authorization token'
+
+        example 'created:success' do
+          explanation 'Events created by user'
+          do_request
+          expect(response_status).to eq(200)
+          expect(json_body.fetch('data', []).size).to eq(page_size)
+        end
+      end
+
+      context 'unauthorized' do
+        example 'created:forbidden', document: false do
+          do_request
+          expect(response_status).to eq(401)
+        end
+      end
+    end
+
+    get '/api/user/participated_events/:skope/page/:page/page_size/:page_size', format: :json do
+      before do
+        another_user = create :user
+        event_series = create_list :event_series, 5, :with_event_hosts, user: another_user
+        Event.where(event_series: event_series).find_each do |event|
+          create :participant, :with_participant_children, participable: event, user: user
+        end
+      end
+
+      let(:skope) { 'upcoming' }
+      let(:page) { 1 }
+      let(:page_size) { 10 }
+
+      context 'authorized' do
+        include_context 'authorization token'
+
+        example 'participated:success' do
+          explanation 'Events participated by user'
+          do_request
+          expect(response_status).to eq(200)
+          expect(json_body.fetch('data', []).size).to eq(page_size)
+        end
+      end
+
+      context 'unauthorized' do
+        example 'participated:forbidden', document: false do
+          do_request
+          expect(response_status).to eq(401)
+        end
+      end
+    end
   end
 
   context 'member operations' do
