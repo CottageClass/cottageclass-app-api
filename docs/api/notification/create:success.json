@@ -25,18 +25,18 @@
     {
       "request_method": "POST",
       "request_path": "/api/users/22/notifications",
-      "request_body": "{\"notification\":{\"body\":\"Ab expedita est voluptas.\"}}",
+      "request_body": "{\"notification\":{\"body\":\"Rem assumenda ipsum non.\"}}",
       "request_headers": {
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDgzMTE4NDEsInN1YiI6MjJ9.ihUNuKeExB6uT5e745bRnqiiu39yxYyCJ6JYBdxY-Pw"
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDg3NDIyNDUsInN1YiI6MjJ9.cBUv44ghXGUzUw3Gkn5QRwieC91Zxf2YqW6e-o75SUc"
       },
       "request_query_parameters": {
       },
       "request_content_type": "application/json",
       "response_status": 201,
       "response_status_text": "Created",
-      "response_body": "{\n  \"data\": {\n    \"id\": \"24\",\n    \"type\": \"notification\",\n    \"attributes\": {\n      \"id\": 24,\n      \"body\": \"Ab expedita est voluptas.\"\n    }\n  }\n}",
+      "response_body": "{\n  \"data\": {\n    \"id\": \"24\",\n    \"type\": \"notification\",\n    \"attributes\": {\n      \"id\": 24,\n      \"body\": \"Rem assumenda ipsum non.\"\n    }\n  }\n}",
       "response_headers": {
         "Content-Type": "application/vnd.api+json; charset=utf-8"
       },
