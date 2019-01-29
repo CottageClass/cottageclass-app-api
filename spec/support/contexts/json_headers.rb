@@ -1,4 +1,5 @@
 RSpec.shared_context 'json headers' do
+  header 'Accept-Encoding', 'deflate, gzip'
   header 'Content-Type', 'application/json'
   header 'Accept', 'application/json'
 

@@ -77,6 +77,9 @@ module CottageclassAppApi
     config.middleware.use ActionDispatch::Session::CookieStore
     # END Review block, needs to be cleaned up
 
+    # enable gzip compression
+    config.middleware.use Rack::Deflater
+
     config.x.noreply_email = format 'no-reply@%s', ENV.fetch('APP_HOST')
   end
 end
