@@ -11,6 +11,7 @@ class ParticipantChild < ApplicationRecord
   belongs_to :child, inverse_of: :participant_children
 
   delegate :user, to: :participant, allow_nil: true
+  delegate :name, :age, to: :child, prefix: true, allow_nil: true
 
   private
 

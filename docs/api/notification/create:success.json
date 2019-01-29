@@ -24,19 +24,19 @@
   "requests": [
     {
       "request_method": "POST",
-      "request_path": "/api/users/28/notifications",
-      "request_body": "{\"notification\":{\"body\":\"Provident cum eum eligendi.\"}}",
+      "request_path": "/api/users/32/notifications",
+      "request_body": "{\"notification\":{\"body\":\"Deserunt ex accusantium impedit.\"}}",
       "request_headers": {
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDg3NzQzMDgsInN1YiI6Mjh9.N-eEAsiHoBOxBK3BXsRUUWH5rKXbloUvwsO2jKCq7PA"
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDg4MzAyOTQsInN1YiI6MzJ9.sG7RZwWwQS0nqKuRLbglRvHJO9mhgs25zugyUc3gfXA"
       },
       "request_query_parameters": {
       },
       "request_content_type": "application/json",
       "response_status": 201,
       "response_status_text": "Created",
-      "response_body": "{\n  \"data\": {\n    \"id\": \"90\",\n    \"type\": \"notification\",\n    \"attributes\": {\n      \"id\": 90,\n      \"body\": \"Provident cum eum eligendi.\"\n    }\n  }\n}",
+      "response_body": "{\n  \"data\": {\n    \"id\": \"98\",\n    \"type\": \"notification\",\n    \"attributes\": {\n      \"id\": 98,\n      \"body\": \"Deserunt ex accusantium impedit.\"\n    }\n  }\n}",
       "response_headers": {
         "Content-Type": "application/vnd.api+json; charset=utf-8"
       },

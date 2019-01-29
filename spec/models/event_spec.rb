@@ -17,7 +17,7 @@ RSpec.describe Event, type: :model do
     it { is_expected.to belong_to(:event_series).inverse_of(:events) }
     it { is_expected.to have_many(:participants).dependent(:destroy) }
     it { is_expected.to have_many(:participant_children) }
-    it { is_expected.to have_many(:notifications) }
+    it { is_expected.to have_many(:notifications).dependent(:nullify) }
     it { is_expected.to have_many(:participating_users).through(:participants) }
     it { is_expected.to have_and_belong_to_many(:event_hosts) }
   end
@@ -27,6 +27,20 @@ RSpec.describe Event, type: :model do
       subject.time_zone = nil
       expect { subject.save }.to change(subject, :time_zone).from(nil)
     end
+  end
+
+  context 'destroy' do
+    before do
+      subject.save
+      participants_count.times do
+        user_with_children = create :user, :with_children
+        create :participant, :with_participant_children, participable: subject, user: user_with_children
+      end
+    end
+
+    let(:participants_count) { 2 }
+
+    it { expect { subject.destroy }.to change(Notification.event_destruction, :count).by(participants_count) }
   end
 
   context 'notify' do

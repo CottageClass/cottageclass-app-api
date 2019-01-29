@@ -1,12 +1,15 @@
 class Event < ApplicationRecord
   include Eventable
 
+  before_destroy :notify_participants_destruction
+
   belongs_to :event_series, inverse_of: :events
-  has_many :notifications, as: :notifiable, dependent: :destroy
+  has_many :notifications, as: :notifiable, dependent: :nullify
   has_many :participants, as: :participable, dependent: :destroy
   has_many :participant_children, as: :participable
   has_many :participating_users, through: :participants, source: :user
 
+  scope :eager, -> { includes :event_hosts, participants: %i[user participant_children] }
   scope :past, -> { where(Event.arel_table[:starts_at].lt(Time.current)).order starts_at: :desc }
   scope :upcoming, -> { where(Event.arel_table[:starts_at].gteq(1.hour.ago(Time.current))).order starts_at: :asc }
   scope :notifiable, lambda {
@@ -66,6 +69,14 @@ class Event < ApplicationRecord
       participants.each do |participant|
         notifications.event_reminder_previous_day_participant.where(recipient: participant.user).first_or_create
       end
+    end
+  end
+
+  private
+
+  def notify_participants_destruction
+    participants.each do |participant|
+      participant.user.notifications.event_destruction.where(notifiable: self).first_or_create
     end
   end
 end

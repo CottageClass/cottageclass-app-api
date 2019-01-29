@@ -10,7 +10,8 @@ class Notification < ApplicationRecord
     event_congratulation_host: 7,
     participant_creation: 8,
     user_creation: 9,
-    participant_creation_next_day: 10
+    participant_creation_next_day: 10,
+    event_destruction: 11
   }
 
   validates :body, presence: true
@@ -69,6 +70,13 @@ class Notification < ApplicationRecord
                when :participant_creation_next_day
                  self.body = 'placeholder for body'
                  Notifier::ParticipantCreationNextDay.new user: recipient, body: body
+               when :event_destruction
+                 self.body = I18n.t 'messages.event_destruction',
+                                    participant_first_name: recipient.first_name,
+                                    host_first_name: notifiable.host_first_name,
+                                    event_start_date: notifiable.start_date,
+                                    event_time_range: notifiable.time_range
+                 Notifier::Base.new user: recipient, body: body
                end
 
     if notifier.present?

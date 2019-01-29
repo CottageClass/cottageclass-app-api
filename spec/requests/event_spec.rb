@@ -119,19 +119,24 @@ RSpec.resource 'Event' do
     let(:subject) { event_series.events.sample }
     let(:id) { subject.id }
 
-    context 'show' do
-      get '/api/events/:id', format: :json do
-        example_request 'show:success' do
-          expect(response_status).to eq(200)
+    get '/api/events/:id', format: :json do
+      before do
+        2.times do
+          user_with_children = create :user, :with_children
+          create :participant, :with_participant_children, participable: subject, user: user_with_children
         end
+      end
 
-        context 'failure' do
-          let(:id) { Faker::Number.between 100, 200 }
+      example_request 'show:success' do
+        expect(response_status).to eq(200)
+      end
 
-          example 'show:not_found', document: false do
-            do_request
-            expect(response_status).to eq(404)
-          end
+      context 'failure' do
+        let(:id) { Faker::Number.between 100, 200 }
+
+        example 'show:not_found', document: false do
+          do_request
+          expect(response_status).to eq(404)
         end
       end
     end

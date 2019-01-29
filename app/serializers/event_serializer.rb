@@ -14,4 +14,5 @@ class EventSerializer
   end
 
   has_many :event_hosts
+  has_many :participants
 end

@@ -28,7 +28,9 @@ class API::EventsController < API::BaseController
   end
 
   def show
-    serializer = EventSerializer.new @event, include: %i[event_hosts], params: { current_user: current_user }
+    @event = Event.eager.find_by id: params[:id]
+    serializer = EventSerializer.new @event, include: %i[event_hosts participants participants.participant_children],
+                                             params: { current_user: current_user }
     render json: serializer.serializable_hash, status: :ok
   end
 
