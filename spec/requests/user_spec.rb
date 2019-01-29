@@ -46,25 +46,28 @@ RSpec.resource 'User' do
       with_options scope: :user do
         parameter :avatar, 'Avatar URL'
         parameter :apartment_number, 'Apartment Number'
-        parameter :children_attributes, 'Array of children'
+        parameter :children_attributes, 'Array of children. Set _destroy to 1 to remove a child. Supply id to update.'
       end
 
-      let(:user) { create :user }
+      let(:user) { create :user, :with_children }
       let(:id) { user.id }
       let(:user_data) { build :user, :with_children }
       let(:avatar) { user_data.avatar }
       let(:apartment_number) { user_data.apartment_number }
       let :children_attributes do
-        user_data.children.map do |child|
-          child.attributes.with_indifferent_access.slice :first_name,
-                                                         :birthday,
-                                                         :school_name,
-                                                         :emergency_contact_name,
-                                                         :emergency_contact_phone_number,
-                                                         :emergency_contact_relationship,
-                                                         :allergies,
-                                                         :dietary_restrictions,
-                                                         :special_needs
+        (user.children + user_data.children).map.with_index do |child, index|
+          child_attributes = child.attributes.with_indifferent_access.slice :first_name,
+                                                                            :birthday,
+                                                                            :school_name,
+                                                                            :emergency_contact_name,
+                                                                            :emergency_contact_phone_number,
+                                                                            :emergency_contact_relationship,
+                                                                            :allergies,
+                                                                            :dietary_restrictions,
+                                                                            :special_needs
+          child_attributes.update(id: child.id) if child.persisted?
+          child_attributes.update(_destroy: 1) if index.zero?
+          child_attributes
         end
       end
 

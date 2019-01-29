@@ -103,6 +103,7 @@ class UsersController < ApiController
                                  :onboarding_care_type,
                                  activities: [],
                                  children_attributes: [
+                                   :id,
                                    :first_name,
                                    :birthday,
                                    :school_name,
@@ -111,7 +112,8 @@ class UsersController < ApiController
                                    :emergency_contact_relationship,
                                    { allergies: [] },
                                    { dietary_restrictions: [] },
-                                   :special_needs
+                                   :special_needs,
+                                   :_destroy
                                  ]
   end
 end

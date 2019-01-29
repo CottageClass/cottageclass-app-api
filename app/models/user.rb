@@ -120,9 +120,13 @@ class User < ApplicationRecord
                      end
   end
 
-  def child_with_same_name_exists?(new_child_attrs)
-    child_names = children.pluck(:first_name)
-    child_names.include? new_child_attrs[:first_name]
+  def child_with_same_name_exists?(child_attributes)
+    if new_record?
+      child_names = children.pluck :first_name
+      child_names.include? child_attributes[:first_name]
+    else
+      false
+    end
   end
 
   def populate_full_name!

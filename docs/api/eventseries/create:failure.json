@@ -108,11 +108,11 @@
     {
       "request_method": "POST",
       "request_path": "/api/event_series",
-      "request_body": "{\"event_series\":{\"name\":null,\"start_date\":\"2019-01-21\",\"starts_at\":\"09:01\",\"ends_at\":\"12:01\",\"maximum_children\":0,\"child_age_minimum\":0,\"child_age_maximum\":0,\"repeat_for\":6,\"interval\":4,\"has_pet\":true,\"activity_names\":[\"pesäpallo\"],\"foods\":[\"Scotch Eggs\"],\"house_rules\":\"Quo laboriosam sed. Corrupti qui eos. Molestiae ea culpa.\",\"pet_description\":\"Officia nesciunt praesentium. Cupiditate molestiae ipsum. Odit voluptatem temporibus.\",\"event_hosts_attributes\":[{\"name\":\"Kenneth Volkman\",\"email\":\"annabel@hotmail.com\",\"phone\":\"1-533-333-5646\"},{\"name\":\"Hilary Altenwerth MD\",\"email\":\"brock.witting@gmail.com\",\"phone\":\"1-881-391-3808\"}]}}",
+      "request_body": "{\"event_series\":{\"name\":null,\"start_date\":\"2019-01-17\",\"starts_at\":\"18:22\",\"ends_at\":\"21:22\",\"maximum_children\":0,\"child_age_minimum\":0,\"child_age_maximum\":0,\"repeat_for\":6,\"interval\":4,\"has_pet\":true,\"activity_names\":[\"league\"],\"foods\":[\"Pasta Carbonara\"],\"house_rules\":\"Qui consequatur in. Sit eos dolores. Ea veniam est.\",\"pet_description\":\"Nihil non blanditiis. Placeat sunt eaque. Doloremque eius voluptatum.\",\"event_hosts_attributes\":[{\"name\":\"Loriann Zieme\",\"email\":\"jeanetta_nitzsche@gmail.com\",\"phone\":\"(486) 128-3445\"},{\"name\":\"Raymundo Morar V\",\"email\":\"nannette.heathcote@yahoo.com\",\"phone\":\"538.949.8130\"}]}}",
       "request_headers": {
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDg4MzAyODUsInN1YiI6Mn0.aAcfaSl-c-lbSxibSuu-GpzzJexhZpMdbs8LIMlfS3E"
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDg4MzI3NTgsInN1YiI6Mn0.IJnz8_O_8aHOIdj3R-ZosCO5-dA-h1sxUS4edrstSH4"
       },
       "request_query_parameters": {
       },

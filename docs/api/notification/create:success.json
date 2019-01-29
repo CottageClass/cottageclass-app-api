@@ -25,18 +25,18 @@
     {
       "request_method": "POST",
       "request_path": "/api/users/32/notifications",
-      "request_body": "{\"notification\":{\"body\":\"Deserunt ex accusantium impedit.\"}}",
+      "request_body": "{\"notification\":{\"body\":\"Omnis eum facere cum.\"}}",
       "request_headers": {
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDg4MzAyOTQsInN1YiI6MzJ9.sG7RZwWwQS0nqKuRLbglRvHJO9mhgs25zugyUc3gfXA"
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDg4MzI3NjgsInN1YiI6MzJ9.wU2O4jvMyPVoU-QWqTPtHEBMm1tfTcM9IP0Zzh6n6hc"
       },
       "request_query_parameters": {
       },
       "request_content_type": "application/json",
       "response_status": 201,
       "response_status_text": "Created",
-      "response_body": "{\n  \"data\": {\n    \"id\": \"98\",\n    \"type\": \"notification\",\n    \"attributes\": {\n      \"id\": 98,\n      \"body\": \"Deserunt ex accusantium impedit.\"\n    }\n  }\n}",
+      "response_body": "{\n  \"data\": {\n    \"id\": \"98\",\n    \"type\": \"notification\",\n    \"attributes\": {\n      \"id\": 98,\n      \"body\": \"Omnis eum facere cum.\"\n    }\n  }\n}",
       "response_headers": {
         "Content-Type": "application/vnd.api+json; charset=utf-8"
       },
