@@ -18,6 +18,51 @@
     },
     {
       "scope": "user",
+      "name": "images",
+      "description": "Array of images"
+    },
+    {
+      "scope": "user",
+      "name": "languages",
+      "description": "Array of language codes"
+    },
+    {
+      "scope": "user",
+      "name": "job_position",
+      "description": "Job Title"
+    },
+    {
+      "scope": "user",
+      "name": "employer",
+      "description": "Employer"
+    },
+    {
+      "scope": "user",
+      "name": "highest_education",
+      "description": "Degree"
+    },
+    {
+      "scope": "user",
+      "name": "school",
+      "description": "School"
+    },
+    {
+      "scope": "user",
+      "name": "instagram_user",
+      "description": "Instagram user name"
+    },
+    {
+      "scope": "user",
+      "name": "twitter_user",
+      "description": "Twitter user name"
+    },
+    {
+      "scope": "user",
+      "name": "linkedin_user",
+      "description": "LinkedIn user name"
+    },
+    {
+      "scope": "user",
       "name": "children_attributes",
       "description": "Array of children. Set _destroy to 1 to remove a child. Supply id to update."
     }
@@ -28,19 +73,19 @@
   "requests": [
     {
       "request_method": "POST",
-      "request_path": "/users/56",
-      "request_body": "{\"user\":{\"avatar\":\"https://robohash.org/tilma-gray-mane.png?size=300x300\\u0026set=set1\",\"apartment_number\":\"794\",\"children_attributes\":[{\"first_name\":\"Pierre\",\"birthday\":\"2014-11-12T00:00:00.000Z\",\"school_name\":\"Flowerlake High\",\"emergency_contact_name\":\"Gregorio Balistreri\",\"emergency_contact_phone_number\":\"583.431.3991\",\"emergency_contact_relationship\":\"qui\",\"allergies\":[\"incidunt\",\"non\"],\"dietary_restrictions\":[\"quia\",\"placeat\"],\"special_needs\":\"Error quis id debitis.\",\"id\":57,\"_destroy\":1},{\"first_name\":\"Rolland\",\"birthday\":\"2013-07-31T00:00:00.000Z\",\"school_name\":\"Ostbarrow High School\",\"emergency_contact_name\":\"Youlanda McKenzie\",\"emergency_contact_phone_number\":\"1-231-196-0456\",\"emergency_contact_relationship\":\"velit\",\"allergies\":[\"accusantium\",\"illo\"],\"dietary_restrictions\":[\"modi\",\"perspiciatis\"],\"special_needs\":\"Aut corrupti et quibusdam.\",\"id\":58},{\"first_name\":\"Yahaira\",\"birthday\":\"2014-09-08T00:00:00.000Z\",\"school_name\":\"Iceborough Secondary College\",\"emergency_contact_name\":\"Gilbert Zboncak\",\"emergency_contact_phone_number\":\"356-883-7127\",\"emergency_contact_relationship\":\"iste\",\"allergies\":[\"quidem\",\"et\"],\"dietary_restrictions\":[\"dolores\",\"qui\"],\"special_needs\":\"Distinctio veritatis aut accusamus.\"},{\"first_name\":\"Toshiko\",\"birthday\":\"2013-08-27T00:00:00.000Z\",\"school_name\":\"Mallowtown High\",\"emergency_contact_name\":\"Yuki Mertz\",\"emergency_contact_phone_number\":\"(270) 640-6632\",\"emergency_contact_relationship\":\"officia\",\"allergies\":[\"qui\",\"ullam\"],\"dietary_restrictions\":[\"odio\",\"corporis\"],\"special_needs\":\"Molestiae occaecati quia ut.\"}]}}",
+      "request_path": "/users/68",
+      "request_body": "{\"user\":{\"avatar\":\"https://robohash.org/arnbjorn-septim.png?size=300x300\\u0026set=set1\",\"apartment_number\":\"722\",\"images\":[\"https://lorempixel.com/300/300\",\"https://lorempixel.com/300/300\"],\"languages\":[\"en\",\"fr\",\"de\"],\"job_position\":\"Internal Planner\",\"employer\":\"Grant-Lang\",\"highest_education\":\"Kindergarten\",\"school\":\"Bluemeadow College\",\"instagram_user\":\"jerald.runolfsdottir\",\"twitter_user\":\"francie_wilkinson\",\"linkedin_user\":\"bethann_macejkovic\",\"children_attributes\":[{\"first_name\":\"Maisha\",\"birthday\":\"2016-07-20T00:00:00.000Z\",\"school_name\":\"Bluemeadow Secondary College\",\"emergency_contact_name\":\"Ms. Else Terry\",\"emergency_contact_phone_number\":\"732.858.9399\",\"emergency_contact_relationship\":\"ipsam\",\"allergies\":[\"quaerat\",\"ratione\"],\"dietary_restrictions\":[\"beatae\",\"voluptas\"],\"special_needs\":\"Quis assumenda reiciendis nihil.\",\"id\":57,\"_destroy\":1},{\"first_name\":\"Clarence\",\"birthday\":\"2016-09-04T00:00:00.000Z\",\"school_name\":\"Clearcourt High\",\"emergency_contact_name\":\"Roxanne Fadel\",\"emergency_contact_phone_number\":\"1-731-051-7910\",\"emergency_contact_relationship\":\"sed\",\"allergies\":[\"quia\",\"labore\"],\"dietary_restrictions\":[\"odio\",\"saepe\"],\"special_needs\":\"Expedita ipsam ab quo.\",\"id\":58},{\"first_name\":\"Danyel\",\"birthday\":\"2016-05-29T00:00:00.000Z\",\"school_name\":\"Clearcourt Secondary College\",\"emergency_contact_name\":\"Lesli Schmidt\",\"emergency_contact_phone_number\":\"1-695-122-0152\",\"emergency_contact_relationship\":\"veritatis\",\"allergies\":[\"tenetur\",\"recusandae\"],\"dietary_restrictions\":[\"numquam\",\"in\"],\"special_needs\":\"Necessitatibus fugit ad voluptatum.\"},{\"first_name\":\"Jay\",\"birthday\":\"2013-12-01T00:00:00.000Z\",\"school_name\":\"Iceborough High School\",\"emergency_contact_name\":\"Paris Jerde MD\",\"emergency_contact_phone_number\":\"673.414.7819\",\"emergency_contact_relationship\":\"quis\",\"allergies\":[\"consequatur\",\"sed\"],\"dietary_restrictions\":[\"natus\",\"dolores\"],\"special_needs\":\"Molestiae praesentium officia explicabo.\"}]}}",
       "request_headers": {
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDg4MzI3NjksInN1YiI6NTZ9.i9u8KL21BVUftgVr6cZl6w82FkcNtT6N4DXfgyp7sXs"
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDg5MjIwMzAsInN1YiI6Njh9.ma05RXQ7BTQw_GwS4fgWK3dyejh_EDmfefuz3rExNfM"
       },
       "request_query_parameters": {
       },
       "request_content_type": "application/json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\n  \"data\": {\n    \"id\": \"56\",\n    \"type\": \"user\",\n    \"attributes\": {\n      \"agree_tos\": false,\n      \"first_name\": \"Enthir\",\n      \"last_name\": \"Secret-Fire\",\n      \"verified\": false,\n      \"avatar\": \"https://robohash.org/tilma-gray-mane.png?size=300x300&set=set1\",\n      \"facebook_id\": \"7514608\",\n      \"apartment_number\": \"794\",\n      \"street_number\": null,\n      \"route\": null,\n      \"locality\": \"Gerholdstad\",\n      \"sublocality\": \"Autumn Pointe\",\n      \"neighborhood\": \"Rice Forest\",\n      \"admin_area_level_1\": \"Virginia\",\n      \"admin_area_level_2\": \"Wyman Divide\",\n      \"country\": \"United States\",\n      \"postal_code\": null,\n      \"latitude\": \"40.73061\",\n      \"longitude\": \"-73.935242\",\n      \"phone_country_code\": \"1\",\n      \"phone_area_code\": null,\n      \"phone_number\": \"1-776-806-6575 x656\",\n      \"available_mornings\": null,\n      \"available_afternoons\": null,\n      \"available_evenings\": null,\n      \"available_weekends\": null,\n      \"network_code\": \"demo\",\n      \"activities\": [\n\n      ],\n      \"phone\": \"() 1-7-76-806-6575 x656\",\n      \"full_address\": \" , Gerholdstad, Virginia, Wyman Divide, United States \",\n      \"profile_blurb\": null,\n      \"onboarding_care_type\": null,\n      \"date_created\": \"2019-01-29T07:19:29.657Z\"\n    },\n    \"relationships\": {\n      \"children\": {\n        \"data\": [\n          {\n            \"id\": \"60\",\n            \"type\": \"child\"\n          },\n          {\n            \"id\": \"59\",\n            \"type\": \"child\"\n          },\n          {\n            \"id\": \"58\",\n            \"type\": \"child\"\n          }\n        ]\n      }\n    }\n  },\n  \"included\": [\n    {\n      \"id\": \"60\",\n      \"type\": \"child\",\n      \"attributes\": {\n        \"first_name\": \"Toshiko\",\n        \"school_name\": \"Mallowtown High\",\n        \"age\": 5,\n        \"emergency_contact_name\": \"Yuki Mertz\",\n        \"emergency_contact_phone_number\": \"(270) 640-6632\",\n        \"emergency_contact_relationship\": \"officia\",\n        \"allergies\": [\n          \"qui\",\n          \"ullam\"\n        ],\n        \"dietary_restrictions\": [\n          \"odio\",\n          \"corporis\"\n        ],\n        \"special_needs\": \"Molestiae occaecati quia ut.\",\n        \"birthday\": \"2013-08-27\"\n      }\n    },\n    {\n      \"id\": \"59\",\n      \"type\": \"child\",\n      \"attributes\": {\n        \"first_name\": \"Yahaira\",\n        \"school_name\": \"Iceborough Secondary College\",\n        \"age\": 4,\n        \"emergency_contact_name\": \"Gilbert Zboncak\",\n        \"emergency_contact_phone_number\": \"356-883-7127\",\n        \"emergency_contact_relationship\": \"iste\",\n        \"allergies\": [\n          \"quidem\",\n          \"et\"\n        ],\n        \"dietary_restrictions\": [\n          \"dolores\",\n          \"qui\"\n        ],\n        \"special_needs\": \"Distinctio veritatis aut accusamus.\",\n        \"birthday\": \"2014-09-08\"\n      }\n    },\n    {\n      \"id\": \"58\",\n      \"type\": \"child\",\n      \"attributes\": {\n        \"first_name\": \"Rolland\",\n        \"school_name\": \"Ostbarrow High School\",\n        \"age\": 5,\n        \"emergency_contact_name\": \"Youlanda McKenzie\",\n        \"emergency_contact_phone_number\": \"1-231-196-0456\",\n        \"emergency_contact_relationship\": \"velit\",\n        \"allergies\": [\n          \"accusantium\",\n          \"illo\"\n        ],\n        \"dietary_restrictions\": [\n          \"modi\",\n          \"perspiciatis\"\n        ],\n        \"special_needs\": \"Aut corrupti et quibusdam.\",\n        \"birthday\": \"2013-07-31\"\n      }\n    }\n  ],\n  \"jwt\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDg4MzI3NjksInN1YiI6NTYsImVtYWlsIjoibWlrZUBleGFtcGxlLmNvbSIsIm5ldHdvcmtfY29kZSI6ImRlbW8ifQ.v-N1wrdo8HQU1u70warddmmJyPmGhJELKV_wtVFBwN0\"\n}",
+      "response_body": "{\n  \"data\": {\n    \"id\": \"68\",\n    \"type\": \"user\",\n    \"attributes\": {\n      \"agree_tos\": false,\n      \"first_name\": \"Sulla\",\n      \"last_name\": \"Ember-Master\",\n      \"verified\": false,\n      \"avatar\": \"https://robohash.org/arnbjorn-septim.png?size=300x300&set=set1\",\n      \"facebook_id\": \"1208367\",\n      \"apartment_number\": \"722\",\n      \"street_number\": null,\n      \"route\": null,\n      \"locality\": \"Gerlachberg\",\n      \"sublocality\": \"Summer Heights\",\n      \"neighborhood\": \"Emeline Road\",\n      \"admin_area_level_1\": \"Oregon\",\n      \"admin_area_level_2\": \"Friesen Hollow\",\n      \"country\": \"United States\",\n      \"postal_code\": null,\n      \"latitude\": \"40.73061\",\n      \"longitude\": \"-73.935242\",\n      \"phone_country_code\": \"1\",\n      \"phone_area_code\": null,\n      \"phone_number\": \"1-616-739-6611\",\n      \"available_mornings\": null,\n      \"available_afternoons\": null,\n      \"available_evenings\": null,\n      \"available_weekends\": null,\n      \"network_code\": \"demo\",\n      \"activities\": [\n\n      ],\n      \"phone\": \"() 1-6-16-739-6611\",\n      \"full_address\": \" , Gerlachberg, Oregon, Friesen Hollow, United States \",\n      \"profile_blurb\": null,\n      \"onboarding_care_type\": null,\n      \"job_position\": \"Internal Planner\",\n      \"employer\": \"Grant-Lang\",\n      \"highest_education\": \"Kindergarten\",\n      \"school\": \"Bluemeadow College\",\n      \"instagram_user\": \"jerald.runolfsdottir\",\n      \"twitter_user\": \"francie_wilkinson\",\n      \"linkedin_user\": \"bethann_macejkovic\",\n      \"images\": [\n        \"https://lorempixel.com/300/300\",\n        \"https://lorempixel.com/300/300\"\n      ],\n      \"languages\": [\n        \"en\",\n        \"fr\",\n        \"de\"\n      ],\n      \"date_created\": \"2019-01-30T08:07:10.690Z\",\n      \"hosted_events_count\": 0,\n      \"participated_events_count\": 0\n    },\n    \"relationships\": {\n      \"children\": {\n        \"data\": [\n          {\n            \"id\": \"60\",\n            \"type\": \"child\"\n          },\n          {\n            \"id\": \"59\",\n            \"type\": \"child\"\n          },\n          {\n            \"id\": \"58\",\n            \"type\": \"child\"\n          }\n        ]\n      },\n      \"user_reviews\": {\n        \"data\": [\n\n        ]\n      }\n    }\n  },\n  \"included\": [\n    {\n      \"id\": \"60\",\n      \"type\": \"child\",\n      \"attributes\": {\n        \"first_name\": \"Jay\",\n        \"school_name\": \"Iceborough High School\",\n        \"age\": 5,\n        \"emergency_contact_name\": \"Paris Jerde MD\",\n        \"emergency_contact_phone_number\": \"673.414.7819\",\n        \"emergency_contact_relationship\": \"quis\",\n        \"allergies\": [\n          \"consequatur\",\n          \"sed\"\n        ],\n        \"dietary_restrictions\": [\n          \"natus\",\n          \"dolores\"\n        ],\n        \"special_needs\": \"Molestiae praesentium officia explicabo.\",\n        \"birthday\": \"2013-12-01\"\n      }\n    },\n    {\n      \"id\": \"59\",\n      \"type\": \"child\",\n      \"attributes\": {\n        \"first_name\": \"Danyel\",\n        \"school_name\": \"Clearcourt Secondary College\",\n        \"age\": 2,\n        \"emergency_contact_name\": \"Lesli Schmidt\",\n        \"emergency_contact_phone_number\": \"1-695-122-0152\",\n        \"emergency_contact_relationship\": \"veritatis\",\n        \"allergies\": [\n          \"tenetur\",\n          \"recusandae\"\n        ],\n        \"dietary_restrictions\": [\n          \"numquam\",\n          \"in\"\n        ],\n        \"special_needs\": \"Necessitatibus fugit ad voluptatum.\",\n        \"birthday\": \"2016-05-29\"\n      }\n    },\n    {\n      \"id\": \"58\",\n      \"type\": \"child\",\n      \"attributes\": {\n        \"first_name\": \"Clarence\",\n        \"school_name\": \"Clearcourt High\",\n        \"age\": 2,\n        \"emergency_contact_name\": \"Roxanne Fadel\",\n        \"emergency_contact_phone_number\": \"1-731-051-7910\",\n        \"emergency_contact_relationship\": \"sed\",\n        \"allergies\": [\n          \"quia\",\n          \"labore\"\n        ],\n        \"dietary_restrictions\": [\n          \"odio\",\n          \"saepe\"\n        ],\n        \"special_needs\": \"Expedita ipsam ab quo.\",\n        \"birthday\": \"2016-09-04\"\n      }\n    }\n  ],\n  \"jwt\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDg5MjIwMzAsInN1YiI6NjgsImVtYWlsIjoiaG9yYWNpb0BleGFtcGxlLm9yZyIsIm5ldHdvcmtfY29kZSI6ImRlbW8ifQ.mHQRnKf4-xcEb9wqLEL_4knt5rOl2CzaWvqVsGImEfw\"\n}",
       "response_headers": {
         "Content-Type": "application/vnd.api+json; charset=utf-8"
       },

@@ -4,7 +4,9 @@ class Event < ApplicationRecord
   before_destroy :notify_participants_destruction
 
   belongs_to :event_series, inverse_of: :events
+  has_one :user, through: :event_series, inverse_of: :events
   has_many :notifications, as: :notifiable, dependent: :nullify
+  has_many :user_reviews, as: :reviewable, dependent: :nullify
   has_many :participants, as: :participable, dependent: :destroy
   has_many :participant_children, as: :participable
   has_many :participating_users, through: :participants, source: :user
@@ -19,7 +21,6 @@ class Event < ApplicationRecord
     ).order starts_at: :asc
   }
 
-  delegate :user, to: :event_series, allow_nil: true
   delegate :id, :facebook_uid, :avatar, :first_name, :fuzzy_latitude, :fuzzy_longitude, :locality, :sublocality,
            :neighborhood, :admin_area_level_1, :admin_area_level_2, :child_ages, :verified,
            to: :user, prefix: :host, allow_nil: true

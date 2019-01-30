@@ -8,41 +8,42 @@ class UsersController < ApiController
     # false defends against returning users who have network `""
     # - TODO: write some tests for this
     desired_network_code = params[:network_code] || false
-    @users = User.where(network_code: desired_network_code)
-    render json: UserInNetworkSerializer.json_for(@users, include: [:children]), status: 200
+    users = User.where network_code: desired_network_code
+    render json: UserInNetworkSerializer.json_for(users, include: %i[children user_reviews user_reviews.reviewer]),
+           status: 200
   end
 
   def create
-    @user = User.new signup_params
-    @user.direct = true
-    if @user.save
-      render json: UserSerializer.json_for(@user), status: :created
+    user = User.new signup_params
+    user.direct = true
+    if user.save
+      render json: UserSerializer.json_for(user), status: :created
     else
-      render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
+      render json: { errors: user.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
   def show
-    @user = current_user
-    render json: UserSerializer.json_for(@user, include: [:children]), status: 200
+    render json: UserSerializer.json_for(current_user, include: %i[children user_reviews user_reviews.reviewer]),
+           status: 200
   end
 
   def update
-    @user = current_user
-    if @user.update(user_params)
-      render json: UserSerializer.json_for(@user, include: [:children]), status: 200
+    user = current_user
+    if user.update(user_params)
+      render json: UserSerializer.json_for(user, include: %i[children user_reviews user_reviews.reviewer]), status: 200
     else
-      render json: { errors: @user.errors.full_messages }, status: 400
+      render json: { errors: user.errors.full_messages }, status: 400
     end
   end
 
   def inquiries
-    @users = current_user
-      .inquirers
-      .in_network(current_user.network_code)
+    users = current_user.inquirers.in_network current_user.network_code
+    serializable_hash = UserInNetworkSerializer.json_for users,
+                                                         include: %i[children user_reviews user_reviews.reviewer],
+                                                         params: { personal_information: true }
 
-    render json: UserInNetworkSerializer.json_for(@users, include: [:children], params: { personal_information: true }),
-           status: 200
+    render json: serializable_hash, status: 200
   end
 
   def admin_index
@@ -101,7 +102,16 @@ class UsersController < ApiController
                                  :network_code,
                                  :profile_blurb,
                                  :onboarding_care_type,
+                                 :job_position,
+                                 :employer,
+                                 :highest_education,
+                                 :school,
+                                 :instagram_user,
+                                 :twitter_user,
+                                 :linkedin_user,
                                  activities: [],
+                                 images: [],
+                                 languages: [],
                                  children_attributes: [
                                    :id,
                                    :first_name,

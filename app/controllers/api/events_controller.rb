@@ -29,7 +29,14 @@ class API::EventsController < API::BaseController
 
   def show
     @event = Event.eager.find_by id: params[:id]
-    serializer = EventSerializer.new @event, include: %i[event_hosts participants participants.participant_children],
+    serializer = EventSerializer.new @event, include: %i[
+      event_hosts
+      participants
+      participants.participant_children
+      user
+      user.user_reviews
+      user.user_reviews.reviewer
+    ],
                                              params: { current_user: current_user }
     render json: serializer.serializable_hash, status: :ok
   end
@@ -71,7 +78,7 @@ class API::EventsController < API::BaseController
       links[:next] = path.call(skope: skope_name, page: events.next_page, page_size: page_size) unless events.last_page?
     end
 
-    serializer = EventSerializer.new events, include: %i[event_hosts],
+    serializer = EventSerializer.new events, include: %i[event_hosts user user.user_reviews user.user_reviews.reviewer],
                                              params: { current_user: current_user },
                                              links: links,
                                              meta: meta

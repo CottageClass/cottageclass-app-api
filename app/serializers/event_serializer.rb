@@ -13,6 +13,7 @@ class EventSerializer
     instance.participated? params[:current_user]
   end
 
+  has_one :user, key: :host, set_type: :user_in_network, set_id: :host_id, serializer: UserInNetworkSerializer
   has_many :event_hosts
   has_many :participants
 end

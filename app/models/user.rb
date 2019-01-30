@@ -40,10 +40,13 @@ class User < ApplicationRecord
   has_many :client_sessions, class_name: 'TwilioSession', foreign_key: :receiver_id, inverse_of: :client,
                              dependent: :destroy
   has_many :event_series, inverse_of: :user, dependent: :destroy
-  has_many :events, through: :event_series
+  has_many :events, through: :event_series, inverse_of: :user
   has_many :participants, inverse_of: :user, dependent: :destroy
   has_many :participated_events, through: :participants, source: :participable, source_type: 'Event'
   has_many :notifications, foreign_key: :recipient_id, inverse_of: :recipient, dependent: :destroy
+  has_many :user_reviews, inverse_of: :user, dependent: :destroy
+  has_many :reviewed_users, class_name: 'UserReview', foreign_key: :reviewer_id, inverse_of: :reviewer,
+                            dependent: :destroy
 
   accepts_nested_attributes_for :children, allow_destroy: true, reject_if: :child_with_same_name_exists?
 

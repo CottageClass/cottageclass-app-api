@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_10_132233) do
+ActiveRecord::Schema.define(version: 2019_01_29_133802) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -176,6 +176,19 @@ ActiveRecord::Schema.define(version: 2019_01_10_132233) do
     t.index ["sender_id"], name: "index_twilio_sessions_on_sender_id"
   end
 
+  create_table "user_reviews", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "reviewer_id", null: false
+    t.string "reviewable_type"
+    t.bigint "reviewable_id"
+    t.text "body"
+    t.integer "rating"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["reviewable_type", "reviewable_id"], name: "index_user_reviews_on_reviewable_type_and_reviewable_id"
+    t.index ["user_id", "reviewer_id"], name: "index_user_reviews_on_user_id_and_reviewer_id", unique: true
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email"
     t.string "avatar"
@@ -216,6 +229,15 @@ ActiveRecord::Schema.define(version: 2019_01_10_132233) do
     t.datetime "fb_access_token_expires_at", default: -> { "CURRENT_TIMESTAMP" }
     t.text "profile_blurb"
     t.string "onboarding_care_type"
+    t.text "images", default: [], array: true
+    t.text "languages", default: [], array: true
+    t.string "job_position"
+    t.string "employer"
+    t.string "highest_education"
+    t.string "school"
+    t.string "instagram_user"
+    t.string "twitter_user"
+    t.string "linkedin_user"
     t.index ["fuzzy_latitude", "fuzzy_longitude"], name: "index_users_on_fuzzy_latitude_and_fuzzy_longitude"
     t.index ["latitude", "longitude"], name: "index_users_on_latitude_and_longitude"
     t.index ["network_code"], name: "index_users_on_network_code"

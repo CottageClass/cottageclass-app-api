@@ -17,11 +17,28 @@ FactoryBot.define do
     sublocality { Faker::Address.community }
     latitude { 40.730610 }
     longitude { -73.935242 }
+    images { Array.new(2).map { Faker::LoremPixel.image } }
+    languages { %w[en fr de] }
+    job_position { Faker::Job.title }
+    employer { Faker::Company.name }
+    highest_education { Faker::Demographic.educational_attainment }
+    school { Faker::Educator.university }
+    instagram_user { Faker::Internet.user_name }
+    twitter_user { Faker::Internet.user_name }
+    linkedin_user { Faker::Internet.user_name }
 
     trait :with_children do
       transient { children_count { 2 } }
 
       after(:build) { |instance, evaluator| instance.children = build_list :child, evaluator.children_count }
+    end
+
+    trait :with_user_reviews do
+      transient { user_reviews_count { 2 } }
+
+      after :build do |instance, evaluator|
+        instance.user_reviews = build_list :user_review, evaluator.user_reviews_count, user: instance
+      end
     end
   end
 end

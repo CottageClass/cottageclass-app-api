@@ -1,5 +1,6 @@
 class UserSerializer < BaseSerializer
   has_many :children, serializer: ChildUnrestrictedSerializer
+  has_many :user_reviews
 
   attributes :agree_tos,
              :first_name,
@@ -31,7 +32,18 @@ class UserSerializer < BaseSerializer
              :phone,
              :full_address,
              :profile_blurb,
-             :onboarding_care_type
+             :onboarding_care_type,
+             :job_position,
+             :employer,
+             :highest_education,
+             :school,
+             :instagram_user,
+             :twitter_user,
+             :linkedin_user,
+             :images,
+             :languages
 
   attribute :date_created, &:created_at
+  attribute(:hosted_events_count) { |instance, _| instance.events.past.count }
+  attribute(:participated_events_count) { |instance, _| instance.participated_events.past.count }
 end
