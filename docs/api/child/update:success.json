@@ -1,0 +1,47 @@
+{
+  "resource": "Child",
+  "resource_explanation": null,
+  "http_method": "PUT",
+  "route": "/api/user/children/:id",
+  "description": "update:success",
+  "explanation": null,
+  "parameters": [
+    {
+      "required": true,
+      "name": "id",
+      "description": "Child Identifier"
+    },
+    {
+      "scope": "child",
+      "with_example": true,
+      "name": "emergency_contacts_attributes",
+      "description": "Array of emergency contacts"
+    }
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "PUT",
+      "request_path": "/api/user/children/1",
+      "request_body": "{\"child\":{\"emergency_contacts_attributes\":[{\"name\":\"Reyes Bauch\",\"phone_number\":\"1-487-434-3838\",\"relationship\":\"reprehenderit\",\"special_needs\":\"In accusamus id exercitationem.\",\"allergies\":[\"nisi\",\"sit\"],\"dietary_restrictions\":[\"ut\",\"quo\"]}]}}",
+      "request_headers": {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDkzNzY1ODIsInN1YiI6MX0.Z782s2us587FWD-asdQ1BFtZMrI_qs2b3mbwtqHbg3A"
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/json",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "{\n  \"data\": {\n    \"id\": \"1\",\n    \"type\": \"child\",\n    \"attributes\": {\n      \"first_name\": \"Catalina\",\n      \"school_name\": \"Vertapple High School\",\n      \"age\": 2,\n      \"birthday\": \"2016-02-14\"\n    },\n    \"relationships\": {\n      \"emergency_contacts\": {\n        \"data\": [\n          {\n            \"id\": \"1\",\n            \"type\": \"emergency_contact\"\n          }\n        ]\n      }\n    }\n  },\n  \"included\": [\n    {\n      \"id\": \"1\",\n      \"type\": \"emergency_contact\",\n      \"attributes\": {\n        \"name\": \"Reyes Bauch\",\n        \"phone_number\": \"1-487-434-3838\",\n        \"relationship\": \"reprehenderit\",\n        \"special_needs\": \"In accusamus id exercitationem.\",\n        \"allergies\": [\n          \"nisi\",\n          \"sit\"\n        ],\n        \"dietary_restrictions\": [\n          \"ut\",\n          \"quo\"\n        ]\n      }\n    }\n  ]\n}",
+      "response_headers": {
+        "Content-Type": "application/vnd.api+json; charset=utf-8"
+      },
+      "response_content_type": "application/vnd.api+json; charset=utf-8",
+      "curl": null
+    }
+  ]
+}

@@ -20,6 +20,8 @@ RSpec.resource 'User' do
     end
 
     get '/users/:id', format: :json do
+      before { create :emergency_contact, contactable: user.children.sample }
+
       let(:id) { user.id }
 
       context 'authorized' do

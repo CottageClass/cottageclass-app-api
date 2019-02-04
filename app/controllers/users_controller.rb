@@ -31,7 +31,13 @@ class UsersController < ApiController
   def update
     user = current_user
     if user.update(user_params)
-      render json: UserSerializer.json_for(user, include: %i[children user_reviews user_reviews.reviewer]), status: 200
+      render json: UserSerializer.json_for(user, include: %i[
+                                             children
+                                             children.emergency_contacts
+                                             user_reviews
+                                             user_reviews.reviewer
+                                           ]),
+             status: 200
     else
       render json: { errors: user.errors.full_messages }, status: 400
     end

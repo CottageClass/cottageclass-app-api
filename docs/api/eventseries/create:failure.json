@@ -108,11 +108,11 @@
     {
       "request_method": "POST",
       "request_path": "/api/event_series",
-      "request_body": "{\"event_series\":{\"name\":null,\"start_date\":\"2019-01-23\",\"starts_at\":\"16:26\",\"ends_at\":\"19:26\",\"maximum_children\":0,\"child_age_minimum\":0,\"child_age_maximum\":0,\"repeat_for\":6,\"interval\":4,\"has_pet\":true,\"activity_names\":[\"association\"],\"foods\":[\"Cheeseburger\"],\"house_rules\":\"Expedita quis dolorem. Suscipit omnis nihil. Libero magni quis.\",\"pet_description\":\"Accusamus et sit. Aut molestias quia. Veniam fuga eius.\",\"event_hosts_attributes\":[{\"name\":\"Ned Oberbrunner V\",\"email\":\"gavin@hotmail.com\",\"phone\":\"488.061.6868\"},{\"name\":\"Doug Volkman\",\"email\":\"augustus_kub@hotmail.com\",\"phone\":\"933-604-6066\"}]}}",
+      "request_body": "{\"event_series\":{\"name\":null,\"start_date\":\"2019-01-26\",\"starts_at\":\"23:27\",\"ends_at\":\"02:27\",\"maximum_children\":0,\"child_age_minimum\":0,\"child_age_maximum\":0,\"repeat_for\":6,\"interval\":4,\"has_pet\":true,\"activity_names\":[\"golf\"],\"foods\":[\"Barbecue Ribs\"],\"house_rules\":\"Repellat libero ut. Beatae velit placeat. Non ea quo.\",\"pet_description\":\"Numquam sit quas. Nulla nemo id. Deleniti et quaerat.\",\"event_hosts_attributes\":[{\"name\":\"Dr. Mathilde Hayes\",\"email\":\"haie@yahoo.com\",\"phone\":\"1-345-450-9808\"},{\"name\":\"Winfred Simonis\",\"email\":\"lyman@hotmail.com\",\"phone\":\"(867) 497-3638\"}]}}",
       "request_headers": {
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDkzNTI0MDAsInN1YiI6Mn0.2gB8yrF6vd2TZUstvAcgQgr7qJQ6NycdCko7OfiYdt8"
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDkzNzY1ODIsInN1YiI6M30.acp1J3fdfNuxBAUctXS4Ox1Vxp5L0h_hMy-IESGbVnw"
       },
       "request_query_parameters": {
       },

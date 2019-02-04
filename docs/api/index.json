@@ -1,6 +1,19 @@
 {
   "resources": [
     {
+      "name": "Child",
+      "explanation": null,
+      "examples": [
+        {
+          "description": "update:success",
+          "link": "child/update:success.json",
+          "groups": "all",
+          "route": "/api/user/children/:id",
+          "method": "put"
+        }
+      ]
+    },
+    {
       "name": "Event",
       "explanation": null,
       "examples": [

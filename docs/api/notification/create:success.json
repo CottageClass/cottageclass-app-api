@@ -24,19 +24,19 @@
   "requests": [
     {
       "request_method": "POST",
-      "request_path": "/api/users/32/notifications",
-      "request_body": "{\"notification\":{\"body\":\"Nihil rerum aut quod.\"}}",
+      "request_path": "/api/users/33/notifications",
+      "request_body": "{\"notification\":{\"body\":\"Quibusdam voluptatibus aut beatae.\"}}",
       "request_headers": {
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDkzNTI0MTAsInN1YiI6MzJ9.ug1Ul2AkKFSDyL4yB72FMPB9qzdJPtH1rlNGxWB-gaQ"
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDkzNzY1OTYsInN1YiI6MzN9.BwuQEsDhkp5kAGwKLYiKQ2e2o3xAGfOFdq05oP4DEFY"
       },
       "request_query_parameters": {
       },
       "request_content_type": "application/json",
       "response_status": 201,
       "response_status_text": "Created",
-      "response_body": "{\n  \"data\": {\n    \"id\": \"98\",\n    \"type\": \"notification\",\n    \"attributes\": {\n      \"id\": 98,\n      \"body\": \"Nihil rerum aut quod.\"\n    }\n  }\n}",
+      "response_body": "{\n  \"data\": {\n    \"id\": \"99\",\n    \"type\": \"notification\",\n    \"attributes\": {\n      \"id\": 99,\n      \"body\": \"Quibusdam voluptatibus aut beatae.\"\n    }\n  }\n}",
       "response_headers": {
         "Content-Type": "application/vnd.api+json; charset=utf-8"
       },
