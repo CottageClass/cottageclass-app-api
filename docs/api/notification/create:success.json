@@ -25,18 +25,18 @@
     {
       "request_method": "POST",
       "request_path": "/api/users/33/notifications",
-      "request_body": "{\"notification\":{\"body\":\"Quibusdam voluptatibus aut beatae.\"}}",
+      "request_body": "{\"notification\":{\"body\":\"Vel rerum qui recusandae.\"}}",
       "request_headers": {
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDkzNzY1OTYsInN1YiI6MzN9.BwuQEsDhkp5kAGwKLYiKQ2e2o3xAGfOFdq05oP4DEFY"
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDkzNzk0OTEsInN1YiI6MzN9.VIa-pRs_VEfvUJ4JlC-eHG6NPKE1DrxbBKUa1VMeKPU"
       },
       "request_query_parameters": {
       },
       "request_content_type": "application/json",
       "response_status": 201,
       "response_status_text": "Created",
-      "response_body": "{\n  \"data\": {\n    \"id\": \"99\",\n    \"type\": \"notification\",\n    \"attributes\": {\n      \"id\": 99,\n      \"body\": \"Quibusdam voluptatibus aut beatae.\"\n    }\n  }\n}",
+      "response_body": "{\n  \"data\": {\n    \"id\": \"99\",\n    \"type\": \"notification\",\n    \"attributes\": {\n      \"id\": 99,\n      \"body\": \"Vel rerum qui recusandae.\"\n    }\n  }\n}",
       "response_headers": {
         "Content-Type": "application/vnd.api+json; charset=utf-8"
       },

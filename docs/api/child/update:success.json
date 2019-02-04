@@ -25,18 +25,18 @@
     {
       "request_method": "PUT",
       "request_path": "/api/user/children/1",
-      "request_body": "{\"child\":{\"emergency_contacts_attributes\":[{\"name\":\"Reyes Bauch\",\"phone_number\":\"1-487-434-3838\",\"relationship\":\"reprehenderit\",\"special_needs\":\"In accusamus id exercitationem.\",\"allergies\":[\"nisi\",\"sit\"],\"dietary_restrictions\":[\"ut\",\"quo\"]}]}}",
+      "request_body": "{\"child\":{\"emergency_contacts_attributes\":[{\"name\":\"Blythe Daniel\",\"phone_number\":\"1-742-179-6763\",\"relationship\":\"aperiam\"}]}}",
       "request_headers": {
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDkzNzY1ODIsInN1YiI6MX0.Z782s2us587FWD-asdQ1BFtZMrI_qs2b3mbwtqHbg3A"
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDkzNzk0NzgsInN1YiI6MX0.ApWGK5m_N3vmc4Z2pDO3KveFZu6EWVNlwQGdIE1F0jc"
       },
       "request_query_parameters": {
       },
       "request_content_type": "application/json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\n  \"data\": {\n    \"id\": \"1\",\n    \"type\": \"child\",\n    \"attributes\": {\n      \"first_name\": \"Catalina\",\n      \"school_name\": \"Vertapple High School\",\n      \"age\": 2,\n      \"birthday\": \"2016-02-14\"\n    },\n    \"relationships\": {\n      \"emergency_contacts\": {\n        \"data\": [\n          {\n            \"id\": \"1\",\n            \"type\": \"emergency_contact\"\n          }\n        ]\n      }\n    }\n  },\n  \"included\": [\n    {\n      \"id\": \"1\",\n      \"type\": \"emergency_contact\",\n      \"attributes\": {\n        \"name\": \"Reyes Bauch\",\n        \"phone_number\": \"1-487-434-3838\",\n        \"relationship\": \"reprehenderit\",\n        \"special_needs\": \"In accusamus id exercitationem.\",\n        \"allergies\": [\n          \"nisi\",\n          \"sit\"\n        ],\n        \"dietary_restrictions\": [\n          \"ut\",\n          \"quo\"\n        ]\n      }\n    }\n  ]\n}",
+      "response_body": "{\n  \"data\": {\n    \"id\": \"1\",\n    \"type\": \"child\",\n    \"attributes\": {\n      \"first_name\": \"Andrew\",\n      \"school_name\": \"Ironston High\",\n      \"age\": 3,\n      \"allergies\": [\n        \"quia\",\n        \"saepe\"\n      ],\n      \"dietary_restrictions\": [\n        \"cumque\",\n        \"non\"\n      ],\n      \"special_needs\": \"Quidem sunt veniam quae.\",\n      \"birthday\": \"2015-03-27\"\n    },\n    \"relationships\": {\n      \"emergency_contacts\": {\n        \"data\": [\n          {\n            \"id\": \"1\",\n            \"type\": \"emergency_contact\"\n          }\n        ]\n      }\n    }\n  },\n  \"included\": [\n    {\n      \"id\": \"1\",\n      \"type\": \"emergency_contact\",\n      \"attributes\": {\n        \"name\": \"Blythe Daniel\",\n        \"phone_number\": \"1-742-179-6763\",\n        \"relationship\": \"aperiam\"\n      }\n    }\n  ]\n}",
       "response_headers": {
         "Content-Type": "application/vnd.api+json; charset=utf-8"
       },

@@ -18,8 +18,6 @@ class API::ChildrenController < API::BaseController
   end
 
   def safe_params
-    params.require(:child).permit emergency_contacts_attributes: [
-      :id, :_destroy, :name, :phone_number, :relationship, :special_needs, allergies: [], dietary_restrictions: []
-    ]
+    params.require(:child).permit emergency_contacts_attributes: %i[id _destroy name phone_number relationship]
   end
 end

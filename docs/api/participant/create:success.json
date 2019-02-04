@@ -29,14 +29,14 @@
       "request_headers": {
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDkzNzY1OTYsInN1YiI6Mzl9.iLxq3lLE3udqHnhcs3IKVBgegA3NP46PMASIAJyHaJE"
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDkzNzk0OTEsInN1YiI6Mzl9.KaXa0lXV2jA23HziUZam0wr_vZFgkg4514tqT5iG6xU"
       },
       "request_query_parameters": {
       },
       "request_content_type": "application/json",
       "response_status": 201,
       "response_status_text": "Created",
-      "response_body": "{\n  \"data\": {\n    \"id\": \"65\",\n    \"type\": \"participant\",\n    \"attributes\": {\n      \"user_id\": 39,\n      \"user_facebook_uid\": \"3462181\",\n      \"user_avatar\": \"https://robohash.org/glover-endell.png?size=300x300&set=set1\",\n      \"user_first_name\": \"Glover\",\n      \"user_fuzzy_latitude\": \"40.73229088864\",\n      \"user_fuzzy_longitude\": \"-73.9348883432583\",\n      \"user_locality\": \"South Reena\",\n      \"user_sublocality\": \"Autumn Pointe\",\n      \"user_neighborhood\": \"Bednar Center\",\n      \"user_admin_area_level_1\": \"Michigan\",\n      \"user_admin_area_level_2\": \"Schuppe Field\",\n      \"user_verified\": false,\n      \"event_id\": 477\n    },\n    \"relationships\": {\n      \"participant_children\": {\n        \"data\": [\n          {\n            \"id\": \"129\",\n            \"type\": \"participant_child\"\n          }\n        ]\n      }\n    }\n  },\n  \"included\": [\n    {\n      \"id\": \"129\",\n      \"type\": \"participant_child\",\n      \"attributes\": {\n        \"child_id\": 45,\n        \"child_name\": \"Millard\",\n        \"child_age\": 3\n      }\n    }\n  ]\n}",
+      "response_body": "{\n  \"data\": {\n    \"id\": \"65\",\n    \"type\": \"participant\",\n    \"attributes\": {\n      \"user_id\": 39,\n      \"user_facebook_uid\": \"6837516\",\n      \"user_avatar\": \"https://robohash.org/rulindil-the-lesser.png?size=300x300&set=set1\",\n      \"user_first_name\": \"Rulindil\",\n      \"user_fuzzy_latitude\": \"40.7327708175704\",\n      \"user_fuzzy_longitude\": \"-73.93618876496\",\n      \"user_locality\": \"North Marcelltown\",\n      \"user_sublocality\": \"Eagle Oaks\",\n      \"user_neighborhood\": \"Pacocha Station\",\n      \"user_admin_area_level_1\": \"Florida\",\n      \"user_admin_area_level_2\": \"Franklin Lane\",\n      \"user_verified\": false,\n      \"event_id\": 477\n    },\n    \"relationships\": {\n      \"participant_children\": {\n        \"data\": [\n          {\n            \"id\": \"129\",\n            \"type\": \"participant_child\"\n          }\n        ]\n      }\n    }\n  },\n  \"included\": [\n    {\n      \"id\": \"129\",\n      \"type\": \"participant_child\",\n      \"attributes\": {\n        \"child_id\": 45,\n        \"child_name\": \"Stuart\",\n        \"child_age\": 2\n      }\n    }\n  ]\n}",
       "response_headers": {
         "Content-Type": "application/vnd.api+json; charset=utf-8"
       },
