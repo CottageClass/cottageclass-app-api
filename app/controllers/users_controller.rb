@@ -112,18 +112,12 @@ class UsersController < ApiController
                                  activities: [],
                                  images: [],
                                  languages: [],
-                                 children_attributes: [
-                                   :id,
-                                   :first_name,
-                                   :birthday,
-                                   :school_name,
-                                   :emergency_contact_name,
-                                   :emergency_contact_phone_number,
-                                   :emergency_contact_relationship,
-                                   { allergies: [] },
-                                   { dietary_restrictions: [] },
-                                   :special_needs,
-                                   :_destroy
+                                 children_attributes: %i[
+                                   id
+                                   first_name
+                                   birthday
+                                   school_name
+                                   _destroy
                                  ]
   end
 end

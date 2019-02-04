@@ -39,7 +39,7 @@ group :development, :test do
   gem 'climate_control'
   gem 'database_cleaner'
   gem 'dotenv-rails'
-  gem 'factory_bot_rails'
+  gem 'factory_bot_rails', '~> 4.1'
   gem 'faker'
   gem 'httplog'
   gem 'mry', require: false

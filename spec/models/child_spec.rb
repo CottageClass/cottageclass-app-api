@@ -5,5 +5,6 @@ RSpec.describe Child, type: :model do
 
   context 'associations' do
     it { is_expected.to have_many(:participant_children).inverse_of(:child).dependent(:destroy) }
+    it { is_expected.to have_many(:emergency_contacts).dependent(:destroy) }
   end
 end

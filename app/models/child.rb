@@ -4,6 +4,7 @@ class Child < ApplicationRecord
 
   belongs_to :parent, class_name: 'User', inverse_of: :children
   has_many :participant_children, inverse_of: :child, dependent: :destroy
+  has_many :emergency_contacts, as: :contactable, dependent: :destroy
 
   alias_attribute :user_id, :parent_id
   alias_attribute :name, :first_name

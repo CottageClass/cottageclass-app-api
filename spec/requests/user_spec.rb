@@ -75,15 +75,7 @@ RSpec.resource 'User' do
       let(:linkedin_user) { user_data.linkedin_user }
       let :children_attributes do
         (user.children + user_data.children).map.with_index do |child, index|
-          child_attributes = child.attributes.with_indifferent_access.slice :first_name,
-                                                                            :birthday,
-                                                                            :school_name,
-                                                                            :emergency_contact_name,
-                                                                            :emergency_contact_phone_number,
-                                                                            :emergency_contact_relationship,
-                                                                            :allergies,
-                                                                            :dietary_restrictions,
-                                                                            :special_needs
+          child_attributes = child.attributes.with_indifferent_access.slice :first_name, :birthday, :school_name
           child_attributes.update(id: child.id) if child.persisted?
           child_attributes.update(_destroy: 1) if index.zero?
           child_attributes
