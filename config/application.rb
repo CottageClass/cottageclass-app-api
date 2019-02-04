@@ -28,6 +28,7 @@ module CottageclassAppApi
         origins 'https://localhost:8077',
                 'https://app.cottageclass.com',
                 'https://www.kidsclub.io',
+                'https://kidsclub-develop.herokuapp.com',
                 'https://cottageclass-app-staging.herokuapp.com',
                 'https://cottageclass-app.herokuapp.com',
                 'https://192.168.1.4:8077',

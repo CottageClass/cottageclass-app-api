@@ -108,11 +108,11 @@
     {
       "request_method": "POST",
       "request_path": "/api/event_series",
-      "request_body": "{\"event_series\":{\"name\":null,\"start_date\":\"2019-01-22\",\"starts_at\":\"09:20\",\"ends_at\":\"12:20\",\"maximum_children\":0,\"child_age_minimum\":0,\"child_age_maximum\":0,\"repeat_for\":6,\"interval\":4,\"has_pet\":true,\"activity_names\":[\"bull fighting\"],\"foods\":[\"Pork Belly Buns\"],\"house_rules\":\"Voluptates expedita architecto. Repellendus quis quia. Sunt iste sint.\",\"pet_description\":\"Enim voluptas quod. Officiis modi quo. Temporibus ratione voluptatem.\",\"event_hosts_attributes\":[{\"name\":\"Dexter Wilderman\",\"email\":\"joel_blick@yahoo.com\",\"phone\":\"412-950-8782\"},{\"name\":\"Cristina Russel\",\"email\":\"magdalen@hotmail.com\",\"phone\":\"(923) 172-1166\"}]}}",
+      "request_body": "{\"event_series\":{\"name\":null,\"start_date\":\"2019-01-23\",\"starts_at\":\"16:26\",\"ends_at\":\"19:26\",\"maximum_children\":0,\"child_age_minimum\":0,\"child_age_maximum\":0,\"repeat_for\":6,\"interval\":4,\"has_pet\":true,\"activity_names\":[\"association\"],\"foods\":[\"Cheeseburger\"],\"house_rules\":\"Expedita quis dolorem. Suscipit omnis nihil. Libero magni quis.\",\"pet_description\":\"Accusamus et sit. Aut molestias quia. Veniam fuga eius.\",\"event_hosts_attributes\":[{\"name\":\"Ned Oberbrunner V\",\"email\":\"gavin@hotmail.com\",\"phone\":\"488.061.6868\"},{\"name\":\"Doug Volkman\",\"email\":\"augustus_kub@hotmail.com\",\"phone\":\"933-604-6066\"}]}}",
       "request_headers": {
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDg5MjIwMTYsInN1YiI6Mn0.TiNQsfgYjutyXOfK-GelB5tGwjmq9bkI9bAB7ldaq2E"
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDkzNTI0MDAsInN1YiI6Mn0.2gB8yrF6vd2TZUstvAcgQgr7qJQ6NycdCko7OfiYdt8"
       },
       "request_query_parameters": {
       },

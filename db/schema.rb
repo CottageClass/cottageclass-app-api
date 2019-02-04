@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_29_133802) do
+ActiveRecord::Schema.define(version: 2019_02_04_062452) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,17 +32,25 @@ ActiveRecord::Schema.define(version: 2019_01_29_133802) do
   create_table "children", force: :cascade do |t|
     t.string "first_name"
     t.string "school_name"
-    t.string "emergency_contact_name"
-    t.string "emergency_contact_phone_number"
-    t.string "emergency_contact_relationship"
-    t.text "allergies", default: [], array: true
-    t.text "dietary_restrictions", default: [], array: true
-    t.text "special_needs"
     t.datetime "birthday"
     t.bigint "parent_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["parent_id"], name: "index_children_on_parent_id"
+  end
+
+  create_table "emergency_contacts", force: :cascade do |t|
+    t.string "contactable_type", null: false
+    t.bigint "contactable_id", null: false
+    t.string "name"
+    t.string "phone_number"
+    t.string "relationship"
+    t.text "allergies", default: [], array: true
+    t.text "dietary_restrictions", default: [], array: true
+    t.text "special_needs"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["contactable_type", "contactable_id"], name: "index_emergency_contacts_on_contactable_type_and_contactable_id"
   end
 
   create_table "event_hosts", force: :cascade do |t|
