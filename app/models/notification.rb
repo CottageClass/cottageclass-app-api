@@ -1,4 +1,6 @@
 class Notification < ApplicationRecord
+  store_accessor :meta, :participant
+
   enum kind: {
     direct: 0,
     event_reminder_previous_day_participant: 1,
@@ -11,7 +13,8 @@ class Notification < ApplicationRecord
     participant_creation: 8,
     user_creation: 9,
     participant_creation_next_day: 10,
-    event_destruction: 11
+    event_destruction: 11,
+    participant_creation_host: 12
   }
 
   validates :body, presence: true
@@ -79,6 +82,12 @@ class Notification < ApplicationRecord
                                       event_start_date: notifiable.start_date,
                                       event_time_range: notifiable.time_range
                    Notifier::Base.new user: recipient, body: body
+                 when :participant_creation_host
+                   self.body = 'placeholder for body'
+                   Notifier::ParticipantCreationHost.new user: recipient,
+                                                         event: notifiable,
+                                                         participant: participant,
+                                                         body: body
                  end
 
       if notifier.present?

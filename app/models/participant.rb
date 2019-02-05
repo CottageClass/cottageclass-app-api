@@ -31,6 +31,8 @@ class Participant < ApplicationRecord
 
   def notify
     participable.notifications.participant_creation.where(recipient: user).first_or_create
+    participable.notifications.participant_creation_host.where(recipient: participable.user)
+      .first_or_create participant: self
   end
 
   def next_day_notify
