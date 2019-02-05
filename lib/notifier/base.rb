@@ -32,4 +32,35 @@ class Notifier::Base
     Rails.logger.debug format('method not implemented yet: %s', __method__)
     nil
   end
+
+  protected
+
+  def mail_template_parameters
+    {
+      recipient: @user.attributes.with_indifferent_access.slice(
+        :id,
+        :name,
+        :first_name,
+        :last_name,
+        :avatar,
+        :facebook_id,
+        :fuzzy_latitude,
+        :fuzzy_longitude,
+        :activities,
+        :full_address,
+        :network_code,
+        :profile_blurb,
+        :onboarding_care_type,
+        :job_position,
+        :employer,
+        :highest_education,
+        :school,
+        :instagram_user,
+        :twitter_user,
+        :linkedin_user,
+        :images,
+        :languages
+      )
+    }
+  end
 end
