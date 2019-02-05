@@ -57,11 +57,18 @@ RSpec.describe Event, type: :model do
       end
 
       it 'event_reminder_previous_day_host' do
+        participants = create_list :participant, 2, :with_participant_children, participable: subject
+        participants.each do |participant|
+          participant.participant_children.each do |participant_child|
+            participant_child.child.emergency_contacts = build_list :emergency_contact, 2, contactable: nil
+          end
+        end
+
         Timecop.freeze(24.hours.before(subject.starts_at)) do
           subject.notify
 
           expect(subject.notifications.event_reminder_previous_day_host.count).to eq(1)
-          expect(subject.notifications.count).to eq(1)
+          expect(subject.notifications.count).to eq(6)
         end
       end
 
@@ -86,7 +93,7 @@ RSpec.describe Event, type: :model do
           subject.notify
 
           expect(subject.notifications.event_reminder_previous_day_participant.count).to eq(participants.size)
-          expect(subject.notifications.count).to eq(participants.size * 2 + 1)
+          expect(subject.notifications.count).to eq(participants.size * 2 + 1 + 1)
         end
       end
 
@@ -95,7 +102,7 @@ RSpec.describe Event, type: :model do
           subject.notify
 
           expect(subject.notifications.event_reminder_same_day_participant.count).to eq(participants.size)
-          expect(subject.notifications.count).to eq(participants.size * 2 + 1)
+          expect(subject.notifications.count).to eq(participants.size * 2 + 1 + 1)
         end
       end
 
@@ -104,7 +111,7 @@ RSpec.describe Event, type: :model do
           subject.notify
 
           expect(subject.notifications.event_feedback_participant.count).to eq(participants.size)
-          expect(subject.notifications.count).to eq(participants.size * 2 + 2)
+          expect(subject.notifications.count).to eq(participants.size * 2 + 2 + 1)
         end
       end
     end

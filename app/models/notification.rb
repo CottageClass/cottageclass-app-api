@@ -59,7 +59,7 @@ class Notification < ApplicationRecord
                    self.body = I18n.t 'messages.event_reminder_previous_day_host',
                                       host_first_name: notifiable.host_first_name,
                                       event_time_range: notifiable.time_range
-                   Notifier::Base.new user: recipient, body: body
+                   Notifier::EventReminderPreviousDayHost.new user: recipient, event: notifiable, body: body
                  when :event_feedback_host
                    self.body = I18n.t 'messages.event_feedback_host'
                    Notifier::EventFeedbackHost.new user: recipient, event: notifiable, body: body
