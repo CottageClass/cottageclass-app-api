@@ -11,14 +11,19 @@ class User < ApplicationRecord
   alias_attribute :facebook_id, :facebook_uid
 
   before_validation :cleanup
+  after_validation :geocode, if: lambda { |instance|
+    instance.full_address.present? && (instance.latitude.blank? || instance.longitude.blank?)
+  }
   before_save :obfuscate_location, :generate_time_zone,
               if: proc { |instance| instance.latitude_changed? || instance.longitude_changed? }
-
   before_create do
     populate_full_name!
     populate_fname_from_name!
     populate_lname_from_name!
   end
+  after_create :notify
+
+  geocoded_by :full_address
 
   with_options if: proc { |instance| instance.direct == true } do
     validates :password, presence: true
@@ -52,8 +57,6 @@ class User < ApplicationRecord
 
   scope :in_network, ->(code) { where network_code: code }
 
-  after_create :notify
-
   def child_ages
     children.map(&:age)
   end
@@ -67,9 +70,13 @@ class User < ApplicationRecord
   end
 
   def full_address
-    admin_area_level_2_str = admin_area_level_2 ? ", #{admin_area_level_2}" : ''
-
-    "#{street_number} #{route}, #{locality}, #{admin_area_level_1}#{admin_area_level_2_str}, #{country} #{postal_code}"
+    [
+      [street_number, route].compact.map(&:squish).select(&:present?).join(' '),
+      locality,
+      admin_area_level_1,
+      admin_area_level_2,
+      [country, postal_code].compact.map(&:squish).select(&:present?).join(' ')
+    ].compact.map(&:squish).select(&:present?).join(', ')
   end
 
   def facebook_token_expired?
@@ -110,6 +117,9 @@ class User < ApplicationRecord
 
   def obfuscate_location
     location = if (latitude.present? && latitude.nonzero?) && (longitude.present? && longitude.nonzero?)
+                 # update dependent events
+                 events.update_all latitude: latitude, longitude: longitude
+
                  Locator.obfuscate latitude: latitude, longitude: longitude
                else
                  { fuzzy_latitude: nil, fuzzy_longitude: nil }

@@ -4,8 +4,11 @@ class API::EventsController < API::BaseController
   before_action :requires_event_owner, only: %i[update destroy]
 
   def index
-    events_index events: Event,
+    events_index events: Event.includes(:user, :event_hosts),
                  skope: params[:skope],
+                 miles: params[:miles],
+                 latitude: params[:latitude],
+                 longitude: params[:longitude],
                  page: params[:page],
                  page_size: params[:page_size],
                  path: proc { |**parameters| index_api_events_path parameters }
@@ -14,6 +17,9 @@ class API::EventsController < API::BaseController
   def created
     events_index events: current_user.events,
                  skope: params[:skope],
+                 miles: params[:miles],
+                 latitude: params[:latitude],
+                 longitude: params[:longitude],
                  page: params[:page],
                  page_size: params[:page_size],
                  path: proc { |**parameters| created_events_api_user_path parameters }
@@ -22,6 +28,9 @@ class API::EventsController < API::BaseController
   def participated
     events_index events: current_user.participated_events,
                  skope: params[:skope],
+                 miles: params[:miles],
+                 latitude: params[:latitude],
+                 longitude: params[:longitude],
                  page: params[:page],
                  page_size: params[:page_size],
                  path: proc { |**parameters| participated_events_api_user_path parameters }
@@ -60,11 +69,20 @@ class API::EventsController < API::BaseController
 
   private
 
-  def events_index(events:, skope:, page:, page_size:, path:)
+  def events_index(events:, skope:, miles:, latitude:, longitude:, page:, page_size:, path:)
     skope ||= 'all'
     events = events.send skope
+
+    miles = miles.to_i
+    if miles.positive?
+      location = []
+      location = [latitude, longitude] if [latitude, longitude].all?(&:present?)
+      location = [current_user.latitude, current_user.longitude] if location.blank? && current_user.present?
+      events = events.near(location.map(&:to_f), miles) if location.all?(&:present?)
+    end
+
     links = {}
-    meta = { events_count: events.count }
+    meta = { events_count: events.count(:all) }
     if page.present?
       page_size ||= 10
       events = events.page(page).per page_size

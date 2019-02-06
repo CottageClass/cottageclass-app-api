@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_04_145751) do
+ActiveRecord::Schema.define(version: 2019_02_06_055919) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -114,9 +114,12 @@ ActiveRecord::Schema.define(version: 2019_02_04_145751) do
     t.text "house_rules"
     t.text "pet_description"
     t.json "meta"
+    t.decimal "latitude"
+    t.decimal "longitude"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["event_series_id"], name: "index_events_on_event_series_id"
+    t.index ["latitude", "longitude"], name: "index_events_on_latitude_and_longitude"
   end
 
   create_table "messages", force: :cascade do |t|

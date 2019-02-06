@@ -1,6 +1,12 @@
 class Event < ApplicationRecord
   include Eventable
 
+  geocoded_by :host_full_address
+
+  before_validation :cleanup
+  after_validation :geocode, if: lambda { |instance|
+    instance.host_full_address.present? && (instance.latitude.blank? || instance.longitude.blank?)
+  }
   before_destroy :notify_participants_destruction
 
   belongs_to :event_series, inverse_of: :events
@@ -22,7 +28,7 @@ class Event < ApplicationRecord
   }
 
   delegate :id, :facebook_uid, :avatar, :first_name, :fuzzy_latitude, :fuzzy_longitude, :locality, :sublocality,
-           :neighborhood, :admin_area_level_1, :admin_area_level_2, :child_ages, :verified,
+           :neighborhood, :admin_area_level_1, :admin_area_level_2, :child_ages, :verified, :full_address,
            to: :user, prefix: :host, allow_nil: true
 
   def full?
@@ -79,5 +85,10 @@ class Event < ApplicationRecord
     participants.each do |participant|
       participant.user.notifications.event_destruction.where(notifiable: self).first_or_create
     end
+  end
+
+  def cleanup
+    self.latitude = user.try(:latitude) unless latitude.present? && latitude.nonzero?
+    self.longitude = user.try(:longitude) unless longitude.present? && longitude.nonzero?
   end
 end

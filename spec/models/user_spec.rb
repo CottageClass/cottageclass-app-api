@@ -29,6 +29,31 @@ RSpec.describe User, type: :model do
     it { expect { subject.save }.to change(Notification.user_creation, :count).from(0).to(1) }
   end
 
+  context 'update' do
+    before { subject.save }
+
+    let(:new_latitude) { 37.773972 }
+    let(:new_longitude) { -122.431297 }
+
+    it 'updates dependent events' do
+      create :event_series, :with_event_hosts, user: subject
+
+      subject.events.reload.each do |event|
+        expect(event.latitude).to eq(subject.latitude)
+        expect(event.latitude).not_to eq(new_latitude)
+        expect(event.longitude).to eq(subject.longitude)
+        expect(event.longitude).not_to eq(new_longitude)
+      end
+
+      subject.update latitude: new_latitude, longitude: new_longitude
+
+      subject.events.reload.each do |event|
+        expect(event.latitude).to eq(new_latitude)
+        expect(event.longitude).to eq(new_longitude)
+      end
+    end
+  end
+
   context 'inquiries' do
     it 'returns users who have messaged the user for childcare' do
       parent1 = FactoryBot.create(:user)

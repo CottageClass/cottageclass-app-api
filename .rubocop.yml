@@ -49,6 +49,8 @@ Metrics/LineLength:
 Metrics/MethodLength:
   Max: 50
   Enabled: false
+Metrics/ParameterLists:
+  Enabled: false
 Metrics/PerceivedComplexity:
   Enabled: false
 

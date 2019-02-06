@@ -8,10 +8,13 @@ Rails.application.routes.draw do
         collection { delete :index, to: 'participants#destroy' }
       end
       collection do
-        get '(/:skope)(/page/:page/page_size/:page_size)', to: 'events#index',
-                                                           skope: /upcoming|past/i,
-                                                           defaults: { skope: 'all' },
-                                                           as: :index
+        get '(/:skope)(/miles/:miles(/latitude/:latitude/longitude/:longitude))(/page/:page/page_size/:page_size)',
+            to: 'events#index',
+            skope: /upcoming|past/i,
+            latitude: /-?+(?=.??\d)\d*\.?\d*/,
+            longitude: /-?+(?=.??\d)\d*\.?\d*/,
+            defaults: { skope: 'all' },
+            as: :index
       end
     end
     resources :users, only: %i[] do

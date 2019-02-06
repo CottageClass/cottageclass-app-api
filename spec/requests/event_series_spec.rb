@@ -84,7 +84,7 @@ RSpec.resource 'EventSeries' do
         end
 
         example 'show:failure' do
-          do_request id: Faker::Number.number(2)
+          do_request id: Faker::Number.number
           expect(response_status).to eq(404)
         end
       end

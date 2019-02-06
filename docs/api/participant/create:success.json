@@ -29,14 +29,14 @@
       "request_headers": {
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDkzNzk0OTEsInN1YiI6Mzl9.KaXa0lXV2jA23HziUZam0wr_vZFgkg4514tqT5iG6xU"
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDk1MzI0NzQsInN1YiI6Mzl9.hbXBFaCKLpdi7-X9Ylxkn-Faqa2maO_qBSl_f-7lHLQ"
       },
       "request_query_parameters": {
       },
       "request_content_type": "application/json",
       "response_status": 201,
       "response_status_text": "Created",
-      "response_body": "{\n  \"data\": {\n    \"id\": \"65\",\n    \"type\": \"participant\",\n    \"attributes\": {\n      \"user_id\": 39,\n      \"user_facebook_uid\": \"6837516\",\n      \"user_avatar\": \"https://robohash.org/rulindil-the-lesser.png?size=300x300&set=set1\",\n      \"user_first_name\": \"Rulindil\",\n      \"user_fuzzy_latitude\": \"40.7327708175704\",\n      \"user_fuzzy_longitude\": \"-73.93618876496\",\n      \"user_locality\": \"North Marcelltown\",\n      \"user_sublocality\": \"Eagle Oaks\",\n      \"user_neighborhood\": \"Pacocha Station\",\n      \"user_admin_area_level_1\": \"Florida\",\n      \"user_admin_area_level_2\": \"Franklin Lane\",\n      \"user_verified\": false,\n      \"event_id\": 477\n    },\n    \"relationships\": {\n      \"participant_children\": {\n        \"data\": [\n          {\n            \"id\": \"129\",\n            \"type\": \"participant_child\"\n          }\n        ]\n      }\n    }\n  },\n  \"included\": [\n    {\n      \"id\": \"129\",\n      \"type\": \"participant_child\",\n      \"attributes\": {\n        \"child_id\": 45,\n        \"child_name\": \"Stuart\",\n        \"child_age\": 2\n      }\n    }\n  ]\n}",
+      "response_body": "{\n  \"data\": {\n    \"id\": \"65\",\n    \"type\": \"participant\",\n    \"attributes\": {\n      \"user_id\": 39,\n      \"user_facebook_uid\": \"3520872\",\n      \"user_avatar\": \"https://robohash.org/maliq-mallory.png?size=300x300&set=set1\",\n      \"user_first_name\": \"Maliq\",\n      \"user_fuzzy_latitude\": \"40.7329275351381\",\n      \"user_fuzzy_longitude\": \"-73.9341338675119\",\n      \"user_locality\": \"West Dena\",\n      \"user_sublocality\": \"Willow Oaks\",\n      \"user_neighborhood\": \"Keven Shore\",\n      \"user_admin_area_level_1\": \"Connecticut\",\n      \"user_admin_area_level_2\": \"Nikolaus Tunnel\",\n      \"user_verified\": false,\n      \"event_id\": 477\n    },\n    \"relationships\": {\n      \"participant_children\": {\n        \"data\": [\n          {\n            \"id\": \"129\",\n            \"type\": \"participant_child\"\n          }\n        ]\n      }\n    }\n  },\n  \"included\": [\n    {\n      \"id\": \"129\",\n      \"type\": \"participant_child\",\n      \"attributes\": {\n        \"child_id\": 45,\n        \"child_name\": \"Erik\",\n        \"child_age\": 4\n      }\n    }\n  ]\n}",
       "response_headers": {
         "Content-Type": "application/vnd.api+json; charset=utf-8"
       },

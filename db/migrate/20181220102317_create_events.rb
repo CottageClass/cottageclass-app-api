@@ -1,5 +1,5 @@
 class CreateEvents < ActiveRecord::Migration[5.2]
-  def up
+  def change
     create_table :events do |t|
       t.references :event_series, null: false
       t.string :name, null: false
@@ -10,13 +10,9 @@ class CreateEvents < ActiveRecord::Migration[5.2]
       t.text :activity_names, :foods, array: true, default: []
       t.text :house_rules, :pet_description
       t.json :meta
+      t.decimal :latitude, :longitude
       t.timestamps null: true
+      t.index %i[latitude longitude]
     end
-    add_column(:children, :school_name, :string) unless column_exists?(:children, :school_name)
-  end
-
-  def down
-    remove_column(:children, :school_name, :string) if column_exists?(:children, :school_name)
-    drop_table :events
   end
 end

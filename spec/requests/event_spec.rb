@@ -9,8 +9,11 @@ RSpec.resource 'Event' do
   context 'index' do
     before { create_list :event_series, 5, :with_event_hosts, user: user }
 
-    get '/api/events/:skope', format: :json do
+    get '/api/events/:skope/miles/:miles/latitude/:latitude/longitude/:longitude', format: :json do
       let(:skope) { nil }
+      let(:miles) { 10 }
+      let(:latitude) { user.latitude }
+      let(:longitude) { user.longitude }
 
       [nil, 'past', 'upcoming'].each do |skope|
         name = skope || 'all'
@@ -18,6 +21,8 @@ RSpec.resource 'Event' do
           let(:skope) { skope }
 
           example format('%s:success', name), document: false do
+            explanation ':miles, :latitude and :longitude are optional parameters.'\
+            'If :miles is available, but :latitude or :longitude are not, tries using authenticated user\'s location'
             do_request
             expect(response_status).to eq(200)
           end
