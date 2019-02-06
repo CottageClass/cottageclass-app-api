@@ -18,6 +18,13 @@ Rails.application.routes.draw do
       end
     end
     resources :users, only: %i[] do
+      collection do
+        get '(/miles/:miles(/latitude/:latitude/longitude/:longitude))(/page/:page/page_size/:page_size)',
+            to: 'users#index',
+            latitude: /-?+(?=.??\d)\d*\.?\d*/,
+            longitude: /-?+(?=.??\d)\d*\.?\d*/,
+            as: :index
+      end
       resources :notifications, only: %i[create]
     end
     resource :user, only: %i[] do

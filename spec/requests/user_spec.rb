@@ -9,6 +9,35 @@ RSpec.resource 'User' do
   context 'read operations' do
     before { user.save }
 
+    get '/api/users/page/:page/page_size/:page_size',
+        format: :json do
+      include_context 'authorization token'
+
+      let(:page) { 1 }
+      let(:page_size) { 10 }
+
+      example_request 'paginated:success' do
+        expect(response_status).to eq(200)
+        expect(json_body.fetch('data', []).map { |u| u.dig('attributes', 'phone') }.compact).to be_blank
+      end
+    end
+
+    get '/api/users/miles/:miles/latitude/:latitude/longitude/:longitude/page/:page/page_size/:page_size',
+        format: :json do
+      include_context 'authorization token'
+
+      let(:miles) { 10 }
+      let(:latitude) { user.latitude }
+      let(:longitude) { user.longitude }
+      let(:page) { 1 }
+      let(:page_size) { 10 }
+
+      example_request 'nearby:success' do
+        expect(response_status).to eq(200)
+        expect(json_body.fetch('data', []).map { |u| u.dig('attributes', 'phone') }.compact).to be_blank
+      end
+    end
+
     get '/networks/:network_code/users', format: :json do
       include_context 'authorization token'
       let(:network_code) { user.network_code }

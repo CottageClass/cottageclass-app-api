@@ -1,4 +1,6 @@
 class UserInNetworkSerializer < BaseSerializer
+  set_type :user
+
   has_many :children
   has_many :user_reviews
 

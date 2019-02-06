@@ -168,6 +168,20 @@
           "method": "get"
         },
         {
+          "description": "nearby:success",
+          "link": "user/nearby:success.json",
+          "groups": "all",
+          "route": "/api/users/miles/:miles/latitude/:latitude/longitude/:longitude/page/:page/page_size/:page_size",
+          "method": "get"
+        },
+        {
+          "description": "paginated:success",
+          "link": "user/paginated:success.json",
+          "groups": "all",
+          "route": "/api/users/page/:page/page_size/:page_size",
+          "method": "get"
+        },
+        {
           "description": "show:success",
           "link": "user/show:success.json",
           "groups": "all",

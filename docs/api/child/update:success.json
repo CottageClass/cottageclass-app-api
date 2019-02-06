@@ -24,19 +24,19 @@
   "requests": [
     {
       "request_method": "PUT",
-      "request_path": "/api/user/children/2",
-      "request_body": "{\"child\":{\"emergency_contacts_attributes\":[{\"name\":\"Sindy Prosacco\",\"phone_number\":\"783-575-5478\",\"relationship\":\"et\"}]}}",
+      "request_path": "/api/user/children/1",
+      "request_body": "{\"child\":{\"emergency_contacts_attributes\":[{\"name\":\"Fred Hagenes IV\",\"phone_number\":\"1-794-207-6167\",\"relationship\":\"impedit\"}]}}",
       "request_headers": {
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDk1MzI0NjIsInN1YiI6MX0.hMLhW7YgMpy50y5XqI-wTshwRkG2b1qkLdA-9Eh4B8w"
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDk1MzgxNjMsInN1YiI6MX0.XgVmlEsosp4cr3llSzfP_NjCpUMH-tFJjI5vzypUJSM"
       },
       "request_query_parameters": {
       },
       "request_content_type": "application/json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\n  \"data\": {\n    \"id\": \"2\",\n    \"type\": \"child\",\n    \"attributes\": {\n      \"first_name\": \"Hoyt\",\n      \"school_name\": \"Bluemeadow High\",\n      \"age\": 2,\n      \"allergies\": [\n        \"harum\",\n        \"repudiandae\"\n      ],\n      \"dietary_restrictions\": [\n        \"excepturi\",\n        \"quasi\"\n      ],\n      \"special_needs\": \"Sed quis nisi quos.\",\n      \"birthday\": \"2016-09-30\"\n    },\n    \"relationships\": {\n      \"emergency_contacts\": {\n        \"data\": [\n          {\n            \"id\": \"1\",\n            \"type\": \"emergency_contact\"\n          }\n        ]\n      }\n    }\n  },\n  \"included\": [\n    {\n      \"id\": \"1\",\n      \"type\": \"emergency_contact\",\n      \"attributes\": {\n        \"name\": \"Sindy Prosacco\",\n        \"phone_number\": \"783-575-5478\",\n        \"relationship\": \"et\"\n      }\n    }\n  ]\n}",
+      "response_body": "{\n  \"data\": {\n    \"id\": \"1\",\n    \"type\": \"child\",\n    \"attributes\": {\n      \"first_name\": \"Kiley\",\n      \"school_name\": \"Icelyn High\",\n      \"age\": 5,\n      \"allergies\": [\n        \"tempore\",\n        \"iusto\"\n      ],\n      \"dietary_restrictions\": [\n        \"sed\",\n        \"non\"\n      ],\n      \"special_needs\": \"Modi officiis occaecati nostrum.\",\n      \"birthday\": \"2013-08-30\"\n    },\n    \"relationships\": {\n      \"emergency_contacts\": {\n        \"data\": [\n          {\n            \"id\": \"1\",\n            \"type\": \"emergency_contact\"\n          }\n        ]\n      }\n    }\n  },\n  \"included\": [\n    {\n      \"id\": \"1\",\n      \"type\": \"emergency_contact\",\n      \"attributes\": {\n        \"name\": \"Fred Hagenes IV\",\n        \"phone_number\": \"1-794-207-6167\",\n        \"relationship\": \"impedit\"\n      }\n    }\n  ]\n}",
       "response_headers": {
         "Content-Type": "application/vnd.api+json; charset=utf-8"
       },
