@@ -25,18 +25,18 @@
     {
       "request_method": "POST",
       "request_path": "/api/users/33/notifications",
-      "request_body": "{\"notification\":{\"body\":\"Et ut dolorem alias.\"}}",
+      "request_body": "{\"notification\":{\"body\":\"Eveniet voluptates mollitia vitae.\"}}",
       "request_headers": {
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDk1MzgxNzYsInN1YiI6MzN9.SFIRw9F3pi7eGQu31X_SmonMDMzPCF6GllkiTCLaMk8"
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDk5NzU4ODcsInN1YiI6MzN9.dmpfTi0k2ZALyFa-DYqKq9gdQeyZgNiQSl_mwVIO67I"
       },
       "request_query_parameters": {
       },
       "request_content_type": "application/json",
       "response_status": 201,
       "response_status_text": "Created",
-      "response_body": "{\n  \"data\": {\n    \"id\": \"161\",\n    \"type\": \"notification\",\n    \"attributes\": {\n      \"id\": 161,\n      \"body\": \"Et ut dolorem alias.\"\n    }\n  }\n}",
+      "response_body": "{\n  \"data\": {\n    \"id\": \"161\",\n    \"type\": \"notification\",\n    \"attributes\": {\n      \"id\": 161,\n      \"body\": \"Eveniet voluptates mollitia vitae.\"\n    }\n  }\n}",
       "response_headers": {
         "Content-Type": "application/vnd.api+json; charset=utf-8"
       },

@@ -1,5 +1,6 @@
 class API::UsersController < API::BaseController
   before_action :authenticate_user
+  before_action :load_user, only: %i[show]
 
   def index
     users_index users: User.includes(:children, user_reviews: :reviewer),
@@ -9,6 +10,11 @@ class API::UsersController < API::BaseController
                 page: params[:page],
                 page_size: params[:page_size],
                 path: proc { |**parameters| index_api_users_path parameters }
+  end
+
+  def show
+    serializer = UserBaseSerializer.new @user, params: { current_user: current_user }
+    render json: serializer.serializable_hash, status: :ok
   end
 
   private
@@ -38,5 +44,10 @@ class API::UsersController < API::BaseController
                                                     links: links,
                                                     meta: meta
     render json: serializer.serializable_hash, status: :ok
+  end
+
+  def load_user
+    @user = User.find_by id: params[:id]
+    render(json: {}, status: :not_found) if @user.blank?
   end
 end

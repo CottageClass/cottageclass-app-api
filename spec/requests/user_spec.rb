@@ -48,18 +48,16 @@ RSpec.resource 'User' do
       end
     end
 
-    get '/users/:id', format: :json do
-      before { create :emergency_contact, contactable: user.children.sample }
-
+    get '/api/users/:id', format: :json do
       let(:id) { user.id }
 
       context 'authorized' do
         include_context 'authorization token'
 
         example_request 'show:success' do
-          expect((json_body.dig('included') || []).map { |included| included.dig('attributes', 'first_name') }.compact)
-            .not_to be_blank
           expect(response_status).to eq(200)
+          expect(json_body.dig('data', 'attributes').deep_symbolize_keys.keys).to \
+            contain_exactly(*User::PUBLIC_ATTRIBUTES)
         end
       end
 

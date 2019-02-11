@@ -185,7 +185,7 @@
           "description": "show:success",
           "link": "user/show:success.json",
           "groups": "all",
-          "route": "/users/:id",
+          "route": "/api/users/:id",
           "method": "get"
         },
         {

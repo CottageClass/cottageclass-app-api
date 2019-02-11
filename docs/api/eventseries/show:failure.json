@@ -18,12 +18,12 @@
   "requests": [
     {
       "request_method": "GET",
-      "request_path": "/api/event_series/7181519830",
+      "request_path": "/api/event_series/5027706871",
       "request_body": null,
       "request_headers": {
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDk1MzgxNjQsInN1YiI6Nn0.Reih0p00qW__XFem9zV4AnkzzIkFN-PGz7KgIv_xWIo"
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDk5NzU4NzYsInN1YiI6Nn0.Cm7pcWs9w2G9ygZKBc6_BdBstTnTh3RydBjlDnhil0A"
       },
       "request_query_parameters": {
         "{}": null

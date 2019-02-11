@@ -10,6 +10,11 @@ class User < ApplicationRecord
 
   alias_attribute :facebook_id, :facebook_uid
 
+  PUBLIC_ATTRIBUTES = %i[
+    id facebook_uid avatar first_name verified fuzzy_latitude fuzzy_longitude locality sublocality neighborhood
+    admin_area_level_1 admin_area_level_2 child_ages created_at
+  ].freeze
+
   before_validation :cleanup
   after_validation :geocode, if: lambda { |instance|
     instance.full_address.present? && (instance.latitude.blank? || instance.longitude.blank?)

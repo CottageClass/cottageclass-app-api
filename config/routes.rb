@@ -17,7 +17,7 @@ Rails.application.routes.draw do
             as: :index
       end
     end
-    resources :users, only: %i[] do
+    resources :users, only: %i[show] do
       collection do
         get '(/miles/:miles(/latitude/:latitude/longitude/:longitude))(/page/:page/page_size/:page_size)',
             to: 'users#index',

@@ -108,11 +108,11 @@
     {
       "request_method": "POST",
       "request_path": "/api/event_series",
-      "request_body": "{\"event_series\":{\"name\":null,\"start_date\":\"2019-01-23\",\"starts_at\":\"10:06\",\"ends_at\":\"13:06\",\"maximum_children\":0,\"child_age_minimum\":0,\"child_age_maximum\":0,\"repeat_for\":6,\"interval\":4,\"has_pet\":true,\"activity_names\":[\"league\"],\"foods\":[\"Chilli con Carne\"],\"house_rules\":\"Aliquam quis vel. In dignissimos rerum. Voluptates repellat perspiciatis.\",\"pet_description\":\"Repudiandae ut odio. Corporis minima qui. Qui reiciendis illo.\",\"event_hosts_attributes\":[{\"name\":\"Cesar Renner\",\"email\":\"dannielle@gmail.com\",\"phone\":\"438-955-2784\"},{\"name\":\"Vance Funk\",\"email\":\"cristopher_ernser@gmail.com\",\"phone\":\"1-658-085-9551\"}]}}",
+      "request_body": "{\"event_series\":{\"name\":null,\"start_date\":\"2019-02-04\",\"starts_at\":\"04:45\",\"ends_at\":\"07:45\",\"maximum_children\":0,\"child_age_minimum\":0,\"child_age_maximum\":0,\"repeat_for\":6,\"interval\":4,\"has_pet\":true,\"activity_names\":[\"water polo\"],\"foods\":[\"Teriyaki Chicken Donburi\"],\"house_rules\":\"Ea quis minima. Consectetur quos vel. Eos consectetur quisquam.\",\"pet_description\":\"Voluptates explicabo aliquam. Delectus unde beatae. Ut laborum et.\",\"event_hosts_attributes\":[{\"name\":\"Jutta Zboncak Jr.\",\"email\":\"gerardo@yahoo.com\",\"phone\":\"290.223.2550\"},{\"name\":\"Linsey Kilback\",\"email\":\"scot.bosco@gmail.com\",\"phone\":\"711-195-5988\"}]}}",
       "request_headers": {
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDk1MzgxNjMsInN1YiI6M30.JLoS-TNKKYOuFCRqWMA_GHjuYaDRnLxqMcjPkTX1xyg"
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDk5NzU4NzUsInN1YiI6M30.BJyUTNkaravkoqpA3GJGZH3lOHV9ZNLjPDtpDevgjsM"
       },
       "request_query_parameters": {
       },

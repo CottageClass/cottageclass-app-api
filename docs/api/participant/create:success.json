@@ -29,14 +29,14 @@
       "request_headers": {
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDk1MzgxNzYsInN1YiI6Mzl9.HdbgPO0I7dUGc1VxZVoreARAhcZW26nqRQA-z3eoeBw"
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDk5NzU4ODgsInN1YiI6Mzl9.ty2doUli6flVw432Z3XKcO9JP_f84dfxV-ilLJxjjEQ"
       },
       "request_query_parameters": {
       },
       "request_content_type": "application/json",
       "response_status": 201,
       "response_status_text": "Created",
-      "response_body": "{\n  \"data\": {\n    \"id\": \"65\",\n    \"type\": \"participant\",\n    \"attributes\": {\n      \"user_id\": 39,\n      \"user_facebook_uid\": \"9904706\",\n      \"user_avatar\": \"https://robohash.org/ravyn-the-unbroken.png?size=300x300&set=set1\",\n      \"user_first_name\": \"Ravyn\",\n      \"user_fuzzy_latitude\": \"40.7308808934643\",\n      \"user_fuzzy_longitude\": \"-73.9333177623365\",\n      \"user_locality\": \"West Kira\",\n      \"user_sublocality\": \"Paradise Place\",\n      \"user_neighborhood\": \"Morar Ways\",\n      \"user_admin_area_level_1\": \"Texas\",\n      \"user_admin_area_level_2\": \"Geraldine Valleys\",\n      \"user_verified\": false,\n      \"event_id\": 477\n    },\n    \"relationships\": {\n      \"participant_children\": {\n        \"data\": [\n          {\n            \"id\": \"129\",\n            \"type\": \"participant_child\"\n          }\n        ]\n      }\n    }\n  },\n  \"included\": [\n    {\n      \"id\": \"129\",\n      \"type\": \"participant_child\",\n      \"attributes\": {\n        \"child_id\": 45,\n        \"child_name\": \"Williams\",\n        \"child_age\": 2\n      }\n    }\n  ]\n}",
+      "response_body": "{\n  \"data\": {\n    \"id\": \"65\",\n    \"type\": \"participant\",\n    \"attributes\": {\n      \"user_id\": 39,\n      \"user_facebook_uid\": \"9641249\",\n      \"user_avatar\": \"https://robohash.org/gulum-ei-the-fleet.png?size=300x300&set=set1\",\n      \"user_first_name\": \"Gulum-Ei\",\n      \"user_fuzzy_latitude\": \"40.731917066965\",\n      \"user_fuzzy_longitude\": \"-73.933125230409\",\n      \"user_locality\": \"North Jeannafurt\",\n      \"user_sublocality\": \"Park Creek\",\n      \"user_neighborhood\": \"Balistreri Pass\",\n      \"user_admin_area_level_1\": \"New York\",\n      \"user_admin_area_level_2\": \"Dina Ways\",\n      \"user_verified\": false,\n      \"event_id\": 477\n    },\n    \"relationships\": {\n      \"participant_children\": {\n        \"data\": [\n          {\n            \"id\": \"129\",\n            \"type\": \"participant_child\"\n          }\n        ]\n      }\n    }\n  },\n  \"included\": [\n    {\n      \"id\": \"129\",\n      \"type\": \"participant_child\",\n      \"attributes\": {\n        \"child_id\": 45,\n        \"child_name\": \"Hortencia\",\n        \"child_age\": 2\n      }\n    }\n  ]\n}",
       "response_headers": {
         "Content-Type": "application/vnd.api+json; charset=utf-8"
       },
