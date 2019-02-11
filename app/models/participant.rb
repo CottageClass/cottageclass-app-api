@@ -36,7 +36,7 @@ class Participant < ApplicationRecord
   end
 
   def next_day_notify
-    if Time.current >= 1.day.since(created_at)
+    if (Time.current >= 1.day.since(created_at)) && (1.day.since(created_at) < participable.starts_at)
       participable.notifications.participant_creation_next_day.where(recipient: user).first_or_create
     end
   end
