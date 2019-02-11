@@ -93,8 +93,8 @@ GEM
       public_suffix (>= 2.0.2, < 4.0)
     airbrake (8.0.1)
       airbrake-ruby (~> 3.0)
-    airbrake-ruby (3.2.0)
-      rbtree3 (~> 0.5.0)
+    airbrake-ruby (3.1.0)
+      tdigest (= 0.1.1)
     apitome (0.2.1)
       kramdown
       railties
@@ -270,7 +270,7 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.10.0)
       ffi (~> 1.0)
-    rbtree3 (0.5.0)
+    rbtree (0.4.2)
     ref (2.0.0)
     request_store (1.4.1)
       rack (>= 1.4)
@@ -356,6 +356,8 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    tdigest (0.1.1)
+      rbtree (~> 0.4.2)
     therubyracer (0.12.3)
       libv8 (~> 3.16.14.15)
       ref
@@ -394,6 +396,7 @@ DEPENDENCIES
   activeadmin_addons
   addressable
   airbrake
+  airbrake-ruby (= 3.1.0)
   apitome
   brakeman
   bullet

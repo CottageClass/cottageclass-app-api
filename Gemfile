@@ -27,6 +27,7 @@ gem 'sassc-rails'
 
 group :production do
   gem 'airbrake'
+  gem 'airbrake-ruby', '3.1.0'
   gem 'lograge'
   gem 'newrelic_rpm'
   gem 'puma-heroku'
