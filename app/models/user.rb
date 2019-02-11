@@ -61,6 +61,10 @@ class User < ApplicationRecord
     children.map(&:age)
   end
 
+  def child_names
+    children.map(&:first_name)
+  end
+
   def phone(country_code = false)
     return nil if phone_number.blank?
 
@@ -134,7 +138,6 @@ class User < ApplicationRecord
 
   def child_with_same_name_exists?(child_attributes)
     if new_record?
-      child_names = children.pluck :first_name
       child_names.include? child_attributes[:first_name]
     else
       false
