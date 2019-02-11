@@ -12,6 +12,7 @@ gem 'inherited_resources', github: 'activeadmin/inherited_resources', ref: 'db6e
 gem 'knock', github: 'ngty/knock', ref: '9e9416c3745fc5e8fa73bbb901b69729d45aef9b'
 gem 'koala'
 gem 'pg'
+gem 'phony'
 gem 'puma_worker_killer'
 gem 'rack-cors', require: 'rack/cors'
 gem 'rails', '~> 5.2.2'

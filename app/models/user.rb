@@ -64,9 +64,8 @@ class User < ApplicationRecord
   def phone(country_code = false)
     return nil if phone_number.blank?
 
-    formatted_ph = "(#{phone_area_code}) #{phone_number[0..2]}-#{phone_number[3..-1]}"
-    formatted_ph = "+#{phone_country_code} #{formatted_ph}" if country_code
-    formatted_ph
+    Phony.format [phone_country_code, phone_area_code, phone_number].join(''),
+                 format: (false.eql?(country_code) ? :national : :international)
   end
 
   def full_address

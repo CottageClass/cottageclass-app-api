@@ -65,7 +65,8 @@ class Notifier::EventReminderPreviousDayHost < Notifier::Base
         participant_child_hash.update age: participant_child.child.age, emergency_contacts: emergency_contact_hash_array
       end
 
-      participant_user_hash.update participant_children: participant_user_children_hash_array
+      participant_user_hash.update participant_children: participant_user_children_hash_array,
+                                   phone: participant.user.phone
     end
     event_hash.update start_date: @event.start_date,
                       time_range: @event.time_range,

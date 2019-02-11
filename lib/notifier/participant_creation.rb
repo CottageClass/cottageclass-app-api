@@ -32,21 +32,24 @@ class Notifier::ParticipantCreation < Notifier::Base
                                                                  :house_rules,
                                                                  :pet_description
 
-    host_hash = @event.user.attributes.with_indifferent_access.slice(
-      :id,
-      :facebook_uid,
-      :avatar,
-      :first_name,
-      :verified,
-      :fuzzy_latitude,
-      :fuzzy_longitude,
-      :locality,
-      :sublocality,
-      :neighborhood,
-      :admin_area_level_1,
-      :admin_area_level_2,
-      :child_ages
-    )
+    host_hash = @event.user.attributes.with_indifferent_access.slice :id,
+                                                                     :facebook_uid,
+                                                                     :avatar,
+                                                                     :first_name,
+                                                                     :verified,
+                                                                     :fuzzy_latitude,
+                                                                     :fuzzy_longitude,
+                                                                     :apartment_number,
+                                                                     :street_number,
+                                                                     :route,
+                                                                     :locality,
+                                                                     :sublocality,
+                                                                     :neighborhood,
+                                                                     :country,
+                                                                     :postal_code,
+                                                                     :admin_area_level_1,
+                                                                     :admin_area_level_2,
+                                                                     :child_ages
     host_hash.update full_address: @event.user.full_address
 
     event_hash.update start_date: @event.start_date,

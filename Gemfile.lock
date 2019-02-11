@@ -93,8 +93,8 @@ GEM
       public_suffix (>= 2.0.2, < 4.0)
     airbrake (8.0.1)
       airbrake-ruby (~> 3.0)
-    airbrake-ruby (3.1.0)
-      tdigest (= 0.1.1)
+    airbrake-ruby (3.2.0)
+      rbtree3 (~> 0.5.0)
     apitome (0.2.1)
       kramdown
       railties
@@ -216,6 +216,7 @@ GEM
     parser (2.6.0.0)
       ast (~> 2.4.0)
     pg (1.1.4)
+    phony (2.16.10)
     powerpack (0.1.2)
     public_suffix (3.0.3)
     puma (3.12.0)
@@ -269,7 +270,7 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.10.0)
       ffi (~> 1.0)
-    rbtree (0.4.2)
+    rbtree3 (0.5.0)
     ref (2.0.0)
     request_store (1.4.1)
       rack (>= 1.4)
@@ -302,7 +303,7 @@ GEM
       activesupport (>= 3.0.0)
       mustache (~> 1.0, >= 0.99.4)
       rspec (~> 3.0)
-    rubocop (0.63.1)
+    rubocop (0.64.0)
       jaro_winkler (~> 1.5.1)
       parallel (~> 1.10)
       parser (>= 2.5, != 2.5.1.1)
@@ -355,8 +356,6 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    tdigest (0.1.1)
-      rbtree (~> 0.4.2)
     therubyracer (0.12.3)
       libv8 (~> 3.16.14.15)
       ref
@@ -415,6 +414,7 @@ DEPENDENCIES
   mry
   newrelic_rpm
   pg
+  phony
   puma-heroku
   puma_worker_killer
   rack-cors
