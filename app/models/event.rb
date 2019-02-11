@@ -49,16 +49,18 @@ class Event < ApplicationRecord
   end
 
   def notify
-    if ends_at <= Time.current
-      # after event has ended
-      notifications.event_feedback_host.where(recipient: user).first_or_create
-      notifications.event_congratulation_host.where(recipient: user).first_or_create
-    elsif starts_at <= 1.day.since(Time.current)
-      # 24 hours before event will start
-      notifications.event_reminder_previous_day_host.where(recipient: user).first_or_create
-    elsif 1.week.ago(starts_at) <= Time.current
-      # 1 week before event will start
-      notifications.event_reminder_previous_week_host.where(recipient: user).first_or_create
+    if participants.any?
+      if ends_at <= Time.current
+        # after event has ended
+        notifications.event_feedback_host.where(recipient: user).first_or_create
+        notifications.event_congratulation_host.where(recipient: user).first_or_create
+      elsif starts_at <= 1.day.since(Time.current)
+        # 24 hours before event will start
+        notifications.event_reminder_previous_day_host.where(recipient: user).first_or_create
+      elsif 1.week.ago(starts_at) <= Time.current
+        # 1 week before event will start
+        notifications.event_reminder_previous_week_host.where(recipient: user).first_or_create
+      end
     end
 
     if 30.minutes.since(ends_at) <= Time.current

@@ -35,6 +35,14 @@ class Notifier::Base
 
   protected
 
+  def dump_mail_template_parameters(name:)
+    if Rails.env.test?
+      File.open(Rails.root.join(name), 'w') do |f|
+        f.write JSON.pretty_generate(mail_template_parameters)
+      end
+    end
+  end
+
   def mail_template_parameters
     {
       recipient: @user.attributes.with_indifferent_access.slice(

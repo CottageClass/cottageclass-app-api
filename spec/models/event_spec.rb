@@ -46,29 +46,59 @@ RSpec.describe Event, type: :model do
   context 'notify' do
     before { subject.save }
 
-    context 'host' do
+    let :participants do
+      participants = create_list :participant, 2, :with_participant_children, participable: subject
+      participants.each do |participant|
+        participant.participant_children.each do |participant_child|
+          participant_child.child.emergency_contacts = build_list :emergency_contact, 2, contactable: nil
+        end
+      end
+      participants
+    end
+
+    context 'host: without participants' do
+      it 'event_reminder_previous_week_host' do
+        Timecop.freeze(1.week.before(subject.starts_at)) do
+          subject.notify
+
+          expect(subject.notifications.event_reminder_previous_week_host.count).to eq(0)
+        end
+      end
+
+      it 'event_reminder_previous_day_host' do
+        Timecop.freeze(24.hours.before(subject.starts_at)) do
+          subject.notify
+
+          expect(subject.notifications.event_reminder_previous_day_host.count).to eq(0)
+        end
+      end
+
+      it 'event_feedback_host/event_congratulation_host' do
+        Timecop.freeze(subject.ends_at) do
+          subject.notify
+
+          expect(subject.notifications.event_feedback_host.count).to eq(0)
+          expect(subject.notifications.event_congratulation_host.count).to eq(0)
+        end
+      end
+    end
+
+    context 'host: with participants' do
+      before { participants }
+
       it 'event_reminder_previous_week_host' do
         Timecop.freeze(1.week.before(subject.starts_at)) do
           subject.notify
 
           expect(subject.notifications.event_reminder_previous_week_host.count).to eq(1)
-          expect(subject.notifications.count).to eq(1)
         end
       end
 
       it 'event_reminder_previous_day_host' do
-        participants = create_list :participant, 2, :with_participant_children, participable: subject
-        participants.each do |participant|
-          participant.participant_children.each do |participant_child|
-            participant_child.child.emergency_contacts = build_list :emergency_contact, 2, contactable: nil
-          end
-        end
-
         Timecop.freeze(24.hours.before(subject.starts_at)) do
           subject.notify
 
-          expect(subject.notifications.event_reminder_previous_day_host.count).to eq(1)
-          expect(subject.notifications.count).to eq(6)
+          expect(subject.notifications.event_reminder_previous_day_host.reload.count).to eq(1)
         end
       end
 
@@ -78,15 +108,12 @@ RSpec.describe Event, type: :model do
 
           expect(subject.notifications.event_feedback_host.count).to eq(1)
           expect(subject.notifications.event_congratulation_host.count).to eq(1)
-          expect(subject.notifications.count).to eq(2)
         end
       end
     end
 
     context 'participants' do
       before { participants }
-
-      let(:participants) { create_list :participant, 2, :with_participant_children, participable: subject }
 
       it 'event_reminder_previous_day_participant' do
         Timecop.freeze(24.hours.before(subject.starts_at)) do

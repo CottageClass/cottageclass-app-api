@@ -5,6 +5,7 @@ class Notifier::EventReminderPreviousDayHost < Notifier::Base
   end
 
   def email
+    dump_mail_template_parameters name: 'EventReminderPreviousDayHost.json'
     response = @sendgrid_client.send_mail to: [@user],
                                           from: @sender_email,
                                           template_id: ENV.fetch('SENDGRID_TEMPLATE_EVENT_REMINDER_PREVIOUS_DAY_HOST'),
