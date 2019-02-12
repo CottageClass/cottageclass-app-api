@@ -17,16 +17,12 @@ class Notification < ApplicationRecord
     participant_creation_host: 12
   }
 
-  validates :body, presence: true
-  validates :sms_provider_identifier, presence: { if: proc { |instance| instance.email_provider_identifier.blank? } },
-                                      uniqueness: { case_sensitive: false, allow_blank: true }
-  validates :email_provider_identifier, presence: { if: proc { |instance| instance.sms_provider_identifier.blank? } },
-                                        uniqueness: { case_sensitive: false, allow_blank: true }
-
   belongs_to :recipient, class_name: 'User', inverse_of: :notifications
   belongs_to :notifiable, polymorphic: true, inverse_of: :notifications, optional: true
 
-  before_validation :transmit
+  before_create :transmit
+
+  private
 
   def transmit
     if recipient.present?
@@ -94,6 +90,22 @@ class Notification < ApplicationRecord
         identifier_hash = notifier.transmit
         self.email_provider_identifier = identifier_hash.dig :email
         self.sms_provider_identifier = identifier_hash.dig :message
+      end
+
+      # Cannot use normal validations for these, generated after validation
+      if body.blank?
+        errors.add :body, :required
+        raise ActiveRecord::RecordInvalid
+      elsif email_provider_identifier.blank? && sms_provider_identifier.blank?
+        errors.add :sms_provider_identifier, :required
+        raise ActiveRecord::RecordInvalid
+      elsif email_provider_identifier.present? &&
+            self.class.where(email_provider_identifier: email_provider_identifier).any?
+        errors.add :email_provider_identifier, :invalid
+        raise ActiveRecord::RecordInvalid
+      elsif sms_provider_identifier.present? && self.class.where(sms_provider_identifier: sms_provider_identifier).any?
+        errors.add :sms_provider_identifier, :invalid
+        raise ActiveRecord::RecordInvalid
       end
     end
   end

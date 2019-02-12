@@ -6,7 +6,6 @@ RSpec.describe Notification, type: :model do
   context 'validations' do
     it { is_expected.not_to validate_presence_of(:notifiable) }
     it { is_expected.to validate_presence_of(:recipient).with_message(:required) }
-    it { is_expected.to validate_presence_of(:body) }
   end
 
   context 'associations' do

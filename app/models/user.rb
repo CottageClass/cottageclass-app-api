@@ -120,7 +120,7 @@ class User < ApplicationRecord
   end
 
   def notify
-    notifications.user_creation.where(recipient: self).first_or_create
+    notifications.user_creation.first_or_create
   end
 
   def obfuscate_location
