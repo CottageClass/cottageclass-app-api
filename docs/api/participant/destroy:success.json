@@ -18,12 +18,12 @@
   "requests": [
     {
       "request_method": "DELETE",
-      "request_path": "/api/events/491/participants",
+      "request_path": "/api/events/581/participants",
       "request_body": "{}",
       "request_headers": {
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDk5NzU4ODgsInN1YiI6NDR9.Ftt4Q1r7hDCvxoDAq_W3CAjtmUa8zSchxX1MfI1edZ0"
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NTAwNDY1MjcsInN1YiI6NDd9.0Jl1iZiWKVTuKzkoFNX4qiCFdgNgB_WJ5_uny0I2Wwo"
       },
       "request_query_parameters": {
       },

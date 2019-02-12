@@ -8,9 +8,11 @@ Rails.application.routes.draw do
         collection { delete :index, to: 'participants#destroy' }
       end
       collection do
-        get '(/:skope)(/miles/:miles(/latitude/:latitude/longitude/:longitude))(/page/:page/page_size/:page_size)',
+        get '(/:skope)(/miles/:miles(/latitude/:latitude/longitude/:longitude))(/sort/:sort)'\
+        '(/page/:page/page_size/:page_size)',
             to: 'events#index',
             skope: /upcoming|past/i,
+            sort: /chronological|distance/i,
             latitude: /-?+(?=.??\d)\d*\.?\d*/,
             longitude: /-?+(?=.??\d)\d*\.?\d*/,
             defaults: { skope: 'all' },

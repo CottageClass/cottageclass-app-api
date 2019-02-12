@@ -9,6 +9,7 @@ class API::EventsController < API::BaseController
                  miles: params[:miles],
                  latitude: params[:latitude],
                  longitude: params[:longitude],
+                 sort: params[:sort],
                  page: params[:page],
                  page_size: params[:page_size],
                  path: proc { |**parameters| index_api_events_path parameters }
@@ -20,6 +21,7 @@ class API::EventsController < API::BaseController
                  miles: params[:miles],
                  latitude: params[:latitude],
                  longitude: params[:longitude],
+                 sort: params[:sort],
                  page: params[:page],
                  page_size: params[:page_size],
                  path: proc { |**parameters| created_events_api_user_path parameters }
@@ -31,6 +33,7 @@ class API::EventsController < API::BaseController
                  miles: params[:miles],
                  latitude: params[:latitude],
                  longitude: params[:longitude],
+                 sort: params[:sort],
                  page: params[:page],
                  page_size: params[:page_size],
                  path: proc { |**parameters| participated_events_api_user_path parameters }
@@ -69,7 +72,7 @@ class API::EventsController < API::BaseController
 
   private
 
-  def events_index(events:, skope:, miles:, latitude:, longitude:, page:, page_size:, path:)
+  def events_index(events:, skope:, miles:, latitude:, longitude:, sort: nil, page:, page_size:, path:)
     skope ||= 'all'
     events = events.send skope
 
@@ -79,6 +82,12 @@ class API::EventsController < API::BaseController
       location = [latitude, longitude] if [latitude, longitude].all?(&:present?)
       location = [current_user.latitude, current_user.longitude] if location.blank? && current_user.present?
       events = events.near(location.map(&:to_f), miles) if location.all?(&:present?)
+    end
+
+    if %w[chronological].include?(sort)
+      events = events.reorder starts_at: :asc
+    elsif miles.positive?
+      events = events.reorder 'distance ASC'
     end
 
     links = {}

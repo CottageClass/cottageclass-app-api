@@ -14,12 +14,12 @@
   "requests": [
     {
       "request_method": "GET",
-      "request_path": "/api/users/73",
+      "request_path": "/api/users/76",
       "request_body": null,
       "request_headers": {
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDk5NzU4OTAsInN1YiI6NzN9.A8KgLHcxy0WrDPHSjAg91TbyJjsWTgAfBPC9Fsv6cg4"
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NTAwNDY1MjksInN1YiI6NzZ9._6xg0AxYeuWcgvyITgMkhomGkCTd5zDFehZp1XoGxSE"
       },
       "request_query_parameters": {
         "{}": null
@@ -27,7 +27,7 @@
       "request_content_type": "application/json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\n  \"data\": {\n    \"id\": \"73\",\n    \"type\": \"user\",\n    \"attributes\": {\n      \"id\": 73,\n      \"facebook_uid\": \"7378793\",\n      \"avatar\": \"https://robohash.org/ravyn-stonearm.png?size=300x300&set=set1\",\n      \"first_name\": \"Ravyn\",\n      \"verified\": false,\n      \"fuzzy_latitude\": \"40.7297924645627\",\n      \"fuzzy_longitude\": \"-73.9373022307144\",\n      \"locality\": \"Chanbury\",\n      \"sublocality\": \"Summer Court\",\n      \"neighborhood\": \"Baumbach Garden\",\n      \"admin_area_level_1\": \"Louisiana\",\n      \"admin_area_level_2\": \"Lynette Port\",\n      \"child_ages\": [\n        2,\n        4\n      ],\n      \"created_at\": \"2019-02-11T12:51:30.702Z\"\n    }\n  }\n}",
+      "response_body": "{\n  \"data\": {\n    \"id\": \"76\",\n    \"type\": \"user\",\n    \"attributes\": {\n      \"id\": 76,\n      \"facebook_uid\": \"8854938\",\n      \"avatar\": \"https://robohash.org/mallus-the-greater.png?size=300x300&set=set1\",\n      \"first_name\": \"Mallus\",\n      \"verified\": false,\n      \"fuzzy_latitude\": \"40.7280725931548\",\n      \"fuzzy_longitude\": \"-73.9350459519969\",\n      \"locality\": \"Lake Irish\",\n      \"sublocality\": \"Park Pointe\",\n      \"neighborhood\": \"Tuyet Station\",\n      \"admin_area_level_1\": \"Montana\",\n      \"admin_area_level_2\": \"Towne Ways\",\n      \"child_ages\": [\n        3,\n        2\n      ],\n      \"created_at\": \"2019-02-12T08:28:49.396Z\"\n    }\n  }\n}",
       "response_headers": {
         "Content-Type": "application/vnd.api+json; charset=utf-8"
       },

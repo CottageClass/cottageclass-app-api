@@ -21,14 +21,14 @@
           "description": "all:success",
           "link": "event/all:success.json",
           "groups": "all",
-          "route": "/api/events/:skope/page/:page/page_size/:page_size",
+          "route": "/api/events/:skope/miles/:miles/latitude/:latitude/longitude/:longitude/sort/:sort",
           "method": "get"
         },
         {
           "description": "authorized:success",
           "link": "event/authorized:success.json",
           "groups": "all",
-          "route": "/api/events/:skope/page/:page/page_size/:page_size",
+          "route": "/api/events/:skope/miles/:miles/latitude/:latitude/longitude/:longitude/sort/:sort",
           "method": "get"
         },
         {
@@ -56,7 +56,7 @@
           "description": "past:success",
           "link": "event/past:success.json",
           "groups": "all",
-          "route": "/api/events/:skope/page/:page/page_size/:page_size",
+          "route": "/api/events/:skope/miles/:miles/latitude/:latitude/longitude/:longitude/sort/:sort",
           "method": "get"
         },
         {
@@ -70,7 +70,7 @@
           "description": "upcoming:success",
           "link": "event/upcoming:success.json",
           "groups": "all",
-          "route": "/api/events/:skope/page/:page/page_size/:page_size",
+          "route": "/api/events/:skope/miles/:miles/latitude/:latitude/longitude/:longitude/sort/:sort",
           "method": "get"
         },
         {

@@ -9,6 +9,41 @@ RSpec.resource 'Event' do
   context 'index' do
     before { create_list :event_series, 5, :with_event_hosts, user: user }
 
+    get '/api/events/:skope/miles/:miles/latitude/:latitude/longitude/:longitude/sort/:sort', format: :json do
+      let(:skope) { nil }
+      let(:miles) { 10 }
+      let(:latitude) { user.latitude }
+      let(:longitude) { user.longitude }
+      let(:sort) { 'chronological' }
+
+      [nil, 'past', 'upcoming'].each do |skope|
+        name = skope || 'all'
+        context name do
+          let(:skope) { skope }
+
+          example format('%s:success', name) do
+            explanation ':page and :page_size are optional parameters.'\
+            ' If :page is omitted, the endpoint returns all records for the scope. Default value for :page_size is 10.'\
+            ' :miles, :latitude, :longitude and :sort are optional parameters.'\
+            ' If :miles is available, but :latitude or :longitude are not, tries using authenticated user\'s location.'\
+            ' If :sort is chronological, results are sorted chronologically. Otherwise, results are sorted by distance.'
+            do_request
+            expect(response_status).to eq(200)
+          end
+        end
+      end
+
+      context 'authorized' do
+        include_context 'authorization token'
+
+        example 'authorized:success' do
+          explanation 'Response to authenticated requests will contain the extra attribute: participated'
+          do_request
+          expect(response_status).to eq(200)
+        end
+      end
+    end
+
     get '/api/events/:skope/miles/:miles/latitude/:latitude/longitude/:longitude', format: :json do
       let(:skope) { nil }
       let(:miles) { 10 }
@@ -21,8 +56,6 @@ RSpec.resource 'Event' do
           let(:skope) { skope }
 
           example format('%s:success', name), document: false do
-            explanation ':miles, :latitude and :longitude are optional parameters.'\
-            'If :miles is available, but :latitude or :longitude are not, tries using authenticated user\'s location'
             do_request
             expect(response_status).to eq(200)
           end
@@ -40,22 +73,10 @@ RSpec.resource 'Event' do
         context name do
           let(:skope) { skope }
 
-          example format('%s:success', name) do
-            explanation ':page and :page_size are optional parameters.'\
-            'If :page is omitted, the endpoint returns all records for the scope. Default value for :page_size is 10.'
+          example format('%s:success', name), document: false do
             do_request
             expect(response_status).to eq(200)
           end
-        end
-      end
-
-      context 'authorized' do
-        include_context 'authorization token'
-
-        example 'authorized:success' do
-          explanation 'Response to authenticated requests will contain the extra attribute: participated'
-          do_request
-          expect(response_status).to eq(200)
         end
       end
     end
