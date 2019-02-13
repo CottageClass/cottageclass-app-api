@@ -16,7 +16,6 @@ class User < ApplicationRecord
     twitter_user linkedin_user created_at child_ages
   ].freeze
 
-
   before_validation :cleanup
   after_validation :geocode, if: lambda { |instance|
     instance.full_address.present? && (instance.latitude.blank? || instance.longitude.blank?)

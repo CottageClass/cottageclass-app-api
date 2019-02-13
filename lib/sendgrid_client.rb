@@ -11,10 +11,7 @@ class SendgridClient
     mail.template_id = template_id
 
     personalization = Personalization.new
-    to.each do |recipient|
-      # [TODO] replace with recipient.email after testing
-      personalization.add_to Email.new(email: ENV.fetch('OVERRIDE_RECIPIENT_EMAIL'), name: recipient.name)
-    end
+    to.each { |recipient| personalization.add_to Email.new(email: recipient.email, name: recipient.name) }
     personalization.add_dynamic_template_data parameters
     mail.add_personalization personalization
 
