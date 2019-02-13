@@ -36,11 +36,7 @@ class Notifier::Base
   protected
 
   def dump_mail_template_parameters(name:)
-    if Rails.env.test?
-      File.open(Rails.root.join(name), 'w') do |f|
-        f.write JSON.pretty_generate(mail_template_parameters)
-      end
-    end
+    Utils.dump(JSON.pretty_generate(mail_template_parameters), name) if Rails.env.test?
   end
 
   def mail_template_parameters
@@ -54,6 +50,8 @@ class Notifier::Base
         :facebook_id,
         :fuzzy_latitude,
         :fuzzy_longitude,
+        :latitude,
+        :longitude,
         :activities,
         :full_address,
         :network_code,

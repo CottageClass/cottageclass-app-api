@@ -40,6 +40,8 @@ class Notifier::ParticipantCreation < Notifier::Base
                                                                      :verified,
                                                                      :fuzzy_latitude,
                                                                      :fuzzy_longitude,
+                                                                     :latitude,
+                                                                     :longitude,
                                                                      :apartment_number,
                                                                      :street_number,
                                                                      :route,

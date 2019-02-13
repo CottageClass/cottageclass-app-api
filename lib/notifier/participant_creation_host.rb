@@ -43,6 +43,8 @@ class Notifier::ParticipantCreationHost < Notifier::Base
                                                                                        :facebook_id,
                                                                                        :fuzzy_latitude,
                                                                                        :fuzzy_longitude,
+                                                                                       :latitude,
+                                                                                       :longitude,
                                                                                        :activities,
                                                                                        :full_address,
                                                                                        :network_code,

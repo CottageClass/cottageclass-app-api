@@ -36,6 +36,8 @@ class Notifier::EventFeedbackParticipant < Notifier::Base
       :verified,
       :fuzzy_latitude,
       :fuzzy_longitude,
+      :latitude,
+      :longitude,
       :locality,
       :sublocality,
       :neighborhood,

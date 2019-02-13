@@ -43,6 +43,7 @@ group :development, :test do
   gem 'dotenv-rails'
   gem 'factory_bot_rails', '~> 4.1'
   gem 'faker'
+  gem 'fakerbot', require: false
   gem 'httplog'
   gem 'mry', require: false
   gem 'rspec-rails'
