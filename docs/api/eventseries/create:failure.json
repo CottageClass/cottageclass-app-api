@@ -108,11 +108,11 @@
     {
       "request_method": "POST",
       "request_path": "/api/event_series",
-      "request_body": "{\"event_series\":{\"name\":null,\"start_date\":\"2019-02-05\",\"starts_at\":\"14:39\",\"ends_at\":\"17:39\",\"maximum_children\":0,\"child_age_minimum\":0,\"child_age_maximum\":0,\"repeat_for\":6,\"interval\":4,\"has_pet\":true,\"activity_names\":[\"field hockey\"],\"foods\":[\"Chicken Parm\"],\"house_rules\":\"Ipsam in quo. Fugiat sequi nihil. Quia minima in.\",\"pet_description\":\"Quia voluptates consequuntur. Nulla sed tempore. Aut adipisci quia.\",\"event_hosts_attributes\":[{\"name\":\"Mrs. Kristofer Osinski\",\"email\":\"long.haag@hotmail.com\",\"phone\":\"1-934-624-7802\"},{\"name\":\"Bunny Fritsch Jr.\",\"email\":\"brendon@gmail.com\",\"phone\":\"425-540-6335\"}]}}",
+      "request_body": "{\"event_series\":{\"name\":null,\"start_date\":\"2019-02-05\",\"starts_at\":\"12:24\",\"ends_at\":\"15:24\",\"maximum_children\":0,\"child_age_minimum\":0,\"child_age_maximum\":0,\"repeat_for\":6,\"interval\":4,\"has_pet\":true,\"activity_names\":[\"oil wrestling\"],\"foods\":[\"French Fries with Sausages\"],\"house_rules\":\"Dicta nisi est. Modi quos quisquam. Assumenda est et.\",\"pet_description\":\"Consequatur qui quia. In doloremque eos. Ex consequuntur laudantium.\",\"event_hosts_attributes\":[{\"name\":\"Jc Huels\",\"email\":\"oscar.ledner@gmail.com\",\"phone\":\"320.860.7434\"},{\"name\":\"Blondell Hermann\",\"email\":\"syble@hotmail.com\",\"phone\":\"523-586-1080\"}]}}",
       "request_headers": {
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NTAxMjE5ODEsInN1YiI6M30.X8K5rKy-I_9LN4NdDjnlnyHFGR5OorMIwmW-LjeTPO4"
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NTAxMzAzOTYsInN1YiI6M30.ZkyHoHgYeIXz-bkMmwSrXk61b8IKh57DviG5RxdQlmQ"
       },
       "request_query_parameters": {
       },

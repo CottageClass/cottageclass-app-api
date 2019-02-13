@@ -46,6 +46,7 @@ class API::EventsController < API::BaseController
       participants
       participants.participant_children
       user
+      user.children
       user.user_reviews
       user.user_reviews.reviewer
     ],

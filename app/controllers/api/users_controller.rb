@@ -12,7 +12,7 @@ class API::UsersController < API::BaseController
   end
 
   def show
-    serializer = UserBaseSerializer.new @user, params: { current_user: current_user }
+    serializer = UserBaseSerializer.new @user, include: %i[children], params: { current_user: current_user }
     render json: serializer.serializable_hash, status: :ok
   end
 

@@ -27,9 +27,8 @@ class Event < ApplicationRecord
     ).order starts_at: :asc
   }
 
-  delegate :id, :facebook_uid, :avatar, :first_name, :fuzzy_latitude, :fuzzy_longitude, :locality, :sublocality,
-           :neighborhood, :admin_area_level_1, :admin_area_level_2, :child_ages, :verified, :full_address,
-           to: :user, prefix: :host, allow_nil: true
+  delegate(*(User::PUBLIC_ATTRIBUTES), to: :user, prefix: :host, allow_nil: true)
+  delegate :first_name, :full_address, to: :user, prefix: :host, allow_nil: true
 
   def full?
     maximum_children.positive? && (participant_children.count >= maximum_children)

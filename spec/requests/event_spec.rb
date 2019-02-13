@@ -7,7 +7,14 @@ RSpec.resource 'Event' do
   let(:user) { create :user, :with_children }
 
   context 'index' do
-    before { create_list :event_series, 5, :with_event_hosts, user: user }
+    before do
+      event_series = create_list :event_series, 5, :with_event_hosts, user: user
+      create_list(:user, 3, :with_children).each do |user|
+        Event.where(event_series: event_series).find_each do |event|
+          create :participant, :with_participant_children, participable: event, user: user
+        end
+      end
+    end
 
     get '/api/events/:skope/miles/:miles/latitude/:latitude/longitude/:longitude/sort/:sort', format: :json do
       let(:skope) { nil }
@@ -140,6 +147,12 @@ RSpec.resource 'Event' do
 
   context 'member operations' do
     include_context 'authorization token'
+
+    before do
+      create_list(:user, 3, :with_children).each do |user|
+        create :participant, :with_participant_children, participable: subject, user: user
+      end
+    end
 
     let(:event_series) { create :event_series, :with_event_hosts, user: user }
     let(:subject) { event_series.events.sample }

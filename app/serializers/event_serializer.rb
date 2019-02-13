@@ -1,10 +1,12 @@
 class EventSerializer
   include FastJsonapi::ObjectSerializer
 
-  attributes :name, :maximum_children, :child_age_minimum, :child_age_maximum, :has_pet, :activity_names, :foods,
-             :house_rules, :pet_description, :host_id, :host_facebook_uid, :host_avatar, :host_first_name,
-             :host_verified, :host_fuzzy_latitude, :host_fuzzy_longitude, :host_locality, :host_sublocality,
-             :host_neighborhood, :host_admin_area_level_1, :host_admin_area_level_2, :host_child_ages
+  has_one :user, key: :host, set_id: :host_id, serializer: UserBaseSerializer
+  has_many :event_hosts
+  has_many :participants
+
+  attributes(*(%i[name maximum_children child_age_minimum child_age_maximum has_pet activity_names foods house_rules
+                  pet_description] + User::PUBLIC_ATTRIBUTES.map { |attribute| format('host_%s', attribute).to_sym }))
   attribute(:starts_at) { |instance| (instance.in_instance_time_zone instance.starts_at).to_s :iso8601 }
   attribute(:ends_at) { |instance| (instance.in_instance_time_zone instance.ends_at).to_s :iso8601 }
   attribute(:participants_count) { |instance| instance.participants.count }
@@ -12,8 +14,4 @@ class EventSerializer
   attribute :participated, if: proc { |_, params| params.dig(:current_user).present? } do |instance, params|
     instance.participated? params[:current_user]
   end
-
-  has_one :user, key: :host, set_type: :user_in_network, set_id: :host_id, serializer: UserInNetworkSerializer
-  has_many :event_hosts
-  has_many :participants
 end

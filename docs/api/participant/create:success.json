@@ -25,18 +25,18 @@
     {
       "request_method": "POST",
       "request_path": "/api/events/567/participants",
-      "request_body": "{\"participant\":{\"participant_children_attributes\":[{\"child_id\":51}]}}",
+      "request_body": "{\"participant\":{\"participant_children_attributes\":[{\"child_id\":171}]}}",
       "request_headers": {
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NTAxMjE5OTUsInN1YiI6NDJ9.3EV3ZiPJKfxzXKz2WrodCh08DMYtf-ltlzmFnpl-jJ0"
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NTAxMzA0NDksInN1YiI6MTAyfQ.yVR3cPVLPh1EYgr8ILbhV-J0OzZtHg9S4oe8H7OI8xA"
       },
       "request_query_parameters": {
       },
       "request_content_type": "application/json",
       "response_status": 201,
       "response_status_text": "Created",
-      "response_body": "{\n  \"data\": {\n    \"id\": \"65\",\n    \"type\": \"participant\",\n    \"attributes\": {\n      \"user_id\": 42,\n      \"user_facebook_uid\": \"3958804\",\n      \"user_avatar\": \"https://robohash.org/anne-ville.png?size=300x300&set=set1\",\n      \"user_first_name\": \"Anne\",\n      \"user_fuzzy_latitude\": \"40.7316218041629\",\n      \"user_fuzzy_longitude\": \"-73.937793543533\",\n      \"user_locality\": \"Hodkiewiczmouth\",\n      \"user_sublocality\": \"Pine Estates\",\n      \"user_neighborhood\": \"Geraldine Fords\",\n      \"user_admin_area_level_1\": \"Alaska\",\n      \"user_admin_area_level_2\": \"Alexander Shore\",\n      \"user_verified\": false,\n      \"event_id\": 567\n    },\n    \"relationships\": {\n      \"participant_children\": {\n        \"data\": [\n          {\n            \"id\": \"129\",\n            \"type\": \"participant_child\"\n          }\n        ]\n      }\n    }\n  },\n  \"included\": [\n    {\n      \"id\": \"129\",\n      \"type\": \"participant_child\",\n      \"attributes\": {\n        \"child_id\": 51,\n        \"child_name\": \"Josette\",\n        \"child_age\": 4\n      }\n    }\n  ]\n}",
+      "response_body": "{\n  \"data\": {\n    \"id\": \"1343\",\n    \"type\": \"participant\",\n    \"attributes\": {\n      \"user_id\": 102,\n      \"user_avatar\": \"https://robohash.org/brighton-early.png?size=300x300&set=set1\",\n      \"user_last_name\": \"Early\",\n      \"user_verified\": false,\n      \"user_fuzzy_latitude\": \"40.7294851872715\",\n      \"user_fuzzy_longitude\": \"-73.9368048535753\",\n      \"user_locality\": \"Lake Douglass\",\n      \"user_sublocality\": \"Autumn Acres\",\n      \"user_neighborhood\": \"Kimberlie Mission\",\n      \"user_admin_area_level_1\": \"North Carolina\",\n      \"user_admin_area_level_2\": \"McLaughlin Point\",\n      \"user_images\": [\n        \"https://lorempixel.com/300/300\",\n        \"https://lorempixel.com/300/300\"\n      ],\n      \"user_languages\": [\n        \"en\",\n        \"fr\",\n        \"de\"\n      ],\n      \"user_job_position\": \"Dynamic Sales Developer\",\n      \"user_employer\": \"Brown, Frami and Green\",\n      \"user_highest_education\": \"Regular high school diploma\",\n      \"user_school\": \"Ironston University\",\n      \"user_facebook_uid\": \"5155995\",\n      \"user_instagram_user\": \"roderick.walter\",\n      \"user_twitter_user\": \"alix\",\n      \"user_linkedin_user\": \"delbert_okon\",\n      \"user_created_at\": \"2019-02-13T07:47:29.663Z\",\n      \"event_id\": 567\n    },\n    \"relationships\": {\n      \"participant_children\": {\n        \"data\": [\n          {\n            \"id\": \"2685\",\n            \"type\": \"participant_child\"\n          }\n        ]\n      }\n    }\n  },\n  \"included\": [\n    {\n      \"id\": \"2685\",\n      \"type\": \"participant_child\",\n      \"attributes\": {\n        \"child_id\": 171,\n        \"child_age\": 4\n      }\n    }\n  ]\n}",
       "response_headers": {
         "Content-Type": "application/vnd.api+json; charset=utf-8"
       },

@@ -14,7 +14,7 @@
   "requests": [
     {
       "request_method": "GET",
-      "request_path": "/api/users/76",
+      "request_path": "/api/users/136",
       "request_body": null,
       "request_headers": {
         "Content-Type": "application/json",
@@ -26,7 +26,7 @@
       "request_content_type": "application/json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\n  \"data\": {\n    \"id\": \"76\",\n    \"type\": \"user\",\n    \"attributes\": {\n      \"id\": 76,\n      \"facebook_uid\": \"1991140\",\n      \"avatar\": \"https://robohash.org/rusty-carr.png?size=300x300&set=set1\",\n      \"first_name\": \"Rusty\",\n      \"verified\": false,\n      \"fuzzy_latitude\": \"40.7326275363646\",\n      \"fuzzy_longitude\": \"-73.9343957921275\",\n      \"locality\": \"Carterhaven\",\n      \"sublocality\": \"Royal Crossing\",\n      \"neighborhood\": \"Abshire Hill\",\n      \"admin_area_level_1\": \"New Jersey\",\n      \"admin_area_level_2\": \"Marybelle Locks\",\n      \"child_ages\": [\n        4,\n        4\n      ],\n      \"created_at\": \"2019-02-13T05:26:38.161Z\"\n    }\n  }\n}",
+      "response_body": "{\n  \"data\": {\n    \"id\": \"136\",\n    \"type\": \"user\",\n    \"attributes\": {\n      \"id\": 136,\n      \"avatar\": \"https://robohash.org/sue-permann.png?size=300x300&set=set1\",\n      \"last_name\": \"Permann\",\n      \"verified\": false,\n      \"fuzzy_latitude\": \"40.7296454133909\",\n      \"fuzzy_longitude\": \"-73.9334527952607\",\n      \"locality\": \"Goldnerbury\",\n      \"sublocality\": \"Paradise Gardens\",\n      \"neighborhood\": \"Franecki Mission\",\n      \"admin_area_level_1\": \"North Dakota\",\n      \"admin_area_level_2\": \"Mathew Common\",\n      \"images\": [\n        \"https://lorempixel.com/300/300\",\n        \"https://lorempixel.com/300/300\"\n      ],\n      \"languages\": [\n        \"en\",\n        \"fr\",\n        \"de\"\n      ],\n      \"job_position\": \"Chief Advertising Engineer\",\n      \"employer\": \"Upton-Bogisich\",\n      \"highest_education\": \"Associate's degree\",\n      \"school\": \"Bluemeadow Technical College\",\n      \"facebook_uid\": \"4815933\",\n      \"instagram_user\": \"dulcie\",\n      \"twitter_user\": \"waltraud.windler\",\n      \"linkedin_user\": \"moises\",\n      \"created_at\": \"2019-02-13T07:47:31.747Z\"\n    },\n    \"relationships\": {\n      \"children\": {\n        \"data\": [\n          {\n            \"id\": \"185\",\n            \"type\": \"child\"\n          },\n          {\n            \"id\": \"186\",\n            \"type\": \"child\"\n          }\n        ]\n      }\n    }\n  },\n  \"included\": [\n    {\n      \"id\": \"185\",\n      \"type\": \"child\",\n      \"attributes\": {\n        \"parent_id\": 136,\n        \"age\": 2\n      },\n      \"relationships\": {\n        \"parent\": {\n          \"data\": {\n            \"id\": \"136\",\n            \"type\": \"user\"\n          }\n        }\n      }\n    },\n    {\n      \"id\": \"186\",\n      \"type\": \"child\",\n      \"attributes\": {\n        \"parent_id\": 136,\n        \"age\": 5\n      },\n      \"relationships\": {\n        \"parent\": {\n          \"data\": {\n            \"id\": \"136\",\n            \"type\": \"user\"\n          }\n        }\n      }\n    }\n  ]\n}",
       "response_headers": {
         "Content-Type": "application/vnd.api+json; charset=utf-8"
       },

@@ -19,9 +19,7 @@ class Participant < ApplicationRecord
       .order starts_at: :asc
   }
 
-  delegate :facebook_uid, :avatar, :first_name, :fuzzy_latitude, :fuzzy_longitude, :locality, :sublocality,
-           :neighborhood, :admin_area_level_1, :admin_area_level_2, :child_ages, :verified,
-           to: :user, prefix: true, allow_nil: true
+  delegate(*User::PUBLIC_ATTRIBUTES, to: :user, prefix: true, allow_nil: true)
 
   accepts_nested_attributes_for :participant_children,
                                 allow_destroy: true,
