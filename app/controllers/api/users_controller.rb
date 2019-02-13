@@ -1,5 +1,4 @@
 class API::UsersController < API::BaseController
-  before_action :authenticate_user
   before_action :load_user, only: %i[show]
 
   def index

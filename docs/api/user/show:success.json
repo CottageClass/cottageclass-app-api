@@ -18,8 +18,7 @@
       "request_body": null,
       "request_headers": {
         "Content-Type": "application/json",
-        "Accept": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NTAwNDY1MjksInN1YiI6NzZ9._6xg0AxYeuWcgvyITgMkhomGkCTd5zDFehZp1XoGxSE"
+        "Accept": "application/json"
       },
       "request_query_parameters": {
         "{}": null
@@ -27,7 +26,7 @@
       "request_content_type": "application/json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\n  \"data\": {\n    \"id\": \"76\",\n    \"type\": \"user\",\n    \"attributes\": {\n      \"id\": 76,\n      \"facebook_uid\": \"8854938\",\n      \"avatar\": \"https://robohash.org/mallus-the-greater.png?size=300x300&set=set1\",\n      \"first_name\": \"Mallus\",\n      \"verified\": false,\n      \"fuzzy_latitude\": \"40.7280725931548\",\n      \"fuzzy_longitude\": \"-73.9350459519969\",\n      \"locality\": \"Lake Irish\",\n      \"sublocality\": \"Park Pointe\",\n      \"neighborhood\": \"Tuyet Station\",\n      \"admin_area_level_1\": \"Montana\",\n      \"admin_area_level_2\": \"Towne Ways\",\n      \"child_ages\": [\n        3,\n        2\n      ],\n      \"created_at\": \"2019-02-12T08:28:49.396Z\"\n    }\n  }\n}",
+      "response_body": "{\n  \"data\": {\n    \"id\": \"76\",\n    \"type\": \"user\",\n    \"attributes\": {\n      \"id\": 76,\n      \"facebook_uid\": \"1991140\",\n      \"avatar\": \"https://robohash.org/rusty-carr.png?size=300x300&set=set1\",\n      \"first_name\": \"Rusty\",\n      \"verified\": false,\n      \"fuzzy_latitude\": \"40.7326275363646\",\n      \"fuzzy_longitude\": \"-73.9343957921275\",\n      \"locality\": \"Carterhaven\",\n      \"sublocality\": \"Royal Crossing\",\n      \"neighborhood\": \"Abshire Hill\",\n      \"admin_area_level_1\": \"New Jersey\",\n      \"admin_area_level_2\": \"Marybelle Locks\",\n      \"child_ages\": [\n        4,\n        4\n      ],\n      \"created_at\": \"2019-02-13T05:26:38.161Z\"\n    }\n  }\n}",
       "response_headers": {
         "Content-Type": "application/vnd.api+json; charset=utf-8"
       },
