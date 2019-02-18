@@ -88,7 +88,8 @@ RSpec.resource 'Event' do
       end
     end
 
-    get '/api/user/created_events/:skope/page/:page/page_size/:page_size', format: :json do
+    get '/api/users/:user_id/events/created/:skope/page/:page/page_size/:page_size', format: :json do
+      let(:user_id) { user.id }
       let(:skope) { 'upcoming' }
       let(:page) { 1 }
       let(:page_size) { 10 }
@@ -96,7 +97,7 @@ RSpec.resource 'Event' do
       context 'authorized' do
         include_context 'authorization token'
 
-        example 'created:success' do
+        example 'created_events:success' do
           explanation 'Events created by user'
           do_request
           expect(response_status).to eq(200)
@@ -105,14 +106,14 @@ RSpec.resource 'Event' do
       end
 
       context 'unauthorized' do
-        example 'created:forbidden', document: false do
+        example 'created_events:forbidden', document: false do
           do_request
           expect(response_status).to eq(401)
         end
       end
     end
 
-    get '/api/user/participated_events/:skope/page/:page/page_size/:page_size', format: :json do
+    get '/api/users/:user_id/events/participated/:skope/page/:page/page_size/:page_size', format: :json do
       before do
         another_user = create :user
         event_series = create_list :event_series, 5, :with_event_hosts, user: another_user
@@ -121,6 +122,7 @@ RSpec.resource 'Event' do
         end
       end
 
+      let(:user_id) { user.id }
       let(:skope) { 'upcoming' }
       let(:page) { 1 }
       let(:page_size) { 10 }
@@ -128,7 +130,7 @@ RSpec.resource 'Event' do
       context 'authorized' do
         include_context 'authorization token'
 
-        example 'participated:success' do
+        example 'participated_events:success' do
           explanation 'Events participated by user'
           do_request
           expect(response_status).to eq(200)
@@ -137,7 +139,7 @@ RSpec.resource 'Event' do
       end
 
       context 'unauthorized' do
-        example 'participated:forbidden', document: false do
+        example 'participated_events:forbidden', document: false do
           do_request
           expect(response_status).to eq(401)
         end

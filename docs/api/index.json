@@ -32,10 +32,10 @@
           "method": "get"
         },
         {
-          "description": "created:success",
-          "link": "event/created:success.json",
+          "description": "created_events:success",
+          "link": "event/created_events:success.json",
           "groups": "all",
-          "route": "/api/user/created_events/:skope/page/:page/page_size/:page_size",
+          "route": "/api/users/:user_id/events/created/:skope/page/:page/page_size/:page_size",
           "method": "get"
         },
         {
@@ -46,10 +46,10 @@
           "method": "delete"
         },
         {
-          "description": "participated:success",
-          "link": "event/participated:success.json",
+          "description": "participated_events:success",
+          "link": "event/participated_events:success.json",
           "groups": "all",
-          "route": "/api/user/participated_events/:skope/page/:page/page_size/:page_size",
+          "route": "/api/users/:user_id/events/participated/:skope/page/:page/page_size/:page_size",
           "method": "get"
         },
         {

@@ -1,5 +1,6 @@
 class API::EventsController < API::BaseController
   before_action :authenticate_user, only: %i[created participated update destroy]
+  before_action :load_user, only: %i[created participated]
   before_action :load_event, only: %i[show update destroy]
   before_action :requires_event_owner, only: %i[update destroy]
 
@@ -16,7 +17,7 @@ class API::EventsController < API::BaseController
   end
 
   def created
-    events_index events: current_user.events,
+    events_index events: @user.events,
                  skope: params[:skope],
                  miles: params[:miles],
                  latitude: params[:latitude],
@@ -28,7 +29,7 @@ class API::EventsController < API::BaseController
   end
 
   def participated
-    events_index events: current_user.participated_events,
+    events_index events: @user.participated_events,
                  skope: params[:skope],
                  miles: params[:miles],
                  latitude: params[:latitude],
@@ -111,6 +112,15 @@ class API::EventsController < API::BaseController
                                              links: links,
                                              meta: meta
     render json: serializer.serializable_hash, status: :ok
+  end
+
+  def load_user
+    @user = if params[:user_id].present?
+              User.find_by id: params[:user_id]
+            elsif current_user.present?
+              current_user
+            end
+    render(json: {}, status: :not_found) if @user.blank?
   end
 
   def load_event

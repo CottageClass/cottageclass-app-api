@@ -108,11 +108,11 @@
     {
       "request_method": "POST",
       "request_path": "/api/event_series",
-      "request_body": "{\"event_series\":{\"name\":null,\"start_date\":\"2019-02-05\",\"starts_at\":\"12:24\",\"ends_at\":\"15:24\",\"maximum_children\":0,\"child_age_minimum\":0,\"child_age_maximum\":0,\"repeat_for\":6,\"interval\":4,\"has_pet\":true,\"activity_names\":[\"oil wrestling\"],\"foods\":[\"French Fries with Sausages\"],\"house_rules\":\"Dicta nisi est. Modi quos quisquam. Assumenda est et.\",\"pet_description\":\"Consequatur qui quia. In doloremque eos. Ex consequuntur laudantium.\",\"event_hosts_attributes\":[{\"name\":\"Jc Huels\",\"email\":\"oscar.ledner@gmail.com\",\"phone\":\"320.860.7434\"},{\"name\":\"Blondell Hermann\",\"email\":\"syble@hotmail.com\",\"phone\":\"523-586-1080\"}]}}",
+      "request_body": "{\"event_series\":{\"name\":null,\"start_date\":\"2019-02-07\",\"starts_at\":\"18:09\",\"ends_at\":\"21:09\",\"maximum_children\":0,\"child_age_minimum\":0,\"child_age_maximum\":0,\"repeat_for\":6,\"interval\":4,\"has_pet\":true,\"activity_names\":[\"hockey\"],\"foods\":[\"Fish and Chips\"],\"house_rules\":\"Odio maxime similique. Neque cum hic. Debitis ut ratione.\",\"pet_description\":\"Est nemo deserunt. Voluptatibus aliquid quaerat. Unde minima tempora.\",\"event_hosts_attributes\":[{\"name\":\"Roosevelt Botsford DVM\",\"email\":\"shirlee.moen@hotmail.com\",\"phone\":\"600-656-4882\"},{\"name\":\"Victoria Tremblay\",\"email\":\"reatha.stehr@gmail.com\",\"phone\":\"402.783.1648\"}]}}",
       "request_headers": {
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NTAxMzAzOTYsInN1YiI6M30.ZkyHoHgYeIXz-bkMmwSrXk61b8IKh57DviG5RxdQlmQ"
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NTA1NjcyMjYsInN1YiI6M30.jdYpNO8FjNhIEZHKmYd8UejsAR4KdiO314PDubRmWqE"
       },
       "request_query_parameters": {
       },

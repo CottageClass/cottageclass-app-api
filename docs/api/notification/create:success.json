@@ -25,18 +25,18 @@
     {
       "request_method": "POST",
       "request_path": "/api/users/96/notifications",
-      "request_body": "{\"notification\":{\"body\":\"Hic ea pariatur aspernatur.\"}}",
+      "request_body": "{\"notification\":{\"body\":\"Voluptate cum minus nobis.\"}}",
       "request_headers": {
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NTAxMzA0NDksInN1YiI6OTZ9.gNlgW1lxtekIWEVVT_blF02ZqffGe8h3BHX3aKpZkkU"
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NTA1NjcyOTYsInN1YiI6OTZ9.uFz_o7UD29VQZ0c9A4aAK5-YTgP637zb8FLa9XzIPIs"
       },
       "request_query_parameters": {
       },
       "request_content_type": "application/json",
       "response_status": 201,
       "response_status_text": "Created",
-      "response_body": "{\n  \"data\": {\n    \"id\": \"1929\",\n    \"type\": \"notification\",\n    \"attributes\": {\n      \"id\": 1929,\n      \"body\": \"Hic ea pariatur aspernatur.\"\n    }\n  }\n}",
+      "response_body": "{\n  \"data\": {\n    \"id\": \"1929\",\n    \"type\": \"notification\",\n    \"attributes\": {\n      \"id\": 1929,\n      \"body\": \"Voluptate cum minus nobis.\"\n    }\n  }\n}",
       "response_headers": {
         "Content-Type": "application/vnd.api+json; charset=utf-8"
       },

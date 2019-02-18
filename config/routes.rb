@@ -27,6 +27,18 @@ Rails.application.routes.draw do
             longitude: /-?+(?=.??\d)\d*\.?\d*/,
             as: :index
       end
+      resources :events, only: %i[] do
+        collection do
+          get 'created(/:skope)(/page/:page/page_size/:page_size)', to: 'events#created',
+                                                                    skope: /upcoming|past/i,
+                                                                    defaults: { skope: 'all' },
+                                                                    as: :created
+          get 'participated(/:skope)(/page/:page/page_size/:page_size)', to: 'events#participated',
+                                                                         skope: /upcoming|past/i,
+                                                                         defaults: { skope: 'all' },
+                                                                         as: :participated
+        end
+      end
       resources :notifications, only: %i[create]
     end
     resource :user, only: %i[] do
