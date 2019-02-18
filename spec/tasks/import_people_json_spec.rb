@@ -5,7 +5,7 @@ RSpec.describe 'import:people_json' do
 
   let(:path_to_json) { 'spec/fixtures/people.json' }
 
-  it 'imports users, including email, facebook_id, phone, location, network, availability, activities, and children' do
+  it 'imports users, including email, facebook_uid, phone, location, network, availability, activities, and children' do
     expect do
       subject.invoke(path_to_json)
     end.to change(User, :count).from(0).to(130)
@@ -14,7 +14,7 @@ RSpec.describe 'import:people_json' do
 
     expect(marixsa.name).to eq 'Marixsa R'
     expect(marixsa.phone).to eq '(212) 920-4828'
-    expect(marixsa.facebook_id).to eq '538259947'
+    expect(marixsa.facebook_uid).to eq '538259947'
     expect(marixsa.latitude.to_f).to eq(40.642485)
     expect(marixsa.longitude.to_f).to eq(-73.944122)
     expect(marixsa.network_code).to eq 'flatbushfamilies'

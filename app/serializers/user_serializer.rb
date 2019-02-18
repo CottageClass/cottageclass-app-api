@@ -7,7 +7,7 @@ class UserSerializer < BaseSerializer
              :last_name,
              :verified,
              :avatar,
-             :facebook_id,
+             :facebook_uid,
              :apartment_number,
              :street_number,
              :route,

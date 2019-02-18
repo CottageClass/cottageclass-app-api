@@ -8,7 +8,7 @@ class UserInNetworkSerializer < BaseSerializer
              :last_name,
              :verified,
              :avatar,
-             :facebook_id,
+             :facebook_uid,
              :fuzzy_latitude,
              :fuzzy_longitude,
              :available_mornings,

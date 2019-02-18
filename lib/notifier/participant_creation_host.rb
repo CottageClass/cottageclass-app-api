@@ -40,7 +40,7 @@ class Notifier::ParticipantCreationHost < Notifier::Base
                                                                                        :first_name,
                                                                                        :last_name,
                                                                                        :avatar,
-                                                                                       :facebook_id,
+                                                                                       :facebook_uid,
                                                                                        :fuzzy_latitude,
                                                                                        :fuzzy_longitude,
                                                                                        :latitude,
