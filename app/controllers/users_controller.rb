@@ -115,6 +115,8 @@ class UsersController < ApiController
                                  :instagram_user,
                                  :twitter_user,
                                  :linkedin_user,
+                                 :referrer,
+                                 source_tags: [],
                                  activities: [],
                                  images: [],
                                  languages: [],

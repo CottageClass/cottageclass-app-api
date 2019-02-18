@@ -25,18 +25,18 @@
     {
       "request_method": "POST",
       "request_path": "/api/users/96/notifications",
-      "request_body": "{\"notification\":{\"body\":\"Exercitationem rem omnis perspiciatis.\"}}",
+      "request_body": "{\"notification\":{\"body\":\"Molestias illo velit deserunt.\"}}",
       "request_headers": {
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NTA1ODIyNzMsInN1YiI6OTZ9.mooPAQegfgygpzMntHuX6DplNoX983Y3IQr40zawhv0"
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NTA1ODQzMzUsInN1YiI6OTZ9.r0bB1loNJuJKLk3kmpDGW1zT0MWrEPYiFoSXWONujeM"
       },
       "request_query_parameters": {
       },
       "request_content_type": "application/json",
       "response_status": 201,
       "response_status_text": "Created",
-      "response_body": "{\n  \"data\": {\n    \"id\": \"1929\",\n    \"type\": \"notification\",\n    \"attributes\": {\n      \"id\": 1929,\n      \"body\": \"Exercitationem rem omnis perspiciatis.\"\n    }\n  }\n}",
+      "response_body": "{\n  \"data\": {\n    \"id\": \"1929\",\n    \"type\": \"notification\",\n    \"attributes\": {\n      \"id\": 1929,\n      \"body\": \"Molestias illo velit deserunt.\"\n    }\n  }\n}",
       "response_headers": {
         "Content-Type": "application/vnd.api+json; charset=utf-8"
       },

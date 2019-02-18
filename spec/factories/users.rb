@@ -26,6 +26,8 @@ FactoryBot.define do
     instagram_user { Faker::Internet.user_name }
     twitter_user { Faker::Internet.user_name }
     linkedin_user { Faker::Internet.user_name }
+    referrer { Faker::Books::Lovecraft.word }
+    source_tags { Faker::Books::Lovecraft.words }
 
     trait :with_children do
       transient { children_count { 2 } }

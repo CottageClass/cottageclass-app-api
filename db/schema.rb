@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_04_062452) do
+ActiveRecord::Schema.define(version: 2019_02_18_132512) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -203,6 +203,7 @@ ActiveRecord::Schema.define(version: 2019_02_04_062452) do
   create_table "users", force: :cascade do |t|
     t.string "email"
     t.string "avatar"
+    t.string "referrer"
     t.decimal "fuzzy_latitude"
     t.decimal "fuzzy_longitude"
     t.string "password_digest"
@@ -210,6 +211,7 @@ ActiveRecord::Schema.define(version: 2019_02_04_062452) do
     t.string "neighborhood"
     t.string "sublocality"
     t.string "time_zone"
+    t.text "source_tags", default: [], array: true
     t.boolean "verified", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

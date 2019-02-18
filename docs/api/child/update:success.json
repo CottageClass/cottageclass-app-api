@@ -24,19 +24,19 @@
   "requests": [
     {
       "request_method": "PUT",
-      "request_path": "/api/user/children/1",
-      "request_body": "{\"child\":{\"emergency_contacts_attributes\":[{\"name\":\"Tyree Kohler\",\"phone_number\":\"320-902-4140\",\"relationship\":\"ut\"}]}}",
+      "request_path": "/api/user/children/2",
+      "request_body": "{\"child\":{\"emergency_contacts_attributes\":[{\"name\":\"Miss Gene Ondricka\",\"phone_number\":\"1-538-758-9933\",\"relationship\":\"qui\"}]}}",
       "request_headers": {
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NTA1ODIyMTcsInN1YiI6MX0.EV-fKLoByYFChKFMyiurX-8i0A3gjmvrNajBpg1-F_s"
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NTA1ODQyNzksInN1YiI6MX0.V09tPdAVSVPzRrRlfXW6fJK0r4jObUsS1ieFlW2Xa7w"
       },
       "request_query_parameters": {
       },
       "request_content_type": "application/json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\n  \"data\": {\n    \"id\": \"1\",\n    \"type\": \"child\",\n    \"attributes\": {\n      \"first_name\": \"Zula\",\n      \"school_name\": \"Ostbarrow Secondary College\",\n      \"age\": 2,\n      \"allergies\": [\n        \"deleniti\",\n        \"voluptatibus\"\n      ],\n      \"dietary_restrictions\": [\n        \"exercitationem\",\n        \"quia\"\n      ],\n      \"special_needs\": \"Illum iusto est voluptate.\",\n      \"birthday\": \"2016-07-19\"\n    },\n    \"relationships\": {\n      \"emergency_contacts\": {\n        \"data\": [\n          {\n            \"id\": \"1\",\n            \"type\": \"emergency_contact\"\n          }\n        ]\n      }\n    }\n  },\n  \"included\": [\n    {\n      \"id\": \"1\",\n      \"type\": \"emergency_contact\",\n      \"attributes\": {\n        \"name\": \"Tyree Kohler\",\n        \"phone_number\": \"320-902-4140\",\n        \"relationship\": \"ut\"\n      }\n    }\n  ]\n}",
+      "response_body": "{\n  \"data\": {\n    \"id\": \"2\",\n    \"type\": \"child\",\n    \"attributes\": {\n      \"first_name\": \"Harriett\",\n      \"school_name\": \"Brookville High\",\n      \"age\": 5,\n      \"allergies\": [\n        \"amet\",\n        \"reprehenderit\"\n      ],\n      \"dietary_restrictions\": [\n        \"et\",\n        \"quod\"\n      ],\n      \"special_needs\": \"Aperiam architecto illum minus.\",\n      \"birthday\": \"2013-12-27\"\n    },\n    \"relationships\": {\n      \"emergency_contacts\": {\n        \"data\": [\n          {\n            \"id\": \"1\",\n            \"type\": \"emergency_contact\"\n          }\n        ]\n      }\n    }\n  },\n  \"included\": [\n    {\n      \"id\": \"1\",\n      \"type\": \"emergency_contact\",\n      \"attributes\": {\n        \"name\": \"Miss Gene Ondricka\",\n        \"phone_number\": \"1-538-758-9933\",\n        \"relationship\": \"qui\"\n      }\n    }\n  ]\n}",
       "response_headers": {
         "Content-Type": "application/vnd.api+json; charset=utf-8"
       },

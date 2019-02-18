@@ -108,11 +108,11 @@
     {
       "request_method": "POST",
       "request_path": "/api/event_series",
-      "request_body": "{\"event_series\":{\"name\":null,\"start_date\":\"2019-02-11\",\"starts_at\":\"19:33\",\"ends_at\":\"22:33\",\"maximum_children\":0,\"child_age_minimum\":0,\"child_age_maximum\":0,\"repeat_for\":6,\"interval\":4,\"has_pet\":true,\"activity_names\":[\"oil wrestling\"],\"foods\":[\"Peking Duck\"],\"house_rules\":\"Ut error optio. Saepe dolor et. Amet numquam dolor.\",\"pet_description\":\"Similique architecto a. Aliquam quos quas. Consequatur eius doloribus.\",\"event_hosts_attributes\":[{\"name\":\"Alva Schaden IV\",\"email\":\"ruel.crona@yahoo.com\",\"phone\":\"1-849-546-9062\"},{\"name\":\"Roosevelt Schuster\",\"email\":\"paige.mayer@hotmail.com\",\"phone\":\"1-312-643-8752\"}]}}",
+      "request_body": "{\"event_series\":{\"name\":null,\"start_date\":\"2019-02-10\",\"starts_at\":\"19:35\",\"ends_at\":\"22:35\",\"maximum_children\":0,\"child_age_minimum\":0,\"child_age_maximum\":0,\"repeat_for\":6,\"interval\":4,\"has_pet\":true,\"activity_names\":[\"oil wrestling\"],\"foods\":[\"Salmon Nigiri\"],\"house_rules\":\"Voluptatibus omnis sit. Eum maiores autem. Totam nisi et.\",\"pet_description\":\"Voluptas occaecati et. Sed excepturi nesciunt. Vero ad cum.\",\"event_hosts_attributes\":[{\"name\":\"Clemmie Bechtelar MD\",\"email\":\"tula.johnson@hotmail.com\",\"phone\":\"296.675.8899\"},{\"name\":\"Malka Mayer\",\"email\":\"kenna.homenick@yahoo.com\",\"phone\":\"(172) 639-9608\"}]}}",
       "request_headers": {
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NTA1ODIyMTgsInN1YiI6M30.ZwoEAxft49Ubyy1n_Aomvjp63Fssw94p0i4Gb1Jjwc0"
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NTA1ODQyODAsInN1YiI6M30.uPJvm7Zb2Y5W2wlL7Gz45eWrraXolsGHJmPEFKHqsS4"
       },
       "request_query_parameters": {
       },

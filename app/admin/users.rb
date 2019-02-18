@@ -5,7 +5,7 @@ ActiveAdmin.register User do
   includes :children
 
   permit_params :email, :facebook_uid, :verified, :first_name, :last_name, :name, :network_code, :profile_blurb,
-                :apartment_number
+                :apartment_number, :referrer, source_tags: []
 
   filter :name
   filter :first_name
@@ -77,6 +77,8 @@ ActiveAdmin.register User do
       instagram_user
       twitter_user
       linkedin_user
+      referrer
+      source_tags
       child_ages
       child_names
     ].each do |attribute|
