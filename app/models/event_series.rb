@@ -11,10 +11,27 @@ class EventSeries < ApplicationRecord
   before_validation :cleanup
   after_create :create_events
 
+  def create_next_event
+    if events.upcoming.blank?
+      0.step(by: interval).each do |number|
+        new_date = number.weeks.since start_date
+        if new_date.future?
+          create_event new_date: new_date
+          break
+        end
+      end
+    end
+  end
+
   private
 
   def create_events
-    attributes = %i[
+    0.step(by: interval).take(repeat_for).each { |number| create_event new_date: number.weeks.since(start_date) }
+  end
+
+  def create_event(new_date:)
+    event = events.build starts_at: date_time(new_date, starts_at), ends_at: date_time(new_date, ends_at)
+    %i[
       name
       maximum_children
       child_age_minimum
@@ -26,14 +43,8 @@ class EventSeries < ApplicationRecord
       pet_description
       time_zone
       event_hosts
-    ]
-    0.step(by: interval).take(repeat_for).each do |number|
-      new_date = number.weeks.since start_date
-
-      event = events.build starts_at: date_time(new_date, starts_at), ends_at: date_time(new_date, ends_at)
-      attributes.each { |attribute| event.send format('%s=', attribute), send(attribute) }
-      event.save
-    end
+    ].each { |attribute| event.send format('%s=', attribute), send(attribute) }
+    event.save
   end
 
   def date_time(date, time)
