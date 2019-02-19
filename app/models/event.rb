@@ -18,6 +18,7 @@ class Event < ApplicationRecord
   has_many :participating_users, through: :participants, source: :user
 
   scope :eager, -> { includes :event_hosts, participants: %i[user participant_children] }
+  scope :nearest, ->(user) { where.not(id: user.events).near([user.latitude, user.longitude], 100) }
   scope :past, -> { where(Event.arel_table[:starts_at].lt(Time.current)).order starts_at: :desc }
   scope :upcoming, -> { where(Event.arel_table[:starts_at].gteq(1.hour.ago(Time.current))).order starts_at: :asc }
   scope :notifiable, lambda {
@@ -27,7 +28,7 @@ class Event < ApplicationRecord
     ).order starts_at: :asc
   }
 
-  delegate(*(User::PUBLIC_ATTRIBUTES), to: :user, prefix: :host, allow_nil: true)
+  delegate(*User::PUBLIC_ATTRIBUTES, to: :user, prefix: :host, allow_nil: true)
   delegate :first_name, :full_address, to: :user, prefix: :host, allow_nil: true
 
   def full?

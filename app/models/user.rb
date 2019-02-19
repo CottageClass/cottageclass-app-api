@@ -76,6 +76,10 @@ class User < ApplicationRecord
                  format: (false.eql?(country_code) ? :national : :international)
   end
 
+  def nearest_upcoming_event
+    Event.upcoming.nearest(self).reorder('distance ASC').order(starts_at: :asc).first
+  end
+
   def full_address
     [
       [street_number, route].compact.map(&:squish).select(&:present?).join(' '),

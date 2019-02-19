@@ -84,8 +84,8 @@ ActiveAdmin.register User do
     ].each do |attribute|
       column attribute
     end
-    column :nearest_event do |instance|
-      event = Event.upcoming.where.not(id: instance.events).near([instance.latitude, instance.longitude], 100).first
+    column :nearest_upcoming_event do |instance|
+      event = instance.nearest_upcoming_event
       event.present? ? edit_admin_event_url(event) : nil
     end
   end
