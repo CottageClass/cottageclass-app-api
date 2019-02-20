@@ -24,19 +24,19 @@
   "requests": [
     {
       "request_method": "PUT",
-      "request_path": "/api/user/children/2",
-      "request_body": "{\"child\":{\"emergency_contacts_attributes\":[{\"name\":\"Miss Gene Ondricka\",\"phone_number\":\"1-538-758-9933\",\"relationship\":\"qui\"}]}}",
+      "request_path": "/api/user/children/1",
+      "request_body": "{\"child\":{\"emergency_contacts_attributes\":[{\"name\":\"Bethann Goodwin\",\"phone_number\":\"(857) 228-2925\",\"relationship\":\"cumque\"}]}}",
       "request_headers": {
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NTA1ODQyNzksInN1YiI6MX0.V09tPdAVSVPzRrRlfXW6fJK0r4jObUsS1ieFlW2Xa7w"
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NTA3Mzk3MTgsInN1YiI6MX0.XhK3nH7ztUrNyaLKqaXf8ovS-4gdG7OaK3wngiasbgQ"
       },
       "request_query_parameters": {
       },
       "request_content_type": "application/json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\n  \"data\": {\n    \"id\": \"2\",\n    \"type\": \"child\",\n    \"attributes\": {\n      \"first_name\": \"Harriett\",\n      \"school_name\": \"Brookville High\",\n      \"age\": 5,\n      \"allergies\": [\n        \"amet\",\n        \"reprehenderit\"\n      ],\n      \"dietary_restrictions\": [\n        \"et\",\n        \"quod\"\n      ],\n      \"special_needs\": \"Aperiam architecto illum minus.\",\n      \"birthday\": \"2013-12-27\"\n    },\n    \"relationships\": {\n      \"emergency_contacts\": {\n        \"data\": [\n          {\n            \"id\": \"1\",\n            \"type\": \"emergency_contact\"\n          }\n        ]\n      }\n    }\n  },\n  \"included\": [\n    {\n      \"id\": \"1\",\n      \"type\": \"emergency_contact\",\n      \"attributes\": {\n        \"name\": \"Miss Gene Ondricka\",\n        \"phone_number\": \"1-538-758-9933\",\n        \"relationship\": \"qui\"\n      }\n    }\n  ]\n}",
+      "response_body": "{\n  \"data\": {\n    \"id\": \"1\",\n    \"type\": \"child\",\n    \"attributes\": {\n      \"first_name\": \"Milly\",\n      \"school_name\": \"Brookville High\",\n      \"age\": 3,\n      \"allergies\": [\n        \"excepturi\",\n        \"libero\"\n      ],\n      \"dietary_restrictions\": [\n        \"molestiae\",\n        \"quos\"\n      ],\n      \"special_needs\": \"Sit ea amet non.\",\n      \"birthday\": \"2015-09-04\"\n    },\n    \"relationships\": {\n      \"emergency_contacts\": {\n        \"data\": [\n          {\n            \"id\": \"1\",\n            \"type\": \"emergency_contact\"\n          }\n        ]\n      }\n    }\n  },\n  \"included\": [\n    {\n      \"id\": \"1\",\n      \"type\": \"emergency_contact\",\n      \"attributes\": {\n        \"name\": \"Bethann Goodwin\",\n        \"phone_number\": \"(857) 228-2925\",\n        \"relationship\": \"cumque\"\n      }\n    }\n  ]\n}",
       "response_headers": {
         "Content-Type": "application/vnd.api+json; charset=utf-8"
       },

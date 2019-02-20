@@ -1,6 +1,8 @@
 class Event < ApplicationRecord
   include Eventable
 
+  enum kind: { manual: 0, generated: 1 }
+
   geocoded_by :host_full_address
 
   before_validation :cleanup

@@ -120,6 +120,13 @@
           "groups": "all",
           "route": "/api/event_series/:id",
           "method": "get"
+        },
+        {
+          "description": "update:success",
+          "link": "eventseries/update:success.json",
+          "groups": "all",
+          "route": "/api/event_series/:id",
+          "method": "put"
         }
       ]
     },

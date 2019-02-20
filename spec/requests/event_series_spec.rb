@@ -59,6 +59,26 @@ RSpec.resource 'EventSeries' do
         expect(response_status).to eq(422)
       end
     end
+
+    put '/api/event_series/:id', format: :json do
+      include_context 'authorization token'
+      before { subject.save }
+
+      with_options scope: :event_series, with_example: true do
+        parameter :paused_from, 'Pause Start Date'
+        parameter :paused_until, 'Pause End Date'
+      end
+
+      let(:id) { subject.id }
+      let(:paused_from) { subject.paused_from }
+      let(:paused_until) { subject.paused_until }
+
+      example 'update:success' do
+        explanation 'To pause automatic event creation forever, set :paused_until to nil'
+        do_request
+        expect(response_status).to eq(200)
+      end
+    end
   end
 
   context 'read operations' do

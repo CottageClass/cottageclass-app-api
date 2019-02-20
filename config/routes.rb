@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   ActiveAdmin.routes self
 
   namespace :api, defaults: { format: :json } do
-    resources :event_series, only: %i[index show create]
+    resources :event_series, only: %i[index show create update]
     resources :events, only: %i[show update destroy] do
       resources :participants, only: %i[create] do
         collection { delete :index, to: 'participants#destroy' }

@@ -12,7 +12,7 @@ class EventSeries < ApplicationRecord
   after_create :create_events
 
   def create_next_event
-    if events.upcoming.blank?
+    if false.eql?(paused?) && events.upcoming.blank?
       0.step(by: interval).each do |number|
         new_date = number.weeks.since start_date
         if new_date.future?
@@ -23,6 +23,16 @@ class EventSeries < ApplicationRecord
     end
   end
 
+  def paused?
+    output = false
+    if paused_from.present? && paused_until.present?
+      output = Time.current.between?(paused_from, paused_until)
+    elsif paused_from.present?
+      output = Time.current > paused_from
+    end
+    output
+  end
+
   private
 
   def create_events
@@ -30,7 +40,7 @@ class EventSeries < ApplicationRecord
   end
 
   def create_event(new_date:)
-    event = events.build starts_at: date_time(new_date, starts_at), ends_at: date_time(new_date, ends_at)
+    event = events.generated.build starts_at: date_time(new_date, starts_at), ends_at: date_time(new_date, ends_at)
     %i[
       name
       maximum_children
