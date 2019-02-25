@@ -14,7 +14,8 @@ class Notification < ApplicationRecord
     user_creation: 9,
     participant_creation_next_day: 10,
     event_destruction: 11,
-    participant_creation_host: 12
+    participant_creation_host: 12,
+    event_creation_host: 13
   }
 
   belongs_to :recipient, class_name: 'User', inverse_of: :notifications
@@ -84,6 +85,11 @@ class Notification < ApplicationRecord
                                                          event: notifiable,
                                                          participant: participant,
                                                          body: body
+                 when :event_creation_host
+                   self.body = 'placeholder for body'
+                   Notifier::EventCreationHost.new user: recipient,
+                                                   event: notifiable,
+                                                   body: body
                  end
 
       if notifier.present?

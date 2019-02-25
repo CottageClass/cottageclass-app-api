@@ -7,10 +7,13 @@ namespace :cottage_class do
     end
 
     desc 'Event Generator'
-    task event_generator: :environment do
-      Event.where(Event.arel_table[:ends_at].between(4.weeks.ago(Time.current)..Time.current)).find_each do |event|
-        event.event_series.reload.create_next_event
-      end
+    task :event_generator, [:user_ids] => :environment do |_, arguments|
+      skope = Event.where Event.arel_table[:ends_at].between(4.weeks.ago(Time.current)..Time.current)
+
+      user_ids = (arguments[:user_ids] || '').split.map(&:squish).select(&:present?).map(&:to_i).select(&:positive?)
+      skope = skope.includes(:event_series).where(event_series: { user_id: user_ids }) if user_ids.present?
+
+      skope.find_each { |event| event.event_series.reload.create_next_event }
     end
   end
 end

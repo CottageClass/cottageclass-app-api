@@ -9,6 +9,7 @@ class Event < ApplicationRecord
   after_validation :geocode, if: lambda { |instance|
     instance.host_full_address.present? && (instance.latitude.blank? || instance.longitude.blank?)
   }
+  after_create :notify_creation
   before_destroy :notify_participants_destruction
 
   belongs_to :event_series, inverse_of: :events
@@ -84,6 +85,10 @@ class Event < ApplicationRecord
   end
 
   private
+
+  def notify_creation
+    notifications.event_creation_host.where(recipient: user).first_or_create if generated?
+  end
 
   def notify_participants_destruction
     participants.each do |participant|

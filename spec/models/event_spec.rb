@@ -27,6 +27,13 @@ RSpec.describe Event, type: :model do
       subject.time_zone = nil
       expect { subject.save }.to change(subject, :time_zone).from(nil)
     end
+
+    context 'event_creation_host' do
+      before { subject.event_series.save }
+
+      it { expect { subject.save }.not_to change(Notification.event_creation_host, :count) }
+      it { expect { subject.update kind: :generated }.to change(Notification.event_creation_host, :count).by(1) }
+    end
   end
 
   context 'destroy' do
