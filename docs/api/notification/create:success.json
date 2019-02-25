@@ -25,18 +25,18 @@
     {
       "request_method": "POST",
       "request_path": "/api/users/97/notifications",
-      "request_body": "{\"notification\":{\"body\":\"Et nostrum qui perspiciatis.\"}}",
+      "request_body": "{\"notification\":{\"body\":\"Impedit sint consectetur ab.\"}}",
       "request_headers": {
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NTA3Mzk3NjksInN1YiI6OTd9.8OS9UFxfqYP3NM4vVnFtHNxbdCzCubbCmjFN_eW5ukc"
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NTExNjMwODAsInN1YiI6OTd9.5CIypyBV7QBQUyNpVyh3HVBcpHDmrD-aX867Qixevqw"
       },
       "request_query_parameters": {
       },
       "request_content_type": "application/json",
       "response_status": 201,
       "response_status_text": "Created",
-      "response_body": "{\n  \"data\": {\n    \"id\": \"1930\",\n    \"type\": \"notification\",\n    \"attributes\": {\n      \"id\": 1930,\n      \"body\": \"Et nostrum qui perspiciatis.\"\n    }\n  }\n}",
+      "response_body": "{\n  \"data\": {\n    \"id\": \"1930\",\n    \"type\": \"notification\",\n    \"attributes\": {\n      \"id\": 1930,\n      \"body\": \"Impedit sint consectetur ab.\"\n    }\n  }\n}",
       "response_headers": {
         "Content-Type": "application/vnd.api+json; charset=utf-8"
       },

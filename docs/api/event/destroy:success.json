@@ -14,12 +14,12 @@
   "requests": [
     {
       "request_method": "DELETE",
-      "request_path": "/api/events/530",
+      "request_path": "/api/events/534",
       "request_body": "{}",
       "request_headers": {
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NTA3Mzk3NjgsInN1YiI6ODJ9.lbyEsUVlyqD9GrVZeI-EVG26Uf71YNvNmAKZb5ix_iQ"
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NTExNjMwNzgsInN1YiI6ODJ9.XXhI9M9BLz-9NTD938R131BCtTwPjClbAjW0WoBPYzE"
       },
       "request_query_parameters": {
       },
