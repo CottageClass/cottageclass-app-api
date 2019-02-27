@@ -24,6 +24,14 @@
 .byebug_history
 .env
 /*.json
+!/package.json
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+# webpacker
+/public/packs
+/public/packs-test
+/node_modules
+yarn-debug.log*
+.yarn-integrity

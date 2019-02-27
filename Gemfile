@@ -22,8 +22,10 @@ gem 'twilio-ruby', '~> 5.15.2'
 
 gem 'apitome'
 gem 'country_select'
+gem 'haml-rails'
 gem 'kaminari'
 gem 'sassc-rails'
+gem 'webpacker'
 
 group :production do
   gem 'airbrake'

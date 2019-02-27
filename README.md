@@ -1,68 +1,92 @@
-# CottageClass App API
+# KidsClub
 
-## Endpoints
+## Develop
 
-### Users
+### Prerequisites
 
-GET `/networks/:network_code/users`
-- returns array of all users with desired networkCode
-- requires current user to belong to desired networkCode
-- accepts no other params
-- returns: list of users, with subset of params (first, last, lat, long, address, phone, availability, activities)
+1. PostgreSQL, [Yarn](https://yarnpkg.com/en/), Git, [RVM](https://rvm.io/), [HiveMinds](https://github.com/DarthSim/hivemind)
+1. Ruby 2.5.3
+    ```
+    $ rvm install 2.5.3
+    ```
 
-GET `/users/:id/inquiries`
-- requires current user
-- accepts no params
-- returns: list of all users *in user's current network* who have messaged the current user
+### Install
 
-GET `/users/:id`
-- returns user with desired ID
-- requires current user to have permissions for desired user
-- accepts no other params
-- returns: user, includes: children
+1. Get the code
+    ```
+    $ git clone git@github.com:CottageClass/cottageclass-app-api.git KidsClub
+    $ cd KidsClub
+    $ git checkout vuefied
+    ```
 
-POST `/users/:id`
-- updates user with desired ID
-- requires current user to have permissions for desired user
-- accepts:
-  - agree_tos
-  - first_name
-  - last_name
-  - street_number
-  - route
-  - locality
-  - admin_area_level_1
-  - admin_area_level_2
-  - country
-  - postal_code
-  - latitude
-  - longitude
-  - phone_country_code
-  - phone_area_code
-  - phone_number
-  - available_mornings
-  - available_afternoons
-  - available_evenings
-  - available_weekends
-  - network_code
-  - activities: [],
-  - children: [:id, :parent_id, :first_name, :birthday]
-- returns: updated user, includes: children
+1. Install gems
+    ```
+    $ bundle
+    ```
 
-### Proxy Sessions
+1. Create your copy of .env
+    ```
+    $ cp .env.sample .env
+    ```
 
-POST `/users/:id/proxy_sessions`
-- finds a live session or creates a new proxy session for current_user and User.find(:id)
-- accepts:
-  - request_message
-  - acknowledgement_message
+1. Update .env with database user/password.
+1. Setup database
+    ```
+    $ RAILS_ENV=development bin/rails db:create
+    $ RAILS_ENV=development bin/rails db:schema:load
+    ```
 
-### Auth
+1. Install JS packages
+    ```
+    $ yarn
+    ```
 
-POST `/auth/user_token`
-- fetches a new user auth token
-- currently not used
+1. If required, copy the matching values in `.env` from Heroku app `vuefied-kidsclub`
+    ```
+    $ heroku config -sa vuefied-kidsclub
+    ```
 
-POST `/auth/facebook`
-- exchanges an OAuth 2 authorization code (obtained via popup on frontend) for a user auth token
-- used by VueAuthenticate and Facebook Login
+### Run
+
+1. Start your server with
+    ```
+    hivemind -p 3000 Procfile.dev
+    ```
+
+## Test
+
+### Setup
+
+1. Setup database
+    ```
+    $ RAILS_ENV=test bin/rails db:create
+    $ RAILS_ENV=test bin/rails db:schema:load
+    ```
+
+### Run
+
+1. RSpec
+    ```
+    $ bin/rspec -fd
+    ```
+
+## Deploy
+
+### Prerequisites
+
+1. Access to the Heroku app.
+1. [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli)
+
+### Setup
+
+1. Add the remote, if not already present.
+    ```
+    $ heroku git:remote --remote vuefied -a vuefied-kidsclub
+    ```
+
+### Deploy
+
+1. Push to Heroku
+    ```
+    $ git push vuefied vuefied:master
+    ```

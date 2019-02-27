@@ -78,5 +78,7 @@ Rails.application.routes.draw do
 
   get '/static' => 'static#index', as: 'static'
 
-  root 'null#index'
+  root 'static#index'
+
+  get '/*path', to: 'static#index', format: false
 end
