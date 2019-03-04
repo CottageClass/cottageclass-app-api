@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_04_062452) do
+ActiveRecord::Schema.define(version: 2019_03_04_055925) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -204,12 +204,11 @@ ActiveRecord::Schema.define(version: 2019_02_04_062452) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "email"
+    t.string "email", null: false
     t.string "avatar"
     t.string "referrer"
     t.decimal "fuzzy_latitude"
     t.decimal "fuzzy_longitude"
-    t.string "password_digest"
     t.string "apartment_number"
     t.string "neighborhood"
     t.string "sublocality"
@@ -254,9 +253,44 @@ ActiveRecord::Schema.define(version: 2019_02_04_062452) do
     t.string "instagram_user"
     t.string "twitter_user"
     t.string "linkedin_user"
+    t.string "encrypted_password", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string "current_sign_in_ip"
+    t.string "last_sign_in_ip"
+    t.string "confirmation_token"
+    t.string "unconfirmed_email"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.integer "failed_attempts", default: 0, null: false
+    t.string "unlock_token"
+    t.datetime "locked_at"
+    t.string "invited_by_type"
+    t.bigint "invited_by_id"
+    t.string "invitation_token"
+    t.datetime "invitation_created_at"
+    t.datetime "invitation_sent_at"
+    t.datetime "invitation_accepted_at"
+    t.integer "invitation_limit"
+    t.integer "invitations_count", default: 0
+    t.string "provider"
+    t.string "uid"
+    t.boolean "terms_of_service", default: false, null: false
+    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
+    t.index ["email"], name: "index_users_on_email"
     t.index ["fuzzy_latitude", "fuzzy_longitude"], name: "index_users_on_fuzzy_latitude_and_fuzzy_longitude"
+    t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
+    t.index ["invitations_count"], name: "index_users_on_invitations_count"
+    t.index ["invited_by_type", "invited_by_id"], name: "index_users_on_invited_by_type_and_invited_by_id"
     t.index ["latitude", "longitude"], name: "index_users_on_latitude_and_longitude"
     t.index ["network_code"], name: "index_users_on_network_code"
+    t.index ["provider", "uid"], name: "index_users_on_provider_and_uid"
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
   add_foreign_key "children", "users", column: "parent_id"

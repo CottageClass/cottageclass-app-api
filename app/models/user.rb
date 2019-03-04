@@ -1,10 +1,8 @@
 class User < ApplicationRecord
-  # adds the following:
-  # - password must be present on creation
-  # - password length must be <= 72bytes
-  # - confirmation of password via password_confirmation attribute (if provided in request)
-  # - via: https://api.rubyonrails.org/classes/ActiveModel/SecurePassword/ClassMethods.html#method-i-has_secure_password
-  has_secure_password
+  # Include devise modules. Others available are:
+  # :timeoutable, :confirmable, :invitable, :lockable
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :omniauthable,
+         omniauth_providers: %i[facebook]
 
   attr_accessor :direct
 
@@ -116,11 +114,21 @@ class User < ApplicationRecord
             fb_access_token_expires_at: (Time.now.utc + sec_til_expiry).to_datetime
   end
 
+  class << self
+    def from_omniauth(auth)
+      where(provider: auth.provider, uid: auth.uid).first_or_create email: auth.info.email,
+                                                                    password: Devise.friendly_token(12),
+                                                                    # avatar: auth.info.image,
+                                                                    name: auth.info.name
+    end
+  end
+
   private
 
   def cleanup
     self.email = email.to_s.downcase
     self.network_code = network_code.to_s.downcase
+    self.facebook_uid = uid if %w[facebook].include?(provider)
   end
 
   def notify
