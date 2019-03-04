@@ -25,18 +25,18 @@
     {
       "request_method": "PUT",
       "request_path": "/api/user/children/2",
-      "request_body": "{\"child\":{\"emergency_contacts_attributes\":[{\"name\":\"Allena Greenfelder\",\"phone_number\":\"1-210-556-3136\",\"relationship\":\"id\"}]}}",
+      "request_body": "{\"child\":{\"emergency_contacts_attributes\":[{\"name\":\"Kimberely Brakus\",\"phone_number\":\"(154) 680-4367\",\"relationship\":\"recusandae\"}]}}",
       "request_headers": {
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NTExNjMwMTUsInN1YiI6MX0.IjJxe56jotsny6BZ_ELUqU7aaJrJwY1mYIRCSHc9nq4"
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NTE4MDEwNjMsInN1YiI6MX0.AcwTtj8q8InOpdZkJ-h8jygIKABL20k0nPXgzT_T5Mw"
       },
       "request_query_parameters": {
       },
       "request_content_type": "application/json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\n  \"data\": {\n    \"id\": \"2\",\n    \"type\": \"child\",\n    \"attributes\": {\n      \"first_name\": \"Charles\",\n      \"school_name\": \"Marblewald High\",\n      \"age\": 5,\n      \"allergies\": [\n        \"repellat\",\n        \"eos\"\n      ],\n      \"dietary_restrictions\": [\n        \"aut\",\n        \"placeat\"\n      ],\n      \"special_needs\": \"Facilis quos accusamus ea.\",\n      \"birthday\": \"2014-01-27\"\n    },\n    \"relationships\": {\n      \"emergency_contacts\": {\n        \"data\": [\n          {\n            \"id\": \"1\",\n            \"type\": \"emergency_contact\"\n          }\n        ]\n      }\n    }\n  },\n  \"included\": [\n    {\n      \"id\": \"1\",\n      \"type\": \"emergency_contact\",\n      \"attributes\": {\n        \"name\": \"Allena Greenfelder\",\n        \"phone_number\": \"1-210-556-3136\",\n        \"relationship\": \"id\"\n      }\n    }\n  ]\n}",
+      "response_body": "{\n  \"data\": {\n    \"id\": \"2\",\n    \"type\": \"child\",\n    \"attributes\": {\n      \"first_name\": \"Abraham\",\n      \"school_name\": \"Ironbarrow Secondary College\",\n      \"age\": 3,\n      \"allergies\": [\n        \"est\",\n        \"velit\"\n      ],\n      \"dietary_restrictions\": [\n        \"expedita\",\n        \"in\"\n      ],\n      \"special_needs\": \"In autem accusamus aut.\",\n      \"birthday\": \"2015-05-14\"\n    },\n    \"relationships\": {\n      \"emergency_contacts\": {\n        \"data\": [\n          {\n            \"id\": \"1\",\n            \"type\": \"emergency_contact\"\n          }\n        ]\n      }\n    }\n  },\n  \"included\": [\n    {\n      \"id\": \"1\",\n      \"type\": \"emergency_contact\",\n      \"attributes\": {\n        \"name\": \"Kimberely Brakus\",\n        \"phone_number\": \"(154) 680-4367\",\n        \"relationship\": \"recusandae\"\n      }\n    }\n  ]\n}",
       "response_headers": {
         "Content-Type": "application/vnd.api+json; charset=utf-8"
       },
