@@ -35,6 +35,9 @@ class AddDeviseToUsers < ActiveRecord::Migration[5.2]
       # OmniAuth
       t.string :provider, :uid
 
+      # JWT
+      t.string :jti
+
       # Custom
       t.boolean :terms_of_service, null: false, default: false
 
@@ -49,6 +52,10 @@ class AddDeviseToUsers < ActiveRecord::Migration[5.2]
 
     reversible do |direction|
       direction.up do
+        User.find_each { |user| user.update_columns jti: SecureRandom.uuid }
+        change_column_null :users, :jti, false
+        add_index :users, :jti, unique: true
+
         change_column_default :users, :encrypted_password, nil
         change_column_null :users, :email, false
         remove_column :users, :password_digest

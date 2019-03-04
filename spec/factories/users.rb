@@ -2,7 +2,7 @@ FactoryBot.define do
   factory :user do
     email { Faker::Internet.unique.safe_email }
     name { Faker::FunnyName.unique.name }
-    password { 'demo' }
+    password { Faker::Internet.password 8, 16 }
     time_zone { Faker::Address.time_zone }
     network_code { 'demo' }
     phone_number { Faker::PhoneNumber.phone_number }

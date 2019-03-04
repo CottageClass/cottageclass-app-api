@@ -11,6 +11,8 @@ RSpec.describe User, type: :model do
   end
 
   context 'save' do
+    it { expect { subject.save }.to change(subject, :jti).from(nil) }
+
     it 'obfuscates location' do
       expect(subject.fuzzy_latitude).to be_blank
       expect(subject.fuzzy_longitude).to be_blank

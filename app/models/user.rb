@@ -1,8 +1,10 @@
 class User < ApplicationRecord
+  include Devise::JWT::RevocationStrategies::JTIMatcher
+
   # Include devise modules. Others available are:
   # :timeoutable, :confirmable, :invitable, :lockable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :omniauthable,
-         omniauth_providers: %i[facebook]
+         :jwt_authenticatable, jwt_revocation_strategy: self, omniauth_providers: %i[facebook]
 
   attr_accessor :direct
 

@@ -1,2 +1,2 @@
-#app{ data: { token: @token } }
+#app{ data: { token: current_user.try(:jti) } }
 = javascript_pack_tag 'application'
