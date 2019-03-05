@@ -16,7 +16,7 @@
     ```
     $ git clone git@github.com:CottageClass/cottageclass-app-api.git KidsClub
     $ cd KidsClub
-    $ git checkout vuefied
+    $ git checkout --track origin/vuefied
     ```
 
 1. Install gems
@@ -43,7 +43,7 @@
 
 1. If required, copy the matching values in `.env` from Heroku app `vuefied-kidsclub`
     ```
-    $ heroku config -sa vuefied-kidsclub
+    $ heroku config -sa kidsclub-vuefied
     ```
 
 ### Run
