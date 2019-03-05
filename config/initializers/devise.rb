@@ -351,5 +351,6 @@ Devise.setup do |config|
 
   config.jwt do |jwt|
     jwt.secret = ENV.fetch('SECRET_KEY_BASE')
+    jwt.expiration_time = 100.years.to_i
   end
 end

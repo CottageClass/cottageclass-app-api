@@ -279,6 +279,7 @@ ActiveRecord::Schema.define(version: 2019_03_04_055925) do
     t.integer "invitations_count", default: 0
     t.string "provider"
     t.string "uid"
+    t.string "jti", null: false
     t.boolean "terms_of_service", default: false, null: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email"
@@ -286,6 +287,7 @@ ActiveRecord::Schema.define(version: 2019_03_04_055925) do
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
     t.index ["invitations_count"], name: "index_users_on_invitations_count"
     t.index ["invited_by_type", "invited_by_id"], name: "index_users_on_invited_by_type_and_invited_by_id"
+    t.index ["jti"], name: "index_users_on_jti", unique: true
     t.index ["latitude", "longitude"], name: "index_users_on_latitude_and_longitude"
     t.index ["network_code"], name: "index_users_on_network_code"
     t.index ["provider", "uid"], name: "index_users_on_provider_and_uid"

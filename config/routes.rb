@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   ActiveAdmin.routes self
-  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks', passwords: 'users/passwords' }
 
   namespace :api, defaults: { format: :json } do
     resources :event_series, only: %i[index show create update]
