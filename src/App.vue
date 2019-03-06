@@ -1,22 +1,16 @@
 <template>
-  <p>{{ message }}</p>
+  <div id="app">
+    <router-view/>
+  </div>
 </template>
 
 <script>
 export default {
-  name: "App",
-  props: ["token"],
-  computed: {
-    message: function() {
-      return `Got token ${this.token}`;
-    }
-  }
-};
+  name: 'App'
+}
 </script>
 
-<style scoped>
-p {
-  font-size: 2em;
-  text-align: center;
-}
+<style>
+@import './assets/css/normalize.css';
+@import './assets/css/webflow.css';
 </style>
