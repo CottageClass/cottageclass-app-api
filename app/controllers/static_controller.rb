@@ -1,5 +1,5 @@
 class StaticController < ApplicationController
   def index
-    @token = 'token-set-in-rails'
+    @token, = current_user.present? ? Warden::JWTAuth::UserEncoder.new.call(current_user, :user, nil) : [nil]
   end
 end
