@@ -1,5 +1,5 @@
 class API::ParticipantsController < API::BaseController
-  before_action :authenticate_user, :load_event
+  before_action :authenticate_user!, :load_event
 
   def create
     participant = @event.participants.build safe_params

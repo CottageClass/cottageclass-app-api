@@ -1,5 +1,5 @@
 class API::ChildrenController < API::BaseController
-  before_action :authenticate_user, :load_child
+  before_action :authenticate_user!, :load_child
 
   def update
     if @child.update(safe_params)

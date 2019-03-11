@@ -17,7 +17,7 @@ export function initProxySession (currentUserId, receiverId, requestMessage, ack
     }
   }
   return Vue.axios.post(
-    `${process.env.BASE_URL_API}/users/${receiverId}/proxy_sessions`,
+    `/users/${receiverId}/proxy_sessions`,
     postData
   ).then(res => {
     console.log('proxy session init SUCCESS, returning proxy phone number for receiver')
@@ -137,7 +137,7 @@ export function submitUserInfo (userId, phone, location, availability, children,
 
   console.log('postdata', postData)
   return Vue.axios.post(
-    `${process.env.BASE_URL_API}/users/${userId}`,
+    `/users/${userId}`,
     postData
   ).then(res => {
     console.log('SUBMIT USER SUCCESS', res)
@@ -212,7 +212,7 @@ function createPeopleObject (responseData) {
 
 export function fetchUsersWithinDistance (miles, lat, lon) {
   return Vue.axios.get(
-    `${process.env.BASE_URL_API}/api/users/miles/${miles}/latitude/${lat}/longitude/${lon}/page/1/page_size/10`
+    `/api/users/miles/${miles}/latitude/${lat}/longitude/${lon}/page/1/page_size/10`
   ).then(res => {
     console.log('FETCH USERS WITHIN DISTANCE SUCCESS')
     console.log(res.data)
@@ -226,7 +226,7 @@ export function fetchUsersWithinDistance (miles, lat, lon) {
 
 export function fetchUsersInNetwork (networkId) {
   return Vue.axios.get(
-    `${process.env.BASE_URL_API}/networks/${networkId}/users`
+    `/networks/${networkId}/users`
   ).then(res => {
     console.log('FETCH USERS IN NETWORK SUCCESS')
     console.log(res.data)
@@ -240,7 +240,7 @@ export function fetchUsersInNetwork (networkId) {
 
 export function fetchUsersWhoHaveMadeInquiries (currentUserId) {
   return Vue.axios.get(
-    `${process.env.BASE_URL_API}/users/${currentUserId}/inquiries`
+    `/users/${currentUserId}/inquiries`
   ).then(res => {
     console.log('FETCH USERS WHO HAVE MADE INQUIRIES SUCCESS')
     console.log(res.data)
@@ -256,7 +256,7 @@ export function fetchUsersWhoHaveMadeInquiries (currentUserId) {
 // uses old API endpoint. todo: modify backend to provide all current user information if the current user themself is requesting it, then switch this to use newer /api/users/:id endpoint.
 export function fetchCurrentUser (userId) {
   return Vue.axios.get(
-    `${process.env.BASE_URL_API}/users/${userId}`
+    `/users/${userId}`
   ).then(res => {
     console.log('FETCH CURRENT USER SUCCESS')
     console.log(res)
@@ -291,7 +291,7 @@ export function fetchCurrentUser (userId) {
 
 export function fetchUser (userId) {
   return Vue.axios.get(
-    `${process.env.BASE_URL_API}/api/users/${userId}`
+    `/api/users/${userId}`
   ).then(res => {
     console.log('FETCH USER #' + userId + ' SUCCESS')
     console.log(res)
@@ -313,7 +313,7 @@ export function fetchUser (userId) {
 
 export function submitEmergencyContacts (childId, arrayOfContacts) {
   return Vue.axios.put(
-    `${process.env.BASE_URL_API}/api/user/children/${childId}`,
+    `/api/user/children/${childId}`,
     {
       child:
       {
@@ -330,7 +330,7 @@ export function submitEmergencyContacts (childId, arrayOfContacts) {
 // backend requires user to be an admin
 export function fetchAllUsers () {
   return Vue.axios.get(
-    `${process.env.BASE_URL_API}/users`
+    `/users`
   ).then(res => {
     console.log('FETCH ALL USERS SUCCESS')
     console.log(createPeopleObject(res.data))
@@ -359,7 +359,7 @@ function createMessageObject (msgFromApi) {
 
 export function fetchMessagesForUserPair (participantId1, participantId2) {
   return Vue.axios.get(
-    `${process.env.BASE_URL_API}/users/${participantId1}/messages/${participantId2}`
+    `/users/${participantId1}/messages/${participantId2}`
   ).then(res => {
     console.log('FETCH Messages for User Pair SUCCESS')
     console.log(createMessagesObject(res.data.data))
@@ -383,7 +383,7 @@ export function submitNotification (participantId, notificationBodyText) {
     }
   }
   return Vue.axios.post(
-    `${process.env.BASE_URL_API}/api/users/${participantId}/notifications/`, notificationData
+    `/api/users/${participantId}/notifications/`, notificationData
   ).then(res => {
     console.log('NOTIFICATION submission SUCCESS')
     return res
@@ -400,7 +400,7 @@ export function submitNotification (participantId, notificationBodyText) {
 
 export function fetchUpcomingEvents (userId) {
   return Vue.axios.get(
-    `${process.env.BASE_URL_API}/api/users/${userId}/events/created/upcoming/page/1/page_size/100`
+    `/api/users/${userId}/events/created/upcoming/page/1/page_size/100`
   ).then(res => {
     console.log('FETCH MY UPCOMING EVENTS SUCCESS')
     return Object.values(normalize(res.data).event).map(parseEventData)
@@ -413,7 +413,7 @@ export function fetchUpcomingEvents (userId) {
 
 export function submitEventSeriesData (data) {
   return Vue.axios.post(
-    `${process.env.BASE_URL_API}/api/event_series`, data
+    `/api/event_series`, data
   ).then(res => {
     return Object.values(normalize(res.data).event).map(parseEventData)
   })
@@ -421,7 +421,7 @@ export function submitEventSeriesData (data) {
 
 export function fetchEvents (params) {
   return Vue.axios.get(
-    `${process.env.BASE_URL_API}/api/events/${params || ''}`
+    `/api/events/${params || ''}`
   ).then(res => {
     console.log('FETCH EVENTS SUCCESS')
     console.log(res.data)
@@ -435,7 +435,7 @@ export function fetchEvents (params) {
 
 export function fetchUpcomingEventsWithinDistance (miles, lat, lon, sort) {
   return Vue.axios.get(
-    `${process.env.BASE_URL_API}/api/events/upcoming/miles/${miles}/latitude/${lat}/longitude/${lon}/sort/chronological`
+    `/api/events/upcoming/miles/${miles}/latitude/${lat}/longitude/${lon}/sort/chronological`
   ).then(res => {
     console.log('FETCH UPCOMING EVENTS WITHIN DISTANCE SUCCESS')
     console.log(res.data)
@@ -450,7 +450,7 @@ export function fetchUpcomingEventsWithinDistance (miles, lat, lon, sort) {
 }
 
 export function fetchUpcomingParticipatingEvents (userId) {
-  return Vue.axios.get(`${process.env.BASE_URL_API}/api/users/${userId}/events/participated/upcoming/page/1/page_size/100`)
+  return Vue.axios.get(`/api/users/${userId}/events/participated/upcoming/page/1/page_size/100`)
     .then(res => {
       console.log('GET PARTICIPATING EVENTS SUCCESS')
       console.log(res)
@@ -468,7 +468,7 @@ export function fetchUpcomingParticipatingEvents (userId) {
 }
 
 export function removeEventParticipant (eventId) {
-  return Vue.axios.delete(`${process.env.BASE_URL_API}/api/events/${eventId}/participants`)
+  return Vue.axios.delete(`/api/events/${eventId}/participants`)
     .then(res => {
       console.log('REMOVE EVENT PARTICIPANT SUCCESS')
       console.log(res)
@@ -493,7 +493,7 @@ export function submitEventParticipant (eventId, participantChildIds) {
       'participant_children_attributes': participantChildIds.map(createChild)
     }
   }
-  return Vue.axios.post(`${process.env.BASE_URL_API}/api/events/${eventId}/participants`, participantData)
+  return Vue.axios.post(`/api/events/${eventId}/participants`, participantData)
     .then(res => {
       console.log('SUBMIT EVENT PARTICIPANT SUCCESS')
       console.log(res)
@@ -508,7 +508,7 @@ export function submitEventParticipant (eventId, participantChildIds) {
 }
 
 export function deleteEvent (eventId, successCallback) {
-  return Vue.axios.delete(`${process.env.BASE_URL_API}/api/events/${eventId}`)
+  return Vue.axios.delete(`/api/events/${eventId}`)
     .then(res => {
       console.log('DELETE EVENT SUCCESS')
       console.log(res)

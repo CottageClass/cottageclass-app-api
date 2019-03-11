@@ -4,6 +4,7 @@ RSpec.describe 'import:people_json' do
   include_context 'rake'
 
   let(:path_to_json) { 'spec/fixtures/people.json' }
+  let(:user) { build :user }
 
   it 'imports users, including email, facebook_uid, phone, location, network, availability, activities, and children' do
     expect do
@@ -32,7 +33,7 @@ RSpec.describe 'import:people_json' do
   context 'when a user with the email already exists' do
     before do
       # don't use FactoryBot because want to maintain blank attributes
-      User.create!(email: 'marixsa@gmail.com', first_name: 'MarixsaTest', password: 'demo')
+      User.create! email: 'marixsa@gmail.com', first_name: 'MarixsaTest', password: user.password
     end
 
     it 'does not import the user' do

@@ -1,5 +1,5 @@
 class API::NotificationsController < API::BaseController
-  before_action :authenticate_user, :verify_user
+  before_action :authenticate_user!, :verify_user
 
   def create
     notification = user.notifications.direct.build safe_params

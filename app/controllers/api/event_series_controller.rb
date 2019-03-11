@@ -1,5 +1,5 @@
 class API::EventSeriesController < API::BaseController
-  before_action :authenticate_user
+  before_action :authenticate_user!
 
   def index
     render json: EventSeriesSerializer.new(current_user.event_series, include: %i[event_hosts]).serializable_hash,

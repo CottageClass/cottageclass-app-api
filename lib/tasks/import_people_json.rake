@@ -66,7 +66,7 @@ namespace :import do
           available_weekends: u.availability.include?('weekends'),
           children_attributes: child_attrs,
           # fake a password
-          password: SecureRandom.base64(15)
+          password: SecureRandom.base64(8)
         )
 
         created_network_codes << user.network_code
