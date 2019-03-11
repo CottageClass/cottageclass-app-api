@@ -1,3 +1,5 @@
 class API::BaseController < ActionController::API
-  include Knock::Authenticable
+  include ActionController::MimeResponds
+
+  respond_to :json
 end
