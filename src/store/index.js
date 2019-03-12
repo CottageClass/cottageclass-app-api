@@ -2,29 +2,25 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import * as api from '../utils/api'
 import moment from 'moment'
+import auth from './auth'
 import createPersistedState from 'vuex-persistedstate'
 import _ from 'lodash'
+
 
 Vue.use(Vuex)
 
 export default new Vuex.Store(
   {
     plugins: [createPersistedState()],
+    modules: {
+      auth
+    },
     state: {
-      eventsByDate: null, // We shouldn't store all events.  It will have to change later
-      currentUser: null,
       alert: null,
       createdEvents: null,
-      RSVPAttempEventId: null,
-      JWT: null
+      RSVPAttempEventId: null
     },
     mutations: {
-      setEventsByDate: (state, payload) => {
-        state.eventsByDate = payload.events
-      },
-      setCurrentUser: (state, payload) => {
-        state.currentUser = payload.user
-      },
       showAlert: (state, payload) => {
         state.alert = payload.alert
       },
@@ -40,35 +36,9 @@ export default new Vuex.Store(
       },
       setCreatedEvents: (state, payload) => {
         state.createdEvents = payload.eventData
-      },
-      setJWT: (state, payload) => {
-        state.JWT = payload.JWT
       }
     },
     actions: {
-      //////////////////////////////////////////
-      // Once again, we should not be doing this
-      //////////////////////////////////////////
-      fetchAllEventsAsync: ({ commit }) => {
-        api.fetchEvents().then(events => {
-          events.sort((eventA, eventB) => {
-            return moment(eventA.startsAt).diff(moment(eventB.startsAt))
-          })
-          commit('setEventsByDate', { events })
-        })
-      },
-      establishUser: ({ commit, state, getters }, payload) => {
-        commit('setJWT', payload)
-        const userId = getters.parsedJWT.sub
-
-        if (userId === null) {
-          commit('setCurrentUser', { user: null })
-        } else {
-          return api.fetchCurrentUser(userId).then(user => {
-            commit('setCurrentUser', { user })
-          })
-        }
-      },
       newRoute: ({ commit, state }, { to, from, next }) => {
         // this method manages the showing of alerts when you enter a new route
         if (state.alert) {
@@ -82,19 +52,6 @@ export default new Vuex.Store(
       }
     },
     getters: {
-      distanceFromCurrentUser: (state) => (lat, lon) => {
-        if (state.currentUser) {
-          return api.distanceHaversine(lat, lon, state.currentUser.latitude, state.currentUser.longitude)
-        } else {
-          return null
-        }
-      },
-      currentUser: (state) => {
-        return state.currentUser
-      },
-      isAuthenticated: (state) => {
-        return state.currentUser !== null
-      },
       alert: state => state.alert,
       firstCreatedEvent: (state, getters) => {
         if (state.createdEvents) {
@@ -111,15 +68,6 @@ export default new Vuex.Store(
         }
       },
       rsvpAttemptedId: state => state.RSVPAttempEventId,
-      parsedJWT: state => {
-        const token = state.JWT
-        if (token) {
-          var base64Url = token.split('.')[1]
-          var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/')
-          return JSON.parse(window.atob(base64))
-        }
-        return null
-      }
     }
   }
 )
