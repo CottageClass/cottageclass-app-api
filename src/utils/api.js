@@ -526,6 +526,7 @@ export function deleteEvent (eventId, successCallback) {
  * UTILS
  */
 
+ // TODO get this out of here
 export function distanceHaversine (lat1, lon1, lat2, lon2) {
   const unit = 'N' // always return miles
   var radlat1 = Math.PI * lat1 / 180
