@@ -214,7 +214,7 @@ export default {
     finishOnboarding () {
       // send the data to the server
       const that = this
-      const userId = Token.currentUserId(that.$auth)
+      const userId = this.currentUser.id
       const submitInfo = api.submitUserInfo(
         userId,
         this.userData.phone,
