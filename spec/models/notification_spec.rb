@@ -9,7 +9,7 @@ RSpec.describe Notification, type: :model do
   end
 
   context 'associations' do
-    it { is_expected.to belong_to(:notifiable).inverse_of(:notifications) }
+    it { is_expected.to belong_to(:notifiable).inverse_of(:notifications).optional }
     it { is_expected.to belong_to(:recipient).inverse_of(:notifications) }
   end
 

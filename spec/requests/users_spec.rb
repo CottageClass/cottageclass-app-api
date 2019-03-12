@@ -8,6 +8,13 @@ RSpec.describe 'requesting users', type: :request do
     let!(:seeker_2)               { FactoryBot.create(:user) }
     let!(:seeker_3)               { FactoryBot.create(:user) }
 
+    let :headers do
+      {
+        'ACCEPT': 'application/json',
+        'HTTP_ACCEPT': 'application/json'
+      }
+    end
+
     before do
       FactoryBot.create(:message, sender: seeker_1, receiver: provider)
       FactoryBot.create(:message, sender: seeker_1, receiver: provider)
@@ -15,7 +22,8 @@ RSpec.describe 'requesting users', type: :request do
     end
 
     it 'requires authorization' do
-      get inquiries_path(provider)
+      get inquiries_path(provider), headers: headers
+
       expect(response.status).to eq 401
     end
 

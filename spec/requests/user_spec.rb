@@ -60,20 +60,6 @@ RSpec.resource 'User' do
   end
 
   context 'write operations' do
-    post auth_login_path, format: :json do
-      parameter :email, 'User Email'
-      parameter :password, 'User Password'
-
-      let(:user) { create :user }
-      let(:email) { user.email }
-      let(:password) { user.password }
-
-      example 'login:success', document: false do
-        do_request
-        expect(response_status).to eq(201)
-      end
-    end
-
     post '/users/:id', format: :json do
       include_context 'authorization token'
 

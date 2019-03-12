@@ -13,7 +13,6 @@ RSpec.describe ParticipantChild, type: :model do
 
   context 'associations' do
     it { is_expected.to belong_to(:participant).inverse_of(:participant_children) }
-    it { is_expected.to belong_to(:participable).inverse_of(:participant_children) }
     it { is_expected.to belong_to(:child).inverse_of(:participant_children) }
   end
 end

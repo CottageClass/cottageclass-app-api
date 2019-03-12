@@ -25,18 +25,18 @@
     {
       "request_method": "POST",
       "request_path": "/api/users/97/notifications",
-      "request_body": "{\"notification\":{\"body\":\"Sunt possimus nulla mollitia.\"}}",
+      "request_body": "{\"notification\":{\"body\":\"Aperiam nihil cum occaecati.\"}}",
       "request_headers": {
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI5NDE4YjBkMy00MzQ2LTQxMjEtYWNjMC1hYTMyY2VkMWViY2YiLCJzdWIiOiI5NyIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTU1MjM3MDYxNCwiZXhwIjo0NzA4MDY1ODE0fQ.aeoX1SPdbXJ7ohJKpeY9IcfdDTLN5cmwEJb_UmklIic"
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxNjFkN2E0OS02OWMyLTQ1YTItODFiZi04MTg4NzIzYzcwMzEiLCJzdWIiOiI5NyIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTU1MjQxMzk1MCwiZXhwIjo0NzA4MTA5MTUwfQ.iKcDIzNkbFKlA24vcOt0qzW-1dSOLhs8KdECoHyX_9Y"
       },
       "request_query_parameters": {
       },
       "request_content_type": "application/json",
       "response_status": 201,
       "response_status_text": "Created",
-      "response_body": "{\n  \"data\": {\n    \"id\": \"1930\",\n    \"type\": \"notification\",\n    \"attributes\": {\n      \"id\": 1930,\n      \"body\": \"Sunt possimus nulla mollitia.\"\n    }\n  }\n}",
+      "response_body": "{\n  \"data\": {\n    \"id\": \"1930\",\n    \"type\": \"notification\",\n    \"attributes\": {\n      \"id\": 1930,\n      \"body\": \"Aperiam nihil cum occaecati.\"\n    }\n  }\n}",
       "response_headers": {
         "Content-Type": "application/vnd.api+json; charset=utf-8"
       },

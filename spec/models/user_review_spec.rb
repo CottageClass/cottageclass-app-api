@@ -19,6 +19,6 @@ RSpec.describe UserReview, type: :model do
   context 'associations' do
     it { is_expected.to belong_to(:user).inverse_of(:user_reviews) }
     it { is_expected.to belong_to(:reviewer).inverse_of(:reviewed_users) }
-    it { is_expected.to belong_to(:reviewable).inverse_of(:user_reviews) }
+    it { is_expected.to belong_to(:reviewable).inverse_of(:user_reviews).optional }
   end
 end

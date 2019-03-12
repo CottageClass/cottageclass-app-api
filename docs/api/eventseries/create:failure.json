@@ -108,11 +108,11 @@
     {
       "request_method": "POST",
       "request_path": "/api/event_series",
-      "request_body": "{\"event_series\":{\"name\":null,\"start_date\":\"2019-03-04\",\"starts_at\":\"07:42\",\"ends_at\":\"10:42\",\"maximum_children\":0,\"child_age_minimum\":0,\"child_age_maximum\":0,\"repeat_for\":6,\"interval\":4,\"has_pet\":true,\"activity_names\":[\"hockey\"],\"foods\":[\"Cheeseburger\"],\"house_rules\":\"Debitis explicabo dignissimos. Recusandae quaerat quas. Sunt molestiae laboriosam.\",\"pet_description\":\"Aliquid error fuga. Eligendi et nesciunt. Nostrum ut nesciunt.\",\"event_hosts_attributes\":[{\"name\":\"Ai Stamm\",\"email\":\"liberty_homenick@gmail.com\",\"phone\":\"(414) 554-0538\"},{\"name\":\"Elin Considine Jr.\",\"email\":\"marcus@hotmail.com\",\"phone\":\"1-344-805-9015\"}]}}",
+      "request_body": "{\"event_series\":{\"name\":null,\"start_date\":\"2019-03-03\",\"starts_at\":\"09:18\",\"ends_at\":\"12:18\",\"maximum_children\":0,\"child_age_minimum\":0,\"child_age_maximum\":0,\"repeat_for\":6,\"interval\":4,\"has_pet\":true,\"activity_names\":[\"taekwondo\"],\"foods\":[\"Som Tam\"],\"house_rules\":\"Iure ut doloribus. Qui ut ea. Nesciunt consequuntur minima.\",\"pet_description\":\"Odit velit rerum. Delectus id modi. Quam neque libero.\",\"event_hosts_attributes\":[{\"name\":\"Sharika Stanton Sr.\",\"email\":\"modesta_dickinson@gmail.com\",\"phone\":\"153.328.7884\"},{\"name\":\"Ashli Weimann\",\"email\":\"bobby.zemlak@hotmail.com\",\"phone\":\"(596) 512-7056\"}]}}",
       "request_headers": {
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJkM2IzMTIxMy04MGQzLTRmZDUtYjM3Ny02Y2JmYzc4MzY0MTQiLCJzdWIiOiIzIiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNTUyMzcwNTU3LCJleHAiOjQ3MDgwNjU3NTd9.hpIwhyfe0sn7GgccA39jlXCuxu3ZuzXF_QiPCztHqKo"
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJkZTkzNDIzYy1iZmNiLTQ3NWQtOGVmYS02MWU2ZWI1NTAyNjQiLCJzdWIiOiIzIiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNTUyNDEzODkyLCJleHAiOjQ3MDgxMDkwOTJ9.AcOB5wMqa8y8VSY9sABZ4Ff53uoFJIguGM7nwTHgfq8"
       },
       "request_query_parameters": {
       },

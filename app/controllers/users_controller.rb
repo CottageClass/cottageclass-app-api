@@ -1,5 +1,5 @@
 class UsersController < ApiController
-  before_action :authenticate_user!, except: %i[create]
+  before_action :authenticate_user!
   before_action :reject_nonmatching_user, only: %i[show update inquiries]
   before_action :reject_user_not_in_network, only: [:index]
   before_action :require_admin!, only: [:admin_index]
@@ -11,16 +11,6 @@ class UsersController < ApiController
     users = User.where network_code: desired_network_code
     render json: UserInNetworkSerializer.json_for(users, include: %i[children user_reviews user_reviews.reviewer]),
            status: 200
-  end
-
-  def create
-    user = User.new signup_params
-    user.direct = true
-    if user.save
-      render json: UserSerializer.json_for(user), status: :created
-    else
-      render json: { errors: user.errors.full_messages }, status: :unprocessable_entity
-    end
   end
 
   def show
@@ -75,10 +65,6 @@ class UsersController < ApiController
 
       render json: { errors: ['No users found in network'] }, status: 404
     end
-  end
-
-  def signup_params
-    params.permit :first_name, :last_name, :email, :password, :avatar
   end
 
   def user_params

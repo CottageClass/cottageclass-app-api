@@ -57,11 +57,6 @@ Rails.application.routes.draw do
     end
   end
 
-  # auth
-  post 'auth/login' => 'user_token#create'
-  post 'auth/register' => 'users#create'
-  post 'auth/facebook' => 'facebook_token#create'
-
   # get
   get '/users/:id' => 'users#show'
   get '/users/:id/inquiries' => 'users#inquiries', as: 'inquiries'

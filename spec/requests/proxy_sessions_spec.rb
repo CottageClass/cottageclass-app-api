@@ -8,6 +8,13 @@ RSpec.describe 'Twilio proxy messages', type: :request do
     let(:twilio_msg_obj)  { OpenStruct.new(session_sid: 'KCXXXX1', sid: 'KIXXXX', data: { 'body': 'message body' }.to_json) }
     let(:post_data)       { { twilio_session: { request_message: 'request', acknowledgment_message: 'ack' } } }
 
+    let :headers do
+      {
+        'ACCEPT': 'application/json',
+        'HTTP_ACCEPT': 'application/json'
+      }
+    end
+
     before do
       twilio_participant_response_1 = OpenStruct.new(sid: 'KPXXXX1')
       twilio_participant_response_2 = OpenStruct.new(sid: 'KPXXXX2')
@@ -22,7 +29,7 @@ RSpec.describe 'Twilio proxy messages', type: :request do
     end
 
     it 'requires authorization' do
-      post proxy_sessions_path(receiver), params: post_data
+      post proxy_sessions_path(receiver), params: post_data, headers: headers
       expect(response.status).to eq 401
     end
 
@@ -51,7 +58,7 @@ RSpec.describe 'Twilio proxy messages', type: :request do
     context 'when a session already exists for the participants' do
       before do
         TwilioSession.create!(
-          last_action_at: DateTime.now,
+          last_action_at: DateTime.current,
           initiator: sender,
           client: receiver,
           twilio_sid: 'KCXXXX1',
