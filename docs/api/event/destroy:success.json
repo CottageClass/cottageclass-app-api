@@ -19,7 +19,7 @@
       "request_headers": {
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NTE4MDExMzQsInN1YiI6ODJ9.AgCuteHqRI3X29_grfT6INgdnaex5WfaDedcZRXl60A"
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI0NGQ2MzRmOC1iZDg2LTQzMmUtODJjNC1iMGQzNmJhOTdhZGYiLCJzdWIiOiI4MiIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTU1MjM3MDYxMywiZXhwIjo0NzA4MDY1ODEzfQ.ItwtwEQu2PixdwYK2DdFcdahuSYuwuUL7thZC0MRcXw"
       },
       "request_query_parameters": {
       },

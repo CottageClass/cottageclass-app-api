@@ -23,7 +23,7 @@
       "request_headers": {
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NTE4MDExMzYsInN1YiI6MTA4fQ.MHqyyEmCWKCYKxQVDAVfJJncg1F5bgP8EkUnBKA2YPk"
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI4Mzg2MWExMC02NjRmLTRkMWMtYTQwNi1mNWU0M2FmZGNkMTciLCJzdWIiOiIxMDgiLCJzY3AiOiJ1c2VyIiwiYXVkIjpudWxsLCJpYXQiOjE1NTIzNzA2MTUsImV4cCI6NDcwODA2NTgxNX0.Id74JHPMLf4PnES5s0KGtUTJJ7D2JXOEqbKj9ruFvEg"
       },
       "request_query_parameters": {
       },
