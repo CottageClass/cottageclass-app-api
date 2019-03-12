@@ -15,7 +15,8 @@ export default new Vuex.Store(
       currentUser: null,
       alert: null,
       createdEvents: null,
-      RSVPAttempEventId: null
+      RSVPAttempEventId: null,
+      JWT: null
     },
     mutations: {
       setEventsByDate: (state, payload) => {
@@ -39,6 +40,9 @@ export default new Vuex.Store(
       },
       setCreatedEvents: (state, payload) => {
         state.createdEvents = payload.eventData
+      },
+      setJWT: (state, payload) => {
+        state.JWT = payload.JWT
       }
     },
     actions: {

@@ -115,8 +115,8 @@ import "../../../src/registerServiceWorker";
 document.addEventListener("DOMContentLoaded", () => {
   const element = "#app";
   let token = _.get(document.querySelector(element), "dataset.token");
-  Vue.prototype.$jwt = token;
 
+  store.commit('setJWT', {JWT: token})
   if (!_.isEmpty(token)) {
     axios.interceptors.request.use(
       config => {
