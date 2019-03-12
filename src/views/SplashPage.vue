@@ -1,4 +1,5 @@
 <template>
+<span>
 <div class="body-homepage">
   <MainNav />
   <div class="hero-section">
@@ -6,6 +7,7 @@
       <div class="hero-content">
         <h1 class="h1-display">The best kids&rsquo; activities in your neighborhood are <span class="highlight">free</span></h1>
         <div class="hero-subtitle">Host kids once a month at your home to get free, unlimited access to your neighborhood's best babysitters: other experienced parents like you.</div>
+        <a href="" class="button-hero w-button" @click.prevent="$router.push({ name: 'SignUp' })">Sign up today. It's free!</a>
         <div class="how-wrapper">
           <ul class="unordered-list">
             <li class="list-item"><img src="@/assets/give-care.svg" alt="" class="image-262">
@@ -20,27 +22,7 @@
               <div class="hero-list-item-heading">Socially.</div>
               <div class="hero-list-item-subtitle">You can invite a circle of trusted friends, or meet new families near you.</div>
             </li>
-            <!-- So we can direct link to the sign in button-->
-            <span id="signup"></span>
           </ul>
-        </div>
-
-        <div class="signup-wrapper">
-          <a
-          v-if="!!facebookLogin"
-          href=""
-          @click.prevent="authenticate('facebook')"
-          class="fb-button w-inline-block">
-          <img src="@/assets/facebook-button-icon.svg" width="24" height="24" alt=""><div class="fb-button-text">Continue with Facebook</div></a>
-          <a
-          v-else
-          @click.prevent="$router.push({name: 'SignUp'})"
-          class="fb-button w-inline-block">
-          <img src="@/assets/add.svg" width="24" height="24" alt="">
-          <div class="fb-button-text">Create your account</div></a>
-          <div v-if="facebookLogin" class="use-password-text">Or <a href="#" class="links" @click.prevent="$router.push({name: 'SignUp'})">use a password instead</a></div>
-          <div v-else class="use-password-text">Or <a href="#" class="links" @click.prevent="$router.push({name: 'SignIn'})">sign in now</a></div>
-          <div class="terms-text">By signing in you agree to our <a href="https://cottageclass.com/terms-of-service">Terms of Service</a> and <a href="https://cottageclass.com/privacy-policy">Privacy Policy</a>.</div>
         </div>
       </div>
     </div>
@@ -51,82 +33,6 @@
     <div class="content-container-3 w-container">
       <h1 class="h1-display">Upcoming Playdates</h1>
       <div class="events-list-wrapper">
-        <!--
-        <div class="event-date-section-tittle"><img src="@/assets/date-outline-white-oval.svg" alt="" class="image-265">
-          <div class="date-text-wrapper">
-            <div class="date-title">Friday, February 8</div>
-          </div>
-        </div>
-        <ul class="unordered-list-events">
-          <li class="event-list-item">
-            <div class="event-list-item-graphic color-purple"><img src="@/assets/artist-palette.svg" alt="" class="emoji"></div>
-            <div class="event-list-item-content">
-              <div class="spacer w-hidden-main w-hidden-medium"></div>
-              <router-link
-              :to="{ name: 'EventPage', params: { id: '86' }}"
-              class="link-block-4 w-inline-block">
-                <h2 class="event-heading">Make your own Valentines Workshop &amp; pizza 💝 with Manisha</h2>
-              </router-link>
-              <div class="event-summary">
-                <div class="event-time">Fri, Feb 8, 2019 at 5:30 PM–8::30 PM</div>
-                <div class="event-ages">Ages 3-11 (10 kids total)</div>
-                <div class="event-location">Carroll Gardens</div>
-              </div>
-              <div class="scrolling-wrapper"><img src="@/assets/manisha1.jpg" alt="" class="event-household-photo"><img src="@/assets/manisha2.jpg" alt="" class="event-household-photo"><img src="@/assets/manisha3.jpg" alt="" class="event-household-photo"><img src="@/assets/manisha4.jpg" alt="" class="event-household-photo"></div>
-              <div class="action-bar">
-                <div class="host-container">
-                  <div class="host-info"><img src="@/assets/manisha2.jpg" width="40" height="40" alt="" class="avatar-small">
-                    <div class="text-block">Hosted by Manisha &amp; Clark (age 1).</div>
-                  </div>
-                  <div class="host-meta">
-                    <div class="host-occupation">CEO/co-founder, CottageClass</div>
-                    <div class="background-checked-wrapper"><img src="@/assets/check-green.svg" alt="">
-                      <div class="background-checked">Background Checked</div>
-                    </div>
-                  </div>
-                </div><RsvpButton eventId="86" /></div>
-            </div>
-          </li>
-        </ul>
-      -->
-        <!--
-        <div class="event-date-section-tittle"><img src="@/assets/date-outline-white-oval.svg" alt="" class="image-265">
-          <div class="date-text-wrapper">
-            <div class="date-title">Sunday, March 3</div>
-          </div>
-        </div>
-        <ul class="unordered-list-events">
-          <li class="event-list-item">
-            <div class="event-list-item-graphic color-light-blue"><img src="@/assets/artist-palette.svg" alt="" class="emoji"></div>
-            <div class="event-list-item-content">
-              <div class="spacer w-hidden-main w-hidden-medium"></div>
-              <router-link
-              :to="{ name: 'EventPage', params: { id: '92' }}"
-              class="link-block-4 w-inline-block">
-                <h2 class="event-heading">Movie Night &amp; Tacos 🌮 with Jordana</h2>
-              </router-link>
-              <div class="event-summary">
-                <div class="event-time">Sun, Mar 3, 2019 at 10:00 AM - 12:00 PM</div>
-                <div class="event-ages">Ages 2-5 (4 kids total)</div>
-                <div class="event-location">Red Hook</div>
-              </div>
-              <div class="scrolling-wrapper"><img src="@/assets/jordanacotton10.jpg" alt="" class="event-household-photo"><img src="@/assets/jordanacotton9.jpg" alt="" class="event-household-photo"><img src="@/assets/jordanacotton5.jpg" alt="" class="event-household-photo"><img src="@/assets/jordanacotton2.jpg" alt="" class="event-household-photo"><img src="@/assets/jordanacotton6.jpg" alt="" class="event-household-photo"><img src="@/assets/jordanacotton7.jpg" alt="" class="event-household-photo"></div>
-              <div class="action-bar">
-                <div class="host-container">
-                  <div class="host-info"><img src="@/assets/jordana.jpg" width="40" height="40" alt="" class="avatar-small">
-                    <div class="text-block">Hosted by Jordana &amp; Bastian (age 2).</div>
-                  </div>
-                  <div class="host-meta">
-                    <div class="host-occupation">Psychiatric Nurse Practitioner, the Midtown Practice</div>
-                    <div class="background-checked-wrapper"><img src="@/assets/check-green.svg" alt="">
-                      <div class="background-checked">Background Checked</div>
-                    </div>
-                  </div>
-                </div><RsvpButton eventId="92" /></div>
-            </div>
-          </li>
-        </ul>
-      -->
         <div class="event-date-section-tittle"><img src="@/assets/date-outline-white-oval.svg" alt="" class="image-265">
           <div class="date-text-wrapper">
             <div class="date-title">Monday, March 4</div>
@@ -334,10 +240,12 @@
     </div>
   </div>
 </div>
-
 <Footer />
-
 </div>
+  <div class="mobile-signup-wrapper">
+    <a href="" class="button-hero-mobile w-button" @click.prevent="$router.push({ name: 'SignUp' })">Sign up today. It's free!</a>
+  </div>
+  </span>
 </template>
 
 <script>
@@ -381,6 +289,77 @@ export default {
 <style scoped>
 .image-8 {
   margin-bottom: 0;
+}
+
+.button-hero {
+  padding: 20px 40px 21px;
+  border: 1px solid #1f88e9;
+  border-radius: 4px;
+  background-color: #1f88e9;
+  box-shadow: 1px 1px 15px 0 hsla(208.8118811881188, 82.11%, 51.76%, 0.60);
+  opacity: 1;
+  font-size: 13px;
+  letter-spacing: 1.3px;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.mobile-signup-wrapper {
+  position: fixed;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  display: none;
+  width: 100%;
+  padding: 10px;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background-color: #fff;
+  box-shadow: 0 -1px 8px 0 rgba(0, 0, 0, .05);
+}
+
+.button-hero:hover {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, .1)), to(rgba(0, 0, 0, .1)));
+  background-image: linear-gradient(180deg, rgba(0, 0, 0, .1), rgba(0, 0, 0, .1));
+}
+
+.button-hero:active {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, .1)), to(rgba(0, 0, 0, .1)));
+  background-image: linear-gradient(180deg, rgba(0, 0, 0, .1), rgba(0, 0, 0, .1));
+}
+
+.button-hero-mobile { 
+  padding: 20px 40px 21px;
+  border: 1px solid #1f88e9;
+  border-radius: 4px;
+  background-color: #1f88e9;
+  box-shadow: 1px 1px 15px 0 hsla(208.8118811881188, 82.11%, 51.76%, 0.60);
+  opacity: 1;
+  font-size: 13px;
+  letter-spacing: 1.3px;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.button-hero-mobile:hover {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, .1)), to(rgba(0, 0, 0, .1)));
+  background-image: linear-gradient(180deg, rgba(0, 0, 0, .1), rgba(0, 0, 0, .1));
+}
+
+.button-hero-mobile:active {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, .1)), to(rgba(0, 0, 0, .1)));
+  background-image: linear-gradient(180deg, rgba(0, 0, 0, .1), rgba(0, 0, 0, .1));
 }
 
 /* Naming necessary to avoid CSS bleed in production */
@@ -565,7 +544,7 @@ a {
 }
 
 .highlight {
-  color: #0dba52;
+  color: #1f88e9;
 }
 
 .hero-content {
@@ -1940,6 +1919,19 @@ a {
     padding-bottom: 110px;
   }
 
+  .mobile-signup-wrapper {
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+  .button-hero-mobile {
+    width: 100%;
+    text-align: center;
+  }
+
+  .button-hero {
+    display: none;
+  }
+
   .nav-container {
     padding-right: 20px;
     padding-left: 20px;
@@ -2416,10 +2408,6 @@ a {
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
-}
-
-.highlight {
-  color: #0dba52;
 }
 
 .hero-content {
@@ -3635,6 +3623,38 @@ a {
 @media (max-width: 767px) {
   .body {
     padding-bottom: 100px;
+  }
+
+  .mobile-signup-wrapper {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    padding-right: 32px;
+    padding-left: 32px;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: start;
+    -webkit-justify-content: flex-start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    -webkit-flex-wrap: nowrap;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-align-content: center;
+    -ms-flex-line-pack: center;
+    align-content: center;
+  }
+  .button-hero-mobile {
+    padding: 8px 16px;
+    font-size: 12px;
   }
 
   .nav-container {
