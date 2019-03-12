@@ -97,11 +97,12 @@ router.beforeEach((to, from, next) => {
 });
 
 // passing the router into the analytics plugin will automaticall track page views
-import VueAnalytics from "vue-analytics";
-Vue.use(VueAnalytics, {
-  id: process.env.GOOGLE_ANALYTICS_ID,
-  router
-});
+// TODO figure out dotenv here for google analytics
+// import VueAnalytics from "vue-analytics";
+// Vue.use(VueAnalytics, {
+//   id: process.env.GOOGLE_ANALYTICS_ID,
+//   router
+// });
 
 import _ from "lodash";
 
@@ -112,22 +113,25 @@ import router from "../../../src/router";
 import store from "../../../src/store";
 import "../../../src/registerServiceWorker";
 
+
+// this is meant to be called when returning from authentication because the vue app reloads at that point
 document.addEventListener("DOMContentLoaded", () => {
   const element = "#app";
   let token = _.get(document.querySelector(element), "dataset.token");
+  store.dispatch('establishUser', {JWT: token}).then( () => {
+    if (!_.isEmpty(token)) {
+      axios.interceptors.request.use(
+        config => {
+          config.headers["Authorization"] = `Bearer ${token}`;
+          return config;
+        },
+        error => {
+          return Promise.reject(error);
+        }
+      );
+    }
+  })
 
-  store.commit('setJWT', {JWT: token})
-  if (!_.isEmpty(token)) {
-    axios.interceptors.request.use(
-      config => {
-        config.headers["Authorization"] = `Bearer ${token}`;
-        return config;
-      },
-      error => {
-        return Promise.reject(error);
-      }
-    );
-  }
 
   new Vue({
     el: element,

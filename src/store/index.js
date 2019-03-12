@@ -57,8 +57,10 @@ export default new Vuex.Store(
           commit('setEventsByDate', { events })
         })
       },
-      establishCurrentUserAsync: ({ commit }, userId) => {
-        console.log('establish')
+      establishUser: ({ commit, state, getters }, payload) => {
+        commit('setJWT', payload)
+        const userId = getters.parsedJWT.sub
+
         if (userId === null) {
           commit('setCurrentUser', { user: null })
         } else {
@@ -108,7 +110,16 @@ export default new Vuex.Store(
           return null
         }
       },
-      rsvpAttemptedId: state => state.RSVPAttempEventId
+      rsvpAttemptedId: state => state.RSVPAttempEventId,
+      parsedJWT: state => {
+        const token = state.JWT
+        if (token) {
+          var base64Url = token.split('.')[1]
+          var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/')
+          return JSON.parse(window.atob(base64))
+        }
+        return null
+      }
     }
   }
 )
