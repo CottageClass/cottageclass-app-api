@@ -255,12 +255,10 @@ import RsvpButton from '@/components/RsvpButton.vue'
 import MainNav from '@/components/MainNav.vue'
 import Footer from '@/components/Footer.vue'
 import { mapGetters } from 'vuex'
-import providerAuth from '@/mixins/providerAuthentication'
 
 export default {
   name: 'SplashPage',
   components: { RsvpButton, MainNav, Footer },
-  mixins: [providerAuth],
   data () {
     return {
       networks: networks,
