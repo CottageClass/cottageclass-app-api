@@ -25,18 +25,18 @@
     {
       "request_method": "POST",
       "request_path": "/api/users/97/notifications",
-      "request_body": "{\"notification\":{\"body\":\"Doloremque eum aut ducimus.\"}}",
+      "request_body": "{\"notification\":{\"body\":\"Sunt possimus nulla mollitia.\"}}",
       "request_headers": {
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NTE4MDExMzUsInN1YiI6OTd9.3octGWbspQDz6dLenydH_7kwyveWZ_88SZRRgZsnGDA"
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI5NDE4YjBkMy00MzQ2LTQxMjEtYWNjMC1hYTMyY2VkMWViY2YiLCJzdWIiOiI5NyIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTU1MjM3MDYxNCwiZXhwIjo0NzA4MDY1ODE0fQ.aeoX1SPdbXJ7ohJKpeY9IcfdDTLN5cmwEJb_UmklIic"
       },
       "request_query_parameters": {
       },
       "request_content_type": "application/json",
       "response_status": 201,
       "response_status_text": "Created",
-      "response_body": "{\n  \"data\": {\n    \"id\": \"1930\",\n    \"type\": \"notification\",\n    \"attributes\": {\n      \"id\": 1930,\n      \"body\": \"Doloremque eum aut ducimus.\"\n    }\n  }\n}",
+      "response_body": "{\n  \"data\": {\n    \"id\": \"1930\",\n    \"type\": \"notification\",\n    \"attributes\": {\n      \"id\": 1930,\n      \"body\": \"Sunt possimus nulla mollitia.\"\n    }\n  }\n}",
       "response_headers": {
         "Content-Type": "application/vnd.api+json; charset=utf-8"
       },
