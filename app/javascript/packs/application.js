@@ -113,10 +113,24 @@ import store from "../../../src/store";
 import "../../../src/registerServiceWorker";
 
 document.addEventListener("DOMContentLoaded", () => {
-  const mountedElement = document.querySelector("#app");
-  Vue.prototype.$jwt = _.get(mountedElement, "dataset.token");
+  const element = "#app";
+  let token = _.get(document.querySelector(element), "dataset.token");
+  Vue.prototype.$jwt = token;
+
+  if (!_.isEmpty(token)) {
+    axios.interceptors.request.use(
+      config => {
+        config.headers["Authorization"] = `Bearer ${token}`;
+        return config;
+      },
+      error => {
+        return Promise.reject(error);
+      }
+    );
+  }
+
   new Vue({
-    el: "#app",
+    el: element,
     store,
     router,
     render: h => h(App)
