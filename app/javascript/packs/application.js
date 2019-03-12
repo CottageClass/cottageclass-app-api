@@ -103,6 +103,8 @@ Vue.use(VueAnalytics, {
   router
 });
 
+import _ from "lodash";
+
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import App from "../../../src/App.vue";
@@ -112,10 +114,11 @@ import "../../../src/registerServiceWorker";
 
 document.addEventListener("DOMContentLoaded", () => {
   const mountedElement = document.querySelector("#app");
+  Vue.prototype.$jwt = _.get(mountedElement, "dataset.token");
   new Vue({
     el: "#app",
     store,
     router,
-    render: h => h(App, { props: { ...mountedElement.dataset } })
+    render: h => h(App)
   });
 });
