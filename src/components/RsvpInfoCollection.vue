@@ -203,7 +203,8 @@ export default {
           }
         })
       }).then(res => {
-        return component.$ga.event('RSVP', 'sent', component.eventId)
+        // TODO restore GA
+        // return component.$ga.event('RSVP', 'sent', component.eventId)
       }).then(res => {
         return component.$router.push({ name: 'EventPage', params: { id: this.eventId } })
       }).catch(err => {
