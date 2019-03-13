@@ -20,34 +20,6 @@ import VeeValidate from "vee-validate";
 Vue.use(VeeValidate);
 
 /*
- * VueAuthenticate setup for FB login
- */
-import VueAuthenticate from "vue-authenticate";
-/*
- * Config for VueAuthenticate
- * - stores our auth token
- * - sends it back and forth with every request for us
- * - gives us auth/login/logout methods
- * - see: https://www.npmjs.com/package/vue-authenticate
- */
-Vue.use(VueAuthenticate, {
-  // baseUrl: 'https://cottageclass-app-api.herokuapp.com',
-  baseUrl: process.env.BASE_URL_API,
-  withCredentials: true,
-  tokenName: "jwt",
-  providers: {
-    facebook: {
-      clientId: "905335782985620",
-      redirectUri: `${origin}/oauth-callback`
-      // Add additional scopes (properties) to be retrieved from Facebook here
-      // - see link below for properties accessible by default and properties requiring app review:
-      // - https://developers.facebook.com/docs/facebook-login/permissions/#reference-default
-      // scope: [],
-    }
-  }
-});
-
-/*
  * Copy to clipboard
  */
 import VueClipboard from "vue-clipboard2";
@@ -97,11 +69,12 @@ router.beforeEach((to, from, next) => {
 });
 
 // passing the router into the analytics plugin will automaticall track page views
-import VueAnalytics from "vue-analytics";
-Vue.use(VueAnalytics, {
-  id: process.env.GOOGLE_ANALYTICS_ID,
-  router
-});
+// TODO figure out dotenv here for google analytics
+// import VueAnalytics from "vue-analytics";
+// Vue.use(VueAnalytics, {
+//   id: process.env.GOOGLE_ANALYTICS_ID,
+//   router
+// });
 
 import _ from "lodash";
 
@@ -112,22 +85,22 @@ import router from "../../../src/router";
 import store from "../../../src/store";
 import "../../../src/registerServiceWorker";
 
+
+// this is meant to be called when returning from authentication because the vue app reloads at that point
 document.addEventListener("DOMContentLoaded", () => {
   const element = "#app";
   let token = _.get(document.querySelector(element), "dataset.token");
-  Vue.prototype.$jwt = token;
+  store.dispatch('establishUser', {JWT: token})
+  axios.interceptors.request.use(
+    config => {
+      config.headers["Authorization"] = `Bearer ${store.getters.JWT}`;
+      return config;
+    },
+    error => {
+      return Promise.reject(error);
+    }
+  );
 
-  if (!_.isEmpty(token)) {
-    axios.interceptors.request.use(
-      config => {
-        config.headers["Authorization"] = `Bearer ${token}`;
-        return config;
-      },
-      error => {
-        return Promise.reject(error);
-      }
-    );
-  }
 
   new Vue({
     el: element,

@@ -60,8 +60,7 @@ export default {
       error: '',
       eventId: this.$route.params.eventId,
       event: false,
-      emergencyInfoJustCompleted: this.$route.query.emergencyInfoComplete === 'true',
-      isAuthenticated: this.$auth.isAuthenticated()
+      emergencyInfoJustCompleted: this.$route.query.emergencyInfoComplete === 'true'
     }
   },
   created: function () {
@@ -125,7 +124,7 @@ export default {
       }
       return this.currentUser.children.reduce((allChildrenSoFar, child) => allChildrenSoFar && childHasAtLeastOneEmergencyContact(child), true)
     },
-    ...mapGetters(['currentUser'])
+    ...mapGetters([ 'currentUser', 'isAuthenticated' ])
   },
   methods: {
     showErrorIfUserHasNoChildren: function () {
@@ -134,7 +133,7 @@ export default {
       }
     },
     redirectToSignupIfNotAuthenticated: function () {
-      if (!this.$auth.isAuthenticated()) {
+      if (!this.isAuthenticated) {
         console.log('User attempted to RSVP without being authenticated')
         this.$store.commit('setRSVPAttemptEventId', { id: this.eventId })
         this.$router.push({ name: 'SignUp' })
@@ -204,7 +203,8 @@ export default {
           }
         })
       }).then(res => {
-        return component.$ga.event('RSVP', 'sent', component.eventId)
+        // TODO restore GA
+        // return component.$ga.event('RSVP', 'sent', component.eventId)
       }).then(res => {
         return component.$router.push({ name: 'EventPage', params: { id: this.eventId } })
       }).catch(err => {

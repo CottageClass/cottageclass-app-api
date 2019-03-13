@@ -61,9 +61,9 @@
 
 <script>
 
-import * as Token from '@/utils/tokens.js'
 import * as api from '@/utils/api.js'
 import moment from 'moment'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'AdminMessages',
@@ -71,7 +71,7 @@ export default {
   // see: https://router.vuejs.org/guide/advanced/navigation-guards.html#in-component-guards
   beforeRouteEnter: (to, from, next) => {
     next(vm => {
-      if (Token.isLoggedIn(vm.$auth) && Token.isAdminUser(vm.$auth)) {
+      if (this.isAuthenticated && this.isAdminUser) {
         console.log('is admin!')
         next()
       } else {
@@ -91,7 +91,7 @@ export default {
   },
   mounted: function () {
     // for some reason we don't have the token on mount
-    if (Token.isLoggedIn(this.$auth)) {
+    if (this.isAuthenticated) {
       this.onMount()
     } else {
       setTimeout(this.onMount, 1000)
@@ -151,7 +151,8 @@ export default {
   computed: {
     messagesForParticipant: function (participantId) {
       return this.messages.filter(msg => msg.senderId === participantId)
-    }
+    },
+    ...mapGetters([ 'isAuthenticated', 'isAdminUser' ])
   }
 }
 

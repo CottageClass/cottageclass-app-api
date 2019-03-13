@@ -173,7 +173,8 @@ export default {
       }
     },
     network: function () {
-      let networkId = Token.currentUserNetworkCode(this.$auth)
+      // TODO remove network stuff
+      let networkId = null
       return this.networks.find(network => network.stub === networkId)
     },
     peopleAvailable: function () {

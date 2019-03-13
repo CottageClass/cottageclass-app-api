@@ -214,7 +214,7 @@ export default {
     finishOnboarding () {
       // send the data to the server
       const that = this
-      const userId = Token.currentUserId(that.$auth)
+      const userId = this.currentUser.id
       const submitInfo = api.submitUserInfo(
         userId,
         this.userData.phone,
@@ -280,7 +280,8 @@ export default {
         } else if (this.currentStep === 'emergencyCare' && this.substep === 'canProvide' && this.userData.emergencyCare.isTrue) {
           this.substep = 'availability'
         } else {
-          this.$ga.event('onboarding', 'stepComplete', this.currentStep)
+          // TODO restore GA
+          // this.$ga.event('onboarding', 'stepComplete', this.currentStep)
           this.stepIndex += 1
           if (this.currentStep === 'pets') {
             this.substep = 'hasPets'

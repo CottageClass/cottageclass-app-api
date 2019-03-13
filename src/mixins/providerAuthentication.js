@@ -16,7 +16,7 @@ export default {
       this.$auth.authenticate(provider)
         .then(res => {
           console.log('auth SUCCESS')
-          return this.$store.dispatch('establishCurrentUserAsync', Token.currentUserId(component.$auth))
+          return this.$store.dispatch('establishCurrentUserAsync', this.currentUser.id)
         }).then(() => {
           console.log(this.currentUser)
           if (this.currentUser.hasAllRequiredFields && !this.rsvpAttemptedId) {

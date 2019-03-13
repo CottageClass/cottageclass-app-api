@@ -58,7 +58,7 @@
             </router-link>
           </li>
           <li v-if="isAuthenticated">
-            <a @click="logout" href="" class="link-block w-inline-block">
+            <a @click.prevent="logout" href="" class="link-block w-inline-block">
               <div class="text-block">Logout</div>
             </a>
           </li>
@@ -74,6 +74,7 @@
 </template>
 
 <script>
+import { signOut } from '@/utils/api'
 import { mixin as clickaway } from 'vue-clickaway'
 import AvatarImage from '@/components/base/AvatarImage'
 import Alert from '@/components/Alert.vue'
@@ -97,10 +98,11 @@ export default {
     clickedAway: function () {
       this.showMenu = false
     },
-    logout: function () {
-      this.$auth.logout()
-      this.$store.dispatch('establishCurrentUserAsync', null)
-      this.$router.push('/')
+    logout: function () {      
+      signOut().then(() => {
+        this.$store.dispatch('establishUser', { JWT: null })
+        this.$router.push({ name: 'Home' })
+      })
     }
   },
   computed: {
