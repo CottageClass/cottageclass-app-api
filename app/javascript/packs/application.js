@@ -20,34 +20,6 @@ import VeeValidate from "vee-validate";
 Vue.use(VeeValidate);
 
 /*
- * VueAuthenticate setup for FB login
- */
-import VueAuthenticate from "vue-authenticate";
-/*
- * Config for VueAuthenticate
- * - stores our auth token
- * - sends it back and forth with every request for us
- * - gives us auth/login/logout methods
- * - see: https://www.npmjs.com/package/vue-authenticate
- */
-Vue.use(VueAuthenticate, {
-  // baseUrl: 'https://cottageclass-app-api.herokuapp.com',
-  baseUrl: process.env.BASE_URL_API,
-  withCredentials: true,
-  tokenName: "jwt",
-  providers: {
-    facebook: {
-      clientId: "905335782985620",
-      redirectUri: `${origin}/oauth-callback`
-      // Add additional scopes (properties) to be retrieved from Facebook here
-      // - see link below for properties accessible by default and properties requiring app review:
-      // - https://developers.facebook.com/docs/facebook-login/permissions/#reference-default
-      // scope: [],
-    }
-  }
-});
-
-/*
  * Copy to clipboard
  */
 import VueClipboard from "vue-clipboard2";
