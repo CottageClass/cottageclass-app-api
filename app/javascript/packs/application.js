@@ -118,19 +118,16 @@ import "../../../src/registerServiceWorker";
 document.addEventListener("DOMContentLoaded", () => {
   const element = "#app";
   let token = _.get(document.querySelector(element), "dataset.token");
-  store.dispatch('establishUser', {JWT: token}).then( () => {
-    if (!_.isEmpty(token)) {
-      axios.interceptors.request.use(
-        config => {
-          config.headers["Authorization"] = `Bearer ${token}`;
-          return config;
-        },
-        error => {
-          return Promise.reject(error);
-        }
-      );
+  store.dispatch('establishUser', {JWT: token})
+  axios.interceptors.request.use(
+    config => {
+      config.headers["Authorization"] = `Bearer ${store.getters.JWT}`;
+      return config;
+    },
+    error => {
+      return Promise.reject(error);
     }
-  })
+  );
 
 
   new Vue({
