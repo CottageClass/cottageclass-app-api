@@ -29,6 +29,8 @@ FactoryBot.define do
     referrer { Faker::Books::Lovecraft.word }
     source_tags { Faker::Books::Lovecraft.words }
 
+    after(:build) { |instance, _| instance.skip_confirmation! if User.confirmable? }
+
     trait :with_children do
       transient { children_count { 2 } }
 

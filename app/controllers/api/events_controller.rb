@@ -76,7 +76,7 @@ class API::EventsController < API::BaseController
 
   def events_index(events:, skope:, miles:, latitude:, longitude:, sort: nil, page:, page_size:, path:)
     skope ||= 'all'
-    events = events.send skope
+    events = events.send(skope).includes user: %i[children]
 
     miles = miles.to_i
     if miles.positive?

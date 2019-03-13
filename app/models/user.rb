@@ -91,37 +91,27 @@ class User < ApplicationRecord
     ].compact.map(&:squish).select(&:present?).join(', ')
   end
 
-  def facebook_token_expired?
-    # fb_access_token_expires_at is a DateTime, so use DateTime to compare
-    !facebook_access_token || (DateTime.now.utc > fb_access_token_expires_at.utc)
-  end
-
-  def facebook_token_invalid?
-    !facebook_access_token || facebook_token_expired? || !FacebookService.valid_token?(facebook_access_token)
-  end
-
-  # facebook_access_token is a database attr
-  def refresh_facebook_access_token!
-    if facebook_token_invalid?
-      token_info = FacebookService.refresh_access_token_info(facebook_access_token)
-      access_token = token_info['access_token']
-      sec_til_expiry = token_info['expires_in'].to_i
-
-      update_facebook_access_token!(access_token, sec_til_expiry)
-    end
-  end
-
-  def update_facebook_access_token!(new_access_token, sec_til_expiry)
-    update! facebook_access_token: new_access_token,
-            fb_access_token_expires_at: (Time.now.utc + sec_til_expiry).to_datetime
-  end
-
   class << self
     def from_omniauth(auth)
-      where(provider: auth.provider, uid: auth.uid).first_or_create email: auth.info.email,
-                                                                    password: Devise.friendly_token(12),
-                                                                    # avatar: auth.info.image,
-                                                                    name: auth.info.name
+      # [suman] This mechanism works for the Facebook payload, and may need adjustment for other providers.
+      instance = find_by email: auth.info.email
+      if instance.blank?
+        instance = where(provider: auth.provider, uid: auth.uid).first_or_initialize \
+          email: auth.info.email,
+          password: Devise.friendly_token(12),
+          name: auth.info.name
+        if instance.new_record?
+          instance.skip_confirmation! if User.confirmable?
+          instance.save
+        end
+      else
+        instance.update provider: auth.provider, uid: auth.uid
+      end
+      instance
+    end
+
+    def confirmable?
+      Devise.mappings[:user].confirmable?
     end
   end
 
