@@ -26,7 +26,6 @@ const mutations = {
 const actions = {
   establishUser: ({ commit, state, getters }, payload) => {
     commit('setJWT', payload)
-    console.log({payload})
     if (!state.JWT) {
       commit('setCurrentUser', { user: null })
     } else {
@@ -39,6 +38,7 @@ const actions = {
 }
 
 const getters = {
+  JWT: state => state.JWT,
   parsedJWT: state => {
     const token = state.JWT
     if (token) {
@@ -62,7 +62,7 @@ const getters = {
     return state.currentUser !== null
   },
   isAdminUser: (state) => {
-    return ADMIN_WHITELIST.includes(state.currentUser.email)
+    return !!state.currentUser && ADMIN_WHITELIST.includes(state.currentUser.email)
   }
 }
 

@@ -74,6 +74,7 @@
 </template>
 
 <script>
+import { signOut } from '@/utils/api'
 import { mixin as clickaway } from 'vue-clickaway'
 import AvatarImage from '@/components/base/AvatarImage'
 import Alert from '@/components/Alert.vue'
@@ -97,9 +98,11 @@ export default {
     clickedAway: function () {
       this.showMenu = false
     },
-    logout: function () {
-      this.$store.dispatch('establishUser', {JWT: null})
-      this.$router.push({name: 'Home'})
+    logout: function () {      
+      signOut().then(() => {
+        this.$store.dispatch('establishUser', { JWT: null })
+        this.$router.push({ name: 'Home' })
+      })
     }
   },
   computed: {

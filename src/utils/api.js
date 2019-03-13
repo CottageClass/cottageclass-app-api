@@ -522,6 +522,10 @@ export function deleteEvent (eventId, successCallback) {
     })
 }
 
+export function signOut () {
+  return Vue.axios.get(`/users/sign_out`)
+}
+
 /*
  * UTILS
  */
