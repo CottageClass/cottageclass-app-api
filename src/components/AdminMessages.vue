@@ -61,7 +61,6 @@
 
 <script>
 
-import * as Token from '@/utils/tokens.js'
 import * as api from '@/utils/api.js'
 import moment from 'moment'
 import { mapGetters } from 'vuex'
