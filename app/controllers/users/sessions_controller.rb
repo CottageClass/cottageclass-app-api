@@ -8,7 +8,7 @@ class Users::SessionsController < Devise::SessionsController
   end
 
   def respond_with(resource, _opts = {})
-    render json: UserSerializer.new(resource).serialized_json, status: :ok
+    render json: Warden::JWTAuth::UserEncoder.new.call(resource, :user, nil)
   end
 
   def respond_to_on_destroy

@@ -36,6 +36,7 @@ Vue.use(Router)
 export default new Router({
   mode: 'history',
   routes: [
+    // TODO check if JWT exists before going to splash page
     {
       path: '/',
       name: 'SplashPage',

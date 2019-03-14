@@ -62,6 +62,11 @@ class User < ApplicationRecord
 
   scope :in_network, ->(code) { where network_code: code }
 
+
+  def jwt_payload
+    { 'user' => UserSerializer.json_for(self) }
+  end
+
   def child_ages
     children.map(&:age)
   end
@@ -164,4 +169,5 @@ class User < ApplicationRecord
   def populate_lname_from_name!
     self.last_name = name.split(' ').last if name.present? && last_name.blank?
   end
+
 end

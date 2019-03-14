@@ -532,7 +532,6 @@ export function register (params) {
 }
 
 export function signIn (params) {
-  console.log('sdf')
   return Vue.axios.post(`/users/sign_in`, { user: params })
 }
 

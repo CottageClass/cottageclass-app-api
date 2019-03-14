@@ -252,10 +252,12 @@ export default {
                 console.log('signup success:', response)
                 component.success = true
                 component.disableForm = false
-                console.log('a')
+
+                // TODO: move this to a mixin or something
                 signIn({ email, password })
                   .then(res => {
                     console.log('auth success:', res)
+                    component.$store.dispatch('establishUser', { JWT: res.data[0]})
                     return component.$router.push({ name: 'OnboardNewUser' })
                   })
                   .catch(function (err) {

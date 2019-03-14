@@ -1,6 +1,6 @@
 // Vuex module to handle all the data for current user and authentication
 
-import { distanceHaversine, fetchCurrentUser } from '@/utils/api'
+import { distanceHaversine } from '@/utils/api'
 
 const ADMIN_WHITELIST = [
   'holmes@cottageclass.com',
@@ -30,9 +30,8 @@ const actions = {
       commit('setCurrentUser', { user: null })
     } else {
       const userId = getters.parsedJWT.sub
-      return fetchCurrentUser(userId).then(user => {
-        commit('setCurrentUser', { user })
-      })
+      //TODO use updated user data parsing method on map-view branch
+      const currentUser = getters.parsedJWT.user.data.attributes
     }
   }
 }
