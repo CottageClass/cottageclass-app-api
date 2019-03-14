@@ -300,10 +300,10 @@ Devise.setup do |config|
   # should add them to the navigational formats lists.
 
   # The "*/*" below is required to match Internet Explorer requests.
-  # config.navigational_formats = ['*/*', :html]
+  config.navigational_formats = []
 
   # The default HTTP method used to sign out a resource. Default is :delete.
-  config.sign_out_via = :get
+  # config.sign_out_via = :delete
 
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
@@ -350,6 +350,8 @@ Devise.setup do |config|
   # ==> Configuration for :jwt
 
   config.jwt do |jwt|
+    # TODO: it's probably not wise to use SECRET_KEY_BASE as described here :
+    # https://www.rubydoc.info/gems/devise-jwt/0.2.1
     jwt.secret = ENV.fetch('SECRET_KEY_BASE')
     jwt.expiration_time = 100.years.to_i
   end
