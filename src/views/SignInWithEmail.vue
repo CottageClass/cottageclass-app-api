@@ -74,7 +74,7 @@
 <script>
 // import networks from '@/assets/network-info.json';
 import { mapGetters } from 'vuex'
-import * as Token from '@/utils/tokens.js'
+import { signIn } from '@/utils/api'
 import ErrorMessage from '@/components/base/ErrorMessage.vue'
 import StyleWrapper from '@/components/FTE/StyleWrapper.vue'
 import providerAuth from '@/mixins/providerAuthentication'
@@ -93,21 +93,17 @@ export default {
     }
   },
   mounted: function () {
-    if (this.$auth) {
-      if (this.isAuthenticated) {
-        if (this.currentUser.hasAllRequiredFields) {
-          this.$router.push({ name: 'Home' })
-        } else if (this.currentUser.id) {
-          this.$router.push({ name: 'OnboardNewUSer' })
+    if (this.isAuthenticated) {
+      if (this.currentUser.hasAllRequiredFields) {
+        this.$router.push({ name: 'Home' })
+      } else if (this.currentUser.id) {
+        this.$router.push({ name: 'OnboardNewUSer' })
 
-        } else {
-          return false
-        }
       } else {
-        console.log('current user does not exist')
+        return false
       }
     } else {
-      console.warn('this.$auth is blank')
+      console.log('current user does not exist')
     }
     // override for better error messages on this screen and on signup screen.
     // note: changes here affect all vee-validate error messages until page reload.
@@ -150,8 +146,7 @@ export default {
           if (result) {
             let email = component.email && component.email.trim().toLowerCase()
             let password = component.password && component.password.trim()
-            component.$auth
-              .login({ email, password })
+            signIn({ email, password })
               .then(res => {
                 console.log('auth success:', res)
               }).catch(err => {
@@ -159,7 +154,7 @@ export default {
                 component.errorMessage = 'There was a problem signing you in. If you forgot your password, email  contact@cottageclass.com for help.'
                 console.log('auth failure', err)
               }).then(() => {
-                return component.$store.dispatch('establishCurrentUserAsync', Token.currentUserId(component.$auth))
+                return component.$store.dispatch('establishCurrentUserAsync', this.currentUser.id)
               }).then(() => {
                 if (component.currentUser.hasAllRequiredFields) {
                   component.$router.push({ name: 'Home' })
