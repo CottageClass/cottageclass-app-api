@@ -88,12 +88,22 @@ import "../../../src/registerServiceWorker";
 
 // this is meant to be called when returning from authentication because the vue app reloads at that point
 document.addEventListener("DOMContentLoaded", () => {
+  // TODO also store JWT token after a login because this will not be run at that point
   const element = "#app";
   let token = _.get(document.querySelector(element), "dataset.token");
   store.dispatch('establishUser', {JWT: token})
+
+  const csrfElement = "meta[name='csrf-token']"
+  let csrfToken = _.get(document.querySelector(csrfElement), "content");
+
+
   axios.interceptors.request.use(
     config => {
       config.headers["Authorization"] = `Bearer ${store.getters.JWT}`;
+      if (config.method !== 'get') {
+        // this is for making api calls to our server.  may not be a valid long term solution
+        config.headers['X-CSRF-Token'] = csrfToken
+      }
       return config;
     },
     error => {
