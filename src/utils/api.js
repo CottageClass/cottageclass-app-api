@@ -522,6 +522,21 @@ export function deleteEvent (eventId, successCallback) {
     })
 }
 
+/**********
+ *  Authentication
+ **********/
+
+ // sign up as a new user
+export function register (params) {
+  return Vue.axios.post(`/users`, { user: params })
+}
+
+export function signIn (params) {
+  console.log('sdf')
+  return Vue.axios.post(`/users/sign_in`, { user: params })
+}
+
+// destroy the current session on the server
 export function signOut () {
   return Vue.axios.get(`/users/sign_out`)
 }
