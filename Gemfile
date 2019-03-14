@@ -49,6 +49,7 @@ group :development, :test do
   gem 'httplog'
   gem 'mry', require: false
   gem 'rspec-rails'
+  gem 'guard-rspec', require: false
   gem 'rspec_api_documentation'
   gem 'rubocop', require: false
   gem 'rubocop-rspec', require: false
