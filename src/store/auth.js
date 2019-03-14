@@ -29,9 +29,10 @@ const actions = {
     if (!state.JWT) {
       commit('setCurrentUser', { user: null })
     } else {
-      const userId = getters.parsedJWT.sub
+      const id = getters.parsedJWT.sub
       //TODO use updated user data parsing method on map-view branch
-      const currentUser = getters.parsedJWT.user.data.attributes
+      const currentUser = Object.assign(getters.parsedJWT.user.data.attributes, { id })
+      commit('setCurrentUser', { user: currentUser })
     }
   }
 }
