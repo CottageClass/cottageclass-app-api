@@ -17,11 +17,17 @@ import VueAnalytics from "vue-analytics";
 
 
 if(window.opener) {
-  // If we're in a popup window that was opened for authentication, close it and  ....
-  // TODO we need a way to tell the opener what to do now?
-  window.opener.location.reload(true);
-  window.close()
+  // If we're in a popup window that was opened for authentication, fire callback and close it
+  document.addEventListener("DOMContentLoaded", () => {
+    const element = "#app";
+    let token = _.get(document.querySelector(element), "dataset.token");
+    if (window.opener.oauthCallback) {
+      window.opener.oauthCallback({ token })
+    }
+    window.close()
+  })
 } else {
+  // Load all the Vue plugins
   Vue.use(VueScrollTo);
   Vue.use(VueAxios, axios);
   Vue.use(VeeValidate);
@@ -69,7 +75,6 @@ if(window.opener) {
 
   // this is meant to be called when returning from authentication because the vue app reloads at that point
   document.addEventListener("DOMContentLoaded", () => {
-    // TODO also store JWT token after a login because this will not be run at that point
     const element = "#app";
     let token = _.get(document.querySelector(element), "dataset.token");
     store.dispatch('establishUser', {JWT: token})

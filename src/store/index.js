@@ -6,8 +6,9 @@ import auth from './auth'
 import createPersistedState from 'vuex-persistedstate'
 import _ from 'lodash'
 
-
 Vue.use(Vuex)
+
+const DEFAULT_REDIRECT_PATH = '/home'
 
 export default new Vuex.Store(
   {
@@ -18,9 +19,16 @@ export default new Vuex.Store(
     state: {
       alert: null,
       createdEvents: null,
-      RSVPAttempEventId: null
+      RSVPAttempEventId: null,
+      redirectPath: DEFAULT_REDIRECT_PATH
     },
     mutations: {
+      resetRedirectPath: (state) => {
+        state.redirectPath = DEFAULT_REDIRECT_PATH
+      },
+      setRedirectPath: (state, payload) => {
+        state.redirectPath = payload.path
+      },
       showAlert: (state, payload) => {
         state.alert = payload.alert
       },
@@ -41,6 +49,7 @@ export default new Vuex.Store(
     actions: {
       newRoute: ({ commit, state }, { to, from, next }) => {
         // this method manages the showing of alerts when you enter a new route
+        // TODO these should be committed with mutations
         if (state.alert) {
           if (state.alert.preshow) {
             state.alert.preshow = false
@@ -68,6 +77,7 @@ export default new Vuex.Store(
         }
       },
       rsvpAttemptedId: state => state.RSVPAttempEventId,
+      redirectPath: state => state.redirectPath
     }
   }
 )

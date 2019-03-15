@@ -26,7 +26,7 @@
     <button
       v-if="showFacebookLogin"
       class="button-text splash-button w-inline-block facebook-sign-in-button"
-      @click.prevent="authenticate('facebook')"
+      @click.stopPropagation.prevent="authenticateFacebook"
       >Continue with Facebook
     </button>
       <p>
