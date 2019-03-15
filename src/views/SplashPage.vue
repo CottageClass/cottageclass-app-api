@@ -259,10 +259,13 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'SplashPage',
   components: { RsvpButton, MainNav, Footer },
+  mounted () {
+    console.log('this')
+    console.log(this)
+  },
   data () {
     return {
-      networks: networks,
-      facebookLogin: !this.hideFacebookLogin()
+      networks: networks
     }
   },
   created: function () {
@@ -271,13 +274,6 @@ export default {
     }
     if (!this.currentUser.hasAllRequiredFields) {
       this.$router.push({ name: 'OnboardNewUser' })
-    }
-  },
-  methods: {
-    hideFacebookLogin: () => {
-      return ['(iPhone|iPod|iPad)(?!.*Safari)'].every(expression => {
-        return !!navigator.userAgent.match(new RegExp(`(${expression})`, 'ig'))
-      })
     }
   }
 }
