@@ -72,8 +72,6 @@ if(window.opener) {
   // });
 
 
-
-  // this is meant to be called when returning from authentication because the vue app reloads at that point
   document.addEventListener("DOMContentLoaded", () => {
     const element = "#app";
     let token = _.get(document.querySelector(element), "dataset.token");
