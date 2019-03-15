@@ -135,7 +135,7 @@ export default {
     redirectToSignupIfNotAuthenticated: function () {
       if (!this.isAuthenticated) {
         console.log('User attempted to RSVP without being authenticated')
-        this.$store.commit('setRedirectRoute', { name: 'RsvpConfirmation', params: { eventId: this.eventId })
+        this.$store.commit('setRedirectRoute', { name: 'RsvpConfirmation', params: { eventId: this.eventId } })
         this.$router.push({ name: 'SignUp' })
       }
     },
@@ -143,7 +143,7 @@ export default {
       if (!this.currentUser.hasAllRequiredFields) {
         // send them back to onboarding.
         console.log('user doesnt have required fields on rsvpinfocollection step, sending them back to onboarding', this.currentUser)
-        this.$store.commit('setRedirectRoute', { name: 'RsvpConfirmation', params: { eventId: this.eventId })
+        this.$store.commit('setRedirectRoute', { name: 'RsvpConfirmation', params: { eventId: this.eventId  } })
         this.$router.push({ name: 'OnboardNewUser' })
       } else {
         console.log('user already onboarded, not redirecting')
