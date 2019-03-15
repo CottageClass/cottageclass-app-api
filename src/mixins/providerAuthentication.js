@@ -32,11 +32,15 @@ export default {
           console.log('error in authentication : ', data.err)
           component.$router.push({ name: 'Home' })
         } else {
+          console.log('Facebook authentication successful')
           component.$store.dispatch('establishUser', { JWT: data.token })
-          console.log(component.currentUser.hasAllRequiredFields)
           if (component.currentUser.hasAllRequiredFields) {
-            component.$router.push(component.redirectPath)
-            component.$store.commit('resetRedirectPath')
+            if (component.redirectPath) {
+              component.$router.push(component.redirectPath)
+              component.$store.commit('resetRedirectPath')
+            } else {
+              component.$router.push({ name: 'Home' })
+            }
           } else {
             component.$router.push({ name: 'OnboardNewUser' })
           }
@@ -44,31 +48,5 @@ export default {
       })
     },
   },
-  computed: mapGetters(['currentUser', 'rsvpAttemptedId', 'redirectPath'])
+  computed: mapGetters(['currentUser', 'redirectPath'])
 }
-
-    //   let component = this
-    //   this.$auth.authenticate(provider)
-    //     .then(res => {
-    //       console.log('auth SUCCESS')
-    //       return this.$store.dispatch('establishCurrentUserAsync', this.currentUser.id)
-    //     }).then(() => {
-    //       console.log(this.currentUser)
-    //       if (this.currentUser.hasAllRequiredFields && !this.rsvpAttemptedId) {
-    //         // redirect to home screen if they haven't attempted an RSVP
-    //         this.$router.push({ name: 'Home' })
-    //       } else if (this.currentUser.hasAllRequiredFields && !!this.rsvpAttemptedId) {
-    //         // confirm that they want to RSVP if they have attempted an RSVP
-    //         this.$router.push({ name: 'RsvpConfirmation', params: { eventId: this.rsvpAttemptedId } })
-    //       } else if (this.currentUser.id) {
-    //         // begin onboarding
-    //         this.$router.push({ name: 'OnboardNewUser' })
-    //       } else {
-    //         return false
-    //       }
-    //     }).catch(function (err) {
-    //       console.log('auth FAILURE or user not onboarded yet')
-    //       console.log(err)
-    //     })
-    // }
-

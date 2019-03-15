@@ -8,8 +8,6 @@ import _ from 'lodash'
 
 Vue.use(Vuex)
 
-const DEFAULT_REDIRECT_PATH = '/home'
-
 export default new Vuex.Store(
   {
     plugins: [createPersistedState()],
@@ -19,21 +17,17 @@ export default new Vuex.Store(
     state: {
       alert: null,
       createdEvents: null,
-      RSVPAttempEventId: null,
-      redirectPath: DEFAULT_REDIRECT_PATH
+      redirectRoute: null
     },
     mutations: {
-      resetRedirectPath: (state) => {
-        state.redirectPath = DEFAULT_REDIRECT_PATH
+      resetRedirectRoute: (state) => {
+        state.redirectRoute = null
       },
-      setRedirectPath: (state, payload) => {
-        state.redirectPath = payload.path
+      setRedirectRoute: (state, payload) => {
+        state.redirectRoute = payload.route
       },
       showAlert: (state, payload) => {
         state.alert = payload.alert
-      },
-      setRSVPAttemptEventId: (state, payload) => {
-        state.RSVPAttempEventId = payload.id
       },
       hideAlert: (state) => {
         state.alert = null
@@ -76,8 +70,7 @@ export default new Vuex.Store(
           return null
         }
       },
-      rsvpAttemptedId: state => state.RSVPAttempEventId,
-      redirectPath: state => state.redirectPath
+      redirectRoute: state => state.redirectRoute
     }
   }
 )

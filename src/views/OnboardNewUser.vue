@@ -204,7 +204,7 @@ export default {
         }
       }
     },
-    ...mapGetters(['currentUser', 'rsvpAttemptedId'])
+    ...mapGetters(['currentUser', 'redirectRoute'])
 
   },
   methods: {
@@ -262,8 +262,8 @@ export default {
       })
     },
     moveOntoNextFTE () {
-      if (this.rsvpAttemptedId) {
-        this.$router.push({ name: 'RsvpConfirmation', params: { eventId: this.rsvpAttemptedId } })
+      if (this.redirectRoute) {
+        this.$router.push(this.redirectRoute)
       } else {
         this.$router.push({ name: 'RSVPPrompt' })
       }
