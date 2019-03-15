@@ -102,6 +102,7 @@ GEM
     bullet (5.9.0)
       activesupport (>= 3.0.0)
       uniform_notifier (~> 1.11)
+    byebug (11.0.0)
     climate_control (0.2.0)
     coderay (1.1.2)
     concurrent-ruby (1.1.5)
@@ -494,6 +495,7 @@ DEPENDENCIES
   apitome
   brakeman
   bullet
+  byebug
   climate_control
   country_select
   database_cleaner

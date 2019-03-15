@@ -57,4 +57,5 @@ group :development, :test do
   gem 'therubyracer', platforms: :ruby
   gem 'timecop'
   gem 'webmock'
+  gem 'byebug'
 end
