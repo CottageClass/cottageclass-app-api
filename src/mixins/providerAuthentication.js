@@ -28,13 +28,18 @@ export default {
       const component = this
       this.authenticate('facebook', function (data) {
         if (data.err) {
-          // TODO handle this error
-          console.log('error in authentication')
+          // TODO handle this error with an alert
+          console.log('error in authentication : ', data.err)
           component.$router.push({ name: 'Home' })
         } else {
           component.$store.dispatch('establishUser', { JWT: data.token })
-          component.$router.push(component.redirectPath)
-          component.$store.commit('resetRedirectPath')
+          console.log(component.currentUser.hasAllRequiredFields)
+          if (component.currentUser.hasAllRequiredFields) {
+            component.$router.push(component.redirectPath)
+            component.$store.commit('resetRedirectPath')
+          } else {
+            component.$router.push({ name: 'OnboardNewUser' })
+          }
         }
       })
     },
