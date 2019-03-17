@@ -6,6 +6,8 @@ import VueClipboard from "vue-clipboard2";
 import VueScrollTo from 'vue-scrollto'
 import * as VueGoogleMaps from "vue2-google-maps";
 
+import '@babel/polyfill'
+
 import _ from "lodash";
 
 import App from "../../../src/App.vue";

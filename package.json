@@ -5,6 +5,7 @@
   "description": "A Vue.js project",
   "author": "holmesworcester <hwilson@gmail.com>",
   "dependencies": {
+    "@babel/polyfill": "^7.2.5",
     "@rails/webpacker": "3.5",
     "axios": "^0.18.0",
     "json-api-normalizer": "^0.4.14",
