@@ -92,7 +92,7 @@ export default {
       const that = this
       Promise.all(requests)
         .then(_ => {
-          return this.$store.dispatch('establishCurrentUserAsync', this.currentUser.id)
+          return this.$store.dispatch('updateCurrentUserFromServer')
         }).then(function () {
           that.$router.push('/onboarding/child-special-requirements-1/' + that.eventId)
         }).catch(err => {

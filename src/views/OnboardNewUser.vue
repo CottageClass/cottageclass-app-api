@@ -244,8 +244,7 @@ export default {
         }, (err) => {
           console.log(err)
         })
-        // TODO fix this and all other  establishCurrentUserAsync
-        return that.$store.dispatch('establishCurrentUserAsync', userId)
+        return that.$store.dispatch('updateCurrentUserFromServer')
       }).then(() => {
         that.submitEventData().then(res => {
           that.$store.commit('setCreatedEvents', { eventData: res })

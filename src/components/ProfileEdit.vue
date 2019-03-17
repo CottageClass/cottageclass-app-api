@@ -119,7 +119,7 @@ export default {
         this.saveButtonText = 'Saving...'
         api.submitUserInfo(this.currentUser.id, this.phone, this.location, this.availability, this.children, this.currentUser).then(res => {
           this.saveButtonText = ' \u2714 Saved'
-          this.$store.dispatch('establishCurrentUserAsync', this.currentUser.id)
+          this.$store.dispatch('updateCurrentUserFromServer')
           console.log('user update SUCCESS')
           console.log(res)
           return res

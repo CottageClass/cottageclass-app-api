@@ -154,7 +154,7 @@ export default {
                 component.errorMessage = 'There was a problem signing you in. If you forgot your password, email  contact@cottageclass.com for help.'
                 console.log('auth failure', err)
               }).then(() => {
-                return component.$store.dispatch('establishCurrentUserAsync', this.currentUser.id)
+                return component.$store.dispatch('updateCurrentUserFromServer')
               }).then(() => {
                 if (component.currentUser.hasAllRequiredFields) {
                   component.$router.push({ name: 'Home' })
