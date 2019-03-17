@@ -41,7 +41,7 @@ export default new Vuex.Store(
       }
     },
     actions: {
-      newRoute: ({ commit, state }, { to, from, next }) => {
+      newRoute: ({ commit, state }) => {
         // this method manages the showing of alerts when you enter a new route
         // TODO these should be committed with mutations
         if (state.alert) {
@@ -51,7 +51,6 @@ export default new Vuex.Store(
             state.alert = null
           }
         }
-        next()
       }
     },
     getters: {

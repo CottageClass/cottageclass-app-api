@@ -61,9 +61,13 @@ if(window.opener) {
 
   Vue.config.productionTip = false;
 
-  // TODO move this to the router
   router.beforeEach((to, from, next) => {
-    store.dispatch("newRoute", { to, from, next });
+    store.dispatch("newRoute")
+    if (to.name === 'SplashPage' && store.getters.isAuthenticated) {
+      next({ name: 'Home'})
+    } else {
+      next()
+    }
   });
 
   // passing the router into the analytics plugin will automaticall track page views
