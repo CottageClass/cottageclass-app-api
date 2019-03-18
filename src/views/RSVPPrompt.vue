@@ -44,7 +44,7 @@ export default {
         return (event.full !== 'false') && (event.hostId !== this.currentUser.id)
       })
     },
-    ...mapGetters([ 'currentUser' ])
+    ...mapGetters([ 'currentUser', 'firstCreatedEventId' ])
   },
   methods: {
     nextStep () {
