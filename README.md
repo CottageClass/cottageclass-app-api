@@ -9,6 +9,11 @@
     ```
     $ rvm install 2.5.3
     ```
+1. Recommended: install [Watchman](https://facebook.github.io/watchman) for jest testing 
+    ```bash
+    $ brew install watchman
+    ```
+
 
 ### Install
 
@@ -65,9 +70,16 @@
 
 ### Run
 
-1. RSpec
+#### RSpec
+for testing rails backend
     ```
     $ bin/rspec -fd
+    ```
+
+#### Jest
+for testing vue/js frontend
+    ```
+    $ yarn run test
     ```
 
 ## Deploy

@@ -2,7 +2,10 @@
   "name": "cottageclass-map",
   "version": "1.0.0",
   "private": true,
-  "description": "A Vue.js project",
+  "description": "A Rails project serving up a Vue.js front end",
+  "scripts": {
+    "test": "jest --config ./jest.conf.js --watch"
+  },
   "author": "holmesworcester <hwilson@gmail.com>",
   "dependencies": {
     "@babel/polyfill": "^7.2.5",
@@ -32,6 +35,10 @@
     "vuex-persistedstate": "^2.5.4"
   },
   "devDependencies": {
+    "@vue/test-utils": "^1.0.0-beta.29",
+    "jest": "^24.5.0",
+    "jest-serializer-vue": "^2.0.2",
+    "vue-jest": "^3.0.4",
     "webpack-dev-server": "2.11.2"
   }
 }
