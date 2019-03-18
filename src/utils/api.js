@@ -521,7 +521,7 @@ export function deleteEvent (eventId, successCallback) {
 
  // sign up as a new user
 export function register (params) {
-  return Vue.axios.post(`/users`, { user: params })
+  return Vue.axios.post(`/users`, params )
 }
 
 export function signIn (params) {

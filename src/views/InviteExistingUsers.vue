@@ -77,7 +77,6 @@ export default {
             null
           ))
         Promise.all(requests).then(() => {
-          console.log('hi')
           that.$router.push({ name: 'Home' })
         }).catch(err => {
           console.log(err)
