@@ -36,6 +36,12 @@ export default new Vuex.Store(
         state.alert = payload.alert
         state.alert.preshow = true // this indicates that we will show the alert in the next route
       },
+      showAlertFromPreshow: (state) => {
+        state.alert.preshow = false
+      },
+      clearAlert: (state) => {
+        state.alert = null
+      },
       setCreatedEvents: (state, payload) => {
         state.createdEvents = payload.eventData
       }
@@ -46,9 +52,9 @@ export default new Vuex.Store(
         // TODO these should be committed with mutations
         if (state.alert) {
           if (state.alert.preshow) {
-            state.alert.preshow = false
+            commit('showAlertFromPreshow')
           } else {
-            state.alert = null
+            commit('clearAlert')
           }
         }
       }
