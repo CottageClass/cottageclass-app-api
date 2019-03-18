@@ -355,9 +355,7 @@ Devise.setup do |config|
   # ==> Configuration for :jwt
 
   config.jwt do |jwt|
-    # TODO: it's probably not wise to use SECRET_KEY_BASE as described here :
-    # https://www.rubydoc.info/gems/devise-jwt/0.2.1
-    jwt.secret = ENV.fetch('SECRET_KEY_BASE')
+    jwt.secret = ENV.fetch('DEVISE_JWT_SECRET_KEY')
     jwt.expiration_time = 100.years.to_i
   end
 end
