@@ -537,7 +537,7 @@ export function signIn (params) {
 
 // destroy the current session on the server
 export function signOut () {
-  return Vue.axios.get(`/users/sign_out`)
+  return Vue.axios.delete(`/users/sign_out`)
 }
 
 /*
