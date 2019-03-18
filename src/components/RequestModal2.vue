@@ -50,11 +50,6 @@ export default {
     }
   },
   computed: {
-    network: function () {
-      // TODO remove network stuff
-      let networkId = null
-      return this.networks.find(network => network.stub === networkId)
-    },
     nextButtonState: function () {
       if (this.bookingRequest.dateTimeSelected === null) {
         return 'inactive'

@@ -45,7 +45,7 @@ var client = sheetsu({ address: 'https://sheetsu.com/apis/v1.0su/62cd725d6088' }
 
 export default {
   name: 'Parent',
-  props: ['person', 'currentUser', 'network'],
+  props: ['person', 'currentUser'],
   components: { AvatarImage, ChildInfo },
   data () {
     return {
@@ -53,17 +53,6 @@ export default {
     }
   },
   methods: {
-    calculateHourlyRate: function (numChildren) {
-      const siblingDiscount = 0.5
-      const price = parseFloat(this.network.price)
-      if (numChildren === 1) {
-        return price
-      } else if (numChildren > 1) {
-        return price + (siblingDiscount * price * (parseInt(numChildren) - 1))
-      } else {
-        return ''
-      }
-    },
     check: function (inOrOut) {
       let numChildren = 1
       this.checkState = 'checking ' + inOrOut
@@ -81,11 +70,6 @@ export default {
         'Checked': inOrOut,
         'Time': Date(),
         'Provider Phone #': this.currentUser.phone,
-        'Network': this.network.name,
-        'Network rate': this.network.price,
-        'Total hourly rate': this.calculateHourlyRate(numChildren),
-        'Percentage': this.network.percentage,
-        'Network Code': this.network.stub
       }, 'events').then((data) => {
         console.log(data)
         this.checkState = 'checked ' + inOrOut

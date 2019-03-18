@@ -67,22 +67,24 @@ export default {
     },
     sendInvites: function (person) {
       const that = this
-      const requests = this.users
-        .filter(person => that.inviteStates[person.id])
-        .map(person => api.initProxySession(
-          that.currentUser.id,
-          person.id,
-          that.inviteMessage(person),
-          null
-        ))
-      Promise.all(requests).then(() => {
-        console.log('hi')
-        that.$router.push({ name: 'Home' })
-      }).catch(err => {
-        console.log(err)
-        that.showAlertOnNextRoute('There was a problem sending your invites', 'failure')
-        that.$router.push({ name: 'Home' })
-      })
+      if (this.users) {
+        const requests = this.users
+          .filter(person => that.inviteStates[person.id])
+          .map(person => api.initProxySession(
+            that.currentUser.id,
+            person.id,
+            that.inviteMessage(person),
+            null
+          ))
+        Promise.all(requests).then(() => {
+          console.log('hi')
+          that.$router.push({ name: 'Home' })
+        }).catch(err => {
+          console.log(err)
+          that.showAlertOnNextRoute('There was a problem sending your invites', 'failure')
+          that.$router.push({ name: 'Home' })
+        })
+      }
     }
   },
   mounted: function () {

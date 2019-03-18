@@ -73,28 +73,21 @@
 
 import AvatarImage from '@/components/base/AvatarImage'
 import * as api from '@/utils/api.js'
-import networks from '@/assets/network-info.json'
 
 export default {
   name: 'EmergencyInfo',
   components: { AvatarImage },
   data () {
     return {
-      people: [],
-      networks: networks
+      people: []
     }
   },
   mounted: function () {
-    api.fetchUsersInNetwork(this.network.stub).then(res => {
+    api.fetchUsers().then(res => {
       this.people = res
     })
   },
   computed: {
-    network: function () {
-      // TODO remove network stuff
-      let networkId = null
-      return this.networks.find(network => network.stub === networkId)
-    },
     person: function () {
       return this.people.find(person => person.id === this.$route.params.id) // computes person. this isn't efficient but simplifies interaction with the API.
     }

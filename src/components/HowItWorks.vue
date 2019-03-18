@@ -19,22 +19,9 @@ When children arrive check them in, and when they leave check them out. It's tha
 </template>
 
 <script>
-import networks from '../assets/network-info.json'
 
 export default {
-  name: 'HowItWorks',
-  data () {
-    return {
-      networks: networks
-    }
-  },
-  computed: {
-    network: function () {
-      // TODO remove network stuff
-      let networkId = null
-      return this.networks.find(network => network.stub === networkId)
-    }
-  }
+  name: 'HowItWorks'
 }
 </script>
 

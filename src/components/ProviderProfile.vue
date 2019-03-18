@@ -95,7 +95,6 @@
 import Images from './Images.vue'
 import AvatarImage from '@/components/base/AvatarImage'
 import * as api from '@/utils/api.js'
-import networks from '@/assets/network-info.json'
 import ChildAges from '@/components/ChildAges.vue'
 import StyleWrapper from '@/components/FTE/StyleWrapper.vue'
 import moment from 'moment'
@@ -108,7 +107,6 @@ export default {
   data () {
     return {
       user: {},
-      networks: networks,
       mapOptions:
        { // move this to map component when i separate it.
          'disableDefaultUI': true, // turns off map controls
@@ -122,10 +120,6 @@ export default {
     })
   },
   computed: {
-    network: function () {
-      let networkId = 'brooklyn-events'
-      return this.networks.find(network => network.stub === networkId)
-    },
     userAvailableSometimes: function () {
       return this.user.availableEvenings || this.user.availableMornings || this.user.availableAfternoons || this.user.availableWeekends
     },

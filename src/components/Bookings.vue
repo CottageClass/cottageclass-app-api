@@ -7,7 +7,7 @@
   </div>
   <div class="list-container"
   v-for="person in peopleWhoHaveMadeInquiriesToCurrentUser">
-     <Parent :person="person" :currentUser="currentUser" :network="network" :key="person.id"/>
+     <Parent :person="person" :currentUser="currentUser" :key="person.id"/>
   </div>
 </div>
 </template>
@@ -17,7 +17,6 @@
 import Parent from './Parent.vue'
 import MainNav from './MainNav.vue'
 import * as api from '@/utils/api.js'
-import networks from '@/assets/network-info.json'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -25,12 +24,11 @@ export default {
   components: { Parent, MainNav },
   data () {
     return {
-      peopleWhoHaveMadeInquiriesToCurrentUser: [],
-      networks: networks
+      peopleWhoHaveMadeInquiriesToCurrentUser: []
     }
   },
   mounted: function () {
-    api.fetchUsersInNetwork(this.network.stub).then(res => {
+    api.fetchUsers().then(res => {
       this.currentUser = res.find(person => person.id === this.currentUser.id)
     })
     api.fetchUsersWhoHaveMadeInquiries(this.currentUser.id).then(res => {
@@ -38,11 +36,6 @@ export default {
     })
   },
   computed: {
-    network: function () {
-      // TODO remove network stuff
-      let networkId = null
-      return this.networks.find(network => network.stub === networkId)
-    }
   },
   ...mapGetters([ 'currentUser' ])
 }

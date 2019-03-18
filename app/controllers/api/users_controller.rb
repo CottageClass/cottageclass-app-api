@@ -39,7 +39,7 @@ class API::UsersController < API::BaseController
       links[:next] = path.call(page: users.next_page, page_size: page_size) unless users.last_page?
     end
 
-    serializer = UserInNetworkSerializer.new users, include: %i[children user_reviews user_reviews.reviewer],
+    serializer = UserSerializer.new users, include: %i[children user_reviews user_reviews.reviewer],
                                                     links: links,
                                                     meta: meta
     render json: serializer.serializable_hash, status: :ok

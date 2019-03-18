@@ -79,7 +79,6 @@ ActiveAdmin.register Event do
         available_afternoons
         available_evenings
         available_weekends
-        network_code
         profile_blurb
         onboarding_care_type
         avatar

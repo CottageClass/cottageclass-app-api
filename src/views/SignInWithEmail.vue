@@ -72,7 +72,6 @@
 </template>
 
 <script>
-// import networks from '@/assets/network-info.json';
 import { mapGetters } from 'vuex'
 import { signIn } from '@/utils/api'
 import ErrorMessage from '@/components/base/ErrorMessage.vue'

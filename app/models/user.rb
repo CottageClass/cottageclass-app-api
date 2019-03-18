@@ -60,9 +60,6 @@ class User < ApplicationRecord
 
   accepts_nested_attributes_for :children, allow_destroy: true, reject_if: :child_with_same_name_exists?
 
-  scope :in_network, ->(code) { where network_code: code }
-
-
   def jwt_payload
     { 'user' => UserSerializer.json_for(self) }
   end
@@ -124,7 +121,6 @@ class User < ApplicationRecord
 
   def cleanup
     self.email = email.to_s.downcase
-    self.network_code = network_code.to_s.downcase
     self.facebook_uid = uid if %w[facebook].include?(provider)
   end
 

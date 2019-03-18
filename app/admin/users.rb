@@ -4,14 +4,13 @@ ActiveAdmin.register User do
 
   includes :children
 
-  permit_params :email, :facebook_uid, :verified, :first_name, :last_name, :name, :network_code, :profile_blurb,
+  permit_params :email, :facebook_uid, :verified, :first_name, :last_name, :name, :profile_blurb,
                 :apartment_number, :referrer, source_tags: []
 
   filter :name
   filter :first_name
   filter :last_name
   filter :verified
-  filter :network_code
   filter :facebook_uid
   filter :created_at
 
@@ -20,7 +19,6 @@ ActiveAdmin.register User do
     column :id
     column :name
     bool_column :verified
-    column :network_code
     column :facebook_uid
     column :created_at
     actions do |instance|
@@ -55,7 +53,6 @@ ActiveAdmin.register User do
       available_afternoons
       available_evenings
       available_weekends
-      network_code
       profile_blurb
       onboarding_care_type
       avatar

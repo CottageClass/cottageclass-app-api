@@ -37,11 +37,7 @@ export function initProxySession (currentUserId, receiverId, requestMessage, ack
 export function submitUserInfo (userId, phone, location, availability, children, userObj) {
   console.log('attempting to submit', userId, phone, location, availability, children)
 
-  let postData = {
-    networkCode: 'brooklyn-events' // this is hardcoded until we make it unnecessary.
-    //        profileBlurb: this.blurb.text,
-  }
-
+  let postData = {}
   if (location && location.fullAddress) {
     let address = location.fullAddress
     let {
@@ -195,7 +191,6 @@ function createPersonObject (personInApi, availableChildren = []) {
     // todo: add these once I have them
     verified: p.verified,
     phone: p.phone,
-    networkCode: 'brooklyn-events',
     dateCreated: p.date_created,
     hasAllRequiredFields: hasAllRequiredFields(),
     blurb: p.profile_blurb
@@ -224,9 +219,9 @@ export function fetchUsersWithinDistance (miles, lat, lon) {
   })
 }
 
-export function fetchUsersInNetwork (networkId) {
+export function fetchUsers () {
   return Vue.axios.get(
-    `/networks/${networkId}/users`
+    `/api/users`
   ).then(res => {
     console.log('FETCH USERS IN NETWORK SUCCESS')
     console.log(res.data)
@@ -263,7 +258,6 @@ export function fetchCurrentUser (userId) {
     let normalizedData = normalize(res.data)
     let user = normalizedData.user[userId].attributes
     user.hasAllRequiredFields = user.phone && user.latitude && user.longitude
-    user.networkCode = 'brooklyn-events' // give everyone the new network code
     if ('child' in normalizedData) {
       let childrenById = normalizedData.child
       let childIds = Object.keys(childrenById)
@@ -297,7 +291,6 @@ export function fetchUser (userId) {
     console.log(res)
     let normalizedData = normalize(res.data)
     let user = normalizedData.user[userId].attributes
-    user.networkCode = 'brooklyn-events' // give everyone the new network code
     user.id = userId
     return user
   }).catch(err => {

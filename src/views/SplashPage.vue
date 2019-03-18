@@ -250,7 +250,6 @@
 
 <script>
 
-import networks from '@/assets/network-info.json'
 import RsvpButton from '@/components/RsvpButton.vue'
 import MainNav from '@/components/MainNav.vue'
 import Footer from '@/components/Footer.vue'
@@ -259,11 +258,6 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'SplashPage',
   components: { RsvpButton, MainNav, Footer },
-  data () {
-    return {
-      networks: networks
-    }
-  },
   created: function () {
     if (this.currentUser === null) {
       return

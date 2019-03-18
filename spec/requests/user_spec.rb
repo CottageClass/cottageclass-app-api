@@ -38,16 +38,6 @@ RSpec.resource 'User' do
       end
     end
 
-    get '/networks/:network_code/users', format: :json do
-      include_context 'authorization token'
-      let(:network_code) { user.network_code }
-
-      example_request 'index:success' do
-        expect(response_status).to eq(200)
-        expect(json_body.fetch('data', []).map { |u| u.dig('attributes', 'phone') }.compact).to be_blank
-      end
-    end
-
     get '/api/users/:id', format: :json do
       let(:id) { user.id }
 

@@ -65,7 +65,6 @@ import MainNav from './MainNav.vue'
 import RequestCareProviderItem from '@/components/RequestCareProviderItem.vue'
 import StyleWrapper from '@/components/FTE/StyleWrapper.vue'
 import ShareButton from '@/components/ShareButton.vue'
-import networks from '@/assets/network-info.json'
 import { mapGetters } from 'vuex'
 import * as api from '@/utils/api.js'
 
@@ -74,8 +73,7 @@ export default {
   components: { RequestCareProviderItem, ShareButton, MainNav, StyleWrapper },
   data () {
     return {
-      people: [], // gets updated on mount by fetchUsersInNetwork
-      networks: networks, // to bring from import into vue model
+      people: [], 
       mapOptions: { // move this to map component when i separate it.
         'disableDefaultUI': true, // turns off map controls
         'gestureHandling': 'greedy' // allows one finger pan.
@@ -97,9 +95,6 @@ export default {
   computed: {
     peopleAvailable: function () {
       return this.people.filter(person => person.availableMornings || person.availableAfternoons || person.availableEvenings || person.availableWeekends)
-    },
-    providersSectionTitle: function () {
-      return 'People in "' + this.network.name + '"'
     },
     currentUserLocation: function () {
       return { lat: parseFloat(this.currentUser.latitude), lng: parseFloat(this.currentUser.longitude) }

@@ -47,7 +47,6 @@ class Notifier::ParticipantCreationHost < Notifier::Base
                                                                                        :longitude,
                                                                                        :activities,
                                                                                        :full_address,
-                                                                                       :network_code,
                                                                                        :profile_blurb,
                                                                                        :onboarding_care_type,
                                                                                        :job_position,

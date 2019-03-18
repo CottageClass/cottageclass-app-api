@@ -27,7 +27,6 @@ class UserSerializer < BaseSerializer
              :available_afternoons,
              :available_evenings,
              :available_weekends,
-             :network_code,
              :activities,
              :phone,
              :full_address,

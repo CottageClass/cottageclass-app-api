@@ -4,7 +4,6 @@ FactoryBot.define do
     name { Faker::FunnyName.unique.name }
     password { Faker::Internet.password 8, 16 }
     time_zone { Faker::Address.time_zone }
-    network_code { 'demo' }
     phone_number { Faker::PhoneNumber.phone_number }
     phone_area_code { Faker::PhoneNumber.area_code }
     facebook_uid { Faker::Omniauth.facebook[:uid] }

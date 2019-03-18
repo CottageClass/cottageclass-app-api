@@ -7,7 +7,6 @@ namespace :import do
     date_format_year_first = '%Y/%m/%d'
 
     created_user_emails = []
-    created_network_codes = []
 
     path_to_json = Rails.root.join args[:path_to_json]
     json = JSON.parse File.read(path_to_json)
@@ -56,7 +55,6 @@ namespace :import do
           facebook_uid: u.fbid,
           phone_area_code: area_code,
           phone_number: phone_number,
-          network_code: u.networks.first,
           activities: u.activities,
           latitude: (u.location && u.location['lat']) || '',
           longitude: (u.location && u.location['lng']) || '',
@@ -69,13 +67,10 @@ namespace :import do
           password: SecureRandom.base64(8)
         )
 
-        created_network_codes << user.network_code
         created_user_emails << user.email
       end
     end
 
-    created_network_codes = created_network_codes.compact.uniq
-    pp "Added #{created_user_emails.length} Users to #{created_network_codes.length} Network Codes:"
-    pp created_network_codes
+    pp "Added #{created_user_emails.length} "
   end
 end

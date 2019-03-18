@@ -1,15 +1,11 @@
 class UsersController < ApiController
   before_action :authenticate_user!
   before_action :reject_nonmatching_user, only: %i[show update inquiries]
-  before_action :reject_user_not_in_network, only: [:index]
   before_action :require_admin!, only: [:admin_index]
 
   def index
-    # false defends against returning users who have network `""
-    # - TODO: write some tests for this
-    desired_network_code = params[:network_code] || false
-    users = User.where network_code: desired_network_code
-    render json: UserInNetworkSerializer.json_for(users, include: %i[children user_reviews user_reviews.reviewer]),
+    users = User.all
+    render json: UserSerializer.json_for(users, include: %i[children user_reviews user_reviews.reviewer]),
            status: 200
   end
 
@@ -34,8 +30,8 @@ class UsersController < ApiController
   end
 
   def inquiries
-    users = current_user.inquirers.in_network current_user.network_code
-    serializable_hash = UserInNetworkSerializer.json_for users,
+    users = current_user.inquirers
+    serializable_hash = UserSerializer.json_for users,
                                                          include: %i[children user_reviews user_reviews.reviewer],
                                                          params: { personal_information: true }
 
@@ -52,18 +48,6 @@ class UsersController < ApiController
   def reject_nonmatching_user
     if !current_user || current_user.id.to_i != params[:id].to_i
       render json: { errors: ['No matching user found'] }, status: 404
-    end
-  end
-
-  def reject_user_not_in_network
-    desired_network_code = params[:network_code]
-
-    if !current_user ||
-       !desired_network_code ||
-       desired_network_code.empty? ||
-       current_user.network_code != desired_network_code
-
-      render json: { errors: ['No users found in network'] }, status: 404
     end
   end
 
@@ -91,7 +75,6 @@ class UsersController < ApiController
                                  :available_afternoons,
                                  :available_evenings,
                                  :available_weekends,
-                                 :network_code,
                                  :profile_blurb,
                                  :onboarding_care_type,
                                  :job_position,

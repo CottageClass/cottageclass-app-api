@@ -52,9 +52,7 @@
 <script>
 // todo: filter by availability
 // todo: send meessages
-// todo: what if there are no people available then in their network? we should make sure there is availability for everys slot
 
-import networks from '@/assets/network-info.json'
 import * as api from '@/utils/api.js'
 import AvatarImage from '@/components/base/AvatarImage'
 import { mapGetters } from 'vuex'
@@ -67,7 +65,6 @@ export default {
     return {
       people: [],
       peopleSelected: [],
-      networks: networks,
       maxRecipients: 3,
       messagesUnsent: null,
       errorSending: false
@@ -105,7 +102,7 @@ export default {
       })
     },
     messageToProvider: function (provider) {
-      return 'Hi ' + provider.firstName + '!! It\'s ' + this.currentUser.firstName + ' from ' + this.network.name + '. I\'m looking for care on ' + this.dateTimeFormatted + '. I saw you were often available at that time, and I was wondering if this might work? Let me know and thanks! \ud83c\udf08\u26a1\ud83e\udd84'
+      return 'Hi ' + provider.firstName + '!! It\'s ' + this.currentUser.firstName + '. I\'m looking for care on ' + this.dateTimeFormatted + '. I saw you were often available at that time, and I was wondering if this might work? Let me know and thanks! \ud83c\udf08\u26a1\ud83e\udd84'
     },
     testApi: function (provider) {
       console.log([
@@ -126,7 +123,7 @@ export default {
     }
   },
   mounted: function () {
-    api.fetchUsersInNetwork(this.network.stub).then(res => {
+    api.fetchUsers().then(res => {
       this.people = res.filter(person => person.id !== this.currentUser.id)
       this.currentUser = res.find(person => person.id === this.currentUser.id)
     })
@@ -170,11 +167,6 @@ export default {
       } else {
         return gray
       }
-    },
-    network: function () {
-      // TODO remove network stuff
-      let networkId = null
-      return this.networks.find(network => network.stub === networkId)
     },
     peopleAvailable: function () {
       let h = moment(this.dateTimeSelected).hour()

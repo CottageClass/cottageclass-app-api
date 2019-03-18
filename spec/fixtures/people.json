@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "networks": ["flatbushfamilies"],
+
     "name": "Marixsa",
     "lastInitial": "R",
     "email": "marixsa@gmail.com",
@@ -106,7 +106,7 @@
 
   {
     "id": 2,
-    "networks": ["flatbushfamilies", "demo"],
+
     "name": "Manisha",
     "email": "manisha@cottageclass.com",
     "lastInitial": "S",
@@ -150,7 +150,7 @@
   },
   {
     "id": 3,
-    "networks": ["flatbushfamilies"],
+
     "email": "donnamehrabi@gmail.com",
     "name": "Donna",
     "lastInitial": "M",
@@ -185,7 +185,7 @@
     "id": 4,
     "name": "Holly",
     "email": "holly@hollylynnellis.com",
-    "networks": ["flatbushfamilies"],
+
     "lastInitial": "S",
     "pic": ["avatar-HollyS.png"],
     "images": ["HollyS-1.jpg", "HollyS-2.jpg", "HollyS-3.jpg", "HollyS-4.jpg"],
@@ -208,7 +208,7 @@
   },
   {
     "id": 5,
-    "networks": ["flatbushfamilies"],
+
     "email": "saragracer@gmail.com",
     "name": "Sara",
     "lastInitial": "C",
@@ -233,7 +233,7 @@
   },
   {
     "id": 6,
-    "networks": ["flatbushfamilies"],
+
     "email": "racheloliv@gmail.com",
     "name": "Rachel",
     "lastInitial": "C",
@@ -258,7 +258,7 @@
   },
   {
     "id": 7,
-    "networks": ["flatbushfamilies"],
+
     "email": "jillalexander@mac.com",
     "name": "Jill",
     "lastInitial": "A",
@@ -283,7 +283,7 @@
   },
   {
     "id": 8,
-    "networks": ["flatbushfamilies"],
+
     "email": "saribgonzo@gmail.com",
     "name": "Sari",
     "lastInitial": "G",
@@ -308,7 +308,7 @@
   },
   {
     "id": 9,
-    "networks": ["flatbushfamilies", "BoCoCaGo"],
+
     "email": "fm@fmwriting.com",
     "name": "Fayre",
     "lastInitial": "M",
@@ -341,7 +341,7 @@
   },
   {
     "id": 10,
-    "networks": ["flatbushfamilies", "BoCoCaGo"],
+
     "email": "catherinejwise@gmail.com",
     "name": "CJ",
     "lastInitial": "W",
@@ -374,7 +374,7 @@
   },
   {
     "id": 11,
-    "networks": ["flatbushfamilies", "BoCoCaGo"],
+
     "email": "caitlin.van.dusen@gmail.com",
     "name": "Caitlin",
     "lastInitial": "D",
@@ -407,7 +407,7 @@
   },
   {
     "id": 12,
-    "networks": ["flatbushfamilies"],
+
     "email": "mariannaazar1@gmail.com",
     "name": "Marianna",
     "lastInitial": "A",
@@ -432,7 +432,7 @@
   },
   {
     "id": 14,
-    "networks": ["flatbushfamilies"],
+
     "email": "jkerson@gmail.com",
     "name": "Julia",
     "lastInitial": "K",
@@ -458,7 +458,7 @@
   },
   {
     "id": 15,
-    "networks": ["flatbushfamilies"],
+
     "email": "auntmarieisme@gmail.com",
     "name": "Marie",
     "lastInitial": "F",
@@ -484,7 +484,7 @@
   },
   {
     "id": 16,
-    "networks": ["flatbushfamilies"],
+
     "email": "eileenkelly@gmail.com",
     "name": "Eileen",
     "lastInitial": "M",
@@ -518,7 +518,7 @@
   },
   {
     "id": 17,
-    "networks": ["flatbushfamilies"],
+
     "email": "katyaschapiro@gmail.com",
     "name": "Katya",
     "lastInitial": "S",
@@ -536,7 +536,7 @@
   },
   {
     "id": 18,
-    "networks": ["flatbushfamilies"],
+
     "email": "dontoo234@yahoo.com",
     "name": "Donnette",
     "lastInitial": "W",
@@ -554,7 +554,7 @@
   },
   {
     "id": 19,
-    "networks": ["BoCoCaGo"],
+
     "email": "stephanie.roos@gmail.com",
     "name": "Stephanie",
     "lastInitial": "R",
@@ -580,7 +580,7 @@
   },
   {
     "id": 20,
-    "networks": ["BoCoCaGo"],
+
     "email": "mamirican0416@gmail.com",
     "name": "Jessica",
     "lastInitial": "V",
@@ -606,7 +606,7 @@
   },
   {
     "id": 21,
-    "networks": ["BoCoCaGo"],
+
     "email": "aastha012@gmail.com",
     "name": "Aastha",
     "lastInitial": "M",
@@ -632,7 +632,7 @@
   },
   {
     "id": 22,
-    "networks": ["BoCoCaGo"],
+
     "email": "tsaldarelli@gmail.com",
     "name": "Tish",
     "lastInitial": "K",
@@ -658,7 +658,7 @@
   },
   {
     "id": 23,
-    "networks": ["flatbushfamilies"],
+
     "email": "hoepnerL@yahoo.com",
     "name": "Lori",
     "lastInitial": "H",
@@ -692,7 +692,7 @@
   },
   {
     "id": 7705970088,
-    "networks": ["flatbushfamilies"],
+
     "email": "tiffanyjdavis@gmail.com",
     "name": "Tiffany",
     "lastInitial": "D",
@@ -718,7 +718,7 @@
 
   {
     "id": 6023345579,
-    "networks": ["prospectleffertsparents"],
+
     "email": "lashafir@gmail.com",
     "name": "Lilach",
     "lastInitial": "S",
@@ -744,7 +744,7 @@
   },
   {
     "id": 7863565152,
-    "networks": ["bedstuyparents"],
+
     "email": "s.angaritajones@gmail.com",
     "name": "Sarah",
     "lastInitial": "A",
@@ -770,7 +770,7 @@
   },
   {
     "id": 7324255999,
-    "networks": ["greenpointwilliamsburgmommies"],
+
     "email": "znrbr@yahoo.com",
     "name": "Catherine",
     "lastInitial": "B",
@@ -804,7 +804,7 @@
   },
   {
     "id": 9292817010,
-    "networks": ["brooklynappleacademy"],
+
     "email": "mandyveliz@gmail.com",
     "name": "Amanda",
     "lastInitial": "V",
@@ -838,7 +838,7 @@
   },
   {
     "id": 6463522142,
-    "networks": ["prospectleffertsparents"],
+
     "email": "mandyveliz@gmail.com",
     "name": "Jennifer",
     "lastInitial": "S",
@@ -864,7 +864,7 @@
   },
   {
     "id": 3018301855,
-    "networks": ["prospectleffertsparents"],
+
     "email": "tullahdash@gmail.com",
     "name": "Tullah",
     "lastInitial": "D",
@@ -890,7 +890,7 @@
   },
   {
     "id": 6466600296,
-    "networks": ["cottageclass"],
+
     "email": "cweida@adelphi.edu",
     "name": "Courtney",
     "lastInitial": "W",
@@ -916,7 +916,7 @@
   },
   {
     "id": 3107175545,
-    "networks": ["bedstuyparents"],
+
     "email": "sunnyshokrae@gmail.com",
     "name": "Sunny",
     "lastInitial": "S",
@@ -942,7 +942,7 @@
   },
   {
     "id": 7188085465,
-    "networks": ["prospectheightsparents"],
+
     "email": "kcmiller73@gmail.com",
     "name": "Casey",
     "lastInitial": "M",
@@ -967,7 +967,7 @@
   },
   {
     "id": 9178481185,
-    "networks": ["flatbushfamilies"],
+
     "email": "amarantaviera@gmail.com",
     "name": "Amaranta",
     "lastInitial": "V",
@@ -993,7 +993,7 @@
   },
   {
     "id": 2815071388,
-    "networks": ["greenpointwilliamsburgmommies"],
+
     "email": "jeremyandgiri@gmail.com",
     "name": "Jeremy",
     "lastInitial": "J",
@@ -1018,7 +1018,7 @@
   },
   {
     "id": 5084960187,
-    "networks": ["nycbabystuff"],
+
     "email": "bushralacerda@yahoo.com",
     "name": "Bushra",
     "lastInitial": "L",
@@ -1043,7 +1043,7 @@
   },
   {
     "id": 3475794359,
-    "networks": ["waterfrontfamilysalon", "BoCoCaGo"],
+
     "email": "camillebourdel@gmail.com",
     "name": "Camille",
     "lastInitial": "B",
@@ -1083,7 +1083,7 @@
     ]
   },
   {  "id": 9173405819,
-    "networks": ["BoCoCaGo"],
+
     "email": "m.serviat@gmail.com",
     "name": "Matthieu",
     "lastInitial": "S",
@@ -1111,12 +1111,12 @@
         "allergies": "",
         "medicalNeeds": "",
         "otherNeeds": ""
-      }      
+      }
     ]
   },
   {
     "id": 9084324444,
-    "networks": ["BoCoCaGo"],
+
     "email": "rachel.leah.christensen@gmail.com",
     "name": "Rachel",
     "lastInitial": "C",
@@ -1141,7 +1141,7 @@
   },
   {
     "id": 2404815304,
-    "networks": ["bushridgeparents"],
+
     "email": "sbherold@gmail.com",
     "name": "Steph",
     "lastInitial": "H",
@@ -1161,12 +1161,12 @@
         "allergies": "",
         "medicalNeeds": "",
         "otherNeeds": ""
-      }      
+      }
     ]
   },
   {
     "id": 9176568850,
-    "networks": ["BoCoCaGo"],
+
     "email": "noemie.trusty@gmail.com",
     "name": "Noemie",
     "lastInitial": "T",
@@ -1186,12 +1186,12 @@
         "allergies": "",
         "medicalNeeds": "",
         "otherNeeds": ""
-      }      
+      }
     ]
   },
   {
     "id": 9178219719,
-    "networks": ["bushridgeparents"],
+
     "email": "nhliao@gmail.com",
     "name": "Nancy",
     "lastInitial": "L",
@@ -1211,12 +1211,12 @@
         "allergies": "",
         "medicalNeeds": "",
         "otherNeeds": ""
-      }      
+      }
     ]
   },
   {
     "id": 3478859954,
-    "networks": ["nyc-homeschoolers"],
+
     "email": "tamment@gmail.com",
     "name": "Tam",
     "lastInitial": "Z",
@@ -1244,12 +1244,12 @@
         "allergies": "",
         "medicalNeeds": "",
         "otherNeeds": ""
-      }      
+      }
     ]
   },
   {
     "id": 6463274678,
-    "networks": ["BoCoCaGo"],
+
     "email": "jessicasmith411@yahoo.com",
     "name": "Jessica",
     "lastInitial": "S",
@@ -1269,12 +1269,12 @@
         "allergies": "",
         "medicalNeeds": "",
         "otherNeeds": ""
-      }      
+      }
     ]
   },
   {
     "id": 9178287282,
-    "networks": ["BoCoCaGo"],
+
     "email": "abbymporter@gmail.com",
     "name": "Abby",
     "lastInitial": "Mack",
@@ -1299,7 +1299,7 @@
   },
   {
     "id": 3478841364,
-    "networks": ["cottageclass", "BoCoCaGo"],
+
     "email": "miranda@joyauxmarisol.com",
     "name": "Miranda",
     "lastInitial": "M",
@@ -1332,7 +1332,7 @@
   },
   {
     "id": 9175092146,
-    "networks": ["BoCoCaGo"],
+
     "email": "ariellawn@gmail.com",
     "name": "Ariella",
     "lastInitial": "W",
@@ -1365,7 +1365,7 @@
   },
   {
     "id": 8649151850,
-    "networks": ["Harlem"],
+
     "email": "aprilsmithhirak@gmail.com",
     "name": "April",
     "lastInitial": "S",
@@ -1398,7 +1398,7 @@
   },
   {
     "id": 9132207739,
-    "networks": ["HydePark"],
+
     "email": "rmeyerpv@gmail.com",
     "name": "Rebecca",
     "lastInitial": "M",
@@ -1406,7 +1406,7 @@
     "images": ["RebeccaMeyer-1.jpg"],
     "phone": "9132207739",
     "availability": [""],
-    "location": {"lat": 41.793478, "lng": -87.591307},  
+    "location": {"lat": 41.793478, "lng": -87.591307},
     "activities":["Playing Outside"],
     "job": {"title": "Counselor", "employer": "Wheaton College"},
     "children":
@@ -1423,7 +1423,7 @@
   },
   {
     "id": 9376843845,
-    "networks": ["Sunnyside"],
+
     "email": "jamiemcox79@gmail.com",
     "name": "Jamie",
     "lastInitial": "C",
@@ -1448,7 +1448,7 @@
   },
   {
     "id": 2027252036,
-    "networks": ["DupontCircle"],
+
     "email": "mariana10ib@gmail.com",
     "name": "Mariana",
     "lastInitial": "D",
@@ -1473,7 +1473,7 @@
   },
   {
     "id": 4153476178,
-    "networks": ["NoeValley"],
+
     "email": "tiaalonaghose@gmail.com",
     "name": "Tia",
     "lastInitial": "G",
@@ -1481,7 +1481,7 @@
     "images": ["TiaGhose-1.jpg"],
     "phone": "4153476178",
     "availability": ["3to7", "after7", "weekends"],
-    "location": {"lat": 37.7560239, "lng": -122.4337747}, 
+    "location": {"lat": 37.7560239, "lng": -122.4337747},
     "activities":["Book club", "Cooking", "Arts & Crafts", "Homework Help"],
     "job": {"title": "Editor", "employer": "home-based"},
     "children":
@@ -1514,7 +1514,7 @@
   },
   {
     "id": 7347170840,
-    "networks": ["Cortelyou"],
+
     "email": "annanovick@gmail.com",
     "name": "Anna",
     "lastInitial": "N",
@@ -1539,7 +1539,7 @@
   },
   {
     "id": 9785784783,
-    "networks": ["Dumbo"],
+
     "email": "Sejackson2@gmail.com",
     "name": "Susy",
     "lastInitial": "J",
@@ -1572,7 +1572,7 @@
   },
   {
     "id": 9176769399,
-    "networks": ["ForestHills"],
+
     "email": "lizkin33@gmail.com",
     "name": "Elizaveta",
     "lastInitial": "B",
@@ -1591,7 +1591,7 @@
   },
   {
     "id": 3125222713,
-    "networks": ["HydePark"],
+
     "email": "efeamu@yahoo.com",
     "name": "Efe",
     "lastInitial": "A",
@@ -1599,7 +1599,7 @@
     "images": ["EfeAdefulu-1.jpg"],
     "phone": "3125222713",
     "availability": ["after7", "weekends"],
-    "location": {"lat": 41.781391, "lng": -87.595907},  
+    "location": {"lat": 41.781391, "lng": -87.595907},
     "activities":["Homework Help", "Playing Outside"],
     "job": {"title": "Accountant", "employer": "Renewable Energy Company"},
     "children":
@@ -1622,7 +1622,7 @@
   },
   {
     "id": 9172547116,
-    "networks": ["Brooklyn"],
+
     "email": "brooklyn.katya@gmail.com",
     "name": "Katya",
     "lastInitial": "C",
@@ -1654,7 +1654,7 @@
   },
   {
     "id": 7188733716,
-    "networks": ["Harlem"],
+
     "email": "Marta.peimer@gmail.com",
     "name": "Marta",
     "lastInitial": "P",
@@ -1687,7 +1687,7 @@
   },
   {
     "id": 4147087500,
-    "networks": ["DupontCircle"],
+
     "email": "carbit@gmail.com",
     "name": "Carmiel",
     "lastInitial": "A",
@@ -1712,7 +1712,7 @@
   },
   {
     "id": 7825166545,
-    "networks": ["Henley"],
+
     "email": "k8campbell@me.com",
     "name": "Katie",
     "lastInitial": "C",
@@ -1753,7 +1753,7 @@
   },
   {
     "id": 9174746866,
-    "networks": ["Brooklyn"],
+
     "email": "melimiss7@gmail.com",
     "name": "Melissa",
     "lastInitial": "G",
@@ -1761,7 +1761,7 @@
     "images": ["MelissaGorelick-1.jpg"],
     "phone": "9174746866",
     "availability": ["weekends"],
-    "location": {"lat": 40.6743075, "lng": -73.9734987}, 
+    "location": {"lat": 40.6743075, "lng": -73.9734987},
     "activities":["Playing Outside"],
     "job": {"title" : "Press Officer", "employer": "United Nations HQ New York"},
     "children":
@@ -1772,7 +1772,7 @@
   },
   {
     "id": 3473068673,
-    "networks": ["Sunnyside"],
+
     "email": "emily.kangas@gmail.com",
     "name": "Emily",
     "lastInitial": "K",
@@ -1780,7 +1780,7 @@
     "images": ["EmilyKangas-1.jpg"],
     "phone": "3473068673",
     "availability": ["weekends"],
-    "location": {"lat": 40.746347, "lng": -73.914718}, 
+    "location": {"lat": 40.746347, "lng": -73.914718},
     "activities":[""],
     "job": {"title" : "Designer", "employer": "DSM"},
     "children":
@@ -1797,7 +1797,7 @@
   },
   {
     "id": 4156725666,
-    "networks": ["theMission"],
+
     "email": "jwagner.415@gmail.com",
     "name": "Jennifer",
     "lastInitial": "S",
@@ -1822,7 +1822,7 @@
   },
   {
     "id": 2818137501,
-    "networks": ["HydePark"],
+
     "email": "christinl.scott@gmail.com",
     "name": "Christin ",
     "lastInitial": "S",
@@ -1847,7 +1847,7 @@
   },
   {
     "id": 4088889316,
-    "networks": ["madisonsquarepark"],
+
     "email": "mildredcalhoun74@yahoo.com",
     "name": "Melissa",
     "lastInitial": "H",
@@ -1872,7 +1872,7 @@
   },
   {
     "id": 9176030492,
-    "networks": ["theMission"],
+
     "email": "riddhi.s@gmail.com",
     "name": "Riddhi",
     "lastInitial": "S",
@@ -1897,7 +1897,7 @@
   },
   {
     "id": 9177714211,
-    "networks": ["PortWashington"],
+
     "email": "mlhatch1@gmail.com",
     "name": "Michelle",
     "lastInitial": "H",
@@ -1922,7 +1922,7 @@
   },
   {
     "id": 2024175395,
-    "networks": ["DupontCircle"],
+
     "email": "geraldine.gudefin@gmail.com",
     "name": "Geraldine",
     "lastInitial": "G",
@@ -1947,7 +1947,7 @@
   },
   {
     "id": 9172925160,
-    "networks": ["Cambridge"],
+
     "email": "dymartinek@gmail.com",
     "name": "Diana",
     "lastInitial": "Y",
@@ -1980,7 +1980,7 @@
   },
   {
     "id": 4153502471,
-    "networks": ["theMission"],
+
     "email": "milo.beitman@gmail.com",
     "name": "Milo",
     "lastInitial": "B",
@@ -2013,7 +2013,7 @@
   },
   {
     "id": 7145855122,
-    "networks": ["NoeValley"],
+
     "email": "kirinqueen@gmail.com",
     "name": "Erin",
     "lastInitial": "O",
@@ -2038,7 +2038,7 @@
   },
   {
     "id": 3472674925,
-    "networks": ["ForestHills"],
+
     "email": "martellenfriedel@gmail.com",
     "name": "Mary",
     "lastInitial": "F",
@@ -2071,7 +2071,7 @@
   },
   {
     "id": 4052507184,
-    "networks": ["cottageclass"],
+
     "email": "ruth@auburn.edu",
     "name": "Ruth",
     "lastInitial": "A",
@@ -2104,7 +2104,7 @@
   },
   {
     "id": 6174079676,
-    "networks": ["NoeValley"],
+
     "email": "shostack@gmail.com",
     "name": "Robin",
     "lastInitial": "S",
@@ -2129,7 +2129,7 @@
   },
   {
     "id": 3013322023,
-    "networks": ["DupontCircle"],
+
     "email": "esty.peskowitz@gmail.com",
     "name": "Esty",
     "lastInitial": "P",
@@ -2148,7 +2148,7 @@
   },
   {
     "id": 5167801489,
-    "networks": ["PortWashington"],
+
     "email": "negri.christine@gmail.com",
     "name": "Christine",
     "lastInitial": "E",
@@ -2173,7 +2173,7 @@
   },
   {
     "id": 3475585204,
-    "networks": ["Sunnyside"],
+
     "email": "yhermita88@yahoo.com",
     "name": "Yeraldyn",
     "lastInitial": "H",
@@ -2206,7 +2206,7 @@
   },
   {
     "id": 7737919461,
-    "networks": ["HydePark"],
+
     "email": "lundberg.april@gmail.com",
     "name": "April",
     "lastInitial": "L",
@@ -2231,7 +2231,7 @@
   },
   {
     "id": 3152185915,
-    "networks": ["Syracuse"],
+
     "email": "kigginspaula@gmail.com",
     "name": "Paula",
     "lastInitial": "K",
@@ -2264,7 +2264,7 @@
   },
   {
     "id": 3472249999,
-    "networks": ["Harlem"],
+
     "email": "yagyrlr@gmail.com",
     "name": "Rhonda",
     "lastInitial": "T",
@@ -2289,7 +2289,7 @@
   },
   {
     "id": 3153175856,
-    "networks": ["Syracuse"],
+
     "email": "juliajoycemartin@gmail.com",
     "name": "Julia",
     "lastInitial": "M",
@@ -2322,7 +2322,7 @@
   },
   {
     "id": 6178186254,
-    "networks": ["Somerville"],
+
     "email": "rozrobidoux@gmail.com",
     "name": "Roz",
     "lastInitial": "P",
@@ -2355,7 +2355,7 @@
   },
   {
     "id": 4802975689,
-    "networks": ["Somerville"],
+
     "email": "anjana.sukumar@gmail.com",
     "name": "Anjana",
     "lastInitial": "S",
@@ -2380,7 +2380,7 @@
   },
   {
     "id": 6178160488,
-    "networks": ["Somerville"],
+
     "email": "khornby@gmail.com",
     "name": "Kathleen",
     "lastInitial": "H",
@@ -2413,7 +2413,7 @@
   },
   {
     "id": 6467294675,
-    "networks": ["Dumbo"],
+
     "email": "ilijouet@gmail.com",
     "name": "Ilise",
     "lastInitial": "R",
@@ -2446,7 +2446,7 @@
   },
   {
     "id": 4014641156,
-    "networks": ["Somerville"],
+
     "email": "nikkojace@gmail.com",
     "name": "Jasmine",
     "lastInitial": "C",
@@ -2470,7 +2470,7 @@
   },
   {
     "id": 2022623002,
-    "networks": ["DupontCircle"],
+
     "email": "anna.kubota@gmail.com",
     "name": "Anna",
     "lastInitial": "N",
@@ -2495,7 +2495,7 @@
   },
   {
     "id": 4153207684,
-    "networks": ["theMission"],
+
     "email": "irnet@waffle.net",
     "name": "Issac",
     "lastInitial": "R",
@@ -2520,7 +2520,7 @@
   },
   {
     "id": 4158233387,
-    "networks": ["theMission"],
+
     "email": "carriemaloney@hotmail.com",
     "name": "Carrie",
     "lastInitial": "M",
@@ -2551,7 +2551,7 @@
   },
   {
     "id": 9173652149,
-    "networks": ["Riverdale"],
+
     "email": "serena.selkin@gmail.com",
     "name": "Serena",
     "lastInitial": "C",
@@ -2584,7 +2584,7 @@
   },
   {
     "id": 9734209698,
-    "networks": ["FortGreene"],
+
     "email": "elevin11@gmail.com",
     "name": "Erez",
     "lastInitial": "L",
@@ -2609,7 +2609,7 @@
   },
   {
     "id": 6469576258,
-    "networks": ["Sunnyside"],
+
     "email": "michelle.arvin@gmail.com",
     "name": "Michelle",
     "lastInitial": "A",
@@ -2634,7 +2634,7 @@
   },
   {
     "id": 9176566602,
-    "networks": ["BoCoCaGo"],
+
     "email": "ellendoyle@gmail.com",
     "name": "Ellen",
     "lastInitial": "D",
@@ -2667,7 +2667,7 @@
   },
   {
     "id": 2672403750,
-    "networks": ["Riverdale"],
+
     "email": "emcglinchey@gmail.com",
     "name": "Ellie",
     "lastInitial": "M",
@@ -2691,7 +2691,7 @@
   },
   {
     "id": 8487023612,
-    "networks": ["DupontCircle"],
+
     "email": "ashley.francovitch@gmail.com",
     "name": "Ashley ",
     "lastInitial": "W",
@@ -2716,7 +2716,7 @@
   },
   {
     "id": 6464836634,
-    "networks": ["prospectheightsparents"],
+
     "email": "julia.druk@gmail.com",
     "name": "Julia",
     "lastInitial": "D",
@@ -2741,7 +2741,7 @@
   },
   {
     "id": 2073322545,
-    "networks": ["AUpark"],
+
     "email": "jenniferhanderson@gmail.com",
     "name": "Jenn",
     "lastInitial": "A",
@@ -2774,7 +2774,7 @@
   },
   {
     "id": 9795836197,
-    "networks": ["prospectheightsparents"],
+
     "email": "hello@gwenschroeder.com",
     "name": "Gwen",
     "lastInitial": "S",
@@ -2799,7 +2799,7 @@
   },
   {
     "id": 6464009367,
-    "networks": ["NorthBrooklyn"],
+
     "email": "j@joec.nyc",
     "name": "Joe",
     "lastInitial": "C",
@@ -2824,7 +2824,7 @@
   },
   {
     "id": 7732639149,
-    "networks": ["HydePark"],
+
     "email": "firexbrat@gmail.com",
     "name": "Jenny",
     "lastInitial": "A",
@@ -2857,7 +2857,7 @@
   },
   {
     "id": 4126124381,
-    "networks": ["HydePark"],
+
     "email": "rachel.levenstein.0@gmail.com",
     "name": "Rachel",
     "lastInitial": "L",
@@ -2882,7 +2882,7 @@
   },
   {
     "id": 6466331390,
-    "networks": ["prospectheightsparents"],
+
     "email": "chanoff@gmail.com",
     "name": "Molly",
     "lastInitial": "C",
@@ -2907,7 +2907,7 @@
   },
   {
     "id": 6176697422,
-    "networks": ["Cambridge"],
+
     "email": "stephaniegbest@gmail.com",
     "name": "Stephanie",
     "lastInitial": "B",
@@ -2932,7 +2932,7 @@
   },
   {
     "id": 9143823076,
-    "networks": ["prospectheightsparents"],
+
     "email": "elanaberman@gmail.com",
     "name": "Elana",
     "lastInitial": "B",
@@ -2957,7 +2957,7 @@
   },
   {
     "id": 9196192414,
-    "networks": ["Cambridge"],
+
     "email": "tsogt22u@mtholyoke.edu",
     "name": "Elana",
     "lastInitial": "T",
@@ -2976,7 +2976,7 @@
   },
   {
     "id": 3202248822,
-    "networks": ["BoCoCaGo"],
+
     "email": "mgsanfilippo@gmail.com",
     "name": "Grace",
     "lastInitial": "S",
@@ -3001,7 +3001,7 @@
   },
   {
     "id": 6509421478,
-    "networks": ["BoCoCaGo"],
+
     "email": "joycectang@gmail.com",
     "name": "Joyce",
     "lastInitial": "T",
@@ -3026,7 +3026,7 @@
   },
   {
     "id": 6468969620,
-    "networks": ["FortGreene"],
+
     "email": "ameliac@gmail.com",
     "name": "Amelia",
     "lastInitial": "C",
@@ -3059,7 +3059,7 @@
   },
   {
     "id": 4126007044,
-    "networks": ["SilverSpring"],
+
     "email": "csolt81@gmail.com",
     "name": "Cheryl",
     "lastInitial": "M",
@@ -3092,7 +3092,7 @@
   },
   {
     "id": 3238078188,
-    "networks": ["NoeValley"],
+
     "email": "tarasamiy@gmail.com",
     "name": "Tara",
     "lastInitial": "S",
@@ -3117,7 +3117,7 @@
   },
   {
     "id": 4158067426,
-    "networks": ["NoeValley"],
+
     "email": "han.pham@yahoo.com",
     "name": "Han",
     "lastInitial": "P",
@@ -3142,7 +3142,7 @@
   },
   {
     "id": 9736536842,
-    "networks": ["passaiccounty"],
+
     "email": "kristencallahan619@yahoo.com",
     "name": "Kristen",
     "lastInitial": "C",
@@ -3175,7 +3175,7 @@
   },
   {
     "id": 4087688334,
-    "networks": ["PortWashington"],
+
     "email": "estheryum@gmail.com",
     "name": "Esther",
     "lastInitial": "Y",
@@ -3200,7 +3200,7 @@
   },
   {
     "id": 5163041954,
-    "networks": ["Harlem"],
+
     "email": "joelleitoua@gmail.com",
     "name": "Joelle",
     "lastInitial": "O",
@@ -3225,7 +3225,7 @@
   },
   {
     "id": 2146088172,
-    "networks": ["Somerville"],
+
     "email": "kdk0726@gmail.com",
     "name": "Kristin",
     "lastInitial": "H",
@@ -3250,7 +3250,7 @@
   },
   {
     "id": 2024863863,
-    "networks": ["AUpark"],
+
     "email": "megcstorch@gmail.com",
     "name": "Meg",
     "lastInitial": "S",
@@ -3283,7 +3283,7 @@
   },
   {
     "id": 2675165477,
-    "networks": ["brooklynappleacademy"],
+
     "email": "daryl@273kelvin.ca",
     "name": "Daryl",
     "lastInitial": "A",
@@ -3332,7 +3332,7 @@
   },
   {
     "id": 9176011177,
-    "networks": ["BrooklynHeights"],
+
     "email": "say.no.to.sharkfin.soup@gmail.com",
     "name": "Caroline",
     "lastInitial": "C",
@@ -3351,7 +3351,7 @@
   },
   {
     "id": 3018730063,
-    "networks": ["SilverSpring"],
+
     "email": "ldsugarman@gmail.com",
     "name": "Leah",
     "lastInitial": "S",
@@ -3384,7 +3384,7 @@
   },
   {
     "id": 3476367104,
-    "networks": ["Harlem"],
+
     "email": "emel.mathlouthi@gmail.com",
     "name": "Emel",
     "lastInitial": "M",
@@ -3409,7 +3409,7 @@
   },
   {
     "id": 2022538473,
-    "networks": ["AUpark"],
+
     "email": "disilvif@gmail.com",
     "name": "Francesca",
     "lastInitial": "D",
@@ -3434,7 +3434,7 @@
   },
   {
     "id": 5704193833,
-    "networks": ["Alameda"],
+
     "email": "katiecasale@gmail.com",
     "name": "Kate",
     "lastInitial": "C",
@@ -3467,7 +3467,7 @@
   },
   {
     "id": 4155175673,
-    "networks": ["Harlem"],
+
     "email": "xandreaisinspired2@gmail.com",
     "name": "Xandréa",
     "lastInitial": "S",
@@ -3492,7 +3492,7 @@
   },
   {
     "id": 2024311769,
-    "networks": ["Alexandria"],
+
     "email": "sarah.pray@gmail.com",
     "name": "Sarah",
     "lastInitial": "P",
@@ -3533,7 +3533,7 @@
   },
   {
     "id": 4082033233,
-    "networks": ["NoeValley"],
+
     "email": "kdvanaken@gmail.com",
     "name": "Kelly",
     "lastInitial": "A",
@@ -3558,7 +3558,7 @@
   },
   {
     "id": 3477039744,
-    "networks": ["BoCoCaGo"],
+
     "email": "hamilton.laurene@gmail.com",
     "name": "Laurène",
     "lastInitial": "H",
@@ -3591,7 +3591,7 @@
   },
   {
     "id": 3035232173,
-    "networks": ["Alameda"],
+
     "email": "anna.piller@gmail.com",
     "name": "Anna",
     "lastInitial": "P",
@@ -3624,7 +3624,7 @@
   },
   {
     "id": 4109638422,
-    "networks": ["crownheights"],
+
     "email": "rajya.karipineni@gmail.com",
     "name": "Rajya",
     "lastInitial": "K",
@@ -3649,7 +3649,7 @@
   },
   {
     "id": 4199445086,
-    "networks": ["BoCoCaGo"],
+
     "email": "micahbrubin@hotmail.com",
     "name": "Micah ",
     "lastInitial": "R",
@@ -3674,7 +3674,7 @@
   },
   {
     "id": 6462504076,
-    "networks": ["Dumbo"],
+
     "email": "priscillapolley@gmail.com",
     "name": "Priscilla",
     "lastInitial": "P",
@@ -3698,7 +3698,7 @@
   },
   {
     "id": 100,
-    "networks": ["escondido-network"],
+
     "email": "keciaya@gmail.com",
     "name": "Kecia",
     "lastInitial": "A",
@@ -3733,7 +3733,7 @@
     "id": 13,
     "name": "Holmes",
     "email": "hwilson@gmail.com",
-    "networks": ["demo", "a-new-network"],
+
     "lastInitial": "W",
     "fbid": 729256968,
     "pic": "avatar-8.png",

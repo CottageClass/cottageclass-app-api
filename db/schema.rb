@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_04_055925) do
+ActiveRecord::Schema.define(version: 2019_03_18_174456) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
 
   create_table "active_admin_comments", force: :cascade do |t|
@@ -239,7 +240,6 @@ ActiveRecord::Schema.define(version: 2019_03_04_055925) do
     t.boolean "available_afternoons"
     t.boolean "available_evenings"
     t.boolean "available_weekends"
-    t.string "network_code"
     t.string "facebook_access_token"
     t.datetime "fb_access_token_expires_at", default: -> { "CURRENT_TIMESTAMP" }
     t.text "profile_blurb"
@@ -289,7 +289,6 @@ ActiveRecord::Schema.define(version: 2019_03_04_055925) do
     t.index ["invited_by_type", "invited_by_id"], name: "index_users_on_invited_by_type_and_invited_by_id"
     t.index ["jti"], name: "index_users_on_jti", unique: true
     t.index ["latitude", "longitude"], name: "index_users_on_latitude_and_longitude"
-    t.index ["network_code"], name: "index_users_on_network_code"
     t.index ["provider", "uid"], name: "index_users_on_provider_and_uid"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
