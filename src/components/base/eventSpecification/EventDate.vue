@@ -2,10 +2,9 @@
   <Question
     title="Choose a day for your monthly activity"
     subtitle="Activities repeat every 4 weeks on the same weekday, unless you change or cancel, so please pick a day when you're usually available. These are the days we need most:">
-    <MultipleChoice
-      type="radio"
+    <RadioButtons
       v-model="dateSelected"
-      :labelsAndOrder="labelsAndOrder"
+      :labels="labelsAndOrder"
       :choices="dates" />
     <div
       class="other-date"
@@ -23,13 +22,13 @@
 
 <script>
 import Question from '@/components/base/Question.vue'
-import MultipleChoice from '@/components/base/MultipleChoice.vue'
+import RadioButtons from '@/components/base/RadioButtons.vue'
 var moment = require('moment')
 
 export default {
   name: 'EventDate',
   props: ['value'],
-  components: { Question, MultipleChoice },
+  components: { Question, RadioButtons },
   data () {
     return {
       dateSelected: '',
@@ -54,8 +53,8 @@ export default {
         this.firstDate.clone().add(1, 'weeks').add(1, 'days')
       ]
     },
-    dates: function () {      
-      return [...this.datesAsMoments.map(date => date.format('YYYY-MM-DD')), 'Other'] 
+    dates: function () {
+      return [...this.datesAsMoments.map(date => date.format('YYYY-MM-DD')), 'Other']
     },
     labelsAndOrder: function () {
       return this.dates.map(date => [date, this.displayDate(date)])

@@ -2,8 +2,7 @@
   <Question
     title="Choose your activity"
     subtitle="All members must provide one activity per month. These tried-and-true options work great, and we'll walk you through whichever one you choose.">
-    <MultipleChoice
-      type="radio"
+    <RadioButtons
       v-model="activitySelected"
       :choices="activities"
     />
@@ -12,11 +11,11 @@
 
 <script>
 import Question from '@/components/base/Question.vue'
-import MultipleChoice from '@/components/base/MultipleChoice.vue'
+import RadioButtons from '@/components/base/RadioButtons.vue'
 
 export default {
   name: 'EventActivity',
-  components: { Question, MultipleChoice },
+  components: { Question, RadioButtons },
   props: ['value'],
   data () {
     return {

@@ -2,8 +2,7 @@
   <Question
     title="Choose a time for your activity"
     subtitle="Each activity runs 3 hours in the evening, but the start time is up to you. (You'll choose the date next.)">
-    <MultipleChoice
-      type="radio"
+    <RadioButtons
       v-model="timeSelected"
       :choices="times" />
   </Question>
@@ -11,13 +10,13 @@
 
 <script>
 import Question from '@/components/base/Question.vue'
-import MultipleChoice from '@/components/base/MultipleChoice.vue'
+import RadioButtons from '@/components/base/RadioButtons.vue'
 var moment = require('moment')
 
 export default {
   name: 'EventTime',
   props: ['value'],
-  components: { Question, MultipleChoice },
+  components: { Question, RadioButtons },
   data () {
     return {
       timeSelected: '',

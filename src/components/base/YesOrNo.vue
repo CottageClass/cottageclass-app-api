@@ -2,8 +2,7 @@
   <Question
     :title="question"
     :subtitle="description">
-    <MultipleChoice
-      type="radio"
+    <RadioButtons
       v-model="yesOrNo"
       :choices="['yes', 'no']" />
     <slot></slot>
@@ -12,11 +11,11 @@
 
 <script>
 import Question from '@/components/base/Question.vue'
-import MultipleChoice from '@/components/base/MultipleChoice.vue'
+import RadioButtons from '@/components/base/RadioButtons.vue'
 
 export default {
   name: 'YesOrNo',
-  components: { Question, MultipleChoice },
+  components: { Question, RadioButtons },
   props: ['value', 'question', 'description'],
   data () {
     return {

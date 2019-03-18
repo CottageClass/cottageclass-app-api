@@ -2,8 +2,7 @@
   <Question
     title="What kind of food will you serve at your activity?"
     subtitle="All hosts must provide a dinner for kids. We may ask you to accommodate allergies and dietary restrictions, but it doesn't have to be time-consuming. Choose one of these tried-and-true options.">
-    <MultipleChoice
-      type="radio"
+    <RadioButtons
       v-model="foodSelected"
       :choices="foods"/>
   </Question>
@@ -11,12 +10,12 @@
 
 <script>
 import Question from '@/components/base/Question.vue'
-import MultipleChoice from '@/components/base/MultipleChoice.vue'
+import RadioButtons from '@/components/base/RadioButtons.vue'
 
 export default {
   name: 'Food',
   props: ['value'],
-  components: { Question, MultipleChoice },
+  components: { Question, RadioButtons },
   data () {
     return {
       foodSelected: this.value.selected,

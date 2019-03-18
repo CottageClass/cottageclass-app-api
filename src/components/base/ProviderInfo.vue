@@ -7,14 +7,15 @@
       </div>
     </div>
 
-    <div class="tag-group-container" v-if="person.activities.length"><img src="../../assets/tag.svg" class="image-tag">
+    <div class="group-container" v-if="person.activities.length">
+      <img src="../../assets/tag.svg" class="image-tag">
       <div class="tags-container" v-for="activity in person.activities">
         <div class="tag">
           <div class="small-text-upper-black-40">{{ activity }}</div>
         </div>
       </div>
     </div>
-    <div class="time-group-container">
+    <div class="group-container" v-if="anyAvailability">
       <img src="../../assets/time.svg" class="image-time">
       <div class="times-container">
         <div class="time" v-if="person.availableMornings">
@@ -40,24 +41,26 @@
 export default {
   name: 'ProviderInfo',
   props: ['person'],
-  components: { }
+  components: { },
+  computed: {
+    anyAvailability: function () {
+      return this.person.availableMornings ||
+             this.person.availableAfternoons ||
+             this.person.availableEvenings ||
+             this.person.availableWeekends
+    }
+  }
 }
 </script>
 
-<style scoped>
+<style scoped lang=scss>
 .providerp-background-check-badge-container2 {
   margin-top: 8px;
   margin-bottom: 6px;
 }
 .providerp-background-check-badge {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   padding: 5px 10px;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
   align-items: center;
   border-radius: 500px;
   background-color: rgba(12, 186, 82, .2);
@@ -77,45 +80,18 @@ export default {
   margin-bottom: 6px;
 }
 
-.time-group-container {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
+.group-container {
   display: flex;
-  -webkit-box-align: start;
-  -webkit-align-items: flex-start;
-  -ms-flex-align: start;
-  align-items: flex-start;
-}
-
-.tag-group-container {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  margin-top: 6px;
-  margin-bottom: 8px;
-  -webkit-box-align: start;
-  -webkit-align-items: flex-start;
-  -ms-flex-align: start;
-  align-items: flex-start;
-  flex-wrap: wrap;
-}
-
-.times-container {
-  width: 100%;
-}
-
-.times-container {
-  width: 100%;
+  align-content: center;
+  img {
+    margin-right: 6px;
+  }
 }
 
 .time {
   display: inline-block;
   margin-right: 6px;
-  margin-bottom: 6px;
-  padding: 4px 6px;
-  clear: none;
+  padding: 7px 6px;
   border-radius: 2px;
   background-color: rgba(100, 66, 107, .2);
 }
@@ -125,14 +101,8 @@ export default {
   margin-right: 4px;
   margin-bottom: 4px;
   padding: 4px 6px;
-  clear: none;
   border-radius: 2px;
   background-color: rgba(0, 0, 0, .1);
-}
-
-.time-block {
-  color: #2b8eea;
-  font-size: 16px;
 }
 
 .time-tags {
@@ -143,27 +113,4 @@ export default {
   font-weight: 700;
   letter-spacing: 1.03px;
 }
-
-@media (max-width: 479px) {
- .tag-group-container {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: start;
-    -webkit-align-items: flex-start;
-    -ms-flex-align: start;
-    align-items: flex-start;
-  }
-
-  .tag {
-    clear: both;
-  }
-
-  .time {
-    clear: both;
-  }
-
-}
-
 </style>
