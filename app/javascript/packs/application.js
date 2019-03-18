@@ -70,12 +70,10 @@ if(window.opener) {
     }
   });
 
-  // passing the router into the analytics plugin will automaticall track page views
-  // TODO figure out dotenv here for google analytics
-  // Vue.use(VueAnalytics, {
-  //   id: process.env.GOOGLE_ANALYTICS_ID,
-  //   router
-  // });
+  Vue.use(VueAnalytics, {
+    id: process.env.GOOGLE_ANALYTICS_ID,
+    router
+  });
 
 
   document.addEventListener("DOMContentLoaded", () => {

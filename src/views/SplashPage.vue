@@ -259,10 +259,6 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'SplashPage',
   components: { RsvpButton, MainNav, Footer },
-  mounted () {
-    console.log('this')
-    console.log(this)
-  },
   data () {
     return {
       networks: networks

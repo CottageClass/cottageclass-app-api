@@ -32,6 +32,7 @@ export default {
           console.log('error in authentication : ', data.err)
           component.$router.push({ name: 'Home' })
         } else {
+          // determine where the user should go next
           console.log('Facebook authentication successful')
           component.$store.dispatch('establishUser', { JWT: data.token })
           if (component.currentUser.hasAllRequiredFields) {

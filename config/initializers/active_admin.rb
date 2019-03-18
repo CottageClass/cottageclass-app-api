@@ -56,7 +56,6 @@ ActiveAdmin.setup do |config|
   # within the application controller.
   # config.authentication_method = :authenticate_admin_user!
   #
-  # TODO: Figure out how to talk to Knock
   config.authentication_method = :authenticate_admin!
 
   # == User Authorization
@@ -96,7 +95,6 @@ ActiveAdmin.setup do |config|
   # (within the application controller) to return the currently logged in user.
   # config.current_user_method = :current_admin_user
   #
-  # TODO: Figure out how to talk to Knock
   config.current_user_method = false
 
   # == Logging Out
