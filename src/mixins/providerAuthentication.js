@@ -7,7 +7,6 @@ export default {
     authenticate: function (provider, callback) {
       const authUri = `${window.location.origin}/users/auth/facebook`
       _.assign(window, { oauthCallback: callback })
-      // TODO remove this callback after it's called
       this.createPopup(
         authUri,
         580,

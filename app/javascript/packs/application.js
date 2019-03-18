@@ -25,6 +25,7 @@ if(window.opener) {
     let token = _.get(document.querySelector(element), "dataset.token");
     if (window.opener.oauthCallback) {
       window.opener.oauthCallback({ token })
+      _.unset(window, 'opener')
     }
     window.close()
   })
