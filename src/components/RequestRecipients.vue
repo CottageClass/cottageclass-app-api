@@ -55,7 +55,6 @@
 // todo: what if there are no people available then in their network? we should make sure there is availability for everys slot
 
 import networks from '@/assets/network-info.json'
-import * as Token from '@/utils/tokens.js'
 import * as api from '@/utils/api.js'
 import AvatarImage from '@/components/base/AvatarImage'
 import { mapGetters } from 'vuex'

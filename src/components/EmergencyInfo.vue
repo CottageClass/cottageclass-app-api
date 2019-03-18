@@ -71,7 +71,6 @@
 // add data to json
 // add live data here
 
-import * as Token from '@/utils/tokens.js'
 import AvatarImage from '@/components/base/AvatarImage'
 import * as api from '@/utils/api.js'
 import networks from '@/assets/network-info.json'

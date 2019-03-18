@@ -29,7 +29,6 @@ import Nav from '@/components/FTE/Nav.vue'
 import StyleWrapper from '@/components/FTE/StyleWrapper.vue'
 import * as api from '@/utils/api.js'
 import { mapGetters } from 'vuex'
-import * as Token from '@/utils/tokens.js'
 
 export default {
   name: 'EmergencyContacts',

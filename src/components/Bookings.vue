@@ -18,7 +18,6 @@ import Parent from './Parent.vue'
 import MainNav from './MainNav.vue'
 import * as api from '@/utils/api.js'
 import networks from '@/assets/network-info.json'
-import * as Token from '@/utils/tokens.js'
 import { mapGetters } from 'vuex'
 
 export default {

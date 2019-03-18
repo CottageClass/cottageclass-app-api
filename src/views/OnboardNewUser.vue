@@ -66,7 +66,6 @@
 
 <script>
 import * as api from '@/utils/api'
-import * as Token from '@/utils/tokens'
 import { mapGetters } from 'vuex'
 import sheetsu from 'sheetsu-node'
 import moment from 'moment'

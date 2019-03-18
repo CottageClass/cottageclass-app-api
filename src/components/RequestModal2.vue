@@ -25,7 +25,6 @@
 <script>
 import Nav from '@/components/FTE/Nav.vue'
 import RequestCare from '@/views/RequestCare.vue'
-import * as Token from '@/utils/tokens.js'
 import { mapGetters } from 'vuex'
 import sheetsu from 'sheetsu-node'
 import RequestRecipients from '@/components/RequestRecipients.vue'

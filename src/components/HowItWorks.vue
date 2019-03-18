@@ -20,7 +20,6 @@ When children arrive check them in, and when they leave check them out. It's tha
 
 <script>
 import networks from '../assets/network-info.json'
-import * as Token from '@/utils/tokens.js'
 
 export default {
   name: 'HowItWorks',
