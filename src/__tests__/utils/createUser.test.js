@@ -7,7 +7,7 @@ describe('createUser', () => {
   describe('public access', () => {
     let user
     beforeAll(async () => {
-      const res = await mockAxios.get(`${process.env.BASE_URL_API}/api/users/1230`)
+      const res = await mockAxios.get(`/api/users/1230`)
       user = createUser(normalize(res.data))
     })
 
@@ -27,7 +27,7 @@ describe('createUser', () => {
 
     let user
     beforeAll(async () => {
-      const res = await mockAxios.get(`${process.env.BASE_URL_API}/users/1228`)
+      const res = await mockAxios.get(`/users/1228`)
       user = createUser(normalize(res.data))
     })
 

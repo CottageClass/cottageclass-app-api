@@ -6,7 +6,7 @@ import moment from 'moment'
 describe('createEvent for one event', () => {
   let event
   beforeAll(async () => {
-    const request = await mockAxios.get(`${process.env.BASE_URL_API}/api/events/2186`)
+    const request = await mockAxios.get(`/api/events/2186`)
     event = createEvent(normalize(request.data))
   })
 
@@ -25,7 +25,7 @@ describe('createEvent for one event', () => {
 describe('createEvents for multiple events', () => {
   let events
   beforeAll(async () => {
-    const request = await mockAxios.get(`${process.env.BASE_URL_API}/api/events/`)
+    const request = await mockAxios.get(`/api/events/`)
     events = createEvents(normalize(request.data))
   })
 

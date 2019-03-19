@@ -15,5 +15,6 @@ module.exports = {
     '.*\\.(vue)$': '<rootDir>/node_modules/vue-jest'
   },
   snapshotSerializers: ['<rootDir>/node_modules/jest-serializer-vue'],
-  testURL: 'http://localhost/'
+  testURL: 'http://localhost/',
+  testMatch: ["<rootDir>/src/__tests__/**/*.test.js"]
 }

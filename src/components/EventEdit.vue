@@ -154,7 +154,7 @@ export default {
       }
     },
     submitEventData: function () {
-      return this.axios.put(`${process.env.BASE_URL_API}/api/events/${this.eventId}`, this.eventDataForSubmissionToAPI)
+      return this.axios.put(`/api/events/${this.eventId}`, this.eventDataForSubmissionToAPI)
     },
     saveEvent: function () {
       if (this.error) {
