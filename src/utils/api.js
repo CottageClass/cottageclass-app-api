@@ -4,7 +4,6 @@ import axios from 'axios'
 import { createEvent, createEvents } from './createEvent'
 import { createUser } from './createUser';
 
-// var moment = require('moment')
 export function initProxySession (currentUserId, receiverId, requestMessage, acknowledgmentMessage) {
   console.log('INITIATING PROXY WITH users ' + currentUserId + ', ' + receiverId)
   let postData = {
@@ -410,8 +409,11 @@ export const fetchEvent = async (id) => {
   }
 }
 
-export function fetchUpcomingEventsWithinDistance (miles, lat, lon) {
-  return fetchEvents(`upcoming/miles/${miles}/latitude/${lat}/longitude/${lon}`, e => e.startsAt)
+export function fetchUpcomingEventsWithinDistance ({ miles, lat, lng, pageSize = 500, page = 1 }) {
+  return fetchEvents(
+    `upcoming/miles/${miles}/latitude/${lat}/longitude/${lng}/page/${page}/page_size/${pageSize}`,
+    e => e.startsAt
+  )
 }
 
 export function fetchUpcomingParticipatingEvents (userId) {

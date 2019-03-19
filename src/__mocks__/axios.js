@@ -15,10 +15,7 @@ export default {
     if (url === eventUrl) {
       return Promise.resolve(allEvents)
     }
-    if (url === eventUrl + 'upcoming/miles/10/latitude/42.2798738/longitude/-71.7900378') {
-      return Promise.resolve(allEvents)
-    }
-    if (url === eventUrl + 'upcoming/miles/10/latitude/42.2798738/longitude/-71.7900378') {
+    if (url === eventUrl + 'upcoming/miles/10/latitude/42.2798738/longitude/-71.7900378/page/1/page_size/500') {
       return Promise.resolve(allEvents)
     }
     if (url === userUrl + `1230/events/created/upcoming/page/1/page_size/100`) {
