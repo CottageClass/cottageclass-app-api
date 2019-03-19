@@ -1,6 +1,5 @@
 import { mount } from '@vue/test-utils'
 import ProviderProfile from '@/views/ProviderProfile.vue'
-import _ from 'lodash'
 
 describe('ProviderProfile', () => {
   let wrapper
