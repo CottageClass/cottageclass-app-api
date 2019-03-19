@@ -4,6 +4,7 @@ const user1230Events = require('./__mockData__/user_1230_events.json')
 const user1230 = require('./__mockData__/user_1230.json')
 const user1228 = require('./__mockData__/user_1228.json')
 const user1281 = require('./__mockData__/user_1281.json')
+const distanceEvents = require('./__mockData__/distance_events.json')
 
 export default {
   get: jest.fn((url) => {
@@ -12,7 +13,7 @@ export default {
     if (url === eventUrl + '2186') {
       return Promise.resolve(event2186)
     }
-    if (url === eventUrl) {
+    if (url === eventUrl || url === eventUrl + 'upcoming') {
       return Promise.resolve(allEvents)
     }
     if (url === eventUrl + 'upcoming/miles/10/latitude/42.2798738/longitude/-71.7900378/page/1/page_size/500') {
