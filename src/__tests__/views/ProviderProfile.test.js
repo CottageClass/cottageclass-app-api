@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils'
 import ProviderProfile from '@/views/ProviderProfile.vue'
 import _ from 'lodash'
 
-describe('ProviderProfile', async () => {
+describe('ProviderProfile', () => {
   let wrapper
   describe('no current user', () => {
     beforeAll(async () => {

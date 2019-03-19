@@ -60,7 +60,6 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'SocialInvite',
   components: { TextMessageLink, EventListItem, Nav, StyleWrapper },
-  props: [ 'eventData' ],
   data () {
     return {
       copyButtonText: 'copy link',
@@ -69,7 +68,7 @@ export default {
       emailBody: 'Hi%20everyone!%0A%0AI%20hope%20you%20can%20all%20join%20me%20at%20this%20event%20we%20are%20hosting%20to%20start%20a%20new%20local%20network%20for%20sharing%20childcare!%20Can%20you%20come%3F%0A%0A',
       emailSubject: 'Sharing%20childcare%20(we%20should%20do%20this!)',
       isMobileDevice: typeof window.orientation !== 'undefined',
-      events: null
+      fetchedEvent: null
     }
   },
   mounted: function () {
@@ -77,7 +76,9 @@ export default {
   },
   computed: {
     eventId: function () {
-      if (this.firstCreatedEvent.id) {
+      if (this.$route.params.id) {
+        return this.$route.params.id
+      } else if (this.firstCreatedEvent.id) {
         return this.firstCreatedEvent.id
       }
       return null
@@ -93,7 +94,7 @@ export default {
       if (this.firstCreatedEvent) {
         return this.firstCreatedEvent
       } else {
-        return null
+        return this.fetchedEvent
       }
     },
     textMessage: function () {
@@ -118,16 +119,18 @@ export default {
   },
   methods: {
     nextStep () {
-      this.$router.push({ name: 'InviteExistingUsers', params: { id: this.firstCreatedEvent.id } })
+      if (this.firstCreatedEvent) {
+        // this is the case if we're in the FTE flow
+        this.$router.push({ name: 'InviteExistingUsers', params: { id: this.firstCreatedEvent.id } })
+      } else {
+        this.$router.go(-1)
+      }
     },
     onCopy: function () {
       this.copyButtonText = 'copied!'
     },
-    fetchEvent: function () {
-      api.fetchEvents(this.eventId).then(
-        (res) => {
-          this.events = res
-        })
+    fetchEvent: async function () {
+      this.events = await api.fetchEvent(this.eventId)
     }
   }
 }

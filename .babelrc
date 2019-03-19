@@ -1,18 +1,17 @@
 {
   "presets": [
-    ["env", {
+    ["@babel/preset-env", {
       "modules": false,
       "targets": {
-        "browsers": "> 1%",
-        "uglify": true
-      },
-      "useBuiltIns": true
+        "browsers": ["> 1%", "last 2 versions", "not ie <= 8"]
+      }
     }]
   ],
-
-  "plugins": [
-    "syntax-dynamic-import",
-    "transform-object-rest-spread",
-    ["transform-class-properties", { "spec": true }]
-  ]
+  "plugins": ["transform-vue-jsx", "@babel/plugin-transform-runtime"],
+  "env": {
+    "test": {
+      "presets": ["@babel/env"],
+      "plugins": ["transform-es2015-modules-commonjs", "dynamic-import-node"]
+    }
+  }
 }

@@ -28,7 +28,7 @@ describe('events', () => {
     })
   })
 
-  describe('fetchUpcomingEventsWithinDistance', async () => {
+  describe('fetchUpcomingEventsWithinDistance', () => {
     it('has the right data', async () => {
       const events = await fetchUpcomingEventsWithinDistance(10, 42.2798738, -71.7900378)
       expect(events[0].id).toBe('2353')
@@ -36,7 +36,7 @@ describe('events', () => {
     })
   })
 
-  describe('fetchUpcomingEvents for user', async () => {
+  describe('fetchUpcomingEvents for user', () => {
     it('has the right data', async () => {
       const events = await fetchUpcomingEvents(1230)
       expect(events[0].id).toBe('2359')
@@ -46,7 +46,7 @@ describe('events', () => {
 })
 
 describe('users', () => {
-  describe('fetchUser', async () => {
+  describe('fetchUser', () => {
     it('has the right data', async () => {
       const user = await fetchUser('1230')
       expect(user.id).toBe('1230')
