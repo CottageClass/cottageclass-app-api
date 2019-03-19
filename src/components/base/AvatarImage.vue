@@ -9,7 +9,7 @@ export default {
   props: ['person', 'className'],
   computed: {
     url: function () {
-      const placeholder = '/static/img/avatar-placeholder.b6445ba.png'
+      const placeholder = require('@/assets/avatar-placeholder.png')
       if (this.person) {
         if (this.person.avatar) {
           return this.person.avatar
@@ -18,7 +18,9 @@ export default {
         } else {
           return placeholder
         }
-      } else { return placeholder }
+      } else { 
+        return placeholder
+      }
     }
   }
 }
