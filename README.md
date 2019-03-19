@@ -53,10 +53,12 @@
 
 ### Run
 
-1. Start your server with
+1. Start the rails server and the webpack dev server with
     ```
     hivemind -p 3000 Procfile.dev
     ```
+
+1. Visit [http://cottageclass.ngrok.io/](http://cottageclass.ngrok.io/).  Or use your own ngrok
 
 ## Test
 
