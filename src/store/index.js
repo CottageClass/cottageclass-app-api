@@ -1,19 +1,17 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import * as api from '../utils/api'
-import moment from 'moment'
 import auth from './auth'
 import createPersistedState from 'vuex-persistedstate'
 import _ from 'lodash'
+import events from './events'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store(
   {
     plugins: [createPersistedState()],
-    modules: {
-      auth
-    },
+    modules: { events, auth },
     state: {
       alert: null,
       createdEvents: null,
@@ -75,7 +73,7 @@ export default new Vuex.Store(
           return null
         }
       },
-      redirectRoute: state => state.redirectRoute
+      rsvpAttemptedId: state => state.RSVPAttempEventId
     }
   }
 )
