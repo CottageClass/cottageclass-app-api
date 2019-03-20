@@ -13,7 +13,7 @@
                 v-if="showFacebookLogin"
                 href="" 
                 class="fb-button w-inline-block"
-                @click.prevent="authenticate('facebook')"     
+                @click.prevent="authenticateFacebook"     
                 >
                   <img src="@/assets/facebook-button-icon.svg" width="24" height="24" alt="">
                   <div class="fb-button-text">Continue with Facebook</div>
