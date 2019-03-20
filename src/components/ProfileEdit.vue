@@ -45,9 +45,8 @@
       title="What are your interests?"
       subtitle="Pick some favorite interests and activities (things you like to do as a family) to find other families with common interests."
       >
-      <MultipleChoice
-        :labelsAndOrder="[['travel', 'Travel' ], ['team sports', 'Team sports'], ['puzzles & games', 'Puzzles & games'], ['art & drawing', 'Art & drawing'], ['computers', 'Computers'], ['music', 'Music'], ['dance', 'Dance'], ['theater', 'Theater'], ['gardening', 'Gardening'], ['activism', 'Activism'], ['reading books', 'Reading books'], ['camping', 'Camping'], ['hiking', 'Hiking'], ['bike rides', 'Bike rides'], ['road trips', 'Road trips'], ['museums', 'Museums']]"
-        type="checkbox"
+      <Checkboxes
+        :labels="[['travel', 'Travel' ], ['team sports', 'Team sports'], ['puzzles & games', 'Puzzles & games'], ['art & drawing', 'Art & drawing'], ['computers', 'Computers'], ['music', 'Music'], ['dance', 'Dance'], ['theater', 'Theater'], ['gardening', 'Gardening'], ['activism', 'Activism'], ['reading books', 'Reading books'], ['camping', 'Camping'], ['hiking', 'Hiking'], ['bike rides', 'Bike rides'], ['road trips', 'Road trips'], ['museums', 'Museums']]"
         v-model="currentUser.activities" />
     </Question>
     <Availability v-model="availability" :required="false"/>
@@ -66,7 +65,7 @@ import FormFieldAndLabel from '@/components/base/FormFieldAndLabel.vue'
 import Question from '@/components/base/Question.vue'
 import FormWithTextArea from '@/components/base/FormWithTextArea.vue'
 import MultipleImageUpload from '@/components/base/MultipleImageUpload.vue'
-import MultipleChoice from '@/components/base/MultipleChoice.vue'
+import Checkboxes from '@/components/base/Checkboxes.vue'
 import Location from '@/components/FTE/userInformation/Location.vue'
 import LanguagesSpoken from '@/components/FTE/userInformation/LanguagesSpoken.vue'
 import Children from '@/components/FTE/userInformation/Children.vue'
@@ -79,30 +78,48 @@ import ErrorMessage from '@/components/base/ErrorMessage.vue'
 import * as api from '@/utils/api.js'
 import { mapGetters } from 'vuex'
 
+import _ from 'lodash'
+
 var VueScrollTo = require('vue-scrollto')
 
 export default {
   name: 'ProfileEdit',
-  components: { Location, Phone, Availability, MainNav, StyleWrapper, PageActionsFooter, ErrorMessage, Children, Question, FormFieldAndLabel, FormWithTextArea, MultipleImageUpload, MultipleChoice, LanguagesSpoken },
+  components: {
+    Location,
+    Phone,
+    Availability,
+    MainNav,
+    StyleWrapper,
+    PageActionsFooter,
+    ErrorMessage,
+    Children,
+    Question,
+    FormFieldAndLabel,
+    FormWithTextArea,
+    MultipleImageUpload,
+    Checkboxes,
+    LanguagesSpoken
+  },
   data () {
     return {
       location: {},
       phone: {},
       availability: {},
       showError: false,
-      saveButtonText: 'Save'
+      saveButtonText: 'Save',
+      children: null
     }
   },
-  mounted: function () {
-    this.availability = {
-      availableAfternoons: this.currentUser.availableAfternoons,
-      availableMornings: this.currentUser.availableMornings,
-      availableEvenings: this.currentUser.availableEvenings,
-      availableWeekends: this.currentUser.availableWeekends
+  created: function () {
+    this.initialAvailability = {
+      availableAfternoons: !!this.currentUser.availableAfternoons,
+      availableMornings: !!this.currentUser.availableMornings,
+      availableEvenings: !!this.currentUser.availableEvenings,
+      availableWeekends: !!this.currentUser.availableWeekends
     }
+    this.children = { 'list': this.currentUser.children || [] }
   },
   computed: {
-    children: function () { return { 'list': this.currentUser.children } },
     error: function () {
       if (!!this.phone.err || !!this.location.err || !!this.children.err) {
         return true

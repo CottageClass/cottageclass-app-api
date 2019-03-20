@@ -76,7 +76,7 @@ export default {
         next()
       } else {
         console.log('Not logged in')
-        next('/home')
+        next({ name: 'SplashPage' })
       }
     })
   },

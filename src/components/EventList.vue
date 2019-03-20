@@ -211,6 +211,7 @@ a {
 
 .events-list-wrapper {
   width: 100%;
+  margin-top: -84px;
 }
 
 .event-date-section-tittle {
@@ -352,6 +353,10 @@ a {
 
   .content-container-4 {
     padding-bottom: 128px;
+  }
+
+  .events-list-wrapper {
+    margin-top: -48px;
   }
 }
 

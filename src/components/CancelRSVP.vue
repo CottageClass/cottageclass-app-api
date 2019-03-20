@@ -41,12 +41,12 @@ export default {
   data: () => {
     return {
       reason: '',
-      charLimit: 288
+      charLimit: 288,
+      event: null
     }
   },
   watch: {
     reason: function () {
-      console.log('x')
       if (this.reason && this.reason.length >= this.charLimit) {
         this.reason = this.reason.slice(this.charLimit)
       }
@@ -67,14 +67,12 @@ export default {
     nevermind: function () {
       this.$router.go(-1) // go back by one record
     },
-    fetchEventInformation: function () {
-      api.fetchEvents(this.eventId).then(
-        (res) => {
-          this.event = res[0]
-        }).catch(
-        (err) => {
-          console.log(err.stack)
-        })
+    fetchEventInformation: async function () {
+      try {
+        this.event = await api.fetchEvent(this.eventId)
+      } catch (e) {
+        console.error(e)
+      }
     },
     confirm: function () {
       const component = this
@@ -82,7 +80,6 @@ export default {
         .then(res => {
           return component.$ga.event('RSVP', 'canceled', component.eventId)
         }).then(res => {
-          
           // send a text to the host
           // send reason to spreadsheet
 
@@ -93,7 +90,7 @@ export default {
             'Reason for cancelation': this.reason,
             'Event title': this.event.name,
             'Event host': this.event.hostFirstName,
-            'Event date': this.event.startsAt,
+            'Event date': this.event.startsAt.toString(),
             'Parent first name': this.currentUser.firstName,
             'Parent last name': this.currentUser.lastInitial,
             'Parent phone': this.currentUser.phone,

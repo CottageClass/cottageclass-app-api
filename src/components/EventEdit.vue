@@ -118,12 +118,9 @@ export default {
     }
   },
   methods: {
-    fetchEvent: function () {
-      api.fetchEvents(this.eventId).then(
-        (res) => {
-          this.eventDataFromAPI = res[0]
-          this.event = this.parseEventDataFromAPI(this.eventDataFromAPI)
-        })
+    fetchEvent: async function () {
+      this.event = await api.fetchEvent(this.eventId)
+      this.event = this.parseEventDataFromAPI(this.event)
     },
     parseEventDataFromAPI: function (dataFromAPI) {
       let e = dataFromAPI

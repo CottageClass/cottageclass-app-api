@@ -3,22 +3,21 @@
     title="What languages do you speak?"
     subtitle="Many of our members are multilingual, so listing the languages you speak is a great way to connect with other families.">
     <a v-if="choicesAreHidden" @click="showChoices">Show choices</a>
-    <MultipleChoice 
+    <Checkboxes
       v-if="!choicesAreHidden"
       v-model="languageCodesChosen"
-      type="checkbox"
-      :labelsAndOrder="labelsAndOrder"
+      :labels="labelsAndOrder"
       />
   </Question>
 </template>
 
 <script>
 import Question from '@/components/base/Question.vue'
-import MultipleChoice from '@/components/base/MultipleChoice.vue'
+import Checkboxes from '@/components/base/Checkboxes.vue'
 var languages = require('language-list')()
 export default {
   name: 'LanguagesSpoken',
-  components: { Question, MultipleChoice },
+  components: { Question, Checkboxes },
   props: ['value'],
   data () {
     return {
@@ -39,6 +38,9 @@ export default {
     languagesSortedByName: function () {
       return this.languages.sort((a, b) => a.language.localeCompare(b.language))
     }
+  },
+  mounted: function () {
+    this.languageCodesChosen = this.value
   },
   watch: {
     languageCodesChosen: function () {

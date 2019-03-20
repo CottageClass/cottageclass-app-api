@@ -47,10 +47,10 @@ export default {
   }
   .loading-container
   {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    margin: auto;
+    width: 50px;
+    height: 50px;
+    margin-top: 100px;
   }
   .spinner{
     * {

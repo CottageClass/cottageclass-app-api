@@ -16,22 +16,48 @@
         <div class="host-info"><router-link :to="{ name: 'ProviderProfile', params: { id: event.hostId }}"><AvatarImage className="avatar-large" :person="{facebookUid: event.hostFacebookUid, avatar: event.hostAvatar}"/></router-link>
           <div class="host-info-wrapper">
             <div class="hosted-by">Hosted by <router-link :to="{ name: 'ProviderProfile', params: { id: event.hostId }}" class="host">{{ event.hostFirstName }}</router-link> &amp;
-            <ChildAges :childAges="event.hostChildAges" singular="kid" plural="kids"/><span v-if="event.participants && event.participants.length > 0"><Participants :participants="event.participants" /></span><span v-else>.</span></div>
+            <ChildAges :childAges="event.hostChildAges" singular="kid" plural="kids"/><span v-if="event.participatingParents && event.participatingParents.length > 0"><Participants :participants="event.participatingParents" /></span><span v-else>.</span></div>
             <div v-if="event.hostVerified" class="background-checked-wrapper"><img src="@/assets/check-green.svg" alt="">
               <div class="background-checked">Background Checked</div>
             </div>
           </div>
         </div>
-
-        <!-- RSVP button or share button-->
-
+      </div>
+      <div class="guests-container">
+        <!-- TODO put in participant info when it's available -->
+        <router-link
+        v-for="participant in event.participatingParents"
+        v-bind:key="participant.id"
+        :to="{ name: 'ProviderProfile', params: { id: participant.userId }}"
+        class="guest-link w-inline-block">
+          <AvatarImage
+            className="avatar-32"
+            :person="{facebookUid: participant.userFacebookUid, avatar: participant.userAvatar}"/>
+          <img src="@/assets/check-circle-24.svg" alt="" class="checkmark-green">
+        </router-link>
+        <div v-if="event.participatingParents.length" class="guests-text">
+          <span v-for="(participant, index) in event.participatingParents.slice(0, 3)">
+          <router-link
+            :to="{ name: 'ProviderProfile', params: { id: participant.userId }}"
+            v-bind:key="participant.id">
+            {{ capitalize(participant.userFirstName) }}
+          </router-link>
+          {{ (index===event.participatingParents.length-1) ? '' : ', ' }}
+          </span>
+          <span v-if="event.participatingParents.length > 3"> and {{ event.participatingParents.length-3 }} more </span> attending.
+        </div>
+      </div>
+      <div class="button-container-event-detail">
+        <EditButton class="button-event-detail"
+        v-if="hostIsCurrentUser"
+        :eventId="eventId"/>
         <RsvpButton
-        v-if="!hostIsCurrentUser"
+        v-else
         :userParticipating="event.participated"
         :full="event.full"
         :eventId="eventId"
         />
-        <EditButton v-if="hostIsCurrentUser" :eventId="eventId" />
+        <ContactHostButton v-if="!hostIsCurrentUser" class="w-inline-block" :eventId="event.id"/>
       </div>
         <!-- Summary info -->
 
@@ -79,10 +105,22 @@
         <div class="card-large-text">{{ event.petDescription }}</div>
       </div>
 
-      <div class="event-specifics-card"><router-link :to="{ name: 'ProviderProfile', params: { id: event.hostId }}" class="host"><AvatarImage className="avatar-x-large" :person="{facebookUid: event.hostFacebookUid, avatar: event.hostAvatar}"/></router-link>
+      <div class="event-specifics-host-card ">
+        <router-link :to="{ name: 'ProviderProfile', params: { id: event.hostId }}" class="host">
+          <AvatarImage className="avatar-x-large" :person="{facebookUid: event.hostFacebookUid, avatar: event.hostAvatar}"/>
+        </router-link>
         <div class="card-small-text">Host</div>
-        <div class="card-large-text">{{ event.hostFirstName }}</div>
-        <div v-if="event.hostChildAges && event.hostChildAges.length > 0" class="card-large-text-gray">Parent to <ChildAges :childAges="event.hostChildAges" singular="child" plural="children" />.
+        <div class="card-large-text">
+          <router-link :to="{name: 'ProviderProfile', params: {id: event.hostId}}">{{ event.hostFirstName }}</router-link> &amp; <ChildAges :childAges="event.hostChildAges" singular="child" plural="children" />.
+        </div>
+        <div class="card-small-text-gray">{{ jobText }}</div>
+        <div class="card-large-text">
+          <p v-for="paragraph in hostBio">{{ paragraph }}</p>
+        </div>
+        <div v-if="images && images.length>0" class="image-container">
+          <div class="divider-1px"></div>
+          <div class="card-section-text">Household Photos</div>
+          <Images :images="images" />
         </div>
       </div>
 
@@ -104,7 +142,7 @@
         <div v-if="!hostIsCurrentUser" class="card-large-text">Want to help spread the word?</div>
         <div v-else class="card-large-text">Invite others to your playdate!</div>
           <router-link :to="'/event/' + $route.params.id + '/share'" class="rsvp-button-bottom">
-            <a class="button w-button">INVITE FRIENDS</a>
+            <a class="share-button w-button">INVITE FRIENDS</a>
           </router-link>
       </div>
 
@@ -123,19 +161,35 @@
 import * as api from '@/utils/api.js'
 import AvatarImage from '@/components/base/AvatarImage'
 import RsvpButton from './RsvpButton.vue'
+import ContactHostButton from './ContactHostButton.vue'
 import EditButton from './EditButton.vue'
 import MainNav from './MainNav.vue'
 import Footer from '@/components/Footer.vue'
 import EventCategoryIcon from '@/components/EventCategoryIcon.vue'
 import ChildAges from '@/components/ChildAges.vue'
 import Participants from '@/components/Participants.vue'
+import Images from '@/components/Images.vue'
+
+import * as utils from '@/utils/utils.js'
 import { mapGetters } from 'vuex'
+import _ from 'lodash'
 
 var moment = require('moment')
 
 export default {
   name: 'EventPage',
-  components: { AvatarImage, RsvpButton, MainNav, Footer, EventCategoryIcon, EditButton, ChildAges, Participants },
+  components: {
+    AvatarImage,
+    RsvpButton,
+    ContactHostButton,
+    MainNav,
+    Footer,
+    EventCategoryIcon,
+    EditButton,
+    ChildAges,
+    Participants,
+    Images
+  },
   data () {
     return {
       event: null,
@@ -143,8 +197,7 @@ export default {
       mapOptions: {
         'disableDefaultUI': true, // turns off map controls
         'gestureHandling': 'none' // prevents any kind of scrolling
-      },
-      locationPlaceholder: { 'lat': 40.6869221, 'lng': -73.9978474 } // todo: pull from actual location
+      }
     }
   },
   methods: {
@@ -161,12 +214,11 @@ export default {
     formatTime: function (time24) {
       return moment(time24).format('LT')
     },
-    fetchEvent: function () {
-      api.fetchEvents(this.$route.params.id).then(
-        (res) => {
-          this.event = res[0]
-        })
-    }
+    fetchEvent: async function () {
+      this.event = await api.fetchEvent(this.$route.params.id)
+      console.log(this.event)
+    },
+    capitalize: utils.capitalize
   },
   created: function () {
     this.fetchEvent()
@@ -182,6 +234,29 @@ export default {
         return null
       }
     },
+    jobText: function () {
+      const employer = this.event.hostEmployer
+      const position = this.event.hostJobPosition
+      if (employer) {
+        if (position) {
+          return position + ', ' + employer
+        } else {
+          return employer
+        }
+      } else {
+        if (position) {
+          return position
+        } else {
+          return ''
+        }
+      }
+    },
+    images: function () {
+      return this.event.hostImages
+    },
+    hostBio: function () {
+      return this.event.hostBlurb
+    },
     ...mapGetters(['currentUser'])
   }
 
@@ -189,6 +264,10 @@ export default {
 </script>
 
 <style scoped>
+a {
+  color: #1f88e9;
+  text-decoration: none;
+}
 .rsvp-button-bottom {
   margin-top: 16px;
 }
@@ -211,6 +290,37 @@ body {
   color: #333;
   font-size: 14px;
   line-height: 20px;
+}
+
+.scrolling-wrapper-detail {
+  left: 0%;
+  top: auto;
+  right: 0%;
+  bottom: 40px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  overflow: hidden;
+  width: auto;
+  min-height: 100px;
+  margin-top: 0px;
+  padding-left: 32px;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  overflow-x: auto;
+  overflow: -moz-scrollbars-none;
+}
+
+.scrolling-wrapper-detail::-webkit-scrollbar {
+  width: 0 !important;
+  display: none;
+}
+
+.image-container {
+  width: 80%;
 }
 
 h1 {
@@ -277,9 +387,9 @@ h1 {
   align-items: center;
 }
 
-.divider-2px {
+.divider-1px {
   width: 100%;
-  height: 2px;
+  height: 1px;
   background-color: #f3f3f3;
 }
 
@@ -525,19 +635,20 @@ h1 {
   line-height: 17px;
 }
 
-.button {
+.share-button {
   padding: 12px 32px;
   border-radius: 4px;
   background-color: #1f88e9;
   text-align: center;
+  color: #fff;
 }
 
-.button:hover {
+.share-button:hover {
   background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, .1)), to(rgba(0, 0, 0, .1)));
   background-image: linear-gradient(180deg, rgba(0, 0, 0, .1), rgba(0, 0, 0, .1));
 }
 
-.button:active {
+.share-button:active {
   background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, .1)), to(rgba(0, 0, 0, .1)));
   background-image: linear-gradient(180deg, rgba(0, 0, 0, .1), rgba(0, 0, 0, .1));
 }
@@ -769,6 +880,95 @@ h1 {
   text-decoration: underline;
 }
 
+.button-container-event-detail {
+  display: flex;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  width: 100%;
+  margin-top: 20px;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.button-container-event-detail > * {
+  margin-right: 8px;
+}
+.avatar-32 {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+.checkmark-green {
+  position: absolute;
+  left: auto;
+  top: auto;
+  right: 0%;
+  bottom: 0%;
+  width: 12px;
+  height: 12px;
+}
+.guest-link {
+  position: relative;
+  margin-right: 4px;
+  margin-bottom: 4px;
+}
+.guests-container {
+  width: 100%;
+  margin-top: 20px;
+}
+.event-household-photo {
+  max-height: 100px;
+  min-height: 100px;
+  padding-right: 8px;
+}
+
+.card-section-text {
+  margin-top: 16px;
+  font-size: 11px;
+  line-height: 20px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  text-align: center;
+}
+.event-specifics-host-card p {
+  margin-bottom: 28px;
+}
+.event-specifics-host-card {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  margin-top: 16px;
+  padding: 32px 32px 60px;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-radius: 4px;
+  background-color: #fff;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .08);
+}
+
 @media (max-width: 991px) {
   .div-block-32 {
     width: 40%;
@@ -869,6 +1069,16 @@ h1 {
     padding-right: 16px;
     padding-left: 16px;
   }
+
+  .button-container-event-detail {
+    width: 100%;
+    margin-top: 32px;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+  }
 }
 
 @media (max-width: 479px) {
@@ -965,6 +1175,29 @@ h1 {
   .button-bottom-event {
     width: 100%;
     margin-top: 20px;
+  }
+
+  .button-container-event-detail > * {
+    width: 100%;
+    margin-right: 0px;
+  }
+
+  .button-container-event-detail {
+    width: 100%;
+    margin-top: 32px;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+
+  .button-event-detail {
+    width: 100%;
+    margin-top: 0px;
+    margin-left: 8px;
+    padding-top: 10px;
+    padding-bottom: 11px;
   }
 }
 

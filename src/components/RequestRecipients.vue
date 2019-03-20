@@ -4,7 +4,7 @@
     <div class="heading-content">
       <h1 class="h1">Request received!</h1>
       <p class="subtitle">We'll be in touch! For a faster response, choose up to {{ maxRecipients }} people to receive your request instantly. (They're all typically available {{ hourSelected }} {{ daySelected }}s.)</p>
-    </div><router-link to="/home" class="button-back w-inline-block"></router-link>
+    </div><router-link :to="{name: 'Events'}" class="button-back w-inline-block"></router-link>
   </div>
   <div class="list-container">
      <div

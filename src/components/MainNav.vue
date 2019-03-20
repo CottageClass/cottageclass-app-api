@@ -8,7 +8,7 @@
         </router-link>
       </div>
       <div class="actions-wrapper">
-        <router-link to="/profile/edit">
+        <router-link v-if="currentUser" :to="{name: 'ProviderProfile', params: {id: currentUser.id}}">
           <AvatarImage
           v-if="currentUser"
           :person="currentUser"
@@ -21,7 +21,7 @@
       class="nav-links-expanded">
         <ul class="unordered-list-2 w-list-unstyled">
           <li>
-            <router-link to="/home" class="link-block w-inline-block">
+            <router-link :to="{name: 'Events'}" class="link-block w-inline-block">
               <div class="text-block">Upcoming Playdates</div>
             </router-link>
           </li>
@@ -63,8 +63,13 @@
             </a>
           </li>
           <li v-if="!isAuthenticated">
-            <router-link to="/sign-in" class="link-block w-inline-block">
-              <div class="text-block">Sign In</div>
+            <router-link to="/log-in" class="link-block w-inline-block">
+              <div class="text-block">Log in</div>
+            </router-link>
+          </li>
+          <li v-if="!isAuthenticated">
+            <router-link to="/sign-up" class="link-block w-inline-block">
+              <div class="text-block">Sign up</div>
             </router-link>
           </li>
         </ul>

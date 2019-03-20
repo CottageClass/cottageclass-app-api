@@ -23,10 +23,9 @@
   title="Which children would you like to RSVP?"
   :subtitle="spotsRemainingPhrase"
   >
-   <MultipleChoice
-   type="checkbox"
+   <Checkboxes
    v-model="childrenSelected"
-   :labelsAndOrder="labelsAndOrder"/>
+   :labels="labelsAndOrder"/>
  </Question>
 </div>
 </div>
@@ -41,7 +40,7 @@ import * as utils from '@/utils/utils.js'
 import Nav from '@/components/FTE/Nav.vue'
 import ErrorMessage from '@/components/base/ErrorMessage.vue'
 import Question from '@/components/base/Question.vue'
-import MultipleChoice from '@/components/base/MultipleChoice.vue'
+import Checkboxes from '@/components/base/Checkboxes.vue'
 import StyleWrapper from '@/components/FTE/StyleWrapper.vue'
 import sheetsu from 'sheetsu-node'
 // this component has a working loading indicator and no other logic. todo: break out and rename.
@@ -53,7 +52,7 @@ var client = sheetsu({ address: 'https://sheetsu.com/apis/v1.0su/62cd725d6088' }
 
 export default {
   name: 'RsvpInfoCollection',
-  components: { Nav, LoadingSpinner, ErrorMessage, MultipleChoice, StyleWrapper, Question },
+  components: { Nav, LoadingSpinner, ErrorMessage, Checkboxes, StyleWrapper, Question },
   data () {
     return {
       childrenSelected: [],
@@ -160,18 +159,16 @@ export default {
     calculateAge: function (birthdate) {
       return moment().diff(birthdate, 'years')
     },
-    fetchEventInformation: function () {
-      api.fetchEvents(this.$route.params.eventId).then(
-        (res) => {
-          this.event = res[0]
-          if (this.event.full || this.event.maximumChildren === 0) {
-            this.error = 'We\'re sorry, this event is full!'
-          }
-        }).catch(
-        (err) => {
-          console.log(err.stack)
-          this.error = 'Sorry, there was a problem retrieving information about the event. Go back and try again?'
-        })
+    fetchEventInformation: async function () {
+      try {
+        this.event = await api.fetchEvent(this.$route.params.eventId)
+        if (this.event.full || this.event.maximumChildren === 0) {
+          this.error = 'We\'re sorry, this event is full!'
+        }
+      } catch (err) {
+        console.log(err.stack)
+        this.error = 'Sorry, there was a problem retrieving information about the event. Go back and try again?'
+      }
     },
     nextStep: function () {
       if (this.tooManyChildren) {

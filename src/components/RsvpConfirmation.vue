@@ -60,11 +60,8 @@ export default {
       showError: false
     }
   },
-  mounted: function () {
-    api.fetchEvents(this.$route.params.eventId).then(
-      (res) => {
-        this.event = res.find(event => event.id === this.eventId)
-      })
+  mounted: async function () {
+    this.event = await api.fetchEvent(this.$route.params.eventId)
   },
   methods: {
     nextStep: function () {

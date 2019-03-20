@@ -6,7 +6,7 @@
       <div class="content-container-4 w-container">
         <h1 class="h1-display">My Playdates</h1>
         <EventList
-            :events="myEventsByDate"
+            :events="events"
             :noEventsMessage="noEventsMessage"
         />
       </div>
@@ -36,20 +36,6 @@ export default {
     }
   },
   computed: {
-    eventsByDate: function () {
-      if (this.events) {
-        return this.events.concat().sort((eventA, eventB) => {
-          return moment(eventA.startsAt).diff(moment(eventB.startsAt))
-        })
-      }
-      return null
-    },
-    myEventsByDate: function () {
-      if (this.eventsByDate) {
-        return this.eventsByDate.filter(event => this.currentUser.id === event.hostId)
-      }
-      return null
-    },
     noEventsMessage: () => {
       return 'Sorry, you don\'t have any scheduled playdates'
     },
@@ -69,10 +55,8 @@ export default {
     formatDate: function (date) {
       return moment(date).format('dddd, MMM Do')
     },
-    fetchMyUpcomingEvents: function () {
-      api.fetchUpcomingEvents(this.currentUser.id).then(res => {
-        this.events = res
-      })
+    fetchMyUpcomingEvents: async function () {
+      this.events = await api.fetchUpcomingEvents(this.currentUser.id)
     }
   },
   mounted: function () {

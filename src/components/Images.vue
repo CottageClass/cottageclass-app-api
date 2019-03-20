@@ -1,9 +1,11 @@
 <template>
   <span class="body">
-  <div class="scrolling-wrapper">
-    <div class="card" v-for="image in person.images"><img :src="image"></div>
-  </div>
-</span>
+    <div class="mask">
+      <div class="scrolling-wrapper">
+        <div class="carousel-image-container" v-for="image in images"><img :src="image"></div>
+      </div>
+    </div>
+  </span>
 </template>
 
 <script>
@@ -15,53 +17,42 @@ export default {
 
 <style scoped>
 
-.scrolling-wrapper {
-  overflow-x: auto;
-}
-
-.card {
-    flex: 0 0 auto;
-  }
-
-.card img {
-  height: 100%;
-  width: auto;
-}
-
-.scrolling-wrapper {
-  -webkit-overflow-scrolling: touch;
-}
-
-.scrolling-wrapper {
-  &::-webkit-scrollbar {
-    display: none;
-  }
-}
-
 .body {
   background-color: #f2f2f2;
+  overflow: hidden;
 }
 
-.child {
-  white-space:nowrap;
+.mask {
+  height: 123px;
+  overflow: hidden;
 }
-
 .scrolling-wrapper {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
+  overflow-x: scroll;
+  overflow-y: hidden;
   display: flex;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
+  flex-wrap: nowrap;
   align-items: center;
+  background-color: #fff;
+  -webkit-overflow-scrolling: touch;
+
+  padding-bottom: 20px;
+  padding-top: 6px;
+  box-sizing: content-box;
+}
+
+.carousel-image-container {
+  flex-shrink: 0;
+  width: 111px;
+  height: 111px;
+  margin-right: 6px;
   background-color: #fff;
 }
 
-.card {
-  width: auto;
+.carousel-image-container img {
+  width: 111px;
   height: 111px;
-  margin-right: 4px;
+  width: auto;
+  height: 100%;
   background-color: #fff;
 }
 
