@@ -1,7 +1,7 @@
 import _ from 'lodash'
 
 export const createUser = (data) => {
-  const includedChildren = data.child
+  const includedChildren = data.child || []
   const id = _.keys(data.user)[0]
   const p = data.user[id].attributes
   const childIds = data.user[id].relationships.children.data.map(e => e.id)
