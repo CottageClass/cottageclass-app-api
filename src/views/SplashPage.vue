@@ -265,7 +265,8 @@ export default {
     if (!this.currentUser.hasAllRequiredFields) {
       this.$router.push({ name: 'OnboardNewUser' })
     }
-  }
+  },
+  computed: mapGetters([ 'currentUser' ])
 }
 
 </script>
