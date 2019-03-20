@@ -1,7 +1,7 @@
 // Vuex module to handle all the data for current user and authentication
 
 import { distanceHaversine, fetchCurrentUser } from '@/utils/api'
-import { createUser } from '../utils/createUser';
+import { createUser } from '../utils/createUser'
 import normalize from 'json-api-normalizer'
 
 const ADMIN_WHITELIST = [
@@ -29,7 +29,7 @@ const actions = {
   updateCurrentUserFromServer: async ({ commit, state, getters }) => {
     try {
       const user = await fetchCurrentUser(getters.currentUser.id)
-      commit('setCurrentUser', { user: currentUser })
+      commit('setCurrentUser', { user })
     } catch (e) {
       console.log('failed to fetch current user')
       console.log(e)

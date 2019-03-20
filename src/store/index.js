@@ -1,9 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import * as api from '../utils/api'
 import auth from './auth'
 import createPersistedState from 'vuex-persistedstate'
-import _ from 'lodash'
 import events from './events'
 
 Vue.use(Vuex)

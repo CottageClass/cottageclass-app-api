@@ -1,7 +1,6 @@
 import { mount } from '@vue/test-utils'
 import RadioButtons from '@/components/base/RadioButtons.vue'
 import _ from 'lodash'
-import Vue from 'vue'
 
 describe('RadioButtons', () => {
   let wrapper
@@ -53,7 +52,6 @@ describe('RadioButtons', () => {
     expect(isChecked(helloDiv)).toBeTruthy()
   })
 })
-
 
 const isChecked = function (i) {
   return i.classes('active-checkbox')

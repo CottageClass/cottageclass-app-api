@@ -3,7 +3,6 @@ import mockAxios from 'axios'
 import normalize from 'json-api-normalizer'
 
 describe('createUser', () => {
-
   describe('public access', () => {
     let user
     beforeAll(async () => {

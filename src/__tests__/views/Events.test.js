@@ -1,6 +1,5 @@
 import { shallowMount } from '@vue/test-utils'
 import Events from '@/views/Events.vue'
-import _ from 'lodash'
 
 describe('Events', () => {
   let wrapper

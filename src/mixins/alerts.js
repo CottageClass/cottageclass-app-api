@@ -13,7 +13,7 @@ export default {
     showAlertOnNextRoute (message, status) {
       this.$store.commit(
         'showAlertOnNextRoute',
-        {alert: { message, status }}
+        { alert: { message, status } }
       )
     }
   }

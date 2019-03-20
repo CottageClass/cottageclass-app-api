@@ -2,7 +2,7 @@ import camelcaseKeys from 'camelcase-keys'
 import normalize from 'json-api-normalizer'
 import axios from 'axios'
 import { createEvent, createEvents } from './createEvent'
-import { createUser } from './createUser';
+import { createUser } from './createUser'
 
 export function initProxySession (currentUserId, receiverId, requestMessage, acknowledgmentMessage) {
   console.log('INITIATING PROXY WITH users ' + currentUserId + ', ' + receiverId)
@@ -381,7 +381,6 @@ export function submitEventSeriesData (data) {
   })
 }
 
-
 export const fetchEvents = async (params, sortBy) => {
   const url = `/api/events/${params || ''}`
   return axios.get(url).then(res => {
@@ -493,9 +492,9 @@ export function deleteEvent (eventId, successCallback) {
  *  Authentication
  **********/
 
- // sign up as a new user
+// sign up as a new user
 export function register (params) {
-  return axios.post(`/users`, params )
+  return axios.post(`/users`, params)
 }
 
 export function signIn (params) {
@@ -511,7 +510,7 @@ export function signOut () {
  * UTILS
  */
 
- // TODO get this out of here
+// TODO get this out of here
 export function distanceHaversine (lat1, lon1, lat2, lon2) {
   const unit = 'N' // always return miles
   var radlat1 = Math.PI * lat1 / 180
@@ -542,4 +541,3 @@ function parseEventData (obj) {
   e.food = e.foods.length > 0 && e.foods[0]
   return e
 }
-
