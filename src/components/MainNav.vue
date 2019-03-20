@@ -103,10 +103,11 @@ export default {
     clickedAway: function () {
       this.showMenu = false
     },
-    logout: function () {      
+    logout: function () {   
       signOut().then(() => {
         this.$store.dispatch('establishUser', { JWT: null })
         this.$router.push({ name: 'Events' })
+        this.showMenu = false
       })
     }
   },
