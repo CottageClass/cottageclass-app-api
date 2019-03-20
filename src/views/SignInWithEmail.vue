@@ -7,21 +7,21 @@
               <StyleWrapper styleIs="onboarding">
                 <ErrorMessage
                   v-if="showError && (errors.first('email') || errors.first('password')) || errorMessage"
-                  :messages="[errorMessage, errors.first('email'), errors.first('password')]" 
+                  :messages="[errorMessage, errors.first('email'), errors.first('password')]"
                   />
               </StyleWrapper>
             <h1 class="auth-heading">Log In</h1>
             <div class="auth-wrapper">
-                  <a 
+                  <a
                   v-if="showFacebookLogin"
-                  href="" 
+                  href=""
                   class="fb-button w-inline-block"
-                  @click.prevent="authenticate('facebook')"     
+                  @click.prevent="authenticate('facebook')"
                   >
                     <img src="@/assets/facebook-button-icon.svg" width="24" height="24" alt="">
                     <div class="fb-button-text">Continue with Facebook</div>
                   </a>
-                <span v-if="showFacebookLogin">    
+                <span v-if="showFacebookLogin">
                   <div class="divider-container">
                   <div class="divider-1px-2"></div>
                   <div class="or-container">
