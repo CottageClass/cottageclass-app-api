@@ -29,7 +29,7 @@ export default {
         if (data.err) {
           // TODO handle this error with an alert
           console.log('error in authentication : ', data.err)
-          component.$router.push({ name: 'Home' })
+          component.$router.push({ name: 'Events' })
         } else {
           // determine where the user should go next
           console.log('Facebook authentication successful')
@@ -39,7 +39,7 @@ export default {
               component.$router.push(component.redirectPath)
               component.$store.commit('resetRedirectPath')
             } else {
-              component.$router.push({ name: 'Home' })
+              component.$router.push({ name: 'Events' })
             }
           } else {
             component.$router.push({ name: 'OnboardNewUser' })

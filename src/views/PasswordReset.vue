@@ -95,10 +95,10 @@ export default {
     submitInfo: function (data) {
       client.create(data, 'passwordResetRequests').then((data) => {
         console.log(data)
-        this.$router.push({ name: 'Home' })
+        this.$router.push({ name: 'Events' })
       }, (err) => {
         console.log(err)
-        this.$router.push({ name: 'Home' })
+        this.$router.push({ name: 'Events' })
       })
     }
   },

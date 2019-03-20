@@ -101,13 +101,13 @@ export default {
     logout: function () {      
       signOut().then(() => {
         this.$store.dispatch('establishUser', { JWT: null })
-        this.$router.push({ name: 'Home' })
+        this.$router.push({ name: 'Events' })
       })
     }
   },
   computed: {
     logoRouterTarget () {
-      return this.isAuthenticated ? 'Home' : 'SplashPage'
+      return this.isAuthenticated ? 'Events' : 'SplashPage'
     },
     ... mapGetters([ 'isAuthenticated', 'currentUser', 'alert' ])
   }

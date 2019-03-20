@@ -8,7 +8,7 @@
     </div>
     <router-link
     class="splash-button w-inline-block"
-    :to="{ name: 'Home' }">
+    :to="{ name: 'Events' }">
     <div class="button-text">CONTINUE</div>
     </router-link>
   </div>

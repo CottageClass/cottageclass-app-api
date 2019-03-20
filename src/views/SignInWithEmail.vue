@@ -88,7 +88,7 @@ export default {
   mounted: function () {
     if (this.isAuthenticated) {
       if (this.currentUser.hasAllRequiredFields) {
-        this.$router.push({ name: 'Home' })
+        this.$router.push({ name: 'Events' })
       } else if (this.currentUser.id) {
         this.$router.push({ name: 'OnboardNewUSer' })
 
@@ -150,7 +150,7 @@ export default {
                 return component.$store.dispatch('updateCurrentUserFromServer')
               }).then(() => {
                 if (component.currentUser.hasAllRequiredFields) {
-                  component.$router.push({ name: 'Home' })
+                  component.$router.push({ name: 'Events' })
                 } else if (component.currentUser.id) {
                   component.$router.push({ name: 'OnboardNewUser' })
                 } else {

@@ -71,7 +71,7 @@ export default {
       if (this.yesOrNo.isTrue === null) {
         this.showError = true
       } else if (this.yesOrNo.isTrue === false) {
-        this.$router.push({ name: 'Home' })
+        this.$router.push({ name: 'Events' })
       } else {
         this.$router.push({ name: 'RsvpInfoCollection', params: { eventId: this.eventId } })
       }

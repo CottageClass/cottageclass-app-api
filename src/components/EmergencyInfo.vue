@@ -2,7 +2,7 @@
 <div class="body">
   <div class="title-bar-container">
     <router-link
-    :to="{ name: 'Home', params: { tab: 'provide' }}"
+    :to="{ name: 'Events' }"
     class="title-bar-action-l w-inline-block">
       <img src="../assets/Arrow-Back-2.svg">
     </router-link>
