@@ -77,6 +77,11 @@ for testing rails backend
     ```
     $ bin/rspec -fd
     ```
+you can also watch with 
+    ```
+    $ guard
+    ```
+
 
 #### Jest
 for testing vue/js frontend
