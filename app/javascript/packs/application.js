@@ -1,28 +1,26 @@
-import Vue from "vue";
-import axios from "axios";
-import VueAxios from "vue-axios";
-import VeeValidate from "vee-validate";
-import VueClipboard from "vue-clipboard2";
+import Vue from 'vue'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+import VeeValidate from 'vee-validate'
+import VueClipboard from 'vue-clipboard2'
 import VueScrollTo from 'vue-scrollto'
-import * as VueGoogleMaps from "vue2-google-maps";
+import * as VueGoogleMaps from 'vue2-google-maps'
 
 import '@babel/polyfill'
 
-import _ from "lodash";
+import _ from 'lodash'
 
-import App from "../../../src/App.vue";
-import router from "../../../src/router";
-import store from "../../../src/store";
-import "../../../src/registerServiceWorker";
-import VueAnalytics from "vue-analytics";
+import App from '../../../src/App.vue'
+import router from '../../../src/router'
+import store from '../../../src/store'
+import '../../../src/registerServiceWorker'
+import VueAnalytics from 'vue-analytics'
 
-
-
-if(window.opener) {
+if (window.opener) {
   // If we're in a popup window that was opened for authentication, fire callback and close it
-  document.addEventListener("DOMContentLoaded", () => {
-    const element = "#app";
-    let token = _.get(document.querySelector(element), "dataset.token");
+  document.addEventListener('DOMContentLoaded', () => {
+    const element = '#app'
+    let token = _.get(document.querySelector(element), 'dataset.token')
     if (window.opener.oauthCallback) {
       window.opener.oauthCallback({ token })
       _.unset(window, 'opener')
@@ -31,13 +29,13 @@ if(window.opener) {
   })
 } else {
   // Load all the Vue plugins
-  Vue.use(VueScrollTo);
-  Vue.use(VueAxios, axios);
-  Vue.use(VeeValidate);
-  Vue.use(VueClipboard);
+  Vue.use(VueScrollTo)
+  Vue.use(VueAxios, axios)
+  Vue.use(VeeValidate)
+  Vue.use(VueClipboard)
   Vue.use(VueGoogleMaps, {
     load: {
-      key: "AIzaSyCAxZ4ERhmcq87C5HK91ujxDLl7gQ_k_-c"
+      key: 'AIzaSyCAxZ4ERhmcq87C5HK91ujxDLl7gQ_k_-c'
       // libraries: 'geocoder', // This is required if you use the Autocomplete plugin
       // OR: libraries: 'places,drawing'
       // OR: libraries: 'places,drawing,visualization'
@@ -58,55 +56,51 @@ if(window.opener) {
     /// / Vue.component('GmapMarker', GmapMarker)
     /// / then disable the following:
     // installComponents: true,
-  });
+  })
 
-  Vue.config.productionTip = false;
+  Vue.config.productionTip = false
 
   router.beforeEach((to, from, next) => {
-    store.dispatch("newRoute")
+    store.dispatch('newRoute')
     if (to.name === 'SplashPage' && store.getters.isAuthenticated) {
-      next({ name: 'Events'})
+      next({ name: 'Events' })
     } else {
       next()
     }
-  });
+  })
 
   Vue.use(VueAnalytics, {
     id: process.env.GOOGLE_ANALYTICS_ID,
     router
-  });
+  })
 
-
-  document.addEventListener("DOMContentLoaded", () => {
-    const element = "#app";
-    let token = _.get(document.querySelector(element), "dataset.token");
-    store.dispatch('establishUser', {JWT: token})
+  document.addEventListener('DOMContentLoaded', () => {
+    const element = '#app'
+    let token = _.get(document.querySelector(element), 'dataset.token')
+    store.dispatch('establishUser', { JWT: token })
 
     const csrfElement = "meta[name='csrf-token']"
-    let csrfToken = _.get(document.querySelector(csrfElement), "content");
-
+    let csrfToken = _.get(document.querySelector(csrfElement), 'content')
 
     axios.interceptors.request.use(
       config => {
-        config.headers["Authorization"] = `Bearer ${store.getters.JWT}`;
+        config.headers['Authorization'] = `Bearer ${store.getters.JWT}`
         if (config.method !== 'get') {
           // this is for making api calls to our server.  may not be a valid long term solution
           config.headers['X-CSRF-Token'] = csrfToken
         }
-        return config;
+        return config
       },
       error => {
-        return Promise.reject(error);
+        return Promise.reject(error)
       }
-    );
-
+    )
 
     new Vue({
       el: element,
       store,
       router,
       render: h => h(App)
-    });
-  });
-
+    })
+  })
 }
