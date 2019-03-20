@@ -53,7 +53,7 @@ export default {
   },
   mounted: function () {
     const that = this
-    api.fetchUpcomingEventsWithinDistance(20, this.currentUser.latitude, this.currentUser.longitude).then(res => {
+    api.fetchUpcomingEventsWithinDistance({ miles: 20, lat: this.currentUser.latitude, lng: this.currentUser.longitude }).then(res => {
       if (res.length > 0) {
         that.events = res
         if (that.eventsNotBelongingToCurrentUser.length < 1) {
