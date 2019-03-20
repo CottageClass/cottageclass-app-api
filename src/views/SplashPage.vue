@@ -16,7 +16,7 @@
             </li>
             <li class="list-item"><img src="@/assets/get-care.svg" alt="" class="image-262">
               <div class="hero-list-item-heading">Get Care.</div>
-              <div class="hero-list-item-subtitle">By hosting a monthly event, you get unlimited access to <router-link to="/home" class="links">activities like these</router-link>.</div>
+              <div class="hero-list-item-subtitle">By hosting a monthly event, you get unlimited access to <router-link :to="{name: 'Events'}" class="links">activities like these</router-link>.</div>
             </li>
             <li class="list-item"><img src="@/assets/socially.svg" alt="" class="image-262">
               <div class="hero-list-item-heading">Socially.</div>
@@ -141,8 +141,8 @@
                 </div><RsvpButton eventId="112" /></div>
             </div>
           </li>
-        </ul>             
-        <div class="event-date-section-more-events"><router-link to='/home' class="button w-button">Show all playdates</router-link></div>
+        </ul>
+        <div class="event-date-section-more-events"><router-link :to="{name: 'Events'}" class="button w-button">Show all playdates</router-link></div>
 
       </div>
     </div>
