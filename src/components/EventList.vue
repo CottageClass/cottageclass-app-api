@@ -1,7 +1,7 @@
 <template>
   <div class="events-list-wrapper">
     <LoadingSpinner v-if="awaitingEvents"/>
-    <p v-if="noEvents" v-html="noEventsMessage"></p>
+    <p class="no-events-message" v-if="noEvents" v-html="noEventsMessage"></p>
     <div v-for="(event, index) in events">
       <div
           v-if="showDates && (index === 0 || (formatDate(event.startsAt) !== formatDate(events[index - 1].startsAt)))"
@@ -331,6 +331,10 @@ a {
   width: 40px;
 }
 
+.no-events-message {
+  margin-top: 100px;
+}
+
 @media (max-width: 991px) {
   .h1-display {
     font-size: 32px;
@@ -357,6 +361,10 @@ a {
 
   .events-list-wrapper {
     margin-top: -48px;
+  }
+
+  .no-events-message {
+    margin: 50px 10px 0;
   }
 }
 
