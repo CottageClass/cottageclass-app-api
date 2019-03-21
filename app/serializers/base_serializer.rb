@@ -7,7 +7,7 @@ class BaseSerializer
   # NB fast_jsonapi supports cache settings
   # - See: https://github.com/Netflix/fast_jsonapi#caching
 
-  def self.json_for(models, options={})
-    self.new(models, options).serializable_hash
+  def self.json_for(models, options = {})
+    new(models, options).serializable_hash
   end
 end

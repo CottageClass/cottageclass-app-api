@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   ActiveAdmin.routes self
   devise_for :users,
-              # TODO get rid of the GET user/sign_in route because it is done with vue now
+             # TODO: get rid of the GET user/sign_in route because it is done with vue now
 
              ## use better routes for auth
              # path: '',

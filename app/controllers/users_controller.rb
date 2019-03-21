@@ -32,8 +32,8 @@ class UsersController < ApiController
   def inquiries
     users = current_user.inquirers
     serializable_hash = UserSerializer.json_for users,
-                                                         include: %i[children user_reviews user_reviews.reviewer],
-                                                         params: { personal_information: true }
+                                                include: %i[children user_reviews user_reviews.reviewer],
+                                                params: { personal_information: true }
 
     render json: serializable_hash, status: 200
   end

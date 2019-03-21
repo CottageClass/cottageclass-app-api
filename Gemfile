@@ -40,16 +40,17 @@ end
 group :development, :test do
   gem 'brakeman', require: false
   gem 'bullet'
+  gem 'byebug'
   gem 'climate_control'
   gem 'database_cleaner'
   gem 'dotenv-rails'
   gem 'factory_bot_rails', '~> 4.1'
   gem 'faker'
   gem 'fakerbot', require: false
+  gem 'guard-rspec', require: false
   gem 'httplog'
   gem 'mry', require: false
   gem 'rspec-rails'
-  gem 'guard-rspec', require: false
   gem 'rspec_api_documentation'
   gem 'rubocop', require: false
   gem 'rubocop-rspec', require: false
@@ -57,5 +58,4 @@ group :development, :test do
   gem 'therubyracer', platforms: :ruby
   gem 'timecop'
   gem 'webmock'
-  gem 'byebug'
 end

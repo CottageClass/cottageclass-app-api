@@ -14,7 +14,7 @@ class TwilioSessionsController < ApiController
 
     # send acknowledgement message to careseeker
     ack_msg = twilio_params[:acknowledgment_message]
-    if ack_msg && ack_msg.length > 0
+    if ack_msg.present?
       service.send_message_to_participant!(cc_twilio_session: twilio_session, sender: provider, receiver: careseeker, message: twilio_params[:acknowledgment_message])
     end
 
@@ -56,7 +56,7 @@ class TwilioSessionsController < ApiController
       receiver: receiver,
       cc_twilio_session: twilio_session,
       twilio_interaction_sid: interaction_sid,
-      content: message_content,
+      content: message_content
     )
 
     # update session's last_action_at
@@ -64,7 +64,6 @@ class TwilioSessionsController < ApiController
 
     render status: 201
   end
-
 
   private
 
@@ -81,7 +80,7 @@ class TwilioSessionsController < ApiController
   def twilio_params
     params.require(:twilio_session).permit(
       :request_message,
-      :acknowledgment_message,
+      :acknowledgment_message
     )
   end
 end
