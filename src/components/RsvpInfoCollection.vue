@@ -197,7 +197,7 @@ export default {
         component.forgetRsvpAttempted()
         return this.$store.commit('showAlertOnNextRoute', {
           alert: {
-            message: "Congratulations, you have RSVP&apos;ed to this event! You&apos;ll soon receive an email confirming your RSVP.",
+            message: 'Congratulations, you have RSVP&apos;ed to this event! You&apos;ll soon receive an email confirming your RSVP.',
             status: 'success'
           }
         })

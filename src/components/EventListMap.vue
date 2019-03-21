@@ -216,7 +216,7 @@ select {
   -webkit-align-items: flex-start;
   -ms-flex-align: start;
   align-items: flex-start;
-  background-color: #fff;  
+  background-color: #fff;
 }
 
 .map-button-1 {

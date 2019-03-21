@@ -9,11 +9,11 @@
             </StyleWrapper>
             <h1 class="auth-heading">Sign Up</h1>
               <div class="auth-wrapper">
-                <a 
+                <a
                 v-if="showFacebookLogin"
-                href="" 
+                href=""
                 class="fb-button w-inline-block"
-                @click.prevent="authenticateFacebook"     
+                @click.prevent="authenticateFacebook"
                 >
                   <img src="@/assets/facebook-button-icon.svg" width="24" height="24" alt="">
                   <div class="fb-button-text">Continue with Facebook</div>
@@ -69,13 +69,13 @@
                         </div>
                         <label for="avatar">
                           <div class="profile-photo-wrapper">
-                            <img 
-                            v-if="!!avatar_url" 
-                            :src="avatar_url" 
+                            <img
+                            v-if="!!avatar_url"
+                            :src="avatar_url"
                             class="profile-photo"
                             height="80"
                             >
-                            <img 
+                            <img
                             v-else
                             src="@/assets/profile-photo-placeholder.svg"
                             class="profile-photo"
@@ -83,8 +83,8 @@
                             <a class="button-3 w-button" :class="{'invalid': errors.has('avatar') }">
                             <span v-if="!avatar_url">Add profile photo</span>
                             <span v-else>Replace photo</span>
-                            </a> 
-                          </div>                    
+                            </a>
+                          </div>
                         </label>
                       <input
                       type="file"
@@ -105,7 +105,7 @@
           </div>
         </div>
       </div>
-    <Footer />  
+    <Footer />
   </span>
 </template>
 
@@ -253,7 +253,7 @@ export default {
                 signIn({ email, password })
                   .then(res => {
                     console.log('auth success:', res)
-                    component.$store.dispatch('establishUser', { JWT: res.data[0]})
+                    component.$store.dispatch('establishUser', { JWT: res.data[0] })
                     return component.$router.push({ name: 'OnboardNewUser' })
                   })
                   .catch(function (err) {

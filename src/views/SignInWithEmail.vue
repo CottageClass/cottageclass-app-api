@@ -82,7 +82,7 @@ export default {
       password: '',
       showError: false,
       errorMessage: null,
-      showFacebookLogin: !this.hideFacebookLogin(),
+      showFacebookLogin: !this.hideFacebookLogin()
     }
   },
   mounted: function () {
@@ -91,7 +91,6 @@ export default {
         this.$router.push({ name: 'Events' })
       } else if (this.currentUser.id) {
         this.$router.push({ name: 'OnboardNewUSer' })
-
       } else {
         return false
       }
