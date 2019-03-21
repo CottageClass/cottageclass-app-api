@@ -18,9 +18,7 @@ import VueAnalytics from 'vue-analytics'
 
 let isAuthWindow = false
 try {
-  isAuthWindow = window.opener &&
-                 window.opener.location &&
-                 window.opener.location.origin === window.location.origin &&
+  isAuthWindow = window.opener.location.origin === window.location.origin &&
                  window.opener.oauthCallback
 } catch (e) {
   console.log(e)
