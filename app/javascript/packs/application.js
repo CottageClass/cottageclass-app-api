@@ -16,7 +16,17 @@ import store from '../../../src/store'
 import '../../../src/registerServiceWorker'
 import VueAnalytics from 'vue-analytics'
 
-if (window.opener && window.opener.location && window.opener.location.origin === window.location.origin) {
+let isAuthWindow = false
+try {
+  isAuthWindow = window.opener &&
+                 window.opener.location &&
+                 window.opener.location.origin === window.location.origin &&
+                 window.opener.oauthCallback
+} catch (e) {
+  console.log(e)
+}
+
+if (isAuthWindow) {
   // If we're in a popup window that was opened for authentication, fire callback and close it
   document.addEventListener('DOMContentLoaded', () => {
     const element = '#app'
