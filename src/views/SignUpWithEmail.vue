@@ -111,7 +111,7 @@
 
 <script>
 import ErrorMessage from '@/components/base/ErrorMessage.vue'
-import providerAuth from '@/mixins/providerAuthentication'
+import { providerAuthentication } from '@/mixins'
 import { register, signIn } from '@/utils/api'
 import MainNav from '@/components/MainNav.vue'
 import Footer from '@/components/Footer.vue'
@@ -120,7 +120,7 @@ import StyleWrapper from '@/components/FTE/StyleWrapper.vue'
 export default {
   name: 'SignUpWithEmail',
   components: { ErrorMessage, MainNav, Footer, StyleWrapper },
-  mixins: [providerAuth],
+  mixins: [providerAuthentication],
   data: function () {
     return {
       success: false,

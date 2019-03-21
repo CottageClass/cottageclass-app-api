@@ -35,9 +35,9 @@ export default {
           console.log('Facebook authentication successful')
           component.$store.dispatch('establishUser', { JWT: data.token })
           if (component.currentUser.hasAllRequiredFields) {
-            if (component.redirectPath) {
-              component.$router.push(component.redirectPath)
-              component.$store.commit('resetRedirectPath')
+            if (component.redirectRoute) {
+              component.$router.push(component.redirectRoute)
+              component.$store.commit('resetRedirectRoute')
             } else {
               component.$router.push({ name: 'Events' })
             }
@@ -48,5 +48,5 @@ export default {
       })
     }
   },
-  computed: mapGetters(['currentUser', 'redirectPath'])
+  computed: mapGetters(['currentUser', 'redirectRoute'])
 }

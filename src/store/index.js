@@ -71,7 +71,7 @@ export default new Vuex.Store(
           return null
         }
       },
-      rsvpAttemptedId: state => state.RSVPAttempEventId
+      redirectRoute: state => state.redirectRoute
     }
   }
 )

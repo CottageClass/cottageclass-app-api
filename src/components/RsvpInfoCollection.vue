@@ -46,6 +46,7 @@ import sheetsu from 'sheetsu-node'
 // this component has a working loading indicator and no other logic. todo: break out and rename.
 import LoadingSpinner from '@/components/LoadingSpinner.vue'
 import { mapGetters } from 'vuex'
+import { redirect } from '@/mixins'
 var moment = require('moment')
 // create a config file to identify which spreadsheet we push to.
 var client = sheetsu({ address: 'https://sheetsu.com/apis/v1.0su/62cd725d6088' })
@@ -53,6 +54,7 @@ var client = sheetsu({ address: 'https://sheetsu.com/apis/v1.0su/62cd725d6088' }
 export default {
   name: 'RsvpInfoCollection',
   components: { Nav, LoadingSpinner, ErrorMessage, Checkboxes, StyleWrapper, Question },
+  mixins: [ redirect ],
   data () {
     return {
       childrenSelected: [],
@@ -134,7 +136,7 @@ export default {
     redirectToSignupIfNotAuthenticated: function () {
       if (!this.isAuthenticated) {
         console.log('User attempted to RSVP without being authenticated')
-        this.$store.commit('setRedirectRoute', { name: 'RsvpConfirmation', params: { eventId: this.eventId } })
+        this.setRedirectRouteHere()
         this.$router.push({ name: 'SignUp' })
       }
     },
@@ -142,7 +144,7 @@ export default {
       if (!this.currentUser.hasAllRequiredFields) {
         // send them back to onboarding.
         console.log('user doesnt have required fields on rsvpinfocollection step, sending them back to onboarding', this.currentUser)
-        this.$store.commit('setRedirectRoute', { name: 'RsvpConfirmation', params: { eventId: this.eventId  } })
+        this.setRedirectRouteHere()
         this.$router.push({ name: 'OnboardNewUser' })
       } else {
         console.log('user already onboarded, not redirecting')

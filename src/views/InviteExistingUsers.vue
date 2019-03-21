@@ -40,7 +40,7 @@ import InviteUserListItem from '@/components/FTE/InviteUserListItem.vue'
 import { mapGetters } from 'vuex'
 import Alert from '@/components/Alert.vue'
 import LoadingSpinner from '@/components/LoadingSpinner.vue'
-import alerts from '@/mixins/alerts.js'
+import { alerts } from '@/mixins'
 
 export default {
   name: 'InviteExistingUsers',
