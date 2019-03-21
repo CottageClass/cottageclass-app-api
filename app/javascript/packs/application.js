@@ -16,14 +16,14 @@ import store from '../../../src/store'
 import '../../../src/registerServiceWorker'
 import VueAnalytics from 'vue-analytics'
 
-if (window.opener) {
+if (window.opener && window.opener.location && window.opener.location.origin === window.location.origin) {
   // If we're in a popup window that was opened for authentication, fire callback and close it
   document.addEventListener('DOMContentLoaded', () => {
     const element = '#app'
     let token = _.get(document.querySelector(element), 'dataset.token')
     if (window.opener.oauthCallback) {
       window.opener.oauthCallback({ token })
-      _.unset(window, 'opener')
+      _.unset(window, 'opener.oauthCallback')
     }
     window.close()
   })
