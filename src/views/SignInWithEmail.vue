@@ -68,21 +68,21 @@ import { mapGetters } from 'vuex'
 import { signIn } from '@/utils/api'
 import ErrorMessage from '@/components/base/ErrorMessage.vue'
 import StyleWrapper from '@/components/FTE/StyleWrapper.vue'
-import providerAuth from '@/mixins/providerAuthentication'
+import { providerAuthentication } from '@/mixins'
 import MainNav from '@/components/MainNav.vue'
 import Footer from '@/components/Footer.vue'
 
 export default {
   name: 'SignInWithEmail',
   components: { ErrorMessage, StyleWrapper, MainNav, Footer },
-  mixins: [providerAuth],
+  mixins: [ providerAuthentication ],
   data: function () {
     return {
       email: '',
       password: '',
       showError: false,
       errorMessage: null,
-      showFacebookLogin: !this.hideFacebookLogin(),
+      showFacebookLogin: !this.hideFacebookLogin()
     }
   },
   mounted: function () {
@@ -91,7 +91,6 @@ export default {
         this.$router.push({ name: 'Events' })
       } else if (this.currentUser.id) {
         this.$router.push({ name: 'OnboardNewUSer' })
-
       } else {
         return false
       }

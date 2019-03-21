@@ -58,8 +58,7 @@ This is the map view of a list of events
 </template>
 
 <script>
-import maps from '@/mixins/maps'
-import screen from '@/mixins/screen'
+import { maps, screen } from '@/mixins'
 import EventList from '@/components/EventList.vue'
 import _ from 'lodash/fp'
 
@@ -217,7 +216,7 @@ select {
   -webkit-align-items: flex-start;
   -ms-flex-align: start;
   align-items: flex-start;
-  background-color: #fff;  
+  background-color: #fff;
 }
 
 .map-button-1 {
