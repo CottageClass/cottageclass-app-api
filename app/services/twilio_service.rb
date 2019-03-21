@@ -1,14 +1,14 @@
 class TwilioService
   NOTIFY_ON_ERROR = [
     '+13104835624',
-    '+16144656371',
-  ]
+    '+16144656371'
+  ].freeze
 
-  def initialize(twilio_client=nil)
+  def initialize(twilio_client = nil)
     @twilio_client = twilio_client
   end
 
-  def proxy_session_for(initiator: , client: )
+  def proxy_session_for(initiator:, client:)
     # -> and query for last_action_at + TTL_SECONDS > now
     existing_sessions = TwilioSession
       .live
@@ -35,7 +35,7 @@ class TwilioService
           twilio_sid_client: twilio_client_obj.sid,
           proxy_identifier_initiator: twilio_initiator_obj.proxy_identifier,
           proxy_identifier_client: twilio_client_obj.proxy_identifier,
-          last_action_at: DateTime.now.utc,
+          last_action_at: DateTime.now.utc
         )
       end
     end
@@ -61,7 +61,7 @@ class TwilioService
       twilio_session_sid = cc_twilio_session.twilio_sid
       twilio_receiver_sid = twilio_sid_for_participant(
         cc_twilio_session: cc_twilio_session,
-        participant: receiver,
+        participant: receiver
       )
 
       # Send message to ppant
@@ -78,32 +78,29 @@ class TwilioService
         receiver_id: receiver.id,
         cc_twilio_session_id: cc_twilio_session.id,
         twilio_interaction_sid: twilio_msg_obj.sid,
-        content: JSON.parse(twilio_msg_obj.data)['body'],
+        content: JSON.parse(twilio_msg_obj.data)['body']
       )
       msg
     end
   end
 
-
   private
 
   def with_alerting(initiator:, client:, session_id:, method:)
-    begin
-      yield
-    rescue => e
-      # do not alert for errors in dev
-      return if ENV['RAILS_ENV'] != 'production'
+    yield
+  rescue => e
+    # do not alert for errors in dev
+    return if ENV['RAILS_ENV'] != 'production'
 
-      # send message to developer, Holmes containing error
-      # - TODO: if webhook for "out of proxy numbers" is added, trigger that instead
-      # - See: https://www.twilio.com/docs/proxy/api/webhooks#callbackurl
-      NOTIFY_ON_ERROR.each do |num|
-        twilio_client.messages.create(
-          messaging_service_sid: ENV['TWILIO_ALERT_MESSAGING_SERVICE_SID'],
-          to: num,
-          body: "Error #{method} for participants #{initiator.email}, #{client.email} in session #{session_id}: #{e}",
-        )
-      end
+    # send message to developer, Holmes containing error
+    # - TODO: if webhook for "out of proxy numbers" is added, trigger that instead
+    # - See: https://www.twilio.com/docs/proxy/api/webhooks#callbackurl
+    NOTIFY_ON_ERROR.each do |num|
+      twilio_client.messages.create(
+        messaging_service_sid: ENV['TWILIO_ALERT_MESSAGING_SERVICE_SID'],
+        to: num,
+        body: "Error #{method} for participants #{initiator.email}, #{client.email} in session #{session_id}: #{e}"
+      )
     end
   end
 
@@ -115,30 +112,27 @@ class TwilioService
       .create(body: message)
   end
 
-
   def add_participant_to_session!(session_id, name, phone_w_country_code)
-    begin
-      proxy_service
-        .sessions(session_id)
-        .participants
-        .create(
-          friendly_name: name,
-          identifier: phone_w_country_code,
-        )
-    rescue Twilio::REST::RestError => e
-      # skip retry if participant is already added
-      if has_existing_participant?(e)
-        # do nothing
-      else
-        # retry
-        add_participant_to_session!(session_id, name, phone_w_country_code)
-      end
+    proxy_service
+      .sessions(session_id)
+      .participants
+      .create(
+        friendly_name: name,
+        identifier: phone_w_country_code
+      )
+  rescue Twilio::REST::RestError => e
+    # skip retry if participant is already added
+    if has_existing_participant?(e)
+      # do nothing
+    else
+      # retry
+      add_participant_to_session!(session_id, name, phone_w_country_code)
     end
   end
 
   def has_existing_participant?(twilio_rest_error)
     twilio_rest_error.error_message.match(/Participant has already been added/) ||
-      twilio_rest_error.code == "80103"
+      twilio_rest_error.code == '80103'
   end
 
   def create_twilio_proxy_session!(session_name)
@@ -146,11 +140,11 @@ class TwilioService
       .sessions
       .create(
         unique_name: session_name,
-        ttl: TwilioSession::TTL_SECONDS,
+        ttl: TwilioSession::TTL_SECONDS
       )
   end
 
-  def unique_name_for_session(initiator_id, client_id, timestamp=DateTime.now)
+  def unique_name_for_session(initiator_id, client_id, timestamp = DateTime.now)
     "#{initiator_id}_#{client_id}_#{timestamp.to_i}"
   end
 

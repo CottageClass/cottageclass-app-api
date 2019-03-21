@@ -14,13 +14,12 @@ class MessagesController < ApiController
     render json: MessageSerializer.json_for(@msgs), status: 200
   end
 
-
   private
 
   def message_params
     params.require(:message).permit(
       :sender_id,
-      :receiver_id,
+      :receiver_id
     )
   end
 end
