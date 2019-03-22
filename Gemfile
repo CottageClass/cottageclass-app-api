@@ -26,6 +26,7 @@ gem 'country_select'
 gem 'kaminari'
 gem 'sassc-rails'
 gem 'webpacker', '~> 3.5.5'
+gem 'bcrypt', '~> 3.1.7'
 
 group :production do
   gem 'airbrake'
