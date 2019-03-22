@@ -203,7 +203,7 @@ export default {
         }
       }
     },
-    ...mapGetters(['currentUser'])
+    ...mapGetters(['currentUser', 'redirectRoute'])
 
   },
   methods: {
