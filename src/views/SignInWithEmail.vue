@@ -141,12 +141,12 @@ export default {
             signIn({ email, password })
               .then(res => {
                 console.log('auth success:', res)
+                const JWT = res.data[0]
+                return component.$store.dispatch('establishUser', { JWT })
               }).catch(err => {
                 component.showError = true
                 component.errorMessage = 'There was a problem signing you in. If you forgot your password, email  contact@cottageclass.com for help.'
                 console.log('auth failure', err)
-              }).then(() => {
-                return component.$store.dispatch('updateCurrentUserFromServer')
               }).then(() => {
                 if (component.currentUser.hasAllRequiredFields) {
                   component.$router.push({ name: 'Events' })
