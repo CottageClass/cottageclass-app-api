@@ -1,5 +1,6 @@
 class Users::SessionsController < Devise::SessionsController
-  skip_before_action :verify_authenticity_token, only: %i[destroy]
+  # protect_from_forgery with: :null_session # since this is called as an API, we have to deal with CSRF tokens
+  skip_before_action :verify_authenticity_token, only: %i[destroy create]
 
   respond_to :json
 
