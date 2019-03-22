@@ -1,6 +1,10 @@
 class User < ApplicationRecord
   include Devise::JWT::RevocationStrategies::JTIMatcher
 
+  # adds an `authenticate` method that we use for old passwords from when we used Knock instead of Devise.
+  has_secure_password
+
+
   # Include devise modules. Others available are:
   # :timeoutable, :confirmable, :invitable, :lockable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :omniauthable,
@@ -59,6 +63,15 @@ class User < ApplicationRecord
                             dependent: :destroy
 
   accepts_nested_attributes_for :children, allow_destroy: true, reject_if: :child_with_same_name_exists?
+
+  def valid_password?(password)
+    if !has_devise_password? && valid_transitional_password?(password)
+      convert_password_to_devise(password)
+      return true
+    end
+
+    super
+  end
 
   def jwt_payload
     { 'user' => UserSerializer.json_for(self, include: %i[children]) }
@@ -119,6 +132,18 @@ class User < ApplicationRecord
 
   private
 
+  def has_devise_password?
+    encrypted_password.present?
+  end
+
+  def valid_transitional_password?(password)
+    authenticate(password)
+  end
+
+  def convert_password_to_devise(password)
+    update!(password: password)
+  end
+
   def cleanup
     self.email = email.to_s.downcase
     self.facebook_uid = uid if %w[facebook].include?(provider)
@@ -165,4 +190,5 @@ class User < ApplicationRecord
   def populate_lname_from_name!
     self.last_name = name.split(' ').last if name.present? && last_name.blank?
   end
+
 end
