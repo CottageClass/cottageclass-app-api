@@ -92,7 +92,9 @@ if (isAuthWindow) {
 
     axios.interceptors.request.use(
       config => {
-        config.headers['Authorization'] = `Bearer ${store.getters.JWT}`
+        if (store.getters.JWT) {
+          config.headers['Authorization'] = `Bearer ${store.getters.JWT}`
+        }
         if (config.method !== 'get') {
           // this is for making api calls to our server.  may not be a valid long term solution
           config.headers['X-CSRF-Token'] = csrfToken
