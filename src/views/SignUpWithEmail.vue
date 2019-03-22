@@ -59,7 +59,7 @@
                           >
                           <input
                           type="password"
-                          v-validate="'required'"
+                          v-validate="'required|min:4|max:128'"
                           name="password"
                           v-model="password"
                           placeholder="Password"
