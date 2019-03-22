@@ -3,8 +3,8 @@ export default {
     setRedirectRouteHere: function () {
       this.$store.commit('setRedirectRoute', {
         route: {
-          name: 'RsvpConfirmation',
-          params: { eventId: this.eventId }
+          name: this.$route.name,
+          params: this.$route.params
         }
       })
     }
