@@ -5,8 +5,8 @@
   <div class="hero-section">
     <div class="hero-container w-container">
       <div class="hero-content">
-        <h1 class="h1-display">The best kids&rsquo; activities in your neighborhood are <span class="highlight">free</span></h1>
-        <div class="hero-subtitle">Host kids once a month at your home to get free, unlimited access to your neighborhood's best babysitters: other experienced parents like you.</div>
+        <h1 class="h1-display">Meet cool parents, find playdates, share childcare. <span class="highlight">Free.</span></h1>
+        <div class="hero-subtitle">Host a monthly playdate at your home to get free, unlimited access to playdates offered by nearby families. Drop off, hang out, invite friends, make new ones—it&rsquo;s up to you. From newborns to tweens, all ages are welcome!</div>
         <a href="" class="button-hero w-button" @click.prevent="$router.push({ name: 'SignUp' })">Sign up today. It's free!</a>
         <div class="how-wrapper">
           <ul class="unordered-list">
@@ -16,11 +16,12 @@
             </li>
             <li class="list-item"><img src="@/assets/get-care.svg" alt="" class="image-262">
               <div class="hero-list-item-heading">Get Care.</div>
-              <div class="hero-list-item-subtitle">By hosting a monthly event, you get unlimited access to <router-link :to="{name: 'Events'}" class="links">activities like these</router-link>.</div>
+              <div class="hero-list-item-subtitle">By hosting yourself, you get unlimited access to
+ <router-link :to="{name: 'Events'}" class="links">playdates like these</router-link>.</div>
             </li>
             <li class="list-item"><img src="@/assets/socially.svg" alt="" class="image-262">
-              <div class="hero-list-item-heading">Socially.</div>
-              <div class="hero-list-item-subtitle">You can invite a circle of trusted friends, or meet new families near you.</div>
+              <div class="hero-list-item-heading">Help in a pinch.</div>
+              <div class="hero-list-item-subtitle">If you need care at specific times, you can <a href="">request</a> playdates too!</div>
             </li>
           </ul>
         </div>
