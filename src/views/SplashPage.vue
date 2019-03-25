@@ -170,8 +170,8 @@
         </li>
         <li class="cottageclass-is-list-item"><img src="https://uploads-ssl.webflow.com/5ba3c28cff7d47030870c8e2/5ba5420373b5d2f4e4a03438_heart%202.svg" alt="" class="cottageclass-is-list-item-image">
           <div class="cottageclass-is-list-item-text">
-            <h2 class="heading-2">Get quality care when you need it.</h2>
-            <p class="p-center-black desktop-align-left">Finding a good sitter is hard, but on KidsClub all the “sitters” are amazing parents like you! KidsClub will help you find reliable care with parents you trust, even if it's at the last minute.</p>
+            <h2 class="heading-2">Bring friends, or make friends.</h2>
+            <p class="p-center-black desktop-align-left">KidsClub works great for coordinating childcare with families you know and trust. Or you can use it to meet new families with kids of similar ages. You can drop kids off, or stick around and help the host. It's up to you.</p>
           </div>
         </li>
       </ul>
