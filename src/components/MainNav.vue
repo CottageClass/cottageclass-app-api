@@ -38,9 +38,9 @@
           </li>
         -->
           <li v-if="isAuthenticated">
-            <router-link to="/profile/edit" class="link-block w-inline-block">
+            <a href="/profile/edit" class="link-block w-inline-block">
               <div class="text-block">Edit Profile</div>
-            </router-link>
+            </a>
           </li>
           <li>
             <router-link to="/faq" class="link-block w-inline-block">
@@ -63,14 +63,14 @@
             </a>
           </li>
           <li v-if="!isAuthenticated">
-            <router-link to="/log-in" class="link-block w-inline-block">
+            <a href="/log-in" class="link-block w-inline-block">
               <div class="text-block">Log in</div>
-            </router-link>
+            </a>
           </li>
           <li v-if="!isAuthenticated">
-            <router-link to="/sign-up" class="link-block w-inline-block">
+            <a href="/sign-up" class="link-block w-inline-block">
               <div class="text-block">Sign up</div>
-            </router-link>
+            </a>
           </li>
         </ul>
       </div>

@@ -66,7 +66,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 select {
   appearance: menulist;
   --webkit-appearance: menulist;
@@ -211,7 +211,10 @@ a {
 
 .events-list-wrapper {
   width: 100%;
-  margin-top: -84px;
+}
+
+.events-list-wrapper div:first-child .event-date-section-tittle {
+  margin-top: 0px
 }
 
 .event-date-section-tittle {
@@ -357,10 +360,6 @@ a {
 
   .content-container-4 {
     padding-bottom: 128px;
-  }
-
-  .events-list-wrapper {
-    margin-top: -48px;
   }
 
   .no-events-message {
