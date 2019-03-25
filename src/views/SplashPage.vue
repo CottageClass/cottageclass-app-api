@@ -21,7 +21,7 @@
             </li>
             <li class="list-item"><img src="@/assets/socially.svg" alt="" class="image-262">
               <div class="hero-list-item-heading">Help in a pinch.</div>
-              <div class="hero-list-item-subtitle">If you need care at specific times, you can <a href="">request</a> playdates too!</div>
+              <div class="hero-list-item-subtitle">If you need care at specific times, you can request playdates too!</div>
             </li>
           </ul>
         </div>
