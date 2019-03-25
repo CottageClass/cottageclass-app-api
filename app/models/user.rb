@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   include Devise::JWT::RevocationStrategies::JTIMatcher
+  include LegacyPassword
 
   # Include devise modules. Others available are:
   # :timeoutable, :confirmable, :invitable, :lockable
@@ -165,4 +166,5 @@ class User < ApplicationRecord
   def populate_lname_from_name!
     self.last_name = name.split(' ').last if name.present? && last_name.blank?
   end
+
 end

@@ -58,10 +58,8 @@ class AddDeviseToUsers < ActiveRecord::Migration[5.2]
 
         change_column_default :users, :encrypted_password, nil
         change_column_null :users, :email, false
-        remove_column :users, :password_digest
       end
       direction.down do
-        add_column :users, :password_digest, :string
         change_column_null :users, :email, true
       end
     end

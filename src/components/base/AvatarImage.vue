@@ -3,13 +3,13 @@
 </template>
 
 <script>
+import placeholder from '@/assets/avatar-placeholder.png'
 export default {
   name: 'AvatarImage',
   // TODO I think we can remove this 'className' and just use a class everywhere
   props: ['person', 'className'],
   computed: {
     url: function () {
-      const placeholder = '@/assets/avatar-placeholder.png'
       if (this.person) {
         if (this.person.avatar) {
           return this.person.avatar
@@ -18,7 +18,7 @@ export default {
         } else {
           return placeholder
         }
-      } else { 
+      } else {
         return placeholder
       }
     }

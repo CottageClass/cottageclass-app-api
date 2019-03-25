@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_18_174456) do
+ActiveRecord::Schema.define(version: 2019_03_22_200820) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
 
   create_table "active_admin_comments", force: :cascade do |t|
@@ -31,14 +32,14 @@ ActiveRecord::Schema.define(version: 2019_03_18_174456) do
 
   create_table "children", force: :cascade do |t|
     t.string "first_name"
-    t.string "school_name"
     t.datetime "birthday"
     t.bigint "parent_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "school_name"
     t.text "allergies", default: [], array: true
     t.text "dietary_restrictions", default: [], array: true
     t.text "special_needs"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.index ["parent_id"], name: "index_children_on_parent_id"
   end
 
@@ -78,17 +79,11 @@ ActiveRecord::Schema.define(version: 2019_03_18_174456) do
   create_table "event_series", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "name", null: false
-    t.string "time_zone"
     t.date "start_date", null: false
-    t.date "paused_from"
-    t.date "paused_until"
     t.time "starts_at", null: false
     t.time "ends_at", null: false
     t.integer "repeat_for", null: false
     t.integer "interval", null: false
-    t.integer "maximum_children", default: 0
-    t.integer "child_age_minimum", default: 0
-    t.integer "child_age_maximum", default: 0
     t.boolean "has_pet", default: false
     t.text "activity_names", default: [], array: true
     t.text "foods", default: [], array: true
@@ -97,30 +92,36 @@ ActiveRecord::Schema.define(version: 2019_03_18_174456) do
     t.json "meta"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer "maximum_children", default: 0
+    t.integer "child_age_minimum", default: 0
+    t.integer "child_age_maximum", default: 0
+    t.string "time_zone"
+    t.date "paused_from"
+    t.date "paused_until"
     t.index ["user_id"], name: "index_event_series_on_user_id"
   end
 
   create_table "events", force: :cascade do |t|
     t.bigint "event_series_id", null: false
     t.string "name", null: false
-    t.string "time_zone"
     t.datetime "starts_at", null: false
     t.datetime "ends_at", null: false
+    t.boolean "modified", default: false
+    t.json "meta"
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer "maximum_children", default: 0
     t.integer "child_age_minimum", default: 0
     t.integer "child_age_maximum", default: 0
-    t.integer "kind", default: 0
-    t.boolean "modified", default: false
     t.boolean "has_pet", default: false
     t.text "activity_names", default: [], array: true
     t.text "foods", default: [], array: true
     t.text "house_rules"
     t.text "pet_description"
-    t.json "meta"
+    t.string "time_zone"
     t.decimal "latitude"
     t.decimal "longitude"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer "kind", default: 0
     t.index ["event_series_id"], name: "index_events_on_event_series_id"
     t.index ["latitude", "longitude"], name: "index_events_on_latitude_and_longitude"
   end
@@ -141,15 +142,15 @@ ActiveRecord::Schema.define(version: 2019_03_18_174456) do
   create_table "notifications", force: :cascade do |t|
     t.text "body", null: false
     t.bigint "recipient_id", null: false
-    t.string "notifiable_type"
-    t.bigint "notifiable_id"
-    t.integer "kind", default: 0
     t.string "sms_provider_identifier"
-    t.string "email_provider_identifier"
     t.string "status"
     t.json "meta"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer "kind", default: 0
+    t.string "notifiable_type"
+    t.bigint "notifiable_id"
+    t.string "email_provider_identifier"
     t.index ["notifiable_type", "notifiable_id"], name: "index_notifications_on_notifiable_type_and_notifiable_id"
     t.index ["recipient_id"], name: "index_notifications_on_recipient_id"
   end
@@ -205,16 +206,7 @@ ActiveRecord::Schema.define(version: 2019_03_18_174456) do
 
   create_table "users", force: :cascade do |t|
     t.string "email", null: false
-    t.string "avatar"
-    t.string "referrer"
-    t.decimal "fuzzy_latitude"
-    t.decimal "fuzzy_longitude"
-    t.string "apartment_number"
-    t.string "neighborhood"
-    t.string "sublocality"
-    t.string "time_zone"
-    t.text "source_tags", default: [], array: true
-    t.boolean "verified", default: false
+    t.string "legacy_password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "facebook_uid"
@@ -222,18 +214,16 @@ ActiveRecord::Schema.define(version: 2019_03_18_174456) do
     t.string "last_name"
     t.string "name"
     t.boolean "agree_tos", default: false
-    t.decimal "latitude"
-    t.decimal "longitude"
     t.string "street_number"
     t.string "route"
     t.string "locality"
     t.string "admin_area_level_1"
     t.string "admin_area_level_2"
+    t.string "country", default: "United States"
     t.string "postal_code"
     t.string "phone_area_code"
-    t.string "phone_number"
-    t.string "country", default: "United States"
     t.string "phone_country_code", default: "1"
+    t.string "phone_number"
     t.text "activities", default: [], array: true
     t.boolean "available_mornings"
     t.boolean "available_afternoons"
@@ -243,6 +233,16 @@ ActiveRecord::Schema.define(version: 2019_03_18_174456) do
     t.datetime "fb_access_token_expires_at", default: -> { "CURRENT_TIMESTAMP" }
     t.text "profile_blurb"
     t.string "onboarding_care_type"
+    t.string "avatar"
+    t.decimal "latitude"
+    t.decimal "longitude"
+    t.decimal "fuzzy_latitude"
+    t.decimal "fuzzy_longitude"
+    t.string "time_zone"
+    t.boolean "verified", default: false
+    t.string "neighborhood"
+    t.string "sublocality"
+    t.string "apartment_number"
     t.text "images", default: [], array: true
     t.text "languages", default: [], array: true
     t.string "job_position"
@@ -252,6 +252,8 @@ ActiveRecord::Schema.define(version: 2019_03_18_174456) do
     t.string "instagram_user"
     t.string "twitter_user"
     t.string "linkedin_user"
+    t.text "source_tags", default: [], array: true
+    t.string "referrer"
     t.string "encrypted_password", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"

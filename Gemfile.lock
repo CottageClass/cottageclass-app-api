@@ -493,6 +493,7 @@ DEPENDENCIES
   airbrake
   airbrake-ruby
   apitome
+  bcrypt (~> 3.1.7)
   brakeman
   bullet
   byebug
