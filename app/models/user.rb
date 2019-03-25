@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   include Devise::JWT::RevocationStrategies::JTIMatcher
+  include LegacyPassword
 
   # Include devise modules. Others available are:
   # :timeoutable, :confirmable, :invitable, :lockable
@@ -60,15 +61,6 @@ class User < ApplicationRecord
 
   accepts_nested_attributes_for :children, allow_destroy: true, reject_if: :child_with_same_name_exists?
 
-  def valid_password?(password)
-    if !devise_password? && valid_transitional_password?(password)
-      convert_password_to_devise(password)
-      return true
-    end
-
-    super
-  end
-
   def jwt_payload
     { 'user' => UserSerializer.json_for(self, include: %i[children]) }
   end
@@ -127,22 +119,6 @@ class User < ApplicationRecord
   end
 
   private
-
-  def devise_password?
-    encrypted_password.present?
-  end
-
-  def valid_transitional_password?(unencrypted_password)
-    # check the password against the existing digest
-    BCrypt::Password.new(legacy_password_digest).is_password?(unencrypted_password) && self
-  end
-
-  def convert_password_to_devise(password)
-    # generate an encrypted password using the method used when we create a new user
-    new_hashed_password = User.new(password: password).encrypted_password
-    self.encrypted_password = new_hashed_password
-    save!
-  end
 
   def cleanup
     self.email = email.to_s.downcase
