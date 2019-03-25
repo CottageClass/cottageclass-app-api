@@ -3,12 +3,15 @@ require 'active_support/concern'
 module LegacyPassword
   extend ActiveSupport::Concern
 
-  def valid_password?(password)
-    if !devise_password? && valid_transitional_password?(password)
-      convert_password_to_devise(password)
-      return true
+  included do
+    def valid_password?(password)
+      puts "hooo"
+      if !devise_password? && valid_transitional_password?(password)
+        convert_password_to_devise(password)
+        return true
+      end
+      super
     end
-    super
   end
 
   private
