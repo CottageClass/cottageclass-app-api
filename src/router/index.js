@@ -14,7 +14,6 @@ import EventPage from '@/components/EventPage.vue'
 import Events from '@/views/Events.vue'
 import EventsDetail from '@/views/EventsDetail.vue'
 import RsvpInfoCollection from '@/components/RsvpInfoCollection.vue'
-import RsvpConfirmation from '@/components/RsvpConfirmation.vue'
 import CancelRSVP from '@/components/CancelRSVP.vue'
 import MyRSVPs from '@/components/MyRSVPs.vue'
 import Faq from '@/components/Faq.vue'
@@ -114,11 +113,6 @@ export default new Router({
       path: '/event/:id/',
       name: 'EventPage',
       component: EventPage
-    },
-    {
-      path: '/rsvp-confirmation/:eventId',
-      name: 'RsvpConfirmation',
-      component: RsvpConfirmation
     },
     {
       path: '/request/:id',
