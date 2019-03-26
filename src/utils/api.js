@@ -408,7 +408,7 @@ export const fetchEvent = async (id) => {
   }
 }
 
-export function fetchUpcomingEventsWithinDistance ({ miles, lat, lng, pageSize = 500, page = 1 }) {
+export function fetchUpcomingEventsWithinDistance ({ miles, lat, lng, pageSize = 100, page = 1 }) {
   return fetchEvents(
     `upcoming/miles/${miles}/latitude/${lat}/longitude/${lng}/page/${page}/page_size/${pageSize}`,
     e => e.startsAt

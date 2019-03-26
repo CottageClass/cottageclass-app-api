@@ -85,12 +85,11 @@ export default {
       })
     },
     fetchAllUpcomingEvents: async function () {
-      const res = (await fetchEvents('upcoming', e => e.startsAt)).slice(20)
-      this.events = []
-      // slice doesn't work here because fetchEvents returns an object
-      for (let i = 0; i < 20; i++) {
-        this.events.push(res[i])
-      }
+      this.$store.dispatch('fetchUpcomingEventsWithinDistance', {
+        miles: this.maximumDistanceFromUserInMiles,
+        lat: '40.692928',
+        lng: '-73.985749'
+      })
     }
   },
   mounted: function () {
