@@ -46,7 +46,7 @@ describe('events', () => {
 })
 
 describe('users', () => {
-  describe('fetchUser', async () => {
+  describe('fetchUser', () => {
     it('has the right data', async () => {
       const user = await fetchUser('1230')
       expect(user.id).toBe('1230')

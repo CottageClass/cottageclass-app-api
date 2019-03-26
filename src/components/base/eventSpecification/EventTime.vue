@@ -22,6 +22,11 @@ export default {
       timeSelected: '',
       errorMesg: 'Please choose a time for your playdate.',
       times: [
+        '9:00am - 12:00pm',
+        '11:00am - 2:00pm',
+        '2:00pm - 5:00pm',
+        '3:00pm - 6:00pm',
+        '4:00pm - 7:00pm',
         '5:00pm - 8:00pm',
         '5:30pm - 8:30pm',
         '6:00pm - 9:00pm',
@@ -44,7 +49,7 @@ export default {
       }
     },
     startTimeUnparsed: function () {
-      return this.timeSelected.substring(0, this.timeSelected.indexOf(' '))
+      return this.timeSelected.split(' ')[0]
     },
     startTime: function () {
       return moment(this.startTimeUnparsed, 'h mm a').format('HH:mm')
