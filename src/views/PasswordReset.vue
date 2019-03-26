@@ -7,7 +7,7 @@
               <StyleWrapper styleIs="onboarding">
                 <ErrorMessage
                   v-if="showError && (errors.first('email') || errors.first('password')) || errorMessage"
-                  :messages="[errorMessage, errors.first('email'), errors.first('password')]" 
+                  :messages="[errorMessage, errors.first('email'), errors.first('password')]"
                   />
               </StyleWrapper>
             <h1 class="auth-heading">Reset Password</h1>
@@ -29,7 +29,7 @@
                     <div class="divider-text">OR</div>
                   </div>
                   <div class="divider-1px-2"></div>
-                </div>              
+                </div>
               <input
                 @keyup.enter="submitRequest"
                 v-model="phoneNumber"

@@ -18,10 +18,10 @@
         </div>
       </router-link>
     </div>
-<!-- todo: replace with new images     
+<!-- todo: replace with new images
     <Images :person="person" />
     -->
-<!-- todo: replace with real employer info.      
+<!-- todo: replace with real employer info.
     <div class="title-bar-and-action-v2">
       <div class="div-block-7">
         <div class="name-and-caption">
@@ -31,28 +31,26 @@
         </div>
       </div>
       -->
-<!-- todo: replace with child age info.      
+<!-- todo: replace with child age info.
       <h5 class="caption" v-if="person.children.length">
         <ChildInfo :children="person.children" />
       </h5>
--->  
-<!-- Todo: fix style     
+-->
+<!-- Todo: fix style
       <ProviderInfo :person="person" />
--->      
     </div>
+-->
   </span>
 </router-link>
 </template>
 
 <script>
-import Images from './Images.vue'
 import AvatarImage from '@/components/base/AvatarImage'
-import ProviderInfo from '@/components/base/ProviderInfo.vue'
 
 export default {
   name: 'RequestCareProviderItem',
   props: ['person'],
-  components: { Images, AvatarImage, ProviderInfo },
+  components: { AvatarImage }
 }
 </script>
 

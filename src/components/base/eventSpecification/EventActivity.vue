@@ -54,7 +54,7 @@ export default {
     activitySelected: function () {
       this.emitInput()
     }
-  },
+  }
 }
 </script>
 

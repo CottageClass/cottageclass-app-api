@@ -172,7 +172,6 @@ import Images from '@/components/Images.vue'
 
 import * as utils from '@/utils/utils.js'
 import { mapGetters } from 'vuex'
-import _ from 'lodash'
 
 var moment = require('moment')
 

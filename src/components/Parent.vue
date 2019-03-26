@@ -69,7 +69,7 @@ export default {
         '# Children': numChildren,
         'Checked': inOrOut,
         'Time': Date(),
-        'Provider Phone #': this.currentUser.phone,
+        'Provider Phone #': this.currentUser.phone
       }, 'events').then((data) => {
         console.log(data)
         this.checkState = 'checked ' + inOrOut

@@ -78,8 +78,6 @@ import ErrorMessage from '@/components/base/ErrorMessage.vue'
 import * as api from '@/utils/api.js'
 import { mapGetters } from 'vuex'
 
-import _ from 'lodash'
-
 var VueScrollTo = require('vue-scrollto')
 
 export default {

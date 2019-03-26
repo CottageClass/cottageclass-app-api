@@ -49,7 +49,7 @@ export default {
     },
     dateIsValid: function () {
       return moment(this.dateTimeSelected).isValid()
-      }
+    }
   },
   watch: {
     dateTimeSelected: function () {

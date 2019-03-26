@@ -294,7 +294,6 @@ a {
   padding-left: 9px;
 }
 
-
 .title-bar-and-action {
   display: -webkit-box;
   display: -webkit-flex;

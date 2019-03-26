@@ -1,6 +1,6 @@
-const { environment } = require("@rails/webpacker");
-const vue = require("./loaders/vue");
-const custom = require("./custom");
+const { environment } = require('@rails/webpacker')
+const vue = require('./loaders/vue')
+const custom = require('./custom')
 const webpack = require('webpack')
 const dotenv = require('dotenv')
 
@@ -16,7 +16,7 @@ dotenvFiles.forEach((dotenvFile) => {
 
 environment.plugins.prepend('Environment', new webpack.EnvironmentPlugin(JSON.parse(JSON.stringify(process.env))))
 
-environment.config.merge(custom);
-environment.loaders.append("vue", vue);
+environment.config.merge(custom)
+environment.loaders.append('vue', vue)
 
-module.exports = environment;
+module.exports = environment

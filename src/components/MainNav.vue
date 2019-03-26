@@ -103,7 +103,7 @@ export default {
     clickedAway: function () {
       this.showMenu = false
     },
-    logout: function () {   
+    logout: function () {
       signOut().then(() => {
         this.$store.dispatch('establishUser', { JWT: null })
         this.$router.push({ name: 'Events' })
@@ -115,7 +115,7 @@ export default {
     logoRouterTarget () {
       return this.isAuthenticated ? 'Events' : 'SplashPage'
     },
-    ... mapGetters([ 'isAuthenticated', 'currentUser', 'alert' ])
+    ...mapGetters([ 'isAuthenticated', 'currentUser', 'alert' ])
   }
 }
 </script>

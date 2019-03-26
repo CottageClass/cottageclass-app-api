@@ -325,7 +325,7 @@ export default {
   background-image: linear-gradient(180deg, rgba(0, 0, 0, .1), rgba(0, 0, 0, .1));
 }
 
-.button-hero-mobile { 
+.button-hero-mobile {
   padding: 20px 40px 21px;
   border: 1px solid #1f88e9;
   border-radius: 4px;

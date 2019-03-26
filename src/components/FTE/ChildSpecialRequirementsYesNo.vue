@@ -20,7 +20,6 @@ import YesOrNo from '@/components/base/YesOrNo.vue'
 import Nav from '@/components/FTE/Nav.vue'
 import ErrorMessage from '@/components/base/ErrorMessage.vue'
 import StyleWrapper from '@/components/FTE/StyleWrapper.vue'
-import { mapGetters } from 'vuex'
 
 export default {
   name: 'ChildSpecialRequirementsYesNo',
@@ -65,7 +64,7 @@ export default {
     },
     nextButtonState: function () {
       return this.childHasSpecialNeeds.isTrue === null ? 'inactive' : 'next'
-    },
+    }
   }
 }
 </script>

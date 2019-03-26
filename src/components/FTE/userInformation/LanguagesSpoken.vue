@@ -36,7 +36,7 @@ export default {
       return this.languagesSortedByName.map(language => [language.code, language.language])
     },
     languagesSortedByName: function () {
-      return this.languages.sort((a, b) => a.language.localeCompare(b.language))
+      return this.languages.concat().sort((a, b) => a.language.localeCompare(b.language))
     }
   },
   mounted: function () {

@@ -144,7 +144,7 @@ export default {
         'Request Day': this.day,
         'Start Time': this.startTime,
         'End Time': this.endTime,
-        '# Children': this.numberOfChildren,
+        '# Children': this.numberOfChildren
       }, 'requests').then((data) => {
         console.log(data)
       }, (err) => {

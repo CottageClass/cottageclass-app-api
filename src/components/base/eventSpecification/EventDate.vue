@@ -33,7 +33,7 @@ export default {
     return {
       dateSelected: '',
       errorMesg: 'Please choose a day for your activity.',
-      otherDate: null,
+      otherDate: null
     }
   },
   mounted: function () {
