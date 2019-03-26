@@ -1,6 +1,10 @@
 # KidsClub
 
-## Develop
+## Development
+This repo contains the rails app which serves up the Vue app. 
+The Vue app is contained in the ./src folder.
+
+The `develop` branch should be used for development.  `Master` should be used for releases (staging and production).
 
 ### Prerequisites
 
@@ -21,7 +25,7 @@
     ```
     $ git clone git@github.com:CottageClass/cottageclass-app-api.git KidsClub
     $ cd KidsClub
-    $ git checkout --track origin/vuefied
+    $ git checkout --track origin/develop
     ```
 
 1. Install gems
@@ -35,6 +39,7 @@
     ```
 
 1. Update .env with database user/password.
+You can choose your username and password and Postgres will use those to create the test and development databases.
 1. Setup database
     ```
     $ RAILS_ENV=development bin/rails db:create
@@ -46,9 +51,9 @@
     $ yarn
     ```
 
-1. If required, copy the matching values in `.env` from Heroku app `vuefied-kidsclub`
+1. If required, copy the matching values in `.env` from Heroku app `kidsclub-staging`
     ```
-    $ heroku config -sa kidsclub-vuefied
+    $ heroku config -sa kidsclub-staging
     ```
 
 ### Run
@@ -84,28 +89,10 @@ you can also watch with
 
 
 #### Jest
-for testing vue/js frontend
+for testing vue/js frontend.  This will run watch tests.
     ```
     $ yarn run test
     ```
 
-## Deploy
-
-### Prerequisites
-
-1. Access to the Heroku app.
-1. [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli)
-
-### Setup
-
-1. Add the remote, if not already present.
-    ```
-    $ heroku git:remote --remote vuefied -a vuefied-kidsclub
-    ```
-
-### Deploy
-
-1. Push to Heroku
-    ```
-    $ git push vuefied vuefied:master
-    ```
+## Deployment
+All PR's to `develop` on github will result in review apps in the [heroku pipeline](https://dashboard.heroku.com/pipelines/f1618cba-fac9-4a02-9dee-4ddf2bc31ba6).  The stagin app is automatically deployed from `master` and the production app has to be manually deployed on the heroku dashboard.
