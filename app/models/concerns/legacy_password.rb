@@ -5,7 +5,6 @@ module LegacyPassword
 
   included do
     def valid_password?(password)
-      puts "hooo"
       if !devise_password? && valid_transitional_password?(password)
         convert_password_to_devise(password)
         return true

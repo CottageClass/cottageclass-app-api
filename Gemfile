@@ -22,11 +22,11 @@ gem 'timezone'
 gem 'twilio-ruby', '~> 5.15.2'
 
 gem 'apitome'
+gem 'bcrypt', '~> 3.1.7'
 gem 'country_select'
 gem 'kaminari'
 gem 'sassc-rails'
 gem 'webpacker', '~> 3.5.5'
-gem 'bcrypt', '~> 3.1.7'
 
 group :production do
   gem 'airbrake'
