@@ -106,6 +106,7 @@ if (isAuthWindow) {
       }
     )
 
+    /* eslint-disable no-new */
     new Vue({
       el: element,
       store,

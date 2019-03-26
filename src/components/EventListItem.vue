@@ -600,7 +600,6 @@ a {
   align-items: center;
 }
 
-
 @media (max-width: 767px) {
   .body {
     padding-bottom: 100px;

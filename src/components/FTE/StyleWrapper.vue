@@ -464,7 +464,6 @@ export default {
     padding-left: 9px;
   }
 
-
   .list-item-content-container {
     display: -webkit-box;
     display: -webkit-flex;

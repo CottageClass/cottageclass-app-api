@@ -73,7 +73,7 @@ export default {
   components: { RequestCareProviderItem, ShareButton, MainNav, StyleWrapper },
   data () {
     return {
-      people: [], 
+      people: [],
       mapOptions: { // move this to map component when i separate it.
         'disableDefaultUI': true, // turns off map controls
         'gestureHandling': 'greedy' // allows one finger pan.

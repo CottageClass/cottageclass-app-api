@@ -34,7 +34,6 @@ import EventList from '@/components/EventList.vue'
 import MainNav from '@/components/MainNav.vue'
 import Footer from '@/components/Footer.vue'
 import EventListMap from '@/components/EventListMap.vue'
-import { fetchEvents } from '@/utils/api.js'
 import { mapGetters } from 'vuex'
 
 var moment = require('moment')
