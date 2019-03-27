@@ -10,10 +10,10 @@ import '@babel/polyfill'
 
 import _ from 'lodash'
 
-import App from '../../../src/App.vue'
-import router from '../../../src/router'
-import store from '../../../src/store'
-import '../../../src/registerServiceWorker'
+import App from '@/App.vue'
+import router from '@/router'
+import store from '@/store'
+import '@/registerServiceWorker'
 import VueAnalytics from 'vue-analytics'
 
 let isAuthWindow = false
