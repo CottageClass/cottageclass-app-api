@@ -55,7 +55,6 @@ export default {
         this.checkedAvailabilityIds.push(k)
       }
     }
-    console.log('A  mounted')
     console.log(this.initialAvailability)
   }
 }
