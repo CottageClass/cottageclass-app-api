@@ -116,10 +116,6 @@ export default {
       availableWeekends: !!this.currentUser.availableWeekends
     }
     this.children = { 'list': this.currentUser.children || [] }
-
-    this.FB.api('/me', function (response) {
-      console.log('Good to see you, ' + response.name + '.')
-    })
   },
   computed: {
     error: function () {
