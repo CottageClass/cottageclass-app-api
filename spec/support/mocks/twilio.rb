@@ -1,3 +1,6 @@
+require_relative './common.rb'
+
+
 module Mocks
   class Twilio < Mocks::Common
     def messages_create
