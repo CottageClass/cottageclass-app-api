@@ -1,5 +1,7 @@
 <template>
-  <Question
+<div>
+  <LoadingSpinner v-if="loading" />
+  <Question v-else
     title="Choose Profile Photos"
     subtitle="Choose the photos that best represent you, your family, or any activities you’d like to share.">
     <div class="image-wrapper">
@@ -12,6 +14,7 @@
         </div>
         <div v-else class="selection-container unselected" />
       </div>
+      <!-- these are here to bad the flex display.  The last line is awkward if we don't have them -->
       <div class="facebook-thumb blank"></div>
       <div class="facebook-thumb blank"></div>
       <div class="facebook-thumb blank"></div>
@@ -20,17 +23,20 @@
       <div class="facebook-thumb blank"></div>
     </div>
   </Question>
+  </div>
 </template>
 
 <script>
 import Question from '@/components/base/Question.vue'
+import LoadingSpinner from '@/components/LoadingSpinner.vue'
+
 import { fetchFacebookImages } from '@/utils/api'
 import { mapGetters } from 'vuex'
 import _ from 'lodash'
 
 export default {
   name: 'FacebookImageSelection',
-  components: { Question },
+  components: { Question, LoadingSpinner },
   props: ['value'],
   data () {
     return {
@@ -90,6 +96,9 @@ export default {
       return function (i) {
         return _.includes(this.selectedIndices, i)
       }
+    },
+    loading () {
+      return !this.facebookImageData
     },
     ...mapGetters([ 'currentUser' ])
   },

@@ -1,5 +1,5 @@
 <template>
-  <div class="onb-body">
+  <div class="content-wrapper">
   <div class="loading-container">
   <div v-bind:style="styles" class="spinner spinner--circle-8">
     <div v-bind:style="innerStyles" class="spinner-inner">

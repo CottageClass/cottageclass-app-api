@@ -96,10 +96,10 @@ import HouseRules from '@/components/FTE/userInformation/HouseRules.vue'
 import FacebookImageSelection from '@/components/FTE/userInformation/FacebookImageSelection.vue'
 
 const stepSequence = [
+  'facebookImages',
   'phone',
   'location',
   'children',
-  'facebookImages',
   'eventActivity',
   'food',
   'eventTime',
