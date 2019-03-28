@@ -20,6 +20,12 @@
             v-model="userData.location"
             @pressedEnter="nextStep"
             required="true"/>
+          <FacebookImageSelection
+            v-if="currentStep === 'facebookImages'"
+            v-model="userData.facebookImages"
+            @pressedEnter="nextStep"
+            v-on:noImages="nextStep"
+            required="true"/>
           <Children
             v-if="currentStep === 'children'"
             v-model="userData.children" />
@@ -65,10 +71,11 @@
 </template>
 
 <script>
-import * as api from '@/utils/api'
+import { submitEventSeriesData, submitUserInfo } from '@/utils/api'
 import { mapGetters } from 'vuex'
 import sheetsu from 'sheetsu-node'
 import moment from 'moment'
+import _ from 'lodash'
 
 import StyleWrapper from '@/components/FTE/StyleWrapper.vue'
 import Nav from '@/components/FTE/Nav.vue'
@@ -86,8 +93,10 @@ import YesOrNo from '@/components/base/YesOrNo.vue'
 import Availability from '@/components/FTE/userInformation/Availability.vue'
 import PetsDescription from '@/components/FTE/userInformation/PetsDescription.vue'
 import HouseRules from '@/components/FTE/userInformation/HouseRules.vue'
+import FacebookImageSelection from '@/components/FTE/userInformation/FacebookImageSelection.vue'
 
 const stepSequence = [
+  'facebookImages',
   'phone',
   'location',
   'children',
@@ -106,21 +115,22 @@ export default {
   name: 'OnboardNewUser',
   props: [],
   components: {
-    StyleWrapper,
-    Nav,
-    ErrorMessage,
-    Phone,
-    Location,
-    PetsDescription,
-    Children,
-    EventActivity,
-    Food,
-    EventTime,
-    EventDate,
-    MaxChildren,
-    YesOrNo,
     Availability,
-    HouseRules
+    Children,
+    ErrorMessage,
+    EventActivity,
+    EventDate,
+    EventTime,
+    FacebookImageSelection,
+    Food,
+    HouseRules,
+    Location,
+    MaxChildren,
+    Nav,
+    PetsDescription,
+    Phone,
+    StyleWrapper,
+    YesOrNo
   },
   data () {
     return {
@@ -133,7 +143,8 @@ export default {
         children: { list: [], err: null },
         pets: { err: null },
         houseRules: { err: null },
-        emergencyCare: { err: null }
+        emergencyCare: { err: null },
+        facebookImages: { err: null }
       },
       eventSeriesData: {
         activity: { err: null },
@@ -165,6 +176,7 @@ export default {
         houseRules: this.userData.houseRules,
         emergencyCare: this.userData.emergencyCare,
         pets: this.userData.pets,
+        facebookImages: this.userData.facebookImages,
         eventActivity: this.eventSeriesData.activity,
         food: this.eventSeriesData.food,
         eventTime: this.eventSeriesData.time,
@@ -204,22 +216,22 @@ export default {
       }
     },
     ...mapGetters(['currentUser', 'redirectRoute'])
-
   },
   methods: {
     submitEventData: function () {
-      return api.submitEventSeriesData(this.eventDataForSubmissionToAPI)
+      return submitEventSeriesData(this.eventDataForSubmissionToAPI)
     },
     finishOnboarding () {
       // send the data to the server
       const that = this
       const userId = this.currentUser.id
-      const submitInfo = api.submitUserInfo(
+      const submitInfo = submitUserInfo(
         userId,
         this.userData.phone,
         this.userData.location,
         this.userData.emergencyCare,
-        this.userData.children
+        this.userData.children,
+        { images: this.userData.facebookImages }
       )
       submitInfo.catch(err => {
         console.log('user update FAILURE')
@@ -285,6 +297,9 @@ export default {
             this.substep = 'hasPets'
           } else if (this.currentStep === 'emergencyCare') {
             this.substep = 'canProvide'
+          } else if (this.currentStep === 'facebookImages' && !this.currentUser.facebookUid) {
+            // not logged in via facebook, skip this step
+            this.nextStep()
           }
         }
         this.showError = false

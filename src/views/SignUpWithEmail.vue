@@ -69,20 +69,20 @@
                         </div>
                         <label for="avatar">
                           <div class="profile-photo-wrapper">
-                            <img
-                            v-if="!!avatar_url"
-                            :src="avatar_url"
-                            class="profile-photo"
-                            height="80"
+                            <img v-if="!!avatar_url"
+                                :src="avatar_url"
+                                class="profile-photo"
+                                height="80"
                             >
                             <img
-                            v-else
-                            src="@/assets/profile-photo-placeholder.svg"
-                            class="profile-photo"
+                              v-else
+                              src="@/assets/profile-photo-placeholder.svg"
+                              class="profile-photo"
                             >
-                            <a class="button-3 w-button" :class="{'invalid': errors.has('avatar') }">
-                            <span v-if="!avatar_url">Add profile photo</span>
-                            <span v-else>Replace photo</span>
+                            <a class="button-3 w-button" :class="{'invalid': avatarLoading || errors.has('avatar') }">
+                              <span v-if="avatarLoading">Uploading...</span>
+                              <span v-else-if="!avatar_url">Add profile photo</span>
+                              <span v-else>Replace photo</span>
                             </a>
                           </div>
                         </label>
@@ -136,6 +136,7 @@ export default {
         apiKey: '415594396214129',
         cloudName: 'cottageclass2'
       },
+      avatarLoading: false,
       showFacebookLogin: !this.hideFacebookLogin(),
       error: null
     }
@@ -201,6 +202,7 @@ export default {
       })
     },
     upload: function (event) {
+      this.avatarLoading = true
       let files = event.target.files
 
       let formData = new FormData()
@@ -219,6 +221,7 @@ export default {
         })
         .then(response => {
           console.log('cloudinary upload success', response)
+          this.avatarLoading = false
           this.disableForm = false
           this.avatar_url = response.secure_url
         })

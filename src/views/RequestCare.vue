@@ -21,7 +21,6 @@
                 </textarea>
               </form>
             </div>
-            <CountdownPromo />
           </div>
         </div>
       </div>
@@ -30,14 +29,13 @@
 </template>
 
 <script>
-import CountdownPromo from '@/components/FTE/CountdownPromo.vue'
 import DateTimePicker from '@/components/DateTimePicker.vue'
 import StyleWrapper from '@/components/FTE/StyleWrapper.vue'
 
 export default {
   name: 'RequestCare',
   props: ['value'],
-  components: { CountdownPromo, DateTimePicker, StyleWrapper },
+  components: { DateTimePicker, StyleWrapper },
   data () {
     return {
       bookingRequest: this.value
