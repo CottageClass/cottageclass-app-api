@@ -269,6 +269,16 @@ export async function fetchCurrentUser (userId) {
   }
 }
 
+export async function fetchFacebookImages (facebookAccessToken) {
+  try {
+    const res = await axios.get(`https://graph.facebook.com/me/photos?fields=images&access_token=${facebookAccessToken}`)
+    return res.data.data
+  } catch (e) {
+    console.log(e)
+    return null
+  }
+}
+
 /*
  * CHILDREN
  */

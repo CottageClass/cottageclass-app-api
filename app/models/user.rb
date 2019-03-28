@@ -102,7 +102,8 @@ class User < ApplicationRecord
         instance = where(provider: auth.provider, uid: auth.uid).first_or_initialize \
           email: auth.info.email,
           password: Devise.friendly_token(12),
-          name: auth.info.name
+          name: auth.info.name,
+          facebook_access_token: auth.credentials.token
         if instance.new_record?
           instance.skip_confirmation! if User.confirmable?
           instance.save

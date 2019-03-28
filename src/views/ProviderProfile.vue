@@ -26,7 +26,7 @@
           </div>
           <div v-if="user && user.images.length > 0" class="group-title-container-2">
             <h5 class="list-title-2">Photos</h5>
-            <Images :person="user"/>
+            <Images :images="user.images"/>
           </div>
           <div class="group-title-container-2">
             <h5 class="list-title-2"><span v-if="user.neighborhood">Neighborhood: {{ user.neighborhood }}</span><span v-else>Location</span></h5>
