@@ -51,6 +51,7 @@ export default {
 .carousel-image-container img {
   width: 111px;
   height: 111px;
+  object-fit: cover;
   width: auto;
   height: 100%;
   background-color: #fff;
