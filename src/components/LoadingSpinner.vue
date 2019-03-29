@@ -1,5 +1,4 @@
 <template>
-  <div class="content-wrapper">
   <div class="loading-container">
   <div v-bind:style="styles" class="spinner spinner--circle-8">
     <div v-bind:style="innerStyles" class="spinner-inner">
@@ -10,7 +9,6 @@
         <div class="contener_mixte"><div class="ballcolor ball_4">&nbsp;</div></div>
       </div>
     </div>
-  </div>
   </div>
 </div>
 </template>
