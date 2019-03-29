@@ -73,7 +73,7 @@ Rails.application.routes.draw do
   end
 
   # get
-  get '/users/:id' => 'users#show'
+  # get '/users/:id' => 'users#show'
   get '/users/:id/inquiries' => 'users#inquiries', as: 'inquiries'
   get '/users/:sender_id/messages/:receiver_id' => 'messages#admin_for_pair', as: 'messages_for_pair'
 

@@ -62,7 +62,7 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :children, allow_destroy: true, reject_if: :child_with_same_name_exists?
 
   def jwt_payload
-    super.merge( 'user' => UserSerializer.json_for(self, include: %i[children]) )
+    super.merge('user' => CurrentUserSerializer.json_for(self, include: %i[children]) )
   end
 
   def child_ages

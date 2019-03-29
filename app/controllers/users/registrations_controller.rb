@@ -7,7 +7,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     build_resource sign_up_params
     resource.save
     if resource.errors.blank?
-      render json: UserSerializer.new(resource).serialized_json, status: :ok
+      render json: CurrentUserSerializer.new(resource).serialized_json, status: :ok
     else
       render json: { errors: resource.errors }, status: :unprocessable_entity
     end

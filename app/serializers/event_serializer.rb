@@ -1,7 +1,7 @@
 class EventSerializer
   include FastJsonapi::ObjectSerializer
 
-  has_one :user, key: :host, set_id: :host_id, serializer: UserBaseSerializer
+  has_one :user, key: :host, set_id: :host_id, serializer: PublicUserSerializer
   has_many :event_hosts
   has_many :participants
 
