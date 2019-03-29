@@ -5,9 +5,15 @@ RSpec.resource 'User' do
   include_context 'json headers'
 
   let(:user) { build :user, :with_children, :with_user_reviews }
+  let(:other_user) { build :user, :with_children, :with_user_reviews }
 
   context 'read operations' do
     before { user.save }
+
+    before { other_user.save }
+
+    let(:id) { user.id }
+    let(:other_user_id) { other_user.id }
 
     get '/api/users/page/:page/page_size/:page_size',
         format: :json do
@@ -38,13 +44,46 @@ RSpec.resource 'User' do
       end
     end
 
-    get '/api/users/:id', format: :json do
-      let(:id) { user.id }
+    context 'authenticated' do
+      include_context 'authorization token'
+      get '/api/users/:id', format: :json do
+        example_request 'get self' do
+          included_children = json_body.dig('included')
+          included_children.select { |object| object[:type] == "child" }
 
-      example_request 'show:success' do
-        expect(response_status).to eq(200)
-        expect(json_body.dig('data', 'attributes').deep_symbolize_keys.keys).to \
-          contain_exactly(*User::PUBLIC_ATTRIBUTES)
+          expect(response_status).to eq(200)
+          expect(json_body.dig('data', 'attributes', 'phone_number')).to eq(user.phone_number)
+          expect(json_body.dig('data', 'attributes', 'facebook_access_token')).to be_nil
+          expect(json_body.dig('data', 'attributes', 'last_name')).not_to be_nil
+          expect(json_body.dig('data', 'relationships', 'user_reviews')).to be_nil
+          expect(json_body.dig('data', 'relationships', 'children')).not_to be_nil
+          expect(included_children.map { |u| u.dig('attributes', 'age') }.compact).not_to be_blank
+          expect(included_children.map { |u| u.dig('attributes', 'birthday') }.compact).not_to be_blank
+        end
+      end
+      get '/api/users/:other_user_id', format: :json do
+        example_request 'get other user' do
+          included_children = json_body.dig('included')
+          included_children.select { |object| object[:type] == "child" }
+
+          expect(response_status).to eq(200)
+          expect(json_body.dig('data', 'attributes', 'phone')).to be_nil
+          expect(json_body.dig('data', 'attributes', 'last_name')).to be_nil
+          expect(json_body.dig('data', 'relationships', 'user_reviews')).not_to be_nil
+          expect(json_body.dig('data', 'relationships', 'children')).not_to be_nil
+          expect(included_children.map { |u| u.dig('attributes', 'age') }.compact).not_to be_blank
+          expect(included_children.map { |u| u.dig('attributes', 'birthday') }.compact).to be_blank
+        end
+      end
+    end
+
+    context 'unauthenticated' do
+      get '/api/users/:id', format: :json do
+        example_request 'unauthenticated get' do
+          expect(response_status).to eq(200)
+          expect(json_body.dig('data', 'attributes').deep_symbolize_keys.keys).to \
+            contain_exactly(*User::PUBLIC_ATTRIBUTES)
+        end
       end
     end
   end

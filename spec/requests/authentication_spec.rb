@@ -102,5 +102,5 @@ end
 
 def decoded_jwt_token_from_response(response)
   token = response.headers['Authorization']
-  JWT.decode(token.split(' ')[1], ENV['SECRET_KEY_BASE'])
+  JWT.decode(token.split(' ')[1], ENV['DEVISE_JWT_SECRET_KEY'])
 end

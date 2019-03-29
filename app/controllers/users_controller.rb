@@ -5,19 +5,14 @@ class UsersController < ApiController
 
   def index
     users = User.all
-    render json: UserSerializer.json_for(users, include: %i[children user_reviews user_reviews.reviewer]),
-           status: 200
-  end
-
-  def show
-    render json: UserSerializer.json_for(current_user, include: %i[children user_reviews user_reviews.reviewer]),
+    render json: PublicUserSerializer.json_for(users, include: %i[children user_reviews user_reviews.reviewer]),
            status: 200
   end
 
   def update
     user = current_user
     if user.update(user_params)
-      render json: UserSerializer.json_for(user, include: %i[
+      render json: CurrentUserSerializer.json_for(user, include: %i[
                                              children
                                              children.emergency_contacts
                                              user_reviews
@@ -31,7 +26,7 @@ class UsersController < ApiController
 
   def inquiries
     users = current_user.inquirers
-    serializable_hash = UserSerializer.json_for users,
+    serializable_hash = PublicUserSerializer.json_for users,
                                                 include: %i[children user_reviews user_reviews.reviewer],
                                                 params: { personal_information: true }
 

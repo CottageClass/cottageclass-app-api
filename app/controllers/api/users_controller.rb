@@ -12,7 +12,11 @@ class API::UsersController < API::BaseController
   end
 
   def show
-    serializer = UserBaseSerializer.new @user, include: %i[children], params: { current_user: current_user }
+    serializer = if current_user && current_user.id == @user.id
+                   CurrentUserSerializer.new @user, include: %i[children]
+                 else
+                   PublicUserSerializer.new @user, include: %i[children]
+                 end
     render json: serializer.serializable_hash, status: :ok
   end
 
@@ -39,7 +43,7 @@ class API::UsersController < API::BaseController
       links[:next] = path.call(page: users.next_page, page_size: page_size) unless users.last_page?
     end
 
-    serializer = UserSerializer.new users, include: %i[children user_reviews user_reviews.reviewer],
+    serializer = PublicUserSerializer.new users, include: %i[children user_reviews user_reviews.reviewer],
                                            links: links,
                                            meta: meta
     render json: serializer.serializable_hash, status: :ok
