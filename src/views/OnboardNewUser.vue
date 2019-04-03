@@ -225,8 +225,6 @@ export default {
     submitUserData (all = false) {
       const userId = this.currentUser.id
       let submission
-      console.log({ all })
-      console.log(this.currentStep)
       if (all) {
         submission = submitUserInfo(
           userId, {
@@ -250,7 +248,7 @@ export default {
             _.assign(params, { location: this.userData.location })
             break
           case 'children':
-            _.assign(params, { children: this.userData.children })
+            _.assign(params, { children: this.userData.children.list })
             break
           case 'emergencyCare':
             _.assign(params, { availability: this.userData.emergencyCare })
