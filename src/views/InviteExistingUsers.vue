@@ -91,7 +91,7 @@ export default {
     const that = this
     api.fetchUsersWithinDistance(20, currentUser.latitude, currentUser.longitude).then(res => {
       if (res.length > 0) {
-        that.users = res.filter(person => parseInt(person.id) !== currentUser.id)
+        that.users = res.filter(person => parseInt(person.id) !== parseInt(currentUser.id))
         // set the inviteStates object to all false
         that.users.forEach(user => {
           this.$set(that.inviteStates, user.id, false)
@@ -113,7 +113,7 @@ export default {
       return `https://www.kidsclub.io/event/${this.firstEventId}`
     },
     firstEventId: function () {
-      return Object.keys(this.eventData.event).sort()[0]
+      return this.$route.params.id
     },
     recipientsSelected: function () {
       const inviteStates = this.inviteStates
