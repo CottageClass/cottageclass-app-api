@@ -30,8 +30,11 @@ export function initProxySession (currentUserId, receiverId, requestMessage, ack
  * USERS
  */
 
-export function submitUserInfo (userId, phone, location, availability, children, userObj) {
-  console.log('attempting to submit', userId, phone, location, availability, children)
+export function submitUserInfo (userId, data) {
+  console.log({ data })
+  if (!data) { return }
+
+  let { phone, location, availability, images } = data
 
   let postData = {}
   if (location && location.fullAddress) {
@@ -82,9 +85,8 @@ export function submitUserInfo (userId, phone, location, availability, children,
   }
 
   // set child attributes, plus the parentId
-  let childrenAttributes = []
-  if (children && children.list && children.list.length > 0) {
-    childrenAttributes = children.list.map(function (childAttrs) {
+  if (data.children && data.children.length > 0) {
+    postData.childrenAttributes = data.children.map(function (childAttrs) {
       return {
         ...childAttrs,
         parentId: userId
@@ -92,39 +94,35 @@ export function submitUserInfo (userId, phone, location, availability, children,
     })
   }
 
-  if (availability) {
+  if (data.availability) {
     postData = {
       ...postData,
       ...availability
     }
   }
 
-  if (children && children.list && children.list.length > 0) {
-    postData.childrenAttributes = childrenAttributes
+  if (data.employer) {
+    postData.employer = data.employer
   }
 
-  if (userObj && userObj.employer) {
-    postData.employer = userObj.employer
+  if (data.jobPosition) {
+    postData.jobPosition = data.jobPosition
   }
 
-  if (userObj && userObj.jobPosition) {
-    postData.jobPosition = userObj.jobPosition
+  if (data.profileBlurb) {
+    postData.profileBlurb = data.profileBlurb
   }
 
-  if (userObj && userObj.profileBlurb) {
-    postData.profileBlurb = userObj.profileBlurb
+  if (images) {
+    postData.images = data.images
   }
 
-  if (userObj && userObj.images) {
-    postData.images = userObj.images
+  if (data.activities) {
+    postData.activities = data.activities
   }
 
-  if (userObj && userObj.activities) {
-    postData.activities = userObj.activities
-  }
-
-  if (userObj && userObj.languages) {
-    postData.languages = userObj.languages
+  if (data.languages) {
+    postData.languages = data.languages
   }
 
   console.log('postdata', postData)
@@ -133,6 +131,7 @@ export function submitUserInfo (userId, phone, location, availability, children,
     postData
   ).then(res => {
     console.log('SUBMIT USER SUCCESS', res)
+    return res
   }).catch(err => {
     console.log('SUBMIT USER FAILURE', err)
     throw err
@@ -259,8 +258,9 @@ export async function fetchUser (userId) {
 // Private
 export async function fetchCurrentUser (userId) {
   try {
-    const res = await axios.get(`/users/${userId}`)
+    const res = await axios.get(`/api/users/${userId}`)
     console.log('FETCH PRIVATE USER #' + userId + ' SUCCESS')
+    console.log(res)
     return createUser(normalize(res.data))
   } catch (err) {
     console.log('FETCH PRIVATE USER #' + userId + ' FAILURE')

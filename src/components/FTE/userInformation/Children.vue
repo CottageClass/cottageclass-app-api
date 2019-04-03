@@ -21,7 +21,7 @@ export default {
   components: { Question, ManyFormFieldGroups },
   data () {
     return {
-      children: this.value.list,
+      children: this.value.list || [],
       errorMesg: 'Please enter a first name (or nickname) and birthdate for each child.',
       fieldGroups: [
         {
