@@ -1,23 +1,24 @@
 <template>
   <div class="onb-body">
-    <div class="body">
-      <div class="content-wrapper">
-        <Nav
-          button="next"
-          @next="send"
-          @prev="back"
-        />
-        <StyleWrapper styleIs="onboarding">
-          <Question
+    <StyleWrapper styleIs="onboarding">
+      <div class="body">
+        <div class="content-wrapper">
+          <Nav
+            :button="nextButtonState"
+            @next="send"
+            @prev="back"
+          />
+          <LoadingSpinner v-if="!event"/>
+          <Question v-else
             :title="'Contact ' + hostFirstName"
             :subtitle="`Enter your question to ${hostFirstName} below. They’ll reply by text message as soon as they can!`">
             <FormWithTextArea
               v-model="questionText"
               :placeholder="placeholderText" />
           </Question>
-        </StyleWrapper>
+        </div>
       </div>
-    </div>
+    </StyleWrapper>
   </div>
 </template>
 
@@ -26,6 +27,7 @@ import StyleWrapper from '@/components/FTE/StyleWrapper.vue'
 import Question from '@/components/base/Question.vue'
 import FormWithTextArea from '@/components/base/FormWithTextArea.vue'
 import Nav from '@/components/FTE/Nav.vue'
+import LoadingSpinner from '@/components/LoadingSpinner.vue'
 
 import { mapGetters } from 'vuex'
 import * as api from '@/utils/api'
@@ -34,7 +36,7 @@ import _ from 'lodash'
 
 export default {
   name: 'ContactForm',
-  components: { Question, FormWithTextArea, StyleWrapper, Nav },
+  components: { Question, FormWithTextArea, StyleWrapper, Nav, LoadingSpinner },
   props: ['eventId'],
   data () {
     return {
@@ -76,14 +78,17 @@ export default {
     }
   },
   computed: {
+    nextButtonState () {
+      return (this.questionText === '') ? 'inactive' : 'next'
+    },
     placeholderText () {
       return `Enter your question here ...`
     },
     hostFirstName: function () {
       if (!this.event) {
-        return null
+        return ''
       }
-      return this.event.hostFirstName
+      return _.capitalize(this.event.hostFirstName)
     },
     hostId: function () {
       if (!this.event) {
@@ -126,6 +131,7 @@ export default {
 
 .body {
   background-color: #0d73c7;
+  height:
 }
 
 @media (max-width: 991px) {
