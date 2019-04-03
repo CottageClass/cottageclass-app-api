@@ -49,8 +49,10 @@ export default {
       return [
         this.firstDate,
         this.firstDate.clone().add(1, 'days'),
+        this.firstDate.clone().add(2, 'days'),
         this.firstDate.clone().add(1, 'weeks'),
-        this.firstDate.clone().add(1, 'weeks').add(1, 'days')
+        this.firstDate.clone().add(1, 'weeks').add(1, 'days'),
+        this.firstDate.clone().add(1, 'weeks').add(2, 'days')
       ]
     },
     dates: function () {
