@@ -67,7 +67,7 @@ export default {
       this.$router.go(-1)
     },
     acknowledgmentMessage: function () {
-      let msg = `We've just sent your question to ${this.event.hostId} and they'll respond soon! You can follow up by texting this number.`
+      let msg = `We've just sent your question to ${this.event.hostFirstName} and they'll respond soon! You can follow up by texting this number.`
       return msg
     }
   },
