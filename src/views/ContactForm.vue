@@ -10,7 +10,7 @@
         <StyleWrapper styleIs="onboarding">
           <Question
             :title="'Contact ' + hostFirstName"
-            subtitle="Put your question or comments to ari here.">
+            :subtitle="`Enter your question to ${hostFirstName} below. They’ll reply by text message as soon as they can!`">
             <FormWithTextArea
               v-model="questionText"
               :placeholder="placeholderText" />
@@ -77,7 +77,7 @@ export default {
   },
   computed: {
     placeholderText () {
-      return `Enter your question here .....`
+      return `Enter your question here ...`
     },
     hostFirstName: function () {
       if (!this.event) {
