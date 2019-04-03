@@ -36,7 +36,6 @@ export default {
   data () {
     return {
       contacts: [],
-      nextButtonState: 'next',
       fieldGroups: [
         {
           label: 'Full Name',
@@ -66,7 +65,10 @@ export default {
       return this.currentUser.children
     },
     firstContactIsComplete: function () {
-      return this.contacts[0].name && this.contacts[0].phoneNumber && this.contacts[0].relationship
+      return this.contacts && this.contacts[0] && this.contacts[0].name && this.contacts[0].phoneNumber && this.contacts[0].relationship
+    },
+    nextButtonState () {
+      return this.firstContactIsComplete ? 'next' : 'inactive'
     },
     ...mapGetters(['currentUser'])
   },
