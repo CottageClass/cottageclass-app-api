@@ -107,7 +107,7 @@ export default {
     },
     submitChildSpecialRequirements: function () {
       console.log('submitting child requirements', this.newChildren)
-      api.submitUserInfo(this.currentUser.id, undefined, undefined, undefined, { list: this.newChildren })
+      api.submitUserInfo(this.currentUser.id, { children: { list: this.newChildren } })
     }
   }
 }

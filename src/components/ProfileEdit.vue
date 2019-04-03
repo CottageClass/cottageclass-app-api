@@ -131,7 +131,9 @@ export default {
     submitUserInformation: function () {
       if (!this.error) {
         this.saveButtonText = 'Saving...'
-        api.submitUserInfo(this.currentUser.id, this.phone, this.location, this.availability, this.children, this.currentUser).then(res => {
+        const data = this.currentUser
+        data.children = this.children.list
+        api.submitUserInfo(this.currentUser.id, data).then(res => {
           this.saveButtonText = ' \u2714 Saved'
           this.$store.dispatch('updateCurrentUserFromServer')
           console.log('user update SUCCESS')

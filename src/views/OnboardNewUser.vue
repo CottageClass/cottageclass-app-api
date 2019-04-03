@@ -96,10 +96,10 @@ import HouseRules from '@/components/FTE/userInformation/HouseRules.vue'
 import FacebookImageSelection from '@/components/FTE/userInformation/FacebookImageSelection.vue'
 
 const stepSequence = [
-  'facebookImages',
   'phone',
   'location',
   'children',
+  'facebookImages',
   'eventActivity',
   'food',
   'eventTime',
@@ -221,26 +221,58 @@ export default {
     submitEventData: function () {
       return submitEventSeriesData(this.eventDataForSubmissionToAPI)
     },
+    submitUserData (all = false) {
+      const userId = this.currentUser.id
+      let submission
+      console.log({ all })
+      console.log(this.currentStep)
+      if (all) {
+        submission = submitUserInfo(
+          userId, {
+            images: this.userData.facebookImages,
+            phone: this.userData.phone,
+            location: this.userData.location,
+            availability: this.userData.emergencyCare,
+            children: this.userData.children
+          }
+        )
+      } else {
+        let params = {}
+        switch (this.currentStep) {
+          case 'facebookImages':
+            _.assign(params, { images: this.userData.facebookImages })
+            break
+          case 'phone':
+            _.assign(params, { phone: this.userData.phone })
+            break
+          case 'location':
+            _.assign(params, { location: this.userData.location })
+            break
+          case 'children':
+            _.assign(params, { children: this.userData.children })
+            break
+          case 'emergencyCare':
+            _.assign(params, { availability: this.userData.emergencyCare })
+            break
+          default:
+            break
+        }
+        submission = submitUserInfo(userId, params)
+      }
+      return submission.catch(function (err) {
+        console.log('user update FAILURE')
+        console.log(err)
+        console.log(Object.entries(err))
+        this.stepIndex = stepSequence.length - 1
+        this.modelForCurrentStep.err = 'Sorry, there was a problem saving your information. Try again?'
+        throw err
+      })
+    },
     finishOnboarding () {
       // send the data to the server
       const that = this
       const userId = this.currentUser.id
-      const submitInfo = submitUserInfo(
-        userId,
-        this.userData.phone,
-        this.userData.location,
-        this.userData.emergencyCare,
-        this.userData.children,
-        { images: this.userData.facebookImages }
-      )
-      submitInfo.catch(err => {
-        console.log('user update FAILURE')
-        console.log(err)
-        console.log(Object.entries(err))
-        that.stepIndex = stepSequence.length - 1
-        that.modelForCurrentStep.err = 'Sorry, there was a problem saving your information. Try again?'
-        throw err
-      })
+      const submitInfo = this.submitUserData(true)
       submitInfo.then(() => {
         client.create({
           'ID': userId,
@@ -282,6 +314,8 @@ export default {
       if (!this.error) {
         if (this.stepIndex === stepSequence.length - 1) {
           this.finishOnboarding()
+        } else {
+          this.submitUserData()
         }
         // set the next step
         if (this.currentStep === 'pets' &&

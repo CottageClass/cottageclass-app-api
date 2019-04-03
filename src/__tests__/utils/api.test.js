@@ -3,7 +3,8 @@ import {
   fetchEvents,
   fetchUpcomingEventsWithinDistance,
   fetchUpcomingEvents,
-  fetchUser
+  fetchUser,
+  submitUserInfo
 } from '@/utils/api'
 import mockAxios from 'axios'
 
@@ -52,5 +53,10 @@ describe('users', () => {
       expect(user.id).toBe('1230')
     })
   })
-}
-)
+  describe('submitUserInfo', () => {
+    it('sends image data', async () => {
+      let data = { images: 'example.com/images/fake.png' }
+      await submitUserInfo('1230', data)
+    })
+  })
+})

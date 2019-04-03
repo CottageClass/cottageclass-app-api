@@ -34,5 +34,8 @@ export default {
     if (url === `/users/1228`) {
       return Promise.resolve(user1228)
     }
+  }),
+  post: jest.fn((url) => {
+    return Promise.resolve({ status: 200 })
   })
 }
