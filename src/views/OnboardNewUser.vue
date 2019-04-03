@@ -99,7 +99,8 @@ const stepSequence = [
   'phone',
   'location',
   'children',
-  'facebookImages',
+  // uncomment this to turn on facebook photo collection when app is approved
+  // 'facebookImages',
   'eventActivity',
   'food',
   'eventTime',
