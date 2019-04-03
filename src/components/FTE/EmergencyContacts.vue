@@ -53,7 +53,7 @@ export default {
         },
         {
           label: 'Relationship to Child',
-          placeholder: 'Relationship to Child',
+          placeholder: 'Friend, aunt, etc.',
           type: 'text',
           name: 'relationship'
         }],
