@@ -58,6 +58,7 @@ import {
   isValidNumber
 } from 'libphonenumber-js'
 import sheetsu from 'sheetsu-node'
+import { alerts } from '@/mixins'
 
 // create a config file to identify which spreadsheet we push to.
 var client = sheetsu({ address: 'https://sheetsu.com/apis/v1.0su/62cd725d6088' })
@@ -65,6 +66,7 @@ var client = sheetsu({ address: 'https://sheetsu.com/apis/v1.0su/62cd725d6088' }
 export default {
   name: 'ResetPassword',
   components: { ErrorMessage, StyleWrapper, MainNav, Footer },
+  mixins: [ alerts ],
   data: function () {
     return {
       email: '',
@@ -95,9 +97,11 @@ export default {
     submitInfo: function (data) {
       client.create(data, 'passwordResetRequests').then((data) => {
         console.log(data)
+        this.showAlertOnNextRoute('Your password reset request has been submitted.  You will be contacted shortly.', 'success')
         this.$router.push({ name: 'Events' })
       }, (err) => {
         console.log(err)
+        this.showAlertOnNextRoute('Something went wrong.  Please contact us at contact@cottageclass.com.', 'failure')
         this.$router.push({ name: 'Events' })
       })
     }
