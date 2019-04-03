@@ -27,6 +27,8 @@ import ErrorMessage from '@/components/base/ErrorMessage.vue'
 import Question from '@/components/base/Question.vue'
 import Nav from '@/components/FTE/Nav.vue'
 import StyleWrapper from '@/components/FTE/StyleWrapper.vue'
+
+import VueScrollTo from 'vue-scrollto'
 import * as api from '@/utils/api.js'
 import { mapGetters } from 'vuex'
 
@@ -77,6 +79,7 @@ export default {
       if (this.firstContactIsComplete) {
         this.submitEmergencyContactsForChildren()
       } else {
+        VueScrollTo.scrollTo('.body')
         this.showError = true
       }
     },
