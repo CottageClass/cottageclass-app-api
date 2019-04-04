@@ -66,10 +66,8 @@ RSpec.describe 'authentication' do
     let(:url) { '/users' }
     let(:params) do
       {
-        user: {
-          email: 'user@example.com',
-          password: 'password'
-        }
+        email: 'user@example.com',
+        password: 'password'
       }
     end
 
