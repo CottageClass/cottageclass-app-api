@@ -29,6 +29,14 @@
           <Children
             v-if="currentStep === 'children'"
             v-model="userData.children" />
+          <YesOrNo
+            v-if="currentStep === 'createEventsNow'"
+            v-model="createEventsNow"
+            question="Would you like to set up your first playdates now or later?"
+            description=""
+            yesText="Now"
+            noText="Later"
+          />
           <EventActivity
             v-if="currentStep === 'eventActivity'"
             v-model="eventSeriesData.activity" />
@@ -101,6 +109,7 @@ const stepSequence = [
   'children',
   // uncomment this to turn on facebook photo collection when app is approved
   // 'facebookImages',
+  'createEventsNow',
   'eventActivity',
   'food',
   'eventTime',
@@ -138,6 +147,7 @@ export default {
       showError: false,
       stepIndex: 0,
       substep: '',
+      createEventsNow: { err: null },
       userData: {
         phone: { err: null },
         location: { err: null },
@@ -178,6 +188,7 @@ export default {
         emergencyCare: this.userData.emergencyCare,
         pets: this.userData.pets,
         facebookImages: this.userData.facebookImages,
+        createEventsNow: this.createEventsNow,
         eventActivity: this.eventSeriesData.activity,
         food: this.eventSeriesData.food,
         eventTime: this.eventSeriesData.time,
@@ -323,6 +334,12 @@ export default {
           this.substep = 'description'
         } else if (this.currentStep === 'emergencyCare' && this.substep === 'canProvide' && this.userData.emergencyCare.isTrue) {
           this.substep = 'availability'
+        } else if (this.currentStep === 'createEventsNow' && !this.createEventsNow.isTrue) {
+          // skip event creation
+          const that = this
+          this.$store.dispatch('updateCurrentUserFromServer').then(function () {
+            that.moveOntoNextFTE()
+          })
         } else {
           this.$ga.event('onboarding', 'stepComplete', this.currentStep)
           this.stepIndex += 1
