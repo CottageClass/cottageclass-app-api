@@ -31,7 +31,7 @@ RSpec.describe EventSeries, type: :model do
     end
   end
 
-  context 'event generator' do
+  xcontext 'event generator' do
     before { subject.save }
 
     it 'create_next_event' do
