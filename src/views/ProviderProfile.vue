@@ -34,16 +34,12 @@
 
           <div class="map-container">
             <GmapMap
+              ref="mapRef"
               :disableDefaultUI="true"
               :center="userLocation"
               :zoom="13"
               :options="mapOptions"
               style="width: 100%; height: 230px;">
-                <GmapMarker
-                :position="userLocation"
-                :title="user.firstName"
-                icon="https://storage.googleapis.com/cottageclass-prod/images/map-radius.png"
-                />
             </GmapMap>
           </div>
 <!-- Positive reviews -->
@@ -89,6 +85,7 @@ import moment from 'moment'
 import ProviderInfo from '@/components/base/ProviderInfo.vue'
 import PageActionsFooter from '@/components/PageActionsFooter.vue'
 import { mapGetters } from 'vuex'
+import { maps } from '@/mixins'
 
 import _ from 'lodash'
 import languageList from 'language-list'
@@ -106,6 +103,7 @@ export default {
        }
     }
   },
+  mixins: [ maps ],
   methods: {
     goToEdit: function () {
       this.$router.push({ name: 'ProfileEdit' })
@@ -113,6 +111,16 @@ export default {
   },
   mounted: async function () {
     this.user = await api.fetchUser(this.$route.params.id)
+
+    const that = this
+    setTimeout(async function () {
+      const map = await that.$refs.mapRef.$mapPromise
+      that.addCircle(
+        that.userLocation,
+        0.2,
+        map
+      )
+    }, 1000)
   },
   computed: {
     employmentDescription: function () {
