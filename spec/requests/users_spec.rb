@@ -29,13 +29,12 @@ RSpec.describe 'requesting users', type: :request do
 
     it 'returns only users who have requested care (messaged) the provider before' do
       get inquiries_path(provider), headers: authenticated_header(provider)
-
-      inquiry_phones = JSON.parse(response.body).fetch('data', []).map { |u| u.dig('attributes', 'phone') }.compact
+      indquiry_ids = JSON.parse(response.body).fetch('data', []).map { |u| u.dig('attributes', 'id') }.compact
       expect(response.status).to eq 200
-      expect(inquiry_phones).to include seeker_1.phone
-      expect(inquiry_phones).to include seeker_2.phone
-      expect(inquiry_phones).not_to include seeker_3.phone
-      expect(inquiry_phones).not_to include non_messaged_provider.phone
+      expect(indquiry_ids).to include seeker_1.id
+      expect(indquiry_ids).to include seeker_2.id
+      expect(indquiry_ids).not_to include seeker_3.id
+      expect(indquiry_ids).not_to include non_messaged_provider.id
     end
 
     it 'does not include a user more than once' do
