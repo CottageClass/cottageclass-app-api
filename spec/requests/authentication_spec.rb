@@ -66,10 +66,8 @@ RSpec.describe 'authentication' do
     let(:url) { '/users' }
     let(:params) do
       {
-        user: {
-          email: 'user@example.com',
-          password: 'password'
-        }
+        email: 'user@example.com',
+        password: 'password'
       }
     end
 
@@ -93,7 +91,6 @@ RSpec.describe 'authentication' do
       end
 
       it 'returns validation errors' do
-        puts response.parsed_body
         expect(response.parsed_body['errors']['email']).to eq(['has already been taken'])
       end
     end
