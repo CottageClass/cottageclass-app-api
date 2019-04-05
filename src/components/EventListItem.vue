@@ -15,9 +15,6 @@
           <div class="event-time">
             {{ formatDate(event.startsAt) }}, {{ formatTime(event.startsAt) }} – {{ formatTime(event.endsAt) }}
           </div>
-          <div class="event-ages">
-            Ages {{event.childAgeMinimum}}-{{event.childAgeMaximum}} ({{event.maximumChildren}} kids total)
-          </div>
           <div class="event-location">
             {{ event.hostNeighborhood || event.hostLocality || event.hostAdminAreaLevel1 }}
             <span>{{ distanceDescription }}</span>

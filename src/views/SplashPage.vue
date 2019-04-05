@@ -88,7 +88,6 @@
               </router-link>
               <div class="event-summary">
                 <div class="event-time">Mon, Mar 4, 2019 at 6:00 PM–9:00 PM</div>
-                <div class="event-ages">Ages 2-11 (5 kids total)</div>
                 <div class="event-location">Dumbo</div>
               </div>
               <div class="scrolling-wrapper"><img src="@/assets/charlice2.jpg" alt="" class="event-household-photo"><img src="@/assets/charlice3.jpg" alt="" class="event-household-photo"><img src="@/assets/charlice4.jpg" alt="" class="event-household-photo"><img src="@/assets/charlice6.jpg" alt="" class="event-household-photo"><img src="@/assets/charlice5.jpg" alt="" class="event-household-photo"><img src="@/assets/charlice8.jpg" alt="" class="event-household-photo"></div>
@@ -124,7 +123,6 @@
               </router-link>
               <div class="event-summary">
                 <div class="event-time">Sat, Mar 16, 2019 at 6:00 PM–9:00 PM</div>
-                <div class="event-ages">Ages 4-11 (4 kids total)</div>
                 <div class="event-location">Carroll Gardens</div>
               </div>
               <div class="scrolling-wrapper"><img src="@/assets/rima8.jpg" alt="" class="event-household-photo"><img src="@/assets/rima5.jpg" alt="" class="event-household-photo"><img src="@/assets/rima12.jpg" alt="" class="event-household-photo"><img src="@/assets/rima4.jpg" alt="" class="event-household-photo"><img src="@/assets/rima7.jpg" alt="" class="event-household-photo"><img src="@/assets/rima6.jpg" alt="" class="event-household-photo"></div>
@@ -160,7 +158,6 @@
               </router-link>
               <div class="event-summary">
                 <div class="event-time">Thu, Apr 18, 2019 at 6:00 PM–9:00 PM</div>
-                <div class="event-ages">Ages 3-11 (4 kids total)</div>
                 <div class="event-location">Cobble Hill</div>
               </div>
               <div class="scrolling-wrapper">
@@ -3289,12 +3286,6 @@ a {
 .fb-button-2:active {
   background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, .15)), to(rgba(0, 0, 0, .15)));
   background-image: linear-gradient(180deg, rgba(0, 0, 0, .15), rgba(0, 0, 0, .15));
-}
-
-.event-ages {
-  margin-bottom: 6px;
-  font-size: 13px;
-  line-height: 17px;
 }
 
 .event-household-photo {
