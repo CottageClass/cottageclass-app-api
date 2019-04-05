@@ -113,7 +113,7 @@
   },
   "name": "kidsclub",
   "scripts": {
-    "test": "./ci-tests.sh",
+    "test": "./ci-test.sh",
     "test-setup": "./ci-test-setup.sh"
   },
   "stack": "heroku-18",
