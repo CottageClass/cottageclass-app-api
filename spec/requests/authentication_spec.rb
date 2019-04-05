@@ -75,7 +75,6 @@ RSpec.describe 'authentication' do
       before { post url, params: params }
 
       it 'returns 200' do
-        pp response
         expect(response.status).to eq 200
       end
     end
@@ -92,7 +91,6 @@ RSpec.describe 'authentication' do
       end
 
       it 'returns validation errors' do
-        pp response.parsed_body
         expect(response.parsed_body['errors']['email']).to eq(['has already been taken'])
       end
     end
