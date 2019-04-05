@@ -119,6 +119,7 @@
   "stack": "heroku-18",
   "environments": {
     "test": {
+      "addons": ["heroku-postgresql:in-dyno"],
       "env": {
         "SECRET_KEY_BASE": {
           "generator": "secret"
