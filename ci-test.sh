@@ -3,4 +3,4 @@
 set -ex
 
 rspec
-jest --config ./jest.conf.js
+./node_modules/.bin/jest --config ./jest.conf.js
