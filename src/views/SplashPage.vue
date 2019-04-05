@@ -28,7 +28,44 @@
       </div>
     </div>
   </div>
-
+  <div class="program-photo-grid-container">
+    <img
+      src="https://storage.googleapis.com/cottageclass-prod/images/photo-12x.png"
+      srcset="https://storage.googleapis.com/cottageclass-prod/images/photo-12x-p-500.png 500w,
+      https://storage.googleapis.com/cottageclass-prod/images/photo-12x-p-800.png 800w,
+      https://storage.googleapis.com/cottageclass-prod/images/photo-12x.png 908w"
+      sizes="(max-width: 479px) 100vw, (max-width: 991px) 29vw, 31vw">
+    <img
+      src="https://storage.googleapis.com/cottageclass-prod/images/photo-22x.png"
+      srcset="https://storage.googleapis.com/cottageclass-prod/images/photo-22x-p-500.png 500w,
+      https://storage.googleapis.com/cottageclass-prod/images/photo-22x-p-800.png 800w,
+      https://storage.googleapis.com/cottageclass-prod/images/photo-22x.png 908w"
+      sizes="(max-width: 479px) 100vw, (max-width: 991px) 29vw, 31vw">
+    <img
+      src="https://storage.googleapis.com/cottageclass-prod/images/photo-3-2x.png"
+      srcset="https://storage.googleapis.com/cottageclass-prod/images/photo-3-2x-p-500.png 500w,
+      https://storage.googleapis.com/cottageclass-prod/images/photo-3-2x-p-800.png 800w,
+      https://storage.googleapis.com/cottageclass-prod/images/photo-3-2x.png 908w"
+      sizes="(max-width: 479px) 100vw, (max-width: 991px) 29vw, 31vw">
+    <img
+      src="https://storage.googleapis.com/cottageclass-prod/images/photo-42x.png"
+      srcset="https://storage.googleapis.com/cottageclass-prod/images/photo-42x-p-500.png 500w,
+      https://storage.googleapis.com/cottageclass-prod/images/photo-42x-p-800.png 800w,
+      https://storage.googleapis.com/cottageclass-prod/images/photo-42x.png 908w"
+      sizes="(max-width: 479px) 100vw, (max-width: 991px) 29vw, 31vw">
+    <img
+      src="https://storage.googleapis.com/cottageclass-prod/images/photo-112x.png"
+      srcset="https://storage.googleapis.com/cottageclass-prod/images/photo-112x-p-500.png 500w,
+      https://storage.googleapis.com/cottageclass-prod/images/photo-112x-p-800.png 800w,
+      https://storage.googleapis.com/cottageclass-prod/images/photo-112x.png 908w"
+      sizes="(max-width: 479px) 100vw, (max-width: 991px) 29vw, 31vw">
+    <img
+      src="https://storage.googleapis.com/cottageclass-prod/images/photo-62x.png"
+      srcset="https://storage.googleapis.com/cottageclass-prod/images/photo-62x-p-500.png 500w,
+      https://storage.googleapis.com/cottageclass-prod/images/photo-62x-p-800.png 800w,
+      https://storage.googleapis.com/cottageclass-prod/images/photo-62x.png 908w"
+      sizes="(max-width: 479px) 100vw, (max-width: 991px) 29vw, 31vw">
+  </div>
   <div class="content-section background-01">
     <div class="divider-2px"></div>
     <div class="content-container-3 w-container">
@@ -4280,4 +4317,28 @@ html {
   -ms-overflow-style: none;
 }
 
+.program-photo-grid-container {
+  display: flex;
+  width: 100%;
+  margin-bottom: 122px;
+  padding-right: 32px;
+  padding-left: 32px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.program-photo-grid-container img {
+  width: 31.5%;
+  max-width: 300%;
+  margin-bottom: 32px;
+  border-radius: 4px;
+}
+
+@media (max-width: 479px) {
+  .program-photo-grid-container img {
+    width: 47%;
+    margin-bottom: 18px;
+  }
+}
 </style>

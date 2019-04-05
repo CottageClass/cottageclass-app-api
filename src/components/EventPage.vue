@@ -1,160 +1,151 @@
 <template>
-<div class="body-2">
-  <MainNav />
-  <div class="event-detail-container w-container">
-    <div class="event-detail-graphic">
-      <EventCategoryIcon
-        :category="!!event ? event.activityName : ''"
-        width="150"
-        height="150"
-        />
-      </div>
-    <div class="div-block-36">
+  <div class="body-2">
+    <MainNav />
+    <LoadingSpinner v-if="!event" />
+    <div v-else>
+      <div class="event-detail-container w-container">
+        <div class="event-detail-graphic">
+          <EventCategoryIcon :category="!!event ? event.activityName : ''" width="150" height="150" />
+        </div>
+        <div class="div-block-36">
 
-      <h1 class="event-detail-heading">{{ event.name }}</h1>
-      <div class="action-bar">
-        <div class="host-info"><router-link :to="{ name: 'ProviderProfile', params: { id: event.hostId }}"><AvatarImage className="avatar-large" :person="{facebookUid: event.hostFacebookUid, avatar: event.hostAvatar}"/></router-link>
-          <div class="host-info-wrapper">
-            <div class="hosted-by">Hosted by <router-link :to="{ name: 'ProviderProfile', params: { id: event.hostId }}" class="host">{{ event.hostFirstName }}</router-link> &amp;
-            <ChildAges :childAges="event.hostChildAges" singular="kid" plural="kids"/><span v-if="event.participatingParents && event.participatingParents.length > 0"><Participants :participants="event.participatingParents" /></span><span v-else>.</span></div>
-            <div v-if="event.hostVerified" class="background-checked-wrapper"><img src="@/assets/check-green.svg" alt="">
-              <div class="background-checked">Background Checked</div>
+          <h1 class="event-detail-heading">{{ event.name }}</h1>
+          <div class="action-bar">
+            <div class="host-info">
+              <router-link :to="{ name: 'ProviderProfile', params: { id: event.hostId }}">
+                <AvatarImage className="avatar-large"
+                  :person="{facebookUid: event.hostFacebookUid, avatar: event.hostAvatar}" />
+              </router-link>
+              <div class="host-info-wrapper">
+                <div class="hosted-by">Hosted by <router-link
+                    :to="{ name: 'ProviderProfile', params: { id: event.hostId }}" class="host">
+                    {{ event.hostFirstName }}</router-link> &amp;
+                  <ChildAges :childAges="event.hostChildAges" singular="kid" plural="kids" /><span
+                    v-if="event.participatingParents && event.participatingParents.length > 0">
+                    <Participants :participants="event.participatingParents" /></span><span v-else>.</span></div>
+                <div v-if="event.hostVerified" class="background-checked-wrapper"><img src="@/assets/check-green.svg"
+                    alt="">
+                  <div class="background-checked">Background Checked</div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-      <div class="guests-container">
-        <!-- TODO put in participant info when it's available -->
-        <router-link
-        v-for="participant in event.participatingParents"
-        v-bind:key="participant.id"
-        :to="{ name: 'ProviderProfile', params: { id: participant.userId }}"
-        class="guest-link w-inline-block">
-          <AvatarImage
-            className="avatar-32"
-            :person="{facebookUid: participant.userFacebookUid, avatar: participant.userAvatar}"/>
-          <img src="@/assets/check-circle-24.svg" alt="" class="checkmark-green">
-        </router-link>
-        <div v-if="event.participatingParents.length" class="guests-text">
-          <span v-for="(participant, index) in event.participatingParents.slice(0, 3)">
-          <router-link
-            :to="{ name: 'ProviderProfile', params: { id: participant.userId }}"
-            v-bind:key="participant.id">
-            {{ capitalize(participant.userFirstName) }}
-          </router-link>
-          {{ (index===event.participatingParents.length-1) ? '' : ', ' }}
-          </span>
-          <span v-if="event.participatingParents.length > 3"> and {{ event.participatingParents.length-3 }} more </span> attending.
-        </div>
-      </div>
-      <div class="button-container-event-detail">
-        <EditButton class="button-event-detail"
-        v-if="hostIsCurrentUser"
-        :eventId="eventId"/>
-        <RsvpButton
-        v-else
-        :userParticipating="event.participated"
-        :full="event.full"
-        :eventId="eventId"
-        />
-        <ContactHostButton v-if="!hostIsCurrentUser" class="w-inline-block" :eventId="event.id"/>
-      </div>
-        <!-- Summary info -->
+          <div class="guests-container">
+            <!-- TODO put in participant info when it's available -->
+            <router-link v-for="participant in event.participatingParents" v-bind:key="participant.id"
+              :to="{ name: 'ProviderProfile', params: { id: participant.userId }}" class="guest-link w-inline-block">
+              <AvatarImage className="avatar-32"
+                :person="{facebookUid: participant.userFacebookUid, avatar: participant.userAvatar}" />
+              <img src="@/assets/check-circle-24.svg" alt="" class="checkmark-green">
+            </router-link>
+            <div v-if="event.participatingParents.length" class="guests-text">
+              <span v-for="(participant, index) in event.participatingParents.slice(0, 3)">
+                <router-link :to="{ name: 'ProviderProfile', params: { id: participant.userId }}"
+                  v-bind:key="participant.id">
+                  {{ capitalize(participant.userFirstName) }}
+                </router-link>
+                {{ (index===event.participatingParents.length-1) ? '' : ', ' }}
+              </span>
+              <span v-if="event.participatingParents.length > 3"> and {{ event.participatingParents.length-3 }} more
+              </span> attending.
+            </div>
+          </div>
+          <div class="button-container-event-detail">
+            <EditButton class="button-event-detail" v-if="hostIsCurrentUser" :eventId="eventId" />
+            <RsvpButton v-else :userParticipating="event.participated" :full="event.full" :eventId="eventId" />
+            <ContactHostButton v-if="!hostIsCurrentUser" class="w-inline-block" :eventId="event.id" />
+          </div>
+          <!-- Summary info -->
 
-      <ul class="summary-info">
-        <li class="summary-list-item"><img src="@/assets/time-black.svg" alt="" class="summary-icon">
-          <div class="summary-text">{{ formatDate(event.startsAt) }} at {{ formatTime(event.startsAt) }}–{{ formatTime(event.endsAt) }}</div>
-        </li>
-        <li v-if="(event.childAgeMinimum || event.childAgeMaximum) && event.maximumChildren" class="summary-list-item"><img src="@/assets/cake-outline-black.svg" alt="" class="summary-icon">
-          <div class="summary-text">Ages {{ event.childAgeMinimum }}-{{ event.childAgeMaximum}} ({{ event.maximumChildren }} kids total)</div>
-        </li>
-        <li class="summary-list-item"><img src="@/assets/location.svg" alt="" class="summary-icon">
-          <div class="summary-text"><span  v-if="event.hostNeighborhood">{{ event.hostNeighborhood }} - {{ event.hostLocality || event.hostSublocality }}, </span>{{ event.hostAdminAreaLevel1 }} <span v-if="distance"> - {{ distance }} miles from you</span></div>
-        </li>
-      </ul>
-    </div>
+          <ul class="summary-info">
+            <li class="summary-list-item"><img src="@/assets/time-black.svg" alt="" class="summary-icon">
+              <div class="summary-text">{{ formatDate(event.startsAt) }} at
+                {{ formatTime(event.startsAt) }}–{{ formatTime(event.endsAt) }}</div>
+            </li>
+            <li v-if="(event.childAgeMinimum || event.childAgeMaximum) && event.maximumChildren"
+              class="summary-list-item"><img src="@/assets/cake-outline-black.svg" alt="" class="summary-icon">
+              <div class="summary-text">Ages {{ event.childAgeMinimum }}-{{ event.childAgeMaximum}}
+                ({{ event.maximumChildren }} kids total)</div>
+            </li>
+            <li class="summary-list-item"><img src="@/assets/location.svg" alt="" class="summary-icon">
+              <div class="summary-text"><span v-if="event.hostNeighborhood">{{ event.hostNeighborhood }} -
+                  {{ event.hostLocality || event.hostSublocality }}, </span>{{ event.hostAdminAreaLevel1 }} <span
+                  v-if="distance"> - {{ distance }} miles from you</span></div>
+            </li>
+          </ul>
+        </div>
 
         <!-- Map -->
 
-  <div class="map">
-  <GmapMap
-    :disableDefaultUI="true"
-    :center="{ lat: event.hostFuzzyLatitude, lng: event.hostFuzzyLongitude }"
-    :zoom="13"
-    :options="mapOptions"
-    style="width: 100%; height: 100%;">
-    <GmapMarker
-      key="1"
-      :position="{ lat: event.hostFuzzyLatitude, lng: event.hostFuzzyLongitude }"
-      title="Test"
-      icon="https://storage.googleapis.com/cottageclass-prod/images/map-radius.png"
-      />
-    </GmapMap>
-  </div>
-  <div class="mobile-cards-wrapper">
-      <div class="event-specifics-card"><img src="@/assets/about.svg" width="100" height="100" alt="">
-        <div class="card-small-text" v-if="event.activityName && event.food">About</div>
-        <div class="card-large-text">Who doesn’t love {{ event.activityName }} &amp; {{ event.food }}? </div>
-      </div>
-      <div v-if="event.houseRules" class="event-specifics-card"><img src="@/assets/house-rules.svg" width="100" height="100" alt="">
-        <div class="card-small-text">House Rules</div>
-        <div class="card-large-text">{{ event.houseRules }}.</div>
-      </div>
-      <div v-if="event.hasPet" class="event-specifics-card"><img src="@/assets/pets.svg" width="100" height="100" alt="">
-        <div class="card-small-text">Pets</div>
-        <div class="card-large-text">{{ event.petDescription }}</div>
-      </div>
-
-      <div class="event-specifics-host-card ">
-        <router-link :to="{ name: 'ProviderProfile', params: { id: event.hostId }}" class="host">
-          <AvatarImage className="avatar-x-large" :person="{facebookUid: event.hostFacebookUid, avatar: event.hostAvatar}"/>
-        </router-link>
-        <div class="card-small-text">Host</div>
-        <div class="card-large-text">
-          <router-link :to="{name: 'ProviderProfile', params: {id: event.hostId}}">{{ event.hostFirstName }}</router-link> &amp; <ChildAges :childAges="event.hostChildAges" singular="child" plural="children" />.
+        <div class="map">
+          <GmapMap ref="mapRef"
+            :disableDefaultUI="true"
+            :center="{ lat: event.hostFuzzyLatitude, lng: event.hostFuzzyLongitude }" :zoom="13" :options="mapOptions"
+            style="width: 100%; height: 100%;">
+          </GmapMap>
         </div>
-        <div class="card-small-text-gray">{{ jobText }}</div>
-        <div class="card-large-text">
-          <p v-for="paragraph in hostBio">{{ paragraph }}</p>
+        <div class="mobile-cards-wrapper">
+          <div class="event-specifics-card"><img src="@/assets/about.svg" width="100" height="100" alt="">
+            <div class="card-small-text" v-if="event.activityName && event.food">About</div>
+            <div class="card-large-text">Who doesn’t love {{ event.activityName }} &amp; {{ event.food }}? </div>
+          </div>
+          <div v-if="event.houseRules" class="event-specifics-card"><img src="@/assets/house-rules.svg" width="100"
+              height="100" alt="">
+            <div class="card-small-text">House Rules</div>
+            <div class="card-large-text">{{ event.houseRules }}.</div>
+          </div>
+          <div v-if="event.hasPet" class="event-specifics-card"><img src="@/assets/pets.svg" width="100" height="100"
+              alt="">
+            <div class="card-small-text">Pets</div>
+            <div class="card-large-text">{{ event.petDescription }}</div>
+          </div>
+
+          <div class="event-specifics-host-card ">
+            <router-link :to="{ name: 'ProviderProfile', params: { id: event.hostId }}" class="host">
+              <AvatarImage className="avatar-x-large"
+                :person="{facebookUid: event.hostFacebookUid, avatar: event.hostAvatar}" />
+            </router-link>
+            <div class="card-small-text">Host</div>
+            <div class="card-large-text">
+              <router-link :to="{name: 'ProviderProfile', params: {id: event.hostId}}">{{ event.hostFirstName }}
+              </router-link> &amp;
+              <ChildAges :childAges="event.hostChildAges" singular="child" plural="children" />.
+            </div>
+            <div class="card-small-text-gray">{{ jobText }}</div>
+            <div class="card-large-text">
+              <p v-for="paragraph in hostBio">{{ paragraph }}</p>
+            </div>
+            <div v-if="images && images.length>0" class="image-container">
+              <div class="divider-1px"></div>
+              <div class="card-section-text">Household Photos</div>
+              <Images :images="images" />
+            </div>
+          </div>
+
+          <!-- second RSVP button -->
+
+          <div class="event-specifics-card" v-if="!event.full && !event.participated && !hostIsCurrentUser">
+            <div class="card-large-text">Interested in this event?</div>
+            <RsvpButton class="rsvp-button-bottom" :userParticipating="event.participated" :full="event.full"
+              :eventId="eventId" />
+          </div>
+
+          <!-- Sharing ask -->
+
+          <div class="event-specifics-card" v-if="!event.full && !event.participated">
+            <div v-if="!hostIsCurrentUser" class="card-large-text">Want to help spread the word?</div>
+            <div v-else class="card-large-text">Invite others to your playdate!</div>
+            <router-link :to="'/event/' + $route.params.id + '/share'" class="rsvp-button-bottom">
+              <a class="share-button w-button">INVITE FRIENDS</a>
+            </router-link>
+          </div>
         </div>
-        <div v-if="images && images.length>0" class="image-container">
-          <div class="divider-1px"></div>
-          <div class="card-section-text">Household Photos</div>
-          <Images :images="images" />
-        </div>
       </div>
-
-      <!-- second RSVP button -->
-
-      <div class="event-specifics-card" v-if="!event.full && !event.participated && !hostIsCurrentUser">
-        <div class="card-large-text">Interested in this event?</div>
-        <RsvpButton
-        class="rsvp-button-bottom"
-        :userParticipating="event.participated"
-        :full="event.full"
-        :eventId="eventId"
-        />
-      </div>
-
-      <!-- Sharing ask -->
-
-      <div class="event-specifics-card" v-if="!event.full && !event.participated">
-        <div v-if="!hostIsCurrentUser" class="card-large-text">Want to help spread the word?</div>
-        <div v-else class="card-large-text">Invite others to your playdate!</div>
-          <router-link :to="'/event/' + $route.params.id + '/share'" class="rsvp-button-bottom">
-            <a class="share-button w-button">INVITE FRIENDS</a>
-          </router-link>
-      </div>
-
+      <Footer />
     </div>
   </div>
-
-<!-- Footer -->
-
- <Footer />
-
-</div>
 </template>
+
 <script>
 // todo: pass "person" object to AvatarImage
 
@@ -165,13 +156,16 @@ import ContactHostButton from './ContactHostButton.vue'
 import EditButton from './EditButton.vue'
 import MainNav from './MainNav.vue'
 import Footer from '@/components/Footer.vue'
-import EventCategoryIcon from '@/components/EventCategoryIcon.vue'
+import EventCategoryIcon from '@/components/base/EventCategoryIcon.vue'
 import ChildAges from '@/components/ChildAges.vue'
 import Participants from '@/components/Participants.vue'
 import Images from '@/components/Images.vue'
+import LoadingSpinner from '@/components/LoadingSpinner.vue'
 
+import { maps } from '@/mixins'
 import * as utils from '@/utils/utils.js'
 import { mapGetters } from 'vuex'
+import _ from 'lodash'
 
 var moment = require('moment')
 
@@ -187,7 +181,8 @@ export default {
     EditButton,
     ChildAges,
     Participants,
-    Images
+    Images,
+    LoadingSpinner
   },
   data () {
     return {
@@ -199,6 +194,7 @@ export default {
       }
     }
   },
+  mixins: [maps],
   methods: {
     isToday: function (date) {
       return moment(0, 'HH').diff(date, 'days') === 0
@@ -215,7 +211,15 @@ export default {
     },
     fetchEvent: async function () {
       this.event = await api.fetchEvent(this.$route.params.id)
-      console.log(this.event)
+      const that = this
+      setTimeout(async function () {
+        const map = await that.$refs.mapRef.$mapPromise
+        that.addCircle(
+          { lat: that.event.hostFuzzyLatitude, lng: that.event.hostFuzzyLongitude },
+          0.2,
+          map
+        )
+      }, 1000)
     },
     capitalize: utils.capitalize
   },
