@@ -66,7 +66,7 @@
 import AvatarImage from '@/components/base/AvatarImage'
 import RsvpButton from './RsvpButton.vue'
 import EditButton from './EditButton.vue'
-import EventCategoryIcon from '@/components/EventCategoryIcon.vue'
+import EventCategoryIcon from '@/components/base/EventCategoryIcon.vue'
 import ChildAges from '@/components/ChildAges.vue'
 import { mapGetters } from 'vuex'
 
@@ -89,24 +89,6 @@ export default {
     },
     iconUrl: function (imageName) {
       return require('@/assets/' + imageName)
-    },
-    iconImage: function (category) {
-      switch (category) {
-        case 'movie night':
-          return 'movie-camera.svg'
-        case 'arts & crafts':
-          return 'artist-palette.svg'
-        case 'games & puzzles':
-          return 'chess-pawn.svg'
-        case 'board games':
-          return 'chess-pawn.svg'
-        case 'baking':
-          return 'birthday-cake.svg'
-        case 'book club':
-          return 'books.svg'
-        default:
-          return 'grinning-face-with-smiling-eyes.svg' // party-popper.svg
-      }
     }
   },
   computed: {

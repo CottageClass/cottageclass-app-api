@@ -22,6 +22,7 @@ export default {
       activitySelected: this.value.selected,
       errorMesg: 'Please choose an activity option from the list.',
       activities: [
+        'baby playgroup',
         'movie night',
         'arts & crafts',
         'games & puzzles',
