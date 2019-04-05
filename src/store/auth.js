@@ -39,6 +39,7 @@ const actions = {
     commit('setJWT', payload)
     if (!state.JWT) {
       commit('setCurrentUser', { user: null })
+      commit('setCreatedEvents', { payload: null })
     } else {
       const currentUser = createUser(normalize(getters.parsedJWT.user))
       commit('setCurrentUser', { user: currentUser })

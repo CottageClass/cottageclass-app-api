@@ -4,7 +4,7 @@
     :subtitle="description">
     <RadioButtons
       v-model="yesOrNo"
-      :choices="['yes', 'no']" />
+      :choices="[yesText, noText]" />
     <slot></slot>
   </Question>
 </template>
@@ -16,11 +16,23 @@ import RadioButtons from '@/components/base/RadioButtons.vue'
 export default {
   name: 'YesOrNo',
   components: { Question, RadioButtons },
-  props: ['value', 'question', 'description'],
+  props: {
+    value: Object,
+    question: String,
+    description: String,
+    yesText: {
+      type: String,
+      default: 'yes'
+    },
+    noText: {
+      type: String,
+      default: 'no'
+    }
+  },
   data () {
     return {
       yesOrNo: this.value.isTrue ? 'yes' : (this.value.isTrue === false ? 'no' : null),
-      errorMesg: 'Please answer yes or no.'
+      errorMesg: `Please answer ${this.yesText} or ${this.noText}.`
     }
   },
   mounted: function () {
@@ -44,9 +56,9 @@ export default {
     },
     trueOrFalse: function () {
       switch (this.yesOrNo) {
-        case 'yes':
+        case this.yesText:
           return true
-        case 'no':
+        case this.noText:
           return false
         default:
           return null
