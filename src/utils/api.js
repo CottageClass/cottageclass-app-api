@@ -31,7 +31,6 @@ export function initProxySession (currentUserId, receiverId, requestMessage, ack
  */
 
 export function submitUserInfo (userId, data) {
-  console.log({ data })
   if (!data) { return }
 
   let { phone, location, availability, images } = data
@@ -125,7 +124,6 @@ export function submitUserInfo (userId, data) {
     postData.languages = data.languages
   }
 
-  console.log('postdata', postData)
   return axios.post(
     `/users/${userId}`,
     postData
