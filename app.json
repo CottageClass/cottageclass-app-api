@@ -134,7 +134,13 @@
         "TWILIO_PROXY_SERVICE_SID": "KS11fbab39e965d427680d9e303e3a96d1",
         "TWILIO_SENDER_NUMBER": "+16468322925",
         "FACEBOOK_KEY": "2348309995388187",
-        "FACEBOOK_SECRET": "ebfbff95b5da654a227ecc9053316d0d"
+        "FACEBOOK_SECRET": "ebfbff95b5da654a227ecc9053316d0d",
+        "SECRET_KEY_BASE": {
+          "generator": "secret"
+        },
+        "DEVISE_JWT_SECRET_KEY": {
+          "generator": "secret"
+        }
       }
     }
   }
