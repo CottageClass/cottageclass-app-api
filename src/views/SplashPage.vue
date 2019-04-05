@@ -28,7 +28,44 @@
       </div>
     </div>
   </div>
-
+  <div class="program-photo-grid-container">
+    <img
+      src="https://storage.googleapis.com/cottageclass-prod/images/photo-12x.png"
+      srcset="https://storage.googleapis.com/cottageclass-prod/images/photo-12x-p-500.png 500w,
+      https://storage.googleapis.com/cottageclass-prod/images/photo-12x-p-800.png 800w,
+      https://storage.googleapis.com/cottageclass-prod/images/photo-12x.png 908w"
+      sizes="(max-width: 479px) 100vw, (max-width: 991px) 29vw, 31vw">
+    <img
+      src="https://storage.googleapis.com/cottageclass-prod/images/photo-22x.png"
+      srcset="https://storage.googleapis.com/cottageclass-prod/images/photo-22x-p-500.png 500w,
+      https://storage.googleapis.com/cottageclass-prod/images/photo-22x-p-800.png 800w,
+      https://storage.googleapis.com/cottageclass-prod/images/photo-22x.png 908w"
+      sizes="(max-width: 479px) 100vw, (max-width: 991px) 29vw, 31vw">
+    <img
+      src="https://storage.googleapis.com/cottageclass-prod/images/photo-3-2x.png"
+      srcset="https://storage.googleapis.com/cottageclass-prod/images/photo-3-2x-p-500.png 500w,
+      https://storage.googleapis.com/cottageclass-prod/images/photo-3-2x-p-800.png 800w,
+      https://storage.googleapis.com/cottageclass-prod/images/photo-3-2x.png 908w"
+      sizes="(max-width: 479px) 100vw, (max-width: 991px) 29vw, 31vw">
+    <img
+      src="https://storage.googleapis.com/cottageclass-prod/images/photo-42x.png"
+      srcset="https://storage.googleapis.com/cottageclass-prod/images/photo-42x-p-500.png 500w,
+      https://storage.googleapis.com/cottageclass-prod/images/photo-42x-p-800.png 800w,
+      https://storage.googleapis.com/cottageclass-prod/images/photo-42x.png 908w"
+      sizes="(max-width: 479px) 100vw, (max-width: 991px) 29vw, 31vw">
+    <img
+      src="https://storage.googleapis.com/cottageclass-prod/images/photo-112x.png"
+      srcset="https://storage.googleapis.com/cottageclass-prod/images/photo-112x-p-500.png 500w,
+      https://storage.googleapis.com/cottageclass-prod/images/photo-112x-p-800.png 800w,
+      https://storage.googleapis.com/cottageclass-prod/images/photo-112x.png 908w"
+      sizes="(max-width: 479px) 100vw, (max-width: 991px) 29vw, 31vw">
+    <img
+      src="https://storage.googleapis.com/cottageclass-prod/images/photo-62x.png"
+      srcset="https://storage.googleapis.com/cottageclass-prod/images/photo-62x-p-500.png 500w,
+      https://storage.googleapis.com/cottageclass-prod/images/photo-62x-p-800.png 800w,
+      https://storage.googleapis.com/cottageclass-prod/images/photo-62x.png 908w"
+      sizes="(max-width: 479px) 100vw, (max-width: 991px) 29vw, 31vw">
+  </div>
   <div class="content-section background-01">
     <div class="divider-2px"></div>
     <div class="content-container-3 w-container">
@@ -51,7 +88,6 @@
               </router-link>
               <div class="event-summary">
                 <div class="event-time">Mon, Mar 4, 2019 at 6:00 PM–9:00 PM</div>
-                <div class="event-ages">Ages 2-11 (5 kids total)</div>
                 <div class="event-location">Dumbo</div>
               </div>
               <div class="scrolling-wrapper"><img src="@/assets/charlice2.jpg" alt="" class="event-household-photo"><img src="@/assets/charlice3.jpg" alt="" class="event-household-photo"><img src="@/assets/charlice4.jpg" alt="" class="event-household-photo"><img src="@/assets/charlice6.jpg" alt="" class="event-household-photo"><img src="@/assets/charlice5.jpg" alt="" class="event-household-photo"><img src="@/assets/charlice8.jpg" alt="" class="event-household-photo"></div>
@@ -87,7 +123,6 @@
               </router-link>
               <div class="event-summary">
                 <div class="event-time">Sat, Mar 16, 2019 at 6:00 PM–9:00 PM</div>
-                <div class="event-ages">Ages 4-11 (4 kids total)</div>
                 <div class="event-location">Carroll Gardens</div>
               </div>
               <div class="scrolling-wrapper"><img src="@/assets/rima8.jpg" alt="" class="event-household-photo"><img src="@/assets/rima5.jpg" alt="" class="event-household-photo"><img src="@/assets/rima12.jpg" alt="" class="event-household-photo"><img src="@/assets/rima4.jpg" alt="" class="event-household-photo"><img src="@/assets/rima7.jpg" alt="" class="event-household-photo"><img src="@/assets/rima6.jpg" alt="" class="event-household-photo"></div>
@@ -123,7 +158,6 @@
               </router-link>
               <div class="event-summary">
                 <div class="event-time">Thu, Apr 18, 2019 at 6:00 PM–9:00 PM</div>
-                <div class="event-ages">Ages 3-11 (4 kids total)</div>
                 <div class="event-location">Cobble Hill</div>
               </div>
               <div class="scrolling-wrapper">
@@ -3254,12 +3288,6 @@ a {
   background-image: linear-gradient(180deg, rgba(0, 0, 0, .15), rgba(0, 0, 0, .15));
 }
 
-.event-ages {
-  margin-bottom: 6px;
-  font-size: 13px;
-  line-height: 17px;
-}
-
 .event-household-photo {
   max-height: 100px;
   min-height: 100px;
@@ -4280,4 +4308,28 @@ html {
   -ms-overflow-style: none;
 }
 
+.program-photo-grid-container {
+  display: flex;
+  width: 100%;
+  margin-bottom: 122px;
+  padding-right: 32px;
+  padding-left: 32px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.program-photo-grid-container img {
+  width: 31.5%;
+  max-width: 300%;
+  margin-bottom: 32px;
+  border-radius: 4px;
+}
+
+@media (max-width: 479px) {
+  .program-photo-grid-container img {
+    width: 47%;
+    margin-bottom: 18px;
+  }
+}
 </style>

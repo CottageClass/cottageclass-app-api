@@ -64,13 +64,6 @@ export default new Vuex.Store(
           return null
         }
       },
-      firstCreatedEventId: (state) => {
-        if (state.createdEvents) {
-          return state.createdEvents[0].id
-        } else {
-          return null
-        }
-      },
       redirectRoute: state => state.redirectRoute
     }
   }
