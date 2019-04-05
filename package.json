@@ -56,5 +56,8 @@
     "jest-serializer-vue": "^2.0.2",
     "vue-jest": "^3.0.4",
     "webpack-dev-server": "2.11.2"
+  },
+  "engines": {
+    "node": "11.12.0"
   }
 }

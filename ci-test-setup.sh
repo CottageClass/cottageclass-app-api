@@ -2,5 +2,4 @@
 
 set -ex
 
-nvm use
 yarn
