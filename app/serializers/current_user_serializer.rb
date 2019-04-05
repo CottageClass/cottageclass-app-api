@@ -12,7 +12,7 @@ class CurrentUserSerializer < BaseSerializer
              :full_address,
              :last_name,
              :latitude,
-             :longitude,:route,
+             :longitude, :route,
              :phone_area_code,
              :phone_country_code,
              :phone_number,
