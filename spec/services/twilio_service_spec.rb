@@ -26,11 +26,11 @@ RSpec.describe TwilioService do
 
       before do
         twilio_session_response = OpenStruct.new(sid: 'KSXXXX1', unique_name: 'demo')
-        twilio_participant_response_1 = OpenStruct.new(sid: 'KPXXXX1')
-        twilio_participant_response_2 = OpenStruct.new(sid: 'KPXXXX2')
+        twilio_participant_response1 = OpenStruct.new(sid: 'KPXXXX1')
+        twilio_participant_response2 = OpenStruct.new(sid: 'KPXXXX2')
         allow(service).to receive(:create_twilio_proxy_session!).and_return twilio_session_response
-        allow(service).to receive(:add_participant_to_session!).and_return twilio_participant_response_1
-        allow(service).to receive(:add_participant_to_session!).and_return twilio_participant_response_2
+        allow(service).to receive(:add_participant_to_session!).and_return twilio_participant_response1
+        allow(service).to receive(:add_participant_to_session!).and_return twilio_participant_response2
       end
 
       it 'creates a new session and adds the participants to it' do
