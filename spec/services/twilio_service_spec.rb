@@ -34,12 +34,11 @@ RSpec.describe TwilioService do
       end
 
       it 'creates a new session and adds the participants to it' do
-        expect(service).to receive(:create_twilio_proxy_session!)
-        expect(service).to receive(:add_participant_to_session!).with(anything, p1.name, anything)
-        expect(service).to receive(:add_participant_to_session!).with(anything, p2.name, anything)
-
         sess = service.proxy_session_for(initiator: p1, client: p2)
 
+        expect(service).to have_received(:create_twilio_proxy_session!)
+        expect(service).to have_received(:add_participant_to_session!).with(anything, p1.name, anything)
+        expect(service).to have_received(:add_participant_to_session!).with(anything, p2.name, anything)
         expect(TwilioSession.count).to eq 2
         expect(sess).not_to eq inactive_session_p1_p2
         expect(sess.initiator).to eq p1
