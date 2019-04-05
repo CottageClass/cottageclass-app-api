@@ -44,11 +44,15 @@ export default {
         return (event.full !== 'false') && (event.hostId !== this.currentUser.id)
       })
     },
-    ...mapGetters([ 'currentUser' ])
+    ...mapGetters([ 'currentUser', 'firstCreatedEvent' ])
   },
   methods: {
     nextStep () {
-      this.$router.push({ name: 'SocialInvite', params: { id: this.firstCreatedEventId } })
+      if (this.firstCreatedEvent) {
+        this.$router.push({ name: 'SocialInvite', params: { id: this.firstCreatedEvent.id } })
+      } else {
+        this.$router.push({ name: 'Events' })
+      }
     }
   },
   mounted: function () {
