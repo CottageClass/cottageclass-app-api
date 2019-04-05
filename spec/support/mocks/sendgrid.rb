@@ -1,3 +1,5 @@
+require_relative './common.rb'
+
 module Mocks
   class Sendgrid < Mocks::Common
     def send_mail
