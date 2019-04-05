@@ -66,7 +66,7 @@
 import AvatarImage from '@/components/base/AvatarImage'
 import RsvpButton from './RsvpButton.vue'
 import EditButton from './EditButton.vue'
-import EventCategoryIcon from '@/components/EventCategoryIcon.vue'
+import EventCategoryIcon from '@/components/base/EventCategoryIcon.vue'
 import ChildAges from '@/components/ChildAges.vue'
 import { mapGetters } from 'vuex'
 
