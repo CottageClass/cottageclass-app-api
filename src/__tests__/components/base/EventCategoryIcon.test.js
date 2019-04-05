@@ -1,6 +1,5 @@
 import { mount } from '@vue/test-utils'
 import EventCategoryIcon from '@/components/base/EventCategoryIcon.vue'
-import _ from 'lodash'
 
 describe('EventCategoryIcon', () => {
   let wrapper

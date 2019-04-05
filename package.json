@@ -4,7 +4,9 @@
   "private": true,
   "description": "A Rails project serving up a Vue.js front end",
   "scripts": {
-    "test": "jest --config ./jest.conf.js --watch"
+    "test": "jest --config ./jest.conf.js",
+    "test-watch": "jest --config ./jest.conf.js --watch",
+    "lint": "eslint src"
   },
   "author": "holmesworcester <hwilson@gmail.com>",
   "dependencies": {
