@@ -119,7 +119,7 @@
   "environments": {
     "test": {
       "env": {
-
+        "APP_HOST": "kidsclub.io"
       }
     }
   }
