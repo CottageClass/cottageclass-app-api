@@ -116,4 +116,13 @@
     "test": "ci-tests.sh"
   },
   "stack": "heroku-18"
+},
+{
+  "environments": {
+    "test": {
+      "env": {
+
+      }
+    }
+  }
 }
