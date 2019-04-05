@@ -14,7 +14,7 @@ class TwilioService
       .live
       .with_participants(initiator.id, client.id)
 
-    if existing_sessions.count > 0
+    if existing_sessions.count.positive?
       proxy_session = existing_sessions.first
     else
       with_alerting(initiator: initiator, client: client, session_id: 'uncreated', method: 'creating proxy session') do
@@ -122,7 +122,7 @@ class TwilioService
       )
   rescue Twilio::REST::RestError => e
     # skip retry if participant is already added
-    if has_existing_participant?(e)
+    if existing_participant?(e)
       # do nothing
     else
       # retry
@@ -130,7 +130,7 @@ class TwilioService
     end
   end
 
-  def has_existing_participant?(twilio_rest_error)
+  def existing_participant?(twilio_rest_error)
     twilio_rest_error.error_message.match(/Participant has already been added/) ||
       twilio_rest_error.code == '80103'
   end
@@ -144,7 +144,7 @@ class TwilioService
       )
   end
 
-  def unique_name_for_session(initiator_id, client_id, timestamp = DateTime.now)
+  def unique_name_for_session(initiator_id, client_id, timestamp = DateTime.current)
     "#{initiator_id}_#{client_id}_#{timestamp.to_i}"
   end
 

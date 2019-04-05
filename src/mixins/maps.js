@@ -3,7 +3,9 @@ import * as VueGoogleMaps from 'vue2-google-maps'
 
 export default {
   computed: {
-    google: VueGoogleMaps.gmapApi,
+    google () {
+      return VueGoogleMaps.gmapApi
+    },
     circlePath () {
       return function (center, radius, numPoints) {
         numPoints = numPoints || 80

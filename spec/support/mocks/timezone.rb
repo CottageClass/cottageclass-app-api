@@ -1,3 +1,5 @@
+require_relative './common.rb'
+
 module Mocks
   class Timezone < Mocks::Common
     def time_zone_for(timeout: false)

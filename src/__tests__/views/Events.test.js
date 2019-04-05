@@ -1,16 +1,25 @@
-import { shallowMount } from '@vue/test-utils'
+import { shallowMount, createLocalVue } from '@vue/test-utils'
 import Events from '@/views/Events.vue'
+import Vuex from 'vuex'
+
+const localVue = createLocalVue()
+
+localVue.use(Vuex)
 
 describe('Events', () => {
   let wrapper
   describe('no current user', () => {
     beforeAll(async () => {
-      const $store = {
-        getters: {
-          currentUser: null,
-          isAuthenticated: false
-        }
+      const actions = {
+        fetchUpcomingEventsWithinDistance: jest.fn()
       }
+      const $store = new Vuex.Store({
+        actions,
+        getters: {
+          currentUser () { return null },
+          isAuthenticated () { return false }
+        }
+      })
       wrapper = shallowMount(Events, {
         mocks: { $store },
         stubs: [ 'GmapMap', 'GmapMarker' ] // because the are globally registered.  this silences the warning

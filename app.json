@@ -113,6 +113,21 @@
   },
   "name": "kidsclub",
   "scripts": {
+    "test": "./ci-test.sh",
+    "test-setup": "./ci-test-setup.sh"
   },
-  "stack": "heroku-18"
+  "stack": "heroku-18",
+  "environments": {
+    "test": {
+      "addons": ["heroku-postgresql:in-dyno"],
+      "env": {
+        "SECRET_KEY_BASE": {
+          "generator": "secret"
+        },
+        "DEVISE_JWT_SECRET_KEY": {
+          "generator": "secret"
+        }
+      }
+    }
+  }
 }

@@ -49,7 +49,7 @@ RSpec.resource 'User' do
       get '/api/users/:id', format: :json do
         example_request 'get self' do
           included_children = json_body.dig('included')
-          included_children.select { |object| object[:type] == "child" }
+          included_children.select { |object| object[:type] == 'child' }
 
           expect(response_status).to eq(200)
           expect(json_body.dig('data', 'attributes', 'phone_number')).to eq(user.phone_number)
@@ -64,7 +64,7 @@ RSpec.resource 'User' do
       get '/api/users/:other_user_id', format: :json do
         example_request 'get other user' do
           included_children = json_body.dig('included')
-          included_children.select { |object| object[:type] == "child" }
+          included_children.select { |object| object[:type] == 'child' }
 
           expect(response_status).to eq(200)
           expect(json_body.dig('data', 'attributes', 'phone')).to be_nil

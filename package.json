@@ -4,7 +4,9 @@
   "private": true,
   "description": "A Rails project serving up a Vue.js front end",
   "scripts": {
-    "test": "jest --config ./jest.conf.js --watch"
+    "test": "jest --config ./jest.conf.js",
+    "test-watch": "jest --config ./jest.conf.js --watch",
+    "lint": "eslint src"
   },
   "author": "holmesworcester <hwilson@gmail.com>",
   "dependencies": {
@@ -56,5 +58,8 @@
     "jest-serializer-vue": "^2.0.2",
     "vue-jest": "^3.0.4",
     "webpack-dev-server": "2.11.2"
+  },
+  "engines": {
+    "node": "10.14.1"
   }
 }

@@ -13,11 +13,11 @@ class UsersController < ApiController
     user = current_user
     if user.update(user_params)
       render json: CurrentUserSerializer.json_for(user, include: %i[
-                                             children
-                                             children.emergency_contacts
-                                             user_reviews
-                                             user_reviews.reviewer
-                                           ]),
+                                                    children
+                                                    children.emergency_contacts
+                                                    user_reviews
+                                                    user_reviews.reviewer
+                                                  ]),
              status: 200
     else
       render json: { errors: user.errors.full_messages }, status: 400
@@ -27,8 +27,8 @@ class UsersController < ApiController
   def inquiries
     users = current_user.inquirers
     serializable_hash = PublicUserSerializer.json_for users,
-                                                include: %i[children user_reviews user_reviews.reviewer],
-                                                params: { personal_information: true }
+                                                      include: %i[children user_reviews user_reviews.reviewer],
+                                                      params: { personal_information: true }
 
     render json: serializable_hash, status: 200
   end

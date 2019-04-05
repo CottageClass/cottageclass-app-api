@@ -10,12 +10,18 @@ class TwilioSessionsController < ApiController
     twilio_session = service.proxy_session_for(initiator: careseeker, client: provider)
 
     # send request message to provider
-    service.send_message_to_participant!(cc_twilio_session: twilio_session, sender: careseeker, receiver: provider, message: twilio_params[:request_message])
+    service.send_message_to_participant!(cc_twilio_session: twilio_session,
+                                         sender: careseeker,
+                                         receiver: provider,
+                                         message: twilio_params[:request_message])
 
     # send acknowledgement message to careseeker
     ack_msg = twilio_params[:acknowledgment_message]
     if ack_msg.present?
-      service.send_message_to_participant!(cc_twilio_session: twilio_session, sender: provider, receiver: careseeker, message: twilio_params[:acknowledgment_message])
+      service.send_message_to_participant!(cc_twilio_session: twilio_session,
+                                           sender: provider,
+                                           receiver: careseeker,
+                                           message: twilio_params[:acknowledgment_message])
     end
 
     # return receiver's textable number (proxy ID)

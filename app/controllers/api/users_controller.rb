@@ -44,8 +44,8 @@ class API::UsersController < API::BaseController
     end
 
     serializer = PublicUserSerializer.new users, include: %i[children user_reviews user_reviews.reviewer],
-                                           links: links,
-                                           meta: meta
+                                                 links: links,
+                                                 meta: meta
     render json: serializer.serializable_hash, status: :ok
   end
 
