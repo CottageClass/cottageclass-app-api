@@ -32,16 +32,7 @@
             <h5 class="list-title-2"><span v-if="user.neighborhood">Neighborhood: {{ user.neighborhood }}</span><span v-else>Location</span></h5>
           </div>
 
-          <div class="map-container">
-            <GmapMap
-              ref="mapRef"
-              :disableDefaultUI="true"
-              :center="userLocation"
-              :zoom="13"
-              :options="mapOptions"
-              style="width: 100%; height: 230px;">
-            </GmapMap>
-          </div>
+          <div ref="map" class="map-container" />
 <!-- Positive reviews -->
           <div class="group-title-container-2">
             <h5 class="list-title-2">Great Experiences</h5>
@@ -111,16 +102,17 @@ export default {
   },
   mounted: async function () {
     this.user = await api.fetchUser(this.$route.params.id)
-
-    const that = this
-    setTimeout(async function () {
-      const map = await that.$refs.mapRef.$mapPromise
-      that.addCircle(
-        that.userLocation,
-        0.2,
-        map
-      )
-    }, 1000)
+    // wait until the next tick so the map div exists
+    this.$nextTick(async function () {
+      await this.createMap(this.$refs.map, {
+        zoom: 13,
+        center: this.userLocation,
+        disableDefaultUI: true,
+        options: this.mapOptions,
+        style: 'width: 100px; height: 230px;'
+      })
+      await this.addCircle({ lat: this.user.fuzzyLatitude, lng: this.user.fuzzyLongitude }, 0.2)
+    })
   },
   computed: {
     employmentDescription: function () {
@@ -241,6 +233,8 @@ img {
 
 .map-container {
   position: relative;
+  height:230px;
+  width:100%;
 }
 
 .list-info-1 {

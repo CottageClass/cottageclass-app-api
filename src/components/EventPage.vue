@@ -77,13 +77,7 @@
 
         <!-- Map -->
 
-        <div class="map">
-          <GmapMap ref="mapRef"
-            :disableDefaultUI="true"
-            :center="{ lat: event.hostFuzzyLatitude, lng: event.hostFuzzyLongitude }" :zoom="13" :options="mapOptions"
-            style="width: 100%; height: 100%;">
-          </GmapMap>
-        </div>
+        <div class="map" ref="map"/>
         <div class="mobile-cards-wrapper">
           <div class="event-specifics-card"><img src="@/assets/about.svg" width="100" height="100" alt="">
             <div class="card-small-text" v-if="event.activityName && event.food">About</div>
@@ -211,15 +205,17 @@ export default {
     },
     fetchEvent: async function () {
       this.event = await api.fetchEvent(this.$route.params.id)
-      const that = this
-      setTimeout(async function () {
-        const map = await that.$refs.mapRef.$mapPromise
-        that.addCircle(
-          { lat: that.event.hostFuzzyLatitude, lng: that.event.hostFuzzyLongitude },
-          0.2,
-          map
-        )
-      }, 1000)
+      this.$nextTick(async function () {
+        console.log(this.$refs.map)
+        await this.createMap(this.$refs.map, {
+          zoom: 13,
+          center: { lat: this.event.hostFuzzyLatitude, lng: this.event.hostFuzzyLongitude },
+          disableDefaultUI: true,
+          options: this.mapOptions,
+          style: 'width: 100px; height: 230px;'
+        })
+        await this.addCircle({ lat: this.event.hostFuzzyLatitude, lng: this.event.hostFuzzyLongitude }, 0.2)
+      })
     },
     capitalize: utils.capitalize
   },

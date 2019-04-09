@@ -58,7 +58,7 @@ export default {
       }
     },
     ...mapGetters([
-      'distanceFromCurrentUser', 'currentUser', 'isAuthenticated'
+      'distanceFromCurrentUser', 'currentUser', 'isAuthenticated', 'events'
     ])
   },
   watch: {
