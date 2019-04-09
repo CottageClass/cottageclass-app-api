@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest --config ./jest.conf.js",
     "test-watch": "jest --config ./jest.conf.js --watch",
-    "lint": "eslint src"
+    "lint": "eslint ./src/**/*.vue ./src/**/*.js"
   },
   "author": "holmesworcester <hwilson@gmail.com>",
   "dependencies": {
@@ -24,6 +24,7 @@
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-vue": "^2.0.2",
     "dotenv": "^7.0.0",
+    "google-maps": "^3.3.0",
     "json-api-normalizer": "^0.4.14",
     "language-list": "0.0.3",
     "libphonenumber-js": "^1.5.1",
@@ -42,7 +43,6 @@
     "vue-router": "^3.0.1",
     "vue-scrollto": "^2.13.0",
     "vue-template-compiler": "^2.6.7",
-    "vue2-google-maps": "^0.10.2",
     "vuex": "^3.1.0",
     "vuex-persistedstate": "^2.5.4"
   },

@@ -5,32 +5,32 @@
     explanation="* Members who RSVP to your playdate will see your address. Non-members will see an approximate location within a few blocks.">
       <div class="w-form">
         <vue-google-autocomplete
-            ref="address"
-            id="map"
-            classname="email-form-2 w-form location-text-field w-input"
-            :placeholder="placeholder"
-            v-on:placechanged="getAddressData"
-            country="us"
-            @inputChange="emitAddress"
+          v-if="googleMapsIsLoaded"
+          id="map"
+          classname="w-input location-text-field"
+          placeholder="Start typing"
+          v-on:placechanged="getAddressData"
         >
         </vue-google-autocomplete>
       </div>
-        <form id="email-form-2" v-on:submit.prevent>
-        <input
-          v-if="showApartmentField"
-          @keyup.enter="$emit('pressedEnter')"
-          name="apartmentNumber"
-          v-model="apartmentNumber"
-          :placeholder="apartmentNumber || 'Apartment #'"
-          class="location-text-field w-input"
-        ></form>
+      <form id="email-form-2" v-on:submit.prevent>
+      <input
+        v-if="showApartmentField"
+        @keyup.enter="$emit('pressedEnter')"
+        name="apartmentNumber"
+        v-model="apartmentNumber"
+        :placeholder="apartmentNumber || 'Apartment #'"
+        class="location-text-field w-input"
+      ></form>
     <a v-if="!showApartmentField" @click="toggleApartmentField" class="onb-button-add-group w-inline-block"><img src="@/assets/add.svg" alt="" class="image-7"><div class="onb-button-add-group-text">Add apartment #</div></a>
     </Question>
 </template>
 
 <script>
+import GoogleMapsLoader from 'google-maps'
 import VueGoogleAutocomplete from 'vue-google-autocomplete'
 import Question from '@/components/base/Question.vue'
+
 export default {
   name: 'Location',
   props: ['currentAddress', 'value', 'required', 'currentApartment'],
@@ -41,10 +41,16 @@ export default {
       showApartmentField: !!this.currentApartment,
       apartmentNumber: this.currentApartment || '',
       placeholder: this.currentAddress || 'Street address (not apt #)',
-      address: {}
+      address: {},
+      googleMapsIsLoaded: false
     }
   },
   mounted: function () {
+    const that = this
+    GoogleMapsLoader.load(function () {
+      that.googleMapsIsLoaded = true
+    })
+
     if (!this.currentAddress) {
       this.$emit('input', {
         err: 'Please enter your street address.'

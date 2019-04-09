@@ -41,6 +41,7 @@ var moment = require('moment')
 export default {
   name: 'Events',
   components: { EventList, MainNav, Footer, EventListMap },
+  props: ['initialCenter'],
   data () {
     return {
       maximumDistanceFromUserInMiles: '5',
@@ -53,12 +54,14 @@ export default {
     center () {
       if (this.currentUser) {
         return { lat: this.currentUser.latitude, lng: this.currentUser.longitude }
+      } else if (this.initialCenter) {
+        return this.initialCenter
       } else {
         return { lat: 40.688309, lng: -73.994639 } // BoCoCa
       }
     },
     ...mapGetters([
-      'distanceFromCurrentUser', 'currentUser', 'isAuthenticated'
+      'distanceFromCurrentUser', 'currentUser', 'isAuthenticated', 'events'
     ])
   },
   watch: {
@@ -79,24 +82,13 @@ export default {
     fetchEventsWithinDistance: async function () {
       this.$store.dispatch('fetchUpcomingEventsWithinDistance', {
         miles: this.maximumDistanceFromUserInMiles,
-        lat: this.currentUser.latitude,
-        lng: this.currentUser.longitude
-      })
-    },
-    fetchAllUpcomingEvents: async function () {
-      this.$store.dispatch('fetchUpcomingEventsWithinDistance', {
-        miles: this.maximumDistanceFromUserInMiles,
-        lat: '40.692928',
-        lng: '-73.985749'
+        lat: this.center.lat,
+        lng: this.center.lng
       })
     }
   },
   mounted: function () {
-    if (this.isAuthenticated) {
-      this.fetchEventsWithinDistance()
-    } else {
-      this.fetchAllUpcomingEvents()
-    }
+    this.fetchEventsWithinDistance()
   }
 }
 </script>
