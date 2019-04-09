@@ -309,9 +309,7 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   config.omniauth :facebook, ENV.fetch('FACEBOOK_KEY'), ENV.fetch('FACEBOOK_SECRET'),
-                  # set this back to use "user_photos" when the facebook app is ready
-                  # scope: 'email,user_photos',
-                  scope: 'email',
+                  scope: 'email,user_photos',
                   display: 'popup',
                   info_fields: 'name,email',
                   provider_ignores_state: true
