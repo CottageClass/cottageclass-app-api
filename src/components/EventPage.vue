@@ -159,7 +159,6 @@ import LoadingSpinner from '@/components/LoadingSpinner.vue'
 import { maps } from '@/mixins'
 import * as utils from '@/utils/utils.js'
 import { mapGetters } from 'vuex'
-import _ from 'lodash'
 
 var moment = require('moment')
 

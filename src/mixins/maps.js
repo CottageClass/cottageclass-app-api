@@ -1,6 +1,5 @@
 // A handy place to store utility functions for any page with a map
 import GoogleMapsLoader from 'google-maps'
-import Vue from 'vue'
 
 export default {
   data () {
