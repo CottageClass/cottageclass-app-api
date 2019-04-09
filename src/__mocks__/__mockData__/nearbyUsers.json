@@ -1,0 +1,433 @@
+{
+  "data": {
+    "data": [{
+      "id": "16",
+      "type": "user",
+      "attributes": {
+        "id": 16,
+        "avatar": "https://res.cloudinary.com/cottageclass2/image/upload/v1554475918/avatars/ari_photo_bw_xmaupc.png",
+        "first_name": "ari",
+        "verified": false,
+        "fuzzy_latitude": "42.2800136201954",
+        "fuzzy_longitude": "-71.7924068778003",
+        "locality": "Worcester",
+        "sublocality": null,
+        "neighborhood": "Biotech Park Area",
+        "admin_area_level_1": "Massachusetts",
+        "admin_area_level_2": "Worcester County",
+        "images": [],
+        "languages": [],
+        "job_position": null,
+        "employer": null,
+        "highest_education": null,
+        "school": null,
+        "facebook_uid": null,
+        "instagram_user": null,
+        "twitter_user": null,
+        "linkedin_user": null,
+        "created_at": "2019-04-05T14:52:00.771Z",
+        "child_ages": [-19202],
+        "profile_blurb": null,
+        "activities": [],
+        "available_mornings": null,
+        "available_afternoons": null,
+        "available_evenings": null,
+        "available_weekends": null
+      },
+      "relationships": {
+        "children": {
+          "data": [{
+            "id": "11",
+            "type": "child"
+          }]
+        },
+        "user_reviews": {
+          "data": []
+        }
+      }
+    }, {
+      "id": "2",
+      "type": "user",
+      "attributes": {
+        "id": 2,
+        "avatar": "https://res.cloudinary.com/cottageclass2/image/upload/v1553555579/avatars/ari_photo_g2dk4v.png",
+        "first_name": "ari",
+        "verified": false,
+        "fuzzy_latitude": "42.2813785719506",
+        "fuzzy_longitude": "-71.7902811818842",
+        "locality": "Worcester",
+        "sublocality": null,
+        "neighborhood": "Biotech Park Area",
+        "admin_area_level_1": "Massachusetts",
+        "admin_area_level_2": "Worcester County",
+        "images": [],
+        "languages": [],
+        "job_position": null,
+        "employer": null,
+        "highest_education": null,
+        "school": null,
+        "facebook_uid": null,
+        "instagram_user": null,
+        "twitter_user": null,
+        "linkedin_user": null,
+        "created_at": "2019-03-25T23:13:02.785Z",
+        "child_ages": [806],
+        "profile_blurb": null,
+        "activities": [],
+        "available_mornings": null,
+        "available_afternoons": null,
+        "available_evenings": null,
+        "available_weekends": null
+      },
+      "relationships": {
+        "children": {
+          "data": [{
+            "id": "2",
+            "type": "child"
+          }]
+        },
+        "user_reviews": {
+          "data": []
+        }
+      }
+    }, {
+      "id": "3",
+      "type": "user",
+      "attributes": {
+        "id": 3,
+        "avatar": "https://res.cloudinary.com/cottageclass2/image/upload/v1553559086/avatars/ari_photo_vhcmrv.png",
+        "first_name": "ari",
+        "verified": false,
+        "fuzzy_latitude": "42.282575444592",
+        "fuzzy_longitude": "-71.7939380389722",
+        "locality": "Worcester",
+        "sublocality": null,
+        "neighborhood": "Biotech Park Area",
+        "admin_area_level_1": "Massachusetts",
+        "admin_area_level_2": "Worcester County",
+        "images": [],
+        "languages": [],
+        "job_position": null,
+        "employer": null,
+        "highest_education": null,
+        "school": null,
+        "facebook_uid": null,
+        "instagram_user": null,
+        "twitter_user": null,
+        "linkedin_user": null,
+        "created_at": "2019-03-26T00:11:30.311Z",
+        "child_ages": [6],
+        "profile_blurb": null,
+        "activities": [],
+        "available_mornings": false,
+        "available_afternoons": true,
+        "available_evenings": true,
+        "available_weekends": true
+      },
+      "relationships": {
+        "children": {
+          "data": [{
+            "id": "3",
+            "type": "child"
+          }]
+        },
+        "user_reviews": {
+          "data": []
+        }
+      }
+    }, {
+      "id": "13",
+      "type": "user",
+      "attributes": {
+        "id": 13,
+        "avatar": "https://res.cloudinary.com/cottageclass2/image/upload/v1554322738/avatars/Photo_on_4-6-18_at_6.11_PM_c0lmyx.png",
+        "first_name": "Holmes",
+        "verified": false,
+        "fuzzy_latitude": "42.2755923609432",
+        "fuzzy_longitude": "-71.8176342151801",
+        "locality": "Worcester",
+        "sublocality": null,
+        "neighborhood": "Salisbury Street",
+        "admin_area_level_1": "Massachusetts",
+        "admin_area_level_2": "Worcester County",
+        "images": [],
+        "languages": [],
+        "job_position": null,
+        "employer": null,
+        "highest_education": null,
+        "school": null,
+        "facebook_uid": null,
+        "instagram_user": null,
+        "twitter_user": null,
+        "linkedin_user": null,
+        "created_at": "2019-04-03T20:19:00.858Z",
+        "child_ages": [14],
+        "profile_blurb": null,
+        "activities": [],
+        "available_mornings": null,
+        "available_afternoons": null,
+        "available_evenings": null,
+        "available_weekends": null
+      },
+      "relationships": {
+        "children": {
+          "data": [{
+            "id": "8",
+            "type": "child"
+          }]
+        },
+        "user_reviews": {
+          "data": []
+        }
+      }
+    }, {
+      "id": "12",
+      "type": "user",
+      "attributes": {
+        "id": 12,
+        "avatar": "https://res.cloudinary.com/cottageclass2/image/upload/v1554322127/avatars/image_lb1b4m.png",
+        "first_name": "Holmes",
+        "verified": false,
+        "fuzzy_latitude": "42.2733801027335",
+        "fuzzy_longitude": "-71.8139514017096",
+        "locality": "Worcester",
+        "sublocality": null,
+        "neighborhood": "Salisbury Street",
+        "admin_area_level_1": "Massachusetts",
+        "admin_area_level_2": "Worcester County",
+        "images": [],
+        "languages": [],
+        "job_position": null,
+        "employer": null,
+        "highest_education": null,
+        "school": null,
+        "facebook_uid": null,
+        "instagram_user": null,
+        "twitter_user": null,
+        "linkedin_user": null,
+        "created_at": "2019-04-03T20:08:51.845Z",
+        "child_ages": [0],
+        "profile_blurb": null,
+        "activities": [],
+        "available_mornings": null,
+        "available_afternoons": null,
+        "available_evenings": null,
+        "available_weekends": null
+      },
+      "relationships": {
+        "children": {
+          "data": [{
+            "id": "7",
+            "type": "child"
+          }]
+        },
+        "user_reviews": {
+          "data": []
+        }
+      }
+    }, {
+      "id": "6",
+      "type": "user",
+      "attributes": {
+        "id": 6,
+        "avatar": null,
+        "first_name": "Holmes",
+        "verified": false,
+        "fuzzy_latitude": "42.2736005585605",
+        "fuzzy_longitude": "-71.8183513658555",
+        "locality": "Worcester",
+        "sublocality": null,
+        "neighborhood": "Salisbury Street",
+        "admin_area_level_1": "Massachusetts",
+        "admin_area_level_2": "Worcester County",
+        "images": ["https://scontent.xx.fbcdn.net/v/t1.0-9/20479613_10154669175951969_2427390714514336334_n.jpg?_nc_cat=110\u0026_nc_ht=scontent.xx\u0026oh=9ab495728a3fd040bad9279e9454a67e\u0026oe=5D0C897A", "https://scontent.xx.fbcdn.net/v/t31.0-8/30419994_10155276522181969_6497614200384531118_o.jpg?_nc_cat=106\u0026_nc_ht=scontent.xx\u0026oh=7d2b6849ca91bb2ed4acb24fffb9eb4b\u0026oe=5D4AD5A8", "https://scontent.xx.fbcdn.net/v/t31.0-8/15723733_10154074206966969_2784915647307702779_o.jpg?_nc_cat=111\u0026_nc_ht=scontent.xx\u0026oh=cc4ab785ca3f02c8f367fd7973a7ca7a\u0026oe=5D0F7030", "https://scontent.xx.fbcdn.net/v/t31.0-8/416151_10151089419316969_873282747_o.jpg?_nc_cat=111\u0026_nc_ht=scontent.xx\u0026oh=b6dffdc4ec5c591379394e75043d589e\u0026oe=5D03FC65"],
+        "languages": [],
+        "job_position": null,
+        "employer": null,
+        "highest_education": null,
+        "school": null,
+        "facebook_uid": "10155630157971969",
+        "instagram_user": null,
+        "twitter_user": null,
+        "linkedin_user": null,
+        "created_at": "2019-03-29T13:02:36.240Z",
+        "child_ages": [14],
+        "profile_blurb": null,
+        "activities": [],
+        "available_mornings": null,
+        "available_afternoons": null,
+        "available_evenings": null,
+        "available_weekends": null
+      },
+      "relationships": {
+        "children": {
+          "data": [{
+            "id": "4",
+            "type": "child"
+          }]
+        },
+        "user_reviews": {
+          "data": []
+        }
+      }
+    }, {
+      "id": "20",
+      "type": "user",
+      "attributes": {
+        "id": 20,
+        "avatar": null,
+        "first_name": "Asa",
+        "verified": false,
+        "fuzzy_latitude": "42.2642442722311",
+        "fuzzy_longitude": "-71.8151339850159",
+        "locality": "Worcester",
+        "sublocality": null,
+        "neighborhood": "Piedmont",
+        "admin_area_level_1": "Massachusetts",
+        "admin_area_level_2": "Worcester County",
+        "images": [],
+        "languages": [],
+        "job_position": null,
+        "employer": null,
+        "highest_education": null,
+        "school": null,
+        "facebook_uid": "2345507718810193",
+        "instagram_user": null,
+        "twitter_user": null,
+        "linkedin_user": null,
+        "created_at": "2019-04-09T13:45:58.163Z",
+        "child_ages": [12],
+        "profile_blurb": null,
+        "activities": [],
+        "available_mornings": true,
+        "available_afternoons": true,
+        "available_evenings": true,
+        "available_weekends": true
+      },
+      "relationships": {
+        "children": {
+          "data": [{
+            "id": "15",
+            "type": "child"
+          }]
+        },
+        "user_reviews": {
+          "data": []
+        }
+      }
+    }],
+    "included": [{
+      "id": "11",
+      "type": "child",
+      "attributes": {
+        "parent_id": 16,
+        "age": -19202
+      },
+      "relationships": {
+        "parent": {
+          "data": {
+            "id": "16",
+            "type": "user"
+          }
+        }
+      }
+    }, {
+      "id": "2",
+      "type": "child",
+      "attributes": {
+        "parent_id": 2,
+        "age": 806
+      },
+      "relationships": {
+        "parent": {
+          "data": {
+            "id": "2",
+            "type": "user"
+          }
+        }
+      }
+    }, {
+      "id": "3",
+      "type": "child",
+      "attributes": {
+        "parent_id": 3,
+        "age": 6
+      },
+      "relationships": {
+        "parent": {
+          "data": {
+            "id": "3",
+            "type": "user"
+          }
+        }
+      }
+    }, {
+      "id": "8",
+      "type": "child",
+      "attributes": {
+        "parent_id": 13,
+        "age": 14
+      },
+      "relationships": {
+        "parent": {
+          "data": {
+            "id": "13",
+            "type": "user"
+          }
+        }
+      }
+    }, {
+      "id": "7",
+      "type": "child",
+      "attributes": {
+        "parent_id": 12,
+        "age": 0
+      },
+      "relationships": {
+        "parent": {
+          "data": {
+            "id": "12",
+            "type": "user"
+          }
+        }
+      }
+    }, {
+      "id": "4",
+      "type": "child",
+      "attributes": {
+        "parent_id": 6,
+        "age": 14
+      },
+      "relationships": {
+        "parent": {
+          "data": {
+            "id": "6",
+            "type": "user"
+          }
+        }
+      }
+    }, {
+      "id": "15",
+      "type": "child",
+      "attributes": {
+        "parent_id": 20,
+        "age": 12
+      },
+      "relationships": {
+        "parent": {
+          "data": {
+            "id": "20",
+            "type": "user"
+          }
+        }
+      }
+    }],
+    "meta": {
+      "users_count": 7,
+      "pages_count": 1
+    },
+    "links": {
+      "self": "/api/users/miles/10/latitude/42.2798738/longitude/-71.7900378/page/1/page_size/10"
+    }
+  }
+}

@@ -4,6 +4,7 @@ const user1230Events = require('./__mockData__/user_1230_events.json')
 const user1230 = require('./__mockData__/user_1230.json')
 const user1228 = require('./__mockData__/user_1228.json')
 const user1281 = require('./__mockData__/user_1281.json')
+const nearbyUsers = require('./__mockData__/nearbyUsers.json')
 
 export default {
   get: jest.fn((url) => {
@@ -22,6 +23,10 @@ export default {
       return Promise.resolve(user1230Events)
     }
 
+    if (url === userUrl + `miles/10/latitude/42.2798738/longitude/-71.7900378/page/1/page_size/10`) {
+      return Promise.resolve(nearbyUsers)
+    }
+
     // this is the unauthenticated endpont
     if (url === `/api/users/1230`) {
       return Promise.resolve(user1230)
@@ -31,7 +36,7 @@ export default {
     }
 
     // this is the authenticated endpont
-    if (url === `/users/1228`) {
+    if (url === `/api/users/1228`) {
       return Promise.resolve(user1228)
     }
   }),
