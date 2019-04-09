@@ -15,6 +15,9 @@ module.exports = {
     '^.+\\.js?$': '<rootDir>/node_modules/babel-jest',
     '.*\\.(vue)$': '<rootDir>/node_modules/vue-jest'
   },
+  transformIgnorePatterns: [
+    'node_modules/(?!(vue-google-autocomplete)/)' // whitelist VGA for transform
+  ],
   snapshotSerializers: ['<rootDir>/node_modules/jest-serializer-vue'],
   testURL: 'http://localhost/',
   testMatch: ['<rootDir>/src/__tests__/**/*.test.js']

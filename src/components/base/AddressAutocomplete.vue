@@ -1,22 +1,19 @@
 <template>
   <div class="wrapper">
     <img src="@/assets/baseline-search-24px.svg" alt="" class="search-icon">
-     <vue-google-autocomplete
-            v-if="googleMapsIsLoaded"
-            ref="address"
-            id="map"
-            classname="address-field"
-            :placeholder="placeholder"
-            v-on:placechanged="getAddressData"
-            country="us"
-        >
-        </vue-google-autocomplete>
+    <vue-google-autocomplete
+          v-if="googleMapsIsLoaded"
+          ref="address"
+          id="map"
+          classname="address-field"
+          :placeholder="placeholder"
+          v-on:placechanged="getAddressData"
+          country="us" />
     <input type="submit"
-          class="submitButton"
-          :class="{ active: latlng }"
-          value="Find Parents & Playdates"
-          @click="submitAddress">
-    </div>
+           class="submitButton"
+           :class="{ active: latlng }"
+           value="Find Parents & Playdates"
+           @click="submitAddress">
   </div>
 </template>
 

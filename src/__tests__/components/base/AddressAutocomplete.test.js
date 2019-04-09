@@ -1,11 +1,11 @@
-import { mount } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import AddressAutocomplete from '@/components/base/AddressAutocomplete.vue'
 
 describe('EventCategoryIcon', () => {
   let wrapper
   beforeAll(async () => {
     try {
-      wrapper = await mount(AddressAutocomplete)
+      wrapper = await shallowMount(AddressAutocomplete)
     } catch (e) {
       throw (e)
     }
@@ -17,7 +17,7 @@ describe('EventCategoryIcon', () => {
   })
 
   it('has a button to sumbit which is inactive at first', () => {
-    const button = wrapper.find('div.w-button')
+    const button = wrapper.find('input.submitButton')
     button.trigger('click')
 
     expect(button).not.toBeNull()
