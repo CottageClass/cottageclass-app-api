@@ -5,7 +5,7 @@
   <div class="hero-section">
     <div class="hero-container w-container">
       <div class="hero-content">
-        <h1 class="h1-display">Meet cool parents, find playdates, share childcare. <span class="highlight">Free.</span></h1>
+        <h1 class="h1-display">Meet cool parents, find playdates, share childcare.</h1>
         <div class="hero-subtitle">Host a monthly playdate at your home to get free, unlimited access to playdates offered by nearby families. Drop off, hang out, invite friends, make new ones—it&rsquo;s up to you. From newborns to tweens, all ages are welcome!</div>
         <a href="" class="button-hero w-button" @click.prevent="$router.push({ name: 'SignUp' })">Sign up today. It's free!</a>
         <div class="how-wrapper">
