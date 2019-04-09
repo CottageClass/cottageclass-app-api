@@ -25,6 +25,7 @@
             v-model="userData.facebookImages"
             @pressedEnter="nextStep"
             v-on:noImages="nextStep"
+            v-on:noPermissions="nextStep"
             required="true"/>
           <Children
             v-if="currentStep === 'children'"
@@ -99,8 +100,7 @@ const stepSequence = [
   'phone',
   'location',
   'children',
-  // uncomment this to turn on facebook photo collection when app is approved
-  // 'facebookImages',
+  'facebookImages',
   'eventActivity',
   'food',
   'eventTime',

@@ -54,6 +54,7 @@ export default {
           this.$emit('noImages')
         }
       } catch (e) {
+        this.$emit('noImages')
         console.log(e)
       }
     },
