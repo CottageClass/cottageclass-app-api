@@ -5,9 +5,9 @@
   <div class="hero-section">
     <div class="hero-container w-container">
       <div class="hero-content">
-        <h1 class="h1-display">Meet cool parents, find playdates, share childcare. <span class="highlight">Free.</span></h1>
+        <h1 class="h1-display">Meet cool parents, find playdates, share childcare.</h1>
         <div class="hero-subtitle">Host a monthly playdate at your home to get free, unlimited access to playdates offered by nearby families. Drop off, hang out, invite friends, make new ones—it&rsquo;s up to you. From newborns to tweens, all ages are welcome!</div>
-        <a href="" class="button-hero w-button" @click.prevent="$router.push({ name: 'SignUp' })">Sign up today. It's free!</a>
+        <AddressAutocomplete />
         <div class="how-wrapper">
           <ul class="unordered-list">
             <li class="list-item"><img src="@/assets/give-care.svg" alt="" class="image-262">
@@ -25,7 +25,7 @@
             </li>
           </ul>
         </div>
-      </div>
+      </div>z
     </div>
   </div>
   <div class="program-photo-grid-container">
@@ -285,6 +285,7 @@
 
 <script>
 
+import AddressAutocomplete from '@/components/base/AddressAutocomplete'
 import RsvpButton from '@/components/RsvpButton.vue'
 import MainNav from '@/components/MainNav.vue'
 import Footer from '@/components/Footer.vue'
@@ -292,7 +293,7 @@ import { mapGetters } from 'vuex'
 
 export default {
   name: 'SplashPage',
-  components: { RsvpButton, MainNav, Footer },
+  components: { RsvpButton, MainNav, Footer, AddressAutocomplete },
   created: function () {
     if (this.currentUser === null) {
       return
