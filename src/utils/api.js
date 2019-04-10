@@ -161,14 +161,15 @@ function createPersonObject (personInApi, availableChildren = []) {
   return {
     agreeTos: p.agree_tos,
     id: personInApi.id,
+    childAges: p.child_ages,
     firstName: p.first_name,
-    lastInitial: p.last_name && p.last_name[0],
     avatar: p.avatar,
     activities: activities,
     availableMornings: p.available_mornings,
     availableEvenings: p.available_evenings,
     availableAfternoons: p.available_afternoons,
     availableWeekends: p.available_weekends,
+    lastInitial: capitalize(p.last_initial),
     location: {
       lat: parseFloat(p.fuzzy_latitude),
       lng: parseFloat(p.fuzzy_longitude)
