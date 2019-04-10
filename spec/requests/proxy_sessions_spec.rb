@@ -5,8 +5,12 @@ RSpec.describe 'Twilio proxy messages', type: :request do
     let(:sender)          { FactoryBot.create(:user) }
     let(:receiver)        { FactoryBot.create(:user) }
     let(:twilio_session)  { OpenStruct.new(sid: 'KCXXXX1', unique_name: 'demo', date_expiry: '2022-07-30T20:00:00Z') }
-    let(:twilio_msg_obj)  { OpenStruct.new(session_sid: 'KCXXXX1', sid: 'KIXXXX', data: { 'body': 'message body' }.to_json) }
-    let(:post_data)       { { twilio_session: { request_message: 'request', acknowledgment_message: 'ack' } } }
+    let(:twilio_msg_obj)  do
+      OpenStruct.new(session_sid: 'KCXXXX1',
+                     sid: 'KIXXXX',
+                     data: { 'body': 'message body' }.to_json)
+    end
+    let(:post_data) { { twilio_session: { request_message: 'request', acknowledgment_message: 'ack' } } }
 
     let :headers do
       {
@@ -16,14 +20,14 @@ RSpec.describe 'Twilio proxy messages', type: :request do
     end
 
     before do
-      twilio_participant_response_1 = OpenStruct.new(sid: 'KPXXXX1')
-      twilio_participant_response_2 = OpenStruct.new(sid: 'KPXXXX2')
+      twilio_participant_response1 = OpenStruct.new(sid: 'KPXXXX1')
+      twilio_participant_response2 = OpenStruct.new(sid: 'KPXXXX2')
       allow_any_instance_of(TwilioService).to receive(:create_twilio_proxy_session!)
         .and_return twilio_session
       allow_any_instance_of(TwilioService).to receive(:add_participant_to_session!)
-        .and_return twilio_participant_response_1
+        .and_return twilio_participant_response1
       allow_any_instance_of(TwilioService).to receive(:add_participant_to_session!)
-        .and_return twilio_participant_response_2
+        .and_return twilio_participant_response2
       allow_any_instance_of(TwilioService).to receive(:send_twilio_message_to_participant!)
         .and_return twilio_msg_obj
     end

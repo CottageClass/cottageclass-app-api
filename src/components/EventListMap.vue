@@ -24,26 +24,17 @@ This is the map view of a list of events
       </a>
 
     </div>
-    <div
-    v-show="type==='map'"
-    class="map-wrapper"
-    @click="mapClick">
-    <a
-     v-if="showNavigation || !isMobile"
-     href=""
-     @click.prevent="searchButtonClick"
-     class="map-button-1 w-button">
-     Search this area
-     </a>
-      <GmapMap
-      class="google-map"
-      ref="mapRef"
-      :disableDefaultUI="true"
-      :center="{ lat: 40.689587754466, lng: -73.9978254887843 }"
-      :zoom="13"
-      :options="mapOptions"
-      style="width: 100%; height: 100%;">
-      </GmapMap>
+    <div v-show="type==='map'"
+         class="map-wrapper"
+         @click="mapClick">
+      <a
+      v-if="showNavigation || !isMobile"
+      href=""
+      @click.prevent="searchButtonClick"
+      class="map-button-1 w-button">
+        Search this area
+      </a>
+      <div ref="map" class="map-container" />
     </div>
     <div
     v-if="type==='list'"
@@ -87,7 +78,7 @@ export default {
       this.type = this.otherType
     },
     updateEvents: async function () {
-      this.map = await this.$refs.mapRef.$mapPromise
+      await this.map
 
       // clear existing markers
       // https://developers.google.com/maps/documentation/javascript/examples/marker-remove
@@ -98,10 +89,9 @@ export default {
 
       const that = this
       for (let event of _.reverse(this.events)) {
-        const circle = that.addCircle(
+        const circle = await that.addCircle(
           { lat: event.hostFuzzyLatitude, lng: event.hostFuzzyLongitude },
-          0.2,
-          that.map
+          0.2
         )
         if (circle) {
           that.circles.push(circle)
@@ -112,16 +102,17 @@ export default {
       }
     },
     setZoomLevelForMaxDistance: async function () {
-      const minDim = Math.min(this.$refs.mapRef.$el.clientHeight, this.$refs.mapRef.$el.clientWidth)
+      const map = await this.map
+      const mapEl = document.querySelector('.map-container')
+      const minDim = Math.min(mapEl.clientHeight, mapEl.clientWidth)
       const pixelRadius = minDim / 2
-      const map = await this.$refs.mapRef.$mapPromise
       const desiredMetersPerPixel = this.maximumDistanceFromUserInMiles * 1609.34 / pixelRadius
-      let zoom = Math.floor(this.zoomLevelForScale(desiredMetersPerPixel, map))
+      let zoom = Math.floor(await this.zoomLevelForScale(desiredMetersPerPixel, map))
       zoom = Math.min(Math.max(zoom, 0), 20) // ensure it's in the range of acceptable zooms
       map.setZoom(zoom)
     },
     searchButtonClick: async function () {
-      const map = await this.$refs.mapRef.$mapPromise
+      const map = await this.map
       this.$emit('maxDistanceSet', { center: map.center, miles: this.maximumDistanceFromUserInMiles }) // this should get the zoom level from the actual map
     }
   },
@@ -158,19 +149,26 @@ export default {
       this.updateEvents()
     },
     maximumDistanceFromUserInMiles: async function () {
-      const map = await this.$refs.mapRef.$mapPromise
+      const map = await this.map
       this.setZoomLevelForMaxDistance()
       this.$emit('maxDistanceSet', { center: map.center, miles: this.maximumDistanceFromUserInMiles })
     }
   },
   mounted: async function () {
-    const map = await this.$refs.mapRef.$mapPromise
+    const center = await this.latlng(this.center.lat, this.center.lng)
+    this.$nextTick(async function () {
+      await this.createMap(this.$refs.map, {
+        zoom: 13,
+        center: center,
+        disableDefaultUI: true,
+        options: this.mapOptions
+      })
+      this.setZoomLevelForMaxDistance()
+    })
     if (this.events && this.events.length) {
       // draw in events if they are already loaded
       this.updateEvents()
     }
-    map.setCenter(this.centerLatLng)
-    this.setZoomLevelForMaxDistance()
   }
 }
 </script>
@@ -246,6 +244,11 @@ select {
 .map-button-1:active {
   background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, .1)), to(rgba(0, 0, 0, .1)));
   background-image: linear-gradient(180deg, rgba(0, 0, 0, .1), rgba(0, 0, 0, .1));
+}
+
+.map-container {
+  height: 100%;
+  width: 100%;
 }
 
 @media (max-width: 991px) {

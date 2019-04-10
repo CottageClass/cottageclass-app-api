@@ -1,3 +1,5 @@
+require_relative './common.rb'
+
 module Mocks
   class Geocode < Mocks::Common
     def geocode_address(timeout: false)

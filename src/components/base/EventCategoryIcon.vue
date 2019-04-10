@@ -14,6 +14,8 @@ export default {
     },
     iconImage: function () {
       switch (this.category) {
+        case 'baby playgroup':
+          return 'hatching-chick.svg'
         case 'movie night':
           return 'movie-camera.svg'
         case 'arts & crafts':

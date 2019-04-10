@@ -131,7 +131,6 @@ export default {
 
 .body {
   background-color: #0d73c7;
-  height:
 }
 
 @media (max-width: 991px) {

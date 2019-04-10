@@ -32,20 +32,7 @@
             <h5 class="list-title-2"><span v-if="user.neighborhood">Neighborhood: {{ user.neighborhood }}</span><span v-else>Location</span></h5>
           </div>
 
-          <div class="map-container">
-            <GmapMap
-              :disableDefaultUI="true"
-              :center="userLocation"
-              :zoom="13"
-              :options="mapOptions"
-              style="width: 100%; height: 230px;">
-                <GmapMarker
-                :position="userLocation"
-                :title="user.firstName"
-                icon="https://storage.googleapis.com/cottageclass-prod/images/map-radius.png"
-                />
-            </GmapMap>
-          </div>
+          <div ref="map" class="map-container" />
 <!-- Positive reviews -->
           <div class="group-title-container-2">
             <h5 class="list-title-2">Great Experiences</h5>
@@ -89,6 +76,7 @@ import moment from 'moment'
 import ProviderInfo from '@/components/base/ProviderInfo.vue'
 import PageActionsFooter from '@/components/PageActionsFooter.vue'
 import { mapGetters } from 'vuex'
+import { maps } from '@/mixins'
 
 import _ from 'lodash'
 import languageList from 'language-list'
@@ -106,6 +94,7 @@ export default {
        }
     }
   },
+  mixins: [ maps ],
   methods: {
     goToEdit: function () {
       this.$router.push({ name: 'ProfileEdit' })
@@ -113,6 +102,17 @@ export default {
   },
   mounted: async function () {
     this.user = await api.fetchUser(this.$route.params.id)
+    // wait until the next tick so the map div exists
+    this.$nextTick(async function () {
+      await this.createMap(this.$refs.map, {
+        zoom: 13,
+        center: this.userLocation,
+        disableDefaultUI: true,
+        options: this.mapOptions,
+        style: 'width: 100px; height: 230px;'
+      })
+      await this.addCircle({ lat: this.user.fuzzyLatitude, lng: this.user.fuzzyLongitude }, 0.2)
+    })
   },
   computed: {
     employmentDescription: function () {
@@ -233,6 +233,8 @@ img {
 
 .map-container {
   position: relative;
+  height:230px;
+  width:100%;
 }
 
 .list-info-1 {

@@ -51,6 +51,7 @@ export default {
       if (this.firstCreatedEvent) {
         this.$router.push({ name: 'SocialInvite', params: { id: this.firstCreatedEvent.id } })
       } else {
+      // in the case that the event creation was skipped, we go straight to home
         this.$router.push({ name: 'Events' })
       }
     }
