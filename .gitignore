@@ -22,7 +22,7 @@
 !/storage/.keep
 
 .byebug_history
-*.env
+.env*
 /*.json
 !/package.json
 
