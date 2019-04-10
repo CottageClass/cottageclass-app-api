@@ -24,16 +24,15 @@ export default {
     if (url === userUrl + `1230/events/created/upcoming/page/1/page_size/100`) {
       return Promise.resolve(user1230Events)
     }
-
-    if (url === userUrl + `miles/10/latitude/42.2798738/longitude/-71.7900378/page/1/page_size/10`) {
+    if (url === userUrl + `miles/10/latitude/42.2798738/longitude/-71.7900378/page/1/page_size/100`) {
       return Promise.resolve(nearbyUsers)
     }
 
-    if (url === userUrl + `miles/10/latitude/40.2798738/longitude/-71.7900378/page/1/page_size/10`) {
+    if (url === userUrl + `miles/10/latitude/40.2798738/longitude/-71.7900378/page/1/page_size/100`) {
       return Promise.resolve(noNearbyUsers)
     }
 
-    if (url === userUrl + `miles/10/latitude/41.2798738/longitude/-71.7900378/page/1/page_size/10`) {
+    if (url === userUrl + `miles/10/latitude/41.2798738/longitude/-71.7900378/page/1/page_size/100`) {
       return Promise.resolve(fewNearbyUsers)
     }
 
