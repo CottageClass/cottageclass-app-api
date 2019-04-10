@@ -21,11 +21,9 @@ GoogleMapsLoader.LIBRARIES = ['geometry', 'places']
 GoogleMapsLoader.load()
 
 let isAuthWindow = false
-try {
+if (window && window.opener && window.opener.location && window.location) {
   isAuthWindow = window.opener.location.origin === window.location.origin &&
                  window.opener.oauthCallback
-} catch (e) {
-  console.log(e)
 }
 
 if (isAuthWindow) {
