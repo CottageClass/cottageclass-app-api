@@ -8,7 +8,7 @@ export default {
         })
       setTimeout(function () {
         store.commit('hideAlert')
-      }, 3000)
+      }, 5000)
     },
     showAlertOnNextRoute (message, status) {
       this.$store.commit(
