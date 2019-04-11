@@ -3,7 +3,7 @@
     <div class="avatar-container">
       <AvatarImage
         :person="user"
-        className="avatar" />
+        className="avatar"/>
     </div>
     <div class="info-container">
       <div class="heading">
@@ -151,6 +151,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.avatar-container {
+  min-width: 80px;
+  height: 80px;
+}
 .avatar {
   height: 80px;
   min-width: 80px;
@@ -194,15 +198,12 @@ export default {
   font-weight: bold;
 }
 .info-container {
-  width: 100%;
   margin-right: 16px;
   margin-left: 16px;
   flex-direction: column;
 }
 .meet-button {
   text-align: center;
-  // display: flex;
-  padding-left: auto;
   min-width: 80px;
   border: 1px solid #1f88e9;
   border-radius: 4px;
@@ -227,6 +228,15 @@ export default {
     background-color:  rgba(12, 186, 82, .2);
     border-width: 2px;
     cursor: default;
+  }
+}
+
+@media (max-width: 767px){
+  .avatar, .avatar-container {
+    max-height: 60px;
+    max-width: 60px;
+    min-height: 60px;
+    min-width: 60px;
   }
 }
 

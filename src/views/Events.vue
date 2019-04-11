@@ -339,6 +339,22 @@ a {
   .main-container {
     padding: 0px;
   }
+  .title {
+    font-size: 32px;
+    line-height: 42px;
+  }
+}
+@media (max-width: 767px){
+  .title {
+      font-size: 28px;
+      line-height: 34px;
+  }
+}
+@media (max-width: 479px) {
+  .title {
+    font-size: 24px;
+    line-height: 31.200000000000003px;
+  }
 }
 
 </style>
