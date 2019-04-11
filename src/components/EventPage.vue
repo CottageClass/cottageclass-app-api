@@ -81,7 +81,6 @@
         <div class="mobile-cards-wrapper">
           <div class="event-specifics-card"><img src="@/assets/about.svg" width="100" height="100" alt="">
             <div class="card-small-text" v-if="event.activityName && event.food">About</div>
-            <div class="card-large-text">Who doesn’t love {{ event.activityName }} &amp; {{ event.food }}? </div>
           </div>
           <div v-if="event.houseRules" class="event-specifics-card"><img src="@/assets/house-rules.svg" width="100"
               height="100" alt="">
