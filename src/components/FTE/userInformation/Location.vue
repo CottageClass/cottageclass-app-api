@@ -8,7 +8,7 @@
           v-if="googleMapsIsLoaded"
           id="map"
           classname="w-input location-text-field"
-          placeholder="Start typing"
+          :placeholder="currentAddress"
           v-on:placechanged="getAddressData"
         >
         </vue-google-autocomplete>
