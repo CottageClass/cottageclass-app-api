@@ -77,6 +77,7 @@ import StyleWrapper from '@/components/FTE/StyleWrapper.vue'
 import ErrorMessage from '@/components/base/ErrorMessage.vue'
 import * as api from '@/utils/api.js'
 import { mapGetters } from 'vuex'
+import _ from 'lodash'
 
 var VueScrollTo = require('vue-scrollto')
 
@@ -131,8 +132,11 @@ export default {
     submitUserInformation: function () {
       if (!this.error) {
         this.saveButtonText = 'Saving...'
-        const data = this.currentUser
+        let data = _.assign(this.currentUser, {})
         data.children = this.children.list
+        const { phone, location, availability, images } = this
+        data = _.assign(data, { phone, location, availability, images })
+        console.log({ data })
         api.submitUserInfo(this.currentUser.id, data).then(res => {
           this.saveButtonText = ' \u2714 Saved'
           this.$store.dispatch('updateCurrentUserFromServer')
