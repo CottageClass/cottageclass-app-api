@@ -51,13 +51,12 @@ This is the map view of a list of events
 <script>
 import { maps, screen } from '@/mixins'
 import EventList from '@/components/EventList.vue'
-import _ from 'lodash/fp'
 
 const DISTANCE_OPTIONS = [ 1, 2, 5, 10, 20, 50 ]
 
 export default {
   name: 'EventListMap',
-  props: ['events', 'center'],
+  props: ['users', 'events', 'center'],
   mixins: [ maps, screen ],
   components: { EventList },
   data () {
@@ -65,7 +64,7 @@ export default {
       map: null,
       type: 'map',
       maximumDistanceFromUserInMiles: DISTANCE_OPTIONS[2],
-      circles: []
+      userPins: []
     }
   },
   methods: {
@@ -77,26 +76,24 @@ export default {
     switchType () {
       this.type = this.otherType
     },
-    updateEvents: async function () {
+    updateMarkers: async function () {
       await this.map
-
-      // clear existing markers
-      // https://developers.google.com/maps/documentation/javascript/examples/marker-remove
-      for (let circle of this.circles) {
-        circle.setMap(null)
+      for (let pin of this.userPins) {
+        pin.setMap(null)
       }
-      this.circles = []
+      this.eventCircles = []
+      this.userPins = []
 
       const that = this
-      for (let event of _.reverse(this.events)) {
-        const circle = await that.addCircle(
-          { lat: event.hostFuzzyLatitude, lng: event.hostFuzzyLongitude },
+      for (let user of this.users) {
+        const pin = await that.addCircle(
+          { lat: user.location.lat, lng: user.location.lng },
           0.2
         )
-        if (circle) {
-          that.circles.push(circle)
-          circle.addListener('click', function () {
-            that.$router.push({ name: 'EventPage', params: { id: event.id } })
+        if (pin) {
+          that.userPins.push(pin)
+          pin.addListener('click', function () {
+            that.$router.push({ name: 'ProviderProfile', params: { id: user.id } })
           })
         }
       }
@@ -145,8 +142,8 @@ export default {
     }
   },
   watch: {
-    events: function () {
-      this.updateEvents()
+    users: function () {
+      this.updateMarkers()
     },
     maximumDistanceFromUserInMiles: async function () {
       const map = await this.map
@@ -165,9 +162,8 @@ export default {
       })
       this.setZoomLevelForMaxDistance()
     })
-    if (this.events && this.events.length) {
-      // draw in events if they are already loaded
-      this.updateEvents()
+    if (this.users && this.users.length) {
+      this.updateMarkers()
     }
   }
 }

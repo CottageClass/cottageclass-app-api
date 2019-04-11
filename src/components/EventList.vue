@@ -2,6 +2,15 @@
   <div class="events-list-wrapper">
     <LoadingSpinner v-if="awaitingEvents"/>
     <p class="no-events-message" v-if="noEvents" v-html="noEventsMessage"></p>
+    <div v-for="(user, index) in users">
+      <UserListItem
+        :user="user"
+        :index="index"
+        :key="index"
+        :mapCenter="mapCenter"
+      />
+    </div>
+
     <div v-for="(event, index) in events">
       <div
           v-if="showDates && (index === 0 || (formatDate(event.startsAt) !== formatDate(events[index - 1].startsAt)))"
@@ -31,20 +40,23 @@
 
 <script>
 import EventListItem from '@/components/EventListItem.vue'
+import UserListItem from '@/components/UserListItem.vue'
 import LoadingSpinner from '@/components/LoadingSpinner.vue'
 import { mapGetters } from 'vuex'
 
 var moment = require('moment')
 export default {
   name: 'EventList',
-  components: { EventListItem, LoadingSpinner },
+  components: { EventListItem, LoadingSpinner, UserListItem },
   props: {
     noEventsMessage: {},
     events: {},
+    users: {},
     showDates: {
       type: Boolean,
       default: true
-    }
+    },
+    mapCenter: {}
   },
   methods: {
     formatDate: function (date) {

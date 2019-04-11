@@ -8,18 +8,21 @@
         <div class="page-subtitle">The hosts of the playdates below are looking to meet other nearby parents. <strong>RSVP, or reach out &amp; introduce yourself</strong>.</div>
       </div>
       <div class="main-container">
-        <div class="map-list-container">
+        <div v-if="mapCenter"
+             class="map-list-container">
           <EventListMap
             class="map"
-            :events="events"
-            @maxDistanceSet="updateEventsForZoomLevel($event)"
-            :center="center"
+            :users="users"
+            @maxDistanceSet="updateForZoomLevel($event)"
+            :center="mapCenter"
           />
           <div class="list-container w-container">
             <EventList
               class="list"
               :events="events"
+              :users="users"
               :noEventsMessage="noEventsMessage"
+              :mapCenter="mapCenter"
             />
           </div>
         </div>
@@ -34,6 +37,8 @@ import EventList from '@/components/EventList.vue'
 import MainNav from '@/components/MainNav.vue'
 import Footer from '@/components/Footer.vue'
 import EventListMap from '@/components/EventListMap.vue'
+
+import { fetchUpcomingEventsWithinDistance, fetchUsersWithinDistance } from '@/utils/api'
 import { mapGetters } from 'vuex'
 
 var moment = require('moment')
@@ -47,11 +52,14 @@ export default {
       maximumDistanceFromUserInMiles: '5',
       showAllButtonText: 'Show all playdates',
       showShowAllButton: false,
-      noEventsMessage: 'Sorry, there are no upcoming playdates in your area'
+      noEventsMessage: 'Sorry, there are no upcoming playdates in your area',
+      events: null,
+      users: null,
+      mapCenter: null
     }
   },
   computed: {
-    center () {
+    calculateStartingCenter () {
       if (this.currentUser) {
         return { lat: this.currentUser.latitude, lng: this.currentUser.longitude }
       } else if (this.initialCenter) {
@@ -61,17 +69,14 @@ export default {
       }
     },
     ...mapGetters([
-      'distanceFromCurrentUser', 'currentUser', 'isAuthenticated'
+      'distanceFromCurrentUser', 'currentUser', 'isAuthenticated', 'alert'
     ])
   },
-  watch: {
-    maximumDistanceFromUserInMiles: function () {
-      this.fetchEventsWithinDistance()
-    }
-  },
   methods: {
-    updateEventsForZoomLevel: async function (e) {
-      this.$store.dispatch('fetchUpcomingEventsWithinDistance', { miles: e.miles, lat: e.center.lat(), lng: e.center.lng() })
+    updateForZoomLevel: async function (e) {
+      this.mapCenter = { lat: e.center.lat(), lng: e.center.lng() }
+      this.maximumDistanceFromUserInMiles = e.miles
+      this.fetchWithinDistance()
     },
     isToday: function (date) {
       return moment(0, 'HH').diff(date, 'days') === 0
@@ -79,16 +84,20 @@ export default {
     formatDate: function (date) {
       return moment(date).format('dddd, MMM Do')
     },
-    fetchEventsWithinDistance: async function () {
-      this.$store.dispatch('fetchUpcomingEventsWithinDistance', {
+    fetchWithinDistance: async function () {
+      const params = {
         miles: this.maximumDistanceFromUserInMiles,
-        lat: this.center.lat,
-        lng: this.center.lng
-      })
+        lat: this.mapCenter.lat,
+        lng: this.mapCenter.lng,
+        page_size: 10
+      }
+      this.events = await fetchUpcomingEventsWithinDistance(params)
+      this.users = await fetchUsersWithinDistance(params)
     }
   },
-  mounted: function () {
-    this.fetchEventsWithinDistance()
+  mounted: async function () {
+    this.mapCenter = await this.calculateStartingCenter
+    this.fetchWithinDistance()
   }
 }
 </script>
