@@ -289,14 +289,21 @@ import AddressAutocomplete from '@/components/base/AddressAutocomplete'
 import RsvpButton from '@/components/RsvpButton.vue'
 import MainNav from '@/components/MainNav.vue'
 import Footer from '@/components/Footer.vue'
+
+import { fetchUsersWithinDistance } from '@/utils/api'
 import { mapGetters } from 'vuex'
 
 export default {
   name: 'SplashPage',
   components: { RsvpButton, MainNav, Footer, AddressAutocomplete },
   methods: {
-    goToEvents (e) {
-      this.$router.push({ name: 'Events', params: { initialCenter: e.latlng } })
+    async goToEvents (e) {
+      const users = await fetchUsersWithinDistance({ miles: 10, lat: e.latlng.lat, lng: e.latlng.lng, pageSize: 1 })
+      if (users.length === 0) {
+        this.$router.push({ name: 'SignIn' })
+      } else {
+        this.$router.push({ name: 'Events', params: { initialCenter: e.latlng } })
+      }
     }
   },
   created: function () {
