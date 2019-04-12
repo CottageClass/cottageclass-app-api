@@ -88,7 +88,7 @@ export default {
     }
   },
   mounted: function () {
-    api.fetchUsersWithinDistance(10, this.currentUser.latitude, this.currentUser.longitude).then(res => {
+    api.fetchUsersWithinDistance({ miles: 10, lat: this.currentUser.latitude, lng: this.currentUser.longitude }).then(res => {
       this.people = res
     })
   },

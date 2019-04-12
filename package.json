@@ -5,7 +5,7 @@
   "description": "A Rails project serving up a Vue.js front end",
   "scripts": {
     "test": "jest --config ./jest.conf.js",
-    "test-watch": "jest --config ./jest.conf.js --watch",
+    "test-watch": "jest --config ./jest.conf.js --watch --setupFiles dotenv/config",
     "lint": "eslint ./src/**/*.vue ./src/**/*.js"
   },
   "author": "holmesworcester <hwilson@gmail.com>",
@@ -23,6 +23,7 @@
     "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-vue": "^2.0.2",
+    "debug": "^4.1.1",
     "dotenv": "^7.0.0",
     "google-maps": "^3.3.0",
     "json-api-normalizer": "^0.4.14",

@@ -89,7 +89,7 @@ export default {
   mounted: function () {
     const currentUser = this.currentUser
     const that = this
-    api.fetchUsersWithinDistance(20, currentUser.latitude, currentUser.longitude).then(res => {
+    api.fetchUsersWithinDistance({ miles: 20, lat: currentUser.latitude, lng: currentUser.longitude }).then(res => {
       if (res.length > 0) {
         that.users = res.filter(person => parseInt(person.id) !== parseInt(currentUser.id))
         // set the inviteStates object to all false

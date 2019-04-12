@@ -3,6 +3,9 @@ import normalize from 'json-api-normalizer'
 import axios from 'axios'
 import { createEvent, createEvents } from './createEvent'
 import { createUser } from './createUser'
+// import debug from 'debug'
+
+// const log = debug('kidsclub:api')
 
 export function initProxySession (currentUserId, receiverId, requestMessage, acknowledgmentMessage) {
   console.log('INITIATING PROXY WITH users ' + currentUserId + ', ' + receiverId)
@@ -161,14 +164,15 @@ function createPersonObject (personInApi, availableChildren = []) {
   return {
     agreeTos: p.agree_tos,
     id: personInApi.id,
+    childAges: p.child_ages,
     firstName: p.first_name,
-    lastInitial: p.last_name && p.last_name[0],
     avatar: p.avatar,
     activities: activities,
     availableMornings: p.available_mornings,
     availableEvenings: p.available_evenings,
     availableAfternoons: p.available_afternoons,
     availableWeekends: p.available_weekends,
+    lastInitial: capitalize(p.last_initial),
     location: {
       lat: parseFloat(p.fuzzy_latitude),
       lng: parseFloat(p.fuzzy_longitude)
@@ -198,16 +202,16 @@ function createPeopleObject (responseData) {
   return peopleDataArray.map(personInApi => createPersonObject(personInApi, childrenArray))
 }
 
-export function fetchUsersWithinDistance (miles, lat, lon) {
+export function fetchUsersWithinDistance ({ miles, lat, lng, pageSize = 100, page = 1 }) {
   return axios.get(
-    `/api/users/miles/${miles}/latitude/${lat}/longitude/${lon}/page/1/page_size/10`
+    `/api/users/miles/${miles}/latitude/${lat}/longitude/${lng}/page/${page}/page_size/${pageSize}`
   ).then(res => {
     console.log('FETCH USERS WITHIN DISTANCE SUCCESS')
     console.log(res.data)
     return createPeopleObject(res.data)
   }).catch(err => {
     console.log('FETCH USERS WITHIN DISTANCE FAILURE')
-    console.log(err.errors)
+    console.log(err)
     throw err
   })
 }

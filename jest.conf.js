@@ -1,5 +1,7 @@
 const path = require('path')
 
+require('dotenv').config({ path: './.env.test' })
+
 module.exports = {
   rootDir: path.resolve(__dirname, '.'),
   moduleFileExtensions: [

@@ -6,7 +6,6 @@
 import placeholder from '@/assets/avatar-placeholder.png'
 export default {
   name: 'AvatarImage',
-  // TODO I think we can remove this 'className' and just use a class everywhere
   props: ['person', 'className'],
   computed: {
     url: function () {
