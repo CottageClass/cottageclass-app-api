@@ -6,22 +6,21 @@
     <div class="hero-container w-container">
       <div class="hero-content">
         <h1 class="h1-display">Meet cool parents, find playdates, share childcare.</h1>
-        <div class="hero-subtitle">Host a monthly playdate at your home to get free, unlimited access to playdates offered by nearby families. Drop off, hang out, invite friends, make new ones—it&rsquo;s up to you. From newborns to tweens, all ages are welcome!</div>
+        <div class="hero-subtitle">Find nearby parents. Then plan fun playdates to get to know each other. Before you know it, you&rsquo;ll have an amazing network of nearby parents for fun activities &amp; sharing childcare. It takes a village. Build yours today. All ages welcome!</div>
         <AddressAutocomplete />
         <div class="how-wrapper">
           <ul class="unordered-list">
             <li class="list-item"><img src="@/assets/give-care.svg" alt="" class="image-262">
-              <div class="hero-list-item-heading">Give Care.</div>
-              <div class="hero-list-item-subtitle">Host a playdate once a month at your home for 2 or more children. <router-link to="/faq">How it works.</router-link></div>
+              <div class="hero-list-item-heading">Find parents.</div>
+              <div class="hero-list-item-subtitle">We show you parents near you with kids of similar ages &amp; interests.</div>
             </li>
             <li class="list-item"><img src="@/assets/get-care.svg" alt="" class="image-262">
-              <div class="hero-list-item-heading">Get Care.</div>
-              <div class="hero-list-item-subtitle">By hosting yourself, you get unlimited access to
- <router-link :to="{name: 'Events'}" class="links">playdates like these</router-link>.</div>
+              <div class="hero-list-item-heading">Meet for playdates.</div>
+              <div class="hero-list-item-subtitle">Invite parents for a playdate. Or RSVP to a scheduled playdate. It&rsquo;s easy.</div>
             </li>
             <li class="list-item"><img src="@/assets/socially.svg" alt="" class="image-262">
-              <div class="hero-list-item-heading">Help in a pinch.</div>
-              <div class="hero-list-item-subtitle">If you need care at specific times, you can request playdates too!</div>
+              <div class="hero-list-item-heading">Share childcare.</div>
+              <div class="hero-list-item-subtitle">Once you feel comfortable that you know a family well, you can share childcare too.</div>
             </li>
           </ul>
         </div>
@@ -204,8 +203,8 @@
         </li>
         <li class="cottageclass-is-list-item"><img src="https://uploads-ssl.webflow.com/5ba3c28cff7d47030870c8e2/5ba5420373b5d2f4e4a03438_heart%202.svg" alt="" class="cottageclass-is-list-item-image">
           <div class="cottageclass-is-list-item-text">
-            <h2 class="heading-2">Bring friends, or make friends.</h2>
-            <p class="p-center-black desktop-align-left">KidsClub works great for coordinating childcare with families you know and trust. Or you can use it to meet new families with kids of similar ages. You can drop kids off, or stick around and help the host. It's up to you.</p>
+            <h2 class="heading-2">Bring friends, or make friends. Safely.</h2>
+            <p class="p-center-black desktop-align-left">KidsClub works great for coordinating childcare with families you know and trust. Or you can use it to meet new families, get to know them, and share childcare whenever you&rsquo;re ready.</p>
           </div>
         </li>
       </ul>
