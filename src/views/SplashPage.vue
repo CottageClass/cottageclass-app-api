@@ -7,7 +7,8 @@
       <div class="hero-content">
         <h1 class="h1-display">Meet cool parents, find playdates, share childcare.</h1>
         <div class="hero-subtitle">Find nearby parents. Then plan fun playdates to get to know each other. Before you know it, you&rsquo;ll have an amazing network of nearby parents for fun activities &amp; sharing childcare. It takes a village. Build yours today. All ages welcome!</div>
-        <AddressAutocomplete />
+        <AddressAutocomplete
+        @locationSubmitted="goToEvents"/>
         <div class="how-wrapper">
           <ul class="unordered-list">
             <li class="list-item"><img src="@/assets/give-care.svg" alt="" class="image-262">
@@ -293,6 +294,11 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'SplashPage',
   components: { RsvpButton, MainNav, Footer, AddressAutocomplete },
+  methods: {
+    goToEvents (e) {
+      this.$router.push({ name: 'Events', params: { initialCenter: e.latlng } })
+    }
+  },
   created: function () {
     if (this.currentUser === null) {
       return
