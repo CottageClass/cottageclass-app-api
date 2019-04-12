@@ -21,6 +21,7 @@ describe('UserListItem', () => {
 
     wrapper = mount(UserListItem, {
       mocks: { $store },
+      stubs: ['router-link'],
       propsData: {
         mapCenter: {
           lat: 41.96,
