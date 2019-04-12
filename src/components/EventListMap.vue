@@ -53,7 +53,6 @@ This is the map view of a list of events
 <script>
 import { maps, screen } from '@/mixins'
 import EventList from '@/components/EventList.vue'
-import _ from 'lodash'
 
 const DISTANCE_OPTIONS = [ 1, 2, 5, 10, 20, 50 ]
 
