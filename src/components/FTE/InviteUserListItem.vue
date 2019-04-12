@@ -1,3 +1,5 @@
+<!-- this file is deprecated see UserListItem.vue -->
+
 <template>
   <div @click="toggleSelected" class="item-container">
     <div class="avatar-container">

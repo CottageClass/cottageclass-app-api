@@ -32,7 +32,8 @@
         "available_mornings": null,
         "available_afternoons": null,
         "available_evenings": null,
-        "available_weekends": null
+        "available_weekends": null,
+        "last_initial": "k"
       },
       "relationships": {
         "children": {
@@ -77,7 +78,8 @@
         "available_mornings": true,
         "available_afternoons": true,
         "available_evenings": true,
-        "available_weekends": true
+        "available_weekends": true,
+        "last_initial": "N"
       },
       "relationships": {
         "children": {

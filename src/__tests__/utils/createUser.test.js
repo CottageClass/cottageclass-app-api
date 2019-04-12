@@ -26,7 +26,7 @@ describe('createUser', () => {
 
     let user
     beforeAll(async () => {
-      const res = await mockAxios.get(`/users/1228`)
+      const res = await mockAxios.get(`/api/users/1228`)
       user = createUser(normalize(res.data))
     })
 

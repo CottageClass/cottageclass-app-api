@@ -82,7 +82,7 @@ RSpec.resource 'User' do
         example_request 'unauthenticated get' do
           expect(response_status).to eq(200)
           expect(json_body.dig('data', 'attributes').deep_symbolize_keys.keys).to \
-            contain_exactly(*User::PUBLIC_ATTRIBUTES)
+            contain_exactly(*User::PUBLIC_ATTRIBUTES + [:last_initial])
         end
       end
     end

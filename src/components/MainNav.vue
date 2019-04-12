@@ -26,18 +26,6 @@
             </router-link>
           </li>
           <li v-if="isAuthenticated">
-            <router-link to="/request" class="link-block w-inline-block">
-              <div class="text-block">Request Care</div>
-            </router-link>
-          </li>
-        <!--
-          <li v-if="isAuthenticated">
-            <router-link to="/offer" class="link-block w-inline-block">
-              <div class="text-block">Offer Care</div>
-            </router-link>
-          </li>
-        -->
-          <li v-if="isAuthenticated">
             <a href="/profile/edit" class="link-block w-inline-block">
               <div class="text-block">Edit Profile</div>
             </a>

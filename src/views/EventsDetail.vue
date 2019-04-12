@@ -5,27 +5,44 @@ This is the mobile-only page that shows an expanded, naviagable map of events
 <template>
   <div class="body">
     <EventListMap
+      v-if="mapCenter"
       class="map"
+      :users="users"
       :events="events"
-      @maxDistanceSet="updateEventsForZoomLevel($event)"
-      :center="center"
+      @maxDistanceSet="updateForZoomLevel($event)"
+      :center="mapCenter"
+      :showTrailblazerMessage="showTrailblazerMessage"
     />
   </div>
 </template>
 
 <script>
 import EventListMap from '@/components/EventListMap.vue'
-import { fetchEvents } from '@/utils/api.js'
+import { fetchUpcomingEventsWithinDistance, fetchUsersWithinDistance } from '@/utils/api'
 import { mapGetters } from 'vuex'
 
 export default {
   name: 'EventsDetail',
+  props: ['initialCenter'],
   components: { EventListMap },
   data () {
     return {
+      mapCenter: null,
+      users: null,
+      events: null,
+      showTrailblazerMessage: true
     }
   },
   computed: {
+    calculateStartingCenter () {
+      if (this.currentUser) {
+        return { lat: this.currentUser.latitude, lng: this.currentUser.longitude }
+      } else if (this.initialCenter) {
+        return this.initialCenter
+      } else {
+        return { lat: 40.688309, lng: -73.994639 } // BoCoCa
+      }
+    },
     center () {
       if (this.currentUser) {
         return { lat: this.currentUser.latitude, lng: this.currentUser.longitude }
@@ -34,37 +51,30 @@ export default {
       }
     },
     ...mapGetters([
-      'currentUser', 'isAuthenticated', 'events'
+      'currentUser', 'isAuthenticated'
     ])
   },
   methods: {
-    updateEventsForZoomLevel: async function (e) {
-      this.$store.dispatch('fetchUpcomingEventsWithinDistance', { miles: e.miles, lat: e.center.lat(), lng: e.center.lng() })
+    updateForZoomLevel: async function (e) {
+      this.showTrailblazerMessage = false
+      this.mapCenter = { lat: e.center.lat(), lng: e.center.lng() }
+      this.maximumDistanceFromUserInMiles = e.miles
+      this.fetchWithinDistance()
     },
-    fetchEventsWithinDistance: async function () {
-      this.$store.dispatch('fetchUpcomingEventsWithinDistance', {
+    fetchWithinDistance: async function () {
+      const params = {
         miles: this.maximumDistanceFromUserInMiles,
-        lat: this.currentUser.latitude,
-        lng: this.currentUser.longitude
-      })
-    },
-    fetchAllUpcomingEvents: async function () {
-      const res = (await fetchEvents('upcoming', e => e.startsAt)).slice(20)
-      this.events = []
-      // slice doesn't work here because fetchEvents returns an object
-      for (let i = 0; i < 20; i++) {
-        this.events.push(res[i])
+        lat: this.mapCenter.lat,
+        lng: this.mapCenter.lng,
+        pageSize: 10
       }
+      this.events = await fetchUpcomingEventsWithinDistance(params)
+      this.users = await fetchUsersWithinDistance(params)
     }
   },
-  mounted: function () {
-    if (this.events) return
-
-    if (this.isAuthenticated) {
-      this.fetchEventsWithinDistance()
-    } else {
-      this.fetchAllUpcomingEvents()
-    }
+  mounted: async function () {
+    this.mapCenter = await this.calculateStartingCenter
+    this.fetchWithinDistance()
   }
 }
 </script>

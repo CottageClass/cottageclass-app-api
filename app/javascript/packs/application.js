@@ -20,12 +20,14 @@ GoogleMapsLoader.KEY = process.env.GOOGLE_API_KEY
 GoogleMapsLoader.LIBRARIES = ['geometry', 'places']
 GoogleMapsLoader.load()
 
+// using this to have better logging in the browser
+window.localStorage.debug = process.env.DEBUG
+
 let isAuthWindow = false
 try {
   isAuthWindow = window.opener.location.origin === window.location.origin &&
                  window.opener.oauthCallback
 } catch (e) {
-  console.log(e)
 }
 
 if (isAuthWindow) {

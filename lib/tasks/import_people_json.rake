@@ -70,7 +70,5 @@ namespace :import do
         created_user_emails << user.email
       end
     end
-
-    pp "Added #{created_user_emails.length} "
   end
 end

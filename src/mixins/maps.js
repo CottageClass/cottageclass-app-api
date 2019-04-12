@@ -1,5 +1,12 @@
 // A handy place to store utility functions for any page with a map
 import GoogleMapsLoader from 'google-maps'
+import placeholder from '@/assets/avatar-placeholder.png'
+import UserPinFactory from '@/utils/UserPinFactory'
+import Marker from '@/components/base/UserPinMapMarker'
+
+import Vue from 'vue'
+
+let UserPin
 
 export default {
   data () {
@@ -26,6 +33,16 @@ export default {
         }
         return circleLatLngs
       }
+    },
+    marker () {
+      return function (user) {
+        var MarkerClass = Vue.extend(Marker)
+        var instance = new MarkerClass({
+          propsData: { avatarUrl: this.avatarUrl(user) }
+        })
+        instance.$mount()
+        return instance
+      }
     }
   },
   methods: {
@@ -36,6 +53,23 @@ export default {
         resolve(map)
       })
       return this.map
+    },
+    avatarUrl (user) {
+      if (user) {
+        if (user.avatar) {
+          return user.avatar
+        } else if (user.facebookUid) {
+          return 'https://graph.facebook.com/' + user.facebookUid + '/picture?width=200'
+        } else {
+          return placeholder
+        }
+      } else {
+        return placeholder
+      }
+    },
+    async addUserPin (user, position) {
+      const res = new UserPin(position, await this.map, this.marker(user).$el)
+      return res
     },
     async addCircle (center, radius) {
       await this.map
@@ -65,6 +99,7 @@ export default {
     const googlePromise = new Promise((resolve, reject) => {
       GoogleMapsLoader.load(function (google) {
         resolve(google)
+        UserPin = UserPinFactory(google)
       })
     })
     this.google = googlePromise

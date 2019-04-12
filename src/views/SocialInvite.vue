@@ -72,13 +72,15 @@ export default {
     }
   },
   mounted: function () {
-    this.fetchEvent()
+    if (this.eventId) {
+      this.fetchEvent()
+    }
   },
   computed: {
     eventId: function () {
       if (this.$route.params.id) {
         return this.$route.params.id
-      } else if (this.firstCreatedEvent.id) {
+      } else if (this.firstCreatedEvent && this.firstCreatedEvent.id) {
         return this.firstCreatedEvent.id
       }
       return null

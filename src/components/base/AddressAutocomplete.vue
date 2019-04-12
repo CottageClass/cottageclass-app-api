@@ -33,7 +33,7 @@ export default {
   methods: {
     submitAddress () {
       if (this.latlng) {
-        this.$router.push({ name: 'Events', params: { initialCenter: this.latlng } })
+        this.$emit('locationSubmitted', { latlng: this.latlng })
       }
     },
     getAddressData (e) {
