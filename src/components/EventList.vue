@@ -1,7 +1,6 @@
 <template>
   <div class="events-list-wrapper">
     <LoadingSpinner v-if="awaitingEvents"/>
-    <p class="no-events-message" v-if="noEvents" v-html="noEventsMessage"></p>
     <div v-for="(user, index) in users">
       <UserListItem
         :user="user"
@@ -10,6 +9,13 @@
         :mapCenter="mapCenter"
       />
     </div>
+    <div v-if="noEvents && showTrailblazerMessage">
+      <TrailblazerCard />
+    </div>
+    <p v-if="noEvents && !showTrailblazerMessage"
+       class="no-events-message">
+       {{noEventsMessage}}
+    </p>
 
     <div v-for="(event, index) in events">
       <div
@@ -39,6 +45,7 @@
 </template>
 
 <script>
+import TrailblazerCard from '@/components/TrailblazerCard.vue'
 import EventListItem from '@/components/EventListItem.vue'
 import UserListItem from '@/components/UserListItem.vue'
 import LoadingSpinner from '@/components/LoadingSpinner.vue'
@@ -47,7 +54,7 @@ import { mapGetters } from 'vuex'
 var moment = require('moment')
 export default {
   name: 'EventList',
-  components: { EventListItem, LoadingSpinner, UserListItem },
+  components: { EventListItem, LoadingSpinner, UserListItem, TrailblazerCard },
   props: {
     noEventsMessage: {},
     events: {},
@@ -56,7 +63,11 @@ export default {
       type: Boolean,
       default: true
     },
-    mapCenter: {}
+    mapCenter: {},
+    showTrailblazerMessage: {
+      type: Boolean,
+      default: false
+    }
   },
   methods: {
     formatDate: function (date) {

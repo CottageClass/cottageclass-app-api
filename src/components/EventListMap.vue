@@ -43,7 +43,9 @@ This is the map view of a list of events
         class="list"
         :events="events"
         :users="users"
+        :noEventsMessage="noEventsMessage"
         :mapCenter="center"
+        :showTrailblazerMessage="showTrailblazerMessage"
       />
     </div>
   </div>
@@ -120,6 +122,9 @@ export default {
     }
   },
   computed: {
+    noEventsMessage () {
+      return 'Sorry, there are no upcoming playdates in this area'
+    },
     otherType: function () {
       if (this.type === 'map') {
         return 'list'

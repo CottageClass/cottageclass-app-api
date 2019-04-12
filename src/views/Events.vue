@@ -21,7 +21,9 @@
               class="list"
               :events="events"
               :users="users"
+              :noEventsMessage="noEventsMessage"
               :mapCenter="mapCenter"
+              :showTrailblazerMessage="showTrailblazerMessage"
             />
           </div>
         </div>
@@ -51,9 +53,11 @@ export default {
       maximumDistanceFromUserInMiles: '5',
       showAllButtonText: 'Show all playdates',
       showShowAllButton: false,
+      noEventsMessage: 'Sorry, there are no upcoming playdates in this area',
       events: null,
       users: null,
-      mapCenter: null
+      mapCenter: null,
+      showTrailblazerMessage: true
     }
   },
   computed: {
@@ -72,6 +76,7 @@ export default {
   },
   methods: {
     updateForZoomLevel: async function (e) {
+      this.showTrailblazerMessage = false
       this.mapCenter = { lat: e.center.lat(), lng: e.center.lng() }
       this.maximumDistanceFromUserInMiles = e.miles
       this.fetchWithinDistance()

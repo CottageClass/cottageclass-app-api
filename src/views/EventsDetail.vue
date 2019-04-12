@@ -11,6 +11,7 @@ This is the mobile-only page that shows an expanded, naviagable map of events
       :events="events"
       @maxDistanceSet="updateForZoomLevel($event)"
       :center="mapCenter"
+      :showTrailblazerMessage="showTrailblazerMessage"
     />
   </div>
 </template>
@@ -28,7 +29,8 @@ export default {
     return {
       mapCenter: null,
       users: null,
-      events: null
+      events: null,
+      showTrailblazerMessage: true
     }
   },
   computed: {
@@ -54,6 +56,7 @@ export default {
   },
   methods: {
     updateForZoomLevel: async function (e) {
+      this.showTrailblazerMessage = false
       this.mapCenter = { lat: e.center.lat(), lng: e.center.lng() }
       this.maximumDistanceFromUserInMiles = e.miles
       this.fetchWithinDistance()
