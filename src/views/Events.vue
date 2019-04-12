@@ -21,7 +21,6 @@
               class="list"
               :events="events"
               :users="users"
-              :noEventsMessage="noEventsMessage"
               :mapCenter="mapCenter"
             />
           </div>
@@ -52,7 +51,6 @@ export default {
       maximumDistanceFromUserInMiles: '5',
       showAllButtonText: 'Show all playdates',
       showShowAllButton: false,
-      noEventsMessage: 'Sorry, there are no upcoming playdates in your area',
       events: null,
       users: null,
       mapCenter: null

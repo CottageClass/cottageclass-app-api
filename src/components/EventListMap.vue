@@ -43,7 +43,6 @@ This is the map view of a list of events
         class="list"
         :events="events"
         :users="users"
-        :noEventsMessage="noEventsMessage"
         :mapCenter="center"
       />
     </div>
