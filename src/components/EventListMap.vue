@@ -42,7 +42,9 @@ This is the map view of a list of events
       <EventList
         class="list"
         :events="events"
+        :users="users"
         :noEventsMessage="noEventsMessage"
+        :mapCenter="center"
       />
     </div>
   </div>
@@ -51,6 +53,7 @@ This is the map view of a list of events
 <script>
 import { maps, screen } from '@/mixins'
 import EventList from '@/components/EventList.vue'
+import _ from 'lodash'
 
 const DISTANCE_OPTIONS = [ 1, 2, 5, 10, 20, 50 ]
 
@@ -70,7 +73,7 @@ export default {
   methods: {
     mapClick () {
       if (this.isMobile && this.$router.currentRoute.name === 'Events') {
-        this.$router.push({ name: 'EventsDetail' })
+        this.$router.push({ name: 'EventsDetail', params: { initialCenter: this.center } })
       }
     },
     switchType () {
@@ -85,10 +88,15 @@ export default {
       this.userPins = []
 
       const that = this
-      for (let user of this.users) {
-        const pin = await that.addCircle(
-          { lat: user.location.lat, lng: user.location.lng },
-          0.2
+      // sort users by latitude when adding pins so the z index is right on the map
+      const latUsers = this.users.concat().sort((a, b) => {
+        return b.location.lat - a.location.lat
+      })
+
+      for (let user of latUsers) {
+        const pin = await that.addUserPin(
+          user,
+          { lat: user.location.lat, lng: user.location.lng }
         )
         if (pin) {
           that.userPins.push(pin)
@@ -152,8 +160,8 @@ export default {
     }
   },
   mounted: async function () {
-    const center = await this.latlng(this.center.lat, this.center.lng)
     this.$nextTick(async function () {
+      const center = await this.latlng(this.center.lat, this.center.lng)
       await this.createMap(this.$refs.map, {
         zoom: 13,
         center: center,

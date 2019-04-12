@@ -1,10 +1,14 @@
 <template>
-  <div class="item-container">
+
+  <div class="item-container" >
+  <router-link :to="{ name: 'ProviderProfile', params: { id: this.user.id } }">
     <div class="avatar-container">
-      <AvatarImage
+        <AvatarImage
         :person="user"
         className="avatar"/>
     </div>
+    </router-link>
+
     <div class="info-container">
       <div class="heading">
         <span class="name">{{ user.firstName }}</span>
