@@ -24,9 +24,10 @@ GoogleMapsLoader.load()
 window.localStorage.debug = process.env.DEBUG
 
 let isAuthWindow = false
-if (window && window.opener && window.opener.location && window.location) {
+try {
   isAuthWindow = window.opener.location.origin === window.location.origin &&
                  window.opener.oauthCallback
+} catch (e) {
 }
 
 if (isAuthWindow) {
