@@ -89,7 +89,7 @@ export default {
         miles: this.maximumDistanceFromUserInMiles,
         lat: this.mapCenter.lat,
         lng: this.mapCenter.lng,
-        page_size: 10
+        pageSize: 10
       }
       this.events = await fetchUpcomingEventsWithinDistance(params)
       this.users = await fetchUsersWithinDistance(params)
