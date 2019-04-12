@@ -91,6 +91,9 @@ html.w-mod-touch * {
   cursor: pointer;
   border-radius: 0;
 }
+input.w-button {
+  -webkit-appearance: button;
+}
 html[data-w-dynpage] [data-w-cloak] {
   color: transparent !important;
 }
@@ -288,6 +291,7 @@ html input[type="button"],
 input[type="reset"] {
   border: 0;
   cursor: pointer;
+  -webkit-appearance: button;
 }
 .w-form {
   margin: 0 0 15px;
@@ -905,8 +909,7 @@ textarea.w-select {
   min-height: 100%;
   z-index: -100;
 }
-input {
-  -moz-appearance: none;
+input[type="submit"] {
   -webkit-appearance: none;
 }
 .w-background-video > video::-webkit-media-controls-start-playback-button {
