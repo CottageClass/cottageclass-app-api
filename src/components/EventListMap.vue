@@ -75,7 +75,7 @@ export default {
   methods: {
     mapClick () {
       if (this.isMobile && this.$router.currentRoute.name === 'Events') {
-        this.$router.push({ name: 'EventsDetail', params: { initialCenter: this.center } })
+        this.$router.push({ name: 'EventsDetail' })
       }
     },
     switchType () {

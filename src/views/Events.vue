@@ -43,7 +43,6 @@ var moment = require('moment')
 export default {
   name: 'Events',
   components: { EventList, MainNav, Footer, EventListMap },
-  props: ['initialCenter'],
   data () {
     return {
       maximumDistanceFromUserInMiles: '5',
