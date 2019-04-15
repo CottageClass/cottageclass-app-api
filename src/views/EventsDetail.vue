@@ -5,12 +5,10 @@ This is the mobile-only page that shows an expanded, naviagable map of events
 <template>
   <div class="body">
     <EventListMap
-      v-if="mapCenter"
       class="map"
       :users="users"
       :events="events"
       @maxDistanceSet="updateForZoomLevel($event)"
-      :center="mapCenter"
     />
   </div>
 </template>
@@ -26,21 +24,11 @@ export default {
   components: { EventListMap },
   data () {
     return {
-      mapCenter: null,
       users: null,
       events: null
     }
   },
   computed: {
-    calculateStartingCenter () {
-      if (this.currentUser) {
-        return { lat: this.currentUser.latitude, lng: this.currentUser.longitude }
-      } else if (this.initialCenter) {
-        return this.initialCenter
-      } else {
-        return { lat: 40.688309, lng: -73.994639 } // BoCoCa
-      }
-    },
     center () {
       if (this.currentUser) {
         return { lat: this.currentUser.latitude, lng: this.currentUser.longitude }
@@ -49,28 +37,31 @@ export default {
       }
     },
     ...mapGetters([
-      'currentUser', 'isAuthenticated'
+      'currentUser', 'isAuthenticated', 'mapArea'
     ])
   },
   methods: {
     updateForZoomLevel: async function (e) {
-      this.mapCenter = { lat: e.center.lat(), lng: e.center.lng() }
-      this.maximumDistanceFromUserInMiles = e.miles
+      console.log(this.mapArea)
+      this.$store.commit('setMapArea', {
+        center: { lat: e.center.lat(), lng: e.center.lng() },
+        maxDistance: e.miles
+      })
       this.fetchWithinDistance()
     },
     fetchWithinDistance: async function () {
       const params = {
-        miles: this.maximumDistanceFromUserInMiles,
-        lat: this.mapCenter.lat,
-        lng: this.mapCenter.lng,
+        miles: this.mapArea.maxDistance,
+        lat: this.mapArea.center.lat,
+        lng: this.mapArea.center.lng,
         pageSize: 10
       }
+      console.log({ params })
       this.events = await fetchUpcomingEventsWithinDistance(params)
       this.users = await fetchUsersWithinDistance(params)
     }
   },
   mounted: async function () {
-    this.mapCenter = await this.calculateStartingCenter
     this.fetchWithinDistance()
   }
 }

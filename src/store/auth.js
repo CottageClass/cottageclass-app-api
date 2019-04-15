@@ -43,6 +43,10 @@ const actions = {
     } else {
       const currentUser = createUser(normalize(getters.parsedJWT.user))
       commit('setCurrentUser', { user: currentUser })
+      commit('setMapArea', {
+        center: { lat: currentUser.latitude, lng: currentUser.longitude },
+        maxDistance: 5
+      })
     }
   }
 }

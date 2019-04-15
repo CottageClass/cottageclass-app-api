@@ -7,7 +7,6 @@
         :user="user"
         :index="index"
         :key="index"
-        :mapCenter="mapCenter"
       />
     </div>
 
@@ -55,8 +54,7 @@ export default {
     showDates: {
       type: Boolean,
       default: true
-    },
-    mapCenter: {}
+    }
   },
   methods: {
     formatDate: function (date) {

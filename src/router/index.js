@@ -64,8 +64,7 @@ export default new Router({
     {
       path: '/events',
       name: 'Events',
-      component: Events,
-      props: true
+      component: Events
     },
     {
       path: '/events/detail',
