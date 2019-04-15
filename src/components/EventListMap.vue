@@ -150,8 +150,13 @@ export default {
     distanceOptions: () => DISTANCE_OPTIONS,
     mapOptions: function () {
       return {
-        'disableDefaultUI': true, // turns off map controls
-        'gestureHandling': 'greedy'
+        gestureHandling: this.showNavigation || !this.isMobile ? 'greedy' : 'none',
+        zoomControl: !this.isMobile,
+        mapTypeControl: false,
+        scaleControl: false,
+        streetViewControl: false,
+        rotateControl: false,
+        fullscreenControl: false
       }
     },
     showSelector: function () {
@@ -176,8 +181,7 @@ export default {
       await this.createMap(this.$refs.map, {
         zoom: 13,
         center: center,
-        disableDefaultUI: true,
-        options: this.mapOptions
+        ...this.mapOptions
       },
       this.idleHandler.bind(this))
       this.setZoomLevelForMaxDistance()
