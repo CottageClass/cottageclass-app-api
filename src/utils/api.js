@@ -3,12 +3,12 @@ import normalize from 'json-api-normalizer'
 import axios from 'axios'
 import { createEvent, createEvents } from './createEvent'
 import { createUser } from './createUser'
-// import debug from 'debug'
+import Logger from '@/utils/logger'
 
-// const log = debug('kidsclub:api')
+const logger = Logger('kidsclub:api')
 
 export function initProxySession (currentUserId, receiverId, requestMessage, acknowledgmentMessage) {
-  console.log('INITIATING PROXY WITH users ' + currentUserId + ', ' + receiverId)
+  logger.log('INITIATING PROXY WITH users ' + currentUserId + ', ' + receiverId)
   let postData = {
     twilioSession: {
       requestMessage: requestMessage,
@@ -19,12 +19,12 @@ export function initProxySession (currentUserId, receiverId, requestMessage, ack
     `/users/${receiverId}/proxy_sessions`,
     postData
   ).then(res => {
-    console.log('proxy session init SUCCESS, returning proxy phone number for receiver')
+    logger.log('proxy session init SUCCESS, returning proxy phone number for receiver')
     // return proxy number for receiver
     return res.data.data.attributes.proxyIdentifierReceiver
   }).catch(err => {
-    console.log('proxy session init FAILURE')
-    console.log(err)
+    logger.error('proxy session init FAILURE')
+    logger.error(err)
     throw err
   })
 }
@@ -131,10 +131,10 @@ export function submitUserInfo (userId, data) {
     `/users/${userId}`,
     postData
   ).then(res => {
-    console.log('SUBMIT USER SUCCESS', res)
+    logger.log('SUBMIT USER SUCCESS', res)
     return res
   }).catch(err => {
-    console.log('SUBMIT USER FAILURE', err)
+    logger.error('SUBMIT USER FAILURE', err)
     throw err
   })
 }
@@ -206,12 +206,12 @@ export function fetchUsersWithinDistance ({ miles, lat, lng, pageSize = 100, pag
   return axios.get(
     `/api/users/miles/${miles}/latitude/${lat}/longitude/${lng}/page/${page}/page_size/${pageSize}`
   ).then(res => {
-    console.log('FETCH USERS WITHIN DISTANCE SUCCESS')
-    console.log(res.data)
+    logger.log('FETCH USERS WITHIN DISTANCE SUCCESS')
+    logger.log(res.data)
     return createPeopleObject(res.data)
   }).catch(err => {
-    console.log('FETCH USERS WITHIN DISTANCE FAILURE')
-    console.log(err)
+    logger.error('FETCH USERS WITHIN DISTANCE FAILURE')
+    logger.error(err)
     throw err
   })
 }
@@ -220,12 +220,12 @@ export function fetchUsers () {
   return axios.get(
     `/api/users`
   ).then(res => {
-    console.log('FETCH USERS IN NETWORK SUCCESS')
-    console.log(res.data)
+    logger.log('FETCH USERS IN NETWORK SUCCESS')
+    logger.log(res.data)
     return createPeopleObject(res.data)
   }).catch(err => {
-    console.log('FETCH USERS IN NETWORK FAILURE')
-    console.log(err.errors)
+    logger.error('FETCH USERS IN NETWORK FAILURE')
+    logger.error(err.errors)
     throw err
   })
 }
@@ -234,12 +234,12 @@ export function fetchUsersWhoHaveMadeInquiries (currentUserId) {
   return axios.get(
     `/users/${currentUserId}/inquiries`
   ).then(res => {
-    console.log('FETCH USERS WHO HAVE MADE INQUIRIES SUCCESS')
-    console.log(res.data)
+    logger.log('FETCH USERS WHO HAVE MADE INQUIRIES SUCCESS')
+    logger.log(res.data)
     return createPeopleObject(res.data)
   }).catch(err => {
-    console.log('FETCH USERS WHO HAVE MADE INQUIRIES FAILURE')
-    console.log(err.errors)
+    logger.error('FETCH USERS WHO HAVE MADE INQUIRIES FAILURE')
+    logger.error(err.errors)
     throw err
   })
 }
@@ -248,11 +248,11 @@ export function fetchUsersWhoHaveMadeInquiries (currentUserId) {
 export async function fetchUser (userId) {
   try {
     const res = await axios.get(`/api/users/${userId}`)
-    console.log('FETCH PUBLIC USER #' + userId + ' SUCCESS')
+    logger.log('FETCH PUBLIC USER #' + userId + ' SUCCESS')
     return createUser(normalize(res.data))
   } catch (err) {
-    console.log('FETCH PUBLIC USER #' + userId + ' FAILURE')
-    console.log(err.errors)
+    logger.error('FETCH PUBLIC USER #' + userId + ' FAILURE')
+    logger.error(err.errors)
     throw err
   }
 }
@@ -261,12 +261,12 @@ export async function fetchUser (userId) {
 export async function fetchCurrentUser (userId) {
   try {
     const res = await axios.get(`/api/users/${userId}`)
-    console.log('FETCH PRIVATE USER #' + userId + ' SUCCESS')
-    console.log(res)
+    logger.log('FETCH PRIVATE USER #' + userId + ' SUCCESS')
+    logger.log(res)
     return createUser(normalize(res.data))
   } catch (err) {
-    console.log('FETCH PRIVATE USER #' + userId + ' FAILURE')
-    console.log(err.errors)
+    logger.error('FETCH PRIVATE USER #' + userId + ' FAILURE')
+    logger.error(err.errors)
     throw err
   }
 }
@@ -276,7 +276,7 @@ export async function fetchFacebookImages (facebookAccessToken) {
     const res = await axios.get(`https://graph.facebook.com/me/photos?fields=images&access_token=${facebookAccessToken}`)
     return res.data.data
   } catch (e) {
-    console.log(e)
+    logger.error(e)
     return null
   }
 }
@@ -294,9 +294,9 @@ export function submitEmergencyContacts (childId, arrayOfContacts) {
         'emergency_contacts_attributes': arrayOfContacts
       }
     }).then(res => {
-    console.log('SUBMIT EMERGENCY CONTACTS SUCCESS', res)
+    logger.log('SUBMIT EMERGENCY CONTACTS SUCCESS', res)
   }).catch(err => {
-    console.log('SUBMIT EMERGENCY CONTACTS FAILURE', childId, arrayOfContacts)
+    logger.error('SUBMIT EMERGENCY CONTACTS FAILURE', childId, arrayOfContacts)
     throw err
   })
 }
@@ -306,12 +306,12 @@ export function fetchAllUsers () {
   return axios.get(
     `/users`
   ).then(res => {
-    console.log('FETCH ALL USERS SUCCESS')
-    console.log(createPeopleObject(res.data))
+    logger.log('FETCH ALL USERS SUCCESS')
+    logger.log(createPeopleObject(res.data))
     return createPeopleObject(res.data)
   }).catch(err => {
-    console.log('FETCH ALL USERS FAILURE')
-    console.log(err.errors)
+    logger.error('FETCH ALL USERS FAILURE')
+    logger.error(err.errors)
     throw err
   })
 }
@@ -335,13 +335,12 @@ export function fetchMessagesForUserPair (participantId1, participantId2) {
   return axios.get(
     `/users/${participantId1}/messages/${participantId2}`
   ).then(res => {
-    console.log('FETCH Messages for User Pair SUCCESS')
-    console.log(createMessagesObject(res.data.data))
+    logger.log('FETCH Messages for User Pair SUCCESS')
+    logger.log(createMessagesObject(res.data.data))
     return createMessagesObject(res.data.data)
   }).catch(err => {
-    console.log('FETCH Messages for User Pair FAILURE')
-    console.log(err)
-    console.log(err.errors)
+    logger.error('FETCH Messages for User Pair FAILURE')
+    logger.error(err)
     throw err
   })
 }
@@ -359,11 +358,11 @@ export function submitNotification (participantId, notificationBodyText) {
   return axios.post(
     `/api/users/${participantId}/notifications/`, notificationData
   ).then(res => {
-    console.log('NOTIFICATION submission SUCCESS')
+    logger.log('NOTIFICATION submission SUCCESS')
     return res
   }).catch(err => {
-    console.log('NOTIFICATION submission FAILURE')
-    console.log(err)
+    logger.error('NOTIFICATION submission FAILURE')
+    logger.error(err)
     throw err
   })
 }
@@ -376,11 +375,11 @@ export const fetchUpcomingEvents = async (userId, sortBy) => {
   return axios.get(
     `/api/users/${userId}/events/created/upcoming/page/1/page_size/100`
   ).then(res => {
-    console.log('FETCH MY UPCOMING EVENTS SUCCESS')
+    logger.log('FETCH MY UPCOMING EVENTS SUCCESS')
     return createEvents(normalize(res.data), sortBy)
   }).catch(err => {
-    console.log('FETCH MY UPCOMING EVENTS FAILURE')
-    console.log(err.errors)
+    logger.error('FETCH MY UPCOMING EVENTS FAILURE')
+    logger.error(err.errors)
     throw err
   })
 }
@@ -396,12 +395,12 @@ export function submitEventSeriesData (data) {
 export const fetchEvents = async (params, sortBy) => {
   const url = `/api/events/${params || ''}`
   return axios.get(url).then(res => {
-    console.log('FETCH SUCCESS -- ', url)
-    // console.log(res.data)
+    logger.log('FETCH SUCCESS -- ', url)
+    logger.log(res.data)
     return createEvents(normalize(res.data), sortBy)
   }).catch(err => {
-    console.log('FETCH FAILURE -- ', url)
-    console.log(err.errors)
+    logger.error('FETCH FAILURE -- ', url)
+    logger.error(err.errors)
     throw err
   })
 }
@@ -430,17 +429,16 @@ export function fetchUpcomingEventsWithinDistance ({ miles, lat, lng, pageSize =
 export function fetchUpcomingParticipatingEvents (userId) {
   return axios.get(`/api/users/${userId}/events/participated/upcoming/page/1/page_size/100`)
     .then(res => {
-      console.log('GET PARTICIPATING EVENTS SUCCESS')
-      console.log(res)
+      logger.log('GET PARTICIPATING EVENTS SUCCESS')
+      logger.log(res)
       const normedData = normalize(res.data)
       if (!normedData.event) {
         return []
       }
       return Object.values(normedData.event).map(parseEventData)
     }).catch(err => {
-      console.log('GET PARTICIPATING EVENTS FAILURE')
-      console.log(err)
-      console.log(Object.entries(err))
+      logger.error('GET PARTICIPATING EVENTS FAILURE')
+      logger.error(err)
       throw err
     })
 }
@@ -448,14 +446,13 @@ export function fetchUpcomingParticipatingEvents (userId) {
 export function removeEventParticipant (eventId) {
   return axios.delete(`/api/events/${eventId}/participants`)
     .then(res => {
-      console.log('REMOVE EVENT PARTICIPANT SUCCESS')
-      console.log(res)
+      logger.log('REMOVE EVENT PARTICIPANT SUCCESS')
+      logger.log(res)
       return res
     })
     .catch(err => {
-      console.log('REMOVE EVENT PARTICIPANT FAILURE')
-      console.log(err)
-      console.log(Object.entries(err))
+      logger.error('REMOVE EVENT PARTICIPANT FAILURE')
+      logger.error(err)
       throw err
     })
 }
@@ -473,14 +470,13 @@ export function submitEventParticipant (eventId, participantChildIds) {
   }
   return axios.post(`/api/events/${eventId}/participants`, participantData)
     .then(res => {
-      console.log('SUBMIT EVENT PARTICIPANT SUCCESS')
-      console.log(res)
+      logger.log('SUBMIT EVENT PARTICIPANT SUCCESS')
+      logger.log(res)
       return res
     })
     .catch(err => {
-      console.log('SUBMIT EVENT PARTICIPANT FAILURE')
-      console.log(err)
-      console.log(Object.entries(err))
+      logger.error('SUBMIT EVENT PARTICIPANT FAILURE')
+      logger.error(err)
       throw err
     })
 }
@@ -488,14 +484,13 @@ export function submitEventParticipant (eventId, participantChildIds) {
 export function deleteEvent (eventId, successCallback) {
   return axios.delete(`/api/events/${eventId}`)
     .then(res => {
-      console.log('DELETE EVENT SUCCESS')
-      console.log(res)
+      logger.log('DELETE EVENT SUCCESS')
+      logger.log(res)
       successCallback()
     })
     .catch(err => {
-      console.log('DELETE EVENT FAILURE')
-      console.log(err)
-      console.log(Object.entries(err))
+      logger.error('DELETE EVENT FAILURE')
+      logger.error(err)
       throw err
     })
 }
