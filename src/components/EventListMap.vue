@@ -27,13 +27,14 @@ This is the map view of a list of events
     <div v-show="type==='map'"
          class="map-wrapper"
          @click="mapClick">
-      <a
-      v-if="showNavigation || !isMobile"
-      href=""
-      @click.prevent="searchButtonClick"
-      class="map-button-1 w-button">
-        Search this area
-      </a>
+      <transition name="fade">
+        <a v-if="showSearchButton"
+          href=""
+          @click.prevent="searchButtonClick"
+          class="map-button-1 w-button">
+          Search this area
+        </a>
+      </transition>
       <div ref="map" class="map-container" />
     </div>
     <div
