@@ -41,9 +41,6 @@
           <EventActivity
             v-if="currentStep === 'eventActivity'"
             v-model="eventSeriesData.activity" />
-          <Food
-            v-if="currentStep === 'food'"
-            v-model="eventSeriesData.food" />
           <EventTime
             v-if="currentStep === 'eventTime'"
             v-model="eventSeriesData.time" />
@@ -96,7 +93,6 @@ import Children from '@/components/FTE/userInformation/Children.vue'
 import EventActivity from '@/components/base/eventSpecification/EventActivity.vue'
 import EventTime from '@/components/base/eventSpecification/EventTime.vue'
 import EventDate from '@/components/base/eventSpecification/EventDate.vue'
-import Food from '@/components/base/eventSpecification/Food.vue'
 import MaxChildren from '@/components/base/eventSpecification/MaxChildren.vue'
 import YesOrNo from '@/components/base/YesOrNo.vue'
 import Availability from '@/components/FTE/userInformation/Availability.vue'
@@ -111,7 +107,6 @@ const stepSequence = [
   'facebookImages',
   'createEventsNow',
   'eventActivity',
-  'food',
   'eventTime',
   'eventDate',
   'maxChildren',
@@ -132,7 +127,6 @@ export default {
     EventDate,
     EventTime,
     FacebookImageSelection,
-    Food,
     HouseRules,
     Location,
     MaxChildren,
@@ -159,7 +153,6 @@ export default {
       },
       eventSeriesData: {
         activity: { err: null },
-        food: { err: null },
         time: { err: null },
         date: { err: null },
         maxChildren: 2,
@@ -190,7 +183,6 @@ export default {
         facebookImages: this.userData.facebookImages,
         createEventsNow: this.createEventsNow,
         eventActivity: this.eventSeriesData.activity,
-        food: this.eventSeriesData.food,
         eventTime: this.eventSeriesData.time,
         eventDate: this.eventSeriesData.date,
         maxChildren: this.eventSeriesData.maxChildren
@@ -202,9 +194,9 @@ export default {
     },
     eventName: function () {
       if (this.currentUser.firstName) {
-        return this.capitalize(this.eventSeriesData.activity.selected) + ' & ' + this.eventSeriesData.food.selected + ' with ' + this.capitalize(this.currentUser.firstName)
+        return this.capitalize(this.eventSeriesData.activity.selected) + ' with ' + this.capitalize(this.currentUser.firstName)
       } else {
-        return this.capitalize(this.eventSeriesData.activity.selected) + ' & ' + this.eventSeriesData.food.selected
+        return this.capitalize(this.eventSeriesData.activity.selected)
       }
     },
     eventDataForSubmissionToAPI: function () {
@@ -218,7 +210,6 @@ export default {
           'has_pet': typeof this.userData.pets.text !== 'undefined' &&
               this.userData.pets.text.length > 0,
           'activity_names': [this.eventSeriesData.activity.selected],
-          'foods': [this.eventSeriesData.food.selected],
           'house_rules': this.userData.houseRules.text,
           'pet_description': this.userData.pets.text,
           'maximum_children': this.eventSeriesData.maxChildren,
@@ -290,8 +281,7 @@ export default {
           'address': this.userData.location.fullAddress,
           'phone': this.userData.phone.number,
           'children': this.userData.children.list,
-          'availability': this.userData.availability,
-          'food': this.eventSeriesData.food.selected
+          'availability': this.userData.availability
         }, 'newUsers').then((data) => {
           console.log(data)
         }, (err) => {
