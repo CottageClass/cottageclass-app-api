@@ -8,13 +8,11 @@
         <div class="page-subtitle">The hosts of the playdates below are looking to meet other nearby parents. <strong>RSVP, or reach out &amp; introduce yourself</strong>.</div>
       </div>
       <div class="main-container">
-        <div v-if="mapCenter"
-             class="map-list-container">
+        <div class="map-list-container">
           <EventListMap
             class="map"
             :users="users"
             @maxDistanceSet="updateForZoomLevel($event)"
-            :center="mapCenter"
           />
           <div class="list-container w-container">
             <EventList
@@ -22,7 +20,6 @@
               :events="events"
               :users="users"
               :noEventsMessage="noEventsMessage"
-              :mapCenter="mapCenter"
             />
           </div>
         </div>
@@ -54,28 +51,18 @@ export default {
       showShowAllButton: false,
       noEventsMessage: 'Sorry, there are no upcoming playdates in your area',
       events: null,
-      users: null,
-      mapCenter: null
+      users: null
     }
   },
-  computed: {
-    calculateStartingCenter () {
-      if (this.currentUser) {
-        return { lat: this.currentUser.latitude, lng: this.currentUser.longitude }
-      } else if (this.initialCenter) {
-        return this.initialCenter
-      } else {
-        return { lat: 40.688309, lng: -73.994639 } // BoCoCa
-      }
-    },
-    ...mapGetters([
-      'distanceFromCurrentUser', 'currentUser', 'isAuthenticated', 'alert'
-    ])
-  },
+  computed: mapGetters([
+    'distanceFromCurrentUser', 'currentUser', 'isAuthenticated', 'alert', 'mapArea'
+  ]),
   methods: {
     updateForZoomLevel: async function (e) {
-      this.mapCenter = { lat: e.center.lat(), lng: e.center.lng() }
-      this.maximumDistanceFromUserInMiles = e.miles
+      this.$store.commit('setMapArea', {
+        center: { lat: e.center.lat(), lng: e.center.lng() },
+        maxDistance: e.miles
+      })
       this.fetchWithinDistance()
     },
     isToday: function (date) {
@@ -87,8 +74,8 @@ export default {
     fetchWithinDistance: async function () {
       const params = {
         miles: this.maximumDistanceFromUserInMiles,
-        lat: this.mapCenter.lat,
-        lng: this.mapCenter.lng,
+        lat: this.mapArea.center.lat,
+        lng: this.mapArea.center.lng,
         pageSize: 10
       }
       this.events = await fetchUpcomingEventsWithinDistance(params)
@@ -96,7 +83,6 @@ export default {
     }
   },
   mounted: async function () {
-    this.mapCenter = await this.calculateStartingCenter
     this.fetchWithinDistance()
   }
 }

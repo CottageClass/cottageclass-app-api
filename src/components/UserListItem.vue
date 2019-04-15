@@ -54,7 +54,7 @@ export default {
       sendingTimeout: null
     }
   },
-  props: ['user', 'mapCenter'],
+  props: ['user'],
   components: { AvatarImage },
   mixins: [alerts],
   methods: {
@@ -128,7 +128,7 @@ export default {
       if (this.currentUser) {
         const location = this.currentUser.location
         return function () {
-          return distanceHaversine(location.lat, location.lng, this.mapCenter.lat, this.mapCenter.lng)
+          return distanceHaversine(location.lat, location.lng, this.mapArea.center.lat, this.mapArea.center.lng)
         }
       } else {
         return ''
@@ -136,7 +136,7 @@ export default {
     },
     distanceFromMapCenter () {
       return function (location) {
-        return distanceHaversine(location.lat, location.lng, this.mapCenter.lat, this.mapCenter.lng)
+        return distanceHaversine(location.lat, location.lng, this.mapArea.center.lat, this.mapArea.center.lng)
       }
     },
     profession () {
@@ -149,7 +149,7 @@ export default {
       }
       return list.join(', ')
     },
-    ...mapGetters([ 'currentUser' ])
+    ...mapGetters([ 'currentUser', 'mapArea' ])
   }
 }
 </script>

@@ -44,7 +44,6 @@ This is the map view of a list of events
         :events="events"
         :users="users"
         :noEventsMessage="noEventsMessage"
-        :mapCenter="center"
       />
     </div>
   </div>
@@ -53,6 +52,7 @@ This is the map view of a list of events
 <script>
 import { maps, screen } from '@/mixins'
 import EventList from '@/components/EventList.vue'
+import { mapGetters } from 'vuex'
 
 const DISTANCE_OPTIONS = [ 1, 2, 5, 10, 20, 50 ]
 
@@ -133,9 +133,6 @@ export default {
     showNavigation: function () {
       return this.$router.currentRoute.name === 'EventsDetail'
     },
-    centerLatLng: function () {
-      return this.latlng(this.center.lat, this.center.lng)
-    },
     distanceOptions: () => DISTANCE_OPTIONS,
     mapOptions: function () {
       return {
@@ -146,7 +143,8 @@ export default {
     showSelector: function () {
       return (this.$router.currentRoute.name === 'Events' && !this.isMobile) ||
              (this.$router.currentRoute.name === 'EventsDetail')
-    }
+    },
+    ...mapGetters([ 'mapArea' ])
   },
   watch: {
     users: function () {
@@ -160,7 +158,7 @@ export default {
   },
   mounted: async function () {
     this.$nextTick(async function () {
-      const center = await this.latlng(this.center.lat, this.center.lng)
+      const center = await this.latlng(this.mapArea.center.lat, this.mapArea.center.lng)
       await this.createMap(this.$refs.map, {
         zoom: 13,
         center: center,
