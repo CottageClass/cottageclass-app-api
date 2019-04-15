@@ -66,7 +66,9 @@ export default {
       map: null,
       type: 'map',
       maximumDistanceFromUserInMiles: DISTANCE_OPTIONS[2],
-      userPins: []
+      userPins: [],
+      mapHasChanged: false,
+      noIdlesYet: true
     }
   },
   methods: {
@@ -117,10 +119,17 @@ export default {
     },
     searchButtonClick: async function () {
       const map = await this.map
+      this.mapHasChanged = false
       this.$emit('maxDistanceSet', { center: map.center, miles: this.maximumDistanceFromUserInMiles }) // this should get the zoom level from the actual map
+    },
+    idleHandler (e) {
+      this.mapHasChanged = true
     }
   },
   computed: {
+    showSearchButton () {
+      return (this.showNavigation || !this.isMobile) && this.mapHasChanged
+    },
     otherType: function () {
       if (this.type === 'map') {
         return 'list'
@@ -157,6 +166,7 @@ export default {
     }
   },
   mounted: async function () {
+    const that = this
     this.$nextTick(async function () {
       const center = await this.latlng(this.mapArea.center.lat, this.mapArea.center.lng)
       await this.createMap(this.$refs.map, {
@@ -164,6 +174,13 @@ export default {
         center: center,
         disableDefaultUI: true,
         options: this.mapOptions
+      },
+      function () {
+        if (that.noIdlesYet) {
+          that.noIdlesYet = false
+        } else {
+          that.mapHasChanged = true
+        }
       })
       this.setZoomLevelForMaxDistance()
     })
@@ -250,6 +267,13 @@ select {
 .map-container {
   height: 100%;
   width: 100%;
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .2s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
 }
 
 @media (max-width: 991px) {
