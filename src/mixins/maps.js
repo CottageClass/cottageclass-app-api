@@ -46,12 +46,15 @@ export default {
     }
   },
   methods: {
-    async createMap (element, options) {
+    async createMap (element, options, idleHandler = null) {
       const google = await this.google
       this.map = new Promise(async function (resolve, reject) {
         const map = new google.maps.Map(element, options)
         resolve(map)
       })
+      if (idleHandler) {
+        google.maps.event.addListener(await this.map, 'idle', idleHandler)
+      }
       return this.map
     },
     avatarUrl (user) {

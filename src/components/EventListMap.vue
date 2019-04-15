@@ -27,13 +27,14 @@ This is the map view of a list of events
     <div v-show="type==='map'"
          class="map-wrapper"
          @click="mapClick">
-      <a
-      v-if="showNavigation || !isMobile"
-      href=""
-      @click.prevent="searchButtonClick"
-      class="map-button-1 w-button">
-        Search this area
-      </a>
+      <transition name="fade">
+        <a v-if="showSearchButton"
+          href=""
+          @click.prevent="searchButtonClick"
+          class="map-button-1 w-button">
+          Search this area
+        </a>
+      </transition>
       <div ref="map" class="map-container" />
     </div>
     <div
@@ -66,7 +67,9 @@ export default {
       map: null,
       type: 'map',
       maximumDistanceFromUserInMiles: DISTANCE_OPTIONS[2],
-      userPins: []
+      userPins: [],
+      mapHasChanged: false,
+      noIdlesYet: true
     }
   },
   methods: {
@@ -117,10 +120,21 @@ export default {
     },
     searchButtonClick: async function () {
       const map = await this.map
+      this.mapHasChanged = false
       this.$emit('maxDistanceSet', { center: map.center, miles: this.maximumDistanceFromUserInMiles }) // this should get the zoom level from the actual map
+    },
+    idleHandler (e) {
+      if (this.noIdlesYet) {
+        this.noIdlesYet = false
+      } else {
+        this.mapHasChanged = true
+      }
     }
   },
   computed: {
+    showSearchButton () {
+      return (this.showNavigation || !this.isMobile) && this.mapHasChanged
+    },
     otherType: function () {
       if (this.type === 'map') {
         return 'list'
@@ -164,7 +178,8 @@ export default {
         center: center,
         disableDefaultUI: true,
         options: this.mapOptions
-      })
+      },
+      this.idleHandler.bind(this))
       this.setZoomLevelForMaxDistance()
     })
     if (this.users && this.users.length) {
@@ -250,6 +265,13 @@ select {
 .map-container {
   height: 100%;
   width: 100%;
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .2s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
 }
 
 @media (max-width: 991px) {
