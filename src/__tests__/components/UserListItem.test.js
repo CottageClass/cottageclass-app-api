@@ -7,6 +7,13 @@ describe('UserListItem', () => {
   beforeAll(async () => {
     const $store = {
       getters: {
+        mapArea: {
+          center: {
+            lat: 41.96,
+            lng: -73.65
+          },
+          maxDistance: 5
+        },
         currentUser: {
           id: '987654321',
           firstName: 'Natasha',
@@ -23,10 +30,6 @@ describe('UserListItem', () => {
       mocks: { $store },
       stubs: ['router-link'],
       propsData: {
-        mapCenter: {
-          lat: 41.96,
-          lng: -73.65
-        },
         user: {
           id: '123456789',
           firstName: 'Chuck',
