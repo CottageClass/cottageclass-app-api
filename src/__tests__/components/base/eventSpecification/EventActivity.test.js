@@ -3,12 +3,15 @@ import EventActivity from '@/components/base/eventSpecification/EventActivity.vu
 import _ from 'lodash'
 
 const ACTIVITIES = [
-  'baby playgroup',
-  'movie night',
-  'arts & crafts',
-  'games & puzzles',
-  'baking',
-  'book club'
+  'Arts & Crafts',
+  'Baby playgroup',
+  'Books & Storytime',
+  'Drawing & Coloring',
+  'Games & Puzzles',
+  'Kids\' Movie Night',
+  'Playing outside (weather permitting)',
+  'Playground Meetup',
+  'Waldorf Nature Walk'
 ]
 describe('EventActivity', () => {
   let wrapper
