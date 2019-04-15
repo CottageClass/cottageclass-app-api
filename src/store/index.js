@@ -13,7 +13,10 @@ export default new Vuex.Store(
       alert: null,
       createdEvents: null,
       redirectRoute: null,
-      mapCenter: { lat: 40.688309, lng: -73.994639 } // BoCoCa
+      mapArea: {
+        center: { lat: 40.688309, lng: -73.994639 }, // BoCoCa
+        maxDistance: 5
+      }
     },
     mutations: {
       resetRedirectRoute: (state) => {
@@ -41,8 +44,9 @@ export default new Vuex.Store(
       setCreatedEvents: (state, payload) => {
         state.createdEvents = payload.eventData
       },
-      setMapCenter: (state, payload) => {
-        state.mapCenter = payload.mapCenter
+      setMapArea: (state, payload) => {
+        state.mapArea.center = payload.center
+        state.mapArea.maxDistance = payload.maxDistance
       }
     },
     actions: {
@@ -67,7 +71,7 @@ export default new Vuex.Store(
           return null
         }
       },
-      mapCenter: state => state.mapCenter,
+      mapArea: state => state.mapArea,
       redirectRoute: state => state.redirectRoute
     }
   }
