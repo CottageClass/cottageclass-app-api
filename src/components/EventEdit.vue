@@ -14,7 +14,6 @@
       <MaxChildren v-model="event.maximumChildren" />
       <ErrorMessage v-if="event.ageRange.err" :text="event.ageRange.err" />
       <AgeRange v-model="event.ageRange" />
-      <Food v-model="event.food" />
       <HouseRules v-model="event.houseRules"/>
       <YesOrNo
       question="Do you have pets?"
@@ -59,7 +58,6 @@ import PageActionsFooter from '@/components/PageActionsFooter.vue'
 import ErrorMessage from '@/components/base/ErrorMessage.vue'
 import * as api from '@/utils/api.js'
 import EventActivity from '@/components/base/eventSpecification/EventActivity.vue'
-import Food from '@/components/base/eventSpecification/Food.vue'
 import HouseRules from '@/components/FTE/userInformation/HouseRules.vue'
 import PetsDescription from '@/components/FTE/userInformation/PetsDescription.vue'
 import MaxChildren from '@/components/base/eventSpecification/MaxChildren.vue'
@@ -74,7 +72,7 @@ var VueScrollTo = require('vue-scrollto')
 
 export default {
   name: 'ProfileEdit',
-  components: { EventActivity, Food, HouseRules, PetsDescription, MaxChildren, MainNav, StyleWrapper, PageActionsFooter, ErrorMessage, YesOrNo, Question, DateTimePicker, EventName, AgeRange, DeleteEventConfirmationModal },
+  components: { EventActivity, HouseRules, PetsDescription, MaxChildren, MainNav, StyleWrapper, PageActionsFooter, ErrorMessage, YesOrNo, Question, DateTimePicker, EventName, AgeRange, DeleteEventConfirmationModal },
   data () {
     return {
       eventId: this.$route.params.id,
@@ -107,7 +105,6 @@ export default {
           'ends_at': this.event.endsAt,
           'has_pet': this.event.hasPet.isTrue,
           'activity_names': [this.event.activity.selected],
-          'foods': [this.event.food.selected],
           'house_rules': this.event.houseRules.text,
           'pet_description': this.event.petDescription.text,
           'maximum_children': this.event.maximumChildren,
@@ -133,9 +130,6 @@ export default {
         },
         activity: {
           selected: e.activityNames[0]
-        },
-        food: {
-          selected: e.foods[0]
         },
         houseRules: {
           text: e.houseRules
