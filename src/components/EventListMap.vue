@@ -124,7 +124,11 @@ export default {
       this.$emit('maxDistanceSet', { center: map.center, miles: this.maximumDistanceFromUserInMiles }) // this should get the zoom level from the actual map
     },
     idleHandler (e) {
-      this.mapHasChanged = true
+      if (this.noIdlesYet) {
+        this.noIdlesYet = false
+      } else {
+        this.mapHasChanged = true
+      }
     }
   },
   computed: {
@@ -167,7 +171,6 @@ export default {
     }
   },
   mounted: async function () {
-    const that = this
     this.$nextTick(async function () {
       const center = await this.latlng(this.mapArea.center.lat, this.mapArea.center.lng)
       await this.createMap(this.$refs.map, {
@@ -176,13 +179,7 @@ export default {
         disableDefaultUI: true,
         options: this.mapOptions
       },
-      function () {
-        if (that.noIdlesYet) {
-          that.noIdlesYet = false
-        } else {
-          that.mapHasChanged = true
-        }
-      })
+      this.idleHandler.bind(this))
       this.setZoomLevelForMaxDistance()
     })
     if (this.users && this.users.length) {
