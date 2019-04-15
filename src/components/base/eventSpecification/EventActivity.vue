@@ -22,12 +22,15 @@ export default {
       activitySelected: this.value.selected,
       errorMesg: 'Please choose an activity option from the list.',
       activities: [
-        'baby playgroup',
-        'movie night',
-        'arts & crafts',
-        'games & puzzles',
-        'baking',
-        'book club'
+        'Arts & Crafts',
+        'Baby playgroup',
+        'Books & Storytime',
+        'Drawing & Coloring',
+        'Games & Puzzles',
+        'Kids\' Movie Night',
+        'Playing outside (weather permitting)',
+        'Playground Meetup',
+        'Waldorf Nature Walk'
       ]
     }
   },
