@@ -20,7 +20,6 @@ import { mapGetters } from 'vuex'
 
 export default {
   name: 'EventsDetail',
-  props: ['initialCenter'],
   components: { EventListMap },
   data () {
     return {
