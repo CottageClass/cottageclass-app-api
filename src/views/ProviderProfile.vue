@@ -2,25 +2,26 @@
   <div class="onb-body">
     <MainNav />
     <StyleWrapper styleIs="editing">
-      <div class="profile-container w-container">
+      <LoadingSpinner v-if="!user"/>
+      <div v-else class="profile-container w-container">
         <div ref="map" class="map-container" />
         <div class="top-card">
           <div class="top-card-summary-info">
             <div class="top-card-column-1">
-              <h1 class="heading">{{ user.firstName }}</h1>
+              <h1 class="name-heading">{{ user.firstName }}</h1>
               <div class="top-card-subtitle"><span>{{ user.neighborhood || user.adminAreaLevel1 }}</span> |
                 <span v-if="user && user.childAges && user.childAges.length > 0" class="providerp-children">
                     Parent to <ChildAges :childAges="user.childAges" singular="child" plural="children" />.
                 </span>
               </div>
               <div v-if="employmentDescription" class="top-card-info-bullet">
-                  <div>{{ employmentDescription }}</div>
+                  <div class="occupation">{{ employmentDescription }}</div>
               </div>
               <div v-if="user.languages.length" class="top-card-info-bullet">
                 <div class="languages">{{ languageText }}</div>
               </div>
               <div class="top-card-info-bullet">
-                <div>Member since {{joinedDateFormatted}}</div>
+                <div class="member-since">Member since {{joinedDateFormatted}}</div>
               </div>
               <div v-if="user.verified" class="top-card-info-bullet">
                 <div class="background-checked-wrapper">
@@ -60,7 +61,7 @@
           <div v-if="user.profileBlurb && user.profileBlurb.length" class="profile-specifics-card">
             <img src="@/assets/about.svg" width="100" height="100" alt="">
             <div class="card-small-text">About Manisha</div>
-            <div class="card-large-text">{{user.profileBlurb}}</div>
+            <div class="card-large-text blurb">{{user.profileBlurb}}</div>
           </div>
           <div v-if="user.images && user.images.length" class="profile-specifics-card">
             <img src="@/assets/photos.svg" width="100" height="100" alt="">
@@ -120,6 +121,8 @@ import AvatarImage from '@/components/base/AvatarImage'
 import * as api from '@/utils/api.js'
 import ChildAges from '@/components/ChildAges.vue'
 import StyleWrapper from '@/components/FTE/StyleWrapper.vue'
+import LoadingSpinner from '@/components/LoadingSpinner.vue'
+
 import moment from 'moment'
 import PageActionsFooter from '@/components/PageActionsFooter.vue'
 import Footer from '@/components/Footer.vue'
@@ -131,7 +134,7 @@ import languageList from 'language-list'
 
 export default {
   name: 'ProviderProfile',
-  components: { Images, AvatarImage, ChildAges, StyleWrapper, PageActionsFooter, MainNav, Footer },
+  components: { Images, AvatarImage, ChildAges, StyleWrapper, PageActionsFooter, MainNav, Footer, LoadingSpinner },
   data () {
     return {
       user: null,
@@ -387,7 +390,7 @@ ul {
   margin-bottom: 12px;
   border-radius: 50%;
 }
-.heading {
+.name-heading {
   margin-top: 0px;
   margin-bottom: 10px;
   font-size: 35px;
@@ -484,7 +487,7 @@ div.background-checked-wrapper {
   .top-sub-card * {
     width: 100%;
   }
-  .heading {
+  .name-heading {
     font-size: 20px;
     line-height: 26px;
     text-align: center;
