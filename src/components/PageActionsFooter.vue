@@ -1,12 +1,14 @@
 <template>
    <div class="page-actions-wrapper">
       <a @click="primaryActive && $emit('primary-click')"
-        class="button-primary w-button">
+        class="button-primary w-button"
+         :class="!primaryActive ? 'inactive' : ''">
       {{ primaryText }}
       </a>
       <a v-if="hasTwoButtons"
          @click="secondaryActive && $emit('secondary-click')"
-         class="button-secondary w-button">
+         class="button-secondary w-button"
+         :class="!secondaryActive ? 'inactive' : ''">
         {{ secondaryText }}
       </a>
   </div>
@@ -46,15 +48,19 @@ export default {
 
 <style scoped>
 .page-actions-wrapper a {
-  margin-right: 4px;
-  padding: 12px 32px;
-  align-self: auto;
-  border-style: solid;
-  border-width: 1px;
-  border-radius: 4px;
+  display: flex;
+  width: 100%;
+  margin-bottom: 0px;
+  padding: 6px 10px;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  line-height: 15px;
   text-align: center;
+  border-radius: 4px;
+  margin-right: 4px;
+  margin-left: 4px;
 }
-
 .page-actions-wrapper a.inactive {
   opacity: 0.3;
   cursor: default;
@@ -64,7 +70,7 @@ export default {
   border-color: hsla(208.8118811881188, 82.11%, 51.76%, 1.00);
 }
 .button-secondary {
-  border-color: hsla(208, 82.11%, 51.76%, 1.00);
+  border: 1px hsla(208, 82.11%, 51.76%, 1.00) solid;
   background-color: hsla(208, 0.00%, 100.00%, 1.00);
   color: hsla(208, 82.11%, 51.76%, 1.00);
 }
@@ -76,18 +82,9 @@ export default {
 }
 
 .page-actions-wrapper {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   margin-top: 16px;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
+  justify-content: space-between;
   align-items: center;
 }
 
