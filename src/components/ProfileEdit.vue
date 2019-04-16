@@ -54,7 +54,7 @@
     <Children v-model="children" :required="false" />
     <LanguagesSpoken v-model="currentUser.languages"/>
   </StyleWrapper>
-  <PageActionsFooter :buttonText="saveButtonText" @click="submitUserInformation"/>
+  <PageActionsFooter :buttons="footerButtons" @primary-click="submitUserInformation" />
   </div>
 </div>
 
@@ -125,6 +125,11 @@ export default {
       } else {
         return false
       }
+    },
+    footerButtons () {
+      return [{
+        text: this.saveButtonText
+      }]
     },
     ...mapGetters(['currentUser'])
   },

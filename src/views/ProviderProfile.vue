@@ -34,7 +34,7 @@
               <AvatarImage :person="user" className="avatar"/>
             </div>
           </div>
-          <div class="top-sub-card">
+          <div v-if="!isCurrentUser" class="top-sub-card">
             <a href="#" class="button invite-button w-button">Invite for a playdate</a>
             <a href="#" class="button request-button w-button">Request Childcare</a>
             <div class="request-childcare-help-text">(Once you have your first playdate you can request childcare too)</div>
@@ -103,14 +103,13 @@
       </div>
       <Footer />
     </StyleWrapper>
-    <PageActionsFooter class='edit-button'
-                       v-if="isCurrentUser"
-                       buttonText="EDIT"
-                       @click="goToEdit"/>
+    <PageActionsFooter v-if="isCurrentUser"
+                       class='edit-button'
+                       :buttons="[{text: 'EDIT'}]"
+                       @primary-click="goToEdit"/>
 
     <PageActionsFooter v-else-if="isPhone"
-                       buttonText="Invite for a playdate"
-                       secondaryButtonText="Request childcare"
+                       :buttons="inviteFooterButtons"
                        @click="invite" />
   </div>
 </template>
@@ -166,6 +165,14 @@ export default {
     })
   },
   computed: {
+    inviteFooterButtons () {
+      return [{
+        text: 'Invite for a playdate'
+      }, {
+        text: 'Request childcare',
+        active: false
+      }]
+    },
     employmentDescription: function () {
       const position = this.user.jobPosition
       const employer = this.user.employer
