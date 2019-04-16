@@ -43,7 +43,7 @@
 
       <!-- </edit date & time> -->
   </StyleWrapper>
-  <PageActionsFooter :buttonText="saveButtonText" @click="saveEvent"/>
+  <PageActionsFooter :buttons="footerButtons" @primary-click="saveEvent" />
   </div>
 </div>
 
@@ -87,6 +87,11 @@ export default {
     this.fetchEvent()
   },
   computed: {
+    footerButtons () {
+      return [{
+        text: this.saveButtonText
+      }]
+    },
     datesValidate: function () {
       if (moment(this.event.startsAt).isBefore(this.event.endsAt)) {
         return true
