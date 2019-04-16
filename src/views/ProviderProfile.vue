@@ -1,69 +1,117 @@
 <template>
-  <StyleWrapper styleIs="editing">
-    <div class="onb-body" v-if="user">
-      <div class="body">
-        <div class="content-wrapper user-profile-wrapper">
-          <div class="providerp-provider-info-section">
-            <a @click="$router.go(-1)" class="providerp-button-back w-inline-block"><img src="../assets/Arrow-Back-2.svg">
-            </a><AvatarImage :person="user" className="avatar-large"/>
-            <h1 class="providerp-h1">{{ user.firstName }}</h1>
-            <div class="providerp-occupation">{{ employmentDescription }}</div>
-            <div v-if="user.languages.length" class="languages">{{ languageText }}</div>
-            <div class="providerp-member-since">Member since {{ joinedDateFormatted }}</div>
-            <div v-if="user && user.childAges && user.childAges.length > 0" class="providerp-children">
-                Parent to <ChildAges :childAges="user.childAges" singular="child" plural="children" />.
+  <div class="onb-body">
+    <MainNav />
+    <StyleWrapper styleIs="editing">
+      <div class="profile-container w-container">
+        <div ref="map" class="map-container" />
+        <div class="top-card">
+          <div class="top-card-summary-info">
+            <div class="top-card-column-1">
+              <h1 class="heading">{{ user.firstName }}</h1>
+              <div class="top-card-subtitle"><span>{{ user.neighborhood || user.adminAreaLevel1 }}</span> |
+                <span v-if="user && user.childAges && user.childAges.length > 0" class="providerp-children">
+                    Parent to <ChildAges :childAges="user.childAges" singular="child" plural="children" />.
+                </span>
+              </div>
+              <div v-if="employmentDescription" class="top-card-info-bullet">
+                  <div>{{ employmentDescription }}</div>
+              </div>
+              <div v-if="user.languages.length" class="top-card-info-bullet">
+                <div class="languages">{{ languageText }}</div>
+              </div>
+              <div class="top-card-info-bullet">
+                <div>Member since {{joinedDateFormatted}}</div>
+              </div>
+              <div v-if="user.verified" class="top-card-info-bullet">
+                <div class="background-checked-wrapper">
+                  <img src="@/assets/check-green.svg" alt="">
+                  <div class="background-checked">Background Checked</div>
+                </div>
+              </div>
             </div>
-
-            <div v-if="user.profileBlurb" class="providerp-chat-bubble-container">
-              <div class="providerp-chat-bubble-caret"><img src="../assets/chat-bubble-caret.svg"></div>
-              <div class="providerp-chat-bubble-primary">
-                <div class="blurb">{{ user.profileBlurb }}</div>
+            <div class="top-card-column-2">
+              <AvatarImage :person="user" className="avatar"/>
+            </div>
+          </div>
+          <div class="top-sub-card">
+            <a href="#" class="button invite-button w-button">Invite for a playdate</a>
+            <a href="#" class="button request-button w-button">Request Childcare</a>
+            <div class="request-childcare-help-text">(Once you have your first playdate you can request childcare too)</div>
+          </div>
+        </div>
+        <div class="mobile-cards-wrapper">
+          <div class="profile-specifics-card">
+            <div class="card-large-text">How to plan a playdate with Manisha</div>
+            <ul class="playdate-planning-bullet-wrapper">
+              <li class="playdate-planning-bullet">
+                <div class="number-bullet">1</div>
+                <div class="playdate-bullet-text">Click &#x27;invite for a playdate&#x27; above</div>
+              </li>
+              <li class="playdate-planning-bullet">
+                <div class="number-bullet">2</div>
+                <div class="playdate-bullet-text">Manisha will get a text that you&#x27;re intestested in a playdate</div>
+              </li>
+              <li class="playdate-planning-bullet">
+                <div class="number-bullet">3</div>
+                <div class="playdate-bullet-text">Decide on a time and place to meet. (We recommend meeting in one of your homes).</div>
+              </li>
+            </ul>
+          </div>
+          <div v-if="user.profileBlurb && user.profileBlurb.length" class="profile-specifics-card">
+            <img src="@/assets/about.svg" width="100" height="100" alt="">
+            <div class="card-small-text">About Manisha</div>
+            <div class="card-large-text">{{user.profileBlurb}}</div>
+          </div>
+          <div v-if="user.images && user.images.length" class="profile-specifics-card">
+            <img src="@/assets/photos.svg" width="100" height="100" alt="">
+            <div class="card-small-text">Household Photos<span class="text-span"></span></div>
+            <div class="div-block-40">
+              <Images :images="user.images" />
+            </div>
+          </div>
+          <div v-if="user.activities && user.activities.length" class="profile-specifics-card">
+            <img src="@/assets/interests.svg" width="100" height="100" alt="">
+            <div class="card-small-text">Interests</div>
+            <div class="tag-container">
+              <div v-for="activity in user.activities"
+                   :key="activity"
+                   class="tag">
+                <div class="tag-text">Dance</div>
               </div>
             </div>
           </div>
-          <div class="providerp-provider-info-bullets">
-            <ProviderInfo :person="user" />
-          </div>
-          <div v-if="user && user.images.length > 0" class="group-title-container-2">
-            <h5 class="list-title-2">Photos</h5>
-            <Images :images="user.images"/>
-          </div>
-          <div class="group-title-container-2">
-            <h5 class="list-title-2"><span v-if="user.neighborhood">Neighborhood: {{ user.neighborhood }}</span><span v-else>Location</span></h5>
-          </div>
-
-          <div ref="map" class="map-container" />
-<!-- Positive reviews -->
-          <div class="group-title-container-2">
-            <h5 class="list-title-2">Great Experiences</h5>
-          </div>
-<!-- Leave a review -->
-
-          <div class="providerp-post-comment-container"><a :href="'mailto:contact@cottageclass.com?subject=Great experience with ' + user.firstName + ' ' + user.lastInitial + '. (' + user.id + ')&body=(please%20describe%20your%20great%20experience%20here!)'" class="pprofile-compose-button w-inline-block"><img src="../assets/compose.svg" class="image-5"><div class="pprofile-comment-prompt-button-text">Post a great experience</div></a>
-            <div class="providerp-book-care-container" v-if="userAvailableSometimes && !isCurrentUser">
-              <router-link
-              :to="{ name: 'RequestModal', params: { id: user.id }}"
-              class="pprovider-book-care-button w-inline-block">
-                <img src="../assets/request-care-white.svg"
-                ><div class="pprovider-primary-action-text">Request childcare</div>
-              </router-link>
+          <div class="profile-specifics-card" v-if="anyAvailability">
+            <img src="@/assets/time.svg" width="100" height="100" alt="">
+            <div class="card-small-text">Available Times</div>
+            <div class="tag-container">
+              <div class="tag" v-if="user.availableMornings">
+                <div class="tag-text">9am-3pm</div>
+              </div>
+              <div class="tag" v-if="user.availableAfternoons">
+                <div class="tag-text">3pm-7pm</div>
+              </div>
+              <div class="tag" v-if="user.availableEvenings">
+                <div class="tag-text">7pm- ?</div>
+              </div>
+              <div class="tag" v-if="user.availableWeekends">
+                <div class="tag-text">Weekends</div>
+              </div>
             </div>
           </div>
-<!-- Negative reviews (concerns) -->
-          <div class="group-title-container-2">
-            <h5 class="list-title-2">Concerns</h5>
-          </div>
-  <!-- concern link -->
-          <div class="providerp-post-comment-container"><a :href="'mailto:contact@cottageclass.com?subject=Concern re: ' + user.firstName + ' ' + user.lastInitial + '. (' + user.id + ')&body=(please%20detail%20your%20concern%20here)'" class="pprofile-compose-button w-inline-block"><img src="../assets/compose.svg" class="image-5"><div class="pprofile-comment-prompt-button-text">Post a concern</div></a></div>
-          <div class="spacer-100px"></div>
         </div>
-        <PageActionsFooter class='edit-button'
-          v-if="isCurrentUser"
-          buttonText="EDIT"
-          @click="goToEdit"/>
       </div>
-    </div>
-  </StyleWrapper>
+      <Footer />
+    </StyleWrapper>
+    <PageActionsFooter class='edit-button'
+                       v-if="isCurrentUser"
+                       buttonText="EDIT"
+                       @click="goToEdit"/>
+
+    <PageActionsFooter v-else-if="isPhone"
+                       buttonText="Invite for a playdate"
+                       secondaryButtonText="Request childcare"
+                       @click="invite" />
+  </div>
 </template>
 
 <script>
@@ -73,17 +121,17 @@ import * as api from '@/utils/api.js'
 import ChildAges from '@/components/ChildAges.vue'
 import StyleWrapper from '@/components/FTE/StyleWrapper.vue'
 import moment from 'moment'
-import ProviderInfo from '@/components/base/ProviderInfo.vue'
 import PageActionsFooter from '@/components/PageActionsFooter.vue'
+import Footer from '@/components/Footer.vue'
+import MainNav from '@/components/MainNav.vue'
 import { mapGetters } from 'vuex'
-import { maps } from '@/mixins'
-
+import { maps, screen } from '@/mixins'
 import _ from 'lodash'
 import languageList from 'language-list'
 
 export default {
   name: 'ProviderProfile',
-  components: { Images, AvatarImage, ChildAges, StyleWrapper, ProviderInfo, PageActionsFooter },
+  components: { Images, AvatarImage, ChildAges, StyleWrapper, PageActionsFooter, MainNav, Footer },
   data () {
     return {
       user: null,
@@ -94,7 +142,7 @@ export default {
        }
     }
   },
-  mixins: [ maps ],
+  mixins: [ maps, screen ],
   methods: {
     goToEdit: function () {
       this.$router.push({ name: 'ProfileEdit' })
@@ -105,7 +153,7 @@ export default {
     // wait until the next tick so the map div exists
     this.$nextTick(async function () {
       await this.createMap(this.$refs.map, {
-        zoom: 13,
+        zoom: 14,
         center: this.userLocation,
         disableDefaultUI: true,
         options: this.mapOptions,
@@ -128,9 +176,6 @@ export default {
         return null
       }
     },
-    userAvailableSometimes: function () {
-      return this.user.availableEvenings || this.user.availableMornings || this.user.availableAfternoons || this.user.availableWeekends
-    },
     userLocation: function () {
       return { lat: parseFloat(this.user.fuzzyLatitude), lng: parseFloat(this.user.fuzzyLongitude) }
     },
@@ -146,968 +191,339 @@ export default {
       const languages = _.map(languageCodes, languageList().getLanguageName)
       return 'Speaks ' + [languages.slice(0, -1).join(', '), _.last(languages)].join(' and ')
     },
+    anyAvailability: function () {
+      return this.user.availableMornings ||
+             this.user.availableAfternoons ||
+             this.user.availableEvenings ||
+             this.user.availableWeekends
+    },
     ...mapGetters([ 'currentUser' ])
   }
 }
 
 </script>
-<style scoped>
-
-.avatar-large {
-  border-radius: 50%;
-  width: 100px;
+<style scoped lang="scss">
+.tag-container {
+  display: block;
+  width: 100%;
+  margin-top: 16px;
+  align-items: flex-start;
+  text-align: center;
 }
-
-.user-profile-wrapper {
-  padding-top: 0px !important;
-  background-color: #f2f2f2 !important;
-}
-
-.body {
-  font-family: soleil, sans-serif;
-  padding-bottom: 100px;
+.tag-text {
+  margin-top: 1px;
   color: #333;
   font-size: 14px;
-  line-height: 20px;
-}
-
-.times-container {
-  width: 100%;
-}
-
-.time {
-  display: inline-block;
-  margin-right: 6px;
-  margin-bottom: 6px;
-  padding: 4px 6px;
-  clear: none;
-  border-radius: 2px;
-  background-color: rgba(100, 66, 107, .2);
-}
-
-.time-tags {
-  margin-top: 1px;
-  color: #64426b;
-  font-size: 9px;
   line-height: 9px;
-  font-weight: 700;
-  letter-spacing: 1.03px;
-}
-
-a {
-  text-decoration: none;
-}
-
-img {
-  display: inline-block;
-}
-
-.list-container {
-  margin-top: 16px;
-}
-
-.image {
-  width: 40px;
-  height: 40px;
-  border-radius: 100px;
-}
-
-.black-50 {
-  color: rgba(0, 0, 0, .5);
-}
-
-.button {
-  border-radius: 4px;
-  background-color: #000;
-  font-size: 13px;
   font-weight: 400;
-  text-align: left;
-  letter-spacing: 1.2px;
-  text-transform: uppercase;
-}
-
-.spacer-16 {
-  width: 16px;
-  height: 16px;
-}
-
-.map-container {
-  position: relative;
-  height:230px;
-  width:100%;
-}
-
-.list-info-1 {
-  color: rgba(0, 0, 0, .5);
-  font-size: 13px;
-  text-align: left;
-}
-
-.map {
-  height: 250px;
-}
-
-.div-block {
-  height: 100px;
-}
-
-.group-title-container {
-  margin-top: 0px;
-  padding-top: 40px;
-  padding-bottom: 10px;
-  background-color: #f2f2f2;
-}
-
-.list-title {
-  margin-top: 0px;
-  margin-bottom: 0px;
-  color: rgba(0, 0, 0, .5);
-  font-size: 13px;
-  font-weight: 400;
-  text-align: center;
-}
-
-.button-text {
-  padding-left: 0px;
-  color: #1f88e9;
-  font-size: 13px;
-  font-weight: 700;
-  text-align: center;
-  letter-spacing: 1.2px;
-  text-decoration: none;
-  text-transform: uppercase;
-}
-
-.div-block-3 {
-  margin-top: 9px;
-  padding: 11px 16px;
-  border-style: none;
-  border-color: #000;
-  border-radius: 16px;
-  background-color: #ddeefb;
-}
-
-.text-block-3 {
-  font-size: 12px;
-  line-height: 15px;
-}
-
-.text-span {
-  font-weight: 700;
-}
-
-.small-text-black-40 {
-  margin-top: 7px;
-  color: rgba(0, 0, 0, .4);
-  font-size: 11px;
-}
-
-.link-block {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  color: #1f88e9;
-  font-weight: 700;
-}
-
-.time-block {
-  color: #2b8eea;
-  font-size: 16px;
-}
-
-.image-3 {
-  padding-left: 9px;
-}
-
-.tags-container {
-  display: block;
-  -webkit-box-align: start;
-  -webkit-align-items: flex-start;
-  -ms-flex-align: start;
-  align-items: flex-start;
-}
-
-.tag {
-  display: inline-block;
-  margin-right: 4px;
-  margin-bottom: 4px;
-  padding: 4px 6px;
-  clear: none;
-  border-radius: 2px;
-  background-color: rgba(0, 0, 0, .1);
-}
-
-.small-text-upper-black-40 {
-  margin-top: 1px;
-  color: rgba(0, 0, 0, .4);
-  font-size: 10px;
-  line-height: 9px;
-  font-weight: 700;
-  letter-spacing: 1.03px;
-  text-transform: uppercase;
-}
-
-.times-container {
-  width: 100%;
-}
-
-.time {
-  display: inline-block;
-  margin-right: 4px;
-  margin-bottom: 4px;
-  padding: 4px 6px;
-  clear: none;
-  border-radius: 2px;
-  background-color: rgba(100, 66, 107, .2);
-}
-
-.small-text-upper-purple {
-  color: #64426b;
-  font-size: 9px;
-  line-height: 9px;
-  font-weight: 700;
-  letter-spacing: 1.03px;
   text-transform: none;
 }
-
-.image-tag {
-  margin-top: 1px;
-  margin-right: 6px;
+.tag {
+  display: inline-block;
+  margin-right: 10px;
+  margin-bottom: 12px;
+  padding: 14px 21px 16px;
+  clear: none;
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgba(0, 0, 0, .11);
+  border-radius: 20px;
+  background-color: transparent;
 }
-
-.image-time {
-  margin-top: 2px;
-  margin-right: 6px;
+.playdate-planning-bullet-wrapper {
+  margin-top: 32px;
+  padding-left: 0px;
 }
-
-.time-group-container {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
+.playdate-planning-bullet {
   display: flex;
-  -webkit-box-align: start;
-  -webkit-align-items: flex-start;
-  -ms-flex-align: start;
+  flex-direction: row;
+  margin-bottom: 16px;
+}
+.number-bullet {
+  display: flex;
+  max-height: 24px;
+  max-width: 24px;
+  min-height: 24px;
+  min-width: 24px;
+  padding-bottom: 2px;
+  margin-right: 10px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background-color: #64426b;
+  color: white;
+}
+ul {
+  list-style: none;
+}
+.card-small-text {
+  margin-top: 16px;
+  font-size: 13px;
+  line-height: 20px;
+}
+.card-large-text{
+  width: 80%;
+  margin-top: 16px;
+  font-size: 18px;
+  line-height: 28px;
+  text-align: center;
+}
+.profile-specifics-card {
+  display: flex;
+  width: 100%;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  padding: 32px;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  border-radius: 4px;
+  background-color: #fff;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .08);
+}
+
+.mobile-cards-wrapper {
+  width: 100%;
+}
+.request-childcare-help-text {
+  margin-top: 10px;
+  color: rgba(0, 0, 0, .5);
+  font-size: 12px;
+  text-align: center;
+}
+.button {
+  min-width: 160px;
+  margin-top: 0px;
+  margin-bottom: 10px;
+  padding: 12px;
+  border-radius: 4px;
+  text-align: center;
+}
+.request-button {
+  background-color: white;
+  opacity: 0.3;
+  color: hsla(208, 82%, 51%, 1.00);
+  border: 1px hsla(208.8118811881188, 82.11%, 51.76%, 1.00) solid;
+  margin-bottom: 0px;
+  .inactive {
+    opacity: 0.3;
+    border-color: #1f88e9;
+  }
+}
+.invite-button {
+  color: white;
+  background-color: #1f88e9;
+}
+.top-card {
+  display: flex;
+  width: 100%;
+  margin-top: 0px;
+  flex-direction: column;
+  justify-content: flex-start;
   align-items: flex-start;
+  align-self: center;
+  border-bottom: 1px solid rgba(0, 0, 0, .06);
+  background-color: #fff;
+}
+.top-sub-card {
+  * {
+    width: 40%;
+  }
+  border-top: 1px lightgray solid;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  padding: 32px;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  background-color: #fff;
+}
+.top-card-summary-info {
+  padding: 32px;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  min-height: 240px;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 1px grey;
 }
 
-.spacer-300px {
-  height: 300px;
+.top-card-column-1 {
+  width: 100%;
+  min-height: 200px;
+  padding-right: 32px;
 }
 
-.list-title-2 {
+.top-card-column-2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.onb-body {
+  background-color: #f6f6f6;
+}
+.profile-container {
+  display: flex;
   margin-top: 0px;
   margin-bottom: 0px;
-  color: #000;
-  font-size: 16px;
-  font-weight: 400;
+  padding: 32px 32px 112px;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+.map-container {
+  min-height: 150px;
+  min-width: 100%;
+}
+.avatar {
+  min-height: 200px;
+  min-width: 200px;
+  margin-top: 12px;
+  margin-bottom: 12px;
+  border-radius: 50%;
+}
+.heading {
+  margin-top: 0px;
+  margin-bottom: 10px;
+  font-size: 35px;
+  line-height: 49px;
+  text-align: left;
+  letter-spacing: -0.5px;
+}
+.top-card-subtitle {
+  margin-bottom: 16px;
+  font-size: 18px;
+  line-height: 28px;
   text-align: left;
 }
-
-.group-title-container-2 {
-  margin-top: 0px;
-  padding-top: 40px;
-  padding-bottom: 16px;
-  padding-left: 16px;
-  background-color: #f2f2f2;
-}
-
-.text-block-5 {
-  font-weight: 400;
-}
-
-.text-block-6 {
-  color: rgba(0, 0, 0, .5);
-  font-size: 13px;
-}
-
-.div-block-4 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  height: 85vh;
-  margin-top: 24px;
-  padding-right: 32px;
-  padding-bottom: 32px;
-  padding-left: 32px;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.div-block-5 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.providerp-button-back {
-  width: 24px;
-  height: 24px;
-  -webkit-align-self: flex-start;
-  -ms-flex-item-align: start;
-  align-self: flex-start;
-}
-
-.providerp-provider-info-section {
-  position: relative;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  width: 100%;
-  padding: 16px 16px 32px;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-box-pack: start;
-  -webkit-justify-content: flex-start;
-  -ms-flex-pack: start;
-  justify-content: flex-start;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
-  border-style: none none solid;
-  border-width: 1px;
-  border-color: rgba(0, 0, 0, .1);
-  background-color: #fff;
-}
-
-.providerp-avatar {
-  width: 100px;
-  height: 100px;
-  border-radius: 100px;
-}
-
-.providerp-h1 {
-  margin-top: 8px;
-  margin-bottom: 2px;
-  font-size: 20px;
-  line-height: 30px;
-}
-
-.text-span-2 {
-  color: rgba(0, 0, 0, .25);
-}
-
-.text-span-3 {
-  color: rgba(0, 0, 0, .25);
-}
-
-.providerp-occupation, .providerp-member-since, .languages {
-  max-width: 500px;
-  margin-top: 0px;
+.top-card-info-bullet div {
+  margin-top: 3px;
   margin-bottom: 4px;
-  color: rgba(0, 0, 0, .5);
-  font-size: 13px;
-  font-weight: 400;
-  text-align: center;
 }
-
-.providerp-children {
-  max-width: 500px;
-  margin-bottom: 12px;
-  color: rgba(0, 0, 0, .5);
-  font-size: 13px;
-  text-align: center;
-}
-
-.providerp-chat-bubble-container {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
+.top-card-info-bullet {
   display: flex;
-  max-width: 500px;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-justify-content: space-around;
-  -ms-flex-pack: distribute;
-  justify-content: space-around;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.providerp-chat-bubble-caret {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-box-pack: end;
-  -webkit-justify-content: flex-end;
-  -ms-flex-pack: end;
-  justify-content: flex-end;
-}
-
-.providerp-chat-bubble-primary {
-  width: 100%;
-  padding: 16px;
-  border-radius: 8px;
-  background-color: #f3f3f3;
-}
-
-.providerp-provider-info-bullets {
-  position: relative;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  width: 100%;
-  padding: 16px;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-box-pack: start;
-  -webkit-justify-content: flex-start;
-  -ms-flex-pack: start;
-  justify-content: flex-start;
-  -webkit-box-align: start;
-  -webkit-align-items: flex-start;
-  -ms-flex-align: start;
-  align-items: flex-start;
-  border-style: none none solid;
-  border-width: 1px;
-  border-color: rgba(0, 0, 0, .1);
-  background-color: #fff;
-}
-
-.providerp-background-check-badge {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  padding: 5px 10px;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
-  border-radius: 500px;
-  background-color: rgba(12, 186, 82, .2);
-}
-
-.background-check-text {
-  margin-top: 1px;
-  color: #0dba52;
-  font-size: 10px;
-  line-height: 9px;
-  font-weight: 700;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-}
-
-.checkmark-image {
-  margin-right: 8px;
-}
-
-.providerp-background-check-badge-container {
-  margin-bottom: 6px;
-}
-
-.providerp-avatar-name-group {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.providerp-post-comment-container {
-  position: relative;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  width: 100%;
-  padding: 16px;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-box-pack: start;
-  -webkit-justify-content: flex-start;
-  -ms-flex-pack: start;
-  justify-content: flex-start;
-  -webkit-box-align: start;
-  -webkit-align-items: flex-start;
-  -ms-flex-align: start;
-  align-items: flex-start;
-  border-style: none none solid;
-  border-width: 1px;
-  border-color: rgba(0, 0, 0, .1);
-  background-color: #fff;
-}
-
-.spacer-100px {
-  height: 100px;
-}
-
-.providerp-book-care-container {
-  position: fixed;
-  left: 0px;
-  right: 0px;
-  bottom: 0px;
-  z-index: 1000;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  width: 100%;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
+  margin-bottom: 8px;
   flex-direction: row;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  border-style: none;
-  border-width: 1px;
-  border-color: rgba(0, 0, 0, .1) #000 #000;
-  background-color: #fff;
-  box-shadow: 0 -1px 3px 0 rgba(0, 0, 0, .08);
+  align-items: stretch;
+  &:before {
+    content: '';
+    margin-right: 12px;
+    min-width: 6px;
+    border-radius: 4px;
+    background-color: hsla(143, 86%, 39%, 1.0);
+  }
 }
-
-.pprovider-book-care-button {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
+div.background-checked-wrapper {
   display: flex;
-  padding: 8px 20px 8px 16px;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
-  border-radius: 4px;
-  background-color: #deedfc;
+  margin-top: 0;
+  margin-bottom: 0;
+  img {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .background-checked {
+    padding: 0;
+    margin-left: 4px;
+    color: #000;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
 }
-
-.pprovider-primary-action-text {
-  margin-left: 8px;
-  color: #1f88e9;
-  font-size: 13px;
-  font-weight: 700;
-  text-align: center;
-  letter-spacing: 1.2px;
-  text-decoration: none;
-  text-transform: uppercase;
+@media (max-width: 991px){
+  .profile-container {
+      padding-top: 32px;
+      padding-bottom: 128px;
+  }
 }
-
-.pprofile-compose-button {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  width: 100%;
-  padding: 8px 12px;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
-  border-radius: 10px;
-  background-color: #f2f2f2;
-}
-
-.pprofile-comment-prompt-button-text {
-  margin-top: -2px;
-  margin-left: 8px;
-  color: rgba(0, 0, 0, .4);
-}
-
-.image-5 {
-  opacity: 0.3;
-}
-
-.check-in-button {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  z-index: 500;
-  margin-right: 168px;
-  padding-top: 11px;
-  padding-bottom: 9px;
-  border-style: solid;
-  border-width: 1px;
-  border-color: rgba(31, 136, 233, .08);
-  border-radius: 4px;
-  background-color: #deedfc;
-  box-shadow: 0 10px 25px -3px rgba(0, 0, 0, .45);
-  color: #1f88e9;
-  font-size: 13px;
-  line-height: 14px;
-  font-weight: 700;
-  text-align: center;
-  letter-spacing: 1.2px;
-  text-transform: uppercase;
-}
-
-.check-in-button-2 {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  z-index: 500;
-  margin-right: 120px;
-  border-style: solid;
-  border-width: 1px;
-  border-color: rgba(31, 136, 233, .08);
-  border-radius: 4px;
-  background-color: #1f88e9;
-  box-shadow: 0 10px 25px -3px rgba(0, 0, 0, .45);
-  color: #fff;
-  font-size: 13px;
-  letter-spacing: 1.2px;
-  text-transform: uppercase;
-}
-
-.check-in-button-6 {
-  position: absolute;
-  right: 16px;
-  bottom: 16px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  margin-bottom: 58px;
-  padding: 9px 15px;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-box-pack: end;
-  -webkit-justify-content: flex-end;
-  -ms-flex-pack: end;
-  justify-content: flex-end;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
-  border-radius: 4px;
-  background-color: #1d8ce7;
-  box-shadow: 0 10px 25px -3px rgba(0, 0, 0, .45);
-}
-
-.check-in-button-6-text {
-  margin-left: 9px;
-  border-radius: 4px;
-  color: #fff;
-  font-size: 13px;
-  font-weight: 400;
-  letter-spacing: 1.2px;
-  text-transform: uppercase;
-}
-
-.text-span-4 {
-  font-size: 10px;
-  font-weight: 400;
-}
-
-.check-in-button-7 {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  margin-right: 168px;
-  padding: 9px 15px;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
-  border-radius: 4px;
-  background-color: #1d8ce7;
-  box-shadow: 0 10px 25px -3px rgba(0, 0, 0, .45);
-}
-
-.check-in-button-7-text {
-  border-radius: 4px;
-  color: #fff;
-  font-size: 13px;
-  line-height: 15px;
-  font-weight: 400;
-  text-align: center;
-  letter-spacing: 1.2px;
-  text-transform: uppercase;
-}
-
-.check-in-button-7-image {
-  margin-bottom: 4px;
-  opacity: 1;
-}
-
-.text-span-5 {
-  color: hsla(0, 0%, 100%, .5);
-  font-size: 10px;
-  line-height: 15px;
-}
-
-.check-in-button-8 {
-  position: absolute;
-  right: 16px;
-  bottom: 16px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  margin-right: 128px;
-  margin-bottom: 61px;
-  padding: 9px 15px 11px;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
-  border-radius: 4px;
-  background-color: #1d8ce7;
-  box-shadow: 0 10px 25px -3px rgba(0, 0, 0, .45);
-}
-
-.text-span-6 {
-  color: hsla(0, 0%, 100%, .5);
-  font-size: 10px;
-}
-
-.check-in-button-8-image {
-  margin-bottom: 4px;
-  opacity: 1;
-}
-
-.check-in-button-8-text {
-  margin-top: -5px;
-  border-radius: 4px;
-  color: #fff;
-  font-size: 13px;
-  line-height: 15px;
-  font-weight: 400;
-  text-align: center;
-  letter-spacing: 1.2px;
-  text-transform: uppercase;
-}
-
-.check-in-button-9 {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  margin-right: 65px;
-  margin-bottom: 145px;
-  padding: 9px 15px 11px;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
-  border-radius: 4px;
-  background-color: #1d8ce7;
-  box-shadow: 0 10px 25px -3px rgba(0, 0, 0, .45);
-}
-
-.check-in-button-9-text {
-  margin-top: -1px;
-  border-radius: 4px;
-  color: #fff;
-  font-size: 11px;
-  line-height: 14px;
-  font-weight: 400;
-  text-align: center;
-  letter-spacing: 1.2px;
-  text-transform: uppercase;
-}
-
-.avatar-name-container {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  width: 100%;
-  margin-right: 24px;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.div-block-6 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  width: 100%;
-  min-height: 30vh;
-  padding: 32px;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
-  background-position: 50% 50%;
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
-.image-6 {
-  opacity: 0.5;
-}
-
-.image-7 {
-  margin-top: 1px;
-  opacity: 0.5;
-}
-
-.text-block-7 {
-  line-height: 14px;
-  text-align: center;
-}
-
-.div-block-7 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  width: 100%;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-}
-
-.div-block-8 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  width: 100%;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.providerp-background-check-badge-container2 {
-  margin-top: 8px;
-  margin-bottom: 6px;
-}
-
-@media (max-width: 479px) {
+@media (max-width: 767px){
   .tag {
-    clear: both;
+      margin-right: 8px;
+      margin-bottom: 10px;
+      padding: 8px 14px 10px;
   }
-
-  .time {
-    clear: both;
+  .tag-text {
+    font-size: 13px;
   }
-
-  .providerp-provider-info-section {
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-    -ms-flex-align: center;
+  .playdate-planning-bullet-wrapper {
+    width: 60%;
+  }
+  .mobile-cards-wrapper {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+  .avatar {
+    margin-top: 0px;
+    max-height: 150px;
+    max-width: 150px;
+    min-height: 150px;
+    min-width: 150px;
+  }
+  .profile-container {
+      padding: 0px 0px 100px;
+  }
+  .card-large-text {
+    width: 88%;
+  }
+  .top-sub-card {
+    * {
+      width: 60%;
+    }
+  }
+}
+@media (max-width: 479px){
+  .playdate-planning-bullet-wrapper {
+    width: 100%;
+  }
+  .top-sub-card * {
+    width: 100%;
+  }
+  .heading {
+    font-size: 20px;
+    line-height: 26px;
+    text-align: center;
+  }
+  .top-card-subtitle {
+    width: 100%;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+  }
+  .avatar {
+    margin-top: 0px;
+    max-height: 200;
+    max-width: 200px;
+    min-height: 200px;
+    min-width: 200px;
+  }
+  .top-card-summary-info {
+    flex-direction: column;
     align-items: center;
   }
-
-  .providerp-provider-info-bullets {
-    -webkit-box-align: start;
-    -webkit-align-items: flex-start;
-    -ms-flex-align: start;
-    align-items: flex-start;
+  .top-card-column-1 {
+    order: 2;
   }
-
-  .providerp-post-comment-container {
-    -webkit-box-align: start;
-    -webkit-align-items: flex-start;
-    -ms-flex-align: start;
-    align-items: flex-start;
+  .profile-container {
+      padding-bottom: 32px;
+      background-color: #f4f4f4;
   }
-
-  .spacer-100px {
-    height: 100px;
+  .card-large-text {
+    width: 100%;
+    font-size: 16px;
+    line-height: 24px;
+  }
+  .top-card-column-2 {
+    margin-bottom: 20px;
+    order: -1;
+  }
+  .top-card-column-1 {
+    padding-right: 0px;
   }
 }
 
