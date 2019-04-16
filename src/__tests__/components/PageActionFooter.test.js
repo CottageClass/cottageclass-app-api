@@ -5,8 +5,7 @@ describe('PageActionsFooter', () => {
   describe('one button', () => {
     it('triggers event on click', () => {
       const buttonData = {
-        text: 'hello',
-        eventName: 'helloClicked'
+        text: 'hello'
       }
       const wrapper = mount(PageActionsFooter, {
         propsData: {
@@ -19,17 +18,15 @@ describe('PageActionsFooter', () => {
 
       expect(secondaryButton.exists()).toBeFalsy()
       expect(primaryButton.text()).toBe('hello')
-      expect(wrapper.emitted().helloClicked).toBeTruthy()
+      expect(wrapper.emitted()['primary-click']).toBeTruthy()
     })
   })
   describe('two buttons', () => {
     it('triggers event on click', () => {
       const buttonData = [{
-        text: 'hello',
-        eventName: 'helloClicked'
+        text: 'hello'
       }, {
-        text: 'goodbye',
-        eventName: 'goodbyeClicked'
+        text: 'goodbye'
       }]
 
       const wrapper = mount(PageActionsFooter, {
@@ -41,7 +38,7 @@ describe('PageActionsFooter', () => {
       secondary.trigger('click')
 
       expect(secondary.text()).toBe('goodbye')
-      expect(wrapper.emitted().goodbyeClicked).toBeTruthy()
+      expect(wrapper.emitted()['secondary-click']).toBeTruthy()
     })
   })
 
@@ -49,11 +46,9 @@ describe('PageActionsFooter', () => {
     it('triggers event on click', () => {
       const buttonData = [{
         text: 'hello',
-        eventName: 'helloClicked',
         active: true
       }, {
         text: 'goodbye',
-        eventName: 'goodbyeClicked',
         active: false
       }]
 
@@ -67,8 +62,8 @@ describe('PageActionsFooter', () => {
       secondary.trigger('click')
       primary.trigger('click')
 
-      expect(wrapper.emitted().helloClicked).toBeTruthy()
-      expect(wrapper.emitted().goodbyeClicked).toBeFalsy()
+      expect(wrapper.emitted()['primary-click']).toBeTruthy()
+      expect(wrapper.emitted()['secondary-click']).toBeFalsy()
     })
   })
 })

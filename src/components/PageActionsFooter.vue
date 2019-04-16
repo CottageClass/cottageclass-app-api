@@ -1,11 +1,11 @@
 <template>
    <div class="page-actions-wrapper">
-      <a @click="primaryActive && $emit(primaryEvent)"
+      <a @click="primaryActive && $emit('primary-click')"
         class="button-primary w-button">
       {{ primaryText }}
       </a>
       <a v-if="hasTwoButtons"
-         @click="secondaryActive && $emit(secondaryEvent)"
+         @click="secondaryActive && $emit('secondary-click')"
          class="button-secondary w-button">
         {{ secondaryText }}
       </a>
@@ -25,12 +25,6 @@ export default {
     },
     secondaryText () {
       return this.buttons[1].text
-    },
-    primaryEvent () {
-      return this.buttons[0].eventName
-    },
-    secondaryEvent () {
-      return this.buttons[1].eventName
     },
     primaryActive () {
       return this.isActive(0)
