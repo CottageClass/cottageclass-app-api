@@ -1,31 +1,78 @@
 <template>
    <div class="page-actions-wrapper">
-       <a @click="$emit('click')" class="button-primary w-button">{{ buttonText }}</a>
+      <a @click="primaryActive && $emit(primaryEvent)"
+        class="button-primary w-button">
+      {{ primaryText }}
+      </a>
+      <a v-if="hasTwoButtons"
+         @click="secondaryActive && $emit(secondaryEvent)"
+         class="button-secondary w-button">
+        {{ secondaryText }}
+      </a>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['buttonText'],
-  name: 'PageActionsFooter'
+  props: ['buttons'],
+  name: 'PageActionsFooter',
+  computed: {
+    hasTwoButtons () {
+      return this.buttons.length >= 2
+    },
+    primaryText () {
+      return this.buttons[0].text
+    },
+    secondaryText () {
+      return this.buttons[1].text
+    },
+    primaryEvent () {
+      return this.buttons[0].eventName
+    },
+    secondaryEvent () {
+      return this.buttons[1].eventName
+    },
+    primaryActive () {
+      return this.isActive(0)
+    },
+    secondaryActive () {
+      return this.isActive(1)
+    },
+    isActive () {
+      return function (i) {
+        if (this.buttons[i].hasOwnProperty('active') && !this.buttons[i].active) {
+          return false
+        }
+        return true
+      }
+    }
+  }
 }
 </script>
 
 <style scoped>
-
-.button-primary {
+.page-actions-wrapper a {
   margin-right: 4px;
   padding: 12px 32px;
-  -webkit-align-self: auto;
-  -ms-flex-item-align: auto;
-  -ms-grid-row-align: auto;
   align-self: auto;
   border-style: solid;
   border-width: 1px;
-  border-color: hsla(208.8118811881188, 82.11%, 51.76%, 1.00);
   border-radius: 4px;
-  background-color: #1f88e9;
   text-align: center;
+}
+
+.page-actions-wrapper a.inactive {
+  opacity: 0.3;
+  cursor: default;
+}
+.button-primary {
+  background-color: #1f88e9;
+  border-color: hsla(208.8118811881188, 82.11%, 51.76%, 1.00);
+}
+.button-secondary {
+  border-color: hsla(208, 82.11%, 51.76%, 1.00);
+  background-color: hsla(208, 0.00%, 100.00%, 1.00);
+  color: hsla(208, 82.11%, 51.76%, 1.00);
 }
 
 .button-primary:hover {
