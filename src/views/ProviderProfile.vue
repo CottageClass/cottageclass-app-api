@@ -148,21 +148,29 @@ export default {
   methods: {
     goToEdit: function () {
       this.$router.push({ name: 'ProfileEdit' })
+    },
+    async setUser () {
+      this.user = await api.fetchUser(this.$route.params.id)
+      // wait until the next tick so the map div exists
+      this.$nextTick(async function () {
+        await this.createMap(this.$refs.map, {
+          zoom: 14,
+          center: this.userLocation,
+          disableDefaultUI: true,
+          options: this.mapOptions,
+          style: 'width: 100px; height: 230px;'
+        })
+        await this.addCircle({ lat: this.user.fuzzyLatitude, lng: this.user.fuzzyLongitude }, 0.2)
+      })
+    }
+  },
+  watch: {
+    '$route' (to, from) {
+      this.setUser()
     }
   },
   mounted: async function () {
-    this.user = await api.fetchUser(this.$route.params.id)
-    // wait until the next tick so the map div exists
-    this.$nextTick(async function () {
-      await this.createMap(this.$refs.map, {
-        zoom: 14,
-        center: this.userLocation,
-        disableDefaultUI: true,
-        options: this.mapOptions,
-        style: 'width: 100px; height: 230px;'
-      })
-      await this.addCircle({ lat: this.user.fuzzyLatitude, lng: this.user.fuzzyLongitude }, 0.2)
-    })
+    this.setUser()
   },
   computed: {
     inviteFooterButtons () {
