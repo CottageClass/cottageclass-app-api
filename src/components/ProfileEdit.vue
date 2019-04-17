@@ -4,8 +4,8 @@
   <div class="container w-container">
   <h1 class="heading-1">Edit profile</h1>
   <StyleWrapper styleIs="editing" class="cards" v-if="currentUser">
-      <ErrorMessage v-if="showError && error" text="Your form has errors. Please fix them to continue..." />
-      <ErrorMessage v-if="showError && error" :text="phone.err" />
+      <ErrorMessage v-if="showError && hasError" text="Your form has errors. Please fix them to continue..." />
+      <ErrorMessage v-if="showError && hasError" :text="phone.err" />
     <Phone v-model="phone" :currentPhone="currentUser.phone" :required="false" />
     <ErrorMessage v-if="showError" :text="location.err" />
     <Location
@@ -119,7 +119,7 @@ export default {
     this.children = { 'list': this.currentUser.children || [] }
   },
   computed: {
-    error: function () {
+    hasError: function () {
       if (!!this.phone.err || !!this.location.err || !!this.children.err) {
         return true
       } else {
@@ -130,7 +130,7 @@ export default {
   },
   methods: {
     submitUserInformation: function () {
-      if (!this.error) {
+      if (!this.hasError) {
         this.saveButtonText = 'Saving...'
         let data = _.assign(this.currentUser, {})
         data.children = this.children.list
