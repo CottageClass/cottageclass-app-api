@@ -909,9 +909,11 @@ textarea.w-select {
   min-height: 100%;
   z-index: -100;
 }
+input[type="submit"] {
+  -webkit-appearance: none;
+}
 .w-background-video > video::-webkit-media-controls-start-playback-button {
   display: none !important;
-  -webkit-appearance: none;
 }
 .w-slider {
   position: relative;
