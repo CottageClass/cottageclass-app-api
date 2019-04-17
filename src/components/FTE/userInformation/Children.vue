@@ -64,7 +64,7 @@ export default {
         return false
       }
     },
-    error: function () {
+    err: function () {
       if (this.childrenValidates) {
         return false
       } else {
@@ -75,7 +75,7 @@ export default {
   mounted: function () {
     this.$emit('input', {
       list: this.children,
-      err: this.error
+      err: this.err
     })
   },
   watch: {
@@ -83,7 +83,7 @@ export default {
       handler: function () {
         this.$emit('input', {
           list: this.children,
-          err: this.error
+          err: this.err
         })
       },
       deep: true

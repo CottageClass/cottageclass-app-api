@@ -25,7 +25,7 @@ export default {
     }
   },
   computed: {
-    error: function () {
+    err: function () {
       if (parseInt(this.minimum) > parseInt(this.maximum)) {
         return 'Oops, the minimum age is greater than the maximum age!'
       } else {
@@ -38,7 +38,7 @@ export default {
       this.$emit('input', {
         minimum: this.minimum,
         maximum: this.maximum,
-        err: this.error
+        err: this.err
       })
     }
   },

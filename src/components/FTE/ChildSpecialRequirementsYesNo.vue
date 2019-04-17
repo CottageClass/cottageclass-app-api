@@ -4,7 +4,7 @@
       <div class="body">
         <div class="content-wrapper">
           <Nav :button="nextButtonState" @next="nextStep" @prev="prevStep" />
-          <ErrorMessage v-if="error && showError" :text="error" />
+          <ErrorMessage v-if="err && showError" :text="err" />
           <YesOrNo
             v-model="childHasSpecialNeeds"
             question="Allergies and Special Requirements"
@@ -59,7 +59,7 @@ export default {
     }
   },
   computed: {
-    error: function () {
+    err: function () {
       return this.childHasSpecialNeeds.err
     },
     nextButtonState: function () {

@@ -9,7 +9,7 @@
           :hidePrevious="stepIndex === 0"
         />
         <StyleWrapper styleIs="onboarding">
-          <ErrorMessage v-if="error && this.showError" :text="error" />
+          <ErrorMessage v-if="err && this.showError" :text="err" />
           <Phone
             v-if="currentStep === 'phone'"
             @pressedEnter="nextStep"
@@ -189,7 +189,7 @@ export default {
       }
       return models[this.currentStep]
     },
-    error () {
+    err () {
       return this.modelForCurrentStep.err
     },
     eventName: function () {
@@ -311,7 +311,7 @@ export default {
       }
     },
     nextStep () {
-      if (!this.error) {
+      if (!this.err) {
         if (this.stepIndex === stepSequence.length - 1) {
           this.finishOnboarding()
         } else {

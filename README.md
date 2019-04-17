@@ -93,6 +93,14 @@ for testing vue/js frontend.  This will run watch tests.
     ```
     $ yarn run test
     ```
+and to watch : 
+    ```
+    $ yarn run test-watch
+    ```
+
+## Logs
+We have a nice logging util that is included in all Vue components via a global mixin.  To use it: 
+`this.log(msg)`,`this.debug(msg)`,`this.error(msg)`
 
 ## Deployment
 All PR's to `develop` on github will result in review apps in the [heroku pipeline](https://dashboard.heroku.com/pipelines/f1618cba-fac9-4a02-9dee-4ddf2bc31ba6).  The stagin app is automatically deployed from `master` and the production app has to be manually deployed on the heroku dashboard.
