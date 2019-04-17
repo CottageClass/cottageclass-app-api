@@ -62,6 +62,8 @@ export default {
       emailBodyWithEvent: 'Hi%20everyone!%0A%0AI%20hope%20you%20can%20all%20join%20me%20at%20this%20event%20we%20are%20hosting%20to%20start%20a%20new%20local%20network%20for%20sharing%20childcare!%20Can%20you%20come%3F%0A%0A',
       tweetTextWithoutEvent: 'This site helps families come together to share childcare and playdates for free. Want to try it with me?',
       emailBodyWithoutEvent: 'Hi%20everyone%2C%0A%0AI%E2%80%99m%20trying%20out%20this%20new%20site%20that%20lets%20families%20come%20together%20to%20share%20childcare%20and%20playdates%20for%20free.%20Want%20to%20try%20it%20with%20me%3F%0A%0A',
+      textMessageWithEvent: "Hey! I'm hosting this event for kids as part of a new way to share childcare. Want to come?",
+      textMessageWithoutEvent: 'This site helps families come together to share childcare and playdates for free. Want to try it with me?',
       isMobileDevice: typeof window.orientation !== 'undefined',
       fetchedEvent: null
     }
@@ -95,7 +97,7 @@ export default {
       }
     },
     textMessage: function () {
-      return "Hey! I'm hosting this event for kids as part of a new way to share childcare. Want to come? " + this.link
+      return (this.eventId ? this.textMessageWithEvent : this.textMessageWithoutEvent) + ' ' + this.link
     },
     link: function () {
       return this.prefix + this.shareUrl
