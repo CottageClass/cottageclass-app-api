@@ -56,9 +56,12 @@ export default {
     return {
       copyButtonText: 'copy link',
       prefix: 'https://',
-      tweetText: "Everyone I know should come to this event I'm hosting to start a local network for childcare sharing!",
-      emailBody: 'Hi%20everyone!%0A%0AI%20hope%20you%20can%20all%20join%20me%20at%20this%20event%20we%20are%20hosting%20to%20start%20a%20new%20local%20network%20for%20sharing%20childcare!%20Can%20you%20come%3F%0A%0A',
       emailSubject: 'Sharing%20childcare%20(we%20should%20do%20this!)',
+      // the content for tweets and emails depends on whether we are sharing a specific event or just the kidsclub site.
+      tweetTextWithEvent: "Everyone I know should come to this event I'm hosting to start a local network for childcare sharing!",
+      emailBodyWithEvent: 'Hi%20everyone!%0A%0AI%20hope%20you%20can%20all%20join%20me%20at%20this%20event%20we%20are%20hosting%20to%20start%20a%20new%20local%20network%20for%20sharing%20childcare!%20Can%20you%20come%3F%0A%0A',
+      tweetTextWithoutEvent: 'This site helps families come together to share childcare and playdates for free. Want to try it with me?',
+      emailBodyWithoutEvent: 'Hi%20everyone%2C%0A%0AI%E2%80%99m%20trying%20out%20this%20new%20site%20that%20lets%20families%20come%20together%20to%20share%20childcare%20and%20playdates%20for%20free.%20Want%20to%20try%20it%20with%20me%3F%0A%0A',
       isMobileDevice: typeof window.orientation !== 'undefined',
       fetchedEvent: null
     }
