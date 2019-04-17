@@ -107,10 +107,10 @@ export default {
       return 'https://www.facebook.com/sharer/sharer.php?u=' + this.link
     },
     tweetLink: function () {
-      return 'https://twitter.com/intent/tweet?text=' + this.tweetText + ' ' + this.link
+      return 'https://twitter.com/intent/tweet?text=' + (this.eventId ? this.tweetTextWithEvent : this.tweetTextWithoutEvent) + ' ' + this.link
     },
     emailLink: function () {
-      return 'mailto:?subject=' + this.emailSubject + '&body=' + this.emailBody + 'https%3A%2F%2F' + this.shareUrl + '%2F%0A%0AThanks!%0A%3C3'
+      return 'mailto:?subject=' + this.emailSubject + '&body=' + (this.eventId ? this.emailBodyWithEvent : this.emailBodyWithoutEvent) + 'https%3A%2F%2F' + this.shareUrl + '%2F%0A%0AThanks!%0A%3C3'
     },
     ...mapGetters([ 'firstCreatedEvent' ])
   },
