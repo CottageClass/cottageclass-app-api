@@ -17,7 +17,8 @@ describe('Events', () => {
         actions,
         getters: {
           currentUser () { return null },
-          isAuthenticated () { return false }
+          isAuthenticated () { return false },
+          mapArea (){}
         }
       })
       wrapper = shallowMount(Events, {

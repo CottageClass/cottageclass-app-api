@@ -1,4 +1,4 @@
-import { mount } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import ProviderProfile from '@/views/ProviderProfile.vue'
 
 describe('ProviderProfile', () => {
@@ -12,23 +12,23 @@ describe('ProviderProfile', () => {
       const $store = {
         getters: { currentUser: null }
       }
-      wrapper = mount(ProviderProfile, {
+      wrapper = shallowMount(ProviderProfile, {
         mocks: { $route, $store },
         stubs: [ 'GmapMap', 'GmapMarker' ] // because the are globally registered.  this silences the warning
       })
     })
 
     it('mounts with the correct information', async () => {
-      const name = wrapper.find('h1.providerp-h1')
+      const name = wrapper.find('.name-heading')
       expect(name.text()).toBe('Ari')
 
-      const memberSince = wrapper.find('div.providerp-member-since')
+      const memberSince = wrapper.find('.member-since')
       expect(memberSince.text()).toBe('Member since March, 2019')
 
-      const employment = wrapper.find('div.providerp-occupation')
+      const employment = wrapper.find('.occupation')
       expect(employment.text()).toBe('coder, KidsClub!!!!')
 
-      const edit = wrapper.find('div.edit-button')
+      const edit = wrapper.find('.edit-button')
       expect(edit.exists()).toBeFalsy()
     })
   })
@@ -42,23 +42,23 @@ describe('ProviderProfile', () => {
       const $store = {
         getters: { currentUser: { id: 1281 } }
       }
-      wrapper = mount(ProviderProfile, {
+      wrapper = shallowMount(ProviderProfile, {
         mocks: { $route, $store },
         stubs: [ 'GmapMap', 'GmapMarker' ] // because the are globally registered.  this silences the warning
       })
     })
 
     it('mounts with the correct information', async () => {
-      const name = wrapper.find('h1.providerp-h1')
+      const name = wrapper.find('.name-heading')
       expect(name.text()).toBe('Ari')
 
-      const memberSince = wrapper.find('div.providerp-member-since')
+      const memberSince = wrapper.find('.member-since')
       expect(memberSince.text()).toBe('Member since March, 2019')
 
-      const employment = wrapper.find('div.providerp-occupation')
+      const employment = wrapper.find('.occupation')
       expect(employment.text('coder, KidsClub!!!!'))
 
-      const edit = wrapper.find('div.edit-button')
+      const edit = wrapper.find('.edit-button')
       expect(edit.exists()).toBeTruthy()
     })
 

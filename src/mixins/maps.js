@@ -78,9 +78,7 @@ export default {
       await this.map
       const polygonOptions = {
         paths: await this.circlePath(center, radius),
-        strokeColor: '#FF0000',
-        strokeOpacity: 0.3,
-        strokeWeight: 2,
+        strokeWeight: 0,
         fillColor: '#FF0000',
         fillOpacity: 0.25,
         map: await this.map
