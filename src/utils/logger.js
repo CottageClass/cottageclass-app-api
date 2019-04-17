@@ -44,7 +44,7 @@ export default function (namespace) {
         case 'test':
           break
         case 'production':
-          FS.error(msg)
+          FS.log('error', msg)
           break
         default:
           break
