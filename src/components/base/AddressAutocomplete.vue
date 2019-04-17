@@ -34,7 +34,7 @@ export default {
     submitAddress () {
       if (this.latlng) {
         this.$store.commit('setMapArea', { center: this.latlng })
-        this.$router.push({ name: 'Events' })
+        this.$emit('locationSubmitted', { latlng: this.latlng })
       }
     },
     getAddressData (e) {
