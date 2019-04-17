@@ -43,9 +43,9 @@
             <div class="request-childcare-help-text">(Once you have your first playdate you can request childcare too)</div>
           </div>
         </div>
-        <div class="mobile-cards-wrapper" v-if="!isCurrentUser">
-          <div class="profile-specifics-card">
-            <div class="card-large-text">How to plan a playdate with Manisha</div>
+        <div class="mobile-cards-wrapper">
+          <div class="profile-specifics-card" v-if="!isCurrentUser">
+            <div class="card-large-text">How to plan a playdate with {{user.firstName}}</div>
             <ul class="playdate-planning-bullet-wrapper">
               <li class="playdate-planning-bullet">
                 <div class="number-bullet">1</div>
