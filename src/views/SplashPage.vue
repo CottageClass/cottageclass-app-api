@@ -24,7 +24,7 @@
             </li>
           </ul>
         </div>
-      </div>z
+      </div>
     </div>
   </div>
   <div class="program-photo-grid-container">
