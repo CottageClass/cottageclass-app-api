@@ -76,6 +76,7 @@ import PageActionsFooter from '@/components/PageActionsFooter.vue'
 import StyleWrapper from '@/components/FTE/StyleWrapper.vue'
 import ErrorMessage from '@/components/base/ErrorMessage.vue'
 import * as api from '@/utils/api.js'
+import { redirect } from '@/mixins'
 import { mapGetters } from 'vuex'
 import _ from 'lodash'
 
@@ -83,6 +84,7 @@ var VueScrollTo = require('vue-scrollto')
 
 export default {
   name: 'ProfileEdit',
+  mixins: [redirect],
   components: {
     Location,
     Phone,
@@ -110,6 +112,7 @@ export default {
     }
   },
   created: function () {
+    if (this.redirectToSignupIfNotAuthenticated('User attempted to edit profile without being authenticated')) { return }
     this.initialAvailability = {
       availableAfternoons: !!this.currentUser.availableAfternoons,
       availableMornings: !!this.currentUser.availableMornings,

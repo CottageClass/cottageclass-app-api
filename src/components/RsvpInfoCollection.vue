@@ -10,7 +10,7 @@
   :button="nextButtonState"
   @next="nextStep"
   @prev="$router.go(-1)" />
-  <ErrorMessage v-if="error" :text="error" />
+  <ErrorMessage v-if="err" :text="err" />
 
 <!-- Show loading indicator until we know how many children there are. If there is an error, show the error only. -->
 
@@ -58,14 +58,14 @@ export default {
   data () {
     return {
       childrenSelected: [],
-      error: '',
+      err: '',
       eventId: this.$route.params.eventId,
       event: false,
       emergencyInfoJustCompleted: this.$route.query.emergencyInfoComplete === 'true'
     }
   },
   created: function () {
-    this.redirectToSignupIfNotAuthenticated()
+    this.redirectToSignupIfNotAuthenticated('User attempted to RSVP without being authenticated')
     this.redirectToOnboardingIfNotOnboarded()
     if (!this.emergencyInfoJustCompleted) {
       this.redirectToEmergencyContactsIfNone()
@@ -130,14 +130,7 @@ export default {
   methods: {
     showErrorIfUserHasNoChildren: function () {
       if (!this.children || this.children.length === 0) {
-        this.error = 'Sorry, but we cannot retrieve your children\'s information. Are you sure you have signed in? To resolve this, please email us at: contact@cottageclass.com.'
-      }
-    },
-    redirectToSignupIfNotAuthenticated: function () {
-      if (!this.isAuthenticated) {
-        console.log('User attempted to RSVP without being authenticated')
-        this.setRedirectRouteHere()
-        this.$router.push({ name: 'SignUp' })
+        this.err = 'Sorry, but we cannot retrieve your children\'s information. Are you sure you have signed in? To resolve this, please email us at: contact@cottageclass.com.'
       }
     },
     redirectToOnboardingIfNotOnboarded: function () {
@@ -165,20 +158,20 @@ export default {
       try {
         this.event = await api.fetchEvent(this.$route.params.eventId)
         if (this.event.full || this.event.maximumChildren === 0) {
-          this.error = 'We\'re sorry, this event is full!'
+          this.err = 'We\'re sorry, this event is full!'
         }
       } catch (err) {
         console.log(err.stack)
-        this.error = 'Sorry, there was a problem retrieving information about the event. Go back and try again?'
+        this.err = 'Sorry, there was a problem retrieving information about the event. Go back and try again?'
       }
     },
     nextStep: function () {
       if (this.tooManyChildren) {
         let numChildren = this.childrenSelected.length
         let childrenSingularOrPlural = numChildren === 1 ? 'child' : 'children'
-        this.error = 'Sorry, but there are not enough spots available for ' + numChildren + ' ' + childrenSingularOrPlural + '.'
+        this.err = 'Sorry, but there are not enough spots available for ' + numChildren + ' ' + childrenSingularOrPlural + '.'
       } else if (this.childrenSelected.length === 0) {
-        this.error = 'Please choose at least one child to RSVP.'
+        this.err = 'Please choose at least one child to RSVP.'
       } else {
         this.submitRsvp()
       }
@@ -187,7 +180,7 @@ export default {
       this.$store.commit('resetRedirectRoute')
     },
     submitRsvp: function () {
-      this.error = ''
+      this.err = ''
       console.log('rsvping children ' + this.childrenSelected + ' to event ID' + this.eventId)
       this.submitToSheetsu()
       let component = this
@@ -207,7 +200,7 @@ export default {
         return component.$router.push({ name: 'EventPage', params: { id: this.eventId } })
       }).catch(err => {
         console.log(err)
-        this.error = 'Sorry, there was a problem submitting your RSVP. Try again?'
+        this.err = 'Sorry, there was a problem submitting your RSVP. Try again?'
         // fetch event information again, which will update the error message if the event is full, e.g. in the case where another user RSVP'ed a the same time, just before this user did.
         this.fetchEventInformation()
       })
@@ -236,7 +229,7 @@ export default {
       return this.childrenSelected.includes(id)
     },
     toggleSelected: function (id) {
-      this.error = ''
+      this.err = ''
       if (this.isSelected(id)) {
         this.childrenSelected = this.childrenSelected.filter((aChildId) => aChildId !== id)
       } else {
