@@ -66,4 +66,72 @@ describe('PageActionsFooter', () => {
       expect(wrapper.emitted()['secondary-click']).toBeFalsy()
     })
   })
+  describe('slot buttons', () => {
+    it('accepts a single button in a slot', () => {
+      const slotComponent = {
+        name: 'my-component',
+        template: '<div class="my-component" />'
+      }
+      const buttonData = []
+      const wrapper = mount(PageActionsFooter, {
+        propsData: {
+          buttons: buttonData
+        },
+        slots: {
+          first: slotComponent
+        }
+      })
+      const component = wrapper.find('.my-component')
+      expect(component.exists()).toBeTruthy()
+    })
+    it('accepts an object first and a slot second', () => {
+      const slotComponent = {
+        name: 'my-component',
+        template: '<div class="my-component" />'
+      }
+      const buttonData = [{
+        text: 'hello',
+        active: true
+      }]
+      const wrapper = mount(PageActionsFooter, {
+        propsData: {
+          buttons: buttonData
+        },
+        slots: {
+          second: slotComponent
+        }
+      })
+      const primary = wrapper.find('.button-primary')
+      const secondary = wrapper.find('.button-secondary')
+      const component = wrapper.find('.my-component')
+      expect(component.exists()).toBeTruthy()
+      expect(primary.exists()).toBeTruthy()
+      expect(secondary.exists()).toBeFalsy()
+    })
+
+    it('accepts a slot first and an object second', () => {
+      const slotComponent = {
+        name: 'my-component',
+        template: '<div class="my-component" />'
+      }
+      const buttonData = [{}, {
+        text: 'hello',
+        active: true
+      }]
+      const wrapper = mount(PageActionsFooter, {
+        propsData: {
+          buttons: buttonData
+        },
+        slots: {
+          first: slotComponent
+        }
+      })
+      const primary = wrapper.find('.button-primary')
+      const secondary = wrapper.find('.button-secondary')
+      const component = wrapper.find('.my-component')
+      expect(component.exists()).toBeTruthy()
+      expect(primary.exists()).toBeFalsy()
+      expect(secondary.exists()).toBeTruthy()
+    })
+  })
 })
