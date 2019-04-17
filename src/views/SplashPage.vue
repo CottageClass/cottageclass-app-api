@@ -123,9 +123,6 @@
 </div>
 <Footer />
 </div>
-  <div class="mobile-signup-wrapper">
-    <a href="" class="button-hero-mobile w-button" @click.prevent="$router.push({ name: 'SignUp' })">Sign up today. It's free!</a>
-  </div>
   </span>
 </template>
 
