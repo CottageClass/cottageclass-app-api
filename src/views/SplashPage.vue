@@ -24,46 +24,13 @@
             </li>
           </ul>
         </div>
-      </div>z
+      </div>
     </div>
   </div>
   <div class="program-photo-grid-container">
-    <img
-      src="https://storage.googleapis.com/cottageclass-prod/images/photo-12x.png"
-      srcset="https://storage.googleapis.com/cottageclass-prod/images/photo-12x-p-500.png 500w,
-      https://storage.googleapis.com/cottageclass-prod/images/photo-12x-p-800.png 800w,
-      https://storage.googleapis.com/cottageclass-prod/images/photo-12x.png 908w"
-      sizes="(max-width: 479px) 100vw, (max-width: 991px) 29vw, 31vw">
-    <img
-      src="https://storage.googleapis.com/cottageclass-prod/images/photo-22x.png"
-      srcset="https://storage.googleapis.com/cottageclass-prod/images/photo-22x-p-500.png 500w,
-      https://storage.googleapis.com/cottageclass-prod/images/photo-22x-p-800.png 800w,
-      https://storage.googleapis.com/cottageclass-prod/images/photo-22x.png 908w"
-      sizes="(max-width: 479px) 100vw, (max-width: 991px) 29vw, 31vw">
-    <img
-      src="https://storage.googleapis.com/cottageclass-prod/images/photo-3-2x.png"
-      srcset="https://storage.googleapis.com/cottageclass-prod/images/photo-3-2x-p-500.png 500w,
-      https://storage.googleapis.com/cottageclass-prod/images/photo-3-2x-p-800.png 800w,
-      https://storage.googleapis.com/cottageclass-prod/images/photo-3-2x.png 908w"
-      sizes="(max-width: 479px) 100vw, (max-width: 991px) 29vw, 31vw">
-    <img
-      src="https://storage.googleapis.com/cottageclass-prod/images/photo-42x.png"
-      srcset="https://storage.googleapis.com/cottageclass-prod/images/photo-42x-p-500.png 500w,
-      https://storage.googleapis.com/cottageclass-prod/images/photo-42x-p-800.png 800w,
-      https://storage.googleapis.com/cottageclass-prod/images/photo-42x.png 908w"
-      sizes="(max-width: 479px) 100vw, (max-width: 991px) 29vw, 31vw">
-    <img
-      src="https://storage.googleapis.com/cottageclass-prod/images/photo-112x.png"
-      srcset="https://storage.googleapis.com/cottageclass-prod/images/photo-112x-p-500.png 500w,
-      https://storage.googleapis.com/cottageclass-prod/images/photo-112x-p-800.png 800w,
-      https://storage.googleapis.com/cottageclass-prod/images/photo-112x.png 908w"
-      sizes="(max-width: 479px) 100vw, (max-width: 991px) 29vw, 31vw">
-    <img
-      src="https://storage.googleapis.com/cottageclass-prod/images/photo-62x.png"
-      srcset="https://storage.googleapis.com/cottageclass-prod/images/photo-62x-p-500.png 500w,
-      https://storage.googleapis.com/cottageclass-prod/images/photo-62x-p-800.png 800w,
-      https://storage.googleapis.com/cottageclass-prod/images/photo-62x.png 908w"
-      sizes="(max-width: 479px) 100vw, (max-width: 991px) 29vw, 31vw">
+    <GridImage v-for="name in imageNames"
+               :key="`grid-image-${name}`"
+               :imageName="name" />
   </div>
   <div class="content-section background-01">
     <div class="divider-2px"></div>
@@ -288,11 +255,12 @@ import AddressAutocomplete from '@/components/base/AddressAutocomplete'
 import RsvpButton from '@/components/RsvpButton.vue'
 import MainNav from '@/components/MainNav.vue'
 import Footer from '@/components/Footer.vue'
+import GridImage from '@/components/base/GridImage'
 import { mapGetters } from 'vuex'
 
 export default {
   name: 'SplashPage',
-  components: { RsvpButton, MainNav, Footer, AddressAutocomplete },
+  components: { RsvpButton, MainNav, Footer, AddressAutocomplete, GridImage },
   created: function () {
     if (this.currentUser === null) {
       return
@@ -301,7 +269,12 @@ export default {
       this.$router.push({ name: 'OnboardNewUser' })
     }
   },
-  computed: mapGetters([ 'currentUser' ])
+  computed: {
+    imageNames () {
+      return ['babies', 'backyard', 'legos', 'painting', 'storytime', 'hugging']
+    },
+    ...mapGetters([ 'currentUser' ])
+  }
 }
 
 </script>
