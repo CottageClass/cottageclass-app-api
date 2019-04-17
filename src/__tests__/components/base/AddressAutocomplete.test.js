@@ -16,11 +16,8 @@ describe('EventCategoryIcon', () => {
     expect(input).not.toBeNull()
   })
 
-  it('has a button to sumbit which is inactive at first', () => {
+  it('has no button', () => {
     const button = wrapper.find('input.submitButton')
-    button.trigger('click')
-
-    expect(button).not.toBeNull()
-    expect(wrapper.emitted('addressSubmitted')).toBeFalsy()
+    expect(button.exists()).toBeFalsy()
   })
 })
