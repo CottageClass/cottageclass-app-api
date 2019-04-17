@@ -6,7 +6,7 @@
     <div class="hero-container w-container">
       <div class="hero-content">
         <h1 class="h1-display">Meet cool parents, find playdates, share childcare.</h1>
-        <div class="hero-subtitle">Find nearby parents. Then plan fun playdates to get to know each other. Before you know it, you&rsquo;ll have an amazing network of nearby parents for fun activities &amp; sharing childcare. It takes a village. Build yours today. All ages welcome!</div>
+        <div class="hero-subtitle">Find nearby parents. Then plan fun playdates to get to know each other. Before you know it, you&rsquo;ll have an amazing network of nearby parents for fun activities &amp; sharing childcare. It takes a village, so build yours today! All ages welcome.</div>
         <AddressAutocomplete />
         <div class="how-wrapper">
           <ul class="unordered-list">
