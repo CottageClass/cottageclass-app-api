@@ -129,7 +129,6 @@
 <script>
 
 import AddressAutocomplete from '@/components/base/AddressAutocomplete'
-import RsvpButton from '@/components/RsvpButton.vue'
 import MainNav from '@/components/MainNav.vue'
 import Footer from '@/components/Footer.vue'
 import GridImage from '@/components/base/GridImage'
@@ -137,7 +136,7 @@ import { mapGetters } from 'vuex'
 
 export default {
   name: 'SplashPage',
-  components: { RsvpButton, MainNav, Footer, AddressAutocomplete, GridImage },
+  components: { MainNav, Footer, AddressAutocomplete, GridImage },
   created: function () {
     if (this.currentUser === null) {
       return
