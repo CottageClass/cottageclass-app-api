@@ -130,6 +130,7 @@ export default {
   margin-right: 16px;
   margin-left: 16px;
   flex-direction: column;
+  width: 100%;
 }
 
 @media (max-width: 767px){
