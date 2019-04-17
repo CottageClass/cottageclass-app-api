@@ -71,7 +71,7 @@ var moment = require('moment')
 var VueScrollTo = require('vue-scrollto')
 
 export default {
-  name: 'ProfileEdit',
+  name: 'EventEdit',
   components: { EventActivity, HouseRules, PetsDescription, MaxChildren, MainNav, StyleWrapper, PageActionsFooter, ErrorMessage, YesOrNo, Question, DateTimePicker, EventName, AgeRange, DeleteEventConfirmationModal },
   data () {
     return {
