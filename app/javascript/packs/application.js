@@ -16,6 +16,8 @@ import '@/registerServiceWorker'
 import VueAnalytics from 'vue-analytics'
 import GoogleMapsLoader from 'google-maps'
 
+import { logger } from '@/mixins'
+
 GoogleMapsLoader.KEY = process.env.GOOGLE_API_KEY
 GoogleMapsLoader.LIBRARIES = ['geometry', 'places']
 GoogleMapsLoader.load()
@@ -43,6 +45,7 @@ if (isAuthWindow) {
   })
 } else {
   // Load all the Vue plugins
+  Vue.mixin(logger)
   Vue.use(VueScrollTo)
   Vue.use(VueAxios, axios)
   Vue.use(VeeValidate)
