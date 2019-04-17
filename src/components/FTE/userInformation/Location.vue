@@ -77,22 +77,22 @@ export default {
           lat: this.address.latitude,
           lng: this.address.longitude,
           apartmentNumber: this.apartmentNumber,
-          err: this.error
+          err: this.err
         })
       } else if (this.apartmentNumber) {
         this.$emit('input', {
           apartmentNumber: this.apartmentNumber,
-          err: this.error
+          err: this.err
         })
       } else {
         this.$emit('input', {
-          err: this.error
+          err: this.err
         })
       }
     }
   },
   computed: {
-    error: function () {
+    err: function () {
       if (this.required && (isNaN(this.address.latitude) || isNaN(this.address.longitude))) {
         return 'There was a problem processing your street address. Try again?'
       } else {
@@ -104,7 +104,7 @@ export default {
     apartmentNumber: function () {
       this.emitAddress()
     },
-    error: function () {
+    err: function () {
       this.emitAddress()
     }
   }

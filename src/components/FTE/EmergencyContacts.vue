@@ -4,7 +4,7 @@
       <div class="body">
         <div class="content-wrapper">
           <Nav :button="nextButtonState" @next="nextStep" @prev="prevStep" />
-          <ErrorMessage v-if="error && showError" :text="error" />
+          <ErrorMessage v-if="err && showError" :text="err" />
           <Question
             title="Emergency Contacts"
             subtitle="Please provide at least one emergency contact. If possible, include your children's primary care physician.">
@@ -58,7 +58,7 @@ export default {
           name: 'relationship'
         }],
       showError: false,
-      error: 'To be safe, please provide your host with at least one emergency contact.',
+      err: 'To be safe, please provide your host with at least one emergency contact.',
       eventId: this.$route.params.eventId
     }
   },

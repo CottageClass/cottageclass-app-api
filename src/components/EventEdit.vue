@@ -94,7 +94,7 @@ export default {
         return false
       }
     },
-    error: function () {
+    err: function () {
       return !this.datesValidate || this.event.ageRange.err
     },
     eventDataForSubmissionToAPI: function () {
@@ -148,7 +148,7 @@ export default {
       return this.axios.put(`/api/events/${this.eventId}`, this.eventDataForSubmissionToAPI)
     },
     saveEvent: function () {
-      if (this.error) {
+      if (this.err) {
         this.showError = true
         VueScrollTo.scrollTo('#top-of-form')
       } else {

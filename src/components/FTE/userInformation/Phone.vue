@@ -39,7 +39,7 @@ export default {
     if (!this.isComplete && this.required) {
       this.$emit('input', {
         number: this.value.number,
-        err: this.error
+        err: this.err
       })
     }
   },
@@ -47,7 +47,7 @@ export default {
     phone: function () {
       return {
         number: this.formattedNumberUsa,
-        err: this.error
+        err: this.err
       }
     },
     formattedNumberUsa: function () {
@@ -64,7 +64,7 @@ export default {
     isComplete: function () {
       return this.number && isValidNumber(this.number, 'US')
     },
-    error: function () {
+    err: function () {
       if (this.isComplete) {
         return false
       } else {

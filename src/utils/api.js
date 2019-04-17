@@ -5,7 +5,7 @@ import { createEvent, createEvents } from './createEvent'
 import { createUser } from './createUser'
 import Logger from '@/utils/logger'
 
-const logger = Logger('kidsclub:api')
+const logger = Logger('api')
 
 export function initProxySession (currentUserId, receiverId, requestMessage, acknowledgmentMessage) {
   logger.log('INITIATING PROXY WITH users ' + currentUserId + ', ' + receiverId)

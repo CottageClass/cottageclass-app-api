@@ -4,7 +4,7 @@
       <div class="body">
         <div class="content-wrapper">
           <Nav :button="nextButtonState" @next="nextStep" @prev="prevStep" />
-          <ErrorMessage v-if="error && showError" :text="error" />
+          <ErrorMessage v-if="err && showError" :text="err" />
           <Question
             title="Allergies & special requirements"
             subtitle="Please enter any allergies, dietary restrictions, or special needs that you would like to share with the host.">
@@ -55,7 +55,7 @@ export default {
       ],
       showError: false,
       eventId: this.$route.params.eventId,
-      error: 'This is an error',
+      err: 'This is an error',
       childrenSpecialRequirements: []
     }
   },

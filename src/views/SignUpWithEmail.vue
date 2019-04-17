@@ -5,7 +5,7 @@
           <div class="content-container w-container">
           <div class="primary-container">
             <StyleWrapper styleIs="onboarding">
-            <ErrorMessage v-if="showError && (errors.all().length > 0 || error)" :text="error" :messages="allErrors" />
+            <ErrorMessage v-if="showError && (errors.all().length > 0)" :messages="allErrors" />
             </StyleWrapper>
             <h1 class="auth-heading">Sign Up</h1>
               <div class="auth-wrapper">
@@ -137,8 +137,7 @@ export default {
         cloudName: 'cottageclass2'
       },
       avatarLoading: false,
-      showFacebookLogin: !this.hideFacebookLogin(),
-      error: null
+      showFacebookLogin: !this.hideFacebookLogin()
     }
   },
   computed: {
