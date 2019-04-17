@@ -155,9 +155,18 @@ export default {
         activity: { err: null },
         time: { err: null },
         date: { err: null },
-        maxChildren: 2,
-        childAgeMaximum: 11,
-        childAgeMinimum: 2
+        maxChildren: 2
+      },
+      activityAges: {
+        'Arts & Crafts': [2, 11],
+        'Baby playgroup': [0, 3],
+        'Books & Storytime': [0, 9],
+        'Drawing & Coloring': [0, 9],
+        'Games & Puzzles': [3, 11],
+        'Kids\' Movie Night': [3, 11],
+        'Playing outside (weather permitting)': [0, 11],
+        'Playground Meetup': [0, 11],
+        'Waldorf Nature Walk': [0, 11]
       }
     }
   },
@@ -213,10 +222,22 @@ export default {
           'house_rules': this.userData.houseRules.text,
           'pet_description': this.userData.pets.text,
           'maximum_children': this.eventSeriesData.maxChildren,
-          'child_age_minimum': this.eventSeriesData.childAgeMinimum,
-          'child_age_maximum': this.eventSeriesData.childAgeMaximum
+          'child_age_minimum': this.childAgeMinimum,
+          'child_age_maximum': this.childAgeMaximum
         }
       }
+    },
+    childAgeMinimum () {
+      if (this.eventSeriesData.activity.selected) {
+        return this.activityAges[this.eventSeriesData.activity.selected][0]
+      }
+      return 2
+    },
+    childAgeMaximum () {
+      if (this.eventSeriesData.activity.selected) {
+        return this.activityAges[this.eventSeriesData.activity.selected][1]
+      }
+      return 11
     },
     ...mapGetters(['currentUser', 'redirectRoute'])
   },
@@ -256,7 +277,7 @@ export default {
             _.assign(params, { availability: this.userData.emergencyCare })
             break
           default:
-            break
+            return // no data to submit
         }
         submission = submitUserInfo(userId, params)
       }

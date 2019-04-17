@@ -5,6 +5,7 @@
     <RadioButtons
       v-model="activitySelected"
       :choices="activities"
+      :labels='fullDescriptions'
     />
   </Question>
 </template>
@@ -31,7 +32,18 @@ export default {
         'Playing outside (weather permitting)',
         'Playground Meetup',
         'Waldorf Nature Walk'
-      ]
+      ],
+      ages: {
+        'Arts & Crafts': [2, 11],
+        'Baby playgroup': [0, 3],
+        'Books & Storytime': [0, 9],
+        'Drawing & Coloring': [0, 9],
+        'Games & Puzzles': [3, 11],
+        'Kids\' Movie Night': [3, 11],
+        'Playing outside (weather permitting)': [0, 11],
+        'Playground Meetup': [0, 11],
+        'Waldorf Nature Walk': [0, 11]
+      }
     }
   },
   methods: {
@@ -52,6 +64,11 @@ export default {
       } else {
         return false
       }
+    },
+    fullDescriptions () {
+      return this.activities.map(activity => {
+        return [activity, activity + ' (ages ' + this.ages[activity][0] + '-' + this.ages[activity][1] + ')']
+      })
     }
   },
   watch: {
