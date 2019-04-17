@@ -34,13 +34,16 @@
               <AvatarImage :person="user" className="avatar"/>
             </div>
           </div>
-          <div v-if="!isCurrentUser" class="top-sub-card">
-            <a href="#" class="button invite-button w-button">Invite for a playdate</a>
+          <div v-if="isCurrentUser" class="top-sub-card">
+              <div @click="goToEdit" class="button edit-button w-button">Edit Your Profile</div>
+          </div>
+          <div v-else class="top-sub-card">
+            <MeetButton :targetUser="user" fillStyle="solid" class="button" layoutStyle="fat"/>
             <a href="#" class="button request-button w-button">Request Childcare</a>
             <div class="request-childcare-help-text">(Once you have your first playdate you can request childcare too)</div>
           </div>
         </div>
-        <div class="mobile-cards-wrapper">
+        <div class="mobile-cards-wrapper" v-if="!isCurrentUser">
           <div class="profile-specifics-card">
             <div class="card-large-text">How to plan a playdate with Manisha</div>
             <ul class="playdate-planning-bullet-wrapper">
@@ -103,14 +106,21 @@
       </div>
       <Footer />
     </StyleWrapper>
-    <PageActionsFooter v-if="isCurrentUser"
+    <PageActionsFooter v-if="isCurrentUser && this.isMobile"
                        class='edit-button'
                        :buttons="[{text: 'EDIT'}]"
                        @primary-click="goToEdit"/>
 
     <PageActionsFooter v-else-if="isPhone"
                        :buttons="inviteFooterButtons"
-                       @click="invite" />
+                       @click="invite">
+      <template v-slot:first>
+        <MeetButton
+          :targetUser="user"
+          fillStyle="solid"
+          layoutStyle="slim" />
+      </template>
+    </PageActionsFooter>
   </div>
 </template>
 
@@ -121,6 +131,7 @@ import * as api from '@/utils/api.js'
 import ChildAges from '@/components/ChildAges.vue'
 import StyleWrapper from '@/components/FTE/StyleWrapper.vue'
 import LoadingSpinner from '@/components/LoadingSpinner.vue'
+import MeetButton from '@/components/base/MeetButton'
 
 import moment from 'moment'
 import PageActionsFooter from '@/components/PageActionsFooter.vue'
@@ -133,7 +144,7 @@ import languageList from 'language-list'
 
 export default {
   name: 'ProviderProfile',
-  components: { Images, AvatarImage, ChildAges, StyleWrapper, PageActionsFooter, MainNav, Footer, LoadingSpinner },
+  components: { Images, AvatarImage, ChildAges, StyleWrapper, PageActionsFooter, MainNav, Footer, LoadingSpinner, MeetButton },
   data () {
     return {
       user: null,
@@ -174,9 +185,7 @@ export default {
   },
   computed: {
     inviteFooterButtons () {
-      return [{
-        text: 'Invite for a playdate'
-      }, {
+      return [{}, {
         text: 'Request childcare',
         active: false
       }]
@@ -317,6 +326,9 @@ ul {
   border-radius: 4px;
   text-align: center;
 }
+.edit-button {
+  color: white;
+}
 .request-button {
   background-color: white;
   opacity: 0.3;
@@ -327,10 +339,6 @@ ul {
     opacity: 0.3;
     border-color: #1f88e9;
   }
-}
-.invite-button {
-  color: white;
-  background-color: #1f88e9;
 }
 .top-card {
   display: flex;

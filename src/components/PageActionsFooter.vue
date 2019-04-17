@@ -1,16 +1,21 @@
 <template>
-   <div class="page-actions-wrapper">
-      <a @click="primaryActive && $emit('primary-click')"
+  <div class="page-actions-wrapper">
+    <div class=button-container>
+      <div v-if="$slots.first"><slot name="first"/></div>
+      <a v-else @click="primaryActive && $emit('primary-click')"
         class="button-primary w-button"
-         :class="!primaryActive ? 'inactive' : ''">
-      {{ primaryText }}
+        :class="!primaryActive ? 'inactive' : ''">
+          {{ primaryText }}
       </a>
-      <a v-if="hasTwoButtons"
-         @click="secondaryActive && $emit('secondary-click')"
-         class="button-secondary w-button"
-         :class="!secondaryActive ? 'inactive' : ''">
+    </div>
+    <div v-if="hasTwoButtons" class=button-container>
+      <div v-if="$slots.second"><slot name="second"/></div>
+      <a v-else @click="secondaryActive && $emit('secondary-click')"
+        class="button-secondary w-button"
+        :class="!secondaryActive ? 'inactive' : ''">
         {{ secondaryText }}
       </a>
+    </div>
   </div>
 </template>
 
@@ -19,8 +24,12 @@ export default {
   props: ['buttons'],
   name: 'PageActionsFooter',
   computed: {
+    firstIsComponent () {
+      console.log(this.buttons[0])
+      return false
+    },
     hasTwoButtons () {
-      return this.buttons.length >= 2
+      return this.buttons.length >= 2 || this.$slots.second
     },
     primaryText () {
       return this.buttons[0].text
@@ -47,9 +56,13 @@ export default {
 </script>
 
 <style scoped>
+.button-container {
+  width: 100%;
+  margin-right: 4px;
+  margin-left: 4px;
+}
 .page-actions-wrapper a {
   display: flex;
-  width: 100%;
   margin-bottom: 0px;
   padding: 6px 10px;
   justify-content: center;
@@ -58,8 +71,6 @@ export default {
   line-height: 15px;
   text-align: center;
   border-radius: 4px;
-  margin-right: 4px;
-  margin-left: 4px;
 }
 .page-actions-wrapper a.inactive {
   opacity: 0.3;
@@ -82,6 +93,14 @@ export default {
 }
 
 .page-actions-wrapper {
+  position: fixed;
+  left: 0%;
+  top: auto;
+  right: 0%;
+  bottom: 0%;
+  padding: 16px;
+  background-color: #fff;
+  box-shadow: 0 -1px 2px 0 rgba(0, 0, 0, .08);
   display: flex;
   margin-top: 16px;
   justify-content: space-between;
@@ -101,17 +120,6 @@ export default {
 
   .button-primary:active {
     background-color: #1b7bd1;
-  }
-
-  .page-actions-wrapper {
-    position: fixed;
-    left: 0%;
-    top: auto;
-    right: 0%;
-    bottom: 0%;
-    padding: 16px;
-    background-color: #fff;
-    box-shadow: 0 -1px 2px 0 rgba(0, 0, 0, .08);
   }
 }
 
