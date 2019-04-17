@@ -7,7 +7,8 @@
       <div class="hero-content">
         <h1 class="h1-display">Meet cool parents, find playdates, share childcare.</h1>
         <div class="hero-subtitle">Find nearby parents. Then plan fun playdates to get to know each other. Before you know it, you&rsquo;ll have an amazing network of nearby parents for fun activities &amp; sharing childcare. It takes a village, so build yours today! All ages welcome.</div>
-        <AddressAutocomplete />
+        <AddressAutocomplete
+        @locationSubmitted="goToEvents"/>
         <div class="how-wrapper">
           <ul class="unordered-list">
             <li class="list-item"><img src="@/assets/one.svg" alt="" class="image-262">
@@ -132,11 +133,23 @@ import AddressAutocomplete from '@/components/base/AddressAutocomplete'
 import MainNav from '@/components/MainNav.vue'
 import Footer from '@/components/Footer.vue'
 import GridImage from '@/components/base/GridImage'
+
+import { fetchUsersWithinDistance } from '@/utils/api'
 import { mapGetters } from 'vuex'
 
 export default {
   name: 'SplashPage',
   components: { MainNav, Footer, AddressAutocomplete, GridImage },
+  methods: {
+    async goToEvents (e) {
+      const users = await fetchUsersWithinDistance({ miles: 10, lat: e.latlng.lat, lng: e.latlng.lng, pageSize: 1 })
+      if (users.length === 0) {
+        this.$router.push({ name: 'SignIn' })
+      } else {
+        this.$router.push({ name: 'Events', params: { initialCenter: e.latlng } })
+      }
+    }
+  },
   created: function () {
     if (this.currentUser === null) {
       return

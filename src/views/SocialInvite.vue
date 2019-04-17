@@ -7,7 +7,7 @@
         <div class="onb-content-container">
           <div class="onb-top-content-container">
             <h1 class="onb-heading-large">Build your village</h1>
-            <p class="onb-paragraph-subheading-2">Invite a few friends to attend your activity. When they join, they'll be prompted to host their own activity and invite a few more friends. Before you know it, you'll have a thriving community of parents sharing activities and childcare!</p>
+            <p class="onb-paragraph-subheading-2">{{ sharingPromptText }}</p>
           </div>
           <ul class="onb-social-button-list">
             <li v-if="isMobileDevice" class="onb-button-social-list-item"><TextMessageLink :message="textMessage" number="" class="onb-button-social w-inline-block"><img src="@/assets/mms.svg" width="32" height="32" alt=""><div class="onb-button-social-text">Text message</div></TextMessageLink></li>
@@ -41,14 +41,6 @@
 </template>
 
 <script>
-// todo
-// remove fake form and replace with something else
-// test textmessage
-// may want to add appId here https://developers.facebook.com/docs/sharing/messenger/web/
-// test fb messenger
-// test twitter
-// test texting also in book
-// add facebook meta tags to page
 
 import TextMessageLink from '@/components/TextMessageLink.vue'
 import EventListItem from '@/components/EventListItem.vue'
@@ -64,21 +56,30 @@ export default {
     return {
       copyButtonText: 'copy link',
       prefix: 'https://',
-      tweetText: "Everyone I know should come to this event I'm hosting to start a local network for childcare sharing!",
-      emailBody: 'Hi%20everyone!%0A%0AI%20hope%20you%20can%20all%20join%20me%20at%20this%20event%20we%20are%20hosting%20to%20start%20a%20new%20local%20network%20for%20sharing%20childcare!%20Can%20you%20come%3F%0A%0A',
       emailSubject: 'Sharing%20childcare%20(we%20should%20do%20this!)',
+      // the content for tweets and emails depends on whether we are sharing a specific event or just the kidsclub site.
+      tweetTextWithEvent: "Everyone I know should come to this event I'm hosting to start a local network for childcare sharing!",
+      emailBodyWithEvent: 'Hi%20everyone!%0A%0AI%20hope%20you%20can%20all%20join%20me%20at%20this%20event%20we%20are%20hosting%20to%20start%20a%20new%20local%20network%20for%20sharing%20childcare!%20Can%20you%20come%3F%0A%0A',
+      tweetTextWithoutEvent: 'This site helps families come together to share childcare and playdates for free. Want to try it with me?',
+      emailBodyWithoutEvent: 'Hi%20everyone%2C%0A%0AI%E2%80%99m%20trying%20out%20this%20new%20site%20that%20lets%20families%20come%20together%20to%20share%20childcare%20and%20playdates%20for%20free.%20Want%20to%20try%20it%20with%20me%3F%0A%0A',
+      textMessageWithEvent: "Hey! I'm hosting this event for kids as part of a new way to share childcare. Want to come?",
+      textMessageWithoutEvent: 'This site helps families come together to share childcare and playdates for free. Want to try it with me?',
       isMobileDevice: typeof window.orientation !== 'undefined',
+      sharingPromptWithEvent: "Invite a few friends to attend your activity. When they join, they'll be prompted to host their own activity and invite a few more friends. Before you know it, you'll have a thriving community of parents sharing activities and childcare!",
+      sharingPromptWithoutEvent: "Invite a few friends to join KidsClub. As they join, they'll be prompted to start a profile and invite more friends. Before you know it, you'll have a thriving community of parents sharing activities and childcare!",
       fetchedEvent: null
     }
   },
   mounted: function () {
-    this.fetchEvent()
+    if (this.eventId) {
+      this.fetchEvent()
+    }
   },
   computed: {
     eventId: function () {
       if (this.$route.params.id) {
         return this.$route.params.id
-      } else if (this.firstCreatedEvent.id) {
+      } else if (this.firstCreatedEvent && this.firstCreatedEvent.id) {
         return this.firstCreatedEvent.id
       }
       return null
@@ -97,8 +98,15 @@ export default {
         return this.fetchedEvent
       }
     },
+    sharingPromptText: function () {
+      if (this.eventId) {
+        return this.sharingPromptWithEvent
+      } else {
+        return this.sharingPromptWithoutEvent
+      }
+    },
     textMessage: function () {
-      return "Hey! I'm hosting this event for kids as part of a new way to share childcare. Want to come? " + this.link
+      return (this.eventId ? this.textMessageWithEvent : this.textMessageWithoutEvent) + ' ' + this.link
     },
     link: function () {
       return this.prefix + this.shareUrl
@@ -110,10 +118,10 @@ export default {
       return 'https://www.facebook.com/sharer/sharer.php?u=' + this.link
     },
     tweetLink: function () {
-      return 'https://twitter.com/intent/tweet?text=' + this.tweetText + ' ' + this.link
+      return 'https://twitter.com/intent/tweet?text=' + (this.eventId ? this.tweetTextWithEvent : this.tweetTextWithoutEvent) + ' ' + this.link
     },
     emailLink: function () {
-      return 'mailto:?subject=' + this.emailSubject + '&body=' + this.emailBody + 'https%3A%2F%2F' + this.shareUrl + '%2F%0A%0AThanks!%0A%3C3'
+      return 'mailto:?subject=' + this.emailSubject + '&body=' + (this.eventId ? this.emailBodyWithEvent : this.emailBodyWithoutEvent) + 'https%3A%2F%2F' + this.shareUrl + '%2F%0A%0AThanks!%0A%3C3'
     },
     ...mapGetters([ 'firstCreatedEvent' ])
   },

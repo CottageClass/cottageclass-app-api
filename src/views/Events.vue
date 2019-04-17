@@ -20,6 +20,7 @@
               :events="events"
               :users="users"
               :noEventsMessage="noEventsMessage"
+              :showTrailblazerMessage="showTrailblazerMessage"
             />
           </div>
         </div>
@@ -48,9 +49,10 @@ export default {
       maximumDistanceFromUserInMiles: '5',
       showAllButtonText: 'Show all playdates',
       showShowAllButton: false,
-      noEventsMessage: 'Sorry, there are no upcoming playdates in your area',
+      noEventsMessage: 'Sorry, there are no upcoming playdates in this area',
       events: null,
-      users: null
+      users: null,
+      showTrailblazerMessage: true
     }
   },
   computed: mapGetters([
@@ -62,6 +64,8 @@ export default {
         center: { lat: e.center.lat(), lng: e.center.lng() },
         maxDistance: e.miles
       })
+      this.showTrailblazerMessage = false
+
       this.fetchWithinDistance()
     },
     isToday: function (date) {

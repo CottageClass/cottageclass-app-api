@@ -9,6 +9,8 @@ This is the mobile-only page that shows an expanded, naviagable map of events
       :users="users"
       :events="events"
       @maxDistanceSet="updateForZoomLevel($event)"
+      :center="mapCenter"
+      :showTrailblazerMessage="showTrailblazerMessage"
     />
   </div>
 </template>
@@ -24,7 +26,8 @@ export default {
   data () {
     return {
       users: null,
-      events: null
+      events: null,
+      showTrailblazerMessage: true
     }
   },
   computed: {
@@ -41,11 +44,11 @@ export default {
   },
   methods: {
     updateForZoomLevel: async function (e) {
-      console.log(this.mapArea)
       this.$store.commit('setMapArea', {
         center: { lat: e.center.lat(), lng: e.center.lng() },
         maxDistance: e.miles
       })
+      this.showTrailblazerMessage = false
       this.fetchWithinDistance()
     },
     fetchWithinDistance: async function () {

@@ -53,7 +53,7 @@ export default {
 /* Generated on: Wed Apr 17 2019 16:02:59 GMT+0000 (UTC) */
 
 /* ==========================================================================
-   normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css 
+   normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css
    ========================================================================== */
 
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
@@ -183,7 +183,6 @@ button,html input[type="button"],input[type="reset"] {
 .w-form {
   margin: 0 0 15px;
 }
-
 
 .input-field::placeholder {
   color: #999;
