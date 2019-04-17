@@ -7,7 +7,7 @@
         <div class="onb-content-container">
           <div class="onb-top-content-container">
             <h1 class="onb-heading-large">Build your village</h1>
-            <p class="onb-paragraph-subheading-2">Invite a few friends to attend your activity. When they join, they'll be prompted to host their own activity and invite a few more friends. Before you know it, you'll have a thriving community of parents sharing activities and childcare!</p>
+            <p class="onb-paragraph-subheading-2">{{ sharingPromptText }}</p>
           </div>
           <ul class="onb-social-button-list">
             <li v-if="isMobileDevice" class="onb-button-social-list-item"><TextMessageLink :message="textMessage" number="" class="onb-button-social w-inline-block"><img src="@/assets/mms.svg" width="32" height="32" alt=""><div class="onb-button-social-text">Text message</div></TextMessageLink></li>
@@ -65,6 +65,8 @@ export default {
       textMessageWithEvent: "Hey! I'm hosting this event for kids as part of a new way to share childcare. Want to come?",
       textMessageWithoutEvent: 'This site helps families come together to share childcare and playdates for free. Want to try it with me?',
       isMobileDevice: typeof window.orientation !== 'undefined',
+      sharingPromptWithEvent: "Invite a few friends to attend your activity. When they join, they'll be prompted to host their own activity and invite a few more friends. Before you know it, you'll have a thriving community of parents sharing activities and childcare!",
+      sharingPromptWithoutEvent: "Invite a few friends to join KidsClub. As they join, they'll be prompted to start a profile and invite more friends. Before you know it, you'll have a thriving community of parents sharing activities and childcare!",
       fetchedEvent: null
     }
   },
@@ -94,6 +96,13 @@ export default {
         return this.firstCreatedEvent
       } else {
         return this.fetchedEvent
+      }
+    },
+    sharingPromptText: function () {
+      if (this.eventId) {
+        return this.sharingPromptWithEvent
+      } else {
+        return this.sharingPromptWithoutEvent
       }
     },
     textMessage: function () {
