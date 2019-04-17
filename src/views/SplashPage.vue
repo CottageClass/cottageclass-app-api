@@ -582,6 +582,7 @@ a {
   font-size: 20px;
   line-height: 24px;
   font-weight: 700;
+  text-align: center;
 }
 
 .hero-list-item-subtitle {
