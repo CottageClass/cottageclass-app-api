@@ -1368,11 +1368,6 @@ a {
     background-repeat: no-repeat;
   }
 
-  .hero-container {
-    padding-top: 112px;
-    padding-bottom: 112px;
-  }
-
   .h1-display {
     font-size: 32px;
     line-height: 42px;
@@ -2233,7 +2228,7 @@ a {
   display: flex;
   margin-top: 0px;
   margin-bottom: 0px;
-  padding: 112px 32px;
+  padding: 60px 32px;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -webkit-flex-direction: column;
@@ -2255,7 +2250,8 @@ a {
 }
 
 .hero-subtitle {
-  margin-bottom: 32px;
+  margin-top: 16px;
+  margin-bottom: 60px;
   font-size: 19px;
   line-height: 26px;
   text-align: center;
@@ -2299,7 +2295,7 @@ a {
 }
 
 .how-wrapper {
-  padding: 32px;
+  padding: 42px 32px 32px 32px;
   border-radius: 8px;
 }
 
