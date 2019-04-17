@@ -10,15 +10,15 @@
         <AddressAutocomplete />
         <div class="how-wrapper">
           <ul class="unordered-list">
-            <li class="list-item"><img src="@/assets/give-care.svg" alt="" class="image-262">
+            <li class="list-item"><img src="@/assets/one.svg" alt="" class="image-262">
               <div class="hero-list-item-heading">Find parents.</div>
               <div class="hero-list-item-subtitle">We show you parents near you with kids of similar ages &amp; interests.</div>
             </li>
-            <li class="list-item"><img src="@/assets/get-care.svg" alt="" class="image-262">
+            <li class="list-item"><img src="@/assets/two.svg" alt="" class="image-262">
               <div class="hero-list-item-heading">Meet for playdates.</div>
               <div class="hero-list-item-subtitle">Invite parents for a playdate. Or RSVP to a scheduled playdate. It&rsquo;s easy.</div>
             </li>
-            <li class="list-item"><img src="@/assets/socially.svg" alt="" class="image-262">
+            <li class="list-item"><img src="@/assets/three.svg" alt="" class="image-262">
               <div class="hero-list-item-heading">Share childcare.</div>
               <div class="hero-list-item-subtitle">Once you feel comfortable that you know a family well, you can share childcare too.</div>
             </li>
