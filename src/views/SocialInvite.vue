@@ -41,14 +41,6 @@
 </template>
 
 <script>
-// todo
-// remove fake form and replace with something else
-// test textmessage
-// may want to add appId here https://developers.facebook.com/docs/sharing/messenger/web/
-// test fb messenger
-// test twitter
-// test texting also in book
-// add facebook meta tags to page
 
 import TextMessageLink from '@/components/TextMessageLink.vue'
 import EventListItem from '@/components/EventListItem.vue'
