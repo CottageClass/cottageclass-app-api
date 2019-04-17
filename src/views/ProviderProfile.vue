@@ -57,7 +57,7 @@
               </li>
               <li class="playdate-planning-bullet">
                 <div class="number-bullet">3</div>
-                <div class="playdate-bullet-text">Decide on a time and place to meet. (We recommend meeting in one of your homes).</div>
+                <div class="playdate-bullet-text">Decide on a time and place to meet. (We recommend meeting in one of your homes).</div>
               </li>
             </ul>
           </div>
