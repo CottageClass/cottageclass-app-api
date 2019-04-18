@@ -39,7 +39,7 @@
           </div>
           <div v-else class="top-sub-card">
             <MeetButton :targetUser="user" fillStyle="solid" class="button" layoutStyle="fat"/>
-            <a href="#" class="button request-button w-button">Request Childcare</a>
+            <a class="button request-button w-button inactive">Request Childcare</a>
             <div class="request-childcare-help-text">(Once you have your first playdate you can request childcare too)</div>
           </div>
         </div>
@@ -112,8 +112,7 @@
                        @primary-click="goToEdit"/>
 
     <PageActionsFooter v-else-if="isPhone"
-                       :buttons="inviteFooterButtons"
-                       @click="invite">
+                       :buttons="inviteFooterButtons">
       <template v-slot:first>
         <MeetButton
           :targetUser="user"
@@ -335,7 +334,11 @@ ul {
   color: hsla(208, 82%, 51%, 1.00);
   border: 1px hsla(208.8118811881188, 82.11%, 51.76%, 1.00) solid;
   margin-bottom: 0px;
-  .inactive {
+  &.inactive {
+    &:hover {
+      text-decoration: none;
+      cursor: default;
+    }
     opacity: 0.3;
     border-color: #1f88e9;
   }

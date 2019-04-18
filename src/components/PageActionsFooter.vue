@@ -55,7 +55,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .button-container {
   width: 100%;
   margin-right: 4px;
@@ -73,6 +73,9 @@ export default {
   border-radius: 4px;
 }
 .page-actions-wrapper a.inactive {
+  &:hover {
+    text-decoration: none;
+  }
   opacity: 0.3;
   cursor: default;
 }
