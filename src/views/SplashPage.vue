@@ -143,9 +143,8 @@ export default {
   methods: {
     async goToEvents (e) {
       const users = await fetchUsersWithinDistance({ miles: 10, lat: this.mapArea.center.lat, lng: this.mapArea.center.lng, pageSize: 1 })
-      this.debug({ users })
       if (users.length === 0) {
-        this.$router.push({ name: 'SignIn' })
+        this.$router.push({ name: 'SignUp' })
       } else {
         this.$router.push({ name: 'Events' })
       }
