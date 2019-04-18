@@ -45,7 +45,6 @@ This is the map view of a list of events
         :events="events"
         :users="users"
         :noEventsMessage="noEventsMessage"
-        :mapCenter="center"
         :showTrailblazerMessage="showTrailblazerMessage"
       />
     </div>
@@ -61,7 +60,7 @@ const DISTANCE_OPTIONS = [ 1, 2, 5, 10, 20, 50 ]
 
 export default {
   name: 'EventListMap',
-  props: ['users', 'events', 'center'],
+  props: ['users', 'events'],
   mixins: [ maps, screen ],
   components: { EventList },
   data () {

@@ -307,7 +307,13 @@ export default {
         }, (err) => {
           console.log(err)
         })
-        return that.$store.dispatch('updateCurrentUserFromServer')
+        that.$store.dispatch('updateCurrentUserFromServer').then(function () {
+          const center = { lat: that.currentUser.latitude, lng: that.currentUser.longitude }
+          that.$store.commit('setMapArea', {
+            center,
+            maxDistance: 5
+          })
+        })
       }).then(() => {
         that.submitEventData().then(res => {
           that.$store.commit('setCreatedEvents', { eventData: res })
@@ -347,8 +353,14 @@ export default {
         } else if (this.currentStep === 'createEventsNow' && !this.createEventsNow.isTrue) {
           // skip event creation
           const that = this
+
           this.$store.dispatch('updateCurrentUserFromServer').then(function () {
             that.moveOntoNextFTE()
+          }).then(() => {
+            that.$store.commit('setMapArea', {
+              center: { lat: that.currentUser.latitude, lng: that.currentUser.longitude },
+              maxDistance: 5
+            })
           })
         } else {
           this.$ga.event('onboarding', 'stepComplete', this.currentStep)
