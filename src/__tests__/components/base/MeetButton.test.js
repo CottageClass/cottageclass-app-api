@@ -7,6 +7,7 @@ describe('MeetButton', () => {
   beforeAll(async () => {
     const $store = {
       getters: {
+        isAuthenticated: true,
         currentUser: {
           id: '987654321',
           firstName: 'Natasha',
