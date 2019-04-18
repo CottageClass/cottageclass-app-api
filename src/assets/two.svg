@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="100px" height="100px" viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54 (76480) - https://sketchapp.com -->
+    <title>illustrations/card-main-100/002</title>
+    <desc>Created with Sketch.</desc>
+    <g id="illustrations/card-main-100/002" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="illustrations/organic-circle/purple" transform="translate(37.000000, 38.000000)" fill="#AFF0FC">
+            <path d="M9.07998122,49.8548218 C-1.97169619,36.5850759 -3.73532961,19.0000285 8.25790659,7.52927032 C20.2511428,-3.94148788 41.848617,-1.711124 54.294273,10.1923447 C66.7399291,22.0958133 65.3266423,39.1703251 53.3334061,50.6410833 C41.3401699,62.1118415 20.1316586,63.1245677 9.07998122,49.8548218 Z" id="Oval-3"></path>
+        </g>
+        <g id="illustrations/organic-circle/purple" transform="translate(0.000000, 8.000000)" fill="#F5F400">
+            <path d="M21,40.8856356 C32.6125768,42.2169088 42,31.7141366 42,20.4005193 C42,9.08690193 34.341341,0 22.7448516,0 C11.1483621,1.38247998e-15 0,9.08690193 0,20.4005193 C0,31.7141366 9.38742322,39.5543623 21,40.8856356 Z" id="Oval-3"></path>
+        </g>
+        <g id="illustrations/organic-circle/purple" transform="translate(4.000000, 2.000000)" fill="#FD6F77">
+            <path d="M45.5,89.7489562 C70.660583,92.6712633 91,69.6163974 91,44.7816277 C91,19.9468579 74.4062389,0 49.2805118,0 C24.1547846,3.03471216e-15 0,19.9468579 0,44.7816277 C0,69.6163974 20.339417,86.826649 45.5,89.7489562 Z" id="Oval-3" style="mix-blend-mode: multiply;"></path>
+        </g>
+        <path d="M37.7,65 L37.7,60.032 C51.686,49.448 57.14,44.75 57.14,39.566 C57.14,35.786 53.9,34.058 50.606,34.058 C46.394,34.058 43.154,35.786 40.886,38.378 L37.214,34.22 C40.4,30.386 45.476,28.442 50.498,28.442 C57.464,28.442 63.566,32.384 63.566,39.566 C63.566,46.208 57.464,52.148 47.798,59.438 L63.782,59.438 L63.782,65 L37.7,65 Z" id="2" fill="#FFFFFF" fill-rule="nonzero"></path>
+    </g>
+</svg>

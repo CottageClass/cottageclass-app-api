@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="100px" height="100px" viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54 (76480) - https://sketchapp.com -->
+    <title>illustrations/card-main-100/001</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="0.505263158 0.25 0.757894737 0.25 0.757894737 0.5 0.505263158 0.5"></polygon>
+        <polygon id="path-3" points="0 0.0525 47.4416842 0.0525 47.4416842 47 0 47"></polygon>
+    </defs>
+    <g id="illustrations/card-main-100/001" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="illustrations/organic-circle/purple" transform="translate(0.000000, 35.000000)" fill="#AFF0FC">
+            <path d="M8.93585453,49.8680594 C-1.94039942,36.5947901 -3.67603867,19.0050735 8.12682871,7.53126952 C19.9296961,-3.94253444 41.1843532,-1.71157834 53.4324592,10.195051 C65.6805651,22.1016803 64.2897115,39.1807257 52.4868441,50.6545296 C40.6839767,62.1283336 19.8121085,63.1413287 8.93585453,49.8680594 Z" id="Oval-3"></path>
+        </g>
+        <g id="illustrations/organic-circle/purple" transform="translate(57.000000, 0.000000)" fill="#F5F400">
+            <path d="M20.5,39.888425 C31.8360869,41.1872281 41,30.9406211 41,19.9029456 C41,8.86527018 33.5236901,0 22.2033075,0 C10.8829249,1.34876096e-15 0,8.86527018 0,19.9029456 C0,30.9406211 9.16391314,38.5896218 20.5,39.888425 Z" id="Oval-3"></path>
+        </g>
+        <g id="illustrations/organic-circle/purple" transform="translate(7.000000, 4.000000)" fill="#64426B">
+            <path d="M44,85.7601137 C68.3311133,88.5525405 88,66.5223353 88,42.7913331 C88,19.0603309 71.953286,0 47.6558795,0 C23.3584731,2.89983606e-15 0,19.0603309 0,42.7913331 C0,66.5223353 19.6688867,82.9676868 44,85.7601137 Z" id="Oval-3" style="mix-blend-mode: multiply;"></path>
+        </g>
+        <g id="Group-7" transform="translate(27.000000, 22.000000)">
+            <g id="Group-3" transform="translate(0.000000, 46.947500)">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <g id="Clip-2"></g>
+                <path d="" id="Fill-1" fill="#FFFFFF" mask="url(#mask-2)"></path>
+            </g>
+            <g id="Group-6" transform="translate(0.505263, 0.447500)">
+                <mask id="mask-4" fill="white">
+                    <use xlink:href="#path-3"></use>
+                </mask>
+                <g id="Clip-5"></g>
+            </g>
+        </g>
+        <polygon id="1" fill="#FFFFFF" fill-rule="nonzero" points="50.368 66 50.368 38.19 44.482 44.292 40.81 40.458 51.178 29.982 56.686 29.982 56.686 66"></polygon>
+    </g>
+</svg>

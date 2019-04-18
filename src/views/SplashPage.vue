@@ -6,20 +6,20 @@
     <div class="hero-container w-container">
       <div class="hero-content">
         <h1 class="h1-display">Meet cool parents, find playdates, share childcare.</h1>
-        <div class="hero-subtitle">Find nearby parents. Then plan fun playdates to get to know each other. Before you know it, you&rsquo;ll have an amazing network of nearby parents for fun activities &amp; sharing childcare. It takes a village. Build yours today. All ages welcome!</div>
+        <div class="hero-subtitle">Find nearby parents. Then plan fun playdates to get to know each other. Before you know it, you&rsquo;ll have an amazing network of nearby parents for fun activities &amp; sharing childcare. It takes a village, so build yours today! All ages welcome.</div>
         <AddressAutocomplete
         @locationSubmitted="goToEvents"/>
         <div class="how-wrapper">
           <ul class="unordered-list">
-            <li class="list-item"><img src="@/assets/give-care.svg" alt="" class="image-262">
+            <li class="list-item"><img src="@/assets/one.svg" alt="" class="image-262">
               <div class="hero-list-item-heading">Find parents.</div>
               <div class="hero-list-item-subtitle">We show you parents near you with kids of similar ages &amp; interests.</div>
             </li>
-            <li class="list-item"><img src="@/assets/get-care.svg" alt="" class="image-262">
+            <li class="list-item"><img src="@/assets/two.svg" alt="" class="image-262">
               <div class="hero-list-item-heading">Meet for playdates.</div>
               <div class="hero-list-item-subtitle">Invite parents for a playdate. Or RSVP to a scheduled playdate. It&rsquo;s easy.</div>
             </li>
-            <li class="list-item"><img src="@/assets/socially.svg" alt="" class="image-262">
+            <li class="list-item"><img src="@/assets/three.svg" alt="" class="image-262">
               <div class="hero-list-item-heading">Share childcare.</div>
               <div class="hero-list-item-subtitle">Once you feel comfortable that you know a family well, you can share childcare too.</div>
             </li>
@@ -33,127 +33,7 @@
                :key="`grid-image-${name}`"
                :imageName="name" />
   </div>
-  <div class="content-section background-01">
-    <div class="divider-2px"></div>
-    <div class="content-container-3 w-container">
-      <h1 class="h1-display">Upcoming Playdates</h1>
-      <div class="events-list-wrapper">
-        <div class="event-date-section-tittle"><img src="@/assets/date-outline-white-oval.svg" alt="" class="image-265">
-          <div class="date-text-wrapper">
-            <div class="date-title">Monday, March 4</div>
-          </div>
-        </div>
-        <ul class="unordered-list-events">
-          <li class="event-list-item">
-            <div class="event-list-item-graphic color-green"><img src="@/assets/film-projector.svg" alt="" class="emoji"></div>
-            <div class="event-list-item-content">
-              <div class="spacer w-hidden-main w-hidden-medium"></div>
-              <router-link
-              :to="{ name: 'EventPage', params: { id: '104' }}"
-              class="link-block-4 w-inline-block">
-                <h2 class="event-heading">Movie night &amp; pizza 🍕 with Charlice</h2>
-              </router-link>
-              <div class="event-summary">
-                <div class="event-time">Mon, Mar 4, 2019 at 6:00 PM–9:00 PM</div>
-                <div class="event-location">Dumbo</div>
-              </div>
-              <div class="scrolling-wrapper"><img src="@/assets/charlice2.jpg" alt="" class="event-household-photo"><img src="@/assets/charlice3.jpg" alt="" class="event-household-photo"><img src="@/assets/charlice4.jpg" alt="" class="event-household-photo"><img src="@/assets/charlice6.jpg" alt="" class="event-household-photo"><img src="@/assets/charlice5.jpg" alt="" class="event-household-photo"><img src="@/assets/charlice8.jpg" alt="" class="event-household-photo"></div>
-              <div class="action-bar">
-                <div class="host-container">
-                  <div class="host-info"><img src="@/assets/charlice.jpg" width="40" height="40" alt="" class="avatar-small">
-                    <div class="text-block">Hosted by Charlice and 4 kids–ages (11, 6, 2 and 2).</div>
-                  </div>
-                  <div class="host-meta">
-                    <div class="host-occupation">Shift Supervisor, Starbucks</div>
-                    <div class="background-checked-wrapper"><img src="@/assets/check-green.svg" alt="">
-                      <div class="background-checked">Background Checked</div>
-                    </div>
-                  </div>
-                </div><RsvpButton eventId="104" /></div>
-            </div>
-          </li>
-        </ul>
-        <div class="event-date-section-tittle"><img src="@/assets/date-outline-white-oval.svg" alt="" class="image-264">
-          <div class="date-text-wrapper">
-            <div class="date-title">Saturday, March 16</div>
-          </div>
-        </div>
-        <ul class="unordered-list-events">
-          <li class="event-list-item">
-            <div class="event-list-item-graphic color-hot-pink"><img src="@/assets/film-projector.svg" alt="" class="emoji"></div>
-            <div class="event-list-item-content">
-              <div class="spacer w-hidden-main w-hidden-medium"></div>
-              <router-link
-              :to="{ name: 'EventPage', params: { id: '99' }}"
-              class="link-block-4 w-inline-block">
-                <h2 class="event-heading">Movie night &amp; pizza 🍕 with Rima</h2>
-              </router-link>
-              <div class="event-summary">
-                <div class="event-time">Sat, Mar 16, 2019 at 6:00 PM–9:00 PM</div>
-                <div class="event-location">Carroll Gardens</div>
-              </div>
-              <div class="scrolling-wrapper"><img src="@/assets/rima8.jpg" alt="" class="event-household-photo"><img src="@/assets/rima5.jpg" alt="" class="event-household-photo"><img src="@/assets/rima12.jpg" alt="" class="event-household-photo"><img src="@/assets/rima4.jpg" alt="" class="event-household-photo"><img src="@/assets/rima7.jpg" alt="" class="event-household-photo"><img src="@/assets/rima6.jpg" alt="" class="event-household-photo"></div>
-              <div class="action-bar">
-                <div class="host-container">
-                  <div class="host-info"><img src="@/assets/rima.jpg" width="40" height="40" alt="" class="avatar-small">
-                    <div class="text-block">Hosted by Rima &amp; Yuri (age 5), PS58</div>
-                  </div>
-                  <div class="host-meta">
-                    <div class="host-occupation">Festival Coordinator &amp; Project Manager</div>
-                    <div class="background-checked-wrapper"><img src="@/assets/check-green.svg" alt="">
-                      <div class="background-checked">Background Checked</div>
-                    </div>
-                  </div>
-                </div><RsvpButton eventId="99" /></div>
-            </div>
-          </li>
-        </ul>
-        <div class="event-date-section-tittle"><img src="@/assets/date-outline-white-oval.svg" alt="" class="image-265">
-          <div class="date-text-wrapper">
-            <div class="date-title">Thursday, April 18</div>
-          </div>
-        </div>
-        <ul class="unordered-list-events">
-          <li class="event-list-item">
-            <div class="event-list-item-graphic color-pink"><img src="@/assets/butterfly.svg" alt="" class="emoji"></div>
-            <div class="event-list-item-content">
-              <div class="spacer w-hidden-main w-hidden-medium"></div>
-              <router-link
-              :to="{ name: 'EventPage', params: { id: 112 }}"
-              class="link-block-4 w-inline-block">
-                <h2 class="event-heading">SuperMindfulMe Workshop + Dinner 🍜 with Julie</h2>
-              </router-link>
-              <div class="event-summary">
-                <div class="event-time">Thu, Apr 18, 2019 at 6:00 PM–9:00 PM</div>
-                <div class="event-location">Cobble Hill</div>
-              </div>
-              <div class="scrolling-wrapper">
-                <img src="@/assets/Julie-Screen-Shot-2019-01-04-at-3.46.43-PM.jpg" alt="" class="event-household-photo"><img src="@/assets/Julie-Screen-Shot-2019-01-04-at-3.45.40-PM.jpg" alt="" class="event-household-photo"><img src="@/assets/Julie-Screen-Shot-2019-01-04-at-3.44.52-PM.jpg" alt="" class="event-household-photo"><img src="@/assets/Julie-Screen-Shot-2019-01-04-at-3.45.13-PM.jpg" alt="" class="event-household-photo"><img src="@/assets/JulieNEW.jpg" alt="" class="event-household-photo"></div>
-              <div class="action-bar">
-                <div class="host-container">
-                  <div class="host-info"><img src="@/assets/julie.jpg" height="40" width="40" alt="" class="avatar-small">
-                    <div class="text-block">Hosted by Julie and 2 kids–age 4 and 7, PS29.</div>
-                  </div>
-                  <div class="host-meta">
-                    <div class="host-occupation">Partner Lead, Google</div>
-                    <div class="background-checked-wrapper"><img src="@/assets/check-green.svg" alt="">
-                      <div class="background-checked">Background Checked</div>
-                    </div>
-                  </div>
-                </div><RsvpButton eventId="112" /></div>
-            </div>
-          </li>
-        </ul>
-        <div class="event-date-section-more-events"><router-link :to="{name: 'Events'}" class="button w-button">Show all playdates</router-link></div>
-
-      </div>
-    </div>
-  </div>
-
-  <!-- End events -->
-
   <div class="content-section">
-    <div class="divider-2px"></div>
     <div class="content-container-2 w-container">
       <h1 class="h1-display">Why KidsClub?</h1>
       <ul class="cottage-class-is-list">
@@ -244,16 +124,12 @@
 </div>
 <Footer />
 </div>
-  <div class="mobile-signup-wrapper">
-    <a href="" class="button-hero-mobile w-button" @click.prevent="$router.push({ name: 'SignUp' })">Sign up today. It's free!</a>
-  </div>
   </span>
 </template>
 
 <script>
 
 import AddressAutocomplete from '@/components/base/AddressAutocomplete'
-import RsvpButton from '@/components/RsvpButton.vue'
 import MainNav from '@/components/MainNav.vue'
 import Footer from '@/components/Footer.vue'
 import GridImage from '@/components/base/GridImage'
@@ -263,7 +139,7 @@ import { mapGetters } from 'vuex'
 
 export default {
   name: 'SplashPage',
-  components: { RsvpButton, MainNav, Footer, AddressAutocomplete, GridImage },
+  components: { MainNav, Footer, AddressAutocomplete, GridImage },
   methods: {
     async goToEvents (e) {
       const users = await fetchUsersWithinDistance({ miles: 10, lat: e.latlng.lat, lng: e.latlng.lng, pageSize: 1 })
@@ -718,6 +594,7 @@ a {
   font-size: 20px;
   line-height: 24px;
   font-weight: 700;
+  text-align: center;
 }
 
 .hero-list-item-subtitle {
@@ -1501,11 +1378,6 @@ a {
     background-position: 50% -123px;
     background-size: 800px;
     background-repeat: no-repeat;
-  }
-
-  .hero-container {
-    padding-top: 112px;
-    padding-bottom: 112px;
   }
 
   .h1-display {
@@ -2368,7 +2240,7 @@ a {
   display: flex;
   margin-top: 0px;
   margin-bottom: 0px;
-  padding: 112px 32px;
+  padding: 60px 32px;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -webkit-flex-direction: column;
@@ -2390,7 +2262,8 @@ a {
 }
 
 .hero-subtitle {
-  margin-bottom: 32px;
+  margin-top: 16px;
+  margin-bottom: 60px;
   font-size: 19px;
   line-height: 26px;
   text-align: center;
@@ -2434,7 +2307,7 @@ a {
 }
 
 .how-wrapper {
-  padding: 32px;
+  padding: 42px 32px 32px 32px;
   border-radius: 8px;
 }
 
