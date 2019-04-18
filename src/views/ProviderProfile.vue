@@ -80,7 +80,7 @@
               <div v-for="activity in user.activities"
                    :key="activity"
                    class="tag">
-                <div class="tag-text">Dance</div>
+                <div class="tag-text">{{activity}}</div>
               </div>
             </div>
           </div>
