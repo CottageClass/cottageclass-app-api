@@ -53,7 +53,6 @@ export default {
         await initProxySession(this.currentUser.id, this.targetUser.id, this.meetMessages[1])
         this.meetStatus = 'sent'
       } catch (e) {
-        console.log('xxxx')
         console.error(e)
         this.meetStatus = 'none'
         this.showBriefAllert('There was a problem sending your message.  Please try again later', 'failure')
@@ -73,10 +72,16 @@ export default {
           return 'Meet'
       }
     },
+    distanceBetweenUsers () {
+      const targetLocation = this.targetUser.location
+      return function () {
+        return this.distanceFromCurrentUser(targetLocation.lat, targetLocation.lng)
+      }
+    },
     meetMessages () {
       return [
         `Hi ${this.targetUser.firstName}, I'm a parent in ${this.currentUser.locality} and I'd love to meet up for a playdate. When might be a good time? -${this.currentUser.firstName}`,
-        `(${this.currentUser.firstName} has ${this.messageChildAgeString}, lives ${this.distanceFromCurrentUser()} miles from you, and their profile is here: https://kidsclub.io/user/${this.currentUser.id}. Good luck & enjoy! ❤️ KidsClub.io)`
+        `(${this.currentUser.firstName} has ${this.messageChildAgeString}, lives ${this.distanceBetweenUsers()} miles from you, and their profile is here: https://kidsclub.io/user/${this.currentUser.id}. Good luck & enjoy! ❤️ KidsClub.io)`
       ]
     },
     acknowledgeMessage () {
