@@ -4,8 +4,8 @@
     <div class="content-section background-01">
       <div class="divider-2px"></div>
       <div class="top-container w-container">
-        <h1 class="title">Find nearby playdates</h1>
-        <div class="page-subtitle">The hosts of the playdates below are looking to meet other nearby parents. <strong>RSVP, or reach out &amp; introduce yourself</strong>.</div>
+        <h1 class="title">Meet new parents. Plan playdates.</h1>
+        <div class="page-subtitle">These parents near you are all interested in sharing playdates. <strong>Reach out &amp; plan an introductory playdate / meeting</strong>. Or browse scheduled playdates below.</div>
       </div>
       <div class="main-container">
         <div class="map-list-container">
