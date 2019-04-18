@@ -13,7 +13,7 @@
 */
 
 import debug from 'debug'
-const FS = window.FS
+let FS = window.FS
 
 export default function (namespace) {
   const namespacedLog = debug('kidsclub:' + namespace)
@@ -29,7 +29,11 @@ export default function (namespace) {
         case 'test':
           break
         case 'production':
-          FS.log(msg)
+          if (FS && FS.log) {
+            FS.log(msg)
+          } else {
+            FS = window.FS
+          }
           break
         default:
           break
@@ -44,7 +48,11 @@ export default function (namespace) {
         case 'test':
           break
         case 'production':
-          FS.log('error', msg)
+          if (FS && FS.log) {
+            FS.log('error', msg)
+          } else {
+            FS = window.FS
+          }
           break
         default:
           break
