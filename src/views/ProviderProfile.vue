@@ -53,7 +53,7 @@
               </li>
               <li class="playdate-planning-bullet">
                 <div class="number-bullet">2</div>
-                <div class="playdate-bullet-text">{{ user.firstName }} will get a text that you&#x27;re intestested in a playdate</div>
+                <div class="playdate-bullet-text">Manisha will get a text that you&#x27;re intestested in a playdate</div>
               </li>
               <li class="playdate-planning-bullet">
                 <div class="number-bullet">3</div>
@@ -63,7 +63,7 @@
           </div>
           <div v-if="user.profileBlurb && user.profileBlurb.length" class="profile-specifics-card">
             <img src="@/assets/about.svg" width="100" height="100" alt="">
-            <div class="card-small-text">About {{ user.firstName }}</div>
+            <div class="card-small-text">About Manisha</div>
             <div class="card-large-text blurb">{{user.profileBlurb}}</div>
           </div>
           <div v-if="user.images && user.images.length" class="profile-specifics-card">
