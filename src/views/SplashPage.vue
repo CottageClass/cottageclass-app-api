@@ -142,11 +142,12 @@ export default {
   components: { MainNav, Footer, AddressAutocomplete, GridImage },
   methods: {
     async goToEvents (e) {
-      const users = await fetchUsersWithinDistance({ miles: 10, lat: e.latlng.lat, lng: e.latlng.lng, pageSize: 1 })
+      const users = await fetchUsersWithinDistance({ miles: 10, lat: this.mapArea.center.lat, lng: this.mapArea.center.lng, pageSize: 1 })
+      this.debug({ users })
       if (users.length === 0) {
         this.$router.push({ name: 'SignIn' })
       } else {
-        this.$router.push({ name: 'Events', params: { initialCenter: e.latlng } })
+        this.$router.push({ name: 'Events' })
       }
     }
   },
@@ -162,7 +163,7 @@ export default {
     imageNames () {
       return ['babies', 'backyard', 'legos', 'painting', 'storytime', 'hugging']
     },
-    ...mapGetters([ 'currentUser' ])
+    ...mapGetters([ 'currentUser', 'mapArea' ])
   }
 }
 

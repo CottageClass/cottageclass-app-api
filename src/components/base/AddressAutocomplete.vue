@@ -33,7 +33,7 @@ export default {
     submitAddress (e) {
       this.latlng = { lat: e.latitude, lng: e.longitude }
       this.$store.commit('setMapArea', { center: this.latlng })
-      this.$router.push({ name: 'Events' })
+      this.$emit('locationSubmitted')
     }
   },
   mounted: function () {
