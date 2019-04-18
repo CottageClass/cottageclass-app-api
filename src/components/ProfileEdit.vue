@@ -112,7 +112,7 @@ export default {
     }
   },
   created: function () {
-    if (this.redirectToSignupIfNotAuthenticated('User attempted to edit profile without being authenticated')) { return }
+    if (this.redirectToSignupIfNotAuthenticated()) { return }
     this.initialAvailability = {
       availableAfternoons: !!this.currentUser.availableAfternoons,
       availableMornings: !!this.currentUser.availableMornings,

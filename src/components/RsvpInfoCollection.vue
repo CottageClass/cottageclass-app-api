@@ -65,7 +65,7 @@ export default {
     }
   },
   created: function () {
-    this.redirectToSignupIfNotAuthenticated('User attempted to RSVP without being authenticated')
+    if (this.redirectToSignupIfNotAuthenticated()) { return }
     this.redirectToOnboardingIfNotOnboarded()
     if (!this.emergencyInfoJustCompleted) {
       this.redirectToEmergencyContactsIfNone()

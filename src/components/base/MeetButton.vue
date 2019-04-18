@@ -14,12 +14,12 @@
 import { setTimeout, clearTimeout } from 'timers'
 import { initProxySession } from '@/utils/api'
 import { mapGetters } from 'vuex'
-import { alerts } from '@/mixins'
+import { alerts, redirect } from '@/mixins'
 
 export default {
   name: 'MeetButton',
   props: ['targetUser', 'fillStyle', 'layoutStyle'],
-  mixins: [alerts],
+  mixins: [alerts, redirect],
   data () {
     return {
       meetStatus: 'none'
@@ -29,6 +29,7 @@ export default {
     meetButtonClick () {
       switch (this.meetStatus) {
         case 'none':
+          if (this.redirectToSignupIfNotAuthenticated()) { return }
           this.initiateMessageSending()
           break
         case 'sending':
