@@ -2,12 +2,17 @@ import { mapGetters } from 'vuex'
 
 export default {
   methods: {
-    redirectToSignupIfNotAuthenticated: function (msg) {
+    /*
+    * returns true if redirected
+    */
+    redirectToSignupIfNotAuthenticated: function () {
       if (!this.isAuthenticated) {
-        this.log(msg)
+        this.log('redirecting to login')
         this.setRedirectRouteHere()
         this.$router.push({ name: 'SignUp' })
+        return true
       }
+      return false
     },
     setRedirectRouteHere: function () {
       this.$store.commit('setRedirectRoute', {
