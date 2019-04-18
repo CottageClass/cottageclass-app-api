@@ -284,7 +284,6 @@ export default {
       return submission.catch(function (err) {
         console.log('user update FAILURE')
         console.log(err)
-        console.log(Object.entries(err))
         this.stepIndex = stepSequence.length - 1
         this.modelForCurrentStep.err = 'Sorry, there was a problem saving your information. Try again?'
         throw err
