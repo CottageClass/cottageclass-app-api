@@ -307,13 +307,7 @@ export default {
         }, (err) => {
           console.log(err)
         })
-        that.$store.dispatch('updateCurrentUserFromServer').then(function () {
-          const center = { lat: that.currentUser.latitude, lng: that.currentUser.longitude }
-          that.$store.commit('setMapArea', {
-            center,
-            maxDistance: 5
-          })
-        })
+        that.$store.dispatch('updateCurrentUserFromServer')
       }).then(() => {
         that.submitEventData().then(res => {
           that.$store.commit('setCreatedEvents', { eventData: res })
@@ -341,6 +335,12 @@ export default {
         if (this.stepIndex === stepSequence.length - 1) {
           this.finishOnboarding()
         } else {
+          if (this.currentStep === 'location') {
+            this.$store.commit('setMapArea', {
+              center: { lat: this.userData.location.lat, lng: this.userData.location.lng },
+              maxDistance: 5
+            })
+          }
           this.submitUserData()
         }
         // set the next step
@@ -353,14 +353,8 @@ export default {
         } else if (this.currentStep === 'createEventsNow' && !this.createEventsNow.isTrue) {
           // skip event creation
           const that = this
-
           this.$store.dispatch('updateCurrentUserFromServer').then(function () {
             that.moveOntoNextFTE()
-          }).then(() => {
-            that.$store.commit('setMapArea', {
-              center: { lat: that.currentUser.latitude, lng: that.currentUser.longitude },
-              maxDistance: 5
-            })
           })
         } else {
           this.$ga.event('onboarding', 'stepComplete', this.currentStep)
