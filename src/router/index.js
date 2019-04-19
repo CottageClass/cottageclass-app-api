@@ -27,7 +27,6 @@ import ChildSpecialRequirementsYesNo from '@/components/FTE/ChildSpecialRequirem
 import SignInWithEmail from '@/views/SignInWithEmail.vue'
 import SignUpWithEmail from '@/views/SignUpWithEmail.vue'
 import OnboardNewUser from '@/views/OnboardNewUser.vue'
-import RSVPPrompt from '@/views/RSVPPrompt.vue'
 import InviteExistingUsers from '@/views/InviteExistingUsers.vue'
 import PasswordReset from '@/views/PasswordReset.vue'
 import ContactForm from '@/views/ContactForm.vue'
@@ -186,11 +185,6 @@ export default new Router({
       path: '/welcome',
       name: 'OnboardNewUser',
       component: OnboardNewUser
-    },
-    {
-      path: '/welcome-RSVP',
-      name: 'RSVPPrompt',
-      component: RSVPPrompt
     },
     {
       path: '/password-reset',
