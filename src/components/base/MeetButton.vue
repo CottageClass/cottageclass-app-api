@@ -26,7 +26,8 @@ export default {
     }
   },
   methods: {
-    meetButtonClick () {
+    meetButtonClick (event) {
+      this.$emit('meetButtonClick', { event })
       switch (this.meetStatus) {
         case 'none':
           if (this.redirectToSignupIfNotAuthenticated()) { return }
