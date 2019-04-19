@@ -80,7 +80,7 @@
               <div v-for="activity in user.activities"
                    :key="activity"
                    class="tag">
-                <div class="tag-text">{{activity}}</div>
+                <div class="tag-text activity-tag">{{activity}}</div>
               </div>
             </div>
           </div>
@@ -89,16 +89,16 @@
             <div class="card-small-text">Available Times</div>
             <div class="tag-container">
               <div class="tag" v-if="user.availableMornings">
-                <div class="tag-text">9am-3pm</div>
+                <div class="tag-text availability-tag">9am-3pm</div>
               </div>
               <div class="tag" v-if="user.availableAfternoons">
-                <div class="tag-text">3pm-7pm</div>
+                <div class="tag-text availability-tag">3pm-7pm</div>
               </div>
               <div class="tag" v-if="user.availableEvenings">
-                <div class="tag-text">7pm- ?</div>
+                <div class="tag-text availability-tag">7pm- ?</div>
               </div>
               <div class="tag" v-if="user.availableWeekends">
-                <div class="tag-text">Weekends</div>
+                <div class="tag-text availability-tag">Weekends</div>
               </div>
             </div>
           </div>
@@ -215,6 +215,9 @@ export default {
     languageText: function () {
       const languageCodes = this.user.languages
       const languages = _.map(languageCodes, languageList().getLanguageName)
+      if (languages.length === 1) {
+        return 'Speaks ' + languages[0]
+      }
       return 'Speaks ' + [languages.slice(0, -1).join(', '), _.last(languages)].join(' and ')
     },
     anyAvailability: function () {
