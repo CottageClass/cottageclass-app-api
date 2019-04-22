@@ -53,7 +53,7 @@
               </li>
               <li class="playdate-planning-bullet">
                 <div class="number-bullet">2</div>
-                <div class="playdate-bullet-text">{{ user.firstName }} will get a text that you&#x27;re intestested in a playdate</div>
+                <div class="playdate-bullet-text">{{ user.firstName }} will get a text that you&#x27;re interested in a playdate</div>
               </li>
               <li class="playdate-planning-bullet">
                 <div class="number-bullet">3</div>
