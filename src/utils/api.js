@@ -179,7 +179,8 @@ function createPersonObject (personInApi, availableChildren = []) {
     },
     // todo: add these once API has them
     title: '',
-    employer: '',
+    jobPosition: p.job_position,
+    employer: p.employer,
     backgroundCheck: false,
     facebookUid: p.facebook_uid,
     facebookMapIcon: 'https://graph.facebook.com/' + p.facebook_uid + '/picture?width=30',
