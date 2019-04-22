@@ -6,11 +6,13 @@
   "scripts": {
     "test": "jest --config ./jest.conf.js",
     "test-watch": "jest --config ./jest.conf.js --watch --setupFiles dotenv/config",
-    "lint": "eslint ./src/**/*.vue ./src/**/*.js"
+    "lint": "eslint ./src/**/*.vue ./src/**/*.js",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "author": "holmesworcester <hwilson@gmail.com>",
   "dependencies": {
-    "@babel/core": "^7.3.4",
+    "@babel/core": "^7.4.3",
     "@babel/plugin-transform-runtime": "^7.3.4",
     "@babel/polyfill": "^7.2.5",
     "@babel/preset-env": "^7.3.4",
@@ -40,14 +42,18 @@
     "vue-clipboard2": "^0.2.1",
     "vue-cookies": "^1.5.12",
     "vue-google-autocomplete": "^1.1.0",
-    "vue-loader": "14.2.2",
+    "vue-loader": "^15.7.0",
     "vue-router": "^3.0.1",
     "vue-scrollto": "^2.13.0",
-    "vue-template-compiler": "^2.6.7",
+    "vue-template-compiler": "^2.6.10",
     "vuex": "^3.1.0",
     "vuex-persistedstate": "^2.5.4"
   },
   "devDependencies": {
+    "@storybook/addon-actions": "^5.0.10",
+    "@storybook/addon-links": "^5.0.10",
+    "@storybook/addons": "^5.0.10",
+    "@storybook/vue": "^5.0.10",
     "@vue/eslint-config-standard": "^4.0.0",
     "@vue/test-utils": "^1.0.0-beta.29",
     "babel-eslint": "^10.0.1",
