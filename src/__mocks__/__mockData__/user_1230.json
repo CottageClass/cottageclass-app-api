@@ -26,7 +26,7 @@
           "https://res.cloudinary.com/cottageclass2/image/upload/v1550866024/avatars/2019-01-27_09.18.43_v4c1ui.png",
           "https://res.cloudinary.com/cottageclass2/image/upload/v1550866035/avatars/2013-09-28_21.23.05_tsl6be.png"
         ],
-        "languages": [],
+        "languages": ["es"],
         "job_position": "Middle School teacher",
         "employer": "City of Worcester",
         "highest_education": null,
