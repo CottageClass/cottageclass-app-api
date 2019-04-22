@@ -2,10 +2,12 @@ class API::UsersController < API::BaseController
   before_action :load_user, only: %i[show]
 
   def index
-    users_index users: User.includes(:children, user_reviews: :reviewer),
+    users_index users: User.joins(:children),
                 miles: params[:miles],
                 latitude: params[:latitude],
                 longitude: params[:longitude],
+                min_age: params[:min_age],
+                max_age: params[:max_age],
                 page: params[:page],
                 page_size: params[:page_size],
                 path: proc { |**parameters| index_api_users_path parameters }
@@ -22,7 +24,18 @@ class API::UsersController < API::BaseController
 
   private
 
-  def users_index(users:, miles:, latitude:, longitude:, page:, page_size:, path:)
+  def users_index(users:, miles:, latitude:, longitude:, page:, page_size:, path:, min_age:, max_age:)
+    if min_age.present? or max_age.present?
+      min_age ||=  0
+      min_age = min_age.to_i
+      max_age ||= 17
+      max_age = max_age.to_i
+      earliest_birthday = (Time.current - (max_age+ 1 ).year.seconds)
+      latest_birthday = (Time.current - min_age.year.seconds)
+      users = users.where('children.birthday >= ?', earliest_birthday).references(:children)
+      users = users.where('children.birthday <= ?', latest_birthday).references(:children)
+    end
+
     miles = miles.to_i
     if miles.positive?
       location = []
