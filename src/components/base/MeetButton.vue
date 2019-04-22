@@ -80,8 +80,14 @@ export default {
       }
     },
     meetMessages () {
+      let message1
+      if (this.currentUser.locality) {
+        message1 = `Hi ${this.targetUser.firstName}, I'm a parent in ${this.currentUser.locality} and I'd love to meet up for a playdate. When might be a good time? -${this.currentUser.firstName}`
+      } else {
+        message1 = `Hi ${this.targetUser.firstName}, I'm a parent near you and I'd love to meet up for a playdate. When might be a good time? -${this.currentUser.firstName}`
+      }
       return [
-        `Hi ${this.targetUser.firstName}, I'm a parent in ${this.currentUser.locality} and I'd love to meet up for a playdate. When might be a good time? -${this.currentUser.firstName}`,
+        message1,
         `(${this.currentUser.firstName} has ${this.messageChildAgeString}, lives ${this.distanceBetweenUsers()} miles from you, and their profile is here: https://kidsclub.io/user/${this.currentUser.id}. Good luck & enjoy! ❤️ KidsClub.io)`
       ]
     },
