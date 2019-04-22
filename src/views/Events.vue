@@ -82,7 +82,9 @@ export default {
         pageSize: 10
       }
       this.events = await fetchUpcomingEventsWithinDistance(params)
+      this.events = this.events.filter(e => e.hostId !== this.currentUser.id)
       this.users = await fetchUsersWithinDistance(params)
+      this.users = this.users.filter(u => u.id !== this.currentUser.id)
     }
   },
   mounted: async function () {
