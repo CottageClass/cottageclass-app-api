@@ -203,9 +203,9 @@ function createPeopleObject (responseData) {
   return peopleDataArray.map(personInApi => createPersonObject(personInApi, childrenArray))
 }
 
-export function fetchUsersWithinDistance ({ miles, lat, lng, pageSize = 100, page = 1 }) {
+export function fetchUsersWithinDistance ({ miles, lat, lng, minAge = 0, maxAge = 17, pageSize = 100, page = 1 }) {
   return axios.get(
-    `/api/users/miles/${miles}/latitude/${lat}/longitude/${lng}/page/${page}/page_size/${pageSize}`
+    `/api/users/miles/${miles}/latitude/${lat}/longitude/${lng}/min_age/${minAge}/max_age/${maxAge}/page/${page}/page_size/${pageSize}`
   ).then(res => {
     logger.log('FETCH USERS WITHIN DISTANCE SUCCESS')
     logger.log(res.data)
