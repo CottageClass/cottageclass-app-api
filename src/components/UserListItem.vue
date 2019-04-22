@@ -1,13 +1,10 @@
 <template>
-  <div class="item-container" >
-    <router-link :to="{ name: 'ProviderProfile', params: { id: this.user.id } }">
-      <div class="avatar-container">
-          <AvatarImage
-          :person="user"
-          className="avatar"/>
-      </div>
-    </router-link>
-
+  <div class="item-container" @click="goToProfile">
+    <div class="avatar-container">
+        <AvatarImage
+        :person="user"
+        className="avatar"/>
+    </div>
     <div class="info-container">
       <div class="heading">
         <span class="name">{{ user.firstName }}</span>
@@ -22,7 +19,10 @@
         </span>
       </div>
     </div>
-   <MeetButton :targetUser="user" fillStyle="outline" layoutStyle="fat"/>
+  <MeetButton :targetUser="user"
+              fillStyle="outline"
+              layoutStyle="fat"
+              @meetButtonClick="registerMeetClick"/>
   </div>
 </template>
 
@@ -39,11 +39,23 @@ export default {
     return {
       isSelected: false,
       inviteComplete: false,
-      sendingTimeout: null
+      sendingTimeout: null,
+      lastMeetButtonClick: null
     }
   },
   props: ['user'],
   components: { AvatarImage, MeetButton },
+  methods: {
+    registerMeetClick (e) {
+      this.lastMeetButtonClick = e
+    },
+    goToProfile (e) {
+      if (!this.lastMeetButtonClick ||
+          Math.abs(this.lastMeetButtonClick.event.timeStamp - e.timeStamp) > 0.001) {
+        this.$router.push({ name: 'ProviderProfile', params: { id: this.user.id } })
+      }
+    }
+  },
   computed: {
     childAgeString () {
       const ages = this.user.childAges
