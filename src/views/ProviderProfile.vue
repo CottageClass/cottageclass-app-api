@@ -69,9 +69,7 @@
           <div v-if="user.images && user.images.length" class="profile-specifics-card">
             <img src="@/assets/photos.svg" width="100" height="100" alt="">
             <div class="card-small-text">Household Photos<span class="text-span"></span></div>
-            <div class="div-block-40">
               <Images :images="user.images" />
-            </div>
           </div>
           <div v-if="user.activities && user.activities.length" class="profile-specifics-card">
             <img src="@/assets/interests.svg" width="100" height="100" alt="">
