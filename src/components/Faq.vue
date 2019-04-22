@@ -10,7 +10,7 @@
           <a v-scroll-to="'#Community-Rules'" class="w-inline-block">
             <div>Community Rules</div>
           </a>
-        </li>        
+        </li>
         <li class="ul-menu-item">
           <a v-scroll-to="'#General-Questions'" class="w-inline-block">
             <div>General Questions</div>
