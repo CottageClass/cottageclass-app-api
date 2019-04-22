@@ -1,13 +1,11 @@
 <template>
-  <span class="body">
-    <div class="mask">
-      <div class="scrolling-wrapper">
-        <div class="carousel-image-container" v-for="image in images">
-          <img :src="image">
-        </div>
+  <div class="mask">
+    <div class="scrolling-wrapper">
+      <div class="carousel-image-container" v-for="image in images">
+        <img :src="image">
       </div>
     </div>
-  </span>
+  </div>
 </template>
 
 <script>
@@ -19,14 +17,10 @@ export default {
 
 <style scoped>
 
-.body {
-  background-color: #f2f2f2;
-  overflow: hidden;
-}
-
 .mask {
   height: 123px;
   overflow: hidden;
+  width: 100%;
 }
 .scrolling-wrapper {
   overflow-x: scroll;
