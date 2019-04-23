@@ -9,6 +9,12 @@ const logger = Logger('api')
 
 export function initProxySession (currentUserId, receiverId, requestMessage, acknowledgmentMessage) {
   logger.log('INITIATING PROXY WITH users ' + currentUserId + ', ' + receiverId)
+  if (process.env.NODE_ENV === 'development') {
+    logger.log('NOT SENDING NOTIFICATIO from ' + currentUserId + '.  To: ' + receiverId)
+    logger.log('REQUEST MESSAGE: ', requestMessage)
+    logger.log('ACKNOWLEDGE MESSAGE: ', acknowledgmentMessage)
+    return
+  }
   let postData = {
     twilioSession: {
       requestMessage: requestMessage,
@@ -351,6 +357,11 @@ export function fetchMessagesForUserPair (participantId1, participantId2) {
  */
 
 export function submitNotification (participantId, notificationBodyText) {
+  if (process.env.NODE_ENV === 'development') {
+    logger.log('NOT SENDING NOTIFICATIO to ' + participantId)
+    logger.log('MESSAGE: ', notificationBodyText)
+    return
+  }
   let notificationData = {
     'notification': {
       'body': notificationBodyText
