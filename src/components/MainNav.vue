@@ -22,7 +22,7 @@
         <ul class="unordered-list-2 w-list-unstyled">
           <li>
             <router-link :to="{name: 'Events'}" class="link-block w-inline-block">
-              <div class="text-block">Upcoming Playdates</div>
+              <div class="text-block">Parents &amp; Playdates</div>
             </router-link>
           </li>
           <li v-if="isAuthenticated">
