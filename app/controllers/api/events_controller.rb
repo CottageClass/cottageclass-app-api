@@ -76,7 +76,7 @@ class API::EventsController < API::BaseController
 
   private
 
-  def events_index(events:, skope:, miles:, latitude:, longitude:, min_age:, max_age:, sort: nil, page:, page_size:, path:)
+  def events_index(events:, skope:, miles:, latitude:, longitude:, min_age: nil, max_age: nil, sort: nil, page:, page_size:, path:)
     skope ||= 'all'
     events = events.send(skope).includes user: %i[children]
 
