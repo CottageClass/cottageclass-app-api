@@ -15,6 +15,8 @@ class SendgridClient
     personalization.add_dynamic_template_data parameters
     mail.add_personalization personalization
 
-    @sendgrid.client.mail._('send').post request_body: mail.to_json
+    if ENV['RAILS_ENV'] == 'production'
+      @sendgrid.client.mail._('send').post request_body: mail.to_json
+    end
   end
 end
