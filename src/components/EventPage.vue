@@ -8,7 +8,8 @@
           <EventCategoryIcon :category="!!event ? event.activityName : ''" width="150" height="150" />
         </div>
         <div class="div-block-36">
-
+        <div class="info-column-wrapper">
+          <div class="column-1">
           <h1 class="event-detail-heading">{{ event.name }}</h1>
           <div class="action-bar">
             <div class="host-info">
@@ -74,7 +75,17 @@
             </li>
           </ul>
         </div>
-
+        <div class="column-2">
+          <div class="how-it-works-container">
+            <h3 class="help-text-heading">How it works</h3>
+            <div class="how-it-works-text"><strong>1. You can stay or drop off.</strong> Stay and meet the family or drop off your child and get some &quot;me time&quot; —it&#x27;s up to you.</div>
+            <div class="how-it-works-text"><strong>2. There&#x27;s no commitment for new members.</strong> RSVP to your first playdate with no obligation. If you like it, become a member by hosting one monthly playdate.</div>
+          </div>
+        </div>
+        </div>
+        </div>
+        
+       
         <!-- Map -->
 
         <div class="map" ref="map"/>
@@ -689,8 +700,21 @@ h1 {
 }
 
 .div-block-36 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
   width: 100%;
-  padding: 32px;
+  padding: 32px 32px 44px;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: start;
+  -webkit-align-items: flex-start;
+  -ms-flex-align: start;
+  align-items: flex-start;
   background-color: #fff;
 }
 
@@ -963,6 +987,68 @@ h1 {
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .08);
 }
 
+.how-it-works-container {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  margin-top: 0px;
+  padding: 16px;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  -webkit-box-align: start;
+  -webkit-align-items: flex-start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgba(0, 0, 0, .11);
+  background-color: #fff;
+}
+
+.help-text-heading {
+  margin-top: 0px;
+  margin-bottom: 10px;
+  font-size: 15px;
+  line-height: 22.5px;
+}
+
+.how-it-works-text {
+  margin-bottom: 8px;
+  color: #333;
+  font-size: 11px;
+  line-height: 16.5px;
+}
+
+.info-column-wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  -webkit-box-align: start;
+  -webkit-align-items: flex-start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+}
+
+.column-1 {
+  width: 60%;
+  padding-right: 32px;
+}
+
+.column-2 {
+  width: 40%;
+}
+
 @media (max-width: 991px) {
   .div-block-32 {
     width: 40%;
@@ -995,6 +1081,26 @@ h1 {
     -webkit-align-items: flex-start;
     -ms-flex-align: start;
     align-items: flex-start;
+  }
+
+  .how-it-works-container {
+    margin-top: 16px;
+  }
+
+  .info-column-wrapper {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+
+  .column-1 {
+    width: 100%;
+    padding-right: 0px;
+  }
+  .column-2 {
+    width: 100%;
   }
 }
 
