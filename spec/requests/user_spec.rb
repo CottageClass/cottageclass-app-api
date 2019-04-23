@@ -28,7 +28,7 @@ RSpec.resource 'User' do
       end
     end
 
-    get '/api/users/miles/:miles/latitude/:latitude/longitude/:longitude/page/:page/page_size/:page_size',
+    get '/api/users/miles/:miles/latitude/:latitude/longitude/:longitude/min_age/:min_age/max_age/:max_age/page/:page/page_size/:page_size',
         format: :json do
       include_context 'authorization token'
 
@@ -36,6 +36,8 @@ RSpec.resource 'User' do
       let(:latitude) { user.latitude }
       let(:longitude) { user.longitude }
       let(:page) { 1 }
+      let(:min_age) { 3 }
+      let(:max_age) { 5 }
       let(:page_size) { 10 }
 
       example_request 'nearby:success' do

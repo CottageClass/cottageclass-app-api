@@ -9,6 +9,12 @@ const logger = Logger('api')
 
 export function initProxySession (currentUserId, receiverId, requestMessage, acknowledgmentMessage) {
   logger.log('INITIATING PROXY WITH users ' + currentUserId + ', ' + receiverId)
+  if (process.env.NODE_ENV === 'development') {
+    logger.log('NOT SENDING NOTIFICATIO from ' + currentUserId + '.  To: ' + receiverId)
+    logger.log('REQUEST MESSAGE: ', requestMessage)
+    logger.log('ACKNOWLEDGE MESSAGE: ', acknowledgmentMessage)
+    return
+  }
   let postData = {
     twilioSession: {
       requestMessage: requestMessage,
@@ -203,9 +209,17 @@ function createPeopleObject (responseData) {
   return peopleDataArray.map(personInApi => createPersonObject(personInApi, childrenArray))
 }
 
-export function fetchUsersWithinDistance ({ miles, lat, lng, pageSize = 100, page = 1 }) {
+export function fetchUsersWithinDistance ({ miles, lat, lng, minAge = 0, maxAge = 17, pageSize = 100, page = 1 }) {
+  let url = `/api/users/miles/${miles}/latitude/${lat}/longitude/${lng}/`
+  if (minAge) {
+    url += `min_age/${minAge}/`
+  }
+  if (maxAge) {
+    url += `max_age/${maxAge}/`
+  }
+  url += `page/${page}/page_size/${pageSize}`
   return axios.get(
-    `/api/users/miles/${miles}/latitude/${lat}/longitude/${lng}/page/${page}/page_size/${pageSize}`
+    url
   ).then(res => {
     logger.log('FETCH USERS WITHIN DISTANCE SUCCESS')
     logger.log(res.data)
@@ -351,6 +365,11 @@ export function fetchMessagesForUserPair (participantId1, participantId2) {
  */
 
 export function submitNotification (participantId, notificationBodyText) {
+  if (process.env.NODE_ENV === 'development') {
+    logger.log('NOT SENDING NOTIFICATIO to ' + participantId)
+    logger.log('MESSAGE: ', notificationBodyText)
+    return
+  }
   let notificationData = {
     'notification': {
       'body': notificationBodyText
@@ -420,9 +439,17 @@ export const fetchEvent = async (id) => {
   }
 }
 
-export function fetchUpcomingEventsWithinDistance ({ miles, lat, lng, pageSize = 100, page = 1 }) {
+export function fetchUpcomingEventsWithinDistance ({ miles, lat, lng, minAge, maxAge, pageSize = 100, page = 1 }) {
+  let url = `upcoming/miles/${miles}/latitude/${lat}/longitude/${lng}/`
+  if (minAge) {
+    url += `min_age/${minAge}/`
+  }
+  if (maxAge) {
+    url += `max_age/${maxAge}/`
+  }
+  url += `page/${page}/page_size/${pageSize}`
   return fetchEvents(
-    `upcoming/miles/${miles}/latitude/${lat}/longitude/${lng}/page/${page}/page_size/${pageSize}`,
+    url,
     e => e.startsAt
   )
 }
