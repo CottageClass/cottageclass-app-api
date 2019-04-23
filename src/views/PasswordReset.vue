@@ -11,7 +11,7 @@
                   />
               </StyleWrapper>
             <h1 class="auth-heading">Reset Password</h1>
-            <div>Please provide your phone number or email and we will contact you to reset your password.</div>
+            <div>Please provide your phone number or email and we will contact you within 24 hours to reset your password.</div>
             <div class="auth-wrapper">
               <div class="form-block w-form">
             <form v-on:submit.prevent="submitRequest">
