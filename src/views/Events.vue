@@ -52,7 +52,8 @@ export default {
       noEventsMessage: 'Sorry, there are no upcoming playdates in this area',
       events: null,
       users: null,
-      showTrailblazerMessage: true
+      showTrailblazerMessage: true,
+      ageRange: { min: null, max: null }
     }
   },
   computed: mapGetters([
@@ -79,7 +80,9 @@ export default {
         miles: this.maximumDistanceFromUserInMiles,
         lat: this.mapArea.center.lat,
         lng: this.mapArea.center.lng,
-        pageSize: 10
+        pageSize: 10,
+        minAge: this.ageRange.min,
+        maxAge: this.ageRange.max
       }
       this.events = await fetchUpcomingEventsWithinDistance(params)
       this.users = await fetchUsersWithinDistance(params)

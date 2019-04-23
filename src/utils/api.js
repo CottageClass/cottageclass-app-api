@@ -210,8 +210,16 @@ function createPeopleObject (responseData) {
 }
 
 export function fetchUsersWithinDistance ({ miles, lat, lng, minAge = 0, maxAge = 17, pageSize = 100, page = 1 }) {
+  let url = `/api/users/miles/${miles}/latitude/${lat}/longitude/${lng}/`
+  if (minAge) {
+    url += `min_age/${minAge}/`
+  }
+  if (maxAge) {
+    url += `max_age/${maxAge}/`
+  }
+  url += `page/${page}/page_size/${pageSize}`
   return axios.get(
-    `/api/users/miles/${miles}/latitude/${lat}/longitude/${lng}/min_age/${minAge}/max_age/${maxAge}/page/${page}/page_size/${pageSize}`
+    url
   ).then(res => {
     logger.log('FETCH USERS WITHIN DISTANCE SUCCESS')
     logger.log(res.data)
@@ -431,9 +439,17 @@ export const fetchEvent = async (id) => {
   }
 }
 
-export function fetchUpcomingEventsWithinDistance ({ miles, lat, lng, pageSize = 100, page = 1 }) {
+export function fetchUpcomingEventsWithinDistance ({ miles, lat, lng, minAge, maxAge, pageSize = 100, page = 1 }) {
+  let url = `upcoming/miles/${miles}/latitude/${lat}/longitude/${lng}/`
+  if (minAge) {
+    url += `min_age/${minAge}/`
+  }
+  if (maxAge) {
+    url += `max_age/${maxAge}/`
+  }
+  url += `page/${page}/page_size/${pageSize}`
   return fetchEvents(
-    `upcoming/miles/${miles}/latitude/${lat}/longitude/${lng}/page/${page}/page_size/${pageSize}`,
+    url,
     e => e.startsAt
   )
 }
