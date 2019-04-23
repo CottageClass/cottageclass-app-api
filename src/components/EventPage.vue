@@ -84,8 +84,7 @@
         </div>
         </div>
         </div>
-        
-       
+
         <!-- Map -->
 
         <div class="map" ref="map"/>
