@@ -2,7 +2,7 @@ class API::UsersController < API::BaseController
   before_action :load_user, only: %i[show]
 
   def index
-    users_index users: User.joins(:children),
+    users_index users: User.includes(:children),
                 miles: params[:miles],
                 latitude: params[:latitude],
                 longitude: params[:longitude],
@@ -32,8 +32,9 @@ class API::UsersController < API::BaseController
       max_age = max_age.to_i
       earliest_birthday = (Time.current - (max_age+ 1 ).year.seconds)
       latest_birthday = (Time.current - min_age.year.seconds)
-      users = users.where('children.birthday >= ?', earliest_birthday).references(:children)
-      users = users.where('children.birthday <= ?', latest_birthday).references(:children)
+      time_range = earliest_birthday..latest_birthday
+
+      users = users.joins(:children).where('children.birthday' => time_range)
     end
 
     miles = miles.to_i
