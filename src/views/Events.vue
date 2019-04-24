@@ -4,7 +4,7 @@
     <div class="content-section background-01">
       <div class="divider-2px"></div>
       <div class="top-container w-container">
-        <h1 class="title">Meet new parents. Plan playdates.</h1>
+        <h1 class="title">Find parents &amp; playdates</h1>
         <div class="selectors-group">
         <div class="filter-container">
           <FilterSelector title="Child Age"

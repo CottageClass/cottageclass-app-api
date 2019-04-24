@@ -11,7 +11,7 @@ export default {
   computed: {
     buttonText () {
       if (!this.range.data) {
-        return 'Age Range'
+        return 'Ages'
       }
       let { min, max } = this.range.data
       if (min < 0) {
@@ -29,12 +29,12 @@ export default {
         return min + ' - ' + max
       }
       if (min && !max) {
-        return min + ' and Up'
+        return min + ' and up'
       }
       if (!min && max) {
-        return 'Up to ' + max
+        return max + ' & under'
       }
-      return 'Age range'
+      return 'Ages'
     }
   }
 }
@@ -43,6 +43,5 @@ export default {
 <style scoped>
 .contents {
   text-align: center;
-  width: 62px;
 }
 </style>

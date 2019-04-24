@@ -8,7 +8,7 @@
               >
               {{age}}
       </option>
-    </select>
+    </select><br>
     <select v-model="value.data.max" @change="update">
       <option value="-1" selected>-</option>
       <option v-for="age in Array(12).keys()"
