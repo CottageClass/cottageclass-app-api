@@ -25,7 +25,7 @@
           <slot name="selectorContents"></slot>
         </div>
       </div>
-      <div class="dsk-selector-action"><a href="#" class="selector-action-btn w-button">Show 22 playdates</a></div>
+      <div class="dsk-selector-action"><a @click.prevent="state.open=false" class="selector-action-btn w-button">Show playdates</a></div>
     </div>
   </div>
 </div>
