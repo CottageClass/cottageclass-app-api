@@ -2,7 +2,7 @@ class API::UsersController < API::BaseController
   before_action :load_user, only: %i[show]
 
   def index
-    users_index users: User.includes(:children),
+    users_index users: User,
                 miles: params[:miles],
                 latitude: params[:latitude],
                 longitude: params[:longitude],
@@ -56,6 +56,8 @@ class API::UsersController < API::BaseController
       links[:previous] = path.call(page: users.prev_page, page_size: page_size) unless users.first_page?
       links[:next] = path.call(page: users.next_page, page_size: page_size) unless users.last_page?
     end
+
+    users = users.distinct
 
     serializer = PublicUserSerializer.new users, include: %i[children user_reviews user_reviews.reviewer],
                                                  links: links,
