@@ -25,7 +25,6 @@
           <slot name="selectorContents"></slot>
         </div>
       </div>
-      <div class="dsk-selector-action"><a href="#" class="selector-action-btn w-button">Show 22 playdates</a></div>
     </div>
   </div>
 </div>
@@ -191,30 +190,6 @@ body {
 .dsk-selector-top {
   width: 100%;
   padding: 24px;
-}
-
-.dsk-selector-action {
-  display: -ms-flexbox;
-  display: flex;
-  width: 100%;
-  padding: 12px 24px;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -ms-flex-align: center;
-  align-items: center;
-  border-top: 1px solid rgba(223, 78, 78, .11);
-}
-
-.selector-action-btn {
-  padding: 8px 16px 9px;
-  border-radius: 4px;
-  background-color: #1f88e9;
-  font-size: 13px;
-  text-align: center;
-}
-
-.selector-action-btn:active {
-  background-image: linear-gradient(180deg, rgba(0, 0, 0, .1), rgba(0, 0, 0, .1));
 }
 
 .mob-selector-top-bar {
@@ -386,14 +361,6 @@ body {
     margin-top: 0px;
     margin-right: 0px;
     margin-left: 0px;
-  }
-
-  .dsk-selector-action {
-    position: static;
-    left: 0%;
-    top: auto;
-    right: 0%;
-    bottom: 0%;
   }
 
   .mob-selector-top-bar {
