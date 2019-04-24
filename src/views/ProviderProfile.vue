@@ -49,15 +49,15 @@
             <ul class="playdate-planning-bullet-wrapper">
               <li class="playdate-planning-bullet">
                 <div class="number-bullet">1</div>
-                <div class="playdate-bullet-text">Click &#x27;invite for a playdate&#x27; above</div>
+                <div class="playdate-bullet-text">Click &#x27;invite for a playdate&#x27; above.</div>
               </li>
               <li class="playdate-planning-bullet">
                 <div class="number-bullet">2</div>
-                <div class="playdate-bullet-text">{{ user.firstName }} will get a text that you&#x27;re interested in a playdate</div>
+                <div class="playdate-bullet-text">{{ user.firstName }} will get a text that you&#x27;re interested in a playdate.</div>
               </li>
               <li class="playdate-planning-bullet">
                 <div class="number-bullet">3</div>
-                <div class="playdate-bullet-text">Decide on a time and place to meet. (We recommend meeting in one of your homes).</div>
+                <div class="playdate-bullet-text">Decide on a time and place to meet. (We recommend meeting in one of your homes.)</div>
               </li>
             </ul>
           </div>
