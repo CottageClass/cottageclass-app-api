@@ -42,6 +42,7 @@ export default {
 
 <style scoped>
 .contents {
+  text-align: center;
   width: 62px;
 }
 </style>

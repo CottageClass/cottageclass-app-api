@@ -1,16 +1,19 @@
 <template>
-<div class="filter-btn-container">
-  <div class="filter-btn-container btn-dates-default w-button"
+<div class="filter-btn-container" @touchmove="preventTouchMove">
+  <div class="filter-button w-button"
+       :class="active ? 'active' : ''"
        @click="buttonClick">
     <slot name="buttonContents" />
   </div>
   <div v-if="state.open"
-         class="modal-background">
-    <div class="dsk-selector-box-container">
+         class="modal-background"
+         @click="state.open=false" >
+    <div class="dsk-selector-box-container"
+         @click.stop >
       <div class="mob-selector-top-bar">
-        <a href="#" class="mob-selector-close w-inline-block">
-          <img src="images/close-x-black.svg" alt="" />
-        </a>
+        <div @click="state.open=false" class="mob-selector-close w-inline-block">
+          <img src="@/assets/close-x-black.svg" alt="" />
+        </div>
         <div class="mob-selector-title">{{ title }}</div>
         <div class="mob-selector-clear-all">
           <div class="mob-selector-clear-all-link"
@@ -31,7 +34,7 @@
 <script>
 export default {
   name: 'FilterSelector',
-  props: [ 'title' ],
+  props: [ 'title', 'active' ],
   data () {
     return {
       state: {
@@ -41,6 +44,12 @@ export default {
     }
   },
   methods: {
+    preventTouchMove (e) {
+      if (this.state.open) {
+        e.preventDefault()
+        e.stopPropagation()
+      }
+    },
     buttonClick () {
       this.state.open = !this.state.open
     }
@@ -136,8 +145,9 @@ body {
   text-align: center;
 }
 
-.btn-dates-default {
-  margin-right: 10px;
+.filter-button {
+  margin-right: auto;
+  margin-left: auto;
   padding: 4px 10px 5px;
   border: 1px solid #1f88e9;
   border-radius: 4px;
@@ -146,7 +156,7 @@ body {
   font-size: 13px;
 }
 
-.btn-dates-default:active {
+.filter-button.active {
   background-image: linear-gradient(180deg, rgba(31 ,136 ,233 ,1), rgba(31 ,136 ,233 ,1));
   color: rgba(255 ,255 ,255 ,1);
 }

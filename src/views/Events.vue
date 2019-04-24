@@ -5,11 +5,11 @@
       <div class="divider-2px"></div>
       <div class="top-container w-container">
         <h1 class="title">Meet new parents. Plan playdates.</h1>
-        <div class="page-subtitle">These parents near you are all interested in sharing playdates. <strong>Reach out &amp; plan an introductory playdate / meeting</strong>. Or browse scheduled playdates below.</div>
         <div class="selectors-group">
         <div class="filter-container">
           <FilterSelector title="Child Age"
-                          @clearFilterClicked="resetAgeRange">
+                          @clearFilterClicked="resetAgeRange"
+                          :active="ageRangeActive" >
             <template v-slot:buttonContents>
               <AgeRangeFilterButton :range="ageRange" />
             </template>
@@ -21,6 +21,7 @@
           </FilterSelector>
         </div>
       </div>
+      <div class="page-subtitle">These parents near you are all interested in sharing playdates. <strong>Reach out &amp; plan an introductory playdate / meeting</strong>. Or browse scheduled playdates below.</div>
       </div>
       <div class="main-container">
         <div class="map-list-container">
@@ -73,9 +74,12 @@ export default {
       ageRange: { error: null, data: { min: -1, max: -1 } }
     }
   },
-  computed: mapGetters([
-    'distanceFromCurrentUser', 'currentUser', 'isAuthenticated', 'alert', 'mapArea'
-  ]),
+  computed: {
+    ageRangeActive () {
+      return this.ageRange.data.min >= 0 || this.ageRange.data.max >= 0
+    },
+    ...mapGetters(['distanceFromCurrentUser', 'currentUser', 'isAuthenticated', 'alert', 'mapArea'])
+  },
   methods: {
     resetAgeRange () {
       this.ageRange = { error: null, data: { min: -1, max: -1 } }
@@ -338,6 +342,10 @@ a {
   flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
+}
+
+.title {
+  margin-bottom: 11px;
 }
 
 @media (max-width: 991px) {
