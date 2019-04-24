@@ -47,14 +47,10 @@ describe('MeetButton', () => {
 
     it('displays correct information', () => {
       const meetButton = wrapper.find('.meet-button')
-      const requestMessages = [
-        `Hi Chuck, I'm a parent in Nashville and I'd love to meet up for a playdate. When might be a good time? -Natasha`,
-        `(Natasha has 3 kids ages 1, 2 & 3, lives 4.2 miles from you, and their profile is here: https://kidsclub.io/user/987654321. Good luck & enjoy! ❤️ KidsClub.io)`
-      ]
+      const requestMessage = `Natasha (https://kidsclub.io/user/987654321) waved at you! They live 4.2 mi. away with 3 kids age 1, 2 & 3. If you're interested in a playdate, reply here!`
 
-      expect(meetButton.text()).toEqual('Meet')
-      expect(wrapper.vm.meetMessages[0]).toEqual(requestMessages[0])
-      expect(wrapper.vm.meetMessages[1]).toEqual(requestMessages[1])
+      expect(meetButton.text()).toEqual('Wave')
+      expect(wrapper.vm.meetMessage).toEqual(requestMessage)
     })
 
     it('initiates sending sequence', done => {
@@ -112,14 +108,10 @@ describe('MeetButton', () => {
         }
       })
       const meetButton = wrapper.find('.meet-button')
-      const requestMessages = [
-        `Hi Chuck, I'm a parent near you and I'd love to meet up for a playdate. When might be a good time? -Natasha`,
-        `(Natasha has 3 kids ages 1, 2 & 3, lives 4.2 miles from you, and their profile is here: https://kidsclub.io/user/987654321. Good luck & enjoy! ❤️ KidsClub.io)`
-      ]
+      const requestMessage = `Natasha (https://kidsclub.io/user/987654321) waved at you! They live 4.2 mi. away with 3 kids age 1, 2 & 3. If you're interested in a playdate, reply here!`
 
-      expect(meetButton.text()).toEqual('Meet')
-      expect(wrapper.vm.meetMessages[0]).toEqual(requestMessages[0])
-      expect(wrapper.vm.meetMessages[1]).toEqual(requestMessages[1])
+      expect(meetButton.text()).toEqual('Wave')
+      expect(wrapper.vm.meetMessage).toEqual(requestMessage)
     })
   })
 })

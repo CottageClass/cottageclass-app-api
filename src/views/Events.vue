@@ -4,7 +4,7 @@
     <div class="content-section background-01">
       <div class="divider-2px"></div>
       <div class="top-container w-container">
-        <h1 class="title">Find parents &amp; playdates</h1>
+        <h1 class="event-page-title">Meet new parents. Plan playdates.</h1>
         <div class="selectors-group">
         <div class="filter-container">
           <FilterSelector title="Child Age"
@@ -21,7 +21,7 @@
           </FilterSelector>
         </div>
       </div>
-      <div class="page-subtitle">These parents near you are all interested in sharing playdates. <strong>Reach out &amp; plan an introductory playdate / meeting</strong>. Or browse scheduled playdates below.</div>
+        <div class="page-subtitle">These parents all want to share playdates. <strong>Wave to start the conversation</strong>, or browse scheduled playdates below.</div>
       </div>
       <div class="main-container">
         <div class="map-list-container">
@@ -344,7 +344,7 @@ a {
   align-items: flex-start;
 }
 
-.title {
+.event-page-title {
   margin-bottom: 11px;
 }
 
@@ -371,19 +371,19 @@ a {
   .main-container {
     padding: 0px;
   }
-  .title {
+  .event-page-title {
     font-size: 32px;
     line-height: 42px;
   }
 }
 @media (max-width: 767px){
-  .title {
+  .event-page-title {
       font-size: 28px;
       line-height: 34px;
   }
 }
 @media (max-width: 479px) {
-  .title {
+  .event-page-title {
     font-size: 24px;
     line-height: 31.200000000000003px;
   }
