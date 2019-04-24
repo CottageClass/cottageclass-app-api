@@ -1,6 +1,6 @@
 <template>
   <div class="location-wrapper">
-    <div class="location-heading-2">Find parents and playdates near you!</div>
+    <div class="location-heading-2">Find parents and playdates near you.</div>
     <div class="formblock-location">
       <div class="form-location">
     <vue-google-autocomplete
