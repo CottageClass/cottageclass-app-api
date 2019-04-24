@@ -80,10 +80,10 @@ export default {
       }
     },
     meetMessage () {
-      return `${this.currentUser.firstName} (https://kidsclub.io/user/${this.currentUser.id}) waved at you! They live ${this.distanceBetweenUsers()} mi. away with ${this.messageChildAgeString}. If you're interested in a playdate, reply here!`
+      return `${this.currentUser.firstName} (https://kidsclub.io/users/${this.currentUser.id}) waved at you! They live ${this.distanceBetweenUsers()} mi. away with ${this.messageChildAgeString}. If you're interested in a playdate, reply here!`
     },
     acknowledgeMessage () {
-      return `We just sent your wave to ${this.targetUser.firstName} (https://kidsclub.io/user/${this.targetUser.id}). Reply here to introduce yourself and schedule your first playdate!`
+      return `We just sent your wave to ${this.targetUser.firstName} (https://kidsclub.io/users/${this.targetUser.id}). Reply here to introduce yourself and schedule your first playdate!`
     },
     messageChildAgeString () {
       const ages = this.currentUser.childAges
