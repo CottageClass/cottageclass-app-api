@@ -5,7 +5,7 @@
       <div class="divider-2px"></div>
       <div class="top-container w-container">
         <h1 class="title">Meet new parents. Plan playdates.</h1>
-        <div class="page-subtitle">These parents near you are all interested in sharing playdates. <strong>Reach out &amp; plan an introductory playdate / meeting</strong>. Or browse scheduled playdates below.</div>
+        <div class="page-subtitle">These parents all want to share playdates. <strong>Wave to start the conversation</strong>, or browse scheduled playdates below.</div>
       </div>
       <div class="main-container">
         <div class="map-list-container">
