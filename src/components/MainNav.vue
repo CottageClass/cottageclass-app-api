@@ -22,12 +22,12 @@
         <ul class="unordered-list-2 w-list-unstyled">
           <li>
             <router-link :to="{name: 'Events'}" class="link-block w-inline-block">
-              <div class="text-block">Parents &amp; Playdates</div>
+              <div class="text-block">Find parents &amp; playdates</div>
             </router-link>
           </li>
           <li v-if="isAuthenticated">
             <a href="/profile/edit" class="link-block w-inline-block">
-              <div class="text-block">Edit Profile</div>
+              <div class="text-block">Edit profile</div>
             </a>
           </li>
           <li>
@@ -36,13 +36,13 @@
             </router-link>
           </li>
           <li v-if="isAuthenticated">
-            <router-link to="/my-events" class="link-block w-inline-block">
-              <div class="text-block">My Playdates</div>
+            <router-link to="/my-rsvps" class="link-block w-inline-block">
+              <div class="text-block">Playdates you're attending</div>
             </router-link>
           </li>
           <li v-if="isAuthenticated">
-            <router-link to="/my-rsvps" class="link-block w-inline-block">
-              <div class="text-block">My RSVP's</div>
+            <router-link to="/my-events" class="link-block w-inline-block">
+              <div class="text-block">Playdates you're hosting</div>
             </router-link>
           </li>
           <li v-if="isAuthenticated">
