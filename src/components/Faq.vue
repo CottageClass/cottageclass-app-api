@@ -80,45 +80,28 @@
       <h2 class="heading-2">General Questions</h2>
       <div class="question">How does it work? </div>
       <ul class="unordered-list">
-        <li class="ul-item">On KidsClub, your childcare is free!</li>
-        <li class="ul-item">You earn points by offering childcare and spend points to receive childcare.</li>
-        <li class="ul-item">Every family in the club requested to host <strong>one 3 hour playdate every 4 weeks. </strong>This is to ensure all families have as much coverage as possible, even for last minute requests.</li>
+        <li class="ul-item">On KidsClub, making new friends and sharing childcare is free!</li>
+        <li class="ul-item">Every family in the club requested to host <strong>one 3 hour playdate every 4 weeks.</strong></li>
+        <li class="ul-item">When you plan your first playdate with a family, we strongly encourage you to stay with your child and get to know the family. You can choose to share childcare whenever you're both comfortable doing so.</li>
         <li class="ul-item">You can edit or change your playdate at any time, though we request 24 hours notice as a courtesy to other families.</li>
         <li class="ul-item">Your playdate can be as simple as pizza and a movie, or you can go all out and host a creative arts project or a robotics class!</li>
-        <li class="ul-item">You can also request childcare for times not covered by existing activities by putting out a general request or individually messaging members to request care. You can earn extra points by replying to last-minute child care requests.</li>
+        <li class="ul-item">If you can't find a playdate at a time that works for you, you can also reach out to parents individually to set up a playdate.</li>
       </ul>
+      <div class="question">What if I’m the first person to join in my neighborhood?</div>
+      <p class="paragraph">KidsClub is set up to support you in sharing childcare wherever you live! All you have to do is host a playdate, invite friends, classmates and/or people in your local parent groups. Once they RSVP to your playdate, they’ll be prompted to reciprocate by hosting playdates of their own and inviting their friends. Before you know it, you’ll have a thriving group of amazing parents sharing care!</p>
+      <div class="question">Can I join if I’m not a parent?</div>
+      <p class="paragraph">No. KidsClub is a community to encourage parents to share childcare and educational activities with other parents to build community, save money and get access to the highest quality care. If you’re not a parent and would like to offer a paid or a free offering, we encourage you to visit our sister platform, <a href="https://www.cottageclass.com/teach">CottageClass</a> to share your offering!</p>
       <div class="question">How do I contact you?</div>
       <p class="paragraph">Please call us at 862-294-4859 if you have any questions at all! Our email is <a href="mailto:contact@cottageclass.com">contact@cottageclass.com</a></p>
     </div>
   </div>
-  <div id="Points" class="section f6f6f6">
-    <div class="container w-container">
-      <h2 class="heading-2">Points</h2>
-      <div class="question">How do points work?</div>
-      <p class="paragraph">There are two ways to earn points: hosting playdates and offering last-minute childcare to other parents. When you host a playdate, you earn points for each child who attends. When you offer last minute childcare to other parents it works similarly: you earn points depending on the amount of time a child spends with you.</p>
-      <p>Spending points works the same, but in reverse. When others provide childcare to you, either at a playdate or for last-minute care, you spend points.</p>
-      <div class="question">I need a lot of childcare. How do I earn more points?</div>
-      <p class="paragraph">There are two great ways to earn lots of points for childcare:</p>
-      <ol class="ordered-list">
-        <li class="ol-item"><strong>Invite lots of children attend your playdate. </strong>The best way to earn a lot of points all at once is to host a playdate and to invite a lot of friends to come! You can invite your own friends, kids in your child’s class and neighbors, just as you would to a birthday party. You’ll earn 3 points per playdate per child. So, for example, if you have a really exciting dinosaur-themed pizza party and 15 kids come, you’ll earn 15 playdates for your own child (or 45 hours of childcare).</li>
-        <li class="ol-item"><strong>Host lots of playdates. </strong>You can also earn points by hosting multiple playdates for a smaller number of children. So, for example, if you need childcare coverage every Wednesday night, you could consider offering childcare every Tuesday night.</li>
-      </ol>
-      <p>You can also do some combination of the two strategies!</p>
-      <div class="question">What if I’m the first person to join in my neighborhood?</div>
-      <p class="paragraph">KidsClub is set up to support you in sharing childcare wherever you live! All you have to do is host a playdate, invite friends, classmates and/or people in your local parent groups. Once they RSVP to your playdate, they’ll be prompted to reciprocate by hosting playdates of their own and inviting their friends. Before you know it, you’ll have a thriving group of amazing parents sharing care!</p>
-      <div class="question">What if I don’t have any points?</div>
-      <p class="paragraph">That's okay! Points are not required to book childcare; they just help us ensure that over time every parent is doing their part. By committing to offer one playdate every month, you're certain to earn points soon.</p>
-      <div class="question">Can I join if I’m not a parent?</div>
-      <p class="paragraph">No. KidsClub is a community to encourage parents to share childcare and educational activities with other parents to build community, save money and get access to the highest quality care. If you’re not a parent and would like to offer a paid or a free offering, we encourage you to visit our sister platform, <a href="https://www.cottageclass.com/teach">CottageClass</a> to share your offering!</p>
-    </div>
-  </div>
-  <div id="Hosting-Playdates" class="section">
+  <div id="Hosting-Playdates" class="section f6f6f6">
     <div class="container w-container">
       <h2 class="heading-2">Hosting Playdates</h2>
+      <div class="question">How do I set up a playdate?</div>
+      <p class="paragraph">The easitest way is to reach out to parents with similarly-aged children near you and set up a time. You can also offer scheduled playdates, which let you share the link to your playdate with friends and invite your friends to share childcare with you! Other members of KidsClub will also have the option to RSVP to your playdate. We encourage you to invite as many friends as possible to grow the KidsClub community with incredible people and expand the options for free, quality care!</p>
       <div class="question">How do I invite my friends and my child’s classmates to share childcare with me?</div>
       <p class="paragraph">KidsClub makes sharing care with friends easy! All you have to do is invite your friends to your playdate or to join KidsClub. When they RSVP to your playdate, they’ll get prompted to create a playdate of their own and invite you!</p>
-      <div class="question">How do I get people to come to my playdate and earn points?</div>
-      <p class="paragraph">Once you’ve scheduled your first playdate, you’ll be able to share the link to your playdate with your friends invite your friends to share childcare with you! Other members of KidsClub will also have the option to RSVP to your playdate. We encourage you to invite as many friends as possible to grow the KidsClub community with incredible people and expand the options for free, quality care!</p>
       <div class="question">Can I offer more than one playdate a month?</div>
       <p class="paragraph">Absolutely. You can offer as many playdates as you like! We recommend offering the same amount of childcare that you need. For example, if you’re looking for 2-3 nights of coverage for 1 child, once a month, then offering one playdate each month for 2-3 children is perfect. If you need childcare 2-3 children on a weekly basis, we recommend offering one playdate for 2-3 children once a week, or a larger playdate for 8-12 children once a month.</p>
       <div class="question">Can I control who attends my playdate?</div>
@@ -126,47 +109,30 @@
       <div class="question">Can I choose the ages of children who attend my playdate?</div>
       <p class="paragraph">You can definitely set a minimum and maximum age you feel comfortable with. We understand that parents often wish for their child to play with children the same age. However, we also encourage you to experiment with hosting much younger or much older children. You may be surprised with what fun your 5 year old will have being a big sister to a 2 year old - or how much she could learn by having an 8 year old “big brother” around for a few hours.</p>
       <div class="question">What should I offer on my playdate?</div>
-      <p class="paragraph">Your playdate consists of a simple activity and serving a meal to the children who attend. Your playdate can be very easygoing. For example, pizza and a movie are a great place to start. If you’re inspired, you are also welcome to design a more elaborate event, such as a painting party or a robotics workshop, but this is by no means expected or required.</p>
+      <p class="paragraph">It's up to you! Some parents choose to offer a simple activity and sometimes a meal or snack, but it's your choice. Your playdate can be very easygoing. For a group of children, a snack and a movie are a great place to start. For two or three children, just letting them play and get to know each other is great! If you’re inspired, you are also welcome to design a more elaborate event, such as a painting party or a robotics workshop, but this is by no means expected or required.</p>
       <div class="question">What if no one RSVP’s to my playdate?</div>
       <p class="paragraph">That's alright! Just by making your playdate available as an option to parents, you're helping our community create childcare availability and coverage for as many children at as many times as possible. Offering a playdate&mdash;even if no one attends&mdash;means you have met your commitment as a member and can attend others' playdates if you choose. That said, we know it's more fun when playdates are well-attended. The best ways to ensure people come to your playdate is to share it widely to friends and local parent groups.</p>
       <div class="question">How long are playdates?</div>
-      <p class="paragraph">Every playdate lasts at least 3 hours to ensure parents have enough time to drop their child off, head to whatever they’re doing and come pick their child up.</p>
+      <p class="paragraph">It's up to you and the other parent. For drop-off playdates, we recommend a minimum of 2-3 hours to ensure parents have enough time to drop their child off, head to whatever they’re doing and come pick their child up.</p>
       <div class="question">What if I need to cancel or reschedule my playdate?</div>
       <p class="paragraph">It’s fine to reschedule or cancel your playdate. We understand that being a parent puts you on a busy and sometimes messy schedule. If you do need to cancel or reschedule, please try to give us as much advance notice as possible, so that we can help your attendees booked in another playdate! We encourage you to contact us directly (rather than contacting your guests) so that we can support them fully in making alternate plans.</p>
     </div>
   </div>
-  <div id="Attending-Playdates" class="section f6f6f6">
+  <div id="Attending-Playdates" class="section">
     <div class="container w-container">
       <h2 class="heading-2">Attending Playdates</h2>
       <div class="question">How do I book a playdate?</div>
-      <p class="paragraph">You book your playdate by RSVP’ing to the events on the events page. When you book your playdate, you’ll get an automated text message from the KidsClub team confirming your reservation.</p>
+      <p class="paragraph">You book your playdate by RSVP’ing to the events on the events page, or by reaching out to a family directly. When you book your playdate, you’ll get an automated text message from the KidsClub team confirming your reservation.</p>
       <div class="question">Can a family decline my RSVP?</div>
       <p class="paragraph">The family hosting the event has 24 hours to decline your request in case they cannot accommodate you, otherwise you are good to go! We will do our best to find you another option should this occur.</p>
-      <div class="question">What do I need to do before I arrive?</div>
-      <p class="paragraph">Please be sure to fill out your registration form before the event so your host has your emergency contact information and knows about your child’s dietary preferences as well as any special needs. (You will only need to fill this out once).</p>
       <div class="question">What if I’m running late for drop-off?</div>
       <p class="paragraph">Part of the benefit of a parent-operated babysitting co-op is you don’t need to stress out about being on time! It’s good to arrive on time, but don’t worry if you’re a little behind. Parents understand that sometimes getting the coat and shoes on can take a little longer than planned. However, we strongly encourage you to be on-time or early for pick up, and to make arrangements with the host in advance if there is any chance you will be late.</p>
       <div class="question">What should I expect when we arrive?</div>
       <p class="paragraph">When you arrive, your host will likely have some games out or activities set up so your child can adjust easily. You are welcome to drop your child off at the door or stick around for a little while as your child gets adjusted, but try to be sensitive to your host’s preferences. After all, the purpose of this is for you to enjoy some well-deserved time off. So take advantage of it and enjoy!</p>
-      <div class="question">Will my host serve dinner?</div>
-      <p class="paragraph">After your child eases in with a few activities, they’ll be invited to dinner (around 30 minutes in). Your host will have prepared a meal that is in line with you child's dietary preferences, based on information you provided in your registration form.. Please be sure to note any allergies in the form. If your child has severe food allergies or highly unusual preferences, you may want to consider packing a meal for them, or attending events whose hosts have specific experience with food allergies. (Feel free to reach out to us if you have any questions about that.)</p>
-      <div class="question">What will the activity consist of?</div>
-      <p class="paragraph">Activities vary from playdate to playdate. Following dinner, your child will be invited to participate in the planned activity, whether it be watching a movie, arts and crafts or other.</p>
       <div class="question">What if I’m late for pick-up?</div>
       <p class="paragraph">We strongly encourage you to plan well to make sure this doesn’t happen. Please be respectful of your host and be sure to arrive on time or a little early! However, if you are late, please let your host know as soon as you discover that you are running late. You may also want to offer them a little gift of apology such as a free playdate in return, flowers or wine.</p>
       <div class="question">What if I need to cancel or reschedule my playdate?</div>
       <p class="paragraph">Just let us know and we’ll book you for something new!</p>
-    </div>
-  </div>
-  <div id="Childcare-in-a-Pinch" class="section">
-    <div class="container w-container">
-      <h2 class="heading-2">Childcare in a Pinch</h2>
-      <div class="question">What’s childcare in a pinch?</div>
-      <p class="paragraph">You can also earn points by responding to custom requests. If you offered to provide childcare in a pinch, you may receive a message from a parents saying that they need. You will receive 1 point per hour for every hour you babysit and spend 1 point per hour for every hour that someone else watches your child.</p>
-      <div class="question">How do I request childcare outside of the hours offered through the list of events?</div>
-      <p class="paragraph">You can also request care by clicking “request care” or individually reaching out to parents in the network. You’ll spend 1 point per hour of care.</p>
-      <div class="question">How do I keep track of time and points for childcare in a pinch?</div>
-      <p>When children arrive, go to the "offer care" tab and click the "check-in" button. When parents arrive to pick them up, click "check-out". That's it!</p>
     </div>
   </div>
   <div id="Trust-Safety" class="section f6f6f6">
@@ -174,7 +140,8 @@
       <h2 class="heading-2">Trust and Safety</h2>
       <div class="question">How do I ensure my child is safe on my playdate?</div>
       <ul class="unordered-list">
-        <li class="ul-item"><strong>Invite your friends to share care with you. </strong>A great place to start is sharing childcare with your existing friends and other parents in your child’s class and school. We depend on you to invite amazing people to join KidsClub. We encourage you to invite only friends you know and trust to join the platform. When you attend their activity, you’ll get to know their friends as well and broaden your network!</li>
+        <li class="ul-item"><strong>Invite your friends to share care with you.</strong> A great place to start is sharing childcare with your existing friends and other parents in your child’s class and school. We depend on you to invite amazing people to join KidsClub. We encourage you to invite only friends you know and trust to join the platform. When you attend their activity, you’ll get to know their friends as well and broaden your network!</li>
+        <li class="ul-item"><strong>Stay with your child until you're comfortable sharing care.</strong> You're always free to stay with your child to get to know a new family, and you should only share childcare once you're both comfortable doing so.</li>
         <li class="ul-item"><strong>Get a background check through KidsClub.</strong> Parents who have purchased background checks get a “background check” badge on their profile. This is a great way to ensure our community stays safe and by going through a background check yourself, you help other parents make sure their child is safe. Background checks cost $50-100 depending on what state you live in. Email <a href="mailto:contact@cottageclass.com">contact@cottageclass.com</a> to inquire about getting a background check.</li>
         <li class="ul-item"><strong>Message new friends.</strong> If you’d like to broaden your friend network, we encourage you to message people you don’t know on the platform and get together for a playdate. You can also propose to get together with your kids in a public place like the library or the park before you start booking care with that person! Approach playdates on KidsClub the way you'd approach playdates with a new classmate, say. First get to know the family, then go from there.</li>
         <li class="ul-item"><strong>Host a mixer.</strong> Have a meetup at the local coffee shop or a potluck and invite parents who live near you. This is a great way</li>
