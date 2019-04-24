@@ -209,7 +209,7 @@ function createPeopleObject (responseData) {
   return peopleDataArray.map(personInApi => createPersonObject(personInApi, childrenArray))
 }
 
-export function fetchUsersWithinDistance ({ miles, lat, lng, minAge = 0, maxAge = 17, pageSize = 100, page = 1 }) {
+export function fetchUsersWithinDistance ({ miles, lat, lng, minAge, maxAge, pageSize = 100, page = 1 }) {
   let url = `/api/users/miles/${miles}/latitude/${lat}/longitude/${lng}/`
   if (minAge) {
     url += `min_age/${minAge}/`
