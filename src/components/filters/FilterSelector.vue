@@ -8,22 +8,22 @@
   <div v-if="state.open"
          class="modal-background"
          @click="state.open=false" >
-    <div class="dsk-selector-box-container"
-         @click.stop >
-      <div class="mob-selector-top-bar">
-        <div @click="state.open=false" class="mob-selector-close w-inline-block">
-          <img src="@/assets/close-x-black.svg" alt="" />
-        </div>
-        <div class="mob-selector-title">{{ title }}</div>
-        <div class="mob-selector-clear-all">
-          <div class="mob-selector-clear-all-link"
-               @click="$emit('clearFilterClicked')">Clear all</div>
-        </div>
+  </div>
+  <div v-if="state.open" class="dsk-selector-box-container"
+        @click.stop >
+    <div class="mob-selector-top-bar">
+      <div @click="state.open=false" class="mob-selector-close w-inline-block">
+        <img src="@/assets/close-x-black.svg" alt="" />
       </div>
-      <div class="dsk-selector-top">
-        <div class="selector-content-container">
-          <slot name="selectorContents"></slot>
-        </div>
+      <div class="mob-selector-title">{{ title }}</div>
+      <div class="mob-selector-clear-all">
+        <div class="mob-selector-clear-all-link"
+              @click="$emit('clearFilterClicked')">Clear all</div>
+      </div>
+    </div>
+    <div class="dsk-selector-top">
+      <div class="selector-content-container">
+        <slot name="selectorContents"></slot>
       </div>
     </div>
   </div>
@@ -318,6 +318,22 @@ body {
   background-color: rgba(0, 0, 0, .1);
 }
 
+  .modal-background {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    right: auto;
+    bottom: auto;
+    z-index: 999;
+    width: 100%;
+    height: 10000px;
+    padding-top: 16px;
+    padding-right: 16px;
+    padding-left: 16px;
+    border-radius: 0px;
+    background-color: rgba(0, 0, 0, 0);
+  }
+
 @media (max-width: 991px) {
   .playdates-content-container {
     padding-top: 32px;
@@ -392,18 +408,6 @@ body {
   }
 
   .modal-background {
-    position: fixed;
-    left: 0px;
-    top: 0px;
-    right: auto;
-    bottom: auto;
-    z-index: 2000;
-    width: 100%;
-    height: 10000px;
-    padding-top: 16px;
-    padding-right: 16px;
-    padding-left: 16px;
-    border-radius: 0px;
     background-color: rgba(0, 0, 0, .4);
   }
 
