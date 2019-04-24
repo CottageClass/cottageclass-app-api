@@ -47,7 +47,7 @@ describe('MeetButton', () => {
 
     it('displays correct information', () => {
       const meetButton = wrapper.find('.meet-button')
-      const requestMessage = `Natasha (https://kidsclub.io/user/987654321) waved at you! They live 4.2 mi. away with 3 kids age 1, 2 & 3. If you're interested in a playdate, reply here!`
+      const requestMessage = `Natasha (https://kidsclub.io/users/987654321) waved at you! They live 4.2 mi. away with 3 kids age 1, 2 & 3. If you're interested in a playdate, reply here!`
 
       expect(meetButton.text()).toEqual('Wave')
       expect(wrapper.vm.meetMessage).toEqual(requestMessage)
@@ -108,7 +108,7 @@ describe('MeetButton', () => {
         }
       })
       const meetButton = wrapper.find('.meet-button')
-      const requestMessage = `Natasha (https://kidsclub.io/user/987654321) waved at you! They live 4.2 mi. away with 3 kids age 1, 2 & 3. If you're interested in a playdate, reply here!`
+      const requestMessage = `Natasha (https://kidsclub.io/users/987654321) waved at you! They live 4.2 mi. away with 3 kids age 1, 2 & 3. If you're interested in a playdate, reply here!`
 
       expect(meetButton.text()).toEqual('Wave')
       expect(wrapper.vm.meetMessage).toEqual(requestMessage)
