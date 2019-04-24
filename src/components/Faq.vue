@@ -17,11 +17,6 @@
           </a>
         </li>
         <li class="ul-menu-item">
-          <a v-scroll-to="'#Points'" class="w-inline-block">
-            <div>Points</div>
-          </a>
-        </li>
-        <li class="ul-menu-item">
           <a v-scroll-to="'#Hosting-Playdates'" class="w-inline-block">
             <div>Hosting Playdates</div>
           </a>
@@ -50,7 +45,7 @@
       <p class="paragraph">All members are required to abide by our <a href="https://www.cottageclass.com/terms-of-service#">Terms of Service</a>, however, here is a brief summary of some guidelines we’ve put in place to keep our community strong. Above all&mdash;to have the best experience on KidsClub&mdash;be kind and respectful, and treat others as you’d wish to be treated!</p>
       <div class="question">When attending a playdate:</div>
       <ul class="unordered-list">
-        <li class="ul-item">Don’t bring a sick child. If your child is feeling ill, we can certainly let you choose another date without losing any points! The same goes for hosting. If your child isn’t feeling well, it’s fine to cancel! We can help your guests get rescheduled for another date.</li>
+        <li class="ul-item">Don’t bring a sick child. If your child is feeling ill, we can certainly let you choose another date! The same goes for hosting. If your child isn’t feeling well, it’s fine to cancel! We can help your guests get rescheduled for another date.</li>
         <li class="ul-item">Make sure to RSVP every child who is attending. If you bring an extra child that you haven’t signed up, it can put your host in an awkward position.</li>
         <li class="ul-item">Pick your child up on time! You may even want to come a few minutes early. We know life happens and sometimes people are running a bit late, but do your best to be respectful of your host’s time.</li>
         <li class="ul-item">If the host has a dog, confirm with them that their pooch will be safely separated from the children (behind a closed door) for the duration of the playdate.</li>
