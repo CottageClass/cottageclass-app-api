@@ -5,11 +5,13 @@ class API::EventsController < API::BaseController
   before_action :requires_event_owner, only: %i[update destroy]
 
   def index
-    events_index events: Event.includes(:user, :event_hosts),
+    events_index events: Event.includes(:user, :event_hosts, participant_children: :child, user: :children),
                  skope: params[:skope],
                  miles: params[:miles],
                  latitude: params[:latitude],
                  longitude: params[:longitude],
+                 min_age: params[:min_age],
+                 max_age: params[:max_age],
                  sort: params[:sort],
                  page: params[:page],
                  page_size: params[:page_size],
@@ -74,9 +76,31 @@ class API::EventsController < API::BaseController
 
   private
 
-  def events_index(events:, skope:, miles:, latitude:, longitude:, sort: nil, page:, page_size:, path:)
+  def events_index(events:, skope:, miles:, latitude:, longitude:, min_age: nil, max_age: nil, sort: nil, page:, page_size:, path:)
     skope ||= 'all'
     events = events.send(skope).includes user: %i[children]
+
+
+    if min_age.present? or max_age.present?
+      min_age ||=  0
+      min_age = min_age.to_i
+      max_age ||= 17
+      max_age = max_age.to_i
+      earliest_birthday = (Time.current - (max_age+ 1 ).year.seconds)
+      latest_birthday = (Time.current - min_age.year.seconds)
+      time_range = earliest_birthday..latest_birthday
+
+      # all participant children in age range
+      participating_subquery = ParticipantChild.joins(:child).where('children.birthday' => time_range)
+
+      # all eventSeries hosted by parents of children in range
+      event_series_belonging_to_users_that_have_children_in_the_age_range = EventSeries.joins(user: :children).where(users: {children: {'birthday' => time_range}})
+
+      events = events.joins("LEFT JOIN (#{participating_subquery.to_sql}) sub ON sub.participable_id = events.id")
+                     .joins("LEFT JOIN (#{event_series_belonging_to_users_that_have_children_in_the_age_range.to_sql}) hsub ON hsub.id = events.event_series_id")
+                     .where("hsub.id IS NOT NULL OR sub.participable_id IS NOT NULL")
+
+    end
 
     miles = miles.to_i
     if miles.positive?
