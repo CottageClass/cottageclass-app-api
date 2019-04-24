@@ -4,8 +4,24 @@
     <div class="content-section background-01">
       <div class="divider-2px"></div>
       <div class="top-container w-container">
-        <h1 class="title">Meet new parents. Plan playdates.</h1>
-        <div class="page-subtitle">These parents near you are all interested in sharing playdates. <strong>Reach out &amp; plan an introductory playdate / meeting</strong>. Or browse scheduled playdates below.</div>
+        <h1 class="title">Find parents &amp; playdates</h1>
+        <div class="selectors-group">
+        <div class="filter-container">
+          <FilterSelector title="Child Age"
+                          @clearFilterClicked="resetAgeRange"
+                          :active="ageRangeActive" >
+            <template v-slot:buttonContents>
+              <AgeRangeFilterButton :range="ageRange" />
+            </template>
+            <template v-slot:selectorContents>
+              <AgeRangeFilterSelector
+                v-model="ageRange"
+              />
+            </template>
+          </FilterSelector>
+        </div>
+      </div>
+      <div class="page-subtitle">These parents near you are all interested in sharing playdates. <strong>Reach out &amp; plan an introductory playdate / meeting</strong>. Or browse scheduled playdates below.</div>
       </div>
       <div class="main-container">
         <div class="map-list-container">
@@ -35,7 +51,9 @@ import EventList from '@/components/EventList.vue'
 import MainNav from '@/components/MainNav.vue'
 import Footer from '@/components/Footer.vue'
 import EventListMap from '@/components/EventListMap.vue'
-
+import FilterSelector from '@/components/filters/FilterSelector'
+import AgeRangeFilterButton from '@/components/filters/AgeRangeFilterButton'
+import AgeRangeFilterSelector from '@/components/filters/AgeRangeFilterSelector'
 import { fetchUpcomingEventsWithinDistance, fetchUsersWithinDistance } from '@/utils/api'
 import { mapGetters } from 'vuex'
 
@@ -43,7 +61,7 @@ var moment = require('moment')
 
 export default {
   name: 'Events',
-  components: { EventList, MainNav, Footer, EventListMap },
+  components: { EventList, MainNav, Footer, EventListMap, FilterSelector, AgeRangeFilterSelector, AgeRangeFilterButton },
   data () {
     return {
       maximumDistanceFromUserInMiles: '5',
@@ -53,13 +71,19 @@ export default {
       events: null,
       users: null,
       showTrailblazerMessage: true,
-      ageRange: { min: null, max: null }
+      ageRange: { error: null, data: { min: -1, max: -1 } }
     }
   },
-  computed: mapGetters([
-    'distanceFromCurrentUser', 'currentUser', 'isAuthenticated', 'alert', 'mapArea'
-  ]),
+  computed: {
+    ageRangeActive () {
+      return this.ageRange.data.min >= 0 || this.ageRange.data.max >= 0
+    },
+    ...mapGetters(['distanceFromCurrentUser', 'currentUser', 'isAuthenticated', 'alert', 'mapArea'])
+  },
   methods: {
+    resetAgeRange () {
+      this.ageRange = { error: null, data: { min: -1, max: -1 } }
+    },
     updateForZoomLevel: async function (e) {
       this.$store.commit('setMapArea', {
         center: { lat: e.center.lat(), lng: e.center.lng() },
@@ -67,7 +91,7 @@ export default {
       })
       this.showTrailblazerMessage = false
 
-      this.fetchWithinDistance()
+      this.fetch()
     },
     isToday: function (date) {
       return moment(0, 'HH').diff(date, 'days') === 0
@@ -75,14 +99,14 @@ export default {
     formatDate: function (date) {
       return moment(date).format('dddd, MMM Do')
     },
-    fetchWithinDistance: async function () {
+    fetch: async function () {
       const params = {
         miles: this.maximumDistanceFromUserInMiles,
         lat: this.mapArea.center.lat,
         lng: this.mapArea.center.lng,
         pageSize: 10,
-        minAge: this.ageRange.min,
-        maxAge: this.ageRange.max
+        minAge: this.ageRange.data.min >= 0 ? this.ageRange.data.min : null,
+        maxAge: this.ageRange.data.max >= 0 ? this.ageRange.data.max : null
       }
       this.events = await fetchUpcomingEventsWithinDistance(params)
       this.users = await fetchUsersWithinDistance(params)
@@ -92,8 +116,16 @@ export default {
       }
     }
   },
+  watch: {
+    ageRange: {
+      handler: function () {
+        this.fetch()
+      },
+      deep: true
+    }
+  },
   mounted: async function () {
-    this.fetchWithinDistance()
+    this.fetch()
   }
 }
 </script>
@@ -310,6 +342,10 @@ a {
   flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
+}
+
+.title {
+  margin-bottom: 11px;
 }
 
 @media (max-width: 991px) {
