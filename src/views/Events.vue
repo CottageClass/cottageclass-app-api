@@ -31,7 +31,7 @@
             @maxDistanceSet="updateForZoomLevel($event)"
           />
           <div class="list-container w-container">
-            <EventList
+            <SearchResultList
               class="list"
               :events="events"
               :users="users"
@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import EventList from '@/components/EventList.vue'
+import SearchResultList from '@/components/SearchResultList.vue'
 import MainNav from '@/components/MainNav.vue'
 import Footer from '@/components/Footer.vue'
 import EventListMap from '@/components/EventListMap.vue'
@@ -61,7 +61,7 @@ var moment = require('moment')
 
 export default {
   name: 'Events',
-  components: { EventList, MainNav, Footer, EventListMap, FilterSelector, AgeRangeFilterSelector, AgeRangeFilterButton },
+  components: { SearchResultList, MainNav, Footer, EventListMap, FilterSelector, AgeRangeFilterSelector, AgeRangeFilterButton },
   data () {
     return {
       maximumDistanceFromUserInMiles: '5',

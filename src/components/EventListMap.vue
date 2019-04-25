@@ -40,7 +40,7 @@ This is the map view of a list of events
     <div
     v-if="type==='list'"
     class="list-container w-container">
-      <EventList
+      <SearchResultList
         class="list"
         :events="events"
         :users="users"
@@ -53,7 +53,7 @@ This is the map view of a list of events
 
 <script>
 import { maps, screen } from '@/mixins'
-import EventList from '@/components/EventList.vue'
+import SearchResultList from '@/components/SearchResultList.vue'
 import { mapGetters } from 'vuex'
 
 const DISTANCE_OPTIONS = [ 1, 2, 5, 10, 20, 50 ]
@@ -62,7 +62,7 @@ export default {
   name: 'EventListMap',
   props: ['users', 'events'],
   mixins: [ maps, screen ],
-  components: { EventList },
+  components: { SearchResultList },
   data () {
     return {
       map: null,

@@ -52,7 +52,7 @@ import { mapGetters } from 'vuex'
 
 var moment = require('moment')
 export default {
-  name: 'EventList',
+  name: 'SearchResultList',
   components: { EventListItem, LoadingSpinner, UserListItem, TrailblazerCard },
   props: {
     noEventsMessage: {},
