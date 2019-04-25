@@ -1,7 +1,7 @@
 <template>
   <div class="events-list-wrapper">
     <LoadingSpinner v-if="awaiting"/>
-    <div class="userList" v-if="!awaiting">
+    <div class="user-list" v-if="!awaiting">
       <div v-for="(user, index) in users">
         <UserListItem
           :user="user"
@@ -10,8 +10,13 @@
         />
       </div>
     </div>
+    <div v-if="showFetchMoreUsersButton && !awaiting"
+          class="pagination-button"
+          @click="$emit('fetchMoreUsersClick')">
+          Load more ...
+    </div>
 
-    <div class="eventList" v-if="!awaiting">
+    <div class="event-list" v-if="!awaiting">
       <div v-for="(event, index) in events">
         <div
             v-if="showDates && (index === 0 || (formatDate(event.startsAt) !== formatDate(events[index - 1].startsAt)))"
@@ -37,6 +42,11 @@
         />
       </div>
     </div>
+    <div v-if="showFetchMoreEventsButton && !awaiting"
+          class="pagination-button"
+          @click="$emit('fetchMoreEventsClick')">
+          Load more ...
+    </div>
 
     <!-- in the case of no events -->
     <div v-if="noEvents && showTrailblazerMessage">
@@ -60,10 +70,11 @@ var moment = require('moment')
 export default {
   name: 'SearchResultList',
   components: { EventListItem, LoadingSpinner, UserListItem, TrailblazerCard },
+
   props: {
     noEventsMessage: {},
-    events: {},
-    users: {},
+    events: { links: null },
+    users: { links: null },
     showDates: {
       type: Boolean,
       default: true
@@ -71,6 +82,14 @@ export default {
     showTrailblazerMessage: {
       type: Boolean,
       default: false
+    },
+    showFetchMoreEventsButton: {
+      type: Boolean,
+      requred: true
+    },
+    showFetchMoreUsersButton: {
+      type: Boolean,
+      requred: true
     }
   },
   methods: {
@@ -99,10 +118,17 @@ select {
   --webkit-appearance: menulist;
 }
 
-.image-8 {
-  margin-bottom: 0;
+.pagination-button {
+  padding: 12px 32px;
+  border-radius: 4px;
+  background-color: #1f88e9;
+  text-align: center;
+  -webkit-text-fill-color: #fff;  // DO NOT REMOVE.  REQUIRED FOR SAFARI
+  color: #fff;
 }
-
+.user-list {
+  margin-bottom: 16px;
+}
 .body {
   all: unset;
   font-family: soleil, sans-serif;
@@ -112,61 +138,15 @@ select {
   background-color: #fff;
 }
 
-h1 {
-  margin-top: 20px;
-  margin-bottom: 10px;
-  font-size: 55px;
-  line-height: 44px;
-  font-weight: 700;
-  text-align: center;
-}
-
-h2 {
-  margin-top: 20px;
-  margin-bottom: 10px;
-  font-size: 32px;
-  line-height: 36px;
-  font-weight: bold;
-}
-
 a {
   color: #000;
   text-decoration: none;
-}
-
-.button {
-  padding: 12px 32px;
-  border-radius: 4px;
-  background-color: #1f88e9;
-  text-align: center;
-  color: white;
-}
-
-.button:hover {
-  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, .1)), to(rgba(0, 0, 0, .1)));
-  background-image: linear-gradient(180deg, rgba(0, 0, 0, .1), rgba(0, 0, 0, .1));
-}
-
-.button:active {
-  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, .1)), to(rgba(0, 0, 0, .1)));
-  background-image: linear-gradient(180deg, rgba(0, 0, 0, .1), rgba(0, 0, 0, .1));
 }
 
 .body {
   overflow: visible;
   background-color: #fff;
   font-family: soleil, sans-serif;
-}
-
-.image-2 {
-  margin-right: 17px;
-  float: left;
-  opacity: 0.8;
-}
-
-.h1-display {
-  margin-bottom: 24px;
-  line-height: 66px;
 }
 
 .content-section {
@@ -210,22 +190,6 @@ a {
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
-}
-
-.image-261 {
-  max-width: 90%;
-}
-
-.image-262 {
-  width: 100px;
-  height: 100px;
-  margin-bottom: 16px;
-}
-
-.image-263 {
-  min-width: 80px;
-  margin-right: 8px;
-  margin-left: 8px;
 }
 
 .link {
@@ -356,28 +320,14 @@ a {
   width: 40px;
   background-color: #fff;
 }
-
-.image-265 {
-  width: 40px;
-}
-
 .no-events-message {
   margin-top: 100px;
 }
 
 @media (max-width: 991px) {
-  .h1-display {
-    font-size: 32px;
-    line-height: 42px;
-  }
-
   .content-container-2 {
     padding-top: 100px;
     padding-bottom: 128px;
-  }
-
-  .image-263 {
-    min-width: 50px;
   }
 
   .content-container-3 {
@@ -399,19 +349,10 @@ a {
     padding-bottom: 100px;
   }
 
-  .h1-display {
-    font-size: 28px;
-    line-height: 34px;
-  }
-
   .content-container-2 {
     padding-right: 32px;
     padding-bottom: 100px;
     padding-left: 32px;
-  }
-
-  .image-263 {
-    min-width: 40px;
   }
 
   .date-title {
@@ -446,10 +387,6 @@ a {
     padding-bottom: 64px;
   }
 
-  .image-261 {
-    max-width: 100%;
-  }
-
   .date-title {
     font-size: 18px;
     line-height: 24px;
@@ -465,10 +402,6 @@ a {
   }
 
   .image-264 {
-    width: 32px;
-  }
-
-  .image-265 {
     width: 32px;
   }
 }
