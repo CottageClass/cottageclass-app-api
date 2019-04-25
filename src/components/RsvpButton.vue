@@ -32,7 +32,7 @@ export default {
 
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 
 .button-sub-link-paragraph {
   text-align: right;
@@ -57,6 +57,7 @@ export default {
   border-radius: 4px;
   background-color: #1f88e9;
   text-align: center;
+  -webkit-text-fill-color: #fff;  // DO NOT REMOVE.  REQUIRED FOR SAFARI
   color: #fff;
 }
 
