@@ -129,12 +129,14 @@ export default {
   border: 1px solid #1f88e9;
   background-color: transparent;
   color: #1f88e9;
+  -webkit-text-fill-color: #1f88e9;  // DO NOT REMOVE.  REQUIRED FOR SAFARI
 
   &.none:hover {
     background-image: linear-gradient(180deg, rgba(0, 0, 0, .02), rgba(0, 0, 0, .04));
   }
   &.sending {
     color: rgb(212, 80, 18);
+    -webkit-text-fill-color: rgb(212, 80, 18);  // DO NOT REMOVE.  REQUIRED FOR SAFARI
     border-color:  rgb(212, 80, 18);
 
     &:hover {
@@ -143,6 +145,7 @@ export default {
   }
   &.sent {
     color:  rgb(12, 186, 82);
+    -webkit-text-fill-color: rgb(12, 186, 82);  // DO NOT REMOVE.  REQUIRED FOR SAFARI
     border-color:  rgb(12, 186, 82);
     background-color:  rgba(12, 186, 82, .2);
     border-width: 2px;
