@@ -95,7 +95,7 @@ export default {
         return false
       }
     } else {
-      console.log('current user does not exist')
+      this.log('current user does not exist')
     }
     // override for better error messages on this screen and on signup screen.
     // note: changes here affect all vee-validate error messages until page reload.
@@ -128,45 +128,39 @@ export default {
         return !!navigator.userAgent.match(new RegExp(`(${expression})`, 'ig'))
       })
     },
-    signIn: function (event) {
+    async signIn (event) {
       event.preventDefault()
-      let component = this
-
-      this.$validator
-        .validateAll()
-        .then(function (result) {
-          if (result) {
-            let email = component.email && component.email.trim().toLowerCase()
-            let password = component.password && component.password.trim()
-            signIn({ email, password })
-              .then(res => {
-                console.log('auth success:', res)
-                const JWT = res.data[0]
-                return component.$store.dispatch('establishUser', { JWT })
-              }).catch(err => {
-                component.showError = true
-                component.errorMessage = 'There was a problem signing you in. If you forgot your password, email  contact@cottageclass.com for help.'
-                console.log('auth failure', err)
-              }).then(() => {
-                if (component.currentUser.hasAllRequiredFields) {
-                  component.$router.push({ name: 'Events' })
-                } else if (component.currentUser.id) {
-                  component.$router.push({ name: 'OnboardNewUser' })
-                } else {
-                  return false
-                }
-              })
-              .catch(function (err) {
-                console.log('auth FAILURE or user not onboarded yet')
-                console.error(err)
-              })
+      let validationResult, signInResult
+      try {
+        validationResult = await this.$validator.validateAll()
+      } catch (e) {
+        this.error('validation error')
+        this.error(e)
+      }
+      if (validationResult) {
+        let email = this.email && this.email.trim().toLowerCase()
+        let password = this.password && this.password.trim()
+        try {
+          signInResult = await signIn({ email, password })
+          this.log('auth success:', signIn)
+          const JWT = signInResult.data[0]
+          await this.$store.dispatch('establishUser', { JWT })
+          if (this.currentUser.hasAllRequiredFields) {
+            this.$router.push({ name: 'Events' })
+          } else if (this.currentUser.id) {
+            this.$router.push({ name: 'OnboardNewUser' })
           } else {
-            component.showError = true
+            throw Error('current user has no id')
           }
-        })
-        .catch(function (error) {
-          console.warn('validation error', error)
-        })
+        } catch (e) {
+          this.error('Authentication Error')
+          this.error(e)
+          this.showError = true
+          this.errorMessage = 'There was a problem signing you in. If you forgot your password, email contact@cottageclass.com for help.'
+        }
+      } else {
+        this.showError = true
+      }
     }
   },
   computed: mapGetters(['currentUser', 'isAuthenticated'])
