@@ -1,13 +1,44 @@
 <template>
   <div class="events-list-wrapper">
-    <LoadingSpinner v-if="awaitingEvents"/>
-    <div v-for="(user, index) in users">
-      <UserListItem
-        :user="user"
-        :index="index"
-        :key="index"
-      />
+    <LoadingSpinner v-if="awaiting"/>
+    <div class="userList" v-if="!awaiting">
+      <div v-for="(user, index) in users">
+        <UserListItem
+          :user="user"
+          :index="index"
+          :key="index"
+        />
+      </div>
     </div>
+
+    <div class="eventList" v-if="!awaiting">
+      <div v-for="(event, index) in events">
+        <div
+            v-if="showDates && (index === 0 || (formatDate(event.startsAt) !== formatDate(events[index - 1].startsAt)))"
+            class="event-date-section-tittle">
+          <img src="@/assets/date-outline-white-oval.svg" alt="" class="image-264">
+          <div class="date-text-wrapper">
+            <div class="date-title">
+              <span v-if="isToday(event.startsAt)">
+                <strong class="bold-text">Today</strong>,
+              </span>
+              {{ formatDate(event.startsAt) }}
+            </div>
+          </div>
+        </div>
+        <EventListItem
+          :event="event"
+          :index="index"
+          :key="index"
+          :showRsvpButton="currentUser === null || currentUser.id !== event.hostId"
+          :showEditButton="isAuthenticated && currentUser.id === event.hostId"
+          :distance="distanceFromCurrentUser(event.hostFuzzyLatitude,
+                                            event.hostFuzzyLongitude)"
+        />
+      </div>
+    </div>
+
+    <!-- in the case of no events -->
     <div v-if="noEvents && showTrailblazerMessage">
       <TrailblazerCard />
     </div>
@@ -15,31 +46,6 @@
        class="no-events-message">
        {{noEventsMessage}}
     </p>
-
-    <div v-for="(event, index) in events">
-      <div
-          v-if="showDates && (index === 0 || (formatDate(event.startsAt) !== formatDate(events[index - 1].startsAt)))"
-          class="event-date-section-tittle">
-        <img src="@/assets/date-outline-white-oval.svg" alt="" class="image-264">
-        <div class="date-text-wrapper">
-          <div class="date-title">
-            <span v-if="isToday(event.startsAt)">
-              <strong class="bold-text">Today</strong>,
-            </span>
-            {{ formatDate(event.startsAt) }}
-          </div>
-        </div>
-      </div>
-      <EventListItem
-        :event="event"
-        :index="index"
-        :key="index"
-        :showRsvpButton="currentUser === null || currentUser.id !== event.hostId"
-        :showEditButton="isAuthenticated && currentUser.id === event.hostId"
-        :distance="distanceFromCurrentUser(event.hostFuzzyLatitude,
-                                           event.hostFuzzyLongitude)"
-      />
-    </div>
   </div>
 </template>
 
@@ -76,8 +82,8 @@ export default {
     }
   },
   computed: {
-    awaitingEvents: function () {
-      return this.events === null
+    awaiting: function () {
+      return this.events === null || this.users === null
     },
     noEvents: function () {
       return this.events !== null && this.events.length === 0
