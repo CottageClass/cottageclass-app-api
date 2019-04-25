@@ -157,6 +157,7 @@ export default {
 .location-heading-2 {
   margin-bottom: 24px;
   color: #fff;
+  -webkit-text-fill-color: #fff;  // DO NOT REMOVE.  REQUIRED FOR SAFARI
   font-size: 20px;
   line-height: 24px;
   font-weight: 700;
