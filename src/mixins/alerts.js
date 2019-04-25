@@ -1,5 +1,12 @@
 export default {
   methods: {
+    showAlert (message, status) {
+      const store = this.$store
+      store.commit('showAlert',
+        {
+          alert: { message, status }
+        })
+    },
     showBriefAllert (message, status) {
       const store = this.$store
       store.commit('showAlert',
