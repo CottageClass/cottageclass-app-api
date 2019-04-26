@@ -67,10 +67,13 @@ export default {
         e.types.forEach(type => (placeResultObject[type] = e.long_name))
       )
       this.address = { ...addressData, ...placeResultObject }
+      if (!this.address.locality) {
+        this.address.locality = ''
+      }
       this.emitAddress()
     },
     emitAddress: function () {
-      console.log('emitting address')
+      this.log('emitting address')
       if (this.address.latitude) {
         this.$emit('input', {
           fullAddress: this.address,
