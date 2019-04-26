@@ -105,8 +105,9 @@ export default {
           this.showFetchMoreUsersButton = false
         }
         if (this.currentUser) {
-          this.users = this.users.filter(u => u.id !== this.currentUser.id)
+          newUsers = newUsers.filter(u => u.id !== this.currentUser.id)
         }
+        // if users is null, set it to the incoming users, otherwise add them
         this.users = !this.users ? newUsers : this.users.concat(newUsers)
         this.usersLastPage = this.usersLastPage + 1
       } catch (e) {
@@ -132,6 +133,7 @@ export default {
         if (this.currentUser) {
           newEvents = newEvents.filter(e => e.hostId !== this.currentUser.id)
         }
+        // if events is null, set it to the incoming events, otherwise add them
         this.events = !this.events ? newEvents : this.events.concat(newEvents)
         this.eventsLastPage = this.eventsLastPage + 1
       } catch (e) {
