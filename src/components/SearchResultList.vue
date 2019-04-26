@@ -1,5 +1,5 @@
 <template>
-  <div class="events-list-wrapper">
+  <div class="list-wrapper">
     <LoadingSpinner v-if="awaiting"/>
     <div class="user-list" v-if="!awaiting">
       <div v-for="(user, index) in users">
@@ -11,9 +11,9 @@
       </div>
     </div>
     <div v-if="showFetchMoreUsersButton && !awaiting"
-          class="pagination-button"
+          class="user-pagination-button"
           @click="$emit('fetchMoreUsersClick')">
-          Load more ...
+          Show more
     </div>
 
     <div class="event-list" v-if="!awaiting">
@@ -43,9 +43,9 @@
       </div>
     </div>
     <div v-if="showFetchMoreEventsButton && !awaiting"
-          class="pagination-button"
+          class="event-pagination-button"
           @click="$emit('fetchMoreEventsClick')">
-          Load more ...
+          Show more
     </div>
 
     <!-- in the case of no events -->
@@ -118,16 +118,30 @@ select {
   --webkit-appearance: menulist;
 }
 
-.pagination-button {
+.user-pagination-button {
+  display: flex;
+  width: 100%;
+  margin-top: 0px;
+  padding: 20px;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  color: hsla(208.8118811881188, 82.11%, 51.76%, 1.00);
+  border-bottom: 1px solid #f5f5f5;
+  background-color: #fff;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .08);
+}
+
+.event-pagination-button {
+  width: 200px;
+  margin-left: auto;
+  margin-right: auto;
   padding: 12px 32px;
   border-radius: 4px;
   background-color: #1f88e9;
   text-align: center;
   -webkit-text-fill-color: #fff;  // DO NOT REMOVE.  REQUIRED FOR SAFARI
   color: #fff;
-}
-.user-list {
-  margin-bottom: 16px;
 }
 .body {
   all: unset;
@@ -200,29 +214,22 @@ a {
   text-decoration: underline;
 }
 
-.events-list-wrapper {
+.list-wrapper {
+  display: flex;
+  flex-direction: column;
   width: 100%;
 }
 
-.events-list-wrapper div:first-child .event-date-section-tittle {
+.list-wrapper div:first-child .event-date-section-tittle {
   margin-top: 0px
 }
 
 .event-date-section-tittle {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   margin-top: 68px;
   margin-bottom: 16px;
   padding: 16px 16px 16px 0px;
-  -webkit-box-pack: start;
-  -webkit-justify-content: flex-start;
-  -ms-flex-pack: start;
   justify-content: flex-start;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
   align-items: center;
   border-radius: 4px;
 }
@@ -345,6 +352,12 @@ a {
 }
 
 @media (max-width: 767px) {
+  .user-pagination-button {
+    padding: 16px;
+    justify-content: center;
+    border-radius: 0px;
+  }
+
   .body {
     padding-bottom: 100px;
   }
