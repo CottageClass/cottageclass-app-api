@@ -5,7 +5,7 @@
       <div class="divider-2px"></div>
       <div class="content-container-4 w-container">
         <h1 class="h1-display">My RSVP'ed events</h1>
-        <EventList
+        <SearchResultList
             :events="events"
             :noEventsMessage="noEventsMessage"
         />
@@ -18,7 +18,7 @@
 <script>
 import MainNav from '@/components/MainNav.vue'
 import Footer from '@/components/Footer.vue'
-import EventList from '@/components/EventList.vue'
+import SearchResultList from '@/components/SearchResultList.vue'
 import * as api from '@/utils/api.js'
 import { mapGetters } from 'vuex'
 
@@ -26,7 +26,7 @@ var moment = require('moment')
 
 export default {
   name: 'MyRSVPs',
-  components: { MainNav, Footer, EventList },
+  components: { MainNav, Footer, SearchResultList },
   props: ['limitTo'],
   data () {
     return {

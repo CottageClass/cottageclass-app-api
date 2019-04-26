@@ -1,5 +1,5 @@
 <template>
-  <div class="body">
+  <div class="page-wrapper">
     <MainNav />
     <div class="content-section background-01">
       <div class="divider-2px"></div>
@@ -31,12 +31,16 @@
             @maxDistanceSet="updateForZoomLevel($event)"
           />
           <div class="list-container w-container">
-            <EventList
+            <SearchResultList
+              :showFetchMoreEventsButton="showFetchMoreEventsButton"
+              :showFetchMoreUsersButton="showFetchMoreUsersButton"
               class="list"
               :events="events"
               :users="users"
               :noEventsMessage="noEventsMessage"
               :showTrailblazerMessage="showTrailblazerMessage"
+              @fetchMoreEventsClick="fetchMoreEvents"
+              @fetchMoreUsersClick="fetchMoreUsers"
             />
           </div>
         </div>
@@ -47,7 +51,7 @@
 </template>
 
 <script>
-import EventList from '@/components/EventList.vue'
+import SearchResultList from '@/components/SearchResultList.vue'
 import MainNav from '@/components/MainNav.vue'
 import Footer from '@/components/Footer.vue'
 import EventListMap from '@/components/EventListMap.vue'
@@ -61,7 +65,7 @@ var moment = require('moment')
 
 export default {
   name: 'Events',
-  components: { EventList, MainNav, Footer, EventListMap, FilterSelector, AgeRangeFilterSelector, AgeRangeFilterButton },
+  components: { SearchResultList, MainNav, Footer, EventListMap, FilterSelector, AgeRangeFilterSelector, AgeRangeFilterButton },
   data () {
     return {
       maximumDistanceFromUserInMiles: '5',
@@ -70,6 +74,10 @@ export default {
       noEventsMessage: 'Sorry, there are no upcoming playdates in this area',
       events: null,
       users: null,
+      eventsLastPage: 0,
+      usersLastPage: 0,
+      showFetchMoreEventsButton: true,
+      showFetchMoreUsersButton: true,
       showTrailblazerMessage: true,
       ageRange: { error: null, data: { min: -1, max: -1 } }
     }
@@ -81,6 +89,56 @@ export default {
     ...mapGetters(['distanceFromCurrentUser', 'currentUser', 'isAuthenticated', 'alert', 'mapArea'])
   },
   methods: {
+    async fetchMoreUsers () {
+      try {
+        const params = {
+          miles: this.maximumDistanceFromUserInMiles,
+          lat: this.mapArea.center.lat,
+          lng: this.mapArea.center.lng,
+          pageSize: 10,
+          minAge: this.ageRange.data.min >= 0 ? this.ageRange.data.min : null,
+          maxAge: this.ageRange.data.max >= 0 ? this.ageRange.data.max : null,
+          page: this.usersLastPage + 1
+        }
+        let newUsers = await fetchUsersWithinDistance(params)
+        if (newUsers.length < 10) {
+          this.showFetchMoreUsersButton = false
+        }
+        if (this.currentUser) {
+          this.users = this.users.filter(u => u.id !== this.currentUser.id)
+        }
+        this.users = !this.users ? newUsers : this.users.concat(newUsers)
+        this.usersLastPage = this.usersLastPage + 1
+      } catch (e) {
+        this.error('problem loading more users')
+        this.error(e)
+      }
+    },
+    async fetchMoreEvents () {
+      try {
+        const params = {
+          miles: this.maximumDistanceFromUserInMiles,
+          lat: this.mapArea.center.lat,
+          lng: this.mapArea.center.lng,
+          pageSize: 10,
+          minAge: this.ageRange.data.min >= 0 ? this.ageRange.data.min : null,
+          maxAge: this.ageRange.data.max >= 0 ? this.ageRange.data.max : null,
+          page: this.eventsLastPage + 1
+        }
+        let newEvents = await fetchUpcomingEventsWithinDistance(params)
+        if (newEvents.length < 10) {
+          this.showFetchMoreEventsButton = false
+        }
+        if (this.currentUser) {
+          newEvents = newEvents.filter(e => e.hostId !== this.currentUser.id)
+        }
+        this.events = !this.events ? newEvents : this.events.concat(newEvents)
+        this.eventsLastPage = this.eventsLastPage + 1
+      } catch (e) {
+        this.error('problem loading events')
+        this.error(e)
+      }
+    },
     resetAgeRange () {
       this.ageRange = { error: null, data: { min: -1, max: -1 } }
     },
@@ -90,7 +148,6 @@ export default {
         maxDistance: e.miles
       })
       this.showTrailblazerMessage = false
-
       this.fetch()
     },
     isToday: function (date) {
@@ -100,20 +157,14 @@ export default {
       return moment(date).format('dddd, MMM Do')
     },
     fetch: async function () {
-      const params = {
-        miles: this.maximumDistanceFromUserInMiles,
-        lat: this.mapArea.center.lat,
-        lng: this.mapArea.center.lng,
-        pageSize: 10,
-        minAge: this.ageRange.data.min >= 0 ? this.ageRange.data.min : null,
-        maxAge: this.ageRange.data.max >= 0 ? this.ageRange.data.max : null
-      }
-      this.events = await fetchUpcomingEventsWithinDistance(params)
-      this.users = await fetchUsersWithinDistance(params)
-      if (this.currentUser) {
-        this.events = this.events.filter(e => e.hostId !== this.currentUser.id)
-        this.users = this.users.filter(u => u.id !== this.currentUser.id)
-      }
+      this.events = null
+      this.users = null
+      this.eventsLastPage = 0
+      this.usersLastPage = 0
+      this.showFetchMoreEventsButton = true
+      this.showFetchMoreUsersButton = true
+      this.fetchMoreEvents()
+      this.fetchMoreUsers()
     }
   },
   watch: {
@@ -132,7 +183,7 @@ export default {
 
 <style scoped>
 
-.body {
+.page-wrapper {
   all: unset;
   font-family: soleil, sans-serif;
   color: #333;
@@ -184,7 +235,7 @@ a {
   background-image: linear-gradient(180deg, rgba(0, 0, 0, .1), rgba(0, 0, 0, .1));
 }
 
-.body {
+.page-wrapper {
   overflow: visible;
   background-color: #fff;
   font-family: soleil, sans-serif;
@@ -258,26 +309,12 @@ a {
   text-decoration: none;
 }
 
-.body-2 {
-  background-color: #f6f6f6;
-}
-
 .list-container {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   width: 568px;
   min-height: 100px;
   padding-right: 32px;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
-  -webkit-box-align: start;
-  -webkit-align-items: flex-start;
-  -ms-flex-align: start;
   align-items: flex-start;
   background-color: transparent;
 }
