@@ -7,6 +7,21 @@
         <h1 class="event-page-title">Meet new parents. Plan playdates.</h1>
         <div class="selectors-group">
         <div class="filter-container">
+
+          <FilterSelector title="Location"
+                          @clearFilterClicked="resetAgeRange"
+                          :active="true" >
+            <template v-slot:buttonContents>
+              <LocationFilterButton :zipCode="mapArea.zipCode" />
+            </template>
+            <template v-slot:selectorContents>
+              <LocationFilterSelector
+                @input="updateMapArea($event)"
+                value="mapArea"
+              />
+            </template>
+          </FilterSelector>
+
           <FilterSelector title="Child Age"
                           @clearFilterClicked="resetAgeRange"
                           :active="ageRangeActive" >
@@ -28,7 +43,7 @@
           <EventListMap
             class="map"
             :users="users"
-            @maxDistanceSet="updateForZoomLevel($event)"
+            @maxDistanceSet="updateMapArea($event)"
           />
           <div class="list-container w-container">
             <SearchResultList
@@ -58,6 +73,8 @@ import EventListMap from '@/components/EventListMap.vue'
 import FilterSelector from '@/components/filters/FilterSelector'
 import AgeRangeFilterButton from '@/components/filters/AgeRangeFilterButton'
 import AgeRangeFilterSelector from '@/components/filters/AgeRangeFilterSelector'
+import LocationFilterSelector from '@/components/filters/LocationFilterSelector'
+import LocationFilterButton from '@/components/filters/LocationFilterButton'
 import { fetchUpcomingEventsWithinDistance, fetchUsersWithinDistance } from '@/utils/api'
 import { mapGetters } from 'vuex'
 
@@ -65,7 +82,15 @@ var moment = require('moment')
 
 export default {
   name: 'Events',
-  components: { SearchResultList, MainNav, Footer, EventListMap, FilterSelector, AgeRangeFilterSelector, AgeRangeFilterButton },
+  components: { SearchResultList,
+    MainNav,
+    Footer,
+    EventListMap,
+    FilterSelector,
+    AgeRangeFilterSelector,
+    AgeRangeFilterButton,
+    LocationFilterSelector,
+    LocationFilterButton },
   data () {
     return {
       maximumDistanceFromUserInMiles: '5',
@@ -144,7 +169,7 @@ export default {
     resetAgeRange () {
       this.ageRange = { error: null, data: { min: -1, max: -1 } }
     },
-    updateForZoomLevel: async function (e) {
+    updateMapArea: async function (e) {
       this.$store.commit('setMapArea', {
         center: { lat: e.center.lat(), lng: e.center.lng() },
         maxDistance: e.miles
@@ -183,8 +208,14 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+.filter-container {
+  display: flex;
+  flex-direction: row;
+  & > div{
+    margin-right:10px;
+  }
+}
 .page-wrapper {
   all: unset;
   font-family: soleil, sans-serif;

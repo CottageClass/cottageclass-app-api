@@ -9,9 +9,9 @@
          class="modal-background"
          @click="state.open=false" >
   </div>
-  <div v-if="state.open" class="dsk-selector-box-container"
+  <div v-if="state.open" class="selector-box-container"
         @click.stop >
-    <div class="mob-selector-top-bar">
+    <div class="selector-top-bar">
       <div @click="state.open=false" class="mob-selector-close w-inline-block">
         <img src="@/assets/close-x-black.svg" alt="" />
       </div>
@@ -21,7 +21,7 @@
               @click="$emit('clearFilterClicked')">Clear all</div>
       </div>
     </div>
-    <div class="dsk-selector-top">
+    <div class="selector-top">
       <div class="selector-content-container">
         <slot name="selectorContents"></slot>
       </div>
@@ -164,7 +164,7 @@ body {
   margin-bottom: 20px;
 }
 
-.dsk-selector-box-container {
+.selector-box-container {
   position: absolute;
   z-index: 1000;
   width: 280px;
@@ -184,15 +184,14 @@ body {
   justify-content: center;
   -ms-flex-align: start;
   align-items: flex-start;
-  background-color: #f2f2f2;
 }
 
-.dsk-selector-top {
+.selector-top {
   width: 100%;
   padding: 24px;
 }
 
-.mob-selector-top-bar {
+.selector-top-bar {
   position: relative;
   display: -ms-flexbox;
   display: flex;
@@ -318,21 +317,21 @@ body {
   background-color: rgba(0, 0, 0, .1);
 }
 
-  .modal-background {
-    position: fixed;
-    left: 0px;
-    top: 0px;
-    right: auto;
-    bottom: auto;
-    z-index: 999;
-    width: 100%;
-    height: 10000px;
-    padding-top: 16px;
-    padding-right: 16px;
-    padding-left: 16px;
-    border-radius: 0px;
-    background-color: rgba(0, 0, 0, 0);
-  }
+.modal-background {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  right: auto;
+  bottom: auto;
+  z-index: 999;
+  width: 100%;
+  height: 10000px;
+  padding-top: 16px;
+  padding-right: 16px;
+  padding-left: 16px;
+  border-radius: 0px;
+  background-color: rgba(0, 0, 0, 0);
+}
 
 @media (max-width: 991px) {
   .playdates-content-container {
@@ -370,7 +369,7 @@ body {
     line-height: 26px;
   }
 
-  .dsk-selector-box-container {
+  .selector-box-container {
     position: relative;
     width: 100%;
     min-height: 100px;
@@ -379,7 +378,7 @@ body {
     margin-left: 0px;
   }
 
-  .mob-selector-top-bar {
+  .selector-top-bar {
     -ms-flex-pack: center;
     justify-content: center;
     border-top-left-radius: 4px;
