@@ -150,8 +150,8 @@ export default {
           this.log(res)
           return res
         }).catch(err => {
-          this.error('Error saving')
-          this.error(err)
+          this.logError('Error saving')
+          this.logError(err)
           this.saveButtonText = 'Problem saving. Click to try again.'
         })
       } else {

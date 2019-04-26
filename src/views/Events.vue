@@ -136,8 +136,8 @@ export default {
         this.users = !this.users ? newUsers : this.users.concat(newUsers)
         this.usersLastPage = this.usersLastPage + 1
       } catch (e) {
-        this.error('problem loading more users')
-        this.error(e)
+        this.logError('problem loading more users')
+        this.logError(e)
       }
     },
     async fetchMoreEvents () {
@@ -162,8 +162,8 @@ export default {
         this.events = !this.events ? newEvents : this.events.concat(newEvents)
         this.eventsLastPage = this.eventsLastPage + 1
       } catch (e) {
-        this.error('problem loading events')
-        this.error(e)
+        this.logError('problem loading events')
+        this.logError(e)
       }
     },
     resetAgeRange () {
