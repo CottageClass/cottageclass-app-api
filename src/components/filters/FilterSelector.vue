@@ -64,17 +64,6 @@ body {
   line-height: 20px;
 }
 
-.container {
-  position: relative;
-  display: -ms-flexbox;
-  display: flex;
-  padding: 24px 32px;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
 .button {
   min-height: 40px;
   margin-left: 16px;
@@ -349,10 +338,6 @@ body {
 }
 
 @media (max-width: 767px) {
-  .container {
-    padding: 16px 20px;
-  }
-
   .playdates-content-container {
     padding-top: 0px;
     padding-right: 20px;
@@ -418,11 +403,6 @@ body {
 }
 
 @media (max-width: 479px) {
-  .container {
-    padding-top: 11px;
-    padding-bottom: 11px;
-  }
-
   .button {
     min-height: auto;
     margin-left: 10px;

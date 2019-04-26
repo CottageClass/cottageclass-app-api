@@ -662,13 +662,6 @@ a {
   align-items: center;
 }
 
-.container {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
 @media (max-width: 991px) {
   .div-block-32 {
     width: 40%;

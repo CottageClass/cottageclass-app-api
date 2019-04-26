@@ -2,7 +2,7 @@
 <div class="body">
   <MainNav />
   <div class="section">
-    <div class="container w-container">
+    <div class="lp-container w-container">
       <h1 class="heading-1">FAQ for KidsClub</h1>
       <p class="intro-paragraph">Welcome to KidsClub! KidsClub is a community for parents to share childcare and educational activities with other parents for free! Our mission is to give you access to an amazing support network of parents to share childcare, advice and fun-filled times! Every parent is asked to host a playdate at least once a month. In exchange, you’ll get access to incredible events, activities and childcare led by other parents. In addition to the listed activities, you’ll also be able to request childcare from other parents in the community at specific times.</p>
       <ul class="ul-menu">
@@ -40,7 +40,7 @@
     </div>
   </div>
   <div id="Community-Rules" class="section f6f6f6">
-    <div class="container w-container">
+    <div class="lp-container w-container">
       <h2 class="heading-2">Community Rules</h2>
       <p class="paragraph">All members are required to abide by our <a href="https://www.cottageclass.com/terms-of-service#">Terms of Service</a>, however, here is a brief summary of some guidelines we’ve put in place to keep our community strong. Above all&mdash;to have the best experience on KidsClub&mdash;be kind and respectful, and treat others as you’d wish to be treated!</p>
       <div class="question">When attending a playdate:</div>
@@ -71,7 +71,7 @@
     </div>
   </div>
   <div id="General-Questions" class="section">
-    <div class="container w-container">
+    <div class="lp-container w-container">
       <h2 class="heading-2">General Questions</h2>
       <div class="question">How does it work? </div>
       <ul class="unordered-list">
@@ -91,7 +91,7 @@
     </div>
   </div>
   <div id="Hosting-Playdates" class="section f6f6f6">
-    <div class="container w-container">
+    <div class="lp-container w-container">
       <h2 class="heading-2">Hosting Playdates</h2>
       <div class="question">How do I set up a playdate?</div>
       <p class="paragraph">The easitest way is to reach out to parents with similarly-aged children near you and set up a time. You can also offer scheduled playdates, which let you share the link to your playdate with friends and invite your friends to share childcare with you! Other members of KidsClub will also have the option to RSVP to your playdate. We encourage you to invite as many friends as possible to grow the KidsClub community with incredible people and expand the options for free, quality care!</p>
@@ -114,7 +114,7 @@
     </div>
   </div>
   <div id="Attending-Playdates" class="section">
-    <div class="container w-container">
+    <div class="lp-container w-container">
       <h2 class="heading-2">Attending Playdates</h2>
       <div class="question">How do I book a playdate?</div>
       <p class="paragraph">You book your playdate by RSVP’ing to the events on the events page, or by reaching out to a family directly. When you book your playdate, you’ll get an automated text message from the KidsClub team confirming your reservation.</p>
@@ -131,7 +131,7 @@
     </div>
   </div>
   <div id="Trust-Safety" class="section f6f6f6">
-    <div class="container w-container">
+    <div class="lp-container w-container">
       <h2 class="heading-2">Trust and Safety</h2>
       <div class="question">How do I ensure my child is safe on my playdate?</div>
       <ul class="unordered-list">
@@ -239,7 +239,7 @@ li {
   background-color: #f6f6f6;
 }
 
-.container {
+.lp-container {
   padding: 64px 32px;
 }
 
@@ -308,7 +308,7 @@ li {
 }
 
 @media (max-width: 479px) {
-  .container {
+  .lp-container {
     padding: 32px 20px;
   }
   .question {

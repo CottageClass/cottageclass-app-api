@@ -3,7 +3,7 @@ This is the map view of a list of events
  -->
 
 <template>
-  <div class="container">
+  <div class="lp-container">
     <div v-if="showSelector" class="top-container">
       <router-link
       v-if="showNavigation"
@@ -208,7 +208,7 @@ select {
   --webkit-appearance: menulist;
 }
 
-.container {
+.lp-container {
   display: flex;
   flex-direction: column;
   background-color: #f6f6f6;

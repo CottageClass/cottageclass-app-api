@@ -4,6 +4,7 @@ import VueAxios from 'vue-axios'
 import VeeValidate from 'vee-validate'
 import VueClipboard from 'vue-clipboard2'
 import VueScrollTo from 'vue-scrollto'
+import Vuetify from 'vuetify'
 
 import '@babel/polyfill'
 
@@ -17,6 +18,8 @@ import VueAnalytics from 'vue-analytics'
 import GoogleMapsLoader from 'google-maps'
 
 import { logger } from '@/mixins'
+
+import 'vuetify/dist/vuetify.min.css' // Ensure you are using css-loader
 
 GoogleMapsLoader.KEY = process.env.GOOGLE_API_KEY
 GoogleMapsLoader.LIBRARIES = ['geometry', 'places']
@@ -50,6 +53,7 @@ if (isAuthWindow) {
   Vue.use(VueAxios, axios)
   Vue.use(VeeValidate)
   Vue.use(VueClipboard)
+  Vue.use(Vuetify)
 
   Vue.config.productionTip = false
 

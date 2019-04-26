@@ -1,7 +1,7 @@
 <template>
   <div class="main-nav">
     <Alert v-if="alert" />
-    <div class="container w-container">
+    <div class="lp-container w-container">
       <div class="logo-wrapper">
         <router-link :to="{ name: logoRouterTarget }" class="w-inline-block">
           <img src="@/assets/kc-logo-landscape.svg" alt="" class="logo">
@@ -143,7 +143,7 @@ a {
   line-height: 20px;
 }
 
-.container {
+.lp-container {
   position: relative;
   display: -webkit-box;
   display: -webkit-flex;
@@ -248,7 +248,7 @@ a {
 }
 
 @media (max-width: 767px) {
-  .container {
+  .lp-container {
     padding: 16px 20px;
   }
   .nav-links-expanded {
@@ -263,7 +263,7 @@ a {
 }
 
 @media (max-width: 479px) {
-  .container {
+  .lp-container {
     padding-top: 11px;
     padding-bottom: 11px;
   }
