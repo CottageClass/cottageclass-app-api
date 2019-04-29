@@ -1,7 +1,9 @@
+import { redirect } from '@/mixins'
 import _ from 'lodash'
 import { mapGetters } from 'vuex'
 
 export default {
+  mixins: [ redirect ],
   methods: {
     // accepts a callback that take `window` as an argument where window is the popup window
     authenticate: function (provider, callback) {
@@ -34,16 +36,7 @@ export default {
           // determine where the user should go next
           console.log('Facebook authentication successful')
           component.$store.dispatch('establishUser', { JWT: data.token })
-          if (component.currentUser.hasAllRequiredFields) {
-            if (component.redirectRoute) {
-              component.$router.push(component.redirectRoute)
-              component.$store.commit('resetRedirectRoute')
-            } else {
-              component.$router.push({ name: 'Events' })
-            }
-          } else {
-            component.$router.push({ name: 'OnboardNewUser' })
-          }
+          component.redirectOrProceed()
         }
       })
     }

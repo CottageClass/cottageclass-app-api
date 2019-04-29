@@ -21,7 +21,21 @@ export default {
           params: this.$route.params
         }
       })
+    },
+    redirectOrProceed () {
+      if (this.currentUser.hasAllRequiredFields) {
+        if (this.redirectRoute) {
+          this.$router.push(this.redirectRoute)
+          this.$store.commit('resetRedirectRoute')
+        } else {
+          this.$router.push({ name: 'Events' })
+        }
+      } else if (this.currentUser.id) {
+        this.$router.push({ name: 'OnboardNewUser' })
+      } else {
+        throw Error('current user has no id')
+      }
     }
   },
-  computed: mapGetters(['isAuthenticated'])
+  computed: mapGetters(['isAuthenticated', 'currentUser'])
 }

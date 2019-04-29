@@ -176,9 +176,6 @@ export default {
         this.submitRsvp()
       }
     },
-    forgetRsvpAttempted: function () {
-      this.$store.commit('resetRedirectRoute')
-    },
     submitRsvp: function () {
       this.err = ''
       console.log('rsvping children ' + this.childrenSelected + ' to event ID' + this.eventId)
@@ -187,7 +184,6 @@ export default {
       api.submitEventParticipant(this.eventId, this.childrenSelected).then(res => {
       // open event page where user will see success message
         component.sendNotifications()
-        component.forgetRsvpAttempted()
         return this.$store.commit('showAlertOnNextRoute', {
           alert: {
             message: 'Congratulations, you have RSVP&apos;ed to this event! You&apos;ll soon receive an email confirming your RSVP.',
