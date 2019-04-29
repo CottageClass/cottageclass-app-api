@@ -1,4 +1,4 @@
-import ChildAges from '@/components/childAges'
+import ChildAges from '@/components/ChildAges'
 import { mount } from '@vue/test-utils'
 
 describe('ChildAges', () => {
