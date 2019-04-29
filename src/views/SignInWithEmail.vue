@@ -145,13 +145,7 @@ export default {
           this.log('auth success:', signIn)
           const JWT = signInResult.data[0]
           await this.$store.dispatch('establishUser', { JWT })
-          if (this.currentUser.hasAllRequiredFields) {
-            this.$router.push({ name: 'Events' })
-          } else if (this.currentUser.id) {
-            this.$router.push({ name: 'OnboardNewUser' })
-          } else {
-            throw Error('current user has no id')
-          }
+          this.redirectOrProceed()
         } catch (e) {
           this.logError('Authentication Error')
           this.logError(e)
