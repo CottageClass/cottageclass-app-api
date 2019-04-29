@@ -6,11 +6,18 @@
       id="address-autocomplete"
       classname="location-text-field w-input"
       placeholder="Search..."
-      v-on:placechanged="getAddressData"
+      v-on:placechanged="updateAddress"
       country="us"
     >
     </vue-google-autocomplete>
     <div class="section-title">Within Distance</div>
+    <v-slider
+      v-model="distance"
+      min="0.1"
+      max="20"
+      @change="update"
+    ></v-slider>
+    <div class="distance-display">{{ distanceText }}</div>
   </div>
 </template>
 
@@ -23,18 +30,31 @@ export default {
   props: ['value'],
   data () {
     return {
-      err: null
+      distance: 1,
+      err: null,
+      zip: null
+    }
+  },
+  computed: {
+    distanceText () {
+      return this.distance + ' Mile' + (this.distance === 1 ? '' : 's')
     }
   },
   methods: {
     update () {
-      this.$emit('maxDistanceSet', {
+      this.$emit('locationUpdated', {
         center: this.center,
-        miles: this.distance
+        miles: this.distance,
+        zip: this.zip
       })
     },
-    getAddressData (addressData) {
-      this.debug({ addressData })
+    updateAddress (addressData) {
+      this.center = {
+        lat: () => addressData.latitude,
+        lng: () => addressData.longitude
+      }
+      this.zip = addressData.postal_code
+      this.update()
     }
   }
 }
@@ -44,6 +64,9 @@ export default {
 .section-title {
     width: auto;
     margin-bottom: 8px;
+}
+.distance-display {
+  text-align: center;
 }
 .location-text-field {
   width: 100%;
