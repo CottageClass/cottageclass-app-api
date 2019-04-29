@@ -20,8 +20,9 @@
               <div class="host-info-wrapper">
                 <div class="hosted-by">Hosted by <router-link
                     :to="{ name: 'ProviderProfile', params: { id: event.hostId }}" class="host">
-                    {{ event.hostFirstName }}</router-link> &amp;
-                  <ChildAges :childAges="event.hostChildAges" singular="kid" plural="kids" /><span
+                    {{ event.hostFirstName }}</router-link>
+                  <ChildAges :childAges="event.hostChildAges" singular="kid" plural="kids" prefix="& "/>
+                  <span
                     v-if="event.participatingParents && event.participatingParents.length > 0">
                     <Participants :participants="event.participatingParents" /></span><span v-else>.</span></div>
                 <div v-if="event.hostVerified" class="background-checked-wrapper"><img src="@/assets/check-green.svg"
@@ -108,8 +109,8 @@
             <div class="card-small-text">Host</div>
             <div class="card-large-text">
               <router-link :to="{name: 'ProviderProfile', params: {id: event.hostId}}">{{ event.hostFirstName }}
-              </router-link> &amp;
-              <ChildAges :childAges="event.hostChildAges" singular="child" plural="children" />.
+              </router-link>
+              <ChildAges :childAges="event.hostChildAges" singular="child" plural="children" prefix="& "/>.
             </div>
             <div class="card-small-text-gray">{{ jobText }}</div>
             <div class="card-large-text">

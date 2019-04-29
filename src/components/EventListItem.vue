@@ -37,8 +37,8 @@
               :to="{ name: 'ProviderProfile', params: { id: event.hostId }}"
               class="host-name link">
                 {{ event.hostFirstName }}
-            </router-link> &amp;
-            <ChildAges :childAges="event.hostChildAges" singular="kid" plural="kids"/>.
+            </router-link>
+            <ChildAges :childAges="event.hostChildAges" singular="kid" plural="kids" prefix="& "/>.
           </div>
           </div>
 

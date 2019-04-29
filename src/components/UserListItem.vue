@@ -8,9 +8,11 @@
     <div class="info-container">
       <div class="heading">
         <span class="name">{{ user.firstName }}</span>
-        <span class="children" v-if="user.childAges && user.childAges.length">
-          {{childAgeString}}
-        </span>
+        <ChildAges class="children"
+                   :childAges="user.childAges"
+                   :verbose="false"
+                   singular="kid"
+                   plural="kids" />
       </div>
       <div class="details">
         <span class="distance">{{distanceFromMapCenter(user.location) + 'mi'}}</span>
@@ -29,6 +31,7 @@
 <script>
 import AvatarImage from '@/components/base/AvatarImage'
 import MeetButton from '@/components/base/MeetButton'
+import ChildAges from '@/components/ChildAges'
 import { distanceHaversine } from '@/utils/api'
 import { mapGetters } from 'vuex'
 import _ from 'lodash'
@@ -44,7 +47,7 @@ export default {
     }
   },
   props: ['user'],
-  components: { AvatarImage, MeetButton },
+  components: { AvatarImage, MeetButton, ChildAges },
   methods: {
     registerMeetClick (e) {
       this.lastMeetButtonClick = e
@@ -57,10 +60,6 @@ export default {
     }
   },
   computed: {
-    childAgeString () {
-      const ages = this.user.childAges
-      return ages.length + ' kid' + (ages.length > 1 ? 's' : '') + ' (' + ages.join(', ') + ')'
-    },
     distanceFromCurrentUser () {
       if (this.currentUser) {
         const location = this.currentUser.location
