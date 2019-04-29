@@ -10,13 +10,13 @@
 
           <FilterSelector title="Location"
                           @clearFilterClicked="resetAgeRange"
-                          :active="true" >
+                          :active="zip" >
             <template v-slot:buttonContents>
-              <LocationFilterButton :zipCode="mapArea.zipCode" />
+              <LocationFilterButton :zipCode="zip" />
             </template>
             <template v-slot:selectorContents>
               <LocationFilterSelector
-                @input="updateMapArea($event)"
+                @locationUpdated="updateMapAreaFromFilter"
                 value="mapArea"
               />
             </template>
@@ -43,7 +43,7 @@
           <EventListMap
             class="map"
             :users="users"
-            @maxDistanceSet="updateMapArea($event)"
+            @searchAreaSet="updateMapAreaFromMap"
           />
           <div class="list-container w-container">
             <SearchResultList
@@ -104,7 +104,8 @@ export default {
       showFetchMoreEventsButton: true,
       showFetchMoreUsersButton: true,
       showTrailblazerMessage: true,
-      ageRange: { error: null, data: { min: -1, max: -1 } }
+      ageRange: { error: null, data: { min: -1, max: -1 } },
+      zip: null
     }
   },
   computed: {
@@ -169,9 +170,18 @@ export default {
     resetAgeRange () {
       this.ageRange = { error: null, data: { min: -1, max: -1 } }
     },
+    updateMapAreaFromMap: async function (e) {
+      this.updateMapArea(e)
+      this.zip = null
+    },
+    updateMapAreaFromFilter: async function (e) {
+      this.updateMapArea(e)
+      this.zip = e.zip
+    },
     updateMapArea: async function (e) {
+      const center = e.center ? { lat: e.center.lat(), lng: e.center.lng() } : null
       this.$store.commit('setMapArea', {
-        center: { lat: e.center.lat(), lng: e.center.lng() },
+        center,
         maxDistance: e.miles
       })
       this.showTrailblazerMessage = false
