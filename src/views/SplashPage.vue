@@ -4169,6 +4169,7 @@ html {
   justify-content: space-between;
   flex-wrap: wrap;
   align-items: flex-start;
+  box-sizing: border-box;
 }
 
 .program-photo-grid-container img {
