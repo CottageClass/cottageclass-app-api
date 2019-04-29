@@ -1,12 +1,12 @@
 <template>
   <div class="contents">
-    {{ zipCode || 'zzz'}}
+    {{ zipCode || 'Location'}}
   </div>
 </template>
 
 <script>
 export default {
-  name: 'AgeRangeFilterButton',
+  name: 'LocationFilterButton',
   props: ['zipCode']
 }
 </script>

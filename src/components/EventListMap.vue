@@ -11,11 +11,6 @@ This is the map view of a list of events
       class="back-button w-inline-block">
         <img src="../assets/arrow-back-black.svg">
       </router-link>
-      <p class="distance-selector">Within
-        <select v-model="maximumDistanceFromUserInMiles">
-          <option v-for="distance in distanceOptions">{{distance}}</option>
-        </select> miles
-      </p>
       <a
       v-if="showNavigation"
       @click="switchType"
@@ -56,8 +51,6 @@ import { maps, screen } from '@/mixins'
 import SearchResultList from '@/components/SearchResultList.vue'
 import { mapGetters } from 'vuex'
 
-const DISTANCE_OPTIONS = [ 1, 2, 5, 10, 20, 50 ]
-
 export default {
   name: 'EventListMap',
   props: ['users', 'events'],
@@ -67,7 +60,6 @@ export default {
     return {
       map: null,
       type: 'map',
-      maximumDistanceFromUserInMiles: DISTANCE_OPTIONS[2],
       userPins: [],
       mapHasChanged: false,
       noIdlesYet: true
@@ -92,29 +84,30 @@ export default {
 
       const that = this
       // sort users by latitude when adding pins so the z index is right on the map
-      const latUsers = this.users.concat().sort((a, b) => {
-        return b.location.lat - a.location.lat
-      })
+      if (this.users) {
+        const latUsers = this.users.concat().sort((a, b) => {
+          return b.location.lat - a.location.lat
+        })
 
-      for (let user of latUsers) {
-        const pin = await that.addUserPin(
-          user,
-          { lat: user.location.lat, lng: user.location.lng }
-        )
-        if (pin) {
-          that.userPins.push(pin)
-          pin.addListener('click', function () {
-            that.$router.push({ name: 'ProviderProfile', params: { id: user.id } })
-          })
+        for (let user of latUsers) {
+          const pin = await that.addUserPin(
+            user,
+            { lat: user.location.lat, lng: user.location.lng }
+          )
+          if (pin) {
+            that.userPins.push(pin)
+            pin.addListener('click', function () {
+              that.$router.push({ name: 'ProviderProfile', params: { id: user.id } })
+            })
+          }
         }
       }
     },
-    setZoomLevelForMaxDistance: async function () {
+    setZoomLevelForRadius: async function (radius) {
       const map = await this.map
       const mapEl = document.querySelector('.map-container')
-      const minDim = Math.min(mapEl.clientHeight, mapEl.clientWidth)
-      const pixelRadius = minDim / 2
-      const desiredMetersPerPixel = this.maximumDistanceFromUserInMiles * 1609.34 / pixelRadius
+      const halfDiagonal = Math.hypot(mapEl.clientHeight, mapEl.clientWidth) / 2
+      const desiredMetersPerPixel = this.radius * 1609.34 / halfDiagonal
       let zoom = Math.floor(await this.zoomLevelForScale(desiredMetersPerPixel, map))
       zoom = Math.min(Math.max(zoom, 0), 20) // ensure it's in the range of acceptable zooms
       map.setZoom(zoom)
@@ -122,7 +115,7 @@ export default {
     searchButtonClick: async function () {
       const map = await this.map
       this.mapHasChanged = false
-      this.$emit('maxDistanceSet', { center: map.center, miles: this.maximumDistanceFromUserInMiles }) // this should get the zoom level from the actual map
+      this.$emit('searchAreaSet', { center: map.center, miles: this.radius })
     },
     idleHandler (e) {
       if (this.noIdlesYet) {
@@ -151,7 +144,6 @@ export default {
     showNavigation: function () {
       return this.$router.currentRoute.name === 'EventsDetail'
     },
-    distanceOptions: () => DISTANCE_OPTIONS,
     mapOptions: function () {
       return {
         gestureHandling: this.showNavigation || !this.isMobile ? 'greedy' : 'none',
@@ -173,10 +165,13 @@ export default {
     users: function () {
       this.updateMarkers()
     },
-    maximumDistanceFromUserInMiles: async function () {
-      const map = await this.map
-      this.setZoomLevelForMaxDistance()
-      this.$emit('maxDistanceSet', { center: map.center, miles: this.maximumDistanceFromUserInMiles })
+    mapArea: {
+      handler: async function () {
+        const map = await this.map
+        map.setCenter(this.mapArea.center)
+        this.setZoomLevelForMaxDistance()
+      },
+      deep: true
     }
   },
   mounted: async function () {
@@ -198,11 +193,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.distance-selector {
-  text-align: center;
-  margin: 10px;
-}
-
 select {
   appearance: menulist;
   --webkit-appearance: menulist;
