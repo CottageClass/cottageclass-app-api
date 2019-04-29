@@ -1918,10 +1918,6 @@ export default {
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .08);
   }
 
-  .container {
-    padding: 0px 32px 100px;
-  }
-
   /* TODO: Make all these one style in the components themselves! */
 
   .onb-child-info-container {
@@ -2210,9 +2206,6 @@ export default {
     .body {
       padding-bottom: 77px;
     }
-    .container {
-      padding-bottom: 32px;
-    }
     .button-primary {
       height: auto;
     }
@@ -2275,11 +2268,6 @@ export default {
     .card {
       padding: 24px;
       border-radius: 0px;
-    }
-    .container {
-      padding-top: 16px;
-      padding-right: 0px;
-      padding-left: 0px;
     }
     .button-primary {
       display: block;

@@ -1,7 +1,7 @@
 <template>
-  <div class="wrapper">
+  <div class="selector-wrapper">
     <div class="dropdown">
-      <div class="label">Minimum</div>
+      <div class="range-dropdown-label">Minimum</div>
     <select v-model="value.data.min" @change="updateMin">
       <option value="-1" selected>-</option>
       <option v-for="age in Array(12).keys()"
@@ -13,7 +13,7 @@
     </select>
     </div>
     <div class="dropdown">
-    <div class="label">Maximum</div>
+    <div class="range-dropdown-label">Maximum</div>
     <select v-model="value.data.max" @change="updateMax">
       <option value="-1" selected>-</option>
       <option v-for="age in Array(12).keys()"
@@ -57,8 +57,8 @@ export default {
 }
 </script>
 
-<style>
-.wrapper {
+<style scoped lang="scss">
+.selector-wrapper {
   text-align: center;
   padding-top: 16px;
 }
@@ -67,7 +67,7 @@ export default {
   padding: 16px;
 }
 
-.label {
+.range-dropdown-label {
   padding: 4px;
 }
 </style>

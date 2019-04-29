@@ -22,6 +22,7 @@ Rails.application.routes.draw do
             sort: /chronological|distance/i,
             latitude: /-?+(?=.??\d)\d*\.?\d*/,
             longitude: /-?+(?=.??\d)\d*\.?\d*/,
+            miles: /-?+(?=.??\d)\d*\.?\d*/,  # this allows negatives, which it shouldn't
             min_age: /\d+/,
             max_age: /\d+/,
             defaults: { skope: 'all' },
@@ -34,6 +35,7 @@ Rails.application.routes.draw do
             to: 'users#index',
             latitude: /-?+(?=.??\d)\d*\.?\d*/,
             longitude: /-?+(?=.??\d)\d*\.?\d*/,
+            miles: /-?+(?=.??\d)\d*\.?\d*/,  # this allows negatives, which it shouldn't
             min_age: /\d+/,
             max_age: /\d+/,
             as: :index

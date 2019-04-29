@@ -37,7 +37,7 @@ class API::UsersController < API::BaseController
       users = users.joins(:children).where('children.birthday' => time_range)
     end
 
-    miles = miles.to_i
+    miles = miles.to_f
     if miles.positive?
       location = []
       location = [latitude, longitude] if [latitude, longitude].all?(&:present?)

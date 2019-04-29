@@ -5,7 +5,7 @@
       v-on:closeModal="showDeleteConfirmationModal = false"
       :eventId="eventId"/>
   <MainNav />
-  <div class="container w-container">
+  <div class="lp-container w-container">
   <h1 class="heading-1">Editing event #{{ eventId }} </h1>
   <StyleWrapper styleIs="editing" class="cards" v-if="event">
       <ErrorMessage v-if="showError && error" text="Your entries have errors. Please fix them to continue..." />
@@ -188,7 +188,7 @@ export default {
   margin-bottom: 32px;
 }
 
-.container {
+.lp-container {
   padding: 32px 32px 100px;
 }
 
@@ -215,7 +215,7 @@ export default {
     padding-bottom: 77px;
   }
 
-  .container {
+  .lp-container {
     padding-bottom: 32px;
   }
 }
@@ -230,7 +230,7 @@ export default {
     margin-left: 24px;
   }
 
-  .container {
+  .lp-container {
     padding-top: 16px;
     padding-right: 0px;
     padding-left: 0px;

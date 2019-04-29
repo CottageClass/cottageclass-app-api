@@ -377,13 +377,6 @@ a {
   align-items: center;
 }
 
-.container {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
 .button-container {
   display: -webkit-box;
   display: -webkit-flex;

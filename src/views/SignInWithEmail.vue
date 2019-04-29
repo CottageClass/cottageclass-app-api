@@ -134,8 +134,8 @@ export default {
       try {
         validationResult = await this.$validator.validateAll()
       } catch (e) {
-        this.error('validation error')
-        this.error(e)
+        this.logError('validation error')
+        this.logError(e)
       }
       if (validationResult) {
         let email = this.email && this.email.trim().toLowerCase()
@@ -153,8 +153,8 @@ export default {
             throw Error('current user has no id')
           }
         } catch (e) {
-          this.error('Authentication Error')
-          this.error(e)
+          this.logError('Authentication Error')
+          this.logError(e)
           this.showError = true
           this.errorMessage = 'There was a problem signing you in. If you forgot your password, email contact@cottageclass.com for help.'
         }
@@ -420,13 +420,6 @@ a {
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
-}
-
-.container {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
 }
 
 .button-container {

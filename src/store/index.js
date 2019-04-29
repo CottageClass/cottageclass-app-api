@@ -45,8 +45,9 @@ export default new Vuex.Store(
         state.createdEvents = payload.eventData
       },
       setMapArea: (state, payload) => {
-        state.mapArea.center = payload.center
-        state.mapArea.maxDistance = payload.maxDistance
+        // this can be accomplished with Object.assign ?
+        state.mapArea.center = payload.center || state.mapArea.center
+        state.mapArea.maxDistance = payload.maxDistance || state.mapArea.maxDistance
       }
     },
     actions: {
