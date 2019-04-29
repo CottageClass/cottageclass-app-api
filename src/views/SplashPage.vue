@@ -3216,13 +3216,6 @@ a {
   align-items: center;
 }
 
-.container {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
 .color-pink {
   background-color: #fd6f77;
 }

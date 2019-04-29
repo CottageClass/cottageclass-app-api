@@ -224,8 +224,8 @@ export default {
           this.avatar_url = response.secure_url
         })
         .catch(error => {
-          this.error('cloudinary upload error')
-          this.error(error)
+          this.logError('cloudinary upload error')
+          this.logError(error)
           this.disableForm = false
         })
     },
@@ -234,8 +234,8 @@ export default {
       try {
         validationResult = await this.$validator.validateAll()
       } catch (e) {
-        this.error('validation error')
-        this.error(e)
+        this.logError('validation error')
+        this.logError(e)
       }
       if (validationResult) {
         this.disableForm = true
@@ -251,8 +251,8 @@ export default {
           this.log('signup success:')
           this.log(registrationResult)
         } catch (e) {
-          this.error('signup failure:')
-          this.error(e)
+          this.logError('signup failure:')
+          this.logError(e)
           this.showError = true
           this.showAlert('Sorry, there was a problem creating your account. Did you already create an account with this email address directly or via Facebook?', 'failure')
         } finally {
@@ -265,8 +265,8 @@ export default {
           this.$store.dispatch('establishUser', { JWT: signInResult.data[0] })
           return this.$router.push({ name: 'OnboardNewUser' })
         } catch (e) {
-          this.error('auth FAILURE')
-          this.error(e)
+          this.logError('auth FAILURE')
+          this.logError(e)
         }
       } else {
         this.showError = true
@@ -553,13 +553,6 @@ a {
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
-}
-
-.container {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
 }
 
 .button-container {

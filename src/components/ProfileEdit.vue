@@ -1,7 +1,7 @@
 <template>
 <div class="body" id="top-of-form">
   <MainNav />
-  <div class="container w-container">
+  <div class="lp-container w-container">
   <h1 class="heading-1">Edit profile</h1>
   <StyleWrapper styleIs="editing" class="cards" v-if="currentUser">
       <ErrorMessage v-if="showError && hasError" text="Your form has errors. Please fix them to continue..." />
@@ -150,8 +150,8 @@ export default {
           this.log(res)
           return res
         }).catch(err => {
-          this.error('Error saving')
-          this.error(err)
+          this.logError('Error saving')
+          this.logError(err)
           this.saveButtonText = 'Problem saving. Click to try again.'
         })
       } else {
@@ -177,7 +177,7 @@ export default {
   margin-bottom: 32px;
 }
 
-.container {
+.lp-container {
   padding: 32px 32px 100px;
 }
 
@@ -186,7 +186,7 @@ export default {
     padding-bottom: 77px;
   }
 
-  .container {
+  .lp-container {
     padding-bottom: 32px;
   }
 }
@@ -201,7 +201,7 @@ export default {
     margin-left: 24px;
   }
 
-  .container {
+  .lp-container {
     padding-top: 16px;
     padding-right: 0px;
     padding-left: 0px;

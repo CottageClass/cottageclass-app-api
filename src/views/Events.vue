@@ -7,6 +7,21 @@
         <h1 class="event-page-title">Meet new parents. Plan playdates.</h1>
         <div class="selectors-group">
         <div class="filter-container">
+
+          <FilterSelector title="Location"
+                          @clearFilterClicked="resetAgeRange"
+                          :active="zip" >
+            <template v-slot:buttonContents>
+              <LocationFilterButton :zipCode="zip" />
+            </template>
+            <template v-slot:selectorContents>
+              <LocationFilterSelector
+                @locationUpdated="updateMapAreaFromFilter"
+                :searchRadius="mapArea.maxDistance"
+              />
+            </template>
+          </FilterSelector>
+
           <FilterSelector title="Child Age"
                           @clearFilterClicked="resetAgeRange"
                           :active="ageRangeActive" >
@@ -28,7 +43,7 @@
           <EventListMap
             class="map"
             :users="users"
-            @maxDistanceSet="updateForZoomLevel($event)"
+            @searchAreaSet="updateMapAreaFromMap"
           />
           <div class="list-container w-container">
             <SearchResultList
@@ -58,6 +73,8 @@ import EventListMap from '@/components/EventListMap.vue'
 import FilterSelector from '@/components/filters/FilterSelector'
 import AgeRangeFilterButton from '@/components/filters/AgeRangeFilterButton'
 import AgeRangeFilterSelector from '@/components/filters/AgeRangeFilterSelector'
+import LocationFilterSelector from '@/components/filters/LocationFilterSelector'
+import LocationFilterButton from '@/components/filters/LocationFilterButton'
 import { fetchUpcomingEventsWithinDistance, fetchUsersWithinDistance } from '@/utils/api'
 import { mapGetters } from 'vuex'
 
@@ -65,10 +82,17 @@ var moment = require('moment')
 
 export default {
   name: 'Events',
-  components: { SearchResultList, MainNav, Footer, EventListMap, FilterSelector, AgeRangeFilterSelector, AgeRangeFilterButton },
+  components: { SearchResultList,
+    MainNav,
+    Footer,
+    EventListMap,
+    FilterSelector,
+    AgeRangeFilterSelector,
+    AgeRangeFilterButton,
+    LocationFilterSelector,
+    LocationFilterButton },
   data () {
     return {
-      maximumDistanceFromUserInMiles: '5',
       showAllButtonText: 'Show all playdates',
       showShowAllButton: false,
       noEventsMessage: 'Sorry, there are no upcoming playdates in this area',
@@ -79,7 +103,8 @@ export default {
       showFetchMoreEventsButton: true,
       showFetchMoreUsersButton: true,
       showTrailblazerMessage: true,
-      ageRange: { error: null, data: { min: -1, max: -1 } }
+      ageRange: { error: null, data: { min: -1, max: -1 } },
+      zip: null
     }
   },
   computed: {
@@ -92,7 +117,7 @@ export default {
     async fetchMoreUsers () {
       try {
         const params = {
-          miles: this.maximumDistanceFromUserInMiles,
+          miles: this.mapArea.maxDistance,
           lat: this.mapArea.center.lat,
           lng: this.mapArea.center.lng,
           pageSize: 10,
@@ -111,14 +136,14 @@ export default {
         this.users = !this.users ? newUsers : this.users.concat(newUsers)
         this.usersLastPage = this.usersLastPage + 1
       } catch (e) {
-        this.error('problem loading more users')
-        this.error(e)
+        this.logError('problem loading more users')
+        this.logError(e)
       }
     },
     async fetchMoreEvents () {
       try {
         const params = {
-          miles: this.maximumDistanceFromUserInMiles,
+          miles: this.mapArea.maxDistance,
           lat: this.mapArea.center.lat,
           lng: this.mapArea.center.lng,
           pageSize: 10,
@@ -137,16 +162,25 @@ export default {
         this.events = !this.events ? newEvents : this.events.concat(newEvents)
         this.eventsLastPage = this.eventsLastPage + 1
       } catch (e) {
-        this.error('problem loading events')
-        this.error(e)
+        this.logError('problem loading events')
+        this.logError(e)
       }
     },
     resetAgeRange () {
       this.ageRange = { error: null, data: { min: -1, max: -1 } }
     },
-    updateForZoomLevel: async function (e) {
+    updateMapAreaFromMap: async function (e) {
+      this.updateMapArea(e)
+      this.zip = null
+    },
+    updateMapAreaFromFilter: async function (e) {
+      this.updateMapArea(e)
+      this.zip = e.zip
+    },
+    updateMapArea: async function (e) {
+      const center = e.center ? { lat: e.center.lat(), lng: e.center.lng() } : null
       this.$store.commit('setMapArea', {
-        center: { lat: e.center.lat(), lng: e.center.lng() },
+        center,
         maxDistance: e.miles
       })
       this.showTrailblazerMessage = false
@@ -183,8 +217,14 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+.filter-container {
+  display: flex;
+  flex-direction: row;
+  & > div{
+    margin-right:10px;
+  }
+}
 .page-wrapper {
   all: unset;
   font-family: soleil, sans-serif;

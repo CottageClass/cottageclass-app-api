@@ -315,10 +315,10 @@ export default {
         }, 'newUsers').then(function (data) {
           that.log(data)
         }, function (err) {
-          that.error(err)
+          that.logError(err)
         })
       } catch (e) {
-        this.error(e)
+        this.logError(e)
         this.stepIndex = stepSequence.length - 1
         this.modelForCurrentStep.err = 'Sorry, there was a problem saving your information. Try again?'
         throw e

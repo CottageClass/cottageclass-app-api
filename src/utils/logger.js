@@ -5,11 +5,11 @@
 * import Logger from '@/utils/logger'
 * logger = Logger('myLocalNamespace')
 * logger.log('hello')
-* logger.error('oh no!')
+* logger.logError('oh no!')
 * logger.debug will only show in 'test' and 'development' environment
-* logger.log and logger.error will use fullstory in production.
-* logger.log and logger.error will show in development.
-* logger.log and logger.error will not show in test.
+* logger.log and logger.logError will use fullstory in production.
+* logger.log and logger.logError will show in development.
+* logger.log and logger.logError will not show in test.
 */
 
 import debug from 'debug'
@@ -39,7 +39,7 @@ export default function (namespace) {
           break
       }
     },
-    error (msg) {
+    logError (msg) {
       switch (process.env.NODE_ENV) {
         case 'development':
         case 'staging':
