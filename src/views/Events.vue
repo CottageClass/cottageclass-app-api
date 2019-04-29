@@ -17,7 +17,7 @@
             <template v-slot:selectorContents>
               <LocationFilterSelector
                 @locationUpdated="updateMapAreaFromFilter"
-                value="mapArea"
+                :searchRadius="mapArea.maxDistance"
               />
             </template>
           </FilterSelector>
@@ -93,7 +93,6 @@ export default {
     LocationFilterButton },
   data () {
     return {
-      maximumDistanceFromUserInMiles: '5',
       showAllButtonText: 'Show all playdates',
       showShowAllButton: false,
       noEventsMessage: 'Sorry, there are no upcoming playdates in this area',
@@ -118,7 +117,7 @@ export default {
     async fetchMoreUsers () {
       try {
         const params = {
-          miles: this.maximumDistanceFromUserInMiles,
+          miles: this.mapArea.maxDistance,
           lat: this.mapArea.center.lat,
           lng: this.mapArea.center.lng,
           pageSize: 10,
@@ -144,7 +143,7 @@ export default {
     async fetchMoreEvents () {
       try {
         const params = {
-          miles: this.maximumDistanceFromUserInMiles,
+          miles: this.mapArea.maxDistance,
           lat: this.mapArea.center.lat,
           lng: this.mapArea.center.lng,
           pageSize: 10,

@@ -12,9 +12,9 @@
     </vue-google-autocomplete>
     <div class="section-title">Within Distance</div>
     <v-slider
-      v-model="distance"
-      min="0.1"
-      max="20"
+      v-model="distanceIndex"
+      min="0"
+      :max="distanceOptions.length - 1"
       @change="update"
     ></v-slider>
     <div class="distance-display">{{ distanceText }}</div>
@@ -23,22 +23,44 @@
 
 <script>
 import VueGoogleAutocomplete from 'vue-google-autocomplete'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'LocationFilterSelector',
   components: { VueGoogleAutocomplete },
-  props: ['value'],
+  props: ['searchRadius'],
   data () {
     return {
-      distance: 1,
+      distanceIndex: null,
+      distanceOptions: [0.1, 0.2, 0.5, 1, 2, 5, 10, 20],
       err: null,
       zip: null
     }
   },
   computed: {
+    initialIndex () {
+      if (!this.searchRadius) {
+        return Math.round(this.distanceOptions.length / 2)
+      }
+      return this.distanceOptions.reduce((bestIndex, currentDistance, currentIndex) => {
+        if (Math.abs(this.distanceOptions[currentIndex] - this.searchRadius) <
+            Math.abs(this.distanceOptions[bestIndex] - this.searchRadius)) {
+          return currentIndex
+        } else {
+          return bestIndex
+        }
+      }, 0)
+    },
+    distance () {
+      return this.distanceOptions[this.distanceIndex]
+    },
     distanceText () {
       return this.distance + ' Mile' + (this.distance === 1 ? '' : 's')
-    }
+    },
+    ...mapGetters(['mapArea'])
+  },
+  mounted () {
+    this.distanceIndex = this.initialIndex
   },
   methods: {
     update () {

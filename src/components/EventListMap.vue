@@ -53,7 +53,7 @@ import { mapGetters } from 'vuex'
 
 export default {
   name: 'EventListMap',
-  props: ['users', 'events'],
+  props: ['users', 'events', 'searchRadius'],
   mixins: [ maps, screen ],
   components: { SearchResultList },
   data () {
@@ -103,19 +103,11 @@ export default {
         }
       }
     },
-    setZoomLevelForRadius: async function (radius) {
-      const map = await this.map
-      const mapEl = document.querySelector('.map-container')
-      const halfDiagonal = Math.hypot(mapEl.clientHeight, mapEl.clientWidth) / 2
-      const desiredMetersPerPixel = this.radius * 1609.34 / halfDiagonal
-      let zoom = Math.floor(await this.zoomLevelForScale(desiredMetersPerPixel, map))
-      zoom = Math.min(Math.max(zoom, 0), 20) // ensure it's in the range of acceptable zooms
-      map.setZoom(zoom)
-    },
     searchButtonClick: async function () {
       const map = await this.map
       this.mapHasChanged = false
-      this.$emit('searchAreaSet', { center: map.center, miles: this.radius })
+      const radius = await this.radiusFromMap()
+      this.$emit('searchAreaSet', { center: map.center, miles: radius })
     },
     idleHandler (e) {
       if (this.noIdlesYet) {
@@ -169,7 +161,7 @@ export default {
       handler: async function () {
         const map = await this.map
         map.setCenter(this.mapArea.center)
-        this.setZoomLevelForMaxDistance()
+        this.setZoomLevelForRadius(this.mapArea.maxDistance)
       },
       deep: true
     }
@@ -183,7 +175,7 @@ export default {
         ...this.mapOptions
       },
       this.idleHandler.bind(this))
-      this.setZoomLevelForMaxDistance()
+      this.setZoomLevelForRadius(2)
     })
     if (this.users && this.users.length) {
       this.updateMarkers()
