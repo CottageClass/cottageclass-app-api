@@ -2122,7 +2122,7 @@ a {
 
 /* New CSS */
 
-v {
+body {
   font-family: soleil, sans-serif;
   color: #333;
   font-size: 14px;
