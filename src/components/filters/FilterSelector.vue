@@ -355,8 +355,12 @@ body {
   }
 
   .selector-box-container {
-    position: relative;
-    width: 100%;
+    position: fixed;
+    left: 16px;
+    top: 16px;
+    right: 16px;
+    bottom: auto;
+    width: auto;
     min-height: 100px;
     margin-top: 0px;
     margin-right: 0px;
