@@ -7,7 +7,7 @@ export default {
     */
     redirectToSignupIfNotAuthenticated: function () {
       if (!this.isAuthenticated) {
-        this.log('redirecting to sing-up')
+        this.log('redirecting to sign-up')
         this.setRedirectRouteHere()
         this.$router.push({ name: 'SignUp' })
         return true
