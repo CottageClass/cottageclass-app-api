@@ -13,6 +13,7 @@
 <script>
 import { setTimeout, clearTimeout } from 'timers'
 import { initProxySession } from '@/utils/api'
+import { childAgeSentenceText } from '@/utils/utils'
 import { mapGetters } from 'vuex'
 import { alerts, redirect } from '@/mixins'
 
@@ -80,18 +81,14 @@ export default {
       }
     },
     meetMessage () {
-      return `${this.currentUser.firstName} (https://kidsclub.io/users/${this.currentUser.id}) waved at you! They live ${this.distanceBetweenUsers()} mi. away with ${this.messageChildAgeString}. If you're interested in a playdate, reply here!`
+      return `${this.currentUser.firstName} (https://kidsclub.io/users/${this.currentUser.id}) waved at you! They live ${this.distanceBetweenUsers()} mi. away${this.messageChildAgeString}. If you're interested in a playdate, reply here!`
     },
     acknowledgeMessage () {
       return `We just sent your wave to ${this.targetUser.firstName} (https://kidsclub.io/users/${this.targetUser.id}). Reply here to introduce yourself and schedule your first playdate!`
     },
     messageChildAgeString () {
-      const ages = this.currentUser.childAges
-      if (ages.length === 1) {
-        return '1 kid age ' + ages[0]
-      } else {
-        return ages.length + ' kids age ' + ages.slice(0, ages.length - 1).join(', ') + ' & ' + ages[ages.length - 1]
-      }
+      const childAges = this.currentUser.childAges
+      return childAgeSentenceText({ childAges })
     },
     ...mapGetters([ 'currentUser', 'distanceFromCurrentUser' ])
   }

@@ -5,7 +5,7 @@
   "description": "A Rails project serving up a Vue.js front end",
   "scripts": {
     "test": "jest --config ./jest.conf.js",
-    "test-watch": "jest --config ./jest.conf.js --watch --setupFiles dotenv/config",
+    "test-watch": "jest --config ./jest.conf.js --watch",
     "lint": "eslint ./src/**/*.vue ./src/**/*.js"
   },
   "author": "holmesworcester <hwilson@gmail.com>",
