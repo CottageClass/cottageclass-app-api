@@ -34,7 +34,7 @@ export default {
       distanceIndex: null,
       distanceOptions: [0.1, 0.2, 0.5, 1, 2, 5, 10, 20],
       err: null,
-      zip: null
+      shortDescription: null
     }
   },
   computed: {
@@ -67,7 +67,7 @@ export default {
       this.$emit('locationUpdated', {
         center: this.center,
         miles: this.distance,
-        zip: this.zip
+        shortDescription: this.shortDescription
       })
     },
     updateAddress (addressData) {
@@ -75,7 +75,8 @@ export default {
         lat: () => addressData.latitude,
         lng: () => addressData.longitude
       }
-      this.zip = addressData.postal_code
+      this.debug(addressData)
+      this.shortDescription = addressData.postal_code || addressData.municipality || addressData.administrative_area_level_1 || addressData.administrative_area_level_2
       this.update()
     }
   }

@@ -11,7 +11,7 @@ export default {
   computed: {
     buttonText () {
       if (!this.range.data) {
-        return 'All ages'
+        return 'Ages 0-11'
       }
       let { min, max } = this.range.data
       if (min < 0) {
@@ -34,7 +34,7 @@ export default {
       if (!min && max) {
         return max + ' & under'
       }
-      return 'All ages'
+      return 'Ages 0-11'
     }
   }
 }
