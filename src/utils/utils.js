@@ -30,14 +30,18 @@ export function arrayToSentence (arr) {
   }
 }
 
-export function childAgeText ({ childAges, singular, plural, prefix, verbose }) {
+export function childAgeText ({ childAges, singular, plural, prefix, verbose, expectingPrefix = '' }) {
   const childAgesSorted = childAges.concat().sort((a, b) => a - b)
   const ages = childAgesSorted.filter(e => e >= 0)
   const n = ages.length
   if (verbose) {
     switch (n) {
       case 0:
-        return 'Expecting'
+        if (expectingPrefix) {
+          return expectingPrefix + 'expecting'
+        } else {
+          return 'Expecting'
+        }
       case 1:
         return prefix + '1 ' + singular + '–age ' + ages[0]
       default: // 2 or more
@@ -45,7 +49,11 @@ export function childAgeText ({ childAges, singular, plural, prefix, verbose }) 
     }
   } else {
     if (n === 0) {
-      return 'Expecting'
+      if (expectingPrefix) {
+        return expectingPrefix + 'expecting'
+      } else {
+        return 'Expecting'
+      }
     } else {
       return n + ' ' + (ages.length > 1 ? plural : singular) + ' (' + ages.join(', ') + ')'
     }

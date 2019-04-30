@@ -27,15 +27,17 @@ import StyleWrapper from '@/components/FTE/StyleWrapper.vue'
 import Question from '@/components/base/Question.vue'
 import FormWithTextArea from '@/components/base/FormWithTextArea.vue'
 import Nav from '@/components/FTE/Nav.vue'
-import LoadingSpinner from '@/components/LoadingSpinner.vue'
 
+import LoadingSpinner from '@/components/LoadingSpinner.vue'
+import { redirect } from '@/mixins'
 import { mapGetters } from 'vuex'
 import * as api from '@/utils/api'
+import { childAgeText, capitalize } from '@/utils/utils'
 import moment from 'moment'
-import _ from 'lodash'
 
 export default {
   name: 'ContactForm',
+  mixins: [redirect],
   components: { Question, FormWithTextArea, StyleWrapper, Nav, LoadingSpinner },
   props: ['eventId'],
   data () {
@@ -85,10 +87,10 @@ export default {
       return `Enter your question here ...`
     },
     hostFirstName: function () {
-      if (!this.event) {
+      if (!this.event || !this.event.hostFirstName) {
         return ''
       }
-      return _.capitalize(this.event.hostFirstName)
+      return capitalize(this.event.hostFirstName)
     },
     hostId: function () {
       if (!this.event) {
@@ -97,19 +99,20 @@ export default {
       return this.event.hostId
     },
     fullMessageText () {
+      const childText = childAgeText({
+        childAges: this.currentUser.childAges,
+        singular: 'child',
+        plural: 'children',
+        prefix: 'has ',
+        verbose: true,
+        expectingPrefix: 'is '
+      })
+
       const senderFirstName = this.currentUser.firstName
-      const childrenAges = this.currentUser.childAges
-      let childrenCountAndAges
-      if (childrenAges && childrenAges.length === 1) {
-        childrenCountAndAges = `1 child age ${childrenAges[0]}`
-      } else if (childrenAges && childrenAges.length > 1) {
-        const ages = _.join(_.slice(childrenAges, 0, childrenAges.length - 1), ', ') + ' and ' + _.last(childrenAges)
-        childrenCountAndAges = `${childrenAges.length} children ages ${ages}`
-      }
       const dateString = moment(this.event.startsAt).format('L')
       const timeString = moment(this.event.startsAt).format('LT')
 
-      const result = '(' + [senderFirstName, 'has', childrenCountAndAges, 'and has a question about your KidsClub playdate on', dateString, 'at', timeString].join(' ') + '.)\n'
+      const result = '(' + [senderFirstName, childText, 'and has a question about your KidsClub playdate on', dateString, 'at', timeString].join(' ') + '.)\n'
       return result + this.questionText
     },
     ...mapGetters([ 'currentUser' ])
