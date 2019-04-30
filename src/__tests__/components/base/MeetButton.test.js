@@ -158,7 +158,7 @@ describe('MeetButton', () => {
 
     it('displays correct information', () => {
       const meetButton = wrapper.find('.meet-button')
-      const requestMessage = `Natasha (https://kidsclub.io/users/987654321) waved at you! They live 4.2 mi. away with one on the way. If you're interested in a playdate, reply here!`
+      const requestMessage = `Natasha (https://kidsclub.io/users/987654321) waved at you! They live 4.2 mi. away. If you're interested in a playdate, reply here!`
 
       expect(meetButton.text()).toEqual('Wave')
       expect(wrapper.vm.meetMessage).toEqual(requestMessage)

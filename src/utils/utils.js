@@ -66,10 +66,10 @@ export function childAgeSentenceText ({ childAges }) {
   const n = ages.length
   switch (n) {
     case 0:
-      return 'one on the way'
+      return ''
     case 1:
-      return '1 kid age ' + ages[0]
+      return ' with 1 kid age ' + ages[0]
     default: // 2 or more
-      return `${n} kids age ${ages.slice(0, n - 1).join(', ')} & ${ages[n - 1]}`
+      return ` with ${n} kids age ${ages.slice(0, n - 1).join(', ')} & ${ages[n - 1]}`
   }
 }
