@@ -211,10 +211,10 @@ function createPeopleObject (responseData) {
 
 export function fetchUsersWithinDistance ({ miles, lat, lng, minAge, maxAge, pageSize = 100, page = 1 }) {
   let url = `/api/users/miles/${miles}/latitude/${lat}/longitude/${lng}/`
-  if (minAge) {
+  if (minAge !== null && typeof minAge !== 'undefined') {
     url += `min_age/${minAge}/`
   }
-  if (maxAge) {
+  if (maxAge !== null && typeof minAge !== 'undefined') {
     url += `max_age/${maxAge}/`
   }
   url += `page/${page}/page_size/${pageSize}`
@@ -441,10 +441,10 @@ export const fetchEvent = async (id) => {
 
 export function fetchUpcomingEventsWithinDistance ({ miles, lat, lng, minAge, maxAge, pageSize = 100, page = 1 }) {
   let url = `upcoming/miles/${miles}/latitude/${lat}/longitude/${lng}/`
-  if (minAge) {
+  if (minAge !== null && typeof minAge !== 'undefined') {
     url += `min_age/${minAge}/`
   }
-  if (maxAge) {
+  if (maxAge !== null && typeof minAge !== 'undefined') {
     url += `max_age/${maxAge}/`
   }
   url += `page/${page}/page_size/${pageSize}`
