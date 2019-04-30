@@ -29,3 +29,25 @@ export function arrayToSentence (arr) {
     return arr[0]
   }
 }
+
+export function childAgeText ({ childAges, singular, plural, prefix, verbose }) {
+  const childAgesSorted = childAges.concat().sort((a, b) => a - b)
+  const ages = childAgesSorted.filter(e => e >= 0)
+  const n = ages.length
+  if (verbose) {
+    switch (n) {
+      case 0:
+        return 'Expecting'
+      case 1:
+        return prefix + '1 ' + singular + '–age ' + ages[0]
+      default: // 2 or more
+        return `${prefix}${n} ${plural}–ages ${ages.slice(0, n - 1).join(', ')} and ${ages[n - 1]}`
+    }
+  } else {
+    if (n === 0) {
+      return 'Expecting'
+    } else {
+      return n + ' ' + (ages.length > 1 ? plural : singular) + ' (' + ages.join(', ') + ')'
+    }
+  }
+}
