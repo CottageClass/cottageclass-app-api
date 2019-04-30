@@ -117,11 +117,12 @@
     <div class="divider-2px"></div>
     <div class="content-container-2 w-container">
       <h1 class="h1-display">As covered in</h1>
-      <div class="featured-container">
-      <a href="https://www.bloomberg.com/company/announcements/bloomberg-and-ny-tech-meetup-spotlight-female-led-startups-at-winter-2016-womens-demo-night/" target="_blank" class="featured-card w-inline-block"><img src="@/assets/bloomberg.png" alt="" class="press-logo"></a><a href="https://www.wsj.com/articles/haute-home-schools-designed-to-give-kids-a-bespoke-education-1455807796" target="_blank" class="featured-card w-inline-block"><img src="@/assets/thewallstreetjournal.png" alt="" class="image-261"></a><a href="https://www.nytimes.com/slideshow/2016/06/26/nyregion/not-just-the-teachers-pets/s/26PETCITY-slide-IKW9.html" target="_blank" class="featured-card w-inline-block"><img src="@/assets/thenewyorktimes.png" alt="" class="image-261"></a><a href="https://mommypoppins.com/new-york-city-kids/camps/8-new-summer-camps-for-nyc-kids-in-2017" target="_blank" class="featured-card w-inline-block"><img src="@/assets/mommypoppins.png" alt="" class="image-261"></a><a href="http://www.gettingsmart.com/2017/01/cottageclass-expanding-access-to-microschools-and-learning-experiences/" target="_blank" class="featured-card w-inline-block"><img src="@/assets/gettingsmart.png" alt="" class="image-261"></a>
+      <div class="resp-container">
+        <div class="w-embed w-iframe"><iframe class="resp-iframe" src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fmanisha.snoyer%2Fvideos%2F10101072285697759%2F&show_text=0&width=560" scrolling="no" frameborder="0" allowtransparency="true" allowfullscreen="true"></iframe></div>
+      </div>
+      <div class="featured-container"><a href="https://www.bloomberg.com/company/announcements/bloomberg-and-ny-tech-meetup-spotlight-female-led-startups-at-winter-2016-womens-demo-night/" target="_blank" class="featured-card w-inline-block"><img src="@/assets/bloomberg.png" alt="" class="image-261"></a><a href="https://www.wsj.com/articles/haute-home-schools-designed-to-give-kids-a-bespoke-education-1455807796" target="_blank" class="featured-card w-inline-block"><img src="@/assets/thewallstreetjournal.png" alt="" class="image-261"></a><a href="https://www.nytimes.com/slideshow/2016/06/26/nyregion/not-just-the-teachers-pets/s/26PETCITY-slide-IKW9.html" target="_blank" class="featured-card w-inline-block"><img src="@/assets/thenewyorktimes.png" alt="" class="image-261"></a><a href="https://mommypoppins.com/new-york-city-kids/camps/8-new-summer-camps-for-nyc-kids-in-2017" target="_blank" class="featured-card w-inline-block"><img src="@/assets/mommypoppins.png" alt="" class="image-261"></a><a href="https://www.gettingsmart.com/2017/01/cottageclass-expanding-access-to-microschools-and-learning-experiences/" target="_blank" class="featured-card w-inline-block"><img src="@/assets/gettingsmart.png" alt="" class="image-261"></a><a href="http://cottageclass.com" target="_blank" class="featured-card w-inline-block"><img src="@/assets/tinkeringschool.png" alt="" class="image-261"></a><a href="https://www.facebook.com/manisha.snoyer/videos/10101072285697759/" target="_blank" class="featured-card w-inline-block"><img src="@/assets/spectrum-news-one.png" alt="" class="image-261"></a><a href="http://brooklyn.news12.com/story/39844684/bk-woman-launches-startup-to-help-parents-find-free-quality-child-care" target="_blank" class="featured-card w-inline-block"><img src="@/assets/news12-brooklyn.png" alt="" class="image-261"></a><a href="https://www.brooklynpaper.com/stories/42/4/all-brooklyn-babysitters-club-2019-01-25-bk.html" target="_blank" class="featured-card w-inline-block"><img src="@/assets/brooklyn-paper.png" alt="" class="image-261"></a></div>
     </div>
   </div>
-</div>
 <Footer />
 </div>
   </span>
@@ -297,6 +298,29 @@ a {
 .button-nav:hover {
   background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, .06)), to(rgba(0, 0, 0, .06)));
   background-image: linear-gradient(180deg, rgba(0, 0, 0, .06), rgba(0, 0, 0, .06));
+}
+
+.resp-container {
+  position: relative;
+  overflow: visible;
+  width: 100%;
+  margin-top: 60px;
+  padding-top: 54.5%;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+}
+
+.resp-iframe {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  right: auto;
+  bottom: auto;
+  width: 100%;
+  height: 100%;
+  border: 0px solid #000;
 }
 
 .nav-container {
@@ -2098,7 +2122,7 @@ a {
 
 /* New CSS */
 
-body {
+v {
   font-family: soleil, sans-serif;
   color: #333;
   font-size: 14px;
@@ -2359,26 +2383,6 @@ a {
   -webkit-justify-content: flex-start;
   -ms-flex-pack: start;
   justify-content: flex-start;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.featured-container {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  width: 90%;
-  margin-top: 48px;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-flex-wrap: wrap;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
   -webkit-box-align: center;
   -webkit-align-items: center;
   -ms-flex-align: center;
