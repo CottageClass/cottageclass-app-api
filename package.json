@@ -5,7 +5,7 @@
   "description": "A Rails project serving up a Vue.js front end",
   "scripts": {
     "test": "jest --config ./jest.conf.js",
-    "test-watch": "jest --config ./jest.conf.js --watch --setupFiles dotenv/config",
+    "test-watch": "jest --config ./jest.conf.js --watch",
     "lint": "eslint ./src/**/*.vue ./src/**/*.js",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
@@ -46,6 +46,7 @@
     "vue-router": "^3.0.1",
     "vue-scrollto": "^2.13.0",
     "vue-template-compiler": "^2.6.10",
+    "vuetify": "^1.5.13",
     "vuex": "^3.1.0",
     "vuex-persistedstate": "^2.5.4"
   },

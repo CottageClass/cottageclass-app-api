@@ -111,7 +111,7 @@
 
 <script>
 import ErrorMessage from '@/components/base/ErrorMessage.vue'
-import { providerAuthentication } from '@/mixins'
+import { providerAuthentication, alerts } from '@/mixins'
 import { register, signIn } from '@/utils/api'
 import MainNav from '@/components/MainNav.vue'
 import Footer from '@/components/Footer.vue'
@@ -120,10 +120,9 @@ import StyleWrapper from '@/components/FTE/StyleWrapper.vue'
 export default {
   name: 'SignUpWithEmail',
   components: { ErrorMessage, MainNav, Footer, StyleWrapper },
-  mixins: [providerAuthentication],
+  mixins: [providerAuthentication, alerts],
   data: function () {
     return {
-      success: false,
       disableForm: false,
       first_name: '',
       last_name: '',
@@ -160,7 +159,6 @@ export default {
       }
     },
     button: function () {
-      // todo: should show errors until avatar upload
       if (this.first_name && this.last_name && this.email && this.password && this.avatar_url && this.errors.items.length === 0) {
         return 'next'
       } else {
@@ -219,63 +217,60 @@ export default {
           }
         })
         .then(response => {
-          console.log('cloudinary upload success', response)
+          this.log('cloudinary upload success')
+          this.log(response)
           this.avatarLoading = false
           this.disableForm = false
           this.avatar_url = response.secure_url
         })
         .catch(error => {
-          console.error('cloudinary upload error', error)
+          this.logError('cloudinary upload error')
+          this.logError(error)
           this.disableForm = false
         })
     },
-    signup: function () {
-      let component = this
+    async signup () {
+      let validationResult, registrationResult, signInResult
+      try {
+        validationResult = await this.$validator.validateAll()
+      } catch (e) {
+        this.logError('validation error')
+        this.logError(e)
+      }
+      if (validationResult) {
+        this.disableForm = true
 
-      this.$validator
-        .validateAll()
-        .then(function (result) {
-          if (result) {
-            component.disableForm = true
+        let first_name = this.first_name && this.first_name.trim()
+        let last_name = this.last_name && this.last_name.trim()
+        let email = this.email && this.email.trim().toLowerCase()
+        let password = this.password && this.password.trim()
+        let avatar = this.avatar_url && this.avatar_url.trim()
 
-            let first_name =
-              component.first_name && component.first_name.trim()
-            let last_name = component.last_name && component.last_name.trim()
-            let email = component.email && component.email.trim().toLowerCase()
-            let password = component.password && component.password.trim()
-            let avatar = component.avatar_url && component.avatar_url.trim()
-
-            register({ first_name, last_name, email, password, avatar })
-              .then(response => {
-                console.log('signup success:', response)
-                component.success = true
-                component.disableForm = false
-
-                // TODO: move this to a mixin or something
-                signIn({ email, password })
-                  .then(res => {
-                    console.log('auth success:', res)
-                    component.$store.dispatch('establishUser', { JWT: res.data[0] })
-                    return component.$router.push({ name: 'OnboardNewUser' })
-                  })
-                  .catch(function (err) {
-                    console.log('auth FAILURE or user not onboarded yet')
-                    console.error(err)
-                  })
-              })
-              .catch(function (error) {
-                console.error('signup failure:', error)
-                component.disableForm = false
-                component.showError = true
-                component.error = 'Sorry, there was a problem creating your account. Did you already create an account with this email address directly or via Facebook?'
-              })
-          } else {
-            component.showError = true
-          }
-        })
-        .catch(function (error) {
-          console.error('validation error', error)
-        })
+        try {
+          registrationResult = await register({ first_name, last_name, email, password, avatar })
+          this.log('signup success:')
+          this.log(registrationResult)
+        } catch (e) {
+          this.logError('signup failure:')
+          this.logError(e)
+          this.showError = true
+          this.showAlert('Sorry, there was a problem creating your account. Did you already create an account with this email address directly or via Facebook?', 'failure')
+        } finally {
+          this.disableForm = false
+        }
+        try {
+          signInResult = await signIn({ email, password })
+          this.log('auth success:')
+          this.log(signInResult)
+          this.$store.dispatch('establishUser', { JWT: signInResult.data[0] })
+          return this.$router.push({ name: 'OnboardNewUser' })
+        } catch (e) {
+          this.logError('auth FAILURE')
+          this.logError(e)
+        }
+      } else {
+        this.showError = true
+      }
     }
   }
 }
@@ -560,13 +555,6 @@ a {
   align-items: center;
 }
 
-.container {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
 .button-container {
   display: -webkit-box;
   display: -webkit-flex;
@@ -746,10 +734,6 @@ a {
 
 .text-block-2 {
   font-size: 13px;
-}
-
-.success-message {
-  background-color: #ccffe0;
 }
 
 .auth-wrapper {

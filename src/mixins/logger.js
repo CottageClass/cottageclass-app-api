@@ -13,8 +13,8 @@ export default {
     log (msg) {
       this.mixinLogger.log(msg)
     },
-    error (msg) {
-      this.mixinLogger.error(msg)
+    logError (msg) {
+      this.mixinLogger.logError(msg)
     },
     debug (msg) {
       this.mixinLogger.debug(msg)

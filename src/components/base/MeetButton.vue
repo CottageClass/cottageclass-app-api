@@ -13,6 +13,7 @@
 <script>
 import { setTimeout, clearTimeout } from 'timers'
 import { initProxySession } from '@/utils/api'
+import { childAgeSentenceText } from '@/utils/utils'
 import { mapGetters } from 'vuex'
 import { alerts, redirect } from '@/mixins'
 
@@ -26,7 +27,8 @@ export default {
     }
   },
   methods: {
-    meetButtonClick () {
+    meetButtonClick (event) {
+      this.$emit('meetButtonClick', { event })
       switch (this.meetStatus) {
         case 'none':
           if (this.redirectToSignupIfNotAuthenticated()) { return }
@@ -50,8 +52,7 @@ export default {
     },
     sendMessage: async function () {
       try {
-        await initProxySession(this.currentUser.id, this.targetUser.id, this.meetMessages[0], this.acknowledgeMessage)
-        await initProxySession(this.currentUser.id, this.targetUser.id, this.meetMessages[1])
+        await initProxySession(this.currentUser.id, this.targetUser.id, this.meetMessage, this.acknowledgeMessage)
         this.meetStatus = 'sent'
       } catch (e) {
         console.error(e)
@@ -64,13 +65,13 @@ export default {
     meetButtonText () {
       switch (this.meetStatus) {
         case 'none':
-          return (this.fillStyle === 'outline') ? 'Meet' : 'Invite for a playdate'
+          return (this.fillStyle === 'outline') ? 'Wave' : 'Invite for a playdate'
         case 'sending':
           return 'Undo'
         case 'sent':
           return 'Sent'
         default:
-          return 'Meet'
+          return 'Wave'
       }
     },
     distanceBetweenUsers () {
@@ -79,22 +80,15 @@ export default {
         return this.distanceFromCurrentUser(targetLocation.lat, targetLocation.lng)
       }
     },
-    meetMessages () {
-      return [
-        `Hi ${this.targetUser.firstName}, I'm a parent in ${this.currentUser.locality} and I'd love to meet up for a playdate. When might be a good time? -${this.currentUser.firstName}`,
-        `(${this.currentUser.firstName} has ${this.messageChildAgeString}, lives ${this.distanceBetweenUsers()} miles from you, and their profile is here: https://kidsclub.io/user/${this.currentUser.id}. Good luck & enjoy! ❤️ KidsClub.io)`
-      ]
+    meetMessage () {
+      return `${this.currentUser.firstName} (https://kidsclub.io/users/${this.currentUser.id}) waved at you! They live ${this.distanceBetweenUsers()} mi. away${this.messageChildAgeString}. If you're interested in a playdate, reply here!`
     },
     acknowledgeMessage () {
-      return `We just texted ${this.targetUser.firstName} to ask them when a good time for a playdate would be. You can send ${this.targetUser.firstName} any additional information or questions by texting this number. ❤️ KidsClub.io`
+      return `We just sent your wave to ${this.targetUser.firstName} (https://kidsclub.io/users/${this.targetUser.id}). Reply here to introduce yourself and schedule your first playdate!`
     },
     messageChildAgeString () {
-      const ages = this.targetUser.childAges
-      if (ages.length === 1) {
-        return '1 kid age ' + ages[0]
-      } else {
-        return ages.length + ' kids ages ' + ages.slice(0, ages.length - 1).join(', ') + ' & ' + ages[ages.length - 1]
-      }
+      const childAges = this.currentUser.childAges
+      return childAgeSentenceText({ childAges })
     },
     ...mapGetters([ 'currentUser', 'distanceFromCurrentUser' ])
   }
@@ -132,12 +126,14 @@ export default {
   border: 1px solid #1f88e9;
   background-color: transparent;
   color: #1f88e9;
+  -webkit-text-fill-color: #1f88e9;  // DO NOT REMOVE.  REQUIRED FOR SAFARI
 
   &.none:hover {
     background-image: linear-gradient(180deg, rgba(0, 0, 0, .02), rgba(0, 0, 0, .04));
   }
   &.sending {
     color: rgb(212, 80, 18);
+    -webkit-text-fill-color: rgb(212, 80, 18);  // DO NOT REMOVE.  REQUIRED FOR SAFARI
     border-color:  rgb(212, 80, 18);
 
     &:hover {
@@ -146,6 +142,7 @@ export default {
   }
   &.sent {
     color:  rgb(12, 186, 82);
+    -webkit-text-fill-color: rgb(12, 186, 82);  // DO NOT REMOVE.  REQUIRED FOR SAFARI
     border-color:  rgb(12, 186, 82);
     background-color:  rgba(12, 186, 82, .2);
     border-width: 2px;

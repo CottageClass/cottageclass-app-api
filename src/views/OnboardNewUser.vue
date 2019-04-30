@@ -175,6 +175,9 @@ export default {
       return stepSequence[this.stepIndex]
     },
     nextButtonState () {
+      if (!this.modelForCurrentStep) {
+        return 'inactive'
+      }
       if (this.modelForCurrentStep.err) {
         return 'inactive'
       } else {
@@ -239,7 +242,7 @@ export default {
       }
       return 11
     },
-    ...mapGetters(['currentUser', 'redirectRoute'])
+    ...mapGetters([ 'currentUser', 'redirectRoute', 'firstCreatedEvent' ])
   },
   methods: {
     submitEventData: function () {
@@ -289,12 +292,19 @@ export default {
         throw err
       })
     },
-    finishOnboarding () {
+    async finishOnboarding () {
       // send the data to the server
-      const that = this
       const userId = this.currentUser.id
-      const submitInfo = this.submitUserData(true)
-      submitInfo.then(() => {
+      try {
+        await this.submitUserData(true)
+        await this.$store.dispatch('updateCurrentUserFromServer')
+        const eventData = await this.submitEventData()
+        this.$store.commit('setCreatedEvents', { eventData: eventData })
+        this.log('event creation SUCCESS')
+        this.moveOntoNextFTE()
+
+        const that = this
+        // sheetsu update
         client.create({
           'ID': userId,
           'Date joined': moment(Date()).format('L'),
@@ -302,32 +312,28 @@ export default {
           'phone': this.userData.phone.number,
           'children': this.userData.children.list,
           'availability': this.userData.availability
-        }, 'newUsers').then((data) => {
-          console.log(data)
-        }, (err) => {
-          console.log(err)
+        }, 'newUsers').then(function (data) {
+          that.log(data)
+        }, function (err) {
+          that.logError(err)
         })
-        that.$store.dispatch('updateCurrentUserFromServer')
-      }).then(() => {
-        that.submitEventData().then(res => {
-          that.$store.commit('setCreatedEvents', { eventData: res })
-        })
-      }).then(res => {
-        console.log('event creation SUCCESS')
-        console.log(res)
-        this.moveOntoNextFTE()
-      }).catch(err => {
-        console.log(err)
-        that.stepIndex = stepSequence.length - 1
-        that.modelForCurrentStep.err = 'Sorry, there was a problem saving your information. Try again?'
-        throw err
-      })
+      } catch (e) {
+        this.logError(e)
+        this.stepIndex = stepSequence.length - 1
+        this.modelForCurrentStep.err = 'Sorry, there was a problem saving your information. Try again?'
+        throw e
+      }
     },
     moveOntoNextFTE () {
       if (this.redirectRoute) {
         this.$router.push(this.redirectRoute)
       } else {
-        this.$router.push({ name: 'RSVPPrompt' })
+        if (this.firstCreatedEvent) {
+          this.$router.push({ name: 'SocialInvite', params: { id: this.firstCreatedEvent.id } })
+        } else {
+          // in the case that the event creation was skipped, we go straight to home
+          this.$router.push({ name: 'Events' })
+        }
       }
     },
     nextStep () {

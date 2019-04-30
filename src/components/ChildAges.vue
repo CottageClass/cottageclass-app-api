@@ -1,18 +1,29 @@
 <template>
   <!-- Proper indentation here would cause spaces to get inserted incorrectly between punctuation like periods, commas.-->
-  <span>
-    <span v-if="childAgesSorted.length === 1">1 {{ singular }}&mdash;age {{ childAgesSorted[0] }}</span><span v-if="childAgesSorted.length === 2">2 {{ plural }}&mdash;ages {{ childAgesSorted[0] }} and {{ childAgesSorted[1] }}</span><span v-if="childAgesSorted.length > 2">{{ childAgesSorted.length }} {{ plural }}&mdash;ages <span v-for="(age, index) in childAgesSorted"><span v-if="index === childAgesSorted.length - 1"> and {{ age }}</span><span v-else>{{ age}}<span v-if="index !== childAgesSorted.length - 2">, </span></span></span>
-    </span>
-  </span>
+  <span>{{text}}</span>
 </template>
 
 <script>
+import { childAgeText } from '@/utils/utils'
+
 export default {
   name: 'ChildAges',
-  props: ['childAges', 'singular', 'plural'],
+  props: {
+    childAges: {},
+    singular: {},
+    plural: {},
+    verbose: {
+      default: true
+    },
+    prefix: {
+      default: ''
+    }
+  },
   computed: {
-    childAgesSorted: function () {
-      return this.childAges.concat().sort((a, b) => a - b)
+    text () {
+      const { childAges, singular, plural, verbose, prefix } = this
+
+      return childAgeText({ childAges, singular, plural, verbose, prefix })
     }
   }
 }

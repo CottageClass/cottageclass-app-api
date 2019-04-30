@@ -1,19 +1,18 @@
 <template>
-  <div class="item-container" >
-    <router-link :to="{ name: 'ProviderProfile', params: { id: this.user.id } }">
-      <div class="avatar-container">
-          <AvatarImage
-          :person="user"
-          className="avatar"/>
-      </div>
-    </router-link>
-
+  <div class="item-container" @click="goToProfile">
+    <div class="avatar-container">
+        <AvatarImage
+        :person="user"
+        className="avatar"/>
+    </div>
     <div class="info-container">
       <div class="heading">
         <span class="name">{{ user.firstName }}</span>
-        <span class="children" v-if="user.childAges && user.childAges.length">
-          {{childAgeString}}
-        </span>
+        <ChildAges class="children"
+                   :childAges="user.childAges"
+                   :verbose="false"
+                   singular="kid"
+                   plural="kids" />
       </div>
       <div class="details">
         <span class="distance">{{distanceFromMapCenter(user.location) + 'mi'}}</span>
@@ -22,13 +21,17 @@
         </span>
       </div>
     </div>
-   <MeetButton :targetUser="user" fillStyle="outline" layoutStyle="fat"/>
+  <MeetButton :targetUser="user"
+              fillStyle="outline"
+              layoutStyle="fat"
+              @meetButtonClick="registerMeetClick"/>
   </div>
 </template>
 
 <script>
 import AvatarImage from '@/components/base/AvatarImage'
 import MeetButton from '@/components/base/MeetButton'
+import ChildAges from '@/components/ChildAges'
 import { distanceHaversine } from '@/utils/api'
 import { mapGetters } from 'vuex'
 import _ from 'lodash'
@@ -39,16 +42,24 @@ export default {
     return {
       isSelected: false,
       inviteComplete: false,
-      sendingTimeout: null
+      sendingTimeout: null,
+      lastMeetButtonClick: null
     }
   },
   props: ['user'],
-  components: { AvatarImage, MeetButton },
-  computed: {
-    childAgeString () {
-      const ages = this.user.childAges
-      return ages.length + ' kid' + (ages.length > 1 ? 's' : '') + ' (' + ages.join(', ') + ')'
+  components: { AvatarImage, MeetButton, ChildAges },
+  methods: {
+    registerMeetClick (e) {
+      this.lastMeetButtonClick = e
     },
+    goToProfile (e) {
+      if (!this.lastMeetButtonClick ||
+          Math.abs(this.lastMeetButtonClick.event.timeStamp - e.timeStamp) > 0.001) {
+        this.$router.push({ name: 'ProviderProfile', params: { id: this.user.id } })
+      }
+    }
+  },
+  computed: {
     distanceFromCurrentUser () {
       if (this.currentUser) {
         const location = this.currentUser.location
@@ -102,6 +113,10 @@ export default {
   border-bottom: 1px solid #f5f5f5;
   background-color: #fff;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .08);
+  cursor: pointer;
+  &:hover {
+    background-color: #00000010;
+  }
 }
 .name {
   font-size: 16px;

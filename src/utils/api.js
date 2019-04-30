@@ -9,6 +9,12 @@ const logger = Logger('api')
 
 export function initProxySession (currentUserId, receiverId, requestMessage, acknowledgmentMessage) {
   logger.log('INITIATING PROXY WITH users ' + currentUserId + ', ' + receiverId)
+  if (process.env.NODE_ENV === 'development') {
+    logger.log('NOT SENDING NOTIFICATIO from ' + currentUserId + '.  To: ' + receiverId)
+    logger.log('REQUEST MESSAGE: ', requestMessage)
+    logger.log('ACKNOWLEDGE MESSAGE: ', acknowledgmentMessage)
+    return
+  }
   let postData = {
     twilioSession: {
       requestMessage: requestMessage,
@@ -23,8 +29,8 @@ export function initProxySession (currentUserId, receiverId, requestMessage, ack
     // return proxy number for receiver
     return res.data.data.attributes.proxyIdentifierReceiver
   }).catch(err => {
-    logger.error('proxy session init FAILURE')
-    logger.error(err)
+    logger.logError('proxy session init FAILURE')
+    logger.logError(err)
     throw err
   })
 }
@@ -134,7 +140,7 @@ export function submitUserInfo (userId, data) {
     logger.log('SUBMIT USER SUCCESS', res)
     return res
   }).catch(err => {
-    logger.error('SUBMIT USER FAILURE', err)
+    logger.logError('SUBMIT USER FAILURE', err)
     throw err
   })
 }
@@ -179,7 +185,8 @@ function createPersonObject (personInApi, availableChildren = []) {
     },
     // todo: add these once API has them
     title: '',
-    employer: '',
+    jobPosition: p.job_position,
+    employer: p.employer,
     backgroundCheck: false,
     facebookUid: p.facebook_uid,
     facebookMapIcon: 'https://graph.facebook.com/' + p.facebook_uid + '/picture?width=30',
@@ -202,16 +209,24 @@ function createPeopleObject (responseData) {
   return peopleDataArray.map(personInApi => createPersonObject(personInApi, childrenArray))
 }
 
-export function fetchUsersWithinDistance ({ miles, lat, lng, pageSize = 100, page = 1 }) {
+export function fetchUsersWithinDistance ({ miles, lat, lng, minAge, maxAge, pageSize = 100, page = 1 }) {
+  let url = `/api/users/miles/${miles}/latitude/${lat}/longitude/${lng}/`
+  if (minAge !== null && typeof minAge !== 'undefined') {
+    url += `min_age/${minAge}/`
+  }
+  if (maxAge !== null && typeof minAge !== 'undefined') {
+    url += `max_age/${maxAge}/`
+  }
+  url += `page/${page}/page_size/${pageSize}`
   return axios.get(
-    `/api/users/miles/${miles}/latitude/${lat}/longitude/${lng}/page/${page}/page_size/${pageSize}`
+    url
   ).then(res => {
     logger.log('FETCH USERS WITHIN DISTANCE SUCCESS')
     logger.log(res.data)
     return createPeopleObject(res.data)
   }).catch(err => {
-    logger.error('FETCH USERS WITHIN DISTANCE FAILURE')
-    logger.error(err)
+    logger.logError('FETCH USERS WITHIN DISTANCE FAILURE')
+    logger.logError(err)
     throw err
   })
 }
@@ -224,8 +239,8 @@ export function fetchUsers () {
     logger.log(res.data)
     return createPeopleObject(res.data)
   }).catch(err => {
-    logger.error('FETCH USERS IN NETWORK FAILURE')
-    logger.error(err.errors)
+    logger.logError('FETCH USERS IN NETWORK FAILURE')
+    logger.logError(err.errors)
     throw err
   })
 }
@@ -238,8 +253,8 @@ export function fetchUsersWhoHaveMadeInquiries (currentUserId) {
     logger.log(res.data)
     return createPeopleObject(res.data)
   }).catch(err => {
-    logger.error('FETCH USERS WHO HAVE MADE INQUIRIES FAILURE')
-    logger.error(err.errors)
+    logger.logError('FETCH USERS WHO HAVE MADE INQUIRIES FAILURE')
+    logger.logError(err.errors)
     throw err
   })
 }
@@ -251,8 +266,8 @@ export async function fetchUser (userId) {
     logger.log('FETCH PUBLIC USER #' + userId + ' SUCCESS')
     return createUser(normalize(res.data))
   } catch (err) {
-    logger.error('FETCH PUBLIC USER #' + userId + ' FAILURE')
-    logger.error(err.errors)
+    logger.logError('FETCH PUBLIC USER #' + userId + ' FAILURE')
+    logger.logError(err.errors)
     throw err
   }
 }
@@ -265,8 +280,8 @@ export async function fetchCurrentUser (userId) {
     logger.log(res)
     return createUser(normalize(res.data))
   } catch (err) {
-    logger.error('FETCH PRIVATE USER #' + userId + ' FAILURE')
-    logger.error(err.errors)
+    logger.logError('FETCH PRIVATE USER #' + userId + ' FAILURE')
+    logger.logError(err.errors)
     throw err
   }
 }
@@ -276,7 +291,7 @@ export async function fetchFacebookImages (facebookAccessToken) {
     const res = await axios.get(`https://graph.facebook.com/me/photos?fields=images&access_token=${facebookAccessToken}`)
     return res.data.data
   } catch (e) {
-    logger.error(e)
+    logger.logError(e)
     return null
   }
 }
@@ -296,7 +311,7 @@ export function submitEmergencyContacts (childId, arrayOfContacts) {
     }).then(res => {
     logger.log('SUBMIT EMERGENCY CONTACTS SUCCESS', res)
   }).catch(err => {
-    logger.error('SUBMIT EMERGENCY CONTACTS FAILURE', childId, arrayOfContacts)
+    logger.logError('SUBMIT EMERGENCY CONTACTS FAILURE', childId, arrayOfContacts)
     throw err
   })
 }
@@ -310,8 +325,8 @@ export function fetchAllUsers () {
     logger.log(createPeopleObject(res.data))
     return createPeopleObject(res.data)
   }).catch(err => {
-    logger.error('FETCH ALL USERS FAILURE')
-    logger.error(err.errors)
+    logger.logError('FETCH ALL USERS FAILURE')
+    logger.logError(err.errors)
     throw err
   })
 }
@@ -339,8 +354,8 @@ export function fetchMessagesForUserPair (participantId1, participantId2) {
     logger.log(createMessagesObject(res.data.data))
     return createMessagesObject(res.data.data)
   }).catch(err => {
-    logger.error('FETCH Messages for User Pair FAILURE')
-    logger.error(err)
+    logger.logError('FETCH Messages for User Pair FAILURE')
+    logger.logError(err)
     throw err
   })
 }
@@ -350,6 +365,11 @@ export function fetchMessagesForUserPair (participantId1, participantId2) {
  */
 
 export function submitNotification (participantId, notificationBodyText) {
+  if (process.env.NODE_ENV === 'development') {
+    logger.log('NOT SENDING NOTIFICATIO to ' + participantId)
+    logger.log('MESSAGE: ', notificationBodyText)
+    return
+  }
   let notificationData = {
     'notification': {
       'body': notificationBodyText
@@ -361,8 +381,8 @@ export function submitNotification (participantId, notificationBodyText) {
     logger.log('NOTIFICATION submission SUCCESS')
     return res
   }).catch(err => {
-    logger.error('NOTIFICATION submission FAILURE')
-    logger.error(err)
+    logger.logError('NOTIFICATION submission FAILURE')
+    logger.logError(err)
     throw err
   })
 }
@@ -378,8 +398,8 @@ export const fetchUpcomingEvents = async (userId, sortBy) => {
     logger.log('FETCH MY UPCOMING EVENTS SUCCESS')
     return createEvents(normalize(res.data), sortBy)
   }).catch(err => {
-    logger.error('FETCH MY UPCOMING EVENTS FAILURE')
-    logger.error(err.errors)
+    logger.logError('FETCH MY UPCOMING EVENTS FAILURE')
+    logger.logError(err.errors)
     throw err
   })
 }
@@ -399,8 +419,8 @@ export const fetchEvents = async (params, sortBy) => {
     logger.log(res.data)
     return createEvents(normalize(res.data), sortBy)
   }).catch(err => {
-    logger.error('FETCH FAILURE -- ', url)
-    logger.error(err.errors)
+    logger.logError('FETCH FAILURE -- ', url)
+    logger.logError(err.errors)
     throw err
   })
 }
@@ -419,9 +439,17 @@ export const fetchEvent = async (id) => {
   }
 }
 
-export function fetchUpcomingEventsWithinDistance ({ miles, lat, lng, pageSize = 100, page = 1 }) {
+export function fetchUpcomingEventsWithinDistance ({ miles, lat, lng, minAge, maxAge, pageSize = 100, page = 1 }) {
+  let url = `upcoming/miles/${miles}/latitude/${lat}/longitude/${lng}/`
+  if (minAge !== null && typeof minAge !== 'undefined') {
+    url += `min_age/${minAge}/`
+  }
+  if (maxAge !== null && typeof minAge !== 'undefined') {
+    url += `max_age/${maxAge}/`
+  }
+  url += `page/${page}/page_size/${pageSize}`
   return fetchEvents(
-    `upcoming/miles/${miles}/latitude/${lat}/longitude/${lng}/page/${page}/page_size/${pageSize}`,
+    url,
     e => e.startsAt
   )
 }
@@ -437,8 +465,8 @@ export function fetchUpcomingParticipatingEvents (userId) {
       }
       return Object.values(normedData.event).map(parseEventData)
     }).catch(err => {
-      logger.error('GET PARTICIPATING EVENTS FAILURE')
-      logger.error(err)
+      logger.logError('GET PARTICIPATING EVENTS FAILURE')
+      logger.logError(err)
       throw err
     })
 }
@@ -451,8 +479,8 @@ export function removeEventParticipant (eventId) {
       return res
     })
     .catch(err => {
-      logger.error('REMOVE EVENT PARTICIPANT FAILURE')
-      logger.error(err)
+      logger.logError('REMOVE EVENT PARTICIPANT FAILURE')
+      logger.logError(err)
       throw err
     })
 }
@@ -475,8 +503,8 @@ export function submitEventParticipant (eventId, participantChildIds) {
       return res
     })
     .catch(err => {
-      logger.error('SUBMIT EVENT PARTICIPANT FAILURE')
-      logger.error(err)
+      logger.logError('SUBMIT EVENT PARTICIPANT FAILURE')
+      logger.logError(err)
       throw err
     })
 }
@@ -489,8 +517,8 @@ export function deleteEvent (eventId, successCallback) {
       successCallback()
     })
     .catch(err => {
-      logger.error('DELETE EVENT FAILURE')
-      logger.error(err)
+      logger.logError('DELETE EVENT FAILURE')
+      logger.logError(err)
       throw err
     })
 }

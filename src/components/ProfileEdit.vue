@@ -1,7 +1,7 @@
 <template>
 <div class="body" id="top-of-form">
   <MainNav />
-  <div class="container w-container">
+  <div class="lp-container w-container">
   <h1 class="heading-1">Edit profile</h1>
   <StyleWrapper styleIs="editing" class="cards" v-if="currentUser">
       <ErrorMessage v-if="showError && hasError" text="Your form has errors. Please fix them to continue..." />
@@ -78,7 +78,6 @@ import ErrorMessage from '@/components/base/ErrorMessage.vue'
 import * as api from '@/utils/api.js'
 import { redirect } from '@/mixins'
 import { mapGetters } from 'vuex'
-import _ from 'lodash'
 
 var VueScrollTo = require('vue-scrollto')
 
@@ -113,7 +112,7 @@ export default {
   },
   created: function () {
     if (this.redirectToSignupIfNotAuthenticated()) { return }
-    this.initialAvailability = {
+    this.availability = {
       availableAfternoons: !!this.currentUser.availableAfternoons,
       availableMornings: !!this.currentUser.availableMornings,
       availableEvenings: !!this.currentUser.availableEvenings,
@@ -140,19 +139,19 @@ export default {
     submitUserInformation: function () {
       if (!this.hasError) {
         this.saveButtonText = 'Saving...'
-        let data = _.assign(this.currentUser, {})
+        let data = Object.assign(this.currentUser, {})
         data.children = this.children.list
-        const { phone, location, availability, images } = this
-        data = _.assign(data, { phone, location, availability, images })
-        console.log({ data })
+        const { phone, location, availability } = this
+        data = Object.assign(data, { phone, location, availability })
         api.submitUserInfo(this.currentUser.id, data).then(res => {
           this.saveButtonText = ' \u2714 Saved'
           this.$store.dispatch('updateCurrentUserFromServer')
-          console.log('user update SUCCESS')
-          console.log(res)
+          this.log('user update SUCCESS')
+          this.log(res)
           return res
         }).catch(err => {
-          console.log('Error saving', err)
+          this.logError('Error saving')
+          this.logError(err)
           this.saveButtonText = 'Problem saving. Click to try again.'
         })
       } else {
@@ -178,7 +177,7 @@ export default {
   margin-bottom: 32px;
 }
 
-.container {
+.lp-container {
   padding: 32px 32px 100px;
 }
 
@@ -187,7 +186,7 @@ export default {
     padding-bottom: 77px;
   }
 
-  .container {
+  .lp-container {
     padding-bottom: 32px;
   }
 }
@@ -202,7 +201,7 @@ export default {
     margin-left: 24px;
   }
 
-  .container {
+  .lp-container {
     padding-top: 16px;
     padding-right: 0px;
     padding-left: 0px;

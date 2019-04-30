@@ -5,7 +5,6 @@
       <p class="button-sub-link-paragraph">
         <router-link
             class="button-sub-link"
-            @click="cancelRSVP"
             :to="{ name: 'CancelRSVP', params: { eventId: eventId }}"
         >
           cancel
@@ -32,7 +31,7 @@ export default {
 
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 
 .button-sub-link-paragraph {
   text-align: right;
@@ -44,6 +43,7 @@ export default {
 .rsvp-button {
   background-color: #1f88e9 !important;
   text-align: center !important;
+  -webkit-text-fill-color: #fff;  // DO NOT REMOVE.  REQUIRED FOR SAFARI
 }
 
 .button-sub-link {
@@ -81,6 +81,7 @@ export default {
 
 .full {
   background-color: transparent !important;
+  border: #ff672f 1px solid;
   color: #ff672f !important;
 }
 

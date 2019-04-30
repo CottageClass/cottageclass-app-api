@@ -1,15 +1,6 @@
 Rails.application.routes.draw do
   ActiveAdmin.routes self
   devise_for :users,
-             # TODO: get rid of the GET user/sign_in route because it is done with vue now
-
-             ## use better routes for auth
-             # path: '',
-             # path_names: {
-             #   sign_in: 'login',
-             #   sign_out: 'logout',
-             #   registration: 'signup'
-             # },
              controllers: {
                omniauth_callbacks: 'users/omniauth_callbacks',
                passwords: 'users/passwords',
@@ -24,23 +15,29 @@ Rails.application.routes.draw do
         collection { delete :index, to: 'participants#destroy' }
       end
       collection do
-        get '(/:skope)(/miles/:miles(/latitude/:latitude/longitude/:longitude))(/sort/:sort)'\
+        get '(/:skope)(/miles/:miles(/latitude/:latitude/longitude/:longitude))(/min_age/:min_age)(/max_age/:max_age)(/sort/:sort)'\
         '(/page/:page/page_size/:page_size)',
             to: 'events#index',
             skope: /upcoming|past/i,
             sort: /chronological|distance/i,
             latitude: /-?+(?=.??\d)\d*\.?\d*/,
             longitude: /-?+(?=.??\d)\d*\.?\d*/,
+            miles: /-?+(?=.??\d)\d*\.?\d*/,  # this allows negatives, which it shouldn't
+            min_age: /\d+/,
+            max_age: /\d+/,
             defaults: { skope: 'all' },
             as: :index
       end
     end
     resources :users, only: %i[show] do
       collection do
-        get '(/miles/:miles(/latitude/:latitude/longitude/:longitude))(/page/:page/page_size/:page_size)',
+        get '(/miles/:miles(/latitude/:latitude/longitude/:longitude))(/min_age/:min_age)(/max_age/:max_age)(/page/:page/page_size/:page_size)',
             to: 'users#index',
             latitude: /-?+(?=.??\d)\d*\.?\d*/,
             longitude: /-?+(?=.??\d)\d*\.?\d*/,
+            miles: /-?+(?=.??\d)\d*\.?\d*/,  # this allows negatives, which it shouldn't
+            min_age: /\d+/,
+            max_age: /\d+/,
             as: :index
       end
       resources :events, only: %i[] do

@@ -8,11 +8,15 @@ import Vue from 'vue'
 
 let UserPin
 
+const GMAPS_ZOOM_FACTOR = 156543.03392
+const METERS_PER_MILE = 1609.34
+
 export default {
   data () {
     return {
       map: null,
-      google: null
+      google: null,
+      element: null
     }
   },
   computed: {
@@ -47,6 +51,7 @@ export default {
   },
   methods: {
     async createMap (element, options, idleHandler = null) {
+      this.element = element
       const google = await this.google
       this.map = new Promise(async function (resolve, reject) {
         const map = new google.maps.Map(element, options)
@@ -89,11 +94,31 @@ export default {
     async zoomLevelForScale (metersPerPixel) {
       const map = await this.map
       const lat = map.center.lat()
-      return Math.log2(156543.03392 * Math.cos(lat * Math.PI / 180) / metersPerPixel)
+      return Math.log2(GMAPS_ZOOM_FACTOR * Math.cos(lat * Math.PI / 180) / metersPerPixel)
+    },
+    async scaleForZoomLevel (zoomLevel) {
+      const map = await this.map
+      const lat = map.center.lat()
+      return GMAPS_ZOOM_FACTOR * Math.cos(lat * Math.PI / 180) / Math.pow(2, zoomLevel)
     },
     async latlng (lat, lng) {
       const google = await this.google
       return new google.maps.LatLng(parseFloat(lat), parseFloat(lng))
+    },
+    async radiusFromMap () {
+      const map = await this.map
+      const halfDiagonal = Math.hypot(this.element.clientHeight, this.element.clientWidth) / 2
+      const scale = await this.scaleForZoomLevel(map.zoom) // in meters per pixel
+      return halfDiagonal * scale / METERS_PER_MILE
+    },
+    setZoomLevelForRadius: async function (radius) {
+      const map = await this.map
+      const mapEl = document.querySelector('.map-container')
+      const halfDiagonal = Math.hypot(mapEl.clientHeight, mapEl.clientWidth) / 2
+      const desiredMetersPerPixel = radius * METERS_PER_MILE / halfDiagonal
+      let zoom = Math.floor(await this.zoomLevelForScale(desiredMetersPerPixel, map))
+      zoom = Math.min(Math.max(zoom, 0), 20) // ensure it's in the range of acceptable zooms
+      map.setZoom(zoom)
     }
   },
   mounted () {

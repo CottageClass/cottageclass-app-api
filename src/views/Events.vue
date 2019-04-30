@@ -1,26 +1,62 @@
 <template>
-  <div class="body">
+  <div class="page-wrapper">
     <MainNav />
     <div class="content-section background-01">
       <div class="divider-2px"></div>
       <div class="top-container w-container">
-        <h1 class="title">Meet new parents. Plan playdates.</h1>
-        <div class="page-subtitle">These parents near you are all interested in sharing playdates. <strong>Reach out &amp; plan an introductory playdate / meeting</strong>. Or browse scheduled playdates below.</div>
+        <h1 class="event-page-title">Meet new parents. Plan playdates.</h1>
+        <div class="selectors-group">
+        <div class="filter-container">
+
+          <FilterSelector title="Location"
+                          :showClear="false"
+                          :active="shortDescription" >
+            <template v-slot:buttonContents>
+              <LocationFilterButton :shortDescription="shortDescription" />
+            </template>
+            <template v-slot:selectorContents>
+              <LocationFilterSelector
+                @locationUpdated="updateMapAreaFromFilter"
+                :searchRadius="mapArea.maxDistance"
+              />
+            </template>
+          </FilterSelector>
+
+          <FilterSelector title="Child Age"
+                          :showClear="true"
+                          @clearFilterClicked="resetAgeRange"
+                          :active="ageRangeActive" >
+            <template v-slot:buttonContents>
+              <AgeRangeFilterButton :range="ageRange" />
+            </template>
+            <template v-slot:selectorContents>
+              <AgeRangeFilterSelector
+                v-model="ageRange"
+              />
+            </template>
+          </FilterSelector>
+        </div>
+      </div>
+        <div class="page-subtitle">These parents all want to share playdates. <strong>Wave to start the conversation</strong>, or browse scheduled playdates below.</div>
       </div>
       <div class="main-container">
         <div class="map-list-container">
           <EventListMap
             class="map"
             :users="users"
-            @maxDistanceSet="updateForZoomLevel($event)"
+            @searchAreaSet="updateMapAreaFromMap"
           />
           <div class="list-container w-container">
-            <EventList
+            <SearchResultList
+              :showFetchMoreEventsButton="showFetchMoreEventsButton"
+              :showFetchMoreUsersButton="showFetchMoreUsersButton"
               class="list"
               :events="events"
               :users="users"
               :noEventsMessage="noEventsMessage"
               :showTrailblazerMessage="showTrailblazerMessage"
+              @fetchMoreEventsClick="fetchMoreEvents"
+              @fetchMoreUsersClick="fetchMoreUsers"
             />
           </div>
         </div>
@@ -31,11 +67,15 @@
 </template>
 
 <script>
-import EventList from '@/components/EventList.vue'
+import SearchResultList from '@/components/SearchResultList.vue'
 import MainNav from '@/components/MainNav.vue'
 import Footer from '@/components/Footer.vue'
 import EventListMap from '@/components/EventListMap.vue'
-
+import FilterSelector from '@/components/filters/FilterSelector'
+import AgeRangeFilterButton from '@/components/filters/AgeRangeFilterButton'
+import AgeRangeFilterSelector from '@/components/filters/AgeRangeFilterSelector'
+import LocationFilterSelector from '@/components/filters/LocationFilterSelector'
+import LocationFilterButton from '@/components/filters/LocationFilterButton'
 import { fetchUpcomingEventsWithinDistance, fetchUsersWithinDistance } from '@/utils/api'
 import { mapGetters } from 'vuex'
 
@@ -43,30 +83,109 @@ var moment = require('moment')
 
 export default {
   name: 'Events',
-  components: { EventList, MainNav, Footer, EventListMap },
+  components: { SearchResultList,
+    MainNav,
+    Footer,
+    EventListMap,
+    FilterSelector,
+    AgeRangeFilterSelector,
+    AgeRangeFilterButton,
+    LocationFilterSelector,
+    LocationFilterButton },
   data () {
     return {
-      maximumDistanceFromUserInMiles: '5',
       showAllButtonText: 'Show all playdates',
       showShowAllButton: false,
       noEventsMessage: 'Sorry, there are no upcoming playdates in this area',
       events: null,
       users: null,
-      showTrailblazerMessage: true
+      eventsLastPage: 0,
+      usersLastPage: 0,
+      showFetchMoreEventsButton: true,
+      showFetchMoreUsersButton: true,
+      showTrailblazerMessage: true,
+      ageRange: { error: null, data: { min: -1, max: -1 } },
+      shortDescription: null
     }
   },
-  computed: mapGetters([
-    'distanceFromCurrentUser', 'currentUser', 'isAuthenticated', 'alert', 'mapArea'
-  ]),
+  computed: {
+    ageRangeActive () {
+      return this.ageRange.data.min >= 0 || this.ageRange.data.max >= 0
+    },
+    ...mapGetters(['distanceFromCurrentUser', 'currentUser', 'isAuthenticated', 'alert', 'mapArea'])
+  },
   methods: {
-    updateForZoomLevel: async function (e) {
+    async fetchMoreUsers () {
+      try {
+        const params = {
+          miles: this.mapArea.maxDistance,
+          lat: this.mapArea.center.lat,
+          lng: this.mapArea.center.lng,
+          pageSize: 10,
+          minAge: this.ageRange.data.min >= 0 ? this.ageRange.data.min : null,
+          maxAge: this.ageRange.data.max >= 0 ? this.ageRange.data.max : null,
+          page: this.usersLastPage + 1
+        }
+        let newUsers = await fetchUsersWithinDistance(params)
+        if (newUsers.length < 10) {
+          this.showFetchMoreUsersButton = false
+        }
+        if (this.currentUser) {
+          newUsers = newUsers.filter(u => u.id !== this.currentUser.id)
+        }
+        // if users is null, set it to the incoming users, otherwise add them
+        this.users = !this.users ? newUsers : this.users.concat(newUsers)
+        this.usersLastPage = this.usersLastPage + 1
+      } catch (e) {
+        this.logError('problem loading more users')
+        this.logError(e)
+      }
+    },
+    async fetchMoreEvents () {
+      try {
+        const params = {
+          miles: this.mapArea.maxDistance,
+          lat: this.mapArea.center.lat,
+          lng: this.mapArea.center.lng,
+          pageSize: 10,
+          minAge: this.ageRange.data.min >= 0 ? this.ageRange.data.min : null,
+          maxAge: this.ageRange.data.max >= 0 ? this.ageRange.data.max : null,
+          page: this.eventsLastPage + 1
+        }
+        let newEvents = await fetchUpcomingEventsWithinDistance(params)
+        if (newEvents.length < 10) {
+          this.showFetchMoreEventsButton = false
+        }
+        if (this.currentUser) {
+          newEvents = newEvents.filter(e => e.hostId !== this.currentUser.id)
+        }
+        // if events is null, set it to the incoming events, otherwise add them
+        this.events = !this.events ? newEvents : this.events.concat(newEvents)
+        this.eventsLastPage = this.eventsLastPage + 1
+      } catch (e) {
+        this.logError('problem loading events')
+        this.logError(e)
+      }
+    },
+    resetAgeRange () {
+      this.ageRange = { error: null, data: { min: -1, max: -1 } }
+    },
+    updateMapAreaFromMap: async function (e) {
+      this.updateMapArea(e)
+      this.shortDescription = null
+    },
+    updateMapAreaFromFilter: async function (e) {
+      this.updateMapArea(e)
+      this.shortDescription = e.shortDescription
+    },
+    updateMapArea: async function (e) {
+      const center = e.center ? { lat: e.center.lat(), lng: e.center.lng() } : null
       this.$store.commit('setMapArea', {
-        center: { lat: e.center.lat(), lng: e.center.lng() },
+        center,
         maxDistance: e.miles
       })
       this.showTrailblazerMessage = false
-
-      this.fetchWithinDistance()
+      this.fetch()
     },
     isToday: function (date) {
       return moment(0, 'HH').diff(date, 'days') === 0
@@ -74,26 +193,40 @@ export default {
     formatDate: function (date) {
       return moment(date).format('dddd, MMM Do')
     },
-    fetchWithinDistance: async function () {
-      const params = {
-        miles: this.maximumDistanceFromUserInMiles,
-        lat: this.mapArea.center.lat,
-        lng: this.mapArea.center.lng,
-        pageSize: 10
-      }
-      this.events = await fetchUpcomingEventsWithinDistance(params)
-      this.users = await fetchUsersWithinDistance(params)
+    fetch: async function () {
+      this.events = null
+      this.users = null
+      this.eventsLastPage = 0
+      this.usersLastPage = 0
+      this.showFetchMoreEventsButton = true
+      this.showFetchMoreUsersButton = true
+      this.fetchMoreEvents()
+      this.fetchMoreUsers()
+    }
+  },
+  watch: {
+    ageRange: {
+      handler: function () {
+        this.fetch()
+      },
+      deep: true
     }
   },
   mounted: async function () {
-    this.fetchWithinDistance()
+    this.fetch()
   }
 }
 </script>
 
-<style scoped>
-
-.body {
+<style scoped lang="scss">
+.filter-container {
+  display: flex;
+  flex-direction: row;
+  & > div{
+    margin-right:10px;
+  }
+}
+.page-wrapper {
   all: unset;
   font-family: soleil, sans-serif;
   color: #333;
@@ -145,7 +278,7 @@ a {
   background-image: linear-gradient(180deg, rgba(0, 0, 0, .1), rgba(0, 0, 0, .1));
 }
 
-.body {
+.page-wrapper {
   overflow: visible;
   background-color: #fff;
   font-family: soleil, sans-serif;
@@ -219,26 +352,12 @@ a {
   text-decoration: none;
 }
 
-.body-2 {
-  background-color: #f6f6f6;
-}
-
 .list-container {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   width: 568px;
   min-height: 100px;
   padding-right: 32px;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
-  -webkit-box-align: start;
-  -webkit-align-items: flex-start;
-  -ms-flex-align: start;
   align-items: flex-start;
   background-color: transparent;
 }
@@ -305,6 +424,10 @@ a {
   align-items: flex-start;
 }
 
+.event-page-title {
+  margin-bottom: 11px;
+}
+
 @media (max-width: 991px) {
   .map {
     position: relative;
@@ -328,19 +451,19 @@ a {
   .main-container {
     padding: 0px;
   }
-  .title {
+  .event-page-title {
     font-size: 32px;
     line-height: 42px;
   }
 }
 @media (max-width: 767px){
-  .title {
+  .event-page-title {
       font-size: 28px;
       line-height: 34px;
   }
 }
 @media (max-width: 479px) {
-  .title {
+  .event-page-title {
     font-size: 24px;
     line-height: 31.200000000000003px;
   }

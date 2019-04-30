@@ -37,8 +37,8 @@
               :to="{ name: 'ProviderProfile', params: { id: event.hostId }}"
               class="host-name link">
                 {{ event.hostFirstName }}
-            </router-link> &amp;
-            <ChildAges :childAges="event.hostChildAges" singular="kid" plural="kids"/>.
+            </router-link>
+            <ChildAges :childAges="event.hostChildAges" singular="kid" plural="kids" prefix="& "/>.
           </div>
           </div>
 
@@ -118,7 +118,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 a {
   text-decoration: none;
 }
@@ -289,15 +289,16 @@ a {
 }
 
 .event-list-item {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
+  &:hover {
+    background-color: #00000001;
+    border: 1px  #00000010 solid;
+    & .event-list-item-graphic {
+      filter: brightness(95%);
+    }
+  }
+  border: 1px transparent solid;
   display: flex;
   margin-bottom: 16px;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
   flex-direction: row;
   border-radius: 4px;
   background-color: #fff;
@@ -305,23 +306,13 @@ a {
 }
 
 .event-list-item-graphic {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   min-height: 180px;
   min-width: 200px;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
   justify-content: center;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
   align-items: center;
   border-top-left-radius: 4px;
   border-bottom-left-radius: 4px;
-  background-color: #cbcbcb;
 }
 
 .event-list-item-content {
@@ -495,7 +486,7 @@ a {
 }
 
 .link-block-4:hover {
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 .heading-2 {

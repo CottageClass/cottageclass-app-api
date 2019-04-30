@@ -62,17 +62,15 @@ describe('ProviderProfile', () => {
       expect(edit.exists()).toBeTruthy()
     })
 
-    it.skip('shows the correct availability', () => {
-      // FIXIT this isn't working because backend doesn't provide the right info
-      const times = wrapper.findAll('div.times-container div.time').wrappers
+    it('shows the correct availability', () => {
+      const times = wrapper.findAll('.availability-tag').wrappers
       expect(times).toHaveLength(2)
-      expect(times[0].text()).toBe('3p–7p')
-      expect(times[1].text()).toBe('7p-')
+      expect(times[0].text()).toBe('3pm-7pm')
+      expect(times[1].text()).toBe('7pm- ?')
     })
 
-    it.skip('shows the correct activities', () => {
-      // FIXIT this isn't working because backend doesn't provide the right info
-      const activities = wrapper.findAll('div.activities div div').wrappers
+    it('shows the correct activities', () => {
+      const activities = wrapper.findAll('.activity-tag').wrappers
       expect(activities).toHaveLength(2)
       expect(activities[0].text()).toBe('travel')
       expect(activities[1].text()).toBe('movies')
@@ -86,6 +84,27 @@ describe('ProviderProfile', () => {
     it('shows the correct languages', () => {
       const languages = wrapper.find('.languages')
       expect(languages.text()).toBe('Speaks English, Italian and Spanish')
+    })
+  })
+
+  describe('single language', () => {
+    beforeAll(async () => {
+      const $route = {
+        path: '/user',
+        params: { id: 1230 }
+      }
+      const $store = {
+        getters: { currentUser: null }
+      }
+      wrapper = shallowMount(ProviderProfile, {
+        mocks: { $route, $store },
+        stubs: [ 'GmapMap', 'GmapMarker' ] // because the are globally registered.  this silences the warning
+      })
+    })
+
+    it('shows the correct language', () => {
+      const languages = wrapper.find('.languages')
+      expect(languages.text()).toBe('Speaks Spanish')
     })
   })
 })

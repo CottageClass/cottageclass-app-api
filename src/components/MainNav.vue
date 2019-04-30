@@ -1,7 +1,7 @@
 <template>
   <div class="main-nav">
     <Alert v-if="alert" />
-    <div class="container w-container">
+    <div class="lp-container w-container">
       <div class="logo-wrapper">
         <router-link :to="{ name: logoRouterTarget }" class="w-inline-block">
           <img src="@/assets/kc-logo-landscape.svg" alt="" class="logo">
@@ -20,14 +20,14 @@
       v-on-clickaway="clickedAway"
       class="nav-links-expanded">
         <ul class="unordered-list-2 w-list-unstyled">
-          <li>
+          <li v-if="isAuthenticated">
             <router-link :to="{name: 'Events'}" class="link-block w-inline-block">
-              <div class="text-block">Upcoming Playdates</div>
+              <div class="text-block">Find parents &amp; playdates</div>
             </router-link>
           </li>
           <li v-if="isAuthenticated">
             <a href="/profile/edit" class="link-block w-inline-block">
-              <div class="text-block">Edit Profile</div>
+              <div class="text-block">Edit profile</div>
             </a>
           </li>
           <li>
@@ -36,13 +36,13 @@
             </router-link>
           </li>
           <li v-if="isAuthenticated">
-            <router-link to="/my-events" class="link-block w-inline-block">
-              <div class="text-block">My Playdates</div>
+            <router-link to="/my-rsvps" class="link-block w-inline-block">
+              <div class="text-block">Playdates you're attending</div>
             </router-link>
           </li>
           <li v-if="isAuthenticated">
-            <router-link to="/my-rsvps" class="link-block w-inline-block">
-              <div class="text-block">My RSVP's</div>
+            <router-link to="/my-events" class="link-block w-inline-block">
+              <div class="text-block">Playdates you're hosting</div>
             </router-link>
           </li>
           <li v-if="isAuthenticated">
@@ -143,20 +143,12 @@ a {
   line-height: 20px;
 }
 
-.container {
+.lp-container {
   position: relative;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
+  flex-direction: row;
   display: flex;
   padding: 24px 32px;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
   justify-content: space-between;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
   align-items: center;
 }
 
@@ -248,7 +240,7 @@ a {
 }
 
 @media (max-width: 767px) {
-  .container {
+  .lp-container {
     padding: 16px 20px;
   }
   .nav-links-expanded {
@@ -263,7 +255,7 @@ a {
 }
 
 @media (max-width: 479px) {
-  .container {
+  .lp-container {
     padding-top: 11px;
     padding-bottom: 11px;
   }

@@ -11,7 +11,7 @@
               <h1 class="name-heading">{{ user.firstName }}</h1>
               <div class="top-card-subtitle"><span>{{ user.neighborhood || user.adminAreaLevel1 }}</span> |
                 <span v-if="user && user.childAges && user.childAges.length > 0" class="providerp-children">
-                    Parent to <ChildAges :childAges="user.childAges" singular="child" plural="children" />.
+                    <ChildAges :childAges="user.childAges" singular="child" plural="children" prefix="Parent to "/>.
                 </span>
               </div>
               <div v-if="employmentDescription" class="top-card-info-bullet">
@@ -49,15 +49,15 @@
             <ul class="playdate-planning-bullet-wrapper">
               <li class="playdate-planning-bullet">
                 <div class="number-bullet">1</div>
-                <div class="playdate-bullet-text">Click &#x27;invite for a playdate&#x27; above</div>
+                <div class="playdate-bullet-text">Click &#x27;invite for a playdate&#x27; above.</div>
               </li>
               <li class="playdate-planning-bullet">
                 <div class="number-bullet">2</div>
-                <div class="playdate-bullet-text">{{ user.firstName }} will get a text that you&#x27;re intestested in a playdate</div>
+                <div class="playdate-bullet-text">{{ user.firstName }} will get a text that you&#x27;re interested in a playdate.</div>
               </li>
               <li class="playdate-planning-bullet">
                 <div class="number-bullet">3</div>
-                <div class="playdate-bullet-text">Decide on a time and place to meet. (We recommend meeting in one of your homes).</div>
+                <div class="playdate-bullet-text">Decide on a time and place to meet. (We recommend meeting in one of your homes.)</div>
               </li>
             </ul>
           </div>
@@ -69,9 +69,7 @@
           <div v-if="user.images && user.images.length" class="profile-specifics-card">
             <img src="@/assets/photos.svg" width="100" height="100" alt="">
             <div class="card-small-text">Household Photos<span class="text-span"></span></div>
-            <div class="div-block-40">
               <Images :images="user.images" />
-            </div>
           </div>
           <div v-if="user.activities && user.activities.length" class="profile-specifics-card">
             <img src="@/assets/interests.svg" width="100" height="100" alt="">
@@ -80,7 +78,7 @@
               <div v-for="activity in user.activities"
                    :key="activity"
                    class="tag">
-                <div class="tag-text">{{activity}}</div>
+                <div class="tag-text activity-tag">{{activity}}</div>
               </div>
             </div>
           </div>
@@ -89,16 +87,16 @@
             <div class="card-small-text">Available Times</div>
             <div class="tag-container">
               <div class="tag" v-if="user.availableMornings">
-                <div class="tag-text">9am-3pm</div>
+                <div class="tag-text availability-tag">9am-3pm</div>
               </div>
               <div class="tag" v-if="user.availableAfternoons">
-                <div class="tag-text">3pm-7pm</div>
+                <div class="tag-text availability-tag">3pm-7pm</div>
               </div>
               <div class="tag" v-if="user.availableEvenings">
-                <div class="tag-text">7pm- ?</div>
+                <div class="tag-text availability-tag">7pm- ?</div>
               </div>
               <div class="tag" v-if="user.availableWeekends">
-                <div class="tag-text">Weekends</div>
+                <div class="tag-text availability-tag">Weekends</div>
               </div>
             </div>
           </div>
@@ -215,6 +213,9 @@ export default {
     languageText: function () {
       const languageCodes = this.user.languages
       const languages = _.map(languageCodes, languageList().getLanguageName)
+      if (languages.length === 1) {
+        return 'Speaks ' + languages[0]
+      }
       return 'Speaks ' + [languages.slice(0, -1).join(', '), _.last(languages)].join(' and ')
     },
     anyAvailability: function () {

@@ -35,7 +35,12 @@
         "child_ages": [
           6
         ],
-        "profile_blurb": "I was born outside of boston and now i live in nyc"
+        "profile_blurb": "I was born outside of boston and now i live in nyc",
+        "activities": ["travel", "movies"],
+        "available_mornings":false,
+        "available_afternoons":true,
+        "available_evenings":true,
+        "available_weekends":false
       },
       "relationships": {
         "children": {

@@ -1,13 +1,54 @@
 <template>
-  <div class="events-list-wrapper">
-    <LoadingSpinner v-if="awaitingEvents"/>
-    <div v-for="(user, index) in users">
-      <UserListItem
-        :user="user"
-        :index="index"
-        :key="index"
-      />
+  <div class="list-wrapper">
+    <LoadingSpinner v-if="awaiting"/>
+    <div class="user-list" v-if="!awaiting">
+      <div v-for="(user, index) in users">
+        <UserListItem
+          :user="user"
+          :index="index"
+          :key="index"
+        />
+      </div>
     </div>
+    <div v-if="showFetchMoreUsersButton && !awaiting"
+          class="user-pagination-button"
+          @click="$emit('fetchMoreUsersClick')">
+          Show more
+    </div>
+
+    <div class="event-list" v-if="!awaiting">
+      <div v-for="(event, index) in events">
+        <div
+            v-if="showDates && (index === 0 || (formatDate(event.startsAt) !== formatDate(events[index - 1].startsAt)))"
+            class="event-date-section-tittle">
+          <img src="@/assets/date-outline-white-oval.svg" alt="" class="image-264">
+          <div class="date-text-wrapper">
+            <div class="date-title">
+              <span v-if="isToday(event.startsAt)">
+                <strong class="bold-text">Today</strong>,
+              </span>
+              {{ formatDate(event.startsAt) }}
+            </div>
+          </div>
+        </div>
+        <EventListItem
+          :event="event"
+          :index="index"
+          :key="index"
+          :showRsvpButton="currentUser === null || currentUser.id !== event.hostId"
+          :showEditButton="isAuthenticated && currentUser.id === event.hostId"
+          :distance="distanceFromCurrentUser(event.hostFuzzyLatitude,
+                                            event.hostFuzzyLongitude)"
+        />
+      </div>
+    </div>
+    <div v-if="showFetchMoreEventsButton && !awaiting"
+          class="event-pagination-button"
+          @click="$emit('fetchMoreEventsClick')">
+          Show more
+    </div>
+
+    <!-- in the case of no events -->
     <div v-if="noEvents && showTrailblazerMessage">
       <TrailblazerCard />
     </div>
@@ -15,31 +56,6 @@
        class="no-events-message">
        {{noEventsMessage}}
     </p>
-
-    <div v-for="(event, index) in events">
-      <div
-          v-if="showDates && (index === 0 || (formatDate(event.startsAt) !== formatDate(events[index - 1].startsAt)))"
-          class="event-date-section-tittle">
-        <img src="@/assets/date-outline-white-oval.svg" alt="" class="image-264">
-        <div class="date-text-wrapper">
-          <div class="date-title">
-            <span v-if="isToday(event.startsAt)">
-              <strong class="bold-text">Today</strong>,
-            </span>
-            {{ formatDate(event.startsAt) }}
-          </div>
-        </div>
-      </div>
-      <EventListItem
-        :event="event"
-        :index="index"
-        :key="index"
-        :showRsvpButton="currentUser === null || currentUser.id !== event.hostId"
-        :showEditButton="isAuthenticated && currentUser.id === event.hostId"
-        :distance="distanceFromCurrentUser(event.hostFuzzyLatitude,
-                                           event.hostFuzzyLongitude)"
-      />
-    </div>
   </div>
 </template>
 
@@ -52,12 +68,13 @@ import { mapGetters } from 'vuex'
 
 var moment = require('moment')
 export default {
-  name: 'EventList',
+  name: 'SearchResultList',
   components: { EventListItem, LoadingSpinner, UserListItem, TrailblazerCard },
+
   props: {
     noEventsMessage: {},
-    events: {},
-    users: {},
+    events: { links: null },
+    users: { links: null },
     showDates: {
       type: Boolean,
       default: true
@@ -65,6 +82,14 @@ export default {
     showTrailblazerMessage: {
       type: Boolean,
       default: false
+    },
+    showFetchMoreEventsButton: {
+      type: Boolean,
+      requred: true
+    },
+    showFetchMoreUsersButton: {
+      type: Boolean,
+      requred: true
     }
   },
   methods: {
@@ -76,8 +101,8 @@ export default {
     }
   },
   computed: {
-    awaitingEvents: function () {
-      return this.events === null
+    awaiting: function () {
+      return this.events === null || this.users === null
     },
     noEvents: function () {
       return this.events !== null && this.events.length === 0
@@ -93,10 +118,35 @@ select {
   --webkit-appearance: menulist;
 }
 
-.image-8 {
-  margin-bottom: 0;
+.user-pagination-button {
+  cursor: pointer;
+  &:hover {
+    background-color: #00000010;
+  }
+  display: flex;
+  width: 100%;
+  margin-top: 0px;
+  padding: 20px;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  color: hsla(208.8118811881188, 82.11%, 51.76%, 1.00);
+  border-bottom: 1px solid #f5f5f5;
+  background-color: #fff;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .08);
 }
 
+.event-pagination-button {
+  width: 200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 12px 32px;
+  border-radius: 4px;
+  background-color: #1f88e9;
+  text-align: center;
+  -webkit-text-fill-color: #fff;  // DO NOT REMOVE.  REQUIRED FOR SAFARI
+  color: #fff;
+}
 .body {
   all: unset;
   font-family: soleil, sans-serif;
@@ -106,61 +156,15 @@ select {
   background-color: #fff;
 }
 
-h1 {
-  margin-top: 20px;
-  margin-bottom: 10px;
-  font-size: 55px;
-  line-height: 44px;
-  font-weight: 700;
-  text-align: center;
-}
-
-h2 {
-  margin-top: 20px;
-  margin-bottom: 10px;
-  font-size: 32px;
-  line-height: 36px;
-  font-weight: bold;
-}
-
 a {
   color: #000;
   text-decoration: none;
-}
-
-.button {
-  padding: 12px 32px;
-  border-radius: 4px;
-  background-color: #1f88e9;
-  text-align: center;
-  color: white;
-}
-
-.button:hover {
-  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, .1)), to(rgba(0, 0, 0, .1)));
-  background-image: linear-gradient(180deg, rgba(0, 0, 0, .1), rgba(0, 0, 0, .1));
-}
-
-.button:active {
-  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, .1)), to(rgba(0, 0, 0, .1)));
-  background-image: linear-gradient(180deg, rgba(0, 0, 0, .1), rgba(0, 0, 0, .1));
 }
 
 .body {
   overflow: visible;
   background-color: #fff;
   font-family: soleil, sans-serif;
-}
-
-.image-2 {
-  margin-right: 17px;
-  float: left;
-  opacity: 0.8;
-}
-
-.h1-display {
-  margin-bottom: 24px;
-  line-height: 66px;
 }
 
 .content-section {
@@ -206,22 +210,6 @@ a {
   align-items: center;
 }
 
-.image-261 {
-  max-width: 90%;
-}
-
-.image-262 {
-  width: 100px;
-  height: 100px;
-  margin-bottom: 16px;
-}
-
-.image-263 {
-  min-width: 80px;
-  margin-right: 8px;
-  margin-left: 8px;
-}
-
 .link {
   text-decoration: none;
 }
@@ -230,29 +218,22 @@ a {
   text-decoration: underline;
 }
 
-.events-list-wrapper {
+.list-wrapper {
+  display: flex;
+  flex-direction: column;
   width: 100%;
 }
 
-.events-list-wrapper div:first-child .event-date-section-tittle {
+.list-wrapper div:first-child .event-date-section-tittle {
   margin-top: 0px
 }
 
 .event-date-section-tittle {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   margin-top: 68px;
   margin-bottom: 16px;
   padding: 16px 16px 16px 0px;
-  -webkit-box-pack: start;
-  -webkit-justify-content: flex-start;
-  -ms-flex-pack: start;
   justify-content: flex-start;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
   align-items: center;
   border-radius: 4px;
 }
@@ -350,28 +331,14 @@ a {
   width: 40px;
   background-color: #fff;
 }
-
-.image-265 {
-  width: 40px;
-}
-
 .no-events-message {
   margin-top: 100px;
 }
 
 @media (max-width: 991px) {
-  .h1-display {
-    font-size: 32px;
-    line-height: 42px;
-  }
-
   .content-container-2 {
     padding-top: 100px;
     padding-bottom: 128px;
-  }
-
-  .image-263 {
-    min-width: 50px;
   }
 
   .content-container-3 {
@@ -389,23 +356,20 @@ a {
 }
 
 @media (max-width: 767px) {
-  .body {
-    padding-bottom: 100px;
+  .user-pagination-button {
+    padding: 16px;
+    justify-content: center;
+    border-radius: 0px;
   }
 
-  .h1-display {
-    font-size: 28px;
-    line-height: 34px;
+  .body {
+    padding-bottom: 100px;
   }
 
   .content-container-2 {
     padding-right: 32px;
     padding-bottom: 100px;
     padding-left: 32px;
-  }
-
-  .image-263 {
-    min-width: 40px;
   }
 
   .date-title {
@@ -440,10 +404,6 @@ a {
     padding-bottom: 64px;
   }
 
-  .image-261 {
-    max-width: 100%;
-  }
-
   .date-title {
     font-size: 18px;
     line-height: 24px;
@@ -459,10 +419,6 @@ a {
   }
 
   .image-264 {
-    width: 32px;
-  }
-
-  .image-265 {
     width: 32px;
   }
 }
