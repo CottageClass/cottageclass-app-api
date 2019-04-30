@@ -1,13 +1,13 @@
 <template>
   <div class="contents">
-    {{ zipCode || 'Location'}}
+    {{ shortDescription || 'Location'}}
   </div>
 </template>
 
 <script>
 export default {
   name: 'LocationFilterButton',
-  props: ['zipCode']
+  props: ['shortDescription']
 }
 </script>
 

@@ -9,10 +9,10 @@
         <div class="filter-container">
 
           <FilterSelector title="Location"
-                          @clearFilterClicked="resetAgeRange"
-                          :active="zip" >
+                          :showClear="false"
+                          :active="shortDescription" >
             <template v-slot:buttonContents>
-              <LocationFilterButton :zipCode="zip" />
+              <LocationFilterButton :shortDescription="shortDescription" />
             </template>
             <template v-slot:selectorContents>
               <LocationFilterSelector
@@ -23,6 +23,7 @@
           </FilterSelector>
 
           <FilterSelector title="Child Age"
+                          :showClear="true"
                           @clearFilterClicked="resetAgeRange"
                           :active="ageRangeActive" >
             <template v-slot:buttonContents>
@@ -104,7 +105,7 @@ export default {
       showFetchMoreUsersButton: true,
       showTrailblazerMessage: true,
       ageRange: { error: null, data: { min: -1, max: -1 } },
-      zip: null
+      shortDescription: null
     }
   },
   computed: {
@@ -171,11 +172,11 @@ export default {
     },
     updateMapAreaFromMap: async function (e) {
       this.updateMapArea(e)
-      this.zip = null
+      this.shortDescription = null
     },
     updateMapAreaFromFilter: async function (e) {
       this.updateMapArea(e)
-      this.zip = e.zip
+      this.shortDescription = e.shortDescription
     },
     updateMapArea: async function (e) {
       const center = e.center ? { lat: e.center.lat(), lng: e.center.lng() } : null
