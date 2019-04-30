@@ -59,3 +59,17 @@ export function childAgeText ({ childAges, singular, plural, prefix, verbose, ex
     }
   }
 }
+
+export function childAgeSentenceText ({ childAges }) {
+  const childAgesSorted = childAges.concat().sort((a, b) => a - b)
+  const ages = childAgesSorted.filter(e => e >= 0)
+  const n = ages.length
+  switch (n) {
+    case 0:
+      return 'one on the way'
+    case 1:
+      return '1 kid age ' + ages[0]
+    default: // 2 or more
+      return `${n} kids age ${ages.slice(0, n - 1).join(', ')} & ${ages[n - 1]}`
+  }
+}
