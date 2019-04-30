@@ -16,9 +16,9 @@
         <img src="@/assets/close-x-black.svg" alt="" />
       </div>
       <div class="mob-selector-title">{{ title }}</div>
-      <div class="mob-selector-clear-all">
+      <div class="mob-selector-clear-all" v-if="showClear">
         <div class="mob-selector-clear-all-link"
-              @click="$emit('clearFilterClicked')">Clear all</div>
+              @click="$emit('clearFilterClicked')">Clear</div>
       </div>
     </div>
     <div class="selector-top">
@@ -33,7 +33,7 @@
 <script>
 export default {
   name: 'FilterSelector',
-  props: [ 'title', 'active' ],
+  props: [ 'title', 'active', 'showClear' ],
   data () {
     return {
       state: {
