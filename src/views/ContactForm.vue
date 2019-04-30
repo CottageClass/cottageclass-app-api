@@ -113,6 +113,9 @@ export default {
       return result + this.questionText
     },
     ...mapGetters([ 'currentUser' ])
+  },
+  created () {
+    this.redirectToSignupIfNotAuthenticated()
   }
 }
 </script>
