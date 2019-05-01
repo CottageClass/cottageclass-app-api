@@ -1,5 +1,5 @@
 <template>
-  <div class="body onb-body">
+  <div class="onb-body">
     <div class="title-bar">
       <a
         @click="$emit('prev')"
@@ -166,19 +166,8 @@ export default {
 
 /* EXISTING WORK FROM WEBFLOW MOCK */
 
-.body {
-  font-family: soleil, sans-serif;
-  color: #333;
-  font-size: 14px;
-  line-height: 20px;
-}
-
 a {
   text-decoration: none;
-}
-
-.body {
-  background-color: #0d73c7;
 }
 
 .title-bar {
