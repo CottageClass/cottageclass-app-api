@@ -4,6 +4,7 @@ import UserListItem from '@/components/UserListItem.vue'
 describe('UserListItem', () => {
   const $store = {
     getters: {
+      waveHasBeenSent: () => false,
       mapArea: {
         center: {
           lat: 41.96,

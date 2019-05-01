@@ -9,6 +9,7 @@ describe('MeetButton', () => {
       const $store = {
         getters: {
           isAuthenticated: true,
+          waveHasBeenSent: () => false,
           currentUser: {
             id: '987654321',
             firstName: 'Natasha',
@@ -72,6 +73,7 @@ describe('MeetButton', () => {
     it('has the correct data', async () => {
       const $store = {
         getters: {
+          waveHasBeenSent: () => false,
           isAuthenticated: true,
           currentUser: {
             id: '987654321',
@@ -119,6 +121,7 @@ describe('MeetButton', () => {
     beforeAll(async () => {
       const $store = {
         getters: {
+          waveHasBeenSent: () => false,
           isAuthenticated: true,
           currentUser: {
             id: '987654321',

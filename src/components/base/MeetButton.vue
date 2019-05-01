@@ -13,14 +13,13 @@
 <script>
 import { setTimeout, clearTimeout } from 'timers'
 import { initProxySession } from '@/utils/api'
-import { childAgeSentenceText } from '@/utils/utils'
 import { mapGetters } from 'vuex'
-import { alerts, redirect } from '@/mixins'
+import { alerts, redirect, messaging } from '@/mixins'
 
 export default {
   name: 'MeetButton',
   props: ['targetUser', 'fillStyle', 'layoutStyle'],
-  mixins: [alerts, redirect],
+  mixins: [alerts, redirect, messaging],
   data () {
     return {
       meetStatus: 'none'
@@ -32,7 +31,7 @@ export default {
       switch (this.meetStatus) {
         case 'none':
           if (this.redirectToSignupIfNotAuthenticated()) {
-            this.$store.commit('addPendingWave', { userId: this.targetUser.id })
+            this.$store.commit('addPendingWave', { targetUser: this.targetUser })
           } else {
             this.initiateMessageSending()
           }
@@ -55,9 +54,12 @@ export default {
     },
     sendMessage: async function () {
       try {
-        await initProxySession(this.currentUser.id, this.targetUser.id, this.meetMessage, this.acknowledgeMessage)
+        await initProxySession(this.currentUser.id,
+          this.targetUser.id,
+          this.meetMessage(this.targetUser),
+          this.acknowledgeMessage(this.targetUser))
         this.meetStatus = 'sent'
-        this.$store.commit('addSentWave', { userId: this.targetUser.id })
+        this.$store.commit('addSentWave', { targetUserId: this.targetUser.id })
       } catch (e) {
         console.error(e)
         this.meetStatus = 'none'
@@ -78,23 +80,7 @@ export default {
           return 'Wave'
       }
     },
-    distanceBetweenUsers () {
-      const targetLocation = this.targetUser.location
-      return function () {
-        return this.distanceFromCurrentUser(targetLocation.lat, targetLocation.lng)
-      }
-    },
-    meetMessage () {
-      return `${this.currentUser.firstName} (https://kidsclub.io/users/${this.currentUser.id}) waved at you! They live ${this.distanceBetweenUsers()} mi. away${this.messageChildAgeString}. If you're interested in a playdate, reply here!`
-    },
-    acknowledgeMessage () {
-      return `We just sent your wave to ${this.targetUser.firstName} (https://kidsclub.io/users/${this.targetUser.id}). Reply here to introduce yourself and schedule your first playdate!`
-    },
-    messageChildAgeString () {
-      const childAges = this.currentUser.childAges
-      return childAgeSentenceText({ childAges })
-    },
-    ...mapGetters([ 'currentUser', 'distanceFromCurrentUser', 'waveHasBeenSent' ])
+    ...mapGetters([ 'currentUser', 'waveHasBeenSent' ])
   },
   created () {
     if (this.waveHasBeenSent(this.targetUser.id)) {
