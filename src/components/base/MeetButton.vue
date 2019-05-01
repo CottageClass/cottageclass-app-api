@@ -54,6 +54,7 @@ export default {
       try {
         await initProxySession(this.currentUser.id, this.targetUser.id, this.meetMessage, this.acknowledgeMessage)
         this.meetStatus = 'sent'
+        this.$store.commit('addSentWave', { userId: this.targetUser.id })
       } catch (e) {
         console.error(e)
         this.meetStatus = 'none'
@@ -90,7 +91,12 @@ export default {
       const childAges = this.currentUser.childAges
       return childAgeSentenceText({ childAges })
     },
-    ...mapGetters([ 'currentUser', 'distanceFromCurrentUser' ])
+    ...mapGetters([ 'currentUser', 'distanceFromCurrentUser', 'waveHasBeenSent' ])
+  },
+  created () {
+    if (this.waveHasBeenSent(this.targetUser.id)) {
+      this.meetStatus = 'sent'
+    }
   }
 }
 </script>

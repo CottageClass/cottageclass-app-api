@@ -17,8 +17,12 @@ export default new Vuex.Store(
         center: { lat: 40.688309, lng: -73.994639 }, // BoCoCa
         maxDistance: 5
       }
+      sentWaves: []
     },
     mutations: {
+      addSentWave: (state, payload) => {
+        state.sentWaves.push(payload.userId)
+      },
       resetRedirectRoute: (state) => {
         state.redirectRoute = null
       },
@@ -71,6 +75,9 @@ export default new Vuex.Store(
         } else {
           return null
         }
+      },
+      waveHasBeenSent: state => {
+        return (userId) => state.sentWaves.includes(userId)
       },
       mapArea: state => state.mapArea,
       redirectRoute: state => state.redirectRoute
