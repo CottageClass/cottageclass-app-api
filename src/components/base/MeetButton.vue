@@ -31,8 +31,11 @@ export default {
       this.$emit('meetButtonClick', { event })
       switch (this.meetStatus) {
         case 'none':
-          if (this.redirectToSignupIfNotAuthenticated()) { return }
-          this.initiateMessageSending()
+          if (this.redirectToSignupIfNotAuthenticated()) {
+            this.$store.commit('addPendingWave', { userId: this.targetUser.id })
+          } else {
+            this.initiateMessageSending()
+          }
           break
         case 'sending':
           this.undoMessageSending()

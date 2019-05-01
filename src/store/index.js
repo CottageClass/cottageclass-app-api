@@ -16,10 +16,14 @@ export default new Vuex.Store(
       mapArea: {
         center: { lat: 40.688309, lng: -73.994639 }, // BoCoCa
         maxDistance: 5
-      }
+      },
+      pendingWaves: [],
       sentWaves: []
     },
     mutations: {
+      addPendingWave: (state, payload) => {
+        state.pendingWaves.push(payload.userId)
+      },
       addSentWave: (state, payload) => {
         state.sentWaves.push(payload.userId)
       },
