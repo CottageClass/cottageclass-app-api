@@ -5,9 +5,6 @@ import Vue from 'vue'
 Vue.component('RsvpButton', RsvpButton)
 
 storiesOf('RsvpButton', module)
-  .add('normal', () => ({
-    template: `<RsvpButton > </RsvpButton>`
-  }))
   .add('as a component', () => ({
     components: { RsvpButton },
     template: '<RsvpButton />'
