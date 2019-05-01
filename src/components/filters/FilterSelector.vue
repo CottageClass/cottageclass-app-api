@@ -7,10 +7,12 @@
   </div>
   <div v-if="state.open"
          class="modal-background"
-         @click="closeSelector" >
+         @click="closeSelector"
+         @touchmove="preventTouchMove">
   </div>
   <div v-if="state.open" class="selector-box-container"
-        @click.stop >
+        @click.stop
+        @touchmove="selectorTouchMove">
     <div class="selector-top-bar">
       <div @click="closeSelector" class="mob-selector-close w-inline-block">
         <img src="@/assets/close-x-black.svg" alt="" />
@@ -52,6 +54,9 @@ export default {
       this.state.open = false
       document.body.classList.remove('no-scroll')
       document.documentElement.classList.remove('no-scroll')
+    },
+    selectorTouchMove (e) {
+      e.preventDefault()
     },
     preventTouchMove (e) {
       if (this.state.open) {
