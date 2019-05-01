@@ -146,7 +146,8 @@ body {
 
 .filter-button.active {
   background-image: linear-gradient(180deg, rgba(31 ,136 ,233 ,1), rgba(31 ,136 ,233 ,1));
-  color: rgba(255 ,255 ,255 ,1);
+  color: #ff;
+  -webkit-text-fill-color: #fff;  // keep for safari
 }
 
 .filter-btn-container {
