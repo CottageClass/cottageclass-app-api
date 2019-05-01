@@ -1,9 +1,13 @@
 <template>
   <div class="item-container" @click="goToProfile">
     <div class="avatar-container">
-        <AvatarImage
-        :person="user"
-        className="avatar"/>
+      <AvatarImage
+      :person="user"
+      className="avatar"/>
+      <div class="facebook-verified-badge" v-if="user.facebookUid">
+        <div class="badge-checkmark">✓</div>
+        <div class="badge-text">Verified</div>
+      </div>
     </div>
     <div class="info-container">
       <div class="heading">
@@ -91,7 +95,36 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.facebook-verified-badge {
+  position: absolute;
+  left: 0%;
+  top: auto;
+  right: 0%;
+  bottom: -10px;
+  display: flex;
+  min-height: 24px;
+  min-width: 24px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1000px;
+  background-color: #0cba52;
+  opacity: 0.92;
+  & div {
+    color: #fff;
+    -webkit-text-fill-color: #fff; // do not remove, required for safari
+    font-size: 10px;
+    line-height: 12px;
+    text-align: center;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    &.badge-checkmark {
+      margin-right: 4px;
+    }
+  }
+}
+
 .avatar-container {
+  position: relative;
   min-width: 80px;
   height: 80px;
 }
@@ -154,6 +187,9 @@ export default {
     max-width: 60px;
     min-height: 60px;
     min-width: 60px;
+  }
+  .badge-checkmark {
+    display: none;
   }
 }
 
