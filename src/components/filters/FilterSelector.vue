@@ -1,18 +1,20 @@
 <template>
-<div class="filter-btn-container" @touchmove="preventTouchMove">
+<div class="filter-btn-container">
   <div class="filter-button w-button"
        :class="active ? 'active' : ''"
-       @click="buttonClick">
+       @click="openSelector">
     <slot name="buttonContents" />
   </div>
   <div v-if="state.open"
          class="modal-background"
-         @click="state.open=false" >
+         @click="closeSelector"
+         @touchmove="preventTouchMove">
   </div>
   <div v-if="state.open" class="selector-box-container"
-        @click.stop >
+        @click.stop
+        @touchmove="selectorTouchMove">
     <div class="selector-top-bar">
-      <div @click="state.open=false" class="mob-selector-close w-inline-block">
+      <div @click="closeSelector" class="mob-selector-close w-inline-block">
         <img src="@/assets/close-x-black.svg" alt="" />
       </div>
       <div class="mob-selector-title">{{ title }}</div>
@@ -43,14 +45,24 @@ export default {
     }
   },
   methods: {
+    openSelector () {
+      this.state.open = true
+      document.body.classList.add('no-scroll')
+      document.documentElement.classList.add('no-scroll')
+    },
+    closeSelector () {
+      this.state.open = false
+      document.body.classList.remove('no-scroll')
+      document.documentElement.classList.remove('no-scroll')
+    },
+    selectorTouchMove (e) {
+      e.preventDefault()
+    },
     preventTouchMove (e) {
       if (this.state.open) {
         e.preventDefault()
         e.stopPropagation()
       }
-    },
-    buttonClick () {
-      this.state.open = !this.state.open
     }
   }
 }
@@ -146,7 +158,8 @@ body {
 
 .filter-button.active {
   background-image: linear-gradient(180deg, rgba(31 ,136 ,233 ,1), rgba(31 ,136 ,233 ,1));
-  color: rgba(255 ,255 ,255 ,1);
+  color: #ff;
+  -webkit-text-fill-color: #fff;  // keep for safari
 }
 
 .filter-btn-container {

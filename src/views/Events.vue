@@ -76,6 +76,8 @@ import AgeRangeFilterButton from '@/components/filters/AgeRangeFilterButton'
 import AgeRangeFilterSelector from '@/components/filters/AgeRangeFilterSelector'
 import LocationFilterSelector from '@/components/filters/LocationFilterSelector'
 import LocationFilterButton from '@/components/filters/LocationFilterButton'
+
+import { messaging, alerts } from '@/mixins'
 import { fetchUpcomingEventsWithinDistance, fetchUsersWithinDistance } from '@/utils/api'
 import { mapGetters } from 'vuex'
 
@@ -83,6 +85,7 @@ var moment = require('moment')
 
 export default {
   name: 'Events',
+  mixins: [messaging, alerts],
   components: { SearchResultList,
     MainNav,
     Footer,
@@ -212,7 +215,8 @@ export default {
       deep: true
     }
   },
-  mounted: async function () {
+  created: async function () {
+    this.settlePendingWaves()
     this.fetch()
   }
 }

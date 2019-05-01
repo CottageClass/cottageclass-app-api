@@ -16,6 +16,7 @@ describe('Events', () => {
       const $store = new Vuex.Store({
         actions,
         getters: {
+          pendingWaves: () => [],
           currentUser () { return null },
           isAuthenticated () { return false },
           mapArea () {}

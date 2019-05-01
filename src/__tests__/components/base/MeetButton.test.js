@@ -5,10 +5,22 @@ describe('MeetButton', () => {
   let wrapper
 
   describe('locality provided', () => {
+    const targetUser = {
+      id: '123456789',
+      firstName: 'Chuck',
+      lastInitial: 'D',
+      childAges: [1, 2, 3],
+      location: {
+        lat: 41.969880,
+        lng: -73.651964 },
+      employer: 'Lockheed',
+      jobPosition: 'engineer'
+    }
     beforeAll(async () => {
       const $store = {
         getters: {
           isAuthenticated: true,
+          waveHasBeenSent: () => false,
           currentUser: {
             id: '987654321',
             firstName: 'Natasha',
@@ -23,22 +35,11 @@ describe('MeetButton', () => {
           }
         }
       }
-
       wrapper = mount(MeetButton, {
         mocks: { $store },
         stubs: ['router-link'],
         propsData: {
-          targetUser: {
-            id: '123456789',
-            firstName: 'Chuck',
-            lastInitial: 'D',
-            childAges: [1, 2, 3],
-            location: {
-              lat: 41.969880,
-              lng: -73.651964 },
-            employer: 'Lockheed',
-            jobPosition: 'engineer'
-          },
+          targetUser,
           fillStyle: 'outline',
           layoutStyle: 'slim'
         }
@@ -50,7 +51,7 @@ describe('MeetButton', () => {
       const requestMessage = `Natasha (https://kidsclub.io/users/987654321) waved at you! They live 4.2 mi. away with 3 kids age 1, 2 & 3. If you're interested in a playdate, reply here!`
 
       expect(meetButton.text()).toEqual('Wave')
-      expect(wrapper.vm.meetMessage).toEqual(requestMessage)
+      expect(wrapper.vm.meetMessage(targetUser)).toEqual(requestMessage)
     })
 
     it('initiates sending sequence', done => {
@@ -72,6 +73,7 @@ describe('MeetButton', () => {
     it('has the correct data', async () => {
       const $store = {
         getters: {
+          waveHasBeenSent: () => false,
           isAuthenticated: true,
           currentUser: {
             id: '987654321',
@@ -88,21 +90,22 @@ describe('MeetButton', () => {
         }
       }
 
+      const targetUser = {
+        id: '123456789',
+        firstName: 'Chuck',
+        lastInitial: 'D',
+        childAges: [1, 2, 3],
+        location: {
+          lat: 41.969880,
+          lng: -73.651964 },
+        employer: 'Lockheed',
+        jobPosition: 'engineer'
+      }
       wrapper = mount(MeetButton, {
         mocks: { $store },
         stubs: ['router-link'],
         propsData: {
-          targetUser: {
-            id: '123456789',
-            firstName: 'Chuck',
-            lastInitial: 'D',
-            childAges: [1, 2, 3],
-            location: {
-              lat: 41.969880,
-              lng: -73.651964 },
-            employer: 'Lockheed',
-            jobPosition: 'engineer'
-          },
+          targetUser,
           fillStyle: 'outline',
           layoutStyle: 'slim'
         }
@@ -111,14 +114,27 @@ describe('MeetButton', () => {
       const requestMessage = `Natasha (https://kidsclub.io/users/987654321) waved at you! They live 4.2 mi. away with 3 kids age 1, 2 & 3. If you're interested in a playdate, reply here!`
 
       expect(meetButton.text()).toEqual('Wave')
-      expect(wrapper.vm.meetMessage).toEqual(requestMessage)
+      expect(wrapper.vm.meetMessage(targetUser)).toEqual(requestMessage)
     })
   })
 
   describe('negative age kid', () => {
+    const targetUser = {
+      id: '123456789',
+      firstName: 'Chuck',
+      lastInitial: 'D',
+      childAges: [1, 2, 3],
+      location: {
+        lat: 41.969880,
+        lng: -73.651964 },
+      employer: 'Lockheed',
+      jobPosition: 'engineer'
+    }
+
     beforeAll(async () => {
       const $store = {
         getters: {
+          waveHasBeenSent: () => false,
           isAuthenticated: true,
           currentUser: {
             id: '987654321',
@@ -134,22 +150,11 @@ describe('MeetButton', () => {
           }
         }
       }
-
       wrapper = mount(MeetButton, {
         mocks: { $store },
         stubs: ['router-link'],
         propsData: {
-          targetUser: {
-            id: '123456789',
-            firstName: 'Chuck',
-            lastInitial: 'D',
-            childAges: [1, 2, 3],
-            location: {
-              lat: 41.969880,
-              lng: -73.651964 },
-            employer: 'Lockheed',
-            jobPosition: 'engineer'
-          },
+          targetUser,
           fillStyle: 'outline',
           layoutStyle: 'slim'
         }
@@ -161,7 +166,7 @@ describe('MeetButton', () => {
       const requestMessage = `Natasha (https://kidsclub.io/users/987654321) waved at you! They live 4.2 mi. away. If you're interested in a playdate, reply here!`
 
       expect(meetButton.text()).toEqual('Wave')
-      expect(wrapper.vm.meetMessage).toEqual(requestMessage)
+      expect(wrapper.vm.meetMessage(targetUser)).toEqual(requestMessage)
     })
 
     it('initiates sending sequence', done => {

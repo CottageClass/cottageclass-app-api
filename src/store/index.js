@@ -16,9 +16,24 @@ export default new Vuex.Store(
       mapArea: {
         center: { lat: 40.688309, lng: -73.994639 }, // BoCoCa
         maxDistance: 5
-      }
+      },
+      pendingWaves: [],
+      sentWaves: []
     },
     mutations: {
+      markWaveSent: (state, payload) => {
+        const id = payload.targetUserId
+        if (state.pendingWaves.some(user => user.id === id)) {
+          state.pendingWaves = state.pendingWaves.filter(w => w.id !== id)
+          state.sentWaves.push(id)
+        }
+      },
+      addPendingWave: (state, payload) => {
+        state.pendingWaves.push(payload.targetUser)
+      },
+      addSentWave: (state, payload) => {
+        state.sentWaves.push(payload.targetUserId)
+      },
       resetRedirectRoute: (state) => {
         state.redirectRoute = null
       },
@@ -71,6 +86,10 @@ export default new Vuex.Store(
         } else {
           return null
         }
+      },
+      pendingWaves: state => state.pendingWaves,
+      waveHasBeenSent: state => {
+        return (userId) => state.sentWaves.includes(userId)
       },
       mapArea: state => state.mapArea,
       redirectRoute: state => state.redirectRoute
