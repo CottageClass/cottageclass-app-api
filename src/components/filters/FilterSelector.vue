@@ -1,18 +1,18 @@
 <template>
-<div class="filter-btn-container" @touchmove="preventTouchMove">
+<div class="filter-btn-container">
   <div class="filter-button w-button"
        :class="active ? 'active' : ''"
-       @click="buttonClick">
+       @click="openSelector">
     <slot name="buttonContents" />
   </div>
   <div v-if="state.open"
          class="modal-background"
-         @click="state.open=false" >
+         @click="closeSelector" >
   </div>
   <div v-if="state.open" class="selector-box-container"
         @click.stop >
     <div class="selector-top-bar">
-      <div @click="state.open=false" class="mob-selector-close w-inline-block">
+      <div @click="closeSelector" class="mob-selector-close w-inline-block">
         <img src="@/assets/close-x-black.svg" alt="" />
       </div>
       <div class="mob-selector-title">{{ title }}</div>
@@ -43,14 +43,21 @@ export default {
     }
   },
   methods: {
+    openSelector () {
+      this.state.open = true
+      document.body.classList.add('no-scroll')
+      document.documentElement.classList.add('no-scroll')
+    },
+    closeSelector () {
+      this.state.open = false
+      document.body.classList.remove('no-scroll')
+      document.documentElement.classList.remove('no-scroll')
+    },
     preventTouchMove (e) {
       if (this.state.open) {
         e.preventDefault()
         e.stopPropagation()
       }
-    },
-    buttonClick () {
-      this.state.open = !this.state.open
     }
   }
 }

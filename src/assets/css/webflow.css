@@ -54,6 +54,13 @@ body {
   line-height: 20px;
   color: #333;
 }
+
+body.no-scroll, html.no-scroll {
+  position: fixed;
+  overflow: hidden;
+  height: 100%;
+}
+
 img {
   max-width: 100%;
   vertical-align: middle;
