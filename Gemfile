@@ -28,11 +28,14 @@ gem 'kaminari'
 gem 'sassc-rails'
 gem 'webpacker', '~> 3.5.5'
 
+group :production, :stagin do
+  gem 'newrelic_rpm'
+end
+
 group :production do
   gem 'airbrake'
   gem 'airbrake-ruby'
   gem 'lograge'
-  gem 'newrelic_rpm'
   gem 'puma-heroku'
   gem 'rails_12factor'
   gem 'uglifier'
