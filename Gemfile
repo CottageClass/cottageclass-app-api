@@ -28,7 +28,7 @@ gem 'kaminari'
 gem 'sassc-rails'
 gem 'webpacker', '~> 3.5.5'
 
-group :production, :stagin do
+group :production, :staging do
   gem 'newrelic_rpm'
 end
 
