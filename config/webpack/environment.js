@@ -4,6 +4,8 @@ const custom = require('./custom')
 const webpack = require('webpack')
 const dotenv = require('dotenv')
 
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
+
 const dotenvFiles = [
   `.env.${process.env.NODE_ENV}.local`,
   '.env.local',
@@ -15,8 +17,10 @@ dotenvFiles.forEach((dotenvFile) => {
 })
 
 environment.plugins.prepend('Environment', new webpack.EnvironmentPlugin(JSON.parse(JSON.stringify(process.env))))
+environment.plugins.prepend('VueLoaderPlugin', new VueLoaderPlugin())
 
 environment.config.merge(custom)
 environment.loaders.append('vue', vue)
+environment.mode = process.env.NODE_ENV
 
 module.exports = environment

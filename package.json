@@ -6,7 +6,9 @@
   "scripts": {
     "test": "jest --config ./jest.conf.js",
     "test-watch": "jest --config ./jest.conf.js --watch",
-    "lint": "eslint ./src/**/*.vue ./src/**/*.js"
+    "lint": "eslint ./src/**/*.vue ./src/**/*.js",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "author": "holmesworcester <hwilson@gmail.com>",
   "dependencies": {
@@ -15,7 +17,7 @@
     "@babel/polyfill": "^7.2.5",
     "@babel/preset-env": "^7.3.4",
     "@babel/runtime": "^7.3.4",
-    "@rails/webpacker": "3.5",
+    "@rails/webpacker": "4.0.2",
     "axios": "^0.18.0",
     "babel-core": "7.0.0-bridge.0",
     "babel-loader": "^8.0.5",
@@ -30,6 +32,7 @@
     "language-list": "0.0.3",
     "libphonenumber-js": "^1.5.1",
     "moment": "^2.22.2",
+    "postcss-cssnext": "^3.1.0",
     "register-service-worker": "^1.0.0",
     "sheetsu-node": "0.0.7",
     "vee-validate": "^2.1.4",
@@ -40,7 +43,7 @@
     "vue-clipboard2": "^0.2.1",
     "vue-cookies": "^1.5.12",
     "vue-google-autocomplete": "^1.1.0",
-    "vue-loader": "14.2.2",
+    "vue-loader": "^15.7.0",
     "vue-router": "^3.0.1",
     "vue-scrollto": "^2.13.0",
     "vue-template-compiler": "^2.6.7",
@@ -59,7 +62,13 @@
     "jest": "^24.5.0",
     "jest-serializer-vue": "^2.0.2",
     "vue-jest": "^3.0.4",
-    "webpack-dev-server": "2.11.2"
+    "webpack": "^4.8.3",
+    "webpack-cli": "^3.1.1",
+    "webpack-dev-server": "^3.1.4",
+    "@storybook/vue": "^5.0.11",
+    "@storybook/addon-actions": "^5.0.11",
+    "@storybook/addon-links": "^5.0.11",
+    "@storybook/addons": "^5.0.11"
   },
   "engines": {
     "node": "10.14.1"

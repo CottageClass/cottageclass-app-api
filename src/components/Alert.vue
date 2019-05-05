@@ -12,7 +12,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 
 .alert-container {
   width: 100%;

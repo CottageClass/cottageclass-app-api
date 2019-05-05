@@ -26,7 +26,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'country_select'
 gem 'kaminari'
 gem 'sassc-rails'
-gem 'webpacker', '~> 3.5.5'
+gem 'webpacker', '~> 4.0', '>= 4.0.2'
 
 group :production, :staging do
   gem 'newrelic_rpm'
