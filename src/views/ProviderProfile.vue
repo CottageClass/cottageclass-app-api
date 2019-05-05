@@ -23,11 +23,8 @@
               <div class="top-card-info-bullet">
                 <div class="member-since">Member since {{joinedDateFormatted}}</div>
               </div>
-              <div v-if="user.verified" class="top-card-info-bullet">
-                <div class="background-checked-wrapper">
-                  <img src="@/assets/check-green.svg" alt="">
-                  <div class="background-checked">Background Checked</div>
-                </div>
+              <div v-if="user.facebookUid" class="top-card-info-bullet">
+                <div class="background-checked">Verified social media account</div>
               </div>
             </div>
             <div class="top-card-column-2">
