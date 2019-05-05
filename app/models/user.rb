@@ -66,7 +66,7 @@ class User < ApplicationRecord
   end
 
   def child_ages
-    children.map(&:age)
+    children.map(&:age_in_months)
   end
 
   def child_names
