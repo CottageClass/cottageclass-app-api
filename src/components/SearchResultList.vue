@@ -53,8 +53,8 @@
       <TrailblazerCard />
     </div>
     <p v-if="noEvents && !showTrailblazerMessage"
-       class="no-events-message">
-       {{noEventsMessage}}
+       class="no-events-message"
+       v-html="noEventsMessage">
     </p>
   </div>
 </template>
