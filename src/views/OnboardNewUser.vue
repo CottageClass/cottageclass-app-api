@@ -30,6 +30,9 @@
           <Children
             v-if="currentStep === 'children'"
             v-model="userData.children" />
+          <Employment
+            v-if="currentStep === 'employment'"
+            v-model="userData.employment" />
           <YesOrNo
             v-if="currentStep === 'createEventsNow'"
             v-model="createEventsNow"
@@ -90,6 +93,7 @@ import ErrorMessage from '@/components/base/ErrorMessage.vue'
 import Phone from '@/components/FTE/userInformation/Phone.vue'
 import Location from '@/components/FTE/userInformation/Location.vue'
 import Children from '@/components/FTE/userInformation/Children.vue'
+import Employment from '@/components/FTE/userInformation/Employment'
 import EventActivity from '@/components/base/eventSpecification/EventActivity.vue'
 import EventTime from '@/components/base/eventSpecification/EventTime.vue'
 import EventDate from '@/components/base/eventSpecification/EventDate.vue'
@@ -104,6 +108,7 @@ const stepSequence = [
   'phone',
   'location',
   'children',
+  'employment',
   'facebookImages',
   'createEventsNow',
   'eventActivity',
@@ -122,6 +127,7 @@ export default {
   components: {
     Availability,
     Children,
+    Employment,
     ErrorMessage,
     EventActivity,
     EventDate,
@@ -143,6 +149,7 @@ export default {
       substep: '',
       createEventsNow: { err: null },
       userData: {
+        employment: { err: null },
         phone: { err: null },
         location: { err: null },
         children: { list: [], err: null },
@@ -191,6 +198,7 @@ export default {
         children: this.userData.children,
         houseRules: this.userData.houseRules,
         emergencyCare: this.userData.emergencyCare,
+        employment: this.userData.employment,
         pets: this.userData.pets,
         facebookImages: this.userData.facebookImages,
         createEventsNow: this.createEventsNow,
@@ -258,12 +266,20 @@ export default {
             phone: this.userData.phone,
             location: this.userData.location,
             availability: this.userData.emergencyCare,
-            children: this.userData.children
+            children: this.userData.children,
+            jobPosition: this.userData.employment.jobPosition,
+            employer: this.userDa.employment.employer
           }
         )
       } else {
         let params = {}
         switch (this.currentStep) {
+          case 'employment':
+            _.assign(params, {
+              employer: this.userData.employment.employer,
+              jobPosition: this.userData.employment.jobPosition
+            })
+            break
           case 'facebookImages':
             _.assign(params, { images: this.userData.facebookImages })
             break
@@ -402,6 +418,9 @@ export default {
           } else {
             this.substep = 'canProvide'
           }
+        }
+        if (this.currentStep === 'facebookImages' && !this.currentUser.facebookUid) {
+          this.prevStep()
         }
       }
       window.scrollTo(0, 0)
