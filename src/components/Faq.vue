@@ -94,7 +94,7 @@
     <div class="lp-container w-container">
       <h2 class="heading-2">Hosting Playdates</h2>
       <div class="question">How do I set up a playdate?</div>
-      <p class="paragraph">The easitest way is to reach out to parents with similarly-aged children near you and set up a time. You can also offer scheduled playdates, which let you share the link to your playdate with friends and invite your friends to share childcare with you! Other members of KidsClub will also have the option to RSVP to your playdate. We encourage you to invite as many friends as possible to grow the KidsClub community with incredible people and expand the options for free, quality care!</p>
+      <p class="paragraph">The easiest way is to reach out to parents with similarly-aged children near you and set up a time. You can also offer scheduled playdates, which let you share the link to your playdate with friends and invite your friends to share childcare with you! Other members of KidsClub will also have the option to RSVP to your playdate. We encourage you to invite as many friends as possible to grow the KidsClub community with incredible people and expand the options for free, quality care!</p>
       <div class="question">How do I invite my friends and my child’s classmates to share childcare with me?</div>
       <p class="paragraph">KidsClub makes sharing care with friends easy! All you have to do is invite your friends to your playdate or to join KidsClub. When they RSVP to your playdate, they’ll get prompted to create a playdate of their own and invite you!</p>
       <div class="question">Can I offer more than one playdate a month?</div>
