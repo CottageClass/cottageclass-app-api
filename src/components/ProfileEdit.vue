@@ -130,24 +130,28 @@ export default {
     ...mapGetters(['currentUser'])
   },
   methods: {
-    submitUserInformation: function () {
+    toToProfilePage () {
+      this.$router.push({ name: 'ProviderProfile', params: { id: this.currentUser.id } })
+    },
+    submitUserInformation: async function () {
       if (!this.hasError) {
         this.saveButtonText = 'Saving...'
         let data = Object.assign(this.currentUser, this.employment, {})
         data.children = this.children.list
         const { phone, location, availability } = this
         data = Object.assign(data, { phone, location, availability })
-        api.submitUserInfo(this.currentUser.id, data).then(res => {
+        try {
+          const res = await api.submitUserInfo(this.currentUser.id, data)
           this.saveButtonText = ' \u2714 Saved'
           this.$store.dispatch('updateCurrentUserFromServer')
+          this.toToProfilePage()
           this.log('user update SUCCESS')
           this.log(res)
-          return res
-        }).catch(err => {
+        } catch (e) {
           this.logError('Error saving')
-          this.logError(err)
+          this.logError(e)
           this.saveButtonText = 'Problem saving. Click to try again.'
-        })
+        }
       } else {
         this.showError = true
         VueScrollTo.scrollTo('#top-of-form')
