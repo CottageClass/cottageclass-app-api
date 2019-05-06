@@ -171,6 +171,7 @@ function createPersonObject (personInApi, availableChildren = []) {
     agreeTos: p.agree_tos,
     id: personInApi.id,
     childAges: p.child_ages,
+    childAgesInMonths: p.child_ages_in_months,
     firstName: p.first_name,
     avatar: p.avatar,
     activities: activities,

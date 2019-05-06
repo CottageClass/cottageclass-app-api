@@ -21,7 +21,7 @@
                 <div class="hosted-by">Hosted by <router-link
                     :to="{ name: 'ProviderProfile', params: { id: event.hostId }}" class="host">
                     {{ event.hostFirstName }}</router-link>
-                  <ChildAges :childAges="event.hostChildAges" singular="kid" plural="kids" prefix="& "/>
+                  <ChildAges :childAgesInMonths="event.hostChildAgesInMonths" singular="kid" plural="kids" prefix="& "/>
                   <span
                     v-if="event.participatingParents && event.participatingParents.length > 0">
                     <Participants :participants="event.participatingParents" /></span><span v-else>.</span></div>
@@ -110,7 +110,7 @@
             <div class="card-large-text">
               <router-link :to="{name: 'ProviderProfile', params: {id: event.hostId}}">{{ event.hostFirstName }}
               </router-link>
-              <ChildAges :childAges="event.hostChildAges" singular="child" plural="children" prefix="& "/>.
+              <ChildAges :childAgesInMonths="event.hostChildAgesInMonths" singular="child" plural="children" prefix="& "/>.
             </div>
             <div class="card-small-text-gray">{{ jobText }}</div>
             <div class="card-large-text">

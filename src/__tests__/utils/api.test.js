@@ -25,7 +25,7 @@ describe('events', () => {
     it('has the right data', async () => {
       const events = await fetchEvents()
       expect(typeof events.all).toBe('object')
-      expect(events.length).toBe(33)
+      expect(events.length).toBe(666)
       expect(events).toMatchSnapshot()
     })
   })
@@ -33,7 +33,7 @@ describe('events', () => {
   describe('fetchUpcomingEventsWithinDistance', () => {
     it('has the right data', async () => {
       const events = await fetchUpcomingEventsWithinDistance({ miles: 10, lat: 42.2798738, lng: -71.7900378 })
-      expect(events[0].id).toBe('2353')
+      expect(events[0].id).toBe('2535')
       expect(events).toMatchSnapshot()
     })
   })

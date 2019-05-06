@@ -38,7 +38,7 @@
               class="host-name link">
                 {{ event.hostFirstName }}
             </router-link>
-            <ChildAges :childAges="event.hostChildAges" singular="kid" plural="kids" prefix="& "/>.
+            <ChildAges :childAgesInMonths="event.hostChildAgesInMonths" singular="kid" plural="kids" prefix="& "/>.
           </div>
           </div>
 
