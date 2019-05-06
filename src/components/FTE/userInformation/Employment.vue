@@ -5,12 +5,12 @@
     <FormFieldAndLabel
       placeholder="Your employer"
       label="Where do you work?"
-      v-model="employerValue"
+      v-model="internalData.employer"
       />
     <FormFieldAndLabel
       placeholder="Your title or role"
       label="What do you do?"
-      v-model="jobPositionValue"
+      v-model="internalData.jobPosition"
       />
   </Question>
 </template>
@@ -22,28 +22,35 @@ import FormFieldAndLabel from '@/components/base/FormFieldAndLabel.vue'
 export default {
   name: 'Employment',
   components: { Question, FormFieldAndLabel },
-  props: ['jobPosition', 'employer'],
+  props: ['value'],
   data () {
     return {
-      err: false,
-      jobPositionValue: this.jobPosition,
-      employerValue: this.employer
+      internalData: this.value
+    }
+  },
+  computed: {
+    err () {
+      if (this.internalData.jobPosition && this.internalData.jobPosition.length) {
+        return null
+      } else {
+        return 'Please enter your job position'
+      }
     }
   },
   methods: {
     updateValues () {
-      this.$emit('valueUpdated', {
-        jobPosition: this.jobPositionValue,
-        employer: this.employerValue
+      this.$emit('input', {
+        employment: this.internalData,
+        err: this.err
       })
     }
   },
   watch: {
-    jobPositionValue: function () {
-      this.updateValues()
-    },
-    employerValue: function () {
-      this.updateValues()
+    internalData: {
+      handler: function () {
+        this.$emit('input', Object.assign(this.internalData, { err: this.err }))
+      },
+      deep: true
     }
   }
 }

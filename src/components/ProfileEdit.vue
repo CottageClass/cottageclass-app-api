@@ -5,7 +5,8 @@
   <h1 class="heading-1">Edit profile</h1>
   <StyleWrapper styleIs="editing" class="cards" v-if="currentUser">
       <ErrorMessage v-if="showError && hasError" text="Your form has errors. Please fix them to continue..." />
-      <ErrorMessage v-if="showError && hasError" :text="phone.err" />
+      <ErrorMessage v-if="showError && hasError && phone.err" :text="phone.err" />
+      <ErrorMessage v-if="showError && hasError && employment.err" :text="employment.err" />
     <Phone v-model="phone" :currentPhone="currentUser.phone" :required="false" />
     <ErrorMessage v-if="showError" :text="location.err" />
     <Location
@@ -13,20 +14,7 @@
       :currentApartment="currentUser.apartmentNumber"
       v-model="location"
       />
-    <Question
-      title="What do you do for a living?"
-      subtitle="Tell other families a bit about what you do for work.">
-      <FormFieldAndLabel
-        placeholder="Your employer"
-        label="Where do you work?"
-        v-model="currentUser.employer"
-        />
-      <FormFieldAndLabel
-        placeholder="Your title or role"
-        label="What do you do?"
-        v-model="currentUser.jobPosition"
-        />
-    </Question>
+    <Employment v-model="employment"/>
     <Question
       title="Tell us a bit about yourself"
       subtitle="Other members would love to know a bit more about you and your family.">
@@ -61,12 +49,12 @@
 </template>
 
 <script>
-import FormFieldAndLabel from '@/components/base/FormFieldAndLabel.vue'
 import Question from '@/components/base/Question.vue'
 import FormWithTextArea from '@/components/base/FormWithTextArea.vue'
 import MultipleImageUpload from '@/components/base/MultipleImageUpload.vue'
 import Checkboxes from '@/components/base/Checkboxes.vue'
 import Location from '@/components/FTE/userInformation/Location.vue'
+import Employment from '@/components/FTE/userInformation/Employment.vue'
 import LanguagesSpoken from '@/components/FTE/userInformation/LanguagesSpoken.vue'
 import Children from '@/components/FTE/userInformation/Children.vue'
 import Phone from '@/components/FTE/userInformation/Phone.vue'
@@ -87,6 +75,7 @@ export default {
   components: {
     Location,
     Phone,
+    Employment,
     Availability,
     MainNav,
     StyleWrapper,
@@ -94,7 +83,6 @@ export default {
     ErrorMessage,
     Children,
     Question,
-    FormFieldAndLabel,
     FormWithTextArea,
     MultipleImageUpload,
     Checkboxes,
@@ -104,6 +92,7 @@ export default {
     return {
       location: {},
       phone: {},
+      employment: {},
       availability: {},
       showError: false,
       saveButtonText: 'Save',
@@ -119,10 +108,15 @@ export default {
       availableWeekends: !!this.currentUser.availableWeekends
     }
     this.children = { 'list': this.currentUser.children || [] }
+    this.employment = {
+      jobPosition: this.currentUser.jobPosition,
+      employer: this.currentUser.employer,
+      err: null
+    }
   },
   computed: {
     hasError: function () {
-      if (!!this.phone.err || !!this.location.err || !!this.children.err) {
+      if (!!this.phone.err || !!this.location.err || !!this.children.err || this.employment.err) {
         return true
       } else {
         return false
@@ -139,7 +133,7 @@ export default {
     submitUserInformation: function () {
       if (!this.hasError) {
         this.saveButtonText = 'Saving...'
-        let data = Object.assign(this.currentUser, {})
+        let data = Object.assign(this.currentUser, this.employment, {})
         data.children = this.children.list
         const { phone, location, availability } = this
         data = Object.assign(data, { phone, location, availability })
