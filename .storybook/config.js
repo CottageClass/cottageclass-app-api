@@ -1,6 +1,7 @@
 import { configure } from '@storybook/vue';
 import '../src/assets/css/webflow.css'
 import '../src/assets/css/normalize.css'
+import 'vuetify/dist/vuetify.min.css' // Ensure you are using css-loader
 
 // automatically import all files ending in *.stories.js
 const req = require.context('../src/stories', true, /\.stories\.js$/);
