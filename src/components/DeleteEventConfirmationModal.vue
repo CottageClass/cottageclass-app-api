@@ -4,7 +4,7 @@
       <div class="modal-wrapper">
         <div class="modal-container">
           <div class="modal-header">
-            <p class="title">Delete Event?</p>
+            <p class="lp-title">Delete Event?</p>
           </div>
           <p class="message">This event will be removed forever.  This cannot be undone.</p>
           <div class="action-bar">
@@ -47,7 +47,7 @@ p {
   text-align: center;
 }
 
-.title {
+.lp-title {
   font-size: 14px;
   font-weight: bold;
 }

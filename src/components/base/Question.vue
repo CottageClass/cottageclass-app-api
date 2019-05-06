@@ -1,7 +1,7 @@
 <template>
   <div class="content-container">
     <div class="title-container">
-      <h1 class="title">{{ title }}</h1>
+      <h1 class="lp-title">{{ title }}</h1>
       <p class="onb-paragraph-subheading-2">{{ subtitle }}</p>
     </div>
     <div class="location-search-container">

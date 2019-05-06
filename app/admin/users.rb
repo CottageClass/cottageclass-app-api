@@ -83,7 +83,7 @@ ActiveAdmin.register User do
     end
     column :nearest_upcoming_event do |instance|
       event = instance.nearest_upcoming_event
-      event.present? ? edit_admin_event_url(event) : nil
+      ENV['APP_HOST'] + '/event/' + event.id.to_s if event.present?
     end
   end
 end

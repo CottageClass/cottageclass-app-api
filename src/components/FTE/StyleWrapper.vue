@@ -20,6 +20,7 @@ export default {
 }
 
 .onboarding {
+  font-family: soleil, sans-serif;
 
   .event-heading {
     color: #333;
@@ -1702,7 +1703,7 @@ export default {
     color: hsla(0, 0%, 100%, .6);
   }
 
-  .title {
+  .lp-title {
     margin-top: 0px;
     margin-bottom: 10px;
     color: #fff;
