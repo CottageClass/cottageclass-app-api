@@ -36,7 +36,7 @@ export default {
     }
   },
   computed: {
-    noEventsMessage: () => 'You aren\'t scheduled for any playdates.  Check out some <a href="home">upcoming playdates near you</a>.',
+    noEventsMessage: () => 'You aren\'t scheduled for any playdates.  Check out some <a href="events">upcoming playdates near you</a>.',
     ...mapGetters(['currentUser', 'isAuthenticated'])
   },
   methods: {
