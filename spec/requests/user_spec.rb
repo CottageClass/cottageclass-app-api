@@ -59,7 +59,7 @@ RSpec.resource 'User' do
           expect(json_body.dig('data', 'attributes', 'last_name')).not_to be_nil
           expect(json_body.dig('data', 'relationships', 'user_reviews')).to be_nil
           expect(json_body.dig('data', 'relationships', 'children')).not_to be_nil
-          expect(included_children.map { |u| u.dig('attributes', 'age') }.compact).not_to be_blank
+          expect(included_children.map { |u| u.dig('attributes', 'age_in_months') }.compact).not_to be_blank
           expect(included_children.map { |u| u.dig('attributes', 'birthday') }.compact).not_to be_blank
         end
       end
