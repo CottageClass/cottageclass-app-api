@@ -1,5 +1,5 @@
 <template>
-  <span>
+  <span id="top">
     <MainNav />
       <div class="body body-2">
           <div class="content-container w-container">
@@ -7,7 +7,7 @@
               <StyleWrapper styleIs="onboarding">
                 <ErrorMessage
                   v-if="showError && (errors.first('email') || errors.first('password')) || errorMessage"
-                  :messages="[errorMessage, errors.first('email'), errors.first('password')]"
+                  :messages="errorMessages"
                   />
               </StyleWrapper>
             <h1 class="auth-heading">Log In</h1>
@@ -150,14 +150,31 @@ export default {
           this.logError('Authentication Error')
           this.logError(e)
           this.showError = true
+          this.$scrollTo('#top')
           this.errorMessage = 'There was a problem signing you in. If you forgot your password, email contact@cottageclass.com for help.'
         }
       } else {
+        this.$scrollTo('#top')
         this.showError = true
       }
     }
   },
-  computed: mapGetters(['currentUser', 'isAuthenticated'])
+  computed: {
+    errorMessages () {
+      const res = []
+      if (this.errorMessage && this.errorMessage.length) {
+        res.push(this.errorMessage)
+      }
+      if (this.errors.first('email') && this.errors.first('email').length) {
+        res.push(this.errors.first('email'))
+      }
+      if (this.errors.first('password') && this.errors.first('password').length) {
+        res.push(this.errors.first('password'))
+      }
+      return res
+    },
+    ...mapGetters(['currentUser', 'isAuthenticated'])
+  }
 }
 </script>
 

@@ -1,5 +1,5 @@
 <template>
-  <span>
+  <span id="top">
     <MainNav />
       <div class="body body-2">
           <div class="content-container w-container">
@@ -269,6 +269,7 @@ export default {
           this.logError(e)
         }
       } else {
+        this.$scrollTo('#top')
         this.showError = true
       }
     }
