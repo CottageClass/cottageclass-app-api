@@ -20,6 +20,7 @@ export default {
 }
 
 .onboarding {
+  font-family: soleil, sans-serif;
 
   .event-heading {
     color: #333;
