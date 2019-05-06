@@ -8,12 +8,12 @@ describe('ChildAges', () => {
         propsData: {
           singular: 'kid',
           plural: 'kids',
-          childAges: [1],
+          childAgesInMonths: [1],
           verbose: true
         }
       })
       const span = wrapper.find('span')
-      expect(span.text()).toEqual('1 kid–age 1')
+      expect(span.text()).toEqual('1 kid–age 1 mo')
     })
 
     it('is correct for multiple', () => {
@@ -21,11 +21,11 @@ describe('ChildAges', () => {
         propsData: {
           singular: 'kid',
           plural: 'kids',
-          childAges: [2, 0, 4]
+          childAgesInMonths: [2, 110, 48]
         }
       })
       const span = wrapper.find('span')
-      expect(span.text()).toEqual('3 kids–ages 0, 2 and 4')
+      expect(span.text()).toEqual('3 kids–ages 2 mos, 4 and 9')
     })
 
     it('is correct for negative', () => {
@@ -33,12 +33,12 @@ describe('ChildAges', () => {
         propsData: {
           singular: 'child',
           plural: 'children',
-          childAges: [2, 0, -4, -1],
+          childAgesInMonths: [24, 0, -4, -1],
           verbose: true
         }
       })
       const span = wrapper.find('span')
-      expect(span.text()).toEqual('2 children–ages 0 and 2')
+      expect(span.text()).toEqual('2 children–ages 0 mos and 2')
     })
 
     it('is correct for no children', () => {
@@ -46,7 +46,7 @@ describe('ChildAges', () => {
         propsData: {
           singular: 'child',
           plural: 'children',
-          childAges: []
+          childAgesInMonths: []
         }
       })
       const span = wrapper.find('span')
@@ -58,7 +58,7 @@ describe('ChildAges', () => {
         propsData: {
           singular: 'child',
           plural: 'children',
-          childAges: [-3],
+          childAgesInMonths: [-3],
           verbose: true
         }
       })
@@ -71,7 +71,7 @@ describe('ChildAges', () => {
         propsData: {
           singular: 'child',
           plural: 'children',
-          childAges: [-3],
+          childAgesInMonths: [-3],
           verbose: true,
           prefix: 'Parent to '
         }
@@ -85,13 +85,13 @@ describe('ChildAges', () => {
         propsData: {
           singular: 'child',
           plural: 'children',
-          childAges: [3, 2, 1, -9],
+          childAgesInMonths: [3, 2, 1, -9],
           verbose: true,
           prefix: 'Parent to '
         }
       })
       const span = wrapper.find('span')
-      expect(span.text()).toEqual('Parent to 3 children–ages 1, 2 and 3')
+      expect(span.text()).toEqual('Parent to 3 children–ages 1 mo, 2 mos and 3 mos')
     })
   })
 
@@ -101,7 +101,7 @@ describe('ChildAges', () => {
         propsData: {
           singular: 'kid',
           plural: 'kids',
-          childAges: [-3],
+          childAgesInMonths: [-3],
           verbose: false
         }
       })
@@ -114,12 +114,12 @@ describe('ChildAges', () => {
         propsData: {
           singular: 'child',
           plural: 'children',
-          childAges: [3, 5, 1],
+          childAgesInMonths: [39, 51, 1],
           verbose: false
         }
       })
       const span = wrapper.find('span')
-      expect(span.text()).toEqual('3 children (1, 3, 5)')
+      expect(span.text()).toEqual('3 children (1 mo, 3, 4)')
     })
 
     it('is correct for negatives', () => {
@@ -127,12 +127,12 @@ describe('ChildAges', () => {
         propsData: {
           singular: 'kid',
           plural: 'kids',
-          childAges: [3, -5, 1],
+          childAgesInMonths: [40, -5, 1],
           verbose: false
         }
       })
       const span = wrapper.find('span')
-      expect(span.text()).toEqual('2 kids (1, 3)')
+      expect(span.text()).toEqual('2 kids (1 mo, 3)')
     })
   })
 })

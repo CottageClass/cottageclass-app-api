@@ -13,14 +13,14 @@
       <div class="heading">
         <span class="name">{{ user.firstName }}</span>
         <ChildAges class="children"
-                   :childAges="user.childAges"
+                   :childAgesInMonths="user.childAgesInMonths"
                    :verbose="false"
                    singular="kid"
                    plural="kids" />
       </div>
       <div class="details">
         <span class="distance">{{distanceFromMapCenter(user.location) + 'mi'}}</span>
-        <span class="profession" v-if="user.childAges && user.childAges.length">
+        <span class="profession" v-if="user.childAgesInMonths && user.childAgesInMonths.length">
           {{profession}}
         </span>
       </div>

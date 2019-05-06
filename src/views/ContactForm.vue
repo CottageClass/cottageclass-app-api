@@ -100,7 +100,7 @@ export default {
     },
     fullMessageText () {
       const childText = childAgeText({
-        childAges: this.currentUser.childAges,
+        childAgesInMonths: this.currentUser.childAgesInMonths,
         singular: 'child',
         plural: 'children',
         prefix: 'has ',

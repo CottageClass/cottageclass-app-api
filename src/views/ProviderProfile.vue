@@ -10,8 +10,8 @@
             <div class="top-card-column-1">
               <h1 class="name-heading">{{ user.firstName }}</h1>
               <div class="top-card-subtitle"><span>{{ user.neighborhood || user.adminAreaLevel1 }}</span> |
-                <span v-if="user && user.childAges && user.childAges.length > 0" class="providerp-children">
-                    <ChildAges :childAges="user.childAges" singular="child" plural="children" prefix="Parent to "/>.
+                <span v-if="user && user.childAgesInMonths && user.childAgesInMonths.length > 0" class="providerp-children">
+                    <ChildAges :childAgesInMonths="user.childAgesInMonths" singular="child" plural="children" prefix="Parent to "/>.
                 </span>
               </div>
               <div v-if="employmentDescription" class="top-card-info-bullet">

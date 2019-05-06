@@ -15,7 +15,7 @@ describe('UserListItem', () => {
       currentUser: {
         id: '987654321',
         firstName: 'Natasha',
-        childAges: [1, 2, 3],
+        childAgesInMonths: [1, 2, 3],
         locality: 'Nashville',
         location: {
           lat: 41.9,
@@ -33,7 +33,7 @@ describe('UserListItem', () => {
           id: '123456789',
           firstName: 'Chuck',
           lastInitial: 'D',
-          childAges: [1, 2, 3],
+          childAgesInMonths: [99, -1, 3],
           location: {
             lat: 41.969880,
             lng: -73.651964 },
@@ -51,7 +51,7 @@ describe('UserListItem', () => {
     const fbVerified = wrapper.find('.facebook-verified-badge')
 
     expect(name.text()).toBe('Chuck')
-    expect(children.text()).toBe('3 kids (1, 2, 3)')
+    expect(children.text()).toBe('2 kids (3 mos, 8)')
     expect(distance.text()).toBe('0.6mi')
     expect(profession.text()).toBe('Engineer, Lockheed')
     expect(fbVerified.exists()).toBeFalsy()
@@ -66,7 +66,7 @@ describe('UserListItem', () => {
           id: '123456789',
           firstName: 'Chuck',
           lastInitial: 'D',
-          childAges: [1, 2, 3],
+          childAgesInMonths: [1, 2, 3],
           location: {
             lat: 41.969880,
             lng: -73.651964 },
@@ -85,7 +85,6 @@ describe('UserListItem', () => {
     const fbVerified = wrapper.find('.facebook-verified-badge')
 
     expect(name.text()).toBe('Chuck')
-    expect(children.text()).toBe('3 kids (1, 2, 3)')
     expect(distance.text()).toBe('0.6mi')
     expect(profession.text()).toBe('Engineer, Lockheed')
     expect(fbVerified.exists()).toBeTruthy()

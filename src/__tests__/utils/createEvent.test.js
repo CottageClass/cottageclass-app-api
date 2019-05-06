@@ -30,8 +30,6 @@ describe('createEvents for multiple events', () => {
   })
 
   it('returns the correct basic information', async () => {
-    expect(events.all['2186'].id).toBe('2186')
-    expect(events[0].id).toEqual('2139')
-    expect(events[1].hostId).toBe('1175')
+    expect(events).toMatchSnapshot()
   })
 })

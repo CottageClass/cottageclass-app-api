@@ -1,5 +1,4 @@
 <template>
-  <!-- Proper indentation here would cause spaces to get inserted incorrectly between punctuation like periods, commas.-->
   <span>{{text}}</span>
 </template>
 
@@ -9,7 +8,7 @@ import { childAgeText } from '@/utils/utils'
 export default {
   name: 'ChildAges',
   props: {
-    childAges: {},
+    childAgesInMonths: {},
     singular: {},
     plural: {},
     verbose: {
@@ -21,9 +20,9 @@ export default {
   },
   computed: {
     text () {
-      const { childAges, singular, plural, verbose, prefix } = this
+      const { childAgesInMonths, singular, plural, verbose, prefix } = this
 
-      return childAgeText({ childAges, singular, plural, verbose, prefix })
+      return childAgeText({ childAgesInMonths, singular, plural, verbose, prefix })
     }
   }
 }

@@ -30,9 +30,8 @@ export function arrayToSentence (arr) {
   }
 }
 
-export function childAgeText ({ childAges, singular, plural, prefix, verbose, expectingPrefix = '' }) {
-  const childAgesSorted = childAges.concat().sort((a, b) => a - b)
-  const ages = childAgesSorted.filter(e => e >= 0)
+export function childAgeText ({ childAgesInMonths, singular, plural, prefix, verbose, expectingPrefix = '' }) {
+  const ages = sortedWithMonths(childAgesInMonths)
   const n = ages.length
   if (verbose) {
     switch (n) {
@@ -60,9 +59,8 @@ export function childAgeText ({ childAges, singular, plural, prefix, verbose, ex
   }
 }
 
-export function childAgeSentenceText ({ childAges }) {
-  const childAgesSorted = childAges.concat().sort((a, b) => a - b)
-  const ages = childAgesSorted.filter(e => e >= 0)
+export function childAgeSentenceText ({ childAgesInMonths }) {
+  const ages = sortedWithMonths(childAgesInMonths)
   const n = ages.length
   switch (n) {
     case 0:
@@ -72,4 +70,22 @@ export function childAgeSentenceText ({ childAges }) {
     default: // 2 or more
       return ` with ${n} kids age ${ages.slice(0, n - 1).join(', ')} & ${ages[n - 1]}`
   }
+}
+
+function sortedWithMonths (agesInMonths) {
+  const childAgesSorted = agesInMonths.concat().sort((a, b) => a - b)
+  const nonNegativeAges = childAgesSorted.filter(a => a >= 0)
+  return nonNegativeAges.map(months => {
+    if (months < 0) {
+      return months
+    } else if (months === 0) {
+      return '0 mos'
+    } else if (months === 1) {
+      return '1 mo'
+    } else if (months < 12) {
+      return months + ' mos'
+    } else {
+      return Math.floor(months / 12)
+    }
+  })
 }

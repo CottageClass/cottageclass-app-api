@@ -5,8 +5,8 @@ import { mapGetters } from 'vuex'
 export default {
   computed: {
     messageChildAgeString () {
-      const childAges = this.currentUser.childAges
-      return childAgeSentenceText({ childAges })
+      const childAgesInMonths = this.currentUser.childAgesInMonths
+      return childAgeSentenceText({ childAgesInMonths })
     },
     meetMessage () {
       return (targetUser) => {

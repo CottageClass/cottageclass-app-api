@@ -76,7 +76,7 @@ ActiveAdmin.register User do
       linkedin_user
       referrer
       source_tags
-      child_ages
+      child_ages_in_months
       child_names
     ].each do |attribute|
       column attribute

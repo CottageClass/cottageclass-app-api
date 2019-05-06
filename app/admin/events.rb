@@ -100,7 +100,7 @@ ActiveAdmin.register Event do
         instagram_user
         twitter_user
         linkedin_user
-        child_ages
+        child_ages_in_months
         child_names
       ]
     }.each do |key, attributes|

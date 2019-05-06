@@ -51,7 +51,7 @@ describe('ContactForm', () => {
           isAuthenticated: true,
           currentUser: {
             firstName: 'Joe',
-            childAges: [-1, 2, 6]
+            childAgesInMonths: [-1, 2, 66]
           }
         }
       }
@@ -72,7 +72,7 @@ describe('ContactForm', () => {
           isAuthenticated: true,
           currentUser: {
             firstName: 'Joe',
-            childAges: [-1]
+            childAgesInMonths: [-1]
           }
         }
       }

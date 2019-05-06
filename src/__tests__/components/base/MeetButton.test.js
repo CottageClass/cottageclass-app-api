@@ -9,7 +9,7 @@ describe('MeetButton', () => {
       id: '123456789',
       firstName: 'Chuck',
       lastInitial: 'D',
-      childAges: [1, 2, 3],
+      childAgesInMonths: [1, 15, 99],
       location: {
         lat: 41.969880,
         lng: -73.651964 },
@@ -24,7 +24,7 @@ describe('MeetButton', () => {
           currentUser: {
             id: '987654321',
             firstName: 'Natasha',
-            childAges: [1, 2, 3],
+            childAgesInMonths: [9, 100, 54],
             locality: 'Nashville',
             location: {
               lat: 41.9,
@@ -48,7 +48,7 @@ describe('MeetButton', () => {
 
     it('displays correct information', () => {
       const meetButton = wrapper.find('.meet-button')
-      const requestMessage = `Natasha (https://kidsclub.io/users/987654321) waved at you! They live 4.2 mi. away with 3 kids age 1, 2 & 3. If you're interested in a playdate, reply here!`
+      const requestMessage = `Natasha (https://kidsclub.io/users/987654321) waved at you! They live 4.2 mi. away with 3 kids age 9 mos, 4 & 8. If you're interested in a playdate, reply here!`
 
       expect(meetButton.text()).toEqual('Wave')
       expect(wrapper.vm.meetMessage(targetUser)).toEqual(requestMessage)
@@ -78,7 +78,7 @@ describe('MeetButton', () => {
           currentUser: {
             id: '987654321',
             firstName: 'Natasha',
-            childAges: [1, 2, 3],
+            childAgesInMonths: [111, 2, 2],
             locality: '',
             location: {
               lat: 41.9,
@@ -94,7 +94,7 @@ describe('MeetButton', () => {
         id: '123456789',
         firstName: 'Chuck',
         lastInitial: 'D',
-        childAges: [1, 2, 3],
+        childAgesInMonths: [1, 2, 3],
         location: {
           lat: 41.969880,
           lng: -73.651964 },
@@ -111,7 +111,7 @@ describe('MeetButton', () => {
         }
       })
       const meetButton = wrapper.find('.meet-button')
-      const requestMessage = `Natasha (https://kidsclub.io/users/987654321) waved at you! They live 4.2 mi. away with 3 kids age 1, 2 & 3. If you're interested in a playdate, reply here!`
+      const requestMessage = `Natasha (https://kidsclub.io/users/987654321) waved at you! They live 4.2 mi. away with 3 kids age 2 mos, 2 mos & 9. If you're interested in a playdate, reply here!`
 
       expect(meetButton.text()).toEqual('Wave')
       expect(wrapper.vm.meetMessage(targetUser)).toEqual(requestMessage)
@@ -123,7 +123,7 @@ describe('MeetButton', () => {
       id: '123456789',
       firstName: 'Chuck',
       lastInitial: 'D',
-      childAges: [1, 2, 3],
+      childAgesInMonths: [1, 2, 3],
       location: {
         lat: 41.969880,
         lng: -73.651964 },
@@ -139,7 +139,7 @@ describe('MeetButton', () => {
           currentUser: {
             id: '987654321',
             firstName: 'Natasha',
-            childAges: [-1],
+            childAgesInMonths: [-1],
             locality: 'Nashville',
             location: {
               lat: 41.9,

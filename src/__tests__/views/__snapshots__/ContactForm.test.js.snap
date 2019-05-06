@@ -6,6 +6,6 @@ exports[`ContactForm authenticated has the right message with no kids 1`] = `
 `;
 
 exports[`ContactForm authenticated has the right message with some kids 1`] = `
-"(Joe has 2 children–ages 2 and 6 and has a question about your KidsClub playdate on 03/23/2019 at 6:00 PM.)
+"(Joe has 2 children–ages 2 mos and 5 and has a question about your KidsClub playdate on 03/23/2019 at 6:00 PM.)
 "
 `;
