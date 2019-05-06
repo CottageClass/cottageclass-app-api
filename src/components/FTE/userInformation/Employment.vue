@@ -3,7 +3,7 @@
     title="What do you do for a living?"
     subtitle="Tell other families a bit about what you do for work.">
     <FormFieldAndLabel
-      placeholder="Your employer"
+      placeholder="Your employer (optional)"
       label="Where do you work?"
       v-model="internalData.employer"
       />
@@ -27,6 +27,9 @@ export default {
     return {
       internalData: this.value
     }
+  },
+  mounted () {
+    this.updateValues()
   },
   computed: {
     err () {
