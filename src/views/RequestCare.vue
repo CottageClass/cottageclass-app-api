@@ -5,7 +5,7 @@
         <div class="content-wrapper">
           <div class="content-container">
             <div class="title-container">
-              <h1 class="title">When do you need care</h1>
+              <h1 class="lp-title">When do you need care</h1>
             </div>
             <DateTimePicker v-model="bookingRequest.dateTimeSelected"/>
             <div class="form-describe-need w-form">

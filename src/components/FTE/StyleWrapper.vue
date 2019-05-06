@@ -1702,7 +1702,7 @@ export default {
     color: hsla(0, 0%, 100%, .6);
   }
 
-  .title {
+  .lp-title {
     margin-top: 0px;
     margin-bottom: 10px;
     color: #fff;

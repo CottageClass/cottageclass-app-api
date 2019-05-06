@@ -3,7 +3,7 @@
 <div class="body">
   <div class="content-container">
     <div class="title-container">
-      <h1 class="title">Messages sent</h1>
+      <h1 class="lp-title">Messages sent</h1>
       <p class="onb-paragraph-subheading-2">We've sent your messages. You'll receive responses via text message soon! Then simply respond to any questions, finalize the details, and you'll be all set!</p>
     </div>
     <router-link
