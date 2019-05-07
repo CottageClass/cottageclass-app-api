@@ -5,10 +5,23 @@
       <div class="modal-content">
         <div class="modal-title-text">{{ title }}</div>
         <div class="modal-description-text">{{ bodyText }}</div>
-      </div><a href="#" class="mob-selector-close2 w-inline-block"><img src="@/assets/close-x-black.svg" alt="" /></a>
+      </div>
+      <div class="mob-selector-close2 w-inline-block"
+           @click="$emit('closeButtonClick')">
+        <img src="@/assets/close-x-black.svg" alt="" />
+      </div>
     </div>
-    <div class="modal-actions"><a href="#" class="modal-primary-action w-button">Submit</a>
-      <div class="spacer-12px"></div><a href="#" class="modal-secondary-action w-button">Cancel</a>
+    <div class="modal-actions">
+      <div class="modal-primary-action w-button"
+         @click="$emit('primaryClick')">
+        {{ buttonNames[0] }}
+      </div>
+      <div class="spacer-12px"></div>
+      <div v-if="buttonNames.length > 1"
+           class="modal-secondary-action w-button"
+           @click="$emit('secondaryClick')">
+        {{ buttonNames[1] }}
+      </div>
     </div>
   </div>
 </div>
@@ -16,8 +29,8 @@
 
 <script>
 export default {
-  name: 'Modal',
-  props: ['title', 'bodyText'],
+  name: 'PureModal',
+  props: ['title', 'bodyText', 'buttonNames'],
   data () {
     return {
     }
