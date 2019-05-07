@@ -47,7 +47,9 @@ export default {
             closeCallback: this.checkAuthenticationAndInitiateMessageSending.bind(this)
           }
         })
-        this.$store.commit('setHasShowEventsPageMessagingDescription')
+        if (this.$route.name === 'Events') {
+          this.$store.commit('setHasShowEventsPageMessagingDescription')
+        }
       } else {
         this.checkAuthenticationAndInitiateMessageSending()
       }
