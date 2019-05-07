@@ -41,8 +41,13 @@
     <ErrorMessage v-if="showError" :text="children.err" />
     <Children v-model="children" :required="false" />
     <LanguagesSpoken v-model="currentUser.languages"/>
+    <div class="save-button-container">
+      <div v-if="!isMobile"
+        class="save-button w-button"
+        @click="submitUserInformation">{{saveButtonText}}</div>
+    </div>
   </StyleWrapper>
-  <PageActionsFooter :buttons="footerButtons" @primary-click="submitUserInformation" />
+  <PageActionsFooter v-if="isMobile" :buttons="footerButtons" @primary-click="submitUserInformation" />
   </div>
 </div>
 
@@ -64,14 +69,14 @@ import PageActionsFooter from '@/components/PageActionsFooter.vue'
 import StyleWrapper from '@/components/FTE/StyleWrapper.vue'
 import ErrorMessage from '@/components/base/ErrorMessage.vue'
 import * as api from '@/utils/api.js'
-import { redirect } from '@/mixins'
+import { redirect, screen } from '@/mixins'
 import { mapGetters } from 'vuex'
 
 var VueScrollTo = require('vue-scrollto')
 
 export default {
   name: 'ProfileEdit',
-  mixins: [redirect],
+  mixins: [redirect, screen],
   components: {
     Location,
     Phone,
@@ -162,6 +167,22 @@ export default {
 </script>
 
 <style scoped>
+
+.save-button-container {
+  margin-top:12px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  & .save-button {
+    min-width: 160px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 12px;
+    border-radius: 4px;
+    text-align: center;
+  }
+}
 
 .body {
   font-family: soleil;
