@@ -30,15 +30,33 @@ export default {
       this.$emit('meetButtonClick', { event })
       switch (this.meetStatus) {
         case 'none':
-          if (this.redirectToSignupIfNotAuthenticated()) {
-            this.$store.commit('addPendingWave', { targetUser: this.targetUser })
-          } else {
-            this.initiateMessageSending()
-          }
+          this.showDescriptionModal()
           break
         case 'sending':
           this.undoMessageSending()
           break
+      }
+    },
+    showDescriptionModal () {
+      if (this.shouldShowDescriptionModal) {
+        this.$store.commit('showModal', {
+          modal: {
+            title: 'asdkfj',
+            bodyText: 'alksdjllll',
+            buttonNames: ['OK'],
+            closeCallback: this.checkAuthenticationAndInitiateMessageSending.bind(this)
+          }
+        })
+        this.$store.commit('setHasShowEventsPageMessagingDescription')
+      } else {
+        this.checkAuthenticationAndInitiateMessageSending()
+      }
+    },
+    checkAuthenticationAndInitiateMessageSending () {
+      if (this.redirectToSignupIfNotAuthenticated()) {
+        this.$store.commit('addPendingWave', { targetUser: this.targetUser })
+      } else {
+        this.initiateMessageSending()
       }
     },
     undoMessageSending () {
@@ -68,6 +86,15 @@ export default {
     }
   },
   computed: {
+    shouldShowDescriptionModal () {
+      if (this.$route.name === 'ProviderProfile') {
+        return true
+      }
+      if (this.$route.name === 'Events' && !this.hasShowEventsPageMessagingDescription) {
+        return true
+      }
+      return false
+    },
     meetButtonText () {
       switch (this.meetStatus) {
         case 'none':
@@ -80,7 +107,7 @@ export default {
           return 'Wave'
       }
     },
-    ...mapGetters([ 'currentUser', 'waveHasBeenSent' ])
+    ...mapGetters([ 'currentUser', 'waveHasBeenSent', 'hasShowEventsPageMessagingDescription' ])
   },
   created () {
     if (this.waveHasBeenSent(this.targetUser.id)) {
