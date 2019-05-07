@@ -1,10 +1,11 @@
 <template>
-<div class="modal-tint">
+<div class="modal-tint"
+     @touchmove="preventTouchMove">
   <div class="modal">
     <div class="modal-content-container">
       <div class="modal-content">
         <div class="modal-title-text">{{ title }}</div>
-        <div class="modal-description-text">{{ bodyText }}</div>
+        <div class="modal-description-text" v-html="bodyText"></div>
       </div>
       <div class="mob-selector-close2 w-inline-block"
            @click="$emit('closeButtonClick')">
@@ -33,6 +34,12 @@ export default {
   props: ['title', 'bodyText', 'buttonNames'],
   data () {
     return {
+    }
+  },
+  methods: {
+    preventTouchMove (e) {
+      e.preventDefault()
+      e.stopPropagation()
     }
   }
 }
@@ -155,6 +162,7 @@ a {
   padding-left: 20px;
   align-items: center;
   background-color: transparent;
+  cursor: pointer;
 }
 
 .mob-selector-close2:active {
