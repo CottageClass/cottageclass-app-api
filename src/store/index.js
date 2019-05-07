@@ -11,6 +11,7 @@ export default new Vuex.Store(
     modules: { auth },
     state: {
       alert: null,
+      modal: null,
       createdEvents: null,
       redirectRoute: null,
       mapArea: {
@@ -39,6 +40,12 @@ export default new Vuex.Store(
       },
       setRedirectRoute: (state, payload) => {
         state.redirectRoute = payload.route
+      },
+      showModal: (state, payload) => {
+        state.modal = payload.alert
+      },
+      hideModal: (state) => {
+        state.modal = null
       },
       showAlert: (state, payload) => {
         state.alert = payload.alert
@@ -79,6 +86,7 @@ export default new Vuex.Store(
       }
     },
     getters: {
+      modal: state => state.modal,
       alert: state => state.alert,
       firstCreatedEvent: (state, getters) => {
         if (state.createdEvents) {

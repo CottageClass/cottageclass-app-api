@@ -1,6 +1,7 @@
 <template>
   <div class="main-nav">
     <Alert v-if="alert" />
+    <Modal />
     <div class="lp-container w-container">
       <div class="logo-wrapper">
         <router-link :to="{ name: logoRouterTarget }" class="w-inline-block">
@@ -71,11 +72,12 @@ import { signOut } from '@/utils/api'
 import { mixin as clickaway } from 'vue-clickaway'
 import AvatarImage from '@/components/base/AvatarImage'
 import Alert from '@/components/Alert.vue'
+import Modal from '@/components/base/Modal'
 import { mapGetters } from 'vuex'
 
 export default {
   name: 'MainNav',
-  components: { AvatarImage, Alert },
+  components: { AvatarImage, Alert, Modal },
   mixins: [ clickaway ],
   props: ['user'],
   data () {
