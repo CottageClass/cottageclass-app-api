@@ -30,15 +30,38 @@ export default {
       this.$emit('meetButtonClick', { event })
       switch (this.meetStatus) {
         case 'none':
-          if (this.redirectToSignupIfNotAuthenticated()) {
-            this.$store.commit('addPendingWave', { targetUser: this.targetUser })
-          } else {
-            this.initiateMessageSending()
-          }
+          this.showDescriptionModal()
           break
         case 'sending':
           this.undoMessageSending()
           break
+      }
+    },
+    showDescriptionModal () {
+      if (this.shouldShowDescriptionModal) {
+        this.$store.commit('showModal', {
+          modal: {
+            title: 'This is where you put the title of the modal. TBD',
+            bodyText: this.targetUser.firstName + ' will reply if interested. When she does, all you have to do is:<br/>' +
+            '1. Decide on a time to meet<br/>' +
+            '2. Decide on a place to meet (we recommend meeting in one of your homes)<br/>' +
+            '3. Decide on an activity (This is optional. Sometimes it’s best to just meet and talk!)<br/>',
+            buttonNames: ['OK'],
+            closeCallback: this.checkAuthenticationAndInitiateMessageSending.bind(this)
+          }
+        })
+        if (this.$route.name === 'Events') {
+          this.$store.commit('setHasShowEventsPageMessagingDescription')
+        }
+      } else {
+        this.checkAuthenticationAndInitiateMessageSending()
+      }
+    },
+    checkAuthenticationAndInitiateMessageSending () {
+      if (this.redirectToSignupIfNotAuthenticated()) {
+        this.$store.commit('addPendingWave', { targetUser: this.targetUser })
+      } else {
+        this.initiateMessageSending()
       }
     },
     undoMessageSending () {
@@ -68,6 +91,15 @@ export default {
     }
   },
   computed: {
+    shouldShowDescriptionModal () {
+      if (this.$route.name === 'ProviderProfile') {
+        return true
+      }
+      if (this.$route.name === 'Events' && !this.hasShowEventsPageMessagingDescription) {
+        return true
+      }
+      return false
+    },
     meetButtonText () {
       switch (this.meetStatus) {
         case 'none':
@@ -80,7 +112,7 @@ export default {
           return 'Wave'
       }
     },
-    ...mapGetters([ 'currentUser', 'waveHasBeenSent' ])
+    ...mapGetters([ 'currentUser', 'waveHasBeenSent', 'hasShowEventsPageMessagingDescription' ])
   },
   created () {
     if (this.waveHasBeenSent(this.targetUser.id)) {

@@ -11,22 +11,31 @@ export default new Vuex.Store(
     modules: { auth },
     state: {
       alert: null,
+      modal: null,
       createdEvents: null,
       redirectRoute: null,
       mapArea: {
         center: { lat: 40.688309, lng: -73.994639 }, // BoCoCa
         maxDistance: 5
       },
+      hasShowEventsPageMessagingDescription: false,
       pendingWaves: [],
       sentWaves: []
     },
     mutations: {
+      setHasShowEventsPageMessagingDescription: (state) => {
+        state.hasShowEventsPageMessagingDescription = true
+      },
       markWaveSent: (state, payload) => {
         const id = payload.targetUserId
         if (state.pendingWaves.some(user => user.id === id)) {
           state.pendingWaves = state.pendingWaves.filter(w => w.id !== id)
           state.sentWaves.push(id)
         }
+      },
+      removePendingWave: (state, payload) => {
+        const id = payload.targetUserId
+        state.pendingWaves = state.pendingWaves.filter(w => w.id !== id)
       },
       addPendingWave: (state, payload) => {
         state.pendingWaves.push(payload.targetUser)
@@ -39,6 +48,12 @@ export default new Vuex.Store(
       },
       setRedirectRoute: (state, payload) => {
         state.redirectRoute = payload.route
+      },
+      showModal: (state, payload) => {
+        state.modal = payload.modal
+      },
+      hideModal: (state) => {
+        state.modal = null
       },
       showAlert: (state, payload) => {
         state.alert = payload.alert
@@ -79,6 +94,8 @@ export default new Vuex.Store(
       }
     },
     getters: {
+      hasShowEventsPageMessagingDescription: state => state.hasShowEventsPageMessagingDescription,
+      modal: state => state.modal,
       alert: state => state.alert,
       firstCreatedEvent: (state, getters) => {
         if (state.createdEvents) {

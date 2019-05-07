@@ -17,8 +17,12 @@ describe('MeetButton', () => {
       jobPosition: 'engineer'
     }
     beforeAll(async () => {
+      const $route = {
+        name: 'Events'
+      }
       const $store = {
         getters: {
+          hasShowEventsPageMessagingDescription: true,
           isAuthenticated: true,
           waveHasBeenSent: () => false,
           currentUser: {
@@ -36,7 +40,7 @@ describe('MeetButton', () => {
         }
       }
       wrapper = mount(MeetButton, {
-        mocks: { $store },
+        mocks: { $store, $route },
         stubs: ['router-link'],
         propsData: {
           targetUser,
@@ -74,6 +78,7 @@ describe('MeetButton', () => {
       const $store = {
         getters: {
           waveHasBeenSent: () => false,
+          hasShowEventsPageMessagingDescription: true,
           isAuthenticated: true,
           currentUser: {
             id: '987654321',
@@ -89,6 +94,9 @@ describe('MeetButton', () => {
           }
         }
       }
+      const $route = {
+        name: 'Events'
+      }
 
       const targetUser = {
         id: '123456789',
@@ -102,7 +110,7 @@ describe('MeetButton', () => {
         jobPosition: 'engineer'
       }
       wrapper = mount(MeetButton, {
-        mocks: { $store },
+        mocks: { $store, $route },
         stubs: ['router-link'],
         propsData: {
           targetUser,
@@ -135,6 +143,7 @@ describe('MeetButton', () => {
       const $store = {
         getters: {
           waveHasBeenSent: () => false,
+          hasShowEventsPageMessagingDescription: true,
           isAuthenticated: true,
           currentUser: {
             id: '987654321',
@@ -150,8 +159,11 @@ describe('MeetButton', () => {
           }
         }
       }
+      const $route = {
+        name: 'Events'
+      }
       wrapper = mount(MeetButton, {
-        mocks: { $store },
+        mocks: { $store, $route },
         stubs: ['router-link'],
         propsData: {
           targetUser,

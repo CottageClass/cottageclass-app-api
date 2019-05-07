@@ -42,10 +42,12 @@ export default {
             this.meetMessage(targetUser),
             this.acknowledgeMessage(targetUser)
           )
-          this.$store.commit('markWaveSent', { targetUserId: targetUser.id })
         } catch (e) {
           console.error(e)
           this.showBriefAllert('There was a problem sending your message.  Please try again later', 'failure')
+        } finally {
+          // mark the wave as send even if it fails
+          this.$store.commit('removePendingWave', { targetUserId: targetUser.id })
         }
       }
     }
