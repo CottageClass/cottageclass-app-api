@@ -41,8 +41,11 @@ export default {
       if (this.shouldShowDescriptionModal) {
         this.$store.commit('showModal', {
           modal: {
-            title: 'asdkfj',
-            bodyText: 'alksdjllll',
+            title: 'This is where you put the title of the modal. TBD',
+            bodyText: this.targetUser.firstName + ' will reply if interested. When she does, all you have to do is:<br/>' +
+            '1. Decide on a time to meet<br/>' +
+            '2. Decide on a place to meet (we recommend meeting in one of your homes)<br/>' +
+            '3. Decide on an activity (This is optional. Sometimes it’s best to just meet and talk!)<br/>',
             buttonNames: ['OK'],
             closeCallback: this.checkAuthenticationAndInitiateMessageSending.bind(this)
           }
