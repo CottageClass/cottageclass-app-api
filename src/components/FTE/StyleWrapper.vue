@@ -22,6 +22,14 @@ export default {
 .onboarding {
   font-family: soleil, sans-serif;
 
+  .question-title {
+    font-size: 20px;
+    color: #fff;
+    text-align: center;
+    font-weight: 500;
+    margin-top: 0;
+  }
+
   .event-heading {
     color: #333;
   }
