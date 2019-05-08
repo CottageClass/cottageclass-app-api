@@ -22,7 +22,7 @@
       >
       <MultipleImageUpload v-model="currentUser.images" />
     </Question>
-    <Interests v-model="currentUser.activities" />
+    <Activities v-model="currentUser.activities" />
     <Availability v-model="availability" :required="false"/>
     <ErrorMessage v-if="showError" :text="children.err" />
     <Children v-model="children" :required="false" />
@@ -53,7 +53,7 @@ import MainNav from '@/components/MainNav.vue'
 import PageActionsFooter from '@/components/PageActionsFooter.vue'
 import StyleWrapper from '@/components/FTE/StyleWrapper.vue'
 import ErrorMessage from '@/components/base/ErrorMessage.vue'
-import Interests from '@/components/FTE/userInformation/Interests.vue'
+import Activities from '@/components/FTE/userInformation/Activities.vue'
 import * as api from '@/utils/api.js'
 import { redirect, screen } from '@/mixins'
 import { mapGetters } from 'vuex'
@@ -77,7 +77,7 @@ export default {
     MultipleImageUpload,
     ProfileBlurb,
     LanguagesSpoken,
-    Interests
+    Activities
   },
   data () {
     return {

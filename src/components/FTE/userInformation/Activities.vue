@@ -5,7 +5,7 @@
       >
       <Checkboxes
         :labels="[['travel', 'Travel' ], ['team sports', 'Team sports'], ['puzzles & games', 'Puzzles & games'], ['art & drawing', 'Art & drawing'], ['computers', 'Computers'], ['music', 'Music'], ['dance', 'Dance'], ['theater', 'Theater'], ['gardening', 'Gardening'], ['activism', 'Activism'], ['reading books', 'Reading books'], ['camping', 'Camping'], ['hiking', 'Hiking'], ['bike rides', 'Bike rides'], ['road trips', 'Road trips'], ['museums', 'Museums']]"
-        v-model="interestsChosen" />
+        v-model="activitiesChosen" />
   </Question>
 </template>
 
@@ -14,17 +14,17 @@ import Question from '@/components/base/Question.vue'
 import Checkboxes from '@/components/base/Checkboxes.vue'
 
 export default {
-  name: 'Interests',
+  name: 'Activities',
   components: { Question, Checkboxes },
   props: ['value'],
   data () {
     return {
-      interestsChosen: this.value
+      activitiesChosen: this.value.interests || []
     }
   },
   watch: {
-    interestsChosen: function () {
-      this.$emit('input', this.interestsChosen)
+    activitiesChosen: function () {
+      this.$emit('input', { activities: this.interestsChosen, err: null })
     }
   }
 }
