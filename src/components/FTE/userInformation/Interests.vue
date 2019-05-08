@@ -22,9 +22,6 @@ export default {
       interestsChosen: this.value
     }
   },
-  mounted: function () {
-    this.interestsChosen = this.value
-  },
   watch: {
     interestsChosen: function () {
       this.$emit('input', this.interestsChosen)

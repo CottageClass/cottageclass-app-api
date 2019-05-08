@@ -15,14 +15,7 @@
       v-model="location"
       />
     <Employment v-model="employment"/>
-    <Question
-      title="Tell us a bit about yourself"
-      subtitle="Other members would love to know a bit more about you and your family.">
-      <FormWithTextArea
-        v-model="currentUser.profileBlurb"
-        placeholder="Your illustrious biography"
-        />
-    </Question>
+    <ProfileBlurb v-model="currentUser.profileBlurb" />
     <Question
       title="Got any photos you'd like to share?"
       subtitle="Adding photos to your profile helps give other members a sense of your family."
@@ -48,10 +41,9 @@
 
 <script>
 import Question from '@/components/base/Question.vue'
-import FormWithTextArea from '@/components/base/FormWithTextArea.vue'
 import MultipleImageUpload from '@/components/base/MultipleImageUpload.vue'
-import Checkboxes from '@/components/base/Checkboxes.vue'
 import Location from '@/components/FTE/userInformation/Location.vue'
+import ProfileBlurb from '@/components/FTE/userInformation/ProfileBlurb.vue'
 import Employment from '@/components/FTE/userInformation/Employment.vue'
 import LanguagesSpoken from '@/components/FTE/userInformation/LanguagesSpoken.vue'
 import Children from '@/components/FTE/userInformation/Children.vue'
@@ -82,9 +74,8 @@ export default {
     ErrorMessage,
     Children,
     Question,
-    FormWithTextArea,
     MultipleImageUpload,
-    Checkboxes,
+    ProfileBlurb,
     LanguagesSpoken,
     Interests
   },
