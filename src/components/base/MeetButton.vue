@@ -41,7 +41,7 @@ export default {
       if (this.shouldShowDescriptionModal) {
         this.$store.commit('showModal', {
           modal: {
-            title: 'This is where you put the title of the modal. TBD',
+            title: `We've sent ${this.targetUser.firstName} your request to meet!`,
             bodyText: this.targetUser.firstName + ' will reply if interested. When she does, all you have to do is:<br/>' +
             '1. Decide on a time to meet<br/>' +
             '2. Decide on a place to meet (we recommend meeting in one of your homes)<br/>' +
