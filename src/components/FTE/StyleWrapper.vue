@@ -1929,6 +1929,10 @@ export default {
     width: 100%;
   }
 
+  .question-title {
+    font-size: 17px;
+  }
+
   .card-title, .title, .onb-heading-large, .onb-child-group-heading {
     margin-bottom: 8px;
     font-size: 17px;
