@@ -6,35 +6,36 @@
           :button="nextButtonState"
           @next="nextStep"
           @prev="prevStep"
-          :hidePrevious="stepIndex === 0"
+          :hidePrevious="stepIndex===0"
         />
+        <div v-if="showContinueButton" class="continue-to-site"> Continue to site </div>
         <StyleWrapper styleIs="onboarding">
           <ErrorMessage v-if="err && this.showError" :text="err" />
           <Phone
-            v-if="currentStep === 'phone'"
+            v-if="currentStep==='phone'"
             @pressedEnter="nextStep"
             v-model="userData.phone"
             required="true" />
           <Location
-            v-if="currentStep === 'location'"
+            v-if="currentStep==='location'"
             v-model="userData.location"
             @pressedEnter="nextStep"
             required="true"/>
           <FacebookImageSelection
-            v-if="currentStep === 'facebookImages'"
+            v-if="currentStep==='facebookImages'"
             v-model="userData.facebookImages"
             @pressedEnter="nextStep"
             v-on:noImages="nextStep"
             v-on:noPermissions="nextStep"
             required="true"/>
           <Children
-            v-if="currentStep === 'children'"
+            v-if="currentStep==='children'"
             v-model="userData.children" />
           <Employment
-            v-if="currentStep === 'employment'"
+            v-if="currentStep==='employment'"
             v-model="userData.employment" />
           <YesOrNo
-            v-if="currentStep === 'createEventsNow'"
+            v-if="currentStep==='createEventsNow'"
             v-model="createEventsNow"
             question="Would you like to set up your first playdates now or later?"
             description=""
@@ -42,37 +43,46 @@
             noText="Later"
           />
           <EventActivity
-            v-if="currentStep === 'eventActivity'"
+            v-if="currentStep==='eventActivity'"
             v-model="eventSeriesData.activity" />
           <EventTime
-            v-if="currentStep === 'eventTime'"
+            v-if="currentStep==='eventTime'"
             v-model="eventSeriesData.time" />
           <EventDate
-            v-if="currentStep === 'eventDate'"
+            v-if="currentStep==='eventDate'"
             v-model="eventSeriesData.date" />
           <MaxChildren
-            v-if="currentStep === 'maxChildren'"
+            v-if="currentStep==='maxChildren'"
             v-model="eventSeriesData.maxChildren" />
           <YesOrNo
-            v-if="currentStep === 'emergencyCare' && substep === 'canProvide'"
+            v-if="currentStep==='emergencyCare' && substep==='canProvide'"
             v-model="userData.emergencyCare"
             question="Childcare in a Pinch?"
             description="Parents often need care at times not covered by our events. Would you like to be able to request childcare from other members when you need it and receive requests (by text message) in return?"
           />
           <Availability
-            v-if="currentStep === 'emergencyCare' && substep === 'availability'"
+            v-if="currentStep==='emergencyCare' && substep==='availability'"
             v-model="userData.emergencyCare" />
           <YesOrNo
-            v-if="currentStep === 'pets' && substep === 'hasPets'"
+            v-if="currentStep==='pets' && substep==='hasPets'"
             v-model="userData.pets"
             question="Do you have pets?"
             description="This is often very important for parents (and children) to know."
           />
           <PetsDescription
-            v-if="currentStep === 'pets' && substep === 'description'"
+            v-if="currentStep==='pets' && substep==='description'"
             v-model="userData.pets" />
-          <HouseRules v-if="currentStep === 'houseRules'"
+          <HouseRules v-if="currentStep==='houseRules'"
             v-model="userData.houseRules" />
+          <ProfileBlurb
+            v-if="currentStep==='profileBlurb'"
+            v-model="userData.profileBlurb" />
+          <LanguagesSpoken
+            v-if="currentStep==='languages'"
+            v-model="userData.languages" />
+          <Activities
+            v-if="currentStep==='activities'"
+            v-model="userData.activities" />
         </StyleWrapper>
       </div>
     </div>
@@ -103,6 +113,9 @@ import Availability from '@/components/FTE/userInformation/Availability.vue'
 import PetsDescription from '@/components/FTE/userInformation/PetsDescription.vue'
 import HouseRules from '@/components/FTE/userInformation/HouseRules.vue'
 import FacebookImageSelection from '@/components/FTE/userInformation/FacebookImageSelection.vue'
+import LanguagesSpoken from '@/components/FTE/userInformation/LanguagesSpoken.vue'
+import Activities from '@/components/FTE/userInformation/Activities.vue'
+import ProfileBlurb from '@/components/FTE/userInformation/ProfileBlurb.vue'
 
 const stepSequence = [
   'phone',
@@ -110,15 +123,20 @@ const stepSequence = [
   'children',
   'employment',
   'facebookImages',
+  'emergencyCare',
   'createEventsNow',
   'eventActivity',
   'eventTime',
   'eventDate',
   'maxChildren',
-  'emergencyCare',
   'pets',
-  'houseRules'
+  'houseRules',
+  'profileBlurb',
+  'activities',
+  'languages'
 ]
+const FIRST_OPTIONAL_STEP_INDEX = 13
+
 const client = sheetsu({ address: 'https://sheetsu.com/apis/v1.0su/62cd725d6088' })
 
 export default {
@@ -139,8 +157,11 @@ export default {
     Nav,
     PetsDescription,
     Phone,
+    ProfileBlurb,
     StyleWrapper,
-    YesOrNo
+    YesOrNo,
+    LanguagesSpoken,
+    Activities
   },
   data () {
     return {
@@ -156,7 +177,10 @@ export default {
         pets: { err: null },
         houseRules: { err: null },
         emergencyCare: { err: null },
-        facebookImages: { err: null }
+        facebookImages: { err: null },
+        languages: { err: null },
+        activities: { err: null },
+        profileBlurb: { err: null }
       },
       eventSeriesData: {
         activity: { err: null },
@@ -205,12 +229,15 @@ export default {
         eventActivity: this.eventSeriesData.activity,
         eventTime: this.eventSeriesData.time,
         eventDate: this.eventSeriesData.date,
-        maxChildren: this.eventSeriesData.maxChildren
+        maxChildren: this.eventSeriesData.maxChildren,
+        languages: this.userData.languages,
+        activities: this.userData.activities,
+        profileBlurb: this.userData.profileBlurb
       }
       return models[this.currentStep]
     },
     err () {
-      return this.modelForCurrentStep.err
+      return this.modelForCurrentStep && this.modelForCurrentStep.err
     },
     eventName: function () {
       if (this.currentUser.firstName) {
@@ -250,11 +277,18 @@ export default {
       }
       return 11
     },
+    showContinueButton () {
+      return (this.stepIndex >= FIRST_OPTIONAL_STEP_INDEX)
+    },
     ...mapGetters([ 'currentUser', 'redirectRoute', 'firstCreatedEvent' ])
   },
   methods: {
     submitEventData: function () {
-      return submitEventSeriesData(this.eventDataForSubmissionToAPI)
+      if (this.createEventsNow.isTrue) {
+        return submitEventSeriesData(this.eventDataForSubmissionToAPI)
+      } else {
+        return null
+      }
     },
     submitUserData (all = false) {
       const userId = this.currentUser.id
@@ -268,7 +302,10 @@ export default {
             availability: this.userData.emergencyCare,
             children: this.userData.children,
             jobPosition: this.userData.employment.jobPosition,
-            employer: this.userDa.employment.employer
+            employer: this.userData.employment.employer,
+            profileBlurb: this.userData.profileBlurb,
+            activities: this.userData.activities,
+            languages: this.userData.languages
           }
         )
       } else {
@@ -282,6 +319,15 @@ export default {
             break
           case 'facebookImages':
             _.assign(params, { images: this.userData.facebookImages })
+            break
+          case 'activities':
+            _.assign(params, { activities: this.userData.activities })
+            break
+          case 'profileBlurb':
+            _.assign(params, { profileBlurb: this.userData.profileBlurb })
+            break
+          case 'languages':
+            _.assign(params, { languages: this.userData.languages })
             break
           case 'phone':
             _.assign(params, { phone: this.userData.phone })
@@ -374,10 +420,7 @@ export default {
           this.substep = 'availability'
         } else if (this.currentStep === 'createEventsNow' && !this.createEventsNow.isTrue) {
           // skip event creation
-          const that = this
-          this.$store.dispatch('updateCurrentUserFromServer').then(function () {
-            that.moveOntoNextFTE()
-          })
+          this.stepIndex = FIRST_OPTIONAL_STEP_INDEX
         } else {
           this.$ga.event('onboarding', 'stepComplete', this.currentStep)
           this.stepIndex += 1

@@ -18,12 +18,12 @@ var languages = require('language-list')()
 export default {
   name: 'LanguagesSpoken',
   components: { Question, Checkboxes },
-  props: ['value'],
+  props: ['value', 'showChoicesImmediately'],
   data () {
     return {
       languages: languages.getData(),
-      languageCodesChosen: this.value,
-      choicesAreHidden: true
+      languageCodesChosen: this.value.languages || [],
+      choicesAreHidden: !!this.showChoicesImmediately
     }
   },
   methods: {
@@ -39,12 +39,9 @@ export default {
       return this.languages.concat().sort((a, b) => a.language.localeCompare(b.language))
     }
   },
-  mounted: function () {
-    this.languageCodesChosen = this.value
-  },
   watch: {
     languageCodesChosen: function () {
-      this.$emit('input', this.languageCodesChosen)
+      this.$emit('input', { languages: this.languageCodesChosen, err: null })
     }
   }
 }
