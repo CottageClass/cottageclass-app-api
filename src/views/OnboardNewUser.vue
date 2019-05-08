@@ -8,8 +8,14 @@
           @prev="prevStep"
           :hidePrevious="stepIndex===0"
         />
-        <div v-if="showContinueButton" class="continue-to-site"> Continue to site </div>
         <StyleWrapper styleIs="onboarding">
+          <div class="skip-link-wrapper">
+            <div v-if="showContinueButton"
+                 class="skip-link"
+                 @click="finishOnboarding">
+              Skip to site
+            </div>
+          </div>
           <ErrorMessage v-if="err && this.showError" :text="err" />
           <Phone
             v-if="currentStep==='phone'"
@@ -476,6 +482,14 @@ export default {
 </script>
 
 <style>
+.skip-link-wrapper {
+  display: flex;
+  justify-content:center;
+}
+.skip-link {
+  margin-top: 47px;
+  color: hsla(0, 0%, 100%, .6);
+}
 
 .content-wrapper {
   width: 720px;
