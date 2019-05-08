@@ -29,14 +29,7 @@
       >
       <MultipleImageUpload v-model="currentUser.images" />
     </Question>
-    <Question
-      title="What are your interests?"
-      subtitle="Pick some favorite interests and activities (things you like to do as a family) to find other families with common interests."
-      >
-      <Checkboxes
-        :labels="[['travel', 'Travel' ], ['team sports', 'Team sports'], ['puzzles & games', 'Puzzles & games'], ['art & drawing', 'Art & drawing'], ['computers', 'Computers'], ['music', 'Music'], ['dance', 'Dance'], ['theater', 'Theater'], ['gardening', 'Gardening'], ['activism', 'Activism'], ['reading books', 'Reading books'], ['camping', 'Camping'], ['hiking', 'Hiking'], ['bike rides', 'Bike rides'], ['road trips', 'Road trips'], ['museums', 'Museums']]"
-        v-model="currentUser.activities" />
-    </Question>
+    <Interests v-model="currentUser.activities" />
     <Availability v-model="availability" :required="false"/>
     <ErrorMessage v-if="showError" :text="children.err" />
     <Children v-model="children" :required="false" />
@@ -68,6 +61,7 @@ import MainNav from '@/components/MainNav.vue'
 import PageActionsFooter from '@/components/PageActionsFooter.vue'
 import StyleWrapper from '@/components/FTE/StyleWrapper.vue'
 import ErrorMessage from '@/components/base/ErrorMessage.vue'
+import Interests from '@/components/FTE/userInformation/Interests.vue'
 import * as api from '@/utils/api.js'
 import { redirect, screen } from '@/mixins'
 import { mapGetters } from 'vuex'
@@ -91,7 +85,8 @@ export default {
     FormWithTextArea,
     MultipleImageUpload,
     Checkboxes,
-    LanguagesSpoken
+    LanguagesSpoken,
+    Interests
   },
   data () {
     return {
