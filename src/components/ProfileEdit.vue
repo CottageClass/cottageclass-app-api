@@ -15,28 +15,14 @@
       v-model="location"
       />
     <Employment v-model="employment"/>
-    <Question
-      title="Tell us a bit about yourself"
-      subtitle="Other members would love to know a bit more about you and your family.">
-      <FormWithTextArea
-        v-model="currentUser.profileBlurb"
-        placeholder="Your illustrious biography"
-        />
-    </Question>
+    <ProfileBlurb v-model="currentUser.profileBlurb" />
     <Question
       title="Got any photos you'd like to share?"
       subtitle="Adding photos to your profile helps give other members a sense of your family."
       >
       <MultipleImageUpload v-model="currentUser.images" />
     </Question>
-    <Question
-      title="What are your interests?"
-      subtitle="Pick some favorite interests and activities (things you like to do as a family) to find other families with common interests."
-      >
-      <Checkboxes
-        :labels="[['travel', 'Travel' ], ['team sports', 'Team sports'], ['puzzles & games', 'Puzzles & games'], ['art & drawing', 'Art & drawing'], ['computers', 'Computers'], ['music', 'Music'], ['dance', 'Dance'], ['theater', 'Theater'], ['gardening', 'Gardening'], ['activism', 'Activism'], ['reading books', 'Reading books'], ['camping', 'Camping'], ['hiking', 'Hiking'], ['bike rides', 'Bike rides'], ['road trips', 'Road trips'], ['museums', 'Museums']]"
-        v-model="currentUser.activities" />
-    </Question>
+    <Activities v-model="currentUser.activities" />
     <Availability v-model="availability" :required="false"/>
     <ErrorMessage v-if="showError" :text="children.err" />
     <Children v-model="children" :required="false" />
@@ -55,10 +41,9 @@
 
 <script>
 import Question from '@/components/base/Question.vue'
-import FormWithTextArea from '@/components/base/FormWithTextArea.vue'
 import MultipleImageUpload from '@/components/base/MultipleImageUpload.vue'
-import Checkboxes from '@/components/base/Checkboxes.vue'
 import Location from '@/components/FTE/userInformation/Location.vue'
+import ProfileBlurb from '@/components/FTE/userInformation/ProfileBlurb.vue'
 import Employment from '@/components/FTE/userInformation/Employment.vue'
 import LanguagesSpoken from '@/components/FTE/userInformation/LanguagesSpoken.vue'
 import Children from '@/components/FTE/userInformation/Children.vue'
@@ -68,6 +53,7 @@ import MainNav from '@/components/MainNav.vue'
 import PageActionsFooter from '@/components/PageActionsFooter.vue'
 import StyleWrapper from '@/components/FTE/StyleWrapper.vue'
 import ErrorMessage from '@/components/base/ErrorMessage.vue'
+import Activities from '@/components/FTE/userInformation/Activities.vue'
 import * as api from '@/utils/api.js'
 import { redirect, screen } from '@/mixins'
 import { mapGetters } from 'vuex'
@@ -88,10 +74,10 @@ export default {
     ErrorMessage,
     Children,
     Question,
-    FormWithTextArea,
     MultipleImageUpload,
-    Checkboxes,
-    LanguagesSpoken
+    ProfileBlurb,
+    LanguagesSpoken,
+    Activities
   },
   data () {
     return {
