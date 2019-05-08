@@ -290,13 +290,11 @@ a {
 
 .event-list-item {
   &:hover {
-    background-color: #00000001;
-    border: 1px  #00000010 solid;
+    background-color: #fafafa;
     & .event-list-item-graphic {
-      filter: brightness(95%);
+      filter: brightness(99%);
     }
   }
-  border: 1px transparent solid;
   display: flex;
   margin-bottom: 16px;
   flex-direction: row;
