@@ -20,12 +20,12 @@ export default {
   components: { Question, FormWithTextArea },
   data () {
     return {
-      profileBlurb: this.value.blurb
+      profileBlurb: this.value
     }
   },
   watch: {
     profileBlurb: function () {
-      this.$emit('input', { blurb: this.profileBlurb })
+      this.$emit('input', this.profileBlurb)
     }
   }
 }

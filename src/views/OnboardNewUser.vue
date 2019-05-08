@@ -178,9 +178,9 @@ export default {
         houseRules: { err: null },
         emergencyCare: { err: null },
         facebookImages: { err: null },
-        languages: { err: null },
-        activities: { err: null },
-        profileBlurb: { err: null }
+        languages: [],
+        activities: [],
+        profileBlurb: ''
       },
       eventSeriesData: {
         activity: { err: null },

@@ -22,7 +22,7 @@ export default {
   data () {
     return {
       languages: languages.getData(),
-      languageCodesChosen: this.value.languages || [],
+      languageCodesChosen: this.value,
       choicesAreHidden: !!this.showChoicesImmediately
     }
   },
@@ -41,7 +41,7 @@ export default {
   },
   watch: {
     languageCodesChosen: function () {
-      this.$emit('input', { languages: this.languageCodesChosen, err: null })
+      this.$emit('input', this.languageCodesChosen)
     }
   }
 }

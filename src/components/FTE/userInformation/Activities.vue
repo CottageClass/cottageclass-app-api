@@ -19,12 +19,12 @@ export default {
   props: ['value'],
   data () {
     return {
-      activitiesChosen: this.value.activities || []
+      activitiesChosen: this.value
     }
   },
   watch: {
     activitiesChosen: function () {
-      this.$emit('input', { activities: this.activitiesChosen, err: null })
+      this.$emit('input', this.activitiesChosen)
     }
   }
 }

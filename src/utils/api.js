@@ -118,7 +118,7 @@ export function submitUserInfo (userId, data) {
   }
 
   if (data.profileBlurb) {
-    postData.profileBlurb = data.profileBlurb.blurb
+    postData.profileBlurb = data.profileBlurb
   }
 
   if (images) {
@@ -126,11 +126,11 @@ export function submitUserInfo (userId, data) {
   }
 
   if (data.activities) {
-    postData.activities = data.activities.activities
+    postData.activities = data.activities
   }
 
   if (data.languages) {
-    postData.languages = data.languages.languages
+    postData.languages = data.languages
   }
 
   return axios.post(
