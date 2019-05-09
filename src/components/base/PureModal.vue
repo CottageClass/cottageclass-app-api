@@ -41,6 +41,14 @@ export default {
       e.preventDefault()
       e.stopPropagation()
     }
+  },
+  mounted () {
+    document.body.classList.add('no-scroll')
+    document.documentElement.classList.add('no-scroll')
+  },
+  destroyed () {
+    document.body.classList.remove('no-scroll')
+    document.documentElement.classList.remove('no-scroll')
   }
 }
 </script>
@@ -71,7 +79,7 @@ a {
 }
 
 .modal-tint {
-  position: absolute;
+  position: fixed;
   left: 0%;
   top: 0%;
   right: 0%;

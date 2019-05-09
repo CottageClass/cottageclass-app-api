@@ -42,7 +42,7 @@ export default {
         this.$store.commit('showModal', {
           modal: {
             title: `We've sent ${this.targetUser.firstName} your request to meet!`,
-            bodyText: this.targetUser.firstName + ' will reply if interested. When she does, all you have to do is:<br/>' +
+            bodyText: this.targetUser.firstName + ' will reply if interested. When they do, all you have to do is:<br/>' +
             '1. Decide on a time to meet<br/>' +
             '2. Decide on a place to meet (we recommend meeting in one of your homes)<br/>' +
             '3. Decide on an activity (This is optional. Sometimes it’s best to just meet and talk!)<br/>',

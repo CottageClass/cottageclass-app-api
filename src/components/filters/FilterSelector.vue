@@ -47,13 +47,9 @@ export default {
   methods: {
     openSelector () {
       this.state.open = true
-      document.body.classList.add('no-scroll')
-      document.documentElement.classList.add('no-scroll')
     },
     closeSelector () {
       this.state.open = false
-      document.body.classList.remove('no-scroll')
-      document.documentElement.classList.remove('no-scroll')
     },
     selectorTouchMove (e) {
       e.preventDefault()

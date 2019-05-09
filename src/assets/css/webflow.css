@@ -58,6 +58,10 @@ body {
   line-height: 20px;
   color: #333;
 }
+body.no-scroll, html.no-scroll {
+  height: 100%;
+  overflow: hidden;
+}
 
 img {
   max-width: 100%;
