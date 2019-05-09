@@ -5,7 +5,7 @@
     <div class="body">
       <div class="content-wrapper">
         <Nav button="next" @next="sendInvites" @prev="$emit('prev')" />
-        <Alert v-if="alert" />
+        <Alert />
         <div class="onb-content-container">
           <div class="onb-top-content-container">
             <h1 class="onb-heading-large">Build your village (part 2)</h1>
