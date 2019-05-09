@@ -1,6 +1,6 @@
 <template>
   <div class="main-nav">
-    <Alert v-if="alert" />
+    <Alert />
     <Modal />
     <div class="lp-container w-container">
       <div class="logo-wrapper">
