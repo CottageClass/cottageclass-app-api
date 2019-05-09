@@ -8,8 +8,8 @@ This is the mobile-only page that shows an expanded, naviagable map of events
       class="map"
       :users="users"
       :events="events"
-      @maxDistanceSet="updateForZoomLevel($event)"
-      :center="mapCenter"
+      @searchAreaSet="updateForZoomLevel"
+      :center="mapArea.center"
       :showTrailblazerMessage="showTrailblazerMessage"
     />
   </div>
