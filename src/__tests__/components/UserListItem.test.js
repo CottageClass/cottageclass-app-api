@@ -43,12 +43,12 @@ describe('UserListItem', () => {
       }
     })
 
-    const name = wrapper.find('.name')
+    const name = wrapper.find('.username')
 
-    const children = wrapper.find('.children')
+    const children = wrapper.find('.number-of-kids')
     const distance = wrapper.find('.distance')
-    const profession = wrapper.find('.profession')
-    const fbVerified = wrapper.find('.facebook-verified-badge')
+    const profession = wrapper.find('.occupation')
+    const fbVerified = wrapper.find('.badge-verified')
 
     expect(name.text()).toBe('Chuck')
     expect(children.text()).toBe('2 kids (3 mos, 8)')
@@ -77,12 +77,11 @@ describe('UserListItem', () => {
       }
     })
 
-    const name = wrapper.find('.name')
+    const name = wrapper.find('.username')
 
-    const children = wrapper.find('.children')
     const distance = wrapper.find('.distance')
-    const profession = wrapper.find('.profession')
-    const fbVerified = wrapper.find('.facebook-verified-badge')
+    const profession = wrapper.find('.occupation')
+    const fbVerified = wrapper.find('.badge-verified')
 
     expect(name.text()).toBe('Chuck')
     expect(distance.text()).toBe('0.6mi')
