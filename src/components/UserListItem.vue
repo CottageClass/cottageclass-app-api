@@ -64,16 +64,6 @@ export default {
     }
   },
   computed: {
-    distanceFromCurrentUser () {
-      if (this.currentUser) {
-        const location = this.currentUser.location
-        return function () {
-          return distanceHaversine(location.lat, location.lng, this.mapArea.center.lat, this.mapArea.center.lng)
-        }
-      } else {
-        return ''
-      }
-    },
     distanceFromMapCenter () {
       return function (location) {
         return distanceHaversine(location.lat, location.lng, this.mapArea.center.lat, this.mapArea.center.lng)

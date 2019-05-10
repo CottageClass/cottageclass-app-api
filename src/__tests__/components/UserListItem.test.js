@@ -79,7 +79,6 @@ describe('UserListItem', () => {
 
     const name = wrapper.find('.name')
 
-    const children = wrapper.find('.children')
     const distance = wrapper.find('.distance')
     const profession = wrapper.find('.profession')
     const fbVerified = wrapper.find('.facebook-verified-badge')
