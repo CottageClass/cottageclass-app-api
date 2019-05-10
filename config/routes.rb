@@ -83,7 +83,10 @@ Rails.application.routes.draw do
   post '/users/:id/proxy_sessions' => 'twilio_sessions#create', as: 'proxy_sessions'
   post '/proxy_callback' => 'twilio_sessions#callback'
 
-  get '/static' => 'static#index', as: 'static'
+  # routes for facebook crawler
+  get '/event/:id', to: 'crawler_events#show', constraints: lambda { |request|
+    (request.user_agent) && (request.user_agent.include? 'facebookexternalhit')
+  }, as: 'crawler_event'
 
   root 'static#index'
 
