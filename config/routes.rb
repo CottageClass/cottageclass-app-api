@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-
-  FACEBOOK_USER_AGENT_SUBSTRING = 'facebookexternalhit'
-
   ActiveAdmin.routes self
   devise_for :users,
              controllers: {
@@ -87,8 +84,8 @@ Rails.application.routes.draw do
   post '/proxy_callback' => 'twilio_sessions#callback'
 
   # routes for facebook crawler
-  get '/event/:id', to: 'crawler_events#show', constraints: lambda { |request| 
-    request.user_agent.include? FACEBOOK_USER_AGENT_SUBSTRING
+  get '/event/:id', to: 'crawler_events#show', constraints: lambda { |request|
+    (request.user_agent) && (request.user_agent.include? 'facebookexternalhit')
   }, as: 'crawler_event'
 
   root 'static#index'
