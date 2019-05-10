@@ -1,5 +1,5 @@
 <template>
-  <div class="user-summary-card truncate">
+  <div class="user-summary-card">
     <div class="photo-wrapper">
       <AvatarImage
         :person="user"
@@ -11,9 +11,9 @@
     </div>
 
     <div class="user-info-wrapper">
-      <div class="username truncate">{{user.firstName}}</div>
-      <div class="occupation truncate">{{profession}}</div>
-      <ChildAges class="number-of-kids"
+      <div class="username truncatable">{{user.firstName}}</div>
+      <div class="occupation truncatable">{{profession}}</div>
+      <ChildAges class="number-of-kids truncatable"
                  :childAgesInMonths="user.childAgesInMonths"
                  :verbose="false"
                  singular="kid"
@@ -124,10 +124,6 @@ a {
   font-weight: 400;
 }
 
-.number-of-kids.truncate {
-  font-size: 13px;
-}
-
 .occupation {
   display: block;
   margin-bottom: 2px;
@@ -137,10 +133,11 @@ a {
   font-weight: 400;
 }
 
-.occupation.truncate {
-  margin-bottom: 5px;
-  font-size: 13px;
-  line-height: 17px;
+.truncatable {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .btn-meet {
@@ -226,24 +223,8 @@ a {
   }
 
   .username {
-    overflow: hidden;
     width: 240px;
     margin-bottom: 1px;
-  }
-
-  .number-of-kids.truncate {
-    overflow: hidden;
-    width: 240px;
-    font-size: 12px;
-    line-height: 16px;
-  }
-
-  .occupation.truncate {
-    overflow: hidden;
-    width: 240px;
-    margin-bottom: 2px;
-    font-size: 12px;
-    line-height: 16px;
   }
 
   .badge-text {
@@ -257,30 +238,17 @@ a {
 }
 
 @media (max-width: 479px){
-  .user-summary-card.truncate {
-    overflow: hidden;
-  }
-
   .username {
     width: 138px;
   }
 
   .number-of-kids {
+    width: 138px;
     display: block;
   }
 
-  .number-of-kids.truncate {
-    overflow: hidden;
-    width: 138px;
-  }
-
   .occupation {
-    overflow: visible;
-  }
-
-  .occupation.truncate {
     width: 138px;
   }
-
 }
 </style>
