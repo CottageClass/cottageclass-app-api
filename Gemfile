@@ -27,6 +27,7 @@ gem 'country_select'
 gem 'kaminari'
 gem 'sassc-rails'
 gem 'webpacker', '~> 4.0', '>= 4.0.2'
+gem 'meta-tags', '~> 2.11', '>= 2.11.1'
 
 group :production, :staging do
   gem 'newrelic_rpm'
