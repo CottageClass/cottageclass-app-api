@@ -489,6 +489,7 @@ export default {
 .skip-link {
   margin-top: 47px;
   color: hsla(0, 0%, 100%, .6);
+  cursor: pointer;
 }
 
 .content-wrapper {
