@@ -204,6 +204,7 @@ a {
 }
 
 .logo {
+  height:29px;
   max-width: 130px;
 }
 

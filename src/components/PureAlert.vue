@@ -1,33 +1,83 @@
 <template>
+  <div>
   <transition name="slide">
-      <div v-if="alert" :class="'alert-container alert-' + alert.status" >
+      <div v-show="showAlert"
+           :class="['alert-container', 'alert-' + alert.status,  state].join(' ')"
+           ref="alertRef">
         <span v-html="alert.message" />
       </div>
   </transition>
+  <transition name="grow">
+      <div v-if="showPlaceholder"
+           class="alert-placeholder"
+           :class="state"
+           ref="placeholderRef">
+        <span>
+        </span>
+      </div>
+  </transition>
+  </div>
 </template>
 
 <script>
 export default {
   name: 'PureAlert',
-  props: ['alert']
+  props: ['alert'],
+  data () {
+    return {
+      state: 'preload'
+    }
+  },
+  computed: {
+    showPlaceholder () {
+      return this.state !== 'setup'
+    },
+    showAlert () {
+      return this.state !== 'setup'
+    }
+  },
+  methods: {
+    setPlaceholderHeight () {
+      const sheet = document.createElement('style')
+      sheet.innerHTML = '.alert-placeholder { height: ' + this.$refs.alertRef.offsetHeight + 'px' + ' ;}'
+      document.body.appendChild(sheet)
+      this.state = 'setup'
+      this.$nextTick(() => {
+        this.state = 'go'
+        console.log(this.state)
+      })
+    }
+  },
+  mounted () {
+    this.setPlaceholderHeight()
+  }
 }
+
 </script>
 
 <style scoped lang="scss">
 
 .slide-leave-active, .slide-enter-active {
-  transition: 0.5s;
+  transition: transform 0.5s;
 }
 .slide-enter, .slide-leave-to {
   transform: translate(0, -100%);
 }
+
+.grow-leave-active, .grow-enter-active {
+  transition: height 0.5s;
+}
+.grow-enter, .grow-leave-to {
+  height: 0;
+}
+.alert-placeholder {
+-webkit-backface-visibility: hidden;
+}
+.alert-container.setup, .alert-container.preload {
+  transform: translate(0, -100%);
+}
 .alert-container {
   position: fixed;
-}
-.alert-container-flow-placeholder {
-}
-
-.alert-container-flow-placeholder, .alert-container {
   top:0;
   width: 100%;
   margin-bottom: 16px;

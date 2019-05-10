@@ -3,10 +3,6 @@
         :class="meetStatus + ' ' + fillStyle + ' ' + layoutStyle + (layoutStyle==='fat' ? ' w-button' : '')"
         @click="meetButtonClick">
     {{meetButtonText}}
-    <img v-if="meetStatus==='sent'"
-          src="@/assets/check-green.svg"
-          alt=""
-          class="checkmark-image">
   </div>
 </template>
 
@@ -172,7 +168,7 @@ export default {
     -webkit-text-fill-color: rgb(12, 186, 82);  // DO NOT REMOVE.  REQUIRED FOR SAFARI
     border-color:  rgb(12, 186, 82);
     background-color:  rgba(12, 186, 82, .2);
-    border-width: 2px;
+    border-width: 1px;
     cursor: default;
   }
 }
