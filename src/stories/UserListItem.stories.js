@@ -25,7 +25,7 @@ storiesOf('UserListItem', module)
     props: {
       user: {
         default: {
-          facebooUid: text('facebookUid', 'Sample Title'),
+          facebookUid: text('facebookUid (clear to hide badge)', '563930223'),
           childAgesInMonths: array('child ages', [1, 34, 99], ','),
           firstName: text('first name', 'Lucas'),
           jobPosition: text('job position', 'Doctor'),
