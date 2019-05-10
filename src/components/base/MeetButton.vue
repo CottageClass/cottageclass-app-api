@@ -197,6 +197,9 @@ export default {
   text-align: center;
 }
 .meet-button.fat {
-    min-width: 80px;
+  padding: 4px 10px 5px;
+  border: 1px solid #1f88e9;
+  background-color: transparent;
+  color: #1f88e9;
 }
 </style>
