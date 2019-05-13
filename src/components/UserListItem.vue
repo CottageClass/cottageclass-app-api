@@ -33,9 +33,8 @@
 import AvatarImage from '@/components/base/AvatarImage'
 import MeetButton from '@/components/base/MeetButton'
 import ChildAges from '@/components/ChildAges'
-import { distanceHaversine } from '@/utils/api'
+import { distanceHaversine, capitalize } from '@/utils/utils'
 import { mapGetters } from 'vuex'
-import _ from 'lodash'
 
 export default {
   name: 'UserListItem',
@@ -69,10 +68,10 @@ export default {
     profession () {
       const list = []
       if (this.user.jobPosition) {
-        list.push(_.capitalize(this.user.jobPosition))
+        list.push(capitalize(this.user.jobPosition))
       }
       if (this.user.employer) {
-        list.push(_.capitalize(this.user.employer))
+        list.push(capitalize(this.user.employer))
       }
       return list.join(', ')
     },
@@ -90,6 +89,7 @@ a {
 .user-summary-card {
   display: flex;
   width: 100%;
+  max-width: 100%;
   margin-top: 0;
   padding: 20px 20px 28px;
   flex-direction: row;
@@ -119,7 +119,7 @@ a {
 
 .number-of-kids {
   color: rgba(0, 0, 0, 0.6);
-  font-size: 12px;
+  font-size: 13px;
   line-height: 17px;
   font-weight: 400;
 }
@@ -128,12 +128,13 @@ a {
   display: block;
   margin-bottom: 2px;
   color: rgba(0, 0, 0, 0.6);
-  font-size: 12px;
+  font-size: 13px;
   line-height: 17px;
   font-weight: 400;
 }
 
 .truncatable {
+  max-width:100%;
   flex: 1;
   white-space: nowrap;
   overflow: hidden;
@@ -155,12 +156,15 @@ a {
 }
 
 .user-info-wrapper {
+  max-width:100%;
   display: flex;
-  width: 100%;
+  flex-shrink: 1;
+  flex-grow: 1;
   margin-right: 16px;
   margin-left: 16px;
   flex-direction: column;
   align-items: flex-start;
+  min-width: 0; /* or some value */
 }
 
 .distance {
@@ -169,8 +173,11 @@ a {
   font-weight: 700;
   text-align: center;
 }
-
+.action-content {
+  flex-shrink: 0;
+}
 .photo-wrapper {
+  flex-shrink: 0;
   position: relative;
 }
 
@@ -223,7 +230,6 @@ a {
   }
 
   .username {
-    width: 240px;
     margin-bottom: 1px;
   }
 
@@ -235,20 +241,8 @@ a {
     display: none;
   }
 
-}
-
-@media (max-width: 479px){
-  .username {
-    width: 138px;
-  }
-
-  .number-of-kids {
-    width: 138px;
-    display: block;
-  }
-
-  .occupation {
-    width: 138px;
+  .number-of-kids, .occupation {
+    font-size: 12px;
   }
 }
 </style>
