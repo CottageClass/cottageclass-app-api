@@ -1,15 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import RequestCare from '@/components/RequestCare.vue'
-import Bookings from '@/components/Bookings'
 import EmergencyInfo from '@/components/EmergencyInfo'
 import ProviderProfile from '@/views/ProviderProfile.vue'
-import RequestModal from '@/components/RequestModal.vue'
-import HowItWorks from '@/components/HowItWorks.vue'
 import SplashPage from '@/views/SplashPage.vue'
-import RequestModal2 from '@/components/RequestModal2.vue'
-import RequestRecipients from '@/components/RequestRecipients.vue'
-import AdminMessages from '@/components/AdminMessages.vue'
 import EventPage from '@/components/EventPage.vue'
 import Events from '@/views/Events.vue'
 import EventsDetail from '@/views/EventsDetail.vue'
@@ -40,20 +33,6 @@ export default new Router({
       path: '/',
       name: 'SplashPage',
       component: SplashPage
-    },
-    {
-      path: '/offer',
-      name: 'Bookings',
-      component: Bookings
-    },
-    {
-      path: '/request',
-      name: 'Request',
-      component: RequestCare
-    },
-    {
-      path: '/bookings',
-      redirect: '/offer'
     },
     {
       path: '/emergency-info/:id',
@@ -111,33 +90,6 @@ export default new Router({
       path: '/event/:id/',
       name: 'EventPage',
       component: EventPage
-    },
-    {
-      path: '/request/:id',
-      name: 'RequestModal',
-      component: RequestModal
-    },
-    {
-      path: '/how-it-works',
-      name: 'HowItWorks',
-      component: HowItWorks
-    },
-    {
-      path: '/request-create',
-      name: 'RequestModal2',
-      component: RequestModal2
-    },
-    {
-      path: '/request-recipients',
-      name: 'RequestRecipients',
-      component: RequestRecipients
-    },
-    // Admin Routes
-    {
-      path: '/admin-messages',
-      name: 'AdminMessages',
-      component: AdminMessages
-      // NB: this route has beforeRouteEnter redirect in the component
     },
     {
       path: '/faq',
