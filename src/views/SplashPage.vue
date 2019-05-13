@@ -135,7 +135,6 @@ import MainNav from '@/components/MainNav.vue'
 import Footer from '@/components/Footer.vue'
 import GridImage from '@/components/base/GridImage'
 
-import { fetchUsersWithinDistance } from '@/utils/api'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -143,12 +142,7 @@ export default {
   components: { MainNav, Footer, AddressAutocomplete, GridImage },
   methods: {
     async goToEvents (e) {
-      const users = await fetchUsersWithinDistance({ miles: 10, lat: this.mapArea.center.lat, lng: this.mapArea.center.lng, pageSize: 1 })
-      if (users.length === 0) {
-        this.$router.push({ name: 'SignUp' })
-      } else {
-        this.$router.push({ name: 'Events' })
-      }
+      this.$router.push({ name: 'SignUp' })
     }
   },
   created: function () {
