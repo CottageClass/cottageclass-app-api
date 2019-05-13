@@ -1,17 +1,16 @@
 <template>
   <div>
   <transition name="slide">
-      <div v-show="showAlert"
-           :class="['alert-container', 'alert-' + alert.status,  state].join(' ')"
+      <div v-if="show"
+           :class="['alert-container', 'alert-' + alertData.status,  state].join(' ')"
            ref="alertRef">
-        <span v-html="alert.message" />
+        <span v-html="alertData.message" />
       </div>
   </transition>
   <transition name="grow">
-      <div v-if="showPlaceholder"
+      <div v-if="show"
            class="alert-placeholder"
-           :class="state"
-           ref="placeholderRef">
+           :class="state">
         <span>
         </span>
       </div>
@@ -25,15 +24,13 @@ export default {
   props: ['alert'],
   data () {
     return {
-      state: 'preload'
+      state: 'calculation',
+      alertData: null
     }
   },
   computed: {
-    showPlaceholder () {
-      return this.state !== 'setup'
-    },
-    showAlert () {
-      return this.state !== 'setup'
+    show () {
+      return (this.state === 'go' || this.state === 'calculation') && this.alertData
     }
   },
   methods: {
@@ -48,8 +45,26 @@ export default {
       })
     }
   },
+  watch: {
+    alert () {
+      if (!this.alert) {
+        this.state = 'hiding'
+      } else {
+        this.alertData = this.alert
+        this.state = 'calculation'
+        this.$nextTick(() => {
+          this.setPlaceholderHeight()
+        })
+      }
+    }
+  },
   mounted () {
-    this.setPlaceholderHeight()
+    if (this.alertDat) {
+      this.setPlaceholderHeight()
+    }
+  },
+  created () {
+    this.alertData = this.alert
   }
 }
 
@@ -73,7 +88,7 @@ export default {
 .alert-placeholder {
 -webkit-backface-visibility: hidden;
 }
-.alert-container.setup, .alert-container.preload {
+.alert-container.setup {
   transform: translate(0, -100%);
 }
 .alert-container {
