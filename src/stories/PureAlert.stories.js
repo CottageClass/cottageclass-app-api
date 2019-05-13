@@ -23,7 +23,7 @@ storiesOf('PureAlert', module)
     },
     template: `<div style="height: 2000px;">
                  <div style="height: 200px;">
-                   <PureAlert v-if="true" :alert="show && alert"/>
+                   <PureAlert :alert="show && alert"/>
                    <p>some text to roll around</p>
                    <p>some text to roll around</p>
                    <p>some text to roll around</p>

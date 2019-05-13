@@ -1,5 +1,5 @@
 <template>
-  <PureAlert v-if="alert" :alert="alert" />
+  <PureAlert :alert="alert" />
 </template>
 
 <script>
