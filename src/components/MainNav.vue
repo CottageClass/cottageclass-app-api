@@ -96,7 +96,7 @@ export default {
     logout: function () {
       signOut().then(() => {
         this.$store.dispatch('establishUser', { JWT: null })
-        this.$router.push({ name: 'Events' })
+        this.$router.push({ name: 'SplashPage' })
         this.showMenu = false
       })
     }
