@@ -39,6 +39,14 @@ export function initProxySession (currentUserId, receiverId, requestMessage, ack
  * USERS
  */
 
+export async function fetchStarredItems (userId) {
+  try {
+    return await axios.get(`api/users/${userId}/stars`)
+  } catch (e) {
+    logger.logError(e)
+  }
+}
+
 export function submitUserInfo (userId, data) {
   if (!data) { return }
 
