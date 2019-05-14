@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :star do
-    starable { nil }
-    giver { nil }
+    association :starable, factory: :user
+    association :giver, factory: :user
   end
 end

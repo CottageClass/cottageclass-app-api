@@ -1,4 +1,4 @@
 class Star < ApplicationRecord
-  belongs_to :starable, polymorphic: true
-  belongs_to :giver
+  belongs_to :starable, polymorphic: true, inverse_of: :received_stars
+  belongs_to :giver, class_name: :User, inverse_of: :given_stars
 end

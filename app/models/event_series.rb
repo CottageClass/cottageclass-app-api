@@ -7,6 +7,7 @@ class EventSeries < ApplicationRecord
 
   belongs_to :user, inverse_of: :event_series
   has_many :events, inverse_of: :event_series, dependent: :destroy
+  has_many :received_stars, as: :starable, class_name: 'Star', dependent: :destroy
 
   before_validation :cleanup
   after_create :create_events

@@ -19,6 +19,7 @@ class Event < ApplicationRecord
   has_many :participants, as: :participable, dependent: :destroy
   has_many :participant_children, as: :participable
   has_many :participating_users, through: :participants, source: :user
+  has_many :received_stars, as: :starable, class_name: 'Star', dependent: :destroy
 
   scope :eager, -> { includes :event_hosts, participants: %i[user participant_children] }
   scope :nearest, ->(user) { where.not(id: user.events).near([user.latitude, user.longitude], 100) }
