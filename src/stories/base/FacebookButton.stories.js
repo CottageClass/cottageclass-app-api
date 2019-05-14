@@ -12,5 +12,5 @@ storiesOf('FacebookButton', module)
       return {
       }
     },
-    template: '<FacebookButton />'
+    template: '<div style="width: 300px;"> <FacebookButton /> </div>'
   }))

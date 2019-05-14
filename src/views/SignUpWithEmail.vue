@@ -9,23 +9,15 @@
             </StyleWrapper>
             <h1 class="auth-heading">Sign Up</h1>
               <div class="auth-wrapper">
-                <a
-                v-if="showFacebookLogin"
-                href=""
-                class="fb-button w-inline-block"
-                @click.prevent="authenticateFacebook"
-                >
-                  <img src="@/assets/facebook-button-icon.svg" width="24" height="24" alt="">
-                  <div class="fb-button-text">Continue with Facebook</div>
-                </a>
+              <FacebookButton v-if="showFacebookLogin" />
                 <span v-if="showFacebookLogin">
-                <div class="divider-container">
-                  <div class="divider-1px-2"></div>
-                  <div class="or-container">
-                    <div class="divider-text">OR</div>
+                  <div class="divider-container">
+                    <div class="divider-1px-2"></div>
+                    <div class="or-container">
+                      <div class="divider-text">OR</div>
+                    </div>
+                    <div class="divider-1px-2"></div>
                   </div>
-                  <div class="divider-1px-2"></div>
-                </div>
                 <div>Sign up with your email</div>
                 </span>
               <div class="form-block w-form">
@@ -110,16 +102,17 @@
 </template>
 
 <script>
-import ErrorMessage from '@/components/base/ErrorMessage.vue'
 import { providerAuthentication, alerts } from '@/mixins'
 import { register, signIn } from '@/utils/api'
 import MainNav from '@/components/MainNav.vue'
 import Footer from '@/components/Footer.vue'
 import StyleWrapper from '@/components/FTE/StyleWrapper.vue'
+import FacebookButton from '@/components/base/FacebookButton'
+import ErrorMessage from '@/components/base/ErrorMessage.vue'
 
 export default {
   name: 'SignUpWithEmail',
-  components: { ErrorMessage, MainNav, Footer, StyleWrapper },
+  components: { ErrorMessage, MainNav, Footer, StyleWrapper, FacebookButton },
   mixins: [providerAuthentication, alerts],
   data: function () {
     return {
@@ -433,41 +426,6 @@ a {
   align-items: center;
 }
 
-.fb-button {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  width: 100%;
-  padding: 12px 24px 12px 16px;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
-  border-radius: 4px;
-  background-color: #3b5998;
-  color: #fff;
-  text-decoration: none;
-}
-
-.fb-button:active {
-  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, .15)), to(rgba(0, 0, 0, .15)));
-  background-image: linear-gradient(180deg, rgba(0, 0, 0, .15), rgba(0, 0, 0, .15));
-}
-
-.fb-button-text {
-  margin-top: 1px;
-  margin-left: 12px;
-  font-size: 14px;
-  text-align: left;
-  letter-spacing: 0.4px;
-  text-decoration: none;
-}
-
 .terms-text {
   width: 220px;
   margin-bottom: 10px;
@@ -483,55 +441,6 @@ a {
 .heading-2 {
   margin-top: 0px;
   font-size: 24px;
-}
-
-.fb-container-2 {
-  position: fixed;
-  left: 0px;
-  right: 0px;
-  bottom: 0px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  width: 100%;
-  padding: 10px;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
-  background-color: #fff;
-  box-shadow: 0 -1px 8px 0 rgba(0, 0, 0, .05);
-}
-
-.fb-button-2 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  padding: 12px 24px 12px 16px;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
-  border-radius: 4px;
-  background-color: #3b5998;
-  color: #fff;
-  text-decoration: none;
-}
-
-.fb-button-2:active {
-  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, .15)), to(rgba(0, 0, 0, .15)));
-  background-image: linear-gradient(180deg, rgba(0, 0, 0, .15), rgba(0, 0, 0, .15));
 }
 
 .div-block-38 {
@@ -830,13 +739,6 @@ a {
     padding-bottom: 60px;
   }
 
-  .fb-button-2 {
-    -webkit-box-pack: center;
-    -webkit-justify-content: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-  }
-
   .button-container {
     -webkit-box-pack: end;
     -webkit-justify-content: flex-end;
@@ -878,39 +780,6 @@ a {
   .heading-2 {
     font-size: 20px;
     line-height: 26px;
-  }
-
-  .fb-container-2 {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    padding-right: 32px;
-    padding-left: 32px;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    -webkit-box-pack: start;
-    -webkit-justify-content: flex-start;
-    -ms-flex-pack: start;
-    justify-content: flex-start;
-    -webkit-flex-wrap: nowrap;
-    -ms-flex-wrap: nowrap;
-    flex-wrap: nowrap;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-align-content: center;
-    -ms-flex-line-pack: center;
-    align-content: center;
-  }
-
-  .fb-button-2 {
-    position: static;
-    width: 320px;
   }
 
   .div-block-37 {
@@ -982,18 +851,6 @@ a {
     padding: 64px 16px;
   }
 
-  .fb-button {
-    padding-bottom: 17px;
-  }
-
-  .fb-button:active {
-    background-color: #3b5998;
-  }
-
-  .fb-button-text {
-    font-weight: 400;
-  }
-
   .terms-text {
     width: 80%;
     margin-top: 6px;
@@ -1001,24 +858,6 @@ a {
 
   .heading-2 {
     text-align: center;
-  }
-
-  .fb-container-2 {
-    padding-right: 20px;
-    padding-left: 20px;
-  }
-
-  .fb-button-2 {
-    width: 100%;
-    padding-bottom: 17px;
-    -webkit-box-pack: center;
-    -webkit-justify-content: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-  }
-
-  .fb-button-2:active {
-    background-color: #3b5998;
   }
 
   .div-block-37 {
