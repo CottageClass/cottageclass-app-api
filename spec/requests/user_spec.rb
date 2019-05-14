@@ -80,6 +80,11 @@ RSpec.resource 'User' do
     end
 
     context 'unauthenticated' do
+      get '/api/users/:id/stars', format: :json do
+        example_request 'unauthenticated stars' do
+          expect(response_status).to eq(401)
+        end
+      end
       get '/api/users/:id', format: :json do
         example_request 'unauthenticated get' do
           expect(response_status).to eq(200)
