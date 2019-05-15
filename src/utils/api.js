@@ -47,6 +47,22 @@ export async function fetchStarredItems (userId) {
   }
 }
 
+export async function unstarUser (userId) {
+  try {
+    return await axios.delete(`api/users/${userId}/stars`)
+  } catch (e) {
+    logger.logError(e)
+  }
+}
+
+export async function starUser (userId) {
+  try {
+    return await axios.post(`api/users/${userId}/stars`)
+  } catch (e) {
+    logger.logError(e)
+  }
+}
+
 export function submitUserInfo (userId, data) {
   if (!data) { return }
 

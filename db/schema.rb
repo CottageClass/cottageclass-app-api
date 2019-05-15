@@ -181,6 +181,7 @@ ActiveRecord::Schema.define(version: 2019_05_14_144821) do
     t.bigint "giver_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["giver_id", "starable_type", "starable_id"], name: "index_stars_on_starable_type_starable_id_giver_id", unique: true
     t.index ["giver_id"], name: "index_stars_on_giver_id"
     t.index ["starable_type", "starable_id"], name: "index_stars_on_starable_type_and_starable_id"
   end
