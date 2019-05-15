@@ -5,7 +5,7 @@ class API::Users::StarsController < API::StarsController
     # get all the starables that this user has starred
     if current_user.id == params[:user_id].to_i
       serializer = UserGivenStarsSerializer.new current_user, 
-        include: %i[starred_users starred_events starred_event_series]
+        include: %i[starred_users starred_event_series]
       render json: serializer.serializable_hash, status: :ok
     else
       render status: 401

@@ -62,7 +62,6 @@ class User < ApplicationRecord
   has_many :stars, class_name: :Star, foreign_key: :giver_id, inverse_of: :giver, dependent: :destroy
   
   has_many :starred_users,        through: :stars, source: :starable, source_type: :User
-  has_many :starred_events,       through: :stars, source: :starable, source_type: :Event
   has_many :starred_event_series, through: :stars, source: :starable, source_type: :EventSeries
   
   has_many :received_stars, as: :starable, class_name: 'Star', dependent: :destroy, inverse_of: :starable

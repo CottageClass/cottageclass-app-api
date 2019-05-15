@@ -3,6 +3,5 @@ class UserGivenStarsSerializer < BaseSerializer
   set_type :user
 
   has_many :starred_users, serializer: PublicUserSerializer
-  has_many :starred_events, serializer: EventSerializer
   has_many :starred_event_series, serializer: EventSeriesSerializer
 end

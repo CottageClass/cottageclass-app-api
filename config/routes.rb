@@ -10,10 +10,9 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: :json } do
     resources :event_series, only: %i[index show create update] do 
-      resources :stars, only: %i[create destroy], module: :event_series
+      resource :stars, only: %i[create destroy], module: :event_series
     end
     resources :events, only: %i[show update destroy] do
-      resources :stars, only: %i[create destroy], module: :events
       resources :participants, only: %i[create] do
         collection { delete :index, to: 'participants#destroy' }
       end
