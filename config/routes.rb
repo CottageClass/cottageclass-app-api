@@ -33,7 +33,8 @@ Rails.application.routes.draw do
       end
     end
     resources :users, only: %i[show] do
-      resources :stars, only: %i[create destroy index], module: :users
+      resource :stars, only: %i[create destroy], module: :users
+      resources :stars, only: :index, module: :users
       collection do
         get '(/miles/:miles(/latitude/:latitude/longitude/:longitude))(/min_age/:min_age)(/max_age/:max_age)(/page/:page/page_size/:page_size)',
             to: 'users#index',
