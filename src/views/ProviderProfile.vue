@@ -1,6 +1,11 @@
 <template>
   <div class="onb-body">
     <MainNav />
+
+    <div @click="fetchStarredItems"> FETCH </div>
+    <div @click="createStar"> STAR </div>
+    <div @click="deleteStar"> DELETE </div>
+
     <StyleWrapper styleIs="editing">
       <LoadingSpinner v-if="!user"/>
       <div v-else class="profile-container w-container">
@@ -151,6 +156,15 @@ export default {
   },
   mixins: [ maps, screen ],
   methods: {
+    fetchStarredItems () {
+      api.fetchStarredItems(this.user.id)
+    },
+    createStar () {
+      api.starUser(this.user.id)
+    },
+    deleteStar () {
+      api.unstarUser(this.user.id)
+    },
     goToEdit: function () {
       this.$router.push({ name: 'ProfileEdit' })
     },
