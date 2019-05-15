@@ -1,5 +1,6 @@
 <template>
-  <div class="user-summary-card">
+  <div class="user-summary-card"
+       @click="goToProfile">
     <div class="photo-wrapper">
       <AvatarImage
         :person="user"
@@ -87,6 +88,10 @@ a {
 }
 
 .user-summary-card {
+  &:hover {
+    background-color: #00000006;
+  }
+  cursor: pointer;
   display: flex;
   width: 100%;
   max-width: 100%;
