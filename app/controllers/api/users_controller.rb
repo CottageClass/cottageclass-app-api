@@ -17,7 +17,10 @@ class API::UsersController < API::BaseController
     serializer = if current_user && current_user.id == @user.id
                    CurrentUserSerializer.new @user, include: %i[children]
                  else
-                   PublicUserSerializer.new @user, include: %i[children]
+                   PublicUserSerializer.new @user, {
+                     include: %i[children],
+                     params: { current_user: current_user }
+                   }
                  end
     render json: serializer.serializable_hash, status: :ok
   end
@@ -61,7 +64,8 @@ class API::UsersController < API::BaseController
 
     serializer = PublicUserSerializer.new users, include: %i[children user_reviews user_reviews.reviewer],
                                                  links: links,
-                                                 meta: meta
+                                                 meta: meta,
+                                                 params: {current_user: current_user}
     render json: serializer.serializable_hash, status: :ok
   end
 
