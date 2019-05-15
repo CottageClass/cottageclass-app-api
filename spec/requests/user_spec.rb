@@ -49,14 +49,14 @@ RSpec.resource 'User' do
     context 'authenticated' do
       include_context 'authorization token'
 
-      delete '/api/users/:id/stars', format: :json do
-        example_request 'authenticated stars' do
-          expect(response_status).to eq(200)
-        end
-      end
-      post '/api/users/:id/stars', format: :json do
+      post '/api/users/:other_user_id/stars', format: :json do
         example_request 'authenticated stars' do
           expect(response_status).to eq(201)
+        end
+      end
+      delete '/api/users/:other_user_id/stars', format: :json do
+        example_request 'authenticated stars' do
+          expect(response_status).to eq(404)
         end
       end
       get '/api/users/:id/stars', format: :json do

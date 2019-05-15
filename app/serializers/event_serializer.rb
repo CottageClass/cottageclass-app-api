@@ -1,10 +1,6 @@
 class EventSerializer
   include FastJsonapi::ObjectSerializer
 
-  has_one :user, key: :host, 
-                 set_id: :host_id, 
-                 serializer: PublicUserSerializer,
-                 params: {current_user: current_user}
   has_many :event_hosts
   has_many :participants
 
@@ -16,5 +12,25 @@ class EventSerializer
   attribute :full, &:full?
   attribute :participated, if: proc { |_, params| params.dig(:current_user).present? } do |instance, params|
     instance.participated? params[:current_user]
+  end
+
+  attribute :host do |instance, params| 
+    serializer = PublicUserSerializer.new instance.user, {
+                     include: %i[children],
+                     params: {current_user: params[:current_user]}
+                   }
+    serializer.serializable_hash
+  end
+
+  attribute :starred do |instance, params|
+    current_user = params[:current_user]
+    if params[:starred_list]
+      true
+    elsif current_user.nil?
+      false
+    else
+      star = Star.find_by giver: current_user, starable_type: :EventSeries, starable_id: instance.event_series.id
+      !star.nil?
+    end
   end
 end
