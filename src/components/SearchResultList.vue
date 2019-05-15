@@ -121,7 +121,7 @@ select {
 .user-pagination-button {
   cursor: pointer;
   &:hover {
-    background-color: #00000010;
+    background-color: #00000006;
   }
   display: flex;
   width: 100%;
