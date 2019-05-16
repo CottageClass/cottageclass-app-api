@@ -2,15 +2,21 @@
   <div class="onb-body">
     <div class="content-wrapper">
       <Nav
-        button="next"
+        button="nextButtonState"
         @next="nextStep"
         @prev="prevStep"
-        :hidePrevious="false"
+        :hidePrevious="currentIndex===0"
       />
       <StyleWrapper styleIs="onboarding">
         <EventDescription
-          v-model="description" />
-
+            v-if="currentStep==='description'"
+          v-model="event.description" />
+          <EventTime
+            v-if="currentStep==='time'"
+            v-model="event.time" />
+          <EventDate
+            v-if="currentStep==='date'"
+            v-model="event.date" />
       </StyleWrapper>
     </div>
   </div>
@@ -18,25 +24,63 @@
 
 <script>
 import EventDescription from '@/components/base/eventSpecification/EventDescription'
+import EventTime from '@/components/base/eventSpecification/EventTime.vue'
+import EventDate from '@/components/base/eventSpecification/EventDate.vue'
 import StyleWrapper from '@/components/FTE/StyleWrapper'
 import Nav from '@/components/FTE/Nav'
 
 import { mapGetters } from 'vuex'
+
+const stepSequence = [
+  'description', 'time', 'date'
+]
 export default {
   name: 'NewEvent',
-  components: { EventDescription, StyleWrapper, Nav },
+  components: { EventDescription, StyleWrapper, Nav, EventTime, EventDate },
   data () {
     return {
-      description: { err: null }
+      stepIndex: 0,
+      event: {
+        time: { err: null },
+        date: { err: null },
+        description: { err: null }
+      }
     }
   },
-  conputed: {
-    ...mapGetters([ 'currentUser', 'redirectRoute', 'firstCreatedEvent' ])
+  computed: {
+    currentStep () {
+      return this.$route.params.step
+    },
+    currentIndex () {
+      return stepSequence.findIndex(e => e === this.currentStep)
+    },
+    nextButtonState () {
+      if (!this.modelForCurrentStep) {
+        return 'inactive'
+      }
+      if (this.modelForCurrentStep.err) {
+        return 'inactive'
+      } else {
+        return 'next'
+      }
+    },
+    ...mapGetters([ 'currentUser' ])
   },
   methods: {
+    submitEvent () {
+      // TODO
+    },
     nextStep () {
+      if (this.currentIndex === stepSequence.length - 1) {
+        this.submitEvent()
+      } else {
+        this.$router.push({ name: 'NewEvent', params: { step: stepSequence[this.currentIndex + 1] } })
+      }
     },
     prevStep () {
+      if (this.currentIndex > 0) {
+        this.$router.push({ name: 'NewEvent', params: { step: stepSequence[this.currentIndex - 1] } })
+      }
     }
   }
 

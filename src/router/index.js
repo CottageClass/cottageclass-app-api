@@ -31,7 +31,7 @@ export default new Router({
   mode: 'history',
   routes: [
     {
-      path: '/events/new',
+      path: '/events/new/:step',
       name: 'NewEvent',
       component: NewEvent
     },
