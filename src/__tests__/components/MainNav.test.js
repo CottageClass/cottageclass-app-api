@@ -49,8 +49,6 @@ describe('MainNav', () => {
       wrapper.vm.$nextTick(() => {
         const list = wrapper.find('.nav-links-expanded ul')
         const itemLabels = list.findAll('li div').wrappers.map(w => w.text())
-        console.log(itemLabels)
-
         expect(itemLabels).toMatchSnapshot()
         done()
       })

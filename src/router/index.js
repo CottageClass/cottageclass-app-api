@@ -6,6 +6,7 @@ import SplashPage from '@/views/SplashPage.vue'
 import EventPage from '@/components/EventPage.vue'
 import Events from '@/views/Events.vue'
 import EventsDetail from '@/views/EventsDetail.vue'
+import NewEvent from '@/views/NewEvent.vue'
 import RsvpInfoCollection from '@/components/RsvpInfoCollection.vue'
 import CancelRSVP from '@/components/CancelRSVP.vue'
 import MyRSVPs from '@/components/MyRSVPs.vue'
@@ -29,6 +30,11 @@ Vue.use(Router)
 export default new Router({
   mode: 'history',
   routes: [
+    {
+      path: '/events/new',
+      name: 'NewEvent',
+      component: NewEvent
+    },
     {
       path: '/',
       name: 'SplashPage',
