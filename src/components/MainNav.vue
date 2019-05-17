@@ -51,6 +51,11 @@
               <div class="text-block">Logout</div>
             </a>
           </li>
+          <li v-if="isAuthenticated">
+            <a href="/events/new" class="link-block w-inline-block">
+              <div class="text-block">Offer a playdate</div>
+            </a>
+          </li>
           <li v-if="!isAuthenticated">
             <a href="/log-in" class="link-block w-inline-block">
               <div class="text-block">Log in</div>
