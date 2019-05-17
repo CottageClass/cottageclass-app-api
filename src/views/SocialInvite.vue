@@ -133,11 +133,15 @@ export default {
   },
   methods: {
     nextStep () {
-      if (this.firstCreatedEvent) {
-        // this is the case if we're in the FTE flow
-        this.$router.push({ name: 'InviteExistingUsers', params: { id: this.firstCreatedEvent.id } })
+      if (this.$route.params.context === 'newEvent') {
+        this.$router.push({ name: 'Events' })
       } else {
-        this.$router.go(-1)
+        if (this.firstCreatedEvent) {
+          // this is the case if we're in the FTE flow
+          this.$router.push({ name: 'InviteExistingUsers', params: { id: this.firstCreatedEvent.id } })
+        } else {
+          this.$router.go(-1)
+        }
       }
     },
     onCopy: function () {
