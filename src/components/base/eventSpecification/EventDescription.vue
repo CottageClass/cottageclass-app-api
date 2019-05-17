@@ -1,6 +1,6 @@
 <template>
   <Question
-    title="Describe Offer"
+    title="Describe your offer"
     subtitle="What would you like to propose to other families? A picnic in the park? A playdate at your house? It's up to you. (You'll choose the times on the next step.)">
     <FormWithTextArea
       maxLength="120"

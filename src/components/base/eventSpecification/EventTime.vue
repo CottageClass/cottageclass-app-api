@@ -1,7 +1,7 @@
 <template>
   <Question
-    title="Choose a time for your activity"
-    subtitle="Each activity runs 3 hours in the evening, but the start time is up to you. (You'll choose the date next.)">
+    :title="titleText"
+    :subtitle="subtitleText">
     <RadioButtons
       v-model="timeSelected"
       :choices="times" />
@@ -29,7 +29,7 @@ const TIMES = [
 
 export default {
   name: 'EventTime',
-  props: ['value'],
+  props: ['value', 'context'],
   components: { Question, RadioButtons },
   data () {
     return {
@@ -46,6 +46,12 @@ export default {
     })
   },
   computed: {
+    titleText () {
+      return this.$route.name === 'NewEventStep' ? 'When are you available?' : 'Choose a time for your activity'
+    },
+    subtitleText () {
+      return 'Each activity runs 3 hours in the evening, but the start time is up to you. (You\'ll choose the date next.)'
+    },
     startTimeChoice () {
       if (!this.value.start) { return null }
       return TIMES.find(t => {
