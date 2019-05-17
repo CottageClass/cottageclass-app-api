@@ -32,6 +32,11 @@ export default new Router({
   routes: [
     {
       path: '/events/new/:step',
+      name: 'NewEventStep',
+      component: NewEvent
+    },
+    {
+      path: '/events/new',
       name: 'NewEvent',
       component: NewEvent
     },
@@ -80,7 +85,10 @@ export default new Router({
     {
       path: '/event/:id/share',
       name: 'SocialInvite',
-      component: SocialInvite
+      component: SocialInvite,
+      props: {
+        context: true
+      }
     },
     {
       path: '/event/:id/invite',

@@ -6,7 +6,7 @@
         <Nav button="done" @next="nextStep" hidePrevious="true" />
         <div class="onb-content-container">
           <div class="onb-top-content-container">
-            <h1 class="onb-heading-large">Build your village</h1>
+            <h1 class="onb-heading-large">{{ titleText }}</h1>
             <p class="onb-paragraph-subheading-2">{{ sharingPromptText }}</p>
           </div>
           <ul class="onb-social-button-list">
@@ -98,7 +98,13 @@ export default {
         return this.fetchedEvent
       }
     },
+    titleText () {
+      return this.$route.params.context === 'newEvent' ? 'Offer posted! Share it?' : 'Build your village'
+    },
     sharingPromptText: function () {
+      if (this.$route.params.context === 'newEvent') {
+        return 'Yay! We\'ve posted your offer to other parents. Now would you like to invite some people?'
+      }
       if (this.eventId) {
         return this.sharingPromptWithEvent
       } else {
