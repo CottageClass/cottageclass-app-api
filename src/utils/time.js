@@ -21,3 +21,11 @@ export function localWeekHourToMoment (weekHour, rootTime, timeZone) {
     return weekStart.add({ weeks: 1, hours: weekHour })
   }
 }
+
+export function momentToLocalWeekHour (time, timeZone) {
+  if (timeZone) {
+    moment.tz.setDefault(timeZone)
+  }
+  const [dow, hour] = time.clone().format('E HH').split(' ')
+  return (24 * parseInt(dow) + parseInt(hour)) % (7 * 24)
+}
