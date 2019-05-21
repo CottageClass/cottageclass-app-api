@@ -1,5 +1,7 @@
 <template>
-  <div class="item-container" @click="toggleSelected">
+  <div class="item-container"
+       @click="toggleSelected"
+       :class="selected?'active':'inactive'">
     <div class="time-label">
       {{ timeText }}
     </div>
@@ -7,37 +9,34 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import { } from '@/mixins'
 
 export default {
   name: 'MultipleTimeSelectorItem',
   props: ['startHour', 'selected'],
   components: {},
-  mixins: [],
-  data () {
-    return {
-    }
-  },
   computed: {
     timeText () {
       return this.toCompactTime(this.startHour) + ' - ' + this.toCompactTime((this.startHour + 1) % 24)
     },
     toCompactTime () {
       return hour => (hour + 11) % 12 + 1 + (hour < 12 ? 'am' : 'pm')
-    },
-    ...mapGetters([])
+    }
   },
   methods: {
     toggleSelected () {
-      this.$emit('input', !this.selected)
+      this.$emit('input', { hour: this.startHour, selected: !this.selected })
     }
-  },
-  mounted () {
   }
 }
 </script>
 
 <style scoped>
-
+.active {
+  background-color:red;
+}
+.item-container {
+  margin: 4px;
+  width: 100px;
+  border: 1px solid white;
+}
 </style>

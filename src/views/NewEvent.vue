@@ -11,10 +11,12 @@
         <ErrorMessage v-if="err && showError" :text="err" />
         <EventDescription
             v-if="currentStep==='description'"
-          v-model="event.description" />
-          <EventTime
+            v-model="event.description" />
+          <MultipleTimeSelector
             v-if="currentStep==='time'"
-            v-model="event.time" />
+            :firstDisplay="110"
+            :value="event.availability"
+            />
           <EventDatePicker
             v-if="currentStep==='date'"
             v-model="event.date" />
@@ -26,7 +28,7 @@
 <script>
 import ErrorMessage from '@/components/base/ErrorMessage.vue'
 import EventDescription from '@/components/base/eventSpecification/EventDescription'
-import EventTime from '@/components/base/eventSpecification/EventTime.vue'
+import MultipleTimeSelector from '@/components/base/eventSpecification/MultipleTimeSelector.vue'
 import EventDatePicker from '@/components/base/eventSpecification/EventDatePicker.vue'
 import StyleWrapper from '@/components/FTE/StyleWrapper'
 import Nav from '@/components/FTE/Nav'
@@ -38,7 +40,7 @@ const stepSequence = ['description', 'time', 'date']
 
 export default {
   name: 'NewEvent',
-  components: { EventDescription, StyleWrapper, Nav, EventTime, EventDatePicker, ErrorMessage },
+  components: { EventDescription, StyleWrapper, Nav, MultipleTimeSelector, EventDatePicker, ErrorMessage },
   data () {
     return {
       showError: false,
@@ -50,7 +52,7 @@ export default {
     modelForCurrentStep () {
       const models = {
         description: this.event.description,
-        time: this.event.time,
+        availability: this.event.availability,
         date: this.event.date
       }
       return models[this.currentStep]
@@ -144,6 +146,16 @@ export default {
       this.$router.push({ name: 'NewEventStep', params: { step: stepSequence[0] } })
     }
     this.event = this.wipEvent
+    if (!this.event.availability.availability) {
+      this.event.availability.availability = []
+      for (let day = 0; day < 7; day++) {
+        const row = []
+        for (let hour = 0; hour < 24; hour++) {
+          row.push(false)
+        }
+        this.event.availability.availability.push(row)
+      }
+    }
   }
 }
 </script>

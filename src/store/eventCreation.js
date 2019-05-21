@@ -2,7 +2,7 @@
 
 const state = {
   event: {
-    time: { err: null },
+    availability: { err: null },
     date: { err: null },
     description: { err: null }
   }

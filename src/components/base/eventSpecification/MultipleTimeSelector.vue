@@ -1,46 +1,85 @@
 <template>
   <div>
-    <div class="day-of-week"
-         v-for="(day, index) of shiftedDays">
-      {{ day  +index }}
+    <div v-for="(dow, dayIndex) of shiftedDayIndices">
+      <MultipleTimeSelectorDay
+         class="day-of-week"
+         :title="dayName(dow)"
+         :firstStartTime="firstTime(dayIndex)"
+         :lastStartTime="lastTime(dayIndex)"
+         :value="value[dow]"
+         />
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import { } from '@/mixins'
-
-const WEEK_DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+import MultipleTimeSelectorDay from '@/components/base/eventSpecification/MultipleTimeSelectorDay'
 
 export default {
   name: 'MultipleTimeSelector',
-  props: ['selectedItems', 'firstDisplay'],
-  components: {},
-  mixins: [],
-  data () {
-    return {
-    }
-  },
+  props: ['value', 'firstDisplay'],
+  components: { MultipleTimeSelectorDay },
   computed: {
+    dayName () {
+      return (index) => {
+        const WEEK_DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+        return WEEK_DAYS[index]
+      }
+    },
     firstDay () {
+      if (this.todayType === 'late') {
+        return Math.floor(this.firstDisplay / 24) + 1
+      }
       return Math.floor(this.firstDisplay / 24)
     },
-    firstTime () {
+    todayType () {
+      // "today" is the day associated with firstDisplay.  it's possible nothing is shown on today if it's too late already
+      if (this.todayTime <= 8) {
+        return 'early' // show the entirety of today
+      }
+      if (this.todayTime >= 23) {
+        return 'late' // don't show anything on today
+      }
+      return 'midday' // show some of today
+    },
+    todayTime () {
       return Math.max(8, this.firstDisplay % 24)
     },
-    shiftedDays () {
-      return [0, 1, 2, 3, 4, 5, 6, 7].map(i => WEEK_DAYS[(i + this.firstDay) % 7])
+    firstTime () {
+      return (dayIndex) => {
+        if (dayIndex > 1) {
+          return 8
+        } else {
+          if (this.todayType === 'midday') {
+            return Math.max(8, this.firstDisplay % 24)
+          } else {
+            return 8
+          }
+        }
+      }
     },
-    ...mapGetters([])
-  },
-  methods: {
-  },
-  mounted () {
+    lastTime () {
+      return (dayIndex) => {
+        if (dayIndex < 7) {
+          return 23
+        } else {
+          return Math.max(8, this.firstDisplay % 24) - 1
+        }
+      }
+    },
+    shiftedDayIndices () {
+      if (this.todayType === 'midday') {
+        return [0, 1, 2, 3, 4, 5, 6, 7].map(i => (i + this.firstDay) % 7)
+      } else {
+        return [0, 1, 2, 3, 4, 5, 6].map(i => (i + this.firstDay) % 7)
+      }
+    }
   }
 }
 </script>
 
 <style scoped>
+.day-of-week {
+}
 
 </style>

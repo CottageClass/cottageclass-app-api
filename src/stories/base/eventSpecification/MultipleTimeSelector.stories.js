@@ -12,7 +12,8 @@ storiesOf('MultipleTimeSelector', module)
     props: {
       firstDisplay: {
         default: number('first weekHour', 60)
-      }
+      },
+      availability: Array(7).fill([...Array(24).keys()])
     },
-    template: '<MultipleTimeSelector :firstDisplay="firstDisplay" :selectedItems="Array(24 * 7).fill(false)"/>'
+    template: '<MultipleTimeSelector :firstDisplay="firstDisplay" :availability="availability"/>'
   }))
