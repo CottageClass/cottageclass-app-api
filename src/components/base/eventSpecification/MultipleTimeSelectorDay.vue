@@ -4,11 +4,10 @@
     <div class="times-wrapper">
       <MultipleTimeSelectorItem
         v-for="hour in startTimeRange"
-        v-bind:key="title + hour"
+        :key="title + hour"
         :startHour="hour"
-        :selected="value[hour]"
-        :value=value[hour]
-        @input="selectionChanged"
+        :value="isSelected(hour)"
+        @input="updated(hour, $event)"
       />
     </div>
   </div>
@@ -19,9 +18,14 @@ import MultipleTimeSelectorItem from '@/components/base/eventSpecification/Multi
 
 export default {
   name: 'MultipleTimeSelectorDay',
-  props: ['title', 'firstStartTime', 'lastStartTime', 'value'],
+  props: ['title', 'firstStartTime', 'lastStartTime', 'value', 'dayIndex'],
   components: { MultipleTimeSelectorItem },
   computed: {
+    isSelected () {
+      return (hour) => {
+        return this.value[hour]
+      }
+    },
     startTimeRange () {
       return [...Array(this.lastStartTime + 1 - this.firstStartTime).keys()].map(
         e => e + this.firstStartTime
@@ -29,8 +33,9 @@ export default {
     }
   },
   methods: {
-    selectionChanged (e) {
-      this.$set(this.value, e.hour, e.selected)
+    updated (hour, e) {
+      this.$set(this.value, hour, e)
+      this.$emit('input', this.value)
     }
   }
 }

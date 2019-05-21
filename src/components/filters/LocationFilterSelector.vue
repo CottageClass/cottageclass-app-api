@@ -75,7 +75,6 @@ export default {
         lat: () => addressData.latitude,
         lng: () => addressData.longitude
       }
-      this.debug(addressData)
       this.shortDescription = addressData.postal_code || addressData.municipality || addressData.administrative_area_level_1 || addressData.administrative_area_level_2
       this.update()
     }

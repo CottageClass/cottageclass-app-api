@@ -34,6 +34,8 @@ import StyleWrapper from '@/components/FTE/StyleWrapper'
 import Nav from '@/components/FTE/Nav'
 
 import { submitEventSeriesData } from '@/utils/api'
+import moment from 'moment'
+import { localWeekHourToMoment } from '@/utils/time'
 import { mapGetters, mapMutations } from 'vuex'
 
 const stepSequence = ['description', 'time', 'date']
@@ -77,40 +79,52 @@ export default {
       }
     },
     eventSeriesDataForSubmission () {
-      return {
-        'event_series': {
-          'name': this.wipEvent.description.text,
-          'start_date': this.wipEvent.date.selected,
-          'starts_at': this.wipEvent.time.start,
-          'ends_at': this.wipEvent.time.end,
-          'has_pet': false,
-          'activity_names': [],
-          'house_rules': '',
-          'pet_description': '',
-          'maximum_children': 4,
-          'child_age_minimum': 0,
-          'child_age_maximum': 18,
-          'repeat_for': 1
+      return (timeRange) => {
+        return {
+          'event_series': {
+            'name': this.wipEvent.description.text,
+            'start_date': this.wipEvent.date.selected,
+            'starts_at': timeRange.start,
+            'ends_at': timeRange.end,
+            'has_pet': false,
+            'activity_names': [],
+            'house_rules': '',
+            'pet_description': '',
+            'maximum_children': 4,
+            'child_age_minimum': 0,
+            'child_age_maximum': 18,
+            'repeat_for': 1
+          }
         }
       }
     },
-    ...mapGetters([ 'currentUser', 'wipEvent', 'firstCreatedEvent' ])
+    timeRangeForBlock () {
+      return ([startHour, endHour]) => {
+        const start = localWeekHourToMoment(startHour, moment())
+        const end = localWeekHourToMoment(endHour, start)
+        return { start, end }
+      }
+    },
+    ...mapGetters([ 'currentUser', 'wipEvent', 'firstCreatedEvent', 'wipEventContiguousTimeBlocks' ])
   },
   methods: {
     async submitEvent () {
-      try {
-        const res = await submitEventSeriesData(this.eventSeriesDataForSubmission)
-        this.setCreatedEvents({ eventData: res })
-        this.resetWipEvent()
-        if (this.firstCreatedEvent) {
-          this.$router.push({ name: 'SocialInvite', params: { id: this.firstCreatedEvent.id, context: 'newEvent' } })
-        } else {
-          this.$router.push({ name: 'Events' })
+      for (let contiguousTimeBlock of this.wipEventContiguousTimeBlocks.reverse()) {
+        try {
+          const timeRange = this.timeRangeForBlock(contiguousTimeBlock)
+          const res = await submitEventSeriesData(this.eventSeriesDataForSubmission(timeRange))
+          this.setCreatedEvents({ eventData: res })
+        } catch (e) {
+          this.logError('Failed to sumbit event series')
+          this.logError(e)
+          this.showAlert('Sorry, there was a problem submitting your event.  Please try again later', 'failure')
         }
-      } catch (e) {
-        this.showAlert('Sorry, there was a problem submitting your event.  Please try again later', 'failure')
-        this.logError('Failed to sumbit event series')
-        this.logError(e)
+      }
+      this.resetWipEvent()
+      if (this.firstCreatedEvent) {
+        this.$router.push({ name: 'SocialInvite', params: { id: this.firstCreatedEvent.id, context: 'newEvent' } })
+      } else {
+        this.$router.push({ name: 'Events' })
       }
     },
     nextStep () {
@@ -147,7 +161,7 @@ export default {
     }
     this.event = this.wipEvent
     if (!this.event.availability.availability) {
-      this.event.availability.availability = []
+      this.$set(this.event.availability, 'availability', [])
       for (let day = 0; day < 7; day++) {
         const row = []
         for (let hour = 0; hour < 24; hour++) {

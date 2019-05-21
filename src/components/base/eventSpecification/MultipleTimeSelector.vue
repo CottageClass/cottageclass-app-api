@@ -6,7 +6,8 @@
          :title="dayName(dow)"
          :firstStartTime="firstTime(dayIndex)"
          :lastStartTime="lastTime(dayIndex)"
-         :value="value[dow]"
+         :value="value.availability[dow]"
+         @input="updated(dow, $event)"
          />
     </div>
   </div>
@@ -47,7 +48,7 @@ export default {
     },
     firstTime () {
       return (dayIndex) => {
-        if (dayIndex > 1) {
+        if (dayIndex > 0) {
           return 8
         } else {
           if (this.todayType === 'midday') {
@@ -73,6 +74,11 @@ export default {
       } else {
         return [0, 1, 2, 3, 4, 5, 6].map(i => (i + this.firstDay) % 7)
       }
+    }
+  },
+  methods: {
+    updated (dow, dayAvailability) {
+      this.$set(this.value, dow, dayAvailability)
     }
   }
 }

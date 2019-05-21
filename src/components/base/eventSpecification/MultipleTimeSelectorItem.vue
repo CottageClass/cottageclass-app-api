@@ -1,7 +1,7 @@
 <template>
   <div class="item-container"
        @click="toggleSelected"
-       :class="selected?'active':'inactive'">
+       :class="value?'active':'inactive'">
     <div class="time-label">
       {{ timeText }}
     </div>
@@ -12,7 +12,7 @@
 
 export default {
   name: 'MultipleTimeSelectorItem',
-  props: ['startHour', 'selected'],
+  props: ['startHour', 'value'],
   components: {},
   computed: {
     timeText () {
@@ -24,7 +24,7 @@ export default {
   },
   methods: {
     toggleSelected () {
-      this.$emit('input', { hour: this.startHour, selected: !this.selected })
+      this.$emit('input', !this.value)
     }
   }
 }
