@@ -29,7 +29,7 @@ export default {
   components: { MultipleTimeSelectorDay, Question },
   computed: {
     subtitle () {
-      return "When are you available for the idea you're offering? The more options you give other families, the more likely you are to get a response."
+      return "When are you available to host the playdate you're offering? The more options you give other families, the more likely you are to get a response."
     },
     dayTitle () {
       return (dayIndex) => {
