@@ -13,7 +13,7 @@
             v-if="currentStep==='description'"
             v-model="event.description" />
           <MultipleTimeSelector
-            v-if="currentStep==='time'"
+            v-if="currentStep==='availability'"
             :firstDisplay="110"
             :value="event.availability"
             />
@@ -39,7 +39,7 @@ import { localWeekHourToMoment } from '@/utils/time'
 import { mapGetters, mapMutations } from 'vuex'
 import { redirect } from '@/mixins'
 
-const stepSequence = ['description', 'time', 'date']
+const stepSequence = ['description', 'availability', 'date']
 
 export default {
   name: 'NewEvent',
