@@ -1,5 +1,6 @@
 import { mount } from '@vue/test-utils'
 import MultipleTimeSelector from '@/components/base/eventSpecification/MultipleTimeSelector'
+import moment from 'moment'
 
 describe('MultipleTimeSelector', () => {
   beforeAll(() => {
@@ -9,10 +10,10 @@ describe('MultipleTimeSelector', () => {
     const value = {
       availability: Array(7).fill(Array(24).fill(false))
     }
-    const firstDisplay = 60 // Tuesday 12pm local time
+    const scheduleStartTime = moment('2019-05-21T11:30') // Tuesday 11:30 am local time
     const wrapper = mount(MultipleTimeSelector, {
       propsData: {
-        value, firstDisplay
+        value, scheduleStartTime
       }
     })
     const days = wrapper.findAll('.day-of-week')
