@@ -148,7 +148,9 @@
       <div class="question">How do I offer suggestions on how to make KidsClub better?</div>
       <p class="paragraph">After your playdate, we will send you a survey to see how things went! We rely on your feedback to improve this experience and make it a truly useful tool for families in the community to share care, so please don’t hold back.</p>
       <div class="question">How do reviews work?</div>
-      <p class="paragraph">After your playdate, we will also ask you to leave an honest, public review of your host. Please do sing their praises if the experience was positive. Your review is a great asset to other parents seeking quality care! If a host receives negative feedback, the KidsClub team will review their case and decide whether to keep them on the platform or remove them.</p>
+      <p class="paragraph">After your playdate, we will also ask you to leave an honest review of your host. Please do sing their praises if the experience was positive. Your review is a great asset to other parents seeking quality care! If a host receives negative feedback, the KidsClub team will review their case and decide whether to keep them on the platform or remove them.</p>
+      <div class="question">Is my phone number visible to other users?</div>
+      <p class="paragraph">Not until one of you RSVPs to the other's playdate, at which point we email you each other's phone numbers in case you need them for scheduling or emergencies. Messages sent through the site pass through a proxy that hides each person's real phone number.</p>
     </div>
   </div>
 <!-- Footer -->
