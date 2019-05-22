@@ -2,7 +2,7 @@
 
 const state = {
   event: {
-    time: { err: null },
+    availability: { err: null },
     date: { err: null },
     description: { err: null }
   }
@@ -12,21 +12,9 @@ const mutations = {
   setWipEvent: (state, payload) => {
     state.event = payload.event
   },
-  setWipEventDate: (state, payload) => {
-    state.event |= {}
-    state.event.date = payload.date
-  },
-  setWipEventTime: (state, payload) => {
-    state.event |= {}
-    state.event.time = payload.time
-  },
-  setWipEventDescription: (state, payload) => {
-    state.event |= {}
-    state.event.description = payload.description
-  },
   resetWipEvent: (state) => {
     state.event = {
-      time: { err: null },
+      availability: { err: null },
       date: { err: null },
       description: { err: null }
     }
@@ -34,6 +22,28 @@ const mutations = {
 }
 const actions = {}
 const getters = {
+  wipEventContiguousTimeBlocks (state) {
+    if (state.event.availability.availability) {
+      let startTime = null
+      const blocks = []
+      state.event.availability.availability.forEach((day, dayIndex) => {
+        day.forEach((selected, hourIndex) => {
+          if (selected && !startTime) {
+            // beginning of block
+            startTime = 24 * dayIndex + hourIndex
+          }
+          if (!selected && startTime) {
+            // end of block
+            blocks.push([startTime, 24 * dayIndex + hourIndex])
+            startTime = null
+          }
+        })
+      })
+      console.log(blocks)
+      return blocks
+    }
+    return []
+  },
   wipEvent: state => state.event
 }
 

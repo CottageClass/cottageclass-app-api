@@ -11,13 +11,12 @@
         <ErrorMessage v-if="err && showError" :text="err" />
         <EventDescription
             v-if="currentStep==='description'"
-          v-model="event.description" />
-          <EventTime
-            v-if="currentStep==='time'"
-            v-model="event.time" />
-          <EventDatePicker
-            v-if="currentStep==='date'"
-            v-model="event.date" />
+            v-model="event.description" />
+          <MultipleTimeSelector
+            v-if="currentStep==='availability'"
+            :scheduleStartTime="scheduleStart"
+            :value="event.availability"
+            />
       </StyleWrapper>
     </div>
   </div>
@@ -26,19 +25,22 @@
 <script>
 import ErrorMessage from '@/components/base/ErrorMessage.vue'
 import EventDescription from '@/components/base/eventSpecification/EventDescription'
-import EventTime from '@/components/base/eventSpecification/EventTime.vue'
-import EventDatePicker from '@/components/base/eventSpecification/EventDatePicker.vue'
+import MultipleTimeSelector from '@/components/base/eventSpecification/MultipleTimeSelector.vue'
 import StyleWrapper from '@/components/FTE/StyleWrapper'
 import Nav from '@/components/FTE/Nav'
 
 import { submitEventSeriesData } from '@/utils/api'
+import moment from 'moment'
+import { localWeekHourToMoment } from '@/utils/time'
 import { mapGetters, mapMutations } from 'vuex'
+import { redirect } from '@/mixins'
 
-const stepSequence = ['description', 'time', 'date']
+const stepSequence = ['description', 'availability']
 
 export default {
   name: 'NewEvent',
-  components: { EventDescription, StyleWrapper, Nav, EventTime, EventDatePicker, ErrorMessage },
+  components: { EventDescription, StyleWrapper, Nav, MultipleTimeSelector, ErrorMessage },
+  mixins: [redirect],
   data () {
     return {
       showError: false,
@@ -47,11 +49,13 @@ export default {
     }
   },
   computed: {
+    scheduleStart () {
+      return moment()
+    },
     modelForCurrentStep () {
       const models = {
         description: this.event.description,
-        time: this.event.time,
-        date: this.event.date
+        availability: this.event.availability
       }
       return models[this.currentStep]
     },
@@ -75,40 +79,52 @@ export default {
       }
     },
     eventSeriesDataForSubmission () {
-      return {
-        'event_series': {
-          'name': this.wipEvent.description.text,
-          'start_date': this.wipEvent.date.selected,
-          'starts_at': this.wipEvent.time.start,
-          'ends_at': this.wipEvent.time.end,
-          'has_pet': false,
-          'activity_names': [],
-          'house_rules': '',
-          'pet_description': '',
-          'maximum_children': 4,
-          'child_age_minimum': 0,
-          'child_age_maximum': 18,
-          'repeat_for': 1
+      return (timeRange) => {
+        return {
+          'event_series': {
+            'name': this.wipEvent.description.text,
+            'start_date': timeRange.start.format('YYYY-MM-DD'),
+            'starts_at': timeRange.start.format('HH:mm'),
+            'ends_at': timeRange.end.format('HH:mm'),
+            'has_pet': false,
+            'activity_names': [],
+            'house_rules': '',
+            'pet_description': '',
+            'maximum_children': 4,
+            'child_age_minimum': 0,
+            'child_age_maximum': 18,
+            'repeat_for': 1
+          }
         }
       }
     },
-    ...mapGetters([ 'currentUser', 'wipEvent', 'firstCreatedEvent' ])
+    timeRangeForBlock () {
+      return ([startHour, endHour]) => {
+        const start = localWeekHourToMoment(startHour, moment())
+        const end = localWeekHourToMoment(endHour, start)
+        return { start, end }
+      }
+    },
+    ...mapGetters([ 'currentUser', 'wipEvent', 'firstCreatedEvent', 'wipEventContiguousTimeBlocks' ])
   },
   methods: {
     async submitEvent () {
-      try {
-        const res = await submitEventSeriesData(this.eventSeriesDataForSubmission)
-        this.setCreatedEvents({ eventData: res })
-        this.resetWipEvent()
-        if (this.firstCreatedEvent) {
-          this.$router.push({ name: 'SocialInvite', params: { id: this.firstCreatedEvent.id, context: 'newEvent' } })
-        } else {
-          this.$router.push({ name: 'Events' })
+      for (let contiguousTimeBlock of this.wipEventContiguousTimeBlocks.reverse()) {
+        try {
+          const timeRange = this.timeRangeForBlock(contiguousTimeBlock)
+          const res = await submitEventSeriesData(this.eventSeriesDataForSubmission(timeRange))
+          this.setCreatedEvents({ eventData: res })
+        } catch (e) {
+          this.logError('Failed to sumbit event series')
+          this.logError(e)
+          this.showAlert('Sorry, there was a problem submitting your event.  Please try again later', 'failure')
         }
-      } catch (e) {
-        this.showAlert('Sorry, there was a problem submitting your event.  Please try again later', 'failure')
-        this.logError('Failed to sumbit event series')
-        this.logError(e)
+      }
+      this.resetWipEvent()
+      if (this.firstCreatedEvent) {
+        this.$router.push({ name: 'SocialInvite', params: { id: this.firstCreatedEvent.id, context: 'newEvent' } })
+      } else {
+        this.$router.push({ name: 'Events' })
       }
     },
     nextStep () {
@@ -140,10 +156,21 @@ export default {
     }
   },
   created () {
+    if (this.redirectToSignupIfNotAuthenticated()) { return }
     if (!this.currentStep) {
       this.$router.push({ name: 'NewEventStep', params: { step: stepSequence[0] } })
     }
     this.event = this.wipEvent
+    if (!this.event.availability.availability) {
+      this.$set(this.event.availability, 'availability', [])
+      for (let day = 0; day < 7; day++) {
+        const row = []
+        for (let hour = 0; hour < 24; hour++) {
+          row.push(false)
+        }
+        this.event.availability.availability.push(row)
+      }
+    }
   }
 }
 </script>
