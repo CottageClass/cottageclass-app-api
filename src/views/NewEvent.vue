@@ -83,9 +83,9 @@ export default {
         return {
           'event_series': {
             'name': this.wipEvent.description.text,
-            'start_date': this.wipEvent.date.selected,
-            'starts_at': timeRange.start,
-            'ends_at': timeRange.end,
+            'start_date': timeRange.start.format('YYYY-MM-DD'),
+            'starts_at': timeRange.start.format('HH:mm'),
+            'ends_at': timeRange.end.format('HH:mm'),
             'has_pet': false,
             'activity_names': [],
             'house_rules': '',
