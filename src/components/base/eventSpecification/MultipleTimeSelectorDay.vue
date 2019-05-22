@@ -46,5 +46,14 @@ export default {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: space-between;
+}
+.day-title {
+  color: white;
+  margin-bottom: 8px;
+
+}
+.day-container {
+  margin-bottom: 20px;
 }
 </style>

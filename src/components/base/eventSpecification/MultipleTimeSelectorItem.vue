@@ -16,7 +16,7 @@ export default {
   components: {},
   computed: {
     timeText () {
-      return this.toCompactTime(this.startHour) + ' - ' + this.toCompactTime((this.startHour + 1) % 24)
+      return this.toCompactTime(this.startHour) + '-' + this.toCompactTime((this.startHour + 1) % 24)
     },
     toCompactTime () {
       return hour => (hour + 11) % 12 + 1 + (hour < 12 ? 'am' : 'pm')
@@ -31,12 +31,17 @@ export default {
 </script>
 
 <style scoped>
-.active {
-  background-color:red;
+.item-container.active {
+  background-color:white;
 }
 .item-container {
-  margin: 4px;
-  width: 100px;
-  border: 1px solid white;
+  background-color: #BCDDF7;
+  border-radius: 4px;
+  color: #158BE7;
+  padding: 5px;
+  margin: 3px 2px;
+  font-variant: small-caps;
+  width: 31%;
+  text-align: center;
 }
 </style>
