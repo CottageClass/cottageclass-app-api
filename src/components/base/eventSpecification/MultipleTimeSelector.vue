@@ -81,6 +81,26 @@ export default {
       } else {
         return [0, 1, 2, 3, 4, 5, 6].map(i => (i + this.firstDay) % 7)
       }
+    },
+    errorMessage () {
+      const someTimeSelected = this.value.availability.some(day => day.some(e => e))
+      if (someTimeSelected) {
+        return null
+      } else {
+        return 'Please select at least one time slot'
+      }
+    },
+    availability () {
+      return this.value.availability
+    }
+  },
+  watch: {
+    availability: {
+      handler: function () {
+        this.value.err = this.errorMessage
+      },
+      deep: true,
+      immediate: true
     }
   }
 }
