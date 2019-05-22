@@ -37,12 +37,14 @@ import { submitEventSeriesData } from '@/utils/api'
 import moment from 'moment'
 import { localWeekHourToMoment } from '@/utils/time'
 import { mapGetters, mapMutations } from 'vuex'
+import { redirect } from '@/mixins'
 
 const stepSequence = ['description', 'time', 'date']
 
 export default {
   name: 'NewEvent',
   components: { EventDescription, StyleWrapper, Nav, MultipleTimeSelector, EventDatePicker, ErrorMessage },
+  mixins: [redirect],
   data () {
     return {
       showError: false,
@@ -156,6 +158,7 @@ export default {
     }
   },
   created () {
+    if (this.redirectToSignupIfNotAuthenticated()) { return }
     if (!this.currentStep) {
       this.$router.push({ name: 'NewEventStep', params: { step: stepSequence[0] } })
     }
