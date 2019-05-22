@@ -6,16 +6,20 @@ describe('MultipleTimeSelector', () => {
   })
 
   it('shows firstDisplay first', () => {
-    const selectedTimes = Array(24 * 7).fill(false)
+    const value = {
+      availability: Array(7).fill(Array(24).fill(false))
+    }
     const firstDisplay = 60 // Tuesday 12pm local time
     const wrapper = mount(MultipleTimeSelector, {
       propsData: {
-        selectedTimes, firstDisplay
+        value, firstDisplay
       }
     })
-    const items = wrapper.findAll('.time-selector-item').wrappers
+    const days = wrapper.findAll('.day-of-week')
+    const items = wrapper.findAll('.time-label')
 
+    expect(days).toHaveLength(8)
     expect(items).toHaveLength(7 * 16)
-    expect(items[0]).props('startHour').toEqual(firstDisplay)
+    expect(items.at(0).text()).toEqual('12pm-1pm')
   })
 })
