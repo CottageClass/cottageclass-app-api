@@ -13,6 +13,9 @@ export default {
       return require('@/assets/' + this.iconImage)
     },
     iconImage: function () {
+      if (!this.category) {
+        return 'grinning-face-with-smiling-eyes.svg'
+      }
       switch (this.category.toLowerCase()) {
         case 'baby playgroup':
           return 'hatching-chick.svg'
