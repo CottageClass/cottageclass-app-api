@@ -302,6 +302,10 @@ export default {
       if (all) {
         submission = submitUserInfo(
           userId, {
+            houseRules: this.userData.houseRules.text,
+            petDescription: this.userData.pets.text,
+            hasPet: typeof this.userData.pets.text !== 'undefined' &&
+              this.userData.pets.text.length > 0,
             images: this.userData.facebookImages,
             phone: this.userData.phone,
             location: this.userData.location,
@@ -322,6 +326,16 @@ export default {
               employer: this.userData.employment.employer,
               jobPosition: this.userData.employment.jobPosition
             })
+            break
+          case 'pets':
+            _.assign(params, {
+              petDescription: this.userData.pets.text,
+              hasPet: typeof this.userData.pets.text !== 'undefined' &&
+                this.userData.pets.text.length > 0
+            })
+            break
+          case 'houseRules' :
+            _.assign(params, { houseRules: this.userData.houseRules.text })
             break
           case 'facebookImages':
             _.assign(params, { images: this.userData.facebookImages })

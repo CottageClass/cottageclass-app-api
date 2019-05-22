@@ -65,7 +65,7 @@ class UsersController < ApiController
                                  :longitude,
                                  :pet_description,
                                  :has_pet,
-                                 :hosue_rules,
+                                 :house_rules,
                                  :phone_country_code,
                                  :phone_area_code,
                                  :phone_number,
