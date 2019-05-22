@@ -6,7 +6,7 @@
       <div v-for="(dow, dayIndex) of shiftedDayIndices">
         <MultipleTimeSelectorDay
            class="day-of-week"
-           :title="dayName(dow)"
+           :title="dayTitle(dayIndex)"
            :firstStartTime="firstTime(dayIndex)"
            :lastStartTime="lastTime(dayIndex)"
            :value="value.availability[dow]"
@@ -20,13 +20,22 @@
 import MultipleTimeSelectorDay from '@/components/base/eventSpecification/MultipleTimeSelectorDay'
 import Question from '@/components/base/Question.vue'
 
+import moment from 'moment'
+import { momentToLocalWeekHour } from '@/utils/time'
+
 export default {
   name: 'MultipleTimeSelector',
-  props: ['value', 'firstDisplay'],
+  props: ['value', 'scheduleStartTime'],
   components: { MultipleTimeSelectorDay, Question },
   computed: {
     subtitle () {
       return "When are you available for the idea you're offering? The more options you give other families, the more likely you are to get a response."
+    },
+    dayTitle () {
+      return (dayIndex) => {
+        const daysToAdd = this.todayType === 'late' ? 1 + dayIndex : dayIndex
+        return moment().add(daysToAdd, 'days').format('dddd, MMMM Do')
+      }
     },
     dayName () {
       return (index) => {
@@ -39,6 +48,9 @@ export default {
         return Math.floor(this.firstDisplay / 24) + 1
       }
       return Math.floor(this.firstDisplay / 24)
+    },
+    firstDisplay () {
+      return momentToLocalWeekHour(this.scheduleStartTime) + 1 % (7 * 24)
     },
     todayType () {
       // "today" is the day associated with firstDisplay.  it's possible nothing is shown on today if it's too late already
@@ -107,7 +119,5 @@ export default {
 </script>
 
 <style scoped>
-.day-of-week {
-}
 
 </style>

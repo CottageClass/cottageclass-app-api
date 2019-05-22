@@ -14,7 +14,7 @@
             v-model="event.description" />
           <MultipleTimeSelector
             v-if="currentStep==='availability'"
-            :firstDisplay="110"
+            :scheduleStartTime="scheduleStart"
             :value="event.availability"
             />
           <EventDatePicker
@@ -53,6 +53,9 @@ export default {
     }
   },
   computed: {
+    scheduleStart () {
+      return moment()
+    },
     modelForCurrentStep () {
       const models = {
         description: this.event.description,
