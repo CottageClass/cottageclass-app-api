@@ -34,7 +34,7 @@ const getters = {
           }
           if (!selected && startTime) {
             // end of block
-            blocks.push([startTime, 24 * dayIndex + hourIndex - 1])
+            blocks.push([startTime, 24 * dayIndex + hourIndex])
             startTime = null
           }
         })
