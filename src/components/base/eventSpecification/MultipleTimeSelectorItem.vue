@@ -1,6 +1,5 @@
 <template>
-  <div class="item-container"
-       @click="toggleSelected"
+  <div @click="toggleSelected"
        :class="value?'active':'inactive'">
     <div class="time-label">
       {{ timeText }}
@@ -29,24 +28,3 @@ export default {
   }
 }
 </script>
-
-<style scoped lang="scss">
-.item-container.active {
-  background-color:white;
-}
-.item-container {
-  background-color: #BCDDF7;
-  border-radius: 4px;
-  color: #158BE7;
-  padding: 5px;
-  margin: 3px 2px;
-  font-variant: small-caps;
-  width: 24%;
-  text-align: center;
-}
-@media (max-width: 479px) {
-  .item-container {
-    width: 31%;
-  }
-}
-</style>

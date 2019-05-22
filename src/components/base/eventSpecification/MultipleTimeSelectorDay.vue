@@ -5,11 +5,18 @@
     </div>
     <div class="times-wrapper">
       <MultipleTimeSelectorItem
+        class="item-container"
         v-for="hour in startTimeRange"
         :key="title + hour"
         :startHour="hour"
         v-model="value[hour]"
       />
+      <!-- dummy containers to ensure wrapping works properly -->
+      <div class="dummy-item-container" />
+      <div class="dummy-item-container" />
+      <div class="dummy-item-container" />
+      <div class="dummy-item-container" />
+      <div class="dummy-item-container" />
     </div>
   </div>
 </template>
@@ -32,6 +39,32 @@ export default {
 </script>
 
 <style scoped>
+.dummy-item-container, .item-container {
+  width: 24%;
+}
+.dummy-item-container {
+  height: 0;
+}
+.item-container {
+  &.active {
+    background-color:white;
+    &:hover {
+      background-color: #F0F0F0;
+    }
+  }
+  &.inactive:hover {
+    background-color: #BCCDEF;
+  }
+  background-color: #BCDDF7;
+  border-radius: 4px;
+  color: #158BE7;
+  padding: 5px;
+  margin: 3px 2px;
+  font-variant: small-caps;
+  width: 24%;
+  text-align: center;
+  cursor: pointer;
+}
 .times-wrapper {
   display: flex;
   flex-direction: row;
@@ -45,5 +78,10 @@ export default {
 }
 .day-container {
   margin-bottom: 20px;
+}
+@media (max-width: 479px) {
+  .dummy-item-container, .item-container {
+    width: 31%;
+  }
 }
 </style>
