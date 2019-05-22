@@ -13,7 +13,7 @@ class User < ApplicationRecord
     id avatar first_name verified fuzzy_latitude fuzzy_longitude locality sublocality neighborhood admin_area_level_1
     admin_area_level_2 images languages job_position employer highest_education school facebook_uid instagram_user
     twitter_user linkedin_user created_at child_ages_in_months profile_blurb activities available_mornings available_afternoons
-    available_evenings available_weekends
+    available_evenings available_weekends house_rules has_pet pet_description
   ].freeze
 
   before_validation :cleanup

@@ -281,7 +281,7 @@ ActiveRecord::Schema.define(version: 2019_05_22_194051) do
     t.string "uid"
     t.string "jti", null: false
     t.boolean "terms_of_service", default: false, null: false
-    t.boolean "has_pets"
+    t.boolean "has_pet"
     t.text "pet_description"
     t.text "house_rules"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
