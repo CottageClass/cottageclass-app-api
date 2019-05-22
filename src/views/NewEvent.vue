@@ -17,9 +17,6 @@
             :scheduleStartTime="scheduleStart"
             :value="event.availability"
             />
-          <EventDatePicker
-            v-if="currentStep==='date'"
-            v-model="event.date" />
       </StyleWrapper>
     </div>
   </div>
@@ -29,7 +26,6 @@
 import ErrorMessage from '@/components/base/ErrorMessage.vue'
 import EventDescription from '@/components/base/eventSpecification/EventDescription'
 import MultipleTimeSelector from '@/components/base/eventSpecification/MultipleTimeSelector.vue'
-import EventDatePicker from '@/components/base/eventSpecification/EventDatePicker.vue'
 import StyleWrapper from '@/components/FTE/StyleWrapper'
 import Nav from '@/components/FTE/Nav'
 
@@ -39,11 +35,11 @@ import { localWeekHourToMoment } from '@/utils/time'
 import { mapGetters, mapMutations } from 'vuex'
 import { redirect } from '@/mixins'
 
-const stepSequence = ['description', 'availability', 'date']
+const stepSequence = ['description', 'availability']
 
 export default {
   name: 'NewEvent',
-  components: { EventDescription, StyleWrapper, Nav, MultipleTimeSelector, EventDatePicker, ErrorMessage },
+  components: { EventDescription, StyleWrapper, Nav, MultipleTimeSelector, ErrorMessage },
   mixins: [redirect],
   data () {
     return {
@@ -59,8 +55,7 @@ export default {
     modelForCurrentStep () {
       const models = {
         description: this.event.description,
-        availability: this.event.availability,
-        date: this.event.date
+        availability: this.event.availability
       }
       return models[this.currentStep]
     },
