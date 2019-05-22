@@ -16,8 +16,16 @@ const TIMES = [
 ]
 describe('EventTime', () => {
   let wrapper
+  const $route = {
+    name: ''
+  }
   beforeAll(async () => {
-    wrapper = mount(EventTime)
+    wrapper = mount(EventTime, {
+      mocks: { $route },
+      propsData: {
+        value: { err: null }
+      }
+    })
   })
 
   it('shows the right times', () => {

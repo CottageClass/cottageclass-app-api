@@ -38,6 +38,13 @@ export default {
   .host-name {
     color: #333;
   }
+  .picker-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+
   /* child birthdate selector */
 
   ::-webkit-datetime-edit-text {

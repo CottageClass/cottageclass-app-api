@@ -9,7 +9,7 @@
         @input="$emit('input', text)"
         name="field"
         :placeholder="placeholder"
-        maxlength="5000"
+        :maxlength="maxLength || 5000"
         class="text-area-decribe-need w-input"
         >
       </textarea>
@@ -19,7 +19,7 @@
 <script>
 export default {
   name: 'FormWithTextArea',
-  props: ['value', 'placeholder'],
+  props: ['value', 'placeholder', 'maxLength'],
   data () {
     return {
       text: this.value

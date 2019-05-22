@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import auth from './auth'
+import eventCreation from './eventCreation'
 import createPersistedState from 'vuex-persistedstate'
 
 Vue.use(Vuex)
@@ -8,7 +9,7 @@ Vue.use(Vuex)
 export default new Vuex.Store(
   {
     plugins: [createPersistedState()],
-    modules: { auth },
+    modules: { auth, eventCreation },
     state: {
       alert: null,
       modal: null,

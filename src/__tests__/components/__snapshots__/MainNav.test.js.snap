@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MainNav authenticated has correct  list items 1`] = `
+Array [
+  "Find parents & playdates",
+  "Edit profile",
+  "FAQ",
+  "Playdates you're attending",
+  "Playdates you're hosting",
+  "Logout",
+  "Offer a playdate",
+]
+`;
+
+exports[`MainNav unauthenticated has correct  list items 1`] = `
+Array [
+  "FAQ",
+  "Log in",
+  "Sign up",
+]
+`;

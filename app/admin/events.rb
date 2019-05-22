@@ -54,6 +54,9 @@ ActiveAdmin.register Event do
         updated_at
       ],
       user: %i[
+        has_pet
+        pet_description
+        house_rules
         id
         email
         created_at

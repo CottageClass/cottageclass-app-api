@@ -10,7 +10,7 @@ const logger = Logger('api')
 export function initProxySession (currentUserId, receiverId, requestMessage, acknowledgmentMessage) {
   logger.log('INITIATING PROXY WITH users ' + currentUserId + ', ' + receiverId)
   if (process.env.NODE_ENV === 'development') {
-    logger.log('NOT SENDING NOTIFICATIO from ' + currentUserId + '.  To: ' + receiverId)
+    logger.log('NOT SENDING NOTIFICATION from ' + currentUserId + '.  To: ' + receiverId)
     logger.log('REQUEST MESSAGE: ', requestMessage)
     logger.log('ACKNOWLEDGE MESSAGE: ', acknowledgmentMessage)
     return
@@ -155,6 +155,15 @@ export function submitUserInfo (userId, data) {
 
   if (data.languages) {
     postData.languages = data.languages
+  }
+  if (data.hasPet) {
+    postData.hasPet = data.hasPet
+  }
+  if (data.houseRules) {
+    postData.houseRules = data.houseRules
+  }
+  if (data.petDescription) {
+    postData.petDescription = data.petDescription
   }
 
   return axios.post(

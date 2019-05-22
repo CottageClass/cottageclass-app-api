@@ -156,11 +156,11 @@ export default {
           page: this.eventsLastPage + 1
         }
         let newEvents = await fetchUpcomingEventsWithinDistance(params)
-        if (newEvents.length < 10) {
-          this.showFetchMoreEventsButton = false
-        }
         if (this.currentUser) {
           newEvents = newEvents.filter(e => e.hostId !== this.currentUser.id)
+        }
+        if (newEvents.length < 10) {
+          this.showFetchMoreEventsButton = false
         }
         // if events is null, set it to the incoming events, otherwise add them
         this.events = !this.events ? newEvents : this.events.concat(newEvents)

@@ -60,6 +60,9 @@ ActiveAdmin.register User do
       longitude
       fuzzy_latitude
       fuzzy_longitude
+      has_pet
+      pet_description
+      house_rules
       time_zone
       verified
       neighborhood
