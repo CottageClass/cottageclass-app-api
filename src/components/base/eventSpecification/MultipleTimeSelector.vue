@@ -1,26 +1,33 @@
 <template>
   <div>
-    <div v-for="(dow, dayIndex) of shiftedDayIndices">
-      <MultipleTimeSelectorDay
-         class="day-of-week"
-         :title="dayName(dow)"
-         :firstStartTime="firstTime(dayIndex)"
-         :lastStartTime="lastTime(dayIndex)"
-         :value="value.availability[dow]"
-         @input="updated(dow, $event)"
-         />
-    </div>
+    <Question
+      title="When are you available?"
+      :subtitle="subtitle" >
+      <div v-for="(dow, dayIndex) of shiftedDayIndices">
+        <MultipleTimeSelectorDay
+           class="day-of-week"
+           :title="dayName(dow)"
+           :firstStartTime="firstTime(dayIndex)"
+           :lastStartTime="lastTime(dayIndex)"
+           :value="value.availability[dow]"
+           />
+      </div>
+    </Question>
   </div>
 </template>
 
 <script>
 import MultipleTimeSelectorDay from '@/components/base/eventSpecification/MultipleTimeSelectorDay'
+import Question from '@/components/base/Question.vue'
 
 export default {
   name: 'MultipleTimeSelector',
   props: ['value', 'firstDisplay'],
-  components: { MultipleTimeSelectorDay },
+  components: { MultipleTimeSelectorDay, Question },
   computed: {
+    subtitle () {
+      return "When are you available for the idea you're offering? The more options you give other families, the more likely you are to get a response."
+    },
     dayName () {
       return (index) => {
         const WEEK_DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
@@ -74,11 +81,6 @@ export default {
       } else {
         return [0, 1, 2, 3, 4, 5, 6].map(i => (i + this.firstDay) % 7)
       }
-    }
-  },
-  methods: {
-    updated (dow, dayAvailability) {
-      this.$set(this.value, dow, dayAvailability)
     }
   }
 }
