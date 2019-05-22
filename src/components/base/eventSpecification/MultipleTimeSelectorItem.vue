@@ -30,7 +30,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .item-container.active {
   background-color:white;
 }
@@ -41,7 +41,12 @@ export default {
   padding: 5px;
   margin: 3px 2px;
   font-variant: small-caps;
-  width: 31%;
+  width: 24%;
   text-align: center;
+}
+@media (max-width: 479px) {
+  .item-container {
+    width: 31%;
+  }
 }
 </style>
