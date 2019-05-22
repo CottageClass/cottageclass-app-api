@@ -132,6 +132,15 @@ export function submitUserInfo (userId, data) {
   if (data.languages) {
     postData.languages = data.languages
   }
+  if (data.hasPet) {
+    postData.hasPet = data.hasPet
+  }
+  if (data.houseRules) {
+    postData.houseRules = data.houseRules
+  }
+  if (data.petDescription) {
+    postData.petDescription = data.petDescription
+  }
 
   return axios.post(
     `/users/${userId}`,
