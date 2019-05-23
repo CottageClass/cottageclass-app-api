@@ -132,7 +132,7 @@ export default {
   },
   created () {
     if (!this.stepName) {
-      this.$router.push({ params: { stepName: stepSequence[0] } })
+      this.$router.replace({ params: { stepName: stepSequence[0] } })
     }
   }
 }
