@@ -25,7 +25,6 @@ import InviteExistingUsers from '@/views/InviteExistingUsers.vue'
 import PasswordReset from '@/views/PasswordReset.vue'
 import ContactForm from '@/views/ContactForm.vue'
 import Onboarding from '@/views/Onboarding.vue'
-import UserInfo from '@/components/FTE/userInformation/UserInformation.vue'
 
 Vue.use(Router)
 
@@ -34,6 +33,12 @@ export default new Router({
   routes: [
     {
       path: '/welcome/:section/:stepName',
+      name: 'Onboarding',
+      component: Onboarding,
+      props: true
+    },
+    {
+      path: '/welcome/:section',
       name: 'Onboarding',
       component: Onboarding,
       props: true
