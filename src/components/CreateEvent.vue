@@ -29,11 +29,12 @@ import moment from 'moment'
 import { localWeekHourToMoment } from '@/utils/time'
 import { mapGetters, mapMutations } from 'vuex'
 
-const stepSequence = ['description', 'availability']
+import { stepNavigation } from '@/mixins'
 
 export default {
   name: 'CreateEvent',
   components: { EventDescription, Nav, MultipleTimeSelector, ErrorMessage },
+  mixins: [stepNavigation],
   props: ['stepName'],
   data () {
     return {
@@ -44,6 +45,9 @@ export default {
     }
   },
   computed: {
+    stepSequence () {
+      return ['description', 'availability']
+    },
     scheduleStart () {
       return moment()
     },
@@ -55,7 +59,7 @@ export default {
       return models[this.stepName]
     },
     currentIndex () {
-      return stepSequence.findIndex(e => e === this.stepName)
+      return this.stepSequence.findIndex(e => e === this.stepName)
     },
     errorMessage () {
       return this.modelForCurrentStep && this.modelForCurrentStep.err
@@ -119,18 +123,18 @@ export default {
       } else {
         // state is persisted after route update because component is reused
         this.showError = false
-        if (this.currentIndex === stepSequence.length - 1) {
+        if (this.currentIndex === this.stepSequence.length - 1) {
           this.submitEvent()
         } else {
           this.$router.push({
-            params: { stepName: stepSequence[this.currentIndex + 1] }
+            params: { stepName: this.stepSequence[this.currentIndex + 1] }
           })
         }
       }
     },
     prevStep () {
       if (this.currentIndex > 0) {
-        this.$router.push({ params: { stepName: stepSequence[this.currentIndex - 1] } })
+        this.$router.push({ params: { stepName: this.stepSequence[this.currentIndex - 1] } })
       }
     },
     ...mapMutations([ 'setWipEvent', 'resetWipEvent', 'setCreatedEvents' ])
@@ -144,9 +148,6 @@ export default {
     }
   },
   created () {
-    if (!this.stepName) {
-      this.$router.replace({ params: { stepName: stepSequence[0] } })
-    }
     this.event = this.wipEvent
     if (!this.availability.availability) {
       this.$set(this.availability, 'availability', [])

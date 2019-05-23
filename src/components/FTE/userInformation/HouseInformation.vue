@@ -27,21 +27,16 @@ import ErrorMessage from '@/components/base/ErrorMessage.vue'
 
 import { submitUserInfo } from '@/utils/api'
 import { mapGetters } from 'vuex'
-
+import { stepNavigation } from '@/mixins'
 import YesOrNo from '@/components/base/YesOrNo.vue'
 import PetsDescription from '@/components/FTE/userInformation/PetsDescription.vue'
 import HouseRules from '@/components/FTE/userInformation/HouseRules.vue'
-
-const stepSequence = [
-  'has-pets',
-  'pet-description',
-  'house-rules'
-]
 
 export default {
   name: 'HouseInformation',
   props: ['stepName'],
   components: { Nav, ErrorMessage, YesOrNo, PetsDescription, HouseRules },
+  mixins: [stepNavigation],
   data () {
     return {
       petsDescription: { err: null },
@@ -51,6 +46,13 @@ export default {
     }
   },
   computed: {
+    stepSequence () {
+      return [
+        'has-pets',
+        'pet-description',
+        'house-rules'
+      ]
+    },
     modelForCurrentStep () {
       const models = {
         'pet-description': this.petsDescription,
@@ -70,7 +72,7 @@ export default {
       }
     },
     stepIndex () {
-      return stepSequence.findIndex(s => s === this.stepName)
+      return this.stepSequence.findIndex(s => s === this.stepName)
     },
     ...mapGetters(['currentUser'])
   },
@@ -95,7 +97,7 @@ export default {
       } catch (e) {
         console.log('user update FAILURE')
         console.log(e)
-        this.stepIndex = stepSequence.length - 1
+        this.stepIndex = this.stepSequence.length - 1
         this.modelForCurrentStep.err = 'Sorry, there was a problem saving your information. Try again?'
       }
     },
@@ -132,11 +134,6 @@ export default {
       }
       this.showError = false
       window.scrollTo(0, 0)
-    }
-  },
-  created () {
-    if (!this.stepName) {
-      this.$router.replace({ params: { stepName: stepSequence[0] } })
     }
   }
 }

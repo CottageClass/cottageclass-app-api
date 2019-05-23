@@ -31,23 +31,17 @@ import ErrorMessage from '@/components/base/ErrorMessage.vue'
 
 import { submitUserInfo } from '@/utils/api'
 import { mapGetters } from 'vuex'
-import { } from '@/mixins'
+import { stepNavigation } from '@/mixins'
 
 import LanguagesSpoken from '@/components/FTE/userInformation/LanguagesSpoken.vue'
 import Activities from '@/components/FTE/userInformation/Activities.vue'
 import ProfileBlurb from '@/components/FTE/userInformation/ProfileBlurb.vue'
 
-const stepSequence = [
-  'profile',
-  'languages',
-  'activities'
-]
-
 export default {
   name: 'UserDetails',
   props: ['stepName'],
   components: { Nav, ErrorMessage, ProfileBlurb, Activities, LanguagesSpoken },
-  mixins: [],
+  mixins: [stepNavigation],
   data () {
     return {
       profileBlurb: '',
@@ -57,6 +51,13 @@ export default {
     }
   },
   computed: {
+    stepSequence () {
+      return [
+        'profile',
+        'languages',
+        'activities'
+      ]
+    },
     modelForCurrentStep () {
       const models = {
         profileBlurb: this.profileBlurb,
@@ -76,7 +77,7 @@ export default {
       }
     },
     stepIndex () {
-      return stepSequence.findIndex(s => s === this.stepName)
+      return this.stepSequence.findIndex(s => s === this.stepName)
     },
     ...mapGetters(['currentUser'])
   },
@@ -102,19 +103,19 @@ export default {
       } catch (e) {
         console.log('user update FAILURE')
         console.log(e)
-        this.stepIndex = stepSequence.length - 1
+        this.stepIndex = this.stepSequence.length - 1
         this.modelForCurrentStep.err = 'Sorry, there was a problem saving your information. Try again?'
       }
     },
     nextStep () {
       if (!this.errorMessage) {
-        if (this.stepIndex === stepSequence.length - 1) {
+        if (this.stepIndex === this.stepSequence.length - 1) {
           this.$emit('finished')
         } else {
           this.submitUserData()
           this.$ga.event('onboarding', 'stepComplete', this.stepName)
           this.$router.push({
-            params: { stepName: stepSequence[this.stepIndex + 1] }
+            params: { stepName: this.stepSequence[this.stepIndex + 1] }
           })
           this.showError = false
           window.scrollTo(0, 0)
@@ -125,14 +126,9 @@ export default {
     },
     prevStep () {
       this.$router.push({ params: {
-        stepName: stepSequence[this.stepIndex - 1]
+        stepName: this.stepSequence[this.stepIndex - 1]
       } })
       window.scrollTo(0, 0)
-    }
-  },
-  created () {
-    if (!this.stepName) {
-      this.$router.replace({ params: { stepName: stepSequence[0] } })
     }
   }
 }

@@ -53,22 +53,13 @@ import YesOrNo from '@/components/base/YesOrNo'
 
 import { submitUserInfo } from '@/utils/api'
 import { mapGetters } from 'vuex'
-import { } from '@/mixins'
-
-const stepSequence = [
-  'phone',
-  'location',
-  'children',
-  'employment',
-  'images',
-  'offer-now'
-]
+import { stepNavigation } from '@/mixins'
 
 export default {
   name: 'UserInformation',
   props: ['stepName'],
   components: { Nav, Phone, Location, Children, Employment, FacebookImageSelection, ErrorMessage, YesOrNo },
-  mixins: [],
+  mixins: [stepNavigation],
   data () {
     return {
       phone: { err: null },
@@ -81,6 +72,16 @@ export default {
     }
   },
   computed: {
+    stepSequence () {
+      return [
+        'phone',
+        'location',
+        'children',
+        'employment',
+        'images',
+        'offer-now'
+      ]
+    },
     modelForCurrentStep () {
       const models = {
         phone: this.phone,
@@ -103,7 +104,7 @@ export default {
       }
     },
     stepIndex () {
-      return stepSequence.findIndex(s => s === this.stepName)
+      return this.stepSequence.findIndex(s => s === this.stepName)
     },
     ...mapGetters(['currentUser'])
   },
@@ -141,7 +142,7 @@ export default {
       } catch (e) {
         console.log('user update FAILURE')
         console.log(e)
-        this.stepIndex = stepSequence.length - 1
+        this.stepIndex = this.stepSequence.length - 1
         this.modelForCurrentStep.err = 'Sorry, there was a problem saving your information. Try again?'
       }
     },
@@ -159,15 +160,15 @@ export default {
           this.submitUserData()
           this.$ga.event('onboarding', 'stepComplete', this.stepName)
 
-          const nextStepName = stepSequence[this.stepIndex + 1]
+          const nextStepName = this.stepSequence[this.stepIndex + 1]
 
           if (nextStepName === 'images' && !this.currentUser.facebookUid) {
             this.$router.push({
-              params: { stepName: stepSequence[this.stepIndex + 2] }
+              params: { stepName: this.stepSequence[this.stepIndex + 2] }
             })
           } else {
             this.$router.push({
-              params: { stepName: stepSequence[this.stepIndex + 1] }
+              params: { stepName: this.stepSequence[this.stepIndex + 1] }
             })
           }
           this.showError = false
@@ -180,7 +181,7 @@ export default {
     prevStep () {
       const params = {
         section: 'user-info',
-        stepName: stepSequence[this.stepIndex - 1]
+        stepName: this.stepSequence[this.stepIndex - 1]
       }
       this.$router.push({
         name: this.$route.name,
@@ -190,11 +191,6 @@ export default {
         this.prevStep()
       }
       window.scrollTo(0, 0)
-    }
-  },
-  created () {
-    if (!this.stepName) {
-      this.$router.replace({ params: { stepName: stepSequence[0] } })
     }
   }
 }
