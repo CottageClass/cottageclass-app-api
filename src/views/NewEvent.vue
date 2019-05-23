@@ -12,11 +12,11 @@
         <EventDescription
             v-if="currentStep==='description'"
             v-model="event.description" />
-          <MultipleTimeSelector
-            v-if="currentStep==='availability'"
-            :scheduleStartTime="scheduleStart"
-            :value="event.availability"
-            />
+        <MultipleTimeSelector
+          v-if="currentStep==='availability'"
+          :scheduleStartTime="scheduleStart"
+          :value="event.availability"
+          />
       </StyleWrapper>
     </div>
   </div>
