@@ -31,7 +31,7 @@ export default {
           this.$router.push({ name: 'Events' })
         }
       } else if (this.currentUser.id) {
-        this.$router.push({ name: 'OnboardNewUser' })
+        this.$router.push({ name: 'Onboarding' })
       } else {
         throw Error('current user has no id')
       }
