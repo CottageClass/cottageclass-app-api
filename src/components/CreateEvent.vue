@@ -4,7 +4,7 @@
       :button="nextButtonState"
       @next="nextStep"
       @prev="prevStep"
-      :hidePrevious="currentIndex===0"
+      :hidePrevious="stepIndex===0"
     />
     <ErrorMessage v-if="errorMessage && showError" :text="errorMessage" />
     <EventDescription
@@ -40,8 +40,7 @@ export default {
     return {
       showError: false,
       description: { err: null },
-      availability: { err: null },
-      stepIndex: 0
+      availability: { err: null }
     }
   },
   computed: {
@@ -57,19 +56,6 @@ export default {
         availability: this.availability
       }
       return models[this.stepName]
-    },
-    currentIndex () {
-      return this.stepSequence.findIndex(e => e === this.stepName)
-    },
-    errorMessage () {
-      return this.modelForCurrentStep && this.modelForCurrentStep.err
-    },
-    nextButtonState () {
-      if (this.errorMessage) {
-        return 'inactive'
-      } else {
-        return 'next'
-      }
     },
     eventSeriesDataForSubmission () {
       return (timeRange) => {
@@ -123,18 +109,18 @@ export default {
       } else {
         // state is persisted after route update because component is reused
         this.showError = false
-        if (this.currentIndex === this.stepSequence.length - 1) {
+        if (this.stepIndex === this.stepSequence.length - 1) {
           this.submitEvent()
         } else {
           this.$router.push({
-            params: { stepName: this.stepSequence[this.currentIndex + 1] }
+            params: { stepName: this.stepSequence[this.stepIndex + 1] }
           })
         }
       }
     },
     prevStep () {
-      if (this.currentIndex > 0) {
-        this.$router.push({ params: { stepName: this.stepSequence[this.currentIndex - 1] } })
+      if (this.stepIndex > 0) {
+        this.$router.push({ params: { stepName: this.stepSequence[this.stepIndex - 1] } })
       }
     },
     ...mapMutations([ 'setWipEvent', 'resetWipEvent', 'setCreatedEvents' ])

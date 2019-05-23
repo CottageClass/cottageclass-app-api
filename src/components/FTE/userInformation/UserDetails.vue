@@ -66,19 +66,6 @@ export default {
       }
       return models[this.stepName]
     },
-    errorMessage () {
-      return this.modelForCurrentStep && this.modelForCurrentStep.err
-    },
-    nextButtonState () {
-      if (this.errorMessage) {
-        return 'inactive'
-      } else {
-        return 'next'
-      }
-    },
-    stepIndex () {
-      return this.stepSequence.findIndex(s => s === this.stepName)
-    },
     ...mapGetters(['currentUser'])
   },
   methods: {
