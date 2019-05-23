@@ -256,7 +256,7 @@ export default {
           this.log('auth success:')
           this.log(signInResult)
           this.$store.dispatch('establishUser', { JWT: signInResult.data[0] })
-          return this.$router.push({ name: 'OnboardNewUser' })
+          return this.$router.push({ name: 'Onboarding' })
         } catch (e) {
           this.logError('auth FAILURE')
           this.logError(e)

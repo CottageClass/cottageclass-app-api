@@ -2,7 +2,8 @@
   <div class="onb-body">
     <div class="content-wrapper">
       <StyleWrapper styleIs="onboarding">
-      <CreateEvent :stepName="stepName" />
+      <CreateEvent :stepName="stepName"
+                    @finished="completeCreation" />
       </StyleWrapper>
     </div>
   </div>
@@ -12,6 +13,7 @@
 import StyleWrapper from '@/components/FTE/StyleWrapper'
 import CreateEvent from '@/components/CreateEvent'
 
+import { mapGetters } from 'vuex'
 import { redirect } from '@/mixins'
 
 export default {
@@ -24,6 +26,16 @@ export default {
       showError: false,
       stepIndex: 0,
       event: null
+    }
+  },
+  computed: mapGetters(['firstCreatedEvent']),
+  methods: {
+    completeCreation () {
+      if (this.firstCreatedEvent) {
+        this.$router.push({ name: 'SocialInvite', params: { id: this.firstCreatedEvent.id, context: 'newEvent' } })
+      } else {
+        this.$router.push({ name: 'Events' })
+      }
     }
   },
   created () {

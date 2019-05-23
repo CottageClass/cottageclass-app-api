@@ -88,7 +88,7 @@ export default {
         children: this.children,
         employment: this.employment,
         images: this.images,
-        offerNow: this.offerNow
+        'offer-now': this.offerNow
       }
       return models[this.stepName]
     },
@@ -159,18 +159,16 @@ export default {
           this.submitUserData()
           this.$ga.event('onboarding', 'stepComplete', this.stepName)
 
-          const params = {
-            section: 'user-info',
-            stepName: stepSequence[this.stepIndex + 1]
-          }
-          this.$router.push({
-            name: this.$route.name,
-            params
-          })
-          if (this.stepName === 'images' && !this.currentUser.facebookUid) {
-            // this is temporary until we have a generic image uploading step
-            // not logged in via facebook, skip this step
-            this.nextStep()
+          const nextStepName = stepSequence[this.stepIndex + 1]
+
+          if (nextStepName === 'images' && !this.currentUser.facebookUid) {
+            this.$router.push({
+              params: { stepName: stepSequence[this.stepIndex + 2] }
+            })
+          } else {
+            this.$router.push({
+              params: { stepName: stepSequence[this.stepIndex + 1] }
+            })
           }
           this.showError = false
           window.scrollTo(0, 0)
@@ -194,7 +192,10 @@ export default {
       window.scrollTo(0, 0)
     }
   },
-  mounted () {
+  created () {
+    if (!this.stepName) {
+      this.$router.replace({ params: { stepName: stepSequence[0] } })
+    }
   }
 }
 </script>

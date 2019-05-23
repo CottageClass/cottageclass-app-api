@@ -83,7 +83,7 @@ export default {
       if (this.currentUser.hasAllRequiredFields) {
         this.$router.push({ name: 'Events' })
       } else if (this.currentUser.id) {
-        this.$router.push({ name: 'OnboardNewUSer' })
+        this.$router.push({ name: 'Onboarding' })
       } else {
         return false
       }

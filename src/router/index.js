@@ -20,7 +20,6 @@ import ChildSpecialRequirements from '@/components/FTE/ChildSpecialRequirements.
 import ChildSpecialRequirementsYesNo from '@/components/FTE/ChildSpecialRequirementsYesNo.vue'
 import SignInWithEmail from '@/views/SignInWithEmail.vue'
 import SignUpWithEmail from '@/views/SignUpWithEmail.vue'
-import OnboardNewUser from '@/views/OnboardNewUser.vue'
 import InviteExistingUsers from '@/views/InviteExistingUsers.vue'
 import PasswordReset from '@/views/PasswordReset.vue'
 import ContactForm from '@/views/ContactForm.vue'
@@ -32,26 +31,16 @@ export default new Router({
   mode: 'history',
   routes: [
     {
-      path: '/welcome/:section/:stepName',
+      path: '/welcome/:section?/:stepName?',
       name: 'Onboarding',
       component: Onboarding,
       props: true
     },
     {
-      path: '/welcome/:section',
-      name: 'Onboarding',
-      component: Onboarding,
-      props: true
-    },
-    {
-      path: '/events/new/:step',
-      name: 'NewEventStep',
-      component: NewEvent
-    },
-    {
-      path: '/events/new',
+      path: '/events/new/:stepName?',
       name: 'NewEvent',
-      component: NewEvent
+      component: NewEvent,
+      props: true
     },
     {
       path: '/',
@@ -159,11 +148,6 @@ export default new Router({
       path: '/rsvp/:eventId',
       name: 'RsvpInfoCollection',
       component: RsvpInfoCollection
-    },
-    {
-      path: '/welcome',
-      name: 'OnboardNewUser',
-      component: OnboardNewUser
     },
     {
       path: '/password-reset',

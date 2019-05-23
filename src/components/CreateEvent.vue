@@ -111,11 +111,7 @@ export default {
         }
       }
       this.resetWipEvent()
-      if (this.firstCreatedEvent) {
-        this.$router.push({ name: 'SocialInvite', params: { id: this.firstCreatedEvent.id, context: 'newEvent' } })
-      } else {
-        this.$router.push({ name: 'Events' })
-      }
+      this.$emit('finished')
     },
     nextStep () {
       if (this.errorMessage) {
@@ -126,7 +122,6 @@ export default {
         if (this.currentIndex === stepSequence.length - 1) {
           this.submitEvent()
         } else {
-          this.log('pushing')
           this.$router.push({
             params: { stepName: stepSequence[this.currentIndex + 1] }
           })
