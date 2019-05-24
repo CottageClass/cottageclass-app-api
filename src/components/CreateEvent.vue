@@ -38,12 +38,12 @@ import moment from 'moment'
 import { localWeekHourToMoment } from '@/utils/time'
 import { mapGetters, mapMutations } from 'vuex'
 
-import { stepNavigation } from '@/mixins'
+import { stepNavigation, alerts } from '@/mixins'
 
 export default {
   name: 'CreateEvent',
   components: { EventDescription, Nav, MultipleTimeSelector, ErrorMessage, EventDatePicker, EventTime },
-  mixins: [stepNavigation],
+  mixins: [stepNavigation, alerts],
   props: ['stepName'],
   data () {
     return {

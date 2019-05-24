@@ -2,8 +2,12 @@
   <div class="onb-body">
     <div class="content-wrapper">
       <StyleWrapper styleIs="onboarding">
-      <CreateEvent :stepName="stepName"
-                    @finished="completeCreation" />
+      <CreateEvent v-if="section==='event'"
+                   :stepName="stepName"
+                   @finished="completeCreation" />
+      <HouseInformation v-if="section==='homeInfo'"
+                        :stepName="stepName"
+                        @finished="proceed" />
       </StyleWrapper>
     </div>
   </div>
@@ -12,29 +16,35 @@
 <script>
 import StyleWrapper from '@/components/FTE/StyleWrapper'
 import CreateEvent from '@/components/CreateEvent'
+import HouseInformation from '@/components/FTE/userInformation/HouseInformation'
 
 import { mapGetters } from 'vuex'
 import { redirect } from '@/mixins'
 
 export default {
   name: 'NewEvent',
-  components: { StyleWrapper, CreateEvent },
+  components: { StyleWrapper, CreateEvent, HouseInformation },
   mixins: [redirect],
   props: ['stepName'],
   data () {
     return {
-      showError: false,
-      stepIndex: 0,
-      event: null
+      section: 'event'
     }
   },
-  computed: mapGetters(['firstCreatedEvent']),
+  computed: mapGetters(['firstCreatedEvent', 'currentUser']),
   methods: {
-    completeCreation () {
+    proceed () {
       if (this.firstCreatedEvent) {
         this.$router.push({ name: 'SocialInvite', params: { id: this.firstCreatedEvent.id, context: 'newEvent' } })
       } else {
         this.$router.push({ name: 'Events' })
+      }
+    },
+    completeCreation () {
+      if (this.currentUser.houseRules === null) {
+        this.section = 'homeInfo'
+      } else {
+        this.proceed()
       }
     }
   },

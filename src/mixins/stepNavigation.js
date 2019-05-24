@@ -15,7 +15,7 @@ export default {
     }
   },
   created () {
-    if (!this.stepName) {
+    if (!this.stepName || this.stepIndex === -1) {
       this.$router.replace({ params: { stepName: this.stepSequence[0] } })
     }
   }
