@@ -9,7 +9,7 @@
           <CreateEvent v-if="section==='offering'"
                        :stepName="stepName"
                        context="onboarding"
-                       @finished="collectHomeInfo" 
+                       @finished="collectHomeInfo"
                        @skip="collectUserDetails"
                        />
           <HouseInformation v-if="section==='home-info'"
