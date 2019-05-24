@@ -4,10 +4,14 @@
       <StyleWrapper styleIs="onboarding">
       <CreateEvent v-if="section==='event'"
                    :stepName="stepName"
-                   @finished="completeCreation" />
+                   @finished="completeCreation"
+                   context="new-event"
+                   />
       <HouseInformation v-if="section==='homeInfo'"
                         :stepName="stepName"
-                        @finished="proceed" />
+                        @finished="proceed"
+                        context="new-event"
+                        />
       </StyleWrapper>
     </div>
   </div>

@@ -22,11 +22,16 @@
       :value="availability"
       @datetimeClicked="selectDateAndTime"
       />
+    <RepeatCount
+      v-if="stepName==='repeat-count'"
+      v-model="repeatCount"
+      />
   </div>
 </template>
 
 <script>
 import ErrorMessage from '@/components/base/ErrorMessage.vue'
+import RepeatCount from '@/components/base/eventSpecification/RepeatCount'
 import EventDatePicker from '@/components/base/eventSpecification/EventDatePicker'
 import EventTime from '@/components/base/eventSpecification/EventTime'
 import EventDescription from '@/components/base/eventSpecification/EventDescription'
@@ -42,21 +47,22 @@ import { stepNavigation, alerts } from '@/mixins'
 
 export default {
   name: 'CreateEvent',
-  components: { EventDescription, Nav, MultipleTimeSelector, ErrorMessage, EventDatePicker, EventTime },
+  components: { EventDescription, Nav, MultipleTimeSelector, ErrorMessage, EventDatePicker, EventTime, RepeatCount },
   mixins: [stepNavigation, alerts],
-  props: ['stepName'],
+  props: ['stepName', 'context'],
   data () {
     return {
       showError: false,
       description: { err: null },
       availability: { err: null },
+      repeatCount: { err: null },
       date: { err: null },
       time: { err: null }
     }
   },
   computed: {
     stepSequence () {
-      return ['description', 'availability', 'date', 'time']
+      return ['description', 'availability', 'repeat-count', 'date', 'time']
     },
     scheduleStart () {
       return moment()
@@ -83,7 +89,8 @@ export default {
             'maximum_children': 4,
             'child_age_minimum': 0,
             'child_age_maximum': 18,
-            'repeat_for': 1
+            'repeat_for': this.repeatCount.number,
+            'interval': 1
           }
         }
       }
@@ -136,7 +143,8 @@ export default {
       } else {
         // state is persisted after route update because component is reused
         this.showError = false
-        if (this.stepName === 'availability') {
+        this.$ga.event(this.context, 'stepComplete', this.stepName)
+        if (this.stepName === 'repeat-count') {
           this.submitAvailabilityEvent()
         } else if (this.stepName === 'time') {
           this.submitSpecificEvent()
