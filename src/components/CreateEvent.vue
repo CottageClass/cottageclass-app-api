@@ -138,7 +138,7 @@ export default {
         this.showError = false
         if (this.stepName === 'availability') {
           this.submitAvailabilityEvent()
-        } else if (this.stepName == 'time') {
+        } else if (this.stepName === 'time') {
           this.submitSpecificEvent()
         } else {
           this.$router.push({
