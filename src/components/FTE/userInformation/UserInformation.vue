@@ -30,14 +30,6 @@
       v-on:noImages="nextStep"
       v-on:noPermissions="nextStep"
       required="true"/>
-    <YesOrNo
-      v-if="stepName==='offer-now'"
-      v-model="offerNow"
-      question="Would you like to set up your first playdates now or later?"
-      description=""
-      yesText="Now"
-      noText="Later"
-    />
   </div>
 </template>
 
@@ -67,7 +59,6 @@ export default {
       children: { err: null },
       employment: { err: null },
       facebookImages: { err: null },
-      offerNow: { err: null },
       showError: false
     }
   },
@@ -78,8 +69,7 @@ export default {
         'location',
         'children',
         'employment',
-        'images',
-        'offer-now'
+        'images'
       ]
     },
     modelForCurrentStep () {
@@ -88,8 +78,7 @@ export default {
         location: this.location,
         children: this.children,
         employment: this.employment,
-        images: this.images,
-        'offer-now': this.offerNow
+        images: this.images
       }
       return models[this.stepName]
     },
@@ -135,8 +124,8 @@ export default {
     },
     nextStep () {
       if (!this.errorMessage) {
-        if (this.stepName === 'offer-now') {
-          this.$emit('finished', { offerNow: this.offerNow.isTrue })
+        if (this.stepName === 'images') {
+          this.$emit('finished')
         } else {
           if (this.stepName === 'location') {
             this.$store.commit('setMapArea', {
@@ -150,9 +139,7 @@ export default {
           const nextStepName = this.stepSequence[this.stepIndex + 1]
 
           if (nextStepName === 'images' && !this.currentUser.facebookUid) {
-            this.$router.push({
-              params: { stepName: this.stepSequence[this.stepIndex + 2] }
-            })
+            this.$emit('finished')
           } else {
             this.$router.push({
               params: { stepName: this.stepSequence[this.stepIndex + 1] }
