@@ -10,16 +10,25 @@
     <EventDescription
         v-if="stepName==='description'"
         v-model="description" />
+    <EventDatePicker
+        v-if="stepName==='date'"
+        v-model="date" />
+    <EventTime
+        v-if="stepName==='time'"
+        v-model="time" />
     <MultipleTimeSelector
       v-if="stepName==='availability'"
       :scheduleStartTime="scheduleStart"
       :value="availability"
+      @datetimeClicked="selectDateAndTime"
       />
   </div>
 </template>
 
 <script>
 import ErrorMessage from '@/components/base/ErrorMessage.vue'
+import EventDatePicker from '@/components/base/eventSpecification/EventDatePicker'
+import EventTime from '@/components/base/eventSpecification/EventTime'
 import EventDescription from '@/components/base/eventSpecification/EventDescription'
 import MultipleTimeSelector from '@/components/base/eventSpecification/MultipleTimeSelector.vue'
 import Nav from '@/components/FTE/Nav'
@@ -33,19 +42,21 @@ import { stepNavigation } from '@/mixins'
 
 export default {
   name: 'CreateEvent',
-  components: { EventDescription, Nav, MultipleTimeSelector, ErrorMessage },
+  components: { EventDescription, Nav, MultipleTimeSelector, ErrorMessage, EventDatePicker, EventTime },
   mixins: [stepNavigation],
   props: ['stepName'],
   data () {
     return {
       showError: false,
       description: { err: null },
-      availability: { err: null }
+      availability: { err: null },
+      date: { err: null },
+      time: { err: null }
     }
   },
   computed: {
     stepSequence () {
-      return ['description', 'availability']
+      return ['description', 'availability', 'date', 'time']
     },
     scheduleStart () {
       return moment()
@@ -61,7 +72,7 @@ export default {
       return (timeRange) => {
         return {
           'event_series': {
-            'name': this.wipEvent.description.text,
+            'name': this.description.text,
             'start_date': timeRange.start.format('YYYY-MM-DD'),
             'starts_at': timeRange.start.format('HH:mm'),
             'ends_at': timeRange.end.format('HH:mm'),
@@ -87,8 +98,24 @@ export default {
     ...mapGetters([ 'currentUser', 'wipEvent', 'firstCreatedEvent', 'wipEventContiguousTimeBlocks' ])
   },
   methods: {
-    async submitEvent () {
-      this.debug(this.wipEventContiguousTimeBlocks)
+    selectDateAndTime () {
+      this.$router.push({ params: { stepName: 'date' } })
+    },
+    async submitSpecificEvent () {
+      try {
+        const start = moment(this.date.selected + 'T' + this.time.start)
+        const end = moment(this.date.selected + 'T' + this.time.end)
+        const timeRange = { start, end }
+        await submitEventSeriesData(this.eventSeriesDataForSubmission(timeRange))
+      } catch (e) {
+        this.logError('Failed to sumbit event series')
+        this.logError(e)
+        this.showAlert('Sorry, there was a problem submitting your event.  Please try again later', 'failure')
+      }
+      this.resetWipEvent()
+      this.$emit('finished')
+    },
+    async submitAvailabilityEvent () {
       for (let contiguousTimeBlock of this.wipEventContiguousTimeBlocks.reverse()) {
         try {
           const timeRange = this.timeRangeForBlock(contiguousTimeBlock)
@@ -109,8 +136,10 @@ export default {
       } else {
         // state is persisted after route update because component is reused
         this.showError = false
-        if (this.stepIndex === this.stepSequence.length - 1) {
-          this.submitEvent()
+        if (this.stepName === 'availability') {
+          this.submitAvailabilityEvent()
+        } else if (this.stepName === 'time') {
+          this.submitSpecificEvent()
         } else {
           this.$router.push({
             params: { stepName: this.stepSequence[this.stepIndex + 1] }
