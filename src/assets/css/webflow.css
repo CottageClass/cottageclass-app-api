@@ -321,6 +321,23 @@ label {
   margin-bottom: 5px;
   font-weight: bold;
 }
+.lp-select {
+  height: 38px;
+  padding: 8px 12px;
+  margin-bottom: 10px;
+  font-size: 18px;
+  line-height: 1;
+  color: #333333;
+  vertical-align: middle;
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  background-image: -webkit-linear-gradient(white 0%, #f3f3f3 100%);
+  background-image: linear-gradient(white 0%, #f3f3f3 100%);
+}
+.lp-select:focus {
+  border-color: #3898EC;
+  outline: 0;
+}
 .w-input,
 .w-select {
   display: block;
