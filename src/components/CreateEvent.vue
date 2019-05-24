@@ -7,7 +7,7 @@
       :hidePrevious="stepIndex===0"
     />
     <ErrorMessage v-if="errorMessage && showError" :text="errorMessage" />
-    <div class="skip-link-wrapper">
+    <div v-if="context === 'onboarding'" class="skip-link-wrapper">
       <div class="skip-link"
            @click="$emit('skip')">
         Skip to fill out your profile
