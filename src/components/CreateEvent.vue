@@ -49,7 +49,7 @@ export default {
   name: 'CreateEvent',
   components: { EventDescription, Nav, MultipleTimeSelector, ErrorMessage, EventDatePicker, EventTime, RepeatCount },
   mixins: [stepNavigation, alerts],
-  props: ['stepName'],
+  props: ['stepName', 'context'],
   data () {
     return {
       showError: false,
@@ -143,6 +143,7 @@ export default {
       } else {
         // state is persisted after route update because component is reused
         this.showError = false
+        this.$ga.event(this.context, 'stepComplete', this.stepName)
         if (this.stepName === 'repeat-count') {
           this.submitAvailabilityEvent()
         } else if (this.stepName === 'time') {

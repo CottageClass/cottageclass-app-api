@@ -34,7 +34,7 @@ import HouseRules from '@/components/FTE/userInformation/HouseRules.vue'
 
 export default {
   name: 'HouseInformation',
-  props: ['stepName'],
+  props: ['stepName', 'context'],
   components: { Nav, ErrorMessage, YesOrNo, PetsDescription, HouseRules },
   mixins: [stepNavigation],
   data () {
@@ -91,7 +91,7 @@ export default {
     nextStep () {
       if (!this.errorMessage) {
         this.submitUserData()
-        this.$ga.event('onboarding', 'stepComplete', this.stepName)
+        this.$ga.event(this.context, 'stepComplete', this.stepName)
 
         if (this.stepName === 'has-pets' && this.hasPets.isTrue) {
           this.$router.push({ params: { stepName: 'pet-description' } })
