@@ -9,7 +9,9 @@
           <CreateEvent v-if="section==='offering'"
                        :stepName="stepName"
                        context="onboarding"
-                       @finished="collectHomeInfo" />
+                       @finished="collectHomeInfo" 
+                       @skip="collectUserDetails"
+                       />
           <HouseInformation v-if="section==='home-info'"
                             :stepName="stepName"
                             context="onboarding"
@@ -57,11 +59,7 @@ export default {
       this.$router.push({ params: { section: 'home-info', stepName: null } })
     },
     finishUserInfo (e) {
-      if (e.offerNow) {
-        this.$router.push({ params: { section: 'offering', stepName: null } })
-      } else {
-        this.$router.push({ params: { section: 'user-details', stepName: null } })
-      }
+      this.$router.push({ params: { section: 'offering', stepName: null } })
     }
   },
   created () {
