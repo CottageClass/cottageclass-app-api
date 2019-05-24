@@ -7,6 +7,12 @@
       :hidePrevious="stepIndex===0"
     />
     <ErrorMessage v-if="errorMessage && showError" :text="errorMessage" />
+    <div class="skip-link-wrapper">
+      <div class="skip-link"
+           @click="$emit('skip')">
+        Skip to fill out your profile
+      </div>
+    </div>
     <EventDescription
         v-if="stepName==='description'"
         v-model="description" />
@@ -212,5 +218,15 @@ export default {
     margin-top: 0px;
     margin-bottom: 0px;
   }
+}
+
+.skip-link-wrapper {
+  display: flex;
+  justify-content:center;
+}
+.skip-link {
+  margin-top: 47px;
+  color: hsla(0, 0%, 100%, .6);
+  cursor: pointer;
 }
 </style>
