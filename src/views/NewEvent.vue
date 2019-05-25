@@ -1,176 +1,59 @@
 <template>
   <div class="onb-body">
     <div class="content-wrapper">
-      <Nav
-        :button="nextButtonState"
-        @next="nextStep"
-        @prev="prevStep"
-        :hidePrevious="currentIndex===0"
-      />
       <StyleWrapper styleIs="onboarding">
-        <ErrorMessage v-if="err && showError" :text="err" />
-        <EventDescription
-            v-if="currentStep==='description'"
-            v-model="event.description" />
-          <MultipleTimeSelector
-            v-if="currentStep==='availability'"
-            :scheduleStartTime="scheduleStart"
-            :value="event.availability"
-            />
+      <CreateEvent v-if="section==='event'"
+                   :stepName="stepName"
+                   @finished="completeCreation"
+                   context="new-event"
+                   />
+      <HouseInformation v-if="section==='homeInfo'"
+                        :stepName="stepName"
+                        @finished="proceed"
+                        context="new-event"
+                        />
       </StyleWrapper>
     </div>
   </div>
 </template>
 
 <script>
-import ErrorMessage from '@/components/base/ErrorMessage.vue'
-import EventDescription from '@/components/base/eventSpecification/EventDescription'
-import MultipleTimeSelector from '@/components/base/eventSpecification/MultipleTimeSelector.vue'
 import StyleWrapper from '@/components/FTE/StyleWrapper'
-import Nav from '@/components/FTE/Nav'
+import CreateEvent from '@/components/CreateEvent'
+import HouseInformation from '@/components/FTE/userInformation/HouseInformation'
 
-import { submitEventSeriesData } from '@/utils/api'
-import moment from 'moment'
-import { localWeekHourToMoment } from '@/utils/time'
-import { mapGetters, mapMutations } from 'vuex'
+import { mapGetters } from 'vuex'
 import { redirect } from '@/mixins'
-
-const stepSequence = ['description', 'availability']
 
 export default {
   name: 'NewEvent',
-  components: { EventDescription, StyleWrapper, Nav, MultipleTimeSelector, ErrorMessage },
+  components: { StyleWrapper, CreateEvent, HouseInformation },
   mixins: [redirect],
+  props: ['stepName'],
   data () {
     return {
-      showError: false,
-      stepIndex: 0,
-      event: null
+      section: 'event'
     }
   },
-  computed: {
-    scheduleStart () {
-      return moment()
-    },
-    modelForCurrentStep () {
-      const models = {
-        description: this.event.description,
-        availability: this.event.availability
-      }
-      return models[this.currentStep]
-    },
-    err () {
-      return this.modelForCurrentStep && this.modelForCurrentStep.err
-    },
-    currentStep () {
-      return this.$route.params.step
-    },
-    currentIndex () {
-      return stepSequence.findIndex(e => e === this.currentStep)
-    },
-    nextButtonState () {
-      if (!this.modelForCurrentStep) {
-        return 'inactive'
-      }
-      if (this.modelForCurrentStep.err) {
-        return 'inactive'
-      } else {
-        return 'next'
-      }
-    },
-    eventSeriesDataForSubmission () {
-      return (timeRange) => {
-        return {
-          'event_series': {
-            'name': this.wipEvent.description.text,
-            'start_date': timeRange.start.format('YYYY-MM-DD'),
-            'starts_at': timeRange.start.format('HH:mm'),
-            'ends_at': timeRange.end.format('HH:mm'),
-            'has_pet': false,
-            'activity_names': [],
-            'house_rules': '',
-            'pet_description': '',
-            'maximum_children': 4,
-            'child_age_minimum': 0,
-            'child_age_maximum': 18,
-            'repeat_for': 1
-          }
-        }
-      }
-    },
-    timeRangeForBlock () {
-      return ([startHour, endHour]) => {
-        const start = localWeekHourToMoment(startHour, moment())
-        const end = localWeekHourToMoment(endHour, start)
-        return { start, end }
-      }
-    },
-    ...mapGetters([ 'currentUser', 'wipEvent', 'firstCreatedEvent', 'wipEventContiguousTimeBlocks' ])
-  },
+  computed: mapGetters(['firstCreatedEvent', 'currentUser']),
   methods: {
-    async submitEvent () {
-      for (let contiguousTimeBlock of this.wipEventContiguousTimeBlocks.reverse()) {
-        try {
-          const timeRange = this.timeRangeForBlock(contiguousTimeBlock)
-          const res = await submitEventSeriesData(this.eventSeriesDataForSubmission(timeRange))
-          this.setCreatedEvents({ eventData: res })
-        } catch (e) {
-          this.logError('Failed to sumbit event series')
-          this.logError(e)
-          this.showAlert('Sorry, there was a problem submitting your event.  Please try again later', 'failure')
-        }
-      }
-      this.resetWipEvent()
+    proceed () {
       if (this.firstCreatedEvent) {
         this.$router.push({ name: 'SocialInvite', params: { id: this.firstCreatedEvent.id, context: 'newEvent' } })
       } else {
         this.$router.push({ name: 'Events' })
       }
     },
-    nextStep () {
-      if (this.err) {
-        this.showError = true
+    completeCreation () {
+      if (this.currentUser.houseRules === null) {
+        this.section = 'homeInfo'
       } else {
-        // state is persisted after route update because component is reused
-        this.showError = false
-        if (this.currentIndex === stepSequence.length - 1) {
-          this.submitEvent()
-        } else {
-          this.$router.push({ name: 'NewEventStep', params: { step: stepSequence[this.currentIndex + 1] } })
-        }
+        this.proceed()
       }
-    },
-    prevStep () {
-      if (this.currentIndex > 0) {
-        this.$router.push({ name: 'NewEventStep', params: { step: stepSequence[this.currentIndex - 1] } })
-      }
-    },
-    ...mapMutations([ 'setWipEvent', 'resetWipEvent', 'setCreatedEvents' ])
-  },
-  watch: {
-    event: {
-      handler () {
-        this.setWipEvent({ event: this.event })
-      },
-      deep: true
     }
   },
   created () {
-    if (this.redirectToSignupIfNotAuthenticated()) { return }
-    if (!this.currentStep) {
-      this.$router.push({ name: 'NewEventStep', params: { step: stepSequence[0] } })
-    }
-    this.event = this.wipEvent
-    if (!this.event.availability.availability) {
-      this.$set(this.event.availability, 'availability', [])
-      for (let day = 0; day < 7; day++) {
-        const row = []
-        for (let hour = 0; hour < 24; hour++) {
-          row.push(false)
-        }
-        this.event.availability.availability.push(row)
-      }
-    }
+    this.redirectToSignupIfNotAuthenticated()
   }
 }
 </script>

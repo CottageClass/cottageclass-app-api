@@ -138,7 +138,7 @@ export default {
         // send them back to onboarding.
         console.log('user doesnt have required fields on rsvpinfocollection step, sending them back to onboarding', this.currentUser)
         this.setRedirectRouteHere()
-        this.$router.push({ name: 'OnboardNewUser' })
+        this.$router.push({ name: 'Onboarding' })
       } else {
         console.log('user already onboarded, not redirecting')
       }

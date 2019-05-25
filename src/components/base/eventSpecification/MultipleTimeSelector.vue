@@ -12,6 +12,10 @@
            :value="value.availability[dow]"
            />
       </div>
+    <div @click="$emit('datetimeClicked')"
+         class="date-time-button">
+      pick date and time
+    </div>
     </Question>
   </div>
 </template>
@@ -119,5 +123,26 @@ export default {
 </script>
 
 <style scoped>
+.date-time-button {
+  &:hover {
+    background-color: #F0F0F0;
+  }
+  background-color:white;
+  border-radius: 4px;
+  color: #158BE7;
+  padding: 12px 5px;
+  margin: 3px 2px;
+  font-variant: small-caps;
+  width: 40%;
+  text-align: center;
+  cursor: pointer;
+  margin-right: auto;
+  margin-left: auto;
+}
+@media (max-width: 479px) {
+  .date-time-button {
+    width: 60%;
+  }
+}
 
 </style>

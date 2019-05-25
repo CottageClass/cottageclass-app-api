@@ -150,7 +150,7 @@ export default {
       return
     }
     if (!this.currentUser.hasAllRequiredFields) {
-      this.$router.push({ name: 'OnboardNewUser' })
+      this.$router.push({ name: 'Onboarding' })
     }
   },
   computed: {
