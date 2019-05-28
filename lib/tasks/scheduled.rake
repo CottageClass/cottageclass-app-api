@@ -15,5 +15,10 @@ namespace :cottage_class do
 
       skope.find_each { |event| event.event_series.reload.create_next_event }
     end
+
+    desc 'Update every event with a recency score'
+    task update_evnnt_scores: :environment do
+      Event.all.each(&:update_recency_score) # saving event should update recency score
+    end
   end
 end

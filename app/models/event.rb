@@ -1,6 +1,7 @@
 class Event < ApplicationRecord
   include Eventable
 
+  PAST_PENALTY = 31_557_600 # seconds in a year
   enum kind: { manual: 0, generated: 1 }
 
   geocoded_by :host_full_address
@@ -49,6 +50,12 @@ class Event < ApplicationRecord
   def time_range
     [in_instance_time_zone(starts_at).strftime('%l:%M'), in_instance_time_zone(ends_at).strftime('%l:%M %p')]
       .join(' - ').try :squish
+  end
+
+  def update_recency_score
+    seconds_since_created = (Time.current - created_at) / 1.second
+    past = (ends_at < Time.current + 2.hours)
+    update_column :recency_score, seconds_since_created + (past ? PAST_PENALTY : 0)
   end
 
   def notify
