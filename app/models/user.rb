@@ -59,7 +59,7 @@ class User < ApplicationRecord
   has_many :reviewed_users, class_name: 'UserReview', foreign_key: :reviewer_id, inverse_of: :reviewer,
                             dependent: :destroy
 
-  belongs_to :showcase_event, class_name: 'Event'
+  belongs_to :showcase_event, class_name: 'Event', optional: true
 
   accepts_nested_attributes_for :children, allow_destroy: true, reject_if: :child_with_same_name_exists?
 

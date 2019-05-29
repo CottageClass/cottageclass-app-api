@@ -59,10 +59,9 @@ class API::UsersController < API::BaseController
       if location.all?(&:present?)
         users = users.near(location.map(&:to_f), miles)
         users = users.joins 'LEFT JOIN events ON users.showcase_event_id = events.id'
+        users = users.reorder 'events.recency_score DESC NULLS LAST, distance ASC'
       end
     end
-
-    users = users.reorder 'events.recency_score DESC NULLS LAST, distance ASC'
 
     links = {}
     meta = { users_count: users.count(:all) }

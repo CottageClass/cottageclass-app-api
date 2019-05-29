@@ -10,9 +10,9 @@ class Event < ApplicationRecord
   after_validation :geocode, if: lambda { |instance|
     instance.host_full_address.present? && (instance.latitude.blank? || instance.longitude.blank?)
   }
-  after_create :notify_creation
-  after_create :set_recency
+  after_create :post_create
   before_destroy :notify_participants_destruction
+  after_destroy :update_user_showcase
 
   belongs_to :event_series, inverse_of: :events
   has_one :user, through: :event_series, inverse_of: :events
@@ -94,9 +94,14 @@ class Event < ApplicationRecord
 
   private
 
-  def set_recency
+  def update_user_showcase
+    user.update_showcase_event
+  end
+
+  def post_create
+    notify_creation
     update_recency_score
-    host.update_showcase_event
+    update_user_showcase
   end
 
   def notify_creation
