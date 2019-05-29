@@ -11,6 +11,7 @@ class Event < ApplicationRecord
     instance.host_full_address.present? && (instance.latitude.blank? || instance.longitude.blank?)
   }
   after_create :notify_creation
+  after_create :set_recency
   before_destroy :notify_participants_destruction
 
   belongs_to :event_series, inverse_of: :events
@@ -92,6 +93,11 @@ class Event < ApplicationRecord
   end
 
   private
+
+  def set_recency
+    update_recency_score
+    host.update_showcase_event
+  end
 
   def notify_creation
     notifications.event_creation_host.where(recipient: user).first_or_create if generated?
