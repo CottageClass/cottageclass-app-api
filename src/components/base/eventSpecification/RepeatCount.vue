@@ -1,7 +1,7 @@
 <template>
   <Question
-  title="How many weeks would you like to repeat your availability?"
-  :explanation="subtitle">
+  title="For how many weeks?"
+  subtitle="How many weeks should the times you just provided repeat for? If your schedule is very predictable, repeat for several weeks. If not, don't repeat at all\u2014it's up to you!">
   <div class="dropdown-container">
       <div>
         <select class="lp-select" v-model="repeatCount">
@@ -31,11 +31,6 @@ export default {
   data () {
     return {
       repeatCount: this.value.number || 2
-    }
-  },
-  computed: {
-    subtitle () {
-      return 'Your offerings will be posted for this many weeks.  If you need to adjust or cancel one, you can do so at any time.'
     }
   },
   mounted: function () {

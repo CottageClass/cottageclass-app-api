@@ -1,7 +1,7 @@
 <template>
   <div>
     <Question
-      title="When are you available?"
+      title="What times work for you?"
       :subtitle="subtitle" >
       <div v-for="(dow, dayIndex) of shiftedDayIndices">
         <MultipleTimeSelectorDay
@@ -12,10 +12,6 @@
            :value="value.availability[dow]"
            />
       </div>
-    <div @click="$emit('datetimeClicked')"
-         class="date-time-button">
-      pick date and time
-    </div>
     </Question>
   </div>
 </template>
@@ -33,7 +29,7 @@ export default {
   components: { MultipleTimeSelectorDay, Question },
   computed: {
     subtitle () {
-      return "When are you available to host the playdate you're offering? The more options you give other families, the more likely you are to get a response."
+      return "When are you available to host the playdate you're offering? The more choices you give other families, the easier it will be to schedule a fun playdate!"
     },
     dayTitle () {
       return (dayIndex) => {

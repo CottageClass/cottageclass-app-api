@@ -1,10 +1,10 @@
 <template>
   <Question
-    title="Describe your offer"
-    subtitle="What would you like to propose to other families? A picnic in the park? A playdate at your house? It's up to you. (You'll choose the times on the next step.)">
+    title="Offer a playdate"
+    subtitle="Describe a playdate you'd like to host in your home or public space. It can be a one-time event (like a trip to the zoo) or something you can offer on a regular basis, like arts & crafts, indoor play, or a playground hangout!">
     <FormWithTextArea
       maxLength="120"
-      placeholder="Going to the park with my 4 and 6 year olds to burn off some energy"
+      placeholder="Describe your playdate here, e.g. 'Come over and play at our house!'"
       v-model="description" />
   </Question>
 </template>
