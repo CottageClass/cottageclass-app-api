@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: :json } do
     resources :event_series, only: %i[index show create update]
+
     resources :events, only: %i[show update destroy] do
       resources :participants, only: %i[create] do
         collection { delete :index, to: 'participants#destroy' }
@@ -29,8 +30,15 @@ Rails.application.routes.draw do
             as: :index
       end
     end
+
     resources :users, only: %i[show] do
       collection do
+        get '/miles/:miles/latitude/:latitude/longitude/:longitude(/page/:page/page_size/:page_size)',
+            to: 'users#feed',
+            latitude: /-?+(?=.??\d)\d*\.?\d*/,
+            longitude: /-?+(?=.??\d)\d*\.?\d*/,
+            miles: /-?+(?=.??\d)\d*\.?\d*/,  # this allows negatives, which it shouldn't
+            as: :feed
         get '(/miles/:miles(/latitude/:latitude/longitude/:longitude))(/min_age/:min_age)(/max_age/:max_age)(/page/:page/page_size/:page_size)',
             to: 'users#index',
             latitude: /-?+(?=.??\d)\d*\.?\d*/,
@@ -85,7 +93,7 @@ Rails.application.routes.draw do
 
   # routes for facebook crawler
   get '/event/:id', to: 'crawler_events#show', constraints: lambda { |request|
-    (request.user_agent) && (request.user_agent.include? 'facebookexternalhit')
+    request.user_agent && (request.user_agent.include? 'facebookexternalhit')
   }, as: 'crawler_event'
 
   root 'static#index'
