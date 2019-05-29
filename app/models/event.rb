@@ -1,6 +1,7 @@
 class Event < ApplicationRecord
   include Eventable
 
+  PAST_PENALTY = 31_557_600 # seconds in a year
   enum kind: { manual: 0, generated: 1 }
 
   geocoded_by :host_full_address
@@ -9,8 +10,9 @@ class Event < ApplicationRecord
   after_validation :geocode, if: lambda { |instance|
     instance.host_full_address.present? && (instance.latitude.blank? || instance.longitude.blank?)
   }
-  after_create :notify_creation
+  after_create :post_create
   before_destroy :notify_participants_destruction
+  after_destroy :update_user_showcase
 
   belongs_to :event_series, inverse_of: :events
   has_one :user, through: :event_series, inverse_of: :events
@@ -51,6 +53,12 @@ class Event < ApplicationRecord
       .join(' - ').try :squish
   end
 
+  def update_recency_score
+    seconds_since_created = (Time.current - created_at) / 1.second
+    past = (ends_at < Time.current + 2.hours)
+    update_column :recency_score, seconds_since_created + (past ? PAST_PENALTY : 0)
+  end
+
   def notify
     if participants.any?
       if ends_at <= Time.current
@@ -85,6 +93,16 @@ class Event < ApplicationRecord
   end
 
   private
+
+  def update_user_showcase
+    user.update_showcase_event
+  end
+
+  def post_create
+    notify_creation
+    update_recency_score
+    update_user_showcase
+  end
 
   def notify_creation
     notifications.event_creation_host.where(recipient: user).first_or_create if generated?
