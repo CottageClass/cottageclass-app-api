@@ -60,12 +60,13 @@ class User < ApplicationRecord
                             dependent: :destroy
 
   has_many :stars, class_name: :Star, foreign_key: :giver_id, inverse_of: :giver, dependent: :destroy
-  
+
   has_many :starred_users,        through: :stars, source: :starable, source_type: :User
   has_many :starred_event_series, through: :stars, source: :starable, source_type: :EventSeries
   has_many :starred_events,       through: :starred_event_series, source: :events
-  
+
   has_many :received_stars, as: :starable, class_name: 'Star', dependent: :destroy, inverse_of: :starable
+  belongs_to :showcase_event, class_name: 'Event', optional: true
 
   accepts_nested_attributes_for :children, allow_destroy: true, reject_if: :child_with_same_name_exists?
 
@@ -75,6 +76,11 @@ class User < ApplicationRecord
 
   def child_ages_in_months
     children.map(&:age_in_months)
+  end
+
+  def update_showcase_event
+    showcase_event = events.order('recency_score DESC').first
+    update_column :showcase_event_id, showcase_event.present? ? showcase_event.id : nil
   end
 
   def child_names

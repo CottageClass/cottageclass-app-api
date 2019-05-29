@@ -9,7 +9,7 @@ Rails.application.routes.draw do
              }
 
   namespace :api, defaults: { format: :json } do
-    resources :event_series, only: %i[index show create update] do 
+    resources :event_series, only: %i[index show create update] do
       resource :stars, only: %i[create destroy], module: :event_series
     end
     resources :events, only: %i[show update destroy] do
@@ -31,10 +31,17 @@ Rails.application.routes.draw do
             as: :index
       end
     end
+
     resources :users, only: %i[show] do
       resource :stars, only: %i[create destroy], module: :users
       resources :stars, only: :index, module: :users
       collection do
+        get '/miles/:miles/latitude/:latitude/longitude/:longitude(/page/:page(/page_size/:page_size))',
+            to: 'users#feed',
+            latitude: /-?+(?=.??\d)\d*\.?\d*/,
+            longitude: /-?+(?=.??\d)\d*\.?\d*/,
+            miles: /-?+(?=.??\d)\d*\.?\d*/,  # this allows negatives, which it shouldn't
+            as: :feed
         get '(/miles/:miles(/latitude/:latitude/longitude/:longitude))(/min_age/:min_age)(/max_age/:max_age)(/page/:page/page_size/:page_size)',
             to: 'users#index',
             latitude: /-?+(?=.??\d)\d*\.?\d*/,
@@ -73,8 +80,6 @@ Rails.application.routes.draw do
     end
   end
 
-
-
   get '/users/:id/inquiries' => 'users#inquiries', as: 'inquiries'
   get '/users/:sender_id/messages/:receiver_id' => 'messages#admin_for_pair', as: 'messages_for_pair'
 
@@ -86,19 +91,18 @@ Rails.application.routes.draw do
   # twilio sessions
   post '/users/:id/proxy_sessions' => 'twilio_sessions#create', as: 'proxy_sessions'
   post '/proxy_callback' => 'twilio_sessions#callback'
-  
+
   #############
   # routes for facebook crawler
   #############
   get '/event/:id', to: 'crawler_events#show', constraints: lambda { |request|
-    (request.user_agent) && (request.user_agent.include? 'facebookexternalhit')
+    request.user_agent && (request.user_agent.include? 'facebookexternalhit')
   }, as: 'crawler_event'
-
 
   #############
   # fallbacks
   #############
-  
+
   root 'static#index'
 
   get '/*path', to: 'static#index', format: false

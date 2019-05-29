@@ -15,5 +15,13 @@ namespace :cottage_class do
 
       skope.find_each { |event| event.event_series.reload.create_next_event }
     end
+
+    desc 'Update every event with a recency score and every user with the best event'
+    task update_showcase: :environment do
+      pp 'Starting hourly task to update recency scores and showcase events'
+      Event.all.each(&:update_recency_score)
+      User.all.each(&:update_showcase_event)
+      pp 'Finished updating recency scores and showcase events'
+    end
   end
 end
