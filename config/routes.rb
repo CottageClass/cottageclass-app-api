@@ -33,7 +33,7 @@ Rails.application.routes.draw do
 
     resources :users, only: %i[show] do
       collection do
-        get '/miles/:miles/latitude/:latitude/longitude/:longitude(/page/:page/page_size/:page_size)',
+        get '/miles/:miles/latitude/:latitude/longitude/:longitude(/page/:page(/page_size/:page_size))',
             to: 'users#feed',
             latitude: /-?+(?=.??\d)\d*\.?\d*/,
             longitude: /-?+(?=.??\d)\d*\.?\d*/,
