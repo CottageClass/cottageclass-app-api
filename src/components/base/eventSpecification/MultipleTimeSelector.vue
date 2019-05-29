@@ -12,10 +12,6 @@
            :value="value.availability[dow]"
            />
       </div>
-    <div @click="$emit('datetimeClicked')"
-         class="date-time-button">
-      pick date and time
-    </div>
     </Question>
   </div>
 </template>
