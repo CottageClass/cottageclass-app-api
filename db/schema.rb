@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_28_174535) do
+ActiveRecord::Schema.define(version: 2019_05_29_125245) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -285,6 +285,7 @@ ActiveRecord::Schema.define(version: 2019_05_28_174535) do
     t.boolean "has_pet"
     t.text "pet_description"
     t.text "house_rules"
+    t.bigint "showcase_event_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email"
     t.index ["fuzzy_latitude", "fuzzy_longitude"], name: "index_users_on_fuzzy_latitude_and_fuzzy_longitude"
@@ -295,6 +296,7 @@ ActiveRecord::Schema.define(version: 2019_05_28_174535) do
     t.index ["latitude", "longitude"], name: "index_users_on_latitude_and_longitude"
     t.index ["provider", "uid"], name: "index_users_on_provider_and_uid"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["showcase_event_id"], name: "index_users_on_showcase_event_id"
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
@@ -304,4 +306,5 @@ ActiveRecord::Schema.define(version: 2019_05_28_174535) do
   add_foreign_key "messages", "users", column: "sender_id"
   add_foreign_key "twilio_sessions", "users", column: "receiver_id"
   add_foreign_key "twilio_sessions", "users", column: "sender_id"
+  add_foreign_key "users", "events", column: "showcase_event_id"
 end
