@@ -2,7 +2,11 @@
   <div>
     <Question
       title="What times work for you?"
-      :subtitle="subtitle" >
+      subtitle="When are you available to host the playdate you're offering? The more choices you give other families, the easier it will be to schedule a fun playdate!" >
+      <div @click="$emit('datetimeClicked')"
+          class="date-time-button">
+        offer one time only
+      </div>
       <div v-for="(dow, dayIndex) of shiftedDayIndices">
         <MultipleTimeSelectorDay
            class="day-of-week"
@@ -28,9 +32,6 @@ export default {
   props: ['value', 'scheduleStartTime'],
   components: { MultipleTimeSelectorDay, Question },
   computed: {
-    subtitle () {
-      return "When are you available to host the playdate you're offering? The more choices you give other families, the easier it will be to schedule a fun playdate!"
-    },
     dayTitle () {
       return (dayIndex) => {
         const daysToAdd = this.todayType === 'late' ? 1 + dayIndex : dayIndex
@@ -127,13 +128,14 @@ export default {
   border-radius: 4px;
   color: #158BE7;
   padding: 12px 5px;
-  margin: 3px 2px;
   font-variant: small-caps;
   width: 40%;
   text-align: center;
   cursor: pointer;
   margin-right: auto;
   margin-left: auto;
+  margin-top: 3px;
+  margin-bottom: 32px;
 }
 @media (max-width: 479px) {
   .date-time-button {
