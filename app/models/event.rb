@@ -12,6 +12,7 @@ class Event < ApplicationRecord
   }
   after_create :post_create
   before_destroy :notify_participants_destruction
+  before_destroy :remove_user_showcase
   after_destroy :update_user_showcase
 
   belongs_to :event_series, inverse_of: :events
@@ -93,6 +94,10 @@ class Event < ApplicationRecord
   end
 
   private
+
+  def remove_user_showcase
+    user.update_column :showcase_event_id, nil if user.showcase_event.id == id
+  end
 
   def update_user_showcase
     user.update_showcase_event
