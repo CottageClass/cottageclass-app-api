@@ -76,10 +76,9 @@
       <div class="question">How does it work? </div>
       <ul class="unordered-list">
         <li class="ul-item">On KidsClub, making new friends and sharing childcare is free!</li>
-        <li class="ul-item">Every family in the club requested to host <strong>one 3 hour playdate every 4 weeks.</strong></li>
         <li class="ul-item">When you plan your first playdate with a family, we strongly encourage you to stay with your child and get to know the family. You can choose to share childcare whenever you're both comfortable doing so.</li>
         <li class="ul-item">You can edit or change your playdate at any time, though we request 24 hours notice as a courtesy to other families.</li>
-        <li class="ul-item">Your playdate can be as simple as pizza and a movie, or you can go all out and host a creative arts project or a robotics class!</li>
+        <li class="ul-item">Your playdate can be as simple as playing with toys, or you can go all out and host a creative arts project or a robotics class!</li>
         <li class="ul-item">If you can't find a playdate at a time that works for you, you can also reach out to parents individually to set up a playdate.</li>
       </ul>
       <div class="question">What if I’m the first person to join in my neighborhood?</div>
