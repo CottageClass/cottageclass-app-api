@@ -90,15 +90,15 @@
 
         <div class="map" ref="map"/>
         <div class="mobile-cards-wrapper">
-          <div v-if="event.houseRules" class="event-specifics-card"><img src="@/assets/house-rules.svg" width="100"
-              height="100" alt="">
+          <div v-if="houseRules" class="event-specifics-card">
+            <img src="@/assets/house-rules.svg" width="100" height="100" alt="">
             <div class="card-small-text">House Rules</div>
-            <div class="card-large-text">{{ event.houseRules }}.</div>
+            <div class="card-large-text">{{ houseRules }}.</div>
           </div>
-          <div v-if="event.hasPet" class="event-specifics-card"><img src="@/assets/pets.svg" width="100" height="100"
-              alt="">
+          <div v-if="petDescription" class="event-specifics-card">
+            <img src="@/assets/pets.svg" width="100" height="100" alt="">
             <div class="card-small-text">Pets</div>
-            <div class="card-large-text">{{ event.petDescription }}</div>
+            <div class="card-large-text">{{ petDescription }}</div>
           </div>
 
           <div class="event-specifics-host-card ">
@@ -212,7 +212,6 @@ export default {
     fetchEvent: async function () {
       this.event = await api.fetchEvent(this.$route.params.id)
       this.$nextTick(async function () {
-        console.log(this.$refs.map)
         await this.createMap(this.$refs.map, {
           zoom: 13,
           center: { lat: this.event.hostFuzzyLatitude, lng: this.event.hostFuzzyLongitude },
@@ -229,6 +228,19 @@ export default {
     this.fetchEvent()
   },
   computed: {
+    petDescription () {
+      this.debug(this.event)
+      if (this.event.hasPet && this.event.petDescription) {
+        return this.event.petDescription
+      }
+      if (this.event.hostHasPet && this.event.hostPetDescription) {
+        return this.event.hostPetDescription
+      }
+      return null
+    },
+    houseRules () {
+      return this.event.houseRules || this.event.hostHouseRules
+    },
     hostIsCurrentUser: function () {
       return this.currentUser && this.event.hostId === this.currentUser.id
     },
