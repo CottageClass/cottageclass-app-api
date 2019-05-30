@@ -14,11 +14,10 @@ class EventSerializer
     instance.participated? params[:current_user]
   end
 
-  attribute :host do |instance, params| 
-    serializer = PublicUserSerializer.new instance.user, {
-                     include: %i[children],
-                     params: {current_user: params[:current_user]}
-                   }
+  attribute :host do |instance, params|
+    serializer = PublicUserSerializer.new instance.user,
+                                          include: %i[children],
+                                          params: { current_user: params[:current_user] }
     serializer.serializable_hash
   end
 

@@ -12,8 +12,8 @@ class User < ApplicationRecord
   PUBLIC_ATTRIBUTES = %i[
     id avatar first_name verified fuzzy_latitude fuzzy_longitude locality sublocality neighborhood admin_area_level_1
     admin_area_level_2 images languages job_position employer highest_education school facebook_uid instagram_user
-    twitter_user linkedin_user created_at child_ages_in_months profile_blurb activities available_mornings available_afternoons
-    available_evenings available_weekends house_rules has_pet pet_description
+    twitter_user linkedin_user created_at child_ages_in_months profile_blurb activities available_mornings
+    available_afternoons available_evenings available_weekends house_rules has_pet pet_description
   ].freeze
 
   before_validation :cleanup
@@ -59,11 +59,10 @@ class User < ApplicationRecord
   has_many :reviewed_users, class_name: 'UserReview', foreign_key: :reviewer_id, inverse_of: :reviewer,
                             dependent: :destroy
 
-  has_many :stars, class_name: :Star, foreign_key: :giver_id, inverse_of: :giver, dependent: :destroy
+  has_many :stars, class_name: 'Star', foreign_key: :giver_id, inverse_of: :giver, dependent: :destroy
 
   has_many :starred_users,        through: :stars, source: :starable, source_type: :User
-  has_many :starred_event_series, through: :stars, source: :starable, source_type: :EventSeries
-  has_many :starred_events,       through: :starred_event_series, source: :events
+  has_many :starred_events,       through: :stars, source: :starable, source_type: :Event
 
   has_many :received_stars, as: :starable, class_name: 'Star', dependent: :destroy, inverse_of: :starable
   belongs_to :showcase_event, class_name: 'Event', optional: true
