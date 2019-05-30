@@ -28,7 +28,7 @@ class EventSerializer
     elsif current_user.nil?
       false
     else
-      star = Star.find_by giver: current_user, starable_type: :EventSeries, starable_id: instance.event_series.id
+      star = Star.find_by giver: current_user, starable_type: :Event, starable_id: instance.id
       !star.nil?
     end
   end

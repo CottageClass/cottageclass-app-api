@@ -2,10 +2,12 @@
   <div class="onb-body">
     <MainNav />
 
-    <div @click="fetchStarredItems"> FETCH </div>
-    <div @click="createStar"> STAR </div>
-    <div @click="deleteStar"> DELETE </div>
-
+    <div v-if="user.starred"> starred
+      <div @click="deleteStar"> unstar </div>
+    </div>
+    <div v-else> not starred
+      <div @click="createStar"> star </div>
+    </div>
     <StyleWrapper styleIs="editing">
       <LoadingSpinner v-if="!user"/>
       <div v-else class="profile-container w-container">
@@ -126,7 +128,7 @@
 <script>
 import Images from '@/components/Images.vue'
 import AvatarImage from '@/components/base/AvatarImage'
-import * as api from '@/utils/api'
+import { starUser, unstarUser, fetchUser } from '@/utils/api'
 import ChildAges from '@/components/ChildAges.vue'
 import StyleWrapper from '@/components/FTE/StyleWrapper.vue'
 import LoadingSpinner from '@/components/LoadingSpinner.vue'
@@ -156,20 +158,19 @@ export default {
   },
   mixins: [ maps, screen ],
   methods: {
-    fetchStarredItems () {
-      api.fetchStarredItems(this.user.id)
+    async createStar () {
+      await starUser(this.user.id)
+      this.user.starred = true
     },
-    createStar () {
-      api.starUser(this.user.id)
-    },
-    deleteStar () {
-      api.unstarUser(this.user.id)
+    async deleteStar () {
+      await unstarUser(this.user.id)
+      this.user.starred = false
     },
     goToEdit: function () {
       this.$router.push({ name: 'ProfileEdit' })
     },
     async setUser () {
-      this.user = await api.fetchUser(this.$route.params.id)
+      this.user = await fetchUser(this.$route.params.id)
       // wait until the next tick so the map div exists
       this.$nextTick(async function () {
         await this.createMap(this.$refs.map, {

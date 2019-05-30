@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     resources :event_series, only: %i[index show create update]
     resources :events, only: %i[show update destroy] do
+      resource :stars, only: %i[create destroy], module: :events
       resources :participants, only: %i[create] do
         collection { delete :index, to: 'participants#destroy' }
       end
@@ -32,7 +33,6 @@ Rails.application.routes.draw do
 
     resources :users, only: %i[show] do
       resource :stars, only: %i[create destroy], module: :users
-      resources :stars, only: :index, module: :users
       collection do
         get '/miles/:miles/latitude/:latitude/longitude/:longitude(/page/:page(/page_size/:page_size))',
             to: 'users#feed',
