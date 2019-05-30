@@ -53,7 +53,7 @@ export default {
   data () {
     return {
       showError: false,
-      description: { err: null },
+      description: { err: null, text: '' },
       availability: { err: null },
       repeatCount: { err: null },
       date: { err: null },
@@ -62,8 +62,8 @@ export default {
   },
   computed: {
     nextButtonState () { // overriding the mixin
-      if (this.stepName === 'description' && this.errorMessage) {
-        return 'skip'
+      if (this.stepName === 'description' && this.description.text.length === 0) { return 'skip' } else if (this.errorMessage) {
+        return 'inactive'
       } else {
         return 'next'
       }
