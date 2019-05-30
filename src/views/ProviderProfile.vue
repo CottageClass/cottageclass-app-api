@@ -2,15 +2,15 @@
   <div class="onb-body">
     <MainNav />
 
-    <div v-if="user.starred"> starred
-      <div @click="deleteStar"> unstar </div>
-    </div>
-    <div v-else> not starred
-      <div @click="createStar"> star </div>
-    </div>
     <StyleWrapper styleIs="editing">
       <LoadingSpinner v-if="!user"/>
       <div v-else class="profile-container w-container">
+        <div v-if="user.starred"> starred
+          <div @click="deleteStar"> unstar </div>
+        </div>
+        <div v-else> not starred
+          <div @click="createStar"> star </div>
+        </div>
         <div ref="map" class="map-container" />
         <div class="top-card">
           <div class="top-card-summary-info">
