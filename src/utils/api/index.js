@@ -1,9 +1,11 @@
 import camelcaseKeys from 'camelcase-keys'
 import normalize from 'json-api-normalizer'
 import axios from 'axios'
-import { createEvent, createEvents } from './createEvent'
-import { createUser } from './createUser'
+import { createEvent, createEvents } from '../createEvent'
+import { createUser } from '../createUser'
 import Logger from '@/utils/logger'
+
+export * from './stars'
 
 const logger = Logger('api')
 
@@ -38,30 +40,6 @@ export function initProxySession (currentUserId, receiverId, requestMessage, ack
 /*
  * USERS
  */
-
-export async function fetchStarredItems (userId) {
-  try {
-    return await axios.get(`api/users/${userId}/stars`)
-  } catch (e) {
-    logger.logError(e)
-  }
-}
-
-export async function unstarUser (userId) {
-  try {
-    return await axios.delete(`api/users/${userId}/stars`)
-  } catch (e) {
-    logger.logError(e)
-  }
-}
-
-export async function starUser (userId) {
-  try {
-    return await axios.post(`api/users/${userId}/stars`)
-  } catch (e) {
-    logger.logError(e)
-  }
-}
 
 export function submitUserInfo (userId, data) {
   if (!data) { return }

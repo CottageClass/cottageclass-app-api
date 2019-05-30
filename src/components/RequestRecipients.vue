@@ -53,7 +53,7 @@
 // todo: filter by availability
 // todo: send meessages
 
-import * as api from '@/utils/api.js'
+import * as api from '@/utils/api'
 import AvatarImage from '@/components/base/AvatarImage'
 import { mapGetters } from 'vuex'
 var moment = require('moment')

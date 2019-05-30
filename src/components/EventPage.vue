@@ -150,7 +150,7 @@
 <script>
 // todo: pass "person" object to AvatarImage
 
-import * as api from '@/utils/api.js'
+import * as api from '@/utils/api'
 import AvatarImage from '@/components/base/AvatarImage'
 import RsvpButton from './RsvpButton.vue'
 import ContactHostButton from './ContactHostButton.vue'

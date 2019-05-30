@@ -35,7 +35,7 @@
 
 <script>
 
-import * as api from '@/utils/api.js'
+import * as api from '@/utils/api'
 import * as utils from '@/utils/utils.js'
 import Nav from '@/components/FTE/Nav.vue'
 import ErrorMessage from '@/components/base/ErrorMessage.vue'

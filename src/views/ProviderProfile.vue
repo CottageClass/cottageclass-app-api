@@ -126,7 +126,7 @@
 <script>
 import Images from '@/components/Images.vue'
 import AvatarImage from '@/components/base/AvatarImage'
-import * as api from '@/utils/api.js'
+import * as api from '@/utils/api'
 import ChildAges from '@/components/ChildAges.vue'
 import StyleWrapper from '@/components/FTE/StyleWrapper.vue'
 import LoadingSpinner from '@/components/LoadingSpinner.vue'

@@ -61,7 +61,7 @@
 
 <script>
 
-import * as api from '@/utils/api.js'
+import * as api from '@/utils/api'
 import moment from 'moment'
 import { mapGetters } from 'vuex'
 

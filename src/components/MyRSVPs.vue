@@ -19,7 +19,7 @@
 import MainNav from '@/components/MainNav.vue'
 import Footer from '@/components/Footer.vue'
 import SearchResultList from '@/components/SearchResultList.vue'
-import * as api from '@/utils/api.js'
+import * as api from '@/utils/api'
 import { mapGetters } from 'vuex'
 
 var moment = require('moment')

@@ -16,7 +16,7 @@
 
 import Parent from './Parent.vue'
 import MainNav from './MainNav.vue'
-import * as api from '@/utils/api.js'
+import * as api from '@/utils/api'
 import { mapGetters } from 'vuex'
 
 export default {

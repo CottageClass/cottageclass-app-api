@@ -34,7 +34,7 @@
 
 <script>
 import Nav from '@/components/FTE/Nav.vue'
-import * as api from '@/utils/api.js'
+import * as api from '@/utils/api'
 import StyleWrapper from '@/components/FTE/StyleWrapper.vue'
 import InviteUserListItem from '@/components/FTE/InviteUserListItem.vue'
 import { mapGetters } from 'vuex'

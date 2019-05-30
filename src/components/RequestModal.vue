@@ -54,7 +54,7 @@
 
 <script>
 
-import * as api from '@/utils/api.js'
+import * as api from '@/utils/api'
 import AvatarImage from '@/components/base/AvatarImage'
 
 // import google sheets API service
