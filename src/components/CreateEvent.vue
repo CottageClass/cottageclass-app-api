@@ -7,12 +7,6 @@
       :hidePrevious="stepIndex===0"
     />
     <ErrorMessage v-if="errorMessage && showError" :text="errorMessage" />
-    <div v-if="context==='onboarding' && stepName==='description'" class="skip-link-wrapper">
-      <div class="skip-link"
-           @click="$emit('skip')">
-        Skip to fill out your profile
-      </div>
-    </div>
     <EventDescription
         v-if="stepName==='description'"
         v-model="description" />
@@ -67,6 +61,13 @@ export default {
     }
   },
   computed: {
+    nextButtonState () { // overriding the mixin
+      if (this.stepName === 'description' && this.errorMessage) {
+        return 'skip'
+      } else {
+        return 'next'
+      }
+    },
     stepSequence () {
       return ['description', 'availability', 'repeat-count', 'date', 'time']
     },
@@ -144,7 +145,9 @@ export default {
       this.$emit('finished')
     },
     nextStep () {
-      if (this.errorMessage) {
+      if (this.nextButtonState === 'skip') {
+        this.$emit('skip')
+      } else if (this.errorMessage) {
         this.showError = true
       } else {
         // state is persisted after route update because component is reused
@@ -218,15 +221,5 @@ export default {
     margin-top: 0px;
     margin-bottom: 0px;
   }
-}
-
-.skip-link-wrapper {
-  display: flex;
-  justify-content:center;
-}
-.skip-link {
-  margin-top: 47px;
-  color: hsla(0, 0%, 100%, .6);
-  cursor: pointer;
 }
 </style>
