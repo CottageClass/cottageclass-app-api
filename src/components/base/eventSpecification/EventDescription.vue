@@ -23,7 +23,7 @@ export default {
   },
   computed: {
     errorMessage () {
-      return (this.description && this.description.length > 5) ? null : 'Please enter a description of your offer'
+      return (this.description && this.description.length >= 5) ? null : 'Please enter a description of your offer'
     }
   },
   created () {
