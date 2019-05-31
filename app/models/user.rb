@@ -16,6 +16,8 @@ class User < ApplicationRecord
     available_evenings available_weekends house_rules has_pet pet_description
   ].freeze
 
+  after_update :sms_notify
+
   before_validation :cleanup
   after_validation :geocode, if: lambda { |instance|
     instance.full_address.present? && (instance.latitude.blank? || instance.longitude.blank?)
@@ -131,6 +133,10 @@ class User < ApplicationRecord
   def cleanup
     self.email = email.to_s.downcase
     self.facebook_uid = uid if %w[facebook].include?(provider)
+  end
+
+  def sms_notify
+    notifications.user_sms_welcome.first_or_create if phone_number.present?
   end
 
   def notify
