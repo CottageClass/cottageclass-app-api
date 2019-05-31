@@ -60,9 +60,6 @@ class Notification < ApplicationRecord
                  when :event_feedback_host
                    self.body = I18n.t 'messages.event_feedback_host'
                    Notifier::EventFeedbackHost.new user: recipient, event: notifiable, body: body
-                 when :event_congratulation_host
-                   self.body = I18n.t 'messages.event_congratulation_host', host_first_name: recipient.first_name
-                   Notifier::Base.new user: recipient, body: body
                  when :participant_creation
                    self.body = 'placeholder for body'
                    Notifier::ParticipantCreation.new user: recipient, event: notifiable, body: body
