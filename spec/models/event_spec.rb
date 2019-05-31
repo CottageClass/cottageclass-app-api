@@ -79,15 +79,6 @@ RSpec.describe Event, type: :model do
           expect(subject.notifications.event_reminder_previous_day_host.count).to eq(0)
         end
       end
-
-      it 'event_feedback_host/event_congratulation_host' do
-        Timecop.freeze(subject.ends_at) do
-          subject.notify
-
-          expect(subject.notifications.event_feedback_host.count).to eq(0)
-          expect(subject.notifications.event_congratulation_host.count).to eq(0)
-        end
-      end
     end
 
     context 'host: with participants' do
@@ -106,15 +97,6 @@ RSpec.describe Event, type: :model do
           subject.notify
 
           expect(subject.notifications.event_reminder_previous_day_host.reload.count).to eq(1)
-        end
-      end
-
-      it 'event_feedback_host/event_congratulation_host' do
-        Timecop.freeze(subject.ends_at) do
-          subject.notify
-
-          expect(subject.notifications.event_feedback_host.count).to eq(1)
-          expect(subject.notifications.event_congratulation_host.count).to eq(1)
         end
       end
     end
