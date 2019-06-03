@@ -1,7 +1,7 @@
 <template>
   <Question
     title="Child Information"
-    subtitle="We need some basic info about your children. Their ages will appear on your public profile, but only hosts of events you RSVP to will see their names.">
+    subtitle="Only the hosts of playdates you attend will see names, and birthdays are private. (We only collect them so we can show correct ages for each family's children, to help you find friends!)">
     <ManyFormFieldGroups
       :fieldGroups="fieldGroups"
       headingWord="Child"
@@ -26,19 +26,19 @@ export default {
       fieldGroups: [
         {
           name: 'firstName',
-          label: 'First Name',
+          label: 'First Name (or nickname)',
           placeholder: 'First Name',
           type: 'text'
         },
         {
           name: 'birthday',
-          label: 'Birthday',
+          label: 'Birthday (approximate is okay)',
           placeholder: 'MM / DD / YYYY',
           type: 'date'
         },
         {
           name: 'schoolName',
-          label: 'School Name',
+          label: 'School Name (optional)',
           placeholder: 'Name of School',
           type: 'text'
         }

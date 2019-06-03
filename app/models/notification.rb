@@ -15,7 +15,8 @@ class Notification < ApplicationRecord
     participant_creation_next_day: 10,
     event_destruction: 11,
     participant_creation_host: 12,
-    event_creation_host: 13
+    event_creation_host: 13,
+    user_sms_welcome: 14
   }
 
   belongs_to :recipient, class_name: 'User', inverse_of: :notifications
@@ -60,12 +61,12 @@ class Notification < ApplicationRecord
                  when :event_feedback_host
                    self.body = I18n.t 'messages.event_feedback_host'
                    Notifier::EventFeedbackHost.new user: recipient, event: notifiable, body: body
-                 when :event_congratulation_host
-                   self.body = I18n.t 'messages.event_congratulation_host', host_first_name: recipient.first_name
-                   Notifier::Base.new user: recipient, body: body
                  when :participant_creation
                    self.body = 'placeholder for body'
                    Notifier::ParticipantCreation.new user: recipient, event: notifiable, body: body
+                 when :user_sms_welcome
+                   self.body = I18n.t 'messages.user_sms_welcome'
+                   Notifier::UserSmsWelcome.new user: recipient, body: body
                  when :user_creation
                    self.body = 'placeholder for body'
                    Notifier::UserCreation.new user: recipient, body: body

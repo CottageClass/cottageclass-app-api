@@ -37,6 +37,11 @@ RSpec.describe User, type: :model do
     let(:new_latitude) { 37.773972 }
     let(:new_longitude) { -122.431297 }
 
+    it 'sends sms' do
+      expect { subject.update_attribute(:phone_number, '6092164398') }
+        .to change(Notification.user_sms_welcome.reload, :count).from(0).to(1)
+    end
+
     it 'updates dependent events' do
       create :event_series, :with_event_hosts, user: subject
 
