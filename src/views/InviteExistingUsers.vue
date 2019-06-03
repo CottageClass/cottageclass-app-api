@@ -97,7 +97,7 @@ export default {
           this.$set(that.inviteStates, user.id, false)
         })
       }
-      if (that.users.length === 0) {
+      if (!that.users || that.users.length === 0) {
         // there are no users within 20 miles so we return to home
         this.$router.push({ name: 'Events' })
       }
