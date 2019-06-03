@@ -41,16 +41,17 @@ import Children from '@/components/FTE/userInformation/Children.vue'
 import Employment from '@/components/FTE/userInformation/Employment'
 import FacebookImageSelection from '@/components/FTE/userInformation/FacebookImageSelection.vue'
 import ErrorMessage from '@/components/base/ErrorMessage.vue'
-import YesOrNo from '@/components/base/YesOrNo'
 
+import normalize from 'json-api-normalizer'
+import { createUser } from '@/utils//createUser'
 import { submitUserInfo } from '@/utils/api'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 import { stepNavigation } from '@/mixins'
 
 export default {
   name: 'UserInformation',
   props: ['stepName'],
-  components: { Nav, Phone, Location, Children, Employment, FacebookImageSelection, ErrorMessage, YesOrNo },
+  components: { Nav, Phone, Location, Children, Employment, FacebookImageSelection, ErrorMessage },
   mixins: [stepNavigation],
   data () {
     return {
@@ -85,7 +86,7 @@ export default {
     ...mapGetters(['currentUser'])
   },
   methods: {
-    submitUserData () {
+    async submitUserData () {
       let params = {}
       const userId = this.currentUser.id
       switch (this.stepName) {
@@ -114,7 +115,8 @@ export default {
           return // no data to submit
       }
       try {
-        submitUserInfo(userId, params)
+        const res = await submitUserInfo(userId, params)
+        this.setCurrentUser({ user: createUser(normalize(res.data)) })
       } catch (e) {
         console.log('user update FAILURE')
         console.log(e)
@@ -165,7 +167,8 @@ export default {
         this.prevStep()
       }
       window.scrollTo(0, 0)
-    }
+    },
+    ...mapMutations([ 'setCurrentUser' ])
   }
 }
 </script>
