@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import EmergencyInfo from '@/components/EmergencyInfo'
 import ProviderProfile from '@/views/ProviderProfile.vue'
 import SplashPage from '@/views/SplashPage.vue'
 import EventPage from '@/components/EventPage.vue'
@@ -46,11 +45,6 @@ export default new Router({
       path: '/',
       name: 'SplashPage',
       component: SplashPage
-    },
-    {
-      path: '/emergency-info/:id',
-      name: 'emergencyInfo',
-      component: EmergencyInfo
     },
     {
       path: '/events',
