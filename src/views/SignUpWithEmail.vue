@@ -109,6 +109,7 @@ import Footer from '@/components/Footer.vue'
 import StyleWrapper from '@/components/FTE/StyleWrapper.vue'
 import FacebookButton from '@/components/base/FacebookButton'
 import ErrorMessage from '@/components/base/ErrorMessage.vue'
+import { uploadAvatarImage } from '@/utils/cloudinary'
 
 export default {
   name: 'SignUpWithEmail',
@@ -123,21 +124,11 @@ export default {
       password: '',
       avatar_url: null,
       showError: false,
-      cloudinary: {
-        uploadPreset: 'avatar',
-        apiKey: '415594396214129',
-        cloudName: 'cottageclass2'
-      },
       avatarLoading: false,
       showFacebookLogin: !this.hideFacebookLogin()
     }
   },
   computed: {
-    cloudinaryUploadUrl: function () {
-      return `https://api.cloudinary.com/v1_1/${
-        this.cloudinary.cloudName
-      }/image/upload`
-    },
     formHasErrors: function () {
       return this.errors
     },
@@ -191,36 +182,17 @@ export default {
         return !!navigator.userAgent.match(new RegExp(`(${expression})`, 'ig'))
       })
     },
-    upload: function (event) {
+    async upload (event) {
       this.avatarLoading = true
-      let files = event.target.files
-
-      let formData = new FormData()
-      formData.append('file', files[0])
-      formData.append('upload_preset', this.cloudinary.uploadPreset)
-
       this.disableForm = true
-
-      fetch(this.cloudinaryUploadUrl, { method: 'POST', body: formData })
-        .then(response => {
-          if (response.ok) {
-            return response.json()
-          } else {
-            throw new Error('Network response was not ok')
-          }
-        })
-        .then(response => {
-          this.log('cloudinary upload success')
-          this.log(response)
-          this.avatarLoading = false
-          this.disableForm = false
-          this.avatar_url = response.secure_url
-        })
-        .catch(error => {
-          this.logError('cloudinary upload error')
-          this.logError(error)
-          this.disableForm = false
-        })
+      try {
+        this.avatar_url = await uploadAvatarImage(event.target.files[0])
+      } catch (e) {
+        this.logError(e)
+      } finally {
+        this.disableForm = false
+        this.avatarLoading = false
+      }
     },
     async signup () {
       let validationResult, registrationResult, signInResult

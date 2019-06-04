@@ -15,7 +15,8 @@
             <div class="host-info">
               <router-link :to="{ name: 'ProviderProfile', params: { id: event.hostId }}">
                 <AvatarImage className="avatar-large"
-                  :person="{facebookUid: event.hostFacebookUid, avatar: event.hostAvatar}" />
+                             imageSize="60"
+                             :person="{facebookUid: event.hostFacebookUid, avatar: event.hostAvatar}" />
               </router-link>
               <div class="host-info-wrapper">
                 <div class="hosted-by">Hosted by <router-link
@@ -104,7 +105,8 @@
           <div class="event-specifics-host-card ">
             <router-link :to="{ name: 'ProviderProfile', params: { id: event.hostId }}" class="host">
               <AvatarImage className="avatar-x-large"
-                :person="{facebookUid: event.hostFacebookUid, avatar: event.hostAvatar}" />
+                           :person="{facebookUid: event.hostFacebookUid, avatar: event.hostAvatar}"
+                           imageSize="100"/>
             </router-link>
             <div class="card-small-text">Host</div>
             <div class="card-large-text">
@@ -148,8 +150,6 @@
 </template>
 
 <script>
-// todo: pass "person" object to AvatarImage
-
 import * as api from '@/utils/api.js'
 import AvatarImage from '@/components/base/AvatarImage'
 import RsvpButton from './RsvpButton.vue'

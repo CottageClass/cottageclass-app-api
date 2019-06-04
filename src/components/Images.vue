@@ -1,7 +1,7 @@
 <template>
   <div class="mask">
     <div class="scrolling-wrapper">
-      <div class="carousel-image-container" v-for="image in images">
+      <div class="carousel-image-container" v-for="image in transformedImages">
         <img :src="image">
       </div>
     </div>
@@ -9,9 +9,15 @@
 </template>
 
 <script>
+import { imageUrl } from '@/utils/cloudinary'
 export default {
   name: 'Images',
-  props: ['images']
+  props: ['images'],
+  computed: {
+    transformedImages () {
+      return this.images.map(url => imageUrl(url, { height: 111 }))
+    }
+  }
 }
 </script>
 

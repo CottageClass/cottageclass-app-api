@@ -13,7 +13,9 @@
           <AvatarImage
           v-if="currentUser"
           :person="currentUser"
-          className="image" />
+          className="image"
+          imageSize="40"
+          />
         </router-link>
         <a @click="toggleMenu" class="nav-menu-button button w-button">Menu</a></div>
       <div
