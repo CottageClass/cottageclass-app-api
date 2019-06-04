@@ -109,7 +109,7 @@ import Footer from '@/components/Footer.vue'
 import StyleWrapper from '@/components/FTE/StyleWrapper.vue'
 import FacebookButton from '@/components/base/FacebookButton'
 import ErrorMessage from '@/components/base/ErrorMessage.vue'
-import { uploadImage } from '@/utils/cloudinary'
+import { uploadAvatarImage } from '@/utils/cloudinary'
 
 export default {
   name: 'SignUpWithEmail',
@@ -186,7 +186,7 @@ export default {
       this.avatarLoading = true
       this.disableForm = true
       try {
-        this.avatar_url = await uploadImage(event.target.files[0])
+        this.avatar_url = await uploadAvatarImage(event.target.files[0])
       } catch (e) {
         this.logError(e)
       } finally {
