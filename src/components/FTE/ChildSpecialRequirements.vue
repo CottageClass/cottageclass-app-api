@@ -26,7 +26,7 @@ import Question from '@/components/base/Question.vue'
 import Nav from '@/components/FTE/Nav.vue'
 import StyleWrapper from '@/components/FTE/StyleWrapper.vue'
 import { mapGetters } from 'vuex'
-import * as api from '@/utils/api.js'
+import * as api from '@/utils/api'
 
 export default {
   name: 'ChildSpecialRequirements',

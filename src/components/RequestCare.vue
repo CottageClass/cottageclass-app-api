@@ -66,7 +66,7 @@ import RequestCareProviderItem from '@/components/RequestCareProviderItem.vue'
 import StyleWrapper from '@/components/FTE/StyleWrapper.vue'
 import ShareButton from '@/components/ShareButton.vue'
 import { mapGetters } from 'vuex'
-import * as api from '@/utils/api.js'
+import * as api from '@/utils/api'
 
 export default {
   name: 'RequestCare',

@@ -72,7 +72,7 @@
 // add live data here
 
 import AvatarImage from '@/components/base/AvatarImage'
-import * as api from '@/utils/api.js'
+import * as api from '@/utils/api'
 
 export default {
   name: 'EmergencyInfo',

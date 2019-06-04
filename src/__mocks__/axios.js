@@ -9,6 +9,9 @@ const noNearbyUsers = require('./__mockData__/noNearbyUsers.json')
 const fewNearbyUsers = require('./__mockData__/fewNearbyUsers.json')
 
 export default {
+  create: jest.fn(() => {
+    return this
+  }),
   get: jest.fn((url) => {
     const eventUrl = `/api/events/`
     const userUrl = `/api/users/`

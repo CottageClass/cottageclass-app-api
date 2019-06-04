@@ -1,9 +1,11 @@
 import camelcaseKeys from 'camelcase-keys'
 import normalize from 'json-api-normalizer'
 import axios from 'axios'
-import { createEvent, createEvents } from './createEvent'
-import { createUser } from './createUser'
+import { createEvent, createEvents } from '../createEvent'
+import { createUser } from '../createUser'
 import Logger from '@/utils/logger'
+
+export * from './stars'
 
 const logger = Logger('api')
 

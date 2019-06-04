@@ -29,7 +29,7 @@ import Nav from '@/components/FTE/Nav.vue'
 import StyleWrapper from '@/components/FTE/StyleWrapper.vue'
 
 import VueScrollTo from 'vue-scrollto'
-import * as api from '@/utils/api.js'
+import * as api from '@/utils/api'
 import { mapGetters } from 'vuex'
 
 export default {

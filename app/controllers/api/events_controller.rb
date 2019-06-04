@@ -44,15 +44,14 @@ class API::EventsController < API::BaseController
 
   def show
     @event = Event.eager.find_by id: params[:id]
-    serializer = EventSerializer.new @event, include: %i[
-      event_hosts
-      participants
-      participants.participant_children
-      user
-      user.children
-      user.user_reviews
-      user.user_reviews.reviewer
-    ],
+    serializer = EventSerializer.new @event, include: %i[ event_hosts
+                                                          participants
+                                                          participants.participant_children
+                                                          user
+                                                          user.children
+                                                          user.user_reviews
+                                                          user.user_reviews.reviewer
+                                                        ],
                                              params: { current_user: current_user }
     render json: serializer.serializable_hash, status: :ok
   end
