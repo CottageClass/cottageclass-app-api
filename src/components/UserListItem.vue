@@ -4,7 +4,9 @@
     <div class="photo-wrapper">
       <AvatarImage
         :person="user"
-        className="photo-fit"/>
+        className="photo-fit"
+        imageSize="80"
+        />
       <div class="badge-verified" v-if="user.facebookUid">
         <div class="unicode-character">✓</div>
         <div class="badge-text">Verified</div>
