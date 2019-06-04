@@ -187,10 +187,7 @@ export default {
       this.disableForm = true
       try {
         this.avatar_url = await uploadImage(event.target.files[0])
-        console.log(this.avatar_url)
-        this.log('cloudinary upload success')
       } catch (e) {
-        this.logError('cloudinary upload error')
         this.logError(e)
       } finally {
         this.disableForm = false

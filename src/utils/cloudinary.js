@@ -1,4 +1,10 @@
 import axios from 'axios'
+import Logger from '@/utils/logger'
+
+// use a differnt axios instance so as to not use the authorization interceptor
+const cloudinaryAxios = axios.create()
+
+const logger = Logger('api')
 
 export function uploadImage (file) {
   const data = new FormData()
@@ -7,14 +13,15 @@ export function uploadImage (file) {
 
   return new Promise(async function (resolve, reject) {
     try {
-      const res = await axios.post(
+      const res = await cloudinaryAxios.post(
         cloudinaryUploadUrl(),
         data,
         { headers: { 'Content-Type': 'multipart/form-data' } }
       )
-      console.log({ res })
+      logger.log('cloudinary upload success')
       resolve(res.data.secure_url)
     } catch (e) {
+      logger.logError('cloudinary upload error')
       reject(e)
     }
   }
