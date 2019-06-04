@@ -28,7 +28,7 @@
               </div>
             </div>
             <div class="top-card-column-2">
-              <AvatarImage :person="user" className="avatar"/>
+              <AvatarImage :person="user" className="avatar" imageSize="200"/>
             </div>
           </div>
           <div v-if="isCurrentUser" class="top-sub-card">

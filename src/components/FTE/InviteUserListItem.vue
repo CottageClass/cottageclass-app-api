@@ -3,7 +3,7 @@
 <template>
   <div @click="toggleSelected" class="item-container">
     <div class="avatar-container">
-      <AvatarImage :person="person" class="avatar" />
+      <AvatarImage :person="person" class="avatar" imageSize="40"/>
     </div>
     <div class="info-container">
       <h5 class="heading">{{ person.firstName }} {{ person.lastInitial}}. </h5>

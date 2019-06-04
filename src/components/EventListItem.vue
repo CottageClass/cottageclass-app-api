@@ -29,7 +29,10 @@
           <div class="host-container">
             <div class="host-info">
             <router-link :to="{ name: 'ProviderProfile', params: { id: event.hostId }}">
-              <AvatarImage class="avatar-small" :person="{facebookUid: event.hostFacebookUid, avatar: event.hostAvatar}" />
+              <AvatarImage class="avatar-small"
+                           :person="{facebookUid: event.hostFacebookUid, avatar: event.hostAvatar}"
+                           imageSize="40"
+                           />
             </router-link>
             <div class="text-block">
               Hosted by
