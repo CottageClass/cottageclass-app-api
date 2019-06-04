@@ -69,6 +69,7 @@ import EditButton from './EditButton.vue'
 import EventCategoryIcon from '@/components/base/EventCategoryIcon.vue'
 import ChildAges from '@/components/ChildAges.vue'
 import { mapGetters } from 'vuex'
+import { imageUrl } from '@/utils/cloudinary'
 
 var moment = require('moment')
 
@@ -114,7 +115,7 @@ export default {
       }
     },
     images: function () {
-      return this.event.hostImages
+      return this.event.hostImages.map(url => imageUrl(url, { height: 100 }))
     },
     ...mapGetters([ 'distanceFromCurrentUser' ])
   }

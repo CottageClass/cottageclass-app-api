@@ -10,6 +10,18 @@ export function avatarUrl (rawUrl, size) {
   return rawUrl.replace('/upload/', `/upload/c_thumb,g_face,h_${size},w_${size}/`)
 }
 
+export function imageUrl (rawUrl, options) {
+  let transformations = ''
+
+  if (options.height) {
+    transformations += `h_${options.height}`
+  }
+  if (options.width) {
+    transformations += `w_${options.width}`
+  }
+  return rawUrl.replace('/upload/', `/upload/${transformations}/`)
+}
+
 export async function uploadAvatarImage (file) {
   const res = await upload(file)
   const rawUrl = res.data.url
