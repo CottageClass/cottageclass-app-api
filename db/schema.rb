@@ -175,6 +175,17 @@ ActiveRecord::Schema.define(version: 2019_05_29_125245) do
     t.index ["participable_type", "participable_id", "user_id"], name: "index_participants_on_participable_type_participable_id_user_id", unique: true
   end
 
+  create_table "stars", force: :cascade do |t|
+    t.string "starable_type"
+    t.bigint "starable_id"
+    t.bigint "giver_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["giver_id", "starable_type", "starable_id"], name: "index_stars_on_starable_type_starable_id_giver_id", unique: true
+    t.index ["giver_id"], name: "index_stars_on_giver_id"
+    t.index ["starable_type", "starable_id"], name: "index_stars_on_starable_type_and_starable_id"
+  end
+
   create_table "twilio_sessions", force: :cascade do |t|
     t.string "friendly_name"
     t.string "twilio_id"
@@ -304,6 +315,7 @@ ActiveRecord::Schema.define(version: 2019_05_29_125245) do
   add_foreign_key "messages", "twilio_sessions", column: "cc_twilio_session_id"
   add_foreign_key "messages", "users", column: "receiver_id"
   add_foreign_key "messages", "users", column: "sender_id"
+  add_foreign_key "stars", "users", column: "giver_id"
   add_foreign_key "twilio_sessions", "users", column: "receiver_id"
   add_foreign_key "twilio_sessions", "users", column: "sender_id"
   add_foreign_key "users", "events", column: "showcase_event_id"

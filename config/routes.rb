@@ -10,8 +10,8 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: :json } do
     resources :event_series, only: %i[index show create update]
-
     resources :events, only: %i[show update destroy] do
+      resource :stars, only: %i[create destroy], module: :events
       resources :participants, only: %i[create] do
         collection { delete :index, to: 'participants#destroy' }
       end
@@ -32,6 +32,7 @@ Rails.application.routes.draw do
     end
 
     resources :users, only: %i[show] do
+      resource :stars, only: %i[create destroy], module: :users
       collection do
         get '/miles/:miles/latitude/:latitude/longitude/:longitude(/page/:page(/page_size/:page_size))',
             to: 'users#feed',
@@ -77,8 +78,6 @@ Rails.application.routes.draw do
     end
   end
 
-  # get
-  # get '/users/:id' => 'users#show'
   get '/users/:id/inquiries' => 'users#inquiries', as: 'inquiries'
   get '/users/:sender_id/messages/:receiver_id' => 'messages#admin_for_pair', as: 'messages_for_pair'
 
@@ -91,10 +90,16 @@ Rails.application.routes.draw do
   post '/users/:id/proxy_sessions' => 'twilio_sessions#create', as: 'proxy_sessions'
   post '/proxy_callback' => 'twilio_sessions#callback'
 
+  #############
   # routes for facebook crawler
+  #############
   get '/event/:id', to: 'crawler_events#show', constraints: lambda { |request|
     request.user_agent && (request.user_agent.include? 'facebookexternalhit')
   }, as: 'crawler_event'
+
+  #############
+  # fallbacks
+  #############
 
   root 'static#index'
 

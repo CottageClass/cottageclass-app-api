@@ -45,7 +45,7 @@
 import TextMessageLink from '@/components/TextMessageLink.vue'
 import EventListItem from '@/components/EventListItem.vue'
 import Nav from '@/components/FTE/Nav.vue'
-import * as api from '@/utils/api.js'
+import * as api from '@/utils/api'
 import StyleWrapper from '@/components/FTE/StyleWrapper.vue'
 import { mapGetters } from 'vuex'
 

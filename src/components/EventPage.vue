@@ -3,6 +3,13 @@
     <MainNav />
     <LoadingSpinner v-if="!event" />
     <div v-else>
+      <div v-if="event.starred"> starred
+        <div @click="deleteStar"> unstar </div>
+      </div>
+      <div v-else> not starred
+        <div @click="createStar"> star </div>
+      </div>
+
       <div class="event-detail-container w-container">
         <div class="event-detail-graphic">
           <EventCategoryIcon :category="!!event ? event.activityName : ''" width="150" height="150" />
@@ -150,7 +157,8 @@
 </template>
 
 <script>
-import * as api from '@/utils/api.js'
+
+import * as api from '@/utils/api'
 import AvatarImage from '@/components/base/AvatarImage'
 import RsvpButton from './RsvpButton.vue'
 import ContactHostButton from './ContactHostButton.vue'
@@ -196,6 +204,14 @@ export default {
   },
   mixins: [maps],
   methods: {
+    async createStar () {
+      await api.starEvent(this.event.id)
+      this.event.starred = true
+    },
+    async deleteStar () {
+      await api.unstarEvent(this.event.id)
+      this.event.starred = false
+    },
     isToday: function (date) {
       return moment(0, 'HH').diff(date, 'days') === 0
     },
@@ -229,7 +245,6 @@ export default {
   },
   computed: {
     petDescription () {
-      this.debug(this.event)
       if (this.event.hasPet && this.event.petDescription) {
         return this.event.petDescription
       }

@@ -48,6 +48,18 @@ RSpec.resource 'User' do
 
     context 'authenticated' do
       include_context 'authorization token'
+
+      post '/api/users/:other_user_id/stars', format: :json do
+        example_request 'authenticated stars' do
+          expect(response_status).to eq(201)
+        end
+      end
+      delete '/api/users/:other_user_id/stars', format: :json do
+        example_request 'authenticated stars' do
+          expect(response_status).to eq(404)
+        end
+      end
+
       get '/api/users/:id', format: :json do
         example_request 'get self' do
           included_children = json_body.dig('included')
@@ -80,11 +92,21 @@ RSpec.resource 'User' do
     end
 
     context 'unauthenticated' do
+      delete '/api/users/:id/stars', format: :json do
+        example_request 'unauthenticated stars' do
+          expect(response_status).to eq(401)
+        end
+      end
+      post '/api/users/:id/stars', format: :json do
+        example_request 'unauthenticated stars' do
+          expect(response_status).to eq(401)
+        end
+      end
       get '/api/users/:id', format: :json do
         example_request 'unauthenticated get' do
           expect(response_status).to eq(200)
           expect(json_body.dig('data', 'attributes').deep_symbolize_keys.keys).to \
-            contain_exactly(*User::PUBLIC_ATTRIBUTES + [:last_initial])
+            contain_exactly(*User::PUBLIC_ATTRIBUTES + %i[last_initial starred])
         end
       end
     end

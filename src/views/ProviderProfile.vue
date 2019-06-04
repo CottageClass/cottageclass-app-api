@@ -1,9 +1,16 @@
 <template>
   <div class="onb-body">
     <MainNav />
+
     <StyleWrapper styleIs="editing">
       <LoadingSpinner v-if="!user"/>
       <div v-else class="profile-container w-container">
+        <div v-if="user.starred"> starred
+          <div @click="deleteStar"> unstar </div>
+        </div>
+        <div v-else> not starred
+          <div @click="createStar"> star </div>
+        </div>
         <div ref="map" class="map-container" />
         <div class="top-card">
           <div class="top-card-summary-info">
@@ -121,7 +128,7 @@
 <script>
 import Images from '@/components/Images.vue'
 import AvatarImage from '@/components/base/AvatarImage'
-import * as api from '@/utils/api.js'
+import { starUser, unstarUser, fetchUser } from '@/utils/api'
 import ChildAges from '@/components/ChildAges.vue'
 import StyleWrapper from '@/components/FTE/StyleWrapper.vue'
 import LoadingSpinner from '@/components/LoadingSpinner.vue'
@@ -151,11 +158,19 @@ export default {
   },
   mixins: [ maps, screen ],
   methods: {
+    async createStar () {
+      await starUser(this.user.id)
+      this.user.starred = true
+    },
+    async deleteStar () {
+      await unstarUser(this.user.id)
+      this.user.starred = false
+    },
     goToEdit: function () {
       this.$router.push({ name: 'ProfileEdit' })
     },
     async setUser () {
-      this.user = await api.fetchUser(this.$route.params.id)
+      this.user = await fetchUser(this.$route.params.id)
       // wait until the next tick so the map div exists
       this.$nextTick(async function () {
         await this.createMap(this.$refs.map, {
