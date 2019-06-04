@@ -1,6 +1,9 @@
 <template>
   <span>
-    <ImageUploadToCloudinary @startedUploading="toggleUploadingState" @imageUpload="addImage">
+    <ImageUploadToCloudinary
+    @startedUploading="toggleUploadingState"
+    @imageUpload="addImage"
+    @uploadError="uploadError">
       <a class="image-upload-photo-link">{{ buttonText }}</a>
     </ImageUploadToCloudinary>
     <div class="scrolling-wrapper">
@@ -13,10 +16,13 @@
 
 <script>
 import ImageUploadToCloudinary from '@/components/base/ImageUploadToCloudinary.vue'
+import { alerts } from '@/mixins'
+
 export default {
   name: 'MultipleImageUpload',
   components: { ImageUploadToCloudinary },
   props: ['value'],
+  mixins: [alerts],
   data () {
     return {
       imageUrls: this.value,
@@ -24,6 +30,9 @@ export default {
     }
   },
   methods: {
+    uploadError (e) {
+      this.showBriefAllert('There was a problem uploading your image.  Please select an image under 10MB ', 'failure')
+    },
     addImage: function (imageUrl) {
       this.imageUrls.push(imageUrl)
       this.$emit('input', this.imageUrls)

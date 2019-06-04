@@ -31,6 +31,7 @@ export default {
         this.avatar_url = await uploadImage(event.target.files[0])
         this.$emit('imageUpload', this.avatar_url)
       } catch (e) {
+        this.$emit('uploadError', e)
         this.logError(e)
       } finally {
         this.disableForm = false
