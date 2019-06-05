@@ -1,4 +1,13 @@
-// var moment = require('moment')
+export function andJoin (arr) {
+  if (!arr || !arr.length) {
+    return ''
+  }
+  if (arr.length === 1) {
+    return arr[0].toString()
+  }
+  const n = arr.length
+  return arr.slice(0, n - 1).map(e => e.toString()).join(', ') + ' and ' + arr[n - 1].toString()
+}
 
 export function distanceHaversine (lat1, lon1, lat2, lon2) {
   const unit = 'N' // always return miles
