@@ -37,6 +37,8 @@ describe('SearchListCard', () => {
     const date = wrapper.find('.header__date')
     const distance = wrapper.find('.header__distance')
     const badge = wrapper.find('.badge-verified')
+    const householdImages = wrapper.findAll('.household-container .tiny-photo')
+    const moreImagesLabel = wrapper.find('.household-container .more-images-label')
 
     expect(userName.text()).toBe('Foo B.')
     expect(occupation.text()).toBe('Doctor, New York Health Dept.')
@@ -45,9 +47,11 @@ describe('SearchListCard', () => {
     expect(date.text()).toBe('Available mornings and weekends')
     expect(distance.text()).toBe('0.7 mi')
     expect(badge.exists()).toBe(false)
+    expect(householdImages).toHaveLength(3)
+    expect(moreImagesLabel.text()).toBe('3 more')
   })
 
-  it('gets a single childs age correctly', () => {
+  it('some alternative cases on the data', () => {
     const wrapper = mount(SearchListCard, {
       propsData: {
         user: {
@@ -60,8 +64,12 @@ describe('SearchListCard', () => {
     })
     const kidsAges = wrapper.find('.user-info__kids')
     const badge = wrapper.find('.badge-verified')
+    const householdImages = wrapper.findAll('.household-container .tiny-photo')
+    const moreImagesLabel = wrapper.find('.household-container .more-images-label')
 
     expect(kidsAges.text()).toBe('1 child age 1 mo')
     expect(badge.exists()).toBe(true)
+    expect(householdImages).toHaveLength(0)
+    expect(moreImagesLabel.text()).toBe('')
   })
 })
