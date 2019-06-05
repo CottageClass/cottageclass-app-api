@@ -22,13 +22,6 @@ export function imageUrl (rawUrl, options) {
   return rawUrl.replace('/upload/', `/upload/${transformations}/`)
 }
 
-export async function uploadAvatarImage (file) {
-  const res = await upload(file)
-  const rawUrl = res.data.url
-  const url = rawUrl.replace('/upload/', '/upload/c_thumb,g_face,h_360,w_360/')
-  return url
-}
-
 export async function uploadImage (file) {
   try {
     const res = await upload(file)
