@@ -11,9 +11,11 @@
     <div class="footer__user-summary">
       <div class="photo-wrapper">
         <AvatarImage
-          :props
+          className="photo photo-fit"
+          :person="user"
+          imageSize="85"
           />
-        <div class="badge-verified">
+        <div class="badge-verified" v-if="user.facebookUid">
           <div class="unicode-character">✓</div>
           <div class="badge-text">Verified</div>
         </div>
@@ -23,12 +25,7 @@
           <div class="user-info__name">{{userName}}</div>
           <div class="user-info__occupation lp-truncate">{{occupation}}<br /></div>
           <div class="user-info__kids lp-truncate">{{kidsAges}}</div>
-          <div class="household-photos-tiny--container">
-            <img src="images/photo-7.png" width="24" height="24" alt="" class="household-photos-tiny__photo photo-fit" />
-            <img src="images/photo-6.png" width="24" height="24" alt="" class="household-photos-tiny__photo photo-fit" />
-            <img src="images/photo-22x.png" width="24" height="24" srcset="images/photo-22x-p-500.png 500w, images/photo-22x-p-800.png 800w, images/photo-22x.png 908w" sizes="24px" alt="" class="household-photos-tiny__photo photo-fit" />
-            <div class="other-events-card__attendees--more">12 more</div>
-          </div>
+          <HouseholdImages :user="user" />
         </div>
       </div>
     </div>
@@ -43,12 +40,15 @@
           </a></li>
       </ul>
     </div>
-  </div><a href="#entry-hyperlink" class="entry__hyperlink w-inline-block"></a>
+  </div>
 </li>
 </template>
 
 <script>
+import AvatarImage from '@/components/base/AvatarImage'
 import { andJoin, distanceHaversine } from '@/utils/utils'
+import HouseholdImages from '@/components/search/HouseholdImages'
+
 export default {
   name: 'SearchListCard',
   props: {
@@ -56,6 +56,7 @@ export default {
     event: { required: false },
     mapCenter: { required: true }
   },
+  components: { AvatarImage, HouseholdImages },
   computed: {
     distance () {
       return distanceHaversine(this.user.fuzzyLatitude, this.user.fuzzyLongitude, this.mapCenter.lat, this.mapCenter.lng) + ' mi'
