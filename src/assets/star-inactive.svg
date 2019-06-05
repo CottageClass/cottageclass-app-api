@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+    <title>kidsclub/icons/star-inactive</title>
+    <desc>Created with Sketch.</desc>
+    <g id="kidsclub/icons/star-inactive" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-opacity="0.2">
+        <g id="mvp/icons/star-inactive" transform="translate(0.450001, 1.500000)" fill="#F3F3F3" stroke="#000000">
+            <path d="M17.5913304,19.8651782 L16.0261528,13.0043899 L21.3250783,8.37388384 L14.3164144,7.74235603 L11.5499995,1.27187337 L8.78358458,7.74235603 L1.77492067,8.37388384 L7.07384615,13.0043899 L5.50866853,19.8651782 L11.5499995,16.2565056 L17.5913304,19.8651782 Z" id="Star"></path>
+        </g>
+    </g>
+</svg>
