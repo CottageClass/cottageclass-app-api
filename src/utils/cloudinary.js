@@ -7,7 +7,7 @@ const cloudinaryAxios = axios.create()
 const logger = Logger('cloudinary')
 
 export function avatarUrl (rawUrl, size) {
-  return rawUrl.replace('/upload/', `/upload/c_thumb,g_face,h_${size},w_${size}/`)
+  return rawUrl.replace('/upload/', `/upload/c_thumb,g_face,z_0.8,h_${size},w_${size}/`)
 }
 
 export function imageUrl (rawUrl, options) {
