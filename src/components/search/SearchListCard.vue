@@ -1,15 +1,18 @@
 <template>
 <li class="events-list__event-summary-card">
   <div class="header">
-    <div class="header__date">Sat, May 7, 8AM–12PM</div>
-    <div class="header__distance">0.1 mi</div>
+    <div class="header__date">{{timeHeader}}</div>
+    <div class="header__distance">{{distance}}</div>
   </div>
   <div class="description">
-    <div class="description-text line-clamp--2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.</div>
+    <div class="description-text line-clamp--2">{{description}}</div>
   </div>
   <div class="footer">
     <div class="footer__user-summary">
-      <div class="photo-wrapper"><img src="images/avatar-8.png" srcset="images/avatar-8-p-500.png 500w, images/avatar-8.png 600w" sizes="(max-width: 479px) 65px, (max-width: 767px) 75px, 85px" alt="" class="photo photo-fit" />
+      <div class="photo-wrapper">
+        <AvatarImage
+          :props
+          />
         <div class="badge-verified">
           <div class="unicode-character">✓</div>
           <div class="badge-text">Verified</div>
@@ -18,8 +21,8 @@
       <div class="user-info--container">
         <div class="user-info_list">
           <div class="user-info__name">{{userName}}</div>
-          <div class="user-info__occupation lp-truncate">Engineer, Lockeed Martin Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum<br /></div>
-          <div class="user-info__kids lp-truncate">Ages 10, 5, 2, 18mnths Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum</div>
+          <div class="user-info__occupation lp-truncate">{{occupation}}<br /></div>
+          <div class="user-info__kids lp-truncate">{{kidsAges}}</div>
           <div class="household-photos-tiny--container">
             <img src="images/photo-7.png" width="24" height="24" alt="" class="household-photos-tiny__photo photo-fit" />
             <img src="images/photo-6.png" width="24" height="24" alt="" class="household-photos-tiny__photo photo-fit" />
@@ -45,6 +48,7 @@
 </template>
 
 <script>
+import { andJoin, distanceHaversine } from '@/utils/utils'
 export default {
   name: 'SearchListCard',
   props: {
@@ -53,8 +57,72 @@ export default {
     mapCenter: { required: true }
   },
   computed: {
+    distance () {
+      return distanceHaversine(this.user.fuzzyLatitude, this.user.fuzzyLongitude, this.mapCenter.lat, this.mapCenter.lng) + ' mi'
+    },
+    timeHeader () {
+      if (this.event) {
+        // TODO
+        return ''
+      }
+      const availabilityStrings = []
+      if (this.user.availableMornings) {
+        availabilityStrings.push('mornings')
+      }
+      if (this.user.availableAfternoons) {
+        availabilityStrings.push('afternoons')
+      }
+      if (this.user.availableEvenings) {
+        availabilityStrings.push('evenings')
+      }
+      if (this.user.availableWeekends) {
+        availabilityStrings.push('weekends')
+      }
+      if (availabilityStrings.length > 0) {
+        return 'Available ' + andJoin(availabilityStrings)
+      }
+      return 'no availability yet'
+    },
+    ageString () {
+      return (i) => {
+        const ageInMonths = this.user.childAgesInMonths[i]
+        if (ageInMonths < 24) {
+          return ageInMonths + (ageInMonths === 1 ? ' mo' : ' mos')
+        }
+        return Math.floor(ageInMonths / 12).toString()
+      }
+    },
+    kidsAges () {
+      const ages = this.user.childAgesInMonths
+      if (!ages || ages.length === 0) {
+        return ''
+      }
+      if (ages.length === 1) {
+        return '1 child age ' + this.ageString(0)
+      }
+      return 'Ages ' + andJoin(ages.map((e, i) => this.ageString(i)))
+    },
     userName () {
       return this.user.firstName + ' ' + this.user.lastInitial + '.'
+    },
+    description () {
+      if (this.event) {
+        return this.event.name
+      }
+      return this.user.profileBlurb
+    },
+    occupation () {
+      const position = this.user.jobPosition
+      const employer = this.user.employer
+      if (position && employer) {
+        return position + ', ' + employer
+      } else if (position) {
+        return position
+      } else if (employer) {
+        return employer
+      } else {
+        return null
+      }
     }
   }
 }
