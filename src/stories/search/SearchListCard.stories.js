@@ -8,7 +8,7 @@ Vue.component('SearchListCard', SearchListCard)
 
 storiesOf('SearchListCard', module)
   .addDecorator(withKnobs)
-  .add('as a component', () => ({
+  .add('with only a user', () => ({
     components: { SearchListCard },
     computed: {},
     props: {
@@ -19,10 +19,7 @@ storiesOf('SearchListCard', module)
           firstName: text('first name', 'Lucas'),
           jobPosition: text('job position', 'Doctor'),
           employer: text('employer', ''),
-          location: {
-            lat: number('lattitude', 42.2798695),
-            lng: number('longitude', -71.7898409)
-          }
+          profileBlurb: text('Let me tell you all about me!  I am a super fast runner and I can bake cookies', '')
         }
       }
     },
