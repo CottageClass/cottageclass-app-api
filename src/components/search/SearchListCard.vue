@@ -1,24 +1,24 @@
 <template>
 <li class="events-list__event-summary-card">
-  <div class="event-summary-card__header">
-    <div class="event-summary-card__header__date">Sat, May 7, 8AM–12PM</div>
-    <div class="event-summary-card__header__distance">0.1 mi</div>
+  <div class="header">
+    <div class="header__date">Sat, May 7, 8AM–12PM</div>
+    <div class="header__distance">0.1 mi</div>
   </div>
-  <div class="event-summary-card__description">
-    <div class="event-summary-card__description-text line-clamp--2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.</div>
+  <div class="description">
+    <div class="description-text line-clamp--2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.</div>
   </div>
-  <div class="event-summary-card__footer">
-    <div class="event-summary-card__footer__user-summary">
-      <div class="event-summary-card__photo-wrapper"><img src="images/avatar-8.png" srcset="images/avatar-8-p-500.png 500w, images/avatar-8.png 600w" sizes="(max-width: 479px) 65px, (max-width: 767px) 75px, 85px" alt="" class="event-summary-card__photo photo-fit" />
+  <div class="footer">
+    <div class="footer__user-summary">
+      <div class="photo-wrapper"><img src="images/avatar-8.png" srcset="images/avatar-8-p-500.png 500w, images/avatar-8.png 600w" sizes="(max-width: 479px) 65px, (max-width: 767px) 75px, 85px" alt="" class="photo photo-fit" />
         <div class="badge-verified">
           <div class="unicode-character">✓</div>
           <div class="badge-text">Verified</div>
         </div>
       </div>
-      <div class="event-summary-card__user-info--container">
-        <div class="event-summary-card__user-info_list">
-          <div class="event-summary-card__user-info__name">This is some text inside of a div block.</div>
-          <div class="event-summary-card__user-info__occupation lp-truncate">Engineer, Lockeed Martin Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum<br /></div>
+      <div class="user-info--container">
+        <div class="user-info_list">
+          <div class="user-info__name">{{userName}}</div>
+          <div class="user-info__occupation lp-truncate">Engineer, Lockeed Martin Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum<br /></div>
           <div class="event-summar-card__user-info__kids lp-truncate">Ages 10, 5, 2, 18mnths Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum</div>
           <div class="household-photos-tiny--container">
             <img src="images/photo-7.png" width="24" height="24" alt="" class="household-photos-tiny__photo photo-fit" />
@@ -29,12 +29,12 @@
         </div>
       </div>
     </div>
-    <div class="event-summary-card__footer__actions--mobile"><a href="#" class="event-action__icon-button__star w-inline-block"></a>
+    <div class="footer__actions--mobile"><a href="#" class="event-action__icon-button__star w-inline-block"></a>
       <div class="other-events-card__footer-actions__more-wrapper"><a href="#" class="event-action__icon-button__more w-inline-block"></a></div>
     </div>
-    <div class="event-summary-card__footer__actions">
-      <ul class="event-summary-card__footer__button-list">
-        <li class="event-summary-card__footer__list-item"><a href="#" class="event-action-button w-inline-block">
+    <div class="footer__actions">
+      <ul class="footer__button-list">
+        <li class="footer__list-item"><a href="#" class="event-action-button w-inline-block">
             <img src="images/star-black-outline.svg" alt="" class="action-button-icon" />
             <div class="text-block-6">Interested</div>
           </a></li>
@@ -46,7 +46,17 @@
 
 <script>
 export default {
-  name: 'EventSummaryCard'
+  name: 'SearchListCard',
+  props: {
+    user: { required: true },
+    event: { required: false },
+    mapCenter: { required: true }
+  },
+  computed: {
+    userName () {
+      return this.user.firstName + ' ' + this.user.lastInitial + '.'
+    }
+  }
 }
 </script>
 
@@ -216,7 +226,7 @@ a {
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.08);
 }
 
-.event-summary-card__header {
+.header {
   position: relative;
   display: flex;
   min-height: 12px;
@@ -225,14 +235,14 @@ a {
   align-items: center;
 }
 
-.event-summary-card__header__date {
+.header__date {
   color: #1f88e9;
   font-size: 12px;
   line-height: 12px;
   text-transform: uppercase;
 }
 
-.event-summary-card__header__distance {
+.header__distance {
   position: absolute;
   right: 0;
   color: #64426b;
@@ -241,7 +251,7 @@ a {
   text-transform: uppercase;
 }
 
-.event-summary-card__description {
+.description {
   position: relative;
   display: flex;
   margin-bottom: 12px;
@@ -249,7 +259,7 @@ a {
   align-items: center;
 }
 
-.event-summary-card__footer {
+.footer {
   position: relative;
   display: flex;
   justify-content: space-between;
@@ -257,30 +267,30 @@ a {
   align-items: flex-end;
 }
 
-.event-summary-card__footer__user-summary {
+.footer__user-summary {
   position: relative;
   display: flex;
   align-items: center;
 }
 
-.event-summary-card__footer__actions {
+.footer__actions {
   position: relative;
   z-index: 2;
   display: flex;
   flex-direction: row;
 }
 
-.event-summary-card__description-text {
+.description-text {
   font-size: 16px;
   line-height: 22px;
 }
 
-.event-summary-card__photo-wrapper {
+.photo-wrapper {
   position: relative;
   height: 100%;
 }
 
-.event-summary-card__photo {
+.photo {
   position: static;
   max-height: 85px;
   max-width: 85px;
@@ -290,7 +300,7 @@ a {
   border-radius: 50%;
 }
 
-.event-summary-card__footer__button-list {
+.footer__button-list {
   display: flex;
   margin-top: 20px;
   margin-right: -8px;
@@ -299,7 +309,7 @@ a {
   list-style-type: none;
 }
 
-.event-summary-card__footer__list-item {
+.footer__list-item {
   display: flex;
   margin-top: 0;
   margin-right: 8px;
@@ -307,14 +317,14 @@ a {
   align-items: flex-end;
 }
 
-.event-summary-card__user-info__name {
+.user-info__name {
   color: rgba(0, 0, 0, 0.86);
   font-size: 12px;
   line-height: 17px;
   font-weight: 700;
 }
 
-.event-summary-card__user-info__occupation {
+.user-info__occupation {
   overflow: hidden;
   width: 360px;
   color: rgba(0, 0, 0, 0.6);
@@ -330,7 +340,7 @@ a {
   line-height: 17px;
 }
 
-.event-summary-card__footer__actions--mobile {
+.footer__actions--mobile {
   position: absolute;
   right: -10px;
   display: none;
@@ -362,7 +372,7 @@ a {
   background-color: rgba(0, 0, 0, 0.06);
 }
 
-.event-summary-card__user-info--container {
+.user-info--container {
   display: flex;
   margin-left: 12px;
   flex-direction: row;
@@ -370,7 +380,7 @@ a {
   align-items: center;
 }
 
-.event-summary-card__user-info_list {
+.user-info_list {
   margin-right: 20px;
   line-height: 20px;
 }
@@ -410,11 +420,11 @@ a {
     background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.03), rgba(0, 0, 0, 0.03));
   }
 
-  .event-summary-card__footer__user-summary {
+  .footer__user-summary {
     min-width: 240px;
   }
 
-  .event-summary-card__user-info__occupation {
+  .user-info__occupation {
     width: 480px;
   }
 
@@ -469,27 +479,27 @@ a {
     border-radius: 0;
   }
 
-  .event-summary-card__footer__user-summary {
+  .footer__user-summary {
     min-width: auto;
   }
 
-  .event-summary-card__footer__actions {
+  .footer__actions {
     display: none;
   }
 
-  .event-summary-card__description-text {
+  .description-text {
     font-size: 13px;
     line-height: 19.5px;
   }
 
-  .event-summary-card__photo {
+  .photo {
     max-height: 75px;
     max-width: 75px;
     min-height: 75px;
     min-width: 75px;
   }
 
-  .event-summary-card__user-info__occupation {
+  .user-info__occupation {
     width: 320px;
   }
 
@@ -497,7 +507,7 @@ a {
     width: 320px;
   }
 
-  .event-summary-card__footer__actions--mobile {
+  .footer__actions--mobile {
     left: auto;
     top: auto;
     right: -12px;
@@ -536,34 +546,34 @@ a {
     width: 100%;
   }
 
-  .event-summary-card__footer__actions {
+  .footer__actions {
     width: 100%;
   }
 
-  .event-summary-card__photo-wrapper {
+  .photo-wrapper {
     max-height: 77px;
   }
 
-  .event-summary-card__photo {
+  .photo {
     max-height: 65px;
     max-width: 65px;
     min-height: 65px;
     min-width: 65px;
   }
 
-  .event-summary-card__footer__button-list {
+  .footer__button-list {
     width: 100%;
     margin-top: 16px;
     flex-direction: column;
   }
 
-  .event-summary-card__footer__list-item {
+  .footer__list-item {
     width: 100%;
     margin-top: 0;
     margin-bottom: 8px;
   }
 
-  .event-summary-card__user-info__occupation {
+  .user-info__occupation {
     width: 200px;
   }
 
