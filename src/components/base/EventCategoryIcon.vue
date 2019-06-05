@@ -14,7 +14,7 @@ export default {
     },
     iconImage: function () {
       if (!this.category) {
-        return 'grinning-face-with-smiling-eyes.svg'
+        return 'sun.svg'
       }
       switch (this.category.toLowerCase()) {
         case 'baby playgroup':
@@ -42,7 +42,7 @@ export default {
         case 'playing outside (weather permitting)':
           return 'sun-behind-small-cloud.svg'
         default:
-          return 'grinning-face-with-smiling-eyes.svg'
+          return 'sun.svg'
       }
     }
   }
