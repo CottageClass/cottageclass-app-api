@@ -19,7 +19,7 @@
         <div class="user-info_list">
           <div class="user-info__name">{{userName}}</div>
           <div class="user-info__occupation lp-truncate">Engineer, Lockeed Martin Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum<br /></div>
-          <div class="event-summar-card__user-info__kids lp-truncate">Ages 10, 5, 2, 18mnths Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum</div>
+          <div class="user-info__kids lp-truncate">Ages 10, 5, 2, 18mnths Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum</div>
           <div class="household-photos-tiny--container">
             <img src="images/photo-7.png" width="24" height="24" alt="" class="household-photos-tiny__photo photo-fit" />
             <img src="images/photo-6.png" width="24" height="24" alt="" class="household-photos-tiny__photo photo-fit" />
@@ -332,7 +332,7 @@ a {
   line-height: 17px;
 }
 
-.event-summar-card__user-info__kids {
+.user-info__kids {
   overflow: hidden;
   width: 360px;
   color: rgba(0, 0, 0, 0.6);
@@ -428,7 +428,7 @@ a {
     width: 480px;
   }
 
-  .event-summar-card__user-info__kids {
+  .user-info__kids {
     width: 480px;
   }
 
@@ -503,7 +503,7 @@ a {
     width: 320px;
   }
 
-  .event-summar-card__user-info__kids {
+  .user-info__kids {
     width: 320px;
   }
 
@@ -577,7 +577,7 @@ a {
     width: 200px;
   }
 
-  .event-summar-card__user-info__kids {
+  .user-info__kids {
     width: 200px;
   }
 
