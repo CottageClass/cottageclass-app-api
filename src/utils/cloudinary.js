@@ -7,7 +7,7 @@ const cloudinaryAxios = axios.create()
 const logger = Logger('cloudinary')
 
 export function avatarUrl (rawUrl, size) {
-  return rawUrl.replace('/upload/', `/upload/c_thumb,g_face,h_${size},w_${size}/`)
+  return rawUrl.replace('/upload/', `/upload/c_thumb,g_face,z_0.8,h_${size},w_${size}/`)
 }
 
 export function imageUrl (rawUrl, options) {
@@ -20,13 +20,6 @@ export function imageUrl (rawUrl, options) {
     transformations += `w_${options.width}`
   }
   return rawUrl.replace('/upload/', `/upload/${transformations}/`)
-}
-
-export async function uploadAvatarImage (file) {
-  const res = await upload(file)
-  const rawUrl = res.data.url
-  const url = rawUrl.replace('/upload/', '/upload/c_thumb,g_face,h_360,w_360/')
-  return url
 }
 
 export async function uploadImage (file) {

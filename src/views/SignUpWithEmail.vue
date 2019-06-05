@@ -61,8 +61,8 @@
                         </div>
                         <label for="avatar">
                           <div class="profile-photo-wrapper">
-                            <img v-if="!!avatar_url"
-                                :src="avatar_url"
+                            <img v-if="previewAvatarUrl"
+                                :src="previewAvatarUrl"
                                 class="profile-photo"
                                 height="80"
                             >
@@ -109,7 +109,7 @@ import Footer from '@/components/Footer.vue'
 import StyleWrapper from '@/components/FTE/StyleWrapper.vue'
 import FacebookButton from '@/components/base/FacebookButton'
 import ErrorMessage from '@/components/base/ErrorMessage.vue'
-import { uploadAvatarImage } from '@/utils/cloudinary'
+import { uploadImage, avatarUrl } from '@/utils/cloudinary'
 
 export default {
   name: 'SignUpWithEmail',
@@ -125,7 +125,8 @@ export default {
       avatar_url: null,
       showError: false,
       avatarLoading: false,
-      showFacebookLogin: !this.hideFacebookLogin()
+      showFacebookLogin: !this.hideFacebookLogin(),
+      previewAvatarUrl: null
     }
   },
   computed: {
@@ -186,7 +187,8 @@ export default {
       this.avatarLoading = true
       this.disableForm = true
       try {
-        this.avatar_url = await uploadAvatarImage(event.target.files[0])
+        this.avatar_url = await uploadImage(event.target.files[0])
+        this.previewAvatarUrl = avatarUrl(this.avatar_url, 80)
       } catch (e) {
         this.logError(e)
       } finally {
