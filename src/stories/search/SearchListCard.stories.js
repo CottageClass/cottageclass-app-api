@@ -1,15 +1,15 @@
 import { storiesOf } from '@storybook/vue'
-import EventSummaryCard from '@/components/search/EventSummaryCard.vue'
+import SearchListCard from '@/components/search/SearchListCard.vue'
 import Vue from 'vue'
 
 import { withKnobs, text, array, number } from '@storybook/addon-knobs'
 
-Vue.component('EventSummaryCard', EventSummaryCard)
+Vue.component('SearchListCard', SearchListCard)
 
-storiesOf('EventSummaryCard', module)
+storiesOf('SearchListCard', module)
   .addDecorator(withKnobs)
   .add('as a component', () => ({
-    components: { EventSummaryCard },
+    components: { SearchListCard },
     computed: {},
     props: {
       user: {
@@ -26,5 +26,5 @@ storiesOf('EventSummaryCard', module)
         }
       }
     },
-    template: `<div style="max-width:524px"> <EventSummaryCard :user="user"/> </div>`
+    template: `<div style="max-width:524px"> <SearchListCard :user="user"/> </div>`
   }))
