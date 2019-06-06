@@ -1,8 +1,8 @@
 <template>
-<div class="event-action-button">
+<a class="event-action-button" @click="$emit('click')">
     <img v-if="icon" :src="icon" class="action-button-icon" />
     <div class="label-text">{{label}}</div>
-</div>
+</a>
 </template>
 
 <script>

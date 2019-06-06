@@ -21,12 +21,18 @@ export default {
   },
   computed: {
     moreText () {
+      if (!this.user.images) {
+        return ''
+      }
       if (this.user.images.length > 3) {
         return (this.user.images.length - 3) + ' more'
       }
       return ''
     },
     displayImageUrls () {
+      if (!this.user.images) {
+        return []
+      }
       return this.user.images.slice(0, 3).map(url => {
         return householdImageUrl(url, 24)
       })

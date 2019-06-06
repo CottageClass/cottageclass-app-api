@@ -3,9 +3,9 @@
     <LoadingSpinner v-if="awaiting"/>
     <div class="user-list" v-if="!awaiting">
       <div v-for="(user, index) in users">
-        <UserListItem
+        <SearchListCard
           :user="user"
-          :index="index"
+          :mapCenter="mapArea.center"
           :key="index"
         />
       </div>
@@ -62,14 +62,14 @@
 <script>
 import TrailblazerCard from '@/components/TrailblazerCard.vue'
 import EventListItem from '@/components/EventListItem.vue'
-import UserListItem from '@/components/UserListItem.vue'
+import SearchListCard from '@/components/search/SearchListCard'
 import LoadingSpinner from '@/components/LoadingSpinner.vue'
 import { mapGetters } from 'vuex'
 
 var moment = require('moment')
 export default {
   name: 'SearchResultList',
-  components: { EventListItem, LoadingSpinner, UserListItem, TrailblazerCard },
+  components: { EventListItem, LoadingSpinner, SearchListCard, TrailblazerCard },
 
   props: {
     noEventsMessage: {},
@@ -107,7 +107,7 @@ export default {
     noEvents: function () {
       return this.events !== null && this.events.length === 0
     },
-    ...mapGetters(['currentUser', 'distanceFromCurrentUser', 'isAuthenticated'])
+    ...mapGetters(['currentUser', 'distanceFromCurrentUser', 'isAuthenticated', 'mapArea'])
   }
 }
 </script>
