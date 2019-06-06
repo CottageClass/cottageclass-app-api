@@ -3,13 +3,6 @@
     <MainNav />
     <LoadingSpinner v-if="!event" />
     <div v-else>
-      <div v-if="event.starred"> starred
-        <div @click="deleteStar"> unstar </div>
-      </div>
-      <div v-else> not starred
-        <div @click="createStar"> star </div>
-      </div>
-
       <div class="event-detail-container w-container">
         <div class="event-detail-graphic">
           <EventCategoryIcon :category="!!event ? event.activityName : ''" width="150" height="150" />
@@ -44,7 +37,7 @@
             <!-- TODO put in participant info when it's available -->
             <router-link v-for="participant in event.participatingParents" v-bind:key="participant.id"
               :to="{ name: 'ProviderProfile', params: { id: participant.userId }}" class="guest-link w-inline-block">
-              <AvatarImage className="avatar-32"
+              <AvatarImage className="avatar-32" imageSize="32"
                 :person="{facebookUid: participant.userFacebookUid, avatar: participant.userAvatar}" />
               <img src="@/assets/check-circle-24.svg" alt="" class="checkmark-green">
             </router-link>
