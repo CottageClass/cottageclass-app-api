@@ -56,6 +56,7 @@ describe('SearchListCard', () => {
         user: {
           facebookUid: '563930223',
           childAgesInMonths: [1],
+          location: { lat: 42.27, lng: -71.78 },
           images: []
         },
         mapCenter: { lat: 42.2798695, lng: -71.7898409 }
