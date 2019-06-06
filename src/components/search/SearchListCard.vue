@@ -248,6 +248,10 @@ a {
 }
 
 .events-list__event-summary-card {
+  &:hover {
+    background-color: #F8F8F8;
+  }
+  cursor: pointer;
   position: relative;
   display: flex;
   width: 100%;
