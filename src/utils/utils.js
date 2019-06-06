@@ -27,6 +27,7 @@ export function distanceHaversine (lat1, lon1, lat2, lon2) {
 }
 
 export function capitalize (string) {
+  if (!string) return null
   return string.charAt(0).toUpperCase() + string.slice(1)
 }
 

@@ -22,7 +22,7 @@ export const createUsers = (data) => {
     return {
       ...p,
       id: id,
-      lastInitial: p.lastName && p.lastName[0],
+      lastInitial: capitalize(p.lastInitial),
       activities: activities,
       networkCode: 'brooklyn-events', // give everyone the new network code
       location,

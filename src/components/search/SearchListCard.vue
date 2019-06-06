@@ -1,5 +1,6 @@
 <template>
-<li class="events-list__event-summary-card">
+<li class="events-list__event-summary-card"
+    @click="goToItem">
   <div class="header">
     <div class="header__date">{{timeHeader}}</div>
     <div class="header__distance">{{distance}}</div>
@@ -36,6 +37,7 @@
     </div>
     <SearchListCardActions
                     :user="user"
+                    :event="event"
                     @user-updated="$emit('user-updated', $event)"
                     @event-updated="$emit('event-updated', $event)"/>
   </div>
@@ -122,6 +124,17 @@ export default {
         return employer
       } else {
         return null
+      }
+    }
+  },
+  methods: {
+    goToItem () {
+      if (this.event) {
+        this.$router.push({ name: 'EventPage', params: { eventId: this.event.id } })
+      } else if (this.user) {
+        this.$router.push({ name: 'ProviderProfile', params: { id: this.user.id } })
+      } else {
+        throw Error('No valid item on this list card')
       }
     }
   }
