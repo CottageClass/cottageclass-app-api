@@ -38,6 +38,17 @@ export default {
 </script>
 
 <style scoped>
+.more-images-label {
+  margin-left: 6px;
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 12px;
+  line-height: 14px;
+}
+
+.more-images-label:hover {
+  text-decoration: underline;
+}
+
 .tiny-photo {
   max-height: 24px;
   max-width: 24px;

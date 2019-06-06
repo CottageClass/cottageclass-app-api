@@ -11,7 +11,7 @@
     <div class="footer__user-summary">
       <div class="photo-wrapper">
         <AvatarImage
-          className="photo photo-fit"
+          className="photo"
           :person="user"
           imageSize="85"
           />
@@ -30,16 +30,11 @@
       </div>
     </div>
     <div class="footer__actions--mobile"><a href="#" class="event-action__icon-button__star w-inline-block"></a>
-      <div class="other-events-card__footer-actions__more-wrapper"><a href="#" class="event-action__icon-button__more w-inline-block"></a></div>
+      <div class="other-events-card__footer-actions__more-wrapper">
+        <a href="#" class="event-action__icon-button__more w-inline-block"></a>
+      </div>
     </div>
-    <div class="footer__actions">
-      <ul class="footer__button-list">
-        <li class="footer__list-item"><a href="#" class="event-action-button w-inline-block">
-            <img src="images/star-black-outline.svg" alt="" class="action-button-icon" />
-            <div class="text-block-6">Interested</div>
-          </a></li>
-      </ul>
-    </div>
+    <SearchListCardActions isStarred="false" isGoing="false" />
   </div>
 </li>
 </template>
@@ -48,6 +43,7 @@
 import AvatarImage from '@/components/base/AvatarImage'
 import { andJoin, distanceHaversine } from '@/utils/utils'
 import HouseholdImages from '@/components/search/HouseholdImages'
+import SearchListCardActions from '@/components/search/SearchListCardActions'
 
 export default {
   name: 'SearchListCard',
@@ -56,7 +52,7 @@ export default {
     event: { required: false },
     mapCenter: { required: true }
   },
-  components: { AvatarImage, HouseholdImages },
+  components: { AvatarImage, HouseholdImages, SearchListCardActions },
   computed: {
     distance () {
       return distanceHaversine(this.user.fuzzyLatitude, this.user.fuzzyLongitude, this.mapCenter.lat, this.mapCenter.lng) + ' mi'
@@ -169,33 +165,6 @@ a {
   letter-spacing: .5px;
   text-transform: uppercase;
 }
-
-.household-photos-tiny--container {
-  display: flex;
-  margin-top: 8px;
-  align-items: center;
-}
-
-.event-action-button {
-  display: flex;
-  padding: 8px 12px;
-  justify-content: flex-start;
-  align-items: center;
-  border-style: solid;
-  border-width: 1px;
-  border-color: rgba(0, 0, 0, 0.03);
-  border-radius: 4px;
-  background-color: #f3f3f3;
-}
-
-.event-action-button:hover {
-  background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0.06));
-}
-
-.event-action-button:active {
-  background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0.06));
-}
-
 .action-button-icon {
   width: 20px;
   height: 20px;
@@ -206,25 +175,6 @@ a {
 .text-block-6 {
   color: #000;
   font-size: 13px;
-}
-
-.household-photos-tiny__photo {
-  max-height: 24px;
-  max-width: 24px;
-  min-height: 24px;
-  min-width: 24px;
-  margin-right: 6px;
-}
-
-.other-events-card__attendees--more {
-  margin-left: 6px;
-  color: rgba(0, 0, 0, 0.5);
-  font-size: 12px;
-  line-height: 14px;
-}
-
-.other-events-card__attendees--more:hover {
-  text-decoration: underline;
 }
 
 .event-action__icon-button__star {
@@ -369,15 +319,6 @@ a {
   border-radius: 50%;
 }
 
-.footer__button-list {
-  display: flex;
-  margin-top: 20px;
-  margin-right: -8px;
-  margin-bottom: 0;
-  padding-left: 0;
-  list-style-type: none;
-}
-
 .footer__list-item {
   display: flex;
   margin-top: 0;
@@ -470,6 +411,12 @@ a {
 
 .entry__hyperlink:hover {
   background-color: rgba(0, 0, 0, 0.03);
+}
+.line-clamp--2 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
 }
 
 @media (max-width: 991px){
@@ -628,12 +575,6 @@ a {
     max-width: 65px;
     min-height: 65px;
     min-width: 65px;
-  }
-
-  .footer__button-list {
-    width: 100%;
-    margin-top: 16px;
-    flex-direction: column;
   }
 
   .footer__list-item {
