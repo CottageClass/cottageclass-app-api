@@ -207,6 +207,7 @@ function createPersonObject (personInApi, availableChildren = []) {
     // todo: add these once I have them
     verified: p.verified,
     phone: p.phone,
+    starred: p.starred,
     dateCreated: p.date_created,
     hasAllRequiredFields: hasAllRequiredFields(),
     blurb: p.profile_blurb
