@@ -75,6 +75,23 @@ class User < ApplicationRecord
     super.merge('user' => CurrentUserSerializer.json_for(self, include: %i[children]))
   end
 
+  def best_match
+    miles = 20
+    if (latitude.present? && latitude.nonzero?) && (longitude.present? && longitude.nonzero?)
+      location = [latitude, longitude]
+    end
+    if location
+      users = User.near(location.map(&:to_f), miles)
+      users = users.where.not(id: id)
+      users.max_by do |matcher|
+        closeest_child_ages = child_ages_in_months.product(matcher.child_ages_in_months).min_by do |ages|
+          (ages[0] - ages[1]).abs
+        end
+        6 * (closeest_child_ages[0] - closeest_child_ages[1]).abs + matcher.distance
+      end
+    end
+  end
+
   def child_ages_in_months
     children.map(&:age_in_months)
   end
