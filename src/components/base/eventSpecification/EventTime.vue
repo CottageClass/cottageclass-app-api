@@ -34,7 +34,7 @@ export default {
   data () {
     return {
       timeSelected: null,
-      errorMesg: 'Please choose a time for your playdate.'
+      errorMesg: 'Please choose a time when you are available.'
     }
   },
   mounted: function () {
@@ -47,10 +47,10 @@ export default {
   },
   computed: {
     titleText () {
-      return this.$route.name === 'NewEventStep' ? 'When are you available?' : 'Choose a time for your activity'
+      return 'What times are you available?'
     },
     subtitleText () {
-      return 'Each activity runs 3 hours in the evening, but the start time is up to you. (You\'ll choose the date next.)'
+      return 'Choose a time range below. The playdate can be any time in this range.'
     },
     startTimeChoice () {
       if (!this.value.start) { return null }
