@@ -16,8 +16,7 @@ describe('SearchListCard', () => {
           availableAfternoons: false,
           availableWeekends: true,
           availableEvenings: false,
-          fuzzyLatitude: 42.27,
-          fuzzyLongitude: -71.78,
+          location: { lat: 42.27, lng: -71.78 },
           images: [
             'https://res.cloudinary.com/cottageclass2/image/upload/v1559762128/user_images/2012-04-06_21.02.13_egjide.png',
             'https://res.cloudinary.com/cottageclass2/image/upload/v1559762128/user_images/2012-04-06_21.02.13_egjide.png',

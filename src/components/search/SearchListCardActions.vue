@@ -4,13 +4,13 @@
       <IconButton label="Interested" :icon="starIcon" @click="interestedClick"/>
     </li>
     <li>
-      <IconButton v-if="eventId" label="Going" :icon="goingIcon" @click="goingClick"/>
+      <IconButton v-if="event" label="Going" :icon="goingIcon" @click="goingClick"/>
     </li>
     <li>
-      <IconButton v-if="eventId" label="Contact" :icon="contactIcon" @click="contactClick"/>
+      <IconButton v-if="event" label="Contact" :icon="contactIcon" @click="contactClick"/>
     </li>
     <li>
-      <IconButton v-if="eventId" label="Share" :icon="shareIcon" @click="shareClick"/>
+      <IconButton v-if="event" label="Share" :icon="shareIcon" @click="shareClick"/>
     </li>
   </ul>
 </template>
@@ -30,9 +30,8 @@ import starredIconInactive from '@/assets/star-black-outline.svg'
 export default {
   name: 'SearchListCardActions',
   props: {
-    isStarred: { required: true },
-    isGoing: {},
-    eventId: {}
+    user: {},
+    event: {}
   },
   components: { IconButton },
   data () {
@@ -46,33 +45,41 @@ export default {
       return this.isGoing ? goingIconActive : goingIconInactive
     },
     starIcon () {
-      return this.isStarred ? starredIconActive : starredIconInactive
+      return this.item.starred ? starredIconActive : starredIconInactive
+    },
+    item () {
+      if (this.event) { return this.event }
+      if (this.user) { return this.user }
+      throw Error('No valid item on this list card')
     }
   },
   methods: {
-    interestedClick () {
-      if (this.eventId) {
-        if (this.isStarred) {
-          starEvent(this.eventId)
+    async interestedClick () {
+      let res
+      if (this.event) {
+        if (this.event.starred) {
+          res = await unstarEvent(this.event.id)
         } else {
-          unstarEvent(this.eventId)
+          res = await starEvent(this.event.id)
         }
-      } else if (this.userId) {
-        if (this.isStarred) {
-          starUser(this.eventId)
+        this.$emit('eventUpdated', res)
+      } else if (this.user) {
+        if (this.user.starred) {
+          res = await unstarUser(this.user.id)
         } else {
-          unstarUser(this.eventId)
+          res = await starUser(this.user.id)
         }
+        this.$emit('userUpdated', res)
       }
     },
     goingClick () {
-      this.$router.push({ name: 'RsvpInfoCollection', params: { eventId: this.eventId } })
+      this.$router.push({ name: 'RsvpInfoCollection', params: { eventId: this.event.id } })
     },
     contactClick () {
-      this.$router.push({ name: 'ContactForm', params: { eventId: this.eventId } })
+      this.$router.push({ name: 'ContactForm', params: { eventId: this.event.id } })
     },
     shareClick () {
-      this.$router.push({ name: 'SocialInvite', params: { id: this.eventId, context: 'searchItem' } })
+      this.$router.push({ name: 'SocialInvite', params: { id: this.event.id, context: 'searchItem' } })
     }
   },
   mounted () {

@@ -34,7 +34,7 @@
         <a href="#" class="event-action__icon-button__more w-inline-block"></a>
       </div>
     </div>
-    <SearchListCardActions isStarred="false" isGoing="false" />
+    <SearchListCardActions :user="user" />
   </div>
 </li>
 </template>
@@ -49,13 +49,13 @@ export default {
   name: 'SearchListCard',
   props: {
     user: { required: true },
-    event: { required: false },
+    event: {},
     mapCenter: { required: true }
   },
   components: { AvatarImage, HouseholdImages, SearchListCardActions },
   computed: {
     distance () {
-      return distanceHaversine(this.user.fuzzyLatitude, this.user.fuzzyLongitude, this.mapCenter.lat, this.mapCenter.lng) + ' mi'
+      return distanceHaversine(this.user.location.lat, this.user.location.lng, this.mapCenter.lat, this.mapCenter.lng) + ' mi'
     },
     timeHeader () {
       if (this.event) {
