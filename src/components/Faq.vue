@@ -27,11 +27,6 @@
           </a>
         </li>
         <li class="ul-menu-item">
-          <a v-scroll-to="'#Childcare-in-a-Pinch'" class="w-inline-block">
-            <div>Childcare in a Pinch</div>
-          </a>
-        </li>
-        <li class="ul-menu-item">
           <a v-scroll-to="'#Trust-Safety'" class="w-inline-block">
             <div>Trust &amp; Safety</div>
           </a>
