@@ -65,6 +65,7 @@
                                 :src="previewAvatarUrl"
                                 class="profile-photo"
                                 height="80"
+                                @load="avatarImageLoaded"
                             >
                             <img
                               v-else
@@ -183,6 +184,9 @@ export default {
         return !!navigator.userAgent.match(new RegExp(`(${expression})`, 'ig'))
       })
     },
+    avatarImageLoaded () {
+      this.avatarLoading = false
+    },
     async upload (event) {
       this.avatarLoading = true
       this.disableForm = true
@@ -191,9 +195,9 @@ export default {
         this.previewAvatarUrl = avatarUrl(this.avatar_url, 80)
       } catch (e) {
         this.logError(e)
+        this.avatarLoading = false
       } finally {
         this.disableForm = false
-        this.avatarLoading = false
       }
     },
     async signup () {
