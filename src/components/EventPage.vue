@@ -37,7 +37,7 @@
             <!-- TODO put in participant info when it's available -->
             <router-link v-for="participant in event.participatingParents" v-bind:key="participant.id"
               :to="{ name: 'ProviderProfile', params: { id: participant.userId }}" class="guest-link w-inline-block">
-              <AvatarImage className="avatar-32"
+              <AvatarImage className="avatar-32" imageSize="32"
                 :person="{facebookUid: participant.userFacebookUid, avatar: participant.userAvatar}" />
               <img src="@/assets/check-circle-24.svg" alt="" class="checkmark-green">
             </router-link>
