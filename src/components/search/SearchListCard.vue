@@ -34,7 +34,10 @@
         <a href="#" class="event-action__icon-button__more w-inline-block"></a>
       </div>
     </div>
-    <SearchListCardActions :user="user" />
+    <SearchListCardActions
+                    :user="user"
+                    @user-updated="$emit('user-updated', $event)"
+                    @event-updated="$emit('event-updated', $event)"/>
   </div>
 </li>
 </template>

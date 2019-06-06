@@ -25,7 +25,8 @@ export async function starUser (userId) {
 
 export async function unstarEvent (eventId) {
   try {
-    return createEvent(await axios.delete(`api/events/${eventId}/stars`))
+    const res = await axios.delete(`api/events/${eventId}/stars`)
+    return createEvent(normalize(res.data))
   } catch (e) {
     logger.logError(e)
   }
@@ -33,7 +34,8 @@ export async function unstarEvent (eventId) {
 
 export async function starEvent (eventId) {
   try {
-    return createEvent(await axios.post(`api/events/${eventId}/stars`))
+    const res = `api/events/${eventId}/stars`
+    return createEvent(normalize(res.data))
   } catch (e) {
     logger.logError(e)
   }

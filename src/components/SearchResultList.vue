@@ -4,10 +4,11 @@
     <div class="user-list" v-if="!awaiting">
       <div v-for="(user, index) in users">
         <SearchListCard
-          :user="user"
-          :mapCenter="mapArea.center"
-          :key="index"
-        />
+                    :user="user"
+                    :mapCenter="mapArea.center"
+                    :key="index"
+                    @user-updated="$emit('user-updated', $event)"
+                    @event-updated="$emit('event-updated', $event)"/>
       </div>
     </div>
     <div v-if="showFetchMoreUsersButton && !awaiting"

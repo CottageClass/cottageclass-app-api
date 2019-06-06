@@ -57,7 +57,8 @@
               :showTrailblazerMessage="showTrailblazerMessage"
               @fetchMoreEventsClick="fetchMoreEvents"
               @fetchMoreUsersClick="fetchMoreUsers"
-            />
+              @user-updated="updateUser"
+              @event-updated="updateEvent"/>
           </div>
         </div>
       </div>
@@ -118,6 +119,14 @@ export default {
     ...mapGetters(['distanceFromCurrentUser', 'currentUser', 'isAuthenticated', 'alert', 'mapArea'])
   },
   methods: {
+    updateUser (user) {
+      this.debug({ user })
+      const userIndex = this.users.findIndex(u => u.id === user.id)
+      this.$set(this.users, userIndex, user)
+    },
+    updateEvent (event) {
+      // TODO
+    },
     async fetchMoreUsers () {
       try {
         const params = {

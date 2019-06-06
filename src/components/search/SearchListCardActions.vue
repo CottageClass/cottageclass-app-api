@@ -62,14 +62,14 @@ export default {
         } else {
           res = await starEvent(this.event.id)
         }
-        this.$emit('eventUpdated', res)
+        this.$emit('event-updated', res)
       } else if (this.user) {
         if (this.user.starred) {
           res = await unstarUser(this.user.id)
         } else {
           res = await starUser(this.user.id)
         }
-        this.$emit('userUpdated', res)
+        this.$emit('user-updated', res)
       }
     },
     goingClick () {
