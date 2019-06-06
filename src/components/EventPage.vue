@@ -3,13 +3,6 @@
     <MainNav />
     <LoadingSpinner v-if="!event" />
     <div v-else>
-      <div v-if="event.starred"> starred
-        <div @click="deleteStar"> unstar </div>
-      </div>
-      <div v-else> not starred
-        <div @click="createStar"> star </div>
-      </div>
-
       <div class="event-detail-container w-container">
         <div class="event-detail-graphic">
           <EventCategoryIcon :category="!!event ? event.activityName : ''" width="150" height="150" />
