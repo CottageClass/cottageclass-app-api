@@ -96,7 +96,7 @@ class Event < ApplicationRecord
   private
 
   def remove_user_showcase
-    user.update_column :showcase_event_id, nil if user.showcase_event.id == id
+    user.update_column :showcase_event_id, nil if user.showcase_event.try(:id) == id
   end
 
   def update_user_showcase
