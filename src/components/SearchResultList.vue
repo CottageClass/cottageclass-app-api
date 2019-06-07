@@ -11,6 +11,9 @@
                     @user-updated="$emit('user-updated', $event)"
                     @event-updated="$emit('event-updated', $event)"/>
       </div>
+      <div v-if="showFetchMoreButton" class="more-link">
+        Show more
+      </div>
     </div>
     <!-- in the case of no events -->
     <div v-if="noItems && showTrailblazerMessage">
@@ -69,10 +72,6 @@ export default {
   display: flex;
   flex-direction: column;
   width: 100%;
-}
-
-.bold-text {
-  color: #ff6550;
 }
 
 .no-events-message {
