@@ -42,7 +42,7 @@ export default {
     shareIcon () { return shareIcon },
     contactIcon () { return contactIcon },
     goingIcon () {
-      return this.isGoing ? goingIconActive : goingIconInactive
+      return this.event.participated ? goingIconActive : goingIconInactive
     },
     starIcon () {
       return this.item.starred ? starredIconActive : starredIconInactive
