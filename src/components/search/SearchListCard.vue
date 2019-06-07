@@ -30,12 +30,16 @@
         </div>
       </div>
     </div>
-    <div class="footer__actions--mobile"><a href="#" class="event-action__icon-button__star w-inline-block"></a>
+    <div class="footer__actions--mobile">
+      <a  class="event-action__icon-button__star w-inline-block"
+          :class="isStarred?'active':''"
+                  @click.stop="interestedClick"></a>
       <div class="other-events-card__footer-actions__more-wrapper">
-        <a href="#" class="event-action__icon-button__more w-inline-block"></a>
+        <a class="event-action__icon-button__more w-inline-block"></a>
       </div>
     </div>
     <SearchListCardActions
+                    v-if="!isPhone"
                     :user="user"
                     :event="event"
                     @user-updated="$emit('user-updated', $event)"
@@ -46,9 +50,12 @@
 
 <script>
 import AvatarImage from '@/components/base/AvatarImage'
-import { andJoin, distanceHaversine } from '@/utils/utils'
 import HouseholdImages from '@/components/search/HouseholdImages'
 import SearchListCardActions from '@/components/search/SearchListCardActions'
+
+import { andJoin, distanceHaversine } from '@/utils/utils'
+import { starEvent, unstarEvent, starUser, unstarUser } from '@/utils/api/stars'
+import { screen } from '@/mixins'
 
 export default {
   name: 'SearchListCard',
@@ -57,8 +64,14 @@ export default {
     event: {},
     mapCenter: { required: true }
   },
+  mixins: [screen],
   components: { AvatarImage, HouseholdImages, SearchListCardActions },
   computed: {
+    isStarred () {
+      if (this.event) { return this.event.starred }
+      if (this.user) { return this.user.starred }
+      throw Error('no item present')
+    },
     distance () {
       return distanceHaversine(
         this.user.fuzzyLatitude,
@@ -132,6 +145,24 @@ export default {
     }
   },
   methods: {
+    async interestedClick () {
+      let res
+      if (this.event) {
+        if (this.event.starred) {
+          res = await unstarEvent(this.event.id)
+        } else {
+          res = await starEvent(this.event.id)
+        }
+        this.$emit('event-updated', res)
+      } else if (this.user) {
+        if (this.user.starred) {
+          res = await unstarUser(this.user.id)
+        } else {
+          res = await starUser(this.user.id)
+        }
+        this.$emit('user-updated', res)
+      }
+    },
     goToItem () {
       if (this.event) {
         this.$router.push({ name: 'EventPage', params: { eventId: this.event.id } })
@@ -198,6 +229,9 @@ a {
 }
 
 .event-action__icon-button__star {
+  &.active {
+    background-image: url('../../assets/star_2.svg');
+  }
   min-height: 30px;
   min-width: 30px;
   margin-right: 2px;
@@ -211,6 +245,9 @@ a {
 }
 
 .event-action__icon-button__star:hover {
+  &.active {
+    background-image: url('../../assets/star_2.svg');
+  }
   background-color: rgba(0, 0, 0, 0.06);
   background-image: url('../../assets/star-inactive.svg');
   background-position: 50% 50%;
