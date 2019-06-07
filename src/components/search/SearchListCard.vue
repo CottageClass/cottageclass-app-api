@@ -1,6 +1,6 @@
 <template>
 <li class="events-list__event-summary-card"
-    @click="goToItem">
+    @click.stop="goToItem">
   <div class="header">
     <div class="header__date">{{timeHeader}}</div>
     <div class="header__distance">{{distance}}</div>
@@ -33,9 +33,10 @@
     <div class="footer__actions--mobile">
       <a  class="event-action__icon-button__star w-inline-block"
           :class="isStarred?'active':''"
-                  @click.stop="interestedClick"></a>
+          @click.stop="interestedClick"></a>
       <div class="other-events-card__footer-actions__more-wrapper">
-        <a class="event-action__icon-button__more w-inline-block"></a>
+        <a class="event-action__icon-button__more w-inline-block"
+           @click.stop="overlayOpen=true"></a>
       </div>
     </div>
     <SearchListCardActions
@@ -44,6 +45,13 @@
                     :event="event"
                     @user-updated="$emit('user-updated', $event)"
                     @event-updated="$emit('event-updated', $event)"/>
+    <SearchListCardActionsOverlay
+                    v-if="showOverlay"
+                    :user="user"
+                    :event="event"
+                    @user-updated="$emit('user-updated', $event)"
+                    @event-updated="$emit('event-updated', $event)"
+                    @clickaway="overlayOpen=false"/>
   </div>
 </li>
 </template>
@@ -52,6 +60,9 @@
 import AvatarImage from '@/components/base/AvatarImage'
 import HouseholdImages from '@/components/search/HouseholdImages'
 import SearchListCardActions from '@/components/search/SearchListCardActions'
+import SearchListCardActionsOverlay from '@/components/search/SearchListCardActionsOverlay'
+
+import moment from 'moment'
 
 import { andJoin, distanceHaversine } from '@/utils/utils'
 import { starEvent, unstarEvent, starUser, unstarUser } from '@/utils/api/stars'
@@ -65,8 +76,16 @@ export default {
     mapCenter: { required: true }
   },
   mixins: [screen],
-  components: { AvatarImage, HouseholdImages, SearchListCardActions },
+  components: { AvatarImage, HouseholdImages, SearchListCardActions, SearchListCardActionsOverlay },
+  data () {
+    return {
+      overlayOpen: false
+    }
+  },
   computed: {
+    showOverlay () {
+      return this.isPhone && this.overlayOpen
+    },
     isStarred () {
       if (this.event) { return this.event.starred }
       if (this.user) { return this.user.starred }
@@ -81,8 +100,7 @@ export default {
     },
     timeHeader () {
       if (this.event) {
-        // TODO
-        return ''
+        return moment(this.event.startsAt).format('ddd, MMMM D ha') + '-' + moment(this.event.endsAt).format('ha')
       }
       const availabilityStrings = []
       if (this.user.availableMornings) {
