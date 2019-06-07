@@ -60,7 +60,11 @@ export default {
   components: { AvatarImage, HouseholdImages, SearchListCardActions },
   computed: {
     distance () {
-      return distanceHaversine(this.user.location.lat, this.user.location.lng, this.mapCenter.lat, this.mapCenter.lng) + ' mi'
+      return distanceHaversine(
+        this.user.fuzzyLatitude,
+        this.user.fuzzyLongitude,
+        this.mapCenter.lat,
+        this.mapCenter.lng) + ' mi'
     },
     timeHeader () {
       if (this.event) {

@@ -2,11 +2,11 @@
   <div class="list-wrapper">
     <LoadingSpinner v-if="awaiting"/>
     <div class="user-list" v-if="!awaiting">
-      <div v-for="(user, index) in users">
+      <div v-for="user in users">
         <SearchListCard
                     :user="user"
                     :mapCenter="mapArea.center"
-                    :key="index"
+                    :key="'user'+user.id"
                     @user-updated="$emit('user-updated', $event)"
                     @event-updated="$emit('event-updated', $event)"/>
       </div>
@@ -18,29 +18,14 @@
     </div>
 
     <div class="event-list" v-if="!awaiting">
-      <div v-for="(event, index) in events">
-        <div
-            v-if="showDates && (index === 0 || (formatDate(event.startsAt) !== formatDate(events[index - 1].startsAt)))"
-            class="event-date-section-tittle">
-          <img src="@/assets/date-outline-white-oval.svg" alt="" class="image-264">
-          <div class="date-text-wrapper">
-            <div class="date-title">
-              <span v-if="isToday(event.startsAt)">
-                <strong class="bold-text">Today</strong>,
-              </span>
-              {{ formatDate(event.startsAt) }}
-            </div>
-          </div>
-        </div>
-        <EventListItem
-          :event="event"
-          :index="index"
-          :key="index"
-          :showRsvpButton="currentUser === null || currentUser.id !== event.hostId"
-          :showEditButton="isAuthenticated && currentUser.id === event.hostId"
-          :distance="distanceFromCurrentUser(event.hostFuzzyLatitude,
-                                            event.hostFuzzyLongitude)"
-        />
+      <div v-for="event in events">
+        <SearchListCard
+                    :user="eventHost(event)"
+        n           :event="event"
+                    :mapCenter="mapArea.center"
+                    :key="'event' + event.id"
+                    @user-updated="$emit('user-updated', $event)"
+                    @event-updated="$emit('event-updated', $event)"/>
       </div>
     </div>
     <div v-if="showFetchMoreEventsButton && !awaiting"
@@ -62,15 +47,16 @@
 
 <script>
 import TrailblazerCard from '@/components/TrailblazerCard.vue'
-import EventListItem from '@/components/EventListItem.vue'
 import SearchListCard from '@/components/search/SearchListCard'
 import LoadingSpinner from '@/components/LoadingSpinner.vue'
 import { mapGetters } from 'vuex'
+import { createUser } from '@/utils/createUser'
+import normalize from 'json-api-normalizer'
 
 var moment = require('moment')
 export default {
   name: 'SearchResultList',
-  components: { EventListItem, LoadingSpinner, SearchListCard, TrailblazerCard },
+  components: { LoadingSpinner, SearchListCard, TrailblazerCard },
 
   props: {
     noEventsMessage: {},
@@ -102,6 +88,11 @@ export default {
     }
   },
   computed: {
+    eventHost () {
+      return (event) => {
+        return createUser(normalize(event.host))
+      }
+    },
     awaiting: function () {
       return this.events === null || this.users === null
     },
