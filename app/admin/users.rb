@@ -81,7 +81,7 @@ ActiveAdmin.register User do
       source_tags
       child_ages_in_months
       child_names
-      best_match_id
+      best_match
     ].each do |attribute|
       column attribute
     end

@@ -83,12 +83,13 @@ class User < ApplicationRecord
     if location
       users = User.near(location.map(&:to_f), miles)
       users = users.where.not(id: id)
-      users.max_by do |matcher|
+      best = users.max_by do |matcher|
         closeest_child_ages = child_ages_in_months.product(matcher.child_ages_in_months).min_by do |ages|
           (ages[0] - ages[1]).abs
         end
-        6 * (closeest_child_ages[0] - closeest_child_ages[1]).abs + matcher.distance
+        6 * (closeest_child_ages[0] - closeest_child_ages[1]).abs + matcher.distance if closeest_child_ages.present?
       end
+      best.id if best.present?
     end
   end
 
