@@ -120,12 +120,12 @@ export default {
   },
   methods: {
     updateUser (user) {
-      this.debug({ user })
       const userIndex = this.users.findIndex(u => u.id === user.id)
       this.$set(this.users, userIndex, user)
     },
     updateEvent (event) {
-      // TODO
+      const eventIndex = this.events.findIndex(e => e.id === event.id)
+      this.$set(this.events, eventIndex, event)
     },
     async fetchMoreUsers () {
       try {

@@ -34,7 +34,7 @@ export async function unstarEvent (eventId) {
 
 export async function starEvent (eventId) {
   try {
-    const res = `api/events/${eventId}/stars`
+    const res = await axios.post(`api/events/${eventId}/stars`)
     return createEvent(normalize(res.data))
   } catch (e) {
     logger.logError(e)
