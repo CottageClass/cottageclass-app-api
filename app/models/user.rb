@@ -87,7 +87,11 @@ class User < ApplicationRecord
         closeest_child_ages = child_ages_in_months.product(matcher.child_ages_in_months).min_by do |ages|
           (ages[0] - ages[1]).abs
         end
-        6 * (closeest_child_ages[0] - closeest_child_ages[1]).abs + matcher.distance if closeest_child_ages.present?
+        if closeest_child_ages.present?
+          6 * (closeest_child_ages[0] - closeest_child_ages[1]).abs + matcher.distance
+        else
+          0
+        end
       end
       best.id if best.present?
     end
