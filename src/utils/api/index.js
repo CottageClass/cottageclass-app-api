@@ -6,6 +6,7 @@ import { createUser, createUsers } from '../createUser'
 import Logger from '@/utils/logger'
 
 export * from './stars'
+export * from './search'
 
 const logger = Logger('api')
 

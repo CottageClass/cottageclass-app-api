@@ -2,12 +2,12 @@
   <div class="list-wrapper">
     <LoadingSpinner v-if="awaiting"/>
     <div class="event-list" v-if="!awaiting">
-      <div v-for="event in events">
+      <div v-for="item in items">
         <SearchListCard
-                    :user="eventHost(event)"
-                    :event="event"
+                    :user="item"
+                    :event="item.showcase_event"
                     :mapCenter="mapArea.center"
-                    :key="'event' + event.id"
+                    :key="'TODOID'"
                     @user-updated="$emit('user-updated', $event)"
                     @event-updated="$emit('event-updated', $event)"/>
       </div>
