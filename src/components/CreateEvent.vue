@@ -96,7 +96,7 @@ export default {
             'maximum_children': 4,
             'child_age_minimum': 0,
             'child_age_maximum': 18,
-            'repeat_for': this.repeatCount.number,
+            'repeat_for': this.repeatCount.number || 1,
             'interval': 1
           }
         }
