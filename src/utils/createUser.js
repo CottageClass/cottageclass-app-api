@@ -12,6 +12,7 @@ export const createUsers = (data) => {
   return ids.map(id => {
     const p = data.user[id].attributes
     const childIds = data.user[id].relationships.children.data.map(e => e.id)
+    let event = null
     const children = childIds.map(id => parseChildData(includedChildren[id]))
     const hasAllRequiredFields = !!(p.phone && p.latitude && p.longitude)
     const activities = (p.activities || []).map(activity => activity.replace(/_/g, ' '))
@@ -21,13 +22,14 @@ export const createUsers = (data) => {
     }
     return {
       ...p,
-      id: id,
+      id,
       lastInitial: capitalize(p.lastInitial),
-      activities: activities,
+      activities,
       networkCode: 'brooklyn-events', // give everyone the new network code
       location,
       facebookMapIcon: 'https://graph.facebook.com/' + p.facebook_uid + '/picture?width=30',
       children,
+      event,
       hasAllRequiredFields
     }
   })

@@ -4,8 +4,8 @@
     <div class="event-list" v-if="!awaiting">
       <div v-for="item in items">
         <SearchListCard
-                    :user="item"
-                    :event="item.showcase_event"
+                    :user="item.user"
+                    :event="item.event"
                     :mapCenter="mapArea.center"
                     :key="'TODOID'"
                     @user-updated="$emit('user-updated', $event)"
@@ -31,8 +31,6 @@ import TrailblazerCard from '@/components/TrailblazerCard.vue'
 import SearchListCard from '@/components/search/SearchListCard'
 import LoadingSpinner from '@/components/LoadingSpinner.vue'
 import { mapGetters } from 'vuex'
-import { createUser } from '@/utils/createUser'
-import normalize from 'json-api-normalizer'
 
 export default {
   name: 'SearchResultList',
@@ -51,11 +49,6 @@ export default {
     }
   },
   computed: {
-    eventHost () {
-      return (event) => {
-        return createUser(normalize(event.host))
-      }
-    },
     awaiting: function () {
       return this.items === null
     },
