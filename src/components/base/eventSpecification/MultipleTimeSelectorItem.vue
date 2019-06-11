@@ -15,7 +15,7 @@ export default {
   components: {},
   computed: {
     timeText () {
-      return this.toCompactTime(this.startHour) + '-' + this.toCompactTime((this.startHour + 1) % 24)
+      return this.toCompactTime(this.startHour)
     },
     toCompactTime () {
       return hour => (hour + 11) % 12 + 1 + (hour < 12 ? 'am' : 'pm')
