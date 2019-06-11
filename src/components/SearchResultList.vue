@@ -2,6 +2,9 @@
   <div class="list-wrapper">
     <LoadingSpinner v-if="awaiting"/>
     <div class="event-list" v-if="!awaiting">
+      <SearchListHeader
+        @offerClick="$emit('offerClick')"
+        />
       <div v-for="item in items">
         <SearchListCard
                     :user="item.user"
@@ -11,9 +14,9 @@
                     @user-updated="$emit('user-updated', $event)"
                     @event-updated="$emit('event-updated', $event)"/>
       </div>
-      <div v-if="showFetchMoreButton" class="more-link">
-        Show more
-      </div>
+      <SearchListFooter v-if="showFetchMoreButton"
+                        @fetchMoreClick="$emit('fetchMoreClick')"
+                        />
     </div>
     <!-- in the case of no events -->
     <div v-if="noItems && showTrailblazerMessage">
@@ -27,14 +30,16 @@
 </template>
 
 <script>
-import TrailblazerCard from '@/components/TrailblazerCard.vue'
+import TrailblazerCard from '@/components/TrailblazerCard'
 import SearchListCard from '@/components/search/SearchListCard'
-import LoadingSpinner from '@/components/LoadingSpinner.vue'
+import LoadingSpinner from '@/components/LoadingSpinner'
+import SearchListHeader from '@/components/search/SearchListHeader'
+import SearchListFooter from '@/components/search/SearchListFooter'
 import { mapGetters } from 'vuex'
 
 export default {
   name: 'SearchResultList',
-  components: { LoadingSpinner, SearchListCard, TrailblazerCard },
+  components: { LoadingSpinner, SearchListCard, TrailblazerCard, SearchListHeader, SearchListFooter },
 
   props: {
     noEventsMessage: {},

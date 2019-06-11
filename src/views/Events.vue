@@ -53,6 +53,7 @@
               :items="items"
               :noItemsMessage="noItemsMessage"
               :showTrailblazerMessage="showTrailblazerMessage"
+              @offerClick="offerPlaydate"
               @fetchMoreClick="fetchMoreItems"
               @user-updated="updateUser"
               @event-updated="updateEvent"/>
@@ -118,6 +119,9 @@ export default {
     updateEvent (event) {
       const eventIndex = this.events.findIndex(e => e.id === event.id)
       this.$set(this.events, eventIndex, event)
+    },
+    offerPlaydate () {
+      this.$router.push({ name: 'NewEvent' })
     },
     async fetchMoreItems () {
       try {
