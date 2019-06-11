@@ -43,7 +43,7 @@
         <div class="map-list-container">
           <EventListMap
             class="map"
-            :users="items"
+            :users="items.map(i => i.user)"
             @searchAreaSet="updateMapAreaFromMap"
           />
           <div class="list-container w-container">
@@ -279,10 +279,6 @@ a {
 
 .link:hover {
   text-decoration: underline;
-}
-
-.events-list-wrapper {
-  width: 100%;
 }
 
 .event-date-section-tittle {
