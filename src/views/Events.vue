@@ -137,8 +137,8 @@ export default {
         if (this.currentUser) {
           newItems = newItems.filter(u => u.id !== this.currentUser.id)
         }
-        // if users is null, set it to the incoming users, otherwise add them
-        this.items = !this.items ? newItems : this.users.concat(newItems)
+        // if items is null, set it to the incoming items, otherwise add them
+        this.items = !this.items ? newItems : this.items.concat(newItems)
         this.lastPage = this.lastPage + 1
       } catch (e) {
         this.logError('problem loading more users')

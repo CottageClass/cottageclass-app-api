@@ -16,5 +16,11 @@ export const createItems = (data) => {
     }
     return { event, user }
   })
+  if (data.meta) {
+    if (data.meta.user) {
+      const userOrder = data.meta.user.data.map(u => u.id)
+      return userOrder.map(id => items.find(i => i.user.id === id))
+    }
+  }
   return items
 }
