@@ -39,7 +39,7 @@
       </div>
         <div class="page-subtitle">These parents all want to share playdates. <strong>Wave to start the conversation</strong>, or browse scheduled playdates below.</div>
       </div>
-      <div class="main-container">
+      <div class="main-container w-container">
         <div class="map-list-container">
           <EventListMap
             class="map"
@@ -418,7 +418,7 @@ a {
     flex-direction: column;
   }
   .main-container {
-    padding: 0px;
+    padding: 0px 32px 80px;
   }
   .event-page-title {
     font-size: 32px;
