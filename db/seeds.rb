@@ -1,7 +1,7 @@
 # seed the local database with some fake users and associated data
 require 'faker'
 
-(1..20).each do |tag|
+(1..50).each do |tag|
   first_name = Faker::Name.unique.first_name
   last_name = Faker::Name.unique.last_name
   hash = {
@@ -53,14 +53,14 @@ require 'faker'
 
   # add some events
   Random.rand(0..3).times do
-    start_time = Faker::Time.forward(7, :day)
+    start_time = Faker::Time.between(1.week.ago, Time.zone.today + 2.weeks, :day)
     duration = Random.rand(1..4).hours
     event_series = user.event_series.build(
       name: Faker::Lorem.paragraph(2, true, 4),
       starts_at: start_time,
       start_date: start_time,
       ends_at: start_time + duration,
-      repeat_for: Random.rand(1..10),
+      repeat_for: Random.rand(1..1),
       interval: 1,
       maximum_children: Random.rand(2..5)
     )
