@@ -31,10 +31,9 @@ class API::UsersController < API::BaseController
     serializer = if current_user && current_user.id == @user.id
                    CurrentUserSerializer.new @user, include: %i[children]
                  else
-                   PublicUserSerializer.new @user, {
-                     include: %i[children],
-                     params: { current_user: current_user }
-                   }
+                   PublicUserSerializer.new @user,
+                                            include: %i[children],
+                                            params: { current_user: current_user }
                  end
     render json: serializer.serializable_hash, status: :ok
   end
@@ -62,7 +61,7 @@ class API::UsersController < API::BaseController
       if location.all?(&:present?)
         users = users.near(location.map(&:to_f), miles)
         users = users.joins 'LEFT JOIN events ON users.showcase_event_id = events.id'
-        users = users.reorder 'events.recency_score DESC NULLS LAST, distance ASC'
+        users = users.reorder 'events.recency_score ASC NULLS LAST, distance ASC'
       end
     end
 
@@ -81,7 +80,7 @@ class API::UsersController < API::BaseController
     serializer = PublicUserSerializer.new users, include: %i[children showcase_event],
                                                  links: links,
                                                  meta: meta,
-                                                 params: {current_user: current_user}
+                                                 params: { current_user: current_user }
     render json: serializer.serializable_hash, status: :ok
   end
 

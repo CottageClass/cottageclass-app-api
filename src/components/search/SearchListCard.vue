@@ -2,7 +2,7 @@
 <li class="events-list__event-summary-card"
     @click.stop="goToItem">
   <div class="header">
-    <div class="header__date">{{timeHeader}}</div>
+    <div class="header__date" :class="{'time-past': timePast}">{{timeHeader}}</div>
     <div class="header__distance">{{distance}}</div>
   </div>
   <div class="description">
@@ -86,6 +86,12 @@ export default {
     }
   },
   computed: {
+    timePast () {
+      if (this.event) {
+        return moment(this.event.endsAt) < moment().add(2, 'hours')
+      }
+      return false
+    },
     showOverlay () {
       return this.isPhone && this.overlayOpen
     },
@@ -337,6 +343,9 @@ a {
 }
 
 .header__date {
+  &.time-past {
+  color: #aaaaaa;
+  }
   color: #1f88e9;
   font-size: 12px;
   line-height: 12px;
