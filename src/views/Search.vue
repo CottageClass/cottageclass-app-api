@@ -39,11 +39,12 @@
       </div>
         <div class="page-subtitle">These parents all want to share playdates. <strong>Wave to start the conversation</strong>, or browse scheduled playdates below.</div>
       </div>
-      <div class="main-container">
+      <div class="main-container w-container">
         <div class="map-list-container">
           <EventListMap
             class="map"
             :users="items && items.map(i => i.user)"
+            :clickToExpand="isMobile"
             @searchAreaSet="updateMapAreaFromMap"
           />
           <div class="list-container w-container">
@@ -76,13 +77,13 @@ import AgeRangeFilterSelector from '@/components/filters/AgeRangeFilterSelector'
 import LocationFilterSelector from '@/components/filters/LocationFilterSelector'
 import LocationFilterButton from '@/components/filters/LocationFilterButton'
 
-import { messaging, alerts } from '@/mixins'
+import { messaging, alerts, screen } from '@/mixins'
 import { fetchFeed } from '@/utils/api'
 import { mapGetters } from 'vuex'
 
 export default {
   name: 'Search',
-  mixins: [messaging, alerts],
+  mixins: [messaging, alerts, screen],
   components: { SearchResultList,
     MainNav,
     Footer,
@@ -418,7 +419,7 @@ a {
     flex-direction: column;
   }
   .main-container {
-    padding: 0px;
+    padding: 0px 32px 80px;
   }
   .event-page-title {
     font-size: 32px;
@@ -426,6 +427,9 @@ a {
   }
 }
 @media (max-width: 767px){
+  .main-container {
+    padding: 0px;
+  }
   .event-page-title {
       font-size: 28px;
       line-height: 34px;
