@@ -24,7 +24,10 @@
       <div class="user-info--container">
         <div class="user-info_list">
           <div class="user-info__name">{{userName}}</div>
-          <div class="user-info__occupation lp-truncate">{{occupation}}<br /></div>
+          <div v-if="occuption"
+               class="user-info__occupation lp-truncate">
+            l{{occupation}}<br />
+          </div>
           <div class="user-info__kids lp-truncate">{{kidsAges}}</div>
           <HouseholdImages :user="user" />
         </div>
