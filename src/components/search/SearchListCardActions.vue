@@ -3,14 +3,14 @@
     <li>
       <IconButton label="Interested" :icon="starIcon" @click="interestedClick"/>
     </li>
-    <li>
-      <IconButton v-if="event" label="Going" :icon="goingIcon" @click="goingClick"/>
+    <li v-if="showGoingButton">
+      <IconButton  label="Going" :icon="goingIcon" @click="goingClick"/>
     </li>
-    <li>
-      <IconButton v-if="event" label="Contact" :icon="contactIcon" @click="contactClick"/>
+    <li v-if="event">
+      <IconButton label="Contact" :icon="contactIcon" @click="contactClick"/>
     </li>
-    <li>
-      <IconButton v-if="event" label="Share" :icon="shareIcon" @click="shareClick"/>
+    <li v-if="event">
+      <IconButton label="Share" :icon="shareIcon" @click="shareClick"/>
     </li>
   </ul>
 </template>
@@ -31,7 +31,8 @@ export default {
   name: 'SearchListCardActions',
   props: {
     user: {},
-    event: {}
+    event: {},
+    timePast: {}
   },
   components: { IconButton },
   data () {
@@ -39,6 +40,9 @@ export default {
     }
   },
   computed: {
+    showGoingButton () {
+      return this.event && !this.timePast
+    },
     shareIcon () { return shareIcon },
     contactIcon () { return contactIcon },
     goingIcon () {
