@@ -1,11 +1,11 @@
 <template>
   <div>
     <Question
-      title="What times work for you?"
-      subtitle="When are you available to host the playdate you're offering? The more choices you give other families, the easier it will be to schedule a fun playdate!" >
+      title="When could you host this playdate?"
+      subtitle="Parents can only book playdates at the times you offer. So the more availability you offer, the easier it is to schedule fun playdates! (It's okay if your schedule changes—you can always cancel if necessary.)" >
       <div @click="$emit('datetimeClicked')"
           class="date-time-button">
-        offer one time only
+        other dates &amp; times
       </div>
       <div v-for="(dow, dayIndex) of shiftedDayIndices">
         <MultipleTimeSelectorDay
@@ -124,7 +124,7 @@ export default {
   &:hover {
     background-color: #F0F0F0;
   }
-  background-color:white;
+  background-color: #b3d4fc;
   border-radius: 4px;
   color: #158BE7;
   padding: 12px 5px;
