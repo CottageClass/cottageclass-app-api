@@ -43,7 +43,7 @@
         <div class="map-list-container">
           <EventListMap
             class="map"
-            :users="items.map(i => i.user)"
+            :users="items && items.map(i => i.user)"
             @searchAreaSet="updateMapAreaFromMap"
           />
           <div class="list-container w-container">
@@ -109,7 +109,7 @@ export default {
     ageRangeActive () {
       return this.ageRange.data.min >= 0 || this.ageRange.data.max >= 0
     },
-    ...mapGetters(['distanceFromCurrentUser', 'currentUser', 'isAuthenticated', 'alert', 'mapArea'])
+    ...mapGetters(['currentUser', 'isAuthenticated', 'alert', 'mapArea'])
   },
   methods: {
     updateUser (user) {

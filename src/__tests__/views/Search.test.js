@@ -1,12 +1,13 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils'
-import Events from '@/views/Events.vue'
+import Search from '@/views/Search.vue'
 import Vuex from 'vuex'
 
+jest.mock('@/utils/api')
 const localVue = createLocalVue()
 
 localVue.use(Vuex)
 
-describe('Events', () => {
+describe('Search', () => {
   let wrapper
   describe('no current user', () => {
     beforeAll(async () => {
@@ -19,10 +20,17 @@ describe('Events', () => {
           pendingWaves: () => [],
           currentUser () { return null },
           isAuthenticated () { return false },
-          mapArea () {}
+          mapArea () {
+            return {
+              center: {
+                lat: 41.96,
+                lng: -73.65
+              }
+            }
+          }
         }
       })
-      wrapper = shallowMount(Events, {
+      wrapper = shallowMount(Search, {
         mocks: { $store },
         stubs: [ 'GmapMap', 'GmapMarker' ] // because the are globally registered.  this silences the warning
       })
