@@ -37,7 +37,7 @@
           </FilterSelector>
         </div>
       </div>
-        <div class="page-subtitle">These parents all want to share playdates. <strong>Wave to start the conversation</strong>, or browse scheduled playdates below.</div>
+      <div class="page-subtitle"><strong>These parents near you want to share playdates.</strong> Offer a playdate, contact parents to invite them, or browse scheduled playdates below!</div>
       </div>
       <div class="main-container w-container">
         <div class="map-list-container">
