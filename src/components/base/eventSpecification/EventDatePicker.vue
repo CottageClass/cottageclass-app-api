@@ -1,7 +1,7 @@
 <template>
   <Question
-    title="Choose a date for your playdate"
-    subtitle="When is the playdate you're offering?">
+    title="Pick a date"
+    subtitle="When would you like to offer this playdate?">
   <div class="picker-container" >
   <v-date-picker class="date-picker"
     :allowedDates="allowedDates"

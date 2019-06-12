@@ -21,6 +21,6 @@ describe('MultipleTimeSelector', () => {
 
     expect(days).toHaveLength(8)
     expect(items).toHaveLength(7 * 16)
-    expect(items.at(0).text()).toEqual('12pm-1pm')
+    expect(items.at(0).text()).toEqual('12pm')
   })
 })
