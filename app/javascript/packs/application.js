@@ -73,7 +73,9 @@ if (isAuthWindow) {
   document.addEventListener('DOMContentLoaded', () => {
     const element = '#app'
     let token = _.get(document.querySelector(element), 'dataset.token')
-    store.dispatch('establishUser', { JWT: token })
+    if (token) {
+      store.dispatch('establishUser', { JWT: token })
+    }
 
     const csrfElement = "meta[name='csrf-token']"
     let csrfToken = _.get(document.querySelector(csrfElement), 'content')
