@@ -3,8 +3,8 @@
   <MainNav />
   <div class="section">
     <div class="lp-container w-container">
-      <h1 class="heading-1">FAQ for KidsClub</h1>
-      <p class="intro-paragraph">Welcome to KidsClub! KidsClub is a community for parents to share childcare and educational activities with other parents for free! Our mission is to give you access to an amazing support network of parents to share childcare, advice and fun-filled times! Every parent is asked to host a playdate at least once a month. In exchange, you’ll get access to incredible events, activities and childcare led by other parents. In addition to the listed activities, you’ll also be able to request childcare from other parents in the community at specific times.</p>
+      <h1 class="heading-1">Frequently Asked Questions</h1>
+      <p class="intro-paragraph">Welcome to KidsClub! KidsClub is a community of parents who are interested in co-operative childcare. If you’re interested in swapping childcare with other parents, our site helps you find parents near you, schedule playdates with them, get to know them and their children, and build your network. Soon, we’ll be adding more structure for swapping drop-off childcare with other parents.</p>
       <ul class="ul-menu">
         <li class="ul-menu-item">
           <a v-scroll-to="'#Community-Rules'" class="w-inline-block">
@@ -42,19 +42,12 @@
       <ul class="unordered-list">
         <li class="ul-item">Don’t bring a sick child. If your child is feeling ill, we can certainly let you choose another date! The same goes for hosting. If your child isn’t feeling well, it’s fine to cancel! We can help your guests get rescheduled for another date.</li>
         <li class="ul-item">Make sure to RSVP every child who is attending. If you bring an extra child that you haven’t signed up, it can put your host in an awkward position.</li>
-        <li class="ul-item">Pick your child up on time! You may even want to come a few minutes early. We know life happens and sometimes people are running a bit late, but do your best to be respectful of your host’s time.</li>
         <li class="ul-item">If the host has a dog, confirm with them that their pooch will be safely separated from the children (behind a closed door) for the duration of the playdate.</li>
       </ul>
       <div class="question">When hosting a playdate:</div>
       <ul class="unordered-list">
-        <li class="ul-item">As parents sign up for your activity, we’ll send you information about the children attending via email. Please be sure to check your email to see dietary preferences and any special needs of children attending, and please let us know if you need tips on how to accommodate these needs.</li>
+        <li class="ul-item">As parents sign up for your playdate, we’ll send you information about the families attending via email. Please let us know if you have any questions or need any additional information about the families attending.</li>
         <li class="ul-item">When families RSVP, you’ll receive a text message notifying you. You can decline any guest within 24 hours—otherwise the booking will be confirmed. If you have any concerns about a guest, please let us know and we’ll work with you to find a solution.</li>
-        <li class="ul-item">Only the host of the event can host. Children should never be left alone, or with anyone who is not the host of the event. The host must remain on the premises at all times during the playdate, and if there is an emergency that requires ending the playdate early, you must contact each parent and accommodate their needs for pickup.</li>
-        <li class="ul-item">Before children arrive, we suggest putting out a couple activities out like puzzles or board games or a few games to ease the transition and get your guests comfortable and involved in an activity right away.</li>
-        <li class="ul-item">Try to have dinner ready about 30 minutes after children arrive. Then start your activity shortly after.</li>
-        <li class="ul-item">Consider inviting parents to stay for a few minutes while their child gets adjusted, but don’t be offended if they want to duck out quickly.</li>
-        <li class="ul-item">Always err on the side of more communication. If there is some kind of accident or incident that is *not* a medical emergency, call the parent and calmly convey what happened.</li>
-        <li class="ul-item">If there is a medical emergency, call 911 and then immediately call the child’s parent, followed by their emergency contact if necessary. You should receive an email with emergency contact information for each child.</li>
         <li class="ul-item">If you have a dog, be sure to keep them safely separated from the children (behind a closed door) for the duration of the playdate.</li>
       </ul>
       <div class="question">Policy of Nondiscrimination, Inclusion, and Respect:</div>
@@ -71,7 +64,7 @@
       <div class="question">How does it work? </div>
       <ul class="unordered-list">
         <li class="ul-item">On KidsClub, making new friends and sharing childcare is free!</li>
-        <li class="ul-item">When you plan your first playdate with a family, we strongly encourage you to stay with your child and get to know the family. You can choose to share childcare whenever you're both comfortable doing so.</li>
+        <li class="ul-item">When you plan your first playdate with a family, we strongly encourage you to stay with your child and get to know the family. You can choose to swap childcare whenever you're both comfortable doing so.</li>
         <li class="ul-item">You can edit or change your playdate at any time, though we request 24 hours notice as a courtesy to other families.</li>
         <li class="ul-item">Your playdate can be as simple as playing with toys, or you can go all out and host a creative arts project or a robotics class!</li>
         <li class="ul-item">If you can't find a playdate at a time that works for you, you can also reach out to parents individually to set up a playdate.</li>
@@ -88,40 +81,30 @@
     <div class="lp-container w-container">
       <h2 class="heading-2">Hosting Playdates</h2>
       <div class="question">How do I set up a playdate?</div>
-      <p class="paragraph">The easiest way is to reach out to parents with similarly-aged children near you and set up a time. You can also offer scheduled playdates, which let you share the link to your playdate with friends and invite your friends to share childcare with you! Other members of KidsClub will also have the option to RSVP to your playdate. We encourage you to invite as many friends as possible to grow the KidsClub community with incredible people and expand the options for free, quality care!</p>
+      <p class="paragraph">First, click "Offer playdate", describe your playdate, and pick some times you are available. Then, either find a scheduled playdate near you, or reach out to some parents with similarly-aged children near you and invite them to your playdate. If you have friends who you might like to swap childcare with, we encourage you to invite them too!</p>
       <div class="question">How do I invite my friends and my child’s classmates to share childcare with me?</div>
       <p class="paragraph">KidsClub makes sharing care with friends easy! All you have to do is invite your friends to your playdate or to join KidsClub. When they RSVP to your playdate, they’ll get prompted to create a playdate of their own and invite you!</p>
-      <div class="question">Can I offer more than one playdate a month?</div>
-      <p class="paragraph">Absolutely. You can offer as many playdates as you like! We recommend offering the same amount of childcare that you need. For example, if you’re looking for 2-3 nights of coverage for 1 child, once a month, then offering one playdate each month for 2-3 children is perfect. If you need childcare 2-3 children on a weekly basis, we recommend offering one playdate for 2-3 children once a week, or a larger playdate for 8-12 children once a month.</p>
       <div class="question">Can I control who attends my playdate?</div>
       <p class="paragraph">You have the right to accept or decline any family that RSVP’s to your playdate. You will receive a notification if a family RSVP’s. If you do not reply within 24 hours, their booking will be confirmed. So it is important to reply promptly with any questions or concerns about an RSVP.</p>
-      <div class="question">Can I choose the ages of children who attend my playdate?</div>
-      <p class="paragraph">You can definitely set a minimum and maximum age you feel comfortable with. We understand that parents often wish for their child to play with children the same age. However, we also encourage you to experiment with hosting much younger or much older children. You may be surprised with what fun your 5 year old will have being a big sister to a 2 year old - or how much she could learn by having an 8 year old “big brother” around for a few hours.</p>
       <div class="question">What should I offer on my playdate?</div>
       <p class="paragraph">It's up to you! Some parents choose to offer a simple activity and sometimes a meal or snack, but it's your choice. Your playdate can be very easygoing. For a group of children, a snack and a movie are a great place to start. For two or three children, just letting them play and get to know each other is great! If you’re inspired, you are also welcome to design a more elaborate event, such as a painting party or a robotics workshop, but this is by no means expected or required.</p>
       <div class="question">What if no one RSVP’s to my playdate?</div>
-      <p class="paragraph">That's alright! Just by making your playdate available as an option to parents, you're helping our community create childcare availability and coverage for as many children at as many times as possible. Offering a playdate&mdash;even if no one attends&mdash;means you have met your commitment as a member and can attend others' playdates if you choose. That said, we know it's more fun when playdates are well-attended. The best ways to ensure people come to your playdate is to share it widely to friends and local parent groups.</p>
+      <p class="paragraph">That's alright! Just by making your playdate available as an option to parents, you're helping our community create childcare availability and coverage for as many children at as many times as possible. That said, we know it's more fun when playdates are well-attended. The best ways to ensure people come to your playdate is to share it widely to friends and local parent groups.</p>
       <div class="question">How long are playdates?</div>
-      <p class="paragraph">It's up to you and the other parent. For drop-off playdates, we recommend a minimum of 2-3 hours to ensure parents have enough time to drop their child off, head to whatever they’re doing and come pick their child up.</p>
+      <p class="paragraph">It's up to you and the other parents! We recommend 1-2 hours for a first playdate.</p>
       <div class="question">What if I need to cancel or reschedule my playdate?</div>
-      <p class="paragraph">It’s fine to reschedule or cancel your playdate. We understand that being a parent puts you on a busy and sometimes messy schedule. If you do need to cancel or reschedule, please try to give us as much advance notice as possible, so that we can help your attendees booked in another playdate! We encourage you to contact us directly (rather than contacting your guests) so that we can support them fully in making alternate plans.</p>
+      <p class="paragraph">It’s fine to reschedule or cancel your playdate, and you can do so <a href="https://kidsclub.io/my-events">here</a> by pressing "cancel" on each playdate. We understand that being a parent puts you on a busy and sometimes messy schedule. If you do need to cancel or reschedule, please try to do with as much advance notice as possible.</p>
     </div>
   </div>
   <div id="Attending-Playdates" class="section">
     <div class="lp-container w-container">
       <h2 class="heading-2">Attending Playdates</h2>
       <div class="question">How do I book a playdate?</div>
-      <p class="paragraph">You book your playdate by RSVP’ing to the events on the events page, or by reaching out to a family directly. When you book your playdate, you’ll get an automated text message from the KidsClub team confirming your reservation.</p>
-      <div class="question">Can a family decline my RSVP?</div>
+      <p class="paragraph">You book your playdate by clicking "Going" to any of the events on the events page, or by reaching out to a family directly. When you book your playdate, you’ll get an automated text message from the KidsClub team confirming your reservation.</p>
+      <div class="question">Can a family decline my request?</div>
       <p class="paragraph">The family hosting the event has 24 hours to decline your request in case they cannot accommodate you, otherwise you are good to go! We will do our best to find you another option should this occur.</p>
-      <div class="question">What if I’m running late for drop-off?</div>
-      <p class="paragraph">Part of the benefit of a parent-operated babysitting co-op is you don’t need to stress out about being on time! It’s good to arrive on time, but don’t worry if you’re a little behind. Parents understand that sometimes getting the coat and shoes on can take a little longer than planned. However, we strongly encourage you to be on-time or early for pick up, and to make arrangements with the host in advance if there is any chance you will be late.</p>
-      <div class="question">What should I expect when we arrive?</div>
-      <p class="paragraph">When you arrive, your host will likely have some games out or activities set up so your child can adjust easily. You are welcome to drop your child off at the door or stick around for a little while as your child gets adjusted, but try to be sensitive to your host’s preferences. After all, the purpose of this is for you to enjoy some well-deserved time off. So take advantage of it and enjoy!</p>
-      <div class="question">What if I’m late for pick-up?</div>
-      <p class="paragraph">We strongly encourage you to plan well to make sure this doesn’t happen. Please be respectful of your host and be sure to arrive on time or a little early! However, if you are late, please let your host know as soon as you discover that you are running late. You may also want to offer them a little gift of apology such as a free playdate in return, flowers or wine.</p>
       <div class="question">What if I need to cancel or reschedule my playdate?</div>
-      <p class="paragraph">Just let us know and we’ll book you for something new!</p>
+      <p class="paragraph">You can cancel at any time by clicking "cancel" <a href="https://kidsclub.io/my-rsvps">here</a>, but please try to give your host 24 hours notice.</p>
     </div>
   </div>
   <div id="Trust-Safety" class="section f6f6f6">
@@ -129,12 +112,12 @@
       <h2 class="heading-2">Trust and Safety</h2>
       <div class="question">How do I ensure my child is safe on my playdate?</div>
       <ul class="unordered-list">
-        <li class="ul-item"><strong>Invite your friends to share care with you.</strong> A great place to start is sharing childcare with your existing friends and other parents in your child’s class and school. We depend on you to invite amazing people to join KidsClub. We encourage you to invite only friends you know and trust to join the platform. When you attend their activity, you’ll get to know their friends as well and broaden your network!</li>
         <li class="ul-item"><strong>Stay with your child until you're comfortable sharing care.</strong> You're always free to stay with your child to get to know a new family, and you should only share childcare once you're both comfortable doing so.</li>
         <li class="ul-item"><strong>Get a background check through KidsClub.</strong> Parents who have purchased background checks get a “background check” badge on their profile. This is a great way to ensure our community stays safe and by going through a background check yourself, you help other parents make sure their child is safe. Background checks cost $50-100 depending on what state you live in. Email <a href="mailto:contact@cottageclass.com">contact@cottageclass.com</a> to inquire about getting a background check.</li>
         <li class="ul-item"><strong>Message new friends.</strong> If you’d like to broaden your friend network, we encourage you to message people you don’t know on the platform and get together for a playdate. You can also propose to get together with your kids in a public place like the library or the park before you start booking care with that person! Approach playdates on KidsClub the way you'd approach playdates with a new classmate, say. First get to know the family, then go from there.</li>
         <li class="ul-item"><strong>Host a mixer.</strong> Have a meetup at the local coffee shop or a potluck and invite parents who live near you. This is a great way</li>
         <li class="ul-item"><strong>Host a playdate.</strong> Hosting a playdate is a great way to meet new friends that you’d like to book care with down the road.</li>
+        <li class="ul-item"><strong>Invite your friends to share care with you.</strong> A great place to start is sharing childcare with your existing friends and other parents in your child’s class and school. We depend on you to invite amazing people to join KidsClub. We encourage you to invite only friends you know and trust to join the platform. When you attend their activity, you’ll get to know their friends as well and broaden your network!</li>
         <li class="ul-item"><strong>Review profiles.</strong> If your host is a stranger, we also encourage you to look at reviews of your host and information they have provided on their profile such as job title, employer and the schools their children attend. You can also see who has purchased a background check. Soon we'll be adding other features, such as additional profile information, mutual friends and more.</li>
       </ul>
       <div class="question">What should I do if I have concerns about a guest or host?</div>
