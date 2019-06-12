@@ -113,12 +113,12 @@ export default {
   },
   methods: {
     updateUser (user) {
-      const userIndex = this.items.findIndex(u => u.id === user.id)
-      this.$set(this.items, userIndex, user)
+      const userIndex = this.items.findIndex(i => i.user.id === user.id)
+      this.items[userIndex].user = user
     },
     updateEvent (event) {
-      const eventIndex = this.events.findIndex(e => e.id === event.id)
-      this.$set(this.events, eventIndex, event)
+      const eventIndex = this.items.findIndex(i => i.event.id === event.id)
+      this.items[eventIndex].event = event
     },
     offerPlaydate () {
       this.$router.push({ name: 'NewEvent' })
