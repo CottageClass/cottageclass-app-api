@@ -183,7 +183,7 @@ export default {
     },
     goToItem () {
       if (this.event) {
-        this.$router.push({ name: 'EventPage', params: { eventId: this.event.id } })
+        this.$router.push({ name: 'EventPage', params: { id: this.event.id } })
       } else if (this.user) {
         this.$router.push({ name: 'ProviderProfile', params: { id: this.user.id } })
       } else {
