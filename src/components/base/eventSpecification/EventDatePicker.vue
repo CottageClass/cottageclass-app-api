@@ -1,7 +1,7 @@
 <template>
   <Question
-    title="Choose a day for your monthly activity"
-    subtitle="Activities repeat every 4 weeks on the same weekday, unless you change or cancel, so please pick a day when you're usually available. These are the days we need most:">
+    title="Pick a date"
+    subtitle="When would you like to offer this playdate?">
   <div class="picker-container" >
   <v-date-picker class="date-picker"
     :allowedDates="allowedDates"
