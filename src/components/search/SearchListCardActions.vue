@@ -73,7 +73,11 @@ export default {
       }
     },
     goingClick () {
-      this.$router.push({ name: 'RsvpInfoCollection', params: { eventId: this.event.id } })
+      if (this.event.participated) {
+        this.$router.push({ name: 'CancelRSVP', params: { eventId: this.event.id } })
+      } else {
+        this.$router.push({ name: 'RsvpInfoCollection', params: { eventId: this.event.id } })
+      }
     },
     contactClick () {
       this.$router.push({ name: 'ContactForm', params: { eventId: this.event.id } })
