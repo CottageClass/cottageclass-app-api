@@ -14,7 +14,6 @@ import MyEvents from '@/components/MyEvents.vue'
 import SocialInvite from '@/views/SocialInvite.vue'
 import EventEdit from '@/components/EventEdit.vue'
 import ProfileEdit from '@/components/ProfileEdit.vue'
-import EmergencyContacts from '@/components/FTE/EmergencyContacts.vue'
 import ChildSpecialRequirements from '@/components/FTE/ChildSpecialRequirements.vue'
 import ChildSpecialRequirementsYesNo from '@/components/FTE/ChildSpecialRequirementsYesNo.vue'
 import SignInWithEmail from '@/views/SignInWithEmail.vue'
@@ -111,11 +110,6 @@ export default new Router({
       path: '/my-events',
       name: 'MyEvents',
       component: MyEvents
-    },
-    {
-      path: '/onboarding/emergency-contacts/:eventId?',
-      name: 'EmergencyContacts',
-      component: EmergencyContacts
     },
     {
       path: '/onboarding/child-special-requirements-2/:eventId?',
