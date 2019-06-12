@@ -44,6 +44,7 @@
           <EventListMap
             class="map"
             :users="items && items.map(i => i.user)"
+            :clickToExpand="isMobile"
             @searchAreaSet="updateMapAreaFromMap"
           />
           <div class="list-container w-container">
@@ -76,13 +77,13 @@ import AgeRangeFilterSelector from '@/components/filters/AgeRangeFilterSelector'
 import LocationFilterSelector from '@/components/filters/LocationFilterSelector'
 import LocationFilterButton from '@/components/filters/LocationFilterButton'
 
-import { messaging, alerts } from '@/mixins'
+import { messaging, alerts, screen } from '@/mixins'
 import { fetchFeed } from '@/utils/api'
 import { mapGetters } from 'vuex'
 
 export default {
   name: 'Search',
-  mixins: [messaging, alerts],
+  mixins: [messaging, alerts, screen],
   components: { SearchResultList,
     MainNav,
     Footer,
@@ -426,6 +427,9 @@ a {
   }
 }
 @media (max-width: 767px){
+  .main-container {
+    padding: 0px;
+  }
   .event-page-title {
       font-size: 28px;
       line-height: 34px;
