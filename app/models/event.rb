@@ -57,7 +57,7 @@ class Event < ApplicationRecord
 
   def update_recency_score
     seconds_since_created = (Time.current - created_at) / 1.second
-    past = (ends_at < Time.current + 2.hours)
+    past = (ends_at < Time.current + 1.hour)
     update_column :recency_score, seconds_since_created + (past ? PAST_PENALTY : 0)
   end
 
