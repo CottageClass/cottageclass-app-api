@@ -43,21 +43,20 @@
         <div class="map-list-container">
           <EventListMap
             class="map"
-            :users="users"
+            :users="items && items.map(i => i.user)"
             @searchAreaSet="updateMapAreaFromMap"
           />
           <div class="list-container w-container">
             <SearchResultList
-              :showFetchMoreEventsButton="showFetchMoreEventsButton"
-              :showFetchMoreUsersButton="showFetchMoreUsersButton"
+              :showFetchMoreButton="showFetchMoreButton"
               class="list"
-              :events="events"
-              :users="users"
-              :noEventsMessage="noEventsMessage"
+              :items="items"
+              :noItemsMessage="noItemsMessage"
               :showTrailblazerMessage="showTrailblazerMessage"
-              @fetchMoreEventsClick="fetchMoreEvents"
-              @fetchMoreUsersClick="fetchMoreUsers"
-            />
+              @offerClick="offerPlaydate"
+              @fetchMoreClick="fetchMoreItems"
+              @user-updated="updateUser"
+              @event-updated="updateEvent"/>
           </div>
         </div>
       </div>
@@ -78,13 +77,11 @@ import LocationFilterSelector from '@/components/filters/LocationFilterSelector'
 import LocationFilterButton from '@/components/filters/LocationFilterButton'
 
 import { messaging, alerts } from '@/mixins'
-import { fetchUpcomingEventsWithinDistance, fetchUsersWithinDistance } from '@/utils/api'
+import { fetchFeed } from '@/utils/api'
 import { mapGetters } from 'vuex'
 
-var moment = require('moment')
-
 export default {
-  name: 'Events',
+  name: 'Search',
   mixins: [messaging, alerts],
   components: { SearchResultList,
     MainNav,
@@ -99,13 +96,10 @@ export default {
     return {
       showAllButtonText: 'Show all playdates',
       showShowAllButton: false,
-      noEventsMessage: 'Sorry, there are no upcoming playdates in this area',
-      events: null,
-      users: null,
-      eventsLastPage: 0,
-      usersLastPage: 0,
-      showFetchMoreEventsButton: true,
-      showFetchMoreUsersButton: true,
+      noItemsMessage: 'Sorry, there are no upcoming playdates in this area',
+      items: null,
+      lastPage: 0,
+      showFetchMoreButton: true,
       showTrailblazerMessage: true,
       ageRange: { error: null, data: { min: -1, max: -1 } },
       shortDescription: null
@@ -115,10 +109,21 @@ export default {
     ageRangeActive () {
       return this.ageRange.data.min >= 0 || this.ageRange.data.max >= 0
     },
-    ...mapGetters(['distanceFromCurrentUser', 'currentUser', 'isAuthenticated', 'alert', 'mapArea'])
+    ...mapGetters(['currentUser', 'isAuthenticated', 'alert', 'mapArea'])
   },
   methods: {
-    async fetchMoreUsers () {
+    updateUser (user) {
+      const userIndex = this.items.findIndex(u => u.id === user.id)
+      this.$set(this.items, userIndex, user)
+    },
+    updateEvent (event) {
+      const eventIndex = this.events.findIndex(e => e.id === event.id)
+      this.$set(this.events, eventIndex, event)
+    },
+    offerPlaydate () {
+      this.$router.push({ name: 'NewEvent' })
+    },
+    async fetchMoreItems () {
       try {
         const params = {
           miles: this.mapArea.maxDistance,
@@ -127,46 +132,20 @@ export default {
           pageSize: 10,
           minAge: this.ageRange.data.min >= 0 ? this.ageRange.data.min : null,
           maxAge: this.ageRange.data.max >= 0 ? this.ageRange.data.max : null,
-          page: this.usersLastPage + 1
+          page: this.lastPage + 1
         }
-        let newUsers = await fetchUsersWithinDistance(params)
-        if (newUsers.length < 10) {
-          this.showFetchMoreUsersButton = false
+        let newItems = await fetchFeed(params)
+        if (newItems.length < params.pageSize) {
+          this.showFetchMoreButton = false
         }
         if (this.currentUser) {
-          newUsers = newUsers.filter(u => u.id !== this.currentUser.id)
+          newItems = newItems.filter(u => u.id !== this.currentUser.id)
         }
-        // if users is null, set it to the incoming users, otherwise add them
-        this.users = !this.users ? newUsers : this.users.concat(newUsers)
-        this.usersLastPage = this.usersLastPage + 1
+        // if items is null, set it to the incoming items, otherwise add them
+        this.items = !this.items ? newItems : this.items.concat(newItems)
+        this.lastPage = this.lastPage + 1
       } catch (e) {
         this.logError('problem loading more users')
-        this.logError(e)
-      }
-    },
-    async fetchMoreEvents () {
-      try {
-        const params = {
-          miles: this.mapArea.maxDistance,
-          lat: this.mapArea.center.lat,
-          lng: this.mapArea.center.lng,
-          pageSize: 10,
-          minAge: this.ageRange.data.min >= 0 ? this.ageRange.data.min : null,
-          maxAge: this.ageRange.data.max >= 0 ? this.ageRange.data.max : null,
-          page: this.eventsLastPage + 1
-        }
-        let newEvents = await fetchUpcomingEventsWithinDistance(params)
-        if (this.currentUser) {
-          newEvents = newEvents.filter(e => e.hostId !== this.currentUser.id)
-        }
-        if (newEvents.length < 10) {
-          this.showFetchMoreEventsButton = false
-        }
-        // if events is null, set it to the incoming events, otherwise add them
-        this.events = !this.events ? newEvents : this.events.concat(newEvents)
-        this.eventsLastPage = this.eventsLastPage + 1
-      } catch (e) {
-        this.logError('problem loading events')
         this.logError(e)
       }
     },
@@ -190,21 +169,11 @@ export default {
       this.showTrailblazerMessage = false
       this.fetch()
     },
-    isToday: function (date) {
-      return moment(0, 'HH').diff(date, 'days') === 0
-    },
-    formatDate: function (date) {
-      return moment(date).format('dddd, MMM Do')
-    },
     fetch: async function () {
-      this.events = null
-      this.users = null
-      this.eventsLastPage = 0
-      this.usersLastPage = 0
-      this.showFetchMoreEventsButton = true
-      this.showFetchMoreUsersButton = true
-      this.fetchMoreEvents()
-      this.fetchMoreUsers()
+      this.items = null
+      this.lastPage = 0
+      this.showFetchMoreButton = true
+      this.fetchMoreItems()
     }
   },
   watch: {
@@ -314,10 +283,6 @@ a {
 
 .link:hover {
   text-decoration: underline;
-}
-
-.events-list-wrapper {
-  width: 100%;
 }
 
 .event-date-section-tittle {

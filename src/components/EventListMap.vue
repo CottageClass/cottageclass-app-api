@@ -7,7 +7,7 @@ This is the map view of a list of events
     <div v-if="showSelector" class="top-container">
       <router-link
       v-if="showNavigation"
-      :to="{name: 'Events'}"
+      :to="{name: 'Search'}"
       class="back-button w-inline-block">
         <img src="../assets/arrow-back-black.svg">
       </router-link>

@@ -16,4 +16,14 @@ class API::Users::StarsController < API::StarsController
     render status: 400 if params[:user_id].to_i == current_user.id
     @starable = User.find(params[:user_id])
   end
+
+  private
+
+  def render_starable(status:)
+    user = User.find(params[:user_id])
+    serializer = PublicUserSerializer.new user,
+                                          include: %i[children],
+                                          params: { current_user: current_user }
+    render json: serializer.serializable_hash, status: status
+  end
 end

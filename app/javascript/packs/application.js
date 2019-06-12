@@ -60,7 +60,7 @@ if (isAuthWindow) {
   router.beforeEach((to, from, next) => {
     store.dispatch('newRoute')
     if (to.name === 'SplashPage' && store.getters.isAuthenticated) {
-      next({ name: 'Events' })
+      next({ name: 'Search' })
     } else {
       next()
     }

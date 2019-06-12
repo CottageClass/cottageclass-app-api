@@ -4,7 +4,7 @@ class API::StarsController < API::BaseController
   def create
     star = Star.new giver: current_user, starable: @starable
     star.save
-    render status: :created
+    render_starable status: :created
   end
 
   def destroy
@@ -13,7 +13,7 @@ class API::StarsController < API::BaseController
                         starable_id: @starable.id
     if !star.nil?
       star.destroy
-      render status: 204
+      render_starable status: 200
     else
       render status: 404
     end

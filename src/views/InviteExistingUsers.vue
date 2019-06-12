@@ -77,11 +77,11 @@ export default {
             null
           ))
         Promise.all(requests).then(() => {
-          that.$router.push({ name: 'Events' })
+          that.$router.push({ name: 'Search' })
         }).catch(err => {
           console.log(err)
           that.showAlertOnNextRoute('There was a problem sending your invites', 'failure')
-          that.$router.push({ name: 'Events' })
+          that.$router.push({ name: 'Search' })
         })
       }
     }
@@ -99,7 +99,7 @@ export default {
       }
       if (!that.users || that.users.length === 0) {
         // there are no users within 20 miles so we return to home
-        this.$router.push({ name: 'Events' })
+        this.$router.push({ name: 'Search' })
       }
     }).catch(err => console.log(err))
   },

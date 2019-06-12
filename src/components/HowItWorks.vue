@@ -3,7 +3,7 @@
   <div class="title-bar-container">
     <a title-bar-action-l w-inline-block>
     <router-link
-    :to="{ name: 'Events' }">
+    :to="{ name: 'Search' }">
       <img src="../assets/Close-X.svg">
     </router-link></a>
     <h5 class="heading-3">How it works</h5>

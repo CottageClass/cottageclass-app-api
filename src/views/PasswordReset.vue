@@ -98,11 +98,11 @@ export default {
       client.create(data, 'passwordResetRequests').then((data) => {
         console.log(data)
         this.showAlertOnNextRoute('Your password reset request has been submitted.  You will be contacted shortly.', 'success')
-        this.$router.push({ name: 'Events' })
+        this.$router.push({ name: 'Search' })
       }, (err) => {
         console.log(err)
         this.showAlertOnNextRoute('Something went wrong.  Please contact us at contact@cottageclass.com.', 'failure')
-        this.$router.push({ name: 'Events' })
+        this.$router.push({ name: 'Search' })
       })
     }
   },
