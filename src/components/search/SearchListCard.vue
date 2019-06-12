@@ -47,7 +47,8 @@
                     :user="user"
                     :event="event"
                     @user-updated="$emit('user-updated', $event)"
-                    @event-updated="$emit('event-updated', $event)"/>
+                    @event-updated="$emit('event-updated', $event)" 
+                    :timePast="timePast"/>
     <SearchListCardActionsOverlay
                     v-if="showOverlay"
                     :user="user"
