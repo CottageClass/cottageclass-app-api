@@ -60,16 +60,12 @@ export default {
       childrenSelected: [],
       err: '',
       eventId: this.$route.params.eventId,
-      event: false,
-      emergencyInfoJustCompleted: this.$route.query.emergencyInfoComplete === 'true'
+      event: false
     }
   },
   created: function () {
     if (this.redirectToSignupIfNotAuthenticated()) { return }
     this.redirectToOnboardingIfNotOnboarded()
-    if (!this.emergencyInfoJustCompleted) {
-      this.redirectToEmergencyContactsIfNone()
-    }
     this.showErrorIfUserHasNoChildren()
   },
   mounted: function () {
@@ -114,17 +110,6 @@ export default {
     children: function () {
       return this.currentUser.children
     },
-    childrenHaveEmergencyContacts: function () {
-      // assumes if first child has them that they all do. not a safe assumption once we allow editing
-      let childHasAtLeastOneEmergencyContact = function (child) {
-        if (child.emergencyContacts && child.emergencyContacts.length > 0) {
-          return true
-        } else {
-          return false
-        }
-      }
-      return this.currentUser.children.reduce((allChildrenSoFar, child) => allChildrenSoFar && childHasAtLeastOneEmergencyContact(child), true)
-    },
     ...mapGetters([ 'currentUser', 'isAuthenticated' ])
   },
   methods: {
@@ -141,14 +126,6 @@ export default {
         this.$router.push({ name: 'Onboarding' })
       } else {
         console.log('user already onboarded, not redirecting')
-      }
-    },
-    redirectToEmergencyContactsIfNone: function () {
-      if (!this.childrenHaveEmergencyContacts) {
-        this.$router.push({
-          name: 'EmergencyContacts',
-          params: { eventId: this.eventId }
-        })
       }
     },
     calculateAge: function (birthdate) {
