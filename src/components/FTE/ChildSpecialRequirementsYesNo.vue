@@ -47,9 +47,6 @@ export default {
           name: 'RsvpInfoCollection',
           params: {
             eventId: this.eventId
-          },
-          query: {
-            emergencyInfoComplete: 'true'
           }
         })
       }

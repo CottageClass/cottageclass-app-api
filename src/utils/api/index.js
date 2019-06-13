@@ -2,10 +2,11 @@ import camelcaseKeys from 'camelcase-keys'
 import normalize from 'json-api-normalizer'
 import axios from 'axios'
 import { createEvent, createEvents } from '../createEvent'
-import { createUser } from '../createUser'
+import { createUser, createUsers } from '../createUser'
 import Logger from '@/utils/logger'
 
 export * from './stars'
+export * from './search'
 
 const logger = Logger('api')
 
@@ -156,71 +157,6 @@ export function submitUserInfo (userId, data) {
   })
 }
 
-function createPersonObject (personInApi, availableChildren = []) {
-  var p = personInApi.attributes
-  let hasAllRequiredFields = function () {
-    if (p.phone && p.latitude && p.longitude) {
-      return true
-    } else {
-      return false
-    }
-  }
-  let createChildrenList = function () {
-    let parseChild = function (child) {
-      return {
-        age: child.attributes.age
-      }
-    }
-    return availableChildren.filter(child => child.attributes.parent_id === personInApi.id).map(parseChild)
-    // make sure this is an array.
-  }
-
-  let activities = p.activities || []
-  activities = activities.map(activity => activity.replace(/_/g, ' '))
-
-  return {
-    agreeTos: p.agree_tos,
-    id: personInApi.id,
-    childAges: p.child_ages,
-    childAgesInMonths: p.child_ages_in_months,
-    firstName: p.first_name,
-    avatar: p.avatar,
-    activities: activities,
-    availableMornings: p.available_mornings,
-    availableEvenings: p.available_evenings,
-    availableAfternoons: p.available_afternoons,
-    availableWeekends: p.available_weekends,
-    lastInitial: capitalize(p.last_initial),
-    location: {
-      lat: parseFloat(p.fuzzy_latitude),
-      lng: parseFloat(p.fuzzy_longitude)
-    },
-    // todo: add these once API has them
-    title: '',
-    jobPosition: p.job_position,
-    employer: p.employer,
-    backgroundCheck: false,
-    facebookUid: p.facebook_uid,
-    facebookMapIcon: 'https://graph.facebook.com/' + p.facebook_uid + '/picture?width=30',
-    // todo: add children now somehow
-    children: createChildrenList(),
-    // todo: add these once I have them
-    verified: p.verified,
-    phone: p.phone,
-    dateCreated: p.date_created,
-    hasAllRequiredFields: hasAllRequiredFields(),
-    blurb: p.profile_blurb
-  }
-}
-
-// parses responseData into peopleArray and childrenArray
-function createPeopleObject (responseData) {
-  let peopleDataArray = responseData.data
-  let included = responseData.included || []
-  let childrenArray = included.filter(obj => obj.type === 'child')
-  return peopleDataArray.map(personInApi => createPersonObject(personInApi, childrenArray))
-}
-
 export function fetchUsersWithinDistance ({ miles, lat, lng, minAge, maxAge, pageSize = 100, page = 1 }) {
   let url = `/api/users/miles/${miles}/latitude/${lat}/longitude/${lng}/`
   if (minAge !== null && typeof minAge !== 'undefined') {
@@ -235,7 +171,7 @@ export function fetchUsersWithinDistance ({ miles, lat, lng, minAge, maxAge, pag
   ).then(res => {
     logger.log('FETCH USERS WITHIN DISTANCE SUCCESS')
     logger.log(res.data)
-    return createPeopleObject(res.data)
+    return createUsers(normalize(res.data))
   }).catch(err => {
     logger.logError('FETCH USERS WITHIN DISTANCE FAILURE')
     logger.logError(err)
@@ -249,7 +185,7 @@ export function fetchUsers () {
   ).then(res => {
     logger.log('FETCH USERS IN NETWORK SUCCESS')
     logger.log(res.data)
-    return createPeopleObject(res.data)
+    return createUsers(normalize(res.data))
   }).catch(err => {
     logger.logError('FETCH USERS IN NETWORK FAILURE')
     logger.logError(err.errors)
@@ -263,7 +199,7 @@ export function fetchUsersWhoHaveMadeInquiries (currentUserId) {
   ).then(res => {
     logger.log('FETCH USERS WHO HAVE MADE INQUIRIES SUCCESS')
     logger.log(res.data)
-    return createPeopleObject(res.data)
+    return createUsers(normalize(res.data))
   }).catch(err => {
     logger.logError('FETCH USERS WHO HAVE MADE INQUIRIES FAILURE')
     logger.logError(err.errors)
@@ -334,8 +270,7 @@ export function fetchAllUsers () {
     `/users`
   ).then(res => {
     logger.log('FETCH ALL USERS SUCCESS')
-    logger.log(createPeopleObject(res.data))
-    return createPeopleObject(res.data)
+    return createUsers(normalize(res.data))
   }).catch(err => {
     logger.logError('FETCH ALL USERS FAILURE')
     logger.logError(err.errors)
@@ -586,5 +521,8 @@ function parseEventData (obj) {
   e.hostFuzzyLongitude = parseFloat(e.hostFuzzyLongitude)
   e.activityName = e.activityNames.length > 0 && e.activityNames[0]
   e.food = e.foods.length > 0 && e.foods[0]
+  if (e.host && e.host.data) {
+    e.host = e.host.data.attributes
+  }
   return e
 }

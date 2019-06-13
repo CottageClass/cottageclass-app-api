@@ -28,7 +28,7 @@ export default {
           this.$router.push(this.redirectRoute)
           this.$store.commit('resetRedirectRoute')
         } else {
-          this.$router.push({ name: 'Events' })
+          this.$router.push({ name: 'Search' })
         }
       } else if (this.currentUser.id) {
         this.$router.push({ name: 'Onboarding' })

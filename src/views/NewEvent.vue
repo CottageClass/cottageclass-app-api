@@ -41,7 +41,7 @@ export default {
       if (this.firstCreatedEvent) {
         this.$router.push({ name: 'SocialInvite', params: { id: this.firstCreatedEvent.id, context: 'newEvent' } })
       } else {
-        this.$router.push({ name: 'Events' })
+        this.$router.push({ name: 'Search' })
       }
     },
     completeCreation () {

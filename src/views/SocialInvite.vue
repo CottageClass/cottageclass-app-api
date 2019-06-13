@@ -134,7 +134,7 @@ export default {
   methods: {
     nextStep () {
       if (this.$route.params.context === 'newEvent') {
-        this.$router.push({ name: 'Events' })
+        this.$router.push({ name: 'Search' })
       } else {
         if (this.firstCreatedEvent) {
           // this is the case if we're in the FTE flow

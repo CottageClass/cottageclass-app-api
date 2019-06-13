@@ -7,7 +7,7 @@ This is the map view of a list of events
     <div v-if="showSelector" class="top-container">
       <router-link
       v-if="showNavigation"
-      :to="{name: 'Events'}"
+      :to="{name: 'Search'}"
       class="back-button w-inline-block">
         <img src="../assets/arrow-back-black.svg">
       </router-link>
@@ -47,14 +47,14 @@ This is the map view of a list of events
 </template>
 
 <script>
-import { maps, screen } from '@/mixins'
+import { maps } from '@/mixins'
 import SearchResultList from '@/components/SearchResultList.vue'
 import { mapGetters } from 'vuex'
 
 export default {
   name: 'EventListMap',
-  props: ['users', 'events', 'searchRadius'],
-  mixins: [ maps, screen ],
+  props: ['users', 'events', 'searchRadius', 'clickToExpand'],
+  mixins: [ maps ],
   components: { SearchResultList },
   data () {
     return {
@@ -67,7 +67,7 @@ export default {
   },
   methods: {
     mapClick () {
-      if (this.isMobile && this.$router.currentRoute.name === 'Events') {
+      if (this.clickToExpand) {
         this.$router.push({ name: 'EventsDetail' })
       }
     },

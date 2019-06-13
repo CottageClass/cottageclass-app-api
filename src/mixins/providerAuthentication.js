@@ -31,7 +31,7 @@ export default {
         if (data.err) {
           // TODO handle this error with an alert
           console.log('error in authentication : ', data.err)
-          component.$router.push({ name: 'Events' })
+          component.$router.push({ name: 'Search' })
         } else {
           // determine where the user should go next
           console.log('Facebook authentication successful')

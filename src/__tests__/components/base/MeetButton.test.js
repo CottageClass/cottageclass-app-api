@@ -18,7 +18,7 @@ describe('MeetButton', () => {
     }
     beforeAll(async () => {
       const $route = {
-        name: 'Events'
+        name: 'Search'
       }
       const $store = {
         getters: {
@@ -95,7 +95,7 @@ describe('MeetButton', () => {
         }
       }
       const $route = {
-        name: 'Events'
+        name: 'Search'
       }
 
       const targetUser = {
@@ -160,7 +160,7 @@ describe('MeetButton', () => {
         }
       }
       const $route = {
-        name: 'Events'
+        name: 'Search'
       }
       wrapper = mount(MeetButton, {
         mocks: { $store, $route },

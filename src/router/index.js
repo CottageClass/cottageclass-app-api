@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import ProviderProfile from '@/views/ProviderProfile.vue'
 import SplashPage from '@/views/SplashPage.vue'
 import EventPage from '@/components/EventPage.vue'
-import Events from '@/views/Events.vue'
+import Search from '@/views/Search.vue'
 import EventsDetail from '@/views/EventsDetail.vue'
 import NewEvent from '@/views/NewEvent.vue'
 import RsvpInfoCollection from '@/components/RsvpInfoCollection.vue'
@@ -14,7 +14,6 @@ import MyEvents from '@/components/MyEvents.vue'
 import SocialInvite from '@/views/SocialInvite.vue'
 import EventEdit from '@/components/EventEdit.vue'
 import ProfileEdit from '@/components/ProfileEdit.vue'
-import EmergencyContacts from '@/components/FTE/EmergencyContacts.vue'
 import ChildSpecialRequirements from '@/components/FTE/ChildSpecialRequirements.vue'
 import ChildSpecialRequirementsYesNo from '@/components/FTE/ChildSpecialRequirementsYesNo.vue'
 import SignInWithEmail from '@/views/SignInWithEmail.vue'
@@ -47,9 +46,9 @@ export default new Router({
       component: SplashPage
     },
     {
-      path: '/events',
-      name: 'Events',
-      component: Events
+      path: '/home',
+      name: 'Search',
+      component: Search
     },
     {
       path: '/events/detail',
@@ -111,11 +110,6 @@ export default new Router({
       path: '/my-events',
       name: 'MyEvents',
       component: MyEvents
-    },
-    {
-      path: '/onboarding/emergency-contacts/:eventId?',
-      name: 'EmergencyContacts',
-      component: EmergencyContacts
     },
     {
       path: '/onboarding/child-special-requirements-2/:eventId?',

@@ -321,6 +321,13 @@ label {
   margin-bottom: 5px;
   font-weight: bold;
 }
+.lp-truncate {
+  max-width:100%;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .lp-select {
   height: 38px;
   padding: 8px 12px;

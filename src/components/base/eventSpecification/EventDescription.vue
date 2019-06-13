@@ -1,7 +1,7 @@
 <template>
   <Question
     title="Offer a playdate"
-    subtitle="Describe a playdate you'd like to host in your home or public space. It can be a one-time event (like a trip to the zoo) or something you can offer on a regular basis, like arts & crafts, indoor play, or a playground hangout!">
+    subtitle="Describe a playdate you'd like to host in your home or public space. It can be a one-time event (like a trip to the zoo) or something you can offer on a regular basis, like arts & crafts, indoor play, or a playground hangout! (You can skip this step if you're not ready.)">
     <FormWithTextArea
       maxLength="120"
       placeholder="Describe your playdate here, e.g. 'Come over and play at our house!'"
