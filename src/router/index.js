@@ -18,7 +18,6 @@ import ChildSpecialRequirements from '@/components/FTE/ChildSpecialRequirements.
 import ChildSpecialRequirementsYesNo from '@/components/FTE/ChildSpecialRequirementsYesNo.vue'
 import SignInWithEmail from '@/views/SignInWithEmail.vue'
 import SignUpWithEmail from '@/views/SignUpWithEmail.vue'
-import InviteExistingUsers from '@/views/InviteExistingUsers.vue'
 import PasswordReset from '@/views/PasswordReset.vue'
 import ContactForm from '@/views/ContactForm.vue'
 import Onboarding from '@/views/Onboarding.vue'
@@ -84,11 +83,6 @@ export default new Router({
       props: {
         context: true
       }
-    },
-    {
-      path: '/event/:id/invite',
-      name: 'InviteExistingUsers',
-      component: InviteExistingUsers
     },
     {
       path: '/event/:id/edit',
