@@ -6,7 +6,7 @@
       <div class="content-container-4 w-container">
         <h1 class="h1-display">My Playdates</h1>
         <SearchResultList
-          :showHeader="false"
+          :showHeader="true"
           :items="items"
           :noEventsMessage="noEventsMessage"
         />
