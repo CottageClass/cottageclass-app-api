@@ -1,5 +1,5 @@
 <template>
-<li class="events-list__view-more"><a @click="$emit('fetchMoreClick')" class="event-list__view-more-link">View more</a></li>
+<li class="events-list__view-more"><a @click="$emit('fetch-more-click')" class="event-list__view-more-link">View more</a></li>
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <!--
-This is the map view of a list of events
+This is the map view or the list view of events
  -->
 
 <template>
@@ -36,12 +36,15 @@ This is the map view of a list of events
     v-if="type==='list'"
     class="list-container w-container">
       <SearchResultList
-        class="list"
-        :events="events"
-        :users="users"
-        :noEventsMessage="noEventsMessage"
-        :showTrailblazerMessage="showTrailblazerMessage"
-      />
+              :showFetchMoreButton="showFetchMoreButton"
+              class="list"
+              :items="items"
+              :noItemsMessage="noItemsMessage"
+              :showTrailblazerMessage="showTrailblazerMessage"
+              @offerClick="offerPlaydate"
+              @fetch-more-click="$emit('fetch-more-click')"
+              @user-updated="$emit('user-updated')"
+              @event-updated="$emit('event-updated')"/>
     </div>
   </div>
 </template>
@@ -53,7 +56,7 @@ import { mapGetters } from 'vuex'
 
 export default {
   name: 'EventListMap',
-  props: ['users', 'events', 'searchRadius', 'clickToExpand'],
+  props: [ 'clickToExpand', 'items', 'showFetchMoreButton', 'noItemsMessage', 'showTrailblazerMessage' ],
   mixins: [ maps, screen ],
   components: { SearchResultList },
   data () {
@@ -66,6 +69,9 @@ export default {
     }
   },
   methods: {
+    offerPlaydate () {
+      this.$router.push({ name: 'NewEvent' })
+    },
     mapClick () {
       if (this.clickToExpand) {
         this.$router.push({ name: 'EventsDetail' })
@@ -118,6 +124,9 @@ export default {
     }
   },
   computed: {
+    users () {
+      return this.items && this.items.map(i => i.user)
+    },
     showSearchButton () {
       return (this.showNavigation || !this.isMobile) && this.mapHasChanged
     },
@@ -302,7 +311,8 @@ select {
   }
   .list-container {
     flex: 1;
-    overflow-y: scroll
+    overflow-y: scroll;
+    padding-bottom: 53px;
   }
 }
 </style>
