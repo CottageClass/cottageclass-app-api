@@ -16,7 +16,7 @@
                     @event-updated="$emit('event-updated', $event)"/>
       </div>
       <SearchListFooter v-if="showFetchMoreButton"
-                        @fetchMoreClick="$emit('fetchMoreClick')"
+                        @fetch-more-click="$emit('fetch-more-click')"
                         />
     </div>
     <!-- in the case of no events -->
