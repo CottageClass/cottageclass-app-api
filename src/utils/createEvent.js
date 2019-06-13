@@ -50,6 +50,7 @@ function cleanEvent (attributes) {
   res.hostFuzzyLongitude = parseFloat(attributes.hostFuzzyLongitude)
   res.activityName = attributes.activityNames.length > 0 ? attributes.activityNames[0] : null
   res.food = attributes.foods.length > 0 ? attributes.foods[0] : null
+  res.host = attributes.host.data.attributes
   return res
 }
 
