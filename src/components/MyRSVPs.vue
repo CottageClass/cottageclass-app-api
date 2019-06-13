@@ -4,7 +4,7 @@
     <div class="content-section background-01">
       <div class="divider-2px"></div>
       <div class="content-container-4 w-container">
-        <h1 class="h1-display">My RSVP'ed events</h1>
+        <h1 class="h1-display">Playdates you're attending</h1>
         <SearchResultList
           :showHeader="false"
           :items="items"
@@ -40,7 +40,7 @@ export default {
     items () {
       return this.events && this.events.map(e => ({ event: e, user: e.host }))
     },
-    noEventsMessage: () => 'You aren\'t scheduled for any playdates.  Check out some <a href="events">upcoming playdates near you</a>.',
+    noEventsMessage: () => 'You aren\'t scheduled for any playdates.  Check out some <a href="home">upcoming playdates near you</a>.',
     ...mapGetters(['currentUser', 'isAuthenticated'])
   },
   methods: {
