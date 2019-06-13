@@ -45,7 +45,7 @@
 import TextMessageLink from '@/components/TextMessageLink.vue'
 import EventListItem from '@/components/EventListItem.vue'
 import Nav from '@/components/FTE/Nav.vue'
-import * as api from '@/utils/api'
+import { fetchEvent } from '@/utils/api'
 import StyleWrapper from '@/components/FTE/StyleWrapper.vue'
 import { mapGetters } from 'vuex'
 
@@ -70,7 +70,7 @@ export default {
       fetchedEvent: null
     }
   },
-  mounted: function () {
+  created () {
     if (this.eventId) {
       this.fetchEvent()
     }
@@ -92,17 +92,19 @@ export default {
       }
     },
     eventToShare: function () {
-      if (this.firstCreatedEvent) {
+      if (this.$route.params.id) {
+        return this.fetchedEvent
+      } else if (this.firstCreatedEvent) {
         return this.firstCreatedEvent
       } else {
         return this.fetchedEvent
       }
     },
     titleText () {
-      return this.$route.params.context === 'newEvent' ? 'Offer posted! Share it?' : 'Build your village'
+      return this.$route.params.context === 'spontaneous' ? 'Offer posted! Share it?' : 'Build your village'
     },
     sharingPromptText: function () {
-      if (this.$route.params.context === 'newEvent') {
+      if (this.$route.params.context === 'spontaneous') {
         return 'Yay! We\'ve posted your offer to other parents. Now would you like to invite some people?'
       }
       if (this.eventId) {
@@ -132,18 +134,14 @@ export default {
     ...mapGetters([ 'firstCreatedEvent' ])
   },
   methods: {
+    async fetchEvent () {
+      this.fetchedEvent = await fetchEvent(this.eventId)
+    },
     nextStep () {
-      if (this.$route.params.context === 'newEvent') {
-        this.$router.push({ name: 'Search' })
-      } else {
-        this.$router.go(-1)
-      }
+      this.$router.push({ name: 'Search' })
     },
     onCopy: function () {
       this.copyButtonText = 'copied!'
-    },
-    fetchEvent: async function () {
-      this.events = await api.fetchEvent(this.eventId)
     }
   }
 }
