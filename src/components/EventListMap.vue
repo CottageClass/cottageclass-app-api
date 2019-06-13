@@ -47,14 +47,14 @@ This is the map view of a list of events
 </template>
 
 <script>
-import { maps } from '@/mixins'
+import { maps, screen } from '@/mixins'
 import SearchResultList from '@/components/SearchResultList.vue'
 import { mapGetters } from 'vuex'
 
 export default {
   name: 'EventListMap',
   props: ['users', 'events', 'searchRadius', 'clickToExpand'],
-  mixins: [ maps ],
+  mixins: [ maps, screen ],
   components: { SearchResultList },
   data () {
     return {
@@ -148,7 +148,7 @@ export default {
       }
     },
     showSelector: function () {
-      return (this.$router.currentRoute.name === 'Events' && !this.isMobile) ||
+      return (this.$router.currentRoute.name === 'Search' && !this.isMobile) ||
              (this.$router.currentRoute.name === 'EventsDetail')
     },
     ...mapGetters([ 'mapArea' ])
