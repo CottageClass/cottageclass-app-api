@@ -1,10 +1,10 @@
 <template>
   <Question
     title="Tell us a bit about yourself"
-    subtitle="Other members would love to know a bit more about you and your family.">
+    subtitle="To help us find you playdates, we need a short paragraph about your family (and what you're looking for here) that we can show to other parents.">
     <FormWithTextArea
       v-model="profileBlurb"
-      placeholder="Your illustrious biography"
+      placeholder="e.g. 'We love parks and playgrounds, and we're looking for playdates on the weekend!'"
       />
   </Question>
 </template>
