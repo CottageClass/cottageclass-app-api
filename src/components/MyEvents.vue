@@ -4,8 +4,9 @@
     <div class="content-section background-01">
       <div class="divider-2px"></div>
       <div class="content-container-4 w-container">
-        <h1 class="h1-display">My Playdates</h1>
+        <h1 class="h1-display">Playdates you're hosting</h1>
         <SearchResultList
+          @offerClick="offerPlaydate"
           :showHeader="true"
           :items="items"
           :noEventsMessage="noEventsMessage"
@@ -20,7 +21,7 @@
 import MainNav from '@/components/MainNav.vue'
 import Footer from '@/components/Footer.vue'
 import SearchResultList from '@/components/SearchResultList.vue'
-import * as api from '@/utils/api'
+import { fetchUpcomingEvents } from '@/utils/api'
 import { mapGetters } from 'vuex'
 
 var moment = require('moment')
@@ -41,11 +42,14 @@ export default {
       return this.events && this.events.map(e => ({ event: e, user: e.host }))
     },
     noEventsMessage: () => {
-      return 'Sorry, you don\'t have any scheduled playdates'
+      return ''
     },
     ...mapGetters(['currentUser'])
   },
   methods: {
+    offerPlaydate () {
+      this.$router.push({ name: 'NewEvent' })
+    },
     limitNumberOfEvents: function (events) {
       if (this.limitTo) {
         return events.slice(0, parseInt(this.limitTo))
@@ -60,7 +64,7 @@ export default {
       return moment(date).format('dddd, MMM Do')
     },
     fetchMyUpcomingEvents: async function () {
-      this.events = await api.fetchUpcomingEvents(this.currentUser.id)
+      this.events = await fetchUpcomingEvents(this.currentUser.id)
     }
   },
   mounted: function () {
