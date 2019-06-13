@@ -39,7 +39,7 @@ export default {
   methods: {
     proceed () {
       if (this.firstCreatedEvent) {
-        this.$router.push({ name: 'SocialInvite', params: { id: this.firstCreatedEvent.id, context: 'newEvent' } })
+        this.$router.push({ name: 'SocialInvite', params: { id: this.firstCreatedEvent.id, context: 'spontaneous' } })
       } else {
         this.$router.push({ name: 'Search' })
       }
