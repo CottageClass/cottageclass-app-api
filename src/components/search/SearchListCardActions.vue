@@ -42,7 +42,6 @@ export default {
   },
   computed: {
     showGoingButton () {
-      this.debug(this.user.id + ' ' + this.currentUser.id)
       return this.event &&
         !this.timePast &&
         (this.user.id.toString() !== this.currentUser.id.toString())

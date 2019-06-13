@@ -2,8 +2,15 @@ import { mount } from '@vue/test-utils'
 import SearchListCard from '@/components/search/SearchListCard'
 
 describe('SearchListCard', () => {
+  const $store = {
+    getters: {
+      currentUser: { id: 100000 },
+      isAuthenticated: false
+    }
+  }
   it('mounts with just user info', () => {
     const wrapper = mount(SearchListCard, {
+      mocks: { $store },
       propsData: {
         user: {
           firstName: 'Foo',
@@ -53,6 +60,7 @@ describe('SearchListCard', () => {
 
   it('some alternative cases on the data', () => {
     const wrapper = mount(SearchListCard, {
+      mocks: { $store },
       propsData: {
         user: {
           facebookUid: '563930223',
