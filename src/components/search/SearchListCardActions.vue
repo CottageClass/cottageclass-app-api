@@ -26,6 +26,7 @@ import goingIconActive from '@/assets/going__green.svg'
 import goingIconInactive from '@/assets/going-black-outline.svg'
 import starredIconActive from '@/assets/star_2.svg'
 import starredIconInactive from '@/assets/star-black-outline.svg'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'SearchListCardActions',
@@ -41,7 +42,10 @@ export default {
   },
   computed: {
     showGoingButton () {
-      return this.event && !this.timePast
+      this.debug(this.user.id + ' ' + this.currentUser.id)
+      return this.event &&
+        !this.timePast &&
+        (this.user.id.toString() !== this.currentUser.id.toString())
     },
     shareIcon () { return shareIcon },
     contactIcon () { return contactIcon },
@@ -55,7 +59,8 @@ export default {
       if (this.event) { return this.event }
       if (this.user) { return this.user }
       throw Error('No valid item on this list card')
-    }
+    },
+    ...mapGetters(['currentUser'])
   },
   methods: {
     async interestedClick () {
