@@ -4,20 +4,24 @@ This is the mobile-only page that shows an expanded, naviagable map of events
 
 <template>
   <div class="body">
-    <EventListMap
-      class="map"
-      :users="users"
-      :events="events"
-      @searchAreaSet="updateForZoomLevel"
-      :center="mapArea.center"
-      :showTrailblazerMessage="showTrailblazerMessage"
-    />
+  <EventListMap
+    :center="mapArea.center"
+    class="map"
+    :clickToExpand="false"
+    @searchAreaSet="updateForZoomLevel"
+    :showFetchMoreButton="showFetchMoreButton"
+    :items="items"
+    :noItemsMessage="noItemsMessage"
+    :showTrailblazerMessage="showTrailblazerMessage"
+    @fetch-more-click="fetchMoreItems"
+    @user-updated="$emit('user-updated')"
+    @event-updated="$emit('event-updated')"/>
   </div>
 </template>
 
 <script>
+import { fetchFeed } from '@/utils/api'
 import EventListMap from '@/components/EventListMap.vue'
-import { fetchUpcomingEventsWithinDistance, fetchUsersWithinDistance } from '@/utils/api'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -25,9 +29,11 @@ export default {
   components: { EventListMap },
   data () {
     return {
-      users: null,
-      events: null,
-      showTrailblazerMessage: true
+      items: null,
+      showFetchMoreButton: true,
+      showTrailblazerMessage: true,
+      noItemsMessage: 'Sorry, there are no upcoming playdates in this area',
+      ageRange: { error: null, data: { min: -1, max: -1 } }
     }
   },
   computed: {
@@ -51,20 +57,42 @@ export default {
       this.showTrailblazerMessage = false
       this.fetchWithinDistance()
     },
-    fetchWithinDistance: async function () {
-      const params = {
-        miles: this.mapArea.maxDistance,
-        lat: this.mapArea.center.lat,
-        lng: this.mapArea.center.lng,
-        pageSize: 10
+    async fetchMoreItems () {
+      this.debug('fetchMoreItems')
+      try {
+        const params = {
+          miles: this.mapArea.maxDistance,
+          lat: this.mapArea.center.lat,
+          lng: this.mapArea.center.lng,
+          pageSize: 10,
+          minAge: this.ageRange.data.min >= 0 ? this.ageRange.data.min : null,
+          maxAge: this.ageRange.data.max >= 0 ? this.ageRange.data.max : null,
+          page: this.lastPage + 1
+        }
+        let newItems = await fetchFeed(params)
+        if (newItems.length < params.pageSize) {
+          this.showFetchMoreButton = false
+        }
+        if (this.currentUser) {
+          newItems = newItems.filter(u => u.id !== this.currentUser.id)
+        }
+        // if items is null, set it to the incoming items, otherwise add them
+        this.items = !this.items ? newItems : this.items.concat(newItems)
+        this.lastPage = this.lastPage + 1
+      } catch (e) {
+        this.logError('problem loading more users')
+        this.logError(e)
       }
-      console.log({ params })
-      this.events = await fetchUpcomingEventsWithinDistance(params)
-      this.users = await fetchUsersWithinDistance(params)
+    },
+    fetch: async function () {
+      this.items = null
+      this.lastPage = 0
+      this.showFetchMoreButton = true
+      this.fetchMoreItems()
     }
   },
   mounted: async function () {
-    this.fetchWithinDistance()
+    this.fetch()
   }
 }
 </script>

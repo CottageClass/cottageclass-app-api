@@ -24,7 +24,7 @@
       class="nav-links-expanded">
         <ul class="unordered-list-2 w-list-unstyled">
           <li v-if="isAuthenticated">
-            <router-link :to="{name: 'Events'}" class="link-block w-inline-block">
+            <router-link :to="{name: 'Search'}" class="link-block w-inline-block">
               <div class="text-block">Find parents &amp; playdates</div>
             </router-link>
           </li>

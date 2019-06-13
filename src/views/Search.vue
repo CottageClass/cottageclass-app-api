@@ -56,7 +56,7 @@
               :noItemsMessage="noItemsMessage"
               :showTrailblazerMessage="showTrailblazerMessage"
               @offerClick="offerPlaydate"
-              @fetchMoreClick="fetchMoreItems"
+              @fetch-more-click="fetchMoreItems"
               @user-updated="updateUser"
               @event-updated="updateEvent"/>
           </div>
