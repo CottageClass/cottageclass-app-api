@@ -43,8 +43,8 @@ This is the map view or the list view of events
               :showTrailblazerMessage="showTrailblazerMessage"
               @offerClick="offerPlaydate"
               @fetch-more-click="$emit('fetch-more-click')"
-              @user-updated="$emit('user-updated')"
-              @event-updated="$emit('event-updated')"/>
+              @user-updated="$emit('user-updated', $event)"
+              @event-updated="$emit('event-updated', $event)"/>
     </div>
   </div>
 </template>
