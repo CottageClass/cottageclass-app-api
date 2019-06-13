@@ -123,6 +123,7 @@
 import Images from '@/components/Images.vue'
 import AvatarImage from '@/components/base/AvatarImage'
 import { starUser, unstarUser, fetchUser } from '@/utils/api'
+import { andJoin } from '@/utils/utils'
 import ChildAges from '@/components/ChildAges.vue'
 import StyleWrapper from '@/components/FTE/StyleWrapper.vue'
 import LoadingSpinner from '@/components/LoadingSpinner.vue'
@@ -134,7 +135,6 @@ import Footer from '@/components/Footer.vue'
 import MainNav from '@/components/MainNav.vue'
 import { mapGetters } from 'vuex'
 import { maps, screen } from '@/mixins'
-import _ from 'lodash'
 import languageList from 'language-list'
 
 export default {
@@ -218,11 +218,11 @@ export default {
     },
     languageText: function () {
       const languageCodes = this.user.languages
-      const languages = _.map(languageCodes, languageList().getLanguageName)
+      const languages = languageCodes.map(languageList().getLanguageName)
       if (languages.length === 1) {
         return 'Speaks ' + languages[0]
       }
-      return 'Speaks ' + [languages.slice(0, -1).join(', '), _.last(languages)].join(' and ')
+      return 'Speaks ' + andJoin(languages)
     },
     anyAvailability: function () {
       return this.user.availableMornings ||

@@ -17,7 +17,9 @@ export function initProxySession (currentUserId, receiverId, requestMessage, ack
     logger.log('NOT SENDING NOTIFICATION from ' + currentUserId + '.  To: ' + receiverId)
     logger.log('REQUEST MESSAGE: ', requestMessage)
     logger.log('ACKNOWLEDGE MESSAGE: ', acknowledgmentMessage)
-    return
+    return new Promise((resolve, reject) => {
+      resolve()
+    })
   }
   let postData = {
     twilioSession: {

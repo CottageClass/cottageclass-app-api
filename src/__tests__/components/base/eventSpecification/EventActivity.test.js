@@ -1,6 +1,5 @@
 import { mount } from '@vue/test-utils'
 import EventActivity from '@/components/base/eventSpecification/EventActivity.vue'
-import _ from 'lodash'
 
 const ages = {
   'Arts & Crafts': [2, 11],

@@ -1,15 +1,18 @@
-import _ from 'lodash'
 import moment from 'moment'
 import { capitalize } from './utils'
 
 export const createEvent = (data) => {
-  const id = _.keys(data.event)[0]
-  // console.log(data.event)
+  const id = Object.keys(data.event)[0]
   const event = data.event[id]
   const attributes = cleanEvent(event.attributes)
 
-  const participatingChildren = _.map(event.relationships.participants.data, e => e.id)
-  const participatingParents = _.map(_.values(data.participant), p => cleanPerson(p.attributes))
+  const participatingChildren = event.relationships.participants.data.map(e => e.id)
+  let participatingParents
+  if (data.participant) {
+    participatingParents = Object.values(data.participant).map(p => cleanPerson(p.attributes))
+  } else {
+    participatingParents = []
+  }
 
   return {
     data,
@@ -21,7 +24,7 @@ export const createEvent = (data) => {
 }
 
 export const createEvents = (data, sortFunction) => {
-  const all = _.mapValues(data.event, e => {
+  const all = Object.values(data.event).map(e => {
     return {
       id: e.id,
       ...cleanEvent(e.attributes)
@@ -31,7 +34,7 @@ export const createEvents = (data, sortFunction) => {
   // if no sort method is given, sort by id ascending (use int value, not lexiacal)
   sortFunction = sortFunction || (e => parseInt(e.id))
   // use this to sort by distance or
-  const sorted = _.sortBy(all, sortFunction)
+  const sorted = all.sort((a, b) => sortFunction(a) - sortFunction(b))
   sorted.all = all
 
   return sorted
@@ -41,7 +44,7 @@ export const createEvents = (data, sortFunction) => {
  * Sanitizing helper methods
 */
 function cleanEvent (attributes) {
-  const res = _.clone(attributes)
+  const res = Object.assign({}, (attributes))
   res.hostId = attributes.hostId.toString()
   res.startsAt = moment(attributes.startsAt)
   res.endsAt = moment(attributes.endsAt)
@@ -57,7 +60,7 @@ function cleanEvent (attributes) {
 }
 
 function cleanPerson (attributes) {
-  const res = _.clone(attributes)
+  const res = Object.assign({}, (attributes))
   res.userFuzzyLatitude = parseFloat(attributes.userFuzzyLatitude)
   res.userFuzzyLongitude = parseFloat(attributes.userFuzzyLongitude)
   res.userFirstName = capitalize(attributes.userFirstName)

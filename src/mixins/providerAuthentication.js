@@ -1,5 +1,4 @@
 import { redirect } from '@/mixins'
-import _ from 'lodash'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -8,7 +7,7 @@ export default {
     // accepts a callback that take `window` as an argument where window is the popup window
     authenticate: function (provider, callback) {
       const authUri = `${window.location.origin}/users/auth/facebook`
-      _.assign(window, { oauthCallback: callback })
+      Object.assign(window, { oauthCallback: callback })
       this.createPopup(
         authUri,
         580,

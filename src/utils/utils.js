@@ -1,3 +1,11 @@
+export function minBy (arr, fn) {
+  return arr.reduce((a, b) => fn(a) <= fn(b) ? a : b)
+}
+
+export function maxBy (arr, fn) {
+  return arr.reduce((a, b) => fn(a) >= fn(b) ? a : b)
+}
+
 export function andJoin (arr) {
   if (!arr || !arr.length) {
     return ''

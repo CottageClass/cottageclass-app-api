@@ -1,6 +1,5 @@
 import { mount } from '@vue/test-utils'
 import RadioButtons from '@/components/base/RadioButtons.vue'
-import _ from 'lodash'
 
 describe('RadioButtons', () => {
   let wrapper
@@ -15,10 +14,10 @@ describe('RadioButtons', () => {
   })
 
   it('mounts with the correct state', () => {
-    const states = _.map(wrapper.findAll('input').wrappers, isChecked)
-    _.forEach(states, s => {
+    const states = wrapper.findAll('input').wrappers.map(isChecked)
+    for (let s of states) {
       expect(s).toBeFalsy()
-    })
+    }
     expect(wrapper.vm.state).toBe('')
     expect(wrapper.emitted().input).toHaveLength(1)
     expect(wrapper.emitted().input[0][0]).toEqual('')

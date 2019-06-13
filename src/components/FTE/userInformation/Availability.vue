@@ -13,8 +13,6 @@
 import Question from '@/components/base/Question.vue'
 import Checkboxes from '@/components/base/Checkboxes.vue'
 
-import _ from 'lodash'
-
 export default {
   name: 'Availability',
   props: ['value'],
@@ -39,10 +37,10 @@ export default {
     availability: function () {
       const that = this
       // this converts our array of checkedBoxes to an object with true/false for each id
-      const a = _.reduce(that.labelsAndOrder,
+      const a = that.labelsAndOrder.reduce(
         function (res, idAndLabel, index) {
           const id = idAndLabel[0]
-          return _.merge(res, { [id]: _.includes(that.checkedAvailabilityIds, id) })
+          return { ...res, ...{ [id]: that.checkedAvailabilityIds.includes(id) } }
         },
         {})
       return a

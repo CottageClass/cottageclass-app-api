@@ -45,7 +45,7 @@
               <span v-for="(participant, index) in event.participatingParents.slice(0, 3)">
                 <router-link :to="{ name: 'ProviderProfile', params: { id: participant.userId }}"
                   v-bind:key="participant.id">
-                  {{firstName}}
+                  {{firstName(participant)}}
                 </router-link>
                 {{ (index===event.participatingParents.length-1) ? '' : ', ' }}
               </span>
@@ -282,7 +282,9 @@ export default {
       return this.event.hostBlurb
     },
     firstName () {
-      return capitalize(this.participant.userFirstName)
+      return (participant) => {
+        return capitalize(participant.userFirstName)
+      }
     },
     ...mapGetters(['currentUser'])
   }
