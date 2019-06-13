@@ -4,7 +4,7 @@
     <div class="content-section background-01">
       <div class="divider-2px"></div>
       <div class="content-container-4 w-container">
-        <h1 class="h1-display">My Playdates</h1>
+        <h1 class="h1-display">Playdates you're hosting</h1>
         <SearchResultList
           :showHeader="true"
           :items="items"
@@ -41,7 +41,7 @@ export default {
       return this.events && this.events.map(e => ({ event: e, user: e.host }))
     },
     noEventsMessage: () => {
-      return 'Sorry, you don\'t have any scheduled playdates'
+      return ''
     },
     ...mapGetters(['currentUser'])
   },
