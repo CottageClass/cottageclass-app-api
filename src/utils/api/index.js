@@ -3,6 +3,7 @@ import normalize from 'json-api-normalizer'
 import axios from 'axios'
 import { createEvent, createEvents } from '../createEvent'
 import { createUser, createUsers } from '../createUser'
+import { capitalize } from '@/utils/utils'
 import Logger from '@/utils/logger'
 
 export * from './stars'
@@ -491,10 +492,6 @@ export function signOut () {
 /*
  * UTILS
  */
-
-function capitalize (string) {
-  return string.charAt(0).toUpperCase() + string.slice(1)
-}
 
 function parseEventData (obj) {
   var e = obj.attributes

@@ -54,9 +54,6 @@ export default {
         }
       }
     }
-  },
-  methods: {
-    capitalize: _.capitalize
   }
 }
 </script>
