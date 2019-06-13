@@ -521,5 +521,8 @@ function parseEventData (obj) {
   e.hostFuzzyLongitude = parseFloat(e.hostFuzzyLongitude)
   e.activityName = e.activityNames.length > 0 && e.activityNames[0]
   e.food = e.foods.length > 0 && e.foods[0]
+  if (e.host && e.host.data) {
+    e.host = e.host.data.attributes
+  }
   return e
 }

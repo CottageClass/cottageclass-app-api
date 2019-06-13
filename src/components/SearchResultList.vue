@@ -3,6 +3,7 @@
     <LoadingSpinner v-if="awaiting"/>
     <div class="event-list" v-if="!awaiting">
       <SearchListHeader
+        v-if="showHeader"
         @offerClick="$emit('offerClick')"
         />
       <div v-for="item in items">
@@ -51,6 +52,10 @@ export default {
     showFetchMoreButton: {
       type: Boolean,
       requred: true
+    },
+    showHeader: {
+      type: Boolean,
+      default: true
     }
   },
   computed: {

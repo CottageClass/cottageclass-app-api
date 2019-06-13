@@ -6,8 +6,9 @@
       <div class="content-container-4 w-container">
         <h1 class="h1-display">My Playdates</h1>
         <SearchResultList
-            :events="events"
-            :noEventsMessage="noEventsMessage"
+          :showHeader="true"
+          :items="items"
+          :noEventsMessage="noEventsMessage"
         />
       </div>
     </div>
@@ -36,6 +37,9 @@ export default {
     }
   },
   computed: {
+    items () {
+      return this.events && this.events.map(e => ({ event: e, user: e.host }))
+    },
     noEventsMessage: () => {
       return 'Sorry, you don\'t have any scheduled playdates'
     },
