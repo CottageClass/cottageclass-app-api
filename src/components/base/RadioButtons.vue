@@ -22,7 +22,6 @@
 </template>
 
 <script>
-import _ from 'lodash'
 
 export default {
   name: 'RadioButtons',
@@ -49,14 +48,11 @@ export default {
         if (!this.labels) {
           return choice
         } else {
-          const pair = _.filter(this.labels, p => p[0] === choice)[0]
+          const pair = this.labels.filter(p => p[0] === choice)[0]
           return pair[1]
         }
       }
     }
-  },
-  methods: {
-    capitalize: _.capitalize
   }
 }
 </script>

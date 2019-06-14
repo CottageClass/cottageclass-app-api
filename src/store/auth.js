@@ -1,6 +1,7 @@
 // Vuex module to handle all the data for current user and authentication
 
-import { distanceHaversine, fetchCurrentUser } from '@/utils/api'
+import { fetchCurrentUser } from '@/utils/api'
+import { distanceHaversine } from '@/utils/utils'
 import { createUser } from '../utils/createUser'
 import normalize from 'json-api-normalizer'
 

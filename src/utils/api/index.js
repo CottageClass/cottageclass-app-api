@@ -3,6 +3,7 @@ import normalize from 'json-api-normalizer'
 import axios from 'axios'
 import { createEvent, createEvents } from '../createEvent'
 import { createUser, createUsers } from '../createUser'
+import { capitalize } from '@/utils/utils'
 import Logger from '@/utils/logger'
 
 export * from './stars'
@@ -16,7 +17,9 @@ export function initProxySession (currentUserId, receiverId, requestMessage, ack
     logger.log('NOT SENDING NOTIFICATION from ' + currentUserId + '.  To: ' + receiverId)
     logger.log('REQUEST MESSAGE: ', requestMessage)
     logger.log('ACKNOWLEDGE MESSAGE: ', acknowledgmentMessage)
-    return
+    return new Promise((resolve, reject) => {
+      resolve()
+    })
   }
   let postData = {
     twilioSession: {
@@ -491,26 +494,6 @@ export function signOut () {
 /*
  * UTILS
  */
-
-// TODO get this out of here
-export function distanceHaversine (lat1, lon1, lat2, lon2) {
-  const unit = 'N' // always return miles
-  var radlat1 = Math.PI * lat1 / 180
-  var radlat2 = Math.PI * lat2 / 180
-  var theta = lon1 - lon2
-  var radtheta = Math.PI * theta / 180
-  var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta)
-  dist = Math.acos(dist)
-  dist = dist * 180 / Math.PI
-  dist = dist * 60 * 1.1515
-  if (unit === 'K') { dist = dist * 1.609344 }
-  if (unit === 'N') { dist = dist * 0.8684 }
-  return dist.toFixed(1)
-}
-
-function capitalize (string) {
-  return string.charAt(0).toUpperCase() + string.slice(1)
-}
 
 function parseEventData (obj) {
   var e = obj.attributes

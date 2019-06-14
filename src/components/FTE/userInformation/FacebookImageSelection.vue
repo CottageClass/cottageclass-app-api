@@ -31,8 +31,8 @@ import Question from '@/components/base/Question.vue'
 import LoadingSpinner from '@/components/LoadingSpinner.vue'
 
 import { fetchFacebookImages } from '@/utils/api'
+import { minBy, maxBy } from '@/utils/utils'
 import { mapGetters } from 'vuex'
-import _ from 'lodash'
 
 export default {
   name: 'FacebookImageSelection',
@@ -60,9 +60,9 @@ export default {
     },
     toggleImageSelection (index) {
       // create a copy, alter it and reassign it to selectedIndices.  This will force Vue to react to the change
-      const selectedIndicesCopy = _.concat(this.selectedIndices)
-      if (_.includes(this.selectedIndices, index)) {
-        _.pull(selectedIndicesCopy, index)
+      const selectedIndicesCopy = this.selectedIndices.concat()
+      if (this.selectedIndices.findIndex(index) >= 0) {
+        selectedIndicesCopy.splice(this.selectedIndices.findIndex(index), 1)
       } else {
         selectedIndicesCopy.push(index)
       }
@@ -71,31 +71,31 @@ export default {
       this.$emit('input', this.state)
     },
     setState () {
-      this.state = _.map(this.selectedIndices, i => this.facebookFullSizeImages[i])
+      this.state = this.selectedIndices.map(i => this.facebookFullSizeImages[i])
     }
   },
   computed: {
     facebookThumbs: function () {
       const THUMB_SIZE = 95
-      return _.map(this.facebookImageData, allSizes => {
-        const bigEnoughImages = _.filter(allSizes.images, oneSize => {
+      return this.facebookImageData.map(allSizes => {
+        const bigEnoughImages = allSizes.images.filter(oneSize => {
           return oneSize.width > THUMB_SIZE && oneSize.height > THUMB_SIZE
         })
         if (bigEnoughImages) {
-          return _.minBy(bigEnoughImages, i => i.width).source
+          return minBy(bigEnoughImages, i => i.width).source
         } else {
-          return _.maxBy(allSizes.images, oneSize => oneSize.width).source
+          return maxBy(allSizes.images, oneSize => oneSize.width).source
         }
       })
     },
     facebookFullSizeImages: function () {
-      return _.map(this.facebookImageData, allSizes => {
-        return _.maxBy(allSizes.images, oneSize => oneSize.width).source
+      return this.facebookImageData.map(allSizes => {
+        return maxBy(allSizes.images, oneSize => oneSize.width).source
       })
     },
     isChecked () {
       return function (i) {
-        return _.includes(this.selectedIndices, i)
+        return this.selectedIndices.includes(i)
       }
     },
     loading () {

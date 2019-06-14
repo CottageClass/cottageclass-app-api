@@ -45,7 +45,7 @@
               <span v-for="(participant, index) in event.participatingParents.slice(0, 3)">
                 <router-link :to="{ name: 'ProviderProfile', params: { id: participant.userId }}"
                   v-bind:key="participant.id">
-                  {{ capitalize(participant.userFirstName) }}
+                  {{firstName(participant)}}
                 </router-link>
                 {{ (index===event.participatingParents.length-1) ? '' : ', ' }}
               </span>
@@ -165,7 +165,7 @@ import Images from '@/components/Images.vue'
 import LoadingSpinner from '@/components/LoadingSpinner.vue'
 
 import { maps } from '@/mixins'
-import * as utils from '@/utils/utils.js'
+import { capitalize, distanceHaversine } from '@/utils/utils.js'
 import { mapGetters } from 'vuex'
 
 var moment = require('moment')
@@ -230,8 +230,7 @@ export default {
         })
         await this.addCircle({ lat: this.event.hostFuzzyLatitude, lng: this.event.hostFuzzyLongitude }, 0.2)
       })
-    },
-    capitalize: utils.capitalize
+    }
   },
   created: function () {
     this.fetchEvent()
@@ -254,7 +253,7 @@ export default {
     },
     distance: function () {
       if (this.currentUser) {
-        return api.distanceHaversine(this.event.hostFuzzyLatitude, this.event.hostFuzzyLongitude, this.currentUser.latitude, this.currentUser.longitude)
+        return distanceHaversine(this.event.hostFuzzyLatitude, this.event.hostFuzzyLongitude, this.currentUser.latitude, this.currentUser.longitude)
       } else {
         return null
       }
@@ -281,6 +280,11 @@ export default {
     },
     hostBio: function () {
       return this.event.hostBlurb
+    },
+    firstName () {
+      return (participant) => {
+        return capitalize(participant.userFirstName)
+      }
     },
     ...mapGetters(['currentUser'])
   }

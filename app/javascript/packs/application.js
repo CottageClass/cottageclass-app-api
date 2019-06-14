@@ -8,8 +8,6 @@ import Vuetify from 'vuetify'
 
 import '@babel/polyfill'
 
-import _ from 'lodash'
-
 import App from '@/App.vue'
 import router from '@/router'
 import store from '@/store'
@@ -38,11 +36,12 @@ try {
 if (isAuthWindow) {
   // If we're in a popup window that was opened for authentication, fire callback and close it
   document.addEventListener('DOMContentLoaded', () => {
-    const element = '#app'
-    let token = _.get(document.querySelector(element), 'dataset.token')
+    const selector = '#app'
+    const element = document.querySelector(selector)
+    const token = (element && element.dataset && element.dataset.token) || undefined
     if (window.opener.oauthCallback) {
       window.opener.oauthCallback({ token })
-      _.unset(window, 'opener.oauthCallback')
+      delete window.opener.oauthCallback
     }
     window.close()
   })
@@ -71,14 +70,16 @@ if (isAuthWindow) {
     router
   })
   document.addEventListener('DOMContentLoaded', () => {
-    const element = '#app'
-    let token = _.get(document.querySelector(element), 'dataset.token')
+    const selector = '#app'
+    const element = document.querySelector(selector)
+    const token = (element && element.dataset && element.dataset.token) || undefined
+
     if (token) {
       store.dispatch('establishUser', { JWT: token })
     }
 
     const csrfElement = "meta[name='csrf-token']"
-    let csrfToken = _.get(document.querySelector(csrfElement), 'content')
+    let csrfToken = document.querySelector(csrfElement).content
 
     axios.interceptors.request.use(
       config => {
@@ -98,7 +99,7 @@ if (isAuthWindow) {
 
     /* eslint-disable no-new */
     new Vue({
-      el: element,
+      el: selector,
       store,
       router,
       render: h => h(App)

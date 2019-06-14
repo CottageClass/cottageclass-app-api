@@ -29,7 +29,6 @@
 */
 
 import FormFieldGroup from '@/components/base/FormFieldGroup.vue'
-var _ = require('lodash/core')
 
 export default {
   name: 'ManyFormFieldGroups',
@@ -44,6 +43,7 @@ export default {
     ],
   data () {
     return {
+      currentKey: 0,
       objects: this.value
     }
   },
@@ -53,7 +53,7 @@ export default {
     } else {
       // verify keys are in object
       for (let object of this.objects) {
-        object.key = _.uniqueId()
+        object.key = this.nextKey()
       }
     }
   },
@@ -72,6 +72,9 @@ export default {
     }
   },
   methods: {
+    nextKey () {
+      return this.currentKey++
+    },
     add: function () {
       this.objects.push(this.newObject())
     },
@@ -80,7 +83,7 @@ export default {
     },
     newObject: function () {
       let obj = JSON.parse(JSON.stringify(this.anEmptyObject))
-      obj.key = _.uniqueId()
+      obj.key = this.nextKey()
       return obj
     }
   },

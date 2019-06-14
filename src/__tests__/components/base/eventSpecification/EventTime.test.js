@@ -1,6 +1,5 @@
 import { mount } from '@vue/test-utils'
 import EventTime from '@/components/base/eventSpecification/EventTime.vue'
-import _ from 'lodash'
 
 const TIMES = [
   '9:00am - 12:00pm',
@@ -29,7 +28,7 @@ describe('EventTime', () => {
   })
 
   it('shows the right times', () => {
-    const names = _.map(wrapper.findAll('input').wrappers, w => w.attributes().name)
+    const names = wrapper.findAll('input').wrappers.map(w => w.attributes().name)
     expect(names).toEqual(TIMES)
   })
 })
