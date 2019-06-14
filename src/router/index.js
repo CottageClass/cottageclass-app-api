@@ -4,7 +4,6 @@ import ProviderProfile from '@/views/ProviderProfile.vue'
 import SplashPage from '@/views/SplashPage.vue'
 import EventPage from '@/components/EventPage.vue'
 import Search from '@/views/Search.vue'
-import EventsDetail from '@/views/EventsDetail.vue'
 import NewEvent from '@/views/NewEvent.vue'
 import RsvpInfoCollection from '@/components/RsvpInfoCollection.vue'
 import CancelRSVP from '@/components/CancelRSVP.vue'
@@ -48,12 +47,6 @@ export default new Router({
       path: '/home',
       name: 'Search',
       component: Search
-    },
-    {
-      path: '/events/detail',
-      name: 'EventsDetail',
-      component: EventsDetail,
-      props: true
     },
     {
       path: '/log-in',

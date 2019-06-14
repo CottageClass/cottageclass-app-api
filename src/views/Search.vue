@@ -1,68 +1,86 @@
 <template>
-  <div class="page-wrapper">
-    <MainNav />
-    <div class="content-section background-01">
-      <div class="divider-2px"></div>
-      <div class="top-container w-container">
-        <h1 class="event-page-title">Meet new parents. Plan playdates.</h1>
-        <div class="selectors-group">
-        <div class="filter-container">
+  <div>
+    <div v-if="detailView" class="detail-wrapper">
+      <EventListMap
+        :center="mapArea.center"
+        @searchAreaSet="updateMapAreaFromMap"
+        :showFetchMoreButton="showFetchMoreButton"
+        :items="items"
+        :noItemsMessage="noItemsMessage"
+        :showTrailblazerMessage="showTrailblazerMessage"
+        @fetch-more-click="fetchMoreItems"
+        @user-updated="updateUser"
+        @event-updated="updateEvent"
+        :isFullScreen="true"
+        @back-click="detailView=false"
+        />
+    </div>
+    <div v-else class="page-wrapper">
+      <MainNav />
+      <div class="content-section background-01">
+        <div class="divider-2px"></div>
+        <div class="top-container w-container">
+          <h1 class="event-page-title">Meet new parents. Plan playdates.</h1>
+          <div class="selectors-group">
+          <div class="filter-container">
 
-          <FilterSelector title="Location"
-                          :showClear="false"
-                          :active="shortDescription" >
-            <template v-slot:buttonContents>
-              <LocationFilterButton :shortDescription="shortDescription" />
-            </template>
-            <template v-slot:selectorContents>
-              <LocationFilterSelector
-                @locationUpdated="updateMapAreaFromFilter"
-                :searchRadius="mapArea.maxDistance"
-              />
-            </template>
-          </FilterSelector>
+            <FilterSelector title="Location"
+                            :showClear="false"
+                            :active="shortDescription" >
+              <template v-slot:buttonContents>
+                <LocationFilterButton :shortDescription="shortDescription" />
+              </template>
+              <template v-slot:selectorContents>
+                <LocationFilterSelector
+                  @locationUpdated="updateMapAreaFromFilter"
+                  :searchRadius="mapArea.maxDistance"
+                />
+              </template>
+            </FilterSelector>
 
-          <FilterSelector v-if="false"
-                          title="Child Age"
-                          :showClear="true"
-                          @clearFilterClicked="resetAgeRange"
-                          :active="ageRangeActive" >
-            <template v-slot:buttonContents>
-              <AgeRangeFilterButton :range="ageRange" />
-            </template>
-            <template v-slot:selectorContents>
-              <AgeRangeFilterSelector
-                v-model="ageRange"
-              />
-            </template>
-          </FilterSelector>
-        </div>
-      </div>
-      <div class="page-subtitle"><strong>These parents near you want to share playdates.</strong> Offer a playdate, contact parents to invite them, or browse scheduled playdates below!</div>
-      </div>
-      <div class="main-container w-container">
-        <div class="map-list-container">
-          <EventListMap
-            class="map"
-            :items="items"
-            :clickToExpand="isMobile"
-            @searchAreaSet="updateMapAreaFromMap"
-          />
-          <div class="list-container w-container">
-            <SearchResultList
-              :showFetchMoreButton="showFetchMoreButton"
-              class="list"
-              :items="items"
-              :noItemsMessage="noItemsMessage"
-              :showTrailblazerMessage="showTrailblazerMessage"
-              @offerClick="offerPlaydate"
-              @fetch-more-click="fetchMoreItems"
-              @user-updated="updateUser"
-              @event-updated="updateEvent"/>
+            <FilterSelector v-if="false"
+                            title="Child Age"
+                            :showClear="true"
+                            @clearFilterClicked="resetAgeRange"
+                            :active="ageRangeActive" >
+              <template v-slot:buttonContents>
+                <AgeRangeFilterButton :range="ageRange" />
+              </template>
+              <template v-slot:selectorContents>
+                <AgeRangeFilterSelector
+                  v-model="ageRange"
+                />
+              </template>
+            </FilterSelector>
           </div>
         </div>
+        <div class="page-subtitle"><strong>These parents near you want to share playdates.</strong> Offer a playdate, contact parents to invite them, or browse scheduled playdates below!</div>
+        </div>
+        <div class="main-container w-container">
+          <div class="map-list-container">
+            <EventListMap
+              class="map"
+              :items="items"
+              @map-click="handleMapClick"
+              @searchAreaSet="updateMapAreaFromMap"
+              :isFullScreen="false"
+            />
+            <div class="list-container w-container">
+              <SearchResultList
+                :showFetchMoreButton="showFetchMoreButton"
+                class="list"
+                :items="items"
+                :noItemsMessage="noItemsMessage"
+                :showTrailblazerMessage="showTrailblazerMessage"
+                @offerClick="offerPlaydate"
+                @fetch-more-click="fetchMoreItems"
+                @user-updated="updateUser"
+                @event-updated="updateEvent"/>
+            </div>
+          </div>
+        </div>
+        <Footer />
       </div>
-      <Footer />
     </div>
   </div>
 </template>
@@ -104,6 +122,7 @@ export default {
       showFetchMoreButton: true,
       showTrailblazerMessage: true,
       ageRange: { error: null, data: { min: -1, max: -1 } },
+      detailView: false,
       shortDescription: null
     }
   },
@@ -114,6 +133,11 @@ export default {
     ...mapGetters(['currentUser', 'isAuthenticated', 'alert', 'mapArea'])
   },
   methods: {
+    handleMapClick () {
+      if (this.isMobile) {
+        this.detailView = true
+      }
+    },
     updateUser (user) {
       const userIndex = this.items.findIndex(i => i.user.id === user.id)
       this.items[userIndex].user = user
@@ -194,6 +218,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.detail-wrapper {
+  height: 100vh;
+  width: 100%;
+}
 .filter-container {
   display: flex;
   flex-direction: row;

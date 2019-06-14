@@ -4,15 +4,15 @@ This is the map view or the list view of events
 
 <template>
   <div class="lp-container">
-    <div v-if="showSelector" class="top-container">
-      <router-link
-      v-if="showNavigation"
-      :to="{name: 'Search'}"
+    <div v-if="isFullScreen" class="top-container">
+      <a
+      v-if="isFullScreen"
+      @click="$emit('back-click')"
       class="back-button w-inline-block">
         <img src="../assets/arrow-back-black.svg">
-      </router-link>
+      </a>
       <a
-      v-if="showNavigation"
+      v-if="isFullScreen"
       @click="switchType"
       class="toggle-button w-inline-block">
         <div>{{ otherType }}</div>
@@ -21,6 +21,7 @@ This is the map view or the list view of events
     </div>
     <div v-show="type==='map'"
          class="map-wrapper"
+         :class="{full: isFullScreen}"
          @click="mapClick">
       <transition name="fade">
         <a v-if="showSearchButton"
@@ -56,7 +57,7 @@ import { mapGetters } from 'vuex'
 
 export default {
   name: 'EventListMap',
-  props: [ 'clickToExpand', 'items', 'showFetchMoreButton', 'noItemsMessage', 'showTrailblazerMessage' ],
+  props: [ 'items', 'showFetchMoreButton', 'noItemsMessage', 'showTrailblazerMessage', 'isFullScreen' ],
   mixins: [ maps, screen ],
   components: { SearchResultList },
   data () {
@@ -73,9 +74,7 @@ export default {
       this.$router.push({ name: 'NewEvent' })
     },
     mapClick () {
-      if (this.clickToExpand) {
-        this.$router.push({ name: 'EventsDetail' })
-      }
+      this.$emit('map-click')
     },
     switchType () {
       this.type = this.otherType
@@ -128,7 +127,7 @@ export default {
       return this.items && this.items.map(i => i.user)
     },
     showSearchButton () {
-      return (this.showNavigation || !this.isMobile) && this.mapHasChanged
+      return (this.isFullScreen || !this.isMobile) && this.mapHasChanged
     },
     noEventsMessage () {
       return 'Sorry, there are no upcoming playdates in this area'
@@ -142,12 +141,9 @@ export default {
       }
       throw Error('Type is neither list nor map')
     },
-    showNavigation: function () {
-      return this.$router.currentRoute.name === 'EventsDetail'
-    },
     mapOptions: function () {
       return {
-        gestureHandling: this.showNavigation || !this.isMobile ? 'greedy' : 'none',
+        gestureHandling: this.isFullScreen || !this.isMobile ? 'greedy' : 'none',
         zoomControl: !this.isMobile,
         mapTypeControl: false,
         scaleControl: false,
@@ -155,10 +151,6 @@ export default {
         rotateControl: false,
         fullscreenControl: false
       }
-    },
-    showSelector: function () {
-      return (this.$router.currentRoute.name === 'Search' && !this.isMobile) ||
-             (this.$router.currentRoute.name === 'EventsDetail')
     },
     ...mapGetters([ 'mapArea' ])
   },
@@ -211,23 +203,10 @@ select {
   background-position: 50% 50%;
   background-size: cover;
   position: relative;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   width: 100%;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
   flex-direction: row;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
   justify-content: center;
-  -webkit-box-align: start;
-  -webkit-align-items: flex-start;
-  -ms-flex-align: start;
   align-items: flex-start;
   background-color: #fff;
 }
@@ -275,6 +254,9 @@ select {
 
 @media (max-width: 991px) {
   .map-wrapper {
+    &.full {
+      height: 100vh;
+    }
     height: 200px;
     flex: 1;
   }
