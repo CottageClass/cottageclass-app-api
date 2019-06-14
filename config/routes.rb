@@ -34,14 +34,8 @@ Rails.application.routes.draw do
     resources :users, only: %i[show] do
       resource :stars, only: %i[create destroy], module: :users
       collection do
-        get '/miles/:miles/latitude/:latitude/longitude/:longitude(/page/:page(/page_size/:page_size))',
+        get '/miles/:miles/latitude/:latitude/longitude/:longitude(/min_age/:min_age)(/max_age/:max_age)(/page/:page/page_size/:page_size)',
             to: 'users#feed',
-            latitude: /-?+(?=.??\d)\d*\.?\d*/,
-            longitude: /-?+(?=.??\d)\d*\.?\d*/,
-            miles: /-?+(?=.??\d)\d*\.?\d*/,  # this allows negatives, which it shouldn't
-            as: :feed
-        get '(/miles/:miles(/latitude/:latitude/longitude/:longitude))(/min_age/:min_age)(/max_age/:max_age)(/page/:page/page_size/:page_size)',
-            to: 'users#index',
             latitude: /-?+(?=.??\d)\d*\.?\d*/,
             longitude: /-?+(?=.??\d)\d*\.?\d*/,
             miles: /-?+(?=.??\d)\d*\.?\d*/,  # this allows negatives, which it shouldn't
