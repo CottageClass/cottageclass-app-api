@@ -24,6 +24,9 @@ export const createEvent = (data) => {
 }
 
 export const createEvents = (data, sortFunction) => {
+  if (!data.event) {
+    return []
+  }
   const all = Object.values(data.event).map(e => {
     return {
       id: e.id,
