@@ -14,8 +14,8 @@ This is the mobile-only page that shows an expanded, naviagable map of events
     :noItemsMessage="noItemsMessage"
     :showTrailblazerMessage="showTrailblazerMessage"
     @fetch-more-click="fetchMoreItems"
-    @user-updated="$emit('user-updated')"
-    @event-updated="$emit('event-updated')"/>
+    @user-updated="updateUser"
+    @event-updated="updateEvent"/>
   </div>
 </template>
 
@@ -49,13 +49,21 @@ export default {
     ])
   },
   methods: {
+    updateUser (user) {
+      const userIndex = this.items.findIndex(i => i.user.id === user.id)
+      this.items[userIndex].user = user
+    },
+    updateEvent (event) {
+      const eventIndex = this.items.findIndex(i => i.event.id === event.id)
+      this.items[eventIndex].event = event
+    },
     updateForZoomLevel: async function (e) {
       this.$store.commit('setMapArea', {
         center: { lat: e.center.lat(), lng: e.center.lng() },
         maxDistance: e.miles
       })
       this.showTrailblazerMessage = false
-      this.fetchWithinDistance()
+      this.fetch()
     },
     async fetchMoreItems () {
       this.debug('fetchMoreItems')

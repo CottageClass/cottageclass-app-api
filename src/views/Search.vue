@@ -44,7 +44,7 @@
         <div class="map-list-container">
           <EventListMap
             class="map"
-            :users="items && items.map(i => i.user)"
+            :items="items"
             :clickToExpand="isMobile"
             @searchAreaSet="updateMapAreaFromMap"
           />
