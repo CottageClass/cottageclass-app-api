@@ -1,18 +1,6 @@
 class API::UsersController < API::BaseController
   before_action :load_user, only: %i[show]
 
-  def index
-    users_index users: User,
-                miles: params[:miles],
-                latitude: params[:latitude],
-                longitude: params[:longitude],
-                min_age: params[:min_age],
-                max_age: params[:max_age],
-                page: params[:page],
-                page_size: params[:page_size],
-                path: proc { |**parameters| index_api_users_path parameters }
-  end
-
   def feed
     users = User
     users = users.where.not(id: current_user.id) if current_user.present?
