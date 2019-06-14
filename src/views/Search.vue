@@ -38,8 +38,7 @@
               </template>
             </FilterSelector>
 
-            <FilterSelector v-if="false"
-                            title="Child Age"
+            <FilterSelector title="Child Age"
                             :showClear="true"
                             @clearFilterClicked="resetAgeRange"
                             :active="ageRangeActive" >
