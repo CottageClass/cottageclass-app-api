@@ -15,19 +15,6 @@ RSpec.resource 'User' do
     let(:id) { user.id }
     let(:other_user_id) { other_user.id }
 
-    get '/api/users/page/:page/page_size/:page_size',
-        format: :json do
-      include_context 'authorization token'
-
-      let(:page) { 1 }
-      let(:page_size) { 10 }
-
-      example_request 'paginated:success' do
-        expect(response_status).to eq(200)
-        expect(json_body.fetch('data', []).map { |u| u.dig('attributes', 'phone') }.compact).to be_blank
-      end
-    end
-
     get '/api/users/miles/:miles/latitude/:latitude/longitude/:longitude/min_age/:min_age/max_age/:max_age/page/:page/page_size/:page_size',
         format: :json do
       include_context 'authorization token'
