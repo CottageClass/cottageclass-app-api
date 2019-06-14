@@ -55,7 +55,7 @@ export default {
         maxDistance: e.miles
       })
       this.showTrailblazerMessage = false
-      this.fetchWithinDistance()
+      this.fetch()
     },
     async fetchMoreItems () {
       this.debug('fetchMoreItems')
