@@ -160,57 +160,6 @@ export function submitUserInfo (userId, data) {
   })
 }
 
-export function fetchUsersWithinDistance ({ miles, lat, lng, minAge, maxAge, pageSize = 100, page = 1 }) {
-  let url = `/api/users/miles/${miles}/latitude/${lat}/longitude/${lng}/`
-  if (minAge !== null && typeof minAge !== 'undefined') {
-    url += `min_age/${minAge}/`
-  }
-  if (maxAge !== null && typeof minAge !== 'undefined') {
-    url += `max_age/${maxAge}/`
-  }
-  url += `page/${page}/page_size/${pageSize}`
-  return axios.get(
-    url
-  ).then(res => {
-    logger.log('FETCH USERS WITHIN DISTANCE SUCCESS')
-    logger.log(res.data)
-    return createUsers(normalize(res.data))
-  }).catch(err => {
-    logger.logError('FETCH USERS WITHIN DISTANCE FAILURE')
-    logger.logError(err)
-    throw err
-  })
-}
-
-export function fetchUsers () {
-  return axios.get(
-    `/api/users`
-  ).then(res => {
-    logger.log('FETCH USERS IN NETWORK SUCCESS')
-    logger.log(res.data)
-    return createUsers(normalize(res.data))
-  }).catch(err => {
-    logger.logError('FETCH USERS IN NETWORK FAILURE')
-    logger.logError(err.errors)
-    throw err
-  })
-}
-
-export function fetchUsersWhoHaveMadeInquiries (currentUserId) {
-  return axios.get(
-    `/users/${currentUserId}/inquiries`
-  ).then(res => {
-    logger.log('FETCH USERS WHO HAVE MADE INQUIRIES SUCCESS')
-    logger.log(res.data)
-    return createUsers(normalize(res.data))
-  }).catch(err => {
-    logger.logError('FETCH USERS WHO HAVE MADE INQUIRIES FAILURE')
-    logger.logError(err.errors)
-    throw err
-  })
-}
-
-// Public
 export async function fetchUser (userId) {
   try {
     const res = await axios.get(`/api/users/${userId}`)
