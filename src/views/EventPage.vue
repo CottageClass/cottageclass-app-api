@@ -98,7 +98,7 @@
             </div>
           </div>
         </div>
-        <div class="event-detail__column-right w-col w-col-4 w-col-stack">
+        <div v-if="false" class="event-detail__column-right w-col w-col-4 w-col-stack">
           <ul class="other-events__list">
             <li class="other-events__title-bar">
               <div class="other-events__title-text truncate">{{userFirstName}}'s other events </div>
