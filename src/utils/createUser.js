@@ -13,7 +13,7 @@ export const createUsers = (data) => {
     const p = data.user[id].attributes
     const childIds = data.user[id].relationships.children.data.map(e => e.id)
     let event = null
-    const children = childIds.map(id => parseChildData(includedChildren[id]))
+    const children = childIds.map(id => parseChildData(includedChildren[id])).filter(c => !!c)
     const hasAllRequiredFields = !!(p.phone && p.latitude && p.longitude)
     const activities = (p.activities || []).map(activity => activity.replace(/_/g, ' '))
     const location = {
@@ -36,6 +36,7 @@ export const createUsers = (data) => {
 }
 
 const parseChildData = (c) => {
+  if (!c) { return null }
   const attributes = c.attributes
   attributes.firstName = attributes.firstName && capitalize(attributes.firstName)
   return {
