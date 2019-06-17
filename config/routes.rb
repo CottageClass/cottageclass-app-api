@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     resources :event_series, only: %i[index show create update]
     resources :events, only: %i[show update destroy] do
       resource :stars, only: %i[create destroy], module: :events
+      resources :stars, only: %i[index], module: :events
       resources :participants, only: %i[create] do
         collection { delete :index, to: 'participants#destroy' }
       end
