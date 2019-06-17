@@ -13,12 +13,14 @@
         </div>
         <div class="user-action-card__footer">
           <div class="user-action-card__footer__user-summary">
+            <div class="avatar-container">
             <AvatarImage className="user-action-card__photo"
                          :person="{facebookUid: event.hostFacebookUid, avatar: event.hostAvatar}"
                          imageSize="100"/>
-            <div class="badge-verified">
+            <div v-if="verified" class="badge-verified">
               <div class="unicode-character">✓</div>
               <div class="badge-text">Verified</div>
+            </div>
             </div>
             <div class="user-action-card__user-info--container">
               <div class="user-action-card__user-info_list"><a class="user-action-card__user-info__name">{{ userName }}</a>
@@ -58,38 +60,41 @@
             <div class="about-the-host__title-text">About the host</div>
             <div class="about-the-host__info"></div>
             <ul class="protile-top-card__about-llist">
-              <li class="about-the-host__list-item">
+              <li v-if="verified" class="about-the-host__list-item" >
                 <div class="bullet-bar"></div>
                 <div class="about-the-host__bullet-text">Verified</div>
               </li>
-              <li class="about-the-host__list-item">
+              <li v-if="occupation" class="about-the-host__list-item">
                 <div class="bullet-bar"></div>
-                <div class="about-the-host__bullet-text">CEO/co-founder, KidsClub.io</div>
+                <div class="about-the-host__bullet-text">{{occupation}}</div>
+              </li>
+              <li v-if="languageText" class="about-the-host__list-item">
+                <div class="bullet-bar"></div>
+                <div class="about-the-host__bullet-text">{{languageText}}</div>
               </li>
               <li class="about-the-host__list-item">
                 <div class="bullet-bar"></div>
-                <div class="about-the-host__bullet-text">Speaks french and English</div>
-              </li>
-              <li class="about-the-host__list-item">
-                <div class="bullet-bar"></div>
-                <div class="about-the-host__bullet-text">Member since January, 2019</div>
+                <div class="about-the-host__bullet-text">{{joinedDateFormatted}}</div>
               </li>
             </ul>
-            <div class="about-the-host__bio">
-              <div class="about-the-host__bio-text">I’m an artist, I’m from Brazil, and my own daughter is 14!. Come hang with us, we have a lot of fun. So much fun. Almost too much fun.</div>
-            </div><a class="btn__more-about-host w-button">More about this host</a>
+            <div v-if="profileBlurb" class="about-the-host__bio">
+              <div class="about-the-host__bio-text">{{profileBlurb}}</div>
+            </div>
+            <router-link :to="{name: 'ProviderProfile', params: {id: this.user.id}}" class="btn__more-about-host w-button">
+              More about this host
+            </router-link>
           </div>
-          <div class="house-rules__card">
+          <div v-if="houseRules" class="house-rules__card">
             <div class="house-rulese_title-text">House Rules</div>
             <div class="card__description-and-icon-container w-clearfix"><img src="https://uploads-ssl.webflow.com/5c6c7d4a75c1e54694ed12d1/5c6c7d4a75c1e5183aed132e_house-rules.svg" width="100" height="100" alt="" class="house__image" />
-              <div class="house-rules__text"></div>
+              <div class="house-rules__text">{{houseRules}}</div>
             </div>
           </div>
-          <div class="pets__card">
+          <div v-if="petDescription" class="pets__card">
             <div class="pets__title-text">Pets</div>
             <div class="card__description-and-icon-container w-clearfix">
               <img :src="petsImage" width="100" height="100" alt="" class="pets__image" />
-              <div class="pets__text">One small dog. Super Friendly.</div>
+              <div class="pets__text">{{petDescription}}</div>
             </div>
           </div>
         </div>
@@ -98,8 +103,6 @@
             <li class="other-events__title-bar">
               <div class="other-events__title-text truncate">{{userFirstName}}'s other events </div>
             </li>
-
-            <li class="other-events__view-more"><a class="other-events__view-more-link">View 16 more</a></li>
           </ul>
         </div>
       </div>
@@ -109,7 +112,6 @@
 
 <script>
 import SearchListCardActions from '@/components/search/SearchListCardActions'
-import SearchListCardActionsOverlay from '@/components/search/SearchListCardActionsOverlay'
 import AvatarImage from '@/components/base/AvatarImage'
 import MainNav from '@/components/MainNav'
 import Images from '@/components/Images'
@@ -203,6 +205,9 @@ a {
   border-radius: 1000px;
   background-color: #0cba52;
   opacity: 0.92;
+}
+.avatar-container {
+  position: relative;
 }
 
 .badge-text {

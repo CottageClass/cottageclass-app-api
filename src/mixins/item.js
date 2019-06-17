@@ -3,6 +3,7 @@ import { andJoin, distanceHaversine } from '@/utils/utils'
 import { starEvent, unstarEvent, starUser, unstarUser } from '@/utils/api/stars'
 import { mapGetters } from 'vuex'
 import moment from 'moment'
+import languageList from 'language-list'
 
 export default {
   mixins: [screen],
@@ -12,6 +13,23 @@ export default {
     }
   },
   computed: {
+    joinedDateFormatted: function () {
+      return moment(this.user.createdAt).format('MMMM, YYYY')
+    },
+    languageText: function () {
+      const languageCodes = this.user.languages
+      const languages = languageCodes.map(languageList().getLanguageName)
+      if (languages.length === 0) {
+        return ''
+      }
+      if (languages.length === 1) {
+        return 'Speaks ' + languages[0]
+      }
+      return 'Speaks ' + andJoin(languages)
+    },
+    verified () {
+      return !!this.user.facebookUid
+    },
     showGoingButton () {
       return this.event &&
         !this.timePast &&
@@ -99,6 +117,15 @@ export default {
         return this.event.name
       }
       return this.user.profileBlurb
+    },
+    profileBlurb () {
+      return this.user.profileBlurb
+    },
+    houseRules () {
+      return this.user.houseRules || (this.event && this.event.houseRules)
+    },
+    petDescription () {
+      return this.user.petDescription || (this.event && this.event.petDescription)
     },
     occupation () {
       const position = this.user.jobPosition
