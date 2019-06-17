@@ -47,11 +47,13 @@
       </div>
       <div class="event-detail__content-columns w-row">
         <div class="event-detail__column-left w-col w-col-8 w-col-stack">
-          <div v-if="attendees" class="attendees__card">
-            <div class="attendees__title-text">Going (2)</div>
+          <div v-if="event.participatingParents" class="attendees__card">
+            <div class="attendees__title-text">Going ({{event.participatingParents.length}})</div>
             <ul class="list">
-              <Attendde :user="attendee"
-              v-for="attendee of attendees" />
+              <Attendee
+                v-for="attendee of event.participatingParents"
+                :key="attendee.id"
+                :user="attendee" />
             </ul>
           </div>
           <div v-if="images && images.length>0" class="household-photos__card">
@@ -116,9 +118,10 @@
 import SearchListCardActions from '@/components/search/SearchListCardActions'
 import SearchListCardActionsOverlay from '@/components/search/SearchListCardActionsOverlay'
 import AvatarImage from '@/components/base/AvatarImage'
-import MainNav from '@/components/MainNav.vue'
-import Images from '@/components/Images.vue'
-import LoadingSpinner from '@/components/LoadingSpinner.vue'
+import MainNav from '@/components/MainNav'
+import Images from '@/components/Images'
+import LoadingSpinner from '@/components/LoadingSpinner'
+import Attendee from '@/components/Attendee'
 
 import houseRulesImage from '@/assets/house-rules.svg'
 import petsImage from '@/assets/pets.svg'
@@ -128,7 +131,7 @@ import { item, maps } from '@/mixins'
 
 export default {
   name: 'EventPage',
-  components: { MainNav, Images, LoadingSpinner, AvatarImage, SearchListCardActionsOverlay, SearchListCardActions
+  components: { MainNav, Images, LoadingSpinner, AvatarImage, SearchListCardActionsOverlay, SearchListCardActions, Attendee
   },
   mixins: [item, maps],
   data () {
