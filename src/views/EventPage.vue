@@ -22,25 +22,18 @@
             </div>
             <div class="user-action-card__user-info--container">
               <div class="user-action-card__user-info_list"><a class="user-action-card__user-info__name">{{ userName }}</a>
-                <div class="user-action-card__user-info__occupation truncate">Engineer, Lockeed Martin<br /></div>
-                <div class="user-action-card__user-info__kids truncate">Ages 10, 5, 2, 18mnths</div>
+                <div class="user-action-card__user-info__occupation truncate">{{occupation}}</div>
+                <div class="user-action-card__user-info__kids truncate">{{kidsAges}}</div>
               </div>
             </div>
           </div>
           <div class="user-action-card__footer__actions">
             <SearchListCardActions
-                            v-if="!isPhone"
+                            class="column-list"
                             :user="event.host"
                             :event="event"
                             @event-updated="updateEvent"
                             :timePast="timePast"
-                            :showGoingButton="showGoingButton"/>
-            <SearchListCardActionsOverlay
-                            v-if="showOverlay"
-                            :user="event.host"
-                            :event="event"
-                            @event-updated="updateEvent"
-                            @clickaway="overlayOpen=false"
                             :showGoingButton="showGoingButton"/>
           </div>
         </div>
@@ -131,8 +124,7 @@ import { item, maps } from '@/mixins'
 
 export default {
   name: 'EventPage',
-  components: { MainNav, Images, LoadingSpinner, AvatarImage, SearchListCardActionsOverlay, SearchListCardActions, Attendee
-  },
+  components: { MainNav, Images, LoadingSpinner, AvatarImage, SearchListCardActions, Attendee },
   mixins: [item, maps],
   data () {
     return {
@@ -144,6 +136,9 @@ export default {
     }
   },
   computed: {
+    user () {
+      return this.event.host
+    },
     images () {
       return this.event && this.event.hostImages
     },
@@ -831,6 +826,10 @@ a {
 }
 
 @media (max-width: 479px){
+  .column-list {
+    flex-direction: column;
+    width:100%;
+  }
   .badge-verified {
     left: 6px;
     right: 6px;

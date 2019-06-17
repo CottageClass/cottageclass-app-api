@@ -1,9 +1,8 @@
-import { screen } from '@/mixins'
-import moment from 'moment'
 
 import { andJoin, distanceHaversine } from '@/utils/utils'
 import { starEvent, unstarEvent, starUser, unstarUser } from '@/utils/api/stars'
 import { mapGetters } from 'vuex'
+import moment from 'moment'
 
 export default {
   mixins: [screen],
