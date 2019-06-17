@@ -1,5 +1,7 @@
 <template>
-  <img :src="url" :class="className" />
+  <img :src="url"
+       :class="className"
+       class="avatar-image"/>
 </template>
 
 <script>
@@ -34,3 +36,9 @@ export default {
   }
 }
 </script>
+<style scoped>
+.avatar-image {
+  object-fit: cover;
+}
+
+</style>
