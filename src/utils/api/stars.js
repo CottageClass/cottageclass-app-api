@@ -2,7 +2,7 @@ import Logger from '@/utils/logger'
 import axios from 'axios'
 import normalize from 'json-api-normalizer'
 import { createEvent } from '@/utils/createEvent'
-import { createUser } from '@/utils/createUser'
+import { createUsers, createUser } from '@/utils/createUser'
 const logger = Logger('api:stars')
 
 export async function unstarUser (userId) {
@@ -36,6 +36,15 @@ export async function starEvent (eventId) {
   try {
     const res = await axios.post(`api/events/${eventId}/stars`)
     return createEvent(normalize(res.data))
+  } catch (e) {
+    logger.logError(e)
+  }
+}
+
+export async function fetchStarrers (starable) {
+  try {
+    const res = await axios.get(`api/events/${starable.eventId}/stars`)
+    return createUsers(normalize(res.data))
   } catch (e) {
     logger.logError(e)
   }
