@@ -69,7 +69,7 @@ import SearchListCardActions from '@/components/search/SearchListCardActions'
 import SearchListCardActionsOverlay from '@/components/search/SearchListCardActionsOverlay'
 
 // most of the functionality is in the itemActions mixin
-import { item } from '@/mixins'
+import { item, screen } from '@/mixins'
 
 export default {
   name: 'SearchListCard',
@@ -78,7 +78,7 @@ export default {
     event: {},
     mapCenter: { required: true }
   },
-  mixins: [item],
+  mixins: [item, screen],
   components: { AvatarImage, HouseholdImages, SearchListCardActions, SearchListCardActionsOverlay }
 }
 </script>
