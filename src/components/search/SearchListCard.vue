@@ -47,15 +47,17 @@
                     :user="user"
                     :event="event"
                     @user-updated="$emit('user-updated', $event)"
-                    @event-updated="$emit('event-updated', $event)" 
-                    :timePast="timePast"/>
+                    @event-updated="$emit('event-updated', $event)"
+                    :timePast="timePast"
+                    :showGoingButton="showGoingButton"/>
     <SearchListCardActionsOverlay
                     v-if="showOverlay"
                     :user="user"
                     :event="event"
                     @user-updated="$emit('user-updated', $event)"
                     @event-updated="$emit('event-updated', $event)"
-                    @clickaway="overlayOpen=false"/>
+                    @clickaway="overlayOpen=false"
+                    :showGoingButton="showGoingButton"/>
   </div>
 </li>
 </template>
@@ -66,11 +68,8 @@ import HouseholdImages from '@/components/search/HouseholdImages'
 import SearchListCardActions from '@/components/search/SearchListCardActions'
 import SearchListCardActionsOverlay from '@/components/search/SearchListCardActionsOverlay'
 
-import moment from 'moment'
-
-import { andJoin, distanceHaversine } from '@/utils/utils'
-import { starEvent, unstarEvent, starUser, unstarUser } from '@/utils/api/stars'
-import { screen } from '@/mixins'
+// most of the functionality is in the itemActions mixin
+import { item, screen } from '@/mixins'
 
 export default {
   name: 'SearchListCard',
@@ -79,128 +78,8 @@ export default {
     event: {},
     mapCenter: { required: true }
   },
-  mixins: [screen],
-  components: { AvatarImage, HouseholdImages, SearchListCardActions, SearchListCardActionsOverlay },
-  data () {
-    return {
-      overlayOpen: false
-    }
-  },
-  computed: {
-    timePast () {
-      if (this.event) {
-        return moment(this.event.endsAt) < moment().add(2, 'hours')
-      }
-      return false
-    },
-    showOverlay () {
-      return this.isPhone && this.overlayOpen
-    },
-    isStarred () {
-      if (this.event) { return this.event.starred }
-      if (this.user) { return this.user.starred }
-      throw Error('no item present')
-    },
-    distance () {
-      return distanceHaversine(
-        this.user.fuzzyLatitude,
-        this.user.fuzzyLongitude,
-        this.mapCenter.lat,
-        this.mapCenter.lng) + ' mi'
-    },
-    timeHeader () {
-      if (this.event) {
-        return moment(this.event.startsAt).format('ddd, MMMM D ha') + '-' + moment(this.event.endsAt).format('ha')
-      }
-      const availabilityStrings = []
-      if (this.user.availableMornings) {
-        availabilityStrings.push('mornings')
-      }
-      if (this.user.availableAfternoons) {
-        availabilityStrings.push('afternoons')
-      }
-      if (this.user.availableEvenings) {
-        availabilityStrings.push('evenings')
-      }
-      if (this.user.availableWeekends) {
-        availabilityStrings.push('weekends')
-      }
-      if (availabilityStrings.length > 0) {
-        return 'Available ' + andJoin(availabilityStrings)
-      }
-      return 'no availability yet'
-    },
-    ageString () {
-      return (i) => {
-        const ageInMonths = this.user.childAgesInMonths[i]
-        if (ageInMonths < 24) {
-          return ageInMonths + (ageInMonths === 1 ? ' mo' : ' mos')
-        }
-        return Math.floor(ageInMonths / 12).toString()
-      }
-    },
-    kidsAges () {
-      const ages = this.user.childAgesInMonths
-      if (!ages || ages.length === 0) {
-        return ''
-      }
-      if (ages.length === 1) {
-        return '1 child age ' + this.ageString(0)
-      }
-      return 'Ages ' + andJoin(ages.map((e, i) => this.ageString(i)))
-    },
-    userName () {
-      return this.user.firstName + ' ' + this.user.lastInitial + '.'
-    },
-    description () {
-      if (this.event) {
-        return this.event.name
-      }
-      return this.user.profileBlurb
-    },
-    occupation () {
-      const position = this.user.jobPosition
-      const employer = this.user.employer
-      if (position && employer) {
-        return position + ', ' + employer
-      } else if (position) {
-        return position
-      } else if (employer) {
-        return employer
-      } else {
-        return null
-      }
-    }
-  },
-  methods: {
-    async interestedClick () {
-      let res
-      if (this.event) {
-        if (this.event.starred) {
-          res = await unstarEvent(this.event.id)
-        } else {
-          res = await starEvent(this.event.id)
-        }
-        this.$emit('event-updated', res)
-      } else if (this.user) {
-        if (this.user.starred) {
-          res = await unstarUser(this.user.id)
-        } else {
-          res = await starUser(this.user.id)
-        }
-        this.$emit('user-updated', res)
-      }
-    },
-    goToItem () {
-      if (this.event) {
-        this.$router.push({ name: 'EventPage', params: { id: this.event.id } })
-      } else if (this.user) {
-        this.$router.push({ name: 'ProviderProfile', params: { id: this.user.id } })
-      } else {
-        throw Error('No valid item on this list card')
-      }
-    }
-  }
+  mixins: [item, screen],
+  components: { AvatarImage, HouseholdImages, SearchListCardActions, SearchListCardActionsOverlay }
 }
 </script>
 

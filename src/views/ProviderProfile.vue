@@ -419,6 +419,8 @@ ul {
 .avatar {
   min-height: 200px;
   min-width: 200px;
+  max-height: 200px;
+  max-width: 200px;
   margin-top: 12px;
   margin-bottom: 12px;
   border-radius: 50%;

@@ -10,7 +10,7 @@
          @user-updated="$emit('user-updated', $event)"
          @event-updated="$emit('event-updated', $event)"
          class="other-events-card__action-selector__button-list"
-     />
+         :showGoingButton="showGoingButton"/>
 </div>
 </div>
 </template>
@@ -20,6 +20,7 @@ import SearchListCardActions from '@/components/search/SearchListCardActions'
 export default {
   name: 'SearchListCardActionsOverlay',
   props: {
+    showGoingButton: { default: false },
     user: { required: true },
     event: {}
   },
