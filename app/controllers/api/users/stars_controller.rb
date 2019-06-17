@@ -1,5 +1,5 @@
 class API::Users::StarsController < API::StarsController
-  before_action :set_starable, only: %i[create destroy]
+  before_action :set_starable, only: %i[create destroy index]
 
   def index
     # get all the starables that this user has starred

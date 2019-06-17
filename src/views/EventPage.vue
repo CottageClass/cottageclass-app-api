@@ -47,8 +47,12 @@
             <ul class="list">
               <Attendee
                 v-for="attendee of event.participatingParents"
-                :key="attendee.id"
+                :key="'attendee' + attendee.id"
                 :user="attendee" />
+              <Starrer
+                v-for="starrer of starrers"
+                :key="'starrer' + starrer.id"
+                :user="starrer" />
             </ul>
           </div>
           <div v-if="images && images.length>0" class="household-photos__card">
@@ -117,20 +121,22 @@ import MainNav from '@/components/MainNav'
 import Images from '@/components/Images'
 import LoadingSpinner from '@/components/LoadingSpinner'
 import Attendee from '@/components/Attendee'
+import Starrer from '@/components/Starrer'
 
 import houseRulesImage from '@/assets/house-rules.svg'
 import petsImage from '@/assets/pets.svg'
 
-import { fetchEvent } from '@/utils/api'
+import { fetchEvent, fetchStarrers } from '@/utils/api'
 import { item, maps } from '@/mixins'
 
 export default {
   name: 'EventPage',
-  components: { MainNav, Images, LoadingSpinner, AvatarImage, SearchListCardActions, Attendee },
+  components: { MainNav, Images, LoadingSpinner, AvatarImage, SearchListCardActions, Attendee, Starrer },
   mixins: [item, maps],
   data () {
     return {
       event: null,
+      starrers: null,
       mapOptions: {
         'disableDefaultUI': true, // turns off map controls
         'gestureHandling': 'none' // prevents any kind of scrolling
@@ -152,6 +158,7 @@ export default {
       this.event = event
     },
     fetchEvent: async function () {
+      this.starrers = await fetchStarrers({ eventId: this.$route.params.id })
       this.event = await fetchEvent(this.$route.params.id)
       this.$nextTick(async function () {
         await this.createMap(this.$refs.map, {

@@ -1,5 +1,5 @@
 class API::StarsController < API::BaseController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: %i[create destroy]
 
   def create
     star = Star.new giver: current_user, starable: @starable
@@ -17,6 +17,12 @@ class API::StarsController < API::BaseController
     else
       render status: 404
     end
+  end
+
+  def index
+    givers = @starable.starrers
+    serializer = PublicUserSerializer.new givers, params: { current_user: current_user }
+    render json: serializer.serializable_hash, status: :ok
   end
 
   private
