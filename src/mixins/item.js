@@ -1,4 +1,3 @@
-
 import { andJoin, distanceHaversine } from '@/utils/utils'
 import { starEvent, unstarEvent, starUser, unstarUser } from '@/utils/api/stars'
 import { mapGetters } from 'vuex'
@@ -34,6 +33,12 @@ export default {
       return this.event &&
         !this.timePast &&
         (this.event.host.id.toString() !== this.currentUser.id.toString())
+    },
+    showInterestedButton () {
+      return !this.currentUser || (this.user.id.toString() !== this.currentUser.id.toString())
+    },
+    showContactButton () {
+      return !this.currentUser || (this.user.id.toString() !== this.currentUser.id.toString())
     },
     attendees () {
       if (!this.event) { return [] }
