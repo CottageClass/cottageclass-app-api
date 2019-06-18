@@ -13,7 +13,8 @@
         </div>
         <div class="user-action-card__footer">
           <div class="user-action-card__footer__user-summary">
-            <div class="avatar-container">
+            <router-link :to="{name:'ProviderProfile', params:{id: event.hostId}}"
+                         class="avatar-container">
             <AvatarImage className="user-action-card__photo"
                          :person="{facebookUid: event.hostFacebookUid, avatar: event.hostAvatar}"
                          imageSize="100"/>
@@ -21,7 +22,7 @@
               <div class="unicode-character">✓</div>
               <div class="badge-text">Verified</div>
             </div>
-            </div>
+            </router-link>
             <div class="user-action-card__user-info--container">
               <div class="user-action-card__user-info_list"><a class="user-action-card__user-info__name">{{ userName }}</a>
                 <div class="user-action-card__user-info__occupation truncate">{{occupation}}</div>
@@ -47,7 +48,7 @@
             <ul class="list">
               <Attendee
                 v-for="attendee of event.participatingParents"
-                :key="'attendee' + attendee.id"
+                :key="'attendee' + attendee.userId"
                 :user="attendee" />
               <Starrer
                 v-for="starrer of starrers"
@@ -102,11 +103,15 @@
             </div>
           </div>
         </div>
-        <div v-if="false" class="event-detail__column-right w-col w-col-4 w-col-stack">
+        <div v-if="otherEvents" class="event-detail__column-right w-col w-col-4 w-col-stack">
           <ul class="other-events__list">
             <li class="other-events__title-bar">
               <div class="other-events__title-text truncate">{{userFirstName}}'s other events </div>
             </li>
+            <OtherEvent v-for="otherEvent of otherEvents"
+                        :key="otherEvent.id"
+                        :event="otherEvent"
+                        class="other-events__title-bar"/>
           </ul>
         </div>
       </div>
@@ -121,17 +126,18 @@ import MainNav from '@/components/MainNav'
 import Images from '@/components/Images'
 import LoadingSpinner from '@/components/LoadingSpinner'
 import Attendee from '@/components/Attendee'
+import OtherEvent from '@/components/OtherEvent'
 import Starrer from '@/components/Starrer'
 
 import houseRulesImage from '@/assets/house-rules.svg'
 import petsImage from '@/assets/pets.svg'
 
-import { fetchEvent, fetchStarrers } from '@/utils/api'
+import { fetchUpcomingEvents, fetchEvent, fetchStarrers } from '@/utils/api'
 import { item, maps } from '@/mixins'
 
 export default {
   name: 'EventPage',
-  components: { MainNav, Images, LoadingSpinner, AvatarImage, SearchListCardActions, Attendee, Starrer },
+  components: { MainNav, Images, LoadingSpinner, AvatarImage, SearchListCardActions, Attendee, Starrer, OtherEvent },
   mixins: [item, maps],
   data () {
     return {
@@ -140,7 +146,8 @@ export default {
       mapOptions: {
         'disableDefaultUI': true, // turns off map controls
         'gestureHandling': 'none' // prevents any kind of scrolling
-      }
+      },
+      otherEvents: null
     }
   },
   computed: {
@@ -160,6 +167,7 @@ export default {
     fetchEvent: async function () {
       this.starrers = await fetchStarrers({ eventId: this.$route.params.id })
       this.event = await fetchEvent(this.$route.params.id)
+      this.otherEvents = (await fetchUpcomingEvents(this.event.hostId)).filter(e => (e.id !== this.event.id))
       this.$nextTick(async function () {
         await this.createMap(this.$refs.map, {
           zoom: 13,
@@ -174,6 +182,11 @@ export default {
   },
   created: function () {
     this.fetchEvent()
+  },
+  beforeRouteUpdate (to, from, next) {
+    this.debug('update route')
+    this.fetchEvent()
+    next()
   }
 }
 </script>

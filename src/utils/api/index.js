@@ -294,10 +294,10 @@ export const fetchUpcomingEvents = async (userId, sortBy) => {
   return axios.get(
     `/api/users/${userId}/events/created/upcoming/page/1/page_size/100`
   ).then(res => {
-    logger.log('FETCH MY UPCOMING EVENTS SUCCESS')
+    logger.log('FETCH UPCOMING EVENTS SUCCESS')
     return createEvents(normalize(res.data), sortBy)
   }).catch(err => {
-    logger.logError('FETCH MY UPCOMING EVENTS FAILURE')
+    logger.logError('FETCH UPCOMING EVENTS FAILURE')
     logger.logError(err.errors)
     throw err
   })

@@ -50,8 +50,7 @@ class API::EventsController < API::BaseController
                                                           user
                                                           user.children
                                                           user.user_reviews
-                                                          user.user_reviews.reviewer
-                                                        ],
+                                                          user.user_reviews.reviewer],
                                              params: { current_user: current_user }
     render json: serializer.serializable_hash, status: :ok
   end
@@ -79,13 +78,12 @@ class API::EventsController < API::BaseController
     skope ||= 'all'
     events = events.send(skope).includes user: %i[children]
 
-
-    if min_age.present? or max_age.present?
-      min_age ||=  0
+    if min_age.present? || max_age.present?
+      min_age ||= 0
       min_age = min_age.to_i
       max_age ||= 17
       max_age = max_age.to_i
-      earliest_birthday = (Time.current - (max_age+ 1 ).year.seconds)
+      earliest_birthday = (Time.current - (max_age + 1).year.seconds)
       latest_birthday = (Time.current - min_age.year.seconds)
       time_range = earliest_birthday..latest_birthday
 
@@ -93,11 +91,11 @@ class API::EventsController < API::BaseController
       participating_subquery = ParticipantChild.joins(:child).where('children.birthday' => time_range)
 
       # all eventSeries hosted by parents of children in range
-      event_series_belonging_to_users_that_have_children_in_the_age_range = EventSeries.joins(user: :children).where(users: {children: {'birthday' => time_range}})
+      event_series_belonging_to_users_that_have_children_in_the_age_range = EventSeries.joins(user: :children).where(users: { children: { 'birthday' => time_range } })
 
       events = events.joins("LEFT JOIN (#{participating_subquery.to_sql}) sub ON sub.participable_id = events.id")
-                     .joins("LEFT JOIN (#{event_series_belonging_to_users_that_have_children_in_the_age_range.to_sql}) hsub ON hsub.id = events.event_series_id")
-                     .where("hsub.id IS NOT NULL OR sub.participable_id IS NOT NULL")
+        .joins("LEFT JOIN (#{event_series_belonging_to_users_that_have_children_in_the_age_range.to_sql}) hsub ON hsub.id = events.event_series_id")
+        .where('hsub.id IS NOT NULL OR sub.participable_id IS NOT NULL')
 
     end
 
@@ -130,7 +128,9 @@ class API::EventsController < API::BaseController
       links[:next] = path.call(skope: skope_name, page: events.next_page, page_size: page_size) unless events.last_page?
     end
 
-    serializer = EventSerializer.new events, include: %i[event_hosts user user.user_reviews user.user_reviews.reviewer],
+    serializer = EventSerializer.new events, include: %i[event_hosts user user.user_reviews user.user_reviews.reviewer
+                                                         participants
+                                                         participants.participant_children],
                                              params: { current_user: current_user },
                                              links: links,
                                              meta: meta
