@@ -28,8 +28,17 @@ export const createEvents = (data, sortFunction) => {
     return []
   }
   const all = Object.values(data.event).map(e => {
+    let participatingParents
+    if (data.participant) {
+      participatingParents = e.relationships.participants.data.map(p => {
+        return cleanPerson(data.participant[p.id])
+      })
+    } else {
+      participatingParents = []
+    }
     return {
       id: e.id,
+      participatingParents,
       ...cleanEvent(e.attributes)
     }
   })
