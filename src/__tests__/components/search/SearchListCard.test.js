@@ -13,6 +13,7 @@ describe('SearchListCard', () => {
       mocks: { $store },
       propsData: {
         user: {
+          id: 12,
           firstName: 'Foo',
           lastInitial: 'B',
           jobPosition: 'Doctor',
@@ -63,6 +64,7 @@ describe('SearchListCard', () => {
       mocks: { $store },
       propsData: {
         user: {
+          id: 22,
           facebookUid: '563930223',
           childAgesInMonths: [1],
           location: { lat: 42.27, lng: -71.78 },
