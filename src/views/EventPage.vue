@@ -186,7 +186,6 @@ export default {
     this.fetchEvent()
   },
   beforeRouteUpdate (to, from, next) {
-    this.debug('update route')
     this.fetchEvent()
     next()
   }
