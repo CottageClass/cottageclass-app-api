@@ -1,12 +1,12 @@
 <template>
    <ul class="button-list">
-    <li>
+    <li v-if="showInterestedButton">
       <IconButton label="Interested" :icon="starIcon" @click="interestedClick"/>
     </li>
     <li v-if="showGoingButton">
       <IconButton  label="Going" :icon="goingIcon" @click="goingClick"/>
     </li>
-    <li v-if="event">
+    <li v-if="showContactButton">
       <IconButton label="Contact" :icon="contactIcon" @click="contactClick"/>
     </li>
     <li v-if="event">
@@ -33,7 +33,9 @@ export default {
     user: {},
     event: {},
     timePast: {},
-    showGoingButton: { default: false }
+    showGoingButton: { default: false },
+    showInterestedButton: { default: false },
+    showContactButton: { default: false }
   },
   components: { IconButton },
   computed: {

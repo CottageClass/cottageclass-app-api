@@ -49,7 +49,9 @@
                     @user-updated="$emit('user-updated', $event)"
                     @event-updated="$emit('event-updated', $event)"
                     :timePast="timePast"
-                    :showGoingButton="showGoingButton"/>
+                    :showGoingButton="showGoingButton"
+                    :showContactButton="showContactButton"
+                    :showInterestedButton="showInterestedButton"/>
     <SearchListCardActionsOverlay
                     v-if="showOverlay"
                     :user="user"
@@ -57,7 +59,9 @@
                     @user-updated="$emit('user-updated', $event)"
                     @event-updated="$emit('event-updated', $event)"
                     @clickaway="overlayOpen=false"
-                    :showGoingButton="showGoingButton"/>
+                    :showGoingButton="showGoingButton"
+                    :showContactButton="showContactButton"
+                    :showInterestedButton="showInterestedButton"/>
   </div>
 </li>
 </template>
