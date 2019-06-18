@@ -1,8 +1,7 @@
 <template>
  <Question
-   title="When are you available for childcare in a pinch?"
-   subtitle="Other parents may text you to request care during the times you choose. There's never any obligation to respond, so just pick times when you're usually available to provide care."
-   explanation="You'll be able to accept or decline any requests. Most families list days and times that they are generally at home with their own children or doing a fun or educational activity which they'd like to include other children in.">
+   title="When are you available for playdates?"
+   subtitle="Other parents may text you to request care during the times you choose. There's never any obligation to respond, so just pick times when you're usually available to provide care." >
    <Checkboxes
      v-model="checkedAvailabilityIds"
      :labels="labelsAndOrder"/>
