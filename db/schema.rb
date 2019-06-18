@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_29_125245) do
+ActiveRecord::Schema.define(version: 2019_06_18_183804) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -202,6 +202,17 @@ ActiveRecord::Schema.define(version: 2019_05_29_125245) do
     t.index ["sender_id"], name: "index_twilio_sessions_on_sender_id"
   end
 
+  create_table "user_matches", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "matched_user_id"
+    t.float "score"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["matched_user_id"], name: "index_user_matches_on_matched_user_id"
+    t.index ["user_id", "matched_user_id"], name: "index_user_matches_on_user_id_matched_user_id", unique: true
+    t.index ["user_id"], name: "index_user_matches_on_user_id"
+  end
+
   create_table "user_reviews", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "reviewer_id", null: false
@@ -318,5 +329,7 @@ ActiveRecord::Schema.define(version: 2019_05_29_125245) do
   add_foreign_key "stars", "users", column: "giver_id"
   add_foreign_key "twilio_sessions", "users", column: "receiver_id"
   add_foreign_key "twilio_sessions", "users", column: "sender_id"
+  add_foreign_key "user_matches", "users"
+  add_foreign_key "user_matches", "users", column: "matched_user_id"
   add_foreign_key "users", "events", column: "showcase_event_id"
 end

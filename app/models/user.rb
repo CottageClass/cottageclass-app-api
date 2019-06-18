@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  STORED_MATCHES = 20
+
   include Devise::JWT::RevocationStrategies::JTIMatcher
   include LegacyPassword
 
@@ -29,7 +31,10 @@ class User < ApplicationRecord
     populate_fname_from_name!
     populate_lname_from_name!
   end
-  after_create :notify
+  after_create do
+    notify
+    find_matches
+  end
 
   geocoded_by :full_address
 
@@ -60,6 +65,8 @@ class User < ApplicationRecord
   has_many :user_reviews, inverse_of: :user, dependent: :destroy
   has_many :reviewed_users, class_name: 'UserReview', foreign_key: :reviewer_id, inverse_of: :reviewer,
                             dependent: :destroy
+  has_many :user_matches, -> { order(:score) }, source: :matched_user, source_type: 'User'
+  has_many :matched_users, through: :user_matches
 
   has_many :stars, class_name: 'Star', foreign_key: :giver_id, inverse_of: :giver, dependent: :destroy
 
@@ -75,27 +82,53 @@ class User < ApplicationRecord
     super.merge('user' => CurrentUserSerializer.json_for(self, include: %i[children]))
   end
 
-  def best_match
+  def find_matches
     miles = 20
     if (latitude.present? && latitude.nonzero?) && (longitude.present? && longitude.nonzero?)
       location = [latitude, longitude]
-    end
-    if location
-      users = User.near(location.map(&:to_f), miles)
-      users = users.where.not(id: id)
-      best = users.max_by do |matcher|
-        closeest_child_ages = child_ages_in_months.product(matcher.child_ages_in_months).min_by do |ages|
-          (ages[0] - ages[1]).abs
-        end
-        if closeest_child_ages.present?
-          6 * (closeest_child_ages[0] - closeest_child_ages[1]).abs + matcher.distance
-        else
-          0
-        end
+      # narrow down the candidates
+      others = User.near(location.map(&:to_f), miles).includes(:children)
+      others = others.where.not(id: id)
+
+      # calculate scores and attach
+      scored_users = others.map do |other|
+        score = match_score other
+        { user: other, score: score } if score
       end
-      best.id if best.present?
+      # sort by score
+      scored_users = scored_users.sort_by { |scored_user| scored_user[:score] }
+      # add matches for this user
+      scored_users.slice(0, STORED_MATCHES).each do |scored_user|
+        user_match = user_matches.build matched_user: scored_user[:user], score: scored_user[:score]
+        user_match.save if user_match.valid?
+      end
+      # add matches for other users
+      scored_users.each do |scored_user|
+        scored_user[:user].insert_match self, scored_user[:score]
+      end
     end
   end
+
+  def insert_match(other_user, score)
+    user_matches.last.destroy if user_matches.count >= STORED_MATCHES && user_matches.last.score > score
+    if user_matches.count < STORED_MATCHES
+      user_match = user_matches.build matched_user: other_user, score: score
+      user_match.save if user_match.valid?
+    end
+  end
+
+  def match_score(other_user)
+    closeest_child_ages = child_ages_in_months.product(other_user.child_ages_in_months).min_by do |ages|
+      (ages[0] - ages[1]).abs
+    end
+    if closeest_child_ages.present?
+      (closeest_child_ages[0] - closeest_child_ages[1]).abs + 6 * distance_to(other_user)
+    else
+      1_000_000
+    end
+  end
+
+  def best_matches; end
 
   def child_ages_in_months
     children.map(&:age_in_months)

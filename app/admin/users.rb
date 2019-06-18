@@ -88,5 +88,10 @@ ActiveAdmin.register User do
       event = instance.nearest_upcoming_event
       ENV['APP_HOST'] + '/event/' + event.id.to_s if event.present?
     end
+    User::STORED_MATCHES.times do |item|
+      column "match_#{item}" do |instance|
+        instance.user_matches[item].matched_user_id if instance.user_matches[item].present?
+      end
+    end
   end
 end
