@@ -13,6 +13,9 @@
         Skip to site
       </div>
     </div>
+    <Availability
+      v-if="stepName==='availability'"
+      v-model=availability />
     <ProfileBlurb
       v-if="stepName==='profile'"
       v-model="profileBlurb" />
@@ -36,14 +39,16 @@ import { stepNavigation } from '@/mixins'
 import LanguagesSpoken from '@/components/FTE/userInformation/LanguagesSpoken.vue'
 import Activities from '@/components/FTE/userInformation/Activities.vue'
 import ProfileBlurb from '@/components/FTE/userInformation/ProfileBlurb.vue'
+import Availability from '@/components/FTE/userInformation/Availability.vue'
 
 export default {
   name: 'UserDetails',
   props: ['stepName'],
-  components: { Nav, ErrorMessage, ProfileBlurb, Activities, LanguagesSpoken },
+  components: { Nav, ErrorMessage, ProfileBlurb, Activities, LanguagesSpoken, Availability },
   mixins: [stepNavigation],
   data () {
     return {
+      availability: {},
       profileBlurb: '',
       languages: [],
       activities: [],
@@ -51,8 +56,19 @@ export default {
     }
   },
   computed: {
+    nextButtonState () {
+      // override the mixin method
+      if (this.errorMessage) {
+        return 'inactive'
+      } else if (this.stepName === 'availability' && !Object.values(this.availability).some(v => v)) {
+        return 'skip'
+      } else {
+        return 'next'
+      }
+    },
     stepSequence () {
       return [
+        'availability',
         'profile',
         'languages',
         'activities'
@@ -60,6 +76,7 @@ export default {
     },
     modelForCurrentStep () {
       const models = {
+        availability: this.availability,
         profileBlurb: this.profileBlurb,
         activities: this.activities,
         languages: this.languages
@@ -73,6 +90,9 @@ export default {
       let params = {}
       const userId = this.currentUser.id
       switch (this.stepName) {
+        case 'availability':
+          params = { availability: this.availability }
+          break
         case 'profile' :
           params = { profileBlurb: this.profileBlurb }
           break
