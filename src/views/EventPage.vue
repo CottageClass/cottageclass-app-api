@@ -109,6 +109,7 @@
               <div class="other-events__title-text truncate">{{userFirstName}}'s other events </div>
             </li>
             <OtherEvent v-for="otherEvent of otherEvents"
+                        :key="otherEvent.id"
                         :event="otherEvent"
                         class="other-events__title-bar"/>
           </ul>
