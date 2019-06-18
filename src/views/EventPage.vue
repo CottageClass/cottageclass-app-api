@@ -45,7 +45,7 @@
       </div>
       <div class="event-detail__content-columns w-row">
         <div class="event-detail__column-left w-col w-col-8 w-col-stack">
-          <div v-if="event.participatingParents" class="attendees__card">
+          <div v-if="event.participatingParents && event.participatingParents.length" class="attendees__card">
             <div class="attendees__title-text">Going ({{event.participatingParents.length}})</div>
             <ul class="list">
               <Attendee
