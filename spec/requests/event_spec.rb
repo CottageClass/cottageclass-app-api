@@ -106,9 +106,9 @@ RSpec.resource 'Event' do
       end
 
       context 'unauthorized' do
-        example 'created_events:forbidden', document: false do
+        example 'created_events:success', document: false do
           do_request
-          expect(response_status).to eq(401)
+          expect(response_status).to eq(200)
         end
       end
     end
