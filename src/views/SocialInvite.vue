@@ -11,8 +11,18 @@
           </div>
           <ul class="onb-social-button-list">
             <li v-if="isMobileDevice" class="onb-button-social-list-item"><TextMessageLink :message="textMessage" number="" class="onb-button-social w-inline-block"><img src="@/assets/mms.svg" width="32" height="32" alt=""><div class="onb-button-social-text">Text message</div></TextMessageLink></li>
-            <li v-if="isMobileDevice" class="onb-button-social-list-item"><a :href="fbMessengerLink" class="onb-button-social w-inline-block"><img src="@/assets/messenger.svg" width="32" height="32" alt=""><div class="onb-button-social-text">Facebook Messenger</div></a></li>
-            <li v-if="!isMobileDevice" class="onb-button-social-list-item"><a :href="fbLink" target="_blank" class="onb-button-social w-inline-block"><img src="@/assets/facebook-hover.svg" width="32" height="32" alt=""><div class="onb-button-social-text">Facebook</div></a></li>
+            <li v-if="false" class="onb-button-social-list-item">
+              <a :href="fbMessengerLink" class="onb-button-social w-inline-block">
+                <img src="@/assets/messenger.svg" width="32" height="32" alt="">
+                <div class="onb-button-social-text">Facebook Messenger</div>
+              </a>
+            </li>
+            <li v-if="false" class="onb-button-social-list-item">
+              <a :href="fbLink" target="_blank" class="onb-button-social w-inline-block">
+                <img src="@/assets/facebook-hover.svg" width="32" height="32" alt="">
+                <div class="onb-button-social-text">Facebook</div>
+              </a>
+            </li>
             <li v-if="!isMobileDevice" class="onb-button-social-list-item"><a :href="tweetLink" target="_blank" class="onb-button-social w-inline-block"><img src="@/assets/twitter-hover.svg" width="32" height="32" alt=""><div class="onb-button-social-text">Twitter</div></a></li>
             <li class="onb-button-social-list-item"><a :href="emailLink" class="onb-button-social w-inline-block"><img src="@/assets/email.svg" width="32" height="32" alt=""><div class="onb-button-social-text">Email</div></a></li>
           </ul>
