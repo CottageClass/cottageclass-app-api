@@ -32,10 +32,11 @@ export default {
     showGoingButton () {
       return this.event &&
         !this.timePast &&
-        (this.event.host.id.toString() !== this.currentUser.id.toString())
+        (!this.currentUser ||
+        (this.event.host.id.toString() !== this.currentUser.id.toString()))
     },
     showInterestedButton () {
-      return !this.currentUser || (this.user.id.toString() !== this.currentUser.id.toString())
+      return this.isAuthenticated && this.currentUser && (this.user.id.toString() !== this.currentUser.id.toString())
     },
     showContactButton () {
       return !this.currentUser || (this.user.id.toString() !== this.currentUser.id.toString())
@@ -154,7 +155,7 @@ export default {
     showOverlay () {
       return this.isPhone && this.overlayOpen
     },
-    ...mapGetters([ 'currentUser' ])
+    ...mapGetters([ 'currentUser', 'isAuthenticated' ])
   },
   methods: {
     async interestedClick () {
