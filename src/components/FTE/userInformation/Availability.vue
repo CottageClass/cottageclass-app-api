@@ -1,7 +1,7 @@
 <template>
  <Question
-   title="When are you available for playdates?"
-   subtitle="Other parents may text you to request care during the times you choose. There's never any obligation to respond, so just pick times when you're usually available to provide care." >
+   title="When are you usually available to meet other parents?"
+   subtitle="This information helps us match you with parents who have compatible schedules." >
    <Checkboxes
      v-model="checkedAvailabilityIds"
      :labels="labelsAndOrder"/>
