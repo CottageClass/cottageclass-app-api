@@ -1,5 +1,5 @@
 class API::EventsController < API::BaseController
-  before_action :authenticate_user!, only: %i[created participated update destroy]
+  before_action :authenticate_user!, only: %i[participated update destroy]
   before_action :load_user, only: %i[created participated]
   before_action :load_event, only: %i[show update destroy]
   before_action :requires_event_owner, only: %i[update destroy]
