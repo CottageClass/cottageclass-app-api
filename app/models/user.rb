@@ -26,15 +26,16 @@ class User < ApplicationRecord
   }
   before_save :obfuscate_location, :generate_time_zone,
               if: proc { |instance| instance.latitude_changed? || instance.longitude_changed? }
+  after_save :find_matches, if: lambda { |instance|
+    (instance.latitude_changed? || instance.longitude_changed? || instance.children.any?(&:changed?))
+  }
   before_create do
     populate_full_name!
     populate_fname_from_name!
     populate_lname_from_name!
   end
-  after_create do
-    notify
-    find_matches
-  end
+
+  after_create :notify
 
   geocoded_by :full_address
 
@@ -48,7 +49,14 @@ class User < ApplicationRecord
             uniqueness: true,
             format: { with: /\A.+@.+\..+\z/, message: 'Please provide a valid email' }
 
-  has_many :children, class_name: 'Child', foreign_key: :parent_id, inverse_of: :parent, dependent: :destroy
+  has_many :children,
+           class_name: 'Child',
+           foreign_key: :parent_id,
+           inverse_of: :parent,
+           dependent: :destroy,
+           after_add: :child_added,
+           before_remove: :child_removed
+
   has_many :sent_messages, class_name: 'Message', foreign_key: :sender_id, inverse_of: :sender, dependent: :destroy
   has_many :received_messages, class_name: 'Message', foreign_key: :receiver_id, inverse_of: :receiver,
                                dependent: :destroy
@@ -65,7 +73,7 @@ class User < ApplicationRecord
   has_many :user_reviews, inverse_of: :user, dependent: :destroy
   has_many :reviewed_users, class_name: 'UserReview', foreign_key: :reviewer_id, inverse_of: :reviewer,
                             dependent: :destroy
-  has_many :user_matches, -> { order(:score) }, source: :matched_user, source_type: 'User'
+  has_many :user_matches, -> { order(:score) }, source: :matched_user, source_type: 'User', inverse_of: :user
   has_many :matched_users, through: :user_matches
 
   has_many :stars, class_name: 'Star', foreign_key: :giver_id, inverse_of: :giver, dependent: :destroy
@@ -82,9 +90,20 @@ class User < ApplicationRecord
     super.merge('user' => CurrentUserSerializer.json_for(self, include: %i[children]))
   end
 
+  def child_added(_child)
+    find_matches if persisted?
+  end
+
+  def child_removed(_child)
+    find_matches if persisted?
+  end
+
   def find_matches
     miles = 20
-    if (latitude.present? && latitude.nonzero?) && (longitude.present? && longitude.nonzero?)
+
+    if (latitude.present? && latitude.nonzero?) &&
+       (longitude.present? && longitude.nonzero?) &&
+       (child_ages_in_months.present? && child_ages_in_months.count.positive?)
       location = [latitude, longitude]
       # narrow down the candidates
       others = User.near(location.map(&:to_f), miles).includes(:children)
@@ -98,6 +117,7 @@ class User < ApplicationRecord
       # sort by score
       scored_users = scored_users.sort_by { |scored_user| scored_user[:score] }
       # add matches for this user
+      user_matches.destroy_all
       scored_users.slice(0, STORED_MATCHES).each do |scored_user|
         user_match = user_matches.build matched_user: scored_user[:user], score: scored_user[:score]
         user_match.save if user_match.valid?
