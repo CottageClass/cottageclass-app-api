@@ -26,8 +26,8 @@ class User < ApplicationRecord
   }
   before_save :obfuscate_location, :generate_time_zone,
               if: proc { |instance| instance.latitude_changed? || instance.longitude_changed? }
-  before_save :find_matches, if: lambda { |instance|
-    instance.latitude_changed? || instance.longitude_changed? || instance.children.any?(&:changed?)
+  after_save :find_matches, if: lambda { |instance|
+    (instance.latitude_changed? || instance.longitude_changed? || instance.children.any?(&:changed?))
   }
   before_create do
     populate_full_name!
@@ -73,7 +73,7 @@ class User < ApplicationRecord
   has_many :user_reviews, inverse_of: :user, dependent: :destroy
   has_many :reviewed_users, class_name: 'UserReview', foreign_key: :reviewer_id, inverse_of: :reviewer,
                             dependent: :destroy
-  has_many :user_matches, -> { order(:score) }, source: :matched_user, source_type: 'User'
+  has_many :user_matches, -> { order(:score) }, source: :matched_user, source_type: 'User', inverse_of: :user
   has_many :matched_users, through: :user_matches
 
   has_many :stars, class_name: 'Star', foreign_key: :giver_id, inverse_of: :giver, dependent: :destroy
@@ -91,11 +91,11 @@ class User < ApplicationRecord
   end
 
   def child_added(_child)
-    find_matches
+    find_matches if persisted?
   end
 
   def child_removed(_child)
-    find_matches
+    find_matches if persisted?
   end
 
   def find_matches
