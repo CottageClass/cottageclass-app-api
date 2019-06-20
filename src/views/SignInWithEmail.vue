@@ -46,7 +46,17 @@
                 <button type="submit" class="submit-button w-button">Log in</button>
             </form>
               </div>
-              <div class="auth-links"><router-link :to="{ name: 'PasswordReset'}" href="">Forgot password?<br></router-link>No account? <a href="" @click.prevent="$router.push({ name: 'SignUp' })">Get started for free!</a></div>
+              <div class="auth-links">
+                <p class="under-link">
+                  <router-link :to="{ name: 'PasswordResetRequest', params:{context:'forgot'}}" href="">Forgot password?<br></router-link>
+                </p>
+                <p class="under-link">
+                  <router-link :to="{ name: 'PasswordResetRequest', params:{context:'facebook-user'}}" href="">Previously signed in with Facebook?</router-link>
+                </p>
+                <p class="under-link">
+                  No account? <a href="" @click.prevent="$router.push({ name: 'SignUp' })">Get started for free!</a>
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -172,6 +182,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.under-link {
+  margin-bottom: 6px;
+}
 .body {
   font-family: soleil, sans-serif;
   color: #333;

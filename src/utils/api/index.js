@@ -8,6 +8,7 @@ import Logger from '@/utils/logger'
 
 export * from './stars'
 export * from './search'
+export * from './auth'
 
 const logger = Logger('api')
 
@@ -420,24 +421,6 @@ export function deleteEvent (eventId, successCallback) {
       logger.logError(err)
       throw err
     })
-}
-
-/**********
- *  Authentication
- **********/
-
-// sign up as a new user
-export function register (params) {
-  return axios.post(`/users`, params)
-}
-
-export function signIn (params) {
-  return axios.post(`/users/sign_in`, { user: params })
-}
-
-// destroy the current session on the server
-export function signOut () {
-  return axios.delete(`/users/sign_out`)
 }
 
 /*
