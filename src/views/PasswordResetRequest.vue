@@ -55,13 +55,9 @@ export default {
   },
   methods: {
     submitRequest: function (event) {
-      this.debug(' submitRequest ')
-
       event.preventDefault()
       let component = this
       this.$validator.validate('email').then(res => {
-        this.debug('hi')
-        this.debug({ res })
         if (res && component.email) {
           const email = component.email && component.email.trim().toLowerCase()
           this.submitInfo({ user: { email } })
