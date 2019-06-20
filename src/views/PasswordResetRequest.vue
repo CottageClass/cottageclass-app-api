@@ -6,27 +6,24 @@
           <div class="primary-container">
             <StyleWrapper styleIs="onboarding">
               <ErrorMessage
-                v-if="showError && errors.first('password')"
-                :messages="[errors.first('password')]"
+                v-if="showError && errors.first('email')"
+                :messages="[errors.first('email')]"
                 />
             </StyleWrapper>
             <h1 class="auth-heading">Reset Password</h1>
-            <div>Please Enter your new password</div>
+            <div>Please enter your email and we will send you a link to reset your password</div>
             <div class="auth-wrapper">
               <div class="form-block w-form">
                 <form v-on:submit.prevent="submitRequest">
-                <input
+                  <input
                     @keyup.enter="submitRequest"
-                  v-validate.immediate="'required|min:4|max:128'"
-                  type="password"
-                  name="password"
-                  v-model="password"
-                  placeholder="Password"
-                  :class="{'invalid': errors.has('password') }"
-                  class="input-field w-input"
-                >
-                  <button type="submit"
-                          class="submit-button w-button">Reset Password</button>
+                    v-validate.immediate="'email'"
+                    name="email"
+                    v-model="email"
+                    placeholder="Email"
+                    class="input-field w-input"
+                  >
+                  <button type="submit" class="submit-button w-button">Reset Password</button>
                 </form>
               </div>
             </div>
@@ -44,38 +41,41 @@ import MainNav from '@/components/MainNav.vue'
 import Footer from '@/components/Footer.vue'
 
 import { alerts } from '@/mixins'
-import { submitNewPassword } from '@/utils/api'
+import { submitPasswordResetRequest } from '@/utils/api'
 
 export default {
-  name: 'PasswordReset',
+  name: 'PasswordResetRequest',
   components: { ErrorMessage, StyleWrapper, MainNav, Footer },
   mixins: [ alerts ],
+  props: ['context'],
   data: function () {
     return {
-      password: '',
+      email: '',
       showError: false
     }
   },
-  computed: {
-    isValid () {
-      return !this.errors.first('password')
-    }
-  },
   methods: {
-    async submitRequest (event) {
-      if (!this.isValid) {
-        this.showError = true
-        return
-      }
+    submitRequest: function (event) {
       event.preventDefault()
-      try {
-        const params = {
-          user: {
-            reset_password_token: this.$route.params.token,
-            password: this.password
-          }
+      let component = this
+      this.$validator.validate('email').then(res => {
+        this.debug('hi')
+        this.debug({ res })
+        if (res && component.email) {
+          const email = component.email && component.email.trim().toLowerCase()
+          this.submitInfo({ user: { email } })
+        } else {
+          component.showError = true
         }
-        await submitNewPassword(params)
+      }).catch(function (error) {
+        this.logError(error)
+        component.showError = true
+      })
+    },
+    async submitInfo (params) {
+      this.debug({ params })
+      try {
+        await submitPasswordResetRequest(params)
         this.showAlertOnNextRoute('Your password reset request has been submitted.  You will be contacted shortly.', 'success')
         this.$router.push({ name: 'Search' })
       } catch (err) {
@@ -199,25 +199,6 @@ a {
   background-color: #ccffe0;
 }
 
-.primary-container {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  width: 100%;
-  padding: 32px 32px 44px;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
-  background-color: #fff;
-}
-
 .auth-wrapper {
   display: -webkit-box;
   display: -webkit-flex;
@@ -242,6 +223,25 @@ a {
   border-radius: 4px;
   background-color: #fff;
   color: #000;
+}
+
+.primary-container {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  padding: 32px 32px 44px;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background-color: #fff;
 }
 
 @media (max-width: 991px) {

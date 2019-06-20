@@ -133,7 +133,8 @@ export default new Router({
     {
       path: '/password-reset-request',
       name: 'PasswordResetRequest',
-      component: PasswordResetRequest
+      component: PasswordResetRequest,
+      props: true
     },
     {
       path: '/contact/:eventId',
