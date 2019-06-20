@@ -17,6 +17,7 @@ import ChildSpecialRequirements from '@/components/FTE/ChildSpecialRequirements.
 import ChildSpecialRequirementsYesNo from '@/components/FTE/ChildSpecialRequirementsYesNo.vue'
 import SignInWithEmail from '@/views/SignInWithEmail.vue'
 import SignUpWithEmail from '@/views/SignUpWithEmail.vue'
+import PasswordResetRequest from '@/views/PasswordResetRequest.vue'
 import PasswordReset from '@/views/PasswordReset.vue'
 import ContactForm from '@/views/ContactForm.vue'
 import Onboarding from '@/views/Onboarding.vue'
@@ -47,6 +48,11 @@ export default new Router({
       path: '/home',
       name: 'Search',
       component: Search
+    },
+    {
+      path: '/password-reset/:token',
+      name: 'PasswordReset',
+      component: PasswordReset
     },
     {
       path: '/log-in',
@@ -125,9 +131,9 @@ export default new Router({
       component: RsvpInfoCollection
     },
     {
-      path: '/password-reset',
-      name: 'PasswordReset',
-      component: PasswordReset
+      path: '/password-reset-request',
+      name: 'PasswordResetRequest',
+      component: PasswordResetRequest
     },
     {
       path: '/contact/:eventId',
