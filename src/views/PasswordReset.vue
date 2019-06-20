@@ -81,7 +81,7 @@ export default {
       } catch (err) {
         this.logError(err)
         this.showAlertOnNextRoute('Something went wrong.  Please contact us at contact@cottageclass.com.', 'failure')
-        this.$router.push({ name: 'Search' })
+        this.$router.push({ name: 'SplashPage' })
       }
     }
   }

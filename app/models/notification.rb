@@ -16,7 +16,8 @@ class Notification < ApplicationRecord
     event_destruction: 11,
     participant_creation_host: 12,
     event_creation_host: 13,
-    user_sms_welcome: 14
+    user_sms_welcome: 14,
+    password_reset_request: 15
   }
 
   belongs_to :recipient, class_name: 'User', inverse_of: :notifications
@@ -58,6 +59,13 @@ class Notification < ApplicationRecord
                                       host_first_name: notifiable.host_first_name,
                                       event_time_range: notifiable.time_range
                    Notifier::EventReminderPreviousDayHost.new user: recipient, event: notifiable, body: body
+                 when :password_reset_request
+                   self.body = I18n.t 'messages.password_reset_request'
+                   if recipient.token.present?
+                     Notifier::PasswordResetRequest.new user: recipient,
+                                                        token: recipient.token,
+                                                        body: body
+                   end
                  when :event_feedback_host
                    self.body = I18n.t 'messages.event_feedback_host'
                    Notifier::EventFeedbackHost.new user: recipient, event: notifiable, body: body
