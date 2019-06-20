@@ -16,7 +16,6 @@
               <div class="form-block w-form">
                 <form v-on:submit.prevent="submitRequest">
                   <input
-                    @keyup.enter="submitRequest"
                     v-validate.immediate="'email'"
                     name="email"
                     v-model="email"
@@ -59,8 +58,6 @@ export default {
       event.preventDefault()
       let component = this
       this.$validator.validate('email').then(res => {
-        this.debug('hi')
-        this.debug({ res })
         if (res && component.email) {
           const email = component.email && component.email.trim().toLowerCase()
           this.submitInfo({ user: { email } })
@@ -77,11 +74,11 @@ export default {
       try {
         await submitPasswordResetRequest(params)
         this.showAlertOnNextRoute('Your password reset request has been submitted.  You will be contacted shortly.', 'success')
-        this.$router.push({ name: 'Search' })
+        this.$router.push({ name: 'SplashPage' })
       } catch (err) {
         this.logError(err)
         this.showAlertOnNextRoute('Something went wrong.  Please contact us at contact@cottageclass.com.', 'failure')
-        this.$router.push({ name: 'Search' })
+        this.$router.push({ name: 'SplashPage' })
       }
     }
   }

@@ -44,7 +44,7 @@ import MainNav from '@/components/MainNav.vue'
 import Footer from '@/components/Footer.vue'
 
 import { alerts } from '@/mixins'
-import { submitNewPassword } from '@/utils/api'
+import { submitNewPassword, signIn } from '@/utils/api'
 
 export default {
   name: 'PasswordReset',
@@ -75,13 +75,21 @@ export default {
             password: this.password
           }
         }
-        await submitNewPassword(params)
+        const res = await submitNewPassword(params)
+
+        const email = res.data.email
+        const password = this.password
+        const signInResult = await signIn({ email, password })
+        this.log('auth success:', signIn)
+        const JWT = signInResult.data[0]
+        await this.$store.dispatch('establishUser', { JWT })
+        await signIn({ email, password })
         this.showAlertOnNextRoute('Your password reset request has been submitted.  You will be contacted shortly.', 'success')
         this.$router.push({ name: 'Search' })
       } catch (err) {
         this.logError(err)
         this.showAlertOnNextRoute('Something went wrong.  Please contact us at contact@cottageclass.com.', 'failure')
-        this.$router.push({ name: 'Search' })
+        this.$router.push({ name: 'SplashPage' })
       }
     }
   }

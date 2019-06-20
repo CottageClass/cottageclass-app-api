@@ -9,7 +9,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :omniauthable,
          :jwt_authenticatable, jwt_revocation_strategy: self, omniauth_providers: %i[facebook]
 
-  attr_accessor :direct
+  attr_accessor :direct, :token
 
   PUBLIC_ATTRIBUTES = %i[
     id avatar first_name verified fuzzy_latitude fuzzy_longitude locality sublocality neighborhood admin_area_level_1
@@ -207,6 +207,11 @@ class User < ApplicationRecord
     def confirmable?
       Devise.mappings[:user].confirmable?
     end
+  end
+
+  def send_reset_password_instructions_notification(token)
+    @token = token
+    notifications.password_reset_request.create if token.present?
   end
 
   private
