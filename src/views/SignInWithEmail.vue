@@ -54,7 +54,7 @@
                   <router-link :to="{ name: 'PasswordResetRequest', params:{context:'facebook-user'}}" href="">Previously signed in with Facebook?</router-link>
                 </p>
                 <p class="under-link">
-                  No account? <a href="" @click.prevent="$router.push({ name: 'SignUp' })">Get started for free!</a>
+                  No account? <a href="" @click.prevent="$router.push({ name: 'SignUp' })">Join us to share playdates!</a>
                 </p>
               </div>
             </div>
