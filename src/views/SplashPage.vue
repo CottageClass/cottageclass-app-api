@@ -5,7 +5,7 @@
   <div class="hero-section">
     <div class="hero-container w-container">
       <div class="hero-content">
-        <h1 class="h1-display">Meet cool parents, find playdates, share childcare.</h1>
+        <h1 class="h1-display">Meet nearby parents for playdates &amp; childcare.</h1>
         <div class="hero-subtitle">Do you need more support as a parent? We help you find nearby parents, meet up for playdates, and build life-changing local networks for sharing kids&rsquo; activities &amp; childcare.</div>
         <AddressAutocomplete
         @locationSubmitted="goToEvents"/>
