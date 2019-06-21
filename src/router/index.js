@@ -21,12 +21,18 @@ import PasswordResetRequest from '@/views/PasswordResetRequest.vue'
 import PasswordReset from '@/views/PasswordReset.vue'
 import ContactForm from '@/views/ContactForm.vue'
 import Onboarding from '@/views/Onboarding.vue'
+import ProfileCollection from '@/views/ProfileCollection.vue'
 
 Vue.use(Router)
 
 export default new Router({
   mode: 'history',
   routes: [
+    {
+      path: '/profile',
+      name: 'ProfileCollection',
+      component: ProfileCollection
+    },
     {
       path: '/welcome/:section?/:stepName?',
       name: 'Onboarding',
@@ -97,7 +103,6 @@ export default new Router({
       path: '/faq',
       name: 'Faq',
       component: Faq
-      // NB: this route has beforeRouteEnter redirect in the component
     },
     {
       path: '/my-events',

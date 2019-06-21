@@ -16,9 +16,6 @@
     <Availability
       v-if="stepName==='availability'"
       v-model=availability />
-    <ProfileBlurb
-      v-if="stepName==='profile'"
-      v-model="profileBlurb" />
     <LanguagesSpoken
       v-if="stepName==='languages'"
       v-model="languages" />
@@ -38,18 +35,16 @@ import { stepNavigation } from '@/mixins'
 
 import LanguagesSpoken from '@/components/FTE/userInformation/LanguagesSpoken.vue'
 import Activities from '@/components/FTE/userInformation/Activities.vue'
-import ProfileBlurb from '@/components/FTE/userInformation/ProfileBlurb.vue'
 import Availability from '@/components/FTE/userInformation/Availability.vue'
 
 export default {
   name: 'UserDetails',
   props: ['stepName'],
-  components: { Nav, ErrorMessage, ProfileBlurb, Activities, LanguagesSpoken, Availability },
+  components: { Nav, ErrorMessage, Activities, LanguagesSpoken, Availability },
   mixins: [stepNavigation],
   data () {
     return {
       availability: {},
-      profileBlurb: '',
       languages: [],
       activities: [],
       showError: false
@@ -69,7 +64,6 @@ export default {
     stepSequence () {
       return [
         'availability',
-        'profile',
         'languages',
         'activities'
       ]
@@ -77,7 +71,6 @@ export default {
     modelForCurrentStep () {
       const models = {
         availability: this.availability,
-        profileBlurb: this.profileBlurb,
         activities: this.activities,
         languages: this.languages
       }
@@ -92,9 +85,6 @@ export default {
       switch (this.stepName) {
         case 'availability':
           params = { availability: this.availability }
-          break
-        case 'profile' :
-          params = { profileBlurb: this.profileBlurb }
           break
         case 'languages':
           params = { languages: this.languages }

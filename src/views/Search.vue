@@ -210,8 +210,12 @@ export default {
     }
   },
   created: async function () {
-    this.settlePendingWaves()
-    this.fetch()
+    if (this.currentUser && !this.currentUser.profileBlurb) {
+      this.$router.push({ name: 'ProfileCollection' })
+    } else {
+      this.settlePendingWaves()
+      this.fetch()
+    }
   }
 }
 </script>
@@ -234,6 +238,8 @@ export default {
   color: #333;
   font-size: 14px;
   line-height: 20px;
+  background-color: #fff;
+  overflow: visible;
   background-color: #fff;
 }
 
@@ -262,36 +268,9 @@ a {
   text-decoration: none;
 }
 
-.button {
-  padding: 12px 32px;
-  border-radius: 4px;
-  background-color: #1f88e9;
-  text-align: center;
-  color: white;
-}
-
-.button:hover {
-  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, .1)), to(rgba(0, 0, 0, .1)));
-  background-image: linear-gradient(180deg, rgba(0, 0, 0, .1), rgba(0, 0, 0, .1));
-}
-
-.button:active {
-  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, .1)), to(rgba(0, 0, 0, .1)));
-  background-image: linear-gradient(180deg, rgba(0, 0, 0, .1), rgba(0, 0, 0, .1));
-}
-
-.page-wrapper {
-  overflow: visible;
-  background-color: #fff;
-  font-family: soleil, sans-serif;
-}
-
 .content-section {
   display: block;
   margin-top: 0px;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
   align-items: center;
   background-color: #fff;
 }
@@ -306,50 +285,6 @@ a {
   background-color: #f3f3f3;
 }
 
-.link {
-  text-decoration: none;
-}
-
-.link:hover {
-  text-decoration: underline;
-}
-
-.event-date-section-tittle {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  margin-top: 68px;
-  margin-bottom: 16px;
-  padding: 16px 16px 16px 0px;
-  -webkit-box-pack: start;
-  -webkit-justify-content: flex-start;
-  -ms-flex-pack: start;
-  justify-content: flex-start;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
-  border-radius: 4px;
-}
-
-.date-title {
-  font-size: 24px;
-  line-height: 28px;
-  text-align: center;
-}
-
-.bold-text {
-  color: #ff6550;
-}
-
-.more-link {
-  color: #1f88e9;
-  font-size: 20px;
-  text-align: center;
-  text-decoration: none;
-}
-
 .list-container {
   display: flex;
   width: 568px;
@@ -358,28 +293,6 @@ a {
   flex-direction: column;
   align-items: flex-start;
   background-color: transparent;
-}
-
-.date-text-wrapper {
-  padding-left: 16px;
-}
-
-.event-date-section-more-events {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  margin-bottom: 16px;
-  padding: 16px 16px 16px 0px;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
-  border-radius: 4px;
 }
 
 .map {
@@ -395,17 +308,10 @@ a {
 
 .top-container {
   position: relative;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   padding-right: 32px;
   padding-bottom: 24px;
   padding-left: 32px;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
 }
 

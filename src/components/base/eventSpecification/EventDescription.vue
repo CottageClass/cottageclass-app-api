@@ -12,6 +12,7 @@
 <script>
 import Question from '@/components/base/Question.vue'
 import FormWithTextArea from '@/components/base/FormWithTextArea.vue'
+
 export default {
   name: 'EventDescription',
   components: { Question, FormWithTextArea },
@@ -23,7 +24,7 @@ export default {
   },
   computed: {
     errorMessage () {
-      return (this.description && this.description.length >= 5) ? null : 'Please enter a description of your offer'
+      return (this.description && this.description.length >= 1) ? null : 'Please enter a description of your offer'
     }
   },
   created () {
