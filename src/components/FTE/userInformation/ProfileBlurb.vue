@@ -20,12 +20,20 @@ export default {
   components: { Question, FormWithTextArea },
   data () {
     return {
-      profileBlurb: this.value
+      profileBlurb: this.value.text
     }
+  },
+  computed: {
+    errorMessage () {
+      return (this.profileBlurb && this.profileBlurb.length >= 1) ? null : 'Please tell us a little about yourself'
+    }
+  },
+  created () {
+    this.$emit('input', { err: this.errorMessage, text: this.profileBlurb })
   },
   watch: {
     profileBlurb: function () {
-      this.$emit('input', this.profileBlurb)
+      this.$emit('input', { err: this.errorMessage, text: this.profileBlurb })
     }
   }
 }

@@ -63,7 +63,7 @@ export default {
       children: { err: null },
       employment: { err: null },
       facebookImages: { err: null },
-      profileBlurb: '',
+      profileBlurb: { err: null },
       showError: false
     }
   },
@@ -97,7 +97,7 @@ export default {
       const userId = this.currentUser.id
       switch (this.stepName) {
         case 'bio' :
-          params = { profileBlurb: this.profileBlurb }
+          params = { profileBlurb: this.profileBlurb.text }
           break
         case 'employment':
           params = {
