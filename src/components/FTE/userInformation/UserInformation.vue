@@ -30,6 +30,9 @@
       v-on:noImages="nextStep"
       v-on:noPermissions="nextStep"
       required="true"/>
+    <ProfileBlurb
+      v-if="stepName==='bio'"
+      v-model="profileBlurb" />
   </div>
 </template>
 
@@ -41,17 +44,17 @@ import Children from '@/components/FTE/userInformation/Children.vue'
 import Employment from '@/components/FTE/userInformation/Employment'
 import FacebookImageSelection from '@/components/FTE/userInformation/FacebookImageSelection.vue'
 import ErrorMessage from '@/components/base/ErrorMessage.vue'
+import ProfileBlurb from '@/components/FTE/userInformation/ProfileBlurb.vue'
 
 import normalize from 'json-api-normalizer'
 import { createUser } from '@/utils//createUser'
 import { submitUserInfo } from '@/utils/api'
 import { mapGetters, mapMutations } from 'vuex'
 import { stepNavigation } from '@/mixins'
-
 export default {
   name: 'UserInformation',
   props: ['stepName'],
-  components: { Nav, Phone, Location, Children, Employment, FacebookImageSelection, ErrorMessage },
+  components: { Nav, Phone, Location, Children, Employment, FacebookImageSelection, ErrorMessage, ProfileBlurb },
   mixins: [stepNavigation],
   data () {
     return {
@@ -60,6 +63,7 @@ export default {
       children: { err: null },
       employment: { err: null },
       facebookImages: { err: null },
+      profileBlurb: '',
       showError: false
     }
   },
@@ -70,11 +74,13 @@ export default {
         'location',
         'children',
         'employment',
+        'bio',
         'images'
       ]
     },
     modelForCurrentStep () {
       const models = {
+        bio: this.profileBlurb,
         phone: this.phone,
         location: this.location,
         children: this.children,
@@ -90,6 +96,9 @@ export default {
       let params = {}
       const userId = this.currentUser.id
       switch (this.stepName) {
+        case 'bio' :
+          params = { profileBlurb: this.profileBlurb }
+          break
         case 'employment':
           params = {
             employer: this.employment.employer,
@@ -126,7 +135,7 @@ export default {
     },
     nextStep () {
       if (!this.errorMessage) {
-        if (this.stepName === 'images') {
+        if (this.stepName === this.stepSequence[this.stepSequence.length - 1]) {
           this.$emit('finished')
         } else {
           if (this.stepName === 'location') {
