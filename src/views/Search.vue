@@ -210,8 +210,12 @@ export default {
     }
   },
   created: async function () {
-    this.settlePendingWaves()
-    this.fetch()
+    if (this.currentUser && !this.currentUser.profileBlurb) {
+      this.$router.push({ name: 'ProfileCollection' })
+    } else {
+      this.settlePendingWaves()
+      this.fetch()
+    }
   }
 }
 </script>

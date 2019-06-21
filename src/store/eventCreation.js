@@ -39,7 +39,6 @@ const getters = {
           }
         })
       })
-      console.log(blocks)
       return blocks
     }
     return []
