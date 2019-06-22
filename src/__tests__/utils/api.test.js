@@ -1,9 +1,7 @@
 import {
   fetchEvent,
   fetchEvents,
-  fetchUpcomingEventsWithinDistance,
   fetchUpcomingEvents,
-  fetchUser,
   submitUserInfo
 } from '@/utils/api'
 import mockAxios from 'axios'
@@ -25,14 +23,6 @@ describe('events', () => {
       const events = await fetchEvents()
       expect(typeof events.all).toBe('object')
       expect(events.length).toBe(666)
-      expect(events).toMatchSnapshot()
-    })
-  })
-
-  describe('fetchUpcomingEventsWithinDistance', () => {
-    it('has the right data', async () => {
-      const events = await fetchUpcomingEventsWithinDistance({ miles: 10, lat: 42.2798738, lng: -71.7900378 })
-      expect(events[0].id).toBe('2535')
       expect(events).toMatchSnapshot()
     })
   })
