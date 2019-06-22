@@ -5,11 +5,9 @@ import normalize from 'json-api-normalizer'
 import Logger from '@/utils/logger'
 const logger = Logger('api:users')
 
-export function submitUserInfo (userId, data) {
+export async function submitUserInfo (userId, data) {
   if (!data) { return }
-
-  let { phone, location, availability, images } = data
-
+  let { phone, location, availability } = data
   let postData = {}
   if (location && location.fullAddress) {
     let address = location.fullAddress
@@ -74,50 +72,19 @@ export function submitUserInfo (userId, data) {
       ...availability
     }
   }
+  const { employer, jobPosition, profileBlurb, images, activities } = data
+  const { languages, hasPet, houseRules, petDescription } = data
+  postData = { ...postData, employer, jobPosition, profileBlurb, images, activities }
+  postData = { ...postData, languages, hasPet, houseRules, petDescription }
 
-  if (data.employer) {
-    postData.employer = data.employer
-  }
-
-  if (data.jobPosition) {
-    postData.jobPosition = data.jobPosition
-  }
-
-  if (data.profileBlurb) {
-    postData.profileBlurb = data.profileBlurb
-  }
-
-  if (images) {
-    postData.images = data.images
-  }
-
-  if (data.activities) {
-    postData.activities = data.activities
-  }
-
-  if (data.languages) {
-    postData.languages = data.languages
-  }
-  if (data.hasPet) {
-    postData.hasPet = data.hasPet
-  }
-  if (data.houseRules) {
-    postData.houseRules = data.houseRules
-  }
-  if (data.petDescription) {
-    postData.petDescription = data.petDescription
-  }
-
-  return axios.post(
-    `/users/${userId}`,
-    postData
-  ).then(res => {
+  try {
+    const res = await axios.post(`/users/${userId}`, postData)
     logger.log('SUBMIT USER SUCCESS', res)
     return res
-  }).catch(err => {
+  } catch (err) {
     logger.logError('SUBMIT USER FAILURE', err)
     throw err
-  })
+  }
 }
 
 export async function fetchUser (userId) {
