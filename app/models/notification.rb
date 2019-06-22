@@ -17,7 +17,8 @@ class Notification < ApplicationRecord
     participant_creation_host: 12,
     event_creation_host: 13,
     user_sms_welcome: 14,
-    password_reset_request: 15
+    password_reset_request: 15,
+    event_suggestion: 16
   }
 
   belongs_to :recipient, class_name: 'User', inverse_of: :notifications
@@ -99,6 +100,11 @@ class Notification < ApplicationRecord
                    Notifier::EventCreationHost.new user: recipient,
                                                    event: notifiable,
                                                    body: body
+                 when :event_suggestion
+                   self.body = 'messages.event_suggestion'
+                   Notifier::EventSuggestion.new user: recipient,
+                                                 event: notifiable,
+                                                 body: body
                  end
 
       if notifier.present?
