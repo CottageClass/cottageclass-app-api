@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { avatarUrl } from '@/utils/cloudinary'
+import { avatarUrl } from '@/utils/vendor/cloudinary'
 import placeholder from '@/assets/avatar-placeholder.png'
 import { screen } from '@/mixins'
 

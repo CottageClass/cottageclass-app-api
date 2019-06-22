@@ -69,7 +69,7 @@ import EditButton from './EditButton.vue'
 import EventCategoryIcon from '@/components/base/EventCategoryIcon.vue'
 import ChildAges from '@/components/ChildAges.vue'
 import { mapGetters } from 'vuex'
-import { imageUrl } from '@/utils/cloudinary'
+import { imageUrl } from '@/utils/vendor/cloudinary'
 
 var moment = require('moment')
 
