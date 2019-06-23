@@ -5,13 +5,6 @@ import { distanceHaversine } from '@/utils/utils'
 import { createUser } from '../utils/createUser'
 import normalize from 'json-api-normalizer'
 
-const ADMIN_WHITELIST = [
-  'holmes@cottageclass.com',
-  'manisha@cottageclass.com',
-  'developer@cottageclass.com',
-  'asa@cottageclass.com'
-]
-
 const state = {
   currentUser: null,
   JWT: null
@@ -75,9 +68,6 @@ const getters = {
   },
   isAuthenticated: (state) => {
     return state.currentUser !== null
-  },
-  isAdminUser: (state) => {
-    return !!state.currentUser && ADMIN_WHITELIST.includes(state.currentUser.email)
   }
 }
 

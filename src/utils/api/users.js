@@ -1,4 +1,4 @@
-import { createUser, createUsers } from '../createUser'
+import { createUser } from '../createUser'
 import axios from 'axios'
 import normalize from 'json-api-normalizer'
 
@@ -111,18 +111,4 @@ export async function fetchCurrentUser (userId) {
     logger.logError(err.errors)
     throw err
   }
-}
-
-// backend requires user to be an admin
-export function fetchAllUsers () {
-  return axios.get(
-    `/users`
-  ).then(res => {
-    logger.log('FETCH ALL USERS SUCCESS')
-    return createUsers(normalize(res.data))
-  }).catch(err => {
-    logger.logError('FETCH ALL USERS FAILURE')
-    logger.logError(err.errors)
-    throw err
-  })
 }
