@@ -1,11 +1,8 @@
 import {
   fetchEvent,
   fetchEvents,
-  fetchUpcomingEventsWithinDistance,
-  fetchUpcomingEvents,
-  fetchUser,
-  submitUserInfo
-} from '@/utils/api'
+  fetchUpcomingEvents
+} from '@/utils/api/events'
 import mockAxios from 'axios'
 
 describe('events', () => {
@@ -29,28 +26,11 @@ describe('events', () => {
     })
   })
 
-  describe('fetchUpcomingEventsWithinDistance', () => {
-    it('has the right data', async () => {
-      const events = await fetchUpcomingEventsWithinDistance({ miles: 10, lat: 42.2798738, lng: -71.7900378 })
-      expect(events[0].id).toBe('2535')
-      expect(events).toMatchSnapshot()
-    })
-  })
-
   describe('fetchUpcomingEvents for user', () => {
     it('has the right data', async () => {
       const events = await fetchUpcomingEvents(1230)
       expect(events[0].id).toBe('2359')
       expect(events).toMatchSnapshot()
-    })
-  })
-})
-
-describe('users', () => {
-  describe('submitUserInfo', () => {
-    it('sends image data', async () => {
-      let data = { images: 'example.com/images/fake.png' }
-      await submitUserInfo('1230', data)
     })
   })
 })

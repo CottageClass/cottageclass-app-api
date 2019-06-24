@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { imageUrl } from '@/utils/cloudinary'
+import { imageUrl } from '@/utils/vendor/cloudinary'
 export default {
   name: 'Images',
   props: ['images'],

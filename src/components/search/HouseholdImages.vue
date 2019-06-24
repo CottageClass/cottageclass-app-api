@@ -9,7 +9,7 @@
 
 <script>
 
-import { householdImageUrl } from '@/utils/cloudinary'
+import { householdImageUrl } from '@/utils/vendor/cloudinary'
 
 export default {
   name: 'HouseholdImages',

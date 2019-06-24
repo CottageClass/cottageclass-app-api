@@ -52,7 +52,7 @@ export default {
       return Promise.resolve(user1228)
     }
   }),
-  post: jest.fn((url) => {
+  post: jest.fn((url, data) => {
     return Promise.resolve({ status: 200 })
   })
 }

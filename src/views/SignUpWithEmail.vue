@@ -110,7 +110,7 @@ import Footer from '@/components/Footer.vue'
 import StyleWrapper from '@/components/FTE/StyleWrapper.vue'
 import FacebookButton from '@/components/base/FacebookButton'
 import ErrorMessage from '@/components/base/ErrorMessage.vue'
-import { uploadImage, avatarUrl } from '@/utils/cloudinary'
+import { uploadImage, avatarUrl } from '@/utils/vendor/cloudinary'
 
 export default {
   name: 'SignUpWithEmail',

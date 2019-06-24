@@ -3,8 +3,7 @@ import Logger from '@/utils/logger'
 
 // use a differnt axios instance so as to not use the authorization interceptor
 const cloudinaryAxios = axios.create()
-
-const logger = Logger('cloudinary')
+const logger = Logger('vendor:cloudinary')
 
 export function avatarUrl (rawUrl, size) {
   return rawUrl.replace('/upload/', `/upload/c_thumb,g_face,z_0.8,h_${size},w_${size}/`)

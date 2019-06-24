@@ -30,7 +30,7 @@
 import Question from '@/components/base/Question.vue'
 import LoadingSpinner from '@/components/LoadingSpinner.vue'
 
-import { fetchFacebookImages } from '@/utils/api'
+import { fetchFacebookImages } from '@/utils/vendor'
 import { minBy, maxBy } from '@/utils/utils'
 import { mapGetters } from 'vuex'
 

@@ -14,7 +14,7 @@
   </span>
 </template>
 <script>
-import { uploadImage } from '@/utils/cloudinary'
+import { uploadImage } from '@/utils/vendor/cloudinary'
 
 export default {
   name: 'ImageUploadToCloudinary',
