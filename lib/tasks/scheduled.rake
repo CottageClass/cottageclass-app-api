@@ -23,5 +23,10 @@ namespace :cottage_class do
       User.all.each(&:update_showcase_event)
       pp 'Finished updating recency scores and showcase events'
     end
+
+    desc 'Send event suggestion emails to all users that have a suggestable event'
+    task notify_suggested_events: :environment do
+      User.all.each(&:notify_event_suggestion)
+    end
   end
 end

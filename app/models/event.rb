@@ -51,9 +51,21 @@ class Event < ApplicationRecord
     in_instance_time_zone(starts_at).strftime('%B %e, %Y').try :squish
   end
 
+  def start_day
+    in_instance_time_zone(starts_at).strftime('%A').try :squish
+  end
+
   def time_range
     [in_instance_time_zone(starts_at).strftime('%l:%M'), in_instance_time_zone(ends_at).strftime('%l:%M %p')]
       .join(' - ').try :squish
+  end
+
+  def end_time
+    in_instance_time_zone(ends_at).strftime('%l:%M')
+  end
+
+  def start_time
+    in_instance_time_zone(starts_at).strftime('%l:%M')
   end
 
   def update_recency_score

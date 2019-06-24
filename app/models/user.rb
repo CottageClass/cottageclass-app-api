@@ -209,6 +209,18 @@ class User < ApplicationRecord
     end
   end
 
+  def notify_event_suggestion
+    suggestion = nil
+    matched_users.includes(:events).each do |matched_user|
+      first_event = matched_user.events.upcoming.order(:starts_at).first
+      next unless first_event.present? && !participated_events.exists?(first_event.id)
+
+      suggestion = first_event
+      break
+    end
+    notifications.event_suggestion.where(notifiable: suggestion).create if suggestion.present?
+  end
+
   def send_reset_password_instructions_notification(token)
     @token = token
     notifications.password_reset_request.create if token.present?
