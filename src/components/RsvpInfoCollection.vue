@@ -20,7 +20,7 @@
 
   <Question
   v-if="allInformationLoaded"
-  title="Which children would you like to RSVP?"
+  title="Which children are going?"
   :subtitle="spotsRemainingPhrase"
   >
    <Checkboxes
@@ -163,7 +163,7 @@ export default {
         component.sendNotifications()
         return this.$store.commit('showAlertOnNextRoute', {
           alert: {
-            message: 'Congratulations, you have RSVP&apos;ed to this event! You&apos;ll soon receive an email confirming your RSVP.',
+            message: 'Your request for a playdate has been sent! You&apos;ll soon receive a confirmation email.',
             status: 'success'
           }
         })

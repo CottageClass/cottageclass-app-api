@@ -88,7 +88,7 @@ export default {
       if (availabilityStrings.length > 0) {
         return 'Available ' + andJoin(availabilityStrings)
       }
-      return 'no availability yet'
+      return 'contact for availability'
     },
     ageString () {
       return (i) => {
