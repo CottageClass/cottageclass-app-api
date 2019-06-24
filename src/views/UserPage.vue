@@ -1,217 +1,217 @@
 <template>
-<div class="profile__container w-container">
-  <div class="profile-top-card__container">
-    <div class="profile__user-basics-container">
-      <div class="profile-top-card__photo-wrapper"><img src="images/charlice.png" alt="" class="profile-top-card__photo photo-fit" />
-        <div class="profile-top-card__badge-verified">
-          <div class="profile__badge__check-mark">✓</div>
-          <div class="profile__badge-text">Verified</div>
-        </div>
-      </div>
-      <div class="profile-top-card__user-summary-info">
-        <div class="profile-top-card__name-action-group">
-          <h1 class="profile-top-card__user-name">Jayme R.</h1><a href="#" class="profile-top-card__action-button w-inline-block"><img src="images/star-black-outline.svg" alt="" class="profile-top-card__action-button-icon" /></a>
-          <div class="profile-top-card__distance">0.1 mi</div>
-        </div>
-        <div class="profile-top-card__occupation">Engineer, Lockeed Martin</div>
-        <div class="profile-top-card__ages">Ages 10, 5, 2, 18 mos</div>
-        <div class="about__description">
-          <div class="bio__triangle"></div>
-          <div class="about-host__bio-text"> Come hang with us, we have a lot of fun. I’m an artist, I’m from Brazil, and my own daughter is 14!. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec bibendum sapien eu velit varius ullamcorper. Proin sollicitudin. <a href="#" class="bio__read-more-link">Read more</a></div>
-          <div class="bio__talk-bubble-caret--right"></div>
-          <div class="bio__talk-bubble-caret--top"></div>
-        </div>
-        <ul class="protile-top-card__about-llist">
-          <li class="about-the-host__list-item">
-            <div class="bullet-bar"></div>
-            <div class="about-the-host__bullet-text">Stay at home mom</div>
-          </li>
-          <li class="about-the-host__list-item">
-            <div class="bullet-bar"></div>
-            <div class="about-the-host__bullet-text">Speaks English, Romanian and Russian, Rom and Russian, Romanian and Russian, Romanian and Russian</div>
-          </li>
-          <li class="about-the-host__list-item">
-            <div class="bullet-bar"></div>
-            <div class="about-the-host__bullet-text">Member since May, 2019</div>
-          </li>
-          <li class="about-the-host__list-item">
-            <div class="bullet-bar"></div>
-            <div class="about-the-host__bullet-text">Verified social media account</div>
-          </li>
-        </ul>
-      </div>
-    </div>
-
-  </div>
-  <div class="profile-detail__content-columns w-row">
-    <div class="profile-detail_column-left w-col w-col-8 w-col-stack">
-      <div class="interests__card">
-        <div class="interests__title-text">Interests</div>
-        <div class="card__description-and-icon-container w-clearfix"><img src="images/interests.svg" width="100" height="100" alt="" class="interests_image" />
-          <div class="interests__tag-container">
-            <div class="tag">
-              <div class="tag-text2">Dance</div>
-            </div>
-            <div class="tag">
-              <div class="tag-text2">Theater</div>
-            </div>
-            <div class="tag">
-              <div class="tag-text2">Reading Books</div>
-            </div>
-            <div class="tag">
-              <div class="tag-text2">Hiking</div>
-            </div>
-            <div class="tag">
-              <div class="tag-text2">Testing the wrap</div>
-            </div>
-            <div class="tag">
-              <div class="tag-text2">Reading Books</div>
-            </div>
-            <div class="tag">
-              <div class="tag-text2">Hiking</div>
-            </div>
-            <div class="tag">
-              <div class="tag-text2">Theater</div>
-            </div>
-            <div class="tag">
-              <div class="tag-text2">Testing the wrap</div>
+  <div>
+    <MainNav />
+    <LoadingSpinner v-if="!user" />
+    <div class="profile__container w-container" v-else>
+      <div class="profile-top-card__container">
+        <div class="profile__user-basics-container">
+          <div class="profile-top-card__photo-wrapper">
+            <AvatarImage className="profile-top-card__photo"
+                         :person="user"
+                         imageSize="200"/>
+            <div v-if="verified" class="profile-top-card__badge-verified">
+              <div class="profile__badge__check-mark">✓</div>
+              <div class="profile__badge-text">Verified</div>
             </div>
           </div>
-        </div>
-      </div>
-      <div class="availability__card">
-        <div class="availability__title-text">Available times</div>
-        <div class="card__description-and-icon-container w-clearfix"><img src="images/time.svg" width="100" height="100" alt="" class="availability_image" />
-          <div class="availability__tag-container">
-            <div class="tag">
-              <div class="tag-text2">9am-3pm</div>
+          <div class="profile-top-card__user-summary-info">
+            <div class="profile-top-card__name-action-group">
+              <h1 class="profile-top-card__user-name">{{userName}}</h1>
+              <a  class="profile-top-card__action-button w-inline-block"
+                  :class="isStarred?'active':''"
+                  @click.stop="interestedClickAndUpdate"></a>
+              <div v-if="distance" class="profile-top-card__distance">{{ distance }}</div>
             </div>
-            <div class="tag">
-              <div class="tag-text2">3pm-7pm</div>
+            <div class="profile-top-card__occupation">{{ occupation }}</div>
+            <div class="profile-top-card__ages">{{ kidsAges }}</div>
+            <div v-if="profileBlurb" class="about__description">
+              <div class="bio__triangle"></div>
+              <div class="about-host__bio-text">{{ profileBlurb }}</div>
+              <div class="bio__talk-bubble-caret--right"></div>
+              <div class="bio__talk-bubble-caret--top"></div>
             </div>
-            <div class="tag">
-              <div class="tag-text2">7pm- ?</div>
-            </div>
-            <div class="tag">
-              <div class="tag-text2">Weekends</div>
-            </div>
+            <ul class="protile-top-card__about-llist">
+              <li v-if="languageText" class="about-the-host__list-item">
+                <div class="bullet-bar"></div>
+                <div class="about-the-host__bullet-text">{{ languageText }}</div>
+              </li>
+              <li class="about-the-host__list-item">
+                <div class="bullet-bar"></div>
+                <div class="about-the-host__bullet-text">Member since {{ joinedDateFormatted }}</div>
+              </li>
+              <li v-if="verified" class="about-the-host__list-item">
+                <div class="bullet-bar"></div>
+                <div class="about-the-host__bullet-text">Verified social media account</div>
+              </li>
+            </ul>
           </div>
         </div>
-      </div>
-      <div class="household-photos__card">
-        <div class="household-photos__title-text">Household photos</div>
+        <SearchListCardActions
+                        class="profile-top-card__footer__button-list"
+                        :user="user"
+                        @user-updated="userUpdate"
+                        :showInterestedButton="false"
+                        :showContactButton="showContactButton"
+                        :showGoingButton="showGoingButton"/>
 
       </div>
-      <div class="attended__card">
-        <div class="attended__title-text">Parents who hosted Jayme (12)</div>
-        <ul class="list">
-          <li class="attendee__list-item"><a href="#" class="attendee__link-wrapper w-inline-block"><img src="images/manisha.jpeg" alt="" class="attendee__photo photo-fit" />
-              <div class="attendee__user-name truncate">Manisha</div>
-            </a></li>
-          <li class="attendee__list-item"><a href="#" class="attendee__link-wrapper w-inline-block"><img src="images/charlice.png" alt="" class="attendee__photo photo-fit" />
-              <div class="attendee__user-name truncate">Sunny</div>
-            </a></li>
-          <li class="attendee__list-item"><a href="#" class="attendee__link-wrapper w-inline-block"><img src="images/julie.png" alt="" class="attendee__photo photo-fit" />
-              <div class="attendee__user-name truncate">Anastasia</div>
-            </a></li>
-          <li class="attendee__list-item"><a href="#" class="attendee__link-wrapper w-inline-block"><img src="images/allison.png" alt="" class="attendee__photo photo-fit" />
-              <div class="attendee__user-name truncate">Caroline</div>
-            </a></li>
-          <li class="attendee__list-item"><a href="#" class="attendee__link-wrapper w-inline-block"><img src="images/rima.png" alt="" class="attendee__photo photo-fit" />
-              <div class="attendee__user-name truncate">Charolotte</div>
-            </a></li>
-          <li class="attendee__list-item"><a href="#" class="attendee__link-wrapper w-inline-block"><img src="images/julie.png" alt="" class="attendee__photo photo-fit" />
-              <div class="attendee__user-name truncate">Colette</div>
-            </a></li>
-          <li class="attendee__list-item"><a href="#" class="attendee__link-wrapper w-inline-block"><img src="images/rima.png" alt="" class="attendee__photo photo-fit" />
-              <div class="attendee__user-name truncate">Elizabeth</div>
-            </a></li>
-          <li class="attendee__list-item"><a href="#" class="attendee__link-wrapper w-inline-block"><img src="images/photo-6.png" alt="" class="attendee__photo photo-fit" />
-              <div class="attendee__user-name truncate">Christopher</div>
-            </a></li>
-          <li class="attendee__list-item"><a href="#" class="attendee__link-wrapper w-inline-block"><img src="images/avatar-8.png" srcset="images/avatar-8-p-500.png 500w, images/avatar-8.png 600w" sizes="60px" alt="" class="attendee__photo photo-fit" />
-              <div class="attendee__user-name truncate">Barbara</div>
-            </a></li>
-          <li class="attendee__list-item"><a href="#" class="attendee__link-wrapper w-inline-block"><img src="images/rima.png" alt="" class="attendee__photo photo-fit" />
-              <div class="attendee__user-name truncate">Barbara</div>
-            </a></li>
-        </ul>
-      </div>
-      <div class="hosted__card">
-        <div class="attended__title-text">Parents hosted by Jayme (5)</div>
-        <ul class="list">
-          <li class="attendee__list-item"><a href="#" class="attendee__link-wrapper w-inline-block"><img src="images/manisha.jpeg" alt="" class="attendee__photo photo-fit" />
-              <div class="attendee__user-name truncate">Manisha</div>
-            </a></li>
-          <li class="attendee__list-item"><a href="#" class="attendee__link-wrapper w-inline-block"><img src="images/charlice.png" alt="" class="attendee__photo photo-fit" />
-              <div class="attendee__user-name truncate">Sunny</div>
-            </a></li>
-          <li class="attendee__list-item"><a href="#" class="attendee__link-wrapper w-inline-block"><img src="images/julie.png" alt="" class="attendee__photo photo-fit" />
-              <div class="attendee__user-name truncate">Anastasia</div>
-            </a></li>
-          <li class="attendee__list-item"><a href="#" class="attendee__link-wrapper w-inline-block"><img src="images/allison.png" alt="" class="attendee__photo photo-fit" />
-              <div class="attendee__user-name truncate">Caroline</div>
-            </a></li>
-          <li class="attendee__list-item"><a href="#" class="attendee__link-wrapper w-inline-block"><img src="images/rima.png" alt="" class="attendee__photo photo-fit" />
-              <div class="attendee__user-name truncate">Charolotte</div>
-            </a></li>
-        </ul>
-      </div>
-      <div class="event-detail__map"></div>
-      <div class="house-rules__card">
-        <div class="house-rulese_title-text">House Rules</div>
-        <div class="card__description-and-icon-container w-clearfix"><img src="https://uploads-ssl.webflow.com/5c6c7d4a75c1e54694ed12d1/5c6c7d4a75c1e5183aed132e_house-rules.svg" width="100" height="100" alt="" class="house__image" />
-          <div class="house-rules__text">Testing some long text. Consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. At vero eos et accusam et justo duo dolores et vero eos et accusam<br /><br />consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren.<br /></div>
-        </div>
-      </div>
-      <div class="pets__card">
-        <div class="pets__title-text">Pets</div>
-        <div class="card__description-and-icon-container w-clearfix"><img src="images/pets.svg" width="100" height="100" alt="" class="pets__image" />
-          <div class="pets__text">One small dog. Super Friendly.</div>
-        </div>
-      </div>
-      <div class="invite__card">
-        <div class="invite__title-text">Invite for a playdate</div>
-        <div class="invite__subtitle">(Once you have your first playdate you can request childcare too)</div><a href="#" class="btn__invite-for-playdate w-button">Invite for a playdate</a>
-        <div class="invite__playdate-instructions">
-          <div class="invite-how-to__title-text">How to plan a playdate with Jayme</div>
-          <div class="playdate-planning-bullet">
-            <div class="number-container">
-              <div class="text-block-10">1</div>
+      <div class="profile-detail__content-columns w-row">
+        <div class="profile-detail_column-left w-col w-col-8 w-col-stack">
+          <div v-if="interests" class="interests__card">
+            <div class="interests__title-text">Interests</div>
+            <div class="card__description-and-icon-container w-clearfix"><img src="images/interests.svg" width="100" height="100" alt="" class="interests_image" />
+              <div class="interests__tag-container">
+                <div v-for="interest in interests" class="tag">
+                  <div class="tag-text2">{{ interest }}</div>
+                </div>
+              </div>
             </div>
-            <div class="invite-how-to__bullet-text">Click 'invite for a playdate' above</div>
           </div>
-          <div class="playdate-planning-bullet">
-            <div class="number-container">
-              <div class="text-block-10">2</div>
+          <div v-if="availableTimes" class="availability__card">
+            <div class="availability__title-text">Available times</div>
+            <div class="card__description-and-icon-container w-clearfix"><img src="images/time.svg" width="100" height="100" alt="" class="availability_image" />
+              <div class="availability__tag-container">
+                <div v-for="time of availableTimes" class="tag">
+                  <div class="tag-text2">{{ time }}</div>
+                </div>
+              </div>
             </div>
-            <div class="invite-how-to__bullet-text">Jayme will get a text that you're intestested in a playdate</div>
           </div>
-          <div class="playdate-planning-bullet">
-            <div class="number-container">
-              <div class="text-block-10">3</div>
+          <div v-if="images && images.length>0" class="household-photos__card">
+            <div class="household-photos__title-text">Household photos</div>
+              <Images :images="images" />
+          </div>
+          <div v-if="false" class="attended__card">
+            <div class="attended__title-text">Parents who hosted Jayme (12)</div>
+            <ul class="list">
+              <li class="attendee__list-item"><a href="#" class="attendee__link-wrapper w-inline-block"><img src="images/rima.png" alt="" class="attendee__photo photo-fit" />
+                  <div class="attendee__user-name truncate">Barbara</div>
+                </a></li>
+            </ul>
+          </div>
+          <div v-if="false" class="hosted__card">
+            <div class="attended__title-text">Parents hosted by Jayme (5)</div>
+            <ul class="list">
+              <li class="attendee__list-item"><a href="#" class="attendee__link-wrapper w-inline-block"><img src="images/rima.png" alt="" class="attendee__photo photo-fit" />
+                  <div class="attendee__user-name truncate">Charolotte</div>
+                </a></li>
+            </ul>
+          </div>
+          <div class="event-detail__map map" ref="map"></div>
+          <div v-if="houseRules" class="house-rules__card">
+            <div class="house-rulese_title-text">House Rules</div>
+            <div class="card__description-and-icon-container w-clearfix"><img src="https://uploads-ssl.webflow.com/5c6c7d4a75c1e54694ed12d1/5c6c7d4a75c1e5183aed132e_house-rules.svg" width="100" height="100" alt="" class="house__image" />
+              <div class="house-rules__text">{{ houseRules }}</div>
             </div>
-            <div class="invite-how-to__bullet-text">Decide on a time and place to meet. (We recommend meeting in one of your homes).</div>
+          </div>
+          <div v-if="petDescription" class="pets__card">
+            <div class="pets__title-text">Pets</div>
+            <div class="card__description-and-icon-container w-clearfix"><img src="images/pets.svg" width="100" height="100" alt="" class="pets__image" />
+              <div class="pets__text">{{ petDescription }}</div>
+            </div>
+          </div>
+          <div class="invite__card">
+            <div class="invite__title-text">Invite for a playdate</div>
+            <div class="invite__subtitle">
+              (Once you have your first playdate you can request childcare too)
+            </div>
+            <MeetButton defaultText="Invite for a playdate"
+                        class="btn__invite-for-playdate w-button"
+                        :targetUser="user"
+                        :allowUndo="false"
+                        :shouldShowDescriptionModal="true"/>
+            <div class="invite__playdate-instructions">
+              <div class="invite-how-to__title-text">How to plan a playdate with Jayme</div>
+              <div class="playdate-planning-bullet">
+                <div class="number-container">
+                  <div class="text-block-10">1</div>
+                </div>
+                <div class="invite-how-to__bullet-text">Click 'invite for a playdate' above</div>
+              </div>
+              <div class="playdate-planning-bullet">
+                <div class="number-container">
+                  <div class="text-block-10">2</div>
+                </div>
+                <div class="invite-how-to__bullet-text">Jayme will get a text that you're intestested in a playdate</div>
+              </div>
+              <div class="playdate-planning-bullet">
+                <div class="number-container">
+                  <div class="text-block-10">3</div>
+                </div>
+                <div class="invite-how-to__bullet-text">Decide on a time and place to meet. (We recommend meeting in one of your homes).</div>
+              </div>
+            </div>
           </div>
         </div>
+        <div class="profile-detail__column-right w-col w-col-4 w-col-stack">
+          <ul class="other-events__list">
+            <li class="other-events__title-bar">
+              <div class="other-events__title-text truncate">{{ userFirstName }}'s events</div>
+            </li>
+            <OtherEvent v-for="event of events"
+                        :key="event.id"
+                        :event="event"
+                        class="other-events__title-bar"/>
+          </ul>
+        </div>
       </div>
-    </div>
-    <div class="profile-detail__column-right w-col w-col-4 w-col-stack">
-      <ul class="other-events__list">
-        <li class="other-events__title-bar">
-          <div class="other-events__title-text truncate">Jayme's events</div>
-        </li>
-
-        <li class="other-events__view-more"><a href="#" class="other-events__view-more-link">View 16 more</a></li>
-      </ul>
     </div>
   </div>
-</div>
 </template>
 
 <script>
+import AvatarImage from '@/components/base/AvatarImage'
+import SearchListCardActions from '@/components/search/SearchListCardActions'
+import MainNav from '@/components/MainNav'
+import Images from '@/components/Images'
+import LoadingSpinner from '@/components/LoadingSpinner'
+import Attendee from '@/components/Attendee'
+import OtherEvent from '@/components/OtherEvent'
+import MeetButton from '@/components/base/MeetButton'
+
+import { item, maps } from '@/mixins'
+import { fetchUser, fetchUpcomingEvents } from '@/utils/api'
+
 export default {
-  name: 'UserPage'
+  name: 'UserPage',
+  components: { MainNav, Images, LoadingSpinner, AvatarImage, Attendee, OtherEvent, MeetButton, SearchListCardActions },
+  mixins: [item, maps],
+  data () {
+    return {
+      user: null,
+      events: null,
+      mapOptions: {
+        'disableDefaultUI': true, // turns off map controls
+        'gestureHandling': 'none' // prevents any kind of scrolling
+      }
+    }
+  },
+  methods: {
+    async interestedClickAndUpdate () {
+      this.user = await this.interestedClick()
+    },
+    fetchUser: async function () {
+      this.user = await fetchUser(this.$route.params.id)
+      this.events = (await fetchUpcomingEvents(this.$route.params.id))
+      this.$nextTick(async function () {
+        await this.createMap(this.$refs.map, {
+          zoom: 13,
+          center: { lat: parseFloat(this.user.fuzzyLatitude),
+            lng: parseFloat(this.user.fuzzyLongitude) },
+          disableDefaultUI: true,
+          options: this.mapOptions,
+          style: 'width: 100px; height: 230px;'
+        })
+        await this.addCircle({ lat: this.user.fuzzyLatitude, lng: this.user.fuzzyLongitude }, 0.2)
+      })
+    },
+    userUpdate () {
+      this.fetchUser()
+    }
+  },
+  created: function () {
+    this.fetchUser()
+  }
 }
 </script>
 
@@ -545,26 +545,24 @@ a {
 }
 
 .profile-top-card__action-button {
+  background-position: center;
   position: static;
-  left: 30px;
-  top: auto;
-  right: auto;
-  bottom: 141px;
-  display: flex;
   width: 40px;
   height: 40px;
   padding: 8px;
-  justify-content: flex-start;
-  align-items: center;
   border-style: solid;
   border-width: 1px;
   border-color: rgba(0, 0, 0, 0.03);
   border-radius: 4px;
   background-color: #f3f3f3;
+  &.active {
+    background-image: url('../assets/star_2.svg');
+  }
+  background-image: url('../assets/star-black-outline.svg');
 }
 
 .profile-top-card__action-button:hover {
-  background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0.06));
+  background-color: #eee;
 }
 
 .profile-top-card__action-button:active {
@@ -765,10 +763,19 @@ a {
   color: #1f88e9;
   font-size: 12px;
   font-weight: 400;
+  &.sent {
+    cursor: default;
+    color:  rgb(12, 186, 82);
+    border-color:  rgb(12, 186, 82);
+    cursor: default;
+    &:hover {
+      background-color: #fff;
+    }
+  }
 }
 
 .btn__invite-for-playdate:hover {
-  background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0.06));
+  background-color: rgba(0, 0, 0, 0.06);
 }
 
 .interests__card {
@@ -1002,16 +1009,9 @@ a {
     padding-bottom: 128px;
   }
 
-  .profile-top-card__action-button:hover {
-    background-image: linear-gradient(180deg, transparent, transparent);
-  }
-
-  .profile-top-card__action-button:active {
-    background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.03), rgba(0, 0, 0, 0.03));
-  }
-
   .profile-detail__content-columns {
     margin-top: 16px;
+    max-width: 684px;
   }
 
   .profile-detail_column-left {
@@ -1031,7 +1031,6 @@ a {
     max-width: 340px;
     min-width: 340px;
   }
-
 }
 
 @media (max-width: 767px){
@@ -1254,6 +1253,14 @@ a {
 }
 
 @media (max-width: 479px){
+.profile-top-card__footer__button-list {
+    width: 100%;
+    margin-top: 24px;
+    flex-direction: column;
+}
+  .profile-detail__content-columns{
+    max-width: 100%;
+  }
   .other-events__title-text {
     width: 270px;
   }
