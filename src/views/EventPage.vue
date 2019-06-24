@@ -156,9 +156,6 @@ export default {
     user () {
       return this.event.host
     },
-    images () {
-      return this.event && this.event.hostImages
-    },
     houseRulesImage: () => houseRulesImage,
     petsImage: () => petsImage
   },
