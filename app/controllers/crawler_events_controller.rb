@@ -6,10 +6,10 @@ class CrawlerEventsController < ActionController::Base
     time = @event.start_time_hour
 
     set_meta_tags og: {
-      image: 'https://storage.googleapis.com/cottageclass-prod/images/lets-share-playdates-and-childcare.png',
+      image: 'https://storage.googleapis.com/cottageclass-prod/images/youre-invited-to-a-playdate.png',
       url: crawler_event_url,
-      titie: @event.name,
-      description: "#{@event.host_first_name} is hosting a playdate #{month} #{date} @ #{time}. Can you come?"
+      description: @event.name,
+      title: "#{@event.host_first_name} is hosting a playdate #{month} #{date} @ #{time}. Can you come?"
     }
   end
 end
