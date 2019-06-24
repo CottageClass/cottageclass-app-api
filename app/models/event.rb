@@ -47,6 +47,18 @@ class Event < ApplicationRecord
     user.present? ? participating_users.include?(user) : false
   end
 
+  def month_abbreviated
+    in_instance_time_zone(starts_at).strftime('%b').try :squish
+  end
+
+  def day_of_month
+    in_instance_time_zone(starts_at).strftime('%e').try :squish
+  end
+
+  def start_time_hour
+    in_instance_time_zone(starts_at).strftime('%l%p').try :squish
+  end
+
   def start_date
     in_instance_time_zone(starts_at).strftime('%B %e, %Y').try :squish
   end
