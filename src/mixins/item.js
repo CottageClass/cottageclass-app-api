@@ -180,7 +180,7 @@ export default {
       if (this.event) {
         this.$router.push({ name: 'EventPage', params: { id: this.event.id } })
       } else if (this.user) {
-        this.$router.push({ name: 'ProviderProfile', params: { id: this.user.id } })
+        this.$router.push({ name: 'UserPage', params: { id: this.user.id } })
       } else {
         throw Error('No valid item on this list card')
       }

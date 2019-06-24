@@ -9,7 +9,7 @@
         </router-link>
       </div>
       <div class="actions-wrapper">
-        <router-link v-if="currentUser" :to="{name: 'ProviderProfile', params: {id: currentUser.id}}">
+        <router-link v-if="currentUser" :to="{name: 'UserPage', params: {id: currentUser.id}}">
           <AvatarImage
           v-if="currentUser"
           :person="currentUser"

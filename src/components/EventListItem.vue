@@ -28,7 +28,7 @@
         <div class="action-bar">
           <div class="host-container">
             <div class="host-info">
-            <router-link :to="{ name: 'ProviderProfile', params: { id: event.hostId }}">
+            <router-link :to="{ name: 'UserPage', params: { id: event.hostId }}">
               <AvatarImage class="avatar-small"
                            :person="{facebookUid: event.hostFacebookUid, avatar: event.hostAvatar}"
                            imageSize="40"
@@ -37,7 +37,7 @@
             <div class="text-block">
               Hosted by
             <router-link
-              :to="{ name: 'ProviderProfile', params: { id: event.hostId }}"
+              :to="{ name: 'UserPage', params: { id: event.hostId }}"
               class="host-name link">
                 {{ event.hostFirstName }}
             </router-link>

@@ -13,7 +13,7 @@
         </div>
         <div class="user-action-card__footer">
           <div class="user-action-card__footer__user-summary">
-            <router-link :to="{name:'ProviderProfile', params:{id: event.hostId}}"
+            <router-link :to="{name:'UserPage', params:{id: event.hostId}}"
                          class="avatar-container">
             <AvatarImage className="user-action-card__photo"
                          :person="{facebookUid: event.hostFacebookUid, avatar: event.hostAvatar}"
@@ -87,7 +87,7 @@
             <div v-if="profileBlurb" class="about-the-host__bio">
               <div class="about-the-host__bio-text">{{profileBlurb}}</div>
             </div>
-            <router-link :to="{name: 'ProviderProfile', params: {id: this.user.id}}" class="btn__more-about-host w-button">
+            <router-link :to="{name: 'UserPage', params: {id: this.user.id}}" class="btn__more-about-host w-button">
               More about this host
             </router-link>
           </div>

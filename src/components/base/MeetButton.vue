@@ -88,7 +88,7 @@ export default {
   },
   computed: {
     shouldShowDescriptionModal () {
-      if (this.$route.name === 'ProviderProfile') {
+      if (this.$route.name === 'UserPage') {
         return true
       }
       if (this.$route.name === 'Events' && !this.hasShowEventsPageMessagingDescription) {
