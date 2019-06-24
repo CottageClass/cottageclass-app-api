@@ -142,8 +142,14 @@ export default new Router({
       props: true
     },
     {
-      path: '/contact/:eventId',
-      name: 'ContactForm',
+      path: '/contact/event/:eventId',
+      name: 'ContactEventForm',
+      component: ContactForm,
+      props: true
+    },
+    {
+      path: '/contact/user/:userId',
+      name: 'ContactUserForm',
       component: ContactForm,
       props: true
     }
