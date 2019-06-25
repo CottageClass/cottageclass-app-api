@@ -58,7 +58,7 @@ export default {
     goToProfile (e) {
       if (!this.lastMeetButtonClick ||
           Math.abs(this.lastMeetButtonClick.event.timeStamp - e.timeStamp) > 0.001) {
-        this.$router.push({ name: 'ProviderProfile', params: { id: this.user.id } })
+        this.$router.push({ name: 'UserPage', params: { id: this.user.id } })
       }
     }
   },
