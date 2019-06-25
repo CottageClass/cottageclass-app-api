@@ -35,7 +35,7 @@
 
 <script>
 
-import * as api from '@/utils/api'
+import { initProxySession, submitEventParticipant, submitNotification, fetchEvent } from '@/utils/api'
 import * as utils from '@/utils/utils.js'
 import Nav from '@/components/FTE/Nav.vue'
 import ErrorMessage from '@/components/base/ErrorMessage.vue'
@@ -133,7 +133,7 @@ export default {
     },
     fetchEventInformation: async function () {
       try {
-        this.event = await api.fetchEvent(this.$route.params.eventId)
+        this.event = await fetchEvent(this.$route.params.eventId)
         if (this.event.full || this.event.maximumChildren === 0) {
           this.err = 'We\'re sorry, this event is full!'
         }
@@ -153,30 +153,38 @@ export default {
         this.submitRsvp()
       }
     },
-    submitRsvp: function () {
+    async submitRsvp () {
       this.err = ''
       console.log('rsvping children ' + this.childrenSelected + ' to event ID' + this.eventId)
       this.submitToSheetsu()
-      let component = this
-      api.submitEventParticipant(this.eventId, this.childrenSelected).then(res => {
-      // open event page where user will see success message
-        component.sendNotifications()
-        return this.$store.commit('showAlertOnNextRoute', {
+
+      try {
+        await submitEventParticipant(this.eventId, this.childrenSelected)
+        // open event page where user will see success message
+        this.sendNotifications()
+        this.$store.commit('showAlertOnNextRoute', {
           alert: {
             message: 'Your request for a playdate has been sent! You&apos;ll soon receive a confirmation email.',
             status: 'success'
           }
         })
-      }).then(res => {
-        return component.$ga.event('RSVP', 'sent', component.eventId)
-      }).then(res => {
-        return component.$router.push({ name: 'EventPage', params: { id: this.eventId } })
-      }).catch(err => {
+        this.$ga.event('RSVP', 'sent', this.eventId)
+        this.initProxyConversation()
+        this.$router.push({ name: 'EventPage', params: { id: this.eventId } })
+      } catch (err) {
         console.log(err)
         this.err = 'Sorry, there was a problem submitting your RSVP. Try again?'
         // fetch event information again, which will update the error message if the event is full, e.g. in the case where another user RSVP'ed a the same time, just before this user did.
         this.fetchEventInformation()
-      })
+      }
+    },
+    initProxyConversation () {
+      initProxySession(
+        this.currentUser.id,
+        this.event.hostId,
+        requestMessage,
+        acknowledgmentMessage
+      )
     },
     submitToSheetsu: function () {
       // submit user to sheetsu which gives us notifications of new RSVPs
@@ -210,8 +218,8 @@ export default {
       }
     },
     sendNotifications: function () {
-      api.submitNotification(this.event.hostId, this.notificationToHost)
-      api.submitNotification(this.currentUser.id, this.notificationBackToUser)
+      submitNotification(this.event.hostId, this.notificationToHost)
+      submitNotification(this.currentUser.id, this.notificationBackToUser)
     }
   }
 }
