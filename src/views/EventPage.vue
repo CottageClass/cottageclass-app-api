@@ -37,6 +37,7 @@
                             :event="event"
                             @event-updated="updateEvent"
                             :timePast="timePast"
+                            :showShareButton="showShareButton"
                             :showInterestedButton="showInterestedButton"
                             :showContactButton="showContactButton"
                             :showGoingButton="showGoingButton"/>
