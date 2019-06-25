@@ -82,7 +82,7 @@
               <Images :images="images" />
           </div>
           <div v-if="false" class="attended__card">
-            <div class="attended__title-text">Parents who hosted Jayme (12)</div>
+            <div class="attended__title-text">Parents who hosted {{ userFirstName }} (12)</div>
             <ul class="list">
               <li class="attendee__list-item"><a href="#" class="attendee__link-wrapper w-inline-block"><img src="@/assets/rima.png" alt="" class="attendee__photo photo-fit" />
                   <div class="attendee__user-name truncate">Barbara</div>
@@ -90,7 +90,7 @@
             </ul>
           </div>
           <div v-if="false" class="hosted__card">
-            <div class="attended__title-text">Parents hosted by Jayme (5)</div>
+            <div class="attended__title-text">Parents hosted by {{ userFirstName }} (5)</div>
             <ul class="list">
               <li class="attendee__list-item"><a href="#" class="attendee__link-wrapper w-inline-block"><img src="@/assets/rima.png" alt="" class="attendee__photo photo-fit" />
                   <div class="attendee__user-name truncate">Charolotte</div>
@@ -121,7 +121,7 @@
                         :allowUndo="false"
                         :shouldShowDescriptionModal="true"/>
             <div class="invite__playdate-instructions">
-              <div class="invite-how-to__title-text">How to plan a playdate with Jayme</div>
+              <div class="invite-how-to__title-text">How to plan a playdate with {{ userFirstName }}</div>
               <div class="playdate-planning-bullet">
                 <div class="number-container">
                   <div class="text-block-10">1</div>
@@ -132,7 +132,7 @@
                 <div class="number-container">
                   <div class="text-block-10">2</div>
                 </div>
-                <div class="invite-how-to__bullet-text">Jayme will get a text that you're intestested in a playdate</div>
+                <div class="invite-how-to__bullet-text">{{ userFirstName }} will get a text that you're intestested in a playdate</div>
               </div>
               <div class="playdate-planning-bullet">
                 <div class="number-container">
