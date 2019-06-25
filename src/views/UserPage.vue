@@ -59,7 +59,7 @@
         <div class="profile-detail_column-left w-col w-col-8 w-col-stack">
           <div v-if="interests" class="interests__card">
             <div class="interests__title-text">Interests</div>
-            <div class="card__description-and-icon-container w-clearfix"><img src="images/interests.svg" width="100" height="100" alt="" class="interests_image" />
+            <div class="card__description-and-icon-container w-clearfix"><img src="@/assets/interests.svg" width="100" height="100" alt="" class="interests_image" />
               <div class="interests__tag-container">
                 <div v-for="interest in interests" class="tag">
                   <div class="tag-text2">{{ interest }}</div>
@@ -69,7 +69,7 @@
           </div>
           <div v-if="availableTimes" class="availability__card">
             <div class="availability__title-text">Available times</div>
-            <div class="card__description-and-icon-container w-clearfix"><img src="images/time.svg" width="100" height="100" alt="" class="availability_image" />
+            <div class="card__description-and-icon-container w-clearfix"><img src="@/assets/time.svg" width="100" height="100" alt="" class="availability_image" />
               <div class="availability__tag-container">
                 <div v-for="time of availableTimes" class="tag">
                   <div class="tag-text2">{{ time }}</div>
@@ -84,7 +84,7 @@
           <div v-if="false" class="attended__card">
             <div class="attended__title-text">Parents who hosted Jayme (12)</div>
             <ul class="list">
-              <li class="attendee__list-item"><a href="#" class="attendee__link-wrapper w-inline-block"><img src="images/rima.png" alt="" class="attendee__photo photo-fit" />
+              <li class="attendee__list-item"><a href="#" class="attendee__link-wrapper w-inline-block"><img src="@/assets/rima.png" alt="" class="attendee__photo photo-fit" />
                   <div class="attendee__user-name truncate">Barbara</div>
                 </a></li>
             </ul>
@@ -92,7 +92,7 @@
           <div v-if="false" class="hosted__card">
             <div class="attended__title-text">Parents hosted by Jayme (5)</div>
             <ul class="list">
-              <li class="attendee__list-item"><a href="#" class="attendee__link-wrapper w-inline-block"><img src="images/rima.png" alt="" class="attendee__photo photo-fit" />
+              <li class="attendee__list-item"><a href="#" class="attendee__link-wrapper w-inline-block"><img src="@/assets/rima.png" alt="" class="attendee__photo photo-fit" />
                   <div class="attendee__user-name truncate">Charolotte</div>
                 </a></li>
             </ul>
@@ -106,7 +106,7 @@
           </div>
           <div v-if="petDescription" class="pets__card">
             <div class="pets__title-text">Pets</div>
-            <div class="card__description-and-icon-container w-clearfix"><img src="images/pets.svg" width="100" height="100" alt="" class="pets__image" />
+            <div class="card__description-and-icon-container w-clearfix"><img src="@/assets/pets.svg" width="100" height="100" alt="" class="pets__image" />
               <div class="pets__text">{{ petDescription }}</div>
             </div>
           </div>
