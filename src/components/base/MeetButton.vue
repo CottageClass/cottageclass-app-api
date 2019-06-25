@@ -1,6 +1,5 @@
 <template>
-  <div class="meet-button"
-        :class="meetStatus + ' ' + fillStyle + ' ' + layoutStyle + (layoutStyle==='fat' ? ' w-button' : '')"
+  <div :class="'w-button '+meetStatus"
         @click="meetButtonClick">
     {{meetButtonText}}
   </div>
@@ -14,7 +13,7 @@ import { alerts, redirect, messaging } from '@/mixins'
 
 export default {
   name: 'MeetButton',
-  props: ['targetUser', 'fillStyle', 'layoutStyle'],
+  props: ['targetUser', 'fillStyle', 'layoutStyle', 'defaultText', 'shouldShowDescriptionModal', 'allowUndo'],
   mixins: [alerts, redirect, messaging],
   data () {
     return {
@@ -57,7 +56,11 @@ export default {
       if (this.redirectToSignupIfNotAuthenticated()) {
         this.$store.commit('addPendingWave', { targetUser: this.targetUser })
       } else {
-        this.initiateMessageSending()
+        if (this.allowUndo) {
+          this.initiateMessageSending()
+        } else {
+          this.sendMessage()
+        }
       }
     },
     undoMessageSending () {
@@ -87,28 +90,19 @@ export default {
     }
   },
   computed: {
-    shouldShowDescriptionModal () {
-      if (this.$route.name === 'ProviderProfile') {
-        return true
-      }
-      if (this.$route.name === 'Events' && !this.hasShowEventsPageMessagingDescription) {
-        return true
-      }
-      return false
-    },
     meetButtonText () {
       switch (this.meetStatus) {
         case 'none':
-          return (this.fillStyle === 'outline') ? 'Wave' : 'Invite for a playdate'
+          return this.defaultText
         case 'sending':
           return 'Undo'
         case 'sent':
           return 'Sent'
         default:
-          return 'Wave'
+          return ''
       }
     },
-    ...mapGetters([ 'currentUser', 'waveHasBeenSent', 'hasShowEventsPageMessagingDescription' ])
+    ...mapGetters([ 'currentUser', 'waveHasBeenSent' ])
   },
   created () {
     if (this.waveHasBeenSent(this.targetUser.id)) {
@@ -117,85 +111,3 @@ export default {
   }
 }
 </script>
-
-<style scoped lang="scss">
-
-.meet-button.solid {
-  color: white;
-  background-color: #1f88e9;
-
-  &.none:hover {
-    background-image: linear-gradient(180deg, rgba(0, 0, 0, .02), rgba(0, 0, 0, .04));
-  }
-  &.sending {
-    color: rgb(212, 80, 18);
-    border: 1px rgb(212, 80, 18) solid;
-    background-color: transparent;
-    &:hover {
-      background-image: linear-gradient(180deg, rgba(255, 0, 0, .1), rgba(255, 0, 0, .04));
-    }
-  }
-  &.sent {
-    color:  rgb(12, 186, 82);
-    border-color:  rgb(12, 186, 82);
-    background-color:  rgba(12, 186, 82, .2);
-    border-width: 2px;
-    cursor: default;
-  }
-
-}
-
-.meet-button.outline {
-  border: 1px solid #1f88e9;
-  background-color: transparent;
-  color: #1f88e9;
-  -webkit-text-fill-color: #1f88e9;  // DO NOT REMOVE.  REQUIRED FOR SAFARI
-
-  &.none:hover {
-    background-image: linear-gradient(180deg, rgba(0, 0, 0, .02), rgba(0, 0, 0, .04));
-  }
-  &.sending {
-    color: rgb(212, 80, 18);
-    -webkit-text-fill-color: rgb(212, 80, 18);  // DO NOT REMOVE.  REQUIRED FOR SAFARI
-    border-color:  rgb(212, 80, 18);
-
-    &:hover {
-      background-image: linear-gradient(180deg, rgba(255, 0, 0, .1), rgba(255, 0, 0, .04));
-    }
-  }
-  &.sent {
-    color:  rgb(12, 186, 82);
-    -webkit-text-fill-color: rgb(12, 186, 82);  // DO NOT REMOVE.  REQUIRED FOR SAFARI
-    border-color:  rgb(12, 186, 82);
-    background-color:  rgba(12, 186, 82, .2);
-    border-width: 1px;
-    cursor: default;
-  }
-}
-
-.meet-button {
-  text-align: center;
-  border-radius: 4px;
-  font-size: 13px;
-  &.sent {
-    cursor: default;
-  }
-}
-.meet-button.slim {
-  display: flex;
-  width: 100%;
-  margin-bottom: 0px;
-  padding: 6px 10px;
-  justify-content: center;
-  align-items: center;
-  font-size: 12px;
-  line-height: 15px;
-  text-align: center;
-}
-.meet-button.fat {
-  padding: 4px 10px 5px;
-  border: 1px solid #1f88e9;
-  background-color: transparent;
-  color: #1f88e9;
-}
-</style>

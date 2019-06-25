@@ -3,7 +3,7 @@
     @click.stop="goToItem">
   <div class="header">
     <div class="header__date" :class="{'time-past': timePast}">{{timeHeader}}</div>
-    <div class="header__distance">{{distance}}</div>
+    <div v-if="distance" class="header__distance">{{distance}}</div>
   </div>
   <div class="description">
     <div class="description-text line-clamp--2">{{description}}</div>
@@ -51,6 +51,7 @@
                     :timePast="timePast"
                     :showGoingButton="showGoingButton"
                     :showContactButton="showContactButton"
+                    :showShareButton="showShareButton"
                     :showInterestedButton="showInterestedButton"/>
     <SearchListCardActionsOverlay
                     v-if="showOverlay"
@@ -61,6 +62,7 @@
                     @clickaway="overlayOpen=false"
                     :showGoingButton="showGoingButton"
                     :showContactButton="showContactButton"
+                    :showShareButton="showShareButton"
                     :showInterestedButton="showInterestedButton"/>
   </div>
 </li>
@@ -80,7 +82,7 @@ export default {
   props: {
     user: { required: true },
     event: {},
-    mapCenter: { required: true }
+    mapCenter: {}
   },
   mixins: [item, screen],
   components: { AvatarImage, HouseholdImages, SearchListCardActions, SearchListCardActionsOverlay }

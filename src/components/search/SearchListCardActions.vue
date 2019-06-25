@@ -9,7 +9,7 @@
     <li v-if="showContactButton">
       <IconButton label="Contact" :icon="contactIcon" @click="contactClick"/>
     </li>
-    <li v-if="event">
+    <li v-if="showShareButton">
       <IconButton label="Share" :icon="shareIcon" @click="shareClick"/>
     </li>
   </ul>
@@ -33,6 +33,7 @@ export default {
     user: {},
     event: {},
     timePast: {},
+    showShareButton: { default: false },
     showGoingButton: { default: false },
     showInterestedButton: { default: false },
     showContactButton: { default: false }
@@ -80,7 +81,11 @@ export default {
       }
     },
     contactClick () {
-      this.$router.push({ name: 'ContactForm', params: { eventId: this.event.id } })
+      if (this.event) {
+        this.$router.push({ name: 'ContactEventForm', params: { eventId: this.event.id } })
+      } else {
+        this.$router.push({ name: 'ContactUserForm', params: { userId: this.user.id } })
+      }
     },
     shareClick () {
       this.$router.push({ name: 'SocialInvite', params: { id: this.event.id, context: 'searchItem' } })

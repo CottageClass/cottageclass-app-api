@@ -102,7 +102,7 @@ export default {
           if (pin) {
             that.userPins.push(pin)
             pin.addListener('click', function () {
-              that.$router.push({ name: 'ProviderProfile', params: { id: user.id } })
+              that.$router.push({ name: 'UserPage', params: { id: user.id } })
             })
           }
         }

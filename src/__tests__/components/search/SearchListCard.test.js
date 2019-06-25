@@ -83,4 +83,21 @@ describe('SearchListCard', () => {
     expect(householdImages).toHaveLength(0)
     expect(moreImagesLabel.text()).toBe('')
   })
+
+  it('allows no center', () => {
+    const wrapper = mount(SearchListCard, {
+      mocks: { $store },
+      propsData: {
+        user: {
+          id: 22
+          // facebookUid: '563930223',
+          // childAgesInMonths: [1],
+          // location: { lat: 42.27, lng: -71.78 },
+          // images: []
+        }
+      }
+    })
+    const distance = wrapper.find('.header__distance')
+    expect(distance.exists()).toBe(false)
+  })
 })

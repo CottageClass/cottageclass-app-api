@@ -13,7 +13,7 @@
         </div>
         <div class="user-action-card__footer">
           <div class="user-action-card__footer__user-summary">
-            <router-link :to="{name:'ProviderProfile', params:{id: event.hostId}}"
+            <router-link :to="{name:'UserPage', params:{id: event.hostId}}"
                          class="avatar-container">
             <AvatarImage className="user-action-card__photo"
                          :person="{facebookUid: event.hostFacebookUid, avatar: event.hostAvatar}"
@@ -24,7 +24,10 @@
             </div>
             </router-link>
             <div class="user-action-card__user-info--container">
-              <div class="user-action-card__user-info_list"><a class="user-action-card__user-info__name">{{ userName }}</a>
+              <div class="user-action-card__user-info_list">
+            <router-link :to="{name:'UserPage', params:{id: event.hostId}}"
+                         class="user-action-card__user-info__name">
+                {{ userName }}</router-link>
                 <div class="user-action-card__user-info__occupation truncate">{{occupation}}</div>
                 <div class="user-action-card__user-info__kids truncate">{{kidsAges}}</div>
               </div>
@@ -37,6 +40,7 @@
                             :event="event"
                             @event-updated="updateEvent"
                             :timePast="timePast"
+                            :showShareButton="showShareButton"
                             :showInterestedButton="showInterestedButton"
                             :showContactButton="showContactButton"
                             :showGoingButton="showGoingButton"/>
@@ -87,7 +91,7 @@
             <div v-if="profileBlurb" class="about-the-host__bio">
               <div class="about-the-host__bio-text">{{profileBlurb}}</div>
             </div>
-            <router-link :to="{name: 'ProviderProfile', params: {id: this.user.id}}" class="btn__more-about-host w-button">
+            <router-link :to="{name: 'UserPage', params: {id: this.user.id}}" class="btn__more-about-host w-button">
               More about this host
             </router-link>
           </div>
@@ -155,9 +159,6 @@ export default {
   computed: {
     user () {
       return this.event.host
-    },
-    images () {
-      return this.event && this.event.hostImages
     },
     houseRulesImage: () => houseRulesImage,
     petsImage: () => petsImage
