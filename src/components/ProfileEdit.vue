@@ -122,7 +122,7 @@ export default {
   },
   methods: {
     toToProfilePage () {
-      this.$router.push({ name: 'ProviderProfile', params: { id: this.currentUser.id } })
+      this.$router.push({ name: 'UserPage', params: { id: this.currentUser.id } })
     },
     submitUserInformation: async function () {
       if (!this.hasError) {

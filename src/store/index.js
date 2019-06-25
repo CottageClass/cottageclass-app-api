@@ -19,14 +19,10 @@ export default new Vuex.Store(
         center: { lat: 40.688309, lng: -73.994639 }, // BoCoCa
         maxDistance: 5
       },
-      hasShowEventsPageMessagingDescription: false,
       pendingWaves: [],
       sentWaves: []
     },
     mutations: {
-      setHasShowEventsPageMessagingDescription: (state) => {
-        state.hasShowEventsPageMessagingDescription = true
-      },
       markWaveSent: (state, payload) => {
         const id = payload.targetUserId
         if (state.pendingWaves.some(user => user.id === id)) {
@@ -95,7 +91,6 @@ export default new Vuex.Store(
       }
     },
     getters: {
-      hasShowEventsPageMessagingDescription: state => state.hasShowEventsPageMessagingDescription,
       modal: state => state.modal,
       alert: state => state.alert,
       firstCreatedEvent: (state, getters) => {

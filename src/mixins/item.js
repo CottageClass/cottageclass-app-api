@@ -12,8 +12,20 @@ export default {
     }
   },
   computed: {
+    images () {
+      if (this.user) {
+        return this.user.images
+      }
+      return this.event && this.event.hostImages
+    },
     joinedDateFormatted: function () {
       return moment(this.user.createdAt).format('MMMM, YYYY')
+    },
+    interests () {
+      if (this.user && this.user.activities) {
+        return this.user.activities.length && this.user.activities
+      }
+      return null
     },
     languageText: function () {
       const languageCodes = this.user.languages
@@ -68,6 +80,25 @@ export default {
           this.user.fuzzyLongitude,
           center.lat,
           center.lng) + ' mi'
+      }
+      return null
+    },
+    availableTimes () {
+      if (this.user) {
+        const res = []
+        if (this.user.availableMornings) {
+          res.push('9am-3pm')
+        }
+        if (this.user.availableAfternoons) {
+          res.push('3pm-7pm')
+        }
+        if (this.user.availableEvenings) {
+          res.push('7pm- ?')
+        }
+        if (this.user.availableWeekends) {
+          res.push('weekends')
+        }
+        return res.length && res
       }
       return null
     },
@@ -178,12 +209,13 @@ export default {
         }
         this.$emit('user-updated', res)
       }
+      return res
     },
     goToItem () {
       if (this.event) {
         this.$router.push({ name: 'EventPage', params: { id: this.event.id } })
       } else if (this.user) {
-        this.$router.push({ name: 'ProviderProfile', params: { id: this.user.id } })
+        this.$router.push({ name: 'UserPage', params: { id: this.user.id } })
       } else {
         throw Error('No valid item on this list card')
       }
