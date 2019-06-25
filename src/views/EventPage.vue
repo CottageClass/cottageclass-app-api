@@ -24,7 +24,10 @@
             </div>
             </router-link>
             <div class="user-action-card__user-info--container">
-              <div class="user-action-card__user-info_list"><a class="user-action-card__user-info__name">{{ userName }}</a>
+              <div class="user-action-card__user-info_list">
+            <router-link :to="{name:'UserPage', params:{id: event.hostId}}"
+                         class="user-action-card__user-info__name">
+                {{ userName }}</router-link>
                 <div class="user-action-card__user-info__occupation truncate">{{occupation}}</div>
                 <div class="user-action-card__user-info__kids truncate">{{kidsAges}}</div>
               </div>
@@ -37,6 +40,7 @@
                             :event="event"
                             @event-updated="updateEvent"
                             :timePast="timePast"
+                            :showShareButton="showShareButton"
                             :showInterestedButton="showInterestedButton"
                             :showContactButton="showContactButton"
                             :showGoingButton="showGoingButton"/>
