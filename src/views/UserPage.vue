@@ -142,7 +142,7 @@
                 <div class="number-container">
                   <div class="text-block-10">3</div>
                 </div>
-                <div class="invite-how-to__bullet-text">Decide on a time and place to meet. (We recommend meeting in one of your homes).</div>
+                <div class="invite-how-to__bullet-text">Decide on a time and place to meet. (We recommend meeting in one of your homes).</div>
               </div>
             </div>
           </div>
@@ -169,7 +169,7 @@ import SearchListCardActions from '@/components/search/SearchListCardActions'
 import MainNav from '@/components/MainNav'
 import Images from '@/components/Images'
 import LoadingSpinner from '@/components/LoadingSpinner'
-import Attendee from '@/components/Attendee'
+// import Attendee from '@/components/Attendee'
 import OtherEvent from '@/components/OtherEvent'
 import MeetButton from '@/components/base/MeetButton'
 
@@ -178,7 +178,7 @@ import { fetchUser, fetchUpcomingEvents } from '@/utils/api'
 
 export default {
   name: 'UserPage',
-  components: { MainNav, Images, LoadingSpinner, AvatarImage, Attendee, OtherEvent, MeetButton, SearchListCardActions },
+  components: { MainNav, Images, LoadingSpinner, AvatarImage, OtherEvent, MeetButton, SearchListCardActions },
   mixins: [item, maps],
   data () {
     return {
