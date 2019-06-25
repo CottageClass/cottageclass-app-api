@@ -41,6 +41,9 @@ export default {
     showContactButton () {
       return !this.currentUser || (this.user.id.toString() !== this.currentUser.id.toString())
     },
+    showShareButton () {
+      return this.event && this.$route.name !== 'SocialInvite'
+    },
     attendees () {
       if (!this.event) { return [] }
     },

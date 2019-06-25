@@ -9,7 +9,7 @@
     <li v-if="showContactButton">
       <IconButton label="Contact" :icon="contactIcon" @click="contactClick"/>
     </li>
-    <li v-if="event">
+    <li v-if="showShareButton">
       <IconButton label="Share" :icon="shareIcon" @click="shareClick"/>
     </li>
   </ul>
@@ -33,6 +33,7 @@ export default {
     user: {},
     event: {},
     timePast: {},
+    showShareButton: { default: false },
     showGoingButton: { default: false },
     showInterestedButton: { default: false },
     showContactButton: { default: false }

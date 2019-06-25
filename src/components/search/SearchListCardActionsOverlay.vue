@@ -12,6 +12,7 @@
          class="other-events-card__action-selector__button-list"
          :showGoingButton="showGoingButton"
          :showContactButton="showContactButton"
+         :showShareButton="showShareButton"
          :showInterestedButton="showInterestedButton"/>
 </div>
 </div>
