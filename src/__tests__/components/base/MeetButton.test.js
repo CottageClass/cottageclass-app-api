@@ -45,7 +45,7 @@ describe('MeetButton', () => {
           targetUser,
           defaultText: 'Invite',
           showDescriptionModal: false,
-          allowUndo: false
+          allowUndo: true
         }
       })
     })
@@ -114,13 +114,14 @@ describe('MeetButton', () => {
         propsData: {
           targetUser,
           showDescriptionModal: false,
+          defaultText: 'Say Hi',
           allowUndo: false
         }
       })
       const meetButton = wrapper.find('.w-button')
       const requestMessage = `Natasha (https://kidsclub.io/users/987654321) waved at you! They live 4.2 mi. away with 3 kids age 2 mos, 2 mos & 9. If you're interested in a playdate, reply here!`
 
-      expect(meetButton.text()).toEqual('Wave')
+      expect(meetButton.text()).toEqual('Say Hi')
       expect(wrapper.vm.meetMessage(targetUser)).toEqual(requestMessage)
     })
   })
@@ -166,7 +167,8 @@ describe('MeetButton', () => {
         propsData: {
           targetUser,
           showDescriptionModal: false,
-          allowUndo: false
+          defaultText: 'Wave',
+          allowUndo: true
         }
       })
     })
@@ -184,7 +186,6 @@ describe('MeetButton', () => {
       const mocksendMessage = jest.fn(() => {})
       wrapper.setMethods({ sendMessage: mocksendMessage })
       meetButton.trigger('click')
-      console.log(wrapper)
 
       // wait a tick so button can update
       wrapper.vm.$nextTick(() => {
