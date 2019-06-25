@@ -22,7 +22,6 @@ describe('MeetButton', () => {
       }
       const $store = {
         getters: {
-          hasShowEventsPageMessagingDescription: true,
           isAuthenticated: true,
           waveHasBeenSent: () => false,
           currentUser: {
@@ -44,22 +43,23 @@ describe('MeetButton', () => {
         stubs: ['router-link'],
         propsData: {
           targetUser,
-          fillStyle: 'outline',
-          layoutStyle: 'slim'
+          defaultText: 'Invite',
+          showDescriptionModal: false,
+          allowUndo: true
         }
       })
     })
 
     it('displays correct information', () => {
-      const meetButton = wrapper.find('.meet-button')
+      const meetButton = wrapper.find('.w-button')
       const requestMessage = `Natasha (https://kidsclub.io/users/987654321) waved at you! They live 4.2 mi. away with 3 kids age 9 mos, 4 & 8. If you're interested in a playdate, reply here!`
 
-      expect(meetButton.text()).toEqual('Wave')
+      expect(meetButton.text()).toEqual('Invite')
       expect(wrapper.vm.meetMessage(targetUser)).toEqual(requestMessage)
     })
 
     it('initiates sending sequence', done => {
-      const meetButton = wrapper.find('.meet-button')
+      const meetButton = wrapper.find('.w-button')
       const mocksendMessage = jest.fn(() => {})
       wrapper.setMethods({ sendMessage: mocksendMessage })
       meetButton.trigger('click')
@@ -78,7 +78,6 @@ describe('MeetButton', () => {
       const $store = {
         getters: {
           waveHasBeenSent: () => false,
-          hasShowEventsPageMessagingDescription: true,
           isAuthenticated: true,
           currentUser: {
             id: '987654321',
@@ -114,14 +113,15 @@ describe('MeetButton', () => {
         stubs: ['router-link'],
         propsData: {
           targetUser,
-          fillStyle: 'outline',
-          layoutStyle: 'slim'
+          showDescriptionModal: false,
+          defaultText: 'Say Hi',
+          allowUndo: false
         }
       })
-      const meetButton = wrapper.find('.meet-button')
+      const meetButton = wrapper.find('.w-button')
       const requestMessage = `Natasha (https://kidsclub.io/users/987654321) waved at you! They live 4.2 mi. away with 3 kids age 2 mos, 2 mos & 9. If you're interested in a playdate, reply here!`
 
-      expect(meetButton.text()).toEqual('Wave')
+      expect(meetButton.text()).toEqual('Say Hi')
       expect(wrapper.vm.meetMessage(targetUser)).toEqual(requestMessage)
     })
   })
@@ -143,7 +143,6 @@ describe('MeetButton', () => {
       const $store = {
         getters: {
           waveHasBeenSent: () => false,
-          hasShowEventsPageMessagingDescription: true,
           isAuthenticated: true,
           currentUser: {
             id: '987654321',
@@ -167,14 +166,15 @@ describe('MeetButton', () => {
         stubs: ['router-link'],
         propsData: {
           targetUser,
-          fillStyle: 'outline',
-          layoutStyle: 'slim'
+          showDescriptionModal: false,
+          defaultText: 'Wave',
+          allowUndo: true
         }
       })
     })
 
     it('displays correct information', () => {
-      const meetButton = wrapper.find('.meet-button')
+      const meetButton = wrapper.find('.w-button')
       const requestMessage = `Natasha (https://kidsclub.io/users/987654321) waved at you! They live 4.2 mi. away. If you're interested in a playdate, reply here!`
 
       expect(meetButton.text()).toEqual('Wave')
@@ -182,7 +182,7 @@ describe('MeetButton', () => {
     })
 
     it('initiates sending sequence', done => {
-      const meetButton = wrapper.find('.meet-button')
+      const meetButton = wrapper.find('.w-button')
       const mocksendMessage = jest.fn(() => {})
       wrapper.setMethods({ sendMessage: mocksendMessage })
       meetButton.trigger('click')

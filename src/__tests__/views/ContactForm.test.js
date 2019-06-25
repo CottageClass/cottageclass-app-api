@@ -19,7 +19,10 @@ describe('ContactForm', () => {
         name: 'ContactForm'
       }
       const wrapper = mount(ContactForm, {
-        mocks: { $store, $router, $route }
+        mocks: { $store, $router, $route },
+        propsData: {
+          eventId: 2186
+        }
       })
 
       wrapper.vm.$nextTick(() => {
@@ -40,7 +43,10 @@ describe('ContactForm', () => {
         }
       }
       mount(ContactForm, {
-        mocks: { $store, $router }
+        mocks: { $store, $router },
+        propsData: {
+          eventId: 2186
+        }
       })
 
       expect($router.push).not.toHaveBeenCalled()

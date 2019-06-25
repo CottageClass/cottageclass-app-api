@@ -80,7 +80,11 @@ export default {
       }
     },
     contactClick () {
-      this.$router.push({ name: 'ContactForm', params: { eventId: this.event.id } })
+      if (this.event) {
+        this.$router.push({ name: 'ContactEventForm', params: { eventId: this.event.id } })
+      } else {
+        this.$router.push({ name: 'ContactUserForm', params: { userId: this.user.id } })
+      }
     },
     shareClick () {
       this.$router.push({ name: 'SocialInvite', params: { id: this.event.id, context: 'searchItem' } })
