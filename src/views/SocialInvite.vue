@@ -37,12 +37,11 @@
               </form>
             </div>
           </div>
-          <EventListItem
+          <SearchListCard
             v-if="eventToShare"
             :event="eventToShare"
-            :index="eventToShare.id"
-            showRsvpButton=""
-          />
+            :user="eventToShare.host"
+            @event-updated="updateEvent"/>
         </div>
       </div>
     </div>
@@ -52,8 +51,8 @@
 
 <script>
 
+import SearchListCard from '@/components/search/SearchListCard'
 import TextMessageLink from '@/components/TextMessageLink.vue'
-import EventListItem from '@/components/EventListItem.vue'
 import Nav from '@/components/FTE/Nav.vue'
 import { fetchEvent } from '@/utils/api'
 import StyleWrapper from '@/components/FTE/StyleWrapper.vue'
@@ -61,7 +60,7 @@ import { mapGetters } from 'vuex'
 
 export default {
   name: 'SocialInvite',
-  components: { TextMessageLink, EventListItem, Nav, StyleWrapper },
+  components: { TextMessageLink, Nav, StyleWrapper, SearchListCard },
   data () {
     return {
       copyButtonText: 'copy link',
@@ -144,6 +143,9 @@ export default {
     ...mapGetters([ 'firstCreatedEvent' ])
   },
   methods: {
+    async updateEvent () {
+      this.fetchedEvent = await fetchEvent(this.eventId)
+    },
     async fetchEvent () {
       this.fetchedEvent = await fetchEvent(this.eventId)
     },

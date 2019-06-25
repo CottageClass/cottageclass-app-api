@@ -1,7 +1,7 @@
 import { shallowMount } from '@vue/test-utils'
 import AddressAutocomplete from '@/components/base/AddressAutocomplete.vue'
 
-describe('EventCategoryIcon', () => {
+describe('AddressAutocomplete', () => {
   let wrapper
   beforeAll(async () => {
     try {
