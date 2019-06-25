@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import ProviderProfile from '@/views/ProviderProfile.vue'
+import UserPage from '@/views/UserPage.vue'
 import SplashPage from '@/views/SplashPage.vue'
 import EventPage from '@/views/EventPage.vue'
 import Search from '@/views/Search.vue'
@@ -77,8 +77,8 @@ export default new Router({
     },
     {
       path: '/users/:id',
-      name: 'ProviderProfile',
-      component: ProviderProfile,
+      name: 'UserPage',
+      component: UserPage,
       props: true
     },
     {
@@ -142,8 +142,14 @@ export default new Router({
       props: true
     },
     {
-      path: '/contact/:eventId',
-      name: 'ContactForm',
+      path: '/contact/event/:eventId',
+      name: 'ContactEventForm',
+      component: ContactForm,
+      props: true
+    },
+    {
+      path: '/contact/user/:userId',
+      name: 'ContactUserForm',
       component: ContactForm,
       props: true
     }
