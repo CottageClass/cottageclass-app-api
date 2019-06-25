@@ -59,7 +59,8 @@
         <div class="profile-detail_column-left w-col w-col-8 w-col-stack">
           <div v-if="interests" class="interests__card">
             <div class="interests__title-text">Interests</div>
-            <div class="card__description-and-icon-container w-clearfix"><img src="@/assets/interests.svg" width="100" height="100" alt="" class="interests_image" />
+            <div class="card__description-and-icon-container w-clearfix">
+              <img src="@/assets/interests.svg" width="100" height="100" alt="" class="interests_image" />
               <div class="interests__tag-container">
                 <div v-for="interest in interests" class="tag">
                   <div class="tag-text2">{{ interest }}</div>
@@ -69,7 +70,8 @@
           </div>
           <div v-if="availableTimes" class="availability__card">
             <div class="availability__title-text">Available times</div>
-            <div class="card__description-and-icon-container w-clearfix"><img src="@/assets/time.svg" width="100" height="100" alt="" class="availability_image" />
+            <div class="card__description-and-icon-container w-clearfix">
+              <img src="@/assets/time.svg" width="100" height="100" alt="" class="availability_image" />
               <div class="availability__tag-container">
                 <div v-for="time of availableTimes" class="tag">
                   <div class="tag-text2">{{ time }}</div>
@@ -100,13 +102,15 @@
           <div class="event-detail__map map" ref="map"></div>
           <div v-if="houseRules" class="house-rules__card">
             <div class="house-rulese_title-text">House Rules</div>
-            <div class="card__description-and-icon-container w-clearfix"><img src="https://uploads-ssl.webflow.com/5c6c7d4a75c1e54694ed12d1/5c6c7d4a75c1e5183aed132e_house-rules.svg" width="100" height="100" alt="" class="house__image" />
+            <div class="card__description-and-icon-container w-clearfix">
+              <img src="https://uploads-ssl.webflow.com/5c6c7d4a75c1e54694ed12d1/5c6c7d4a75c1e5183aed132e_house-rules.svg" width="100" height="100" alt="" class="house__image" />
               <div class="house-rules__text">{{ houseRules }}</div>
             </div>
           </div>
           <div v-if="petDescription" class="pets__card">
             <div class="pets__title-text">Pets</div>
-            <div class="card__description-and-icon-container w-clearfix"><img src="@/assets/pets.svg" width="100" height="100" alt="" class="pets__image" />
+            <div class="card__description-and-icon-container w-clearfix">
+              <img src="@/assets/pets.svg" width="100" height="100" alt="" class="pets__image" />
               <div class="pets__text">{{ petDescription }}</div>
             </div>
           </div>
