@@ -11,21 +11,15 @@
   @next="nextStep"
   @prev="$router.go(-1)" />
   <ErrorMessage v-if="err" :text="err" />
-
-<!-- Show loading indicator until we know how many children there are. If there is an error, show the error only. -->
-
   <LoadingSpinner v-if="!allInformationLoaded"/>
-
-<!-- Once we have child and event information, ask user which child/children they want to RSVP -->
-
   <Question
-  v-if="allInformationLoaded"
-  title="Which children are going?"
-  :subtitle="spotsRemainingPhrase"
-  >
-   <Checkboxes
-   v-model="childrenSelected"
-   :labels="labelsAndOrder"/>
+      v-if="allInformationLoaded"
+      title="Which children are going?"
+      :subtitle="spotsRemainingPhrase"
+      >
+     <Checkboxes
+       v-model="childrenSelected"
+       :labels="labelsAndOrder"/>
  </Question>
 </div>
 </div>
@@ -35,7 +29,7 @@
 
 <script>
 
-import * as api from '@/utils/api'
+import { initProxySession, submitEventParticipant, fetchEvent } from '@/utils/api'
 import * as utils from '@/utils/utils.js'
 import Nav from '@/components/FTE/Nav.vue'
 import ErrorMessage from '@/components/base/ErrorMessage.vue'
@@ -73,6 +67,28 @@ export default {
     this.fetchEventInformation()
   },
   computed: {
+    formattedDateTime () {
+      return this.event.startsAt.format('MMM d') + ' at ' + this.event.startsAt.format('ha')
+    },
+    messageToHost () {
+      return `Hi ${this.hostFirstName}, ${this.participantFirstName} ` +
+        `just booked a playdate with you on ` +
+        this.formattedDateTime +
+        `. Reply to this message to say hi! ` +
+        `Or cancel here: https://kidsclub.io/events/${this.event.id}`
+    },
+    messageToParticipant () {
+      return `Hi ${this.participantFirstName}, meet ${this.hostFirstName}! ` +
+        `We've sent them your request for a playdate ` +
+        this.formattedDateTime +
+        `. Reply to this message to introduce yourself or ask a question!`
+    },
+    participantFirstName () {
+      return this.currentUser.firstName
+    },
+    hostFirstName () {
+      return this.event.host.firstName
+    },
     spotsRemainingPhrase: function () {
       return 'There ' + (this.spotsRemaining === 1 ? 'is' : 'are') + ' ' + this.spotsRemaining + ' spot' + (this.spotsRemaining !== 1 ? 's' : '') + ' remaining.'
     },
@@ -97,15 +113,6 @@ export default {
     },
     guestChildrenNamesAgesFormatted: function () {
       return utils.arrayToSentence(this.children.filter(child => this.childrenSelected.includes(child.id)).map(child => child.firstName + ' (age ' + this.calculateAge(child.birthday) + ')')) // 'Suzie (5)'
-    },
-    eventDateFormattedMonthDay: function () {
-      return moment(this.event.startsAt).format('MMMM D')
-    },
-    notificationToHost: function () {
-      return 'Congratulations, ' + this.event.hostFirstName + '! ' + this.currentUser.firstName + ' booked a playdate with you for ' + this.guestChildrenNamesAgesFormatted + ' on ' + this.eventDateFormattedMonthDay + '! Visit https://kidsclub.io/faq or reply with any questions!'
-    },
-    notificationBackToUser: function () {
-      return 'Congratulations ' + this.currentUser.firstName + '! You\'ve booked a playdate with ' + this.event.hostFirstName + ' for ' + this.guestChildrenNamesAgesFormatted + ' on ' + this.eventDateFormattedMonthDay + '. We\'ll email you shortly to confirm your RSVP.'
     },
     children: function () {
       return this.currentUser.children
@@ -133,7 +140,7 @@ export default {
     },
     fetchEventInformation: async function () {
       try {
-        this.event = await api.fetchEvent(this.$route.params.eventId)
+        this.event = await fetchEvent(this.$route.params.eventId)
         if (this.event.full || this.event.maximumChildren === 0) {
           this.err = 'We\'re sorry, this event is full!'
         }
@@ -153,30 +160,36 @@ export default {
         this.submitRsvp()
       }
     },
-    submitRsvp: function () {
+    async submitRsvp () {
       this.err = ''
       console.log('rsvping children ' + this.childrenSelected + ' to event ID' + this.eventId)
       this.submitToSheetsu()
-      let component = this
-      api.submitEventParticipant(this.eventId, this.childrenSelected).then(res => {
-      // open event page where user will see success message
-        component.sendNotifications()
-        return this.$store.commit('showAlertOnNextRoute', {
+
+      try {
+        await submitEventParticipant(this.eventId, this.childrenSelected)
+        // open event page where user will see success message
+        this.$store.commit('showAlertOnNextRoute', {
           alert: {
-            message: 'Your request for a playdate has been sent! You&apos;ll soon receive a confirmation email.',
+            message: `Playdate request sent for ${this.formattedDateTime}. We're texting you now, to introduce you to ${this.hostFirstName}!`,
             status: 'success'
           }
         })
-      }).then(res => {
-        return component.$ga.event('RSVP', 'sent', component.eventId)
-      }).then(res => {
-        return component.$router.push({ name: 'EventPage', params: { id: this.eventId } })
-      }).catch(err => {
+        this.$ga.event('RSVP', 'sent', this.eventId)
+        this.initProxyConversation()
+        this.$router.push({ name: 'EventPage', params: { id: this.eventId } })
+      } catch (err) {
         console.log(err)
         this.err = 'Sorry, there was a problem submitting your RSVP. Try again?'
-        // fetch event information again, which will update the error message if the event is full, e.g. in the case where another user RSVP'ed a the same time, just before this user did.
         this.fetchEventInformation()
-      })
+      }
+    },
+    initProxyConversation () {
+      initProxySession(
+        this.currentUser.id,
+        this.event.hostId,
+        this.messageToHost,
+        this.messageToParticipant
+      )
     },
     submitToSheetsu: function () {
       // submit user to sheetsu which gives us notifications of new RSVPs
@@ -208,10 +221,6 @@ export default {
       } else {
         this.childrenSelected.push(id)
       }
-    },
-    sendNotifications: function () {
-      api.submitNotification(this.event.hostId, this.notificationToHost)
-      api.submitNotification(this.currentUser.id, this.notificationBackToUser)
     }
   }
 }
