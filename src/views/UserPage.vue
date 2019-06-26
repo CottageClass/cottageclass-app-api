@@ -52,7 +52,8 @@
                         @user-updated="userUpdate"
                         :showInterestedButton="false"
                         :showContactButton="showContactButton"
-                        :showGoingButton="showGoingButton"/>
+                        :showGoingButton="showGoingButton"
+                        :allowWaveUndo="false"/>
 
       </div>
       <div class="profile-detail__content-columns w-row">
@@ -119,11 +120,12 @@
             <div class="invite__subtitle">
               (Once you have your first playdate you can request childcare too)
             </div>
-            <MeetButton defaultText="Invite for a playdate"
-                        class="btn__invite-for-playdate w-button"
-                        :targetUser="user"
-                        :allowUndo="false"
-                        :shouldShowDescriptionModal="true"/>
+            <MeetButton
+              defaultText="Invite for a playdate"
+              :icon="contactIcon"
+              :targetUser="user"
+              :allowUndo="false"
+              :shouldShowDescriptionModal="true"/>
             <div class="invite__playdate-instructions">
               <div class="invite-how-to__title-text">How to plan a playdate with {{ userFirstName }}</div>
               <div class="playdate-planning-bullet">
@@ -169,12 +171,12 @@ import SearchListCardActions from '@/components/search/SearchListCardActions'
 import MainNav from '@/components/MainNav'
 import Images from '@/components/Images'
 import LoadingSpinner from '@/components/LoadingSpinner'
-// import Attendee from '@/components/Attendee'
 import OtherEvent from '@/components/OtherEvent'
 import MeetButton from '@/components/base/MeetButton'
 
 import { item, maps } from '@/mixins'
 import { fetchUser, fetchUpcomingEvents } from '@/utils/api'
+import contactIcon from '@/assets/contact-black-outline.svg'
 
 export default {
   name: 'UserPage',
@@ -189,6 +191,9 @@ export default {
         'gestureHandling': 'none' // prevents any kind of scrolling
       }
     }
+  },
+  computed: {
+    contactIcon () { return contactIcon }
   },
   methods: {
     async interestedClickAndUpdate () {

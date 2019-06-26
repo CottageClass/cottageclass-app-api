@@ -67,6 +67,10 @@ function cleanEvent (attributes) {
   res.food = attributes.foods.length > 0 ? attributes.foods[0] : null
   if (attributes.host && attributes.host.data) {
     res.host = attributes.host.data.attributes
+    res.host.location = {
+      lat: parseFloat(attributes.hostFuzzyLatitude),
+      lng: parseFloat(attributes.hostFuzzyLongitude)
+    }
   }
   return res
 }

@@ -7,7 +7,11 @@
       <IconButton  label="Going" :icon="goingIcon" @click="goingClick"/>
     </li>
     <li v-if="showContactButton">
-      <IconButton label="Contact" :icon="contactIcon" @click="contactClick"/>
+      <MeetButton
+        defaultText="Say hi"
+        :icon="contactIcon"
+        :targetUser="user"
+        :allowUndo="allowWaveUndo"/>
     </li>
     <li v-if="showShareButton">
       <IconButton label="Share" :icon="shareIcon" @click="shareClick"/>
@@ -16,6 +20,9 @@
 </template>
 
 <script>
+import MeetButton from '@/components/base/MeetButton'
+import IconButton from '@/components/search/IconButton'
+
 import { starEvent, unstarEvent, starUser, unstarUser } from '@/utils/api/stars'
 import { mapGetters } from 'vuex'
 import { rsvp } from '@/mixins'
@@ -27,8 +34,6 @@ import goingIconInactive from '@/assets/going-black-outline.svg'
 import starredIconActive from '@/assets/star_2.svg'
 import starredIconInactive from '@/assets/star-black-outline.svg'
 
-import IconButton from '@/components/search/IconButton'
-
 export default {
   name: 'SearchListCardActions',
   props: {
@@ -38,10 +43,11 @@ export default {
     showShareButton: { default: false },
     showGoingButton: { default: false },
     showInterestedButton: { default: false },
-    showContactButton: { default: false }
+    showContactButton: { default: false },
+    allowWaveUndo: { default: false }
   },
   mixins: [rsvp],
-  components: { IconButton },
+  components: { IconButton, MeetButton },
   computed: {
     shareIcon () { return shareIcon },
     contactIcon () { return contactIcon },
@@ -86,13 +92,6 @@ export default {
         } else {
           this.$router.push({ name: 'RsvpInfoCollection', params: { eventId: this.event.id } })
         }
-      }
-    },
-    contactClick () {
-      if (this.event) {
-        this.$router.push({ name: 'ContactEventForm', params: { eventId: this.event.id } })
-      } else {
-        this.$router.push({ name: 'ContactUserForm', params: { userId: this.user.id } })
       }
     },
     shareClick () {

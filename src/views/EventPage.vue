@@ -43,7 +43,8 @@
                             :showShareButton="showShareButton"
                             :showInterestedButton="showInterestedButton"
                             :showContactButton="showContactButton"
-                            :showGoingButton="showGoingButton"/>
+                            :showGoingButton="showGoingButton"
+                            :allowWaveUndo="false"/>
           </div>
         </div>
       </div>
