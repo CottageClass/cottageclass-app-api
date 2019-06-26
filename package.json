@@ -72,6 +72,6 @@
     "webpack-dev-server": "^3.1.4"
   },
   "engines": {
-    "node": "10.14.1"
+    "node": "10.15.3"
   }
 }
