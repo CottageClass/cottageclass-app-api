@@ -52,7 +52,8 @@
                     :showGoingButton="showGoingButton"
                     :showContactButton="showContactButton"
                     :showShareButton="showShareButton"
-                    :showInterestedButton="showInterestedButton"/>
+                    :showInterestedButton="showInterestedButton"
+                    :allowWaveUndo="true"/>
     <SearchListCardActionsOverlay
                     v-if="showOverlay"
                     :user="user"
@@ -63,7 +64,8 @@
                     :showGoingButton="showGoingButton"
                     :showContactButton="showContactButton"
                     :showShareButton="showShareButton"
-                    :showInterestedButton="showInterestedButton"/>
+                    :showInterestedButton="showInterestedButton"
+                    :allowWaveUndo="true"/>
   </div>
 </li>
 </template>

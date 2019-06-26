@@ -7,7 +7,11 @@
       <IconButton  label="Going" :icon="goingIcon" @click="goingClick"/>
     </li>
     <li v-if="showContactButton">
-      <IconButton label="Contact" :icon="contactIcon" @click="contactClick"/>
+      <MeetButton
+        defaultText="Say hi"
+        :icon="contactIcon"
+        :targetUser="user"
+        :allowUndo="allowWaveUndo"/>
     </li>
     <li v-if="showShareButton">
       <IconButton label="Share" :icon="shareIcon" @click="shareClick"/>
@@ -17,6 +21,7 @@
 
 <script>
 import IconButton from '@/components/search/IconButton'
+import MeetButton from '@/components/base/MeetButton'
 
 import { starEvent, unstarEvent, starUser, unstarUser } from '@/utils/api/stars'
 
@@ -36,9 +41,10 @@ export default {
     showShareButton: { default: false },
     showGoingButton: { default: false },
     showInterestedButton: { default: false },
-    showContactButton: { default: false }
+    showContactButton: { default: false },
+    allowWaveUndo: { default: false }
   },
-  components: { IconButton },
+  components: { IconButton, MeetButton },
   computed: {
     shareIcon () { return shareIcon },
     contactIcon () { return contactIcon },
@@ -78,13 +84,6 @@ export default {
         this.$router.push({ name: 'CancelRSVP', params: { eventId: this.event.id } })
       } else {
         this.$router.push({ name: 'RsvpInfoCollection', params: { eventId: this.event.id } })
-      }
-    },
-    contactClick () {
-      if (this.event) {
-        this.$router.push({ name: 'ContactEventForm', params: { eventId: this.event.id } })
-      } else {
-        this.$router.push({ name: 'ContactUserForm', params: { userId: this.user.id } })
       }
     },
     shareClick () {

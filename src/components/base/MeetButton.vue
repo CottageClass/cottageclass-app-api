@@ -1,8 +1,10 @@
 <template>
-  <div :class="'w-button '+meetStatus"
-        @click="meetButtonClick">
-    {{meetButtonText}}
-  </div>
+<a class="event-action-button"
+   :class="meetStatus"
+   @click.stop="meetButtonClick">
+    <img v-if="icon" :src="icon" class="action-button-icon" />
+    <div class="label-text">{{meetButtonText}}</div>
+</a>
 </template>
 
 <script>
@@ -13,7 +15,13 @@ import { alerts, redirect, messaging } from '@/mixins'
 
 export default {
   name: 'MeetButton',
-  props: ['targetUser', 'fillStyle', 'layoutStyle', 'defaultText', 'shouldShowDescriptionModal', 'allowUndo'],
+  props: {
+    icon: {},
+    targetUser: {},
+    defaultText: {},
+    shouldShowDescriptionModal: {},
+    allowUndo: {}
+  },
   mixins: [alerts, redirect, messaging],
   data () {
     return {
@@ -22,7 +30,6 @@ export default {
   },
   methods: {
     meetButtonClick (event) {
-      this.$emit('meetButtonClick', { event })
       switch (this.meetStatus) {
         case 'none':
           this.showDescriptionModal()
@@ -76,6 +83,7 @@ export default {
     },
     sendMessage: async function () {
       try {
+        this.debug(this.targetUser)
         await initProxySession(this.currentUser.id,
           this.targetUser.id,
           this.meetMessage(this.targetUser),
@@ -111,3 +119,79 @@ export default {
   }
 }
 </script>
+
+<style scoped lang="scss">
+a {
+  color: #000;
+  text-decoration: none;
+}
+
+.event-action-button {
+  display: flex;
+  padding: 8px 12px;
+  justify-content: flex-start;
+  align-items: center;
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgba(0, 0, 0, 0.03);
+  border-radius: 4px;
+  background-color: #f3f3f3;
+  display: flex;
+  margin-top: 0;
+  margin-right: 8px;
+  margin-left: 0;
+  align-items: flex-end;
+  &:hover, &:active{
+    background-color: rgba(0,0,0,0.06);
+  }
+  &.sent {
+    cursor: default;
+    & .label-text, .action-button-icon{
+      opacity: 0.5;
+    }
+    &:hover, &:active{
+      background-color: #f3f3f3;
+    }
+  }
+}
+
+.action-button-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 6px;
+  opacity: 1;
+}
+
+.label-text {
+  color: #000;
+  font-size: 13px;
+}
+
+@media (max-width: 991px){
+  .event-action-button:hover {
+    background-image: linear-gradient(180deg, transparent, transparent);
+  }
+
+  .event-action-button:active {
+    background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.03), rgba(0, 0, 0, 0.03));
+  }
+
+}
+
+@media (max-width: 767px){
+  .label-text {
+    font-size: 13px;
+    line-height: 16px;
+  }
+
+}
+
+@media (max-width: 479px){
+  .event-action-button {
+    width: 100%;
+    width: 100%;
+    margin-top: 0;
+    margin-bottom: 8px;
+  }
+}
+</style>

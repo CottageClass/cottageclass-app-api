@@ -13,7 +13,8 @@
          :showGoingButton="showGoingButton"
          :showContactButton="showContactButton"
          :showShareButton="showShareButton"
-         :showInterestedButton="showInterestedButton"/>
+         :showInterestedButton="showInterestedButton"
+         :allowWaveUndo="allowWaveUndo"/>
 </div>
 </div>
 </template>
@@ -27,6 +28,7 @@ export default {
     showInterestedButton: { default: false },
     showContactButton: { default: false },
     user: { required: true },
+    allowWaveUndo: { default: false },
     event: {}
   },
   components: { SearchListCardActions },
