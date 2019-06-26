@@ -123,10 +123,12 @@
         </div>
       </div>
     </div>
+    <RsvpFooter :event="event"/>
   </div>
 </template>
 
 <script>
+import RsvpFooter from '@/components/base/RsvpFooter'
 import SearchListCardActions from '@/components/search/SearchListCardActions'
 import AvatarImage from '@/components/base/AvatarImage'
 import MainNav from '@/components/MainNav'
@@ -144,7 +146,7 @@ import { item, maps } from '@/mixins'
 
 export default {
   name: 'EventPage',
-  components: { MainNav, Images, LoadingSpinner, AvatarImage, SearchListCardActions, Attendee, Starrer, OtherEvent },
+  components: { MainNav, Images, LoadingSpinner, AvatarImage, SearchListCardActions, Attendee, Starrer, OtherEvent, RsvpFooter },
   mixins: [item, maps],
   data () {
     return {
