@@ -28,27 +28,25 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 
-import { initProxySession, submitEventParticipant, fetchEvent } from '@/utils/api'
+import { fetchEvent } from '@/utils/api'
 import * as utils from '@/utils/utils.js'
+import { redirect, rsvp } from '@/mixins'
+
 import Nav from '@/components/FTE/Nav.vue'
 import ErrorMessage from '@/components/base/ErrorMessage.vue'
 import Question from '@/components/base/Question.vue'
 import Checkboxes from '@/components/base/Checkboxes.vue'
 import StyleWrapper from '@/components/FTE/StyleWrapper.vue'
-import sheetsu from 'sheetsu-node'
-// this component has a working loading indicator and no other logic. todo: break out and rename.
 import LoadingSpinner from '@/components/LoadingSpinner.vue'
-import { mapGetters } from 'vuex'
-import { redirect } from '@/mixins'
+
 var moment = require('moment')
-// create a config file to identify which spreadsheet we push to.
-var client = sheetsu({ address: 'https://sheetsu.com/apis/v1.0su/62cd725d6088' })
 
 export default {
   name: 'RsvpInfoCollection',
   components: { Nav, LoadingSpinner, ErrorMessage, Checkboxes, StyleWrapper, Question },
-  mixins: [ redirect ],
+  mixins: [ redirect, rsvp ],
   data () {
     return {
       childrenSelected: [],
@@ -67,28 +65,6 @@ export default {
     this.fetchEventInformation()
   },
   computed: {
-    formattedDateTime () {
-      return this.event.startsAt.format('MMM d') + ' at ' + this.event.startsAt.format('ha')
-    },
-    messageToHost () {
-      return `Hi ${this.hostFirstName}, ${this.participantFirstName} ` +
-        `just booked a playdate with you on ` +
-        this.formattedDateTime +
-        `. Reply to this message to say hi! ` +
-        `Or cancel here: https://kidsclub.io/events/${this.event.id}`
-    },
-    messageToParticipant () {
-      return `Hi ${this.participantFirstName}, meet ${this.hostFirstName}! ` +
-        `We've sent them your request for a playdate ` +
-        this.formattedDateTime +
-        `. Reply to this message to introduce yourself or ask a question!`
-    },
-    participantFirstName () {
-      return this.currentUser.firstName
-    },
-    hostFirstName () {
-      return this.event.host.firstName
-    },
     spotsRemainingPhrase: function () {
       return 'There ' + (this.spotsRemaining === 1 ? 'is' : 'are') + ' ' + this.spotsRemaining + ' spot' + (this.spotsRemaining !== 1 ? 's' : '') + ' remaining.'
     },
@@ -157,59 +133,8 @@ export default {
       } else if (this.childrenSelected.length === 0) {
         this.err = 'Please choose at least one child to RSVP.'
       } else {
-        this.submitRsvp()
+        this.submitRsvp(this.childrenSelected)
       }
-    },
-    async submitRsvp () {
-      this.err = ''
-      console.log('rsvping children ' + this.childrenSelected + ' to event ID' + this.eventId)
-      this.submitToSheetsu()
-
-      try {
-        await submitEventParticipant(this.eventId, this.childrenSelected)
-        // open event page where user will see success message
-        this.$store.commit('showAlertOnNextRoute', {
-          alert: {
-            message: `Playdate request sent for ${this.formattedDateTime}. We're texting you now, to introduce you to ${this.hostFirstName}!`,
-            status: 'success'
-          }
-        })
-        this.$ga.event('RSVP', 'sent', this.eventId)
-        this.initProxyConversation()
-        this.$router.push({ name: 'EventPage', params: { id: this.eventId } })
-      } catch (err) {
-        console.log(err)
-        this.err = 'Sorry, there was a problem submitting your RSVP. Try again?'
-        this.fetchEventInformation()
-      }
-    },
-    initProxyConversation () {
-      initProxySession(
-        this.currentUser.id,
-        this.event.hostId,
-        this.messageToHost,
-        this.messageToParticipant
-      )
-    },
-    submitToSheetsu: function () {
-      // submit user to sheetsu which gives us notifications of new RSVPs
-      client.create({
-        'Event ID': this.eventId,
-        'Event title': this.event.name,
-        'Event host': this.event.hostFirstName,
-        'Event date': this.event.startsAt,
-        'Date submitted': moment(Date()).format('L'),
-        'Parent first name': this.currentUser.firstName,
-        'Parent last name': this.currentUser.lastInitial,
-        'Parent phone': this.currentUser.phone,
-        'Parent email': this.currentUser.email,
-        'IDs of RSVPed children': this.childrenSelected,
-        'All children': this.currentUser.children
-      }, 'RSVPs').then((data) => {
-        console.log('Successfully submitted RSVP to Sheetsu: ' + data)
-      }, (err) => {
-        console.log(err)
-      })
     },
     isSelected: function (id) {
       return this.childrenSelected.includes(id)
