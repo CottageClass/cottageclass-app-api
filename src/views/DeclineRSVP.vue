@@ -31,7 +31,7 @@ import FormWithTextArea from '@/components/base/FormWithTextArea.vue'
 
 import { submitToSheetsu } from '@/utils/vendor/sheetsu'
 import { mapGetters } from 'vuex'
-import { redirect } from '@/mixins'
+import { alerts } from '@/mixins'
 
 export default {
   name: 'DeclineRSVP',
@@ -42,7 +42,7 @@ export default {
       reasons: []
     }
   },
-  mixins: [redirect],
+  mixins: [alerts],
   props: ['eventId'],
   computed: {
     labelsAndOrder () {
@@ -65,6 +65,8 @@ export default {
         eventId: this.eventId,
         reasons: this.reasons,
         otherTex: this.otherText }, 'noRsvp')
+      this.showAlertOnNextRoute('Thanks for your feedback! Here are some other options you might like...', 'success')
+      this.$router.push({ name: 'Search' })
     }
   }
 }
