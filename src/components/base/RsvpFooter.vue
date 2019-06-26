@@ -8,9 +8,9 @@
       </a>
     </li>
     <li class="event-detail__floating-button-item">
-      <a href="#" class="event-detail-floating-button w-inline-block">
+      <router-link :to="{name:'DeclineRSVP', params:{eventId:event.id}}" class="event-detail-floating-button w-inline-block">
         <div class="floating-button__black-text">No</div>
-      </a>
+      </router-link>
     </li>
   </ul>
 </div>
