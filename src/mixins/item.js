@@ -147,7 +147,9 @@ export default {
       return (this.event && this.event.hostFirstName) || (this.user && this.user.firstName)
     },
     userLastInitial () {
-      return (this.event && this.event.host.lastInitial) || (this.user && this.user.lastInitial)
+      return (this.event && this.event.host.lastInitial) ||
+        (this.user && this.user.lastInitial) ||
+        ''
     },
     userName () {
       return this.userFirstName + ' ' + this.userLastInitial + '.'

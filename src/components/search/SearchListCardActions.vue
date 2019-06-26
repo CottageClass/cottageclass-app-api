@@ -16,9 +16,9 @@
 </template>
 
 <script>
-import IconButton from '@/components/search/IconButton'
-
 import { starEvent, unstarEvent, starUser, unstarUser } from '@/utils/api/stars'
+import { mapGetters } from 'vuex'
+import { rsvp } from '@/mixins'
 
 import shareIcon from '@/assets/share-black-outline.svg'
 import contactIcon from '@/assets/contact-black-outline.svg'
@@ -26,6 +26,8 @@ import goingIconActive from '@/assets/going__green.svg'
 import goingIconInactive from '@/assets/going-black-outline.svg'
 import starredIconActive from '@/assets/star_2.svg'
 import starredIconInactive from '@/assets/star-black-outline.svg'
+
+import IconButton from '@/components/search/IconButton'
 
 export default {
   name: 'SearchListCardActions',
@@ -38,6 +40,7 @@ export default {
     showInterestedButton: { default: false },
     showContactButton: { default: false }
   },
+  mixins: [rsvp],
   components: { IconButton },
   computed: {
     shareIcon () { return shareIcon },
@@ -52,7 +55,8 @@ export default {
       if (this.event) { return this.event }
       if (this.user) { return this.user }
       throw Error('No valid item on this list card')
-    }
+    },
+    ...mapGetters(['currentUser'])
   },
   methods: {
     async interestedClick () {
@@ -77,7 +81,11 @@ export default {
       if (this.event.participated) {
         this.$router.push({ name: 'CancelRSVP', params: { eventId: this.event.id } })
       } else {
-        this.$router.push({ name: 'RsvpInfoCollection', params: { eventId: this.event.id } })
+        if (this.currentUser.children.length === 1) {
+          this.submitRsvp(this.currentUser.children.map(c => c.id))
+        } else {
+          this.$router.push({ name: 'RsvpInfoCollection', params: { eventId: this.event.id } })
+        }
       }
     },
     contactClick () {
