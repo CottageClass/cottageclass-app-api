@@ -123,7 +123,8 @@
         </div>
       </div>
     </div>
-    <RsvpFooter :event="event"/>
+    <RsvpFooter v-if="showRsvpFooter"
+                :event="event"/>
   </div>
 </template>
 
@@ -141,6 +142,7 @@ import Starrer from '@/components/Starrer'
 import houseRulesImage from '@/assets/house-rules.svg'
 import petsImage from '@/assets/pets.svg'
 
+import { mapGetters } from 'vuex'
 import { fetchUpcomingEvents, fetchEvent, fetchStarrers } from '@/utils/api'
 import { item, maps } from '@/mixins'
 
@@ -160,11 +162,19 @@ export default {
     }
   },
   computed: {
+    showRsvpFooter () {
+      return this.event &&
+        !this.timePast &&
+        (this.currentUser && this.event.host.id.toString() !== this.currentUser.id.toString()) &&
+        !this.event.participated &&
+        !this.isRsvpDeclined(this.event.id)
+    },
     user () {
       return this.event.host
     },
     houseRulesImage: () => houseRulesImage,
-    petsImage: () => petsImage
+    petsImage: () => petsImage,
+    ...mapGetters(['isRsvpDeclined'])
   },
   methods: {
     updateEvent (event) {

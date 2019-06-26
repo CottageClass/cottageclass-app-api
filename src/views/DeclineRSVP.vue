@@ -14,7 +14,7 @@
             v-model="reasons"
             :labels="labelsAndOrder"/>
           <FormWithTextArea
-            placeholder="Enter your reason here"
+            placeholder="Other reasons? Any notes to add?"
             v-model="otherText" />
        </Question>
       </StyleWrapper>
@@ -30,7 +30,7 @@ import Question from '@/components/base/Question.vue'
 import FormWithTextArea from '@/components/base/FormWithTextArea.vue'
 
 import { submitToSheetsu } from '@/utils/vendor/sheetsu'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 import { alerts } from '@/mixins'
 
 export default {
@@ -52,8 +52,7 @@ export default {
         [ 'incompatibleAges', 'Ages didn\'t seem compatible.' ],
         [ 'badTime', 'That time never works for me.' ],
         [ 'badDay', 'That day of the week never works.' ],
-        [ 'badDayTime', 'This specific date & time doesn\'t work.' ],
-        [ 'other', 'Other reasons? Any notes to add?' ]
+        [ 'badDayTime', 'This specific date & time doesn\'t work.' ]
       ]
     },
     ...mapGetters(['currentUser'])
@@ -66,8 +65,10 @@ export default {
         reasons: this.reasons,
         otherTex: this.otherText }, 'noRsvp')
       this.showAlertOnNextRoute('Thanks for your feedback! Here are some other options you might like...', 'success')
+      this.declineRsvp({ eventId: this.eventId })
       this.$router.push({ name: 'Search' })
-    }
+    },
+    ...mapMutations(['declineRsvp'])
   }
 }
 </script>
