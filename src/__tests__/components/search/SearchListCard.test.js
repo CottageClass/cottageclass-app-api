@@ -4,6 +4,7 @@ import SearchListCard from '@/components/search/SearchListCard'
 describe('SearchListCard', () => {
   const $store = {
     getters: {
+      waveHasBeenSent: () => false,
       currentUser: { id: 100000 },
       isAuthenticated: false
     }

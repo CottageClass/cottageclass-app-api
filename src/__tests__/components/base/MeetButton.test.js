@@ -51,7 +51,7 @@ describe('MeetButton', () => {
     })
 
     it('displays correct information', () => {
-      const meetButton = wrapper.find('.w-button')
+      const meetButton = wrapper.find('.event-action-button')
       const requestMessage = `Natasha (https://kidsclub.io/users/987654321) waved at you! They live 4.2 mi. away with 3 kids age 9 mos, 4 & 8. If you're interested in a playdate, reply here!`
 
       expect(meetButton.text()).toEqual('Invite')
@@ -59,7 +59,7 @@ describe('MeetButton', () => {
     })
 
     it('initiates sending sequence', done => {
-      const meetButton = wrapper.find('.w-button')
+      const meetButton = wrapper.find('.event-action-button')
       const mocksendMessage = jest.fn(() => {})
       wrapper.setMethods({ sendMessage: mocksendMessage })
       meetButton.trigger('click')
@@ -118,7 +118,7 @@ describe('MeetButton', () => {
           allowUndo: false
         }
       })
-      const meetButton = wrapper.find('.w-button')
+      const meetButton = wrapper.find('.event-action-button')
       const requestMessage = `Natasha (https://kidsclub.io/users/987654321) waved at you! They live 4.2 mi. away with 3 kids age 2 mos, 2 mos & 9. If you're interested in a playdate, reply here!`
 
       expect(meetButton.text()).toEqual('Say Hi')
@@ -174,7 +174,7 @@ describe('MeetButton', () => {
     })
 
     it('displays correct information', () => {
-      const meetButton = wrapper.find('.w-button')
+      const meetButton = wrapper.find('.event-action-button')
       const requestMessage = `Natasha (https://kidsclub.io/users/987654321) waved at you! They live 4.2 mi. away. If you're interested in a playdate, reply here!`
 
       expect(meetButton.text()).toEqual('Wave')
@@ -182,7 +182,7 @@ describe('MeetButton', () => {
     })
 
     it('initiates sending sequence', done => {
-      const meetButton = wrapper.find('.w-button')
+      const meetButton = wrapper.find('.event-action-button')
       const mocksendMessage = jest.fn(() => {})
       wrapper.setMethods({ sendMessage: mocksendMessage })
       meetButton.trigger('click')
