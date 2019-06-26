@@ -93,7 +93,7 @@ export default {
     nextStep: function () {
       this.submitChildSpecialRequirements()
       this.$router.push({
-        name: 'RsvpInfoCollection',
+        name: 'ChildSpecialRequirements',
         params: {
           eventId: this.eventId
         }
