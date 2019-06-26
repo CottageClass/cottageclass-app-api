@@ -24,7 +24,7 @@ export default new Vuex.Store(
     },
     mutations: {
       markWaveSent: (state, payload) => {
-        const id = payload.targetUserId
+        const id = payload.targetUserId.toString()
         if (state.pendingWaves.some(user => user.id === id)) {
           state.pendingWaves = state.pendingWaves.filter(w => w.id !== id)
           state.sentWaves.push(id)
@@ -38,7 +38,7 @@ export default new Vuex.Store(
         state.pendingWaves.push(payload.targetUser)
       },
       addSentWave: (state, payload) => {
-        state.sentWaves.push(payload.targetUserId)
+        state.sentWaves.push(payload.targetUserId.toString())
       },
       resetRedirectRoute: (state) => {
         state.redirectRoute = null

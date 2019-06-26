@@ -110,11 +110,21 @@ export default {
           return ''
       }
     },
+    storedSentWave () {
+      return this.waveHasBeenSent(this.targetUser.id.toString())
+    },
     ...mapGetters([ 'currentUser', 'waveHasBeenSent' ])
   },
-  created () {
-    if (this.waveHasBeenSent(this.targetUser.id)) {
-      this.meetStatus = 'sent'
+  watch: {
+    storedSentWave: {
+      handler () {
+        if (this.storedSentWave) {
+          this.meetStatus = 'sent'
+        } else {
+          this.meetStatus = 'none'
+        }
+      },
+      immediate: true
     }
   }
 }
