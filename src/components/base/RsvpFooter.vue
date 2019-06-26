@@ -4,7 +4,7 @@
   <ul class="event-detail__floating-buttons-list">
     <li class="event-detail__floating-button-item">
       <a @click="submitRsvp" class="event-detail-floating-button w-inline-block">
-        <div class="floating-button__black-text">Yes</div>
+        <div class="floating-button__black-text">Yes!</div>
       </a>
     </li>
     <li class="event-detail__floating-button-item">
