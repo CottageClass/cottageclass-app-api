@@ -155,7 +155,7 @@ class User < ApplicationRecord
   end
 
   def update_showcase_event
-    showcase_event = events.order('recency_score ASC').first
+    showcase_event = events.upcoming.order('recency_score ASC').first
     update_column :showcase_event_id, showcase_event.present? ? showcase_event.id : nil
   end
 

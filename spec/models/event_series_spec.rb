@@ -35,7 +35,7 @@ RSpec.describe EventSeries, type: :model do
   context 'event generator' do
     before { subject.save }
 
-    it 'create_next_event' do
+    xit 'create_next_event' do
       last_event = subject.events.upcoming.last
 
       Timecop.freeze 2.hours.since(last_event.ends_at) do
