@@ -11,7 +11,7 @@
                     :user="item.user"
                     :event="item.event"
                     :mapCenter="mapArea.center"
-                    :key="'TODOID'"
+                    :key="item.user.id"
                     @user-updated="$emit('user-updated', $event)"
                     @event-updated="$emit('event-updated', $event)"/>
       </div>
