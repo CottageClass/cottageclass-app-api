@@ -62,7 +62,12 @@ export default {
   },
   computed: {
     nextButtonState () { // overriding the mixin
-      if (this.stepName === 'description' && this.description.text.length === 0) { return 'skip' } else if (this.errorMessage) {
+      if (this.context === 'onboarding' &&
+        this.stepName === 'description' &&
+        this.description.text.length === 0) {
+        return 'skip'
+      } else if (this.errorMessage ||
+        (this.context === 'new-event' && this.description.text.length === 0)) {
         return 'inactive'
       } else {
         return 'next'
