@@ -70,7 +70,7 @@
             </div>
           </div>
           <div v-if="availableTimes" class="availability__card">
-            <div class="availability__title-text">Available times</div>
+            <div class="availability__title-text">Availability</div>
             <div class="card__description-and-icon-container w-clearfix">
               <img src="@/assets/time.svg" width="100" height="100" alt="" class="availability_image" />
               <div class="availability__tag-container">

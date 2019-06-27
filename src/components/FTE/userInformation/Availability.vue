@@ -20,9 +20,9 @@ export default {
     return {
       checkedAvailabilityIds: [],
       labelsAndOrder: [
-        [ 'availableMornings', '9am - 3pm' ],
-        [ 'availableAfternoons', '3pm - 7pm' ],
-        [ 'availableEvenings', 'After 7pm' ],
+        [ 'availableMornings', 'Weekday mornings' ],
+        [ 'availableAfternoons', 'Weekday afternoons' ],
+        [ 'availableEvenings', 'Weekday evenings' ],
         [ 'availableWeekends', 'Weekends' ]
       ]
     }
