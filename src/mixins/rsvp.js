@@ -1,8 +1,7 @@
 import { initProxySession, submitEventParticipant } from '@/utils/api'
-import sheetsu from 'sheetsu-node'
+import { submitToSheetsu } from '@/utils/vendor'
 import moment from 'moment'
 
-var client = sheetsu({ address: 'https://sheetsu.com/apis/v1.0su/62cd725d6088' })
 export default {
   computed: {
     formattedDateTime () {
@@ -30,8 +29,7 @@ export default {
   },
   methods: {
     submitToSheetsu: function () {
-      // submit user to sheetsu which gives us notifications of new RSVPs
-      client.create({
+      const data = {
         'Event ID': this.eventId,
         'Event title': this.event.name,
         'Event host': this.event.hostFirstName,
@@ -43,11 +41,8 @@ export default {
         'Parent email': this.currentUser.email,
         'IDs of RSVPed children': this.childrenSelected,
         'All children': this.currentUser.children
-      }, 'RSVPs').then((data) => {
-        console.log('Successfully submitted RSVP to Sheetsu: ' + data)
-      }, (err) => {
-        console.log(err)
-      })
+      }
+      submitToSheetsu(data, 'RSVPs')
     },
     async submitRsvp (childIds) {
       this.err = ''

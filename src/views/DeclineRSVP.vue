@@ -63,7 +63,7 @@ export default {
         userId: this.currentUser.id,
         eventId: this.eventId,
         reasons: this.reasons,
-        otherTex: this.otherText }, 'noRsvp')
+        otherText: this.otherText }, 'noRsvp')
       this.showAlertOnNextRoute('Thanks for your feedback! Here are some other options you might like...', 'success')
       this.declineRsvp({ eventId: this.eventId })
       this.$router.push({ name: 'Search' })

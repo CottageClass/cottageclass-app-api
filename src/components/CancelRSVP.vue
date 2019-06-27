@@ -28,11 +28,9 @@
 import StyleWrapper from '@/components/FTE/StyleWrapper.vue'
 import Question from '@/components/base/Question.vue'
 import * as api from '@/utils/api'
-import sheetsu from 'sheetsu-node'
+import { submitToSheetsu } from '@/utils/vendor'
 import { mapGetters } from 'vuex'
 import moment from 'moment'
-
-var client = sheetsu({ address: 'https://sheetsu.com/apis/v1.0su/62cd725d6088' })
 
 export default {
   name: 'CancelRSVP',
@@ -80,10 +78,7 @@ export default {
         .then(res => {
           return component.$ga.event('RSVP', 'canceled', component.eventId)
         }).then(res => {
-          // send a text to the host
-          // send reason to spreadsheet
-
-          client.create({
+          const data = {
             'User ID': this.currentUser.id,
             'Cancelation Time': moment(Date()).format('LLLL'),
             'Event ID': this.eventId,
@@ -96,13 +91,8 @@ export default {
             'Parent phone': this.currentUser.phone,
             'Parent email': this.currentUser.email,
             'All children': this.currentUser.children
-          }, 'RSVPCancelations').then((data) => {
-            console.log(data)
-          }, (err) => {
-            // failure to put it in the spreadsheet should not stop flow
-            console.log(err)
-          })
-          // remove rspv from our server
+          }
+          submitToSheetsu(data, 'RSVPCancelations')
           this.$store.commit('showAlertOnNextRoute', {
             alert: {
               message: 'Your RSVP has been canceled.',
