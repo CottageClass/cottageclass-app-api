@@ -22,12 +22,19 @@ import PasswordReset from '@/views/PasswordReset.vue'
 import ContactForm from '@/views/ContactForm.vue'
 import Onboarding from '@/views/Onboarding.vue'
 import ProfileCollection from '@/views/ProfileCollection.vue'
+import DeclineRSVP from '@/views/DeclineRSVP.vue'
 
 Vue.use(Router)
 
 export default new Router({
   mode: 'history',
   routes: [
+    {
+      path: '/rsvp/:eventId/decline',
+      name: 'DeclineRSVP',
+      component: DeclineRSVP,
+      props: true
+    },
     {
       path: '/profile',
       name: 'ProfileCollection',
