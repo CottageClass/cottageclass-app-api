@@ -29,6 +29,7 @@
             {{occupation}}<br />
           </div>
           <div class="user-info__kids lp-truncate">{{kidsAges}}</div>
+          <div v-if="neighborhood" class="user-info__kids lp-truncate">{{neighborhood}}</div>
           <HouseholdImages :user="user" />
         </div>
       </div>
