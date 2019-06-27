@@ -12,6 +12,9 @@ export default {
     }
   },
   computed: {
+    neighborhood () {
+      return this.user && this.user.neighborhood
+    },
     images () {
       if (this.user) {
         return this.user.images
