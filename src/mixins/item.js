@@ -87,16 +87,16 @@ export default {
       if (this.user) {
         const res = []
         if (this.user.availableMornings) {
-          res.push('9am-3pm')
+          res.push('Weekday mornings')
         }
         if (this.user.availableAfternoons) {
-          res.push('3pm-7pm')
+          res.push('Weekday afternoons')
         }
         if (this.user.availableEvenings) {
-          res.push('7pm- ?')
+          res.push('Weekday evenings')
         }
         if (this.user.availableWeekends) {
-          res.push('weekends')
+          res.push('Weekends')
         }
         return res.length && res
       }
