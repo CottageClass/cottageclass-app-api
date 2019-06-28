@@ -56,6 +56,7 @@ class User < ApplicationRecord
            dependent: :destroy,
            after_add: :child_added,
            before_remove: :child_removed
+  has_many :search_list_items, inverse_of: :user, class_name: 'SearchListItem', dependent: :destroy
 
   has_many :sent_messages, class_name: 'Message', foreign_key: :sender_id, inverse_of: :sender, dependent: :destroy
   has_many :received_messages, class_name: 'Message', foreign_key: :receiver_id, inverse_of: :receiver,
