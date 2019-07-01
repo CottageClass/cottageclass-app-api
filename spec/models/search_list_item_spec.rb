@@ -38,4 +38,8 @@ RSpec.describe SearchListItem, type: :model do
       expect(SearchListItem.new(user: (build :user), itemable: event)).to be_invalid
     end
   end
+
+  context 'delegation' do
+    it { expect(subject).to respond_to(*User::PUBLIC_ATTRIBUTES) }
+  end
 end
