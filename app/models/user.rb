@@ -35,7 +35,7 @@ class User < ApplicationRecord
     populate_lname_from_name!
   end
 
-  after_create :notify
+  after_create :notify, :create_search_list_item
 
   geocoded_by :full_address
 
@@ -89,6 +89,10 @@ class User < ApplicationRecord
 
   def jwt_payload
     super.merge('user' => CurrentUserSerializer.json_for(self, include: %i[children]))
+  end
+
+  def create_search_list_item
+    SearchListItem.create(user: self)
   end
 
   def child_added(_child)
