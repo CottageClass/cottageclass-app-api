@@ -9,6 +9,19 @@ RSpec.describe SearchListItem, type: :model do
     it { expect(subject).to be_invalid }
   end
 
+  context 'duplicate users with no itemable' do
+    let(:user) { create :user }
+    let(:subject) { SearchListItem.new(user: user) }
+    let(:second_subject) { SearchListItem.new(user: user) }
+
+    it {
+      expect do
+        subject.save
+        second_subject.save
+      end.to raise_error(ActiveRecord::RecordNotUnique)
+    }
+  end
+
   context 'bad itemable provided' do
     let(:subject) { SearchListItem.new(user: (build :user), itemable: (build :user)) }
 
@@ -18,6 +31,19 @@ RSpec.describe SearchListItem, type: :model do
   context 'accepts event' do
     let(:subject) { build :search_list_item, :with_event }
 
-    it { expect(subject).to be_valid }
+    it {
+      expect(subject).to be_valid
+    }
+  end
+
+  context 'duplicate itemable' do
+    let(:event) { build :event }
+    let(:user) { build :user }
+    let(:subject) { SearchListItem.create(user: (build :user), itemable: event) }
+
+    it do
+      subject
+      expect(SearchListItem.new(user: (build :user), itemable: event)).to be_invalid
+    end
   end
 end
