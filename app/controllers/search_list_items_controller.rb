@@ -21,7 +21,7 @@ class SearchListItemsController < ApiController
       latest_birthday = (Time.current - min_age.year.seconds)
       time_range = earliest_birthday..latest_birthday
 
-      items = items.joins('INNER JOIN children ON children.id = users.id').where('children.birthday' => time_range)
+      items = items.joins('INNER JOIN children ON children.parent_id = users.id').where('children.birthday' => time_range)
     end
 
     miles = miles.to_f
