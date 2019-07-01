@@ -87,6 +87,19 @@ class User < ApplicationRecord
 
   accepts_nested_attributes_for :children, allow_destroy: true, reject_if: :child_with_same_name_exists?
 
+  scope :child_age_range, lambda { |min_age, max_age|
+    if min_age.present? || max_age.present?
+      min_age ||= 0
+      min_age = min_age.to_i
+      max_age ||= 17
+      max_age = max_age.to_i
+      earliest_birthday = (Time.current - (max_age + 1).year.seconds)
+      latest_birthday = (Time.current - min_age.year.seconds)
+      time_range = earliest_birthday..latest_birthday
+      joins(:children).where('children.birthday' => time_range)
+    end
+  }
+
   def jwt_payload
     super.merge('user' => CurrentUserSerializer.json_for(self, include: %i[children]))
   end

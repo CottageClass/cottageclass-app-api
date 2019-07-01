@@ -11,18 +11,7 @@ class SearchListItemsController < ApiController
 
     items = SearchListItem.joins(:user).where(itemable: nil)
     items = items.where.not(user_id: current_user.id) if current_user.present?
-
-    if min_age.present? || max_age.present?
-      min_age ||= 0
-      min_age = min_age.to_i
-      max_age ||= 17
-      max_age = max_age.to_i
-      earliest_birthday = (Time.current - (max_age + 1).year.seconds)
-      latest_birthday = (Time.current - min_age.year.seconds)
-      time_range = earliest_birthday..latest_birthday
-
-      items = items.joins('INNER JOIN children ON children.parent_id = users.id').where('children.birthday' => time_range)
-    end
+    items = items.child_age_range(min_age, max_age)
 
     miles = miles.to_f
     if miles.positive?

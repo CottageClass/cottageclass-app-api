@@ -11,4 +11,8 @@ class SearchListItem < ApplicationRecord
             uniqueness: { scope: %i[itemable_type] },
             allow_nil: true,
             if: -> { itemable.present? }
+
+  scope :child_age_range, lambda { |min_age, max_age|
+    joins(:user).merge(User.child_age_range(min_age, max_age))
+  }
 end

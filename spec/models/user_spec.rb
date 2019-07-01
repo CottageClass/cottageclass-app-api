@@ -70,6 +70,18 @@ RSpec.describe User, type: :model do
     end
   end
 
+  context 'scope' do
+    let(:child1) { build :child, birthday: '2 Jan, 2014' }
+    let(:child2) { build :child, birthday: '2 Jan, 2014' }
+    let(:subject) { create :user, children: [child1, child2] }
+
+    it 'child_age_range' do
+      # mock time as May 5, 2019
+      allow(Time).to receive(:current).and_return(Time.strptime('1557082500', '%s'))
+      expect(User.child_age_range(0, 10).where(id: subject.id).count).to eq 2
+    end
+  end
+
   context 'inquiries' do
     it 'returns users who have messaged the user for childcare' do
       parent1 = FactoryBot.create(:user)
