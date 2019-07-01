@@ -28,14 +28,6 @@ RSpec.describe SearchListItem, type: :model do
     it { expect { subject }.to raise_error(ActiveRecord::InverseOfAssociationNotFoundError) }
   end
 
-  context 'accepts event' do
-    let(:subject) { build :search_list_item, :with_event }
-
-    it {
-      expect(subject).to be_valid
-    }
-  end
-
   context 'duplicate itemable' do
     let(:event) { build :event }
     let(:user) { build :user }
