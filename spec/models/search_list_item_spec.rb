@@ -40,6 +40,6 @@ RSpec.describe SearchListItem, type: :model do
   end
 
   context 'delegation' do
-    it { expect(subject).to respond_to(*User::PUBLIC_ATTRIBUTES) }
+    it { expect(subject).to respond_to(*(User::PUBLIC_ATTRIBUTES.reject { |a| a == :id })) }
   end
 end
