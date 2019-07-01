@@ -34,6 +34,13 @@ RSpec.describe Event, type: :model do
       it { expect { subject.save }.not_to change(Notification.event_creation_host, :count) }
       it { expect { subject.update kind: :generated }.to change(Notification.event_creation_host, :count).by(1) }
     end
+
+    context 'search_list_items' do
+      it {
+        subject.save
+        expect(SearchListItem.where(itemable: subject, user: subject.user)).to exist
+      }
+    end
   end
 
   context 'destroy' do

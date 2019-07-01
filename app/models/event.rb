@@ -129,10 +129,15 @@ class Event < ApplicationRecord
     user.update_showcase_event
   end
 
+  def create_search_list_item
+    SearchListItem.create(user: user, itemable: self)
+  end
+
   def post_create
     notify_creation
     update_recency_score
     update_user_showcase
+    create_search_list_item
   end
 
   def notify_creation
