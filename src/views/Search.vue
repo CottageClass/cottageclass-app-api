@@ -166,6 +166,31 @@ export default {
         if (this.currentUser) {
           newItems = newItems.filter(u => u.id !== this.currentUser.id)
         }
+        // find duplicates within newItems
+        const removeList = []
+        for (let i = 0; i < newItems.length; i++) {
+          if (i === newItems.length - 1) { break }
+          if (removeList.includes(i)) { continue }
+          for (let j = i + 1; j < newItems.length; j++) {
+            if (newItems[i].event.id === newItems[j].event.id) {
+              removeList.push(j)
+            }
+          }
+        }
+        removeList.reverse()
+        for (let removeIndex of removeList) {
+          newItems.splice(removeIndex, 1)
+        }
+
+        // filter out duplicates (this should be done on backend)
+        if (this.items && this.items.length) {
+          newItems = newItems.filter(newItem => {
+            return !this.items.find(oldItem => {
+              return oldItem.event.id === newItem.event.id
+            })
+          })
+        }
+
         // if items is null, set it to the incoming items, otherwise add them
         this.items = !this.items ? newItems : this.items.concat(newItems)
         this.lastPage = this.lastPage + 1
