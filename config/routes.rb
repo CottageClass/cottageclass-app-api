@@ -72,6 +72,14 @@ Rails.application.routes.draw do
       end
     end
   end
+  get '/api/feed//miles/:miles/latitude/:latitude/longitude/:longitude(/min_age/:min_age)(/max_age/:max_age)(/page/:page/page_size/:page_size)',
+      to: 'search_list_items#index',
+      latitude: /-?+(?=.??\d)\d*\.?\d*/,
+      longitude: /-?+(?=.??\d)\d*\.?\d*/,
+      miles: /-?+(?=.??\d)\d*\.?\d*/, # this allows negatives, which it shouldn't
+      min_age: /\d+/,
+      max_age: /\d+/,
+      as: :feed
 
   get '/users/:id/inquiries' => 'users#inquiries', as: 'inquiries'
   get '/users/:sender_id/messages/:receiver_id' => 'messages#admin_for_pair', as: 'messages_for_pair'
