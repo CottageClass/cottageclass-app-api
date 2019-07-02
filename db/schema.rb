@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_01_020616) do
+ActiveRecord::Schema.define(version: 2019_07_02_142542) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,12 @@ ActiveRecord::Schema.define(version: 2019_07_01_020616) do
     t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id"
     t.index ["namespace"], name: "index_active_admin_comments_on_namespace"
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
+  end
+
+  create_table "childcare_requests", force: :cascade do |t|
+    t.bigint "user_id"
+    t.text "content"
+    t.index ["user_id"], name: "index_childcare_requests_on_user_id"
   end
 
   create_table "children", force: :cascade do |t|
@@ -333,6 +339,7 @@ ActiveRecord::Schema.define(version: 2019_07_01_020616) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
+  add_foreign_key "childcare_requests", "users"
   add_foreign_key "children", "users", column: "parent_id"
   add_foreign_key "messages", "twilio_sessions", column: "cc_twilio_session_id"
   add_foreign_key "messages", "users", column: "receiver_id"
