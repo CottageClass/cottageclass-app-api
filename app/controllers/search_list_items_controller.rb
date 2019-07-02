@@ -24,6 +24,7 @@ class SearchListItemsController < ApiController
         items = items.reorder 'events.recency_score ASC NULLS LAST, distance ASC'
       end
     end
+    items = Kaminari.paginate_array(items.to_a.uniq { |i| i.user.id })
 
     links = {}
     meta = { items_count: items.count(:all) }
