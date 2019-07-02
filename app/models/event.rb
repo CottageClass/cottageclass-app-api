@@ -17,6 +17,7 @@ class Event < ApplicationRecord
 
   belongs_to :event_series, inverse_of: :events
   has_one :user, through: :event_series, inverse_of: :events
+  has_one :search_list_item, as: :itemable, class_name: 'SearchListItem', dependent: :destroy
   has_many :notifications, as: :notifiable, dependent: :nullify
   has_many :user_reviews, as: :reviewable, dependent: :nullify
   has_many :participants, as: :participable, dependent: :destroy
@@ -128,10 +129,15 @@ class Event < ApplicationRecord
     user.update_showcase_event
   end
 
+  def create_search_list_item
+    SearchListItem.create(user: user, itemable: self)
+  end
+
   def post_create
     notify_creation
     update_recency_score
     update_user_showcase
+    create_search_list_item
   end
 
   def notify_creation

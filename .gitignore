@@ -37,6 +37,7 @@ yarn-debug.log*
 .yarn-integrity
 
 # editor debris
+tags
 .vscode
 .sublime-workspace
 

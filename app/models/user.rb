@@ -35,7 +35,7 @@ class User < ApplicationRecord
     populate_lname_from_name!
   end
 
-  after_create :notify
+  after_create :notify, :create_search_list_item
 
   geocoded_by :full_address
 
@@ -56,6 +56,7 @@ class User < ApplicationRecord
            dependent: :destroy,
            after_add: :child_added,
            before_remove: :child_removed
+  has_many :search_list_items, inverse_of: :user, class_name: 'SearchListItem', dependent: :destroy
 
   has_many :sent_messages, class_name: 'Message', foreign_key: :sender_id, inverse_of: :sender, dependent: :destroy
   has_many :received_messages, class_name: 'Message', foreign_key: :receiver_id, inverse_of: :receiver,
@@ -74,12 +75,7 @@ class User < ApplicationRecord
   has_many :reviewed_users, class_name: 'UserReview', foreign_key: :reviewer_id, inverse_of: :reviewer,
                             dependent: :destroy
 
-  has_many :user_matches, -> { order(:score) },
-           source: :matched_user,
-           source_type: 'User',
-           inverse_of: :user
-
-  has_many :active_user_matches,
+  has_many :active_user_matches, -> { order(:score) },
            foreign_key: :user_id,
            class_name: 'UserMatch',
            dependent: :destroy
@@ -88,7 +84,7 @@ class User < ApplicationRecord
            class_name: 'UserMatch',
            dependent: :destroy
 
-  has_many :matched_users,  through: :active_user_matches,  source: :matched_user
+  has_many :matched_users, through: :active_user_matches, source: :matched_user
   has_many :matching_users, through: :passive_user_matches, source: :user
 
   has_many :stars, class_name: 'Star', foreign_key: :giver_id, inverse_of: :giver, dependent: :destroy
@@ -101,8 +97,25 @@ class User < ApplicationRecord
 
   accepts_nested_attributes_for :children, allow_destroy: true, reject_if: :child_with_same_name_exists?
 
+  scope :child_age_range, lambda { |min_age, max_age|
+    if min_age.present? || max_age.present?
+      min_age ||= 0
+      min_age = min_age.to_i
+      max_age ||= 17
+      max_age = max_age.to_i
+      earliest_birthday = (Time.current - (max_age + 1).year.seconds)
+      latest_birthday = (Time.current - min_age.year.seconds)
+      time_range = earliest_birthday..latest_birthday
+      joins(:children).where('children.birthday' => time_range)
+    end
+  }
+
   def jwt_payload
     super.merge('user' => CurrentUserSerializer.json_for(self, include: %i[children]))
+  end
+
+  def create_search_list_item
+    SearchListItem.create(user: self)
   end
 
   def child_added(_child)
@@ -132,9 +145,9 @@ class User < ApplicationRecord
       # sort by score
       scored_users = scored_users.sort_by { |scored_user| scored_user[:score] }
       # add matches for this user
-      user_matches.destroy_all
+      active_user_matches.destroy_all
       scored_users.slice(0, STORED_MATCHES).each do |scored_user|
-        user_match = user_matches.build matched_user: scored_user[:user], score: scored_user[:score]
+        user_match = active_user_matches.build matched_user: scored_user[:user], score: scored_user[:score]
         user_match.save if user_match.valid?
       end
       # add matches for other users
@@ -145,9 +158,9 @@ class User < ApplicationRecord
   end
 
   def insert_match(other_user, score)
-    user_matches.last.destroy if user_matches.count >= STORED_MATCHES && user_matches.last.score > score
-    if user_matches.count < STORED_MATCHES
-      user_match = user_matches.build matched_user: other_user, score: score
+    active_user_matches.last.destroy if active_user_matches.count >= STORED_MATCHES && active_user_matches.last.score > score
+    if active_user_matches.count < STORED_MATCHES
+      user_match = active_user_matches.build matched_user: other_user, score: score
       user_match.save if user_match.valid?
     end
   end

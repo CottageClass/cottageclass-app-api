@@ -29,8 +29,6 @@ guard :rspec,
   require 'guard/rspec/dsl'
   dsl = Guard::RSpec::Dsl.new(self)
 
-  # Feel free to open issues for suggestions and improvements
-
   # RSpec files
   rspec = dsl.rspec
   watch(rspec.spec_helper) { rspec.spec_dir }
@@ -47,13 +45,15 @@ guard :rspec,
   dsl.watch_spec_files_for(rails.views)
 
   watch(rails.controllers) do |m|
+  pp m[1]
     [
       rspec.spec.call("routing/#{m[1]}_routing"),
       rspec.spec.call("controllers/#{m[1]}_controller"),
-      rspec.spec.call("acceptance/#{m[1]}")
+      rspec.spec.call("acceptance/#{m[1]}"),
+      rspec.spec.call("requests/#{m[1]}")
     ]
   end
-
+  
   # Rails config changes
   watch(rails.spec_helper)     { rspec.spec_dir }
   watch(rails.routes)          { "#{rspec.spec_dir}/routing" }

@@ -31,6 +31,15 @@ RSpec.describe User, type: :model do
     it { expect { subject.save }.to change(Notification.user_creation, :count).from(0).to(1) }
   end
 
+  context 'create' do
+    context 'search_list_items' do
+      it {
+        subject.save
+        expect(SearchListItem.where(user: subject)).to exist
+      }
+    end
+  end
+
   context 'update' do
     before { subject.save }
 
@@ -58,6 +67,18 @@ RSpec.describe User, type: :model do
         expect(event.latitude).to eq(new_latitude)
         expect(event.longitude).to eq(new_longitude)
       end
+    end
+  end
+
+  context 'scope' do
+    let(:child1) { build :child, birthday: '2 Jan, 2014' }
+    let(:child2) { build :child, birthday: '2 Jan, 2014' }
+    let(:subject) { create :user, children: [child1, child2] }
+
+    it 'child_age_range' do
+      # mock time as May 5, 2019
+      allow(Time).to receive(:current).and_return(Time.strptime('1557082500', '%s'))
+      expect(User.child_age_range(0, 10).where(id: subject.id).count).to eq 2
     end
   end
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_21_162609) do
+ActiveRecord::Schema.define(version: 2019_07_01_020616) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -175,6 +175,16 @@ ActiveRecord::Schema.define(version: 2019_06_21_162609) do
     t.index ["participable_type", "participable_id", "user_id"], name: "index_participants_on_participable_type_participable_id_user_id", unique: true
   end
 
+  create_table "search_list_items", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "itemable_type"
+    t.bigint "itemable_id"
+    t.index ["itemable_type", "itemable_id"], name: "index_search_list_items_on_itemable_type_and_itemable_id"
+    t.index ["user_id", "itemable_type", "itemable_id"], name: "index_items_on_itemable_type_itemable_id_user_id", unique: true
+    t.index ["user_id"], name: "index_items_on_user_with_null_itemable", unique: true, where: "(itemable_id IS NULL)"
+    t.index ["user_id"], name: "index_search_list_items_on_user_id"
+  end
+
   create_table "stars", force: :cascade do |t|
     t.string "starable_type"
     t.bigint "starable_id"
@@ -327,6 +337,7 @@ ActiveRecord::Schema.define(version: 2019_06_21_162609) do
   add_foreign_key "messages", "twilio_sessions", column: "cc_twilio_session_id"
   add_foreign_key "messages", "users", column: "receiver_id"
   add_foreign_key "messages", "users", column: "sender_id"
+  add_foreign_key "search_list_items", "users"
   add_foreign_key "stars", "users", column: "giver_id"
   add_foreign_key "twilio_sessions", "users", column: "receiver_id"
   add_foreign_key "twilio_sessions", "users", column: "sender_id"

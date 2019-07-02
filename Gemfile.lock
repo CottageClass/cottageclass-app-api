@@ -92,6 +92,7 @@ GEM
       activesupport (>= 3.0.0)
     arel (9.0.0)
     ast (2.4.0)
+    awesome_print (1.8.0)
     babel-source (5.8.35)
     babel-transpiler (0.7.0)
       babel-source (>= 4.0, < 6)
@@ -495,6 +496,7 @@ DEPENDENCIES
   airbrake
   airbrake-ruby
   apitome
+  awesome_print
   bcrypt (~> 3.1.7)
   brakeman
   bullet
