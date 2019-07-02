@@ -95,4 +95,17 @@ RSpec.describe User, type: :model do
       expect(parent1.inquirers).not_to include(parent4)
     end
   end
+
+  context 'destroy' do
+    let(:subject) { build :user, :with_children }
+    let(:other) { build :user, :with_children, latitude: subject.latitude, longitude: subject.longitude }
+
+    it 'can be destroyed with some associations' do
+      subject.save
+      other.save
+      subject.find_matches
+
+      expect { subject.destroy }.to change(User, :count).from(2).to(1)
+    end
+  end
 end
