@@ -24,13 +24,30 @@ class SearchListItemsController < ApiController
         items = items.reorder 'events.recency_score ASC NULLS LAST, distance ASC'
       end
     end
-    items = Kaminari.paginate_array(items.to_a.uniq { |i| i.user.id })
+
+    # convert to array to perform application level logic
+    items = items.to_a.uniq { |i| i.user.id }
+
+    # remove user_matches from array and add them to the beginning
+    user_matches = current_user.matched_users
+
+    user_matches.reverse_each do |user_match|
+      # find the first list item from this user
+      item_index = items.find_index do |i|
+        i.user.id == user_match.id
+      end
+      next if item_index.nil?
+
+      item = items[item_index]
+      items.delete_at(item_index)
+      items.unshift(item)
+    end
 
     links = {}
     meta = { items_count: items.count(:all) }
     if page.present?
       page_size ||= 10
-      items = items.page(page).per page_size
+      items = Kaminari.paginate_array(items).page(page).per(page_size)
 
       meta[:pages_count] = items.total_pages
       links[:self] = path.call page: items.current_page, page_size: page_size

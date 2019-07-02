@@ -75,12 +75,7 @@ class User < ApplicationRecord
   has_many :reviewed_users, class_name: 'UserReview', foreign_key: :reviewer_id, inverse_of: :reviewer,
                             dependent: :destroy
 
-  has_many :user_matches, -> { order(:score) },
-           source: :matched_user,
-           source_type: 'User',
-           inverse_of: :user
-
-  has_many :active_user_matches,
+  has_many :active_user_matches, -> { order(:score) },
            foreign_key: :user_id,
            class_name: 'UserMatch',
            dependent: :destroy
@@ -89,7 +84,7 @@ class User < ApplicationRecord
            class_name: 'UserMatch',
            dependent: :destroy
 
-  has_many :matched_users,  through: :active_user_matches,  source: :matched_user
+  has_many :matched_users, through: :active_user_matches, source: :matched_user
   has_many :matching_users, through: :passive_user_matches, source: :user
 
   has_many :stars, class_name: 'Star', foreign_key: :giver_id, inverse_of: :giver, dependent: :destroy
@@ -150,9 +145,9 @@ class User < ApplicationRecord
       # sort by score
       scored_users = scored_users.sort_by { |scored_user| scored_user[:score] }
       # add matches for this user
-      user_matches.destroy_all
+      active_user_matches.destroy_all
       scored_users.slice(0, STORED_MATCHES).each do |scored_user|
-        user_match = user_matches.build matched_user: scored_user[:user], score: scored_user[:score]
+        user_match = active_user_matches.build matched_user: scored_user[:user], score: scored_user[:score]
         user_match.save if user_match.valid?
       end
       # add matches for other users
@@ -163,9 +158,9 @@ class User < ApplicationRecord
   end
 
   def insert_match(other_user, score)
-    user_matches.last.destroy if user_matches.count >= STORED_MATCHES && user_matches.last.score > score
-    if user_matches.count < STORED_MATCHES
-      user_match = user_matches.build matched_user: other_user, score: score
+    active_user_matches.last.destroy if active_user_matches.count >= STORED_MATCHES && active_user_matches.last.score > score
+    if active_user_matches.count < STORED_MATCHES
+      user_match = active_user_matches.build matched_user: other_user, score: score
       user_match.save if user_match.valid?
     end
   end
