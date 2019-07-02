@@ -23,12 +23,19 @@ import ContactForm from '@/views/ContactForm.vue'
 import Onboarding from '@/views/Onboarding.vue'
 import ProfileCollection from '@/views/ProfileCollection.vue'
 import DeclineRSVP from '@/views/DeclineRSVP.vue'
+import RequestChildcare from '@/views/RequestChildcare.vue'
 
 Vue.use(Router)
 
 export default new Router({
   mode: 'history',
   routes: [
+    {
+      path: '/request-childcare/:section?/:stepName?',
+      name: 'RequestChildcare',
+      component: RequestChildcare,
+      props: true
+    },
     {
       path: '/rsvp/:eventId/decline',
       name: 'DeclineRSVP',

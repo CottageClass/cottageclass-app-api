@@ -1,7 +1,8 @@
 <template>
 <div class="events__actions">
   <ul class="events__actions__button-list">
-    <li class="events__actions__button-item">
+    <li v-if="isAuthenticated"
+        class="events__actions__button-item">
       <a @click="$emit('request-childcare-click')" class="events__actions__button request-childcare w-button">Request Care</a>
     </li>
     <li class="events__actions__button-item">
@@ -12,8 +13,11 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
-  name: 'SearchListHeader'
+  name: 'SearchListHeader',
+  computed: mapGetters(['isAuthenticated'])
 }
 </script>
 

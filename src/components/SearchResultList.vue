@@ -5,7 +5,7 @@
       <SearchListHeader
         v-if="showHeader"
         @offer-playdate-click="$emit('offer-click')"
-        @request-childcare-click="$emit('request-childcare')"
+        @request-childcare-click="$emit('request-childcare-click')"
         />
       <div v-for="item in items">
         <SearchListCard
