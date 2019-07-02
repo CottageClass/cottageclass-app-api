@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: :json } do
     resources :event_series, only: %i[index show create update]
+    resources :childcare_requests, only: %i[show create update destroy]
     resources :events, only: %i[show update destroy] do
       resource :stars, only: %i[create destroy], module: :events
       resources :stars, only: %i[index], module: :events
