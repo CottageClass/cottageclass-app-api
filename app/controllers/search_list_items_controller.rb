@@ -29,7 +29,8 @@ class SearchListItemsController < ApiController
     items = items.to_a.uniq { |i| i.user.id }
 
     # remove user_matches from array and add them to the beginning
-    user_matches = current_user.matched_users
+    user_matches = current_user.matched_users if current_user.present?
+    user_matches ||= []
 
     user_matches.reverse_each do |user_match|
       # find the first list item from this user
