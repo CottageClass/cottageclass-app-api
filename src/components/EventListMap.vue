@@ -42,7 +42,7 @@ This is the map view or the list view of events
               :items="items"
               :noItemsMessage="noItemsMessage"
               :showTrailblazerMessage="showTrailblazerMessage"
-              @offerClick="offerPlaydate"
+              @offer-playdate-click="offerPlaydate"
               @fetch-more-click="$emit('fetch-more-click')"
               @user-updated="$emit('user-updated', $event)"
               @event-updated="$emit('event-updated', $event)"/>

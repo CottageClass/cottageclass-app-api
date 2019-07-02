@@ -4,7 +4,7 @@
     <div class="event-list" v-if="!awaiting">
       <SearchListHeader
         v-if="showHeader"
-        @offerClick="$emit('offerClick')"
+        @offer-playdate-click="$emit('offerClick')"
         />
       <div v-for="item in items">
         <SearchListCard

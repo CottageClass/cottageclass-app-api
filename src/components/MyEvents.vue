@@ -6,7 +6,7 @@
       <div class="content-container-4 w-container">
         <h1 class="h1-display">Playdates you're hosting</h1>
         <SearchResultList
-          @offerClick="offerPlaydate"
+          @offer-playdate-click="offerPlaydate"
           :showHeader="true"
           :items="items"
           :noEventsMessage="noEventsMessage"
