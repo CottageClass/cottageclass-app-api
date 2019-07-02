@@ -16,7 +16,7 @@ class API::ChildcareRequestsController < API::BaseController
 
   def show
     childcare_request = ChildcareRequest.find params[:id]
-    render json: ChildcareRequestSerializer.new(childcare_request).serializable_hash,
+    render json: ChildcareRequestSerializer.new(childcare_request, include: %i[user]).serializable_hash,
            status: :ok
   rescue ActiveRecord::RecordNotFound
     render json: {}, status: :not_found
