@@ -73,8 +73,23 @@ class User < ApplicationRecord
   has_many :user_reviews, inverse_of: :user, dependent: :destroy
   has_many :reviewed_users, class_name: 'UserReview', foreign_key: :reviewer_id, inverse_of: :reviewer,
                             dependent: :destroy
-  has_many :user_matches, -> { order(:score) }, source: :matched_user, source_type: 'User', inverse_of: :user
-  has_many :matched_users, through: :user_matches
+
+  has_many :user_matches, -> { order(:score) },
+           source: :matched_user,
+           source_type: 'User',
+           inverse_of: :user
+
+  has_many :active_user_matches,
+           foreign_key: :user_id,
+           class_name: 'UserMatch',
+           dependent: :destroy
+  has_many :passive_user_matches,
+           foreign_key: :matched_user_id,
+           class_name: 'UserMatch',
+           dependent: :destroy
+
+  has_many :matched_users,  through: :active_user_matches,  source: :matched_user
+  has_many :matching_users, through: :passive_user_matches, source: :user
 
   has_many :stars, class_name: 'Star', foreign_key: :giver_id, inverse_of: :giver, dependent: :destroy
 
@@ -147,8 +162,6 @@ class User < ApplicationRecord
       1_000_000
     end
   end
-
-  def best_matches; end
 
   def child_ages_in_months
     children.map(&:age_in_months)
