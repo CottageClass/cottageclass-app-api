@@ -13,6 +13,9 @@
         :targetUser="user"
         :allowUndo="allowWaveUndo"/>
     </li>
+    <li v-if="showContactButton">
+      <IconButton label="Respond" :icon="contactIcon" @click="contactClick"/>
+    </li>
     <li v-if="showShareButton">
       <IconButton label="Share" :icon="shareIcon" @click="shareClick"/>
     </li>
@@ -40,6 +43,7 @@ export default {
     user: {},
     event: {},
     timePast: {},
+    showContactButton: { default: false },
     showShareButton: { default: false },
     showGoingButton: { default: false },
     showInterestedButton: { default: false },
@@ -82,6 +86,9 @@ export default {
         }
         this.$emit('user-updated', res)
       }
+    },
+    contactClick () {
+      this.$router.push({ name: 'ContactUserForm', params: { userId: this.user.id } })
     },
     goingClick () {
       if (this.event.participated) {

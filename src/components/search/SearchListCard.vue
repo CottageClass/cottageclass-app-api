@@ -54,6 +54,7 @@
                     :showMeetButton="showMeetButton"
                     :showShareButton="showShareButton"
                     :showInterestedButton="showInterestedButton"
+                    :showContactButton="showContactButton"
                     :allowWaveUndo="true"/>
     <SearchListCardActionsOverlay
                     v-if="showOverlay"
@@ -65,6 +66,7 @@
                     :showGoingButton="showGoingButton"
                     :showMeetButton="showMeetButton"
                     :showShareButton="showShareButton"
+                    :showContactButton="showContactButton"
                     :showInterestedButton="showInterestedButton"
                     :allowWaveUndo="true"/>
   </div>

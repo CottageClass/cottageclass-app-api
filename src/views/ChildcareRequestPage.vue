@@ -38,10 +38,11 @@
                             class="column-list"
                             :user="user"
                             :timePast="timePast"
-                            :showShareButton="showShareButton"
-                            :showInterestedButton="showInterestedButton"
-                            :showGoingButton="showGoingButton"
-                            :showMeetButton="showMeetButton"
+                            :showShareButton="false"
+                            :showContactButton="showContactButton"
+                            :showInterestedButton="false"
+                            :showGoingButton="false"
+                            :showMeetButton="false"
                             :allowWaveUndo="false"/>
           </div>
         </div>

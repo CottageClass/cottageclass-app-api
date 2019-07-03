@@ -53,6 +53,9 @@ export default {
     showInterestedButton () {
       return this.isAuthenticated && this.currentUser && (this.user.id.toString() !== this.currentUser.id.toString())
     },
+    showContactButton () {
+      return !!this.childcareRequest
+    },
     showMeetButton () {
       return !this.currentUser || (this.user.id.toString() !== this.currentUser.id.toString())
     },
