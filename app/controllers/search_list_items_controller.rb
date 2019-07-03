@@ -1,5 +1,3 @@
-require 'byebug'
-
 class SearchListItemsController < ApiController
   def index
     miles = params[:miles]
@@ -41,7 +39,6 @@ class SearchListItemsController < ApiController
     users = showcase_users | childcare_request_users
     items = childcare_requests_array + showcase_array
 
-    # byebug
 
     links = {}
     meta = { items_count: items.count(:all) }
