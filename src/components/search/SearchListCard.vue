@@ -2,7 +2,11 @@
 <li class="events-list__event-summary-card"
     @click.stop="goToItem">
   <div class="header">
-    <div class="header__date" :class="{'time-past': timePast}">{{timeHeader}}</div>
+    <div class="header__date"
+         :class="{'time-past': timePast,
+                  'childcare-request': item.childcareRequest}" >
+      {{timeHeader}}
+    </div>
     <div v-if="distance" class="header__distance">{{distance}}</div>
   </div>
   <div class="description">
@@ -247,7 +251,10 @@ a {
 
 .header__date {
   &.time-past {
-  color: #aaaaaa;
+    color: #aaaaaa;
+  }
+  &.childcare-request {
+    color: #FD6F77;
   }
   color: #1f88e9;
   font-size: 12px;
