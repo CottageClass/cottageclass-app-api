@@ -1,8 +1,5 @@
-require 'byebug'
-
 class SearchListItemsController < ApiController
   def index
-    # DevelopmentProfiler.prof('import') do
     miles = params[:miles]
     latitude = params[:latitude]
     longitude = params[:longitude]
@@ -37,6 +34,7 @@ class SearchListItemsController < ApiController
     event_array = events.to_a
     childcare_request_array = childcare_requests.to_a
 
+    # byebug
     # find all users that have no eligible events or childcare_requests
     event_users = event_array.map { |s| s.user.id }
     childcare_request_users = childcare_request_array.map { |s| s.user.id }
@@ -44,7 +42,6 @@ class SearchListItemsController < ApiController
     unseen_users = SearchListItem.where(itemable_id: nil).where.not(user_id: seen_users)
     unseen_users = unseen_users.to_a
 
-    byebug
     # reduce to one per user.  the last created
     childcare_request_array = childcare_request_array.sort_by(&:created_at)
     childcare_request_array.reverse!
@@ -82,4 +79,3 @@ class SearchListItemsController < ApiController
     render json: json_hash, status: :ok
     end
   end
-# end
