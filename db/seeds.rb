@@ -1,7 +1,7 @@
 # seed the local database with some fake users and associated data
 require 'faker'
 
-(1..50).each do |tag|
+(1..500).each do |tag|
   first_name = Faker::Name.unique.first_name
   last_name = Faker::Name.unique.last_name
   hash = {
