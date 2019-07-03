@@ -1,3 +1,5 @@
+require 'byebug'
+
 class SearchListItemsController < ApiController
   def index
     miles = params[:miles]
@@ -9,40 +11,38 @@ class SearchListItemsController < ApiController
     page_size = params[:page_size]
     path = proc { |**parameters| feed_path parameters }
 
-    items = SearchListItem.joins(:user).where(itemable: nil)
-    items = items.where.not(user_id: current_user.id) if current_user.present?
-    items = items.child_age_range(min_age, max_age)
-
     miles = miles.to_f
-    if miles.positive?
-      location = []
-      location = [latitude, longitude] if [latitude, longitude].all?(&:present?)
-      location = [current_user.latitude, current_user.longitude] if location.blank? && current_user.present?
-      if location.all?(&:present?)
-        items = items.near(location.map(&:to_f), miles)
-        items = items.joins 'LEFT JOIN events ON users.showcase_event_id = events.id'
-        items = items.reorder 'events.recency_score ASC NULLS LAST, distance ASC'
-      end
+    location = []
+    location = [latitude, longitude] if [latitude, longitude].all?(&:present?)
+    location = [current_user.latitude, current_user.longitude] if location.blank? && current_user.present?
+
+    unless miles.positive? && location.all?(&:present?)
+      render status: 400
+      return
     end
+    showcase = SearchListItem.near(location.map(&:to_f), miles).includes(user: :children)
+    showcase = showcase.joins('INNER JOIN events ON events.id = itemable_id')
+    showcase = showcase.child_age_range(min_age, max_age)
+    showcase = showcase.where.not(user_id: current_user.id) if current_user.present?
+    showcase = showcase.where itemable_type: :Event
+
+    childcare_requests = SearchListItem.near(location.map(&:to_f), miles).includes(user: :children)
+    childcare_requests = childcare_requests.child_age_range(min_age, max_age)
+    childcare_requests = childcare_requests.where itemable_type: :ChildcareRequest
+    childcare_requests = childcare_requests.where.not(user_id: current_user.id) if current_user.present?
+    childcare_requests_array = childcare_requests.to_a.uniq { |i| i.user.id }
 
     # convert to array to perform application level logic
-    items = items.to_a.uniq { |i| i.user.id }
+    showcase_array = showcase.to_a.uniq { |i| i.user.id }
 
-    # remove user_matches from array and add them to the beginning
-    user_matches = current_user.matched_users if current_user.present?
-    user_matches ||= []
+    showcase_users = showcase_array.map { |s| s.user.id }
+    childcare_request_users = childcare_requests_array.map { |s| s.user.id }
 
-    user_matches.reverse_each do |user_match|
-      # find the first list item from this user
-      item_index = items.find_index do |i|
-        i.user.id == user_match.id
-      end
-      next if item_index.nil?
+    users = showcase_users | childcare_request_users
 
-      item = items[item_index]
-      items.delete_at(item_index)
-      items.unshift(item)
-    end
+    items = childcare_requests_array + showcase_array
+
+    # byebug
 
     links = {}
     meta = { items_count: items.count(:all) }
@@ -56,10 +56,11 @@ class SearchListItemsController < ApiController
       links[:next] = path.call(page: items.next_page, page_size: page_size) unless items.last_page?
     end
 
-    serializer = PublicUserSerializer.new items.map(&:user), include: %i[children showcase_event],
-                                                             links: links,
-                                                             meta: meta,
-                                                             params: { current_user: current_user }
-    render json: serializer.serializable_hash, status: :ok
+    serializer = SearchListItemSerializer.new items, include: %i[itemable user],
+                                                     links: links,
+                                                     meta: meta,
+                                                     params: { current_user: current_user }
+    json_hash = serializer.serializable_hash
+    render json: json_hash, status: :ok
   end
 end

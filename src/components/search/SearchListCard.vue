@@ -45,8 +45,9 @@
     </div>
     <SearchListCardActions
                     v-if="!isPhone"
-                    :user="user"
-                    :event="event"
+                    :user="item.user"
+                    :event="item.event"
+                    :childcareRequest="item.childcareRequest"
                     @user-updated="$emit('user-updated', $event)"
                     @event-updated="$emit('event-updated', $event)"
                     :timePast="timePast"
@@ -58,8 +59,9 @@
                     :allowWaveUndo="true"/>
     <SearchListCardActionsOverlay
                     v-if="showOverlay"
-                    :user="user"
-                    :event="event"
+                    :user="item.user"
+                    :event="item.event"
+                    :childcareRequest="item.childcareRequest"
                     @user-updated="$emit('user-updated', $event)"
                     @event-updated="$emit('event-updated', $event)"
                     @clickaway="overlayOpen=false"
@@ -85,12 +87,22 @@ import { item, screen } from '@/mixins'
 export default {
   name: 'SearchListCard',
   props: {
-    user: { required: true },
-    event: {},
+    item: { required: true },
     mapCenter: {}
   },
   mixins: [item, screen],
-  components: { AvatarImage, HouseholdImages, SearchListCardActions, SearchListCardActionsOverlay }
+  components: { AvatarImage, HouseholdImages, SearchListCardActions, SearchListCardActionsOverlay },
+  computed: {
+    user () {
+      return this.item.user
+    },
+    event () {
+      return this.item.event
+    },
+    childcareRequest () {
+      return this.item.childcareRequest
+    }
+  }
 }
 </script>
 

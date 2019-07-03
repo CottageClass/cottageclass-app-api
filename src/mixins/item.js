@@ -51,13 +51,17 @@ export default {
         (this.event.host.id.toString() !== this.currentUser.id.toString()))
     },
     showInterestedButton () {
-      return this.isAuthenticated && this.currentUser && (this.user.id.toString() !== this.currentUser.id.toString())
+      return !this.childcareRequest && // don't show for childcare requests
+        this.isAuthenticated &&
+        this.currentUser &&
+        (this.user.id.toString() !== this.currentUser.id.toString())
     },
     showContactButton () {
-      return !!this.childcareRequest
+      return !!this.childcareRequest // only show for childcare requests
     },
     showMeetButton () {
-      return !this.currentUser || (this.user.id.toString() !== this.currentUser.id.toString())
+      return !this.childcareRequest && // don't show for childcare requests
+       (!this.currentUser || (this.user.id.toString() !== this.currentUser.id.toString()))
     },
     showShareButton () {
       return this.event && this.$route.name !== 'SocialInvite'
