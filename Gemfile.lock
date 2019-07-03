@@ -387,6 +387,7 @@ GEM
       unicode-display_width (~> 1.4.0)
     rubocop-rspec (1.32.0)
       rubocop (>= 0.60.0)
+    ruby-prof (0.18.0)
     ruby-progressbar (1.10.0)
     ruby_dep (1.5.0)
     ruby_http_client (3.3.0)
@@ -532,6 +533,7 @@ DEPENDENCIES
   rspec_api_documentation
   rubocop
   rubocop-rspec
+  ruby-prof
   sassc-rails
   sendgrid-ruby
   shoulda-matchers

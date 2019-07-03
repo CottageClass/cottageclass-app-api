@@ -63,6 +63,7 @@ group :development, :test do
   gem 'rspec_api_documentation'
   gem 'rubocop', require: false
   gem 'rubocop-rspec', require: false
+  gem 'ruby-prof'
   gem 'shoulda-matchers'
   gem 'therubyracer', platforms: :ruby
   gem 'timecop'
