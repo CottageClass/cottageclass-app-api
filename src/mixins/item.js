@@ -53,7 +53,7 @@ export default {
     showInterestedButton () {
       return this.isAuthenticated && this.currentUser && (this.user.id.toString() !== this.currentUser.id.toString())
     },
-    showContactButton () {
+    showMeetButton () {
       return !this.currentUser || (this.user.id.toString() !== this.currentUser.id.toString())
     },
     showShareButton () {

@@ -51,7 +51,7 @@
                     @event-updated="$emit('event-updated', $event)"
                     :timePast="timePast"
                     :showGoingButton="showGoingButton"
-                    :showContactButton="showContactButton"
+                    :showMeetButton="showMeetButton"
                     :showShareButton="showShareButton"
                     :showInterestedButton="showInterestedButton"
                     :allowWaveUndo="true"/>
@@ -63,7 +63,7 @@
                     @event-updated="$emit('event-updated', $event)"
                     @clickaway="overlayOpen=false"
                     :showGoingButton="showGoingButton"
-                    :showContactButton="showContactButton"
+                    :showMeetButton="showMeetButton"
                     :showShareButton="showShareButton"
                     :showInterestedButton="showInterestedButton"
                     :allowWaveUndo="true"/>

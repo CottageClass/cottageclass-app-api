@@ -42,7 +42,7 @@
                             :timePast="timePast"
                             :showShareButton="showShareButton"
                             :showInterestedButton="showInterestedButton"
-                            :showContactButton="showContactButton"
+                            :showMeetButton="showMeetButton"
                             :showGoingButton="showGoingButton"
                             :allowWaveUndo="false"/>
           </div>

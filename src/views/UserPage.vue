@@ -51,7 +51,7 @@
                         :user="user"
                         @user-updated="userUpdate"
                         :showInterestedButton="false"
-                        :showContactButton="showContactButton"
+                        :showMeetButton="showMeetButton"
                         :showGoingButton="showGoingButton"
                         :allowWaveUndo="false"/>
 

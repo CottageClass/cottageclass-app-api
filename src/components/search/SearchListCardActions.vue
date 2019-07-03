@@ -6,7 +6,7 @@
     <li v-if="showGoingButton">
       <IconButton  label="Going" :icon="goingIcon" @click="goingClick"/>
     </li>
-    <li v-if="showContactButton">
+    <li v-if="showMeetButton">
       <MeetButton
         defaultText="Say hi"
         :icon="contactIcon"
@@ -43,7 +43,7 @@ export default {
     showShareButton: { default: false },
     showGoingButton: { default: false },
     showInterestedButton: { default: false },
-    showContactButton: { default: false },
+    showMeetButton: { default: false },
     allowWaveUndo: { default: false }
   },
   mixins: [rsvp],

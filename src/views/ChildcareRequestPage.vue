@@ -40,8 +40,8 @@
                             :timePast="timePast"
                             :showShareButton="showShareButton"
                             :showInterestedButton="showInterestedButton"
-                            :showContactButton="showContactButton"
                             :showGoingButton="showGoingButton"
+                            :showMeetButton="showMeetButton"
                             :allowWaveUndo="false"/>
           </div>
         </div>
