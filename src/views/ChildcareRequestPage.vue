@@ -1,7 +1,7 @@
 <template>
   <div>
     <MainNav />
-    <LoadingSpinner v-if="!childcareRequest" />
+    <LoadingSpinner v-if="!childcareRequest || !user" />
     <div v-else class="event-detail__container w-container">
       <div class="user-action-card__container">
         <div class="user-action-card__header">
@@ -123,7 +123,7 @@ import OtherEvent from '@/components/OtherEvent'
 import houseRulesImage from '@/assets/house-rules.svg'
 import petsImage from '@/assets/pets.svg'
 
-import { fetchUpcomingEvents, fetchChildcareRequest } from '@/utils/api'
+import { fetchUser, fetchUpcomingEvents, fetchChildcareRequest } from '@/utils/api'
 import { item, maps } from '@/mixins'
 
 export default {
@@ -132,6 +132,7 @@ export default {
   mixins: [item, maps],
   data () {
     return {
+      user: null,
       childcareRequest: null,
       mapOptions: {
         'disableDefaultUI': true, // turns off map controls
@@ -141,16 +142,28 @@ export default {
     }
   },
   computed: {
-    user () {
-      return this.childcareRequest.user
-    },
     houseRulesImage: () => houseRulesImage,
     petsImage: () => petsImage
   },
   methods: {
+    fetchUser: async function () {
+      this.user = await fetchUser(this.$route.params.id)
+      this.events = (await fetchUpcomingEvents(this.$route.params.id))
+      this.$nextTick(async function () {
+        await this.createMap(this.$refs.map, {
+          zoom: 13,
+          center: { lat: parseFloat(this.user.fuzzyLatitude),
+            lng: parseFloat(this.user.fuzzyLongitude) },
+          disableDefaultUI: true,
+          options: this.mapOptions,
+          style: 'width: 100px; height: 230px;'
+        })
+        await this.addCircle({ lat: this.user.fuzzyLatitude, lng: this.user.fuzzyLongitude }, 0.2)
+      })
+      this.otherEvents = (await fetchUpcomingEvents(this.user.id))
+    },
     fetchChildcareRequest: async function () {
       this.childcareRequest = await fetchChildcareRequest(this.$route.params.id)
-      this.otherEvents = (await fetchUpcomingEvents(this.childcareRequest.user.id))
       this.$nextTick(async function () {
         await this.createMap(this.$refs.map, {
           zoom: 13,
@@ -164,6 +177,7 @@ export default {
     }
   },
   created: function () {
+    this.fetchUser()
     this.fetchChildcareRequest()
   }
 }

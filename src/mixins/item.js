@@ -116,6 +116,9 @@ export default {
       if (this.event) {
         return moment(this.event.startsAt).format('ddd, MMMM D ha') + '-' + moment(this.event.endsAt).format('ha')
       }
+      if (this.childcareRequest) {
+        return 'CHILDCARE REQUESTED'
+      }
       const availabilityStrings = []
       if (this.user.availableMornings) {
         availabilityStrings.push('mornings')
@@ -226,6 +229,8 @@ export default {
     goToItem () {
       if (this.event) {
         this.$router.push({ name: 'EventPage', params: { id: this.event.id } })
+      } else if (this.childcareRequest) {
+        this.$router.push({ name: 'ChildcareRequestPage', params: { id: this.childcareRequest.id } })
       } else if (this.user) {
         this.$router.push({ name: 'UserPage', params: { id: this.user.id } })
       } else {
