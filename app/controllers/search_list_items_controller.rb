@@ -1,5 +1,8 @@
+require 'byebug'
+
 class SearchListItemsController < ApiController
   def index
+    # DevelopmentProfiler.prof('import') do
     miles = params[:miles]
     latitude = params[:latitude]
     longitude = params[:longitude]
@@ -18,27 +21,46 @@ class SearchListItemsController < ApiController
       render status: 400
       return
     end
-    showcase = SearchListItem.near(location.map(&:to_f), miles).includes(user: :children).includes(:itemable)
-    showcase = showcase.joins('INNER JOIN events ON events.id = itemable_id')
-    showcase = showcase.child_age_range(min_age, max_age)
-    showcase = showcase.where.not(user_id: current_user.id) if current_user.present?
-    showcase = showcase.where itemable_type: :Event
+    events = SearchListItem.near(location.map(&:to_f), miles).includes(user: :children).includes(:itemable)
+    events = events.where itemable_type: :Event
+    events = events.child_age_range(min_age, max_age)
+    events = events.where.not(user_id: current_user.id) if current_user.present?
+    events = events.merge(Event.upcoming)
+    events = events.joins('INNER JOIN events ON events.id = itemable_id')
 
     childcare_requests = SearchListItem.near(location.map(&:to_f), miles).includes(user: :children).includes(:itemable)
     childcare_requests = childcare_requests.child_age_range(min_age, max_age)
     childcare_requests = childcare_requests.where itemable_type: :ChildcareRequest
     childcare_requests = childcare_requests.where.not(user_id: current_user.id) if current_user.present?
-    childcare_requests_array = childcare_requests.to_a.uniq { |i| i.user.id }
 
     # convert to array to perform application level logic
-    showcase_array = showcase.to_a.uniq { |i| i.user.id }
+    event_array = events.to_a
+    childcare_request_array = childcare_requests.to_a
 
-    showcase_users = showcase_array.map { |s| s.user.id }
-    childcare_request_users = childcare_requests_array.map { |s| s.user.id }
+    # find all users that have no eligible events or childcare_requests
+    event_users = event_array.map { |s| s.user.id }
+    childcare_request_users = childcare_request_array.map { |s| s.user.id }
+    seen_users = event_users | childcare_request_users
+    unseen_users = SearchListItem.where(itemable_id: nil).where.not(user_id: seen_users)
+    unseen_users = unseen_users.to_a
 
-    users = showcase_users | childcare_request_users
-    items = childcare_requests_array + showcase_array
+    byebug
+    # reduce to one per user.  the last created
+    childcare_request_array = childcare_request_array.sort_by(&:created_at)
+    childcare_request_array.reverse!
+    childcare_request_array = childcare_request_array.uniq { |i| i.user.id }
 
+    event_array = event_array.sort_by(&:created_at)
+    event_array.reverse!
+    event_array = event_array.uniq { |i| i.user.id }
+
+    items = childcare_request_array + event_array
+    items.sort! do |i|
+      current_user.match_score i.user
+    end
+
+    # these go last.  we don't have to find them if we aren't at this page yet.
+    items += unseen_users
 
     links = {}
     meta = { items_count: items.count(:all) }
@@ -58,5 +80,6 @@ class SearchListItemsController < ApiController
                                                      params: { current_user: current_user }
     json_hash = serializer.serializable_hash
     render json: json_hash, status: :ok
+    end
   end
-end
+# end
