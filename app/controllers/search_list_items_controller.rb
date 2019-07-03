@@ -20,13 +20,13 @@ class SearchListItemsController < ApiController
       render status: 400
       return
     end
-    showcase = SearchListItem.near(location.map(&:to_f), miles).includes(user: :children)
+    showcase = SearchListItem.near(location.map(&:to_f), miles).includes(user: :children).includes(:itemable)
     showcase = showcase.joins('INNER JOIN events ON events.id = itemable_id')
     showcase = showcase.child_age_range(min_age, max_age)
     showcase = showcase.where.not(user_id: current_user.id) if current_user.present?
     showcase = showcase.where itemable_type: :Event
 
-    childcare_requests = SearchListItem.near(location.map(&:to_f), miles).includes(user: :children)
+    childcare_requests = SearchListItem.near(location.map(&:to_f), miles).includes(user: :children).includes(:itemable)
     childcare_requests = childcare_requests.child_age_range(min_age, max_age)
     childcare_requests = childcare_requests.where itemable_type: :ChildcareRequest
     childcare_requests = childcare_requests.where.not(user_id: current_user.id) if current_user.present?
@@ -39,7 +39,6 @@ class SearchListItemsController < ApiController
     childcare_request_users = childcare_requests_array.map { |s| s.user.id }
 
     users = showcase_users | childcare_request_users
-
     items = childcare_requests_array + showcase_array
 
     # byebug
