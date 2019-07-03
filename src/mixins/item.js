@@ -197,7 +197,7 @@ export default {
     },
     timePast () {
       if (this.event) {
-        return moment(this.event.endsAt) < moment().add(2, 'hours')
+        return moment(this.event.startsAt) < moment().subtract(1, 'hours')
       }
       return false
     },

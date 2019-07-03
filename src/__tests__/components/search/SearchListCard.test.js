@@ -13,28 +13,30 @@ describe('SearchListCard', () => {
     const wrapper = mount(SearchListCard, {
       mocks: { $store },
       propsData: {
-        user: {
-          id: 12,
-          firstName: 'Foo',
-          lastInitial: 'B',
-          jobPosition: 'Doctor',
-          employer: 'New York Health Dept.',
-          profileBlurb: 'This is my biography and I love it.',
-          childAgesInMonths: [4, 30, 108],
-          availableMornings: true,
-          availableAfternoons: false,
-          availableWeekends: true,
-          availableEvenings: false,
-          fuzzyLatitude: 42.27,
-          fuzzyLongitude: -71.78,
-          images: [
-            'https://res.cloudinary.com/cottageclass2/image/upload/v1559762128/user_images/2012-04-06_21.02.13_egjide.png',
-            'https://res.cloudinary.com/cottageclass2/image/upload/v1559762128/user_images/2012-04-06_21.02.13_egjide.png',
-            'https://res.cloudinary.com/cottageclass2/image/upload/v1559762152/user_images/2012-09-06_19.16.29_gehvr5.png',
-            'https://res.cloudinary.com/cottageclass2/image/upload/v1559762152/user_images/2012-09-06_19.16.29_gehvr5.png',
-            'https://res.cloudinary.com/cottageclass2/image/upload/v1559762128/user_images/2012-04-06_21.02.13_egjide.png',
-            'https://res.cloudinary.com/cottageclass2/image/upload/v1559762152/user_images/2012-09-06_19.16.29_gehvr5.png'
-          ]
+        item: {
+          user: {
+            id: 12,
+            firstName: 'Foo',
+            lastInitial: 'B',
+            jobPosition: 'Doctor',
+            employer: 'New York Health Dept.',
+            profileBlurb: 'This is my biography and I love it.',
+            childAgesInMonths: [4, 30, 108],
+            availableMornings: true,
+            availableAfternoons: false,
+            availableWeekends: true,
+            availableEvenings: false,
+            fuzzyLatitude: 42.27,
+            fuzzyLongitude: -71.78,
+            images: [
+              'https://res.cloudinary.com/cottageclass2/image/upload/v1559762128/user_images/2012-04-06_21.02.13_egjide.png',
+              'https://res.cloudinary.com/cottageclass2/image/upload/v1559762128/user_images/2012-04-06_21.02.13_egjide.png',
+              'https://res.cloudinary.com/cottageclass2/image/upload/v1559762152/user_images/2012-09-06_19.16.29_gehvr5.png',
+              'https://res.cloudinary.com/cottageclass2/image/upload/v1559762152/user_images/2012-09-06_19.16.29_gehvr5.png',
+              'https://res.cloudinary.com/cottageclass2/image/upload/v1559762128/user_images/2012-04-06_21.02.13_egjide.png',
+              'https://res.cloudinary.com/cottageclass2/image/upload/v1559762152/user_images/2012-09-06_19.16.29_gehvr5.png'
+            ]
+          }
         },
         mapCenter: { lat: 42.2798695, lng: -71.7898409 }
       }
@@ -64,12 +66,14 @@ describe('SearchListCard', () => {
     const wrapper = mount(SearchListCard, {
       mocks: { $store },
       propsData: {
-        user: {
-          id: 22,
-          facebookUid: '563930223',
-          childAgesInMonths: [1],
-          location: { lat: 42.27, lng: -71.78 },
-          images: []
+        item: {
+          user: {
+            id: 22,
+            facebookUid: '563930223',
+            childAgesInMonths: [1],
+            location: { lat: 42.27, lng: -71.78 },
+            images: []
+          }
         },
         mapCenter: { lat: 42.2798695, lng: -71.7898409 }
       }
@@ -89,12 +93,14 @@ describe('SearchListCard', () => {
     const wrapper = mount(SearchListCard, {
       mocks: { $store },
       propsData: {
-        user: {
-          id: 22
+        item: {
+          user: {
+            id: 22
           // facebookUid: '563930223',
           // childAgesInMonths: [1],
           // location: { lat: 42.27, lng: -71.78 },
           // images: []
+          }
         }
       }
     })

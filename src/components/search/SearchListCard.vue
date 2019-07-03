@@ -4,7 +4,7 @@
   <div class="header">
     <div class="header__date"
          :class="{'time-past': timePast,
-                  'childcare-request': item.childcareRequest}" >
+                  'childcare-request': item && item.childcareRequest}" >
       {{timeHeader}}
     </div>
     <div v-if="distance" class="header__distance">{{distance}}</div>
@@ -98,13 +98,13 @@ export default {
   components: { AvatarImage, HouseholdImages, SearchListCardActions, SearchListCardActionsOverlay },
   computed: {
     user () {
-      return this.item.user
+      return this.item && this.item.user
     },
     event () {
-      return this.item.event
+      return this.item && this.item.event
     },
     childcareRequest () {
-      return this.item.childcareRequest
+      return this.item && this.item.childcareRequest
     }
   }
 }
