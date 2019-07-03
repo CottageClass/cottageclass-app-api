@@ -179,7 +179,7 @@ class User < ApplicationRecord
   end
 
   def child_ages_in_months
-    children.map(&:age_in_months)
+    @child_ages_in_months ||= children.map(&:age_in_months)
   end
 
   def update_showcase_event
