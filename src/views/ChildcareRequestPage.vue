@@ -147,7 +147,7 @@ export default {
   },
   methods: {
     fetchUser: async function () {
-      this.user = await fetchUser(this.$route.params.id)
+      this.user = await fetchUser(this.childcareRequest.userId)
       this.events = (await fetchUpcomingEvents(this.$route.params.id))
       this.$nextTick(async function () {
         await this.createMap(this.$refs.map, {
@@ -176,9 +176,9 @@ export default {
       })
     }
   },
-  created: function () {
+  async created () {
+    await this.fetchChildcareRequest()
     this.fetchUser()
-    this.fetchChildcareRequest()
   }
 }
 </script>
