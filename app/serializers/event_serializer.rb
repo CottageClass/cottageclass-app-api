@@ -21,15 +21,7 @@ class EventSerializer
     serializer.serializable_hash
   end
 
-  attribute :starred do |instance, params|
-    current_user = params[:current_user]
-    if params[:starred_list]
-      true
-    elsif current_user.nil?
-      false
-    else
-      star = Star.find_by giver: current_user, starable_type: :Event, starable_id: instance.id
-      !star.nil?
-    end
+  attribute :starred do |event, params|
+    !event.received_stars.where(giver: params[:current_user]).nil?
   end
 end

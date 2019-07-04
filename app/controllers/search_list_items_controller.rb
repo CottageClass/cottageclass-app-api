@@ -1,5 +1,6 @@
 class SearchListItemsController < ApiController
   def index
+    # DevelopmentProfiler.prof 'profile' do
     miles = params[:miles]
     latitude = params[:latitude]
     longitude = params[:longitude]
@@ -93,5 +94,6 @@ class SearchListItemsController < ApiController
                                                      params: { current_user: current_user }
     json_hash = serializer.serializable_hash
     render json: json_hash, status: :ok
+    # end
   end
 end

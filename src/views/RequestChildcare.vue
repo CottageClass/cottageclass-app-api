@@ -23,6 +23,7 @@ import { mapGetters } from 'vuex'
 import StyleWrapper from '@/components/FTE/StyleWrapper'
 import CreateEvent from '@/components/CreateEvent'
 import CreateChildcareRequest from '@/components/CreateChildcareRequest'
+import { fetchUpcomingEvents } from '@/utils/api'
 
 export default {
   name: 'RequestChildcare',
@@ -31,6 +32,7 @@ export default {
   props: ['stepName', 'section'],
   data () {
     return {
+      myEvents: null
     }
   },
   computed: {
@@ -39,9 +41,12 @@ export default {
         ''
       ]
     },
-    ...mapGetters([])
+    ...mapGetters(['currentUser'])
   },
   methods: {
+    async fetchMyUpcomingEvents () {
+      this.myEvents = await fetchUpcomingEvents(this.currentUser.id)
+    },
     skipEvent () {
       this.$router.push({ params: { section: 'request', stepName: null } })
     },
@@ -49,9 +54,14 @@ export default {
       this.$router.push({ params: { section: 'request', stepName: null } })
     }
   },
-  created () {
+  async created () {
     if (!this.section) {
-      this.$router.push({ params: { section: 'event' } })
+      await this.fetchMyUpcomingEvents()
+      if (this.myEvents && this.myEvents.length > 0) {
+        this.$router.replace({ params: { section: 'request' } })
+      } else {
+        this.$router.replace({ params: { section: 'event' } })
+      }
     }
   }
 }

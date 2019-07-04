@@ -113,11 +113,11 @@ export default {
       if (this.stepName === 'has-pets') {
         this.$emit('backout')
       } else if (this.stepName === 'pet-description') {
-        this.$router.push({ params: { stepName: 'has-pets' } })
+        this.$router.replace({ params: { stepName: 'has-pets' } })
       } else if (this.stepName === 'house-rules' && this.hasPets.isTrue) {
-        this.$router.push({ params: { stepName: 'pets-description' } })
+        this.$router.replace({ params: { stepName: 'pets-description' } })
       } else if (this.stepName === 'house-rules' && !this.hasPets.isTrue) {
-        this.$router.push({ params: { stepName: 'has-pets' } })
+        this.$router.replace({ params: { stepName: 'has-pets' } })
       }
       this.showError = false
       window.scrollTo(0, 0)

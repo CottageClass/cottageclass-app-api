@@ -3,6 +3,7 @@ class User < ApplicationRecord
 
   include Devise::JWT::RevocationStrategies::JTIMatcher
   include LegacyPassword
+  include Starable
 
   # Include devise modules. Others available are:
   # :timeoutable, :confirmable, :invitable, :lockable
@@ -94,7 +95,6 @@ class User < ApplicationRecord
 
   has_many :childcare_requests, inverse_of: :user
 
-  has_many :received_stars, as: :starable, class_name: 'Star', dependent: :destroy, inverse_of: :starable
   belongs_to :showcase_event, class_name: 'Event', optional: true
 
   accepts_nested_attributes_for :children, allow_destroy: true, reject_if: :child_with_same_name_exists?
