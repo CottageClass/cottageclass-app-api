@@ -3,7 +3,7 @@
   <div class="floating-buttons__title-text">Can you come?</div>
   <ul class="event-detail__floating-buttons-list">
     <li class="event-detail__floating-button-item">
-      <a @click="submitRsvp" class="event-detail-floating-button w-inline-block">
+      <a @click="submitRsvpHandler" class="event-detail-floating-button w-inline-block">
         <div class="floating-button__black-text">Yes!</div>
       </a>
     </li>
@@ -26,15 +26,14 @@ export default {
   mixins: [rsvp],
   computed: mapGetters(['currentUser']),
   methods: {
-    submitRsvp () {
+    async submitRsvpHandler () {
       if (this.event.participated) {
         this.$router.push({ name: 'CancelRSVP', params: { eventId: this.event.id } })
+      } else if (this.currentUser.children.length === 1) {
+        await this.submitRsvp(this.currentUser.children.map(c => c.id))
+        this.$router.push({ name: 'Search' })
       } else {
-        if (this.currentUser.children.length === 1) {
-          this.submitRsvp(this.currentUser.children.map(c => c.id))
-        } else {
-          this.$router.push({ name: 'RsvpInfoCollection', params: { eventId: this.event.id } })
-        }
+        this.$router.push({ name: 'RsvpInfoCollection', params: { eventId: this.event.id } })
       }
     }
   }
