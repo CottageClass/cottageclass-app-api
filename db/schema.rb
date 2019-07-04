@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_02_142542) do
+ActiveRecord::Schema.define(version: 2019_07_04_165946) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 2019_07_02_142542) do
   create_table "childcare_requests", force: :cascade do |t|
     t.bigint "user_id"
     t.text "content"
+    t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.index ["user_id"], name: "index_childcare_requests_on_user_id"
   end
 
