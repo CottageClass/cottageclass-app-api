@@ -5,7 +5,7 @@ import moment from 'moment'
 export default {
   computed: {
     formattedDateTime () {
-      return this.event.startsAt.format('MMM d') + ' at ' + this.event.startsAt.format('ha')
+      return this.event.startsAt.format('MMM D') + ' at ' + this.event.startsAt.format('ha')
     },
     participantFirstName () {
       return this.currentUser.firstName
