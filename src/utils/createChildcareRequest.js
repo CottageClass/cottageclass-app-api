@@ -9,6 +9,8 @@ export const createChildcareRequests = (data) => {
   return ids.map(id => {
     const res = { id }
     Object.assign(res, data.childcareRequest[id].attributes)
+    Object.assign(res, { userId: data.childcareRequest[id].relationships.user.data.id })
+
     return res
   })
 }

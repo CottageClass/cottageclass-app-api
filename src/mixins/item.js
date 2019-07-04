@@ -171,6 +171,9 @@ export default {
       if (this.event) {
         return this.event.name
       }
+      if (this.childcareRequest) {
+        return this.childcareRequest.content
+      }
       return this.user.profileBlurb
     },
     profileBlurb () {

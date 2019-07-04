@@ -57,6 +57,7 @@ class SearchListItemsController < ApiController
     childcare_request_users = childcare_request_array.map { |s| s.user.id }
     seen_users = event_users | childcare_request_users
     unseen_users = SearchListItem.where(itemable_id: nil).where.not(user_id: seen_users)
+    unseen_users = unseen_users.where.not(user_id: current_user.id) if current_user.present?
     unseen_users = unseen_users.to_a
 
     # reduce to one per user.  the last created
