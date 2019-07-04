@@ -1,5 +1,3 @@
-import { capitalize } from '@/utils/utils'
-
 export const createChildcareRequest = (data) => {
   return createChildcareRequests(data)[0]
 }
