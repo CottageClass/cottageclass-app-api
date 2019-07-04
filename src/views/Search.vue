@@ -177,7 +177,7 @@ export default {
         console.log(this.items)
         this.lastPage = this.lastPage + 1
       } catch (e) {
-        this.logError('problem loading more users')
+        this.logError('problem loading more items')
         this.logError(e)
       } finally {
         this.awaiting = false

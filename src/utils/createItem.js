@@ -29,6 +29,8 @@ export const createItems = (data) => {
     return res
   })
   if (data.meta.item) {
+    console.log('data.meta.item')
+    console.log(data.meta.item)
     const order = data.meta.item.data.map(u => u.id)
     return order.map(id => items.find(i => i.id === id))
   }
