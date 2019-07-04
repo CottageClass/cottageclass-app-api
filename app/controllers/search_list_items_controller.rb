@@ -18,14 +18,17 @@ class SearchListItemsController < ApiController
       render status: 400
       return
     end
-    events = SearchListItem.near(location.map(&:to_f), miles).includes(user: :children).includes(:itemable)
+    events = SearchListItem.near(location.map(&:to_f), miles)
+    events = events.includes(:itemable, user: { children: :emergency_contacts })
+
     events = events.where itemable_type: :Event
     events = events.child_age_range(min_age, max_age)
     events = events.where.not(user_id: current_user.id) if current_user.present?
     events = events.merge(Event.upcoming)
     events = events.joins('INNER JOIN events ON events.id = itemable_id')
 
-    childcare_requests = SearchListItem.near(location.map(&:to_f), miles).includes(user: :children).includes(:itemable)
+    childcare_requests = SearchListItem.near(location.map(&:to_f), miles)
+    childcare_requests = childcare_requests.includes(user: :children)
     childcare_requests = childcare_requests.child_age_range(min_age, max_age)
     childcare_requests = childcare_requests.where itemable_type: :ChildcareRequest
     childcare_requests = childcare_requests.where.not(user_id: current_user.id) if current_user.present?
@@ -33,6 +36,17 @@ class SearchListItemsController < ApiController
     # convert to array to perform application level logic
     event_array = events.to_a
     childcare_request_array = childcare_requests.to_a
+
+    preloader = ActiveRecord::Associations::Preloader.new
+    preloader.preload(event_array,
+                      { itemable: %i[received_stars] },
+                      Star.where(giver_id: current_user.id,
+                                 starable_type: Event.name))
+
+    preloader.preload event_array, itemable: %i[participants
+                                                participating_users
+                                                user
+                                                event_hosts]
 
     # byebug
     # find all users that have no eligible events or childcare_requests
@@ -71,7 +85,7 @@ class SearchListItemsController < ApiController
       links[:next] = path.call(page: items.next_page, page_size: page_size) unless items.last_page?
     end
 
-    serializer = SearchListItemSerializer.new items, include: %i[itemable user],
+    serializer = SearchListItemSerializer.new items, include: %i[itemable user.children.emergency_contacts],
                                                      links: links,
                                                      meta: meta,
                                                      params: { current_user: current_user }
