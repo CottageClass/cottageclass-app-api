@@ -70,7 +70,7 @@ class SearchListItemsController < ApiController
     event_array = event_array.uniq { |i| i.user.id }
 
     items = childcare_request_array + event_array
-    items.sort! do |i|
+    items = items.sort_by do |i|
       current_user.match_score i.user
     end
 
