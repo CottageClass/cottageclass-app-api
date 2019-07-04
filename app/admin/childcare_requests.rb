@@ -1,6 +1,5 @@
 ActiveAdmin.register ChildcareRequest do
   config.sort_order = 'id_desc'
-  menu parent: 'Data'
 
   includes :user
 
@@ -14,5 +13,6 @@ ActiveAdmin.register ChildcareRequest do
     column :content
     column :user
     column :created_at
+    actions
   end
 end
