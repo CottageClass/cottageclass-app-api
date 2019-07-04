@@ -7,11 +7,13 @@ export const createItem = (data) => {
 }
 
 export const createItems = (data) => {
+  console.log({ data })
   const users = createUsers(data)
   const events = createEvents(data)
   const childcareRequests = createChildcareRequests(data)
 
   const itemIds = Object.keys(data.searchListItem)
+  console.log({ users, events, childcareRequests, itemIds })
   const items = itemIds.map(itemId => {
     const item = data.searchListItem[itemId]
     const res = { id: itemId }
