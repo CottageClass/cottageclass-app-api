@@ -9,7 +9,8 @@
     <ErrorMessage v-if="errorMessage && showError" :text="errorMessage" />
     <EventDescription
         v-if="stepName==='description'"
-        v-model="description" />
+        v-model="description"
+        :context="context" />
     <EventDatePicker
         v-if="stepName==='date'"
         v-model="date" />
