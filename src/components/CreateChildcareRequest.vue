@@ -8,7 +8,7 @@
     />
     <ErrorMessage v-if="errorMessage && showError" :text="errorMessage" />
     <Question v-if="stepName==='description'"
-      title="Describe your request"
+      title="Describe your childcare request"
       subtitle="What are you looking for? For what times? What kinds of needs does your child have? Parents near you will see your request and reply by text message. We strongly recommend meeting them for a playdate first!">
       <FormWithTextArea
         maxLength="120"

@@ -1,11 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ContactForm authenticated has the right message with no kids 1`] = `
-"(Joe is expecting and has a question about your KidsClub playdate on 03/23/2019 at 6:00 PM.)
+"(Joe is expecting and has a message about your KidsClub playdate on 03/23/2019 at 6:00 PM.)
 "
 `;
 
 exports[`ContactForm authenticated has the right message with some kids 1`] = `
-"(Joe has 2 children–ages 2 mos and 5 and has a question about your KidsClub playdate on 03/23/2019 at 6:00 PM.)
+"(Joe has 2 children–ages 2 mos and 5 and has a message about your KidsClub playdate on 03/23/2019 at 6:00 PM.)
 "
 `;
