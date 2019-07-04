@@ -8,6 +8,6 @@ class PublicUserSerializer < BaseSerializer
     user.last_name[0, 1]
   end
   attribute :starred do |user, params|
-    !user.received_stars.where(giver: params[:current_user]).nil?
+    user.starred? params[:current_user]
   end
 end

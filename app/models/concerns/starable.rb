@@ -7,7 +7,7 @@ module Starable
     has_many :starrers, through: :received_stars, source: :giver
   end
 
-  def starred?
-    @starred ||= !current_user_star.nil?
+  def starred?(current_user)
+    received_stars.where(giver: current_user).present?
   end
 end

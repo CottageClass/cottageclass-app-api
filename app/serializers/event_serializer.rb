@@ -22,6 +22,6 @@ class EventSerializer
   end
 
   attribute :starred do |event, params|
-    !event.received_stars.where(giver: params[:current_user]).nil?
+    event.starred? params[:current_user]
   end
 end
