@@ -17,6 +17,8 @@ export async function fetchFeed ({ miles, lat, lng, minAge, maxAge, pageSize = 2
     const res = await axios.get(url)
     logger.log('FETCH USERS WITHIN DISTANCE SUCCESS')
     logger.log(res.data)
+    const normalizedData = normalize(res.data, { endpoint: 'item' })
+    logger.debug({ normalizedData })
     return createItems(normalize(res.data, { endpoint: 'item' }))
   } catch (err) {
     logger.logError('FETCH USERS WITHIN DISTANCE FAILURE')
