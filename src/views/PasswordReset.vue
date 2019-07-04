@@ -84,7 +84,7 @@ export default {
         const JWT = signInResult.data[0]
         await this.$store.dispatch('establishUser', { JWT })
         await signIn({ email, password })
-        this.showAlertOnNextRoute('Your password reset request has been submitted.  You will be contacted shortly.', 'success')
+        this.showAlertOnNextRoute('Your password has been reset', 'success')
         this.$router.push({ name: 'Search' })
       } catch (err) {
         this.logError(err)
