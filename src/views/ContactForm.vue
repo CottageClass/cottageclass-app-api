@@ -11,7 +11,7 @@
           <LoadingSpinner v-if="!event && !user"/>
           <Question v-else
             :title="'Contact ' + recipientFirstName"
-            :subtitle="`Enter your question to ${recipientFirstName} below. They’ll reply by text message as soon as they can!`">
+            :subtitle="`Enter your message to ${recipientFirstName} below. They’ll reply by text message as soon as they can!`">
             <FormWithTextArea
               v-model="questionText"
               :placeholder="placeholderText" />
@@ -89,7 +89,7 @@ export default {
       this.$router.go(-1)
     },
     acknowledgmentMessage: function () {
-      let msg = `We've just sent your question to ${this.recipientFirstName} and they'll respond soon! You can follow up by texting this number.`
+      let msg = `We've just sent your message to ${this.recipientFirstName} and they'll respond soon! You can follow up by texting this number.`
       return msg
     }
   },
@@ -101,7 +101,7 @@ export default {
       return (this.questionText === '') ? 'inactive' : 'next'
     },
     placeholderText () {
-      return `Enter your question here ...`
+      return `Enter your message here ...`
     },
     hostId: function () {
       return (this.event && this.event.hostId) || (this.user && this.user.id)
@@ -121,10 +121,10 @@ export default {
       if (this.event) {
         const dateString = moment(this.event.startsAt).format('L')
         const timeString = moment(this.event.startsAt).format('LT')
-        const result = '(' + [senderFirstName, childText, 'and has a question about your KidsClub playdate on', dateString, 'at', timeString].join(' ') + '.)\n'
+        const result = '(' + [senderFirstName, childText, 'and has a message about your KidsClub playdate on', dateString, 'at', timeString].join(' ') + '.)\n'
         return result + this.questionText
       } else {
-        const result = '(' + [senderFirstName, childText, 'and has a question'].join(' ') + '.)\n'
+        const result = '(' + [senderFirstName, childText, 'and has a message'].join(' ') + '.)\n'
         return result + this.questionText
       }
     },
