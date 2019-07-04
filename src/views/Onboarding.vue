@@ -64,7 +64,7 @@ export default {
   },
   created () {
     if (!this.section) {
-      this.$router.push({ params: { section: 'user-info' } })
+      this.$router.replace({ params: { section: 'user-info' } })
     }
   }
 }

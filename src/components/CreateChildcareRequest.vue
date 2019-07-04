@@ -80,7 +80,7 @@ export default {
     },
     prevStep () {
       if (this.stepIndex > 0) {
-        this.$router.push({ params: { stepName: this.stepSequence[this.stepIndex - 1] } })
+        this.$router.replace({ params: { stepName: this.stepSequence[this.stepIndex - 1] } })
       }
     }
   },

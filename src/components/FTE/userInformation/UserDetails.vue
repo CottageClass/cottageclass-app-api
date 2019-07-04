@@ -122,7 +122,7 @@ export default {
       }
     },
     prevStep () {
-      this.$router.push({ params: {
+      this.$router.replace({ params: {
         stepName: this.stepSequence[this.stepIndex - 1]
       } })
       window.scrollTo(0, 0)
