@@ -1,7 +1,7 @@
 <template>
   <div>
     <MainNav />
-    <LoadingSpinner v-if="!event" />
+    <LoadingSpinner v-if="!childcareRequest || !user" />
     <div v-else class="event-detail__container w-container">
       <div class="user-action-card__container">
         <div class="user-action-card__header">
@@ -9,14 +9,14 @@
           <div v-if="distance" class="user-action-card__header__distance">{{distance}}</div>
         </div>
         <div class="user-action-card__description">
-          <div class="user-action-card__description-text">{{this.event.name}}</div>
+          <div class="user-action-card__description-text">{{this.childcareRequest.content}}</div>
         </div>
         <div class="user-action-card__footer">
           <div class="user-action-card__footer__user-summary">
-            <router-link :to="{name:'UserPage', params:{id: event.hostId}}"
+            <router-link :to="{name:'UserPage', params:{id: user.id}}"
                          class="avatar-container">
             <AvatarImage className="user-action-card__photo"
-                         :person="{facebookUid: event.hostFacebookUid, avatar: event.hostAvatar}"
+                         :person="{facebookUid: user.facebookUid, avatar: user.avatar}"
                          imageSize="100"/>
             <div v-if="verified" class="badge-verified">
               <div class="unicode-character">✓</div>
@@ -25,7 +25,7 @@
             </router-link>
             <div class="user-action-card__user-info--container">
               <div class="user-action-card__user-info_list">
-            <router-link :to="{name:'UserPage', params:{id: event.hostId}}"
+            <router-link :to="{name:'UserPage', params:{id: user.id}}"
                          class="user-action-card__user-info__name">
                 {{ userName }}</router-link>
                 <div class="user-action-card__user-info__occupation truncate">{{occupation}}</div>
@@ -36,33 +36,19 @@
           <div class="user-action-card__footer__actions">
             <SearchListCardActions
                             class="column-list"
-                            :user="event.host"
-                            :event="event"
-                            @event-updated="updateEvent"
+                            :user="user"
                             :timePast="timePast"
-                            :showShareButton="showShareButton"
-                            :showInterestedButton="showInterestedButton"
-                            :showMeetButton="showMeetButton"
-                            :showGoingButton="showGoingButton"
+                            :showShareButton="false"
+                            :showContactButton="showContactButton"
+                            :showInterestedButton="false"
+                            :showGoingButton="false"
+                            :showMeetButton="false"
                             :allowWaveUndo="false"/>
           </div>
         </div>
       </div>
       <div class="event-detail__content-columns w-row">
         <div class="event-detail__column-left w-col w-col-8 w-col-stack">
-          <div v-if="event.participatingParents && event.participatingParents.length" class="attendees__card">
-            <div class="attendees__title-text">Going ({{event.participatingParents.length}})</div>
-            <ul class="list">
-              <Attendee
-                v-for="attendee of event.participatingParents"
-                :key="'attendee' + attendee.userId"
-                :user="attendee" />
-              <Starrer
-                v-for="starrer of starrers"
-                :key="'starrer' + starrer.id"
-                :user="starrer" />
-            </ul>
-          </div>
           <div v-if="images && images.length>0" class="household-photos__card">
             <div class="household-photos__title-text">Household photos</div>
               <Images :images="images" />
@@ -113,7 +99,7 @@
         <div v-if="otherEvents" class="event-detail__column-right w-col w-col-4 w-col-stack">
           <ul class="other-events__list">
             <li class="other-events__title-bar">
-              <div class="other-events__title-text truncate">{{userFirstName}}'s other events </div>
+              <div class="other-events__title-text truncate">{{userFirstName}}'s events </div>
             </li>
             <OtherEvent v-for="otherEvent of otherEvents"
                         :key="otherEvent.id"
@@ -123,37 +109,31 @@
         </div>
       </div>
     </div>
-    <RsvpFooter v-if="showRsvpFooter"
-                :event="event"/>
   </div>
 </template>
 
 <script>
-import RsvpFooter from '@/components/base/RsvpFooter'
 import SearchListCardActions from '@/components/search/SearchListCardActions'
 import AvatarImage from '@/components/base/AvatarImage'
 import MainNav from '@/components/MainNav'
 import Images from '@/components/Images'
 import LoadingSpinner from '@/components/LoadingSpinner'
-import Attendee from '@/components/Attendee'
 import OtherEvent from '@/components/OtherEvent'
-import Starrer from '@/components/Starrer'
 
 import houseRulesImage from '@/assets/house-rules.svg'
 import petsImage from '@/assets/pets.svg'
 
-import { mapGetters } from 'vuex'
-import { fetchUpcomingEvents, fetchEvent, fetchStarrers } from '@/utils/api'
+import { fetchUser, fetchUpcomingEvents, fetchChildcareRequest } from '@/utils/api'
 import { item, maps } from '@/mixins'
 
 export default {
-  name: 'EventPage',
-  components: { MainNav, Images, LoadingSpinner, AvatarImage, SearchListCardActions, Attendee, Starrer, OtherEvent, RsvpFooter },
+  name: 'ChildcareRequestPage',
+  components: { MainNav, Images, LoadingSpinner, AvatarImage, SearchListCardActions, OtherEvent },
   mixins: [item, maps],
   data () {
     return {
-      event: null,
-      starrers: null,
+      user: null,
+      childcareRequest: null,
       mapOptions: {
         'disableDefaultUI': true, // turns off map controls
         'gestureHandling': 'none' // prevents any kind of scrolling
@@ -162,46 +142,43 @@ export default {
     }
   },
   computed: {
-    showRsvpFooter () {
-      return this.event &&
-        !this.timePast &&
-        (this.currentUser && this.event.host.id.toString() !== this.currentUser.id.toString()) &&
-        !this.event.participated &&
-        !this.isRsvpDeclined(this.event.id)
-    },
-    user () {
-      return this.event.host
-    },
     houseRulesImage: () => houseRulesImage,
-    petsImage: () => petsImage,
-    ...mapGetters(['isRsvpDeclined'])
+    petsImage: () => petsImage
   },
   methods: {
-    updateEvent (event) {
-      this.event = event
-    },
-    fetchEvent: async function () {
-      this.starrers = await fetchStarrers({ eventId: this.$route.params.id })
-      this.event = await fetchEvent(this.$route.params.id)
-      this.otherEvents = (await fetchUpcomingEvents(this.event.hostId)).filter(e => (e.id !== this.event.id))
+    fetchUser: async function () {
+      this.user = await fetchUser(this.$route.params.id)
+      this.events = (await fetchUpcomingEvents(this.$route.params.id))
       this.$nextTick(async function () {
         await this.createMap(this.$refs.map, {
           zoom: 13,
-          center: { lat: this.event.hostFuzzyLatitude, lng: this.event.hostFuzzyLongitude },
+          center: { lat: parseFloat(this.user.fuzzyLatitude),
+            lng: parseFloat(this.user.fuzzyLongitude) },
           disableDefaultUI: true,
           options: this.mapOptions,
           style: 'width: 100px; height: 230px;'
         })
-        await this.addCircle({ lat: this.event.hostFuzzyLatitude, lng: this.event.hostFuzzyLongitude }, 0.2)
+        await this.addCircle({ lat: this.user.fuzzyLatitude, lng: this.user.fuzzyLongitude }, 0.2)
+      })
+      this.otherEvents = (await fetchUpcomingEvents(this.user.id))
+    },
+    fetchChildcareRequest: async function () {
+      this.childcareRequest = await fetchChildcareRequest(this.$route.params.id)
+      this.$nextTick(async function () {
+        await this.createMap(this.$refs.map, {
+          zoom: 13,
+          center: { lat: parseFloat(this.user.fuzzyLatitude), lng: parseFloat(this.user.fuzzyLongitude) },
+          disableDefaultUI: true,
+          options: this.mapOptions,
+          style: 'width: 100px; height: 230px;'
+        })
+        await this.addCircle({ lat: this.user.fuzzyLatitude, lng: this.user.fuzzyLongitude }, 0.2)
       })
     }
   },
   created: function () {
-    this.fetchEvent()
-  },
-  beforeRouteUpdate (to, from, next) {
-    this.fetchEvent()
-    next()
+    this.fetchUser()
+    this.fetchChildcareRequest()
   }
 }
 </script>

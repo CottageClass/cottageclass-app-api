@@ -48,9 +48,7 @@ class API::EventsController < API::BaseController
                                                           participants
                                                           participants.participant_children
                                                           user
-                                                          user.children
-                                                          user.user_reviews
-                                                          user.user_reviews.reviewer],
+                                                          user.children],
                                              params: { current_user: current_user }
     render json: serializer.serializable_hash, status: :ok
   end
@@ -128,7 +126,7 @@ class API::EventsController < API::BaseController
       links[:next] = path.call(skope: skope_name, page: events.next_page, page_size: page_size) unless events.last_page?
     end
 
-    serializer = EventSerializer.new events, include: %i[event_hosts user user.user_reviews user.user_reviews.reviewer
+    serializer = EventSerializer.new events, include: %i[event_hosts user
                                                          participants
                                                          participants.participant_children],
                                              params: { current_user: current_user },

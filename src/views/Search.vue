@@ -71,7 +71,8 @@
                 :items="items"
                 :noItemsMessage="noItemsMessage"
                 :showTrailblazerMessage="showTrailblazerMessage"
-                @offerClick="offerPlaydate"
+                @offer-playdate-click="offerPlaydate"
+                @request-childcare-click="requestChildcare"
                 @fetch-more-click="fetchMoreItems"
                 @user-updated="updateUser"
                 @event-updated="updateEvent"/>
@@ -147,6 +148,9 @@ export default {
     },
     offerPlaydate () {
       this.$router.push({ name: 'NewEvent' })
+    },
+    requestChildcare () {
+      this.$router.push({ name: 'RequestChildcare' })
     },
     async fetchMoreItems () {
       try {

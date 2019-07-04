@@ -62,7 +62,7 @@ export default {
   },
   computed: {
     nextButtonState () { // overriding the mixin
-      if (this.context === 'onboarding' &&
+      if ((this.context === 'onboarding' || this.context === 'request-childcare') &&
         this.stepName === 'description' &&
         this.description.text.length === 0) {
         return 'skip'

@@ -50,8 +50,8 @@
                         class="profile-top-card__footer__button-list"
                         :user="user"
                         @user-updated="userUpdate"
-                        :showInterestedButton="false"
-                        :showContactButton="showContactButton"
+                        :showInterestedButton="showInterestedButton"
+                        :showMeetButton="showMeetButton"
                         :showGoingButton="showGoingButton"
                         :allowWaveUndo="false"/>
 

@@ -43,6 +43,12 @@ group :production do
   gem 'uglifier'
 end
 
+group :development, :test, :staging do
+  gem 'factory_bot_rails', '~> 4.1'
+  gem 'faker'
+  gem 'fakerbot', require: false
+end
+
 group :development, :test do
   gem 'brakeman', require: false
   gem 'bullet'
@@ -50,9 +56,6 @@ group :development, :test do
   gem 'climate_control'
   gem 'database_cleaner'
   gem 'dotenv-rails'
-  gem 'factory_bot_rails', '~> 4.1'
-  gem 'faker'
-  gem 'fakerbot', require: false
   gem 'guard-rspec', require: false
   gem 'httplog'
   gem 'mry', require: false
@@ -60,6 +63,7 @@ group :development, :test do
   gem 'rspec_api_documentation'
   gem 'rubocop', require: false
   gem 'rubocop-rspec', require: false
+  gem 'ruby-prof'
   gem 'shoulda-matchers'
   gem 'therubyracer', platforms: :ruby
   gem 'timecop'

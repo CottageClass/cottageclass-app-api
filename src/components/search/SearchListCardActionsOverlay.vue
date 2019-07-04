@@ -11,6 +11,7 @@
          @event-updated="$emit('event-updated', $event)"
          class="other-events-card__action-selector__button-list"
          :showGoingButton="showGoingButton"
+         :showMeetButton="showMeetButton"
          :showContactButton="showContactButton"
          :showShareButton="showShareButton"
          :showInterestedButton="showInterestedButton"
@@ -26,7 +27,7 @@ export default {
   props: {
     showGoingButton: { default: false },
     showInterestedButton: { default: false },
-    showContactButton: { default: false },
+    showMeetButton: { default: false },
     user: { required: true },
     allowWaveUndo: { default: false },
     event: {}

@@ -4,14 +4,14 @@
     <div class="event-list" v-if="!awaiting">
       <SearchListHeader
         v-if="showHeader"
-        @offerClick="$emit('offerClick')"
+        @offer-playdate-click="$emit('offer-playdate-click')"
+        @request-childcare-click="$emit('request-childcare-click')"
         />
       <div v-for="item in items">
         <SearchListCard
-                    :user="item.user"
-                    :event="item.event"
+                    :item="item"
                     :mapCenter="mapArea.center"
-                    :key="item.user.id"
+                    :key="item.id"
                     @user-updated="$emit('user-updated', $event)"
                     @event-updated="$emit('event-updated', $event)"/>
       </div>

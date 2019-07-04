@@ -92,6 +92,8 @@ class User < ApplicationRecord
   has_many :starred_users,        through: :stars, source: :starable, source_type: :User
   has_many :starred_events,       through: :stars, source: :starable, source_type: :Event
 
+  has_many :childcare_requests, inverse_of: :user
+
   has_many :received_stars, as: :starable, class_name: 'Star', dependent: :destroy, inverse_of: :starable
   belongs_to :showcase_event, class_name: 'Event', optional: true
 
@@ -177,7 +179,7 @@ class User < ApplicationRecord
   end
 
   def child_ages_in_months
-    children.map(&:age_in_months)
+    @child_ages_in_months ||= children.map(&:age_in_months)
   end
 
   def update_showcase_event

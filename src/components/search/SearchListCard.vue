@@ -2,7 +2,11 @@
 <li class="events-list__event-summary-card"
     @click.stop="goToItem">
   <div class="header">
-    <div class="header__date" :class="{'time-past': timePast}">{{timeHeader}}</div>
+    <div class="header__date"
+         :class="{'time-past': timePast,
+                  'childcare-request': item && item.childcareRequest}" >
+      {{timeHeader}}
+    </div>
     <div v-if="distance" class="header__distance">{{distance}}</div>
   </div>
   <div class="description">
@@ -45,26 +49,30 @@
     </div>
     <SearchListCardActions
                     v-if="!isPhone"
-                    :user="user"
-                    :event="event"
+                    :user="item.user"
+                    :event="item.event"
+                    :childcareRequest="item.childcareRequest"
                     @user-updated="$emit('user-updated', $event)"
                     @event-updated="$emit('event-updated', $event)"
                     :timePast="timePast"
                     :showGoingButton="showGoingButton"
-                    :showContactButton="showContactButton"
+                    :showMeetButton="showMeetButton"
                     :showShareButton="showShareButton"
                     :showInterestedButton="showInterestedButton"
+                    :showContactButton="showContactButton"
                     :allowWaveUndo="true"/>
     <SearchListCardActionsOverlay
                     v-if="showOverlay"
-                    :user="user"
-                    :event="event"
+                    :user="item.user"
+                    :event="item.event"
+                    :childcareRequest="item.childcareRequest"
                     @user-updated="$emit('user-updated', $event)"
                     @event-updated="$emit('event-updated', $event)"
                     @clickaway="overlayOpen=false"
                     :showGoingButton="showGoingButton"
-                    :showContactButton="showContactButton"
+                    :showMeetButton="showMeetButton"
                     :showShareButton="showShareButton"
+                    :showContactButton="showContactButton"
                     :showInterestedButton="showInterestedButton"
                     :allowWaveUndo="true"/>
   </div>
@@ -83,12 +91,22 @@ import { item, screen } from '@/mixins'
 export default {
   name: 'SearchListCard',
   props: {
-    user: { required: true },
-    event: {},
+    item: { required: true },
     mapCenter: {}
   },
   mixins: [item, screen],
-  components: { AvatarImage, HouseholdImages, SearchListCardActions, SearchListCardActionsOverlay }
+  components: { AvatarImage, HouseholdImages, SearchListCardActions, SearchListCardActionsOverlay },
+  computed: {
+    user () {
+      return this.item && this.item.user
+    },
+    event () {
+      return this.item && this.item.event
+    },
+    childcareRequest () {
+      return this.item && this.item.childcareRequest
+    }
+  }
 }
 </script>
 
@@ -233,7 +251,10 @@ a {
 
 .header__date {
   &.time-past {
-  color: #aaaaaa;
+    color: #aaaaaa;
+  }
+  &.childcare-request {
+    color: #FD6F77;
   }
   color: #1f88e9;
   font-size: 12px;

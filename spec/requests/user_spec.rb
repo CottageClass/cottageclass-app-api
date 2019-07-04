@@ -4,8 +4,8 @@ require 'rspec_api_documentation/dsl'
 RSpec.resource 'User' do
   include_context 'json headers'
 
-  let(:user) { build :user, :with_children, :with_user_reviews }
-  let(:other_user) { build :user, :with_children, :with_user_reviews }
+  let(:user) { build :user, :with_children }
+  let(:other_user) { build :user, :with_children }
 
   context 'read operations' do
     before { user.save }
@@ -56,7 +56,6 @@ RSpec.resource 'User' do
           expect(json_body.dig('data', 'attributes', 'phone_number')).to eq(user.phone_number)
           expect(json_body.dig('data', 'attributes', 'facebook_access_token')).to be_nil
           expect(json_body.dig('data', 'attributes', 'last_name')).not_to be_nil
-          expect(json_body.dig('data', 'relationships', 'user_reviews')).to be_nil
           expect(json_body.dig('data', 'relationships', 'children')).not_to be_nil
           expect(included_children.map { |u| u.dig('attributes', 'age_in_months') }.compact).not_to be_blank
           expect(included_children.map { |u| u.dig('attributes', 'birthday') }.compact).not_to be_blank
@@ -70,7 +69,6 @@ RSpec.resource 'User' do
           expect(response_status).to eq(200)
           expect(json_body.dig('data', 'attributes', 'phone')).to be_nil
           expect(json_body.dig('data', 'attributes', 'last_name')).to be_nil
-          expect(json_body.dig('data', 'relationships', 'user_reviews')).not_to be_nil
           expect(json_body.dig('data', 'relationships', 'children')).not_to be_nil
           expect(included_children.map { |u| u.dig('attributes', 'age_in_months') }.compact).not_to be_blank
           expect(included_children.map { |u| u.dig('attributes', 'birthday') }.compact).to be_blank

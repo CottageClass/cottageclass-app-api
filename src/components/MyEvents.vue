@@ -6,7 +6,8 @@
       <div class="content-container-4 w-container">
         <h1 class="h1-display">Playdates you're hosting</h1>
         <SearchResultList
-          @offerClick="offerPlaydate"
+          @offer-playdate-click="offerPlaydate"
+          @request-childcare-click="requestChildcare"
           :showHeader="true"
           :items="items"
           :noEventsMessage="noEventsMessage"
@@ -49,6 +50,9 @@ export default {
   methods: {
     offerPlaydate () {
       this.$router.push({ name: 'NewEvent' })
+    },
+    requestChildcare () {
+      this.$router.push({ name: 'RequestChildcare' })
     },
     limitNumberOfEvents: function (events) {
       if (this.limitTo) {

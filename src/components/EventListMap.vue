@@ -42,7 +42,8 @@ This is the map view or the list view of events
               :items="items"
               :noItemsMessage="noItemsMessage"
               :showTrailblazerMessage="showTrailblazerMessage"
-              @offerClick="offerPlaydate"
+              @offer-playdate-click="offerPlaydate"
+              @request-childcare-click="requestChildcare"
               @fetch-more-click="$emit('fetch-more-click')"
               @user-updated="$emit('user-updated', $event)"
               @event-updated="$emit('event-updated', $event)"/>
@@ -72,6 +73,9 @@ export default {
   methods: {
     offerPlaydate () {
       this.$router.push({ name: 'NewEvent' })
+    },
+    requestChildcare () {
+      this.$router.push({ name: 'RequestChildcare' })
     },
     mapClick () {
       this.$emit('map-click')

@@ -1,16 +1,23 @@
 <template>
 <div class="events__actions">
   <ul class="events__actions__button-list">
+    <li v-if="isAuthenticated"
+        class="events__actions__button-item">
+      <a @click="$emit('request-childcare-click')" class="events__actions__button request-childcare w-button">Request Care</a>
+    </li>
     <li class="events__actions__button-item">
-      <a @click="$emit('offerClick')" class="events__actions__button__offer-playdate w-button">Offer Playdate</a>
+      <a @click="$emit('offer-playdate-click')" class="events__actions__button offer-playdate w-button">Offer Playdate</a>
     </li>
   </ul>
 </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
-  name: 'SearchListHeader'
+  name: 'SearchListHeader',
+  computed: mapGetters(['isAuthenticated'])
 }
 </script>
 
@@ -45,7 +52,19 @@ a {
   margin-right: 8px;
 }
 
-.events__actions__button__offer-playdate {
+.events__actions__button{
+  &.offer-playdate {
+    background-image: url('../../assets/heart__blue.svg');
+    &:hover {
+      background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('../../assets/heart__blue.svg');
+    }
+  }
+  &.request-childcare{
+    background-image: url('../../assets/megaphone__blue.svg');
+    &:hover {
+      background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('../../assets/megaphone__blue.svg');
+    }
+  }
   margin-right: 0;
   padding: 4px 10px 5px 26px;
   border-style: solid;
@@ -53,33 +72,33 @@ a {
   border-color: #1f88e9;
   border-radius: 4px;
   background-color: #fff;
-  background-image: url('../../assets/heart__blue.svg');
   background-position: 6px 49%;
   background-size: 16px 16px;
   background-repeat: no-repeat;
   color: #1f88e9;
-}
-
-.events__actions__button__offer-playdate:hover {
-  background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('../../assets/heart__blue.svg');
-  background-position: 0 0, 6px 49%;
-  background-size: auto, 16px 16px;
-  background-repeat: repeat, no-repeat;
-}
-
-@media (max-width: 991px){
-  .events__actions__button__offer-playdate:hover {
-    background-image: linear-gradient(180deg, transparent, transparent), url('../../assets/heart__blue.svg');
+  &:hover {
+    background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('../../assets/heart__blue.svg');
     background-position: 0 0, 6px 49%;
     background-size: auto, 16px 16px;
     background-repeat: repeat, no-repeat;
   }
+}
 
-  .events__actions__button__offer-playdate:active {
-    background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.03), rgba(0, 0, 0, 0.03)), url('../../assets/heart__blue.svg');
+@media (max-width: 991px){
+  .events__actions__button:hover {
+    background-image: linear-gradient(180deg, transparent, transparent), url('../../assets/heart__blue.svg');
+  }
+
+  .events__actions__button:active {
     background-position: 0 0, 6px 49%;
     background-size: auto, 16px 16px;
     background-repeat: repeat, no-repeat;
+    &.offer-playdate {
+      background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.03), rgba(0, 0, 0, 0.03)), url('../../assets/heart__blue.svg');
+    }
+    &.request-chilcdare{
+      background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.03), rgba(0, 0, 0, 0.03)), url('../../assets/megaphone__blue.svg');
+    }
   }
 
 }

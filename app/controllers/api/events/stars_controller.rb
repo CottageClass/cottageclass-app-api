@@ -11,9 +11,7 @@ class API::Events::StarsController < API::StarsController
                                                          participants
                                                          participants.participant_children
                                                          user
-                                                         user.children
-                                                         user.user_reviews
-                                                         user.user_reviews.reviewer],
+                                                         user.children],
                                             params: { current_user: current_user }
     render json: serializer.serializable_hash, status: status
   end

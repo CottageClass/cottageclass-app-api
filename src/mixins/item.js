@@ -51,10 +51,17 @@ export default {
         (this.event.host.id.toString() !== this.currentUser.id.toString()))
     },
     showInterestedButton () {
-      return this.isAuthenticated && this.currentUser && (this.user.id.toString() !== this.currentUser.id.toString())
+      return !this.childcareRequest && // don't show for childcare requests
+        this.isAuthenticated &&
+        this.currentUser &&
+        (this.user.id.toString() !== this.currentUser.id.toString())
     },
     showContactButton () {
-      return !this.currentUser || (this.user.id.toString() !== this.currentUser.id.toString())
+      return !!this.childcareRequest // only show for childcare requests
+    },
+    showMeetButton () {
+      return !this.childcareRequest && // don't show for childcare requests
+       (!this.currentUser || (this.user.id.toString() !== this.currentUser.id.toString()))
     },
     showShareButton () {
       return this.event && this.$route.name !== 'SocialInvite'
@@ -108,6 +115,9 @@ export default {
     timeHeader () {
       if (this.event) {
         return moment(this.event.startsAt).format('ddd, MMMM D ha') + '-' + moment(this.event.endsAt).format('ha')
+      }
+      if (this.childcareRequest) {
+        return 'CHILDCARE REQUESTED'
       }
       const availabilityStrings = []
       if (this.user.availableMornings) {
@@ -187,7 +197,7 @@ export default {
     },
     timePast () {
       if (this.event) {
-        return moment(this.event.endsAt) < moment().add(2, 'hours')
+        return moment(this.event.startsAt) < moment().subtract(1, 'hours')
       }
       return false
     },
@@ -219,6 +229,8 @@ export default {
     goToItem () {
       if (this.event) {
         this.$router.push({ name: 'EventPage', params: { id: this.event.id } })
+      } else if (this.childcareRequest) {
+        this.$router.push({ name: 'ChildcareRequestPage', params: { id: this.childcareRequest.id } })
       } else if (this.user) {
         this.$router.push({ name: 'UserPage', params: { id: this.user.id } })
       } else {
