@@ -9,10 +9,10 @@
     <ErrorMessage v-if="errorMessage && showError" :text="errorMessage" />
     <Question v-if="stepName==='description'"
       title="Describe your childcare request"
-      subtitle="What are you looking for? For what times? What kinds of needs does your child have? Parents near you will see your request and reply by text message. We strongly recommend meeting them for a playdate first!">
+      subtitle="Parents near you will see your request and reply by text message. What are you looking for? For what times? What kinds of needs does your child have? (Note: if you do swap childcare with a parent, we strongly recommend meeting them for a playdate first.)">
       <FormWithTextArea
         maxLength="120"
-        placeholder="Describe your playdate here, e.g. 'Come over and play at our house!'"
+        placeholder="e.g. 'Can anyone recommend a great sitter?' or 'Seeking a childcare swap to cover Tuesday mornings in September.'"
         v-model="description.text" />
     </Question>
   </div>
