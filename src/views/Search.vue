@@ -170,11 +170,11 @@ export default {
         if (newItems.length < params.pageSize) {
           this.showFetchMoreButton = false
         }
-        if (this.currentUser) {
-          newItems = newItems.filter(u => u.id !== this.currentUser.id)
-        }
+        console.log(this.items)
+        console.log(newItems)
         // if items is null, set it to the incoming items, otherwise add them
         this.items = !this.items ? newItems : this.items.concat(newItems)
+        console.log(this.items)
         this.lastPage = this.lastPage + 1
       } catch (e) {
         this.logError('problem loading more users')
