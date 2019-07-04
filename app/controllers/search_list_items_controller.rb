@@ -38,10 +38,12 @@ class SearchListItemsController < ApiController
     childcare_request_array = childcare_requests.to_a
 
     preloader = ActiveRecord::Associations::Preloader.new
-    preloader.preload(event_array,
-                      { itemable: %i[received_stars] },
-                      Star.where(giver_id: current_user.id,
-                                 starable_type: Event.name))
+    if current_user.present?
+      preloader.preload(event_array,
+                        { itemable: %i[received_stars] },
+                        Star.where(giver_id: current_user.id,
+                                   starable_type: Event.name))
+    end
 
     preloader.preload event_array, itemable: %i[participants
                                                 participating_users
