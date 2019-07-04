@@ -39,7 +39,8 @@
       </div>
     </div>
     <div class="footer__actions--mobile">
-      <a  class="event-action__icon-button__star w-inline-block"
+      <a  v-if="!childcareRequest"
+          class="event-action__icon-button__star w-inline-block"
           :class="isStarred?'active':''"
           @click.stop="interestedClick"></a>
       <div class="other-events-card__footer-actions__more-wrapper">
