@@ -71,7 +71,7 @@
                 :items="items"
                 :noItemsMessage="noItemsMessage"
                 :showTrailblazerMessage="showTrailblazerMessage"
-                @offer-click="offerPlaydate"
+                @offer-playdate-click="offerPlaydate"
                 @request-childcare-click="requestChildcare"
                 @fetch-more-click="fetchMoreItems"
                 @user-updated="updateUser"
