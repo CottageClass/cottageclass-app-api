@@ -66,6 +66,7 @@
             />
             <div class="list-container w-container">
               <SearchResultList
+                :awaiting="awaiting"
                 :showFetchMoreButton="showFetchMoreButton"
                 class="list"
                 :items="items"
@@ -123,6 +124,7 @@ export default {
       showTrailblazerMessage: true,
       ageRange: { error: null, data: { min: -1, max: -1 } },
       detailView: false,
+      awaiting: false,
       shortDescription: null
     }
   },
@@ -163,6 +165,7 @@ export default {
           maxAge: this.ageRange.data.max >= 0 ? this.ageRange.data.max : null,
           page: this.lastPage + 1
         }
+        this.awaiting = true
         let newItems = await fetchFeed(params)
         if (newItems.length < params.pageSize) {
           this.showFetchMoreButton = false
@@ -176,6 +179,8 @@ export default {
       } catch (e) {
         this.logError('problem loading more users')
         this.logError(e)
+      } finally {
+        this.awaiting = false
       }
     },
     resetAgeRange () {

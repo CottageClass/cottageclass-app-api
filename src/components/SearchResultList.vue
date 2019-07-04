@@ -1,13 +1,12 @@
 <template>
   <div class="list-wrapper">
-    <LoadingSpinner v-if="awaiting"/>
-    <div class="event-list" v-if="!awaiting">
+    <div class="event-list">
       <SearchListHeader
         v-if="showHeader"
         @offer-playdate-click="$emit('offer-playdate-click')"
         @request-childcare-click="$emit('request-childcare-click')"
         />
-      <div v-for="item in items">
+      <div v-for="item in (items || [])">
         <SearchListCard
                     :item="item"
                     :mapCenter="mapArea.center"
@@ -16,6 +15,7 @@
                     @event-updated="$emit('event-updated', $event)"/>
       </div>
       <SearchListFooter v-if="showFetchMoreButton"
+                        :awaiting="awaiting"
                         @fetch-more-click="$emit('fetch-more-click')"
                         />
     </div>
@@ -33,16 +33,19 @@
 <script>
 import TrailblazerCard from '@/components/TrailblazerCard'
 import SearchListCard from '@/components/search/SearchListCard'
-import LoadingSpinner from '@/components/LoadingSpinner'
 import SearchListHeader from '@/components/search/SearchListHeader'
 import SearchListFooter from '@/components/search/SearchListFooter'
 import { mapGetters } from 'vuex'
 
 export default {
   name: 'SearchResultList',
-  components: { LoadingSpinner, SearchListCard, TrailblazerCard, SearchListHeader, SearchListFooter },
+  components: { SearchListCard, TrailblazerCard, SearchListHeader, SearchListFooter },
 
   props: {
+    awaiting: {
+      type: Boolean,
+      default: false
+    },
     noEventsMessage: {},
     items: { links: null },
     showTrailblazerMessage: {
@@ -59,9 +62,6 @@ export default {
     }
   },
   computed: {
-    awaiting: function () {
-      return this.items === null
-    },
     noItems: function () {
       return this.items !== null && this.items.length === 0
     },

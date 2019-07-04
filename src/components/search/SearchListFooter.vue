@@ -1,10 +1,18 @@
 <template>
-<li class="events-list__view-more"><a @click="$emit('fetch-more-click')" class="event-list__view-more-link">View more</a></li>
+<li class="events-list__view-more">
+  <a v-if="!awaiting"
+     @click="$emit('fetch-more-click')"
+     class="event-list__view-more-link">View more</a>
+  <LoadingSpinner v-else class="compact"/>
+</li>
 </template>
 
 <script>
+import LoadingSpinner from '@/components/LoadingSpinner'
 export default {
-  name: 'SearchListFooter'
+  name: 'SearchListFooter',
+  props: ['awaiting'],
+  components: { LoadingSpinner }
 }
 </script>
 
@@ -35,6 +43,10 @@ a {
 
 .event-list__view-more-link:hover {
   background-color: rgba(0, 0, 0, 0.03);
+}
+.compact {
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 @media (max-width: 991px){
