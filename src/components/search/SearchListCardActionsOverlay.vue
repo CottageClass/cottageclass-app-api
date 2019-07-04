@@ -7,6 +7,7 @@
     <SearchListCardActions
          :user="user"
          :event="event"
+         :childcareRequest="childcareRequest"
          @user-updated="$emit('user-updated', $event)"
          @event-updated="$emit('event-updated', $event)"
          class="other-events-card__action-selector__button-list"
@@ -28,8 +29,10 @@ export default {
     showGoingButton: { default: false },
     showInterestedButton: { default: false },
     showMeetButton: { default: false },
+    showContactButton: { default: false },
     user: { required: true },
     allowWaveUndo: { default: false },
+    childcareRequest: {},
     event: {}
   },
   components: { SearchListCardActions },
