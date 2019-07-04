@@ -1,5 +1,6 @@
 class Event < ApplicationRecord
   include Eventable
+  include Starable
 
   PAST_PENALTY = 31_557_600 # seconds in a year
   enum kind: { manual: 0, generated: 1 }
@@ -23,8 +24,6 @@ class Event < ApplicationRecord
   has_many :participants, as: :participable, dependent: :destroy
   has_many :participant_children, as: :participable
   has_many :participating_users, through: :participants, source: :user
-  has_many :received_stars, as: :starable, class_name: 'Star', dependent: :destroy
-  has_many :starrers, through: :received_stars, source: :giver
 
   scope :eager, -> { includes :event_hosts, participants: %i[user participant_children] }
   scope :nearest, ->(user) { where.not(id: user.events).near([user.latitude, user.longitude], 100) }
