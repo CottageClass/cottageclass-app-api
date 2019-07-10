@@ -91,7 +91,7 @@ ActiveAdmin.register User do
     end
     User::STORED_MATCHES.times do |item|
       column "match_#{item}" do |instance|
-        instance.user_matches[item].matched_user_id if instance.user_matches[item].present?
+        instance.active_user_matches[item].matched_user_id if instance.active_user_matches[item].present?
       end
     end
   end
