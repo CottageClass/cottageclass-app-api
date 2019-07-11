@@ -1,7 +1,7 @@
 <template>
   <Question
   title="What's your phone number?"
-  explanation="Only members who RSVP to your playdate will see your phone number. (We may also send you text messages about your playdate or upcoming playdates. Message & data rates apply.)">
+  explanation="Only members who RSVP to your playdate will see your phone number. (We may also send you text messages about your playdate or upcoming playdates. Reply STOP to cancel, HELP for help. Message & data rates may apply.)">
     <form v-on:submit.prevent>
       <input
         @keyup.enter="$emit('pressedEnter')"
