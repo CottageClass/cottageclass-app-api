@@ -173,6 +173,10 @@ export default new Router({
       name: 'ContactUserForm',
       component: ContactForm,
       props: true
+    },
+    {
+      path: '/my', // short link for SMS prompts
+      redirect: '/events/new/description'
     }
   ],
   scrollBehavior (to, from, savedPosition) {
