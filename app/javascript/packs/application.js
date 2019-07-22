@@ -104,6 +104,6 @@ if (isAuthWindow) {
       router,
       render: h => h(App)
     })
-    vue.$ga.require('GTM-N8C23R')
+    vue.$ga.require('GTM-N8C23RQ')
   })
 }
