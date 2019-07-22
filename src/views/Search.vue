@@ -197,7 +197,6 @@ export default {
         center,
         maxDistance: e.miles
       })
-      this.showTrailblazerMessage = false
       this.fetch()
     },
     fetch: async function () {
