@@ -11,6 +11,9 @@ export const createItem = (data) => {
 }
 
 export const createItems = (data) => {
+  if (!data.searchListItem || data.searchListItem.length === 0) {
+    return []
+  }
   const users = createUsers(data)
   const events = createEvents(data)
   const childcareRequests = createChildcareRequests(data)
