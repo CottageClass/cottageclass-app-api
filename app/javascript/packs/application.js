@@ -98,11 +98,12 @@ if (isAuthWindow) {
     )
 
     /* eslint-disable no-new */
-    new Vue({
+    const vue = new Vue({
       el: selector,
       store,
       router,
       render: h => h(App)
     })
+    vue.$ga.require('GTM-N8C23R')
   })
 }
