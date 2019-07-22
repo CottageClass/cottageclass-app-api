@@ -42,7 +42,7 @@ require 'faker'
   user = User.new(hash)
 
   # add some children
-  children = (0..Random.rand(1..3)).map do
+  children = Random.rand(0..3).times do
     Child.new(
       first_name: Faker::Name.unique.first_name,
       birthday: Faker::Time.between(17.years.ago, Time.zone.today, :midnight)

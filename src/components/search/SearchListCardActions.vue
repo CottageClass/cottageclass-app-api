@@ -4,7 +4,11 @@
       <IconButton label="Interested" :icon="starIcon" @click="interestedClick"/>
     </li>
     <li v-if="showGoingButton">
-      <IconButton  label="Going" :icon="goingIcon" @click="goingClick"/>
+      <IconButton
+        class="going-button"
+        label="Going"
+        :icon="goingIcon"
+        @click="goingClick"/>
     </li>
     <li v-if="showMeetButton">
       <MeetButton
@@ -28,7 +32,7 @@ import IconButton from '@/components/search/IconButton'
 
 import { starEvent, unstarEvent, starUser, unstarUser } from '@/utils/api/stars'
 import { mapGetters } from 'vuex'
-import { rsvp } from '@/mixins'
+import { rsvp, redirect } from '@/mixins'
 
 import shareIcon from '@/assets/share-black-outline.svg'
 import contactIcon from '@/assets/contact-black-outline.svg'
@@ -50,7 +54,7 @@ export default {
     showMeetButton: { default: false },
     allowWaveUndo: { default: false }
   },
-  mixins: [rsvp],
+  mixins: [rsvp, redirect],
   components: { IconButton, MeetButton },
   computed: {
     shareIcon () { return shareIcon },
@@ -91,7 +95,11 @@ export default {
       this.$router.push({ name: 'ContactUserForm', params: { userId: this.user.id } })
     },
     goingClick () {
-      if (this.event.participated) {
+      if (this.redirectToSignupIfNotAuthenticated({
+        name: 'RsvpInfoCollection',
+        params: { eventId: this.event.id }
+      })) {
+      } else if (this.event.participated) {
         this.$router.push({ name: 'CancelRSVP', params: { eventId: this.event.id } })
       } else {
         if (this.currentUser.children.length === 1) {

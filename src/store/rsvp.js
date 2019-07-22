@@ -1,4 +1,4 @@
-// This module holds data for an event that is in the process of being created
+// This module stores data around rsvps
 
 const state = {
   declinedRsvps: []
