@@ -55,10 +55,11 @@ export default {
       event: false
     }
   },
-  created: function () {
+  async created () {
     if (this.redirectToSignupIfNotAuthenticated()) { return }
     this.redirectToOnboardingIfNotOnboarded()
     this.showErrorIfUserHasNoChildren()
+    await this.selectSingleChild()
   },
   mounted: function () {
     // get data about the current event to determine max attendees.
@@ -96,6 +97,16 @@ export default {
     ...mapGetters([ 'currentUser', 'isAuthenticated' ])
   },
   methods: {
+    async selectSingleChild () {
+      if (!this.evnet) {
+        await this.fetchEventInformation()
+      }
+      if (this.children.length === 1) {
+        this.childrenSelected.push(this.children[0].id)
+        await this.submitRsvp(this.childrenSelected)
+        this.$router.replace({ name: 'EventPage', params: { id: this.event.id } })
+      }
+    },
     showErrorIfUserHasNoChildren: function () {
       if (!this.children || this.children.length === 0) {
         this.err = 'Sorry, but we cannot retrieve your children\'s information. Are you sure you have signed in? To resolve this, please email us at: contact@cottageclass.com.'
@@ -125,15 +136,17 @@ export default {
         this.err = 'Sorry, there was a problem retrieving information about the event. Go back and try again?'
       }
     },
-    nextStep: function () {
+    async nextStep () {
       if (this.tooManyChildren) {
         let numChildren = this.childrenSelected.length
         let childrenSingularOrPlural = numChildren === 1 ? 'child' : 'children'
         this.err = 'Sorry, but there are not enough spots available for ' + numChildren + ' ' + childrenSingularOrPlural + '.'
       } else if (this.childrenSelected.length === 0) {
         this.err = 'Please choose at least one child to RSVP.'
+      } else if (this.event.participated) {
+        this.$router.push({ name: 'EventPage', params: { id: this.event.id } })
       } else {
-        this.submitRsvp(this.childrenSelected)
+        await this.submitRsvp(this.childrenSelected)
       }
     },
     isSelected: function (id) {

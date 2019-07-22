@@ -46,11 +46,11 @@ export default {
     },
     async submitRsvp (childIds) {
       this.err = ''
-      console.log('rsvping children ' + childIds + ' to event ID' + this.event.id)
+      const eventId = this.event.id || this.$route.params.eventId
       this.submitToSheetsu()
 
       try {
-        await submitEventParticipant(this.event.id, childIds)
+        await submitEventParticipant(eventId, childIds)
         this.$store.commit('showAlertOnNextRoute', {
           alert: {
             message: `Playdate request sent for ${this.formattedDateTime}. ` +
@@ -59,9 +59,9 @@ export default {
             status: 'success'
           }
         })
-        this.$ga.event('RSVP', 'sent', this.event.id)
+        this.$ga.event('RSVP', 'sent', eventId)
         this.initProxyConversation()
-        this.$router.push({ name: 'EventPage', params: { id: this.event.id } })
+        this.$router.push({ name: 'EventPage', params: { id: eventId } })
       } catch (err) {
         console.log(err)
         this.err = 'Sorry, there was a problem submitting your RSVP. Try again?'

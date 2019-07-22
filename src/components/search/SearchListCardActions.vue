@@ -95,8 +95,10 @@ export default {
       this.$router.push({ name: 'ContactUserForm', params: { userId: this.user.id } })
     },
     goingClick () {
-      if (this.redirectToSignupIfNotAuthenticated()) {
-        this.$store.commit('addPendingGoing', { event: this.event })
+      if (this.redirectToSignupIfNotAuthenticated({
+        name: 'RsvpInfoCollection',
+        params: { eventId: this.event.id }
+      })) {
       } else if (this.event.participated) {
         this.$router.push({ name: 'CancelRSVP', params: { eventId: this.event.id } })
       } else {

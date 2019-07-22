@@ -5,21 +5,26 @@ export default {
     /*
     * returns true if redirected
     */
-    redirectToSignupIfNotAuthenticated: function () {
+    redirectToSignupIfNotAuthenticated: function (callbackRoute) {
       if (!this.isAuthenticated) {
         this.log('redirecting to sign-up')
-        this.setRedirectRouteHere()
+        if (callbackRoute) {
+          this.setRedirectRoute(callbackRoute)
+        } else {
+          this.setRedirectRouteHere()
+        }
         this.$router.push({ name: 'SignUp' })
         return true
       }
       return false
     },
+    setRedirectRoute: function (route) {
+      this.$store.commit('setRedirectRoute', { route })
+    },
     setRedirectRouteHere: function () {
-      this.$store.commit('setRedirectRoute', {
-        route: {
-          name: this.$route.name,
-          params: this.$route.params
-        }
+      this.setRedirectRoute({
+        name: this.$route.name,
+        params: this.$route.params
       })
     },
     redirectOrProceed () {
