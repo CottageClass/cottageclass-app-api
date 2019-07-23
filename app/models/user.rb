@@ -4,6 +4,7 @@ class User < ApplicationRecord
   include Devise::JWT::RevocationStrategies::JTIMatcher
   include LegacyPassword
   include Starable
+  include CriticalMass
 
   # Include devise modules. Others available are:
   # :timeoutable, :confirmable, :invitable, :lockable
