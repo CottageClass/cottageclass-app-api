@@ -4,7 +4,7 @@ ActiveAdmin.register User do
 
   includes :children
 
-  permit_params :email, :facebook_uid, :internally_cleared, :verified, :first_name, :last_name, :name, :profile_blurb,
+  permit_params :email, :facebook_uid, :internally_cleared, :pause_suggestion_email, :verified, :first_name, :last_name, :name, :profile_blurb,
                 :apartment_number, :referrer, source_tags: []
 
   filter :name
@@ -13,12 +13,14 @@ ActiveAdmin.register User do
   filter :verified
   filter :facebook_uid
   filter :created_at
+  filter :pause_suggestion_email
 
   index do
     selectable_column
     column :id
     column :name
     column :internally_cleared
+    column :pause_suggestion_email
     bool_column :verified
     column :facebook_uid
     column :created_at

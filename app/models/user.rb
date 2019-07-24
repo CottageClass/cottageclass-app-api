@@ -239,6 +239,8 @@ class User < ApplicationRecord
   end
 
   def notify_event_suggestion
+    return if pause_suggestion_email
+
     suggestion = nil
     matched_users.includes(:events).each do |matched_user|
       first_event = matched_user.events.upcoming.order(:starts_at).first
