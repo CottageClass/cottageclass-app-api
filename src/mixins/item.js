@@ -59,6 +59,11 @@ export default {
     showContactButton () {
       return !!this.childcareRequest // only show for childcare requests
     },
+    showCancelButton () {
+      return this.event &&
+        !this.timePast &&
+        (this.event.host.id.toString() === this.currentUser.id.toString())
+    },
     showMeetButton () {
       return !this.childcareRequest && // don't show for childcare requests
        (!this.currentUser || (this.user.id.toString() !== this.currentUser.id.toString()))

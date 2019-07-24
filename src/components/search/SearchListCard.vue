@@ -55,12 +55,14 @@
                     :childcareRequest="item.childcareRequest"
                     @user-updated="$emit('user-updated', $event)"
                     @event-updated="$emit('event-updated', $event)"
+                    @event-deleted="$emit('event-deleted', id)"
                     :timePast="timePast"
                     :showGoingButton="showGoingButton"
                     :showMeetButton="showMeetButton"
                     :showShareButton="showShareButton"
                     :showInterestedButton="showInterestedButton"
                     :showContactButton="showContactButton"
+                    :showCancelButton="showCancelButton"
                     :allowWaveUndo="true"/>
     <SearchListCardActionsOverlay
                     v-if="showOverlay"
@@ -69,12 +71,14 @@
                     :childcareRequest="item.childcareRequest"
                     @user-updated="$emit('user-updated', $event)"
                     @event-updated="$emit('event-updated', $event)"
+                    @event-deleted="$emit('event-deleted', id)"
                     @clickaway="overlayOpen=false"
                     :showGoingButton="showGoingButton"
                     :showMeetButton="showMeetButton"
                     :showShareButton="showShareButton"
                     :showContactButton="showContactButton"
                     :showInterestedButton="showInterestedButton"
+                    :showCancelButton="showCancelButton"
                     :allowWaveUndo="true"/>
   </div>
 </li>

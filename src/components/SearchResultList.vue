@@ -12,6 +12,7 @@
                     :mapCenter="mapArea.center"
                     :key="item.id"
                     @user-updated="$emit('user-updated', $event)"
+                    @event-deleted="$emit('event-deleted', id)"
                     @event-updated="$emit('event-updated', $event)"/>
       </div>
       <SearchListFooter v-if="showFetchMoreButton"
