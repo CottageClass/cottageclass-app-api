@@ -9,10 +9,12 @@
          :event="event"
          :childcareRequest="childcareRequest"
          @user-updated="$emit('user-updated', $event)"
+         @event-deleted="$emit('event-deleted', id)"
          @event-updated="$emit('event-updated', $event)"
          class="other-events-card__action-selector__button-list"
          :showGoingButton="showGoingButton"
          :showMeetButton="showMeetButton"
+         :showCancelButton="showCancelButton"
          :showContactButton="showContactButton"
          :showShareButton="showShareButton"
          :showInterestedButton="showInterestedButton"
@@ -29,6 +31,7 @@ export default {
     showGoingButton: { default: false },
     showInterestedButton: { default: false },
     showMeetButton: { default: false },
+    showCancelButton: { default: false },
     showContactButton: { default: false },
     user: { required: true },
     allowWaveUndo: { default: false },

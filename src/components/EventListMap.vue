@@ -46,6 +46,7 @@ This is the map view or the list view of events
               @request-childcare-click="requestChildcare"
               @fetch-more-click="$emit('fetch-more-click')"
               @user-updated="$emit('user-updated', $event)"
+              @event-deleted="$emit('event-deleted', id)"
               @event-updated="$emit('event-updated', $event)"/>
     </div>
   </div>

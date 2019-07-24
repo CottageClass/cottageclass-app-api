@@ -20,6 +20,9 @@
     <li v-if="showContactButton">
       <IconButton label="Respond" :icon="contactIcon" @click="contactClick"/>
     </li>
+    <li v-if="showCancelButton">
+      <IconButton label="Cancel" @click="cancelClick"/>
+    </li>
     <li v-if="showShareButton">
       <IconButton label="Share" :icon="shareIcon" @click="shareClick"/>
     </li>
@@ -30,9 +33,9 @@
 import MeetButton from '@/components/base/MeetButton'
 import IconButton from '@/components/search/IconButton'
 
-import { starEvent, unstarEvent, starUser, unstarUser } from '@/utils/api/stars'
+import { starEvent, unstarEvent, starUser, unstarUser, deleteEvent } from '@/utils/api'
 import { mapGetters } from 'vuex'
-import { rsvp, redirect } from '@/mixins'
+import { rsvp, redirect, alerts } from '@/mixins'
 
 import shareIcon from '@/assets/share-black-outline.svg'
 import contactIcon from '@/assets/contact-black-outline.svg'
@@ -52,9 +55,10 @@ export default {
     showGoingButton: { default: false },
     showInterestedButton: { default: false },
     showMeetButton: { default: false },
+    showCancelButton: { default: false },
     allowWaveUndo: { default: false }
   },
-  mixins: [rsvp, redirect],
+  mixins: [rsvp, redirect, alerts],
   components: { IconButton, MeetButton },
   computed: {
     shareIcon () { return shareIcon },
@@ -108,6 +112,12 @@ export default {
           this.$router.push({ name: 'RsvpInfoCollection', params: { eventId: this.event.id } })
         }
       }
+    },
+    cancelClick () {
+      deleteEvent(this.event.id, () => {
+        this.$emit('event-deleted', this.event.id)
+        this.showBriefAllert('Your event has been deleted', 'success')
+      })
     },
     shareClick () {
       this.$router.push({ name: 'SocialInvite', params: { id: this.event.id, context: 'searchItem' } })

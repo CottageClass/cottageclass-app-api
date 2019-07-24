@@ -8,6 +8,7 @@
         <SearchResultList
           @offer-playdate-click="offerPlaydate"
           @request-childcare-click="requestChildcare"
+          @event-deleted="eventDeleted"
           :showHeader="true"
           :items="items"
           :noEventsMessage="noEventsMessage"
@@ -48,6 +49,9 @@ export default {
     ...mapGetters(['currentUser'])
   },
   methods: {
+    eventDeleted (id) {
+      this.fetchMyUpcomingEvents()
+    },
     offerPlaydate () {
       this.$router.push({ name: 'NewEvent' })
     },
