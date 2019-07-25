@@ -6,7 +6,7 @@ const logger = Logger('vendor:sheetsu')
 const client = sheetsu({ address: 'https://sheetsu.com/apis/v1.0su/62cd725d6088' })
 
 export function submitToSheetsu (data, sheetName) {
-  if (process.env.NODE_ENV === 'production') {
+  if (process.env.NODE_ENV === 'production' || window.location.hostname.includes('staging')) {
     data = { timeStamp: moment(Date()).format('LLLL'), ...data }
     try {
       client.create(data, sheetName)
