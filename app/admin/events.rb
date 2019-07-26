@@ -13,6 +13,8 @@ ActiveAdmin.register Event do
                 activity_names: [], foods: [], event_hosts_attributes: %i[id verified _destroy]
 
   filter :name
+  filter :user_email, as: :string
+  filter :user_phone_number, as: :string
 
   before_save do |instance|
     instance.activity_names = (params.dig(:event, :activity_names) || '').split(',').try :flatten

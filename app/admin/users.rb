@@ -14,6 +14,8 @@ ActiveAdmin.register User do
   filter :facebook_uid
   filter :created_at
   filter :pause_suggestion_email
+  filter :phone_number, label: 'phone: 5551234'
+  filter :email
 
   index do
     selectable_column
