@@ -27,13 +27,8 @@
       v-model="location"
       />
     <LanguagesSpoken v-model="currentUser.languages" :showChoicesImmediately="false"/>
-    <div class="save-button-container">
-      <div v-if="!isMobile"
-        class="save-button w-button"
-        @click="submitUserInformation">{{saveButtonText}}</div>
-    </div>
   </StyleWrapper>
-  <PageActionsFooter v-if="isMobile" :buttons="footerButtons" @primary-click="submitUserInformation" />
+  <PageActionsFooter :buttons="footerButtons" @primary-click="submitUserInformation" />
   </div>
 </div>
 
