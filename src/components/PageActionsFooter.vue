@@ -80,6 +80,9 @@ export default {
   cursor: default;
 }
 .button-primary {
+  width: 200px;
+  margin-right: auto;
+  margin-left: auto;
   background-color: #1f88e9;
   border-color: hsla(208.8118811881188, 82.11%, 51.76%, 1.00);
 }
@@ -129,16 +132,11 @@ export default {
 @media (max-width: 767px) {
 
   .button-primary {
+    width: 100%;
     display: block;
     padding-top: 6px;
     padding-bottom: 7px;
-    -webkit-align-self: center;
-    -ms-flex-item-align: center;
-    -ms-grid-row-align: center;
     align-self: center;
-    -webkit-box-flex: 0;
-    -webkit-flex: 0 auto;
-    -ms-flex: 0 auto;
     flex: 0 auto;
   }
 
@@ -147,25 +145,10 @@ export default {
     min-width: 0px;
     padding-top: 8px;
     padding-bottom: 8px;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: row;
-    -ms-flex-direction: row;
     flex-direction: row;
-    -webkit-box-pack: center;
-    -webkit-justify-content: center;
-    -ms-flex-pack: center;
     justify-content: center;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-    -ms-flex-align: center;
     align-items: center;
   }
 }
 
-@media (max-width: 479px) {
-  .button-primary {
-    width: 100%;
-  }
-}
 </style>

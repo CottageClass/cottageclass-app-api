@@ -4,36 +4,31 @@
   <div class="lp-container w-container">
   <h1 class="heading-1">Edit profile</h1>
   <StyleWrapper styleIs="editing" class="cards" v-if="currentUser">
-      <ErrorMessage v-if="showError && hasError" text="Your form has errors. Please fix them to continue..." />
-      <ErrorMessage v-if="showError && hasError && phone.err" :text="phone.err" />
-      <ErrorMessage v-if="showError && hasError && employment.err" :text="employment.err" />
-    <Phone v-model="phone" :currentPhone="currentUser.phone" :required="false" />
+    <ErrorMessage v-if="showError && hasError" text="Your form has errors. Please fix them to continue..." />
+    <ErrorMessage v-if="showError && hasError && phone.err" :text="phone.err" />
+    <ErrorMessage v-if="showError && hasError && employment.err" :text="employment.err" />
     <ErrorMessage v-if="showError" :text="location.err" />
-    <Location
-      :currentAddress="currentUser.fullAddress"
-      :currentApartment="currentUser.apartmentNumber"
-      v-model="location"
-      />
-    <Employment v-model="employment"/>
-    <ProfileBlurb v-model="currentUser.profileBlurb" />
+    <ErrorMessage v-if="showError" :text="children.err" />
     <Question
       title="Got any photos you'd like to share?"
       subtitle="Adding photos to your profile helps give other members a sense of your family."
       >
       <MultipleImageUpload v-model="currentUser.images" />
     </Question>
+    <Employment v-model="employment"/>
+    <ProfileBlurb v-model="currentUser.profileBlurb" />
     <Activities v-model="currentUser.activities" />
     <Availability v-model="availability" :required="false"/>
-    <ErrorMessage v-if="showError" :text="children.err" />
     <Children v-model="children" :required="false" />
-    <LanguagesSpoken v-model="currentUser.languages"/>
-    <div class="save-button-container">
-      <div v-if="!isMobile"
-        class="save-button w-button"
-        @click="submitUserInformation">{{saveButtonText}}</div>
-    </div>
+    <Phone v-model="phone" :currentPhone="currentUser.phone" :required="false" />
+    <Location
+      :currentAddress="currentUser.fullAddress"
+      :currentApartment="currentUser.apartmentNumber"
+      v-model="location"
+      />
+    <LanguagesSpoken v-model="currentUser.languages" :showChoicesImmediately="false"/>
   </StyleWrapper>
-  <PageActionsFooter v-if="isMobile" :buttons="footerButtons" @primary-click="submitUserInformation" />
+  <PageActionsFooter :buttons="footerButtons" @primary-click="submitUserInformation" />
   </div>
 </div>
 
