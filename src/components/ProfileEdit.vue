@@ -26,7 +26,7 @@
     <Availability v-model="availability" :required="false"/>
     <ErrorMessage v-if="showError" :text="children.err" />
     <Children v-model="children" :required="false" />
-    <LanguagesSpoken v-model="currentUser.languages"/>
+    <LanguagesSpoken v-model="currentUser.languages" :showChoicesImmediately="false"/>
     <div class="save-button-container">
       <div v-if="!isMobile"
         class="save-button w-button"

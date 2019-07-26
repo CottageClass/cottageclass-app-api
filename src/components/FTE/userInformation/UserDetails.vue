@@ -18,7 +18,8 @@
       v-model=availability />
     <LanguagesSpoken
       v-if="stepName==='languages'"
-      v-model="languages" />
+      v-model="languages"
+      :showChoicesImmediately="true"/>
     <Activities
       v-if="stepName==='activities'"
       v-model="activities" />
