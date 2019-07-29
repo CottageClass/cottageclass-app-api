@@ -39,13 +39,8 @@
             </router-link>
           </li>
           <li v-if="isAuthenticated">
-            <router-link to="/my-rsvps" class="link-block w-inline-block">
-              <div class="text-block">Playdates you're attending</div>
-            </router-link>
-          </li>
-          <li v-if="isAuthenticated">
-            <router-link to="/my-events" class="link-block w-inline-block">
-              <div class="text-block">Playdates you're hosting</div>
+            <router-link :to="{name: 'YourPlaydates'}" class="link-block w-inline-block">
+              <div class="text-block">Your playdates</div>
             </router-link>
           </li>
           <li v-if="isAuthenticated">
