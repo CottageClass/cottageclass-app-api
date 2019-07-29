@@ -1,92 +1,86 @@
 <template>
   <div class="main-nav">
-    <Alert />
-    <Modal />
-    <div class="lp-container w-container">
-      <div class="logo-wrapper">
+    <div class="navigation__container w-container">
+      <Alert />
+      <Modal />
+      <div class="navigation__logo-wrapper">
         <router-link :to="{ name: logoRouterTarget }" class="w-inline-block">
           <img src="@/assets/kc-logo-landscape.svg" alt="" class="logo">
         </router-link>
       </div>
-      <div class="actions-wrapper">
-        <router-link v-if="currentUser" :to="{name: 'UserPage', params: {id: currentUser.id}}">
+      <ul class="navigation__links-list w-list-unstyled">
+        <li class="navigation__link-item">
+          <router-link :to="{name: 'Search'}"
+                       class="navigation__button w-inline-block"
+                       :class="{'selected-nav-item': isSearchPage}"
+                       >
+            <img src="@/assets/house.svg" alt="" class="navigation__icon" />
+            <div class="navigation__button-label">Nearby Parents</div>
+          </router-link>
+        </li>
+        <li class="navigation__link-item">
+          <router-link :to="{name: 'YourPlaydates'}"
+                       class="navigation__button w-inline-block"
+                       :class="{'selected-nav-item': isYourPlaydatesPage}"
+                       >
+            <img src="@/assets/calendar.svg" alt="" class="navigation__icon" />
+            <div class="navigation__button-label">Your Playdates</div>
+            <div v-if="false" class="global__badge TODO">
+              <div class="badge__text">99+</div>
+            </div>
+          </router-link>
+        </li>
+      </ul>
+      <div class="navigation__profile-menu__container">
+        <a v-if="currentUser"
+           class="navigation__profile-menu-button w-inline-block"
+           @click="toggleMenu"
+           >
           <AvatarImage
           v-if="currentUser"
           :person="currentUser"
           className="image"
           imageSize="40"
           />
-        </router-link>
-        <a @click="toggleMenu" class="nav-menu-button button w-button">Menu</a></div>
-      <div
-      v-if="showMenu"
-      v-on-clickaway="clickedAway"
-      class="nav-links-expanded">
-        <ul class="unordered-list-2 w-list-unstyled">
-          <li v-if="isAuthenticated">
-            <router-link :to="{name: 'Search'}" class="link-block w-inline-block">
-              <div class="text-block">Find parents &amp; playdates</div>
-            </router-link>
-          </li>
-          <li v-if="isAuthenticated">
-            <a href="/profile/edit" class="link-block w-inline-block">
-              <div class="text-block">Edit profile</div>
-            </a>
-          </li>
-          <li>
-            <router-link to="/faq" class="link-block w-inline-block">
-              <div class="text-block">FAQ</div>
-            </router-link>
-          </li>
-          <li v-if="isAuthenticated">
-            <router-link :to="{name: 'YourPlaydates'}" class="link-block w-inline-block">
-              <div class="text-block">Your playdates</div>
-            </router-link>
-          </li>
-          <li v-if="isAuthenticated">
-            <a @click.prevent="logout" href="" class="link-block w-inline-block">
-              <div class="text-block">Logout</div>
-            </a>
-          </li>
-          <li v-if="isAuthenticated">
-            <a href="/events/new" class="link-block w-inline-block">
-              <div class="text-block">Offer a playdate</div>
-            </a>
-          </li>
-          <li v-if="!isAuthenticated">
-            <a href="/log-in" class="link-block w-inline-block">
-              <div class="text-block">Log in</div>
-            </a>
-          </li>
-          <li v-if="!isAuthenticated">
-            <a href="/sign-up" class="link-block w-inline-block">
-              <div class="text-block">Sign up</div>
-            </a>
-          </li>
-        </ul>
+          <img src="@/assets/triangle-down_1triangle-down.png" alt="" class="navigation__down-triangle" />
+        </a>
       </div>
+      <ExpandingMenu v-if="showMenu"
+                     v-on-clickaway="clickedAway"
+                    />
     </div>
   </div>
 </template>
 
 <script>
-import { signOut } from '@/utils/api'
+import { mapGetters } from 'vuex'
 import { mixin as clickaway } from 'vue-clickaway'
+
 import AvatarImage from '@/components/base/AvatarImage'
 import Alert from '@/components/Alert.vue'
 import Modal from '@/components/base/Modal'
-import { mapGetters } from 'vuex'
+import ExpandingMenu from '@/components/ExpandingMenu'
 
 export default {
   name: 'MainNav',
-  components: { AvatarImage, Alert, Modal },
-  mixins: [ clickaway ],
-  props: ['user'],
   data () {
     return {
-      showMenu: false,
-      menuButtonText: 'Menu'
+      showMenu: false
     }
+  },
+  components: { AvatarImage, Alert, Modal, ExpandingMenu },
+  mixins: [ clickaway ],
+  computed: {
+    isYourPlaydatesPage () {
+      return this.$route.name === 'YourPlaydates'
+    },
+    isSearchPage () {
+      return this.$route.name === 'Search'
+    },
+    logoRouterTarget () {
+      return this.isAuthenticated ? 'Search' : 'SplashPage'
+    },
+    ...mapGetters(['currentUser'])
   },
   methods: {
     toggleMenu: function () {
@@ -94,50 +88,20 @@ export default {
     },
     clickedAway: function () {
       this.showMenu = false
-    },
-    logout: function () {
-      signOut().then(() => {
-        this.$store.dispatch('establishUser', { JWT: null })
-        this.$router.push({ name: 'SplashPage' })
-        this.showMenu = false
-      })
     }
-  },
-  computed: {
-    logoRouterTarget () {
-      return this.isAuthenticated ? 'Search' : 'SplashPage'
-    },
-    ...mapGetters([ 'isAuthenticated', 'currentUser', 'alert' ])
   }
 }
 </script>
 
-<style scoped>
-
-.body {
-  font-family: soleil, sans-serif;
-  color: #333;
-  font-size: 14px;
-  line-height: 20px;
-}
-
+<style scoped lang="scss">
 a {
   color: #000;
   text-decoration: none;
 }
-
-.text-block {
-  width: 100%;
-  color: #000;
-  text-decoration: none;
+.logo {
+  height:29px;
+  max-width: 130px;
 }
-
-.nav-menu-button:active {
-  background-color: #fff !important;
-  color: #000;
-  border: 1px solid black;
-}
-
 .main-nav {
   position: relative;
   background-color: #fff;
@@ -146,57 +110,6 @@ a {
   font-size: 14px;
   line-height: 20px;
 }
-
-.lp-container {
-  position: relative;
-  flex-direction: row;
-  display: flex;
-  padding: 24px 32px;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.actions-wrapper {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  width: 100%;
-  -webkit-box-pack: end;
-  -webkit-justify-content: flex-end;
-  -ms-flex-pack: end;
-  justify-content: flex-end;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.button {
-  min-height: 40px;
-  margin-left: 16px;
-  border: 1px solid #c2c2c2;
-  border-radius: 4px;
-  background-color: #fff;
-  color: #000;
-  font-size: 12px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-}
-
-.button:hover {
-  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, .04)), to(rgba(0, 0, 0, .04)));
-  background-image: linear-gradient(180deg, rgba(0, 0, 0, .04), rgba(0, 0, 0, .04));
-}
-
-.button:active {
-  border-color: #1f88e9;
-  background-color: #1f88e9;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, .1)), to(rgba(0, 0, 0, .1)));
-  background-image: linear-gradient(180deg, rgba(0, 0, 0, .1), rgba(0, 0, 0, .1));
-  color: #fff;
-}
-
 .image {
   max-height: 40px;
   max-width: 40px;
@@ -205,69 +118,223 @@ a {
   border-radius: 50%;
 }
 
-.logo {
-  height:29px;
+.navigation__container {
+  position: relative;
+  display: flex;
+  padding: 16px 32px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navigation__logo {
   max-width: 130px;
+  min-width: 130px;
 }
 
-.body {
-  background-color: #f5f5f5;
-}
-
-.nav-links-expanded {
-  position: absolute;
-  top: 88px;
-  right: 32px;
-  width: 320px;
-  border-top: 1px solid #f4f4f4;
-  background-color: #fff;
-  box-shadow: 0 17px 30px 0 rgba(0, 0, 0, .04);
-  z-index: 99999999;
-}
-
-.unordered-list-2 {
-  margin-bottom: 8px;
-  padding-left: 0px;
-}
-
-.link-block {
-  font-weight: normal;
+.navigation__links-list {
+  display: flex;
   width: 100%;
-  padding: 14px 16px 14px 24px;
+  margin: 0;
+  padding-left: 0;
+  justify-content: flex-end;
+  align-items: center;
 }
 
-.link-block:hover {
-  background-color: rgba(0, 0, 0, .04);
+.navigation__link-item {
+  position: relative;
+  margin-right: 8px;
+  margin-left: 8px;
 }
 
-.temporary-spacer-between-navs {
-  height: 30px;
+.navigation__button {
+  position: relative;
+  display: flex;
+  padding: 10px 12px;
+  align-items: center;
+  border-bottom: 1px solid transparent;
+  border-radius: 4px;
 }
 
-@media (max-width: 767px) {
-  .lp-container {
-    padding: 16px 20px;
+.navigation__button:hover {
+  background-color: rgba(0, 0, 0, 0.06);
+}
+
+.navigation__button-label {
+  margin-left: 8px;
+  font-size: 13px;
+}
+
+.navigation__profile-menu-button {
+  position: static;
+  display: flex;
+  min-width: 69px;
+  margin-left: 0;
+  padding: 6px;
+  justify-content: flex-end;
+  align-items: center;
+  border-radius: 4px;
+}
+
+.navigation__profile-menu-button:hover {
+  background-color: rgba(0, 0, 0, 0.06);
+}
+
+.navigation__profiile-photo {
+  max-height: 40px;
+  max-width: 40px;
+  min-height: 40px;
+  min-width: 40px;
+  border-radius: 50%;
+}
+
+.navigation__down-triangle {
+  margin: 0 0 0 6px;
+}
+
+.navigation__profile-menu__container {
+  position: relative;
+  margin-left: 16px;
+  justify-content: flex-end;
+}
+
+.navigation__icon {
+  min-height: 24px;
+  min-width: 24px;
+}
+
+.selected-nav-item {
+  display: flex;
+  padding: 10px 12px;
+  align-items: center;
+  border-bottom: 2px solid #333;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  border-radius: 0;
+}
+
+.global__badge {
+  position: absolute;
+  left: 0%;
+  top: 0%;
+  right: auto;
+  bottom: auto;
+  display: flex;
+  min-height: 20px;
+  min-width: 20px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  background-color: #e82d55;
+  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.4);
+  opacity: 1;
+}
+
+.badge__text {
+  padding: 0 6px;
+  color: #fff;
+  font-size: 10px;
+  line-height: 11px;
+  font-weight: 700;
+  text-align: center;
+}
+
+@media (max-width: 991px){
+  .navigation__button:hover {
+    background-color: transparent;
   }
-  .nav-links-expanded {
-    top: 72px;
-    right: 0px;
-    width: 100%;
+
+  .navigation__button:active {
+    background-color: rgba(0, 0, 0, 0.06);
   }
-  .link-block {
+
+  .navigation__profile-menu-button:hover {
+    background-color: transparent;
+  }
+
+  .navigation__profile-menu-button:active {
+    background-color: rgba(0, 0, 0, 0.06);
+  }
+
+  .selected-nav-item:hover {
+    background-color: transparent;
+  }
+
+}
+
+@media (max-width: 767px){
+  .navigation__container {
+    padding: 0 16px;
+  }
+
+  .navigation__logo {
+    overflow: visible;
+    max-width: 120px;
+    min-width: 120px;
+    margin-top: 0;
+  }
+
+  .navigation__link-item {
+    margin-right: 4px;
+    margin-left: 4px;
+  }
+
+  .navigation__button {
     padding-top: 16px;
     padding-bottom: 16px;
   }
+
+  .navigation__profile-menu-button {
+    overflow: visible;
+    min-width: 44px;
+    margin-right: 0;
+    margin-left: 0;
+    border-radius: 50px;
+  }
+
+  .navigation__profile-menu-button:hover {
+    background-color: transparent;
+  }
+
+  .navigation__profile-menu-button:active {
+    background-color: rgba(0, 0, 0, 0.06);
+  }
+
+  .navigation__profiile-photo {
+    max-height: 32px;
+    max-width: 32px;
+    min-height: 32px;
+    min-width: 32px;
+  }
+
+  .navigation__down-triangle {
+    display: none;
+  }
+
+  .navigation__profile-menu__container {
+    position: static;
+    margin-right: -8px;
+    margin-left: 8px;
+  }
+
+  .selected-nav-item {
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+
+  .global__badge {
+    top: 11px;
+  }
+
+  .navigation__logo-block--lilypad {
+    overflow: hidden;
+    width: 35px;
+  }
+
 }
 
-@media (max-width: 479px) {
-  .lp-container {
-    padding-top: 11px;
-    padding-bottom: 11px;
-  }
-  .button {
-    min-height: auto;
-    margin-left: 10px;
-    padding: 6px 10px;
+@media (max-width: 479px){
+  .logo {
+    max-width: 120px;
   }
   .image {
     max-height: 34px;
@@ -275,12 +342,57 @@ a {
     min-height: 34px;
     min-width: 34px;
   }
-  .logo {
+  .navigation__container {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .navigation__logo {
     max-width: 120px;
   }
-  .nav-links-expanded {
-    top: 56px;
-  }
-}
 
+  .navigation__link-item {
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  .navigation__button {
+    flex-direction: column;
+    border-radius: 0;
+  }
+
+  .navigation__button-label {
+    margin-top: 2px;
+    margin-left: 0;
+    font-size: 10px;
+    line-height: 10px;
+    text-align: center;
+  }
+
+  .navigation__profile-menu-button {
+    margin-left: 0;
+  }
+
+  .navigation__profile-menu__container {
+    margin-left: 8px;
+  }
+
+  .selected-nav-item {
+    padding-top: 16px;
+    padding-bottom: 16px;
+    flex-direction: column;
+    border-radius: 0;
+  }
+
+  .global__badge {
+    left: 18px;
+    top: 11px;
+  }
+
+  .navigation__logo-block--lilypad {
+    overflow: hidden;
+    width: 35px;
+  }
+
+}
 </style>
