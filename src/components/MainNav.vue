@@ -8,7 +8,8 @@
           <img src="@/assets/kc-logo-landscape.svg" alt="" class="logo">
         </router-link>
       </div>
-      <ul class="navigation__links-list w-list-unstyled">
+      <LoggedOutNav v-if="!isAuthenticated" />
+      <ul v-if="isAuthenticated" class="navigation__links-list w-list-unstyled">
         <li class="navigation__link-item">
           <router-link :to="{name: 'Search'}"
                        class="navigation__button w-inline-block"
@@ -31,7 +32,7 @@
           </router-link>
         </li>
       </ul>
-      <div class="navigation__profile-menu__container">
+      <div v-if="isAuthenticated" class="navigation__profile-menu__container">
         <a class="navigation__profile-menu-button w-inline-block"
            @click="toggleMenu"
            >
@@ -56,6 +57,7 @@ import { mapGetters } from 'vuex'
 import { mixin as clickaway } from 'vue-clickaway'
 
 import AvatarImage from '@/components/base/AvatarImage'
+import LoggedOutNav from '@/components/LoggedOutNav'
 import Alert from '@/components/Alert.vue'
 import Modal from '@/components/base/Modal'
 import ExpandingMenu from '@/components/ExpandingMenu'
@@ -67,7 +69,7 @@ export default {
       showMenu: false
     }
   },
-  components: { AvatarImage, Alert, Modal, ExpandingMenu },
+  components: { AvatarImage, Alert, Modal, ExpandingMenu, LoggedOutNav },
   mixins: [ clickaway ],
   computed: {
     isYourPlaydatesPage () {
@@ -79,7 +81,7 @@ export default {
     logoRouterTarget () {
       return this.isAuthenticated ? 'Search' : 'SplashPage'
     },
-    ...mapGetters(['currentUser'])
+    ...mapGetters(['currentUser', 'isAuthenticated'])
   },
   methods: {
     toggleMenu: function () {
