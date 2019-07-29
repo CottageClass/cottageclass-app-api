@@ -1,12 +1,12 @@
 <template>
   <div class="nav-links-expanded">
     <ul class="unordered-list-2 w-list-unstyled">
-      <li v-if="isAuthenticated">
+      <li>
         <a href="/events/new" class="link-block w-inline-block">
           <div class="text-block">Offer a playdate</div>
         </a>
       </li>
-      <li v-if="isAuthenticated">
+      <li>
         <a href="/profile/edit" class="link-block w-inline-block">
           <div class="text-block">Edit profile</div>
         </a>
@@ -16,17 +16,7 @@
           <div class="text-block">FAQ</div>
         </router-link>
       </li>
-      <li v-if="!isAuthenticated">
-        <a href="/log-in" class="link-block w-inline-block">
-          <div class="text-block">Log in</div>
-        </a>
-      </li>
-      <li v-if="!isAuthenticated">
-        <a href="/sign-up" class="link-block w-inline-block">
-          <div class="text-block">Sign up</div>
-        </a>
-      </li>
-      <li v-if="isAuthenticated">
+      <li>
         <a @click.prevent="logout" href="" class="link-block w-inline-block">
           <div class="text-block">Logout</div>
         </a>
@@ -36,7 +26,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 import { } from '@/mixins'
 import { signOut } from '@/utils/api'
 
@@ -48,9 +37,6 @@ export default {
   data () {
     return {
     }
-  },
-  computed: {
-    ...mapGetters(['isAuthenticated'])
   },
   methods: {
     logout: function () {
