@@ -32,8 +32,7 @@
         </li>
       </ul>
       <div class="navigation__profile-menu__container">
-        <a v-if="currentUser"
-           class="navigation__profile-menu-button w-inline-block"
+        <a class="navigation__profile-menu-button w-inline-block"
            @click="toggleMenu"
            >
           <AvatarImage
