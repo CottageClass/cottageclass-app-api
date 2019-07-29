@@ -51,7 +51,10 @@ export function fetchUpcomingParticipatingEvents (userId) {
       if (!normedData.event) {
         return []
       }
-      return Object.values(normedData.event).map(parseEventData)
+      const events = Object.values(normedData.event).map(parseEventData)
+      return events.map(e => {
+        return { event: e, user: e.host }
+      })
     }).catch(err => {
       logger.logError('GET PARTICIPATING EVENTS FAILURE')
       logger.logError(err)
