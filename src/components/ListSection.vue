@@ -7,13 +7,19 @@
       />
     <LoadingSpinner v-if="!items && !hasSlot" />
     <ListSectionEmptyCard v-else-if="items && items.length===0"
-                          :options=emptyOptions />
+                          :options=emptyOptions
+                          @button-click="$emit('empty-card-button-click')"
+                          @additional-link-click="$emit('empty-card-additional-link-click')"
+                          />
     <li class="card" v-if="hasSlot">
     <slot />
     </li>
     <SearchListCard v-for="item in items"
                     :key="item.id"
-                    :item="item"/>
+                    :item="item"
+                    @event-deleted="$emit('event-deleted')"
+                    @event-updated="$emit('event-updated')"
+                    />
 
   </ul>
 </div>
