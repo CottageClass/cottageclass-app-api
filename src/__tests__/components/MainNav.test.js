@@ -21,8 +21,7 @@ describe('MainNav', () => {
 
     it('responds', () => {
       const dropdownButton = wrapper.find('.navigation__profile-menu-button')
-      dropdownButton.trigger('click')
-      expect(wrapper.vm.showMenu).toBeTruthy()
+      expect(dropdownButton.exists()).toBeFalsy()
     })
   })
   describe('authenticated', () => {
@@ -40,7 +39,7 @@ describe('MainNav', () => {
       })
     })
 
-    it('responds', () => {
+    it('has no menu', () => {
       const dropdownButton = wrapper.find('.navigation__profile-menu-button')
       dropdownButton.trigger('click')
       expect(wrapper.vm.showMenu).toBeTruthy()
