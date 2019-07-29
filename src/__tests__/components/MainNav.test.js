@@ -12,21 +12,17 @@ describe('MainNav', () => {
           isAuthenticated: false
         }
       }
+      const $route = {}
       wrapper = shallowMount(MainNav, {
         stubs: ['router-link'],
-        mocks: { $store }
+        mocks: { $store, $route }
       })
     })
 
-    it('has correct  list items', done => {
-      const dropdownButton = wrapper.find('.nav-menu-button')
+    it('responds', () => {
+      const dropdownButton = wrapper.find('.navigation__profile-menu-button')
       dropdownButton.trigger('click')
-      wrapper.vm.$nextTick(() => {
-        const list = wrapper.find('.nav-links-expanded ul')
-        const itemLabels = list.findAll('li div').wrappers.map(w => w.text())
-        expect(itemLabels).toMatchSnapshot()
-        done()
-      })
+      expect(wrapper.vm.showMenu).toBeTruthy()
     })
   })
   describe('authenticated', () => {
@@ -37,21 +33,17 @@ describe('MainNav', () => {
           isAuthenticated: true
         }
       }
+      const $route = {}
       wrapper = shallowMount(MainNav, {
         stubs: ['router-link'],
-        mocks: { $store }
+        mocks: { $store, $route }
       })
     })
 
-    it('has correct  list items', done => {
-      const dropdownButton = wrapper.find('.nav-menu-button')
+    it('responds', () => {
+      const dropdownButton = wrapper.find('.navigation__profile-menu-button')
       dropdownButton.trigger('click')
-      wrapper.vm.$nextTick(() => {
-        const list = wrapper.find('.nav-links-expanded ul')
-        const itemLabels = list.findAll('li div').wrappers.map(w => w.text())
-        expect(itemLabels).toMatchSnapshot()
-        done()
-      })
+      expect(wrapper.vm.showMenu).toBeTruthy()
     })
   })
 })

@@ -7,9 +7,8 @@ import Search from '@/views/Search.vue'
 import NewEvent from '@/views/NewEvent.vue'
 import RsvpInfoCollection from '@/components/RsvpInfoCollection.vue'
 import CancelRSVP from '@/components/CancelRSVP.vue'
-import MyRSVPs from '@/components/MyRSVPs.vue'
 import Faq from '@/components/Faq.vue'
-import MyEvents from '@/components/MyEvents.vue'
+import YourPlaydates from '@/views/YourPlaydates.vue'
 import SocialInvite from '@/views/SocialInvite.vue'
 import EventEdit from '@/components/EventEdit.vue'
 import ProfileEdit from '@/components/ProfileEdit.vue'
@@ -126,11 +125,6 @@ export default new Router({
       component: Faq
     },
     {
-      path: '/my-events',
-      name: 'MyEvents',
-      component: MyEvents
-    },
-    {
       path: '/onboarding/child-special-requirements-2/:eventId?',
       name: 'ChildSpecialRequirements',
       component: ChildSpecialRequirements
@@ -141,9 +135,9 @@ export default new Router({
       component: ChildSpecialRequirementsYesNo
     },
     {
-      path: '/my-rsvps',
-      name: 'MyRSVPs',
-      component: MyRSVPs
+      path: '/your-playdates',
+      name: 'YourPlaydates',
+      component: YourPlaydates
     },
     {
       path: '/rsvp/:eventId/cancel',

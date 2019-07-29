@@ -100,7 +100,7 @@ export default {
             }
           })
           this.$router.push({
-            name: 'MyRSVPs'
+            name: 'YourPlaydates'
           })
         })
         .catch(err => {

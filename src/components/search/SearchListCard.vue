@@ -7,7 +7,7 @@
                   'childcare-request': item && item.childcareRequest}" >
       {{timeHeader}}
     </div>
-    <div v-if="distance" class="header__distance">{{distance}}</div>
+    <div v-if="distance && !isCurrentUser" class="header__distance">{{distance}}</div>
   </div>
   <div class="description">
     <div class="description-text line-clamp--2">{{description}}</div>

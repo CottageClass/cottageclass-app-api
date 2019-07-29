@@ -44,6 +44,9 @@ export default {
     verified () {
       return !!this.user.facebookUid
     },
+    isCurrentUser () {
+      return this.user.id.toString() === this.currentUser.id.toString()
+    },
     showGoingButton () {
       return this.event &&
         !this.timePast &&
