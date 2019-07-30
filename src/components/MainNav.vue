@@ -263,6 +263,11 @@ a {
 }
 
 @media (max-width: 767px){
+  .navigation__button-label {
+    display: flex;
+    flex: 0 0 auto;
+  }
+
   .navigation__container {
     padding: 0 16px;
   }
