@@ -83,7 +83,7 @@ export default {
   padding-left: 44px;
   border-style: solid;
   border-width: 1px;
-  border-color: hsla(208.65671641791045, 81.38%, 51.57%, 1.00);
+  border-color: #fd6f77;
   border-radius: 4px;
   background-color: hsla(189.35064935064935, 92.77%, 83.73%, 0.10);
   background-image: url("https://assets.website-files.com/5c6c7d4a75c1e54694ed12d1/5cb74731476af65c8b56d2ff_search-black-20.svg"), linear-gradient(180deg, #fff, #fff);
@@ -98,40 +98,16 @@ export default {
   transform-style: preserve-3d;
 }
 
-.btn-location-submit {
-  position: absolute;
-  left: auto;
-  top: 0%;
-  right: 0%;
-  bottom: 0%;
-  display: none;
-  border-style: solid;
-  border-width: 1px;
-  border-color: rgba(0, 0, 0, .15);
-  border-radius: 0px 4px 4px 0px;
-  background-color: hsla(208.8118811881188, 82.11%, 51.76%, 1.00);
-  box-shadow: none;
-  color: hsla(208.8118811881188, 0.00%, 100.00%, 1.00);
-}
-
-.btn-location-submit:hover {
-  background-image: linear-gradient(180deg, rgba(0, 0, 0, .1), rgba(0, 0, 0, .1));
-  text-decoration: none;
-}
-
 .location-wrapper {
   display: -ms-flexbox;
   display: flex;
   width: 60%;
   padding: 34px 40px 40px;
-  -ms-flex-direction: column;
   flex-direction: column;
-  -ms-flex-pack: center;
   justify-content: center;
-  -ms-flex-align: center;
   align-items: center;
   border-radius: 8px;
-  background-color: hsla(208.8118811881188, 82.11%, 51.76%, 1.00);
+  background-color: #fd6f77;
   box-shadow: none;
 }
 
@@ -141,17 +117,6 @@ export default {
   line-height: 24px;
   font-weight: 700;
   text-align: center;
-}
-
-.location-wrapper-2 {
-  display: flex;
-  width: 60%;
-  padding: 32px 32px 36px;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border-radius: 8px;
-  background-color: hsla(208.8118811881188, 82.11%, 51.76%, 1.00);
 }
 
 .location-heading-2 {
@@ -175,10 +140,6 @@ export default {
 
   .location-heading {
     text-align: center;
-  }
-
-  .location-wrapper-2 {
-    width: 80%;
   }
 
   .location-heading-2 {
@@ -208,10 +169,6 @@ export default {
   }
 
   .location-wrapper {
-    width: 100%;
-  }
-
-  .location-wrapper-2 {
     width: 100%;
   }
 }
