@@ -1,8 +1,8 @@
 <template>
   <div class="main-nav">
-    <div class="navigation__container w-container">
       <Alert />
       <Modal />
+    <div class="navigation__container w-container">
       <div class="navigation__logo-wrapper">
         <router-link :to="{ name: logoRouterTarget }" class="w-inline-block">
           <img src="@/assets/kc-logo-landscape.svg" alt="" class="logo">
