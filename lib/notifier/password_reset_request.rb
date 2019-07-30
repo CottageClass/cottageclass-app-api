@@ -20,7 +20,7 @@ class Notifier::PasswordResetRequest < Notifier::Base
   end
 
   def link
-    'https://kidsclub.io/password-reset/' + @token
+    ENV['APP_HOST'] + '/password-reset/' + @token
   end
 
   def mail_template_parameters

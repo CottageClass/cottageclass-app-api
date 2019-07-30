@@ -95,9 +95,9 @@ export default {
     },
     shareUrl: function () {
       if (this.eventId) {
-        return 'www.kidsclub.io/event/' + this.eventId
+        return `${window.location.origin}/event/` + this.eventId
       } else {
-        return 'www.kidsclub.io'
+        return window.location.origin
       }
     },
     eventToShare: function () {

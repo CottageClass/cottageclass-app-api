@@ -3,7 +3,7 @@
     <img src="@/assets/invite.svg" alt="" class="card-photo">
     <div class="card-title">Get more childcare! Invite your friends to share care.</div>
     <div class="card-subtitle">
-      Kidsclub.io works best when you invite your friends to share childcare. The more friends
+      Lilypad works best when you invite your friends to share childcare. The more friends
       who join, the more free childcare you get!
       </div>
     <router-link :to="{name: 'SocialInvite'}" class="button-primary w-button">Invite your friends</router-link>
@@ -31,7 +31,7 @@ export default {
     }
   },
   computed: {
-    linkText: () => 'https://www.kidsclub.io'
+    linkText: () => 'https://www.JoinLilypad.com'
   },
   methods: {
     onCopy () {

@@ -93,7 +93,7 @@
       <div class="question">How long are playdates?</div>
       <p class="paragraph">It's up to you and the other parents! We recommend 1-2 hours for a first playdate.</p>
       <div class="question">What if I need to cancel or reschedule my playdate?</div>
-      <p class="paragraph">It’s fine to reschedule or cancel your playdate, and you can do so <a href="https://kidsclub.io/my-events">here</a> by pressing "cancel" on each playdate. We understand that being a parent puts you on a busy and sometimes messy schedule. If you do need to cancel or reschedule, please try to do with as much advance notice as possible.</p>
+      <p class="paragraph">It’s fine to reschedule or cancel your playdate, and you can do so <a href="/your-playdates">here</a> by pressing "cancel" on each playdate. We understand that being a parent puts you on a busy and sometimes messy schedule. If you do need to cancel or reschedule, please try to do with as much advance notice as possible.</p>
     </div>
   </div>
   <div id="Attending-Playdates" class="section">
@@ -104,7 +104,7 @@
       <div class="question">Can a family decline my request?</div>
       <p class="paragraph">The family hosting the event has 24 hours to decline your request in case they cannot accommodate you, otherwise you are good to go! We will do our best to find you another option should this occur.</p>
       <div class="question">What if I need to cancel or reschedule my playdate?</div>
-      <p class="paragraph">You can cancel at any time by clicking "cancel" <a href="https://kidsclub.io/my-rsvps">here</a>, but please try to give your host 24 hours notice.</p>
+      <p class="paragraph">You can cancel at any time by clicking "cancel" <a href="/your-playdates">here</a>, but please try to give your host 24 hours notice.</p>
     </div>
   </div>
   <div id="Trust-Safety" class="section f6f6f6">
