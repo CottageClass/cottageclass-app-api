@@ -1,8 +1,8 @@
 <template>
   <div class="main-nav">
+    <Alert />
+    <Modal />
     <div class="navigation__container w-container">
-      <Alert />
-      <Modal />
       <div class="navigation__logo-wrapper">
         <router-link :to="{ name: logoRouterTarget }" class="w-inline-block">
           <img src="@/assets/kc-logo-landscape.svg" alt="" class="logo">
@@ -263,6 +263,11 @@ a {
 }
 
 @media (max-width: 767px){
+  .navigation__button-label {
+    display: flex;
+    flex: 0 0 auto;
+  }
+
   .navigation__container {
     padding: 0 16px;
   }

@@ -11,9 +11,7 @@
                           @button-click="$emit('empty-card-button-click')"
                           @additional-link-click="$emit('empty-card-additional-link-click')"
                           />
-    <li class="card" v-if="hasSlot">
     <slot />
-    </li>
     <SearchListCard v-for="item in items"
                     :key="item.id"
                     :item="item"
@@ -54,27 +52,5 @@ export default {
 
 .utility-cont__margin-bottom-48 {
   margin-bottom: 48px;
-}
-.card {
-  display: flex;
-  width: 100%;
-  margin-top: 0;
-  margin-bottom: 4px;
-  padding: 16px 20px 18px;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid #f5f5f5;
-  background-color: #fff;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.08);
-  list-style-type: none;
-}
-@media (max-width: 767px){
-  .card {
-    margin-bottom: 0;
-    padding: 16px;
-    border-radius: 0;
-  }
-
 }
 </style>

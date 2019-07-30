@@ -29,17 +29,22 @@
                  />
     <ListSection title="Availability"
                  buttonText="Edit"
-                 @header-button-click="$router.push({name: 'ProfileEdit'})"
+                 @header-button-click="goToAvailability"
                  >
-      <div v-if="availableTimes" class="availability__card">
-        <div class="card__description-and-icon-container w-clearfix">
-          <div class="availability__tag-container">
-            <div v-for="time of availableTimes" class="tag">
-              <div class="tag-text2">{{ time }}</div>
+      <li v-if="availableTimes" class="card" >
+        <div  class="availability__card">
+          <div class="card__description-and-icon-container w-clearfix">
+            <div class="availability__tag-container">
+              <div v-for="time of availableTimes" class="tag">
+                <div class="tag-text2">{{ time }}</div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </li>
+      <ListSectionEmptyCard v-else
+                            @button-click="goToAvailability"
+                            :options="availabilityEmptyOptions"/>
     </ListSection>
   </div>
   <Footer />
@@ -52,18 +57,19 @@ import { mapGetters } from 'vuex'
 import ListSection from '@/components/ListSection'
 import MainNav from '@/components/MainNav.vue'
 import Footer from '@/components/Footer.vue'
+import ListSectionEmptyCard from '@/components/ListSectionEmptyCard'
 
 import heartDoor2 from '@/assets/heart-door-2.svg'
 import playdates2 from '@/assets/playdates-2.svg'
 import availability2 from '@/assets/availability-2.svg'
 
-import { item } from '@/mixins'
+import { item, redirect } from '@/mixins'
 import { fetchUpcomingParticipatingEvents, fetchUpcomingEvents } from '@/utils/api'
 
 export default {
   name: 'YourPlaydates',
-  components: { ListSection, MainNav, Footer },
-  mixins: [ item ],
+  components: { ListSection, MainNav, Footer, ListSectionEmptyCard },
+  mixins: [ item, redirect ],
   data () {
     return {
       goingItems: null,
@@ -74,6 +80,12 @@ export default {
   computed: {
     user () {
       return this.currentUser
+    },
+    availabilityEmptyOptions () {
+      return {
+        title: 'You haven\'t chosen any availability yet. Can you tell us when you\'re usually free?',
+        buttonText: 'Edit Availability'
+      }
     },
     hostingEmptyOptions () {
       return {
@@ -101,6 +113,9 @@ export default {
     ...mapGetters(['currentUser'])
   },
   methods: {
+    goToAvailability () {
+      this.$router.push({ name: 'ProfileEdit', hash: '#availability' })
+    },
     async fetchGoing () {
       this.goingItems = await fetchUpcomingParticipatingEvents(this.currentUser.id)
     },
@@ -112,6 +127,7 @@ export default {
     }
   },
   created () {
+    if (this.redirectToSignupIfNotAuthenticated()) { return }
     this.fetchGoing()
     this.fetchMyEvents()
   }
@@ -165,7 +181,27 @@ body {
   text-align: left;
 }
 
+.card {
+  display: flex;
+  width: 100%;
+  margin-top: 0;
+  margin-bottom: 4px;
+  padding: 16px 20px 18px;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #f5f5f5;
+  background-color: #fff;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.08);
+  list-style-type: none;
+}
+
 @media (max-width: 767px){
+  .card {
+    margin-bottom: 0;
+    padding: 16px;
+    border-radius: 0;
+  }
   .your-playdates__container {
     padding-right: 0;
     padding-left: 0;

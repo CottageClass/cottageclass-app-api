@@ -18,7 +18,7 @@
     <Employment v-model="employment"/>
     <ProfileBlurb v-model="currentUser.profileBlurb" />
     <Activities v-model="currentUser.activities" />
-    <Availability v-model="availability" :required="false"/>
+    <Availability id="availability" v-model="availability" :required="false"/>
     <Children v-model="children" :required="false" />
     <Phone v-model="phone" :currentPhone="currentUser.phone" :required="false" />
     <Location

@@ -1,6 +1,6 @@
 <template>
 <li class="card-empty">
-  <img :src="options.image" class="card-empty__image" />
+  <img v-if="options.image" :src="options.image" class="card-empty__image" />
   <div class="card-empty__title-text">{{ options.title }}</div>
   <a
      @click.prevent="$emit('button-click')"
