@@ -29,7 +29,7 @@
                  />
     <ListSection title="Availability"
                  buttonText="Edit"
-                 @header-button-click="$router.push({name: 'ProfileEdit'})"
+                 @header-button-click="goToAvailability"
                  >
       <li v-if="availableTimes" class="card" >
         <div  class="availability__card">
@@ -43,6 +43,7 @@
         </div>
       </li>
       <ListSectionEmptyCard v-else
+                            @button-click="goToAvailability"
                             :options="availabilityEmptyOptions"/>
     </ListSection>
   </div>
@@ -112,6 +113,9 @@ export default {
     ...mapGetters(['currentUser'])
   },
   methods: {
+    goToAvailability () {
+      this.$router.push({ name: 'ProfileEdit', hash: '#availability' })
+    },
     async fetchGoing () {
       this.goingItems = await fetchUpcomingParticipatingEvents(this.currentUser.id)
     },
