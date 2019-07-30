@@ -1,7 +1,7 @@
 <template>
   <div class="main-nav">
-      <Alert />
-      <Modal />
+    <Alert />
+    <Modal />
     <div class="navigation__container w-container">
       <div class="navigation__logo-wrapper">
         <router-link :to="{ name: logoRouterTarget }" class="w-inline-block">
