@@ -35,24 +35,24 @@
   </div>
   <div class="content-section">
     <div class="content-container-2 w-container">
-      <h1 class="h1-display">Why KidsClub?</h1>
+      <h1 class="h1-display">Why Lilypad?</h1>
       <ul class="cottage-class-is-list">
         <li class="cottageclass-is-list-item"><img src="@/assets/easy-to-start.svg" alt="" class="cottageclass-is-list-item-image">
           <div class="cottageclass-is-list-item-text">
             <h2 class="heading-2">Build a village to raise your child.</h2>
-            <p class="p-center-black desktop-align-left">Being a parent is hard, so why should you have to do it alone? On Kidsclub, you can share parenting with friends and neighbors. Your child will make new friends...and you will too!</p>
+            <p class="p-center-black desktop-align-left">Being a parent is hard, so why should you have to do it alone? On Lilypad, you can share parenting with friends and neighbors. Your child will make new friends...and you will too!</p>
           </div>
         </li>
         <li class="cottageclass-is-list-item"><img src="@/assets/pay-nothing.svg" alt="" class="cottageclass-is-list-item-image">
           <div class="cottageclass-is-list-item-text">
             <h2 class="heading-2">Pay nothing for childcare.</h2>
-            <p class="p-center-black desktop-align-left">Childcare is expensive, but at KidsClub, it’s always free! Parents spend more than 20% of their income on childcare. What would you buy if you got 20% of your income back? A boat, a family trip to Paris?</p>
+            <p class="p-center-black desktop-align-left">Childcare is expensive, but at Lilypad, it’s always free! Parents spend more than 20% of their income on childcare. What would you buy if you got 20% of your income back? A boat, a family trip to Paris?</p>
           </div>
         </li>
         <li class="cottageclass-is-list-item"><img src="https://uploads-ssl.webflow.com/5ba3c28cff7d47030870c8e2/5ba5420373b5d2f4e4a03438_heart%202.svg" alt="" class="cottageclass-is-list-item-image">
           <div class="cottageclass-is-list-item-text">
             <h2 class="heading-2">Bring friends, or make friends. Safely.</h2>
-            <p class="p-center-black desktop-align-left">KidsClub works great for coordinating childcare with families you know and trust. Or you can use it to meet new families, get to know them, and share childcare whenever you&rsquo;re ready.</p>
+            <p class="p-center-black desktop-align-left">Lilypad works great for coordinating childcare with families you know and trust. Or you can use it to meet new families, get to know them, and share childcare whenever you&rsquo;re ready.</p>
           </div>
         </li>
       </ul>

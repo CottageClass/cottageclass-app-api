@@ -111,7 +111,7 @@
       "quantity": 1
     }
   },
-  "name": "kidsclub",
+  "name": "Lilypad",
   "scripts": {
     "test": "./ci-test.sh",
     "test-setup": "./ci-test-setup.sh"

@@ -1,4 +1,4 @@
-# KidsClub
+# Lilypad
 
 ## Development
 This repo contains the rails app which serves up the Vue app. 
@@ -23,8 +23,8 @@ The `develop` branch should be used for development.  `Master` should be used fo
 
 1. Get the code
     ```
-    $ git clone git@github.com:CottageClass/cottageclass-app-api.git KidsClub
-    $ cd KidsClub
+    $ git clone git@github.com:CottageClass/cottageclass-app-api.git Lilypad
+    $ cd Lilypad
     $ git checkout --track origin/develop
     ```
 

@@ -16,8 +16,8 @@ import debug from 'debug'
 let FS = window.FS
 
 export default function (namespace) {
-  const namespacedLog = debug('kidsclub:' + namespace)
-  const namespacedError = debug('kidsclub:' + namespace + ':error')
+  const namespacedLog = debug('Lilypad:' + namespace)
+  const namespacedError = debug('Lilypad:' + namespace + ':error')
 
   return {
     log (msg) {
