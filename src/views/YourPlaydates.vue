@@ -57,13 +57,13 @@ import heartDoor2 from '@/assets/heart-door-2.svg'
 import playdates2 from '@/assets/playdates-2.svg'
 import availability2 from '@/assets/availability-2.svg'
 
-import { item } from '@/mixins'
+import { item, redirect } from '@/mixins'
 import { fetchUpcomingParticipatingEvents, fetchUpcomingEvents } from '@/utils/api'
 
 export default {
   name: 'YourPlaydates',
   components: { ListSection, MainNav, Footer },
-  mixins: [ item ],
+  mixins: [ item, redirect ],
   data () {
     return {
       goingItems: null,
@@ -112,6 +112,7 @@ export default {
     }
   },
   created () {
+    if (this.redirectToSignupIfNotAuthenticated()) { return }
     this.fetchGoing()
     this.fetchMyEvents()
   }
