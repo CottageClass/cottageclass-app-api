@@ -18,7 +18,7 @@ export default {
         `just booked a playdate with you on ` +
         this.formattedDateTime +
         `. Reply to this message to say hi! ` +
-        `Or cancel here: https://kidsclub.io/events/${this.event.id}`
+        `Or cancel here: ${window.location.origin}/events/${this.event.id}`
     },
     messageToParticipant () {
       return `Hi ${this.participantFirstName}, meet ${this.hostFirstName}! ` +

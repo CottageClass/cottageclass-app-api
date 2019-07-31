@@ -66,7 +66,7 @@ export default {
       copyButtonText: 'copy link',
       prefix: 'https://',
       emailSubject: 'Sharing%20childcare%20(we%20should%20do%20this!)',
-      // the content for tweets and emails depends on whether we are sharing a specific event or just the kidsclub site.
+      // the content for tweets and emails depends on whether we are sharing a specific event or just the Lilypad site.
       tweetTextWithEvent: 'Would anyone like to join me for this?',
       emailBodyWithEvent: 'Hi%20everyone!%0A%0AI%20hope%20you%20can%20all%20join%20me%20at%20this%20playdate%20for%20families%20interested%20in%20sharing%20childcare!%20Can%20you%20come%3F%0A%0A',
       tweetTextWithoutEvent: 'This site helps families come together to share childcare and playdates for free. Want to try it with me?',
@@ -75,7 +75,7 @@ export default {
       textMessageWithoutEvent: 'This site helps families come together to share childcare and playdates for free. Want to try it with me?',
       isMobileDevice: typeof window.orientation !== 'undefined',
       sharingPromptWithEvent: "Invite a few friends to attend this activity. When they join, they'll be prompted to offer their own activities and invite a few more friends. Before you know it, you'll have a thriving community of parents sharing activities and childcare!",
-      sharingPromptWithoutEvent: "Invite a few friends to join KidsClub. As they join, they'll be prompted to start a profile and invite more friends. Before you know it, you'll have a thriving community of parents sharing activities and childcare!",
+      sharingPromptWithoutEvent: "Invite a few friends to join Lilypad. As they join, they'll be prompted to start a profile and invite more friends. Before you know it, you'll have a thriving community of parents sharing activities and childcare!",
       fetchedEvent: null
     }
   },
@@ -95,9 +95,9 @@ export default {
     },
     shareUrl: function () {
       if (this.eventId) {
-        return 'www.kidsclub.io/event/' + this.eventId
+        return `${window.location.origin}/event/` + this.eventId
       } else {
-        return 'www.kidsclub.io'
+        return window.location.origin
       }
     },
     eventToShare: function () {

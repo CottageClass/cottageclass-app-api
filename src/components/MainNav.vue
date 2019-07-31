@@ -3,11 +3,7 @@
     <Alert />
     <Modal />
     <div class="navigation__container w-container">
-      <div class="navigation__logo-wrapper">
-        <router-link :to="{ name: logoRouterTarget }" class="w-inline-block">
-          <img src="@/assets/kc-logo-landscape.svg" alt="" class="logo">
-        </router-link>
-      </div>
+      <MainNavLogo />
       <LoggedOutNav v-if="!isAuthenticated" />
       <ul v-if="isAuthenticated" class="navigation__links-list w-list-unstyled">
         <li class="navigation__link-item">
@@ -56,6 +52,7 @@
 import { mapGetters } from 'vuex'
 import { mixin as clickaway } from 'vue-clickaway'
 
+import MainNavLogo from '@/components/MainNavLogo'
 import AvatarImage from '@/components/base/AvatarImage'
 import LoggedOutNav from '@/components/LoggedOutNav'
 import Alert from '@/components/Alert.vue'
@@ -69,7 +66,7 @@ export default {
       showMenu: false
     }
   },
-  components: { AvatarImage, Alert, Modal, ExpandingMenu, LoggedOutNav },
+  components: { AvatarImage, Alert, Modal, ExpandingMenu, LoggedOutNav, MainNavLogo },
   mixins: [ clickaway ],
   computed: {
     isYourPlaydatesPage () {
@@ -77,9 +74,6 @@ export default {
     },
     isSearchPage () {
       return this.$route.name === 'Search'
-    },
-    logoRouterTarget () {
-      return this.isAuthenticated ? 'Search' : 'SplashPage'
     },
     ...mapGetters(['currentUser', 'isAuthenticated'])
   },
@@ -98,10 +92,6 @@ export default {
 a {
   color: #000;
   text-decoration: none;
-}
-.logo {
-  height:29px;
-  max-width: 130px;
 }
 .main-nav {
   position: relative;
@@ -125,11 +115,6 @@ a {
   padding: 16px 32px;
   justify-content: space-between;
   align-items: center;
-}
-
-.navigation__logo {
-  max-width: 130px;
-  min-width: 130px;
 }
 
 .navigation__links-list {
@@ -272,13 +257,6 @@ a {
     padding: 0 16px;
   }
 
-  .navigation__logo {
-    overflow: visible;
-    max-width: 120px;
-    min-width: 120px;
-    margin-top: 0;
-  }
-
   .navigation__link-item {
     margin-right: 4px;
     margin-left: 4px;
@@ -330,18 +308,9 @@ a {
   .global__badge {
     top: 11px;
   }
-
-  .navigation__logo-block--lilypad {
-    overflow: hidden;
-    width: 35px;
-  }
-
 }
 
 @media (max-width: 479px){
-  .logo {
-    max-width: 120px;
-  }
   .image {
     max-height: 34px;
     max-width: 34px;
@@ -351,10 +320,6 @@ a {
   .navigation__container {
     padding-top: 0;
     padding-bottom: 0;
-  }
-
-  .navigation__logo {
-    max-width: 120px;
   }
 
   .navigation__link-item {
@@ -394,11 +359,5 @@ a {
     left: 18px;
     top: 11px;
   }
-
-  .navigation__logo-block--lilypad {
-    overflow: hidden;
-    width: 35px;
-  }
-
 }
 </style>

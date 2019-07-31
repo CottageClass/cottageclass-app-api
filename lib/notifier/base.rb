@@ -7,7 +7,7 @@ class Notifier::Base
     @sendgrid_client = SendgridClient.new
 
     @sender_phone = ENV.fetch 'TWILIO_SENDER_NUMBER'
-    @sender_email = OpenStruct.new email: Rails.configuration.x.reply_to_email, name: 'KidsClub.io'
+    @sender_email = OpenStruct.new email: Rails.configuration.x.reply_to_email, name: 'JoinLilypad.com'
 
     @user_phone = user.try :phone
   end

@@ -121,7 +121,7 @@ export default {
       if (this.event) {
         const dateString = moment(this.event.startsAt).format('L')
         const timeString = moment(this.event.startsAt).format('LT')
-        const result = '(' + [senderFirstName, childText, 'and has a message about your KidsClub playdate on', dateString, 'at', timeString].join(' ') + '.)\n'
+        const result = '(' + [senderFirstName, childText, 'and has a message about your Lilypad playdate on', dateString, 'at', timeString].join(' ') + '.)\n'
         return result + this.questionText
       } else {
         const result = '(' + [senderFirstName, childText, 'and has a message'].join(' ') + '.)\n'
