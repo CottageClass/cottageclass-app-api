@@ -92,7 +92,7 @@ ActiveAdmin.register User do
     end
     column :nearest_upcoming_event do |instance|
       event = instance.nearest_upcoming_event
-      ENV['APP_HOST'] + '/event/' + event.id.to_s if event.present?
+      root_url + 'event/' + event.id.to_s if event.present?
     end
     User::STORED_MATCHES.times do |item|
       column "match_#{item}" do |instance|
