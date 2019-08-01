@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 import { mixin as clickaway } from 'vue-clickaway'
 
 import MainNavLogo from '@/components/MainNavLogo'
@@ -85,13 +85,14 @@ export default {
       this.showMenu = false
     },
     closeCallback () {
-      this.$store.commit('hideModal')
+      this.hideModal()
       this.$router.push({ query: {} })
-    }
+    },
+    ...mapMutations(['showModal', 'hideModal'])
   },
-  created () {
+  mounted () {
     if (this.$route.query && this.$route.query['welcome-to-the-new-lilypad']) {
-      this.$store.commit('showModal', {
+      this.showModal({
         modal: {
           title: `What's in a name? KidsClub is now Lilypad!`,
           bodyText: 'Hi! We just changed our name to Lilypad (and moved our site to JoinLilypad.com) but everything about the service, the people, and the organization behind it is exactly the same. \n\nWe hope you love the new name (and lilypads) as much as we do, and we hope you find some great new parent friends, fun playdates, and childcare swaps on Lilypad!',
