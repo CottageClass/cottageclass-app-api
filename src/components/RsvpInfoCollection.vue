@@ -109,7 +109,7 @@ export default {
     },
     showErrorIfUserHasNoChildren: function () {
       if (!this.children || this.children.length === 0) {
-        this.err = 'Sorry, but we cannot retrieve your children\'s information. Are you sure you have signed in? To resolve this, please email us at: contact@cottageclass.com.'
+        this.err = 'Sorry, but we cannot retrieve your children\'s information. Are you sure you have signed in? To resolve this, please email us at: contact@joinlilypad.com.'
       }
     },
     redirectToOnboardingIfNotOnboarded: function () {

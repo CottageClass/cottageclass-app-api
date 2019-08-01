@@ -4,7 +4,7 @@
     <div class="footer-container w-container">
       <div class="div-block-33">
         <ul class="footer-unordered-list">
-          <li class="footer-link-list-item"><a href="mailto:contact@cottageclass.com" class="links footer-link">contact@cottageclass.com</a></li>
+          <li class="footer-link-list-item"><a href="mailto:contact@joinlilypad.com" class="links footer-link">contact@joinlilypad.com</a></li>
           <li class="footer-link-list-item"><a href="tel:+18622944859" class="links footer-link">‭(862) 294-4859‬</a></li>
           <!-- Additional footer links here -->
         </ul>
