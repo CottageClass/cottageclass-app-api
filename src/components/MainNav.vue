@@ -2,6 +2,14 @@
   <div class="main-nav">
     <Alert />
     <Modal />
+    <PureModal v-if="showNameChangeModal"
+               :title="nameChangeModalOptions.title"
+               :bodyText="nameChangeModalOptions.bodyText"
+               :buttonNames="nameChangeModalOptions.buttonNames"
+               @primaryClick="nameChangeModalOptions.closeCallback"
+               @closeButtonClick="nameChangeModalOptions.closeCallback"
+               />
+
     <div class="navigation__container w-container">
       <MainNavLogo />
       <LoggedOutNav v-if="!isAuthenticated" />
@@ -57,18 +65,28 @@ import AvatarImage from '@/components/base/AvatarImage'
 import LoggedOutNav from '@/components/LoggedOutNav'
 import Alert from '@/components/Alert.vue'
 import Modal from '@/components/base/Modal'
+import PureModal from '@/components/base/PureModal'
 import ExpandingMenu from '@/components/ExpandingMenu'
 
 export default {
   name: 'MainNav',
   data () {
     return {
-      showMenu: false
+      showMenu: false,
+      showNameChangeModal: false
     }
   },
-  components: { AvatarImage, Alert, Modal, ExpandingMenu, LoggedOutNav, MainNavLogo },
+  components: { AvatarImage, Alert, Modal, ExpandingMenu, LoggedOutNav, MainNavLogo, PureModal },
   mixins: [ clickaway ],
   computed: {
+    nameChangeModalOptions () {
+      return {
+        title: `What's in a name? KidsClub is now Lilypad!`,
+        bodyText: 'Hi! We just changed our name to Lilypad (and moved our site to JoinLilypad.com) but everything about the service, the people, and the organization behind it is exactly the same. \n\nWe hope you love the new name (and lilypads) as much as we do, and we hope you find some great new parent friends, fun playdates, and childcare swaps on Lilypad!',
+        buttonNames: ['Continue to JoinLilypad.com'],
+        closeCallback: this.closeCallback
+      }
+    },
     isYourPlaydatesPage () {
       return this.$route.name === 'YourPlaydates'
     },
@@ -85,22 +103,13 @@ export default {
       this.showMenu = false
     },
     closeCallback () {
-      this.$store.commit('hideModal')
+      this.showNameChangeModal = false
       this.$router.push({ query: {} })
     }
   },
   mounted () {
-    console.log('mounted')
-    console.log({ state: this.$store.state })
     if (this.$route.query && this.$route.query['welcome-to-the-new-lilypad']) {
-      this.$store.commit('showModal', {
-        modal: {
-          title: `What's in a name? KidsClub is now Lilypad!`,
-          bodyText: 'Hi! We just changed our name to Lilypad (and moved our site to JoinLilypad.com) but everything about the service, the people, and the organization behind it is exactly the same. \n\nWe hope you love the new name (and lilypads) as much as we do, and we hope you find some great new parent friends, fun playdates, and childcare swaps on Lilypad!',
-          buttonNames: ['Continue to JoinLilypad.com'],
-          closeCallback: this.closeCallback
-        }
-      })
+      this.showNameChangeModal = true
     }
   }
 }
