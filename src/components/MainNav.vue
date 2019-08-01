@@ -95,7 +95,7 @@ export default {
       this.showModal({
         modal: {
           title: `What's in a name? KidsClub is now Lilypad!`,
-          bodyText: 'Hi! We just changed our name to LilyPad (and moved our site to JoinLilypad.com) but everything about the service, the people, and the organization behind it is exactly the same. \n\nWe hope you love the new name (and lilypads) as much as we do, and we hope you find some great new parent friends, fun playdates, and childcare swaps on Lilypad!',
+          bodyText: 'Hi! We just changed our name to Lilypad (and moved our site to JoinLilypad.com) but everything about the service, the people, and the organization behind it is exactly the same. \n\nWe hope you love the new name (and lilypads) as much as we do, and we hope you find some great new parent friends, fun playdates, and childcare swaps on Lilypad!',
           buttonNames: ['Continue to JoinLilypad.com >'],
           closeCallback: this.closeCallback
         }
