@@ -91,7 +91,6 @@ a {
 
 .modal-content-container {
   position: relative;
-  width: 100%;
   padding: 32px;
 }
 
@@ -106,7 +105,6 @@ a {
 
 .modal-content {
   display: flex;
-  width: 100%;
   min-height: 200px;
   margin-top: 43px;
   flex-direction: column;
