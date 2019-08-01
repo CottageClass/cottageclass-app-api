@@ -77,7 +77,7 @@ export default {
         this.$router.push({ name: 'SplashPage' })
       } catch (err) {
         this.logError(err)
-        this.showAlertOnNextRoute('Something went wrong.  Please contact us at contact@cottageclass.com.', 'failure')
+        this.showAlertOnNextRoute('Something went wrong.  Please contact us at contact@joinlilypad.com.', 'failure')
         this.$router.push({ name: 'SplashPage' })
       }
     }
