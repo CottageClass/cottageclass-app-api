@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 import { mixin as clickaway } from 'vue-clickaway'
 
 import MainNavLogo from '@/components/MainNavLogo'
@@ -83,6 +83,23 @@ export default {
     },
     clickedAway: function () {
       this.showMenu = false
+    },
+    closeCallback () {
+      this.hideModal()
+      this.$router.push({ query: {} })
+    },
+    ...mapMutations(['showModal', 'hideModal'])
+  },
+  created () {
+    if (this.$route.query && this.$route.query['welcome-to-the-new-lilypad']) {
+      this.showModal({
+        modal: {
+          title: `new name time`,
+          bodyText: 'what is up with names, anyway?',
+          buttonNames: ['OK'],
+          closeCallback: this.closeCallback
+        }
+      })
     }
   }
 }
