@@ -90,6 +90,8 @@ export default {
     }
   },
   mounted () {
+    console.log('mounted')
+    console.log({ state: this.$store.state })
     if (this.$route.query && this.$route.query['welcome-to-the-new-lilypad']) {
       this.$store.commit('showModal', {
         modal: {
