@@ -100,8 +100,6 @@ export default {
           closeCallback: this.closeCallback
         }
       })
-    } else {
-      this.closeCallback()
     }
   }
 }
