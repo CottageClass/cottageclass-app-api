@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import auth from './auth'
+import modal from './modal'
 import rsvp from './rsvp'
 import eventCreation from './eventCreation'
 import createPersistedState from 'vuex-persistedstate'
@@ -10,10 +11,9 @@ Vue.use(Vuex)
 export default new Vuex.Store(
   {
     plugins: [createPersistedState()],
-    modules: { auth, eventCreation, rsvp },
+    modules: { auth, eventCreation, rsvp, modal },
     state: {
       alert: null,
-      modal: null,
       createdEvents: null,
       redirectRoute: null,
       mapArea: {
@@ -46,12 +46,6 @@ export default new Vuex.Store(
       },
       setRedirectRoute: (state, payload) => {
         state.redirectRoute = payload.route
-      },
-      showModal: (state, payload) => {
-        state.modal = payload.modal
-      },
-      hideModal: (state) => {
-        state.modal = null
       },
       showAlert: (state, payload) => {
         state.alert = payload.alert
@@ -92,7 +86,6 @@ export default new Vuex.Store(
       }
     },
     getters: {
-      modal: state => state.modal,
       alert: state => state.alert,
       firstCreatedEvent: (state, getters) => {
         if (state.createdEvents) {
