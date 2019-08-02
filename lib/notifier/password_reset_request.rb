@@ -20,7 +20,8 @@ class Notifier::PasswordResetRequest < Notifier::Base
   end
 
   def link
-    ENV['APP_HOST'] + '/password-reset/' + @token
+    # ENV['APP_HOST'] + '/password-reset/' + @token
+    'https://joinlilypad.com/password-reset/' + @token
   end
 
   def mail_template_parameters
