@@ -13,6 +13,11 @@ export default {
 
 <style lang="scss">
 
+.onb-error-text a.error-link {
+  color: #c96168;
+  text-decoration: underline;
+}
+
 .onb-checkbox {
   margin-top: 22px !important;
   padding-top: 0px;
@@ -43,7 +48,6 @@ export default {
     flex-direction: column;
     align-items: center;
   }
-
 
   /* child birthdate selector */
 

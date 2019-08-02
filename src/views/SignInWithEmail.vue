@@ -154,7 +154,7 @@ export default {
           this.logError(e)
           this.showError = true
           this.$scrollTo('#top')
-          this.errorMessage = 'There was a problem signing you in. If you forgot your password, email contact@joinlilypad.com for help.'
+          this.errorMessage = 'There was a problem signing you in. If you forgot your password, <a class="error-link" href="/password-reset-request">reset your password here</a>'
         }
       } else {
         this.$scrollTo('#top')
