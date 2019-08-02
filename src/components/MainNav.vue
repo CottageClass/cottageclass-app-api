@@ -1,7 +1,6 @@
 <template>
   <div class="main-nav">
     <Alert />
-    <Modal />
     <PureModal v-if="showNameChangeModal"
                :title="nameChangeModalOptions.title"
                :bodyText="nameChangeModalOptions.bodyText"
@@ -64,7 +63,6 @@ import MainNavLogo from '@/components/MainNavLogo'
 import AvatarImage from '@/components/base/AvatarImage'
 import LoggedOutNav from '@/components/LoggedOutNav'
 import Alert from '@/components/Alert.vue'
-import Modal from '@/components/base/Modal'
 import PureModal from '@/components/base/PureModal'
 import ExpandingMenu from '@/components/ExpandingMenu'
 
@@ -76,7 +74,7 @@ export default {
       showNameChangeModal: false
     }
   },
-  components: { AvatarImage, Alert, Modal, ExpandingMenu, LoggedOutNav, MainNavLogo, PureModal },
+  components: { AvatarImage, Alert, ExpandingMenu, LoggedOutNav, MainNavLogo, PureModal },
   mixins: [ clickaway ],
   computed: {
     nameChangeModalOptions () {
