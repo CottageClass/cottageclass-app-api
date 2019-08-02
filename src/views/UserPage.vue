@@ -125,7 +125,7 @@
               :icon="contactIcon"
               :targetUser="user"
               :allowUndo="false"
-              :shouldShowDescriptionModal="true"/>
+              :shouldShowDescriptionModal="false"/>
             <div class="invite__playdate-instructions">
               <div class="invite-how-to__title-text">How to plan a playdate with {{ userFirstName }}</div>
               <div class="playdate-planning-bullet">
