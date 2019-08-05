@@ -7,30 +7,33 @@
       :hidePrevious="stepIndex===0"
     />
     <ErrorMessage v-if="errorMessage && showError" :text="errorMessage" />
+    <LoadingSpinner v-if="submissionPending" />
     <EventDescription
-        v-if="stepName==='description'"
+        v-else-if="stepName==='description'"
         v-model="description"
         :context="context" />
     <EventDatePicker
-        v-if="stepName==='date'"
+        v-else-if="stepName==='date'"
         v-model="date" />
     <EventTime
-        v-if="stepName==='time'"
+        v-else-if="stepName==='time'"
         v-model="time" />
     <MultipleTimeSelector
-      v-if="stepName==='availability'"
+      v-else-if="stepName==='availability'"
       :scheduleStartTime="scheduleStart"
       :value="availability"
       @datetimeClicked="selectDateAndTime"
       />
     <RepeatCount
-      v-if="stepName==='repeat-count'"
+      v-else-if="stepName==='repeat-count'"
       v-model="repeatCount"
       />
+
   </div>
 </template>
 
 <script>
+import LoadingSpinner from '@/components/LoadingSpinner'
 import ErrorMessage from '@/components/base/ErrorMessage.vue'
 import RepeatCount from '@/components/base/eventSpecification/RepeatCount'
 import EventDatePicker from '@/components/base/eventSpecification/EventDatePicker'
@@ -48,11 +51,12 @@ import { stepNavigation, alerts } from '@/mixins'
 
 export default {
   name: 'CreateEvent',
-  components: { EventDescription, Nav, MultipleTimeSelector, ErrorMessage, EventDatePicker, EventTime, RepeatCount },
+  components: { EventDescription, Nav, MultipleTimeSelector, ErrorMessage, EventDatePicker, EventTime, RepeatCount, LoadingSpinner },
   mixins: [stepNavigation, alerts],
   props: ['stepName', 'context'],
   data () {
     return {
+      submissionPending: false,
       showError: false,
       description: { err: null, text: '' },
       availability: { err: null },
@@ -122,6 +126,7 @@ export default {
       this.$router.push({ params: { stepName: 'date' } })
     },
     async submitSpecificEvent () {
+      this.submissionPending = true
       try {
         const start = moment(this.date.selected + 'T' + this.time.start)
         const end = moment(this.date.selected + 'T' + this.time.end)
@@ -136,6 +141,7 @@ export default {
       this.$emit('finished')
     },
     async submitAvailabilityEvent () {
+      this.submissionPending = true
       for (let contiguousTimeBlock of this.wipEventContiguousTimeBlocks.reverse()) {
         try {
           const timeRange = this.timeRangeForBlock(contiguousTimeBlock)
