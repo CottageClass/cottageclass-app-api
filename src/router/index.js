@@ -24,12 +24,18 @@ import ProfileCollection from '@/views/ProfileCollection.vue'
 import DeclineRSVP from '@/views/DeclineRSVP.vue'
 import RequestChildcare from '@/views/RequestChildcare.vue'
 import ChildcareRequestPage from '@/views/ChildcareRequestPage.vue'
+import DeleteAccountConfirmation from '@/views/DeleteAccountConfirmation'
 
 Vue.use(Router)
 
 export default new Router({
   mode: 'history',
   routes: [
+    {
+      path: '/delete-account',
+      name: 'DeleteAccountConfirmation',
+      component: DeleteAccountConfirmation
+    },
     {
       path: '/childcare-request/:id',
       name: 'ChildcareRequestPage',
