@@ -126,6 +126,7 @@ export default {
       this.$router.push({ params: { stepName: 'date' } })
     },
     async submitSpecificEvent () {
+      this.submissionPending = true
       try {
         const start = moment(this.date.selected + 'T' + this.time.start)
         const end = moment(this.date.selected + 'T' + this.time.end)
