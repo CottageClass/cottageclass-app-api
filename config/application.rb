@@ -82,7 +82,7 @@ module CottageclassAppApi
     config.middleware.use Rack::Deflater
 
     config.x.noreply_email = format 'no-reply@%s', ENV.fetch('APP_HOST')
-    config.x.reply_to_email = 'contact@cottageclass.com'
+    config.x.reply_to_email = 'contact@joinlilypad.com'
     config.x.brand_name = 'joinlilypad.com'
   end
 end
