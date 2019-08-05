@@ -23,3 +23,7 @@ export function signIn (params) {
 export function signOut () {
   return axios.delete(`/users/sign_out`)
 }
+
+export function deleteUserAccount (params) {
+  return axios.delete(`api/users/${params.id}`)
+}

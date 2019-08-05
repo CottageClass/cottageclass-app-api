@@ -144,8 +144,11 @@ class Event < ApplicationRecord
   end
 
   def notify_participants_destruction
-    participants.each do |participant|
-      participant.user.notifications.event_destruction.where(notifiable: self).first_or_create
+    past = (ends_at < Time.current + 1.hour)
+    unless past
+      participants.each do |participant|
+        participant.user.notifications.event_destruction.where(notifiable: self).first_or_create
+      end
     end
   end
 

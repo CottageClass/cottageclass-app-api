@@ -1,5 +1,6 @@
 class API::UsersController < API::BaseController
-  before_action :load_user, only: %i[show]
+  before_action :load_user, only: %i[show destroy]
+  before_action :authenticate_user!, only: %i[destroy]
 
   def feed
     users = User
@@ -24,6 +25,14 @@ class API::UsersController < API::BaseController
                                             params: { current_user: current_user }
                  end
     render json: serializer.serializable_hash, status: :ok
+  end
+
+  def destroy
+    if current_user && current_user.id == @user.id
+      render status: 200 if @user.destroy
+    else
+      render status: 401
+    end
   end
 
   private

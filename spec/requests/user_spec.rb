@@ -74,6 +74,11 @@ RSpec.resource 'User' do
           expect(included_children.map { |u| u.dig('attributes', 'birthday') }.compact).to be_blank
         end
       end
+      delete '/api/users/:id', format: :json do
+        example_request 'authenticated user deletion' do
+          expect(response_status).to eq(200)
+        end
+      end
     end
 
     context 'unauthenticated' do
@@ -92,6 +97,11 @@ RSpec.resource 'User' do
           expect(response_status).to eq(200)
           expect(json_body.dig('data', 'attributes').deep_symbolize_keys.keys).to \
             contain_exactly(*User::PUBLIC_ATTRIBUTES + %i[last_initial starred])
+        end
+      end
+      delete '/api/users/:id', format: :json do
+        example_request 'user deletion' do
+          expect(response_status).to eq(401)
         end
       end
     end

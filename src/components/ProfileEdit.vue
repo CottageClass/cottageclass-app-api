@@ -27,6 +27,14 @@
       v-model="location"
       />
     <LanguagesSpoken v-model="currentUser.languages" :showChoicesImmediately="false"/>
+    <Question title="Delete your account"
+              subtitle="Would you like to leave Lilypad? Deleting your account will remove your profile and cancel any playdates you've booked. This cannot be undone.">
+      <button
+          class="delete-account-button"
+          @click="$router.push({name: 'DeleteAccountConfirmation'})">
+        Delete Account
+      </button>
+    </Question>
   </StyleWrapper>
   <PageActionsFooter :buttons="footerButtons" @primary-click="submitUserInformation" />
   </div>
@@ -148,6 +156,24 @@ export default {
 </script>
 
 <style scoped>
+
+.delete-account-button {
+  padding: 12px 32px;
+  border-radius: 4px;
+  background-color: #e91f29;
+  text-align: center;
+  color: #fff;
+}
+
+.delete-account-button:hover {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, .1)), to(rgba(0, 0, 0, .1)));
+  background-image: linear-gradient(180deg, rgba(0, 0, 0, .1), rgba(0, 0, 0, .1));
+}
+
+.delete-account-button:active {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, .1)), to(rgba(0, 0, 0, .1)));
+  background-image: linear-gradient(180deg, rgba(0, 0, 0, .1), rgba(0, 0, 0, .1));
+}
 
 .save-button-container {
   margin-top:12px;
