@@ -33,7 +33,7 @@
 import MeetButton from '@/components/base/MeetButton'
 import IconButton from '@/components/search/IconButton'
 
-import { starEvent, unstarEvent, starUser, unstarUser, deleteEvent } from '@/utils/api'
+import { starUser, unstarUser, deleteEvent } from '@/utils/api'
 import { mapGetters } from 'vuex'
 import { rsvp, redirect, alerts } from '@/mixins'
 
@@ -67,7 +67,7 @@ export default {
       return this.event.participated ? goingIconActive : goingIconInactive
     },
     starIcon () {
-      return this.item.starred ? starredIconActive : starredIconInactive
+      return this.user.starred ? starredIconActive : starredIconInactive
     },
     item () {
       if (this.event) { return this.event }
@@ -79,21 +79,12 @@ export default {
   methods: {
     async interestedClick () {
       let res
-      if (this.event) {
-        if (this.event.starred) {
-          res = await unstarEvent(this.event.id)
-        } else {
-          res = await starEvent(this.event.id)
-        }
-        this.$emit('event-updated', res)
-      } else if (this.user) {
-        if (this.user.starred) {
-          res = await unstarUser(this.user.id)
-        } else {
-          res = await starUser(this.user.id)
-        }
-        this.$emit('user-updated', res)
+      if (this.user.starred) {
+        res = await unstarUser(this.user.id)
+      } else {
+        res = await starUser(this.user.id)
       }
+      this.$emit('user-updated', res)
     },
     contactClick () {
       this.$router.push({ name: 'ContactUserForm', params: { userId: this.user.id } })
