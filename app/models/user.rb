@@ -1,5 +1,7 @@
 class User < ApplicationRecord
   STORED_MATCHES = 20
+  # change these when new settings are added, they will only effect new users
+  DEFAULT_SETTINGS = { 'email' => { 'receive_weekly_email' => true } }.freeze
 
   include Devise::JWT::RevocationStrategies::JTIMatcher
   include LegacyPassword
@@ -32,6 +34,7 @@ class User < ApplicationRecord
     (instance.latitude_changed? || instance.longitude_changed? || instance.children.any?(&:changed?))
   }
   before_create do
+    set_default_settings
     populate_full_name!
     populate_fname_from_name!
     populate_lname_from_name!
@@ -239,7 +242,7 @@ class User < ApplicationRecord
   end
 
   def notify_event_suggestion
-    return if pause_suggestion_email
+    return unless settings['email']['receive_weekly_email']
 
     suggestion = nil
     matched_users.includes(:events).each do |matched_user|
@@ -258,6 +261,10 @@ class User < ApplicationRecord
   end
 
   private
+
+  def set_default_settings
+    self.settings = User::DEFAULT_SETTINGS
+  end
 
   def cleanup
     self.email = email.to_s.downcase

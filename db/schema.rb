@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_24_141432) do
+ActiveRecord::Schema.define(version: 2019_08_06_144532) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -327,6 +327,7 @@ ActiveRecord::Schema.define(version: 2019_07_24_141432) do
     t.bigint "showcase_event_id"
     t.boolean "internally_cleared", default: false, null: false
     t.boolean "pause_suggestion_email", default: false, null: false
+    t.jsonb "settings", default: {}
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email"
     t.index ["fuzzy_latitude", "fuzzy_longitude"], name: "index_users_on_fuzzy_latitude_and_fuzzy_longitude"

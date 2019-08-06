@@ -86,6 +86,7 @@ class UsersController < ApiController
                                  :twitter_user,
                                  :linkedin_user,
                                  :referrer,
+                                 settings: { email: [:receive_weekly_email] },
                                  source_tags: [],
                                  activities: [],
                                  images: [],
