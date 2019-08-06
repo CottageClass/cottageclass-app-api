@@ -5,7 +5,7 @@ namespace :users do
 
     ActiveRecord::Base.transaction do
       User.all.each do |user|
-        user.update_column(:settings, email: { receiveWeeklyEmail: !user.pause_suggestion_email })
+        user.update_column(:settings, email: { receive_weekly_email: !user.pause_suggestion_email })
         print '.'
       end
     end
