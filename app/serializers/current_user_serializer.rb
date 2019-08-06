@@ -20,6 +20,7 @@ class CurrentUserSerializer < BaseSerializer
              :phone,
              :postal_code,
              :school,
+             :settings,
              :street_number
 
   attribute :date_created, &:created_at

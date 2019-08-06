@@ -5,7 +5,7 @@ ActiveAdmin.register User do
   includes :children
 
   permit_params :email, :facebook_uid, :internally_cleared, :pause_suggestion_email, :verified, :first_name, :last_name, :name, :profile_blurb,
-                :apartment_number, :referrer, source_tags: []
+                :settings, :apartment_number, :referrer, source_tags: []
 
   filter :name
   filter :first_name
