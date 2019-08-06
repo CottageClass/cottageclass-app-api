@@ -5,6 +5,7 @@ source 'https://rubygems.org'
 
 gem 'activeadmin', github: 'activeadmin/activeadmin', ref: '9292dfb548b7779db962ab7992ea4b1342ea69d4'
 gem 'activeadmin_addons'
+gem 'activeadmin_json_editor'
 gem 'addressable'
 gem 'awesome_print'
 gem 'devise-jwt'
