@@ -38,7 +38,7 @@
                             class="column-list"
                             :user="event.host"
                             :event="event"
-                            @event-updated="updateEvent"
+                            @user-updated="updateUser"
                             :timePast="timePast"
                             :showShareButton="showShareButton"
                             :showInterestedButton="showInterestedButton"
@@ -177,8 +177,8 @@ export default {
     ...mapGetters(['isRsvpDeclined'])
   },
   methods: {
-    updateEvent (event) {
-      this.event = event
+    updateUser (user) {
+      this.event.host = user
     },
     fetchEvent: async function () {
       this.starrers = await fetchStarrers({ eventId: this.$route.params.id })

@@ -1,5 +1,5 @@
 import { andJoin, distanceHaversine } from '@/utils/utils'
-import { starEvent, unstarEvent, starUser, unstarUser } from '@/utils/api/stars'
+import { starUser, unstarUser } from '@/utils/api/stars'
 import { mapGetters } from 'vuex'
 import moment from 'moment'
 import languageList from 'language-list'
@@ -78,7 +78,6 @@ export default {
       if (!this.event) { return [] }
     },
     isStarred () {
-      if (this.event) { return this.event.starred }
       if (this.user) { return this.user.starred }
       throw Error('no item present')
     },
@@ -220,21 +219,12 @@ export default {
   methods: {
     async interestedClick () {
       let res
-      if (this.event) {
-        if (this.event.starred) {
-          res = await unstarEvent(this.event.id)
-        } else {
-          res = await starEvent(this.event.id)
-        }
-        this.$emit('event-updated', res)
-      } else if (this.user) {
-        if (this.user.starred) {
-          res = await unstarUser(this.user.id)
-        } else {
-          res = await starUser(this.user.id)
-        }
-        this.$emit('user-updated', res)
+      if (this.user.starred) {
+        res = await unstarUser(this.user.id)
+      } else {
+        res = await starUser(this.user.id)
       }
+      this.$emit('user-updated', res)
       return res
     },
     goToItem () {

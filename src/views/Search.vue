@@ -141,8 +141,10 @@ export default {
       }
     },
     updateUser (user) {
-      const userIndex = this.items.findIndex(i => i.user.id === user.id)
-      this.items[userIndex].user = user
+      const userItems = this.items.filter(i => i.user.id === user.id)
+      for (const item of userItems) {
+        item.user = user
+      }
     },
     updateEvent (event) {
       const eventIndex = this.items.findIndex(i => i.event.id === event.id)
