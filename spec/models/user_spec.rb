@@ -30,7 +30,7 @@ RSpec.describe User, type: :model do
     end
 
     it { expect { subject.save }.to change(Notification.user_creation, :count).from(0).to(1) }
-    it { expect { subject.save }.to change(subject, :settings).from(nil).to(User::DEFAULT_SETTINGS) }
+    it { expect { subject.save }.to change(subject, :settings).to(User::DEFAULT_SETTINGS) }
   end
 
   context 'create' do
