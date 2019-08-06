@@ -39,8 +39,7 @@
           </div>
           <SearchListCard
             v-if="eventToShare"
-            :event="eventToShare"
-            :user="eventToShare.host"
+            :item="item"
             @event-updated="updateEvent"/>
         </div>
       </div>
@@ -85,6 +84,12 @@ export default {
     }
   },
   computed: {
+    item () {
+      return {
+        event: this.eventToShare,
+        user: this.eventToShare.host
+      }
+    },
     eventId: function () {
       if (this.$route.params.id) {
         return this.$route.params.id

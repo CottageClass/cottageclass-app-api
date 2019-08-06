@@ -12,8 +12,6 @@ import YourPlaydates from '@/views/YourPlaydates.vue'
 import SocialInvite from '@/views/SocialInvite.vue'
 import EventEdit from '@/components/EventEdit.vue'
 import ProfileEdit from '@/components/ProfileEdit.vue'
-import ChildSpecialRequirements from '@/components/FTE/ChildSpecialRequirements.vue'
-import ChildSpecialRequirementsYesNo from '@/components/FTE/ChildSpecialRequirementsYesNo.vue'
 import SignInWithEmail from '@/views/SignInWithEmail.vue'
 import SignUpWithEmail from '@/views/SignUpWithEmail.vue'
 import PasswordResetRequest from '@/views/PasswordResetRequest.vue'
@@ -129,16 +127,6 @@ export default new Router({
       path: '/faq',
       name: 'Faq',
       component: Faq
-    },
-    {
-      path: '/onboarding/child-special-requirements-2/:eventId?',
-      name: 'ChildSpecialRequirements',
-      component: ChildSpecialRequirements
-    },
-    {
-      path: '/onboarding/child-special-requirements-1/:eventId?',
-      name: 'ChildSpecialRequirementsYesNo',
-      component: ChildSpecialRequirementsYesNo
     },
     {
       path: '/your-playdates',
