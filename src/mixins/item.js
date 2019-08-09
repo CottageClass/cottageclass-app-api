@@ -78,8 +78,7 @@ export default {
       if (!this.event) { return [] }
     },
     isStarred () {
-      if (this.user) { return this.user.starred }
-      throw Error('no item present')
+      return this.user.starred
     },
     distance () {
       const center = this.mapCenter || (this.currentUser && this.currentUser.location)

@@ -20,8 +20,4 @@ class EventSerializer
                                           params: { current_user: params[:current_user] }
     serializer.serializable_hash
   end
-
-  attribute :starred do |event, params|
-    event.starred? params[:current_user]
-  end
 end
