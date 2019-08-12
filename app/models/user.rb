@@ -154,6 +154,7 @@ class User < ApplicationRecord
         score = match_score other
         { user: other, score: score } if score.present?
       end
+      scored_users = scored_users.compact
       # sort by score
       scored_users = scored_users.sort_by { |scored_user| scored_user[:score] }
       # add matches for this user
