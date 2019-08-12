@@ -1,8 +1,6 @@
 class Users::PasswordsController < Devise::PasswordsController
   skip_before_action :verify_authenticity_token, only: %i[update create]
   def create
-    puts 'request_params'
-    puts request_params
     self.resource = resource_class.send_reset_password_instructions(request_params)
 
     if successfully_sent?(resource)
