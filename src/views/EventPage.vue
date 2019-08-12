@@ -57,10 +57,6 @@
                 v-for="attendee of event.participatingParents"
                 :key="'attendee' + attendee.userId"
                 :user="attendee" />
-              <Starrer
-                v-for="starrer of starrers"
-                :key="'starrer' + starrer.id"
-                :user="starrer" />
             </ul>
           </div>
           <div v-if="images && images.length>0" class="household-photos__card">
@@ -137,23 +133,21 @@ import Images from '@/components/Images'
 import LoadingSpinner from '@/components/LoadingSpinner'
 import Attendee from '@/components/Attendee'
 import OtherEvent from '@/components/OtherEvent'
-import Starrer from '@/components/Starrer'
 
 import houseRulesImage from '@/assets/house-rules.svg'
 import petsImage from '@/assets/pets.svg'
 
 import { mapGetters } from 'vuex'
-import { fetchUpcomingEvents, fetchEvent, fetchStarrers } from '@/utils/api'
+import { fetchUpcomingEvents, fetchEvent } from '@/utils/api'
 import { item, maps } from '@/mixins'
 
 export default {
   name: 'EventPage',
-  components: { MainNav, Images, LoadingSpinner, AvatarImage, SearchListCardActions, Attendee, Starrer, OtherEvent, RsvpFooter },
+  components: { MainNav, Images, LoadingSpinner, AvatarImage, SearchListCardActions, Attendee, OtherEvent, RsvpFooter },
   mixins: [item, maps],
   data () {
     return {
       event: null,
-      starrers: null,
       mapOptions: {
         'disableDefaultUI': true, // turns off map controls
         'gestureHandling': 'none' // prevents any kind of scrolling
@@ -181,7 +175,6 @@ export default {
       this.event.host = user
     },
     fetchEvent: async function () {
-      this.starrers = await fetchStarrers({ eventId: this.$route.params.id })
       this.event = await fetchEvent(this.$route.params.id)
       this.otherEvents = (await fetchUpcomingEvents(this.event.hostId)).filter(e => (e.id !== this.event.id))
       this.$nextTick(async function () {
