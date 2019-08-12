@@ -21,3 +21,21 @@ export async function starUser (userId) {
     logger.logError(e)
   }
 }
+
+export async function undarkStarUser (userId) {
+  try {
+    const res = await axios.delete(`api/users/${userId}/dark-stars`)
+    return createUser(normalize(res.data))
+  } catch (e) {
+    logger.logError(e)
+  }
+}
+
+export async function darkStarUser (userId) {
+  try {
+    const res = await axios.post(`api/users/${userId}/dark-stars`)
+    return createUser(normalize(res.data))
+  } catch (e) {
+    logger.logError(e)
+  }
+}
