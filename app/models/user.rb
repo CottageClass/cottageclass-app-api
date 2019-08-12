@@ -152,7 +152,7 @@ class User < ApplicationRecord
       # calculate scores and attach
       scored_users = others.map do |other|
         score = match_score other
-        { user: other, score: score } if score
+        { user: other, score: score } if score.present?
       end
       # sort by score
       scored_users = scored_users.sort_by { |scored_user| scored_user[:score] }
@@ -182,7 +182,10 @@ class User < ApplicationRecord
       (ages[0] - ages[1]).abs
     end
     if closeest_child_ages.present?
-      (closeest_child_ages[0] - closeest_child_ages[1]).abs + 6 * distance_to(other_user)
+      difference = (closeest_child_ages[0] - closeest_child_ages[1]).abs
+      return nil if difference > 24
+
+      difference + 6 * distance_to(other_user)
     else
       1_000_000
     end
