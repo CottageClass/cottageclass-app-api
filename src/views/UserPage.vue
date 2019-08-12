@@ -199,7 +199,7 @@ export default {
   },
   computed: {
     showLikeUserFooter () {
-      return !this.isStarred
+      return !this.isStarred && !this.isDarkStarred
     },
     contactIcon () { return contactIcon }
   },

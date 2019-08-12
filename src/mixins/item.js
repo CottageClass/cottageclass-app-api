@@ -77,6 +77,9 @@ export default {
     attendees () {
       if (!this.event) { return [] }
     },
+    isDarkStarred () {
+      return this.user.darkStarred
+    },
     isStarred () {
       return this.user.starred
     },
