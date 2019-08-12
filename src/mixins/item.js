@@ -1,5 +1,5 @@
 import { andJoin, distanceHaversine } from '@/utils/utils'
-import { starUser, unstarUser } from '@/utils/api/stars'
+import { starUser, unstarUser, darkStarUser, undarkStarUser } from '@/utils/api/stars'
 import { mapGetters } from 'vuex'
 import moment from 'moment'
 import languageList from 'language-list'
@@ -76,6 +76,9 @@ export default {
     },
     attendees () {
       if (!this.event) { return [] }
+    },
+    isDarkStarred () {
+      return this.user.darkStarred
     },
     isStarred () {
       return this.user.starred
@@ -216,6 +219,16 @@ export default {
     ...mapGetters([ 'currentUser', 'isAuthenticated' ])
   },
   methods: {
+    async disinterestedClick () {
+      let res
+      if (this.user.darkStarred) {
+        res = await undarkStarUser(this.user.id)
+      } else {
+        res = await darkStarUser(this.user.id)
+      }
+      this.$emit('user-updated', res)
+      return res
+    },
     async interestedClick () {
       let res
       if (this.user.starred) {

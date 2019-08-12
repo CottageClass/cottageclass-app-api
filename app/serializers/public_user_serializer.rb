@@ -10,4 +10,7 @@ class PublicUserSerializer < BaseSerializer
   attribute :starred do |user, params|
     user.starred? params[:current_user]
   end
+  attribute :dark_starred do |user, params|
+    user.dark_starred? params[:current_user]
+  end
 end
