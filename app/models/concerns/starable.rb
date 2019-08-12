@@ -10,4 +10,8 @@ module Starable
   def starred?(current_user)
     received_stars.where(giver: current_user).present?
   end
+
+  def dark_starred?(current_user)
+    received_dark_stars.where(giver: current_user).present?
+  end
 end

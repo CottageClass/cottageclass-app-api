@@ -97,7 +97,11 @@ class User < ApplicationRecord
 
   has_many :starred_users,        through: :stars, source: :starable, source_type: :User
   has_many :dark_starred_users,   through: :dark_stars, source: :recipient
-  has_many :received_dark_stars,  through: :dark_stars, inverse_of: :recipient
+  has_many :received_dark_stars,
+           class_name: 'DarkStar',
+           foreign_key: :recipient,
+           inverse_of: :recipient,
+           dependent: :destroy
 
   has_many :childcare_requests, inverse_of: :user, dependent: :destroy
 
