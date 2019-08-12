@@ -164,7 +164,7 @@
     </div>
     <LikeUserFooter v-if="showLikeUserFooter"
                     :user="user"
-                    @click-yes="interestedClickAndUpdate"
+                    @click-yes="likeUserHandler"
                     @click-no="dislikeUserHandler"/>
   </div>
 </template>
@@ -179,14 +179,14 @@ import LoadingSpinner from '@/components/LoadingSpinner'
 import OtherEvent from '@/components/OtherEvent'
 import MeetButton from '@/components/base/MeetButton'
 
-import { item, maps } from '@/mixins'
+import { item, maps, alerts } from '@/mixins'
 import { fetchUser, fetchUpcomingEvents } from '@/utils/api'
 import contactIcon from '@/assets/contact-black-outline.svg'
 
 export default {
   name: 'UserPage',
   components: { MainNav, Images, LoadingSpinner, AvatarImage, OtherEvent, MeetButton, SearchListCardActions, LikeUserFooter },
-  mixins: [item, maps],
+  mixins: [item, maps, alerts],
   data () {
     return {
       user: null,
@@ -204,6 +204,10 @@ export default {
     contactIcon () { return contactIcon }
   },
   methods: {
+    async likeUserHandler () {
+      this.user = await this.interestedClick()
+      this.showBriefAllert(`Excellent! ${this.user.firstName} has been starred as one of your favorites! We'll let you know when they offer new playdates.`, 'success')
+    },
     async dislikeUserHandler () {
       this.user = await this.disinterestedClick()
     },
