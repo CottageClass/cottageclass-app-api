@@ -73,7 +73,7 @@ class SearchListItemsController < ApiController
 
     items = childcare_request_array + event_array
     items = items.sort_by do |i|
-      current_user.match_score i.user
+      current_user.match_score i.user || 1_000_000
     end
 
     # these go last.  we don't have to find them if we aren't at this page yet.
