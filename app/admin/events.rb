@@ -15,6 +15,8 @@ ActiveAdmin.register Event do
   filter :name
   filter :user_email, as: :string
   filter :user_phone_number, as: :string
+  filter :has_participants, as: :boolean
+  filter :upcoming, as: :boolean
 
   before_save do |instance|
     instance.activity_names = (params.dig(:event, :activity_names) || '').split(',').try :flatten
