@@ -656,7 +656,7 @@ a {
   min-height: 200px;
   min-width: 200px;
   margin: 0;
-  border-radius: 50%;
+  border-radius: 4px;
 }
 
 .profile-top-card__badge-verified {
@@ -664,7 +664,7 @@ a {
   left: auto;
   top: auto;
   right: auto;
-  bottom: -6px;
+  bottom: -14px;
   display: flex;
   min-height: 24px;
   min-width: 80px;

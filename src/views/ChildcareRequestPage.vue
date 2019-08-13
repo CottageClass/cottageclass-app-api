@@ -148,7 +148,7 @@ export default {
   methods: {
     fetchUser: async function () {
       this.user = await fetchUser(this.childcareRequest.userId)
-      this.events = (await fetchUpcomingEvents(this.$route.params.id))
+      this.events = (await fetchUpcomingEvents(this.user.id))
       this.$nextTick(async function () {
         await this.createMap(this.$refs.map, {
           zoom: 13,
@@ -164,16 +164,6 @@ export default {
     },
     fetchChildcareRequest: async function () {
       this.childcareRequest = await fetchChildcareRequest(this.$route.params.id)
-      this.$nextTick(async function () {
-        await this.createMap(this.$refs.map, {
-          zoom: 13,
-          center: { lat: parseFloat(this.user.fuzzyLatitude), lng: parseFloat(this.user.fuzzyLongitude) },
-          disableDefaultUI: true,
-          options: this.mapOptions,
-          style: 'width: 100px; height: 230px;'
-        })
-        await this.addCircle({ lat: this.user.fuzzyLatitude, lng: this.user.fuzzyLongitude }, 0.2)
-      })
     }
   },
   async created () {
@@ -208,7 +198,7 @@ a {
   left: 10px;
   top: auto;
   right: 10px;
-  bottom: 0;
+  bottom: -8px;
   display: flex;
   min-height: 19px;
   min-width: 24px;
@@ -311,7 +301,7 @@ a {
   min-height: 85px;
   min-width: 85px;
   margin: 0 1px 1px 0;
-  border-radius: 50%;
+  border-radius: 4px;
 }
 
 .user-action-card__footer__user-summary {

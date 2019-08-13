@@ -224,7 +224,7 @@ a {
   left: 10px;
   top: auto;
   right: 10px;
-  bottom: 0;
+  bottom: -8px;
   display: flex;
   min-height: 19px;
   min-width: 24px;
@@ -327,7 +327,7 @@ a {
   min-height: 85px;
   min-width: 85px;
   margin: 0 1px 1px 0;
-  border-radius: 50%;
+  border-radius: 4px;
 }
 
 .user-action-card__footer__user-summary {
