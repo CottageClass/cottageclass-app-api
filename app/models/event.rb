@@ -25,6 +25,7 @@ class Event < ApplicationRecord
   has_many :participant_children, as: :participable
   has_many :participating_users, through: :participants, source: :user
 
+  scope :has_participants, -> { joins(:participants) }
   scope :eager, -> { includes :event_hosts, participants: %i[user participant_children] }
   scope :nearest, ->(user) { where.not(id: user.events).near([user.latitude, user.longitude], 100) }
   scope :past, -> { where(Event.arel_table[:starts_at].lt(Time.current)).order starts_at: :desc }
@@ -35,6 +36,10 @@ class Event < ApplicationRecord
       .or(Event.arel_table[:starts_at].between(1.hour.ago(Time.current)..1.week.since(Time.current)))
     ).order starts_at: :asc
   }
+
+  def self.ransackable_scopes(_auth_object = nil)
+    %i[has_participants upcoming]
+  end
 
   delegate(*User::PUBLIC_ATTRIBUTES, to: :user, prefix: :host, allow_nil: true)
   delegate :first_name, :full_address, to: :user, prefix: :host, allow_nil: true
