@@ -27,12 +27,12 @@
       v-model="location"
       />
     <LanguagesSpoken v-model="currentUser.languages" :showChoicesImmediately="false"/>
+    <MaxDistanceSetting v-model="maxDistance" />
     <YesOrNo
       question="Email settings"
       description="Would you like to receive custom weekly emails with suggestions for nearby playdates"
       v-model="weeklyEmails"
               />
-
     <Question title="Delete your account"
               subtitle="Would you like to leave Lilypad? Deleting your account will remove your profile and cancel any playdates you've booked. This cannot be undone.">
       <button
@@ -64,6 +64,8 @@ import StyleWrapper from '@/components/FTE/StyleWrapper.vue'
 import ErrorMessage from '@/components/base/ErrorMessage.vue'
 import Activities from '@/components/FTE/userInformation/Activities.vue'
 import YesOrNo from '@/components/base/YesOrNo'
+import MaxDistanceSetting from '@/components/FTE/userInformation/MaxDistanceSetting'
+
 import * as api from '@/utils/api'
 import { redirect, screen } from '@/mixins'
 import { mapGetters } from 'vuex'
@@ -88,11 +90,13 @@ export default {
     ProfileBlurb,
     LanguagesSpoken,
     Activities,
-    YesOrNo
+    YesOrNo,
+    MaxDistanceSetting
   },
   data () {
     return {
       weeklyEmails: {},
+      maxDistance: {},
       location: {},
       phone: {},
       employment: {},
@@ -105,6 +109,7 @@ export default {
   created: function () {
     if (this.redirectToSignupIfNotAuthenticated()) { return }
     this.weeklyEmails = { isTrue: this.currentUser.settings.email.receiveWeeklyEmail }
+    this.maxDistance = (this.currentUser.settings.matching && this.currentUser.settings.matching.maxDistance) || '2'
     this.availability = {
       availableAfternoons: !!this.currentUser.availableAfternoons,
       availableMornings: !!this.currentUser.availableMornings,
@@ -142,7 +147,10 @@ export default {
         this.saveButtonText = 'Saving...'
         let data = Object.assign(this.currentUser, this.employment, {})
         data.children = this.children.list
-        const settings = { email: { receiveWeeklyEmail: this.weeklyEmails.isTrue } } // TODO this is a hack, should be better
+        const settings = {
+          matching: { maxDistance: this.maxDistance },
+          email: { receiveWeeklyEmail: this.weeklyEmails.isTrue }
+        }
         const { phone, location, availability } = this
         data = Object.assign(data, { phone, location, availability, settings })
         console.log({ data })
