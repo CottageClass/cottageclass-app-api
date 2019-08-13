@@ -1,7 +1,10 @@
 class User < ApplicationRecord
   STORED_MATCHES = 20
   # change these when new settings are added, they will only effect new users
-  DEFAULT_SETTINGS = { 'email' => { 'receive_weekly_email' => true } }.freeze
+  DEFAULT_SETTINGS = {
+    'email' => { 'receive_weekly_email' => true },
+    'matching' => { 'max_distance' => 2 }
+  }.freeze
 
   include Devise::JWT::RevocationStrategies::JTIMatcher
   include LegacyPassword
@@ -139,7 +142,7 @@ class User < ApplicationRecord
   end
 
   def find_matches
-    miles = 20
+    miles = settings.dig('matching', 'max_distance') || DEFAULT_SETTINGS['matching']['max_distance']
 
     if (latitude.present? && latitude.nonzero?) &&
        (longitude.present? && longitude.nonzero?) &&
