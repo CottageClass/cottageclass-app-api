@@ -198,7 +198,7 @@ a {
   left: 10px;
   top: auto;
   right: 10px;
-  bottom: 0;
+  bottom: -8px;
   display: flex;
   min-height: 19px;
   min-width: 24px;

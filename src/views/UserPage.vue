@@ -664,7 +664,7 @@ a {
   left: auto;
   top: auto;
   right: auto;
-  bottom: -6px;
+  bottom: -14px;
   display: flex;
   min-height: 24px;
   min-width: 80px;
