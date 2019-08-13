@@ -656,7 +656,7 @@ a {
   min-height: 200px;
   min-width: 200px;
   margin: 0;
-  border-radius: 50%;
+  border-radius: 4px;
 }
 
 .profile-top-card__badge-verified {
