@@ -2,30 +2,40 @@ import { mount } from '@vue/test-utils'
 import SearchListCardActions from '@/components/search/SearchListCardActions'
 
 describe('SearchListCardActions', () => {
-  it('redirects going click when not authenticated', done => {
-    const $route = { name: 'mock route name' }
-    const $router = {
-      push: jest.fn()
-    }
-    const $store = {
-      getters: {
-        isAuthenticated: false
-      },
-      commit: jest.fn()
-    }
-    const event = { participated: false }
-    const wrapper = mount(SearchListCardActions, {
-      mocks: { $store, $router, $route },
-      propsData: {
-        showGoingButton: true,
-        event
+  describe('emits events', () => {
+    let wrapper
+    beforeEach(() => {
+      const $store = {
+        getters: {
+          isAuthenticated: false
+        },
+        commit: jest.fn()
       }
+      const event = { participated: false }
+      const user = { starred: false }
+      wrapper = mount(SearchListCardActions, {
+        mocks: { $store },
+        propsData: {
+          showGoingButton: true,
+          showCancelButton: true,
+          showShareButton: true,
+          showContactButton: true,
+          showInterestedButton: true,
+          event,
+          user
+        }
+      })
     })
-    const goingButton = wrapper.find('.going-button')
-    goingButton.trigger('click')
-    wrapper.vm.$nextTick(() => {
-      expect($router.push).toHaveBeenCalled()
-      done()
+    it.each([
+      [ '.going-button', 'going-click' ],
+      [ '.interested-button', 'interested-click' ],
+      [ '.contact-button', 'contact-click' ],
+      [ '.share-button', 'share-click' ],
+      [ '.cancel-button', 'cancel-click' ]
+    ])('%s button emits %s event', (selector, event) => {
+      const goingButton = wrapper.find(selector)
+      goingButton.trigger('click')
+      expect(wrapper.emitted(event)).toBeTruthy()
     })
   })
 })

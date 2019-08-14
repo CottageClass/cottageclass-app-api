@@ -1,30 +1,46 @@
 <template>
    <ul class="button-list">
     <li v-if="showInterestedButton">
-      <IconButton label="Interested" :icon="starIcon" @click="interestedClick"/>
+      <IconButton
+        class="interested-button"
+        label="Interested"
+        :icon="starIcon"
+        @click="$emit('interested-click')"/>
     </li>
     <li v-if="showGoingButton">
       <IconButton
         class="going-button"
         label="Going"
         :icon="goingIcon"
-        @click="goingClick"/>
+        @click="$emit('going-click')"/>
     </li>
     <li v-if="showMeetButton">
       <MeetButton
+        class="meet-button"
         defaultText="Say hi"
         :icon="contactIcon"
         :targetUser="user"
         :allowUndo="allowWaveUndo"/>
     </li>
     <li v-if="showContactButton">
-      <IconButton label="Respond" :icon="contactIcon" @click="contactClick"/>
+      <IconButton
+        class="contact-button"
+        label="Respond"
+        :icon="contactIcon"
+        @click="$emit('contact-click')"/>
     </li>
     <li v-if="showCancelButton">
-      <IconButton label="Cancel" @click="cancelClick"/>
+      <IconButton
+        class="cancel-button"
+        label="Cancel"
+        @click="$emit('cancel-click')"/>
     </li>
     <li v-if="showShareButton">
-      <IconButton label="Share" :icon="shareIcon" @click="shareClick"/>
+      <IconButton
+        class='share-button'
+        label="Share"
+        :icon="shareIcon"
+        @click="$emit('share-click')"/>
     </li>
   </ul>
 </template>
@@ -33,7 +49,6 @@
 import MeetButton from '@/components/base/MeetButton'
 import IconButton from '@/components/search/IconButton'
 
-import { starUser, unstarUser, deleteEvent } from '@/utils/api'
 import { mapGetters } from 'vuex'
 import { rsvp, redirect, alerts } from '@/mixins'
 
@@ -75,46 +90,6 @@ export default {
       throw Error('No valid item on this list card')
     },
     ...mapGetters(['currentUser'])
-  },
-  methods: {
-    async interestedClick () {
-      let res
-      if (this.user.starred) {
-        res = await unstarUser(this.user.id)
-      } else {
-        res = await starUser(this.user.id)
-      }
-      this.$emit('user-updated', res)
-    },
-    contactClick () {
-      this.$router.push({ name: 'ContactUserForm', params: { userId: this.user.id } })
-    },
-    goingClick () {
-      if (this.redirectToSignupIfNotAuthenticated({
-        name: 'RsvpInfoCollection',
-        params: { eventId: this.event.id }
-      })) {
-      } else if (this.event.participated) {
-        this.$router.push({ name: 'CancelRSVP', params: { eventId: this.event.id } })
-      } else {
-        if (this.currentUser.children.length === 1) {
-          this.submitRsvp(this.currentUser.children.map(c => c.id))
-        } else {
-          this.$router.push({ name: 'RsvpInfoCollection', params: { eventId: this.event.id } })
-        }
-      }
-    },
-    cancelClick () {
-      deleteEvent(this.event.id, () => {
-        this.$emit('event-deleted', this.event.id)
-        this.showBriefAllert('Your event has been deleted', 'success')
-      })
-    },
-    shareClick () {
-      this.$router.push({ name: 'SocialInvite', params: { id: this.event.id, context: 'searchItem' } })
-    }
-  },
-  mounted () {
   }
 }
 </script>
