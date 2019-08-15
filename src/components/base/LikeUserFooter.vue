@@ -32,10 +32,6 @@ export default {
   computed: {
     starIcon: () => starIcon,
     ...mapGetters(['currentUser'])
-  },
-  methods: {
-    async likeUserHandler () {
-    }
   }
 }
 </script>
