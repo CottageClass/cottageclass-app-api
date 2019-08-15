@@ -23,12 +23,19 @@ import DeclineRSVP from '@/views/DeclineRSVP.vue'
 import RequestChildcare from '@/views/RequestChildcare.vue'
 import ChildcareRequestPage from '@/views/ChildcareRequestPage.vue'
 import DeleteAccountConfirmation from '@/views/DeleteAccountConfirmation'
+import SelectEventFromUser from '@/views/SelectEventFromUser'
 
 Vue.use(Router)
 
 export default new Router({
   mode: 'history',
   routes: [
+    {
+      path: '/pick-a-time/:userId',
+      name: 'SelectEventFromUser',
+      component: SelectEventFromUser,
+      props: true
+    },
     {
       path: '/delete-account',
       name: 'DeleteAccountConfirmation',

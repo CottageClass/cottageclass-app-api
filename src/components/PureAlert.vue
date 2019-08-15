@@ -41,7 +41,6 @@ export default {
       this.state = 'setup'
       this.$nextTick(() => {
         this.state = 'go'
-        console.log(this.state)
       })
     }
   },

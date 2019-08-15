@@ -49,7 +49,8 @@
         <SearchListCardActions
                         class="profile-top-card__footer__button-list"
                         :user="user"
-                        @user-updated="userUpdate"
+                        @user-updated="updateUser"
+                        @interested-click="interestedClickWithPrompts"
                         :showInterestedButton="showInterestedButton"
                         :showMeetButton="showMeetButton"
                         :showGoingButton="showGoingButton"
@@ -157,6 +158,7 @@
             <OtherEvent v-for="event of events"
                         :key="event.id"
                         :event="event"
+                        @item-click="$router.push({ name: 'EventPage', params: { id: event.id } })"
                         class="other-events__title-bar"/>
           </ul>
         </div>
@@ -179,14 +181,14 @@ import LoadingSpinner from '@/components/LoadingSpinner'
 import OtherEvent from '@/components/OtherEvent'
 import MeetButton from '@/components/base/MeetButton'
 
-import { item, maps, alerts } from '@/mixins'
+import { item, maps } from '@/mixins'
 import { fetchUser, fetchUpcomingEvents } from '@/utils/api'
 import contactIcon from '@/assets/contact-black-outline.svg'
 
 export default {
   name: 'UserPage',
   components: { MainNav, Images, LoadingSpinner, AvatarImage, OtherEvent, MeetButton, SearchListCardActions, LikeUserFooter },
-  mixins: [item, maps, alerts],
+  mixins: [ item, maps ],
   data () {
     return {
       user: null,
@@ -198,17 +200,21 @@ export default {
     }
   },
   computed: {
+    targetUser () {
+      return this.user
+    },
     showLikeUserFooter () {
-      return this.user.id !== this.currentUser.id && !this.isStarred && !this.isDarkStarred
+      return this.user && this.user.id !== this.currentUser.id && !this.isStarred && !this.isDarkStarred
     },
     contactIcon () { return contactIcon }
   },
   methods: {
     async likeUserHandler () {
-      this.user = await this.interestedClick()
-      this.showBriefAllert(`Excellent! ${this.user.firstName} has been starred as one of your favorites! We'll let you know when they offer new playdates.`, 'success')
+      this.$ga.event('Star', 'starred', 'UserPage footer')
+      this.user = await this.interestedClickWithPrompts(this.user)
     },
     async dislikeUserHandler () {
+      this.$ga.event('Star', 'dark-starred', 'UserPage footer')
       this.user = await this.disinterestedClick()
     },
     async interestedClickAndUpdate () {
@@ -229,8 +235,8 @@ export default {
         await this.addCircle({ lat: this.user.fuzzyLatitude, lng: this.user.fuzzyLongitude }, 0.2)
       })
     },
-    userUpdate () {
-      this.fetchUser()
+    updateUser (user) {
+      this.user = user
     }
   },
   created: function () {

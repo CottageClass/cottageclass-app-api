@@ -1,6 +1,6 @@
 <template>
 <li class="other-events__list-item">
-  <router-link :to="{name:'EventPage', params:{id:event.id}}">
+  <a @click="$emit('item-click')">
     <div class="other-events-card__header">
       <div class="other-events-card__header__date">{{timeHeader}}</div>
       <div class="other-events-card__header__distance">{{distance}}</div>
@@ -18,7 +18,7 @@
         <div v-if="undisplayedParticipantsCount" class="other-events-card__attendees--more">{{undisplayedParticipantsCount}} more</div>
       </div>
     </div>
-  </router-link>
+  </a>
 </li>
 </template>
 
@@ -38,7 +38,6 @@ export default {
       return this.event.participatingParents.length - this.displayedParticipants.length
     }
   }
-
 }
 </script>
 
@@ -47,7 +46,9 @@ a {
   color: #000;
   text-decoration: none;
 }
-
+.other-events-card__description-text {
+  color: black;
+}
 .other-events__list-item {
   position: relative;
   display: flex;

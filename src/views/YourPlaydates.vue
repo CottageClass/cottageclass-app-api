@@ -14,7 +14,7 @@
     <ListSection title="Going"
                  :emptyOptions="goingEmptyOptions"
                  :items="goingItems"
-                 @event-updated="fetchGoing"
+                 @user-updated="fetchGoing"
                  @empty-card-button-click="$router.push({ name: 'Search' })"
                  />
     <ListSection title="Your offers"

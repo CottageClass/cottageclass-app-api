@@ -38,6 +38,7 @@
                             class="column-list"
                             :user="user"
                             :timePast="timePast"
+                            @contact-click="contactClick"
                             :showShareButton="false"
                             :showContactButton="showContactButton"
                             :showInterestedButton="false"

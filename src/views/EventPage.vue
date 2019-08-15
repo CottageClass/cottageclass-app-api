@@ -39,6 +39,9 @@
                             :user="event.host"
                             :event="event"
                             @user-updated="updateUser"
+                            @interested-click="interestedClickWithPrompts"
+                            @going-click="goingClick"
+                            @share-click="shareClick"
                             :timePast="timePast"
                             :showShareButton="showShareButton"
                             :showInterestedButton="showInterestedButton"
@@ -114,6 +117,7 @@
             <OtherEvent v-for="otherEvent of otherEvents"
                         :key="otherEvent.id"
                         :event="otherEvent"
+                        @item-click="$router.push({ name: 'EventPage', params: { id: otherEvent.id } })"
                         class="other-events__title-bar"/>
           </ul>
         </div>
