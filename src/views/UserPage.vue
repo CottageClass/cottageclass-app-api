@@ -172,6 +172,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 import LikeUserFooter from '@/components/base/LikeUserFooter'
 import AvatarImage from '@/components/base/AvatarImage'
 import SearchListCardActions from '@/components/search/SearchListCardActions'
@@ -204,7 +206,7 @@ export default {
       return this.user
     },
     showLikeUserFooter () {
-      return this.user && this.user.id !== this.currentUser.id && !this.isStarred && !this.isDarkStarred
+      return this.user && this.currentUser && (this.user.id !== this.currentUser.id) && !this.isStarred && !this.isDarkStarred
     },
     contactIcon () { return contactIcon }
   },
