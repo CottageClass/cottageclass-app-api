@@ -36,7 +36,6 @@ export const createItems = (data) => {
         Object.assign(res, { childcareRequest })
       }
     }
-    logger.log('items created')
     logger.log(res)
     return res
   })

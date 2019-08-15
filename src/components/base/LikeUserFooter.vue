@@ -24,7 +24,7 @@ import { mapGetters } from 'vuex'
 import IconButton from '@/components/search/IconButton'
 
 export default {
-  name: 'LikeUserFooter.vue',
+  name: 'LikeUserFooter',
   components: { IconButton },
   props: {
     user: { required: true }

@@ -1,4 +1,3 @@
-
 /*
 * logger.
 * usage :
@@ -12,12 +11,37 @@
 * logger.log and logger.logError will not show in test.
 */
 
-import debug from 'debug'
 let FS = window.FS
 
 export default function (namespace) {
-  const namespacedLog = debug('Lilypad:' + namespace)
-  const namespacedError = debug('Lilypad:' + namespace + ':error')
+  const namespacedLog = (...msgs) => {
+    if (msgs.length === 1 && typeof msgs[0] === 'object') {
+      console.log('%c Lilypad:' + namespace + ':',
+        'color: #f00; font-weight: bold;')
+      console.log(msgs[0])
+    } else {
+      console.log('%c Lilypad:' + namespace + ': %c' + msgs.join(', '),
+        'color: #f00; font-weight: bold;',
+        'color #000')
+    }
+  }
+
+  const namespacedError = (...msgs) => {
+    if (msgs.length === 1 && msgs[0] instanceof Error) {
+      console.log('%c Lilypad:' + namespace + ':error:',
+        'color: #000; background: #f55;')
+      console.log(msgs[0].message)
+      console.log(msgs[0].stack)
+    } else if (msgs.length === 1 && typeof msgs[0] === 'object') {
+      console.log('%c Lilypad:' + namespace + ':error:',
+        'color: #000; background: #f55;')
+      console.log(msgs[0])
+    } else {
+      console.log('%c Lilypad:' + namespace + ':error' + ': %c' + msgs.join(', '),
+        'color: #000; background: #f55;',
+        'color #fff')
+    }
+  }
 
   return {
     log (msg) {
@@ -63,12 +87,8 @@ export default function (namespace) {
       switch (process.env.NODE_ENV) {
         case 'development':
         case 'staging':
-          namespacedLog(msg)
-          break
         case 'test':
           namespacedLog(msg)
-          break
-        case 'production':
           break
         default:
           break

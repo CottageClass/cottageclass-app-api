@@ -4,8 +4,13 @@ import { mapGetters } from 'vuex'
 import moment from 'moment'
 import languageList from 'language-list'
 
+import { redirect } from '@/mixins'
+import rsvp from '@/mixins/rsvp'
+import waves from '@/mixins/waves'
+import { deleteEvent, fetchUpcomingEvents } from '@/utils/api'
+
 export default {
-  mixins: [screen],
+  mixins: [ redirect, rsvp, waves ],
   data () {
     return {
       overlayOpen: false
@@ -219,6 +224,33 @@ export default {
     ...mapGetters([ 'currentUser', 'isAuthenticated' ])
   },
   methods: {
+    contactClick () {
+      this.$router.push({ name: 'ContactUserForm', params: { userId: this.user.id } })
+    },
+    cancelClick () {
+      deleteEvent(this.event.id, () => {
+        this.$emit('event-deleted', this.event.id)
+        this.showBriefAllert('Your event has been deleted', 'success')
+      })
+    },
+    shareClick () {
+      this.$router.push({ name: 'SocialInvite', params: { id: this.event.id, context: 'searchItem' } })
+    },
+    goingClick () {
+      if (this.redirectToSignupIfNotAuthenticated({
+        name: 'RsvpInfoCollection',
+        params: { eventId: this.event.id }
+      })) {
+      } else if (this.event.participated) {
+        this.$router.push({ name: 'CancelRSVP', params: { eventId: this.event.id } })
+      } else {
+        if (this.currentUser.children.length === 1) {
+          this.submitRsvp(this.currentUser.children.map(c => c.id))
+        } else {
+          this.$router.push({ name: 'RsvpInfoCollection', params: { eventId: this.event.id } })
+        }
+      }
+    },
     async disinterestedClick () {
       let res
       if (this.user.darkStarred) {
@@ -227,6 +259,24 @@ export default {
         res = await darkStarUser(this.user.id)
       }
       this.$emit('user-updated', res)
+      return res
+    },
+    async interestedClickWithPrompts (likedUser, events) {
+      let res
+      if (this.user.starred) {
+        res = await unstarUser(this.user.id)
+      } else {
+        if (!events) {
+          events = await fetchUpcomingEvents(likedUser.id)
+        }
+        if (events.length > 0) {
+          this.$router.push({ name: 'SelectEventFromUser', params: { userId: likedUser.id } })
+        } else {
+          this.checkAuthenticationAndInitiateMessageSending()
+        }
+        res = await starUser(this.user.id)
+      }
+      this.updateUser(res)
       return res
     },
     async interestedClick () {

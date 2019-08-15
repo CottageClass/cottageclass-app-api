@@ -82,7 +82,7 @@ export async function submitUserInfo (userId, data) {
     logger.log('SUBMIT USER SUCCESS', res)
     return res
   } catch (err) {
-    logger.logError('SUBMIT USER FAILURE', err)
+    logger.logError(err)
     throw err
   }
 }
@@ -93,8 +93,7 @@ export async function fetchUser (userId) {
     logger.log('FETCH PUBLIC USER #' + userId + ' SUCCESS')
     return createUser(normalize(res.data))
   } catch (err) {
-    logger.logError('FETCH PUBLIC USER #' + userId + ' FAILURE')
-    logger.logError(err.errors)
+    logger.logError(err)
     throw err
   }
 }
@@ -107,8 +106,7 @@ export async function fetchCurrentUser (userId) {
     logger.log(res)
     return createUser(normalize(res.data))
   } catch (err) {
-    logger.logError('FETCH PRIVATE USER #' + userId + ' FAILURE')
-    logger.logError(err.errors)
+    logger.logError(err)
     throw err
   }
 }

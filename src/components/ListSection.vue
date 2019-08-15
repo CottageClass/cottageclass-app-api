@@ -17,6 +17,7 @@
                     :item="item"
                     @event-deleted="$emit('event-deleted')"
                     @event-updated="$emit('event-updated')"
+                    @user-updated="$emit('user-updated')"
                     />
 
   </ul>

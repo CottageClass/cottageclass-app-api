@@ -38,6 +38,7 @@ export const fetchEvent = async (id) => {
       throw Error('failed to fetch event')
     }
   } catch (e) {
+    logger.logError(e)
     throw e
   }
 }

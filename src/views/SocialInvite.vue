@@ -40,7 +40,7 @@
           <SearchListCard
             v-if="eventToShare"
             :item="item"
-            @event-updated="updateEvent"/>
+            @user-updated="updateUser"/>
         </div>
       </div>
     </div>
@@ -148,8 +148,8 @@ export default {
     ...mapGetters([ 'firstCreatedEvent' ])
   },
   methods: {
-    async updateEvent () {
-      this.fetchedEvent = await fetchEvent(this.eventId)
+    async updateUser (user) {
+      this.eventToShare.host = user
     },
     async fetchEvent () {
       this.fetchedEvent = await fetchEvent(this.eventId)
