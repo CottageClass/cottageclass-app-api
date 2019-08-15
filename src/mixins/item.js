@@ -261,16 +261,14 @@ export default {
       this.$emit('user-updated', res)
       return res
     },
-    async interestedClickWithPrompts (likedUser, events) {
+    async interestedClickWithPrompts () {
       let res
       if (this.user.starred) {
         res = await unstarUser(this.user.id)
       } else {
-        if (!events) {
-          events = await fetchUpcomingEvents(likedUser.id)
-        }
+        const events = await fetchUpcomingEvents(this.user.id)
         if (events.length > 0) {
-          this.$router.push({ name: 'SelectEventFromUser', params: { userId: likedUser.id } })
+          this.$router.push({ name: 'SelectEventFromUser', params: { userId: this.user.id } })
         } else {
           this.checkAuthenticationAndInitiateMessageSending()
         }

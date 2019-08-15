@@ -211,7 +211,7 @@ export default {
   methods: {
     async likeUserHandler () {
       this.$ga.event('Star', 'starred', 'UserPage footer')
-      this.user = await this.interestedClickWithPrompts(this.user)
+      this.user = await this.interestedClickWithPrompts()
     },
     async dislikeUserHandler () {
       this.$ga.event('Star', 'dark-starred', 'UserPage footer')
