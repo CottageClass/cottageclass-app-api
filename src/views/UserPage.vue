@@ -172,8 +172,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-
 import LikeUserFooter from '@/components/base/LikeUserFooter'
 import AvatarImage from '@/components/base/AvatarImage'
 import SearchListCardActions from '@/components/search/SearchListCardActions'
