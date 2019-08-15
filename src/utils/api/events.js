@@ -32,7 +32,11 @@ export const fetchEvent = async (id) => {
   id = id.toString()
   try {
     const res = await axios.get(`/api/events/${id}`)
-    return createEvent(normalize(res.data))
+    if (res) {
+      return createEvent(normalize(res.data))
+    } else {
+      throw Error('failed to fetch event')
+    }
   } catch (e) {
     logger.logError(e)
     throw e
