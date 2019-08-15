@@ -32,10 +32,6 @@ export default {
   computed: {
     starIcon: () => starIcon,
     ...mapGetters(['currentUser'])
-  },
-  methods: {
-    async likeUserHandler () {
-    }
   }
 }
 </script>
@@ -103,7 +99,6 @@ a {
   }
 
   .floating-button-item {
-    width: 100%;
     margin-top: 0;
   }
 

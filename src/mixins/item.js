@@ -268,7 +268,9 @@ export default {
       } else {
         const events = await fetchUpcomingEvents(this.user.id)
         if (events.length > 0) {
-          this.$router.push({ name: 'SelectEventFromUser', params: { userId: this.user.id } })
+          if (events.filter(e => !e.participated).length > 0) {
+            this.$router.push({ name: 'SelectEventFromUser', params: { userId: this.user.id } })
+          }
         } else {
           this.checkAuthenticationAndInitiateMessageSending()
         }

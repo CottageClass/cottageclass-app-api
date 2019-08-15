@@ -180,7 +180,7 @@ export default {
     },
     fetchEvent: async function () {
       this.event = await fetchEvent(this.$route.params.id)
-      this.otherEvents = (await fetchUpcomingEvents(this.event.hostId)).filter(e => (e.id !== this.event.id))
+      this.otherEvents = (await fetchUpcomingEvents(this.event.hostId)).filter(e => (e.id !== this.$route.params.id))
       this.$nextTick(async function () {
         await this.createMap(this.$refs.map, {
           zoom: 13,
