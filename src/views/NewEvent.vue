@@ -35,10 +35,10 @@ export default {
       section: 'event'
     }
   },
-  computed: mapGetters(['firstCreatedEvent', 'currentUser']),
+  computed: mapGetters(['firstCreatedEvent', 'currentUser', 'pendingWaves']),
   methods: {
     proceed () {
-      if (this.firstCreatedEvent) {
+      if (this.firstCreatedEvent && this.pendingWaves.length === 0) {
         this.$router.push({ name: 'SocialInvite', params: { id: this.firstCreatedEvent.id, context: 'spontaneous' } })
       } else {
         this.$router.push({ name: 'Search' })
