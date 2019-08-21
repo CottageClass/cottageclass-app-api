@@ -69,8 +69,7 @@ describe('MeetButton', () => {
 
       // wait a tick so button can update
       wrapper.vm.$nextTick(() => {
-        expect(mocksendMessage.mock.calls).toHaveLength(0)
-        expect(meetButton.text()).toEqual('Undo')
+        expect(mocksendMessage.mock.calls).toHaveLength(1)
         done()
       })
     })
@@ -196,8 +195,7 @@ describe('MeetButton', () => {
 
       // wait a tick so button can update
       wrapper.vm.$nextTick(() => {
-        expect(mocksendMessage.mock.calls).toHaveLength(0)
-        expect(meetButton.text()).toEqual('Undo')
+        expect(mocksendMessage.mock.calls).toHaveLength(1)
         done()
       })
     })
