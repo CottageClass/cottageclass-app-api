@@ -263,6 +263,20 @@ class User < ApplicationRecord
 
     false
   end
+
+  def notify_user_suggestion
+    return unless settings['email']['receive_weekly_email']
+
+    suggestion = nil
+    matched_users.each do |matched_user|
+      next if either_dark_star? matched_user
+
+      suggestion = matched_user
+      break
+    end
+    notifications.user_suggestion.where(notifiable: suggestion).create if suggestion.present?
+  end
+
   def notify_event_suggestion
     return unless settings['email']['receive_weekly_email']
 
