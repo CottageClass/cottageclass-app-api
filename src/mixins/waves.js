@@ -4,7 +4,7 @@ import { alerts, messaging } from '@/mixins'
 import { initProxySession, fetchUpcomingEvents } from '@/utils/api'
 
 export default {
-  mixins: [alerts, messaging ],
+  mixins: [ alerts, messaging ],
   data () {
     return {
       currentUserEvents: null
