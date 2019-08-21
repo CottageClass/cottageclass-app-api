@@ -25,12 +25,19 @@ import RequestChildcare from '@/views/RequestChildcare.vue'
 import ChildcareRequestPage from '@/views/ChildcareRequestPage.vue'
 import DeleteAccountConfirmation from '@/views/DeleteAccountConfirmation'
 import SelectEventFromUser from '@/views/SelectEventFromUser'
+import AddOffersPrompt from '@/views/AddOffersPrompt'
 
 Vue.use(Router)
 
 export default new Router({
   mode: 'history',
   routes: [
+    {
+      path: '/add-offers/:userId',
+      name: 'AddOffersPrompt',
+      component: AddOffersPrompt,
+      props: true
+    },
     {
       path: '/pick-a-time/:userId',
       name: 'SelectEventFromUser',

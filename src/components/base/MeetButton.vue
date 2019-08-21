@@ -38,6 +38,7 @@ export default {
     meetButtonClick (event) {
       switch (this.meetStatus) {
         case 'none':
+
           this.showDescriptionModal()
           break
         case 'sending':
@@ -62,7 +63,7 @@ export default {
           this.$store.commit('setHasShowEventsPageMessagingDescription')
         }
       } else {
-        this.checkAuthenticationAndInitiateMessageSending()
+        this.handleWave()
       }
     },
     undoMessageSending () {

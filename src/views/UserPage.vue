@@ -181,14 +181,14 @@ import LoadingSpinner from '@/components/LoadingSpinner'
 import OtherEvent from '@/components/OtherEvent'
 import MeetButton from '@/components/base/MeetButton'
 
-import { item, maps } from '@/mixins'
+import { item, maps, messaging } from '@/mixins'
 import { fetchUser, fetchUpcomingEvents } from '@/utils/api'
 import contactIcon from '@/assets/contact-black-outline.svg'
 
 export default {
   name: 'UserPage',
   components: { MainNav, Images, LoadingSpinner, AvatarImage, OtherEvent, MeetButton, SearchListCardActions, LikeUserFooter },
-  mixins: [ item, maps ],
+  mixins: [ item, maps, messaging ],
   data () {
     return {
       user: null,
@@ -242,6 +242,7 @@ export default {
   },
   created: function () {
     this.fetchUser()
+    this.settlePendingWaves()
   }
 }
 </script>

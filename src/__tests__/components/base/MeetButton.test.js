@@ -6,7 +6,7 @@ describe('MeetButton', () => {
 
   describe('locality provided', () => {
     const targetUser = {
-      id: '123456789',
+      id: '1230',
       firstName: 'Chuck',
       lastInitial: 'D',
       childAgesInMonths: [1, 15, 99],
@@ -20,7 +20,9 @@ describe('MeetButton', () => {
       const $route = {
         name: 'Search'
       }
+      const $router = { push: jest.fn() }
       const $store = {
+        commit: jest.fn(),
         getters: {
           isAuthenticated: true,
           waveHasBeenSent: () => false,
@@ -39,7 +41,7 @@ describe('MeetButton', () => {
         }
       }
       wrapper = mount(MeetButton, {
-        mocks: { $store, $route },
+        mocks: { $router, $store, $route },
         stubs: ['router-link'],
         propsData: {
           targetUser,
@@ -63,11 +65,11 @@ describe('MeetButton', () => {
       const mocksendMessage = jest.fn(() => {})
       wrapper.setMethods({ sendMessage: mocksendMessage })
       meetButton.trigger('click')
+      console.log(wrapper)
 
       // wait a tick so button can update
       wrapper.vm.$nextTick(() => {
-        expect(mocksendMessage.mock.calls).toHaveLength(0)
-        expect(meetButton.text()).toEqual('Undo')
+        expect(mocksendMessage.mock.calls).toHaveLength(1)
         done()
       })
     })
@@ -75,7 +77,9 @@ describe('MeetButton', () => {
 
   describe('no locality provided', () => {
     it('has the correct data', async () => {
+      const $router = { push: jest.fn() }
       const $store = {
+        commit: jest.fn(),
         getters: {
           waveHasBeenSent: () => false,
           isAuthenticated: true,
@@ -98,7 +102,7 @@ describe('MeetButton', () => {
       }
 
       const targetUser = {
-        id: '123456789',
+        id: '1230',
         firstName: 'Chuck',
         lastInitial: 'D',
         childAgesInMonths: [1, 2, 3],
@@ -109,7 +113,7 @@ describe('MeetButton', () => {
         jobPosition: 'engineer'
       }
       wrapper = mount(MeetButton, {
-        mocks: { $store, $route },
+        mocks: { $router, $store, $route },
         stubs: ['router-link'],
         propsData: {
           targetUser,
@@ -128,7 +132,7 @@ describe('MeetButton', () => {
 
   describe('negative age kid', () => {
     const targetUser = {
-      id: '123456789',
+      id: '1230',
       firstName: 'Chuck',
       lastInitial: 'D',
       childAgesInMonths: [1, 2, 3],
@@ -140,7 +144,9 @@ describe('MeetButton', () => {
     }
 
     beforeAll(async () => {
+      const $router = { push: jest.fn() }
       const $store = {
+        commit: jest.fn(),
         getters: {
           waveHasBeenSent: () => false,
           isAuthenticated: true,
@@ -162,7 +168,7 @@ describe('MeetButton', () => {
         name: 'Search'
       }
       wrapper = mount(MeetButton, {
-        mocks: { $store, $route },
+        mocks: { $router, $store, $route },
         stubs: ['router-link'],
         propsData: {
           targetUser,
@@ -189,8 +195,7 @@ describe('MeetButton', () => {
 
       // wait a tick so button can update
       wrapper.vm.$nextTick(() => {
-        expect(mocksendMessage.mock.calls).toHaveLength(0)
-        expect(meetButton.text()).toEqual('Undo')
+        expect(mocksendMessage.mock.calls).toHaveLength(1)
         done()
       })
     })
