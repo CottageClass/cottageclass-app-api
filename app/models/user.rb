@@ -254,11 +254,22 @@ class User < ApplicationRecord
     end
   end
 
+  def either_dark_star?(other_user)
+    dark_star = DarkStar.where(giver: self, recipient: other_user)
+    return true if dark_star.count > 0
+
+    dark_star = DarkStar.where(giver: other_user, recipient: self)
+    return true if dark_star.count > 0
+
+    false
+  end
   def notify_event_suggestion
     return unless settings['email']['receive_weekly_email']
 
     suggestion = nil
     matched_users.includes(:events).each do |matched_user|
+      next if either_dark_star? matched_user
+
       first_event = matched_user.events.upcoming.order(:starts_at).first
       next unless first_event.present? && !participated_events.exists?(first_event.id)
 
