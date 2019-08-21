@@ -215,7 +215,8 @@ export default {
     },
     async dislikeUserHandler () {
       this.$ga.event('Star', 'dark-starred', 'UserPage footer')
-      this.user = await this.disinterestedClick()
+      await this.disinterestedClick()
+      this.$router.push({ name: 'DisinterestedSurvey', params: { userId: this.$route.params.id } })
     },
     async interestedClickAndUpdate () {
       this.user = await this.interestedClick()

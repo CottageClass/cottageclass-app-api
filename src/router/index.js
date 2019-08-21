@@ -20,6 +20,7 @@ import ContactForm from '@/views/ContactForm.vue'
 import Onboarding from '@/views/Onboarding.vue'
 import ProfileCollection from '@/views/ProfileCollection.vue'
 import DeclineRSVP from '@/views/DeclineRSVP.vue'
+import DisinterestedSurvey from '@/views/DisinterestedSurvey.vue'
 import RequestChildcare from '@/views/RequestChildcare.vue'
 import ChildcareRequestPage from '@/views/ChildcareRequestPage.vue'
 import DeleteAccountConfirmation from '@/views/DeleteAccountConfirmation'
@@ -51,6 +52,12 @@ export default new Router({
       path: '/request-childcare/:section?/:stepName?',
       name: 'RequestChildcare',
       component: RequestChildcare,
+      props: true
+    },
+    {
+      path: '/users/:userId/decline',
+      name: 'DisinterestedSurvey',
+      component: DisinterestedSurvey,
       props: true
     },
     {
