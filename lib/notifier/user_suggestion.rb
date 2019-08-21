@@ -44,12 +44,12 @@ class Notifier::UserSuggestion < Notifier::Base
     ages = @suggested_user.child_ages_in_months
     if ages.length == 1
       kids_ages_standalone_string = 'Child age ' + display_age(ages[0], 'mo')
-      kids_ages_sentence_string = 'kid is ' + display_age(ages[0], 'month')
+      kids_ages_sentence_string = 'child is ' + display_age(ages[0], 'month')
     else
       display_ages = ages.map { |age| display_age(age, 'mo') }
       and_join_ages = display_ages.slice(0, display_ages.length - 1).join(', ') + ' and ' + display_ages[-1]
       kids_ages_standalone_string = 'Childen age ' + and_join_ages
-      kids_ages_sentence_string = 'kids are ' + and_join_ages
+      kids_ages_sentence_string = 'children are ' + and_join_ages
     end
 
     suggested_user_hash = {
