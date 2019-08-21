@@ -33,8 +33,13 @@ class Notifier::UserSuggestion < Notifier::Base
   def mail_template_parameters
     distance = @user.distance_to(@suggested_user).round(1).to_s
     full_bio = @suggested_user.profile_blurb
-    truncated_bio = full_bio.truncate(260, seperator: /\s/)
-    bio_truncated = full_bio.length != truncated_bio.length
+    if full_bio
+      truncated_bio = full_bio.truncate(260, seperator: /\s/) if full_bio
+      bio_truncated = full_bio.length != truncated_bio.length
+    else
+      truncated_bio = ''
+      bio_truncated = false
+    end
 
     ages = @suggested_user.child_ages_in_months
     if ages.length == 1
