@@ -128,6 +128,7 @@ export default {
 <style scoped lang="scss">
 a {
   color: #000;
+  -webkit-text-fill-color: #000;  // keep for safari
   text-decoration: none;
 }
 
@@ -150,6 +151,7 @@ a {
 .badge-text {
   margin-left: 4px;
   color: #fff;
+  -webkit-text-fill-color: #fff;  // keep for safari
   font-size: 8px;
   line-height: 12px;
   text-align: center;
@@ -159,6 +161,7 @@ a {
 
 .unicode-character {
   color: #fff;
+  -webkit-text-fill-color: #fff;  // keep for safari
   font-size: 8px;
   line-height: 12px;
   text-align: center;
@@ -266,12 +269,15 @@ a {
 
 .header__date {
   &.time-past {
+    -webkit-text-fill-color: #aaaaaa;  // keep for safari
     color: #aaaaaa;
   }
   &.childcare-request {
+    -webkit-text-fill-color: #FD6F77;  // keep for safari
     color: #FD6F77;
   }
   color: #1f88e9;
+  -webkit-text-fill-color: #1f88e9;  // keep for safari
   font-size: 12px;
   line-height: 12px;
   text-transform: uppercase;
@@ -281,6 +287,7 @@ a {
   position: absolute;
   right: 0;
   color: #64426b;
+  -webkit-text-fill-color: #64426b;  // keep for safari
   font-size: 12px;
   line-height: 12px;
   text-transform: uppercase;
@@ -345,6 +352,7 @@ a {
 
 .user-info__name {
   color: rgba(0, 0, 0, 0.86);
+  -webkit-text-fill-color: rgba(0, 0, 0, 0.86);  // keep for safari
   font-size: 12px;
   line-height: 17px;
   font-weight: 700;
@@ -354,6 +362,7 @@ a {
   overflow: hidden;
   width: 360px;
   color: rgba(0, 0, 0, 0.6);
+  -webkit-text-fill-color: rgba(0, 0, 0, 0.6);  // keep for safari
   font-size: 12px;
   line-height: 17px;
 }
@@ -362,6 +371,7 @@ a {
   overflow: hidden;
   width: 360px;
   color: rgba(0, 0, 0, 0.6);
+  -webkit-text-fill-color: rgba(0, 0, 0, 0.6);  // keep for safari
   font-size: 12px;
   line-height: 17px;
 }
