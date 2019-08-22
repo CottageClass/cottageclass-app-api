@@ -73,7 +73,7 @@ export default {
       this.debug({ params })
       try {
         await submitPasswordResetRequest(params)
-        this.showAlertOnNextRoute('Your password reset request has been submitted.  You will be contacted shortly.', 'success')
+        this.showAlertOnNextRoute('We\'ve emailed you a link to reset your password. It will arrive momentarily!', 'success')
         this.$router.push({ name: 'SplashPage' })
       } catch (err) {
         this.logError(err)
