@@ -179,7 +179,12 @@ export default {
       this.event.host = user
     },
     fetchEvent: async function () {
-      this.event = await fetchEvent(this.$route.params.id)
+      try {
+        this.event = await fetchEvent(this.$route.params.id)
+      } catch (e) {
+        this.logError(e)
+        this.$router.push({ name: 'NotFound' })
+      }
       this.otherEvents = (await fetchUpcomingEvents(this.event.hostId)).filter(e => (e.id !== this.$route.params.id))
       this.$nextTick(async function () {
         await this.createMap(this.$refs.map, {
