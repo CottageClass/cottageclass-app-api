@@ -58,7 +58,7 @@ export default {
     }
   },
   mounted () {
-    if (this.alertDat) {
+    if (this.alertData) {
       this.setPlaceholderHeight()
     }
   },
