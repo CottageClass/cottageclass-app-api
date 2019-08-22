@@ -2073,7 +2073,6 @@ export default {
 
   .text-field, .w-input {
     width: 100%;
-    height: 50px;
     padding-top: 6px;
     border: 1px solid transparent;
     border-radius: 4px;

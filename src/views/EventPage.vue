@@ -85,7 +85,7 @@
               </li>
               <li class="about-the-host__list-item">
                 <div class="bullet-bar"></div>
-                <div class="about-the-host__bullet-text">{{joinedDateFormatted}}</div>
+                <div class="about-the-host__bullet-text">Member since {{ joinedDateFormatted }}</div>
               </li>
             </ul>
             <div v-if="profileBlurb" class="about-the-host__bio">
