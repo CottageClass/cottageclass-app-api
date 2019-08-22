@@ -7,7 +7,7 @@ import languageList from 'language-list'
 import { redirect } from '@/mixins'
 import rsvp from '@/mixins/rsvp'
 import waves from '@/mixins/waves'
-import { deleteEvent, fetchUpcomingEvents } from '@/utils/api'
+import { fetchEvent, deleteEvent, fetchUpcomingEvents } from '@/utils/api'
 
 export default {
   mixins: [ redirect, rsvp, waves ],
@@ -236,7 +236,7 @@ export default {
     shareClick () {
       this.$router.push({ name: 'SocialInvite', params: { id: this.event.id, context: 'searchItem' } })
     },
-    goingClick () {
+    async goingClick () {
       if (this.redirectToSignupIfNotAuthenticated({
         name: 'RsvpInfoCollection',
         params: { eventId: this.event.id }
@@ -245,7 +245,8 @@ export default {
         this.$router.push({ name: 'CancelRSVP', params: { eventId: this.event.id } })
       } else {
         if (this.currentUser.children.length === 1) {
-          this.submitRsvp(this.currentUser.children.map(c => c.id))
+          await this.submitRsvp(this.currentUser.children.map(c => c.id))
+          this.event = await fetchEvent(this.event.id)
         } else {
           this.$router.push({ name: 'RsvpInfoCollection', params: { eventId: this.event.id } })
         }
