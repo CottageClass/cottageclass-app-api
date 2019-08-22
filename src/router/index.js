@@ -26,6 +26,7 @@ import ChildcareRequestPage from '@/views/ChildcareRequestPage.vue'
 import DeleteAccountConfirmation from '@/views/DeleteAccountConfirmation'
 import SelectEventFromUser from '@/views/SelectEventFromUser'
 import AddOffersPrompt from '@/views/AddOffersPrompt'
+import ErrorPage from '@/views/ErrorPage'
 
 Vue.use(Router)
 
@@ -186,7 +187,18 @@ export default new Router({
     {
       path: '/my', // short link for SMS prompts
       redirect: '/events/new/description'
+    },
+    {
+      path: '/404',
+      name: 'NotFound',
+      component: ErrorPage,
+      props: { status: 404 }
+    },
+    {
+      path: '*',
+      redirect: '/404'
     }
+
   ],
   scrollBehavior (to, from, savedPosition) {
     if (to.hash) {
