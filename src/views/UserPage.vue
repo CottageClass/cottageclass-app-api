@@ -222,7 +222,12 @@ export default {
       this.user = await this.interestedClick()
     },
     fetchUser: async function () {
-      this.user = await fetchUser(this.$route.params.id)
+      try {
+        this.user = await fetchUser(this.$route.params.id)
+      } catch (e) {
+        this.logError(e)
+        this.$router.push({ name: 'NotFound' })
+      }
       this.events = (await fetchUpcomingEvents(this.$route.params.id))
       this.$nextTick(async function () {
         await this.createMap(this.$refs.map, {

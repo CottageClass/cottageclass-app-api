@@ -65,7 +65,6 @@ describe('MeetButton', () => {
       const mocksendMessage = jest.fn(() => {})
       wrapper.setMethods({ sendMessage: mocksendMessage })
       meetButton.trigger('click')
-      console.log(wrapper)
 
       // wait a tick so button can update
       wrapper.vm.$nextTick(() => {

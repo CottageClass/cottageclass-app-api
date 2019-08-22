@@ -10,9 +10,12 @@ export async function fetchChildcareRequest (id) {
     const res = await axios.get(`api/childcare_requests/${id}`)
     if (res) {
       return createChildcareRequest(normalize(res.data))
+    } else {
+      throw Error('failed to fetch childcare request')
     }
   } catch (e) {
     logger.logError(e)
+    throw e
   }
 }
 
@@ -22,5 +25,6 @@ export async function submitChildcareRequest (description) {
     await axios.post('api/childcare_requests', data)
   } catch (e) {
     logger.logError(e)
+    throw e
   }
 }

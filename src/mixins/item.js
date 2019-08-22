@@ -176,7 +176,6 @@ export default {
     userLastInitial () {
       return (this.event && this.event.host.lastInitial) ||
         (this.user && this.user.lastInitial) || (this.user && this.user.lastName && this.user.lastName[0])
-      ''
     },
     userName () {
       return this.userFirstName + ' ' + this.userLastInitial + '.'

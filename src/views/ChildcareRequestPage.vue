@@ -164,7 +164,13 @@ export default {
       this.otherEvents = (await fetchUpcomingEvents(this.user.id))
     },
     fetchChildcareRequest: async function () {
-      this.childcareRequest = await fetchChildcareRequest(this.$route.params.id)
+      try {
+        this.childcareRequest = await fetchChildcareRequest(this.$route.params.id)
+      } catch (e) {
+        this.logError(e)
+        this.debug('hi')
+        this.$router.push({ name: 'NotFound' })
+      }
     }
   },
   async created () {
