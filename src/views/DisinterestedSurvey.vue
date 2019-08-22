@@ -8,7 +8,7 @@
     <div class="content-wrapper">
       <StyleWrapper styleIs="onboarding">
         <Question
-          title="Why can't you come to this playdate?"
+          :title="`Why aren't you interested in a playdate with ${this.otherUser.firstName}?`"
           subtitle="Your feedback is private and helps us do a better job of matching parents and playdates!" >
           <Checkboxes
             v-model="reasons"
