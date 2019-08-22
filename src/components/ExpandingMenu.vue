@@ -12,6 +12,13 @@
         </a>
       </li>
       <li>
+        <router-link
+        :to="'/users/' + currentUser.id"
+        class="link-block w-inline-block">
+          <div class="text-block">View profile</div>
+        </router-link>
+      </li>
+      <li>
         <router-link to="/faq" class="link-block w-inline-block">
           <div class="text-block">FAQ</div>
         </router-link>
@@ -28,6 +35,7 @@
 <script>
 import { } from '@/mixins'
 import { signOut } from '@/utils/api'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'ExpandingMenu',
@@ -47,7 +55,8 @@ export default {
       })
     }
   },
-  mounted () {
+  computed: {
+    ...mapGetters(['currentUser'])
   }
 }
 </script>
