@@ -1,6 +1,6 @@
 <template>
 <div class="floating-buttons-container">
-  <div class="floating-buttons__title-text">Are you interested in a playdate with {{user.firstName}}</div>
+  <div class="floating-buttons__title-text">Are you interested in a playdate with {{user.firstName}}?</div>
   <ul class="floating-buttons-list">
     <li class="floating-button-item">
       <IconButton label="Yes"

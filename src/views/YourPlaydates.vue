@@ -22,7 +22,7 @@
                  :emptyOptions="yourOffersEmptyOptions"
                  :items="yourOffersItems"
                  @header-button-click="$router.push({ name: 'NewEvent' })"
-                 @empty-card-button-click="$router.push({ name: 'ProfileEdit' })"
+                 @empty-card-button-click="$router.push({ name: 'NewEvent' })"
                  @empty-card-additional-link-click="$router.push({ name: 'Search' })"
                  @event-updated="fetchMyEvents"
                  @event-deleted="fetchMyEvents"
@@ -90,8 +90,8 @@ export default {
     hostingEmptyOptions () {
       return {
         image: heartDoor2,
-        title: 'You don\'t have any playdates scheduled',
-        buttonText: 'Offer Playdate',
+        title: 'You aren\'t scheduled to host any playdates.',
+        buttonText: 'Offer More Playdates',
         additionalLinkText: 'Find playdates near you'
       }
     },
@@ -106,7 +106,7 @@ export default {
       return {
         image: availability2,
         title: 'You aren\'t currently offering any playdates.',
-        buttonText: 'Update your availability',
+        buttonText: 'Offer some playdates',
         additionalLinkText: 'Find playdates near you'
       }
     },

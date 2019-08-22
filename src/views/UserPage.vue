@@ -153,7 +153,7 @@
         <div class="profile-detail__column-right w-col w-col-4 w-col-stack">
           <ul class="other-events__list">
             <li class="other-events__title-bar">
-              <div class="other-events__title-text truncate">{{ userFirstName }}'s events</div>
+              <div class="other-events__title-text truncate">{{ userFirstName }}'s offers</div>
             </li>
             <OtherEvent v-for="event of events"
                         :key="event.id"
