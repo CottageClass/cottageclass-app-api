@@ -220,6 +220,8 @@ GEM
       activerecord
       kaminari-core (= 1.1.1)
     kaminari-core (1.1.1)
+    key_value (0.4.4)
+      activerecord
     koala (3.0.0)
       addressable
       faraday
@@ -521,6 +523,7 @@ DEPENDENCIES
   httplog
   inherited_resources!
   kaminari
+  key_value
   koala
   lograge
   meta-tags (~> 2.11, >= 2.11.1)
