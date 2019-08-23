@@ -39,6 +39,7 @@
           </div>
           <SearchListCard
             v-if="eventToShare"
+            :doNotShowCancel="true"
             :item="item"
             @user-updated="updateUser"/>
         </div>
