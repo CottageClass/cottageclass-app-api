@@ -19,7 +19,8 @@ class Notification < ApplicationRecord
     user_sms_welcome: 14,
     password_reset_request: 15,
     event_suggestion: 16,
-    user_suggestion: 17
+    user_suggestion: 17,
+    event_created_starrer: 18
   }
 
   belongs_to :recipient, class_name: 'User', inverse_of: :notifications
