@@ -146,7 +146,6 @@ import MainNav from '@/components/MainNav'
 import Images from '@/components/Images'
 import LoadingSpinner from '@/components/LoadingSpinner'
 import OtherEvent from '@/components/OtherEvent'
-import MeetButton from '@/components/base/MeetButton'
 
 import { item, maps, messaging } from '@/mixins'
 import { fetchUser, fetchUpcomingEvents } from '@/utils/api'
@@ -154,7 +153,7 @@ import contactIcon from '@/assets/contact-black-outline.svg'
 
 export default {
   name: 'UserPage',
-  components: { MainNav, Images, LoadingSpinner, AvatarImage, OtherEvent, MeetButton, SearchListCardActions, LikeUserFooter },
+  components: { MainNav, Images, LoadingSpinner, AvatarImage, OtherEvent, SearchListCardActions, LikeUserFooter },
   mixins: [ item, maps, messaging ],
   data () {
     return {
