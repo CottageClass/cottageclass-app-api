@@ -44,7 +44,7 @@ export default {
   computed: {
     titleText: () => 'Would you like to offer some times to meet?',
     questionText () {
-      return 'You haven\'t offered any upcoming times yet, so we strongly reommend offering some before saying hi to ' +
+      return 'You haven\'t offered any upcoming times yet, so we strongly recommend offering some before saying hi to ' +
              this.user.firstName +
              '. It will make scheduling a playdate so much simpler!'
     }

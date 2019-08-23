@@ -36,7 +36,7 @@ export default {
       if (this.currentUser && this.currentUserHasEvents) {
         try {
           await this.sendMessage()
-          this.showAlertOnNextRoute('You message has been sent', 'success')
+          this.showAlertOnNextRoute('Your message has been sent', 'success')
         } catch (e) {
           this.logError(e)
           this.showAlertOnNextRoute('Something went wrong.  Please try again later', 'failure')
