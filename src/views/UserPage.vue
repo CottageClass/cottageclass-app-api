@@ -17,7 +17,7 @@
           <div class="profile-top-card__user-summary-info">
             <div class="profile-top-card__name-action-group">
               <h1 class="profile-top-card__user-name">{{userName}}</h1>
-              <a  class="profile-top-card__action-button w-inline-block"
+              <a v-if="showInterestedButton" class="profile-top-card__action-button w-inline-block"
                   :class="isStarred?'active':''"
                   @click.stop="interestedClickAndUpdate"></a>
               <div v-if="distance" class="profile-top-card__distance">{{ distance }}</div>
@@ -114,39 +114,6 @@
             <div class="card__description-and-icon-container w-clearfix">
               <img src="@/assets/pets.svg" width="100" height="100" alt="" class="pets__image" />
               <div class="pets__text">{{ petDescription }}</div>
-            </div>
-          </div>
-          <div class="invite__card">
-            <div class="invite__title-text">Invite for a playdate</div>
-            <div class="invite__subtitle">
-              (Once you have your first playdate you can request childcare too)
-            </div>
-            <MeetButton
-              defaultText="Invite for a playdate"
-              :icon="contactIcon"
-              :targetUser="user"
-              :allowUndo="false"
-              :shouldShowDescriptionModal="false"/>
-            <div class="invite__playdate-instructions">
-              <div class="invite-how-to__title-text">How to plan a playdate with {{ userFirstName }}</div>
-              <div class="playdate-planning-bullet">
-                <div class="number-container">
-                  <div class="text-block-10">1</div>
-                </div>
-                <div class="invite-how-to__bullet-text">Click 'invite for a playdate' above</div>
-              </div>
-              <div class="playdate-planning-bullet">
-                <div class="number-container">
-                  <div class="text-block-10">2</div>
-                </div>
-                <div class="invite-how-to__bullet-text">{{ userFirstName }} will get a text that you're intestested in a playdate</div>
-              </div>
-              <div class="playdate-planning-bullet">
-                <div class="number-container">
-                  <div class="text-block-10">3</div>
-                </div>
-                <div class="invite-how-to__bullet-text">Decide on a time and place to meet. (We recommend meeting in one of your homes).</div>
-              </div>
             </div>
           </div>
         </div>
@@ -640,16 +607,19 @@ a {
 }
 
 .profile-detail__content-columns {
+  min-width: 100%;
   margin-top: 16px;
   padding-bottom: 16px;
 }
 
 .profile-detail_column-left {
   padding-right: 8px;
+  padding-left: 0px;
 }
 
 .profile-detail__column-right {
   padding-left: 8px;
+  padding-right: 0px;
 }
 
 .profile-top-card__photo-wrapper {
@@ -767,54 +737,6 @@ a {
   list-style-type: none;
 }
 
-.invite__card {
-  position: static;
-  display: flex;
-  margin-top: 16px;
-  margin-bottom: 16px;
-  padding: 20px;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  border-bottom: 1px solid #f5f5f5;
-  background-color: #fff;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.08);
-  list-style-type: none;
-}
-
-.invite__title-text {
-  margin-bottom: 0;
-  font-size: 16px;
-  line-height: 24px;
-}
-
-.btn__invite-for-playdate {
-  display: block;
-  margin-right: 10px;
-  padding: 4px 16px 5px;
-  border-style: solid;
-  border-width: 1px;
-  border-color: #1f88e9;
-  border-radius: 4px;
-  background-color: #fff;
-  color: #1f88e9;
-  font-size: 12px;
-  font-weight: 400;
-  &.sent {
-    cursor: default;
-    color:  rgb(12, 186, 82);
-    border-color:  rgb(12, 186, 82);
-    cursor: default;
-    &:hover {
-      background-color: #fff;
-    }
-  }
-}
-
-.btn__invite-for-playdate:hover {
-  background-color: rgba(0, 0, 0, 0.06);
-}
-
 .interests__card {
   position: static;
   display: flex;
@@ -899,20 +821,6 @@ a {
   margin-bottom: 16px;
   font-size: 16px;
   line-height: 24px;
-}
-
-.invite__subtitle {
-  margin-bottom: 17px;
-  color: rgba(0, 0, 0, 0.5);
-  font-size: 12px;
-  text-align: center;
-}
-
-.invite__playdate-instructions {
-  margin-top: 32px;
-  padding: 20px;
-  border-radius: 4px;
-  background-color: #f5f5f5;
 }
 
 .profile__badge-text {
@@ -1005,17 +913,6 @@ a {
   border-color: #f1f1f1 transparent transparent #f1f1f1;
 }
 
-.invite-how-to__title-text {
-  margin-bottom: 20px;
-  font-size: 13px;
-}
-
-.invite-how-to__bullet-text {
-  margin-top: 1px;
-  padding-left: 10px;
-  font-size: 13px;
-}
-
 @media (max-width: 991px){
   .event-detail__map {
     max-height: 210px;
@@ -1054,14 +951,16 @@ a {
   .profile-detail_column-left {
     margin-bottom: 0;
     padding-right: 10px;
+    padding-left: 10px;
+  }
+
+  .map {
+    margin-bottom: 10px;
   }
 
   .profile-detail__column-right {
     padding-left: 10px;
-  }
-
-  .invite__playdate-instructions {
-    width: 100%;
+    padding-right: 10px;
   }
 
   .about__description {
@@ -1223,16 +1122,6 @@ a {
     border-radius: 0;
   }
 
-  .invite__card {
-    padding: 16px 16px 24px;
-    border-radius: 0;
-  }
-
-  .invite__title-text {
-    font-size: 14px;
-    line-height: 18px;
-  }
-
   .interests__card {
     padding: 16px 16px 24px;
     border-radius: 0;
@@ -1348,10 +1237,6 @@ a {
 
   .profile-top-card__user-name {
     font-size: 20px;
-  }
-
-  .invite__playdate-instructions {
-    width: 100%;
   }
 
   .about__description {
