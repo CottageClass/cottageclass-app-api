@@ -67,7 +67,7 @@
                     :showShareButton="showShareButton"
                     :showInterestedButton="showInterestedButton"
                     :showContactButton="showContactButton"
-                    :showCancelButton="showCancelButton"
+                    :showCancelButton="!doNotShowCancel && showCancelButton"
                     :allowWaveUndo="true"/>
     <SearchListCardActionsOverlay
                     v-if="showOverlay"
@@ -88,7 +88,7 @@
                     :showShareButton="showShareButton"
                     :showContactButton="showContactButton"
                     :showInterestedButton="showInterestedButton"
-                    :showCancelButton="showCancelButton"
+                    :showCancelButton="!doNotShowCancel && showCancelButton"
                     :allowWaveUndo="true"/>
   </div>
 </li>
@@ -106,6 +106,7 @@ import { item, screen } from '@/mixins'
 export default {
   name: 'SearchListCard',
   props: {
+    doNotShowCancel: { default: false },
     item: { required: true },
     mapCenter: {}
   },
