@@ -85,7 +85,7 @@
               </li>
               <li class="about-the-host__list-item">
                 <div class="bullet-bar"></div>
-                <div class="about-the-host__bullet-text">{{joinedDateFormatted}}</div>
+                <div class="about-the-host__bullet-text">Member since {{ joinedDateFormatted }}</div>
               </li>
             </ul>
             <div v-if="profileBlurb" class="about-the-host__bio">
@@ -112,7 +112,7 @@
         <div v-if="otherEvents" class="event-detail__column-right w-col w-col-4 w-col-stack">
           <ul class="other-events__list">
             <li class="other-events__title-bar">
-              <div class="other-events__title-text truncate">{{userFirstName}}'s other events </div>
+              <div class="other-events__title-text truncate">{{userFirstName}}'s offers</div>
             </li>
             <OtherEvent v-for="otherEvent of otherEvents"
                         :key="otherEvent.id"
@@ -179,7 +179,12 @@ export default {
       this.event.host = user
     },
     fetchEvent: async function () {
-      this.event = await fetchEvent(this.$route.params.id)
+      try {
+        this.event = await fetchEvent(this.$route.params.id)
+      } catch (e) {
+        this.logError(e)
+        this.$router.push({ name: 'NotFound' })
+      }
       this.otherEvents = (await fetchUpcomingEvents(this.event.hostId)).filter(e => (e.id !== this.$route.params.id))
       this.$nextTick(async function () {
         await this.createMap(this.$refs.map, {

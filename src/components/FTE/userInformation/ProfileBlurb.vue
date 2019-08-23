@@ -5,6 +5,7 @@
     <FormWithTextArea
       v-model="profileBlurb"
       placeholder="e.g. 'We love parks and playgrounds, and we're looking for playdates on the weekend!'"
+      rows="4"
       />
   </Question>
 </template>

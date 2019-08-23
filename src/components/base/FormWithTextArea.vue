@@ -11,6 +11,7 @@
         :placeholder="placeholder"
         :maxlength="maxLength || 5000"
         class="text-area-decribe-need w-input"
+        :rows="rows"
         >
       </textarea>
     </form>
@@ -19,7 +20,14 @@
 <script>
 export default {
   name: 'FormWithTextArea',
-  props: ['value', 'placeholder', 'maxLength'],
+  props: {
+    value: {},
+    placeholder: {},
+    maxLength: {},
+    rows: {
+      default: 2
+    }
+  },
   data () {
     return {
       text: this.value

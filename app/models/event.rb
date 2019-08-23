@@ -82,7 +82,7 @@ class Event < ApplicationRecord
   end
 
   def start_time
-    in_instance_time_zone(starts_at).strftime('%l:%M')
+    in_instance_time_zone(starts_at).strftime('%l:%M %P')
   end
 
   def update_recency_score

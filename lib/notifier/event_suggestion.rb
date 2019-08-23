@@ -5,7 +5,7 @@ class Notifier::EventSuggestion < Notifier::Base
   end
 
   def email
-    dump_mail_template_parameters name: 'EventCreationHost.json'
+    dump_mail_template_parameters name: 'EventSuggestion.json'
     pp mail_template_parameters.deep_stringify_keys
     response = @sendgrid_client.send_mail to: [@user],
                                           from: @sender_email,

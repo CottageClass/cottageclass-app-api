@@ -20,16 +20,25 @@ import ContactForm from '@/views/ContactForm.vue'
 import Onboarding from '@/views/Onboarding.vue'
 import ProfileCollection from '@/views/ProfileCollection.vue'
 import DeclineRSVP from '@/views/DeclineRSVP.vue'
+import DisinterestedSurvey from '@/views/DisinterestedSurvey.vue'
 import RequestChildcare from '@/views/RequestChildcare.vue'
 import ChildcareRequestPage from '@/views/ChildcareRequestPage.vue'
 import DeleteAccountConfirmation from '@/views/DeleteAccountConfirmation'
 import SelectEventFromUser from '@/views/SelectEventFromUser'
+import AddOffersPrompt from '@/views/AddOffersPrompt'
+import ErrorPage from '@/views/ErrorPage'
 
 Vue.use(Router)
 
 export default new Router({
   mode: 'history',
   routes: [
+    {
+      path: '/add-offers/:userId',
+      name: 'AddOffersPrompt',
+      component: AddOffersPrompt,
+      props: true
+    },
     {
       path: '/pick-a-time/:userId',
       name: 'SelectEventFromUser',
@@ -51,6 +60,12 @@ export default new Router({
       path: '/request-childcare/:section?/:stepName?',
       name: 'RequestChildcare',
       component: RequestChildcare,
+      props: true
+    },
+    {
+      path: '/users/:userId/decline',
+      name: 'DisinterestedSurvey',
+      component: DisinterestedSurvey,
       props: true
     },
     {
@@ -172,7 +187,18 @@ export default new Router({
     {
       path: '/my', // short link for SMS prompts
       redirect: '/events/new/description'
+    },
+    {
+      path: '/404',
+      name: 'NotFound',
+      component: ErrorPage,
+      props: { status: 404 }
+    },
+    {
+      path: '*',
+      redirect: '/404'
     }
+
   ],
   scrollBehavior (to, from, savedPosition) {
     if (to.hash) {

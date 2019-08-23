@@ -31,7 +31,7 @@ export default {
     }
   },
   computed: {
-    linkText: () => 'https://www.JoinLilypad.com'
+    linkText: () => 'https://JoinLilypad.com'
   },
   methods: {
     onCopy () {

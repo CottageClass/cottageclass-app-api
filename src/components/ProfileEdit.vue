@@ -16,7 +16,7 @@
       <MultipleImageUpload v-model="currentUser.images" />
     </Question>
     <Employment v-model="employment"/>
-    <ProfileBlurb v-model="currentUser.profileBlurb" />
+    <ProfileBlurb v-model="profileBlurb" />
     <Activities v-model="currentUser.activities" />
     <Availability id="availability" v-model="availability" :required="false"/>
     <Children v-model="children" :required="false" />
@@ -101,6 +101,7 @@ export default {
       phone: {},
       employment: {},
       availability: {},
+      profileBlurb: {},
       showError: false,
       saveButtonText: 'Save',
       children: null
@@ -120,6 +121,10 @@ export default {
     this.employment = {
       jobPosition: this.currentUser.jobPosition,
       employer: this.currentUser.employer,
+      err: null
+    }
+    this.profileBlurb = {
+      text: this.currentUser.profileBlurb,
       err: null
     }
   },
@@ -147,6 +152,7 @@ export default {
         this.saveButtonText = 'Saving...'
         let data = Object.assign(this.currentUser, this.employment, {})
         data.children = this.children.list
+        data.profileBlurb = this.profileBlurb.text
         const settings = {
           matching: { maxDistance: this.maxDistance },
           email: { receiveWeeklyEmail: this.weeklyEmails.isTrue }

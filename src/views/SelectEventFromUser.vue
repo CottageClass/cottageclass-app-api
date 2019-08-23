@@ -8,16 +8,16 @@
           <div class="onb-top-content-container">
             <h1 class="onb-heading-large">{{ titleText }}</h1>
           </div>
-          <LoadingSpinner v-if="!events" />
+          <LoadingSpinner v-if="!currentUserEvents || !events" />
           <div v-else v-for="event in events">
             <OtherEvent :event="event"
                         @item-click="processRSVP(event)"/>
           </div>
-        </div>
         <a class="wave-button"
            @click="handleWave">
-          Just say hi!
+          {{waveButtonText}}
         </a>
+        </div>
       </div>
     </div>
   </div>
@@ -25,21 +25,21 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 
 import Nav from '@/components/FTE/Nav'
 import StyleWrapper from '@/components/FTE/StyleWrapper'
 import LoadingSpinner from '@/components/LoadingSpinner'
 import OtherEvent from '@/components/OtherEvent'
 
-import { fetchUpcomingEvents, fetchUser } from '@/utils/api'
-import { rsvp, waves, alerts } from '@/mixins'
+import { fetchUser, fetchUpcomingEvents } from '@/utils/api'
+import { rsvp, waves } from '@/mixins'
 
 export default {
   name: 'SelectEventFromUser',
   props: ['userId'],
   components: { Nav, StyleWrapper, LoadingSpinner, OtherEvent },
-  mixins: [rsvp, waves, alerts],
+  mixins: [ rsvp, waves ],
   data () {
     return {
       events: null,
@@ -48,6 +48,9 @@ export default {
   },
   computed: {
     titleText: () => 'Great! Pick a time that works for you.',
+    waveButtonText () {
+      return 'Say hi & propose another time'
+    },
     ...mapGetters(['currentUser'])
   },
   methods: {
@@ -59,21 +62,12 @@ export default {
         this.$router.push({ name: 'RsvpInfoCollection', params: { eventId: event.id } })
       }
     },
-    async handleWave () {
-      try {
-        await this.sendMessage()
-        this.showAlertOnNextRoute('You message has been sent', 'success')
-      } catch (e) {
-        this.logError(e)
-        this.showAlertOnNextRoute('Something went wrong.  Please try again later', 'failure')
-      } finally {
-        this.$router.push({ name: 'UserPage', params: { id: this.userId } })
-      }
-    }
+    ...mapMutations(['addPendingWave'])
   },
   async created () {
     this.events = await fetchUpcomingEvents(this.userId)
     this.events = this.events.filter(e => !e.participated)
+
     this.targetUser = await fetchUser(this.userId)
   }
 }
@@ -82,6 +76,8 @@ export default {
 <style scoped>
 .onb-content-container {
   font-family: soleil;
+  display: flex;
+  flex-direction: column;
 }
 .wave-button {
   display: block;
@@ -91,20 +87,17 @@ export default {
   background-color: #b3d4fc;
   border-radius: 4px;
   color: #158BE7;
-  padding: 12px 5px;
+  padding: 12px 25px;
   font-variant: small-caps;
-  width: 40%;
   text-align: center;
   cursor: pointer;
   margin-right: auto;
   margin-left: auto;
-  margin-top: 3px;
+  margin-top: 45px;
   margin-bottom: 32px;
 }
 @media (max-width: 479px) {
-  .wave-button {
-    width: 60%;
-  }
+
 }
 
 </style>

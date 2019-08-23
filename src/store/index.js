@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import auth from './auth'
-// import modal from './modal'
 import rsvp from './rsvp'
 import eventCreation from './eventCreation'
+import waves from './waves'
 import createPersistedState from 'vuex-persistedstate'
 
 Vue.use(Vuex)
@@ -11,7 +11,7 @@ Vue.use(Vuex)
 export default new Vuex.Store(
   {
     plugins: [createPersistedState()],
-    modules: { auth, eventCreation, rsvp },
+    modules: { auth, eventCreation, rsvp, waves },
     state: {
       alert: null,
       createdEvents: null,
@@ -19,28 +19,9 @@ export default new Vuex.Store(
       mapArea: {
         center: { lat: 40.688309, lng: -73.994639 }, // BoCoCa
         maxDistance: 5
-      },
-      pendingWaves: [],
-      sentWaves: []
+      }
     },
     mutations: {
-      markWaveSent: (state, payload) => {
-        const id = payload.targetUserId.toString()
-        if (state.pendingWaves.some(user => user.id === id)) {
-          state.pendingWaves = state.pendingWaves.filter(w => w.id !== id)
-          state.sentWaves.push(id)
-        }
-      },
-      removePendingWave: (state, payload) => {
-        const id = payload.targetUserId
-        state.pendingWaves = state.pendingWaves.filter(w => w.id !== id)
-      },
-      addPendingWave: (state, payload) => {
-        state.pendingWaves.push(payload.targetUser)
-      },
-      addSentWave: (state, payload) => {
-        state.sentWaves.push(payload.targetUserId.toString())
-      },
       resetRedirectRoute: (state) => {
         state.redirectRoute = null
       },
@@ -93,10 +74,6 @@ export default new Vuex.Store(
         } else {
           return null
         }
-      },
-      pendingWaves: state => state.pendingWaves,
-      waveHasBeenSent: state => {
-        return (userId) => state.sentWaves.includes(userId)
       },
       mapArea: state => state.mapArea,
       redirectRoute: state => state.redirectRoute

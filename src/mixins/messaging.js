@@ -1,8 +1,11 @@
-import { initProxySession } from '@/utils/api'
-import { childAgeSentenceText } from '@/utils/utils'
 import { mapGetters } from 'vuex'
 
+import { initProxySession } from '@/utils/api'
+import { childAgeSentenceText } from '@/utils/utils'
+import { alerts } from '@/mixins'
+
 export default {
+  mixins: [ alerts ],
   computed: {
     messageChildAgeString () {
       const childAgesInMonths = this.currentUser.childAgesInMonths
@@ -42,9 +45,10 @@ export default {
             this.meetMessage(targetUser),
             this.acknowledgeMessage(targetUser)
           )
+          this.showAlertOnNextRoute('Your message has been sent', 'success')
         } catch (e) {
-          console.error(e)
-          this.showBriefAllert('There was a problem sending your message.  Please try again later', 'failure')
+          this.logError(e)
+          this.showAlertOnNextRoute('There was a problem sending your message.  Please try again later', 'failure')
         } finally {
           // mark the wave as send even if it fails
           this.$store.commit('removePendingWave', { targetUserId: targetUser.id })

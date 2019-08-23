@@ -10,4 +10,4 @@ en:
     event_reminder_previous_day_host: 'Hi %{host_first_name}, we’re excited for you. Your next playdate is tomorrow from %{event_time_range}! Please let us know if you have any questions and have a wonderful time!'
     event_feedback_host: 'How did your playdate go? We’d love to hear feedback on your experience if you get a chance. https://cottageclass1.typeform.com/to/fINuSZ'
     event_destruction: 'Hi %{participant_first_name}, we’re sorry but %{host_first_name} has cancelled their Lilypad playdate on %{event_start_date} from %{event_time_range}. Please call us at ‭862-294-4859 if you need help finding another playdate!'
-    user_sms_welcome: "Welcome! When parents text each other on Lilypad, a proxy keeps your number private—we only share your real number with your own guests & hosts. ❤️ JoinLilypad.com"
+    user_sms_welcome: "Welcome! When you text parents on Lilypad, a proxy keeps your number private—we only share your real number with your own guests & hosts. ❤️ JoinLilypad.com"

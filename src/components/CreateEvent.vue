@@ -4,7 +4,6 @@
       :button="nextButtonState"
       @next="nextStep"
       @prev="prevStep"
-      :hidePrevious="stepIndex===0"
     />
     <ErrorMessage v-if="errorMessage && showError" :text="errorMessage" />
     <LoadingSpinner v-if="submissionPending" />
@@ -179,6 +178,8 @@ export default {
     prevStep () {
       if (this.stepIndex > 0) {
         this.$router.replace({ params: { stepName: this.stepSequence[this.stepIndex - 1] } })
+      } else {
+        this.$router.go(-1)
       }
     },
     ...mapMutations([ 'setWipEvent', 'resetWipEvent', 'setCreatedEvents' ])
