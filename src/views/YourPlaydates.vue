@@ -90,7 +90,7 @@ export default {
     hostingEmptyOptions () {
       return {
         image: heartDoor2,
-        title: 'You aren\'t scheduled to host any playdates.',
+        title: 'You aren\'t scheduled to host anyone yet.',
         buttonText: 'Offer More Playdates',
         additionalLinkText: 'Find playdates near you'
       }
