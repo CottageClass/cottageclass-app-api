@@ -30,8 +30,8 @@ class Notifier::EventCreationStarrer < Notifier::Base
   end
 
   def mail_template_parameters
-    distance = @user.distance_to(@suggested_user).round(1).to_s
-    full_bio = @suggested_user.profile_blurb
+    distance = @user.distance_to(@event_creator).round(1).to_s
+    full_bio = @event_creator.profile_blurb
     if full_bio
       truncated_bio = full_bio.truncate(260, seperator: /\s/) if full_bio
       bio_truncated = full_bio.length != truncated_bio.length
@@ -40,31 +40,29 @@ class Notifier::EventCreationStarrer < Notifier::Base
       bio_truncated = false
     end
 
-    ages = @suggested_user.child_ages_in_months
+    ages = @event_creator.child_ages_in_months
     if ages.length == 1
-      kids_ages_standalone_string = 'Child age ' + display_age(ages[0], 'mo')
-      kids_ages_sentence_string = 'child is ' + display_age(ages[0], 'month')
+      kids_ages_sentence_string = '1 kid age ' + display_age(ages[0], 'month')
+      kids_ages_standalone_string = '1 Kid age ' + display_age(ages[0], 'mo')
     else
       display_ages = ages.map { |age| display_age(age, 'mo') }
       and_join_ages = display_ages.slice(0, display_ages.length - 1).join(', ') + ' and ' + display_ages[-1]
-      kids_ages_standalone_string = 'Childen age ' + and_join_ages
-      kids_ages_sentence_string = 'children are ' + and_join_ages
+      kids_ages_sentence_string = ages.count.to_s + ' kids ages ' + and_join_ages
+      kids_ages_standalone_string = ages.count.to_s + ' kids ages ' + and_join_ages
     end
 
     suggested_user_hash = {
-      first_name: @suggested_user.first_name,
-      last_initial: @suggested_user.last_name[0].capitalize,
+      first_name: @event_creator.first_name,
+      last_initial: @event_creator.last_name[0].capitalize,
       distance: distance + ' miles',
-      short_distance: distance + ' mi',
-      kids_ages_standalone_string: kids_ages_standalone_string,
       kids_ages_sentence_string: kids_ages_sentence_string,
-      neighborhood: @suggested_user.neighborhood,
+      kids_ages_standalone_string: kids_ages_standalone_string,
       bio: truncated_bio,
       bio_truncated: bio_truncated,
-      avatar: @suggested_user.avatar,
-      link: 'https://joinlilypad.com/user/' + @suggested_user.id.to_s
+      avatar: @event_creator.avatar,
+      link: 'https://joinlilypad.com/user/' + @event_creator.id.to_s
     }
 
-    super.update suggested_user: suggested_user_hash
+    super.update event_creator: suggested_user_hash
   end
 end
