@@ -91,6 +91,22 @@ class Event < ApplicationRecord
     update_column :recency_score, seconds_since_created + (past ? PAST_PENALTY : 0)
   end
 
+  class << self
+    def notify_event_creation_starrers(last_run_time)
+      recent_events = Event.joins(:event_series).includes(:user).where('events.created_at > ?', last_run_time).to_a
+
+      hosts = recent_events.map(&:user).uniq
+      hosts.each do |host|
+        starrers = User
+          .joins('INNER JOIN stars ON users.id = stars.giver_id')
+          .where("stars.starable_type = 'User' AND stars.starable_id = ?", host.id)
+        starrers.each do |starrer|
+          starrer.notify_event_creation_starrer host if starrer.id != host.id
+        end
+      end
+    end
+  end
+
   def notify
     if participants.any?
       if ends_at <= Time.current

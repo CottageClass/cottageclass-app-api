@@ -1,3 +1,5 @@
+require 'key_value'
+
 namespace :cottage_class do
   namespace :scheduled do
     desc 'Event Notifier'
@@ -34,6 +36,20 @@ namespace :cottage_class do
       puts 'Sending user suggestions for users: ' + User.count.to_s
       User.all.each(&:notify_user_suggestion)
       puts 'done'
+    end
+
+    desc 'Send emails notifying starrers when events are created'
+    task notify_event_creation_starrers: :environment do
+      last_run_time = KeyValue['last_notify_event_creation_starrers_timestamp']
+      now = Time.current
+      if last_run_time.present?
+        puts "Notifying starrers of created events.  Last run at #{last_run_time}."
+        Event.notify_event_creation_starrers last_run_time
+        puts 'done'
+      else
+        puts 'Never run before.  Skipping.'
+      end
+      KeyValue['last_notify_event_creation_starrers_timestamp'] = now
     end
   end
 end
