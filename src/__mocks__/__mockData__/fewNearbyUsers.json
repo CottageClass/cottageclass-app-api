@@ -41,9 +41,6 @@
             "id": "11",
             "type": "child"
           }]
-        },
-        "user_reviews": {
-          "data": []
         }
       }
     }, {
@@ -87,9 +84,6 @@
             "id": "15",
             "type": "child"
           }]
-        },
-        "user_reviews": {
-          "data": []
         }
       }
     }],

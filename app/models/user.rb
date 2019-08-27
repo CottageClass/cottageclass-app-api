@@ -78,9 +78,6 @@ class User < ApplicationRecord
   has_many :participants, inverse_of: :user, dependent: :destroy
   has_many :participated_events, through: :participants, source: :participable, source_type: 'Event'
   has_many :notifications, foreign_key: :recipient_id, inverse_of: :recipient, dependent: :destroy
-  has_many :user_reviews, inverse_of: :user, dependent: :destroy
-  has_many :reviewed_users, class_name: 'UserReview', foreign_key: :reviewer_id, inverse_of: :reviewer,
-                            dependent: :destroy
 
   has_many :active_user_matches, -> { order(:score) },
            foreign_key: :user_id,
