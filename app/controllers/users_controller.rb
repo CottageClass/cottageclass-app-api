@@ -1,6 +1,6 @@
 class UsersController < ApiController
   before_action :authenticate_user!
-  before_action :reject_nonmatching_user, only: %i[show update inquiries]
+  before_action :reject_nonmatching_user, only: %i[show update]
   before_action :require_admin!, only: [:admin_index]
 
   def index
@@ -22,18 +22,6 @@ class UsersController < ApiController
     else
       render json: { errors: user.errors.full_messages }, status: 400
     end
-  end
-
-  def inquiries
-    users = current_user.inquirers
-    serializable_hash = PublicUserSerializer.json_for users,
-                                                      include: %i[children],
-                                                      params: {
-                                                        personal_information: true,
-                                                        current_user: current_user
-                                                      }
-
-    render json: serializable_hash, status: 200
   end
 
   def admin_index

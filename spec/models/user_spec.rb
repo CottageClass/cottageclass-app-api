@@ -84,20 +84,6 @@ RSpec.describe User, type: :model do
     end
   end
 
-  context 'inquiries' do
-    it 'returns users who have messaged the user for childcare' do
-      parent1 = FactoryBot.create(:user)
-      parent2 = FactoryBot.create(:user)
-      parent3 = FactoryBot.create(:user)
-      parent4 = FactoryBot.create(:user)
-      FactoryBot.create(:message, receiver: parent1, sender: parent2)
-      FactoryBot.create(:message, receiver: parent1, sender: parent3)
-
-      expect(parent1.inquirers).to include(parent2, parent3)
-      expect(parent1.inquirers).not_to include(parent4)
-    end
-  end
-
   context 'destroy' do
     let(:subject) { build :user, :with_children }
     let(:other) { build :user, :with_children, latitude: subject.latitude, longitude: subject.longitude }
