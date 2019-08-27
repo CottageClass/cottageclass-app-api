@@ -1,6 +1,12 @@
 <template>
   <div>
     <MainNav />
+    <LightBox
+      v-if="images"
+      ref="lightbox"
+      :images="lightboxImages"
+      :showLightBox="false"
+    />
     <LoadingSpinner v-if="!user" />
     <div class="profile__container w-container" v-else>
       <div class="profile-top-card__container">
@@ -83,7 +89,10 @@
           </div>
           <div v-if="images && images.length>0" class="household-photos__card">
             <div class="household-photos__title-text">Household photos</div>
-              <Images :images="images" />
+              <Images
+                 :images="images"
+                 @image-click="handleImageClick"
+               />
           </div>
           <div v-if="false" class="attended__card">
             <div class="attended__title-text">Parents who hosted {{ userFirstName }} (12)</div>
@@ -146,6 +155,7 @@ import MainNav from '@/components/MainNav'
 import Images from '@/components/Images'
 import LoadingSpinner from '@/components/LoadingSpinner'
 import OtherEvent from '@/components/OtherEvent'
+import LightBox from 'vue-image-lightbox'
 
 import { item, maps, messaging } from '@/mixins'
 import { fetchUser, fetchUpcomingEvents } from '@/utils/api'
@@ -153,7 +163,7 @@ import contactIcon from '@/assets/contact-black-outline.svg'
 
 export default {
   name: 'UserPage',
-  components: { MainNav, Images, LoadingSpinner, AvatarImage, OtherEvent, SearchListCardActions, LikeUserFooter },
+  components: { MainNav, Images, LoadingSpinner, AvatarImage, OtherEvent, SearchListCardActions, LikeUserFooter, LightBox },
   mixins: [ item, maps, messaging ],
   data () {
     return {
@@ -166,6 +176,15 @@ export default {
     }
   },
   computed: {
+    lightboxImages () {
+      this.debug(this)
+      return this.images.map(i => {
+        return {
+          thumb: i,
+          src: i
+        }
+      })
+    },
     targetUser () {
       return this.user
     },
@@ -175,6 +194,9 @@ export default {
     contactIcon () { return contactIcon }
   },
   methods: {
+    handleImageClick (payload) {
+      this.$refs.lightbox.showImage(payload)
+    },
     async likeUserHandler () {
       this.$ga.event('Star', 'starred', 'UserPage footer')
       this.user = await this.interestedClickWithPrompts()
