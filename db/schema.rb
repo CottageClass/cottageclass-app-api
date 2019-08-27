@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_27_182859) do
+ActiveRecord::Schema.define(version: 2019_08_27_205018) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -243,19 +243,6 @@ ActiveRecord::Schema.define(version: 2019_08_27_182859) do
     t.index ["matched_user_id"], name: "index_user_matches_on_matched_user_id"
     t.index ["user_id", "matched_user_id"], name: "index_user_matches_on_user_id_matched_user_id", unique: true
     t.index ["user_id"], name: "index_user_matches_on_user_id"
-  end
-
-  create_table "user_reviews", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "reviewer_id", null: false
-    t.string "reviewable_type"
-    t.bigint "reviewable_id"
-    t.text "body"
-    t.integer "rating"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.index ["reviewable_type", "reviewable_id"], name: "index_user_reviews_on_reviewable_type_and_reviewable_id"
-    t.index ["user_id", "reviewer_id"], name: "index_user_reviews_on_user_id_and_reviewer_id", unique: true
   end
 
   create_table "users", force: :cascade do |t|
