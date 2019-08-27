@@ -83,10 +83,6 @@ Rails.application.routes.draw do
       max_age: /\d+/,
       as: :feed
 
-  get '/users/:sender_id/messages/:receiver_id' => 'messages#admin_for_pair', as: 'messages_for_pair'
-
-  get '/users' => 'users#admin_index', as: 'admin_all_users'
-
   # twilio sessions
   post '/api/users/:id/proxy_sessions' => 'twilio_sessions#create', as: 'proxy_sessions'
   post '/proxy_callback' => 'twilio_sessions#callback'
