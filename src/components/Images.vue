@@ -1,6 +1,9 @@
 <template>
   <div class="hh-photos__grid">
-    <a v-for="image in transformedImages" class="hh-photo__link w-inline-block">
+    <a
+       v-for="(image, i) in transformedImages"
+       class="hh-photo__link w-inline-block"
+       @click="$emit('image-click', i)" >
       <img :src="image" class="hh-photos__image photo-fit" />
     </a>
   </div>
