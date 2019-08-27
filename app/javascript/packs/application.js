@@ -18,6 +18,9 @@ import GoogleMapsLoader from 'google-maps'
 import { logger } from '@/mixins'
 
 import 'vuetify/dist/vuetify.min.css' // Ensure you are using css-loader
+import 'vue-image-lightbox/dist/vue-image-lightbox.min.css'
+
+import VueLazyLoad from 'vue-lazyload'
 
 GoogleMapsLoader.KEY = process.env.GOOGLE_API_KEY
 GoogleMapsLoader.LIBRARIES = ['geometry', 'places']
@@ -47,6 +50,7 @@ if (isAuthWindow) {
   })
 } else {
   // Load all the Vue plugins
+  Vue.use(VueLazyLoad)
   Vue.mixin(logger)
   Vue.use(VueScrollTo)
   Vue.use(VueAxios, axios)
