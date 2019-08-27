@@ -78,7 +78,7 @@ export async function submitUserInfo (userId, data) {
   postData = { ...postData, languages, hasPet, houseRules, petDescription, settings }
 
   try {
-    const res = await axios.post(`/users/${userId}`, postData)
+    const res = await axios.put(`/api/users/${userId}`, postData)
     logger.log('SUBMIT USER SUCCESS', res)
     return res
   } catch (err) {
