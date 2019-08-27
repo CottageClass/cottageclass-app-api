@@ -57,5 +57,8 @@ export default {
   }),
   post: jest.fn((url, data) => {
     return Promise.resolve({ status: 200 })
+  }),
+  put: jest.fn((url, data) => {
+    return Promise.resolve({ status: 200 })
   })
 }
