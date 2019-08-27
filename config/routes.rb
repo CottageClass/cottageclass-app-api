@@ -88,7 +88,7 @@ Rails.application.routes.draw do
   get '/users' => 'users#admin_index', as: 'admin_all_users'
 
   # twilio sessions
-  post '/users/:id/proxy_sessions' => 'twilio_sessions#create', as: 'proxy_sessions'
+  post '/api/users/:id/proxy_sessions' => 'twilio_sessions#create', as: 'proxy_sessions'
   post '/proxy_callback' => 'twilio_sessions#callback'
 
   #############
