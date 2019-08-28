@@ -1,12 +1,14 @@
 <template>
   <div>
     <MainNav />
-    <LightBox
-      v-if="images"
-      ref="lightbox"
-      :images="lightboxImages"
-      :showLightBox="false"
-    />
+    <LightBoxStyleWrapper>
+      <LightBox
+        v-if="images"
+        ref="lightbox"
+        :images="lightboxImages"
+        :showLightBox="false"
+      />
+      </LightBoxStyleWrapper>
     <LoadingSpinner v-if="!user" />
     <div class="profile__container w-container" v-else>
       <div class="profile-top-card__container">
@@ -155,6 +157,7 @@ import MainNav from '@/components/MainNav'
 import Images from '@/components/Images'
 import LoadingSpinner from '@/components/LoadingSpinner'
 import OtherEvent from '@/components/OtherEvent'
+import LightBoxStyleWrapper from '@/components/LightBoxStyleWrapper'
 import LightBox from 'vue-image-lightbox'
 
 import { item, maps, messaging } from '@/mixins'
@@ -163,7 +166,7 @@ import contactIcon from '@/assets/contact-black-outline.svg'
 
 export default {
   name: 'UserPage',
-  components: { MainNav, Images, LoadingSpinner, AvatarImage, OtherEvent, SearchListCardActions, LikeUserFooter, LightBox },
+  components: { MainNav, Images, LoadingSpinner, AvatarImage, OtherEvent, SearchListCardActions, LikeUserFooter, LightBox, LightBoxStyleWrapper },
   mixins: [ item, maps, messaging ],
   data () {
     return {
