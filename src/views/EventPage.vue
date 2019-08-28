@@ -1,6 +1,14 @@
 <template>
   <div>
     <MainNav />
+    <LightBoxStyleWrapper>
+      <LightBox
+        v-if="images"
+        ref="lightbox"
+        :images="lightboxImages"
+        :showLightBox="false"
+      />
+    </LightBoxStyleWrapper>
     <LoadingSpinner v-if="!event" />
     <div v-else class="event-detail__container w-container">
       <div class="user-action-card__container">
@@ -64,7 +72,10 @@
           </div>
           <div v-if="images && images.length>0" class="household-photos__card">
             <div class="household-photos__title-text">Household photos</div>
-            <Images :images="images" />
+            <Images
+              :images="images"
+              @image-click="handleImageClick"
+            />
           </div>
           <div class="event-detail__map map" ref="map"/>
           <div class="about-the-host__card">
@@ -129,6 +140,8 @@
 </template>
 
 <script>
+import LightBox from 'vue-image-lightbox'
+
 import RsvpFooter from '@/components/base/RsvpFooter'
 import SearchListCardActions from '@/components/search/SearchListCardActions'
 import AvatarImage from '@/components/base/AvatarImage'
@@ -137,6 +150,7 @@ import Images from '@/components/Images'
 import LoadingSpinner from '@/components/LoadingSpinner'
 import Attendee from '@/components/Attendee'
 import OtherEvent from '@/components/OtherEvent'
+import LightBoxStyleWrapper from '@/components/LightBoxStyleWrapper'
 
 import houseRulesImage from '@/assets/house-rules.svg'
 import petsImage from '@/assets/pets.svg'
@@ -147,7 +161,7 @@ import { item, maps } from '@/mixins'
 
 export default {
   name: 'EventPage',
-  components: { MainNav, Images, LoadingSpinner, AvatarImage, SearchListCardActions, Attendee, OtherEvent, RsvpFooter },
+  components: { MainNav, Images, LoadingSpinner, AvatarImage, SearchListCardActions, Attendee, OtherEvent, RsvpFooter, LightBox, LightBoxStyleWrapper },
   mixins: [item, maps],
   data () {
     return {
@@ -160,6 +174,14 @@ export default {
     }
   },
   computed: {
+    lightboxImages () {
+      return this.images.map(i => {
+        return {
+          thumb: i,
+          src: i
+        }
+      })
+    },
     showRsvpFooter () {
       return this.event &&
         !this.timePast &&
@@ -168,13 +190,17 @@ export default {
         !this.isRsvpDeclined(this.event.id)
     },
     user () {
-      return this.event.host
+      return this.event && this.event.host
     },
     houseRulesImage: () => houseRulesImage,
     petsImage: () => petsImage,
     ...mapGetters(['isRsvpDeclined'])
   },
   methods: {
+    handleImageClick (payload) {
+      this.debug('handle')
+      this.$refs.lightbox.showImage(payload)
+    },
     updateUser (user) {
       this.event.host = user
     },
