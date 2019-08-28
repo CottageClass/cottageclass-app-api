@@ -17,8 +17,8 @@ class EventSeries < ApplicationRecord
     0.step(by: interval).take(repeat_for).each { |number| create_event new_date: number.weeks.since(start_date) }
   end
 
-  def create_event(new_date:, skope: :manual)
-    event = events.send(skope).build starts_at: date_time(new_date, starts_at), ends_at: date_time(new_date, ends_at)
+  def create_event(new_date:)
+    event = events.build starts_at: date_time(new_date, starts_at), ends_at: date_time(new_date, ends_at)
     %i[
       name
       maximum_children
