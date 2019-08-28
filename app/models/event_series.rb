@@ -11,18 +11,6 @@ class EventSeries < ApplicationRecord
   before_validation :cleanup
   after_create :create_events
 
-  def create_next_event
-    if false.eql?(paused?) && events.upcoming.blank?
-      0.step(by: interval).each do |number|
-        new_date = number.weeks.since start_date
-        if new_date.future?
-          create_event new_date: new_date, skope: :generated
-          break
-        end
-      end
-    end
-  end
-
   def paused?
     output = false
     if paused_from.present? && paused_until.present?
