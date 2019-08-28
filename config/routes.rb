@@ -33,7 +33,7 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :users, only: %i[show destroy] do
+    resources :users, only: %i[show destroy update] do
       resource :stars, only: %i[create destroy], module: :users
       resource :dark_stars, only: %i[create destroy], module: :users
       collection do
@@ -83,16 +83,8 @@ Rails.application.routes.draw do
       max_age: /\d+/,
       as: :feed
 
-  get '/users/:id/inquiries' => 'users#inquiries', as: 'inquiries'
-  get '/users/:sender_id/messages/:receiver_id' => 'messages#admin_for_pair', as: 'messages_for_pair'
-
-  get '/users' => 'users#admin_index', as: 'admin_all_users'
-
-  # post
-  post '/users/:id' => 'users#update'
-
   # twilio sessions
-  post '/users/:id/proxy_sessions' => 'twilio_sessions#create', as: 'proxy_sessions'
+  post '/api/users/:id/proxy_sessions' => 'twilio_sessions#create', as: 'proxy_sessions'
   post '/proxy_callback' => 'twilio_sessions#callback'
 
   #############

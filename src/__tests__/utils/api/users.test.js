@@ -51,7 +51,7 @@ describe('users', () => {
       }]
     ])('data: %o', async (data, expected) => {
       await submitUserInfo('1230', data)
-      expect(mockAxios.post).toHaveBeenCalledWith('/users/1230', expected)
+      expect(mockAxios.put).toHaveBeenCalledWith('/api/users/1230', expected)
     })
   })
 })

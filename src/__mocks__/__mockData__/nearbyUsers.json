@@ -41,9 +41,6 @@
             "id": "11",
             "type": "child"
           }]
-        },
-        "user_reviews": {
-          "data": []
         }
       }
     }, {
@@ -87,9 +84,6 @@
             "id": "2",
             "type": "child"
           }]
-        },
-        "user_reviews": {
-          "data": []
         }
       }
     }, {
@@ -133,9 +127,6 @@
             "id": "3",
             "type": "child"
           }]
-        },
-        "user_reviews": {
-          "data": []
         }
       }
     }, {
@@ -179,9 +170,6 @@
             "id": "8",
             "type": "child"
           }]
-        },
-        "user_reviews": {
-          "data": []
         }
       }
     }, {
@@ -225,9 +213,6 @@
             "id": "7",
             "type": "child"
           }]
-        },
-        "user_reviews": {
-          "data": []
         }
       }
     }, {
@@ -271,9 +256,6 @@
             "id": "4",
             "type": "child"
           }]
-        },
-        "user_reviews": {
-          "data": []
         }
       }
     }, {
@@ -317,9 +299,6 @@
             "id": "15",
             "type": "child"
           }]
-        },
-        "user_reviews": {
-          "data": []
         }
       }
     }],

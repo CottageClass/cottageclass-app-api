@@ -3,7 +3,6 @@ class Event < ApplicationRecord
   include Starable
 
   PAST_PENALTY = 31_557_600 # seconds in a year
-  enum kind: { manual: 0, generated: 1 }
 
   geocoded_by :host_full_address
 
@@ -20,7 +19,6 @@ class Event < ApplicationRecord
   has_one :user, through: :event_series, inverse_of: :events
   has_one :search_list_item, as: :itemable, class_name: 'SearchListItem', dependent: :destroy
   has_many :notifications, as: :notifiable, dependent: :nullify
-  has_many :user_reviews, as: :reviewable, dependent: :nullify
   has_many :participants, as: :participable, dependent: :destroy
   has_many :participant_children, as: :participable
   has_many :participating_users, through: :participants, source: :user
@@ -154,14 +152,9 @@ class Event < ApplicationRecord
   end
 
   def post_create
-    notify_creation
     update_recency_score
     update_user_showcase
     create_search_list_item
-  end
-
-  def notify_creation
-    notifications.event_creation_host.where(recipient: user).first_or_create if generated?
   end
 
   def notify_participants_destruction

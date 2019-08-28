@@ -1,6 +1,7 @@
 class API::UsersController < API::BaseController
   before_action :load_user, only: %i[show destroy]
   before_action :authenticate_user!, only: %i[destroy]
+  before_action :reject_nonmatching_user, only: %i[update]
 
   def feed
     users = User
@@ -14,6 +15,19 @@ class API::UsersController < API::BaseController
                 page: params[:page],
                 page_size: params[:page_size],
                 path: proc { |**parameters| index_api_users_path parameters }
+  end
+
+  def update
+    user = current_user
+    if user.update(user_params)
+      render json: CurrentUserSerializer.json_for(user, include: %i[
+                                                    children
+                                                    children.emergency_contacts
+                                                  ]),
+             status: 200
+    else
+      render json: { errors: user.errors.full_messages }, status: 400
+    end
   end
 
   def show
@@ -36,6 +50,12 @@ class API::UsersController < API::BaseController
   end
 
   private
+
+  def reject_nonmatching_user
+    if !current_user || current_user.id.to_i != params[:id].to_i
+      render json: { errors: ['No matching user found'] }, status: 404
+    end
+  end
 
   def users_index(users:, miles:, latitude:, longitude:, page:, page_size:, path:, min_age:, max_age:)
     if min_age.present? || max_age.present?
@@ -84,5 +104,60 @@ class API::UsersController < API::BaseController
   def load_user
     @user = User.find_by id: params[:id]
     render(json: {}, status: :not_found) if @user.blank?
+  end
+
+  def user_params
+    params.require(:user).permit :agree_tos,
+                                 :first_name,
+                                 :last_name,
+                                 :avatar,
+                                 :street_number,
+                                 :route,
+                                 :locality,
+                                 :sublocality,
+                                 :apartment_number,
+                                 :neighborhood,
+                                 :admin_area_level_1,
+                                 :admin_area_level_2,
+                                 :country,
+                                 :postal_code,
+                                 :latitude,
+                                 :longitude,
+                                 :pet_description,
+                                 :has_pet,
+                                 :house_rules,
+                                 :phone_country_code,
+                                 :phone_area_code,
+                                 :phone_number,
+                                 :available_mornings,
+                                 :available_afternoons,
+                                 :available_evenings,
+                                 :available_weekends,
+                                 :profile_blurb,
+                                 :onboarding_care_type,
+                                 :job_position,
+                                 :employer,
+                                 :highest_education,
+                                 :school,
+                                 :instagram_user,
+                                 :twitter_user,
+                                 :linkedin_user,
+                                 :referrer,
+                                 settings: { email: [:receive_weekly_email],
+                                             matching: [:max_distance] },
+                                 source_tags: [],
+                                 activities: [],
+                                 images: [],
+                                 languages: [],
+                                 children_attributes: [
+                                   :id,
+                                   :first_name,
+                                   :birthday,
+                                   :school_name,
+                                   { allergies: [] },
+                                   { dietary_restrictions: [] },
+                                   :special_needs,
+                                   :_destroy
+                                 ]
   end
 end

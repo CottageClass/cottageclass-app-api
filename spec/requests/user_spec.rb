@@ -109,7 +109,7 @@ RSpec.resource 'User' do
   end
 
   context 'write operations' do
-    post '/users/:id', format: :json do
+    put 'api/users/:id', format: :json do
       include_context 'authorization token'
 
       with_options scope: :user do

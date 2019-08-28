@@ -260,9 +260,6 @@
               }
             ]
           },
-          "user_reviews": {
-            "data": []
-          },
           "showcase_event": {
             "data": {
               "id": "808",
@@ -395,9 +392,6 @@
                       "type": "child"
                     }
                   ]
-                },
-                "user_reviews": {
-                  "data": []
                 },
                 "showcase_event": {
                   "data": {
@@ -552,9 +546,6 @@
               }
             ]
           },
-          "user_reviews": {
-            "data": []
-          },
           "showcase_event": {
             "data": {
               "id": "83",
@@ -676,9 +667,6 @@
                     }
                   ]
                 },
-                "user_reviews": {
-                  "data": []
-                },
                 "showcase_event": {
                   "data": null
                 }
@@ -786,9 +774,6 @@
                 "type": "child"
               }
             ]
-          },
-          "user_reviews": {
-            "data": []
           },
           "showcase_event": {
             "data": null
@@ -919,9 +904,6 @@
                       "type": "child"
                     }
                   ]
-                },
-                "user_reviews": {
-                  "data": []
                 },
                 "showcase_event": {
                   "data": {
@@ -1076,9 +1058,6 @@
               }
             ]
           },
-          "user_reviews": {
-            "data": []
-          },
           "showcase_event": {
             "data": {
               "id": "5",
@@ -1200,9 +1179,6 @@
                     }
                   ]
                 },
-                "user_reviews": {
-                  "data": []
-                },
                 "showcase_event": {
                   "data": {
                     "id": "162",
@@ -1313,9 +1289,6 @@
                 "type": "child"
               }
             ]
-          },
-          "user_reviews": {
-            "data": []
           },
           "showcase_event": {
             "data": {
@@ -1443,9 +1416,6 @@
                       "type": "child"
                     }
                   ]
-                },
-                "user_reviews": {
-                  "data": []
                 },
                 "showcase_event": {
                   "data": {
@@ -1579,9 +1549,6 @@
               }
             ]
           },
-          "user_reviews": {
-            "data": []
-          },
           "showcase_event": {
             "data": {
               "id": "166",
@@ -1708,9 +1675,6 @@
                       "type": "child"
                     }
                   ]
-                },
-                "user_reviews": {
-                  "data": []
                 },
                 "showcase_event": {
                   "data": {
@@ -1844,9 +1808,6 @@
               }
             ]
           },
-          "user_reviews": {
-            "data": []
-          },
           "showcase_event": {
             "data": {
               "id": "8",
@@ -1968,9 +1929,6 @@
                     }
                   ]
                 },
-                "user_reviews": {
-                  "data": []
-                },
                 "showcase_event": {
                   "data": null
                 }
@@ -2078,9 +2036,6 @@
                 "type": "child"
               }
             ]
-          },
-          "user_reviews": {
-            "data": []
           },
           "showcase_event": {
             "data": null
@@ -2200,9 +2155,6 @@
                     }
                   ]
                 },
-                "user_reviews": {
-                  "data": []
-                },
                 "showcase_event": {
                   "data": null
                 }
@@ -2310,9 +2262,6 @@
                 "type": "child"
               }
             ]
-          },
-          "user_reviews": {
-            "data": []
           },
           "showcase_event": {
             "data": null
@@ -2432,9 +2381,6 @@
                     }
                   ]
                 },
-                "user_reviews": {
-                  "data": []
-                },
                 "showcase_event": {
                   "data": null
                 }
@@ -2542,9 +2488,6 @@
                 "type": "child"
               }
             ]
-          },
-          "user_reviews": {
-            "data": []
           },
           "showcase_event": {
             "data": null

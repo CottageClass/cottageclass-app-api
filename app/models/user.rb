@@ -69,7 +69,6 @@ class User < ApplicationRecord
   has_many :sent_messages, class_name: 'Message', foreign_key: :sender_id, inverse_of: :sender, dependent: :destroy
   has_many :received_messages, class_name: 'Message', foreign_key: :receiver_id, inverse_of: :receiver,
                                dependent: :destroy
-  has_many :inquirers, -> { distinct }, through: :received_messages, source: :sender
   has_many :initiated_sessions, class_name: 'TwilioSession', foreign_key: :sender_id, inverse_of: :initiator,
                                 dependent: :destroy
   has_many :client_sessions, class_name: 'TwilioSession', foreign_key: :receiver_id, inverse_of: :client,
@@ -79,9 +78,6 @@ class User < ApplicationRecord
   has_many :participants, inverse_of: :user, dependent: :destroy
   has_many :participated_events, through: :participants, source: :participable, source_type: 'Event'
   has_many :notifications, foreign_key: :recipient_id, inverse_of: :recipient, dependent: :destroy
-  has_many :user_reviews, inverse_of: :user, dependent: :destroy
-  has_many :reviewed_users, class_name: 'UserReview', foreign_key: :reviewer_id, inverse_of: :reviewer,
-                            dependent: :destroy
 
   has_many :active_user_matches, -> { order(:score) },
            foreign_key: :user_id,

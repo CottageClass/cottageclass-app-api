@@ -17,7 +17,7 @@ export function initProxySession (currentUserId, receiverId, requestMessage, ack
   let postData = { twilioSession: { requestMessage, acknowledgmentMessage } }
 
   return axios.post(
-    `/users/${receiverId}/proxy_sessions`,
+    `/api/users/${receiverId}/proxy_sessions`,
     postData
   ).then(res => {
     logger.log('proxy session init SUCCESS, returning proxy phone number for receiver')
