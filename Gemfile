@@ -12,6 +12,7 @@ gem 'devise-jwt'
 gem 'fast_jsonapi'
 gem 'geocoder'
 gem 'inherited_resources', github: 'activeadmin/inherited_resources', ref: 'db6eb312b7cac6baf0023f720cf6785a9849fa85'
+gem 'key_value', require: false # so migrations do not fail because of missing table
 gem 'koala'
 gem 'omniauth-facebook'
 gem 'pg'

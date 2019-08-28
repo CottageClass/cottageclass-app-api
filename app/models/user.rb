@@ -277,6 +277,11 @@ class User < ApplicationRecord
     notifications.user_suggestion.where(notifiable: suggestion).create if suggestion.present?
   end
 
+  def notify_event_creation_starrer(host)
+    puts "sending a message to #{id} about #{host.id}"
+    notifications.event_creation_starrer.create(notifiable: host)
+  end
+
   def notify_event_suggestion
     return unless settings['email']['receive_weekly_email']
 
