@@ -3,7 +3,6 @@ class Event < ApplicationRecord
   include Starable
 
   PAST_PENALTY = 31_557_600 # seconds in a year
-  enum kind: { manual: 0, generated: 1 }
 
   geocoded_by :host_full_address
 
