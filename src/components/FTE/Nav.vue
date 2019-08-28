@@ -168,7 +168,7 @@ a {
   border-width: 1px;
   border-color: hsla(0, 0%, 100%, .1);
   background-color: rgba(108, 200, 255, .93);
-  background-image: url('../../assets/cclogo-house-blue.svg');
+  background-image: url('../../assets/cclogo-house-blue-bf44c260.svg');
   background-position: 50% 13px;
   background-size: 24px 24px;
   background-repeat: no-repeat;
