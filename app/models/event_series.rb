@@ -11,16 +11,6 @@ class EventSeries < ApplicationRecord
   before_validation :cleanup
   after_create :create_events
 
-  def paused?
-    output = false
-    if paused_from.present? && paused_until.present?
-      output = Time.current.between?(paused_from, paused_until)
-    elsif paused_from.present?
-      output = Time.current > paused_from
-    end
-    output
-  end
-
   private
 
   def create_events

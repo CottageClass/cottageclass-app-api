@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_28_133310) do
+ActiveRecord::Schema.define(version: 2019_08_28_134622) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -96,8 +96,6 @@ ActiveRecord::Schema.define(version: 2019_08_28_133310) do
     t.string "name", null: false
     t.string "time_zone"
     t.date "start_date", null: false
-    t.date "paused_from"
-    t.date "paused_until"
     t.time "starts_at", null: false
     t.time "ends_at", null: false
     t.integer "repeat_for", null: false
