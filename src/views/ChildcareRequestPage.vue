@@ -515,7 +515,6 @@ a {
   list-style-type: none;
 }
 
-
 .about-the-host__list-item {
   display: -webkit-box;
   display: -webkit-flex;
