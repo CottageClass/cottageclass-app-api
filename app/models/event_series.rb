@@ -11,36 +11,14 @@ class EventSeries < ApplicationRecord
   before_validation :cleanup
   after_create :create_events
 
-  def create_next_event
-    if false.eql?(paused?) && events.upcoming.blank?
-      0.step(by: interval).each do |number|
-        new_date = number.weeks.since start_date
-        if new_date.future?
-          create_event new_date: new_date, skope: :generated
-          break
-        end
-      end
-    end
-  end
-
-  def paused?
-    output = false
-    if paused_from.present? && paused_until.present?
-      output = Time.current.between?(paused_from, paused_until)
-    elsif paused_from.present?
-      output = Time.current > paused_from
-    end
-    output
-  end
-
   private
 
   def create_events
     0.step(by: interval).take(repeat_for).each { |number| create_event new_date: number.weeks.since(start_date) }
   end
 
-  def create_event(new_date:, skope: :manual)
-    event = events.send(skope).build starts_at: date_time(new_date, starts_at), ends_at: date_time(new_date, ends_at)
+  def create_event(new_date:)
+    event = events.build starts_at: date_time(new_date, starts_at), ends_at: date_time(new_date, ends_at)
     %i[
       name
       maximum_children

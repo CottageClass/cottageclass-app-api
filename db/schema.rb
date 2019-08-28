@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_23_172033) do
+ActiveRecord::Schema.define(version: 2019_08_28_134622) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -96,8 +96,6 @@ ActiveRecord::Schema.define(version: 2019_08_23_172033) do
     t.string "name", null: false
     t.string "time_zone"
     t.date "start_date", null: false
-    t.date "paused_from"
-    t.date "paused_until"
     t.time "starts_at", null: false
     t.time "ends_at", null: false
     t.integer "repeat_for", null: false
@@ -125,7 +123,6 @@ ActiveRecord::Schema.define(version: 2019_08_23_172033) do
     t.integer "maximum_children", default: 0
     t.integer "child_age_minimum", default: 0
     t.integer "child_age_maximum", default: 0
-    t.integer "kind", default: 0
     t.boolean "modified", default: false
     t.boolean "has_pet", default: false
     t.text "activity_names", default: [], array: true
@@ -245,19 +242,6 @@ ActiveRecord::Schema.define(version: 2019_08_23_172033) do
     t.index ["user_id"], name: "index_user_matches_on_user_id"
   end
 
-  create_table "user_reviews", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "reviewer_id", null: false
-    t.string "reviewable_type"
-    t.bigint "reviewable_id"
-    t.text "body"
-    t.integer "rating"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.index ["reviewable_type", "reviewable_id"], name: "index_user_reviews_on_reviewable_type_and_reviewable_id"
-    t.index ["user_id", "reviewer_id"], name: "index_user_reviews_on_user_id_and_reviewer_id", unique: true
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "email", null: false
     t.string "avatar"
@@ -341,7 +325,6 @@ ActiveRecord::Schema.define(version: 2019_08_23_172033) do
     t.text "house_rules"
     t.bigint "showcase_event_id"
     t.boolean "internally_cleared", default: false, null: false
-    t.boolean "pause_suggestion_email", default: false, null: false
     t.jsonb "settings", default: {}
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email"

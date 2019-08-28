@@ -25,42 +25,9 @@ RSpec.describe EventSeries, type: :model do
 
   context 'create' do
     it { expect { subject.save }.to change(subject.events, :count).from(0).to(subject.repeat_for) }
-    it { expect { subject.save }.not_to change(Notification.event_creation_host, :count) }
     it 'generates time zone' do
       subject.time_zone = nil
       expect { subject.save }.to change(subject, :time_zone).from(nil)
-    end
-  end
-
-  xcontext 'event generator' do
-    before { subject.save }
-
-    it 'create_next_event' do
-      last_event = subject.events.upcoming.last
-
-      Timecop.freeze 2.hours.since(last_event.ends_at) do
-        expect(subject.events.upcoming.count).to eq(0)
-        subject.create_next_event
-        expect(subject.events.upcoming.count).to eq(1)
-        expect(subject.events.upcoming.last.starts_at).to eq(subject.interval.weeks.since(last_event.starts_at))
-      end
-    end
-
-    it 'paused' do
-      subject.assign_attributes paused_from: 1.day.since(Time.zone.today), paused_until: 1.month.since(Time.zone.today)
-
-      expect(subject).not_to be_paused
-      Timecop.freeze 2.hours.since(subject.paused_from) do
-        expect(subject).to be_paused
-      end
-      Timecop.freeze 2.hours.since(subject.paused_until) do
-        expect(subject).not_to be_paused
-      end
-
-      subject.assign_attributes paused_until: nil
-      Timecop.freeze rand(10).weeks.since(subject.paused_from) do
-        expect(subject).to be_paused
-      end
     end
   end
 end

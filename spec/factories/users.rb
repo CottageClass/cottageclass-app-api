@@ -35,13 +35,5 @@ FactoryBot.define do
 
       after(:build) { |instance, evaluator| instance.children = build_list :child, evaluator.children_count }
     end
-
-    trait :with_user_reviews do
-      transient { user_reviews_count { 2 } }
-
-      after :build do |instance, evaluator|
-        instance.user_reviews = build_list :user_review, evaluator.user_reviews_count, user: instance
-      end
-    end
   end
 end
