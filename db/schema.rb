@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_27_205018) do
+ActiveRecord::Schema.define(version: 2019_08_28_133310) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -125,7 +125,6 @@ ActiveRecord::Schema.define(version: 2019_08_27_205018) do
     t.integer "maximum_children", default: 0
     t.integer "child_age_minimum", default: 0
     t.integer "child_age_maximum", default: 0
-    t.integer "kind", default: 0
     t.boolean "modified", default: false
     t.boolean "has_pet", default: false
     t.text "activity_names", default: [], array: true
