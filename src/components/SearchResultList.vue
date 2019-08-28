@@ -5,20 +5,20 @@
         v-if="showHeader"
         @offer-playdate-click="$emit('offer-playdate-click')"
         @request-childcare-click="$emit('request-childcare-click')"
-        />
+      />
       <div v-for="item in (items || [])">
         <SearchListCard
-                    :item="item"
-                    :mapCenter="mapArea.center"
-                    :key="item.id"
-                    @user-updated="$emit('user-updated', $event)"
-                    @event-deleted="$emit('event-deleted', id)"
-                    @event-updated="$emit('event-updated', $event)"/>
+          :item="item"
+          :mapCenter="mapArea.center"
+          :key="item.id"
+          @user-updated="$emit('user-updated', $event)"
+          @event-deleted="$emit('event-deleted', id)"
+          @event-updated="$emit('event-updated', $event)"/>
       </div>
       <SearchListFooter v-if="showFetchMoreButton"
                         :awaiting="awaiting"
                         @fetch-more-click="$emit('fetch-more-click')"
-                        />
+      />
     </div>
     <!-- in the case of no events -->
     <div v-if="noItems && showTrailblazerMessage">

@@ -1,20 +1,20 @@
 <template>
   <div>
-  <transition name="slide">
+    <transition name="slide">
       <div v-if="show"
            :class="['alert-container', 'alert-' + alertData.status,  state].join(' ')"
            ref="alertRef">
         <span v-html="alertData.message" />
       </div>
-  </transition>
-  <transition name="grow">
+    </transition>
+    <transition name="grow">
       <div v-if="show"
            class="alert-placeholder"
            :class="state">
         <span>
         </span>
       </div>
-  </transition>
+    </transition>
   </div>
 </template>
 

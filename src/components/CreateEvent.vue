@@ -8,25 +8,25 @@
     <ErrorMessage v-if="errorMessage && showError" :text="errorMessage" />
     <LoadingSpinner v-if="submissionPending" />
     <EventDescription
-        v-else-if="stepName==='description'"
-        v-model="description"
-        :context="context" />
+      v-else-if="stepName==='description'"
+      v-model="description"
+      :context="context" />
     <EventDatePicker
-        v-else-if="stepName==='date'"
-        v-model="date" />
+      v-else-if="stepName==='date'"
+      v-model="date" />
     <EventTime
-        v-else-if="stepName==='time'"
-        v-model="time" />
+      v-else-if="stepName==='time'"
+      v-model="time" />
     <MultipleTimeSelector
       v-else-if="stepName==='availability'"
       :scheduleStartTime="scheduleStart"
       :value="availability"
       @datetimeClicked="selectDateAndTime"
-      />
+    />
     <RepeatCount
       v-else-if="stepName==='repeat-count'"
       v-model="repeatCount"
-      />
+    />
 
   </div>
 </template>

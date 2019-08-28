@@ -5,7 +5,7 @@
     <div class="card-subtitle">
       Lilypad works best when you invite your friends to share childcare. The more friends
       who join, the more free childcare you get!
-      </div>
+    </div>
     <router-link :to="{name: 'SocialInvite'}" class="button-primary w-button">Invite your friends</router-link>
     <div class="card-divider"></div>
     <div class="card-subtitle">

@@ -13,8 +13,8 @@
       </li>
       <li>
         <router-link
-        :to="'/users/' + currentUser.id"
-        class="link-block w-inline-block">
+          :to="'/users/' + currentUser.id"
+          class="link-block w-inline-block">
           <div class="text-block">View profile</div>
         </router-link>
       </li>

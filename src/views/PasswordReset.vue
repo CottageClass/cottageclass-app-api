@@ -1,22 +1,22 @@
 <template>
   <span>
     <MainNav />
-      <div class="body body-2">
-        <div class="content-container w-container">
-          <div class="primary-container">
-            <StyleWrapper styleIs="onboarding">
-              <ErrorMessage
-                v-if="showError && errors.first('password')"
-                :messages="[errors.first('password')]"
-                />
-            </StyleWrapper>
-            <h1 class="auth-heading">Reset Password</h1>
-            <div>Please Enter your new password</div>
-            <div class="auth-wrapper">
-              <div class="form-block w-form">
-                <form v-on:submit.prevent="submitRequest">
+    <div class="body body-2">
+      <div class="content-container w-container">
+        <div class="primary-container">
+          <StyleWrapper styleIs="onboarding">
+            <ErrorMessage
+              v-if="showError && errors.first('password')"
+              :messages="[errors.first('password')]"
+            />
+          </StyleWrapper>
+          <h1 class="auth-heading">Reset Password</h1>
+          <div>Please Enter your new password</div>
+          <div class="auth-wrapper">
+            <div class="form-block w-form">
+              <form v-on:submit.prevent="submitRequest">
                 <input
-                    @keyup.enter="submitRequest"
+                  @keyup.enter="submitRequest"
                   v-validate.immediate="'required|min:4|max:128'"
                   type="password"
                   name="password"
@@ -25,14 +25,14 @@
                   :class="{'invalid': errors.has('password') }"
                   class="input-field w-input"
                 >
-                  <button type="submit"
-                          class="submit-button w-button">Reset Password</button>
-                </form>
-              </div>
+                <button type="submit"
+                        class="submit-button w-button">Reset Password</button>
+              </form>
             </div>
           </div>
         </div>
       </div>
+    </div>
     <Footer />
   </span>
 </template>

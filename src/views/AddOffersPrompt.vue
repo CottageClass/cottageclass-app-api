@@ -1,26 +1,26 @@
 <template>
-<StyleWrapper styleIs="onboarding">
-  <div class="onb-body">
-    <div class="body">
-      <div class="content-wrapper">
-        <Nav button="none"
-             @prev="$router.go(-1)"
-             :hidePrevious="false" />
-        <div v-if="user" class="onb-content-container">
-          <div class="onb-top-content-container">
-            <h1 class="onb-heading-large">{{ titleText }}</h1>
-            <p class="onb-paragraph-subheading-2">{{ questionText }}</p>
-          </div>
+  <StyleWrapper styleIs="onboarding">
+    <div class="onb-body">
+      <div class="body">
+        <div class="content-wrapper">
+          <Nav button="none"
+               @prev="$router.go(-1)"
+               :hidePrevious="false" />
+          <div v-if="user" class="onb-content-container">
+            <div class="onb-top-content-container">
+              <h1 class="onb-heading-large">{{ titleText }}</h1>
+              <p class="onb-paragraph-subheading-2">{{ questionText }}</p>
+            </div>
             <div class="action-bar">
               <button class="button" @click="goToCreateOffers">Yes</button>
               <button class="button" @click="skipCreateOffers">No</button>
             </div>
+          </div>
+          <LoadingSpinner v-else />
         </div>
-        <LoadingSpinner v-else />
       </div>
     </div>
-  </div>
-</StyleWrapper>
+  </StyleWrapper>
 </template>
 
 <script>

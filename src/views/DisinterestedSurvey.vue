@@ -16,7 +16,7 @@
           <FormWithTextArea
             placeholder="Other reasons? Any notes to add?"
             v-model="otherText" />
-       </Question>
+        </Question>
       </StyleWrapper>
     </div>
   </div>

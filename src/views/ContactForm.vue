@@ -10,8 +10,8 @@
           />
           <LoadingSpinner v-if="!event && !user"/>
           <Question v-else
-            :title="'Contact ' + recipientFirstName"
-            :subtitle="`Enter your message to ${recipientFirstName} below. They’ll reply by text message as soon as they can!`">
+                    :title="'Contact ' + recipientFirstName"
+                    :subtitle="`Enter your message to ${recipientFirstName} below. They’ll reply by text message as soon as they can!`">
             <FormWithTextArea
               v-model="questionText"
               :placeholder="placeholderText" />

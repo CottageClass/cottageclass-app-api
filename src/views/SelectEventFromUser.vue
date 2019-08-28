@@ -1,27 +1,27 @@
 <template>
-<StyleWrapper styleIs="onboarding">
-  <div class="onb-body">
-    <div class="body">
-      <div class="content-wrapper">
-        <Nav button="skip" @next="$router.go(-1)" hidePrevious="true" />
-        <div class="onb-content-container">
-          <div class="onb-top-content-container">
-            <h1 class="onb-heading-large">{{ titleText }}</h1>
+  <StyleWrapper styleIs="onboarding">
+    <div class="onb-body">
+      <div class="body">
+        <div class="content-wrapper">
+          <Nav button="skip" @next="$router.go(-1)" hidePrevious="true" />
+          <div class="onb-content-container">
+            <div class="onb-top-content-container">
+              <h1 class="onb-heading-large">{{ titleText }}</h1>
+            </div>
+            <LoadingSpinner v-if="!currentUserEvents || !events" />
+            <div v-else v-for="event in events">
+              <OtherEvent :event="event"
+                          @item-click="processRSVP(event)"/>
+            </div>
+            <a class="wave-button"
+               @click="handleWave">
+              {{waveButtonText}}
+            </a>
           </div>
-          <LoadingSpinner v-if="!currentUserEvents || !events" />
-          <div v-else v-for="event in events">
-            <OtherEvent :event="event"
-                        @item-click="processRSVP(event)"/>
-          </div>
-        <a class="wave-button"
-           @click="handleWave">
-          {{waveButtonText}}
-        </a>
         </div>
       </div>
     </div>
-  </div>
-</StyleWrapper>
+  </StyleWrapper>
 </template>
 
 <script>

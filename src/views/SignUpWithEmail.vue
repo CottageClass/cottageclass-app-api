@@ -1,93 +1,93 @@
 <template>
   <span id="top">
     <MainNav />
-      <div class="body body-2">
-          <div class="content-container w-container">
-          <div class="primary-container">
-            <StyleWrapper styleIs="onboarding">
+    <div class="body body-2">
+      <div class="content-container w-container">
+        <div class="primary-container">
+          <StyleWrapper styleIs="onboarding">
             <ErrorMessage v-if="showError && (errors.all().length > 0)" :messages="allErrors" />
-            </StyleWrapper>
-            <h1 class="auth-heading">Sign Up</h1>
-            <div class="auth-wrapper">
-              <FacebookButton v-if="false" />
-              <span v-if="false">
-                <div class="divider-container">
-                  <div class="divider-1px-2"></div>
-                  <div class="or-container">
-                    <div class="divider-text">OR</div>
-                  </div>
-                  <div class="divider-1px-2"></div>
+          </StyleWrapper>
+          <h1 class="auth-heading">Sign Up</h1>
+          <div class="auth-wrapper">
+            <FacebookButton v-if="false" />
+            <span v-if="false">
+              <div class="divider-container">
+                <div class="divider-1px-2"></div>
+                <div class="or-container">
+                  <div class="divider-text">OR</div>
                 </div>
-                <div>Sign up with your email</div>
-              </span>
-              <div class="form-block w-form">
-                <form v-on:submit.prevent="signup" id="email-form">
-                    <fieldset :disabled="disableForm === true">
-                      <div class="onb-child-group-2">
-                        <input
-                        v-validate="'required'"
-                        name="first_name"
-                        v-model="first_name"
-                        placeholder="First Name"
-                        :class="{'invalid': errors.has('first_name') }"
-                        class="input-field w-input"
-                        >
-                        <input
-                        v-validate="'required'"
-                        name="last_name"
-                        v-model="last_name"
-                        placeholder="Last Name"
-                        :class="{'invalid': errors.has('last_name') }"
-                        class="input-field w-input"
-                        >
-                        <input
-                        v-validate="'required|email'"
-                        name="email"
-                        v-model="email"
-                        placeholder="Email"
-                        :class="{'invalid': errors.has('email') }"
-                        class="input-field w-input"
-                        type="email"
-                        >
-                        <input
-                        type="password"
-                        v-validate="'required|min:4|max:128'"
-                        name="password"
-                        v-model="password"
-                        placeholder="Password"
-                        :class="{'invalid': errors.has('password') }"
-                        class="input-field w-input"
-                        >
-                      </div>
-                        <div class="profile-photo-wrapper"
-                             @click="handlePhotoClick">
-                          <img v-if="previewAvatarUrl"
-                              :src="previewAvatarUrl"
-                              class="profile-photo"
-                              height="80"
-                              @load="avatarImageLoaded"
-                          >
-                          <img
-                            v-else
-                            src="@/assets/profile-photo-placeholder.svg"
-                            class="profile-photo"
-                          >
-                          <a class="button-3 w-button" :class="{'invalid': avatarLoading || errors.has('avatar') }">
-                            <span v-if="avatarLoading">Uploading...</span>
-                            <span v-else-if="!avatar_url">Add profile photo</span>
-                            <span v-else>Replace photo</span>
-                          </a>
-                        </div>
-                    </fieldset>
-                  <input type="submit" value="Sign up" class="submit-button w-button">
-                </form>
+                <div class="divider-1px-2"></div>
               </div>
-              <div class="terms-text">By signing in you agree to our <a href="https://cottageclass.com/terms-of-service" class="links terms-link">Terms of Service</a> and <a href="https://cottageclass.com/privacy-policy" class="links terms-link">Privacy Policy</a>.</div>
-              <div class="auth-links">Have an account? <a href="" @click.prevent="$router.push( {name: 'SignIn' })">Log in</a></div>
+              <div>Sign up with your email</div>
+            </span>
+            <div class="form-block w-form">
+              <form v-on:submit.prevent="signup" id="email-form">
+                <fieldset :disabled="disableForm === true">
+                  <div class="onb-child-group-2">
+                    <input
+                      v-validate="'required'"
+                      name="first_name"
+                      v-model="first_name"
+                      placeholder="First Name"
+                      :class="{'invalid': errors.has('first_name') }"
+                      class="input-field w-input"
+                    >
+                    <input
+                      v-validate="'required'"
+                      name="last_name"
+                      v-model="last_name"
+                      placeholder="Last Name"
+                      :class="{'invalid': errors.has('last_name') }"
+                      class="input-field w-input"
+                    >
+                    <input
+                      v-validate="'required|email'"
+                      name="email"
+                      v-model="email"
+                      placeholder="Email"
+                      :class="{'invalid': errors.has('email') }"
+                      class="input-field w-input"
+                      type="email"
+                    >
+                    <input
+                      type="password"
+                      v-validate="'required|min:4|max:128'"
+                      name="password"
+                      v-model="password"
+                      placeholder="Password"
+                      :class="{'invalid': errors.has('password') }"
+                      class="input-field w-input"
+                    >
+                  </div>
+                  <div class="profile-photo-wrapper"
+                       @click="handlePhotoClick">
+                    <img v-if="previewAvatarUrl"
+                         :src="previewAvatarUrl"
+                         class="profile-photo"
+                         height="80"
+                         @load="avatarImageLoaded"
+                    >
+                    <img
+                      v-else
+                      src="@/assets/profile-photo-placeholder.svg"
+                      class="profile-photo"
+                    >
+                    <a class="button-3 w-button" :class="{'invalid': avatarLoading || errors.has('avatar') }">
+                      <span v-if="avatarLoading">Uploading...</span>
+                      <span v-else-if="!avatar_url">Add profile photo</span>
+                      <span v-else>Replace photo</span>
+                    </a>
+                  </div>
+                </fieldset>
+                <input type="submit" value="Sign up" class="submit-button w-button">
+              </form>
             </div>
+            <div class="terms-text">By signing in you agree to our <a href="https://cottageclass.com/terms-of-service" class="links terms-link">Terms of Service</a> and <a href="https://cottageclass.com/privacy-policy" class="links terms-link">Privacy Policy</a>.</div>
+            <div class="auth-links">Have an account? <a href="" @click.prevent="$router.push( {name: 'SignIn' })">Log in</a></div>
           </div>
         </div>
       </div>
+    </div>
     <Footer />
   </span>
 </template>

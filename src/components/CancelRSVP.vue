@@ -1,13 +1,13 @@
 <template>
 
-<div class="body">
-  <div class="content-wrapper">
-    <StyleWrapper styleIs="onboarding">
-      <Question
-      class='rsvp-cancel-reason'
-      title="Cancel your RSVP."
-      subtitle="Please let us know in a few words why you won't be attending."
-      >
+  <div class="body">
+    <div class="content-wrapper">
+      <StyleWrapper styleIs="onboarding">
+        <Question
+          class='rsvp-cancel-reason'
+          title="Cancel your RSVP."
+          subtitle="Please let us know in a few words why you won't be attending."
+        >
           <div class="form-describe-need w-form">
             <form v-on:submit.prevent id="email-form-2">
               <p class="describe-label">{{ charsLeft }} characters left...</p>
@@ -18,10 +18,10 @@
               <button class="button cancel-button" @click="confirm">Cancel RSVP</button>
             </div>
           </div>
-      </Question>
-    </StyleWrapper>
+        </Question>
+      </StyleWrapper>
+    </div>
   </div>
-</div>
 </template>
 
 <script>
