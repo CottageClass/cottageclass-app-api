@@ -501,6 +501,13 @@ a {
   align-items: center;
 }
 
+.protile-top-card__about-llist {
+  margin-top: 0px;
+  margin-bottom: 11px;
+  padding-left: 0px;
+  list-style-type: none;
+}
+
 .event-detail__about-llst {
   margin-top: 0px;
   margin-bottom: 11px;
