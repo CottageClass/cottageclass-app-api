@@ -1,6 +1,14 @@
 <template>
   <div>
     <MainNav />
+    <LightBoxStyleWrapper>
+      <LightBox
+        v-if="images"
+        ref="lightbox"
+        :images="lightboxImages"
+        :showLightBox="false"
+      />
+    </LightBoxStyleWrapper>
     <LoadingSpinner v-if="!childcareRequest || !user" />
     <div v-else class="event-detail__container w-container">
       <div class="user-action-card__container">
@@ -52,7 +60,10 @@
         <div class="event-detail__column-left w-col w-col-8 w-col-stack">
           <div v-if="images && images.length>0" class="household-photos__card">
             <div class="household-photos__title-text">Household photos</div>
-            <Images :images="images" />
+            <Images
+              :images="images"
+              @image-click="handleImageClick"
+            />
           </div>
           <div class="event-detail__map map" ref="map"/>
           <div class="about-the-host__card">
@@ -114,12 +125,15 @@
 </template>
 
 <script>
+import LightBox from 'vue-image-lightbox'
+
 import SearchListCardActions from '@/components/search/SearchListCardActions'
 import AvatarImage from '@/components/base/AvatarImage'
 import MainNav from '@/components/MainNav'
 import Images from '@/components/Images'
 import LoadingSpinner from '@/components/LoadingSpinner'
 import OtherEvent from '@/components/OtherEvent'
+import LightBoxStyleWrapper from '@/components/LightBoxStyleWrapper'
 
 import houseRulesImage from '@/assets/house-rules.svg'
 import petsImage from '@/assets/pets.svg'
@@ -129,7 +143,7 @@ import { item, maps } from '@/mixins'
 
 export default {
   name: 'ChildcareRequestPage',
-  components: { MainNav, Images, LoadingSpinner, AvatarImage, SearchListCardActions, OtherEvent },
+  components: { MainNav, Images, LoadingSpinner, AvatarImage, SearchListCardActions, OtherEvent, LightBox, LightBoxStyleWrapper },
   mixins: [item, maps],
   data () {
     return {
@@ -143,10 +157,21 @@ export default {
     }
   },
   computed: {
+    lightboxImages () {
+      return this.images.map(i => {
+        return {
+          thumb: i,
+          src: i
+        }
+      })
+    },
     houseRulesImage: () => houseRulesImage,
     petsImage: () => petsImage
   },
   methods: {
+    handleImageClick (payload) {
+      this.$refs.lightbox.showImage(payload)
+    },
     fetchUser: async function () {
       this.user = await fetchUser(this.childcareRequest.userId)
       this.events = (await fetchUpcomingEvents(this.user.id))
