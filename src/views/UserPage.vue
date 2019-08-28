@@ -150,6 +150,8 @@
 </template>
 
 <script>
+import LightBox from 'vue-image-lightbox'
+
 import LikeUserFooter from '@/components/base/LikeUserFooter'
 import AvatarImage from '@/components/base/AvatarImage'
 import SearchListCardActions from '@/components/search/SearchListCardActions'
@@ -158,7 +160,6 @@ import Images from '@/components/Images'
 import LoadingSpinner from '@/components/LoadingSpinner'
 import OtherEvent from '@/components/OtherEvent'
 import LightBoxStyleWrapper from '@/components/LightBoxStyleWrapper'
-import LightBox from 'vue-image-lightbox'
 
 import { item, maps, messaging } from '@/mixins'
 import { fetchUser, fetchUpcomingEvents } from '@/utils/api'
@@ -180,7 +181,6 @@ export default {
   },
   computed: {
     lightboxImages () {
-      this.debug(this)
       return this.images.map(i => {
         return {
           thumb: i,
