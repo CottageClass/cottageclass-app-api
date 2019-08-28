@@ -15,19 +15,19 @@
           <div class="user-action-card__footer__user-summary">
             <router-link :to="{name:'UserPage', params:{id: user.id}}"
                          class="avatar-container">
-            <AvatarImage className="user-action-card__photo"
-                         :person="{facebookUid: user.facebookUid, avatar: user.avatar}"
-                         imageSize="100"/>
-            <div v-if="verified" class="badge-verified">
-              <div class="unicode-character">✓</div>
-              <div class="badge-text">Verified</div>
-            </div>
+              <AvatarImage className="user-action-card__photo"
+                           :person="{facebookUid: user.facebookUid, avatar: user.avatar}"
+                           imageSize="100"/>
+              <div v-if="verified" class="badge-verified">
+                <div class="unicode-character">✓</div>
+                <div class="badge-text">Verified</div>
+              </div>
             </router-link>
             <div class="user-action-card__user-info--container">
               <div class="user-action-card__user-info_list">
-            <router-link :to="{name:'UserPage', params:{id: user.id}}"
-                         class="user-action-card__user-info__name">
-                {{ userName }}</router-link>
+                <router-link :to="{name:'UserPage', params:{id: user.id}}"
+                             class="user-action-card__user-info__name">
+                  {{ userName }}</router-link>
                 <div class="user-action-card__user-info__occupation truncate">{{occupation}}</div>
                 <div class="user-action-card__user-info__kids truncate">{{kidsAges}}</div>
               </div>
@@ -35,16 +35,16 @@
           </div>
           <div class="user-action-card__footer__actions">
             <SearchListCardActions
-                            class="column-list"
-                            :user="user"
-                            :timePast="timePast"
-                            @contact-click="contactClick"
-                            :showShareButton="false"
-                            :showContactButton="showContactButton"
-                            :showInterestedButton="false"
-                            :showGoingButton="false"
-                            :showMeetButton="false"
-                            :allowWaveUndo="false"/>
+              class="column-list"
+              :user="user"
+              :timePast="timePast"
+              @contact-click="contactClick"
+              :showShareButton="false"
+              :showContactButton="showContactButton"
+              :showInterestedButton="false"
+              :showGoingButton="false"
+              :showMeetButton="false"
+              :allowWaveUndo="false"/>
           </div>
         </div>
       </div>
@@ -52,7 +52,7 @@
         <div class="event-detail__column-left w-col w-col-8 w-col-stack">
           <div v-if="images && images.length>0" class="household-photos__card">
             <div class="household-photos__title-text">Household photos</div>
-              <Images :images="images" />
+            <Images :images="images" />
           </div>
           <div class="event-detail__map map" ref="map"/>
           <div class="about-the-host__card">

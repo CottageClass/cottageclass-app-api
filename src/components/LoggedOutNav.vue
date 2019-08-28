@@ -1,24 +1,24 @@
 <template>
-<div class="lo-navigation__actions">
-  <router-link :to="{name: 'SignUp'}"
-               class="lo-navigation__button w-inline-block">
-    <div class="lo-navigation__button-label">Sign up</div>
-  </router-link>
-  <ul class="lo-navigation__links-list w-list-unstyled">
-    <li class="lo-navigation__link-item">
-      <router-link :to="{name: 'SignIn'}"
-                    class="lo-navigation__button-secondary w-inline-block">
-        <div class="lo-navigation__button-label">Log in</div>
-      </router-link>
-    </li>
-    <li class="lo-navigation__link-item">
-      <router-link :to="{name:'Faq'}"
-                   class="lo-navigation__button-secondary w-inline-block">
-        <div class="lo-navigation__button-label">FAQ</div>
-      </router-link>
-    </li>
-  </ul>
-</div>
+  <div class="lo-navigation__actions">
+    <router-link :to="{name: 'SignUp'}"
+                 class="lo-navigation__button w-inline-block">
+      <div class="lo-navigation__button-label">Sign up</div>
+    </router-link>
+    <ul class="lo-navigation__links-list w-list-unstyled">
+      <li class="lo-navigation__link-item">
+        <router-link :to="{name: 'SignIn'}"
+                     class="lo-navigation__button-secondary w-inline-block">
+          <div class="lo-navigation__button-label">Log in</div>
+        </router-link>
+      </li>
+      <li class="lo-navigation__link-item">
+        <router-link :to="{name:'Faq'}"
+                     class="lo-navigation__button-secondary w-inline-block">
+          <div class="lo-navigation__button-label">FAQ</div>
+        </router-link>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>

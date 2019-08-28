@@ -1,27 +1,27 @@
 <template>
-<div class="utility-cont__margin-bottom-48">
-  <ul class="hosting-list">
-    <ListSectionHeader :title="title"
-                       :buttonText="buttonText"
-                       @button-click="$emit('header-button-click')"
+  <div class="utility-cont__margin-bottom-48">
+    <ul class="hosting-list">
+      <ListSectionHeader :title="title"
+                         :buttonText="buttonText"
+                         @button-click="$emit('header-button-click')"
       />
-    <LoadingSpinner v-if="!items && !hasSlot" />
-    <ListSectionEmptyCard v-else-if="items && items.length===0"
-                          :options=emptyOptions
-                          @button-click="$emit('empty-card-button-click')"
-                          @additional-link-click="$emit('empty-card-additional-link-click')"
-                          />
-    <slot />
-    <SearchListCard v-for="item in items"
-                    :key="item.id"
-                    :item="item"
-                    @event-deleted="$emit('event-deleted')"
-                    @event-updated="$emit('event-updated')"
-                    @user-updated="$emit('user-updated')"
-                    />
+      <LoadingSpinner v-if="!items && !hasSlot" />
+      <ListSectionEmptyCard v-else-if="items && items.length===0"
+                            :options=emptyOptions
+                            @button-click="$emit('empty-card-button-click')"
+                            @additional-link-click="$emit('empty-card-additional-link-click')"
+      />
+      <slot />
+      <SearchListCard v-for="item in items"
+                      :key="item.id"
+                      :item="item"
+                      @event-deleted="$emit('event-deleted')"
+                      @event-updated="$emit('event-updated')"
+                      @user-updated="$emit('user-updated')"
+      />
 
-  </ul>
-</div>
+    </ul>
+  </div>
 </template>
 
 <script>

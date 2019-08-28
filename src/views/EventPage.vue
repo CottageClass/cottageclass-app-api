@@ -15,19 +15,19 @@
           <div class="user-action-card__footer__user-summary">
             <router-link :to="{name:'UserPage', params:{id: event.hostId}}"
                          class="avatar-container">
-            <AvatarImage className="user-action-card__photo"
-                         :person="{facebookUid: event.hostFacebookUid, avatar: event.hostAvatar}"
-                         imageSize="100"/>
-            <div v-if="verified" class="badge-verified">
-              <div class="unicode-character">✓</div>
-              <div class="badge-text">Verified</div>
-            </div>
+              <AvatarImage className="user-action-card__photo"
+                           :person="{facebookUid: event.hostFacebookUid, avatar: event.hostAvatar}"
+                           imageSize="100"/>
+              <div v-if="verified" class="badge-verified">
+                <div class="unicode-character">✓</div>
+                <div class="badge-text">Verified</div>
+              </div>
             </router-link>
             <div class="user-action-card__user-info--container">
               <div class="user-action-card__user-info_list">
-            <router-link :to="{name:'UserPage', params:{id: event.hostId}}"
-                         class="user-action-card__user-info__name">
-                {{ userName }}</router-link>
+                <router-link :to="{name:'UserPage', params:{id: event.hostId}}"
+                             class="user-action-card__user-info__name">
+                  {{ userName }}</router-link>
                 <div class="user-action-card__user-info__occupation truncate">{{occupation}}</div>
                 <div class="user-action-card__user-info__kids truncate">{{kidsAges}}</div>
               </div>
@@ -35,19 +35,19 @@
           </div>
           <div class="user-action-card__footer__actions">
             <SearchListCardActions
-                            class="column-list"
-                            :user="event.host"
-                            :event="event"
-                            @user-updated="updateUser"
-                            @interested-click="interestedClickWithPrompts"
-                            @going-click="goingClick"
-                            @share-click="shareClick"
-                            :timePast="timePast"
-                            :showShareButton="showShareButton"
-                            :showInterestedButton="showInterestedButton"
-                            :showMeetButton="showMeetButton"
-                            :showGoingButton="showGoingButton"
-                            :allowWaveUndo="false"/>
+              class="column-list"
+              :user="event.host"
+              :event="event"
+              @user-updated="updateUser"
+              @interested-click="interestedClickWithPrompts"
+              @going-click="goingClick"
+              @share-click="shareClick"
+              :timePast="timePast"
+              :showShareButton="showShareButton"
+              :showInterestedButton="showInterestedButton"
+              :showMeetButton="showMeetButton"
+              :showGoingButton="showGoingButton"
+              :allowWaveUndo="false"/>
           </div>
         </div>
       </div>
@@ -64,7 +64,7 @@
           </div>
           <div v-if="images && images.length>0" class="household-photos__card">
             <div class="household-photos__title-text">Household photos</div>
-              <Images :images="images" />
+            <Images :images="images" />
           </div>
           <div class="event-detail__map map" ref="map"/>
           <div class="about-the-host__card">

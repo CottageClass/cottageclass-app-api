@@ -1,25 +1,25 @@
 <template>
-<li class="other-events__list-item">
-  <a @click="$emit('item-click')">
-    <div class="other-events-card__header">
-      <div class="other-events-card__header__date">{{timeHeader}}</div>
-      <div class="other-events-card__header__distance">{{distance}}</div>
-    </div>
-    <div class="other-events-card__description-text lp-truncate">{{description}}</div>
-    <div class="other-events-card__footer">
-      <div v-if="event.participatingParents.length" class="other-events-card__footer__attendees">
-        <AvatarImage v-for="participant of displayedParticipants"
-                     :key="participant.attributes.userId"
-                     class="other-events-card__attendees--photo-fit"
-                      imageSize="30"
-                     :person="{facebookUid: participant.attributes.userFacebookUid, avatar: participant.attributes.userAvatar}"
-                     />
-        <div class="attendees__going-icon"></div>
-        <div v-if="undisplayedParticipantsCount" class="other-events-card__attendees--more">{{undisplayedParticipantsCount}} more</div>
+  <li class="other-events__list-item">
+    <a @click="$emit('item-click')">
+      <div class="other-events-card__header">
+        <div class="other-events-card__header__date">{{timeHeader}}</div>
+        <div class="other-events-card__header__distance">{{distance}}</div>
       </div>
-    </div>
-  </a>
-</li>
+      <div class="other-events-card__description-text lp-truncate">{{description}}</div>
+      <div class="other-events-card__footer">
+        <div v-if="event.participatingParents.length" class="other-events-card__footer__attendees">
+          <AvatarImage v-for="participant of displayedParticipants"
+                       :key="participant.attributes.userId"
+                       class="other-events-card__attendees--photo-fit"
+                       imageSize="30"
+                       :person="{facebookUid: participant.attributes.userFacebookUid, avatar: participant.attributes.userAvatar}"
+          />
+          <div class="attendees__going-icon"></div>
+          <div v-if="undisplayedParticipantsCount" class="other-events-card__attendees--more">{{undisplayedParticipantsCount}} more</div>
+        </div>
+      </div>
+    </a>
+  </li>
 </template>
 
 <script>

@@ -6,15 +6,15 @@ This is the map view or the list view of events
   <div class="lp-container">
     <div v-if="isFullScreen" class="top-container">
       <a
-      v-if="isFullScreen"
-      @click="$emit('back-click')"
-      class="back-button w-inline-block">
+        v-if="isFullScreen"
+        @click="$emit('back-click')"
+        class="back-button w-inline-block">
         <img src="../assets/arrow-back-black.svg">
       </a>
       <a
-      v-if="isFullScreen"
-      @click="switchType"
-      class="toggle-button w-inline-block">
+        v-if="isFullScreen"
+        @click="switchType"
+        class="toggle-button w-inline-block">
         <div>{{ otherType }}</div>
       </a>
 
@@ -25,29 +25,29 @@ This is the map view or the list view of events
          @click="mapClick">
       <transition name="fade">
         <a v-if="showSearchButton"
-          href=""
-          @click.prevent="searchButtonClick"
-          class="map-button-1 w-button">
+           href=""
+           @click.prevent="searchButtonClick"
+           class="map-button-1 w-button">
           Search this area
         </a>
       </transition>
       <div ref="map" class="map-container" />
     </div>
     <div
-    v-if="type==='list'"
-    class="list-container w-container">
+      v-if="type==='list'"
+      class="list-container w-container">
       <SearchResultList
-              :showFetchMoreButton="showFetchMoreButton"
-              class="list"
-              :items="items"
-              :noItemsMessage="noItemsMessage"
-              :showTrailblazerMessage="showTrailblazerMessage"
-              @offer-playdate-click="offerPlaydate"
-              @request-childcare-click="requestChildcare"
-              @fetch-more-click="$emit('fetch-more-click')"
-              @user-updated="$emit('user-updated', $event)"
-              @event-deleted="$emit('event-deleted', id)"
-              @event-updated="$emit('event-updated', $event)"/>
+        :showFetchMoreButton="showFetchMoreButton"
+        class="list"
+        :items="items"
+        :noItemsMessage="noItemsMessage"
+        :showTrailblazerMessage="showTrailblazerMessage"
+        @offer-playdate-click="offerPlaydate"
+        @request-childcare-click="requestChildcare"
+        @fetch-more-click="$emit('fetch-more-click')"
+        @user-updated="$emit('user-updated', $event)"
+        @event-deleted="$emit('event-deleted', id)"
+        @event-updated="$emit('event-updated', $event)"/>
     </div>
   </div>
 </template>

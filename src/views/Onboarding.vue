@@ -11,7 +11,7 @@
                        context="onboarding"
                        @finished="collectHomeInfo"
                        @skip="collectUserDetails"
-                       />
+          />
           <HouseInformation v-if="section==='home-info'"
                             :stepName="stepName"
                             context="onboarding"

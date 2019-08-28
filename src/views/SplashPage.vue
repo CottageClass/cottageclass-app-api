@@ -1,130 +1,130 @@
 <template>
-<span>
-<div class="body-homepage">
-  <MainNav />
-  <div class="hero-section">
-    <div class="hero-container w-container">
-      <div class="hero-content">
-        <h1 class="h1-display">Meet nearby parents for playdates &amp; childcare.</h1>
-        <div class="hero-subtitle">Do you need more support as a parent? We help you find nearby parents, meet up for playdates, and build life-changing local networks for sharing kids&rsquo; activities &amp; childcare.</div>
-        <AddressAutocomplete
-        @locationSubmitted="goToEvents"/>
-        <div class="how-wrapper">
-          <ul class="unordered-list">
-            <li class="list-item"><img src="@/assets/one.svg" alt="" class="image-262">
-              <div class="hero-list-item-heading">Find parents.</div>
-              <div class="hero-list-item-subtitle">We show you parents near you with kids of similar ages &amp; interests.</div>
+  <span>
+    <div class="body-homepage">
+      <MainNav />
+      <div class="hero-section">
+        <div class="hero-container w-container">
+          <div class="hero-content">
+            <h1 class="h1-display">Meet nearby parents for playdates &amp; childcare.</h1>
+            <div class="hero-subtitle">Do you need more support as a parent? We help you find nearby parents, meet up for playdates, and build life-changing local networks for sharing kids&rsquo; activities &amp; childcare.</div>
+            <AddressAutocomplete
+              @locationSubmitted="goToEvents"/>
+            <div class="how-wrapper">
+              <ul class="unordered-list">
+                <li class="list-item"><img src="@/assets/one.svg" alt="" class="image-262">
+                  <div class="hero-list-item-heading">Find parents.</div>
+                  <div class="hero-list-item-subtitle">We show you parents near you with kids of similar ages &amp; interests.</div>
+                </li>
+                <li class="list-item"><img src="@/assets/two.svg" alt="" class="image-262">
+                  <div class="hero-list-item-heading">Meet for playdates.</div>
+                  <div class="hero-list-item-subtitle">Invite parents for a playdate. Or RSVP to a scheduled playdate. It&rsquo;s easy.</div>
+                </li>
+                <li class="list-item"><img src="@/assets/three.svg" alt="" class="image-262">
+                  <div class="hero-list-item-heading">Share childcare.</div>
+                  <div class="hero-list-item-subtitle">Once you feel comfortable that you know a family well, you can share childcare too.</div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="program-photo-grid-container">
+        <GridImage v-for="name in imageNames"
+                   :key="`grid-image-${name}`"
+                   :imageName="name" />
+      </div>
+      <div class="content-section">
+        <div class="content-container-2 w-container">
+          <h1 class="h1-display">Why Lilypad?</h1>
+          <ul class="cottage-class-is-list">
+            <li class="cottageclass-is-list-item"><img src="@/assets/easy-to-start.svg" alt="" class="cottageclass-is-list-item-image">
+              <div class="cottageclass-is-list-item-text">
+                <h2 class="heading-2">Build a village to raise your child.</h2>
+                <p class="p-center-black desktop-align-left">Being a parent is hard, so why should you have to do it alone? On Lilypad, you can share parenting with friends and neighbors. Your child will make new friends...and you will too!</p>
+              </div>
             </li>
-            <li class="list-item"><img src="@/assets/two.svg" alt="" class="image-262">
-              <div class="hero-list-item-heading">Meet for playdates.</div>
-              <div class="hero-list-item-subtitle">Invite parents for a playdate. Or RSVP to a scheduled playdate. It&rsquo;s easy.</div>
+            <li class="cottageclass-is-list-item"><img src="@/assets/pay-nothing.svg" alt="" class="cottageclass-is-list-item-image">
+              <div class="cottageclass-is-list-item-text">
+                <h2 class="heading-2">Pay nothing for childcare.</h2>
+                <p class="p-center-black desktop-align-left">Childcare is expensive, but at Lilypad, it’s always free! Parents spend more than 20% of their income on childcare. What would you buy if you got 20% of your income back? A boat, a family trip to Paris?</p>
+              </div>
             </li>
-            <li class="list-item"><img src="@/assets/three.svg" alt="" class="image-262">
-              <div class="hero-list-item-heading">Share childcare.</div>
-              <div class="hero-list-item-subtitle">Once you feel comfortable that you know a family well, you can share childcare too.</div>
+            <li class="cottageclass-is-list-item"><img src="https://uploads-ssl.webflow.com/5ba3c28cff7d47030870c8e2/5ba5420373b5d2f4e4a03438_heart%202.svg" alt="" class="cottageclass-is-list-item-image">
+              <div class="cottageclass-is-list-item-text">
+                <h2 class="heading-2">Bring friends, or make friends. Safely.</h2>
+                <p class="p-center-black desktop-align-left">Lilypad works great for coordinating childcare with families you know and trust. Or you can use it to meet new families, get to know them, and share childcare whenever you&rsquo;re ready.</p>
+              </div>
             </li>
           </ul>
         </div>
       </div>
-    </div>
-  </div>
-  <div class="program-photo-grid-container">
-    <GridImage v-for="name in imageNames"
-               :key="`grid-image-${name}`"
-               :imageName="name" />
-  </div>
-  <div class="content-section">
-    <div class="content-container-2 w-container">
-      <h1 class="h1-display">Why Lilypad?</h1>
-      <ul class="cottage-class-is-list">
-        <li class="cottageclass-is-list-item"><img src="@/assets/easy-to-start.svg" alt="" class="cottageclass-is-list-item-image">
-          <div class="cottageclass-is-list-item-text">
-            <h2 class="heading-2">Build a village to raise your child.</h2>
-            <p class="p-center-black desktop-align-left">Being a parent is hard, so why should you have to do it alone? On Lilypad, you can share parenting with friends and neighbors. Your child will make new friends...and you will too!</p>
-          </div>
-        </li>
-        <li class="cottageclass-is-list-item"><img src="@/assets/pay-nothing.svg" alt="" class="cottageclass-is-list-item-image">
-          <div class="cottageclass-is-list-item-text">
-            <h2 class="heading-2">Pay nothing for childcare.</h2>
-            <p class="p-center-black desktop-align-left">Childcare is expensive, but at Lilypad, it’s always free! Parents spend more than 20% of their income on childcare. What would you buy if you got 20% of your income back? A boat, a family trip to Paris?</p>
-          </div>
-        </li>
-        <li class="cottageclass-is-list-item"><img src="https://uploads-ssl.webflow.com/5ba3c28cff7d47030870c8e2/5ba5420373b5d2f4e4a03438_heart%202.svg" alt="" class="cottageclass-is-list-item-image">
-          <div class="cottageclass-is-list-item-text">
-            <h2 class="heading-2">Bring friends, or make friends. Safely.</h2>
-            <p class="p-center-black desktop-align-left">Lilypad works great for coordinating childcare with families you know and trust. Or you can use it to meet new families, get to know them, and share childcare whenever you&rsquo;re ready.</p>
-          </div>
-        </li>
-      </ul>
-    </div>
-  </div>
-  <div class="content-section background-01">
-    <div class="divider-2px"></div>
-    <div class="content-container-2 w-container">
-      <h1 class="h1-display">Our Story</h1>
-      <div class="photo-group-container"><img src="@/assets/manishaholmes-2.jpg" alt="" class="our-story-photo">
-        <p class="p-center-black">Manisha is a teaching artist and learning specialist with 15 years of experience teaching over 1,000 kids in three countries. Holmes is a techie/activist step-dad who was never satisfied with the educational options available to his bilingual family. Together, they’re working to build a new network that respects the uniqueness of each family and the creative passion of every child.</p>
-      </div>
-    </div>
-  </div>
-  <div class="content-section">
-    <div class="divider-2px"></div>
-    <div class="content-container-2 w-container">
-      <div class="parents-heart-us-container">
-        <h1 class="h1-display-parents-align-r">Parents</h1><img src="@/assets/heart-red.svg" alt="" class="image-263">
-        <h1 class="h1-display-parents-align-l">Us</h1>
-      </div>
-    <ul class="testimonial-list-group">
-      <li class="testimonial-list-item"><img src="@/assets/photo-12.jpg" alt="" class="testimonial-desktop-image w-hidden-small w-hidden-tiny">
-        <div class="blockquote-container w-clearfix"><img src="@/assets/quotation.svg" alt="" class="quotation-mark-icon">
-          <blockquote class="parents-love-us-blockquote">William has been very excited ...and often comes home singing a new song or talking about an activity he did that day. More than anything we&#x27;re hoping interacting with multiple children will get him better at being gentle, sharing and taking turns... things that he&#x27;s been trying very hard to understand :) &quot;</blockquote>
-          <div class="testimonial-image-name-group"><img src="@/assets/photo-12.jpg" alt="" class="testimonial-mobile-image w-hidden-main w-hidden-medium">
-            <div class="testimonial-mobile-text-content">
-              <div class="testimonial-list-item-name"><strong class="parent-name">Mary Summers</strong></div>
-              <div class="parent-location p-small-black-50">Brooklyn</div>
-            </div>
+      <div class="content-section background-01">
+        <div class="divider-2px"></div>
+        <div class="content-container-2 w-container">
+          <h1 class="h1-display">Our Story</h1>
+          <div class="photo-group-container"><img src="@/assets/manishaholmes-2.jpg" alt="" class="our-story-photo">
+            <p class="p-center-black">Manisha is a teaching artist and learning specialist with 15 years of experience teaching over 1,000 kids in three countries. Holmes is a techie/activist step-dad who was never satisfied with the educational options available to his bilingual family. Together, they’re working to build a new network that respects the uniqueness of each family and the creative passion of every child.</p>
           </div>
         </div>
-      </li>
-      <li class="list-item-divider"></li>
-      <li class="testimonial-list-item"><img src="@/assets/rima4.jpg" alt="" class="testimonial-desktop-image w-hidden-small w-hidden-tiny">
-        <div class="blockquote-container w-clearfix"><img src="@/assets/quotation.svg" alt="" class="quotation-mark-icon">
-          <blockquote class="parents-love-us-blockquote">The playdate went really well! Millie was so nice and sweet and I think Yuri and Lexi had a lot of fun. They ended up playing all evening and didn&rsquo;t even watch the movie :) We are so happy with our experience and I had some really nice time together with my husband!</blockquote>
-          <div class="testimonial-image-name-group"><img src="@/assets/rima4.jpg" alt="" class="testimonial-mobile-image w-hidden-main w-hidden-medium">
-            <div class="testimonial-mobile-text-content">
-              <div class="testimonial-list-item-name">Rima Khusainova</div>
-              <div class="parent-location p-small-black-50">Brooklyn</div>
-            </div>
-          </div>
-        </div>
-      </li>
-      <li class="list-item-divider"></li>
-      <li class="testimonial-list-item"><img src="@/assets/eva-vandock-pinkley.jpg" alt="" class="testimonial-desktop-image w-hidden-small w-hidden-tiny">
-        <div class="blockquote-container w-clearfix"><img src="@/assets/quotation.svg" alt="" class="quotation-mark-icon">
-          <blockquote class="parents-love-us-blockquote">EMMETT LOVES LOVES LOVES this program. He is beaming when he walks out...thank you so much.&quot;</blockquote>
-          <div class="testimonial-image-name-group"><img src="@/assets/eva-vandock-pinkley.jpg" alt="" class="testimonial-mobile-image w-hidden-main w-hidden-medium">
-            <div class="testimonial-mobile-text-content">
-              <div class="testimonial-list-item-name">Eva van Dok Pinkley</div>
-              <div class="parent-location p-small-black-50">Brooklyn</div>
-            </div>
-          </div>
-        </div>
-      </li>
-    </ul>
-    </div>
-  </div>
-  <div class="content-section">
-    <div class="divider-2px"></div>
-    <div class="content-container-2 w-container">
-      <h1 class="h1-display">As covered in</h1>
-      <div class="resp-container">
-        <div class="w-embed w-iframe"><iframe class="resp-iframe" src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fmanisha.snoyer%2Fvideos%2F10101072285697759%2F&show_text=0&width=560" scrolling="no" frameborder="0" allowtransparency="true" allowfullscreen="true"></iframe></div>
       </div>
-      <div class="featured-container"><a href="https://www.bloomberg.com/company/announcements/bloomberg-and-ny-tech-meetup-spotlight-female-led-startups-at-winter-2016-womens-demo-night/" target="_blank" class="featured-card w-inline-block"><img src="@/assets/bloomberg.png" alt="" class="image-261"></a><a href="https://www.wsj.com/articles/haute-home-schools-designed-to-give-kids-a-bespoke-education-1455807796" target="_blank" class="featured-card w-inline-block"><img src="@/assets/thewallstreetjournal.png" alt="" class="image-261"></a><a href="https://www.nytimes.com/slideshow/2016/06/26/nyregion/not-just-the-teachers-pets/s/26PETCITY-slide-IKW9.html" target="_blank" class="featured-card w-inline-block"><img src="@/assets/thenewyorktimes.png" alt="" class="image-261"></a><a href="https://mommypoppins.com/new-york-city-kids/camps/8-new-summer-camps-for-nyc-kids-in-2017" target="_blank" class="featured-card w-inline-block"><img src="@/assets/mommypoppins.png" alt="" class="image-261"></a><a href="https://www.gettingsmart.com/2017/01/cottageclass-expanding-access-to-microschools-and-learning-experiences/" target="_blank" class="featured-card w-inline-block"><img src="@/assets/gettingsmart.png" alt="" class="image-261"></a><a href="https://www.facebook.com/manisha.snoyer/videos/10101072285697759/" target="_blank" class="featured-card w-inline-block"><img src="@/assets/spectrum-news-one.png" alt="" class="image-261"></a><a href="http://brooklyn.news12.com/story/39844684/bk-woman-launches-startup-to-help-parents-find-free-quality-child-care" target="_blank" class="featured-card w-inline-block"><img src="@/assets/news12-brooklyn.png" alt="" class="image-261"></a><a href="https://www.brooklynpaper.com/stories/42/4/all-brooklyn-babysitters-club-2019-01-25-bk.html" target="_blank" class="featured-card w-inline-block"><img src="@/assets/brooklyn-paper.png" alt="" class="image-261"></a></div>
+      <div class="content-section">
+        <div class="divider-2px"></div>
+        <div class="content-container-2 w-container">
+          <div class="parents-heart-us-container">
+            <h1 class="h1-display-parents-align-r">Parents</h1><img src="@/assets/heart-red.svg" alt="" class="image-263">
+            <h1 class="h1-display-parents-align-l">Us</h1>
+          </div>
+          <ul class="testimonial-list-group">
+            <li class="testimonial-list-item"><img src="@/assets/photo-12.jpg" alt="" class="testimonial-desktop-image w-hidden-small w-hidden-tiny">
+              <div class="blockquote-container w-clearfix"><img src="@/assets/quotation.svg" alt="" class="quotation-mark-icon">
+                <blockquote class="parents-love-us-blockquote">William has been very excited ...and often comes home singing a new song or talking about an activity he did that day. More than anything we&#x27;re hoping interacting with multiple children will get him better at being gentle, sharing and taking turns... things that he&#x27;s been trying very hard to understand :) &quot;</blockquote>
+                <div class="testimonial-image-name-group"><img src="@/assets/photo-12.jpg" alt="" class="testimonial-mobile-image w-hidden-main w-hidden-medium">
+                  <div class="testimonial-mobile-text-content">
+                    <div class="testimonial-list-item-name"><strong class="parent-name">Mary Summers</strong></div>
+                    <div class="parent-location p-small-black-50">Brooklyn</div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li class="list-item-divider"></li>
+            <li class="testimonial-list-item"><img src="@/assets/rima4.jpg" alt="" class="testimonial-desktop-image w-hidden-small w-hidden-tiny">
+              <div class="blockquote-container w-clearfix"><img src="@/assets/quotation.svg" alt="" class="quotation-mark-icon">
+                <blockquote class="parents-love-us-blockquote">The playdate went really well! Millie was so nice and sweet and I think Yuri and Lexi had a lot of fun. They ended up playing all evening and didn&rsquo;t even watch the movie :) We are so happy with our experience and I had some really nice time together with my husband!</blockquote>
+                <div class="testimonial-image-name-group"><img src="@/assets/rima4.jpg" alt="" class="testimonial-mobile-image w-hidden-main w-hidden-medium">
+                  <div class="testimonial-mobile-text-content">
+                    <div class="testimonial-list-item-name">Rima Khusainova</div>
+                    <div class="parent-location p-small-black-50">Brooklyn</div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li class="list-item-divider"></li>
+            <li class="testimonial-list-item"><img src="@/assets/eva-vandock-pinkley.jpg" alt="" class="testimonial-desktop-image w-hidden-small w-hidden-tiny">
+              <div class="blockquote-container w-clearfix"><img src="@/assets/quotation.svg" alt="" class="quotation-mark-icon">
+                <blockquote class="parents-love-us-blockquote">EMMETT LOVES LOVES LOVES this program. He is beaming when he walks out...thank you so much.&quot;</blockquote>
+                <div class="testimonial-image-name-group"><img src="@/assets/eva-vandock-pinkley.jpg" alt="" class="testimonial-mobile-image w-hidden-main w-hidden-medium">
+                  <div class="testimonial-mobile-text-content">
+                    <div class="testimonial-list-item-name">Eva van Dok Pinkley</div>
+                    <div class="parent-location p-small-black-50">Brooklyn</div>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="content-section">
+        <div class="divider-2px"></div>
+        <div class="content-container-2 w-container">
+          <h1 class="h1-display">As covered in</h1>
+          <div class="resp-container">
+            <div class="w-embed w-iframe"><iframe class="resp-iframe" src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fmanisha.snoyer%2Fvideos%2F10101072285697759%2F&show_text=0&width=560" scrolling="no" frameborder="0" allowtransparency="true" allowfullscreen="true"></iframe></div>
+          </div>
+          <div class="featured-container"><a href="https://www.bloomberg.com/company/announcements/bloomberg-and-ny-tech-meetup-spotlight-female-led-startups-at-winter-2016-womens-demo-night/" target="_blank" class="featured-card w-inline-block"><img src="@/assets/bloomberg.png" alt="" class="image-261"></a><a href="https://www.wsj.com/articles/haute-home-schools-designed-to-give-kids-a-bespoke-education-1455807796" target="_blank" class="featured-card w-inline-block"><img src="@/assets/thewallstreetjournal.png" alt="" class="image-261"></a><a href="https://www.nytimes.com/slideshow/2016/06/26/nyregion/not-just-the-teachers-pets/s/26PETCITY-slide-IKW9.html" target="_blank" class="featured-card w-inline-block"><img src="@/assets/thenewyorktimes.png" alt="" class="image-261"></a><a href="https://mommypoppins.com/new-york-city-kids/camps/8-new-summer-camps-for-nyc-kids-in-2017" target="_blank" class="featured-card w-inline-block"><img src="@/assets/mommypoppins.png" alt="" class="image-261"></a><a href="https://www.gettingsmart.com/2017/01/cottageclass-expanding-access-to-microschools-and-learning-experiences/" target="_blank" class="featured-card w-inline-block"><img src="@/assets/gettingsmart.png" alt="" class="image-261"></a><a href="https://www.facebook.com/manisha.snoyer/videos/10101072285697759/" target="_blank" class="featured-card w-inline-block"><img src="@/assets/spectrum-news-one.png" alt="" class="image-261"></a><a href="http://brooklyn.news12.com/story/39844684/bk-woman-launches-startup-to-help-parents-find-free-quality-child-care" target="_blank" class="featured-card w-inline-block"><img src="@/assets/news12-brooklyn.png" alt="" class="image-261"></a><a href="https://www.brooklynpaper.com/stories/42/4/all-brooklyn-babysitters-club-2019-01-25-bk.html" target="_blank" class="featured-card w-inline-block"><img src="@/assets/brooklyn-paper.png" alt="" class="image-261"></a></div>
+        </div>
+      </div>
+      <Footer />
     </div>
-  </div>
-<Footer />
-</div>
   </span>
 </template>
 

@@ -1,66 +1,66 @@
 <template>
   <span id="top">
     <MainNav />
-      <div class="body body-2">
-          <div class="content-container w-container">
-            <div class="primary-container">
-              <StyleWrapper styleIs="onboarding">
-                <ErrorMessage
-                  v-if="showError && (errors.first('email') || errors.first('password')) || errorMessage"
-                  :messages="errorMessages"
-                  />
-              </StyleWrapper>
-            <h1 class="auth-heading">Log In</h1>
-            <div class="auth-wrapper">
-              <FacebookButton v-if="false" />
-               <span v-if="false">
-                <div class="divider-container">
-                  <div class="divider-1px-2"></div>
-                  <div class="or-container">
-                    <div class="divider-text">OR</div>
-                  </div>
-                  <div class="divider-1px-2"></div>
+    <div class="body body-2">
+      <div class="content-container w-container">
+        <div class="primary-container">
+          <StyleWrapper styleIs="onboarding">
+            <ErrorMessage
+              v-if="showError && (errors.first('email') || errors.first('password')) || errorMessage"
+              :messages="errorMessages"
+            />
+          </StyleWrapper>
+          <h1 class="auth-heading">Log In</h1>
+          <div class="auth-wrapper">
+            <FacebookButton v-if="false" />
+            <span v-if="false">
+              <div class="divider-container">
+                <div class="divider-1px-2"></div>
+                <div class="or-container">
+                  <div class="divider-text">OR</div>
                 </div>
-                <div>Log in with your email</div>
-              </span>
-              <div class="form-block w-form">
+                <div class="divider-1px-2"></div>
+              </div>
+              <div>Log in with your email</div>
+            </span>
+            <div class="form-block w-form">
               <form id="email-form" v-on:submit.prevent="signIn">
-              <input
-                v-validate="'required|email'"
-                name="email"
-                v-model="email"
-                placeholder="Email"
-                type="email"
-                class="input-field w-input"
-                :class="{'invalid': errors.has('email') }"
-              >
-              <input
-                v-validate="'required'"
-                type="password"
-                name="password"
-                v-model="password"
-                placeholder="Password"
-                :class="{'invalid': errors.has('password') }"
-                class="input-field w-input"
-              >
+                <input
+                  v-validate="'required|email'"
+                  name="email"
+                  v-model="email"
+                  placeholder="Email"
+                  type="email"
+                  class="input-field w-input"
+                  :class="{'invalid': errors.has('email') }"
+                >
+                <input
+                  v-validate="'required'"
+                  type="password"
+                  name="password"
+                  v-model="password"
+                  placeholder="Password"
+                  :class="{'invalid': errors.has('password') }"
+                  class="input-field w-input"
+                >
                 <button type="submit" class="submit-button w-button">Log in</button>
-            </form>
-              </div>
-              <div class="auth-links">
-                <p class="under-link">
-                  <router-link :to="{ name: 'PasswordResetRequest', params:{context:'forgot'}}" href="">Forgot password?<br></router-link>
-                </p>
-                <p class="under-link">
-                  <router-link :to="{ name: 'PasswordResetRequest', params:{context:'facebook-user'}}" href="">Previously signed in with Facebook?</router-link>
-                </p>
-                <p class="under-link">
-                  No account? <a href="" @click.prevent="$router.push({ name: 'SignUp' })">Join us to share playdates!</a>
-                </p>
-              </div>
+              </form>
+            </div>
+            <div class="auth-links">
+              <p class="under-link">
+                <router-link :to="{ name: 'PasswordResetRequest', params:{context:'forgot'}}" href="">Forgot password?<br></router-link>
+              </p>
+              <p class="under-link">
+                <router-link :to="{ name: 'PasswordResetRequest', params:{context:'facebook-user'}}" href="">Previously signed in with Facebook?</router-link>
+              </p>
+              <p class="under-link">
+                No account? <a href="" @click.prevent="$router.push({ name: 'SignUp' })">Join us to share playdates!</a>
+              </p>
             </div>
           </div>
         </div>
       </div>
+    </div>
     <Footer />
   </span>
 </template>

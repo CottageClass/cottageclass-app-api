@@ -8,7 +8,7 @@
         :images="lightboxImages"
         :showLightBox="false"
       />
-      </LightBoxStyleWrapper>
+    </LightBoxStyleWrapper>
     <LoadingSpinner v-if="!user" />
     <div class="profile__container w-container" v-else>
       <div class="profile-top-card__container">
@@ -26,8 +26,8 @@
             <div class="profile-top-card__name-action-group">
               <h1 class="profile-top-card__user-name">{{userName}}</h1>
               <a v-if="showInterestedButton" class="profile-top-card__action-button w-inline-block"
-                  :class="isStarred?'active':''"
-                  @click.stop="interestedClickAndUpdate"></a>
+                 :class="isStarred?'active':''"
+                 @click.stop="interestedClickAndUpdate"></a>
               <div v-if="distance" class="profile-top-card__distance">{{ distance }}</div>
             </div>
             <div class="profile-top-card__occupation">{{ occupation }}</div>
@@ -55,14 +55,14 @@
           </div>
         </div>
         <SearchListCardActions
-                        class="profile-top-card__footer__button-list"
-                        :user="user"
-                        @user-updated="updateUser"
-                        @interested-click="interestedClickWithPrompts"
-                        :showInterestedButton="showInterestedButton"
-                        :showMeetButton="showMeetButton"
-                        :showGoingButton="showGoingButton"
-                        :allowWaveUndo="false"/>
+          class="profile-top-card__footer__button-list"
+          :user="user"
+          @user-updated="updateUser"
+          @interested-click="interestedClickWithPrompts"
+          :showInterestedButton="showInterestedButton"
+          :showMeetButton="showMeetButton"
+          :showGoingButton="showGoingButton"
+          :allowWaveUndo="false"/>
 
       </div>
       <div class="profile-detail__content-columns w-row">
@@ -91,25 +91,25 @@
           </div>
           <div v-if="images && images.length>0" class="household-photos__card">
             <div class="household-photos__title-text">Household photos</div>
-              <Images
-                 :images="images"
-                 @image-click="handleImageClick"
-               />
+            <Images
+              :images="images"
+              @image-click="handleImageClick"
+            />
           </div>
           <div v-if="false" class="attended__card">
             <div class="attended__title-text">Parents who hosted {{ userFirstName }} (12)</div>
             <ul class="list">
               <li class="attendee__list-item"><a href="#" class="attendee__link-wrapper w-inline-block"><img src="@/assets/rima.png" alt="" class="attendee__photo photo-fit" />
-                  <div class="attendee__user-name truncate">Barbara</div>
-                </a></li>
+                <div class="attendee__user-name truncate">Barbara</div>
+              </a></li>
             </ul>
           </div>
           <div v-if="false" class="hosted__card">
             <div class="attended__title-text">Parents hosted by {{ userFirstName }} (5)</div>
             <ul class="list">
               <li class="attendee__list-item"><a href="#" class="attendee__link-wrapper w-inline-block"><img src="@/assets/rima.png" alt="" class="attendee__photo photo-fit" />
-                  <div class="attendee__user-name truncate">Charolotte</div>
-                </a></li>
+                <div class="attendee__user-name truncate">Charolotte</div>
+              </a></li>
             </ul>
           </div>
           <div class="event-detail__map map" ref="map"></div>
