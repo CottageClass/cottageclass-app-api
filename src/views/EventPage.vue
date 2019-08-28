@@ -1,4 +1,4 @@
-<template>
+<template> 
   <div>
     <MainNav />
     <LoadingSpinner v-if="!event" />
@@ -72,19 +72,19 @@
             <div class="about-the-host__info"></div>
             <ul class="protile-top-card__about-llist">
               <li v-if="verified" class="about-the-host__list-item" >
-                <div class="bullet-bar"></div>
+                <div class="bullet-bar"><img src="@/assets/check-white.svg" alt="" class="image-2"></div>
                 <div class="about-the-host__bullet-text">Verified</div>
               </li>
               <li v-if="occupation" class="about-the-host__list-item">
-                <div class="bullet-bar"></div>
+                <div class="bullet-bar"><img src="@/assets/check-white.svg" alt="" class="image-2"></div>
                 <div class="about-the-host__bullet-text">{{occupation}}</div>
               </li>
               <li v-if="languageText" class="about-the-host__list-item">
-                <div class="bullet-bar"></div>
+                <div class="bullet-bar"><img src="@/assets/check-white.svg" alt="" class="image-2"></div>
                 <div class="about-the-host__bullet-text">{{languageText}}</div>
               </li>
               <li class="about-the-host__list-item">
-                <div class="bullet-bar"></div>
+                <div class="bullet-bar"><img src="@/assets/check-white.svg" alt="" class="image-2"></div>
                 <div class="about-the-host__bullet-text">Member since {{ joinedDateFormatted }}</div>
               </li>
             </ul>
@@ -212,6 +212,12 @@ export default {
 a {
   color: #000;
   text-decoration: none;
+}
+
+.image-2 {
+  width: 12px;
+  height: 12px;
+  line-height: 1px;
 }
 
 .event-detail__map {
@@ -495,11 +501,24 @@ a {
 }
 
 .bullet-bar {
-  height: auto;
-  min-width: 6px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  height: 16px;
+  min-width: 16px;
+  margin-top: 2px;
   clear: left;
-  border-radius: 4px;
-  background-color: #0dba51;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-radius: 50%;
+  background-color: #8fd8e9;
 }
 
 .about-the-host__info {
@@ -511,16 +530,23 @@ a {
 }
 
 .protile-top-card__about-llist {
-  margin-top: 28px;
-  margin-bottom: 8px;
-  padding-left: 0;
+  margin-top: 0px;
+  margin-bottom: 11px;
+  padding-left: 0px;
   list-style-type: none;
 }
 
 .about-the-host__list-item {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
-  min-height: 30px;
-  margin-bottom: 12px;
+  min-height: 26px;
+  margin-bottom: 8px;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .about-the-host__bullet-text {
@@ -828,6 +854,9 @@ a {
 
   .protile-top-card__about-llist {
     max-width: 365px;
+    -webkit-box-align: start;
+    -webkit-align-items: flex-start;
+    -ms-flex-align: start;
     align-items: flex-start;
   }
 
@@ -900,6 +929,10 @@ a {
 
   .protile-top-card__about-llist {
     max-width: 288px;
+  }
+
+  .about-the-host__list-item {
+    line-height: 20px;
   }
 
   .list {
