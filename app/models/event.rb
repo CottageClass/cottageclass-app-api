@@ -152,14 +152,9 @@ class Event < ApplicationRecord
   end
 
   def post_create
-    notify_creation
     update_recency_score
     update_user_showcase
     create_search_list_item
-  end
-
-  def notify_creation
-    notifications.event_creation_host.where(recipient: user).first_or_create if generated?
   end
 
   def notify_participants_destruction

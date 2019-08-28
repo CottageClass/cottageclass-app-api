@@ -15,7 +15,6 @@ class Notification < ApplicationRecord
     participant_creation_next_day: 10,
     event_destruction: 11,
     participant_creation_host: 12,
-    event_creation_host: 13,
     user_sms_welcome: 14,
     password_reset_request: 15,
     event_suggestion: 16,
@@ -97,11 +96,6 @@ class Notification < ApplicationRecord
                                                          event: notifiable,
                                                          participant: participant,
                                                          body: body
-                 when :event_creation_host
-                   self.body = 'placeholder for body'
-                   Notifier::EventCreationHost.new user: recipient,
-                                                   event: notifiable,
-                                                   body: body
                  when :event_suggestion
                    self.body = 'messages.event_suggestion'
                    Notifier::EventSuggestion.new user: recipient,
