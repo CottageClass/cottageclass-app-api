@@ -229,8 +229,15 @@ export default {
       })
     }
   },
-  created: function () {
-    this.fetchEvent()
+  async created () {
+    await this.fetchEvent()
+    if (this.$route.query && this.$route.query.interested) {
+      if (this.$route.query.interested === 'yes') {
+        this.goingClick()
+      } else if (this.$route.query.interested === 'no') {
+        this.initiateDeclineRsvp()
+      }
+    }
   },
   beforeRouteUpdate (to, from, next) {
     this.fetchEvent()

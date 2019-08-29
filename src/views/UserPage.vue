@@ -244,9 +244,16 @@ export default {
       this.user = user
     }
   },
-  created: function () {
-    this.fetchUser()
-    this.settlePendingWaves()
+  async created () {
+    await this.fetchUser()
+    if (this.$route.query && this.$route.query.interested) {
+      if (this.$route.query.interested === 'yes') {
+        this.likeUserHandler()
+      } else if (this.$route.query.interested === 'no') {
+        this.dislikeUserHandler()
+      }
+    }
+    await this.settlePendingWaves()
   }
 }
 </script>
