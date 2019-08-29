@@ -28,6 +28,9 @@ export default {
     }
   },
   methods: {
+    initiateDeclineRsvp () {
+      this.$router.push({ name: 'DeclineRSVP', params: { eventId: this.event.id } })
+    },
     submitToSheetsu: function () {
       const data = {
         'Event ID': this.eventId,
