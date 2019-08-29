@@ -12,9 +12,9 @@
     <LoadingSpinner v-if="!event" />
     <div v-else class="event-detail__container w-container">
       <RSVPCard v-if="showRsvpCard"
-                :event="event"
                 @rsvp-yes="goingClick"
                 @rsvp-no="initiateDeclineRsvp"
+                @wave="handleWave"
       />
       <div class="user-action-card__container">
         <div class="user-action-card__header">
