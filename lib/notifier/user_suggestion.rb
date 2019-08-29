@@ -63,7 +63,7 @@ class Notifier::UserSuggestion < Notifier::Base
       bio: truncated_bio,
       bio_truncated: bio_truncated,
       avatar: @suggested_user.avatar,
-      link: 'https://joinlilypad.com/user/' + @suggested_user.id.to_s
+      link: 'https://joinlilypad.com/users/' + @suggested_user.id.to_s
     }
 
     super.update suggested_user: suggested_user_hash
