@@ -1,10 +1,6 @@
-import Logger from '@/utils/logger'
-
 import { createUsers } from '@/utils/createUser'
 import { createEvents } from '@/utils/createEvent'
 import { createChildcareRequests } from '@/utils/createChildcareRequest'
-
-const logger = Logger('createItem')
 
 export const createItem = (data) => {
   return createItems(data)[0]
@@ -36,7 +32,6 @@ export const createItems = (data) => {
         Object.assign(res, { childcareRequest })
       }
     }
-    logger.log(res)
     return res
   })
   if (data.meta.item) {
