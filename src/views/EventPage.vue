@@ -11,6 +11,11 @@
     </LightBoxStyleWrapper>
     <LoadingSpinner v-if="!event" />
     <div v-else class="event-detail__container w-container">
+      <RSVPCard v-if="showRsvpCard"
+                :event="event"
+                @rsvp-yes="goingClick"
+                @rsvp-no="initiateDeclineRsvp"
+      />
       <div class="user-action-card__container">
         <div class="user-action-card__header">
           <div class="user-action-card__header__date">{{timeHeader}}</div>
@@ -134,15 +139,13 @@
         </div>
       </div>
     </div>
-    <RsvpFooter v-if="showRsvpFooter"
-                :event="event"/>
   </div>
 </template>
 
 <script>
 import LightBox from 'vue-image-lightbox'
 
-import RsvpFooter from '@/components/base/RsvpFooter'
+import RSVPCard from '@/components/base/RSVPCard'
 import SearchListCardActions from '@/components/search/SearchListCardActions'
 import AvatarImage from '@/components/base/AvatarImage'
 import MainNav from '@/components/MainNav'
@@ -157,12 +160,12 @@ import petsImage from '@/assets/pets.svg'
 
 import { mapGetters } from 'vuex'
 import { fetchUpcomingEvents, fetchEvent } from '@/utils/api'
-import { item, maps } from '@/mixins'
+import { item, maps, rsvp } from '@/mixins'
 
 export default {
   name: 'EventPage',
-  components: { MainNav, Images, LoadingSpinner, AvatarImage, SearchListCardActions, Attendee, OtherEvent, RsvpFooter, LightBox, LightBoxStyleWrapper },
-  mixins: [item, maps],
+  components: { MainNav, Images, LoadingSpinner, AvatarImage, SearchListCardActions, Attendee, OtherEvent, RSVPCard, LightBox, LightBoxStyleWrapper },
+  mixins: [item, maps, rsvp],
   data () {
     return {
       event: null,
@@ -182,7 +185,7 @@ export default {
         }
       })
     },
-    showRsvpFooter () {
+    showRsvpCard () {
       return this.event &&
         !this.timePast &&
         (this.currentUser && this.event.host.id.toString() !== this.currentUser.id.toString()) &&

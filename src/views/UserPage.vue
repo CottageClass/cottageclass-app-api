@@ -11,6 +11,11 @@
     </LightBoxStyleWrapper>
     <LoadingSpinner v-if="!user" />
     <div class="profile__container w-container" v-else>
+      <LikeUserCard v-if="showLikeUserCard"
+                    :userFirstName="user.firstName"
+                    @like-user-click="likeUserHandler"
+                    @dislike-user-click="dislikeUserHandler"
+      />
       <div class="profile-top-card__container">
         <div class="profile__user-basics-container">
           <div class="profile-top-card__photo-wrapper">
@@ -142,17 +147,14 @@
         </div>
       </div>
     </div>
-    <LikeUserFooter v-if="showLikeUserFooter"
-                    :user="user"
-                    @click-yes="likeUserHandler"
-                    @click-no="dislikeUserHandler"/>
+
   </div>
 </template>
 
 <script>
 import LightBox from 'vue-image-lightbox'
 
-import LikeUserFooter from '@/components/base/LikeUserFooter'
+import LikeUserCard from '@/components/base/LikeUserCard'
 import AvatarImage from '@/components/base/AvatarImage'
 import SearchListCardActions from '@/components/search/SearchListCardActions'
 import MainNav from '@/components/MainNav'
@@ -167,7 +169,7 @@ import contactIcon from '@/assets/contact-black-outline.svg'
 
 export default {
   name: 'UserPage',
-  components: { MainNav, Images, LoadingSpinner, AvatarImage, OtherEvent, SearchListCardActions, LikeUserFooter, LightBox, LightBoxStyleWrapper },
+  components: { MainNav, Images, LoadingSpinner, AvatarImage, OtherEvent, SearchListCardActions, LikeUserCard, LightBox, LightBoxStyleWrapper },
   mixins: [ item, maps, messaging ],
   data () {
     return {
@@ -191,7 +193,7 @@ export default {
     targetUser () {
       return this.user
     },
-    showLikeUserFooter () {
+    showLikeUserCard () {
       return this.user && this.currentUser && (this.user.id !== this.currentUser.id) && !this.isStarred && !this.isDarkStarred
     },
     contactIcon () { return contactIcon }
