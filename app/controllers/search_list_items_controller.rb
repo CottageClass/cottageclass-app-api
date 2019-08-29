@@ -59,6 +59,7 @@ class SearchListItemsController < ApiController
 
     unseen_users = SearchListItem.where(itemable_id: nil).where.not(user_id: seen_users)
     unseen_users = unseen_users.joins(:user).near(location.map(&:to_f), miles)
+    unseen_users = unseen_users.child_age_range(min_age, max_age)
     unseen_users = unseen_users.where.not(user_id: current_user.id) if current_user.present?
     unseen_users = unseen_users.to_a
 
