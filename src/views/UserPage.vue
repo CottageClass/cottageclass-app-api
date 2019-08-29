@@ -194,7 +194,13 @@ export default {
       return this.user
     },
     showLikeUserCard () {
-      return this.user && this.currentUser && (this.user.id !== this.currentUser.id) && !this.isStarred && !this.isDarkStarred
+      if (!this.user) { return false }
+      if (this.currentUser) {
+        return (this.user.id !== this.currentUser.id) &&
+               !this.isStarred &&
+               !this.isDarkStarred
+      }
+      return true
     },
     contactIcon () { return contactIcon }
   },
@@ -209,7 +215,12 @@ export default {
     async dislikeUserHandler () {
       this.$ga.event('Star', 'dark-starred', 'UserPage footer')
       await this.disinterestedClick()
-      this.$router.push({ name: 'DisinterestedSurvey', params: { userId: this.$route.params.id } })
+      if (!this.redirectToSignupIfNotAuthenticated({
+        name: 'DisinterestedSurvey',
+        params: { userId: this.user.id }
+      })) {
+        this.$router.push({ name: 'DisinterestedSurvey', params: { userId: this.$route.params.id } })
+      }
     },
     async interestedClickAndUpdate () {
       this.user = await this.interestedClick()
@@ -238,9 +249,16 @@ export default {
       this.user = user
     }
   },
-  created: function () {
-    this.fetchUser()
-    this.settlePendingWaves()
+  async created () {
+    await this.fetchUser()
+    if (this.$route.query && this.$route.query.interested) {
+      if (this.$route.query.interested === 'yes') {
+        this.likeUserHandler()
+      } else if (this.$route.query.interested === 'no') {
+        this.dislikeUserHandler()
+      }
+    }
+    await this.settlePendingWaves()
   }
 }
 </script>
