@@ -194,7 +194,13 @@ export default {
       return this.user
     },
     showLikeUserCard () {
-      return this.user && this.currentUser && (this.user.id !== this.currentUser.id) && !this.isStarred && !this.isDarkStarred
+      if (!this.user) { return false }
+      if (this.currentUser) {
+        return (this.user.id !== this.currentUser.id) &&
+               !this.isStarred &&
+               !this.isDarkStarred
+      }
+      return true
     },
     contactIcon () { return contactIcon }
   },

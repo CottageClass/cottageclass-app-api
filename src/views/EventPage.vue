@@ -186,11 +186,13 @@ export default {
       })
     },
     showRsvpCard () {
-      return this.event &&
-        !this.timePast &&
-        (this.currentUser && this.event.host.id.toString() !== this.currentUser.id.toString()) &&
-        !this.event.participated &&
-        !this.isRsvpDeclined(this.event.id)
+      if (!this.event || this.timePast) { return false }
+      if (this.currentUser) {
+        return (this.event.host.id.toString() !== this.currentUser.id.toString()) &&
+               !this.event.participated &&
+               !this.isRsvpDeclined(this.event.id)
+      }
+      return true
     },
     user () {
       return this.event && this.event.host
