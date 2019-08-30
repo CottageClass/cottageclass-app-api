@@ -62,7 +62,7 @@ export default {
         this.showError = false
         try {
           await submitChildcareRequest(this.description.text)
-          this.showAlertOnNextRoute('Your request has been submitted', 'success')
+          this.showAlertOnNextRoute('Your childcare request has been posted', 'success')
         } catch (e) {
           this.showAlertOnNextRoute('There was a problem submitting your request, please try again later', 'failure')
         } finally {
