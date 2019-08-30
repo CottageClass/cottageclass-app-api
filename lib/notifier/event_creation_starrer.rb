@@ -60,7 +60,7 @@ class Notifier::EventCreationStarrer < Notifier::Base
       bio: truncated_bio,
       bio_truncated: bio_truncated,
       avatar: @event_creator.avatar,
-      link: 'https://joinlilypad.com/user/' + @event_creator.id.to_s
+      link: ENV['LINK_HOST'] + '/users/' + @event_creator.id.to_s
     }
 
     super.update event_creator: suggested_user_hash
