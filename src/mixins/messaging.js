@@ -45,7 +45,7 @@ export default {
             this.meetMessage(targetUser),
             this.acknowledgeMessage(targetUser)
           )
-          this.showAlertOnNextRoute('Your message has been sent', 'success')
+          this.showAlertOnNextRoute('Message sent! Check your text messages to say hi & schedule a playdate', 'success')
         } catch (e) {
           this.logError(e)
           this.showAlertOnNextRoute('There was a problem sending your message.  Please try again later', 'failure')
