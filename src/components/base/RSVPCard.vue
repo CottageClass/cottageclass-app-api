@@ -1,7 +1,7 @@
 <template>
   <InterestedCard
     title="Can you attend?"
-    otherText="Say hi and suggest another time"
+    :otherText="otherText"
     @primary-click="$emit('rsvp-yes')"
     @secondary-click="$emit('rsvp-no')"
     @other-click="$emit('wave')"
@@ -12,6 +12,9 @@
 import InterestedCard from '@/components/base/InterestedCard'
 export default {
   name: 'RSVPCard',
+  props: {
+    otherText: {}
+  },
   components: { InterestedCard }
 }
 </script>
