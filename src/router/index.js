@@ -189,14 +189,10 @@ export default new Router({
       redirect: '/events/new/description'
     },
     {
-      path: '/404',
+      path: '*',
       name: 'NotFound',
       component: ErrorPage,
       props: { status: 404 }
-    },
-    {
-      path: '*',
-      redirect: '/404'
     }
 
   ],
