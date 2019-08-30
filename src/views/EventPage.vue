@@ -15,7 +15,7 @@
                 @rsvp-yes="goingClick"
                 @rsvp-no="initiateDeclineRsvp"
                 @wave="handleWave"
-                :otherText="currentUser ? 'Say hi and Suggest another time': null"
+                :otherText="currentUser ? 'Say hi and suggest another time': null"
       />
       <div class="user-action-card__container">
         <div class="user-action-card__header">
