@@ -1,14 +1,14 @@
 <template>
-<li class="card-empty">
-  <img v-if="options.image" :src="options.image" class="card-empty__image" />
-  <div class="card-empty__title-text">{{ options.title }}</div>
-  <a
-     @click.prevent="$emit('button-click')"
-     class="card-empty__btn-small-blue w-button">{{ options.buttonText }}</a>
-  <a
-     @click.prevent="$emit('additional-link-click')"
-     class="card-empty__btn-link">{{ options.additionalLinkText }}</a>
-</li>
+  <li class="card-empty">
+    <img v-if="options.image" :src="options.image" class="card-empty__image" />
+    <div class="card-empty__title-text">{{ options.title }}</div>
+    <a
+      @click.prevent="$emit('button-click')"
+      class="card-empty__btn-small-blue w-button">{{ options.buttonText }}</a>
+    <a
+      @click.prevent="$emit('additional-link-click')"
+      class="card-empty__btn-link">{{ options.additionalLinkText }}</a>
+  </li>
 </template>
 
 <script>

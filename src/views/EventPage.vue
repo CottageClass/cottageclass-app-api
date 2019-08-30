@@ -1,8 +1,22 @@
 <template>
   <div>
     <MainNav />
+    <LightBoxStyleWrapper>
+      <LightBox
+        v-if="images"
+        ref="lightbox"
+        :images="lightboxImages"
+        :showLightBox="false"
+      />
+    </LightBoxStyleWrapper>
     <LoadingSpinner v-if="!event" />
     <div v-else class="event-detail__container w-container">
+      <RSVPCard v-if="showRsvpCard"
+                @rsvp-yes="goingClick"
+                @rsvp-no="initiateDeclineRsvp"
+                @wave="handleWave"
+                :otherText="currentUser ? 'Say hi and suggest another time': null"
+      />
       <div class="user-action-card__container">
         <div class="user-action-card__header">
           <div class="user-action-card__header__date">{{timeHeader}}</div>
@@ -15,19 +29,19 @@
           <div class="user-action-card__footer__user-summary">
             <router-link :to="{name:'UserPage', params:{id: event.hostId}}"
                          class="avatar-container">
-            <AvatarImage className="user-action-card__photo"
-                         :person="{facebookUid: event.hostFacebookUid, avatar: event.hostAvatar}"
-                         imageSize="100"/>
-            <div v-if="verified" class="badge-verified">
-              <div class="unicode-character">✓</div>
-              <div class="badge-text">Verified</div>
-            </div>
+              <AvatarImage className="user-action-card__photo"
+                           :person="{facebookUid: event.hostFacebookUid, avatar: event.hostAvatar}"
+                           imageSize="100"/>
+              <div v-if="verified" class="badge-verified">
+                <div class="unicode-character">✓</div>
+                <div class="badge-text">Verified</div>
+              </div>
             </router-link>
             <div class="user-action-card__user-info--container">
               <div class="user-action-card__user-info_list">
-            <router-link :to="{name:'UserPage', params:{id: event.hostId}}"
-                         class="user-action-card__user-info__name">
-                {{ userName }}</router-link>
+                <router-link :to="{name:'UserPage', params:{id: event.hostId}}"
+                             class="user-action-card__user-info__name">
+                  {{ userName }}</router-link>
                 <div class="user-action-card__user-info__occupation truncate">{{occupation}}</div>
                 <div class="user-action-card__user-info__kids truncate">{{kidsAges}}</div>
               </div>
@@ -35,19 +49,19 @@
           </div>
           <div class="user-action-card__footer__actions">
             <SearchListCardActions
-                            class="column-list"
-                            :user="event.host"
-                            :event="event"
-                            @user-updated="updateUser"
-                            @interested-click="interestedClickWithPrompts"
-                            @going-click="goingClick"
-                            @share-click="shareClick"
-                            :timePast="timePast"
-                            :showShareButton="showShareButton"
-                            :showInterestedButton="showInterestedButton"
-                            :showMeetButton="showMeetButton"
-                            :showGoingButton="showGoingButton"
-                            :allowWaveUndo="false"/>
+              class="column-list"
+              :user="event.host"
+              :event="event"
+              @user-updated="updateUser"
+              @interested-click="interestedClickWithPrompts"
+              @going-click="goingClick"
+              @share-click="shareClick"
+              :timePast="timePast"
+              :showShareButton="showShareButton"
+              :showInterestedButton="showInterestedButton"
+              :showMeetButton="showMeetButton"
+              :showGoingButton="showGoingButton"
+              :allowWaveUndo="false"/>
           </div>
         </div>
       </div>
@@ -64,7 +78,10 @@
           </div>
           <div v-if="images && images.length>0" class="household-photos__card">
             <div class="household-photos__title-text">Household photos</div>
-              <Images :images="images" />
+            <Images
+              :images="images"
+              @image-click="handleImageClick"
+            />
           </div>
           <div class="event-detail__map map" ref="map"/>
           <div class="about-the-host__card">
@@ -72,19 +89,19 @@
             <div class="about-the-host__info"></div>
             <ul class="protile-top-card__about-llist">
               <li v-if="verified" class="about-the-host__list-item" >
-                <div class="bullet-bar"></div>
+                <div class="bullet-bar"><img src="@/assets/check-white.svg" alt="" class="image-2"></div>
                 <div class="about-the-host__bullet-text">Verified</div>
               </li>
               <li v-if="occupation" class="about-the-host__list-item">
-                <div class="bullet-bar"></div>
+                <div class="bullet-bar"><img src="@/assets/check-white.svg" alt="" class="image-2"></div>
                 <div class="about-the-host__bullet-text">{{occupation}}</div>
               </li>
               <li v-if="languageText" class="about-the-host__list-item">
-                <div class="bullet-bar"></div>
+                <div class="bullet-bar"><img src="@/assets/check-white.svg" alt="" class="image-2"></div>
                 <div class="about-the-host__bullet-text">{{languageText}}</div>
               </li>
               <li class="about-the-host__list-item">
-                <div class="bullet-bar"></div>
+                <div class="bullet-bar"><img src="@/assets/check-white.svg" alt="" class="image-2"></div>
                 <div class="about-the-host__bullet-text">Member since {{ joinedDateFormatted }}</div>
               </li>
             </ul>
@@ -123,13 +140,13 @@
         </div>
       </div>
     </div>
-    <RsvpFooter v-if="showRsvpFooter"
-                :event="event"/>
   </div>
 </template>
 
 <script>
-import RsvpFooter from '@/components/base/RsvpFooter'
+import LightBox from 'vue-image-lightbox'
+
+import RSVPCard from '@/components/base/RSVPCard'
 import SearchListCardActions from '@/components/search/SearchListCardActions'
 import AvatarImage from '@/components/base/AvatarImage'
 import MainNav from '@/components/MainNav'
@@ -137,18 +154,19 @@ import Images from '@/components/Images'
 import LoadingSpinner from '@/components/LoadingSpinner'
 import Attendee from '@/components/Attendee'
 import OtherEvent from '@/components/OtherEvent'
+import LightBoxStyleWrapper from '@/components/LightBoxStyleWrapper'
 
 import houseRulesImage from '@/assets/house-rules.svg'
 import petsImage from '@/assets/pets.svg'
 
 import { mapGetters } from 'vuex'
 import { fetchUpcomingEvents, fetchEvent } from '@/utils/api'
-import { item, maps } from '@/mixins'
+import { item, maps, rsvp } from '@/mixins'
 
 export default {
   name: 'EventPage',
-  components: { MainNav, Images, LoadingSpinner, AvatarImage, SearchListCardActions, Attendee, OtherEvent, RsvpFooter },
-  mixins: [item, maps],
+  components: { MainNav, Images, LoadingSpinner, AvatarImage, SearchListCardActions, Attendee, OtherEvent, RSVPCard, LightBox, LightBoxStyleWrapper },
+  mixins: [item, maps, rsvp],
   data () {
     return {
       event: null,
@@ -160,21 +178,35 @@ export default {
     }
   },
   computed: {
-    showRsvpFooter () {
-      return this.event &&
-        !this.timePast &&
-        (this.currentUser && this.event.host.id.toString() !== this.currentUser.id.toString()) &&
-        !this.event.participated &&
-        !this.isRsvpDeclined(this.event.id)
+    lightboxImages () {
+      return this.images.map(i => {
+        return {
+          thumb: i,
+          src: i
+        }
+      })
+    },
+    showRsvpCard () {
+      if (!this.event || this.timePast) { return false }
+      if (this.currentUser) {
+        return (this.event.host.id.toString() !== this.currentUser.id.toString()) &&
+               !this.event.participated &&
+               !this.isRsvpDeclined(this.event.id)
+      }
+      return true
     },
     user () {
-      return this.event.host
+      return this.event && this.event.host
     },
     houseRulesImage: () => houseRulesImage,
     petsImage: () => petsImage,
     ...mapGetters(['isRsvpDeclined'])
   },
   methods: {
+    handleImageClick (payload) {
+      this.debug('handle')
+      this.$refs.lightbox.showImage(payload)
+    },
     updateUser (user) {
       this.event.host = user
     },
@@ -198,8 +230,15 @@ export default {
       })
     }
   },
-  created: function () {
-    this.fetchEvent()
+  async created () {
+    await this.fetchEvent()
+    if (this.$route.query && this.$route.query.interested) {
+      if (this.$route.query.interested === 'yes') {
+        this.goingClick()
+      } else if (this.$route.query.interested === 'no') {
+        this.initiateDeclineRsvp()
+      }
+    }
   },
   beforeRouteUpdate (to, from, next) {
     this.fetchEvent()
@@ -212,6 +251,12 @@ export default {
 a {
   color: #000;
   text-decoration: none;
+}
+
+.image-2 {
+  width: 12px;
+  height: 12px;
+  line-height: 1px;
 }
 
 .event-detail__map {
@@ -495,11 +540,24 @@ a {
 }
 
 .bullet-bar {
-  height: auto;
-  min-width: 6px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  height: 16px;
+  min-width: 16px;
+  margin-top: 2px;
   clear: left;
-  border-radius: 4px;
-  background-color: #0dba51;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-radius: 50%;
+  background-color: #8fd8e9;
 }
 
 .about-the-host__info {
@@ -511,16 +569,23 @@ a {
 }
 
 .protile-top-card__about-llist {
-  margin-top: 28px;
-  margin-bottom: 8px;
-  padding-left: 0;
+  margin-top: 0px;
+  margin-bottom: 11px;
+  padding-left: 0px;
   list-style-type: none;
 }
 
 .about-the-host__list-item {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
-  min-height: 30px;
-  margin-bottom: 12px;
+  min-height: 26px;
+  margin-bottom: 8px;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .about-the-host__bullet-text {
@@ -828,6 +893,9 @@ a {
 
   .protile-top-card__about-llist {
     max-width: 365px;
+    -webkit-box-align: start;
+    -webkit-align-items: flex-start;
+    -ms-flex-align: start;
     align-items: flex-start;
   }
 
@@ -900,6 +968,10 @@ a {
 
   .protile-top-card__about-llist {
     max-width: 288px;
+  }
+
+  .about-the-host__list-item {
+    line-height: 20px;
   }
 
   .list {

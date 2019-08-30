@@ -3,16 +3,16 @@
     <div class=button-container>
       <div v-if="$slots.first"><slot name="first"/></div>
       <a v-else @click="primaryActive && $emit('primary-click')"
-        class="button-primary w-button"
-        :class="!primaryActive ? 'inactive' : ''">
-          {{ primaryText }}
+         class="button-primary w-button"
+         :class="!primaryActive ? 'inactive' : ''">
+        {{ primaryText }}
       </a>
     </div>
     <div v-if="hasTwoButtons" class=button-container>
       <div v-if="$slots.second"><slot name="second"/></div>
       <a v-else @click="secondaryActive && $emit('secondary-click')"
-        class="button-secondary w-button"
-        :class="!secondaryActive ? 'inactive' : ''">
+         class="button-secondary w-button"
+         :class="!secondaryActive ? 'inactive' : ''">
         {{ secondaryText }}
       </a>
     </div>

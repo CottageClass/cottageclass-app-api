@@ -8,10 +8,10 @@
                        @finished="completeEventCreation"
                        @skip="skipEvent"
                        context="request-childcare"
-                       />
+          />
           <CreateChildcareRequest v-if="section==='request'"
                                   :stepName="stepName"
-                                  />
+          />
         </StyleWrapper>
       </div>
     </div>

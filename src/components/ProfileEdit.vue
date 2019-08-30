@@ -1,50 +1,50 @@
 <template>
-<div class="body" id="top-of-form">
-  <MainNav />
-  <div class="lp-container w-container">
-  <h1 class="heading-1">Edit profile</h1>
-  <StyleWrapper styleIs="editing" class="cards" v-if="currentUser">
-    <ErrorMessage v-if="showError && hasError" text="Your form has errors. Please fix them to continue..." />
-    <ErrorMessage v-if="showError && hasError && phone.err" :text="phone.err" />
-    <ErrorMessage v-if="showError && hasError && employment.err" :text="employment.err" />
-    <ErrorMessage v-if="showError" :text="location.err" />
-    <ErrorMessage v-if="showError" :text="children.err" />
-    <Question
-      title="Got any photos you'd like to share?"
-      subtitle="Adding photos to your profile helps give other members a sense of your family."
-      >
-      <MultipleImageUpload v-model="currentUser.images" />
-    </Question>
-    <Employment v-model="employment"/>
-    <ProfileBlurb v-model="profileBlurb" />
-    <Activities v-model="currentUser.activities" />
-    <Availability id="availability" v-model="availability" :required="false"/>
-    <Children v-model="children" :required="false" />
-    <Phone v-model="phone" :currentPhone="currentUser.phone" :required="false" />
-    <Location
-      :currentAddress="currentUser.fullAddress"
-      :currentApartment="currentUser.apartmentNumber"
-      v-model="location"
-      />
-    <LanguagesSpoken v-model="currentUser.languages" :showChoicesImmediately="false"/>
-    <MaxDistanceSetting v-model="maxDistance" />
-    <YesOrNo
-      question="Email settings"
-      description="Would you like to receive custom weekly emails with suggestions for nearby playdates"
-      v-model="weeklyEmails"
-              />
-    <Question title="Delete your account"
-              subtitle="Would you like to leave Lilypad? Deleting your account will remove your profile and cancel any playdates you've booked. This cannot be undone.">
-      <button
-          class="delete-account-button"
-          @click="$router.push({name: 'DeleteAccountConfirmation'})">
-        Delete Account
-      </button>
-    </Question>
-  </StyleWrapper>
-  <PageActionsFooter :buttons="footerButtons" @primary-click="submitUserInformation" />
+  <div class="body" id="top-of-form">
+    <MainNav />
+    <div class="lp-container w-container">
+      <h1 class="heading-1">Edit profile</h1>
+      <StyleWrapper styleIs="editing" class="cards" v-if="currentUser">
+        <ErrorMessage v-if="showError && hasError" text="Your form has errors. Please fix them to continue..." />
+        <ErrorMessage v-if="showError && hasError && phone.err" :text="phone.err" />
+        <ErrorMessage v-if="showError && hasError && employment.err" :text="employment.err" />
+        <ErrorMessage v-if="showError" :text="location.err" />
+        <ErrorMessage v-if="showError" :text="children.err" />
+        <Question
+          title="Got any photos you'd like to share?"
+          subtitle="Adding photos to your profile helps give other members a sense of your family."
+        >
+          <MultipleImageUpload v-model="currentUser.images" />
+        </Question>
+        <Employment v-model="employment"/>
+        <ProfileBlurb v-model="profileBlurb" />
+        <Activities v-model="currentUser.activities" />
+        <Availability id="availability" v-model="availability" :required="false"/>
+        <Children v-model="children" :required="false" />
+        <Phone v-model="phone" :currentPhone="currentUser.phone" :required="false" />
+        <Location
+          :currentAddress="currentUser.fullAddress"
+          :currentApartment="currentUser.apartmentNumber"
+          v-model="location"
+        />
+        <LanguagesSpoken v-model="currentUser.languages" :showChoicesImmediately="false"/>
+        <MaxDistanceSetting v-model="maxDistance" />
+        <YesOrNo
+          question="Email settings"
+          description="Would you like to receive custom weekly emails with suggestions for nearby playdates"
+          v-model="weeklyEmails"
+        />
+        <Question title="Delete your account"
+                  subtitle="Would you like to leave Lilypad? Deleting your account will remove your profile and cancel any playdates you've booked. This cannot be undone.">
+          <button
+            class="delete-account-button"
+            @click="$router.push({name: 'DeleteAccountConfirmation'})">
+            Delete Account
+          </button>
+        </Question>
+      </StyleWrapper>
+      <PageActionsFooter :buttons="footerButtons" @primary-click="submitUserInformation" />
+    </div>
   </div>
-</div>
 
 </template>
 

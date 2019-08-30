@@ -1,51 +1,51 @@
 <template>
-<div class="body" id="top-of-form">
-  <DeleteEventConfirmationModal
+  <div class="body" id="top-of-form">
+    <DeleteEventConfirmationModal
       v-if="showDeleteConfirmationModal"
       v-on:closeModal="showDeleteConfirmationModal = false"
       :eventId="eventId"/>
-  <MainNav />
-  <div class="lp-container w-container">
-  <h1 class="heading-1">Editing event #{{ eventId }} </h1>
-  <StyleWrapper styleIs="editing" class="cards" v-if="event">
-      <ErrorMessage v-if="showError && error" text="Your entries have errors. Please fix them to continue..." />
-      <EventName v-model="event.name" />
-      <EventActivity v-model="event.activity" />
-      <MaxChildren v-model="event.maximumChildren" />
-      <ErrorMessage v-if="event.ageRange.err" :text="event.ageRange.err" />
-      <AgeRange v-model="event.ageRange" />
-      <HouseRules v-model="event.houseRules"/>
-      <YesOrNo
-      question="Do you have pets?"
-      description="This is often very important for parents (and children) to know."
-      v-model="event.hasPet"
-      />
-      <PetsDescription v-model="event.petDescription" />
-      <!-- <edit date & time> -->
-      <ErrorMessage v-if="!datesValidate" text="Please enter a valid start and end time for your event." />
-      <Question title="When is your event?">
-        From...
-        <br>
-        <br>
-        <DateTimePicker v-model="event.startsAt" showDate="true" />
-        <br>
-        To...
-        <br><br>
-        <DateTimePicker v-model="event.endsAt" showDate="true" />
-      </Question>
-      <Question title="Delete this event" subtitle="Are you unable to host this event? This cannot be undone. Your guests will receive a text message informing them that the event has been cancelled.">
-        <button
+    <MainNav />
+    <div class="lp-container w-container">
+      <h1 class="heading-1">Editing event #{{ eventId }} </h1>
+      <StyleWrapper styleIs="editing" class="cards" v-if="event">
+        <ErrorMessage v-if="showError && error" text="Your entries have errors. Please fix them to continue..." />
+        <EventName v-model="event.name" />
+        <EventActivity v-model="event.activity" />
+        <MaxChildren v-model="event.maximumChildren" />
+        <ErrorMessage v-if="event.ageRange.err" :text="event.ageRange.err" />
+        <AgeRange v-model="event.ageRange" />
+        <HouseRules v-model="event.houseRules"/>
+        <YesOrNo
+          question="Do you have pets?"
+          description="This is often very important for parents (and children) to know."
+          v-model="event.hasPet"
+        />
+        <PetsDescription v-model="event.petDescription" />
+        <!-- <edit date & time> -->
+        <ErrorMessage v-if="!datesValidate" text="Please enter a valid start and end time for your event." />
+        <Question title="When is your event?">
+          From...
+          <br>
+          <br>
+          <DateTimePicker v-model="event.startsAt" showDate="true" />
+          <br>
+          To...
+          <br><br>
+          <DateTimePicker v-model="event.endsAt" showDate="true" />
+        </Question>
+        <Question title="Delete this event" subtitle="Are you unable to host this event? This cannot be undone. Your guests will receive a text message informing them that the event has been cancelled.">
+          <button
             class="delete-event-button"
             v-on:click="showDeleteConfirmationModal=true">
-          Delete
-        </button>
-      </Question>
+            Delete
+          </button>
+        </Question>
 
       <!-- </edit date & time> -->
-  </StyleWrapper>
-  <PageActionsFooter :buttons="footerButtons" @primary-click="saveEvent" />
+      </StyleWrapper>
+      <PageActionsFooter :buttons="footerButtons" @primary-click="saveEvent" />
+    </div>
   </div>
-</div>
 
 </template>
 

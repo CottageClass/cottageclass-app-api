@@ -1,17 +1,17 @@
 <template>
-<label class="lpv2-choose-time-button w-inline-block" @click="toggleShowDatetimeInputOnDesktop">
-  <div class="div-block-8"><img src="@/assets/time-outline-blue.svg" width="15" height="15" alt="">
-    <div
-    class="lpv2-choose-time-button-text"
-    v-if="hideDateTimeInputOnMobile">{{ timePlaceholder }}</div>
-    <input type="datetime-local"
-    v-model="dateTimeSelected"
-    class="timePlacholderText"
-    :class="[{ hideDateTimeInput: hideDateTimeInputOnMobile }]"/>
-  </div>
-  <img v-if="hideDateTimeInputOnMobile"
-  src="@/assets/Dropdown-Arrows.svg">
-</label>
+  <label class="lpv2-choose-time-button w-inline-block" @click="toggleShowDatetimeInputOnDesktop">
+    <div class="div-block-8"><img src="@/assets/time-outline-blue.svg" width="15" height="15" alt="">
+      <div
+        class="lpv2-choose-time-button-text"
+        v-if="hideDateTimeInputOnMobile">{{ timePlaceholder }}</div>
+      <input type="datetime-local"
+             v-model="dateTimeSelected"
+             class="timePlacholderText"
+             :class="[{ hideDateTimeInput: hideDateTimeInputOnMobile }]"/>
+    </div>
+    <img v-if="hideDateTimeInputOnMobile"
+         src="@/assets/Dropdown-Arrows.svg">
+  </label>
 </template>
 
 <script>

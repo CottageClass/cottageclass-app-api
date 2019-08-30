@@ -1,12 +1,12 @@
 <template>
-<div class="body">
-  <div class="content-wrapper">
-    <StyleWrapper styleIs="onboarding">
-      <Question
-      class='rsvp-cancel-reason'
-      title="Delete your account"
-      subtitle="We really appreciate your feedback! Why are you leaving?"
-      >
+  <div class="body">
+    <div class="content-wrapper">
+      <StyleWrapper styleIs="onboarding">
+        <Question
+          class='rsvp-cancel-reason'
+          title="Delete your account"
+          subtitle="We really appreciate your feedback! Why are you leaving?"
+        >
           <div class="form-describe-need w-form">
             <form v-on:submit.prevent id="email-form-2">
               <p class="describe-label">{{ charsLeft }} characters left...</p>
@@ -17,10 +17,10 @@
               <button class="button delete-button" @click="confirm">Delete account</button>
             </div>
           </div>
-      </Question>
-    </StyleWrapper>
+        </Question>
+      </StyleWrapper>
+    </div>
   </div>
-</div>
 </template>
 
 <script>

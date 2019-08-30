@@ -1,21 +1,21 @@
 <template>
-<div class="body">
-  <div class="title-bar-container">
-    <a title-bar-action-l w-inline-block>
-    <router-link
-    :to="{ name: 'Search' }">
-      <img src="../assets/Close-X.svg">
-    </router-link></a>
-    <h5 class="heading-3">How it works</h5>
+  <div class="body">
+    <div class="title-bar-container">
+      <a title-bar-action-l w-inline-block>
+        <router-link
+          :to="{ name: 'Search' }">
+          <img src="../assets/Close-X.svg">
+        </router-link></a>
+      <h5 class="heading-3">How it works</h5>
+    </div>
+    <div class="top-content-container">
+      <div class="page-lead-text">
+
+        When children arrive check them in, and when they leave check them out. It's that simple! (This lets us keep a tally of hours of care offered and received, to make sure everyone is doing their part. We will calculate the hours from check-in to check-out. To receive extra credit for siblings, enter the number of children when checking in.
+
+      </div><a href="javascript:history.go(-1)" class="button-small-outline w-button">OK, Got it</a></div>
+
   </div>
-  <div class="top-content-container">
-    <div class="page-lead-text">
-
-When children arrive check them in, and when they leave check them out. It's that simple! (This lets us keep a tally of hours of care offered and received, to make sure everyone is doing their part. We will calculate the hours from check-in to check-out. To receive extra credit for siblings, enter the number of children when checking in.
-
-</div><a href="javascript:history.go(-1)" class="button-small-outline w-button">OK, Got it</a></div>
-
-</div>
 </template>
 
 <script>

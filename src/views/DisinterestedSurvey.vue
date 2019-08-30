@@ -16,7 +16,7 @@
           <FormWithTextArea
             placeholder="Other reasons? Any notes to add?"
             v-model="otherText" />
-       </Question>
+        </Question>
       </StyleWrapper>
     </div>
   </div>
@@ -53,7 +53,7 @@ export default {
         [ 'moreInfo', 'Need more info about the other parent.' ],
         [ 'tooFar', 'It\'s too far away.' ],
         [ 'incompatibleAges', 'Ages didn\'t seem compatible.' ],
-        [ 'badType', 'Didn\'t seem my type' ]
+        [ 'badType', 'Didn\'t seem my type.' ]
       ]
     },
     ...mapGetters(['currentUser', 'distanceFromCurrentUser'])

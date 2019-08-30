@@ -28,6 +28,14 @@ export default {
     }
   },
   methods: {
+    initiateDeclineRsvp () {
+      if (!this.redirectToSignupIfNotAuthenticated({
+        name: 'DeclineRSVP',
+        params: { eventId: this.event.id }
+      })) {
+        this.$router.push({ name: 'DeclineRSVP', params: { eventId: this.event.id } })
+      }
+    },
     submitToSheetsu: function () {
       const data = {
         'Event ID': this.eventId,

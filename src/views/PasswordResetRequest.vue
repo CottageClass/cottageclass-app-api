@@ -1,34 +1,34 @@
 <template>
   <span>
     <MainNav />
-      <div class="body body-2">
-        <div class="content-container w-container">
-          <div class="primary-container">
-            <StyleWrapper styleIs="onboarding">
-              <ErrorMessage
-                v-if="showError && errors.first('email')"
-                :messages="[errors.first('email')]"
-                />
-            </StyleWrapper>
-            <h1 class="auth-heading">Reset Password</h1>
-            <div>Please enter your email and we will send you a link to reset your password</div>
-            <div class="auth-wrapper">
-              <div class="form-block w-form">
-                <form v-on:submit.prevent="submitRequest">
-                  <input
-                    v-validate.immediate="'email'"
-                    name="email"
-                    v-model="email"
-                    placeholder="Email"
-                    class="input-field w-input"
-                  >
-                  <button type="submit" class="submit-button w-button">Reset Password</button>
-                </form>
-              </div>
+    <div class="body body-2">
+      <div class="content-container w-container">
+        <div class="primary-container">
+          <StyleWrapper styleIs="onboarding">
+            <ErrorMessage
+              v-if="showError && errors.first('email')"
+              :messages="[errors.first('email')]"
+            />
+          </StyleWrapper>
+          <h1 class="auth-heading">Reset Password</h1>
+          <div>Please enter your email and we will send you a link to reset your password</div>
+          <div class="auth-wrapper">
+            <div class="form-block w-form">
+              <form v-on:submit.prevent="submitRequest">
+                <input
+                  v-validate.immediate="'email'"
+                  name="email"
+                  v-model="email"
+                  placeholder="Email"
+                  class="input-field w-input"
+                >
+                <button type="submit" class="submit-button w-button">Reset Password</button>
+              </form>
             </div>
           </div>
         </div>
       </div>
+    </div>
     <Footer />
   </span>
 </template>

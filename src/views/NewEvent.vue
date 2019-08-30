@@ -2,16 +2,16 @@
   <div class="onb-body">
     <div class="content-wrapper">
       <StyleWrapper styleIs="onboarding">
-      <CreateEvent v-if="section==='event'"
-                   :stepName="stepName"
-                   @finished="completeCreation"
-                   context="new-event"
-                   />
-      <HouseInformation v-if="section==='homeInfo'"
-                        :stepName="stepName"
-                        @finished="proceed"
-                        context="new-event"
-                        />
+        <CreateEvent v-if="section==='event'"
+                     :stepName="stepName"
+                     @finished="completeCreation"
+                     context="new-event"
+        />
+        <HouseInformation v-if="section==='homeInfo'"
+                          :stepName="stepName"
+                          @finished="proceed"
+                          context="new-event"
+        />
       </StyleWrapper>
     </div>
   </div>

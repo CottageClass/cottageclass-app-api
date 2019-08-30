@@ -8,9 +8,14 @@
         :images="lightboxImages"
         :showLightBox="false"
       />
-      </LightBoxStyleWrapper>
+    </LightBoxStyleWrapper>
     <LoadingSpinner v-if="!user" />
     <div class="profile__container w-container" v-else>
+      <LikeUserCard v-if="showLikeUserCard"
+                    :userFirstName="user.firstName"
+                    @like-user-click="likeUserHandler"
+                    @dislike-user-click="dislikeUserHandler"
+      />
       <div class="profile-top-card__container">
         <div class="profile__user-basics-container">
           <div class="profile-top-card__photo-wrapper">
@@ -26,8 +31,8 @@
             <div class="profile-top-card__name-action-group">
               <h1 class="profile-top-card__user-name">{{userName}}</h1>
               <a v-if="showInterestedButton" class="profile-top-card__action-button w-inline-block"
-                  :class="isStarred?'active':''"
-                  @click.stop="interestedClickAndUpdate"></a>
+                 :class="isStarred?'active':''"
+                 @click.stop="interestedClickAndUpdate"></a>
               <div v-if="distance" class="profile-top-card__distance">{{ distance }}</div>
             </div>
             <div class="profile-top-card__occupation">{{ occupation }}</div>
@@ -40,29 +45,29 @@
             </div>
             <ul class="protile-top-card__about-llist">
               <li v-if="languageText" class="about-the-host__list-item">
-                <div class="bullet-bar"></div>
+                <div class="bullet-bar"><img src="@/assets/check-white.svg" alt="" class="image-2"></div>
                 <div class="about-the-host__bullet-text">{{ languageText }}</div>
               </li>
               <li class="about-the-host__list-item">
-                <div class="bullet-bar"></div>
+                <div class="bullet-bar"><img src="@/assets/check-white.svg" alt="" class="image-2"></div>
                 <div class="about-the-host__bullet-text">Member since {{ joinedDateFormatted }}</div>
               </li>
               <li v-if="verified" class="about-the-host__list-item">
-                <div class="bullet-bar"></div>
+                <div class="bullet-bar"><img src="@/assets/check-white.svg" alt="" class="image-2"></div>
                 <div class="about-the-host__bullet-text">Verified social media account</div>
               </li>
             </ul>
           </div>
         </div>
         <SearchListCardActions
-                        class="profile-top-card__footer__button-list"
-                        :user="user"
-                        @user-updated="updateUser"
-                        @interested-click="interestedClickWithPrompts"
-                        :showInterestedButton="showInterestedButton"
-                        :showMeetButton="showMeetButton"
-                        :showGoingButton="showGoingButton"
-                        :allowWaveUndo="false"/>
+          class="profile-top-card__footer__button-list"
+          :user="user"
+          @user-updated="updateUser"
+          @interested-click="interestedClickWithPrompts"
+          :showInterestedButton="showInterestedButton"
+          :showMeetButton="showMeetButton"
+          :showGoingButton="showGoingButton"
+          :allowWaveUndo="false"/>
 
       </div>
       <div class="profile-detail__content-columns w-row">
@@ -91,25 +96,25 @@
           </div>
           <div v-if="images && images.length>0" class="household-photos__card">
             <div class="household-photos__title-text">Household photos</div>
-              <Images
-                 :images="images"
-                 @image-click="handleImageClick"
-               />
+            <Images
+              :images="images"
+              @image-click="handleImageClick"
+            />
           </div>
           <div v-if="false" class="attended__card">
             <div class="attended__title-text">Parents who hosted {{ userFirstName }} (12)</div>
             <ul class="list">
               <li class="attendee__list-item"><a href="#" class="attendee__link-wrapper w-inline-block"><img src="@/assets/rima.png" alt="" class="attendee__photo photo-fit" />
-                  <div class="attendee__user-name truncate">Barbara</div>
-                </a></li>
+                <div class="attendee__user-name truncate">Barbara</div>
+              </a></li>
             </ul>
           </div>
           <div v-if="false" class="hosted__card">
             <div class="attended__title-text">Parents hosted by {{ userFirstName }} (5)</div>
             <ul class="list">
               <li class="attendee__list-item"><a href="#" class="attendee__link-wrapper w-inline-block"><img src="@/assets/rima.png" alt="" class="attendee__photo photo-fit" />
-                  <div class="attendee__user-name truncate">Charolotte</div>
-                </a></li>
+                <div class="attendee__user-name truncate">Charolotte</div>
+              </a></li>
             </ul>
           </div>
           <div class="event-detail__map map" ref="map"></div>
@@ -142,15 +147,14 @@
         </div>
       </div>
     </div>
-    <LikeUserFooter v-if="showLikeUserFooter"
-                    :user="user"
-                    @click-yes="likeUserHandler"
-                    @click-no="dislikeUserHandler"/>
+
   </div>
 </template>
 
 <script>
-import LikeUserFooter from '@/components/base/LikeUserFooter'
+import LightBox from 'vue-image-lightbox'
+
+import LikeUserCard from '@/components/base/LikeUserCard'
 import AvatarImage from '@/components/base/AvatarImage'
 import SearchListCardActions from '@/components/search/SearchListCardActions'
 import MainNav from '@/components/MainNav'
@@ -158,7 +162,6 @@ import Images from '@/components/Images'
 import LoadingSpinner from '@/components/LoadingSpinner'
 import OtherEvent from '@/components/OtherEvent'
 import LightBoxStyleWrapper from '@/components/LightBoxStyleWrapper'
-import LightBox from 'vue-image-lightbox'
 
 import { item, maps, messaging } from '@/mixins'
 import { fetchUser, fetchUpcomingEvents } from '@/utils/api'
@@ -166,7 +169,7 @@ import contactIcon from '@/assets/contact-black-outline.svg'
 
 export default {
   name: 'UserPage',
-  components: { MainNav, Images, LoadingSpinner, AvatarImage, OtherEvent, SearchListCardActions, LikeUserFooter, LightBox, LightBoxStyleWrapper },
+  components: { MainNav, Images, LoadingSpinner, AvatarImage, OtherEvent, SearchListCardActions, LikeUserCard, LightBox, LightBoxStyleWrapper },
   mixins: [ item, maps, messaging ],
   data () {
     return {
@@ -180,7 +183,6 @@ export default {
   },
   computed: {
     lightboxImages () {
-      this.debug(this)
       return this.images.map(i => {
         return {
           thumb: i,
@@ -191,8 +193,14 @@ export default {
     targetUser () {
       return this.user
     },
-    showLikeUserFooter () {
-      return this.user && this.currentUser && (this.user.id !== this.currentUser.id) && !this.isStarred && !this.isDarkStarred
+    showLikeUserCard () {
+      if (!this.user) { return false }
+      if (this.currentUser) {
+        return (this.user.id !== this.currentUser.id) &&
+               !this.isStarred &&
+               !this.isDarkStarred
+      }
+      return true
     },
     contactIcon () { return contactIcon }
   },
@@ -207,7 +215,12 @@ export default {
     async dislikeUserHandler () {
       this.$ga.event('Star', 'dark-starred', 'UserPage footer')
       await this.disinterestedClick()
-      this.$router.push({ name: 'DisinterestedSurvey', params: { userId: this.$route.params.id } })
+      if (!this.redirectToSignupIfNotAuthenticated({
+        name: 'DisinterestedSurvey',
+        params: { userId: this.user.id }
+      })) {
+        this.$router.push({ name: 'DisinterestedSurvey', params: { userId: this.$route.params.id } })
+      }
     },
     async interestedClickAndUpdate () {
       this.user = await this.interestedClick()
@@ -236,9 +249,16 @@ export default {
       this.user = user
     }
   },
-  created: function () {
-    this.fetchUser()
-    this.settlePendingWaves()
+  async created () {
+    await this.fetchUser()
+    if (this.$route.query && this.$route.query.interested) {
+      if (this.$route.query.interested === 'yes') {
+        this.likeUserHandler()
+      } else if (this.$route.query.interested === 'no') {
+        this.dislikeUserHandler()
+      }
+    }
+    await this.settlePendingWaves()
   }
 }
 </script>
@@ -247,6 +267,12 @@ export default {
 a {
   color: #000;
   text-decoration: none;
+}
+
+.image-2 {
+  width: 12px;
+  height: 12px;
+  line-height: 1px;
 }
 
 .event-detail__map {
@@ -327,24 +353,44 @@ a {
 }
 
 .bullet-bar {
-  height: auto;
-  min-width: 6px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  height: 16px;
+  min-width: 16px;
+  margin-top: 2px;
   clear: left;
-  border-radius: 4px;
-  background-color: #0dba51;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-radius: 50%;
+  background-color: #8fd8e9;
 }
 
 .protile-top-card__about-llist {
-  margin-top: 28px;
-  margin-bottom: 8px;
-  padding-left: 0;
+  margin-top: 25px;
+  margin-bottom: -8px;
+  padding-left: 0px;
   list-style-type: none;
 }
 
 .about-the-host__list-item {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
-  min-height: 30px;
-  margin-bottom: 12px;
+  min-height: 26px;
+  margin-bottom: 8px;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .about-the-host__bullet-text {
@@ -1022,6 +1068,9 @@ a {
 
   .protile-top-card__about-llist {
     max-width: 365px;
+    -webkit-box-align: start;
+    -webkit-align-items: flex-start;
+    -ms-flex-align: start;
     align-items: flex-start;
   }
 
@@ -1217,6 +1266,10 @@ a {
 
   .protile-top-card__about-llist {
     max-width: 288px;
+  }
+
+  .about-the-host__list-item {
+    line-height: 20px;
   }
 
   .list {

@@ -1,10 +1,10 @@
 <template>
-    <div class="dropdown-group">
-      <div v-if="label" class="text-field-label">{{ label }}</div>
-      <select v-model="selected" class="select-field w-select">
-        <option v-for="choice in choices" :value="choice">{{ choice }}</option>
-      </select>
-    </div>
+  <div class="dropdown-group">
+    <div v-if="label" class="text-field-label">{{ label }}</div>
+    <select v-model="selected" class="select-field w-select">
+      <option v-for="choice in choices" :value="choice">{{ choice }}</option>
+    </select>
+  </div>
 </template>
 
 <script>

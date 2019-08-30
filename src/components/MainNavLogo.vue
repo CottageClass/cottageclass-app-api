@@ -1,12 +1,12 @@
 <template>
-<div class="navigation__logo-wrapper">
-  <a @click="goToLink"
-     class="navigation__logo-block w-inline-block"
-     :class="isAuthenticated? 'logged-in' : 'logged-out'"
-     >
-    <img src="@/assets/lilypad__primary-transparent--cropped.svg" alt="" class="navigation__logo" />
-  </a>
-</div>
+  <div class="navigation__logo-wrapper">
+    <a @click="goToLink"
+       class="navigation__logo-block w-inline-block"
+       :class="isAuthenticated? 'logged-in' : 'logged-out'"
+    >
+      <img src="@/assets/lilypad__primary-transparent--cropped.svg" alt="" class="navigation__logo" />
+    </a>
+  </div>
 </template>
 
 <script>

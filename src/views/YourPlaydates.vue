@@ -1,54 +1,54 @@
 <template>
-<div class="body__your-playdates">
-  <MainNav />
+  <div class="body__your-playdates">
+    <MainNav />
 
-  <div class="your-playdates__container w-container">
-    <ListSection title="Hosting"
-                 :emptyOptions="hostingEmptyOptions"
-                 :items="hostingItems"
-                 @empty-card-button-click="$router.push({ name: 'NewEvent' })"
-                 @empty-card-additional-link-click="$router.push({ name: 'Search' })"
-                 @event-updated="fetchMyEvents"
-                 @event-deleted="fetchMyEvents"
-                 />
-    <ListSection title="Going"
-                 :emptyOptions="goingEmptyOptions"
-                 :items="goingItems"
-                 @user-updated="fetchGoing"
-                 @empty-card-button-click="$router.push({ name: 'Search' })"
-                 />
-    <ListSection title="Your offers"
-                 buttonText="Offer Playdate"
-                 :emptyOptions="yourOffersEmptyOptions"
-                 :items="yourOffersItems"
-                 @header-button-click="$router.push({ name: 'NewEvent' })"
-                 @empty-card-button-click="$router.push({ name: 'NewEvent' })"
-                 @empty-card-additional-link-click="$router.push({ name: 'Search' })"
-                 @event-updated="fetchMyEvents"
-                 @event-deleted="fetchMyEvents"
-                 />
-    <ListSection title="Availability"
-                 buttonText="Edit"
-                 @header-button-click="goToAvailability"
-                 >
-      <li v-if="availableTimes" class="card" >
-        <div  class="availability__card">
-          <div class="card__description-and-icon-container w-clearfix">
-            <div class="availability__tag-container">
-              <div v-for="time of availableTimes" class="tag">
-                <div class="tag-text2">{{ time }}</div>
+    <div class="your-playdates__container w-container">
+      <ListSection title="Hosting"
+                   :emptyOptions="hostingEmptyOptions"
+                   :items="hostingItems"
+                   @empty-card-button-click="$router.push({ name: 'NewEvent' })"
+                   @empty-card-additional-link-click="$router.push({ name: 'Search' })"
+                   @event-updated="fetchMyEvents"
+                   @event-deleted="fetchMyEvents"
+      />
+      <ListSection title="Going"
+                   :emptyOptions="goingEmptyOptions"
+                   :items="goingItems"
+                   @user-updated="fetchGoing"
+                   @empty-card-button-click="$router.push({ name: 'Search' })"
+      />
+      <ListSection title="Your offers"
+                   buttonText="Offer Playdate"
+                   :emptyOptions="yourOffersEmptyOptions"
+                   :items="yourOffersItems"
+                   @header-button-click="$router.push({ name: 'NewEvent' })"
+                   @empty-card-button-click="$router.push({ name: 'NewEvent' })"
+                   @empty-card-additional-link-click="$router.push({ name: 'Search' })"
+                   @event-updated="fetchMyEvents"
+                   @event-deleted="fetchMyEvents"
+      />
+      <ListSection title="Availability"
+                   buttonText="Edit"
+                   @header-button-click="goToAvailability"
+      >
+        <li v-if="availableTimes" class="card" >
+          <div  class="availability__card">
+            <div class="card__description-and-icon-container w-clearfix">
+              <div class="availability__tag-container">
+                <div v-for="time of availableTimes" class="tag">
+                  <div class="tag-text2">{{ time }}</div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </li>
-      <ListSectionEmptyCard v-else
-                            @button-click="goToAvailability"
-                            :options="availabilityEmptyOptions"/>
-    </ListSection>
+        </li>
+        <ListSectionEmptyCard v-else
+                              @button-click="goToAvailability"
+                              :options="availabilityEmptyOptions"/>
+      </ListSection>
+    </div>
+    <Footer />
   </div>
-  <Footer />
-</div>
 </template>
 
 <script>

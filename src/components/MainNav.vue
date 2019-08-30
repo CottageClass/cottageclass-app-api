@@ -7,7 +7,7 @@
                :buttonNames="nameChangeModalOptions.buttonNames"
                @primaryClick="nameChangeModalOptions.closeCallback"
                @closeButtonClick="nameChangeModalOptions.closeCallback"
-               />
+    />
 
     <div class="navigation__container w-container">
       <MainNavLogo />
@@ -17,7 +17,7 @@
           <router-link :to="{name: 'Search'}"
                        class="navigation__button w-inline-block"
                        :class="{'selected-nav-item': isSearchPage}"
-                       >
+          >
             <img src="@/assets/house.svg" alt="" class="navigation__icon" />
             <div class="navigation__button-label">Nearby Parents</div>
           </router-link>
@@ -26,7 +26,7 @@
           <router-link :to="{name: 'YourPlaydates'}"
                        class="navigation__button w-inline-block"
                        :class="{'selected-nav-item': isYourPlaydatesPage}"
-                       >
+          >
             <img src="@/assets/calendar.svg" alt="" class="navigation__icon" />
             <div class="navigation__button-label">Your Playdates</div>
             <div v-if="false" class="global__badge TODO">
@@ -38,19 +38,19 @@
       <div v-if="isAuthenticated" class="navigation__profile-menu__container">
         <a class="navigation__profile-menu-button w-inline-block"
            @click="toggleMenu"
-           >
+        >
           <AvatarImage
-          v-if="currentUser"
-          :person="currentUser"
-          className="image"
-          imageSize="40"
+            v-if="currentUser"
+            :person="currentUser"
+            className="image"
+            imageSize="40"
           />
           <img src="@/assets/triangle-down_1triangle-down.png" alt="" class="navigation__down-triangle" />
         </a>
       </div>
       <ExpandingMenu v-if="showMenu"
                      v-on-clickaway="clickedAway"
-                    />
+      />
     </div>
   </div>
 </template>

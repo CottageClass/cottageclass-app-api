@@ -1,6 +1,14 @@
 <template>
   <div>
     <MainNav />
+    <LightBoxStyleWrapper>
+      <LightBox
+        v-if="images"
+        ref="lightbox"
+        :images="lightboxImages"
+        :showLightBox="false"
+      />
+    </LightBoxStyleWrapper>
     <LoadingSpinner v-if="!childcareRequest || !user" />
     <div v-else class="event-detail__container w-container">
       <div class="user-action-card__container">
@@ -15,19 +23,19 @@
           <div class="user-action-card__footer__user-summary">
             <router-link :to="{name:'UserPage', params:{id: user.id}}"
                          class="avatar-container">
-            <AvatarImage className="user-action-card__photo"
-                         :person="{facebookUid: user.facebookUid, avatar: user.avatar}"
-                         imageSize="100"/>
-            <div v-if="verified" class="badge-verified">
-              <div class="unicode-character">✓</div>
-              <div class="badge-text">Verified</div>
-            </div>
+              <AvatarImage className="user-action-card__photo"
+                           :person="{facebookUid: user.facebookUid, avatar: user.avatar}"
+                           imageSize="100"/>
+              <div v-if="verified" class="badge-verified">
+                <div class="unicode-character">✓</div>
+                <div class="badge-text">Verified</div>
+              </div>
             </router-link>
             <div class="user-action-card__user-info--container">
               <div class="user-action-card__user-info_list">
-            <router-link :to="{name:'UserPage', params:{id: user.id}}"
-                         class="user-action-card__user-info__name">
-                {{ userName }}</router-link>
+                <router-link :to="{name:'UserPage', params:{id: user.id}}"
+                             class="user-action-card__user-info__name">
+                  {{ userName }}</router-link>
                 <div class="user-action-card__user-info__occupation truncate">{{occupation}}</div>
                 <div class="user-action-card__user-info__kids truncate">{{kidsAges}}</div>
               </div>
@@ -35,16 +43,16 @@
           </div>
           <div class="user-action-card__footer__actions">
             <SearchListCardActions
-                            class="column-list"
-                            :user="user"
-                            :timePast="timePast"
-                            @contact-click="contactClick"
-                            :showShareButton="false"
-                            :showContactButton="showContactButton"
-                            :showInterestedButton="false"
-                            :showGoingButton="false"
-                            :showMeetButton="false"
-                            :allowWaveUndo="false"/>
+              class="column-list"
+              :user="user"
+              :timePast="timePast"
+              @contact-click="contactClick"
+              :showShareButton="false"
+              :showContactButton="showContactButton"
+              :showInterestedButton="false"
+              :showGoingButton="false"
+              :showMeetButton="false"
+              :allowWaveUndo="false"/>
           </div>
         </div>
       </div>
@@ -52,7 +60,10 @@
         <div class="event-detail__column-left w-col w-col-8 w-col-stack">
           <div v-if="images && images.length>0" class="household-photos__card">
             <div class="household-photos__title-text">Household photos</div>
-              <Images :images="images" />
+            <Images
+              :images="images"
+              @image-click="handleImageClick"
+            />
           </div>
           <div class="event-detail__map map" ref="map"/>
           <div class="about-the-host__card">
@@ -60,19 +71,19 @@
             <div class="about-the-host__info"></div>
             <ul class="protile-top-card__about-llist">
               <li v-if="verified" class="about-the-host__list-item" >
-                <div class="bullet-bar"></div>
+                <div class="bullet-bar"><img src="@/assets/check-white.svg" alt="" class="image-2"></div>
                 <div class="about-the-host__bullet-text">Verified</div>
               </li>
               <li v-if="occupation" class="about-the-host__list-item">
-                <div class="bullet-bar"></div>
+                <div class="bullet-bar"><img src="@/assets/check-white.svg" alt="" class="image-2"></div>
                 <div class="about-the-host__bullet-text">{{occupation}}</div>
               </li>
               <li v-if="languageText" class="about-the-host__list-item">
-                <div class="bullet-bar"></div>
+                <div class="bullet-bar"><img src="@/assets/check-white.svg" alt="" class="image-2"></div>
                 <div class="about-the-host__bullet-text">{{languageText}}</div>
               </li>
               <li class="about-the-host__list-item">
-                <div class="bullet-bar"></div>
+                <div class="bullet-bar"><img src="@/assets/check-white.svg" alt="" class="image-2"></div>
                 <div class="about-the-host__bullet-text">{{joinedDateFormatted}}</div>
               </li>
             </ul>
@@ -114,12 +125,15 @@
 </template>
 
 <script>
+import LightBox from 'vue-image-lightbox'
+
 import SearchListCardActions from '@/components/search/SearchListCardActions'
 import AvatarImage from '@/components/base/AvatarImage'
 import MainNav from '@/components/MainNav'
 import Images from '@/components/Images'
 import LoadingSpinner from '@/components/LoadingSpinner'
 import OtherEvent from '@/components/OtherEvent'
+import LightBoxStyleWrapper from '@/components/LightBoxStyleWrapper'
 
 import houseRulesImage from '@/assets/house-rules.svg'
 import petsImage from '@/assets/pets.svg'
@@ -129,7 +143,7 @@ import { item, maps } from '@/mixins'
 
 export default {
   name: 'ChildcareRequestPage',
-  components: { MainNav, Images, LoadingSpinner, AvatarImage, SearchListCardActions, OtherEvent },
+  components: { MainNav, Images, LoadingSpinner, AvatarImage, SearchListCardActions, OtherEvent, LightBox, LightBoxStyleWrapper },
   mixins: [item, maps],
   data () {
     return {
@@ -143,10 +157,21 @@ export default {
     }
   },
   computed: {
+    lightboxImages () {
+      return this.images.map(i => {
+        return {
+          thumb: i,
+          src: i
+        }
+      })
+    },
     houseRulesImage: () => houseRulesImage,
     petsImage: () => petsImage
   },
   methods: {
+    handleImageClick (payload) {
+      this.$refs.lightbox.showImage(payload)
+    },
     fetchUser: async function () {
       this.user = await fetchUser(this.childcareRequest.userId)
       this.events = (await fetchUpcomingEvents(this.user.id))
@@ -184,6 +209,12 @@ export default {
 a {
   color: #000;
   text-decoration: none;
+}
+
+.image-2 {
+  width: 12px;
+  height: 12px;
+  line-height: 1px;
 }
 
 .event-detail__map {
@@ -467,11 +498,24 @@ a {
 }
 
 .bullet-bar {
-  height: auto;
-  min-width: 6px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  height: 16px;
+  min-width: 16px;
+  margin-top: 2px;
   clear: left;
-  border-radius: 4px;
-  background-color: #0dba51;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-radius: 50%;
+  background-color: #8fd8e9;
 }
 
 .about-the-host__info {
@@ -483,16 +527,30 @@ a {
 }
 
 .protile-top-card__about-llist {
-  margin-top: 28px;
-  margin-bottom: 8px;
-  padding-left: 0;
+  margin-top: 0px;
+  margin-bottom: 11px;
+  padding-left: 0px;
+  list-style-type: none;
+}
+
+.event-detail__about-llst {
+  margin-top: 0px;
+  margin-bottom: 11px;
+  padding-left: 0px;
   list-style-type: none;
 }
 
 .about-the-host__list-item {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
-  min-height: 30px;
-  margin-bottom: 12px;
+  min-height: 26px;
+  margin-bottom: 8px;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .about-the-host__bullet-text {
@@ -800,6 +858,9 @@ a {
 
   .protile-top-card__about-llist {
     max-width: 365px;
+    -webkit-box-align: start;
+    -webkit-align-items: flex-start;
+    -ms-flex-align: start;
     align-items: flex-start;
   }
 
@@ -872,6 +933,10 @@ a {
 
   .protile-top-card__about-llist {
     max-width: 288px;
+  }
+
+  .about-the-host__list-item {
+    line-height: 20px;
   }
 
   .list {

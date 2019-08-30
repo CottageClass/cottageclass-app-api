@@ -1,30 +1,30 @@
 <template>
-<StyleWrapper styleIs="onboarding">
+  <StyleWrapper styleIs="onboarding">
 
-  <!-- wrapper for desktop screens -->
+    <!-- wrapper for desktop screens -->
 
     <div class="onb-body">
       <div class="body">
         <div class="content-wrapper">
-  <Nav
-  :button="nextButtonState"
-  @next="nextStep"
-  @prev="$router.go(-1)" />
-  <ErrorMessage v-if="err" :text="err" />
-  <LoadingSpinner v-if="!allInformationLoaded"/>
-  <Question
-      v-if="allInformationLoaded"
-      title="Which children are going?"
-      :subtitle="spotsRemainingPhrase"
-      >
-     <Checkboxes
-       v-model="childrenSelected"
-       :labels="labelsAndOrder"/>
- </Question>
-</div>
-</div>
-</div>
-</StyleWrapper>
+          <Nav
+            :button="nextButtonState"
+            @next="nextStep"
+            @prev="$router.go(-1)" />
+          <ErrorMessage v-if="err" :text="err" />
+          <LoadingSpinner v-if="!allInformationLoaded"/>
+          <Question
+            v-if="allInformationLoaded"
+            title="Which children are going?"
+            :subtitle="spotsRemainingPhrase"
+          >
+            <Checkboxes
+              v-model="childrenSelected"
+              :labels="labelsAndOrder"/>
+          </Question>
+        </div>
+      </div>
+    </div>
+  </StyleWrapper>
 </template>
 
 <script>

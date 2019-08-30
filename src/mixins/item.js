@@ -263,7 +263,12 @@ export default {
     },
     async interestedClickWithPrompts () {
       let res
-      if (this.user.starred) {
+      if (this.redirectToSignupIfNotAuthenticated({
+        name: 'SelectEventFromUser',
+        params: { userId: this.user.id },
+        query: { interested: 'yes' }
+      })) {
+      } else if (this.user.starred) {
         res = await unstarUser(this.user.id)
       } else {
         const events = await fetchUpcomingEvents(this.user.id)

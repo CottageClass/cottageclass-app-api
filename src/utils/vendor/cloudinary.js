@@ -6,6 +6,9 @@ const cloudinaryAxios = axios.create()
 const logger = Logger('vendor:cloudinary')
 
 export function avatarUrl (rawUrl, size) {
+  if (rawUrl.includes('g_custom')) {
+    return rawUrl.replace('/upload/', `/upload/c_thumb,g_custom,h_${size},w_${size}/`)
+  }
   return rawUrl.replace('/upload/', `/upload/c_thumb,g_face,z_0.8,h_${size},w_${size}/`)
 }
 
@@ -23,6 +26,18 @@ export function imageUrl (rawUrl, options) {
     transformations += `w_${options.width}`
   }
   return rawUrl.replace('/upload/', `/upload/${transformations}/`)
+}
+
+export function createWidget (callback, options) {
+  const widgetOptions = {
+    croppingAspectRatio: 1,
+    cloudName: process.env.CLOUDINARY_CLOUD_NAME,
+    uploadPreset: 'user_images',
+    cropping: true,
+    showPoweredBy: false, // maybe this will work if we ever pay for cloudinary
+    ...options
+  }
+  return window.cloudinary.createUploadWidget(widgetOptions, callback)
 }
 
 export async function uploadImage (file) {

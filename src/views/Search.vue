@@ -13,7 +13,7 @@
         @event-updated="updateEvent"
         :isFullScreen="true"
         @back-click="detailView=false"
-        />
+      />
     </div>
     <div v-else class="page-wrapper">
       <MainNav />
@@ -22,38 +22,38 @@
         <div class="top-container w-container">
           <h1 class="event-page-title">Meet new parents. Plan playdates.</h1>
           <div class="selectors-group">
-          <div class="filter-container">
+            <div class="filter-container">
 
-            <FilterSelector title="Location"
-                            :showClear="false"
-                            :active="shortDescription" >
-              <template v-slot:buttonContents>
-                <LocationFilterButton :shortDescription="shortDescription" />
-              </template>
-              <template v-slot:selectorContents>
-                <LocationFilterSelector
-                  @locationUpdated="updateMapAreaFromFilter"
-                  :searchRadius="mapArea.maxDistance"
-                />
-              </template>
-            </FilterSelector>
+              <FilterSelector title="Location"
+                              :showClear="false"
+                              :active="shortDescription" >
+                <template v-slot:buttonContents>
+                  <LocationFilterButton :shortDescription="shortDescription" />
+                </template>
+                <template v-slot:selectorContents>
+                  <LocationFilterSelector
+                    @locationUpdated="updateMapAreaFromFilter"
+                    :searchRadius="mapArea.maxDistance"
+                  />
+                </template>
+              </FilterSelector>
 
-            <FilterSelector title="Child Age"
-                            :showClear="true"
-                            @clearFilterClicked="resetAgeRange"
-                            :active="ageRangeActive" >
-              <template v-slot:buttonContents>
-                <AgeRangeFilterButton :range="ageRange" />
-              </template>
-              <template v-slot:selectorContents>
-                <AgeRangeFilterSelector
-                  v-model="ageRange"
-                />
-              </template>
-            </FilterSelector>
+              <FilterSelector title="Child Age"
+                              :showClear="true"
+                              @clearFilterClicked="resetAgeRange"
+                              :active="ageRangeActive" >
+                <template v-slot:buttonContents>
+                  <AgeRangeFilterButton :range="ageRange" />
+                </template>
+                <template v-slot:selectorContents>
+                  <AgeRangeFilterSelector
+                    v-model="ageRange"
+                  />
+                </template>
+              </FilterSelector>
+            </div>
           </div>
-        </div>
-        <div class="page-subtitle"><strong>These parents near you want to share playdates.</strong> Offer a playdate, contact parents to invite them, or browse scheduled playdates below!</div>
+          <div class="page-subtitle"><strong>These parents near you want to share playdates.</strong> Offer a playdate, contact parents to invite them, or browse scheduled playdates below!</div>
         </div>
         <div class="main-container w-container">
           <div class="map-list-container">

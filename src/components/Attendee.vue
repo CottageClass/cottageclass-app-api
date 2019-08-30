@@ -1,15 +1,15 @@
 <template>
-<li class="attendee__list-item">
-  <router-link
-    :to="{name: 'UserPage', params: {id: user.userId}}"
-    class="attendee__link-wrapper w-inline-block">
-     <AvatarImage className="attendee__photo"
+  <li class="attendee__list-item">
+    <router-link
+      :to="{name: 'UserPage', params: {id: user.userId}}"
+      class="attendee__link-wrapper w-inline-block">
+      <AvatarImage className="attendee__photo"
                    :person="{facebookUid: user.userFacebookUid, avatar: user.userAvatar}"
                    imageSize="100"/>
-    <img :src="goingIcon" width="24" height="24" alt="" class="attendees__going-icon-medium" />
-    <div class="attendee__user-name truncate">{{ firstName }}</div>
-  </router-link>
-</li>
+      <img :src="goingIcon" width="24" height="24" alt="" class="attendees__going-icon-medium" />
+      <div class="attendee__user-name truncate">{{ firstName }}</div>
+    </router-link>
+  </li>
 </template>
 
 <script>

@@ -1,11 +1,11 @@
 <template>
-<li class="card-list-title-bar">
-  <div class="card-list__title-text">{{ title }}</div>
-  <ListSectionHeaderButton
-    v-if="buttonText"
-    :title="buttonText"
-    @click="handleClick"/>
-</li>
+  <li class="card-list-title-bar">
+    <div class="card-list__title-text">{{ title }}</div>
+    <ListSectionHeaderButton
+      v-if="buttonText"
+      :title="buttonText"
+      @click="handleClick"/>
+  </li>
 </template>
 
 <script>
