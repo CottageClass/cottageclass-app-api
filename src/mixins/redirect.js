@@ -24,7 +24,8 @@ export default {
     setRedirectRouteHere: function () {
       this.setRedirectRoute({
         name: this.$route.name,
-        params: this.$route.params
+        params: this.$route.params,
+        query: this.$route.query
       })
     },
     redirectOrProceed () {
