@@ -263,25 +263,22 @@ export default {
     },
     async interestedClickWithPrompts () {
       let res
-      if (this.redirectToSignupIfNotAuthenticated({
-        name: 'SelectEventFromUser',
-        params: { userId: this.user.id },
-        query: { interested: 'yes' }
-      })) {
-      } else if (this.user.starred) {
-        res = await unstarUser(this.user.id)
-      } else {
-        const events = await fetchUpcomingEvents(this.user.id)
-        if (events.length > 0) {
-          if (events.filter(e => !e.participated).length > 0) {
-            this.$router.push({ name: 'SelectEventFromUser', params: { userId: this.user.id } })
-          }
+      if (!this.redirectToSignupIfNotAuthenticated()) {
+        if (this.user.starred) {
+          res = await unstarUser(this.user.id)
         } else {
-          this.checkAuthenticationAndInitiateMessageSending()
+          const events = await fetchUpcomingEvents(this.user.id)
+          if (events.length > 0) {
+            if (events.filter(e => !e.participated).length > 0) {
+              this.$router.push({ name: 'SelectEventFromUser', params: { userId: this.user.id } })
+            }
+          } else {
+            this.checkAuthenticationAndInitiateMessageSending()
+          }
+          res = await starUser(this.user.id)
         }
-        res = await starUser(this.user.id)
+        this.updateUser(res)
       }
-      this.updateUser(res)
       return res
     },
     async interestedClick () {

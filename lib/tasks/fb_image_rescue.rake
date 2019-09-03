@@ -18,7 +18,7 @@ namespace :users do
           if (valid_uri? uri) && (valid_response? uri)
             new_images = new_images << image_url
           else
-            puts 'invalid image found: ' + image_url + '. For user : ' + user.id
+            puts 'invalid image found: ' + image_url + '. For user : ' + user.id.to_s
           end
         end
         user.update_columns images: new_images
