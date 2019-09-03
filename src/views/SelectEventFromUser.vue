@@ -3,7 +3,7 @@
     <div class="onb-body">
       <div class="body">
         <div class="content-wrapper">
-          <Nav button="skip" @next="$router.go(-1)" hidePrevious="true" />
+          <Nav button="skip" @next="$router.push({name:'Search'})" hidePrevious="true" />
           <div class="onb-content-container">
             <div class="onb-top-content-container">
               <h1 class="onb-heading-large">{{ titleText }}</h1>
