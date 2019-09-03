@@ -29,6 +29,7 @@ export default {
           this.initiateMessageSending()
         } else {
           this.sendMessage()
+          this.showAlertOnNextRoute('Your message has been sent', 'success')
         }
       }
     },
