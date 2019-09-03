@@ -1,16 +1,16 @@
 import { andJoin, distanceHaversine } from '@/utils/utils'
-import { starUser, unstarUser, darkStarUser, undarkStarUser } from '@/utils/api/stars'
 import { mapGetters } from 'vuex'
 import moment from 'moment'
 import languageList from 'language-list'
 
 import { redirect } from '@/mixins'
 import rsvp from '@/mixins/rsvp'
+import stars from '@/mixins/stars'
 import waves from '@/mixins/waves'
 import { fetchEvent, deleteEvent, fetchUpcomingEvents } from '@/utils/api'
 
 export default {
-  mixins: [ redirect, rsvp, waves ],
+  mixins: [ redirect, rsvp, waves, stars ],
   data () {
     return {
       overlayOpen: false
@@ -251,17 +251,7 @@ export default {
         }
       }
     },
-    async disinterestedClick () {
-      let res
-      if (this.user.darkStarred) {
-        res = await undarkStarUser(this.user.id)
-      } else {
-        res = await darkStarUser(this.user.id)
-      }
-      this.$emit('user-updated', res)
-      return res
-    },
-    async interestedClickWithPrompts () {
+    async interestedClickWithPrompts (context) {
       let res
       if (this.redirectToSignupIfNotAuthenticated({
         name: 'SelectEventFromUser',
@@ -269,8 +259,9 @@ export default {
         query: { interested: 'yes' }
       })) {
       } else if (this.user.starred) {
-        res = await unstarUser(this.user.id)
+        res = await this.unstarUser(this.user.id, context)
       } else {
+        res = await this.starUser(this.user.id, context)
         const events = await fetchUpcomingEvents(this.user.id)
         if (events.length > 0) {
           if (events.filter(e => !e.participated).length > 0) {
@@ -279,17 +270,17 @@ export default {
         } else {
           this.checkAuthenticationAndInitiateMessageSending()
         }
-        res = await starUser(this.user.id)
+        res = await this.starUser(this.user.id)
       }
       this.updateUser(res)
       return res
     },
-    async interestedClick () {
+    async interestedClick (context) {
       let res
       if (this.user.starred) {
-        res = await unstarUser(this.user.id)
+        res = await this.unstarUser(this.user.id, context)
       } else {
-        res = await starUser(this.user.id)
+        res = await this.starUser(this.user.id, context)
       }
       this.$emit('user-updated', res)
       return res

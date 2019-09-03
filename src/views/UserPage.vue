@@ -13,8 +13,8 @@
     <div class="profile__container w-container" v-else>
       <LikeUserCard v-if="showLikeUserCard"
                     :userFirstName="user.firstName"
-                    @like-user-click="likeUserHandler"
-                    @dislike-user-click="dislikeUserHandler"
+                    @like-user-click="likeUserHandler('top card')"
+                    @dislike-user-click="dislikeUserHandler('top card')"
       />
       <div class="profile-top-card__container">
         <div class="profile__user-basics-container">
@@ -63,7 +63,7 @@
           class="profile-top-card__footer__button-list"
           :user="user"
           @user-updated="updateUser"
-          @interested-click="interestedClickWithPrompts"
+          @interested-click="interestedClickWithPrompts('card')"
           :showInterestedButton="showInterestedButton"
           :showMeetButton="showMeetButton"
           :showGoingButton="showGoingButton"
@@ -208,17 +208,15 @@ export default {
     handleImageClick (payload) {
       this.$refs.lightbox.showImage(payload)
     },
-    async likeUserHandler () {
-      this.$ga.event('Star', 'starred', 'UserPage footer')
-      this.user = await this.interestedClickWithPrompts()
+    async likeUserHandler (context) {
+      this.user = await this.interestedClickWithPrompts(context)
     },
-    async dislikeUserHandler () {
-      this.$ga.event('Star', 'dark-starred', 'UserPage footer')
-      await this.disinterestedClick()
+    async dislikeUserHandler (context) {
       if (!this.redirectToSignupIfNotAuthenticated({
         name: 'DisinterestedSurvey',
         params: { userId: this.user.id }
       })) {
+        this.darkStarUser(this.$route.params.id, context)
         this.$router.push({ name: 'DisinterestedSurvey', params: { userId: this.$route.params.id } })
       }
     },
@@ -253,9 +251,9 @@ export default {
     await this.fetchUser()
     if (this.$route.query && this.$route.query.interested) {
       if (this.$route.query.interested === 'yes') {
-        this.likeUserHandler()
+        this.likeUserHandler('query parameter')
       } else if (this.$route.query.interested === 'no') {
-        this.dislikeUserHandler()
+        this.dislikeUserHandler('query parameter')
       }
     }
     await this.settlePendingWaves()

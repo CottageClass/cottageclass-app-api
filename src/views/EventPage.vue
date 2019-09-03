@@ -53,7 +53,7 @@
               :user="event.host"
               :event="event"
               @user-updated="updateUser"
-              @interested-click="interestedClickWithPrompts"
+              @interested-click="interestedClickWithPrompts('card')"
               @going-click="goingClick"
               @share-click="shareClick"
               :timePast="timePast"
