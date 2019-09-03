@@ -1,41 +1,30 @@
-import Logger from '@/utils/logger'
+// wrapper around api calls.
+// errors are propagated
+// additional functionality should be in src/mixins/stars/js
+//
+
 import axios from 'axios'
 import normalize from 'json-api-normalizer'
 import { createUser } from '@/utils/createUser'
-const logger = Logger('api:stars')
 
-export async function unstarUser (userId) {
-  try {
-    const res = await axios.delete(`api/users/${userId}/stars`)
+export function unstarUser (userId) {
+  return axios.delete(`api/users/${userId}/stars`).then(res => {
     return createUser(normalize(res.data))
-  } catch (e) {
-    logger.logError(e)
-  }
+  })
 }
 
 export async function starUser (userId) {
-  try {
-    const res = await axios.post(`api/users/${userId}/stars`)
+  return axios.post(`api/users/${userId}/stars`).then(res => {
     return createUser(normalize(res.data))
-  } catch (e) {
-    logger.logError(e)
-  }
+  })
 }
 
 export async function undarkStarUser (userId) {
-  try {
-    const res = await axios.delete(`api/users/${userId}/dark_stars`)
-    return createUser(normalize(res.data))
-  } catch (e) {
-    logger.logError(e)
-  }
+  const res = await axios.delete(`api/users/${userId}/dark_stars`)
+  return createUser(normalize(res.data))
 }
 
 export async function darkStarUser (userId) {
-  try {
-    const res = await axios.post(`api/users/${userId}/dark_stars`)
-    return createUser(normalize(res.data))
-  } catch (e) {
-    logger.logError(e)
-  }
+  const res = await axios.post(`api/users/${userId}/dark_stars`)
+  return createUser(normalize(res.data))
 }
