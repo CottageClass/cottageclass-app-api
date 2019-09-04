@@ -84,8 +84,12 @@ ActiveAdmin.register User do
       source_tags
       child_ages_in_months
       child_names
+      settings
     ].each do |attribute|
       column attribute
+    end
+    column :weekly_email_setting do |instance|
+      instance.settings['email']['receive_weekly_email']
     end
     column :nearest_upcoming_event do |instance|
       event = instance.nearest_upcoming_event
