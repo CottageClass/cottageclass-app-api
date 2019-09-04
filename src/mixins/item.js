@@ -253,26 +253,27 @@ export default {
     },
     async interestedClickWithPrompts (context) {
       let res
-      if (this.redirectToSignupIfNotAuthenticated({
+      if (!this.redirectToSignupIfNotAuthenticated({
         name: 'SelectEventFromUser',
         params: { userId: this.user.id },
         query: { interested: 'yes' }
       })) {
-      } else if (this.user.starred) {
-        res = await this.unstarUser(this.user.id, context)
-      } else {
-        res = await this.starUser(this.user.id, context)
-        const events = await fetchUpcomingEvents(this.user.id)
-        if (events.length > 0) {
-          if (events.filter(e => !e.participated).length > 0) {
-            this.$router.push({ name: 'SelectEventFromUser', params: { userId: this.user.id } })
-          }
+        if (this.user.starred) {
+          res = await this.unstarUser(this.user.id, context)
         } else {
-          this.checkAuthenticationAndInitiateMessageSending()
+          res = await this.starUser(this.user.id, context)
+          const events = await fetchUpcomingEvents(this.user.id)
+          if (events.length > 0) {
+            if (events.filter(e => !e.participated).length > 0) {
+              this.$router.push({ name: 'SelectEventFromUser', params: { userId: this.user.id } })
+            }
+          } else {
+            this.checkAuthenticationAndInitiateMessageSending()
+          }
+          res = await this.starUser(this.user.id)
         }
-        res = await this.starUser(this.user.id)
+        this.updateUser(res)
       }
-      this.updateUser(res)
       return res
     },
     async interestedClick (context) {
