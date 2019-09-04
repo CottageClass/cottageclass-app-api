@@ -42,7 +42,7 @@
       <a  v-if="!childcareRequest"
           class="event-action__icon-button__star w-inline-block"
           :class="isStarred?'active':''"
-          @click.stop="interestedClick"></a>
+          @click.stop="interestedClick('card')"></a>
       <div class="other-events-card__footer-actions__more-wrapper">
         <a class="event-action__icon-button__more w-inline-block"
            @click.stop="overlayOpen=true"></a>
@@ -58,7 +58,7 @@
                     @event-deleted="$emit('event-deleted', id)"
                     @going-click="goingClick"
                     @cancel-click="cancelClick"
-                    @interested-click="interestedClick"
+                    @interested-click="interestedClick('card')"
                     @share-click="shareClick"
                     @contact-click="contactClick"
                     :timePast="timePast"
@@ -80,7 +80,7 @@
                     @clickaway="overlayOpen=false"
                     @going-click="goingClick"
                     @cancel-click="cancelClick"
-                    @interested-click="interestedClick"
+                    @interested-click="interestedClick('card')"
                     @share-click="shareClick"
                     @contact-click="contactClick"
                     :showGoingButton="showGoingButton"

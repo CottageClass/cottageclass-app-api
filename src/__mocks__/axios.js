@@ -56,6 +56,21 @@ export default {
     }
   }),
   post: jest.fn((url, data) => {
+    if (url === 'api/users/000/stars') {
+      return Promise.reject(Error('no such user'))
+    }
+    if (url === 'api/users/000/dark_stars') {
+      return Promise.reject(Error('no such user'))
+    }
+    return Promise.resolve({ status: 200 })
+  }),
+  delete: jest.fn((url, data) => {
+    if (url === 'api/users/000/stars') {
+      return Promise.reject(Error('no such user'))
+    }
+    if (url === 'api/users/000/dark_stars') {
+      return Promise.reject(Error('no such user'))
+    }
     return Promise.resolve({ status: 200 })
   }),
   put: jest.fn((url, data) => {
