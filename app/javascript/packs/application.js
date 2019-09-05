@@ -11,6 +11,7 @@ import '@babel/polyfill'
 import App from '@/App.vue'
 import router from '@/router'
 import store from '@/store'
+import { trackEvent } from '@/utils/vendor/ahoy'
 import '@/registerServiceWorker'
 import VueAnalytics from 'vue-analytics'
 import GoogleMapsLoader from 'google-maps'
@@ -62,6 +63,7 @@ if (isAuthWindow) {
 
   router.beforeEach((to, from, next) => {
     store.dispatch('newRoute')
+    trackEvent('page_view', { to: to.fullPath, from: from.fullPath })
     if (to.name === 'SplashPage' && store.getters.isAuthenticated) {
       next({ name: 'Search' })
     } else {
