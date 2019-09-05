@@ -1,4 +1,4 @@
-class SearchListItemsController < ApiController
+class API::SearchListItemsController < API::BaseController
   def index
     # DevelopmentProfiler.prof 'profile' do
     miles = params[:miles]
