@@ -1,7 +1,7 @@
 # seed the local database with some fake users and associated data
 require 'faker'
 
-(1..500).each do |tag|
+(1..50).each do |tag|
   first_name = Faker::Name.unique.first_name
   last_name = Faker::Name.unique.last_name
   hash = {
@@ -42,8 +42,10 @@ require 'faker'
   user = User.new(hash)
 
   # add some children
-  children = Random.rand(0..3).times do
-    Child.new(
+  children = []
+
+  Random.rand(0..3).times do
+    children << Child.new(
       first_name: Faker::Name.unique.first_name,
       birthday: Faker::Time.between(17.years.ago, Time.zone.today, :midnight)
     )
