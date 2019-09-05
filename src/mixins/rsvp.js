@@ -1,4 +1,4 @@
-import { initProxySession, submitEventParticipant } from '@/utils/api'
+import { removeEventParticipant, initProxySession, submitEventParticipant } from '@/utils/api'
 import { submitToSheetsu } from '@/utils/vendor'
 import moment from 'moment'
 
@@ -51,6 +51,30 @@ export default {
         'All children': this.currentUser.children
       }
       submitToSheetsu(data, 'RSVPs')
+    },
+    async cancelRsvp () {
+      try {
+        await removeEventParticipant(this.eventId)
+        this.$ga.event('RSVP', 'canceled', this.eventId)
+        const data = {
+          'User ID': this.currentUser.id,
+          'Cancelation Time': moment(Date()).format('LLLL'),
+          'Event ID': this.eventId,
+          'Reason for cancelation': this.reason,
+          'Event title': this.event.name,
+          'Event host': this.event.hostFirstName,
+          'Event date': this.event.startsAt.toString(),
+          'Parent first name': this.currentUser.firstName,
+          'Parent last name': this.currentUser.lastInitial,
+          'Parent phone': this.currentUser.phone,
+          'Parent email': this.currentUser.email,
+          'All children': this.currentUser.children
+        }
+        submitToSheetsu(data, 'RSVPCancelations')
+      } catch (err) {
+        console.log(err)
+        throw err
+      }
     },
     async submitRsvp (childIds) {
       this.err = ''
