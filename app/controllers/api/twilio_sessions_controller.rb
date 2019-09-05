@@ -1,4 +1,4 @@
-class TwilioSessionsController < ApiController
+class API::TwilioSessionsController < API::BaseController
   before_action :authenticate_user!, except: [:callback]
 
   # - creates a Twilio session
