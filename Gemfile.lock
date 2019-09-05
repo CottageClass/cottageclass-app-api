@@ -107,12 +107,18 @@ GEM
       babel-source (>= 4.0, < 6)
       execjs (~> 2.0)
     bcrypt (3.1.12)
+    blazer (2.0.1)
+      activerecord (>= 4.2)
+      chartkick
+      railties (>= 4.2)
+      safely_block (>= 0.1.1)
     brakeman (4.4.0)
     builder (3.2.3)
     bullet (5.9.0)
       activesupport (>= 3.0.0)
       uniform_notifier (~> 1.11)
     byebug (11.0.0)
+    chartkick (3.0.2)
     climate_control (0.2.0)
     coderay (1.1.2)
     concurrent-ruby (1.1.5)
@@ -516,6 +522,7 @@ DEPENDENCIES
   apitome
   awesome_print
   bcrypt (~> 3.1.7)
+  blazer
   brakeman
   bullet
   byebug
