@@ -1,4 +1,5 @@
 class CrawlerEventsController < ActionController::Base
+  skip_before_action :track_ahoy_visit
   def show
     @event = Event.eager.find_by id: params[:id]
     month = @event.month_abbreviated

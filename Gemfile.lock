@@ -85,6 +85,11 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.6.0)
       public_suffix (>= 2.0.2, < 4.0)
+    ahoy_matey (3.0.0)
+      activesupport (>= 5)
+      device_detector
+      geocoder (>= 1.4.5)
+      safely_block (>= 0.2.1)
     airbrake (8.3.2)
       airbrake-ruby (~> 4.1)
     airbrake-ruby (4.2.0)
@@ -122,6 +127,7 @@ GEM
       safe_yaml (~> 1.0.0)
     crass (1.0.4)
     database_cleaner (1.7.0)
+    device_detector (1.0.2)
     devise (4.6.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -147,6 +153,7 @@ GEM
     dry-core (0.4.7)
       concurrent-ruby (~> 1.0)
     equatable (0.5.0)
+    errbase (0.1.1)
     erubi (1.8.0)
     execjs (2.7.0)
     factory_bot (4.11.1)
@@ -398,6 +405,8 @@ GEM
     ruby_dep (1.5.0)
     ruby_http_client (3.3.0)
     safe_yaml (1.0.5)
+    safely_block (0.2.2)
+      errbase (>= 0.1.1)
     sass (3.7.3)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
@@ -501,6 +510,7 @@ DEPENDENCIES
   activeadmin_addons
   activeadmin_json_editor
   addressable
+  ahoy_matey
   airbrake
   airbrake-ruby
   apitome
