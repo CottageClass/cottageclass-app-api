@@ -1,5 +1,4 @@
 <template>
-
   <div class="body">
     <div class="content-wrapper">
       <StyleWrapper styleIs="onboarding">
@@ -85,7 +84,7 @@ export default {
           name: 'YourPlaydates'
         })
       } catch (err) {
-        this.showAlert('There was a problem canceling your participaton, please try again or contact us at \'contact@joinlilypad.com\'', 'failure')
+        this.showAlert('There was a problem canceling your participaton, please try again or contact us at contact@joinlilypad.com', 'failure')
       }
     }
   },
