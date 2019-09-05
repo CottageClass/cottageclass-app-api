@@ -1,5 +1,5 @@
 import ahoy from 'ahoy.js'
 
-export function trackEvent (name, properties) {
-  ahoy.track(name, properties)
+export const trackEvent = async (name, properties) => {
+  return ahoy.track(name, properties)
 }
