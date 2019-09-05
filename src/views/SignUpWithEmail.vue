@@ -174,7 +174,6 @@ export default {
   },
   methods: {
     cloudinaryEventHandler (error, result) {
-      this.debug({ result })
       if (!error && result && result.event === 'success') {
         let transformation = ''
         if (result.info.coordinates.custom) {
