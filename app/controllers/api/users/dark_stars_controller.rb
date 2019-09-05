@@ -1,4 +1,4 @@
-class API::Users::DarkStarsController < ApiController
+class API::Users::DarkStarsController < API::BaseController
   before_action :authenticate_user!, only: %i[create destroy]
   before_action :set_recipient, only: %i[create destroy]
 
