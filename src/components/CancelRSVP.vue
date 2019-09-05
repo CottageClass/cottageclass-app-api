@@ -27,7 +27,7 @@
 <script>
 import StyleWrapper from '@/components/FTE/StyleWrapper.vue'
 import Question from '@/components/base/Question.vue'
-import * as api from '@/utils/api'
+import { removeEventParticipant, fetchEvent } from '@/utils/api'
 import { submitToSheetsu } from '@/utils/vendor'
 import { mapGetters } from 'vuex'
 import moment from 'moment'
@@ -67,14 +67,14 @@ export default {
     },
     fetchEventInformation: async function () {
       try {
-        this.event = await api.fetchEvent(this.eventId)
+        this.event = await fetchEvent(this.eventId)
       } catch (e) {
         console.error(e)
       }
     },
     confirm: function () {
       const component = this
-      api.removeEventParticipant(this.eventId)
+      removeEventParticipant(this.eventId)
         .then(res => {
           return component.$ga.event('RSVP', 'canceled', component.eventId)
         }).then(res => {
