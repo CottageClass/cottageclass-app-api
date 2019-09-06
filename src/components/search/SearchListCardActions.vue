@@ -1,5 +1,5 @@
 <template>
-   <ul class="button-list">
+  <ul class="button-list">
     <li v-if="showInterestedButton">
       <IconButton
         class="interested-button"

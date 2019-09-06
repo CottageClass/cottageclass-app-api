@@ -1,3 +1,6 @@
+// mixin that wraps the api, event tracking and anything else that needs to happen every
+// time stars are added or removed
+
 import { unstarUser, starUser, darkStarUser, undarkStarUser } from '@/utils/api'
 import { trackEvent } from '@/utils/ahoy'
 
