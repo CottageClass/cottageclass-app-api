@@ -88,7 +88,7 @@ export default {
 
       try {
         const res = await submitEventParticipant(eventId, childIds)
-        trackEvent('rsvp_affirmative', { eventId: this.eventId })
+        trackEvent('rsvp_affirmative', { eventId: eventId })
         this.showAlertOnNextRoute(`Playdate request sent for ${this.formattedDateTime}. ` +
             'We\'re texting you now, to introduce you to ' +
             `${this.hostFirstName}!`, 'success'
