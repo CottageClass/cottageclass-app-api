@@ -1,3 +1,5 @@
+import { trackEvent } from '@/utils/ahoy'
+
 export default {
   computed: {
     errorMessage () {
@@ -12,6 +14,14 @@ export default {
     },
     stepIndex () {
       return this.stepSequence.findIndex(s => s === this.stepName)
+    }
+  },
+  methods: {
+    trackStep (section) {
+      this.$ga.event(this.context, 'stepComplete', this.stepName)
+      trackEvent('step_complete', { context: this.context,
+        step_name: this.stepName,
+        section })
     }
   },
   created () {

@@ -1,8 +1,11 @@
-import { initProxySession, submitEventParticipant } from '@/utils/api'
+import { removeEventParticipant, initProxySession, submitEventParticipant } from '@/utils/api'
 import { submitToSheetsu } from '@/utils/vendor'
+import { trackEvent } from '@/utils/ahoy'
+import { alerts } from '@/mixins'
 import moment from 'moment'
 
 export default {
+  mixins: [alerts],
   computed: {
     formattedDateTime () {
       return this.event.startsAt.format('MMM D') + ' at ' + this.event.startsAt.format('ha')
@@ -52,24 +55,48 @@ export default {
       }
       submitToSheetsu(data, 'RSVPs')
     },
+    async cancelRsvp () {
+      try {
+        const res = await removeEventParticipant(this.eventId)
+        trackEvent('rsvp_cancel', { eventId: this.eventId })
+        this.$ga.event('RSVP', 'canceled', this.eventId)
+        const data = {
+          'User ID': this.currentUser.id,
+          'Cancelation Time': moment(Date()).format('LLLL'),
+          'Event ID': this.eventId,
+          'Reason for cancelation': this.reason,
+          'Event title': this.event.name,
+          'Event host': this.event.hostFirstName,
+          'Event date': this.event.startsAt.toString(),
+          'Parent first name': this.currentUser.firstName,
+          'Parent last name': this.currentUser.lastInitial,
+          'Parent phone': this.currentUser.phone,
+          'Parent email': this.currentUser.email,
+          'All children': this.currentUser.children
+        }
+        submitToSheetsu(data, 'RSVPCancelations')
+        return res
+      } catch (err) {
+        console.log(err)
+        throw err
+      }
+    },
     async submitRsvp (childIds) {
       this.err = ''
       const eventId = this.event.id || this.$route.params.eventId
       this.submitToSheetsu()
 
       try {
-        await submitEventParticipant(eventId, childIds)
-        this.$store.commit('showAlertOnNextRoute', {
-          alert: {
-            message: `Playdate request sent for ${this.formattedDateTime}. ` +
+        const res = await submitEventParticipant(eventId, childIds)
+        trackEvent('rsvp_affirmative', { eventId: eventId })
+        this.showAlertOnNextRoute(`Playdate request sent for ${this.formattedDateTime}. ` +
             'We\'re texting you now, to introduce you to ' +
-            `${this.hostFirstName}!`,
-            status: 'success'
-          }
-        })
+            `${this.hostFirstName}!`, 'success'
+        )
         this.$ga.event('RSVP', 'sent', eventId)
         this.initProxyConversation()
         this.$router.push({ name: 'EventPage', params: { id: eventId } })
+        return res
       } catch (err) {
         console.log(err)
         this.err = 'Sorry, there was a problem submitting your RSVP. Try again?'

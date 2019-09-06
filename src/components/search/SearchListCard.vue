@@ -1,97 +1,97 @@
 <template>
-<li class="events-list__event-summary-card"
-    @click.stop="goToItem">
-  <div class="header">
-    <div class="header__date"
-         :class="{'time-past': timePast,
-                  'childcare-request': item && item.childcareRequest}" >
-      {{timeHeader}}
+  <li class="events-list__event-summary-card"
+      @click.stop="goToItem">
+    <div class="header">
+      <div class="header__date"
+           :class="{'time-past': timePast,
+                    'childcare-request': item && item.childcareRequest}" >
+        {{timeHeader}}
+      </div>
+      <div v-if="distance && !isCurrentUser" class="header__distance">{{distance}}</div>
     </div>
-    <div v-if="distance && !isCurrentUser" class="header__distance">{{distance}}</div>
-  </div>
-  <div class="description">
-    <div class="description-text line-clamp--2">{{description}}</div>
-  </div>
-  <div class="footer">
-    <div class="footer__user-summary">
-      <div class="photo-wrapper">
-        <AvatarImage
-          className="photo"
-          :person="user"
-          imageSize="85"
+    <div class="description">
+      <div class="description-text line-clamp--2">{{description}}</div>
+    </div>
+    <div class="footer">
+      <div class="footer__user-summary">
+        <div class="photo-wrapper">
+          <AvatarImage
+            className="photo"
+            :person="user"
+            imageSize="85"
           />
-        <div class="badge-verified" v-if="user.facebookUid">
-          <div class="unicode-character">✓</div>
-          <div class="badge-text">Verified</div>
-        </div>
-      </div>
-      <div class="user-info--container">
-        <div class="user-info_list">
-          <div class="user-info__name">{{userName}}</div>
-          <div v-if="occupation"
-               class="user-info__occupation lp-truncate">
-            {{occupation}}<br />
+          <div class="badge-verified" v-if="user.facebookUid">
+            <div class="unicode-character">✓</div>
+            <div class="badge-text">Verified</div>
           </div>
-          <div class="user-info__kids lp-truncate">{{kidsAges}}</div>
-          <div v-if="neighborhood" class="user-info__kids lp-truncate">{{neighborhood}}</div>
-          <HouseholdImages :user="user" />
+        </div>
+        <div class="user-info--container">
+          <div class="user-info_list">
+            <div class="user-info__name">{{userName}}</div>
+            <div v-if="occupation"
+                 class="user-info__occupation lp-truncate">
+              {{occupation}}<br />
+            </div>
+            <div class="user-info__kids lp-truncate">{{kidsAges}}</div>
+            <div v-if="neighborhood" class="user-info__kids lp-truncate">{{neighborhood}}</div>
+            <HouseholdImages :user="user" />
+          </div>
         </div>
       </div>
-    </div>
-    <div class="footer__actions--mobile">
-      <a  v-if="!childcareRequest"
-          class="event-action__icon-button__star w-inline-block"
-          :class="isStarred?'active':''"
-          @click.stop="interestedClick('card')"></a>
-      <div class="other-events-card__footer-actions__more-wrapper">
-        <a class="event-action__icon-button__more w-inline-block"
-           @click.stop="overlayOpen=true"></a>
+      <div class="footer__actions--mobile">
+        <a  v-if="!childcareRequest"
+            class="event-action__icon-button__star w-inline-block"
+            :class="isStarred?'active':''"
+            @click.stop="interestedClick('card')"></a>
+        <div class="other-events-card__footer-actions__more-wrapper">
+          <a class="event-action__icon-button__more w-inline-block"
+             @click.stop="overlayOpen=true"></a>
+        </div>
       </div>
+      <SearchListCardActions
+        v-if="!isPhone"
+        :user="item.user"
+        :event="item.event"
+        :childcareRequest="item.childcareRequest"
+        @user-updated="$emit('user-updated', $event)"
+        @event-updated="$emit('event-updated', $event)"
+        @event-deleted="$emit('event-deleted', id)"
+        @going-click="goingClick"
+        @cancel-click="cancelClick"
+        @interested-click="interestedClick('card')"
+        @share-click="shareClick"
+        @contact-click="contactClick"
+        :timePast="timePast"
+        :showGoingButton="showGoingButton"
+        :showMeetButton="showMeetButton"
+        :showShareButton="showShareButton"
+        :showInterestedButton="showInterestedButton"
+        :showContactButton="showContactButton"
+        :showCancelButton="!doNotShowCancel && showCancelButton"
+        :allowWaveUndo="true"/>
+      <SearchListCardActionsOverlay
+        v-if="showOverlay"
+        :user="item.user"
+        :event="item.event"
+        :childcareRequest="item.childcareRequest"
+        @user-updated="$emit('user-updated', $event)"
+        @event-updated="$emit('event-updated', $event)"
+        @event-deleted="$emit('event-deleted', id)"
+        @clickaway="overlayOpen=false"
+        @going-click="goingClick"
+        @cancel-click="cancelClick"
+        @interested-click="interestedClick('card')"
+        @share-click="shareClick"
+        @contact-click="contactClick"
+        :showGoingButton="showGoingButton"
+        :showMeetButton="showMeetButton"
+        :showShareButton="showShareButton"
+        :showContactButton="showContactButton"
+        :showInterestedButton="showInterestedButton"
+        :showCancelButton="!doNotShowCancel && showCancelButton"
+        :allowWaveUndo="true"/>
     </div>
-    <SearchListCardActions
-                    v-if="!isPhone"
-                    :user="item.user"
-                    :event="item.event"
-                    :childcareRequest="item.childcareRequest"
-                    @user-updated="$emit('user-updated', $event)"
-                    @event-updated="$emit('event-updated', $event)"
-                    @event-deleted="$emit('event-deleted', id)"
-                    @going-click="goingClick"
-                    @cancel-click="cancelClick"
-                    @interested-click="interestedClick('card')"
-                    @share-click="shareClick"
-                    @contact-click="contactClick"
-                    :timePast="timePast"
-                    :showGoingButton="showGoingButton"
-                    :showMeetButton="showMeetButton"
-                    :showShareButton="showShareButton"
-                    :showInterestedButton="showInterestedButton"
-                    :showContactButton="showContactButton"
-                    :showCancelButton="!doNotShowCancel && showCancelButton"
-                    :allowWaveUndo="true"/>
-    <SearchListCardActionsOverlay
-                    v-if="showOverlay"
-                    :user="item.user"
-                    :event="item.event"
-                    :childcareRequest="item.childcareRequest"
-                    @user-updated="$emit('user-updated', $event)"
-                    @event-updated="$emit('event-updated', $event)"
-                    @event-deleted="$emit('event-deleted', id)"
-                    @clickaway="overlayOpen=false"
-                    @going-click="goingClick"
-                    @cancel-click="cancelClick"
-                    @interested-click="interestedClick('card')"
-                    @share-click="shareClick"
-                    @contact-click="contactClick"
-                    :showGoingButton="showGoingButton"
-                    :showMeetButton="showMeetButton"
-                    :showShareButton="showShareButton"
-                    :showContactButton="showContactButton"
-                    :showInterestedButton="showInterestedButton"
-                    :showCancelButton="!doNotShowCancel && showCancelButton"
-                    :allowWaveUndo="true"/>
-  </div>
-</li>
+  </li>
 </template>
 
 <script>

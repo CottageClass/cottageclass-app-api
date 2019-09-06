@@ -1,5 +1,4 @@
 <template>
-
   <div class="body">
     <div class="content-wrapper">
       <StyleWrapper styleIs="onboarding">
@@ -27,15 +26,15 @@
 <script>
 import StyleWrapper from '@/components/FTE/StyleWrapper.vue'
 import Question from '@/components/base/Question.vue'
-import * as api from '@/utils/api'
-import { submitToSheetsu } from '@/utils/vendor'
+import { fetchEvent } from '@/utils/api'
+import { rsvp } from '@/mixins'
 import { mapGetters } from 'vuex'
-import moment from 'moment'
 
 export default {
   name: 'CancelRSVP',
   components: { Question, StyleWrapper },
   props: ['eventId'],
+  mixins: [rsvp],
   data: () => {
     return {
       reason: '',
@@ -67,46 +66,26 @@ export default {
     },
     fetchEventInformation: async function () {
       try {
-        this.event = await api.fetchEvent(this.eventId)
+        this.event = await fetchEvent(this.eventId)
       } catch (e) {
         console.error(e)
       }
     },
-    confirm: function () {
-      const component = this
-      api.removeEventParticipant(this.eventId)
-        .then(res => {
-          return component.$ga.event('RSVP', 'canceled', component.eventId)
-        }).then(res => {
-          const data = {
-            'User ID': this.currentUser.id,
-            'Cancelation Time': moment(Date()).format('LLLL'),
-            'Event ID': this.eventId,
-            'Reason for cancelation': this.reason,
-            'Event title': this.event.name,
-            'Event host': this.event.hostFirstName,
-            'Event date': this.event.startsAt.toString(),
-            'Parent first name': this.currentUser.firstName,
-            'Parent last name': this.currentUser.lastInitial,
-            'Parent phone': this.currentUser.phone,
-            'Parent email': this.currentUser.email,
-            'All children': this.currentUser.children
+    async confirm  () {
+      try {
+        await this.cancelRsvp(this.eventID)
+        this.$store.commit('showAlertOnNextRoute', {
+          alert: {
+            message: 'Your RSVP has been canceled.',
+            status: 'success'
           }
-          submitToSheetsu(data, 'RSVPCancelations')
-          this.$store.commit('showAlertOnNextRoute', {
-            alert: {
-              message: 'Your RSVP has been canceled.',
-              status: 'success'
-            }
-          })
-          this.$router.push({
-            name: 'YourPlaydates'
-          })
         })
-        .catch(err => {
-          console.log(err)
-          throw err
+        this.$router.push({
+          name: 'YourPlaydates'
         })
+      } catch (err) {
+        this.showAlert('There was a problem canceling your participaton, please try again or contact us at contact@joinlilypad.com', 'failure')
+      }
     }
   },
   mounted: function () {

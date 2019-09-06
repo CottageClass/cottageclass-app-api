@@ -31,7 +31,7 @@ import { submitToSheetsu } from '@/utils/vendor'
 import { mapGetters } from 'vuex'
 
 export default {
-  name: 'CancelRSVP',
+  name: 'DeleteAccountConfirmation',
   components: { Question, StyleWrapper },
   props: ['eventId'],
   data: () => {

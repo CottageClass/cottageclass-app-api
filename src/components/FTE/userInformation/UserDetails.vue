@@ -45,6 +45,7 @@ export default {
   mixins: [stepNavigation],
   data () {
     return {
+      context: 'onboarding',
       availability: {},
       languages: [],
       activities: [],
@@ -111,7 +112,7 @@ export default {
           this.$emit('finished')
         } else {
           this.submitUserData()
-          this.$ga.event('onboarding', 'stepComplete', this.stepName)
+          this.trackStep('user-details')
           this.$router.push({
             params: { stepName: this.stepSequence[this.stepIndex + 1] }
           })

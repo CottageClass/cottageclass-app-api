@@ -17,7 +17,7 @@
       v-if="stepName==='pet-description'"
       v-model="petsDescription" />
     <HouseRules v-if="stepName==='house-rules'"
-      v-model="houseRules" />
+                v-model="houseRules" />
   </div>
 </template>
 
@@ -91,7 +91,7 @@ export default {
     nextStep () {
       if (!this.errorMessage) {
         this.submitUserData()
-        this.$ga.event(this.context, 'stepComplete', this.stepName)
+        this.trackStep('house-info')
 
         if (this.stepName === 'has-pets' && this.hasPets.isTrue) {
           this.$router.push({ params: { stepName: 'pet-description' } })
