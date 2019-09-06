@@ -58,6 +58,7 @@ export default {
   mixins: [stepNavigation],
   data () {
     return {
+      context: 'onboarding',
       phone: { err: null },
       location: { err: null },
       children: { err: null },
@@ -145,7 +146,7 @@ export default {
             })
           }
           this.submitUserData()
-          this.$ga.event('onboarding', 'stepComplete', this.stepName)
+          this.trackStep('user-info')
 
           const nextStepName = this.stepSequence[this.stepIndex + 1]
 

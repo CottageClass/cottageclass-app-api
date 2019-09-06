@@ -155,7 +155,7 @@ export default {
       this.resetWipEvent()
       this.$emit('finished')
     },
-    nextStep () {
+    async nextStep () {
       if (this.nextButtonState === 'skip') {
         this.$emit('skip')
       } else if (this.errorMessage) {
@@ -163,16 +163,16 @@ export default {
       } else {
         // state is persisted after route update because component is reused
         this.showError = false
-        this.$ga.event(this.context, 'stepComplete', this.stepName)
         if (this.stepName === 'repeat-count') {
-          this.submitAvailabilityEvent()
+          await this.submitAvailabilityEvent()
         } else if (this.stepName === 'time') {
-          this.submitSpecificEvent()
+          await this.submitSpecificEvent()
         } else {
           this.$router.push({
             params: { stepName: this.stepSequence[this.stepIndex + 1] }
           })
         }
+        this.trackStep('offering')
       }
     },
     prevStep () {
