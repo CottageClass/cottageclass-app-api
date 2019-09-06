@@ -8,48 +8,52 @@ export default {
   methods: {
     async starUser (userId, context) {
       try {
-        await starUser(userId)
+        const res = await starUser(userId)
         await this.$ga.event('Star', 'added - ' + context, userId)
         await trackEvent('star_added', {
           context,
           userId
         })
+        return res
       } catch (err) {
         throw err
       }
     },
     async unstarUser (userId, context) {
       try {
-        await unstarUser(userId)
+        const res = await unstarUser(userId)
         await this.$ga.event('Star', 'removed - ' + context, userId)
         await trackEvent('star_removed', {
           context,
           userId
         })
+        return res
       } catch (err) {
         throw err
       }
     },
     async darkStarUser (userId, context) {
       try {
-        await darkStarUser(userId)
+        const res = await darkStarUser(userId)
         await this.$ga.event('DarkStar', 'added - ' + context, userId)
         await trackEvent('dark_star_added', {
           context,
           userId
         })
+        return res
       } catch (err) {
         throw err
       }
     },
     async undarkStarUser (userId, context) {
       try {
-        await undarkStarUser(userId)
+        const res = await undarkStarUser(userId)
         await this.$ga.event('DarkStar', 'removed - ' + context, userId)
         await trackEvent('dark_star_removed', {
           context,
           userId
         })
+        return res
       } catch (err) {
         throw err
       }
