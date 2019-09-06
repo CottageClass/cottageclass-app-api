@@ -17,7 +17,7 @@
       v-if="stepName==='pet-description'"
       v-model="petsDescription" />
     <HouseRules v-if="stepName==='house-rules'"
-      v-model="houseRules" />
+                v-model="houseRules" />
   </div>
 </template>
 
