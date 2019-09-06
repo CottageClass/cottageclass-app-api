@@ -29,6 +29,7 @@ import Checkboxes from '@/components/base/Checkboxes.vue'
 import Question from '@/components/base/Question.vue'
 import FormWithTextArea from '@/components/base/FormWithTextArea.vue'
 
+import { trackEvent } from '@/utils/ahoy'
 import { submitToSheetsu } from '@/utils/vendor/sheetsu'
 import { mapGetters, mapMutations } from 'vuex'
 import { alerts } from '@/mixins'
@@ -66,6 +67,7 @@ export default {
         otherText: this.otherText }, 'noRsvp')
       this.showAlertOnNextRoute('Thanks for your feedback! Here are some other options you might like...', 'success')
       this.declineRsvp({ eventId: this.eventId })
+      trackEvent('rsvp_decline', { eventId: this.eventId })
       this.$router.push({ name: 'Search' })
     },
     ...mapMutations(['declineRsvp'])
