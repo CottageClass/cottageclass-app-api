@@ -1,5 +1,5 @@
 import { unstarUser, starUser, darkStarUser, undarkStarUser } from '@/utils/api'
-import { trackEvent } from '@/utils/vendor/ahoy'
+import { trackEvent } from '@/utils/ahoy'
 
 export default {
   methods: {
