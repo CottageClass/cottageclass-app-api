@@ -2,7 +2,7 @@ require 'rails_helper'
 require 'byebug'
 
 RSpec.describe EventSeries, type: :model do
-  let(:subject) { build :event_series, :with_event_hosts }
+  let(:subject) { build :event_series }
 
   context 'validations' do
     it { is_expected.to validate_presence_of(:user).with_message(:required) }
@@ -20,7 +20,6 @@ RSpec.describe EventSeries, type: :model do
   context 'associations' do
     it { is_expected.to belong_to(:user).inverse_of(:event_series) }
     it { is_expected.to have_many(:events).inverse_of(:event_series).dependent(:destroy) }
-    it { is_expected.to have_and_belong_to_many(:event_hosts) }
   end
 
   context 'create' do

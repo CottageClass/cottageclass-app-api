@@ -8,10 +8,5 @@ FactoryBot.define do
     maximum_children { 0 }
     child_age_minimum { 0 }
     child_age_maximum { 0 }
-    activity_names { [Faker::Team.unique.sport] }
-    foods { [Faker::Food.unique.dish] }
-    house_rules { Faker::Lorem.unique.paragraph }
-    has_pet { true }
-    pet_description { Faker::Lorem.unique.paragraph }
   end
 end

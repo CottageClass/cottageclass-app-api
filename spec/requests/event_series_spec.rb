@@ -5,7 +5,7 @@ RSpec.resource 'EventSeries' do
   include_context 'json headers'
 
   let(:user) { create :user }
-  let(:subject) { build :event_series, :with_event_hosts, user: user }
+  let(:subject) { build :event_series, user: user }
 
   context 'write operations' do
     with_options scope: :event_series, with_example: true do
@@ -18,12 +18,6 @@ RSpec.resource 'EventSeries' do
       parameter :child_age_maximum, 'Maximum age of child. Default: 0 (no limit)'
       parameter :repeat_for, 'Number of events this series. Default: 6'
       parameter :interval, 'Interval in weeks between events. Default: 4'
-      parameter :has_pet, 'Has Pet?'
-      parameter :activity_names, 'Activity Names'
-      parameter :foods, 'Food Names'
-      parameter :house_rules, 'House Rules'
-      parameter :pet_description, 'Pet Description'
-      parameter :event_hosts_attributes, 'Array of adults present at host venue'
     end
 
     %i[
@@ -34,18 +28,10 @@ RSpec.resource 'EventSeries' do
       child_age_maximum
       repeat_for
       interval
-      has_pet
-      activity_names
-      foods
-      house_rules
-      pet_description
     ].each do |attribute|
       let(attribute) { subject.send attribute }
     end
     %i[starts_at ends_at].each { |attribute| let(attribute) { subject.send(attribute).to_s :time } }
-    let :event_hosts_attributes do
-      subject.event_hosts.map { |event_host| event_host.attributes.with_indifferent_access.slice :name, :email, :phone }
-    end
 
     post api_event_series_index_path, format: :json do
       include_context 'authorization token'

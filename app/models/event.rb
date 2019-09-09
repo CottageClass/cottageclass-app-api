@@ -24,7 +24,7 @@ class Event < ApplicationRecord
   has_many :participating_users, through: :participants, source: :user
 
   scope :has_participants, -> { joins(:participants) }
-  scope :eager, -> { includes :event_hosts, participants: %i[user participant_children] }
+  scope :eager, -> { includes participants: %i[user participant_children] }
   scope :nearest, ->(user) { where.not(id: user.events).near([user.latitude, user.longitude], 100) }
   scope :past, -> { where(Event.arel_table[:starts_at].lt(Time.current)).order starts_at: :desc }
   scope :upcoming, -> { where(Event.arel_table[:starts_at].gteq(1.hour.ago(Time.current))).order starts_at: :asc }

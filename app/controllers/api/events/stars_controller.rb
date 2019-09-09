@@ -7,8 +7,7 @@ class API::Events::StarsController < API::StarsController
 
   def render_starable(status:)
     event = Event.find(params[:event_id])
-    serializer = EventSerializer.new event, include: %i[ event_hosts
-                                                         participants
+    serializer = EventSerializer.new event, include: %i[ participants
                                                          participants.participant_children
                                                          user
                                                          user.children],

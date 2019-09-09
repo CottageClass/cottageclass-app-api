@@ -24,13 +24,7 @@ class EventSeries < ApplicationRecord
       maximum_children
       child_age_minimum
       child_age_maximum
-      has_pet
-      activity_names
-      foods
-      house_rules
-      pet_description
       time_zone
-      event_hosts
     ].each { |attribute| event.send format('%s=', attribute), send(attribute) }
     event.save
   end

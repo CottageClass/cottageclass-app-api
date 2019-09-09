@@ -5,13 +5,12 @@ ActiveAdmin.register EventSeries do
   actions :index, :new, :create, :edit, :update, :destroy
 
   permit_params :name, :start_date, :starts_at, :ends_at, :repeat_for, :interval, :maximum_children, :child_age_minimum,
-                :child_age_maximum, :has_pet, :house_rules, :pet_description,
-                activity_names: [], foods: [], event_hosts_attributes: %i[id verified _destroy]
+                :child_age_maximum
 
   filter :name
   filter :start_date
 
-  includes :user, :event_hosts
+  includes :user
 
   index do
     selectable_column
@@ -21,7 +20,6 @@ ActiveAdmin.register EventSeries do
     column :start_date
     column(:starts_at) { |instance| instance.starts_at.strftime('%T') }
     column(:ends_at) { |instance| instance.ends_at.strftime('%T') }
-    column(:event_hosts) { |instance| instance.event_hosts.size }
     column :created_at
     actions do |instance|
       item 'Events', admin_event_series_events_path(instance), class: 'member_link'
@@ -39,11 +37,6 @@ ActiveAdmin.register EventSeries do
       f.input :start_date
       f.input :starts_at
       f.input :ends_at
-      f.input :has_pet
-      f.input :pet_description
-      f.input :activity_names, as: :tags
-      f.input :foods, as: :tags
-      f.input :house_rules
       f.input :repeat_for
       f.input :interval
       f.input :maximum_children
@@ -56,10 +49,6 @@ ActiveAdmin.register EventSeries do
       f.li do
         f.label :updated_at
         f.span f.object.updated_at
-      end
-      f.has_many :event_hosts, allow_destroy: true do |event_host_f|
-        event_host_f.input :name, input_html: { disabled: true }
-        event_host_f.input :verified
       end
     end
     f.actions

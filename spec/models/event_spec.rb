@@ -19,7 +19,6 @@ RSpec.describe Event, type: :model do
     it { is_expected.to have_many(:participant_children) }
     it { is_expected.to have_many(:notifications).dependent(:nullify) }
     it { is_expected.to have_many(:participating_users).through(:participants) }
-    it { is_expected.to have_and_belong_to_many(:event_hosts) }
   end
 
   context 'create' do

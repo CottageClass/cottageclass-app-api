@@ -2,14 +2,14 @@ class API::EventSeriesController < API::BaseController
   before_action :authenticate_user!
 
   def index
-    render json: EventSeriesSerializer.new(current_user.event_series, include: %i[event_hosts]).serializable_hash,
+    render json: EventSeriesSerializer.new(current_user.event_series).serializable_hash,
            status: :ok
   end
 
   def create
     event_series = current_user.event_series.build safe_params
     if event_series.save
-      render json: EventSeriesSerializer.new(event_series, include: %i[events event_hosts]).serializable_hash,
+      render json: EventSeriesSerializer.new(event_series).serializable_hash,
              status: :created
     else
       render json: { errors: event_series.errors.full_messages }, status: :unprocessable_entity
@@ -27,7 +27,7 @@ class API::EventSeriesController < API::BaseController
 
   def show
     event_series = current_user.event_series.find params[:id]
-    render json: EventSeriesSerializer.new(event_series, include: %i[events event_hosts]).serializable_hash, status: :ok
+    render json: EventSeriesSerializer.new(event_series).serializable_hash, status: :ok
   rescue ActiveRecord::RecordNotFound
     render json: {}, status: :not_found
   end
@@ -35,9 +35,8 @@ class API::EventSeriesController < API::BaseController
   private
 
   def safe_params
-    params.require(:event_series).permit :name, :start_date, :starts_at, :ends_at, :has_pet, :house_rules, :interval,
-                                         :pet_description, :maximum_children, :child_age_minimum, :child_age_maximum,
-                                         :repeat_for, activity_names: [], foods: [],
-                                                      event_hosts_attributes: %i[id name email phone _destroy]
+    params.require(:event_series).permit :name, :start_date, :starts_at, :ends_at, :interval,
+                                         :maximum_children, :child_age_minimum, :child_age_maximum,
+                                         :repeat_for
   end
 end
