@@ -21,12 +21,7 @@ class Notifier::EventReminderPreviousDayHost < Notifier::Base
                                                                  :name,
                                                                  :maximum_children,
                                                                  :child_age_minimum,
-                                                                 :child_age_maximum,
-                                                                 :has_pet,
-                                                                 :activity_names,
-                                                                 :foods,
-                                                                 :house_rules,
-                                                                 :pet_description
+                                                                 :child_age_maximum
 
     participant_user_hash_array = @event.participants.map do |participant|
       participant_user_hash = participant.user.attributes.with_indifferent_access.slice :id,

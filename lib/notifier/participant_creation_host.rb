@@ -27,12 +27,8 @@ class Notifier::ParticipantCreationHost < Notifier::Base
                                                                  :name,
                                                                  :maximum_children,
                                                                  :child_age_minimum,
-                                                                 :child_age_maximum,
-                                                                 :has_pet,
-                                                                 :activity_names,
-                                                                 :foods,
-                                                                 :house_rules,
-                                                                 :pet_description
+                                                                 :child_age_maximum
+
     event_hash.update start_date: @event.start_date, time_range: @event.time_range
 
     participant_user_hash = @participant.user.attributes.with_indifferent_access.slice :id,
