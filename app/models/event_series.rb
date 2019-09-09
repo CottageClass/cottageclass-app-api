@@ -30,7 +30,6 @@ class EventSeries < ApplicationRecord
       house_rules
       pet_description
       time_zone
-      event_hosts
     ].each { |attribute| event.send format('%s=', attribute), send(attribute) }
     event.save
   end

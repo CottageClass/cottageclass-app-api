@@ -54,7 +54,7 @@ RSpec.describe User, type: :model do
     end
 
     it 'updates dependent events' do
-      create :event_series, :with_event_hosts, user: subject
+      create :event_series, user: subject
 
       subject.events.reload.each do |event|
         expect(event.latitude).to eq(subject.latitude)

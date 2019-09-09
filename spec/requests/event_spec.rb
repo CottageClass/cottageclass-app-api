@@ -8,7 +8,7 @@ RSpec.resource 'Event' do
 
   context 'index' do
     before do
-      event_series = create_list :event_series, 5, :with_event_hosts, user: user
+      event_series = create_list :event_series, 5, user: user
       create_list(:user, 3, :with_children).each do |user|
         Event.where(event_series: event_series).find_each do |event|
           create :participant, :with_participant_children, participable: event, user: user
@@ -116,7 +116,7 @@ RSpec.resource 'Event' do
     get '/api/users/:user_id/events/participated/:skope/page/:page/page_size/:page_size', format: :json do
       before do
         another_user = create :user
-        event_series = create_list :event_series, 5, :with_event_hosts, user: another_user
+        event_series = create_list :event_series, 5, user: another_user
         Event.where(event_series: event_series).find_each do |event|
           create :participant, :with_participant_children, participable: event, user: user
         end
@@ -156,7 +156,7 @@ RSpec.resource 'Event' do
       end
     end
 
-    let(:event_series) { create :event_series, :with_event_hosts, user: user }
+    let(:event_series) { create :event_series, user: user }
     let(:subject) { event_series.events.sample }
     let(:id) { subject.id }
 
@@ -209,7 +209,6 @@ RSpec.resource 'Event' do
         parameter :foods, 'Food Names'
         parameter :house_rules, 'House Rules'
         parameter :pet_description, 'Pet Description'
-        parameter :event_hosts_attributes, 'Array of adults present at host venue'
       end
 
       %i[
@@ -226,13 +225,6 @@ RSpec.resource 'Event' do
         let(attribute) { subject.send attribute }
       end
       %i[starts_at ends_at].each { |attribute| let(attribute) { subject.send(attribute).to_s :rfc2822 } }
-      let :event_hosts_attributes do
-        subject.event_hosts.map.with_index do |event_host, index|
-          event_host_attributes = event_host.attributes.with_indifferent_access.slice :id, :name, :email, :phone
-          event_host_attributes.update(_destroy: 1) if index.zero?
-          event_host_attributes
-        end
-      end
 
       put '/api/events/:id', format: :json do
         example_request 'update:success' do

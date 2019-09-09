@@ -48,8 +48,7 @@ class API::SearchListItemsController < API::BaseController
 
     preloader.preload event_array, itemable: %i[participants
                                                 participating_users
-                                                user
-                                                event_hosts]
+                                                user]
 
     # byebug
     # find all users that have no eligible events or childcare_requests

@@ -5,7 +5,7 @@ RSpec.resource 'EventSeries' do
   include_context 'json headers'
 
   let(:user) { create :user }
-  let(:subject) { build :event_series, :with_event_hosts, user: user }
+  let(:subject) { build :event_series, user: user }
 
   context 'write operations' do
     with_options scope: :event_series, with_example: true do
@@ -23,7 +23,6 @@ RSpec.resource 'EventSeries' do
       parameter :foods, 'Food Names'
       parameter :house_rules, 'House Rules'
       parameter :pet_description, 'Pet Description'
-      parameter :event_hosts_attributes, 'Array of adults present at host venue'
     end
 
     %i[
@@ -43,9 +42,6 @@ RSpec.resource 'EventSeries' do
       let(attribute) { subject.send attribute }
     end
     %i[starts_at ends_at].each { |attribute| let(attribute) { subject.send(attribute).to_s :time } }
-    let :event_hosts_attributes do
-      subject.event_hosts.map { |event_host| event_host.attributes.with_indifferent_access.slice :name, :email, :phone }
-    end
 
     post api_event_series_index_path, format: :json do
       include_context 'authorization token'

@@ -5,7 +5,7 @@ class API::EventsController < API::BaseController
   before_action :requires_event_owner, only: %i[update destroy]
 
   def index
-    events_index events: Event.includes(:user, :event_hosts, participant_children: :child, user: :children),
+    events_index events: Event.includes(:user, participant_children: :child, user: :children),
                  skope: params[:skope],
                  miles: params[:miles],
                  latitude: params[:latitude],
@@ -44,8 +44,7 @@ class API::EventsController < API::BaseController
 
   def show
     @event = Event.eager.find_by id: params[:id]
-    serializer = EventSerializer.new @event, include: %i[ event_hosts
-                                                          participants
+    serializer = EventSerializer.new @event, include: %i[ participants
                                                           participants.participant_children
                                                           user
                                                           user.children],
@@ -55,7 +54,7 @@ class API::EventsController < API::BaseController
 
   def update
     if @event.update(safe_params)
-      serializer = EventSerializer.new @event, include: %i[event_hosts], params: { current_user: current_user }
+      serializer = EventSerializer.new @event, params: { current_user: current_user }
       render json: serializer.serializable_hash, status: :ok
     else
       render json: { errors: @event.errors.full_messages }, status: :unprocessable_entity
@@ -126,8 +125,7 @@ class API::EventsController < API::BaseController
       links[:next] = path.call(skope: skope_name, page: events.next_page, page_size: page_size) unless events.last_page?
     end
 
-    serializer = EventSerializer.new events, include: %i[event_hosts user
-                                                         participants
+    serializer = EventSerializer.new events, include: %i[participants
                                                          participants.participant_children],
                                              params: { current_user: current_user },
                                              links: links,
@@ -157,7 +155,6 @@ class API::EventsController < API::BaseController
     params.require(:event).permit :name, :starts_at, :ends_at, :has_pet, :house_rules, :pet_description,
                                   :maximum_children, :child_age_minimum, :child_age_maximum,
                                   activity_names: [],
-                                  foods: [],
-                                  event_hosts_attributes: %i[id name email phone _destroy]
+                                  foods: []
   end
 end

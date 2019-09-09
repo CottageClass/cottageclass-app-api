@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_05_152225) do
+ActiveRecord::Schema.define(version: 2019_09_09_152550) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -109,28 +109,6 @@ ActiveRecord::Schema.define(version: 2019_09_05_152225) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["contactable_type", "contactable_id"], name: "index_emergency_contacts_on_contactable_type_and_contactable_id"
-  end
-
-  create_table "event_hosts", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "email"
-    t.string "phone"
-    t.boolean "verified", default: false
-    t.json "meta"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "event_hosts_events", id: false, force: :cascade do |t|
-    t.bigint "event_host_id", null: false
-    t.bigint "event_id", null: false
-    t.index ["event_host_id", "event_id"], name: "index_event_hosts_events_on_event_host_id_and_event_id", unique: true
-  end
-
-  create_table "event_hosts_series", id: false, force: :cascade do |t|
-    t.bigint "event_host_id", null: false
-    t.bigint "event_series_id", null: false
-    t.index ["event_host_id", "event_series_id"], name: "index_event_hosts_series_on_event_host_id_and_event_series_id", unique: true
   end
 
   create_table "event_series", force: :cascade do |t|

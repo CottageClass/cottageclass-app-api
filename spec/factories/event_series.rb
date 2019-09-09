@@ -16,11 +16,5 @@ FactoryBot.define do
     house_rules { Faker::Lorem.unique.paragraph }
     has_pet { true }
     pet_description { Faker::Lorem.unique.paragraph }
-
-    trait :with_event_hosts do
-      transient { event_hosts_count { 2 } }
-
-      after(:build) { |instance, evaluator| instance.event_hosts = build_list :event_host, evaluator.event_hosts_count }
-    end
   end
 end

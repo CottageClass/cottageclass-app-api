@@ -7,5 +7,4 @@ class EventSeriesSerializer
   attribute(:ends_at) { |object| object.ends_at.to_s :time }
 
   has_many :events
-  has_many :event_hosts
 end

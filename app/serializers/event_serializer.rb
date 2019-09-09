@@ -1,7 +1,6 @@
 class EventSerializer
   include FastJsonapi::ObjectSerializer
 
-  has_many :event_hosts
   has_many :participants
 
   attributes(*(%i[name maximum_children child_age_minimum child_age_maximum has_pet activity_names foods house_rules

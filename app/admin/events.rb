@@ -10,7 +10,7 @@ ActiveAdmin.register Event do
 
   permit_params :name, :starts_at, :ends_at, :maximum_children, :child_age_minimum, :child_age_maximum, :has_pet,
                 :house_rules, :pet_description,
-                activity_names: [], foods: [], event_hosts_attributes: %i[id verified _destroy]
+                activity_names: [], foods: []
 
   filter :name
   filter :user_email, as: :string
@@ -151,10 +151,6 @@ ActiveAdmin.register Event do
       f.li do
         f.label :updated_at
         f.span f.object.updated_at
-      end
-      f.has_many :event_hosts, allow_destroy: true do |event_host_f|
-        event_host_f.input :name
-        event_host_f.input :verified
       end
     end
     f.actions
