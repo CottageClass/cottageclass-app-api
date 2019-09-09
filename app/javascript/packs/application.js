@@ -23,6 +23,9 @@ import 'vue-image-lightbox/dist/vue-image-lightbox.min.css'
 
 import VueLazyLoad from 'vue-lazyload'
 
+var Turbolinks = require('turbolinks')
+Turbolinks.start()
+
 GoogleMapsLoader.KEY = process.env.GOOGLE_API_KEY
 GoogleMapsLoader.LIBRARIES = ['geometry', 'places']
 GoogleMapsLoader.load()
