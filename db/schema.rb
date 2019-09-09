@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_09_152550) do
+ActiveRecord::Schema.define(version: 2019_09_09_162753) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -123,11 +123,6 @@ ActiveRecord::Schema.define(version: 2019_09_09_152550) do
     t.integer "maximum_children", default: 0
     t.integer "child_age_minimum", default: 0
     t.integer "child_age_maximum", default: 0
-    t.boolean "has_pet", default: false
-    t.text "activity_names", default: [], array: true
-    t.text "foods", default: [], array: true
-    t.text "house_rules"
-    t.text "pet_description"
     t.json "meta"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -144,11 +139,6 @@ ActiveRecord::Schema.define(version: 2019_09_09_152550) do
     t.integer "child_age_minimum", default: 0
     t.integer "child_age_maximum", default: 0
     t.boolean "modified", default: false
-    t.boolean "has_pet", default: false
-    t.text "activity_names", default: [], array: true
-    t.text "foods", default: [], array: true
-    t.text "house_rules"
-    t.text "pet_description"
     t.json "meta"
     t.decimal "latitude"
     t.decimal "longitude"
