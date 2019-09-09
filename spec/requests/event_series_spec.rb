@@ -18,9 +18,6 @@ RSpec.resource 'EventSeries' do
       parameter :child_age_maximum, 'Maximum age of child. Default: 0 (no limit)'
       parameter :repeat_for, 'Number of events this series. Default: 6'
       parameter :interval, 'Interval in weeks between events. Default: 4'
-      parameter :has_pet, 'Has Pet?'
-      parameter :house_rules, 'House Rules'
-      parameter :pet_description, 'Pet Description'
     end
 
     %i[
@@ -31,9 +28,6 @@ RSpec.resource 'EventSeries' do
       child_age_maximum
       repeat_for
       interval
-      has_pet
-      house_rules
-      pet_description
     ].each do |attribute|
       let(attribute) { subject.send attribute }
     end

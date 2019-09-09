@@ -204,9 +204,6 @@ RSpec.resource 'Event' do
         parameter :maximum_children, 'Maximum number of children allowed. Default: 0 (no limit)'
         parameter :child_age_minimum, 'Minimum age of child. Default: 0 (no limit)'
         parameter :child_age_maximum, 'Maximum age of child. Default: 0 (no limit)'
-        parameter :has_pet, 'Has Pet?'
-        parameter :house_rules, 'House Rules'
-        parameter :pet_description, 'Pet Description'
       end
 
       %i[
@@ -214,9 +211,6 @@ RSpec.resource 'Event' do
         maximum_children
         child_age_minimum
         child_age_maximum
-        has_pet
-        house_rules
-        pet_description
       ].each do |attribute|
         let(attribute) { subject.send attribute }
       end

@@ -11,8 +11,5 @@ FactoryBot.define do
     child_age_maximum { 0 }
     repeat_for { 6 }
     interval { 4 }
-    house_rules { Faker::Lorem.unique.paragraph }
-    has_pet { true }
-    pet_description { Faker::Lorem.unique.paragraph }
   end
 end
