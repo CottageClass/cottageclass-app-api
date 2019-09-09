@@ -8,20 +8,13 @@ ActiveAdmin.register Event do
 
   actions :index, :new, :create, :edit, :update, :destroy
 
-  permit_params :name, :starts_at, :ends_at, :maximum_children, :child_age_minimum, :child_age_maximum, :has_pet,
-                :house_rules, :pet_description,
-                activity_names: [], foods: []
+  permit_params :name, :starts_at, :ends_at, :maximum_children, :child_age_minimum, :child_age_maximum
 
   filter :name
   filter :user_email, as: :string
   filter :user_phone_number, as: :string
   filter :has_participants, as: :boolean
   filter :upcoming, as: :boolean
-
-  before_save do |instance|
-    instance.activity_names = (params.dig(:event, :activity_names) || '').split(',').try :flatten
-    instance.foods = (params.dig(:event, :foods) || '').split(',').try :flatten
-  end
 
   index do
     selectable_column
@@ -48,19 +41,11 @@ ActiveAdmin.register Event do
         maximum_children
         child_age_minimum
         child_age_maximum
-        has_pet
-        activity_names
-        foods
-        house_rules
-        pet_description
         time_zone
         created_at
         updated_at
       ],
       user: %i[
-        has_pet
-        pet_description
-        house_rules
         id
         email
         created_at
@@ -132,15 +117,6 @@ ActiveAdmin.register Event do
       end
       f.input :starts_at, hint: 'This is in UTC'
       f.input :ends_at, hint: 'This is in UTC'
-      f.input :has_pet
-      f.input :pet_description
-      f.input :activity_names,
-              as: :tags,
-              hint: 'Though this input allows more than 1 item, entering more than 1 can lead to unexpected behavior'
-      f.input :foods,
-              as: :tags,
-              hint: 'Though this input allows more than 1 item, entering more than 1 can lead to unexpected behavior'
-      f.input :house_rules
       f.input :maximum_children
       f.input :child_age_minimum
       f.input :child_age_maximum

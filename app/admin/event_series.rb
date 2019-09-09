@@ -5,8 +5,7 @@ ActiveAdmin.register EventSeries do
   actions :index, :new, :create, :edit, :update, :destroy
 
   permit_params :name, :start_date, :starts_at, :ends_at, :repeat_for, :interval, :maximum_children, :child_age_minimum,
-                :child_age_maximum, :has_pet, :house_rules, :pet_description,
-                activity_names: [], foods: []
+                :child_age_maximum
 
   filter :name
   filter :start_date
@@ -38,11 +37,6 @@ ActiveAdmin.register EventSeries do
       f.input :start_date
       f.input :starts_at
       f.input :ends_at
-      f.input :has_pet
-      f.input :pet_description
-      f.input :activity_names, as: :tags
-      f.input :foods, as: :tags
-      f.input :house_rules
       f.input :repeat_for
       f.input :interval
       f.input :maximum_children

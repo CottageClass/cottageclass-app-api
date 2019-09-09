@@ -152,9 +152,6 @@ class API::EventsController < API::BaseController
   end
 
   def safe_params
-    params.require(:event).permit :name, :starts_at, :ends_at, :has_pet, :house_rules, :pet_description,
-                                  :maximum_children, :child_age_minimum, :child_age_maximum,
-                                  activity_names: [],
-                                  foods: []
+    params.require(:event).permit :name, :starts_at, :ends_at, :maximum_children, :child_age_minimum, :child_age_maximum
   end
 end

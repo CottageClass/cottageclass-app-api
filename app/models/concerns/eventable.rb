@@ -26,10 +26,6 @@ module Eventable
     self.maximum_children ||= 0
     self.child_age_minimum ||= 0
     self.child_age_maximum ||= 0
-    self.house_rules = house_rules.try :squish
-    self.pet_description = has_pet? ? pet_description.try(:squish) : nil
-    self.activity_names = activity_names.map(&:squish).select(&:present?)
-    self.foods = foods.map(&:squish).select(&:present?)
   end
 
   def generate_time_zone
