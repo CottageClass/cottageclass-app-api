@@ -17,8 +17,6 @@ describe('createEvent for one event', () => {
     expect(event.name).toBe('Arts & crafts & tacos 🌮 with Asa')
     expect(event.startsAt).toEqual(moment('2019-03-23T18:00:00-04:00'))
     expect(event.endsAt).toEqual(moment('2019-03-23T21:00:00-04:00'))
-    expect(event.activityName).toBe('arts & crafts')
-    expect(event.food).toBe('tacos 🌮')
   })
 })
 

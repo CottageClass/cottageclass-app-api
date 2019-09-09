@@ -133,9 +133,6 @@ export default {
         hasPet: {
           isTrue: e.hasPet
         },
-        activity: {
-          selected: e.activityNames[0]
-        },
         houseRules: {
           text: e.houseRules
         },

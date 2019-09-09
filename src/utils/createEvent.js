@@ -63,8 +63,6 @@ function cleanEvent (attributes) {
   res.hostFirstName = capitalize(attributes.hostFirstName)
   res.hostFuzzyLatitude = parseFloat(attributes.hostFuzzyLatitude)
   res.hostFuzzyLongitude = parseFloat(attributes.hostFuzzyLongitude)
-  res.activityName = attributes.activityNames.length > 0 ? attributes.activityNames[0] : null
-  res.food = attributes.foods.length > 0 ? attributes.foods[0] : null
   if (attributes.host && attributes.host.data) {
     res.host = attributes.host.data.attributes
     res.host.location = {
