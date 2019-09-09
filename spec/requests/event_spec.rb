@@ -205,8 +205,6 @@ RSpec.resource 'Event' do
         parameter :child_age_minimum, 'Minimum age of child. Default: 0 (no limit)'
         parameter :child_age_maximum, 'Maximum age of child. Default: 0 (no limit)'
         parameter :has_pet, 'Has Pet?'
-        parameter :activity_names, 'Activity Names'
-        parameter :foods, 'Food Names'
         parameter :house_rules, 'House Rules'
         parameter :pet_description, 'Pet Description'
       end
@@ -217,8 +215,6 @@ RSpec.resource 'Event' do
         child_age_minimum
         child_age_maximum
         has_pet
-        activity_names
-        foods
         house_rules
         pet_description
       ].each do |attribute|

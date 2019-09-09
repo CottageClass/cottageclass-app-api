@@ -19,8 +19,6 @@ RSpec.resource 'EventSeries' do
       parameter :repeat_for, 'Number of events this series. Default: 6'
       parameter :interval, 'Interval in weeks between events. Default: 4'
       parameter :has_pet, 'Has Pet?'
-      parameter :activity_names, 'Activity Names'
-      parameter :foods, 'Food Names'
       parameter :house_rules, 'House Rules'
       parameter :pet_description, 'Pet Description'
     end
@@ -34,8 +32,6 @@ RSpec.resource 'EventSeries' do
       repeat_for
       interval
       has_pet
-      activity_names
-      foods
       house_rules
       pet_description
     ].each do |attribute|
