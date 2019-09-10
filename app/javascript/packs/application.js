@@ -18,6 +18,8 @@ import GoogleMapsLoader from 'google-maps'
 
 import { logger } from '@/mixins'
 
+import TurbolinksAdapter from 'vue-turbolinks'
+
 import 'vuetify/dist/vuetify.min.css' // Ensure you are using css-loader
 import 'vue-image-lightbox/dist/vue-image-lightbox.min.css'
 
@@ -54,6 +56,7 @@ if (isAuthWindow) {
   })
 } else {
   // Load all the Vue plugins
+  Vue.use(TurbolinksAdapter)
   Vue.use(VueLazyLoad)
   Vue.mixin(logger)
   Vue.use(VueScrollTo)
@@ -78,7 +81,7 @@ if (isAuthWindow) {
     id: process.env.GOOGLE_ANALYTICS_ID,
     router
   })
-  document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('turbolinks:load', () => {
     const selector = '#app'
     const element = document.querySelector(selector)
     const token = (element && element.dataset && element.dataset.token) || undefined
