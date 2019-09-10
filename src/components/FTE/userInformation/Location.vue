@@ -1,19 +1,19 @@
 <template>
-    <Question
+  <Question
     title="What's your home address?"
     subtitle="Please enter your address so we can list your playdate & find playdates near you. Only your guests will see this.*"
     explanation="* Members who RSVP to your playdate will see your address. Non-members will see an approximate location within a few blocks.">
-      <div class="w-form">
-        <vue-google-autocomplete
-          v-if="googleMapsIsLoaded"
-          id="map"
-          classname="w-input location-text-field"
-          :placeholder="currentAddress"
-          v-on:placechanged="getAddressData"
-        >
-        </vue-google-autocomplete>
-      </div>
-      <form id="email-form-2" v-on:submit.prevent>
+    <div class="w-form">
+      <vue-google-autocomplete
+        v-if="googleMapsIsLoaded"
+        id="map"
+        classname="w-input location-text-field"
+        :placeholder="currentAddress"
+        v-on:placechanged="getAddressData"
+      >
+      </vue-google-autocomplete>
+    </div>
+    <form id="email-form-2" v-on:submit.prevent>
       <input
         v-if="showApartmentField"
         @keyup.enter="$emit('pressedEnter')"
@@ -23,7 +23,7 @@
         class="location-text-field w-input"
       ></form>
     <a v-if="!showApartmentField" @click="toggleApartmentField" class="onb-button-add-group w-inline-block"><img src="@/assets/add.svg" alt="" class="image-7"><div class="onb-button-add-group-text">Add apartment #</div></a>
-    </Question>
+  </Question>
 </template>
 
 <script>
