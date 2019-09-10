@@ -58,6 +58,7 @@ a {
   font-weight: 500;
   text-align: center;
   text-transform: none;
+  -webkit-text-fill-color: #fff;
 }
 
 .btn__primary-action--alt-2:hover {
