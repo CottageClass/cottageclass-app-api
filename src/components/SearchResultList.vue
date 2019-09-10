@@ -1,11 +1,6 @@
 <template>
   <div class="list-wrapper">
-    <div class="event-list">
-      <SearchListHeader
-        v-if="showHeader"
-        @offer-playdate-click="$emit('offer-playdate-click')"
-        @request-childcare-click="$emit('request-childcare-click')"
-      />
+    <div class="event-list"> 
       <div v-for="item in (items || [])">
         <SearchListCard
           :item="item"

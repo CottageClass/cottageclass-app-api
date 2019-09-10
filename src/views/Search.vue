@@ -19,6 +19,10 @@
       <MainNav />
       <div class="content-section background-01">
         <div class="divider-2px"></div>
+         <GetTheMost 
+            @offer-playdate-click="offerPlaydate"
+            @request-childcare-click="requestChildcare"
+          />
         <div class="top-container w-container">
           <h1 class="event-page-title">Meet new parents. Plan playdates.</h1>
           <div class="selectors-group">
@@ -72,8 +76,6 @@
                 :items="items"
                 :noItemsMessage="noItemsMessage"
                 :showTrailblazerMessage="showTrailblazerMessage"
-                @offer-playdate-click="offerPlaydate"
-                @request-childcare-click="requestChildcare"
                 @fetch-more-click="fetchMoreItems"
                 @user-updated="updateUser"
                 @event-updated="updateEvent"/>
@@ -87,6 +89,7 @@
 </template>
 
 <script>
+import GetTheMost from '@/components/search/GetTheMost.vue'
 import SearchResultList from '@/components/SearchResultList.vue'
 import MainNav from '@/components/MainNav.vue'
 import Footer from '@/components/Footer.vue'
@@ -104,7 +107,8 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'Search',
   mixins: [messaging, alerts, screen],
-  components: { SearchResultList,
+  components: { GetTheMost,
+    SearchResultList,
     MainNav,
     Footer,
     EventListMap,
