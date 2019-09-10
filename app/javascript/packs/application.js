@@ -12,7 +12,6 @@ import App from '@/App.vue'
 import router from '@/router'
 import store from '@/store'
 import { trackEvent } from '@/utils/ahoy'
-import '@/registerServiceWorker'
 import VueAnalytics from 'vue-analytics'
 import GoogleMapsLoader from 'google-maps'
 
