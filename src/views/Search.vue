@@ -23,43 +23,8 @@
           @offer-playdate-click="offerPlaydate"
           @request-childcare-click="requestChildcare"
         />
-        <div class="top-container w-container">
-          <h1 class="event-page-title">Meet new parents. Plan playdates.</h1>
-          <div class="selectors-group">
-            <div class="filter-container">
-
-              <FilterSelector title="Location"
-                              :showClear="false"
-                              :active="shortDescription" >
-                <template v-slot:buttonContents>
-                  <LocationFilterButton :shortDescription="shortDescription" />
-                </template>
-                <template v-slot:selectorContents>
-                  <LocationFilterSelector
-                    @locationUpdated="updateMapAreaFromFilter"
-                    :searchRadius="mapArea.maxDistance"
-                  />
-                </template>
-              </FilterSelector>
-
-              <FilterSelector title="Child Age"
-                              :showClear="true"
-                              @clearFilterClicked="resetAgeRange"
-                              :active="ageRangeActive" >
-                <template v-slot:buttonContents>
-                  <AgeRangeFilterButton :range="ageRange" />
-                </template>
-                <template v-slot:selectorContents>
-                  <AgeRangeFilterSelector
-                    v-model="ageRange"
-                  />
-                </template>
-              </FilterSelector>
-            </div>
-          </div>
-          <div class="page-subtitle"><strong>These parents near you want to share playdates.</strong> Offer a playdate, contact parents to invite them, or browse scheduled playdates below!</div>
-        </div>
         <div class="main-container w-container">
+
           <div class="map-list-container">
             <EventListMap
               class="map"
@@ -69,6 +34,40 @@
               :isFullScreen="false"
             />
             <div class="list-container w-container">
+              <li class="events-list__title-bar">
+               <div class="other-events__title-text">Nearby Parents</div>
+               <div class="selectors-group"> 
+                <FilterSelector title="Location" 
+                              :showClear="false"
+                              :active="shortDescription" >
+                <template v-slot:buttonContents> 
+                  <LocationFilterButton :shortDescription="shortDescription" />
+                  </template>
+                  <template v-slot:selectorContents>
+                    <LocationFilterSelector
+                      @locationUpdated="updateMapAreaFromFilter"
+                      :searchRadius="mapArea.maxDistance"
+                   />
+                  </template>
+                </FilterSelector>
+
+              <div class="utility-spacer-16px"></div>
+
+                <FilterSelector title="Child Age"
+                    :showClear="false"
+                    @clearFilterClicked="resetAgeRange"
+                    :active="ageRangeActive" >
+                     <template v-slot:buttonContents>
+                       <AgeRangeFilterButton :range="ageRange" />
+                     </template>
+                     <template v-slot:selectorContents>
+                       <AgeRangeFilterSelector
+                       v-model="ageRange"
+                      /> =
+                     </template>
+                  </FilterSelector>
+               </div>
+              </li> 
               <SearchResultList
                 :awaiting="awaiting"
                 :showFetchMoreButton="showFetchMoreButton"
@@ -234,6 +233,82 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.events-list__title-bar {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  margin-top: 0px;
+  padding: 16px 20px 18px;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-bottom: 1px solid #f5f5f5;
+  background-color: #fff;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.08);
+  list-style-type: none;
+}
+
+.other-events__title-text {
+  overflow: hidden;
+  margin-right: 16px;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.selectors-group {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  -webkit-box-align: start;
+  -webkit-align-items: flex-start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+}
+
+.filter-btn-container-alt {
+  margin-bottom: 0px;
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 auto;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+}
+
+.utility-spacer-16px {
+  padding: 0px 8px;
+}
+
+.btn-filter {
+  margin-right: 0px;
+  padding: 4px 10px 5px;
+  border: 1px solid #1f88e9;
+  border-radius: 4px;
+  background-color: transparent;
+  color: #1f88e9;
+  font-size: 13px;
+}
+
 .detail-wrapper {
   height: 100vh;
   width: 100%;
@@ -374,6 +449,16 @@ a {
   }
 }
 @media (max-width: 767px){
+  .events-list__title-bar {
+    padding: 16px;
+    border-radius: 0px;
+  }
+
+  .other-events__title-text {
+    font-size: 14px;
+    line-height: 18px;
+  }
+
   .main-container {
     padding: 0px;
   }
