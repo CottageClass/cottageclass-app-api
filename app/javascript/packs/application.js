@@ -31,6 +31,7 @@ if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/service-worker.js')
   })
 }
+import { requestPermission } from '@/utils/notifications/push'
 
 var Turbolinks = require('turbolinks')
 Turbolinks.start()
@@ -89,6 +90,7 @@ if (isAuthWindow) {
     router
   })
   document.addEventListener('turbolinks:load', () => {
+    requestPermission()
     const selector = '#app'
     const element = document.querySelector(selector)
     const token = (element && element.dataset && element.dataset.token) || undefined
