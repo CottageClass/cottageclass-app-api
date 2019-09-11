@@ -44,7 +44,7 @@ export default {
       if (this.errorMessage) {
         return 'inactive'
       } else {
-        return 'next'
+        return 'done'
       }
     },
     stepSequence () {
