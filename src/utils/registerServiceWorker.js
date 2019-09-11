@@ -1,9 +1,10 @@
 import Logger from '@/utils/logger'
+import { isIOSNativeApp } from '@/utils/platform'
 const logger = Logger('registerServiceWorker')
-// this should be called after page load
 
+// this should be called after page load
 export function registerServiceWorker () {
-  if ('serviceWorker' in navigator) {
+  if (isIOSNativeApp() && 'serviceWorker' in navigator) {
     navigator.serviceWorker.register('/service-worker.js').then(function (reg) {
       logger.log('Service Worker Registered!', reg)
 
