@@ -77,7 +77,7 @@ export default {
        (!this.currentUser || (this.user.id.toString() !== this.currentUser.id.toString()))
     },
     showShareButton () {
-      return this.event && this.$route.name !== 'SocialInvite'
+      return this.event && this.$route.name !== 'SocialEventInvite'
     },
     attendees () {
       if (!this.event) { return [] }
@@ -233,7 +233,7 @@ export default {
       })
     },
     shareClick () {
-      this.$router.push({ name: 'SocialInvite', params: { id: this.event.id, context: 'searchItem' } })
+      this.$router.push({ name: 'SocialEventInvite', params: { id: this.event.id, context: 'searchItem' } })
     },
     async goingClick () {
       if (this.redirectToSignupIfNotAuthenticated({

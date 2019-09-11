@@ -39,7 +39,7 @@ export default {
   methods: {
     proceed () {
       if (this.firstCreatedEvent && this.pendingWaves.length === 0) {
-        this.$router.push({ name: 'SocialInvite', params: { id: this.firstCreatedEvent.id, context: 'spontaneous' } })
+        this.$router.push({ name: 'SocialEventInvite', params: { id: this.firstCreatedEvent.id, context: 'spontaneous' } })
       } else {
         this.$router.push({ name: 'Search' })
       }
