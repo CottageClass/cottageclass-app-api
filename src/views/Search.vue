@@ -19,10 +19,10 @@
       <MainNav />
       <div class="content-section background-01">
         <div class="divider-2px"></div>
-         <GetTheMost 
-            @offer-playdate-click="offerPlaydate"
-            @request-childcare-click="requestChildcare"
-          />
+        <GetTheMost
+          @offer-playdate-click="offerPlaydate"
+          @request-childcare-click="requestChildcare"
+        />
         <div class="top-container w-container">
           <h1 class="event-page-title">Meet new parents. Plan playdates.</h1>
           <div class="selectors-group">
@@ -107,7 +107,8 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'Search',
   mixins: [messaging, alerts, screen],
-  components: { GetTheMost,
+  components: {
+    GetTheMost,
     SearchResultList,
     MainNav,
     Footer,
@@ -116,7 +117,8 @@ export default {
     AgeRangeFilterSelector,
     AgeRangeFilterButton,
     LocationFilterSelector,
-    LocationFilterButton },
+    LocationFilterButton
+  },
   data () {
     return {
       showAllButtonText: 'Show all playdates',
