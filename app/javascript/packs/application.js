@@ -12,6 +12,7 @@ import App from '@/App.vue'
 import router from '@/router'
 import store from '@/store'
 import { trackEvent } from '@/utils/ahoy'
+import { registerServiceWorker } from '@/utils/registerServiceWorker'
 import VueAnalytics from 'vue-analytics'
 import GoogleMapsLoader from 'google-maps'
 
@@ -23,14 +24,6 @@ import 'vuetify/dist/vuetify.min.css' // Ensure you are using css-loader
 import 'vue-image-lightbox/dist/vue-image-lightbox.min.css'
 
 import VueLazyLoad from 'vue-lazyload'
-
-// Check that service workers are supported
-if ('serviceWorker' in navigator) {
-  // Use the window load event to keep the page load performant
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/service-worker.js')
-  })
-}
 import { requestPermission } from '@/utils/notifications/push'
 
 var Turbolinks = require('turbolinks')
@@ -90,6 +83,7 @@ if (isAuthWindow) {
     router
   })
   document.addEventListener('turbolinks:load', () => {
+    registerServiceWorker()
     requestPermission()
     const selector = '#app'
     const element = document.querySelector(selector)

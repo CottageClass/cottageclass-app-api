@@ -42,6 +42,15 @@ if (workbox) {
       ]
     })
   )
+
+  self.addEventListener('push', (event) => {
+    console.log('push notification received')
+    const title = 'Get Started With Workbox'
+    const options = {
+      body: event.data.text()
+    }
+    event.waitUntil(self.registration.showNotification(title, options))
+  })
 } else {
   console.log(`Boo! Workbox didn't load 😬`)
 }
