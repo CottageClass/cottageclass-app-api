@@ -1,31 +1,31 @@
 <template>
-<div class="action-selector-overlay"
-     @click.stop="$emit('clickaway')"
-     @touchmove="preventTouchMove"
-     >
-  <div class="other-events-card_action-selector">
-    <SearchListCardActions
-         :user="user"
-         :event="event"
-         :childcareRequest="childcareRequest"
-         @user-updated="$emit('user-updated', $event)"
-         @event-deleted="$emit('event-deleted', id)"
-         @event-updated="$emit('event-updated', $event)"
-         @going-click="$emit('going-click')"
-         @cancel-click="$emit('cancel-click')"
-         @interested-click="$emit('interested-click')"
-         @share-click="$emit('share-click')"
-         @contact-click="$emit('contact-click')"
-         class="other-events-card__action-selector__button-list"
-         :showGoingButton="showGoingButton"
-         :showMeetButton="showMeetButton"
-         :showCancelButton="showCancelButton"
-         :showContactButton="showContactButton"
-         :showShareButton="showShareButton"
-         :showInterestedButton="showInterestedButton"
-         :allowWaveUndo="allowWaveUndo"/>
-</div>
-</div>
+  <div class="action-selector-overlay"
+       @click.stop="$emit('clickaway')"
+       @touchmove.passive="preventTouchMove"
+  >
+    <div class="other-events-card_action-selector">
+      <SearchListCardActions
+        :user="user"
+        :event="event"
+        :childcareRequest="childcareRequest"
+        @user-updated="$emit('user-updated', $event)"
+        @event-deleted="$emit('event-deleted', id)"
+        @event-updated="$emit('event-updated', $event)"
+        @going-click="$emit('going-click')"
+        @cancel-click="$emit('cancel-click')"
+        @interested-click="$emit('interested-click')"
+        @share-click="$emit('share-click')"
+        @contact-click="$emit('contact-click')"
+        class="other-events-card__action-selector__button-list"
+        :showGoingButton="showGoingButton"
+        :showMeetButton="showMeetButton"
+        :showCancelButton="showCancelButton"
+        :showContactButton="showContactButton"
+        :showShareButton="showShareButton"
+        :showInterestedButton="showInterestedButton"
+        :allowWaveUndo="allowWaveUndo"/>
+    </div>
+  </div>
 </template>
 
 <script>
