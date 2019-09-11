@@ -1,31 +1,31 @@
 <template>
-  <div class="modal-tint"
-       @touchmove.passive="preventTouchMove">
-    <div class="modal">
-      <div class="modal-content-container">
-        <div class="modal-content">
-          <div class="modal-title-text">{{ title }}</div>
-          <div class="modal-description-text" v-html="bodyText"></div>
-        </div>
-        <div class="mob-selector-close2 w-inline-block"
-             @click="$emit('closeButtonClick')">
-          <img src="@/assets/close-x-black.svg" alt="" />
-        </div>
+<div class="modal-tint"
+     @touchmove="preventTouchMove">
+  <div class="modal">
+    <div class="modal-content-container">
+      <div class="modal-content">
+        <div class="modal-title-text">{{ title }}</div>
+        <div class="modal-description-text" v-html="bodyText"></div>
       </div>
-      <div class="modal-actions">
-        <div class="modal-primary-action w-button"
-             @click="$emit('primaryClick')">
-          {{ buttonNames[0] }}
-        </div>
-        <div class="spacer-12px"></div>
-        <div v-if="buttonNames.length > 1"
-             class="modal-secondary-action w-button"
-             @click="$emit('secondaryClick')">
-          {{ buttonNames[1] }}
-        </div>
+      <div class="mob-selector-close2 w-inline-block"
+           @click="$emit('closeButtonClick')">
+        <img src="@/assets/close-x-black.svg" alt="" />
+      </div>
+    </div>
+    <div class="modal-actions">
+      <div class="modal-primary-action w-button"
+         @click="$emit('primaryClick')">
+        {{ buttonNames[0] }}
+      </div>
+      <div class="spacer-12px"></div>
+      <div v-if="buttonNames.length > 1"
+           class="modal-secondary-action w-button"
+           @click="$emit('secondaryClick')">
+        {{ buttonNames[1] }}
       </div>
     </div>
   </div>
+</div>
 </template>
 
 <script>
