@@ -35,39 +35,39 @@
             />
             <div class="list-container w-container">
               <li class="events-list__title-bar">
-               <div class="other-events__title-text">Nearby Parents</div>
-               <div class="selectors-group"> 
-                <FilterSelector title="Location" 
-                              :showClear="false"
-                              :active="shortDescription" >
-                <template v-slot:buttonContents> 
-                  <LocationFilterButton :shortDescription="shortDescription" />
-                  </template>
-                  <template v-slot:selectorContents>
-                    <LocationFilterSelector
-                      @locationUpdated="updateMapAreaFromFilter"
-                      :searchRadius="mapArea.maxDistance"
-                   />
-                  </template>
-                </FilterSelector>
-
-              <div class="utility-spacer-16px"></div>
-
-                <FilterSelector title="Child Age"
-                    :showClear="false"
-                    @clearFilterClicked="resetAgeRange"
-                    :active="ageRangeActive" >
-                     <template v-slot:buttonContents>
-                       <AgeRangeFilterButton :range="ageRange" />
-                     </template>
-                     <template v-slot:selectorContents>
-                       <AgeRangeFilterSelector
-                       v-model="ageRange"
-                      /> =
-                     </template>
+                <div class="other-events__title-text">Nearby Parents</div>
+                <div class="selectors-group">
+                  <FilterSelector title="Location"
+                                  :showClear="false"
+                                  :active="shortDescription" >
+                    <template v-slot:buttonContents>
+                      <LocationFilterButton :shortDescription="shortDescription" />
+                    </template>
+                    <template v-slot:selectorContents>
+                      <LocationFilterSelector
+                        @locationUpdated="updateMapAreaFromFilter"
+                        :searchRadius="mapArea.maxDistance"
+                      />
+                    </template>
                   </FilterSelector>
-               </div>
-              </li> 
+
+                  <div class="utility-spacer-16px"></div>
+
+                  <FilterSelector title="Child Age"
+                                  :showClear="false"
+                                  @clearFilterClicked="resetAgeRange"
+                                  :active="ageRangeActive" >
+                    <template v-slot:buttonContents>
+                      <AgeRangeFilterButton :range="ageRange" />
+                    </template>
+                    <template v-slot:selectorContents>
+                      <AgeRangeFilterSelector
+                        v-model="ageRange"
+                      /> =
+                    </template>
+                  </FilterSelector>
+                </div>
+              </li>
               <SearchResultList
                 :awaiting="awaiting"
                 :showFetchMoreButton="showFetchMoreButton"
