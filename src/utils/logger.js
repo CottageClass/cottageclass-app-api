@@ -14,19 +14,19 @@
 let FS = window.FS
 
 export default function (namespace) {
-  const namespacedLog = (...msgs) => {
+  const namespacedLog = (msgs) => {
     if (msgs.length === 1 && typeof msgs[0] === 'object') {
       console.log('%c Lilypad:' + namespace + ':',
-        'color: #f00; font-weight: bold;')
+        'color: #00f; font-weight: bold;')
       console.log(msgs[0])
     } else {
       console.log('%c Lilypad:' + namespace + ': %c' + msgs.join(', '),
-        'color: #f00; font-weight: bold;',
+        'color: #00f; font-weight: bold;',
         'color #000')
     }
   }
 
-  const namespacedError = (...msgs) => {
+  const namespacedError = (msgs) => {
     if (msgs.length === 1 && msgs[0] instanceof Error) {
       console.log('%c Lilypad:' + namespace + ':error:',
         'color: #000; background: #f55;')
@@ -44,7 +44,7 @@ export default function (namespace) {
   }
 
   return {
-    log (msg) {
+    log (...msg) {
       switch (process.env.NODE_ENV) {
         case 'development':
         case 'staging':
@@ -63,7 +63,7 @@ export default function (namespace) {
           break
       }
     },
-    logError (msg) {
+    logError (...msg) {
       switch (process.env.NODE_ENV) {
         case 'development':
         case 'staging':
@@ -83,7 +83,7 @@ export default function (namespace) {
       }
     },
 
-    debug (msg) {
+    debug (...msg) {
       switch (process.env.NODE_ENV) {
         case 'development':
         case 'staging':
