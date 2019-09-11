@@ -12,7 +12,7 @@ import App from '@/App.vue'
 import router from '@/router'
 import store from '@/store'
 import { trackEvent } from '@/utils/ahoy'
-import { registerServiceWorker } from '@/utils/registerServiceWorker'
+import { registerServiceWorker, subscribeUser } from '@/utils/registerServiceWorker'
 import VueAnalytics from 'vue-analytics'
 import GoogleMapsLoader from 'google-maps'
 
@@ -85,6 +85,7 @@ if (isAuthWindow) {
   document.addEventListener('turbolinks:load', () => {
     registerServiceWorker()
     requestPermission()
+    subscribeUser()
     const selector = '#app'
     const element = document.querySelector(selector)
     const token = (element && element.dataset && element.dataset.token) || undefined

@@ -1,9 +1,42 @@
+import Logger from '@/utils/logger'
+const logger = Logger('registerServiceWorker')
+// this should be called after page load
+
 export function registerServiceWorker () {
-// Check that service workers are supported
   if ('serviceWorker' in navigator) {
-  // Use the window load event to keep the page load performant
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/service-worker.js')
+    navigator.serviceWorker.register('/service-worker.js').then(function (reg) {
+      logger.log('Service Worker Registered!', reg)
+
+      reg.pushManager.getSubscription().then(function (sub) {
+        if (sub === null) {
+        // Update UI to ask user to register for Push
+          logger.log('Not subscribed to push service!')
+        } else {
+        // We have a subscription, update the database
+          logger.log('Subscription object: ')
+          logger.log(sub)
+        }
+      })
+    }).catch(function (err) {
+      logger.error('Service Worker registration failed: ', err)
+    })
+  }
+}
+
+export function subscribeUser () {
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.ready.then(function (reg) {
+      reg.pushManager.subscribe({
+        userVisibleOnly: true
+      }).then(function (sub) {
+        logger.log('Endpoint URL: ', sub.endpoint)
+      }).catch(function (e) {
+        if (Notification.permission === 'denied') {
+          logger.log('Permission for notifications was denied')
+        } else {
+          logger.logError(e)
+        }
+      })
     })
   }
 }
