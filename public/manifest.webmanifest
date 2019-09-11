@@ -4,6 +4,7 @@
   "start_url": "/",
   "display": "standalone",
   "background_color": "#fff",
+  "theme_color": "#fd6f77",
   "description": "Parenting. Locally",
   "icons" : [
     {
