@@ -3,6 +3,9 @@
 importScripts('https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js')
 
 if (workbox) {
+  // chill on the logs, workbox
+  workbox.setConfig({ debug: false })
+
   workbox.routing.registerRoute(
     /^\/api\//,
     new workbox.strategies.NetworkFirst({
