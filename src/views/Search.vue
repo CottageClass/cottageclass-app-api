@@ -375,7 +375,7 @@ a {
 
 .list-container {
   display: flex;
-  width: 568px;
+  width: 555px;
   min-height: 100px;
   padding-right: 32px;
   flex-direction: column;
