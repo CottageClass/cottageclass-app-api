@@ -385,7 +385,7 @@ a {
 
 .map {
   position: sticky;
-  top: 32px;
+  top: 146px;
   display: block;
   width: 320px;
   height:438px;
@@ -442,6 +442,7 @@ a {
   }
   .main-container {
     padding: 0px 32px 80px;
+    margin-top: 24px;
   }
   .event-page-title {
     font-size: 32px;
