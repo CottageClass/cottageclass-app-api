@@ -1,5 +1,5 @@
+/* global importScripts workbox */
 /* this is run in the context of the service worker which defines variable */
-/* eslint-disable no-undef */
 importScripts('https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js')
 
 if (workbox) {
