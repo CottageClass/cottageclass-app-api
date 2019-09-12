@@ -168,7 +168,7 @@ export default {
       if (ages.length === 1) {
         return '1 child age ' + this.ageString(0)
       }
-      return 'Ages ' + andJoin(ages.map((e, i) => this.ageString(i)))
+      return 'Children ages ' + andJoin(ages.map((e, i) => this.ageString(i)))
     },
     userFirstName () {
       return (this.event && this.event.hostFirstName) || (this.user && this.user.firstName)
