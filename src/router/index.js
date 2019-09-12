@@ -128,8 +128,13 @@ export default new Router({
       props: true
     },
     {
-      path: '/event/:id/share',
+      path: '/share',
       name: 'SocialInvite',
+      component: SocialInvite
+    },
+    {
+      path: '/event/:id/share',
+      name: 'SocialEventInvite',
       component: SocialInvite,
       props: {
         context: true
