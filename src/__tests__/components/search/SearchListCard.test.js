@@ -54,7 +54,7 @@ describe('SearchListCard', () => {
     expect(userName.text()).toBe('Foo B.')
     expect(occupation.text()).toBe('Doctor, New York Health Dept.')
     expect(description.text()).toBe('This is my biography and I love it.')
-    expect(kidsAges.text()).toBe('Ages 4 mos, 2 and 9')
+    expect(kidsAges.text()).toBe('Children ages 4 mos, 2 and 9')
     expect(date.text()).toBe('Available mornings and weekends')
     expect(distance.text()).toBe('0.7 mi')
     expect(badge.exists()).toBe(false)
