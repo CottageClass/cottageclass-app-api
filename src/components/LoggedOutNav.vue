@@ -11,7 +11,7 @@
           <div class="lo-navigation__button-label">Log in</div>
         </router-link>
       </li>
-      <li class="lo-navigation__link-item">
+      <li class="lo-navigation__link-item faq">
         <router-link :to="{name:'Faq'}"
                      class="lo-navigation__button-secondary w-inline-block">
           <div class="lo-navigation__button-label">FAQ</div>
@@ -117,6 +117,7 @@ a {
 }
 
 @media (max-width: 479px){
+
   .lo-navigation__link-item {
     margin-right: 4px;
   }
@@ -142,5 +143,10 @@ a {
     border-radius: 0;
   }
 
+}
+@media (max-width: 320px){
+  .faq {
+    display: none
+  }
 }
 </style>
