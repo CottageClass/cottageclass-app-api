@@ -11,7 +11,6 @@
               title="Describe your childcare request"
               subtitle="Parents near you will see your request and reply by text message. What are you looking for? For what times? What kinds of needs does your child have? (Note: if you do swap childcare with a parent, we strongly recommend meeting them for a playdate first.)">
       <FormWithTextArea
-        maxLength="120"
         placeholder="e.g. 'Can anyone recommend a great sitter?' or 'Seeking a childcare swap to cover Tuesday mornings in September.'"
         v-model="description.text" />
     </Question>
@@ -45,7 +44,7 @@ export default {
       if (this.errorMessage) {
         return 'inactive'
       } else {
-        return 'next'
+        return 'done'
       }
     },
     stepSequence () {
