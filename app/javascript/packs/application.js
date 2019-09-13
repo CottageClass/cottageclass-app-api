@@ -85,7 +85,6 @@ if (isAuthWindow) {
   })
   document.addEventListener('turbolinks:load', () => {
     registerIOSEventLIstener()
-    postMessage('does not matter')
     registerServiceWorker()
     requestPermission()
     subscribeUser()
