@@ -25,6 +25,7 @@ import 'vue-image-lightbox/dist/vue-image-lightbox.min.css'
 
 import VueLazyLoad from 'vue-lazyload'
 import { requestPermission } from '@/utils/notifications/push'
+import { registerIOSEventLIstener, postMessage } from '@/utils/iosAdapter.js'
 
 var Turbolinks = require('turbolinks')
 Turbolinks.start()
@@ -83,9 +84,12 @@ if (isAuthWindow) {
     router
   })
   document.addEventListener('turbolinks:load', () => {
+    registerIOSEventLIstener()
+    postMessage('does not matter')
     registerServiceWorker()
     requestPermission()
     subscribeUser()
+
     const selector = '#app'
     const element = document.querySelector(selector)
     const token = (element && element.dataset && element.dataset.token) || undefined
