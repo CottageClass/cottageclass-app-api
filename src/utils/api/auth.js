@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { postMessage } from '@/utils/iosAdapter'
 
 // request an email with a password change link
 export function submitPasswordResetRequest (data) {
@@ -16,7 +17,16 @@ export function register (params) {
 }
 
 export function signIn (params) {
-  return axios.post(`/users/sign_in`, { user: params })
+  return axios.post(`/users/sign_in`, { user: params }).then((res) => {
+    console.log({ res })
+    if (res.status.toString() === '200') {
+      const messageContents = {
+        title: 'signInComplete'
+      }
+      postMessage(messageContents)
+      return res
+    }
+  })
 }
 
 // destroy the current session on the server
