@@ -7,7 +7,7 @@ const logger = Logger('api:users')
 
 export async function submitUserInfo (userId, data) {
   if (!data) { return }
-  let { phone, location, availability, settings } = data
+  let { phone, location, availability, settings, firebaseToken } = data
   let postData = {}
   if (location && location.fullAddress) {
     let address = location.fullAddress
@@ -71,6 +71,9 @@ export async function submitUserInfo (userId, data) {
       ...postData,
       ...availability
     }
+  }
+  if (data.firebaseToken) {
+    postData = { ...postData, firebaseToken }
   }
   const { employer, jobPosition, profileBlurb, images, activities } = data
   const { languages, hasPet, houseRules, petDescription } = data
