@@ -10,7 +10,7 @@ async function sendTokenToServer (userId, refreshToken) {
   try {
     await submitUserInfo(userId, { firebaseToken: refreshToken })
   } catch (e) {
-    logger.logError('Unable to update token on server')
+    logger.logError('Unable to update token on server', e)
   }
 }
 
