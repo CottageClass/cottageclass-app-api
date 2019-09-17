@@ -121,6 +121,14 @@ class User < ApplicationRecord
       joins(:children).where('children.birthday' => time_range)
     end
   }
+  scope :child_birthday_range, lambda { |earliest, latest|
+    if earliest.present? || latest.present?
+      earliest ||= Time.current - 20.years.seconds
+      latest ||= Time.current
+      time_range = earliest..latest
+      joins(:children).where('children.birthday' => time_range)
+    end
+  }
 
   def jwt_payload
     super.merge('user' => CurrentUserSerializer.json_for(self, include: %i[children]))
