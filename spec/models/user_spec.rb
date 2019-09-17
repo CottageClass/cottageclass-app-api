@@ -7,6 +7,7 @@ RSpec.describe User, type: :model do
     it { is_expected.to have_many(:event_series).inverse_of(:user) }
     it { is_expected.to have_many(:childcare_requests).inverse_of(:user) }
     it { is_expected.to have_many(:events).through(:event_series) }
+    it { is_expected.to have_many(:devices) }
     it { is_expected.to have_many(:participants).inverse_of(:user).dependent(:destroy) }
     it { is_expected.to have_many(:notifications).inverse_of(:recipient).dependent(:destroy) }
   end

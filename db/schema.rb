@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_13_160929) do
+ActiveRecord::Schema.define(version: 2019_09_17_131529) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -98,6 +98,14 @@ ActiveRecord::Schema.define(version: 2019_09_13_160929) do
     t.datetime "updated_at", null: false
     t.index ["giver_id"], name: "index_dark_stars_on_giver_id"
     t.index ["recipient_id"], name: "index_dark_stars_on_recipient_id"
+  end
+
+  create_table "devices", force: :cascade do |t|
+    t.string "token"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_devices_on_user_id"
   end
 
   create_table "emergency_contacts", force: :cascade do |t|
@@ -422,6 +430,7 @@ ActiveRecord::Schema.define(version: 2019_09_13_160929) do
   add_foreign_key "children", "users", column: "parent_id"
   add_foreign_key "dark_stars", "users", column: "giver_id"
   add_foreign_key "dark_stars", "users", column: "recipient_id"
+  add_foreign_key "devices", "users"
   add_foreign_key "messages", "twilio_sessions", column: "cc_twilio_session_id"
   add_foreign_key "messages", "users", column: "receiver_id"
   add_foreign_key "messages", "users", column: "sender_id"
