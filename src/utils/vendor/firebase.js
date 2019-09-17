@@ -17,7 +17,12 @@ async function sendTokenToServer (userId, refreshToken) {
 export default {
 
   init (userId) {
+    logger.log('initializing firebase')
     const messaging = firebase.messaging()
+    messaging.onMessage((payload) => {
+      logger.debug('Message received. ', payload)
+    })
+
     logger.log('initializing firebase token handling')
 
     // get a token if it exists
