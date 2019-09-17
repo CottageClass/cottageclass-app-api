@@ -2,13 +2,13 @@ import * as firebase from 'firebase/app'
 import 'firebase/messaging'
 
 import Logger from '@/utils/logger'
-import { submitUserInfo } from '@/utils/api'
+import { createDevice } from '@/utils/api'
 
 const logger = Logger('firebase')
 
 async function sendTokenToServer (userId, refreshToken) {
   try {
-    await submitUserInfo(userId, { firebaseToken: refreshToken })
+    await createDevice({ token: refreshToken })
   } catch (e) {
     logger.logError('Unable to update token on server', e)
   }
