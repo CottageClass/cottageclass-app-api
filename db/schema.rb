@@ -105,6 +105,7 @@ ActiveRecord::Schema.define(version: 2019_09_17_131529) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["token"], name: "index_devices_on_token"
     t.index ["user_id"], name: "index_devices_on_user_id"
   end
 
