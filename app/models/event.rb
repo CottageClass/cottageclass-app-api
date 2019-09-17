@@ -95,11 +95,34 @@ class Event < ApplicationRecord
 
       hosts = recent_events.map(&:user).uniq
       hosts.each do |host|
+        # find all the starrers of the hosts an send an email
         starrers = User
           .joins('INNER JOIN stars ON users.id = stars.giver_id')
           .where("stars.starable_type = 'User' AND stars.starable_id = ?", host.id)
         starrers.each do |starrer|
           starrer.notify_event_creation_starrer host if starrer.id != host.id
+        end
+
+        # find all nearby users with near children and send a push
+        nearby_users = User.near([host.latitude, host.longitude], 1).where.not(id: host.id)
+        all_eligible_users = []
+        host.children.each do |child|
+          eligible_users_for_child = nearby_users.child_birthday_range(child.birthday - 2.years.seconds, child.birthday + 2.years.seconds)
+          all_eligible_users += eligible_users_for_child.to_a
+          all_eligible_users = all_eligible_users.uniq
+        end
+        recipients.each do |recipient|
+          next if recipient.devices.empty?
+
+          puts recipient.devices
+          push_notification = Rpush::Gcm::Notification.new
+          push_notification.app = Rpush::Gcm::App.find_by(name: 'lilypad')
+          push_notification.registration_ids = recipient.devices.pluck(:token)
+          push_notification.data = {
+            title: "#{host.first_name} has a new offering",
+            body: 'content here'
+          }
+          push_notification.save!
         end
       end
     end
