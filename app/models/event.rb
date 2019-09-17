@@ -90,7 +90,7 @@ class Event < ApplicationRecord
   end
 
   class << self
-    def notify_event_creation_starrers(last_run_time)
+    def batch_event_job(last_run_time)
       recent_events = Event.joins(:event_series).includes(:user).where('events.created_at > ?', last_run_time).to_a
 
       hosts = recent_events.map(&:user).uniq

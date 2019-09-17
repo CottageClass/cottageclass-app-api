@@ -28,18 +28,18 @@ namespace :cottage_class do
       puts 'done'
     end
 
-    desc 'Send emails notifying starrers when events are created'
-    task notify_event_creation_starrers: :environment do
-      last_run_time = KeyValue['last_notify_event_creation_starrers_timestamp']
+    desc 'Perform once hourly batched event tasks'
+    task batch_event_job: :environment do
+      last_run_time = KeyValue['last_batch_event_job_timestamp']
       now = Time.current
       if last_run_time.present?
-        puts "Notifying starrers of created events.  Last run at #{last_run_time}."
-        Event.notify_event_creation_starrers last_run_time
+        puts "Performing batch event job.  Last run at #{last_run_time}."
+        Event.batch_event_job last_run_time
         puts 'done'
       else
         puts 'Never run before.  Skipping.'
       end
-      KeyValue['last_notify_event_creation_starrers_timestamp'] = now
+      KeyValue['last_batch_event_job_timestamp'] = now
     end
   end
 end
