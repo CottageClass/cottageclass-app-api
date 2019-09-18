@@ -1,4 +1,4 @@
-import { andJoin, distanceHaversine } from '@/utils/utils'
+import { andJoin, distanceHaversine, capitalize } from '@/utils/utils'
 import { mapGetters } from 'vuex'
 import moment from 'moment'
 import languageList from 'language-list'
@@ -218,8 +218,8 @@ export default {
       }
     },
     occupation () {
-      const position = this.user.jobPosition
-      const employer = this.user.employer
+      const position = capitalize(this.user.jobPosition)
+      const employer = capitalize(this.user.employer)
       if (position && employer) {
         return position + ', ' + employer
       } else if (position) {
