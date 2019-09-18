@@ -201,7 +201,9 @@ export default {
     localArea () {
       var neighborhood = this.user.neighborhood
       var sublocality = ''
-      if (this.user.locality) { sublocality = this.user.locality } else {
+      if (this.user.locality) {
+        sublocality = this.user.locality
+      } else {
         sublocality = this.user.sublocality
       }
       var stateName = this.user.adminAreaLevel1
