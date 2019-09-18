@@ -1,5 +1,5 @@
 <template>
-<div class="filter-btn-container">
+<div class="filter-btn-container-alt">
   <div class="filter-button w-button"
        :class="active ? 'active' : ''"
        @click="openSelector">
@@ -156,10 +156,6 @@ body {
   background-image: linear-gradient(180deg, rgba(31 ,136 ,233 ,1), rgba(31 ,136 ,233 ,1));
   color: #ff;
   -webkit-text-fill-color: #fff;  // keep for safari
-}
-
-.filter-btn-container {
-  margin-bottom: 20px;
 }
 
 .selector-box-container {

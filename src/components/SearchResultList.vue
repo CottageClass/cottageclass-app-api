@@ -1,11 +1,6 @@
 <template>
   <div class="list-wrapper">
     <div class="event-list">
-      <SearchListHeader
-        v-if="showHeader"
-        @offer-playdate-click="$emit('offer-playdate-click')"
-        @request-childcare-click="$emit('request-childcare-click')"
-      />
       <div v-for="item in (items || [])">
         <SearchListCard
           :item="item"
@@ -34,13 +29,12 @@
 <script>
 import TrailblazerCard from '@/components/TrailblazerCard'
 import SearchListCard from '@/components/search/SearchListCard'
-import SearchListHeader from '@/components/search/SearchListHeader'
 import SearchListFooter from '@/components/search/SearchListFooter'
 import { mapGetters } from 'vuex'
 
 export default {
   name: 'SearchResultList',
-  components: { SearchListCard, TrailblazerCard, SearchListHeader, SearchListFooter },
+  components: { SearchListCard, TrailblazerCard, SearchListFooter },
 
   props: {
     awaiting: {
