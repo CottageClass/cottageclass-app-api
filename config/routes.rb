@@ -9,6 +9,7 @@ Rails.application.routes.draw do
              }
 
   namespace :api, defaults: { format: :json } do
+    resources :devices, only: %i[create]
     resources :event_series, only: %i[index show create update]
     resources :childcare_requests, only: %i[show create update destroy]
     resources :events, only: %i[show update destroy] do

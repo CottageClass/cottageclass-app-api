@@ -19,7 +19,8 @@ class Notification < ApplicationRecord
     password_reset_request: 15,
     event_suggestion: 16,
     user_suggestion: 17,
-    event_creation_starrer: 18
+    event_creation_starrer: 18,
+    event_creation_match: 19
   }
 
   belongs_to :recipient, class_name: 'User', inverse_of: :notifications
@@ -111,6 +112,11 @@ class Notification < ApplicationRecord
                    Notifier::EventCreationStarrer.new user: recipient,
                                                       event_creator: notifiable,
                                                       body: body
+                 when :event_creation_match
+                   self.body = 'messages.event_creation_match'
+                   Notifier::EventCreationMatch.new user: recipient,
+                                                    event_creator: notifiable,
+                                                    body: body
                  end
 
       if notifier.present?

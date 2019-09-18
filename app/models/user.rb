@@ -57,6 +57,7 @@ class User < ApplicationRecord
             uniqueness: true,
             format: { with: /\A.+@.+\..+\z/, message: 'Please provide a valid email' }
 
+  has_many :devices
   has_many :children,
            class_name: 'Child',
            foreign_key: :parent_id,
@@ -117,6 +118,14 @@ class User < ApplicationRecord
       earliest_birthday = (Time.current - (max_age + 1).year.seconds)
       latest_birthday = (Time.current - min_age.year.seconds)
       time_range = earliest_birthday..latest_birthday
+      joins(:children).where('children.birthday' => time_range)
+    end
+  }
+  scope :child_birthday_range, lambda { |earliest, latest|
+    if earliest.present? || latest.present?
+      earliest ||= Time.current - 20.years.seconds
+      latest ||= Time.current
+      time_range = earliest..latest
       joins(:children).where('children.birthday' => time_range)
     end
   }
@@ -274,8 +283,17 @@ class User < ApplicationRecord
   end
 
   def notify_event_creation_starrer(host)
+    return unless settings['email']['receive_weekly_email']
+
     puts "sending a message to #{id} about #{host.id}"
     notifications.event_creation_starrer.create(notifiable: host)
+  end
+
+  def notify_event_creation_match(host)
+    return unless settings['email']['receive_weekly_email']
+
+    puts "sending a message to #{id} about #{host.id}"
+    notifications.event_creation_match.create(notifiable: host)
   end
 
   def notify_event_suggestion

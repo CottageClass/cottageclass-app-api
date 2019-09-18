@@ -25,7 +25,20 @@ import 'vue-image-lightbox/dist/vue-image-lightbox.min.css'
 
 import VueLazyLoad from 'vue-lazyload'
 import { requestPermission } from '@/utils/notifications/push'
-import { registerIOSEventLIstener, postMessage } from '@/utils/iosAdapter.js'
+import { registerIOSEventLIstener } from '@/utils/iosAdapter.js'
+import * as firebase from 'firebase/app'
+const firebaseConfig = {
+  apiKey: 'AIzaSyC6OILnj9bH_fEbTAI8u1ll9rxZ2wKk1pk',
+  authDomain: 'cottageclass-166118.firebaseapp.com',
+  databaseURL: 'https://cottageclass-166118.firebaseio.com',
+  projectId: 'cottageclass-166118',
+  storageBucket: '',
+  messagingSenderId: '438514874280',
+  appId: '1:438514874280:web:6b1458ceb579d3e4330f9d'
+}
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig)
 
 var Turbolinks = require('turbolinks')
 Turbolinks.start()
@@ -85,7 +98,6 @@ if (isAuthWindow) {
   })
   document.addEventListener('turbolinks:load', () => {
     registerIOSEventLIstener()
-    postMessage('does not matter')
     registerServiceWorker()
     requestPermission()
     subscribeUser()

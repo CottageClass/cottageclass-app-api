@@ -1,6 +1,7 @@
 export * from './stars'
 export * from './search'
 export * from './auth'
+export * from './devices'
 export * from './proxy'
 export * from './users'
 export * from './events'
