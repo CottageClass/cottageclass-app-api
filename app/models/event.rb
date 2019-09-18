@@ -105,16 +105,18 @@ class Event < ApplicationRecord
 
         # find all nearby users with near children and send a push
         nearby_users = User.near([host.latitude, host.longitude], 1).where.not(id: host.id)
-        all_eligible_users = []
+        recipients = []
         host.children.each do |child|
           eligible_users_for_child = nearby_users.child_birthday_range(child.birthday - 2.years.seconds, child.birthday + 2.years.seconds)
-          all_eligible_users += eligible_users_for_child.to_a
-          all_eligible_users = all_eligible_users.uniq
+          recipients += eligible_users_for_child.to_a
+          recipients = recipients.uniq
         end
+        # User.all.each do |recipient|
         recipients.each do |recipient|
           next if recipient.devices.empty?
 
-          puts recipient.devices
+          recipient.notify_event_creation_match host unless starrers.include? recipient
+
           push_notification = Rpush::Gcm::Notification.new
           push_notification.app = Rpush::Gcm::App.find_by(name: 'lilypad')
           push_notification.registration_ids = recipient.devices.pluck(:token)
