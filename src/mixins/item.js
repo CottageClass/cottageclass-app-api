@@ -42,7 +42,11 @@ export default {
         return ''
       }
       if (languages.length === 1) {
-        return 'Speaks ' + languages[0]
+        if (languages[0] === 'English') {
+          return ''
+        } else {
+          return 'Speaks ' + languages[0]
+        }
       }
       return 'Speaks ' + andJoin(languages)
     },
