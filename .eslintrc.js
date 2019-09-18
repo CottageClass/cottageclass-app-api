@@ -12,7 +12,8 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'camelcase': 'off',
     'vue/require-v-for-key': 'off',
-    'vue/html-indent': ['error'] 
+    'vue/html-indent': ['error'],
+    'brace-style': ['error', '1tbs', {'allowSingleLine': true }]
   },
   parserOptions: {
     parser: 'babel-eslint'

@@ -35,6 +35,7 @@
                  @click.stop="interestedClickAndUpdate"></a>
               <div v-if="distance" class="profile-top-card__distance">{{ distance }}</div>
             </div>
+            <div class="profile-top-card__localArea">{{ localArea }}</div>
             <div class="profile-top-card__occupation">{{ occupation }}</div>
             <div class="profile-top-card__ages">{{ kidsAges }}</div>
             <div v-if="profileBlurb" class="about__description">
@@ -760,6 +761,14 @@ a {
   line-height: 17px;
 }
 
+.profile-top-card__localArea {
+  overflow: hidden;
+  margin-bottom: 6px;
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 13px;
+  line-height: 17px;
+}
+
 .profile-top-card__user-name {
   margin-top: 0;
   margin-right: 14px;
@@ -1169,6 +1178,10 @@ a {
   }
 
   .profile-top-card__occupation {
+    margin-bottom: 2px;
+    text-align: center;
+  }
+  .profile-top-card__localArea {
     margin-bottom: 2px;
     text-align: center;
   }
