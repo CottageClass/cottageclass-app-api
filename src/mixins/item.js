@@ -200,19 +200,18 @@ export default {
     },
     localArea () {
       var neighborhood = this.user.neighborhood
-      var sublocality = ""
-      if (this.user.locality)
-        {sublocality = this.user.locality} else {
-          sublocality = this.user.sublocality
-        }
+      var sublocality = ''
+      if (this.user.locality) { sublocality = this.user.locality } else {
+        sublocality = this.user.sublocality
+      }
       var stateName = this.user.adminAreaLevel1
-      if (neighborhood && sublocality && stateName){
-          return neighborhood + ', ' + sublocality + ', ' + stateName
+      if (neighborhood && sublocality && stateName) {
+        return neighborhood + ', ' + sublocality + ', ' + stateName
       } else if (neighborhood && stateName) {
-        return neighborhood  + ', ' + stateName
-      } else if (sublocality && stateName){
+        return neighborhood + ', ' + stateName
+      } else if (sublocality && stateName) {
         return sublocality && stateName
-      } else if (stateName){
+      } else if (stateName) {
         return stateName
       }
     },
