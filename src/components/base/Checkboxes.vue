@@ -6,6 +6,7 @@
         class="checkbox-field-extra-space"
         :class="{'active-checkbox': isChecked(index)}"
         @click="toggleSelected(id)"
+        :key="'cb-' + _uid + '-' + index"
       >
         <input
           type="checkbox"
