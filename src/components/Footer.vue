@@ -1,27 +1,29 @@
 <template>
-  <div class="footer">
-    <div class="divider-2px"></div>
-    <div class="footer-container w-container">
-      <div class="div-block-33">
-        <ul class="footer-unordered-list">
-          <li class="footer-link-list-item"><a href="mailto:contact@joinlilypad.com" class="links footer-link">contact@joinlilypad.com</a></li>
-          <li class="footer-link-list-item"><a href="tel:+18622944859" class="links footer-link">‭(862) 294-4859‬</a></li>
+  <div v-bind:class="{ hideOnMobile: hideOnMobile }">
+    <div class="footer">
+      <div class="divider-2px"></div>
+      <div class="footer-container w-container">
+        <div class="div-block-33">
+          <ul class="footer-unordered-list">
+            <li class="footer-link-list-item"><a href="mailto:contact@joinlilypad.com" class="links footer-link">contact@joinlilypad.com</a></li>
+            <li class="footer-link-list-item"><a href="tel:+18622944859" class="links footer-link">‭(862) 294-4859‬</a></li>
           <!-- Additional footer links here -->
-        </ul>
-        <ul class="footer-social-unordered-list">
-          <li class="footer-social-list-item"><a href="https://twitter.com/cottageclass" class="link-block-2 w-inline-block"><img src="@/assets/social---twitter---gray.svg" width="32" height="32" alt=""></a></li>
-          <li class="footer-social-list-item"><a href="https://instagram.com/cottageclass" class="link-block-2 w-inline-block"><img src="@/assets/social---instagram---gray.svg" width="32" height="32" alt=""></a></li>
-          <li class="footer-social-list-item"><a href="https://cottageclass.tumblr.com/" class="link-block-2 w-inline-block"><img src="@/assets/social---tumblr---gray.svg" width="32" height="32" alt=""></a></li>
-          <li class="footer-social-list-item"><a href="https://pinterest.com/cottageclass" class="link-block-2 w-inline-block"><img src="@/assets/social---pinterest---gray.svg" width="32" height="32" alt=""></a></li>
-          <li class="footer-social-list-item"><a href="https://facebook.com/cottageclass" class="link-block-2 w-inline-block"><img src="@/assets/social---facebook---gray.svg" width="32" height="32" alt=""></a></li>
-        </ul>
-      </div>
-      <div>
-        <ul class="terms-unordered-list">
-          <li class="terms-list-item"><a href="#" class="links footer-bottom">© CottageClass 2018</a></li>
-          <li class="terms-list-item"><a href="https://cottageclass.com/terms-of-service" class="links footer-bottom">Terms of Service</a></li>
-          <li class="terms-list-item"><a href="https://cottageclass.com/privacy-policy" class="links footer-bottom">Privacy Policy</a></li>
-        </ul>
+          </ul>
+          <ul class="footer-social-unordered-list">
+            <li class="footer-social-list-item"><a href="https://twitter.com/cottageclass" class="link-block-2 w-inline-block"><img src="@/assets/social---twitter---gray.svg" width="32" height="32" alt=""></a></li>
+            <li class="footer-social-list-item"><a href="https://instagram.com/cottageclass" class="link-block-2 w-inline-block"><img src="@/assets/social---instagram---gray.svg" width="32" height="32" alt=""></a></li>
+            <li class="footer-social-list-item"><a href="https://cottageclass.tumblr.com/" class="link-block-2 w-inline-block"><img src="@/assets/social---tumblr---gray.svg" width="32" height="32" alt=""></a></li>
+            <li class="footer-social-list-item"><a href="https://pinterest.com/cottageclass" class="link-block-2 w-inline-block"><img src="@/assets/social---pinterest---gray.svg" width="32" height="32" alt=""></a></li>
+            <li class="footer-social-list-item"><a href="https://facebook.com/cottageclass" class="link-block-2 w-inline-block"><img src="@/assets/social---facebook---gray.svg" width="32" height="32" alt=""></a></li>
+          </ul>
+        </div>
+        <div>
+          <ul class="terms-unordered-list">
+            <li class="terms-list-item"><a href="#" class="links footer-bottom">© CottageClass 2018</a></li>
+            <li class="terms-list-item"><a href="https://cottageclass.com/terms-of-service" class="links footer-bottom">Terms of Service</a></li>
+            <li class="terms-list-item"><a href="https://cottageclass.com/privacy-policy" class="links footer-bottom">Privacy Policy</a></li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
@@ -29,7 +31,8 @@
 
 <script>
 export default {
-  name: 'Footer'
+  name: 'Footer',
+  props: [ 'hideOnMobile' ]
 }
 </script>
 
@@ -277,6 +280,10 @@ a {
   .footer {
     background-position: 50% -84%;
     background-size: auto;
+  }
+
+  .hideOnMobile {
+    display: none
   }
 
   .unordered-list {
