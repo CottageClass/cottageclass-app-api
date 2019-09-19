@@ -113,9 +113,8 @@ class Event < ApplicationRecord
         end
         # User.all.each do |recipient|
         recipients.each do |recipient|
-          next if recipient.devices.empty?
-
           recipient.notify_event_creation_match host unless starrers.include? recipient
+          next if recipient.devices.empty?
 
           push_notification = Rpush::Gcm::Notification.new
           push_notification.app = Rpush::Gcm::App.find_by(name: 'lilypad')
