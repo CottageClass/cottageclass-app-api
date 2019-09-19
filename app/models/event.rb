@@ -103,19 +103,26 @@ class Event < ApplicationRecord
           starrer.notify_event_creation_starrer host if starrer.id != host.id
         end
 
-        # find all nearby users with near children and send a push
-        nearby_users = User.near([host.latitude, host.longitude], 1).where.not(id: host.id)
+        # Find users for whom host is within their radius.  Beacuse of the restrictions of geocoder (near),
+        # this is tricky.  we have to create a subquery with the users' max_distance as its own column because
+        # currently it's buryied in the settings jsonb (probably worth changing in the future
+        users_with_distance = User.select("*, CAST(settings->'matching'->>'max_distance' AS decimal) AS max_distance")
+        nearby_users = users_with_distance
+          .from(users_with_distance, :users)
+          .near([host.latitude, host.longitude], :max_distance)
+          .where.not(id: host.id)
+
         recipients = []
         host.children.each do |child|
-          eligible_users_for_child = nearby_users.child_birthday_range(child.birthday - 2.years.seconds, child.birthday + 2.years.seconds)
+          eligible_users_for_child = nearby_users.child_birthday_range(child.birthday - 2.years.seconds,
+                                                                       child.birthday + 2.years.seconds)
           recipients += eligible_users_for_child.to_a
           recipients = recipients.uniq
         end
         # User.all.each do |recipient|
         recipients.each do |recipient|
-          next if recipient.devices.empty?
-
           recipient.notify_event_creation_match host unless starrers.include? recipient
+          next if recipient.devices.empty?
 
           push_notification = Rpush::Gcm::Notification.new
           push_notification.app = Rpush::Gcm::App.find_by(name: 'lilypad')

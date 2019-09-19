@@ -285,14 +285,14 @@ class User < ApplicationRecord
   def notify_event_creation_starrer(host)
     return unless settings['email']['receive_weekly_email']
 
-    puts "sending a message to #{id} about #{host.id}"
+    puts "sending a starrer message to #{id} about #{host.id}"
     notifications.event_creation_starrer.create(notifiable: host)
   end
 
   def notify_event_creation_match(host)
     return unless settings['email']['receive_weekly_email']
 
-    puts "sending a message to #{id} about #{host.id}"
+    puts "sending a match message to #{id} about #{host.id}"
     notifications.event_creation_match.create(notifiable: host)
   end
 
