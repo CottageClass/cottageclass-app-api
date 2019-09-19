@@ -1,4 +1,5 @@
 <template>
+<div v-bind:class="{ hideOnMobile: hideOnMobile }">
   <div class="footer">
     <div class="divider-2px"></div>
     <div class="footer-container w-container">
@@ -25,11 +26,13 @@
       </div>
     </div>
   </div>
+  </div>
 </template>
 
 <script>
 export default {
-  name: 'Footer'
+  name: 'Footer',
+  props: [ 'hideOnMobile' ]
 }
 </script>
 
@@ -278,6 +281,10 @@ a {
     background-position: 50% -84%;
     background-size: auto;
   }
+
+  .hideOnMobile {
+    display: none
+  } 
 
   .unordered-list {
     -webkit-box-align: start;
