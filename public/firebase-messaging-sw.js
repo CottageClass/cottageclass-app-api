@@ -16,7 +16,7 @@ messaging.setBackgroundMessageHandler(function (payload) {
   const notificationOptions = {
     body: payload.data.body,
     data: payload.data,
-    icon: '/lilypad-icon-192x192.png',
+    icon: payload.data.icon,
     badge: '/lilypad-icon-monochrome-152x152.png'
   }
 

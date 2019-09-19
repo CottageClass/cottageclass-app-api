@@ -128,9 +128,10 @@ class Event < ApplicationRecord
           push_notification.app = Rpush::Gcm::App.find_by(name: 'lilypad')
           push_notification.registration_ids = recipient.devices.pluck(:token)
           push_notification.data = {
+            icon: host.avatar,
             url: ENV['LINK_HOST'] + '/event/' + recent_events.first.id.to_s,
-            title: "#{host.first_name} has a new offering",
-            body: 'content here'
+            title: "#{host.first_name.capitalize} has a new offering",
+            body: recent_events.first.name
           }
           push_notification.save!
         end
