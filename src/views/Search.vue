@@ -430,7 +430,7 @@ a {
   }
   .list-container {
     width:100%;
-    padding-top: 20px;
+    padding-top: 0px;
     padding-right: 0px;
     padding-bottom: 128px;
   }
@@ -442,7 +442,7 @@ a {
   }
   .main-container {
     padding: 0px 32px 80px;
-    margin-top: 24px;
+    margin-top: 0px;
   }
   .event-page-title {
     font-size: 32px;
