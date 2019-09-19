@@ -28,7 +28,7 @@ describe('EventTime', () => {
   })
 
   it('shows the right times', () => {
-    const names = wrapper.findAll('input').wrappers.map(w => w.attributes().name)
+    const names = wrapper.findAll('label').wrappers.map(w => w.text())
     expect(names).toEqual(TIMES)
   })
 })

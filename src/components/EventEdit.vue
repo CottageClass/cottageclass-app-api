@@ -10,7 +10,6 @@
       <StyleWrapper styleIs="editing" class="cards" v-if="event">
         <ErrorMessage v-if="showError && error" text="Your entries have errors. Please fix them to continue..." />
         <EventName v-model="event.name" />
-        <EventActivity v-model="event.activity" />
         <MaxChildren v-model="event.maximumChildren" />
         <ErrorMessage v-if="event.ageRange.err" :text="event.ageRange.err" />
         <AgeRange v-model="event.ageRange" />
@@ -57,7 +56,6 @@ import DateTimePicker from '@/components/DateTimePicker.vue'
 import PageActionsFooter from '@/components/PageActionsFooter.vue'
 import ErrorMessage from '@/components/base/ErrorMessage.vue'
 import * as api from '@/utils/api'
-import EventActivity from '@/components/base/eventSpecification/EventActivity.vue'
 import HouseRules from '@/components/FTE/userInformation/HouseRules.vue'
 import PetsDescription from '@/components/FTE/userInformation/PetsDescription.vue'
 import MaxChildren from '@/components/base/eventSpecification/MaxChildren.vue'
@@ -72,7 +70,7 @@ var VueScrollTo = require('vue-scrollto')
 
 export default {
   name: 'EventEdit',
-  components: { EventActivity, HouseRules, PetsDescription, MaxChildren, MainNav, StyleWrapper, PageActionsFooter, ErrorMessage, YesOrNo, Question, DateTimePicker, EventName, AgeRange, DeleteEventConfirmationModal },
+  components: { HouseRules, PetsDescription, MaxChildren, MainNav, StyleWrapper, PageActionsFooter, ErrorMessage, YesOrNo, Question, DateTimePicker, EventName, AgeRange, DeleteEventConfirmationModal },
   data () {
     return {
       eventId: this.$route.params.id,
