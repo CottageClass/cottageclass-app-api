@@ -27,7 +27,7 @@
 
           <div class="map-list-container">
             <EventListMap
-              class="map" 
+              class="map"
               :items="items"
               @map-click="handleMapClick"
               @searchAreaSet="updateMapAreaFromMap"
@@ -63,7 +63,7 @@
                     <template v-slot:selectorContents>
                       <AgeRangeFilterSelector
                         v-model="ageRange"
-                      /> 
+                      />
                     </template>
                   </FilterSelector>
                 </div>
