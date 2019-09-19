@@ -1,3 +1,6 @@
+import { subscribeUser } from '@/utils/registerServiceWorker'
+import { requestPermission } from '@/utils/notifications/push'
+
 import axios from 'axios'
 import firebaseWrapper from '@/utils/vendor/firebase'
 import { postMessage } from '@/utils/iosAdapter'
@@ -23,6 +26,8 @@ export function register (params) {
 export function signIn (params) {
   return axios.post(`/users/sign_in`, { user: params }).then((res) => {
     if (res.status.toString() === '200') {
+      subscribeUser()
+      requestPermission()
       const userId = res.data[1].sub
       const messageContents = {
         title: 'signInComplete'
