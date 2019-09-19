@@ -81,8 +81,8 @@
             </div>
           </div>
         </div>
-        <Footer 
-        :hideOnMobile = true
+        <Footer
+          :hideOnMobile = true
         />
       </div>
     </div>
