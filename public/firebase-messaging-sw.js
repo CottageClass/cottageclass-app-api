@@ -17,7 +17,7 @@ messaging.setBackgroundMessageHandler(function (payload) {
     body: payload.data.body,
     data: payload.data,
     icon: '/lilypad-icon-192x192.png',
-    badge: '/lilypad-icon-192x192.png'
+    badge: '/lilypad-icon-monochrome-152x152.png'
   }
 
   return self.registration.showNotification(notificationTitle,
