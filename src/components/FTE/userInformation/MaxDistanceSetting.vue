@@ -6,7 +6,7 @@
       v-model="miles"
       :choices="choices"
       :labels="labels"
-                />
+    />
 
     <slot></slot>
   </Question>

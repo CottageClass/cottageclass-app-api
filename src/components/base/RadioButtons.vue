@@ -1,22 +1,23 @@
 <template>
-    <div class="w-form">
-      <form class="onb-form-checkbox-list">
-        <div
+  <div class="w-form">
+    <form class="onb-form-checkbox-list">
+      <div
         v-for="(choice, index) in choices"
+        :key="'r-' + _uid + '-' + index"
         class="checkbox-field-extra-space"
         :class="{'active-checkbox': choice === state}">
-          <input
+        <input
           type="radio"
-          :id="choice"
-          :value="choice"
-          :name="choice"
+          :id="statePrefix + choice"
+          :value="statePrefix + choice"
+          :name="statePrefix + choice"
           class="onb-checkbox w-checkbox-input"
           v-model="state"
-          >
-          <label :for="choice" class="onb-checkbox-label w-form-label">
-            {{ getLabel(index) }}
-         </label>
-        </div>
+        >
+        <label :for="statePrefix + choice" class="onb-checkbox-label w-form-label">
+          {{ getLabel(index) }}
+        </label>
+      </div>
     </form>
   </div>
 </template>
@@ -32,16 +33,19 @@ export default {
   watch: {
     value: function () {
       // update the state if the props change, after a fetch or something
-      this.state = this.value
+      this.state = this.statePrefix + this.value
     },
     state: function () {
-      this.$emit('input', this.state)
+      this.$emit('input', this.state.split(this.statePrefix)[1])
     }
   },
   mounted: function () {
-    this.state = this.value
+    this.state = 'rb-' + this._uid + '-' + this.value
   },
   computed: {
+    statePrefix () {
+      return 'rb-' + this._uid + '-'
+    },
     getLabel: function () {
       return function (i) {
         const choice = this.choices[i]
