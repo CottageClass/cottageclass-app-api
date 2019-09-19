@@ -12,7 +12,8 @@ import App from '@/App.vue'
 import router from '@/router'
 import store from '@/store'
 import { trackEvent } from '@/utils/ahoy'
-import { registerServiceWorker, subscribeUser } from '@/utils/registerServiceWorker'
+import { requestPermission } from '@/utils/notifications/push'
+import { registerServiceWorker } from '@/utils/registerServiceWorker'
 import VueAnalytics from 'vue-analytics'
 import GoogleMapsLoader from 'google-maps'
 
@@ -24,7 +25,6 @@ import 'vuetify/dist/vuetify.min.css' // Ensure you are using css-loader
 import 'vue-image-lightbox/dist/vue-image-lightbox.min.css'
 
 import VueLazyLoad from 'vue-lazyload'
-import { requestPermission } from '@/utils/notifications/push'
 import { registerIOSEventLIstener } from '@/utils/iosAdapter.js'
 import * as firebase from 'firebase/app'
 const firebaseConfig = {
@@ -99,14 +99,13 @@ if (isAuthWindow) {
   document.addEventListener('turbolinks:load', () => {
     registerIOSEventLIstener()
     registerServiceWorker()
-    requestPermission()
-    subscribeUser()
 
     const selector = '#app'
     const element = document.querySelector(selector)
     const token = (element && element.dataset && element.dataset.token) || undefined
 
     if (token) {
+      requestPermission()
       store.dispatch('establishUser', { JWT: token })
     }
 
