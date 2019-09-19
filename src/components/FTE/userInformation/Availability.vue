@@ -1,10 +1,10 @@
 <template>
- <Question
-   title="When are you usually available to meet other parents?"
-   subtitle="This information helps us match you with parents who have compatible schedules." >
-   <Checkboxes
-     v-model="checkedAvailabilityIds"
-     :labels="labelsAndOrder"/>
+  <Question
+    title="When are you usually available to meet other parents?"
+    subtitle="This information helps us match you with parents who have compatible schedules." >
+    <Checkboxes
+      v-model="checkedAvailabilityIds"
+      :labels="labelsAndOrder"/>
   </Question>
 </template>
 
