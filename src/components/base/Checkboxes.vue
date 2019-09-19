@@ -1,25 +1,25 @@
 <template>
-    <div class="w-form">
-      <form class="onb-form-checkbox-list">
-        <div
-          v-for="(id, index) in ids"
-          class="checkbox-field-extra-space"
-          :class="{'active-checkbox': isChecked(index)}"
-          @click="toggleSelected(id)"
-        >
-          <input
-            type="checkbox"
-            :id="'cb-' + _uid + '-' + index"
-            :name="index"
-            class="onb-checkbox w-checkbox-input"
-            :checked="isChecked(index)"
-            :class="{ 'active-checkbox': isChecked(index) }">
-          <label :for="index" class="onb-checkbox-label w-form-label">
-            {{ labels[index][1] }}
-          </label>
-        </div>
-      </form>
-    </div>
+  <div class="w-form">
+    <form class="onb-form-checkbox-list">
+      <div
+        v-for="(id, index) in ids"
+        class="checkbox-field-extra-space"
+        :class="{'active-checkbox': isChecked(index)}"
+        @click="toggleSelected(id)"
+      >
+        <input
+          type="checkbox"
+          :id="'cb-' + _uid + '-' + index"
+          :name="index"
+          class="onb-checkbox w-checkbox-input"
+          :checked="isChecked(index)"
+          :class="{ 'active-checkbox': isChecked(index) }">
+        <label :for="index" class="onb-checkbox-label w-form-label">
+          {{ labels[index][1] }}
+        </label>
+      </div>
+    </form>
+  </div>
 </template>
 
 <script>
