@@ -1,7 +1,7 @@
 import { mapGetters, mapMutations } from 'vuex'
 
 import { alerts, messaging } from '@/mixins'
-import { initProxySession, fetchUpcomingEvents } from '@/utils/api'
+import { initProxySession } from '@/utils/api'
 
 export default {
   mixins: [ alerts, messaging ],
@@ -11,14 +11,10 @@ export default {
     }
   },
   computed: {
-    currentUserHasEvents () {
-      return this.currentUser && this.currentUserEvents && this.currentUserEvents.length > 0
+    async currentUserHasEvents () {
+      return this.currentUser && this.currentUser.upcomingEventsCount > 0
     },
     ...mapGetters(['currentUser'])
-  },
-  async created () {
-    this.currentUserEvents = await fetchUpcomingEvents(this.currentUser.id)
-    this.currentUserEvents = this.currentUserEvents.filter(e => !e.participated)
   },
   methods: {
     checkAuthenticationAndInitiateMessageSending () {
