@@ -4,9 +4,9 @@ import { requestPermission } from '@/utils/notifications/push'
 import axios from 'axios'
 import firebaseWrapper from '@/utils/vendor/firebase'
 import { postMessage } from '@/utils/iosAdapter'
-// import Logger from '@/utils/logger'
+import Logger from '@/utils/logger'
 
-// const logger = Logger('api:auth')
+const logger = Logger('api:auth')
 
 // request an email with a password change link
 export function submitPasswordResetRequest (data) {
@@ -32,8 +32,12 @@ export function signIn (params) {
       const messageContents = {
         title: 'signInComplete'
       }
-      postMessage(messageContents) // post a message to ios to request push
-      firebaseWrapper.init(userId) // initialize firebase to watch for token
+      try {
+        postMessage(messageContents) // post a message to ios to request push
+        firebaseWrapper.init(userId) // initialize firebase to watch for token
+      } catch (e) {
+        logger.logError(e)
+      }
       return res
     }
   })
