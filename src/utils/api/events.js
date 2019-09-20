@@ -43,8 +43,8 @@ export const fetchEvent = async (id) => {
   }
 }
 
-export function fetchUpcomingParticipatingEvents (userId) {
-  return axios.get(`/api/users/${userId}/events/participated/upcoming/page/1/page_size/100`)
+export function fetchUpcomingParticipatingEvents (userId, pageSize = 100) {
+  return axios.get(`/api/users/${userId}/events/participated/upcoming/page/1/page_size/${pageSize}`)
     .then(res => {
       logger.log('GET PARTICIPATING EVENTS SUCCESS')
       logger.log(res)
