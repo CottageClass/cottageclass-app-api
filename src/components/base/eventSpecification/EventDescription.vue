@@ -3,7 +3,7 @@
     :title="titleForContext"
     :subtitle="subtitleForContext">
     <FormWithTextArea
-      maxLength="120"
+      maxLength="5000"
       placeholder="Describe your playdate here, e.g. 'Come over and play at our house!'"
       v-model="description" />
   </Question>
