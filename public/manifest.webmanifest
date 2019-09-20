@@ -1,6 +1,6 @@
 {
-  "name": "LilyPad",
-  "short_name": "LilyPad",
+  "name": "Lilypad",
+  "short_name": "Lilypad",
   "start_url": "/",
   "display": "standalone",
   "gcm_sender_id": "438514874280",
