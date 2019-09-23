@@ -12,6 +12,20 @@ export default {
 </script>
 
 <style lang="scss"> 
+.w-button {
+  display: inline-block;
+  padding: 9px 15px;
+  background-color: #3898EC;
+  color: white;
+  border: 0;
+  line-height: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 0;
+}
+input.w-button {
+  -webkit-appearance: button;
+}
 
 .w-inline-block {
   max-width: 100%;

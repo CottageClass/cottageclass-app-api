@@ -3,13 +3,13 @@
     <div class="title-bar">
       <a
         @click="$emit('prev')"
-        v-bind:class="['button-back', 'w-inline-block', {'button-hidden': hidePrevious}]">
+        v-bind:class="['button-back w-button', 'w-inline-block', {'button-hidden': hidePrevious}]">
       </a>
       <a
         v-if="button !== 'none'"
         @click="$emit('next')"
         :class="classObject">
-      <div class="button-next-text">{{ text }}</div>
+      <div class="button-next-text w-button">{{ text }}</div>
       </a>
     </div>
   </div>
