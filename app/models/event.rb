@@ -103,13 +103,9 @@ class Event < ApplicationRecord
           starrer.notify_event_creation_starrer host if starrer.id != host.id
         end
 
-        # Find users for whom host is within their radius.  Beacuse of the restrictions of geocoder (near),
-        # this is tricky.  we have to create a subquery with the users' max_distance as its own column because
-        # currently it's buryied in the settings jsonb (probably worth changing in the future
-        users_with_distance = User.select("*, CAST(settings->'matching'->>'max_distance' AS decimal) AS max_distance")
         nearby_users = users_with_distance
           .from(users_with_distance, :users)
-          .near([host.latitude, host.longitude], :max_distance)
+          .near([host.latitude, host.longitude], :setting_max_distance)
           .where.not(id: host.id)
 
         recipients = []

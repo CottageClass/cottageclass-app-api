@@ -7,9 +7,11 @@
         </a>
       </li>
       <li>
-        <a href="/profile/edit" class="link-block w-inline-block">
+        <router-link
+          :to="{name:'ProfileEdit'}"
+          class="link-block w-inline-block">
           <div class="text-block">Edit profile</div>
-        </a>
+        </router-link>
       </li>
       <li>
         <router-link

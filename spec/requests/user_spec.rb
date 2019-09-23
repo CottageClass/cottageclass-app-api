@@ -54,7 +54,6 @@ RSpec.resource 'User' do
 
           expect(response_status).to eq(200)
           expect(json_body.dig('data', 'attributes', 'phone_number')).to eq(user.phone_number)
-          expect(json_body.dig('data', 'attributes', 'settings')).to eq(user.settings)
           expect(json_body.dig('data', 'attributes', 'facebook_access_token')).to be_nil
           expect(json_body.dig('data', 'attributes', 'last_name')).not_to be_nil
           expect(json_body.dig('data', 'relationships', 'children')).not_to be_nil
