@@ -129,10 +129,7 @@ export default {
           params = { children: this.children.list }
           break
         case 'distance':
-          const settings = {
-            matching: { maxDistance: this.maxDistance }
-          }
-          params = { settings }
+          params = { settingMaxDistance: this.maxDistance }
           break
         default:
           return // no data to submit

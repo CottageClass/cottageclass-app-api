@@ -5,7 +5,7 @@ ActiveAdmin.register User do
   includes :children
 
   permit_params :email, :facebook_uid, :internally_cleared, :verified, :first_name, :last_name, :name, :profile_blurb,
-                :settings, :apartment_number, :referrer, source_tags: []
+                :apartment_number, :referrer, :setting_email_notifications, :setting_max_distance, source_tags: []
 
   filter :name
   filter :first_name
@@ -84,12 +84,10 @@ ActiveAdmin.register User do
       source_tags
       child_ages_in_months
       child_names
-      settings
+      setting_email_notifications
+      setting_max_distance
     ].each do |attribute|
       column attribute
-    end
-    column :weekly_email_setting do |instance|
-      instance.settings['email']['receive_weekly_email']
     end
     column :nearest_upcoming_event do |instance|
       event = instance.nearest_upcoming_event

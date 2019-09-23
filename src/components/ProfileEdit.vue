@@ -109,8 +109,8 @@ export default {
   },
   created: function () {
     if (this.redirectToSignupIfNotAuthenticated()) { return }
-    this.weeklyEmails = { isTrue: this.currentUser.settings.email.receiveWeeklyEmail }
-    this.maxDistance = (this.currentUser.settings.matching && this.currentUser.settings.matching.maxDistance) || '2'
+    this.weeklyEmails = { isTrue: this.currentUser.settingEmailNotifications }
+    this.maxDistance = this.currentUser.settingMaxDistance || '2'
     this.availability = {
       availableAfternoons: !!this.currentUser.availableAfternoons,
       availableMornings: !!this.currentUser.availableMornings,
@@ -153,12 +153,10 @@ export default {
         let data = Object.assign(this.currentUser, this.employment, {})
         data.children = this.children.list
         data.profileBlurb = this.profileBlurb.text
-        const settings = {
-          matching: { maxDistance: this.maxDistance },
-          email: { receiveWeeklyEmail: this.weeklyEmails.isTrue }
-        }
+        const settingMaxDistance = this.maxDistance
+        const settingEmailNotifications = this.weeklyEmails.isTrue
         const { phone, location, availability } = this
-        data = Object.assign(data, { phone, location, availability, settings })
+        data = Object.assign(data, { phone, location, availability, settingEmailNotifications, settingMaxDistance })
         console.log({ data })
         try {
           const res = await api.submitUserInfo(this.currentUser.id, data)
