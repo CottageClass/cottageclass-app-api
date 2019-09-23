@@ -139,37 +139,30 @@ export default {
 <style>
 
 .content-wrapper {
-  position: relative;
-  left: 0%;
-  top: 40px;
-  right: 0%;
-  bottom: auto;
-  z-index: 1000;
-  display: flex;
-  width: 876px;
-  min-height: 500px;
-  margin: 0 auto 100px;
-  flex-direction: column;
-  border-radius: 4px;
-  background-color: #fff;
-  box-shadow: 1px 1px 35px 0 rgba(0, 0, 0, 0.2);
+  width: 720px;
+  min-height: 100vh;
+  margin-right: auto;
+  margin-left: auto;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  background-color: #1c8be7;
 }
 
 .body {
-  background-color: #f6f6f6;
+  background-color: #0d73c7;
 }
 
 @media (max-width: 991px) {
   .content-wrapper {
-    width: auto;
-    margin-right: 32px;
-    margin-left: 32px;
+    width: 670px;
   }
 }
 
-@media (max-width: 479px) {
+@media (max-width: 767px) {
   .content-wrapper {
-    margin-top: 28px;
+    width: 100%;
+    margin-top: 0px;
+    margin-bottom: 0px;
   }
 }
 

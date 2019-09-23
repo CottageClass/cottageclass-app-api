@@ -1,12 +1,12 @@
 <template>
-
+<StyleWrapper styleIs="onboarding" >
 <div class="onb-body">
   
-    <div class="body"> 
+    <div class="body__request"> 
       
-      <div class="content-wrapper">
+      <div class="content-wrapper__request">
        
-        <StyleWrapper styleIs="onboarding" >
+        
 
           
           <CreateChildcareRequest v-if="section==='request'"
@@ -14,13 +14,14 @@
                                   :stepName="stepName"
           />
           <MainNav />
-        </StyleWrapper>
+        
       </div> 
       
     </div>
   
 
   </div>
+  </StyleWrapper>
 </template>
  
 <script>
