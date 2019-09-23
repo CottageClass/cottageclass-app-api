@@ -1,25 +1,25 @@
 <template>
-  <div v-on-clickaway="clickedAway">
-    <Nav
+  <div>
+    <NavUpdated
       :button="nextButtonState"
       @next="nextStep"
       @prev="prevStep"
       :hidePrevious="stepIndex===0"
     />
     <ErrorMessage v-if="errorMessage && showError" :text="errorMessage" />
-    <Question v-if="stepName==='description'"
+    <QuestionNewStyle v-if="stepName==='description'"
               title="Describe your childcare request"
               subtitle="Parents near you will see your request and reply by text message. What are you looking for? For what times? What kinds of needs does your child have? (Note: if you do swap childcare with a parent, we strongly recommend meeting them for a playdate first.)">
       <FormWithTextArea
         placeholder="e.g. 'Can anyone recommend a great sitter?' or 'Seeking a childcare swap to cover Tuesday mornings in September.'"
         v-model="description.text" />
-    </Question>
+    </QuestionNewStyle>
   </div>
 </template>
 
 <script>
-import Nav from '@/components/FTE/Nav'
-import Question from '@/components/base/Question.vue'
+import NavUpdated from '@/components/FTE/NavUpdated.vue'
+import QuestionNewStyle from '@/components/base/QuestionNewStyle.vue'
 import FormWithTextArea from '@/components/base/FormWithTextArea.vue'
 import ErrorMessage from '@/components/base/ErrorMessage.vue'
 import { stepNavigation, alerts } from '@/mixins'

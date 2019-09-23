@@ -3,13 +3,13 @@
     <div class="title-bar">
       <a
         @click="$emit('prev')"
-        v-bind:class="['button-back w-button', 'w-inline-block', {'button-hidden': hidePrevious}]">
+        v-bind:class="['button-back', 'w-inline-block', {'button-hidden': hidePrevious}]">
       </a>
       <a
         v-if="button !== 'none'"
         @click="$emit('next')"
         :class="classObject">
-      <div class="button-next-text w-button">{{ text }}</div>
+      <div class="button-next-text">{{ text }}</div>
       </a>
     </div>
   </div>
@@ -51,7 +51,7 @@ export default {
 
 <style scoped>
 .onb-body {
-  background-color: #f6f6f6;
+  background-color: #0d73c7;
 }
 
 .title-bar {
@@ -88,7 +88,8 @@ export default {
 }
 
 .title-bar-next-button:active {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: #64426b;
+  color: #fff;
 }
 
 .title-bar-next-button-text {
@@ -101,21 +102,16 @@ export default {
 }
 
 .title-bar-back-button {
-  position: absolute;
-  left: 0%;
-  top: 30px;
-  right: auto;
-  bottom: auto;
   display: flex;
-  margin-top: 8px;
+  margin-top: 7px;
   margin-bottom: 8px;
-  margin-left: 16px;
-  padding: 24px;
+  margin-left: 10px;
+  padding: 18px;
   justify-content: space-between;
   align-items: center;
-  border-radius: 50%;
+  border-radius: 4px;
   background-color: transparent;
-  background-image: url('../../assets/arrow-back--black.svg');
+  background-image: url('../../assets/arrow-back-white.svg');
   background-position: 50% 50%;
   background-size: 24px 24px;
   background-repeat: no-repeat;
@@ -156,44 +152,40 @@ a {
 }
 
 .title-bar {
-  position: sticky;
-  left: 0;
-  top: 0;
-  right: 0;
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  right: 0px;
   z-index: 1000;
   display: flex;
   overflow: visible;
-  width: 100%;
-  min-height: 120px;
+  width: 720px;
+  margin-right: auto;
+  margin-left: auto;
   justify-content: space-between;
   align-items: center;
   border-style: none;
   border-width: 1px;
-  border-color: rgba(255, 255, 255, 0.1);
-  background-color: rgba(255, 255, 255, 0.97);
-  background-image: url('../../assets/lilypad__logo.svg');
-  background-position: 50% 50%;
-  background-size: 125px;
+  border-color: hsla(0, 0%, 100%, .1);
+  background-color: rgba(108, 200, 255, .93);
+  background-image: url('../../assets/cclogo-house-blue-bf44c260.svg');
+  background-position: 50% 13px;
+  background-size: 24px 24px;
   background-repeat: no-repeat;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.03);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .08);
 }
 
 .button-back {
-  position: absolute;
-  left: 0%;
-  top: 30px;
-  right: auto;
-  bottom: auto;
   display: flex;
-  margin-top: 8px;
+  margin-top: 7px;
   margin-bottom: 8px;
-  margin-left: 16px;
-  padding: 24px;
+  margin-left: 10px;
+  padding: 18px;
   justify-content: space-between;
   align-items: center;
-  border-radius: 50%;
+  border-radius: 4px;
   background-color: transparent;
-  background-image: url('../../assets/arrow-back--black.svg');
+  background-image: url('../../assets/arrow-back-white.svg');
   background-position: 50% 50%;
   background-size: 24px 24px;
   background-repeat: no-repeat;
@@ -229,20 +221,13 @@ a {
 }
 
 .button-next-text {
-  position: absolute;
-  left: auto;
-  top: 35px;
-  right: 0;
-  bottom: auto;
-  margin-right: 24px;
-  padding: 12px 42px 12px 24px;
-  border-radius: 4px;
-  background-color: #fc6f77;
-  background-image: url('../../assets/navigate-next.svg');
-  background-position: 63px 50%;
-  background-size: 24px 24px;
-  background-repeat: no-repeat;
-  text-align: center;
+  margin-bottom: 2px;
+  font-size: 14px;
+  line-height: 14px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  cursor: pointer;
 }
 
 @media (max-width: 991px) {
