@@ -1232,7 +1232,7 @@ background-color: #f6f6f6;
     color: rgba(0, 0, 0, .3);
   }
 
-  .onb-paragraph-subheading-2__new-style {
+  .onb-paragraph-subheading-2 {
     margin-bottom: 8px;
     color: #fff;
     font-size: 13px;
@@ -1240,7 +1240,7 @@ background-color: #f6f6f6;
     text-align: center;
   }
 
-  .onb-paragraph-subheading-2 {
+  .onb-paragraph-subheading-2__new-style {
   margin-bottom: 8px;
   color: #333;
   font-size: 13px;
@@ -1814,11 +1814,19 @@ background-color: #f6f6f6;
     color: #fff;
   }
 
-  .content-container {
+  .content-container__new-style {
   margin-bottom: 0;
   padding: 32px;
   color: #fff;
   }
+
+  .content-container {
+    margin-bottom: 0px;
+    padding: 32px;
+    background-color: #1d8be7;
+  }
+
+
 
   .text-area-decribe-need {
     min-height: 120px;

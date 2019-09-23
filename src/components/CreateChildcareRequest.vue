@@ -27,7 +27,7 @@ import { submitChildcareRequest } from '@/utils/api'
 
 export default {
   name: 'CreateChildcareRequest',
-  components: { Question, FormWithTextArea, Nav, ErrorMessage },
+  components: { QuestionNewStyle, FormWithTextArea, NavUpdated, ErrorMessage },
   props: ['stepName'],
   mixins: [stepNavigation, alerts],
   data () {
