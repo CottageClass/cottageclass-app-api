@@ -12,25 +12,27 @@ export default {
 </script>
 
 <style lang="scss"> 
-.w-button {
-  display: inline-block;
-  padding: 9px 15px;
-  background-color: #3898EC;
-  color: white;
-  border: 0;
-  line-height: inherit;
-  text-decoration: none;
-  cursor: pointer;
-  border-radius: 0;
-}
-input.w-button {
-  -webkit-appearance: button;
+.content-wrapper__request{
+  position: relative;
+  left: 0%;
+  top: 40px;
+  right: 0%;
+  bottom: auto;
+  z-index: 1000;
+  display: flex;
+  width: 876px;
+  min-height: 500px;
+  margin: 0 auto 100px;
+  flex-direction: column;
+  border-radius: 4px;
+  background-color: #fff;
+  box-shadow: 1px 1px 35px 0 rgba(0, 0, 0, 0.2);
 }
 
-.w-inline-block {
-  max-width: 100%;
-  display: inline-block;
+.body__request{
+background-color: #f6f6f6;
 }
+
 
 .onb-error-text a.error-link {
   color: #c96168;
@@ -47,12 +49,13 @@ input.w-button {
   font-family: soleil, sans-serif;
 
   .question-title {
-    font-size: 20px;
-    color: #fff;
-    text-align: center;
-    font-weight: bold;
-    line-height: 34px;
-    margin-top: 0;
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: #333;
+  font-size: 24px;
+  line-height: 34px;
+  text-align: center;
+  letter-spacing: -.3px; 
   }
 
   .event-heading {
@@ -1220,11 +1223,11 @@ input.w-button {
   }
 
   .onb-paragraph-subheading-2 {
-    margin-bottom: 8px;
-    color: #fff;
-    font-size: 13px;
-    line-height: 21px;
-    text-align: center;
+  margin-bottom: 8px;
+  color: #333;
+  font-size: 13px;
+  line-height: 21px;
+  text-align: center;
   }
 
   .onb-index-heading-2 {
@@ -1784,14 +1787,15 @@ input.w-button {
   }
 
   .title-container {
-    margin-bottom: 32px;
-    color: #fff;
+  margin-bottom: 0;
+  padding: 32px;
+  color: #fff;
   }
 
   .content-container {
-    margin-bottom: 0px;
-    padding: 32px;
-    background-color: #1d8be7;
+  margin-bottom: 0;
+  padding: 32px;
+  color: #fff;
   }
 
   .text-area-decribe-need {
@@ -1854,6 +1858,11 @@ input.w-button {
   }
 
   @media (max-width: 991px) {
+    .content-wrapper__request {
+        width: auto;
+        margin-right: 32px;
+        margin-left: 32px;
+    }
     .content-wrapper {
         width: auto;
         margin-right: 32px;
@@ -1866,7 +1875,12 @@ input.w-button {
   }
 
   @media (max-width: 767px) {
-
+    .content-wrapper__request {
+      margin-top: 28px;
+    }
+    .content-wrapper {
+      margin-top: 28px;
+    }
   }
 
   @media (max-width: 479px) {
@@ -1875,10 +1889,6 @@ input.w-button {
       -webkit-align-items: center;
       -ms-flex-align: center;
       align-items: center;
-    }
-
-    .content-wrapper {
-    margin-top: 28px;
     }
 
     .content-container {

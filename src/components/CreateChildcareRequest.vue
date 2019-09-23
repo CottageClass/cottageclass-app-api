@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-on-clickaway="clickedAway">
     <Nav
       :button="nextButtonState"
       @next="nextStep"
