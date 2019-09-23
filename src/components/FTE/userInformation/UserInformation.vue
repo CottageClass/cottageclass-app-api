@@ -33,6 +33,9 @@
     <ProfileBlurb
       v-if="stepName==='bio'"
       v-model="profileBlurb" />
+    <MaxDistanceSetting
+      v-if="stepName==='distance'"
+      v-model="maxDistance" />
   </div>
 </template>
 
@@ -45,6 +48,7 @@ import Employment from '@/components/FTE/userInformation/Employment'
 import FacebookImageSelection from '@/components/FTE/userInformation/FacebookImageSelection.vue'
 import ErrorMessage from '@/components/base/ErrorMessage.vue'
 import ProfileBlurb from '@/components/FTE/userInformation/ProfileBlurb.vue'
+import MaxDistanceSetting from '@/components/FTE/userInformation/MaxDistanceSetting'
 
 import normalize from 'json-api-normalizer'
 import { createUser } from '@/utils//createUser'
@@ -54,7 +58,7 @@ import { stepNavigation } from '@/mixins'
 export default {
   name: 'UserInformation',
   props: ['stepName'],
-  components: { Nav, Phone, Location, Children, Employment, FacebookImageSelection, ErrorMessage, ProfileBlurb },
+  components: { Nav, Phone, Location, Children, Employment, FacebookImageSelection, ErrorMessage, ProfileBlurb, MaxDistanceSetting },
   mixins: [stepNavigation],
   data () {
     return {
@@ -65,6 +69,7 @@ export default {
       employment: { err: null },
       facebookImages: { err: null },
       profileBlurb: { err: null },
+      maxDistance: { err: null },
       showError: false
     }
   },
@@ -76,6 +81,7 @@ export default {
         'children',
         'employment',
         'bio',
+        'distance',
         'images'
       ]
     },
@@ -86,7 +92,8 @@ export default {
         location: this.location,
         children: this.children,
         employment: this.employment,
-        images: this.images
+        images: this.images,
+        distance: this.maxDistance
       }
       return models[this.stepName]
     },
@@ -121,6 +128,12 @@ export default {
         case 'children':
           params = { children: this.children.list }
           break
+        case 'distance':
+          const settings = {
+            matching: { maxDistance: this.maxDistance }
+          }
+          params = { settings }
+          break
         default:
           return // no data to submit
       }
@@ -149,6 +162,7 @@ export default {
           this.trackStep('user-info')
 
           const nextStepName = this.stepSequence[this.stepIndex + 1]
+          this.debug({ nextStepName })
 
           if (nextStepName === 'images' && !this.currentUser.facebookUid) {
             this.$emit('finished')
