@@ -1,17 +1,23 @@
 <template>
-  <div class="onb-body">
+<div class="onb-body">
+
+  
     <div class="body">
+      
       <div class="content-wrapper">
         <StyleWrapper styleIs="onboarding">
           <CreateChildcareRequest v-if="section==='request'"
                                   :stepName="stepName"
           />
         </StyleWrapper>
-      </div>
+      </div> 
+      
     </div>
+  
+
   </div>
 </template>
-
+ 
 <script>
 import StyleWrapper from '@/components/FTE/StyleWrapper'
 import CreateChildcareRequest from '@/components/CreateChildcareRequest'

@@ -51,7 +51,7 @@ export default {
 
 <style scoped>
 .onb-body {
-  background-color: #0d73c7;
+  background-color: #f6f6f6;
 }
 
 .title-bar {
@@ -88,8 +88,7 @@ export default {
 }
 
 .title-bar-next-button:active {
-  background-color: #64426b;
-  color: #fff;
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 .title-bar-next-button-text {
@@ -102,16 +101,21 @@ export default {
 }
 
 .title-bar-back-button {
+  position: absolute;
+  left: 0%;
+  top: 30px;
+  right: auto;
+  bottom: auto;
   display: flex;
-  margin-top: 7px;
+  margin-top: 8px;
   margin-bottom: 8px;
-  margin-left: 10px;
-  padding: 18px;
+  margin-left: 16px;
+  padding: 24px;
   justify-content: space-between;
   align-items: center;
-  border-radius: 4px;
+  border-radius: 50%;
   background-color: transparent;
-  background-image: url('../../assets/arrow-back-white.svg');
+  background-image: url('../../assets/arrow-back--black.svg');
   background-position: 50% 50%;
   background-size: 24px 24px;
   background-repeat: no-repeat;
@@ -152,40 +156,44 @@ a {
 }
 
 .title-bar {
-  position: fixed;
-  left: 0px;
-  top: 0px;
-  right: 0px;
+  position: sticky;
+  left: 0;
+  top: 0;
+  right: 0;
   z-index: 1000;
   display: flex;
   overflow: visible;
-  width: 720px;
-  margin-right: auto;
-  margin-left: auto;
+  width: 100%;
+  min-height: 120px;
   justify-content: space-between;
   align-items: center;
   border-style: none;
   border-width: 1px;
-  border-color: hsla(0, 0%, 100%, .1);
-  background-color: rgba(108, 200, 255, .93);
-  background-image: url('../../assets/cclogo-house-blue-bf44c260.svg');
-  background-position: 50% 13px;
-  background-size: 24px 24px;
+  border-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.97);
+  background-image: url('../../assets/lilypad__logo.svg');
+  background-position: 50% 50%;
+  background-size: 125px;
   background-repeat: no-repeat;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .08);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.03);
 }
 
 .button-back {
+  position: absolute;
+  left: 0%;
+  top: 30px;
+  right: auto;
+  bottom: auto;
   display: flex;
-  margin-top: 7px;
+  margin-top: 8px;
   margin-bottom: 8px;
-  margin-left: 10px;
-  padding: 18px;
+  margin-left: 16px;
+  padding: 24px;
   justify-content: space-between;
   align-items: center;
-  border-radius: 4px;
+  border-radius: 50%;
   background-color: transparent;
-  background-image: url('../../assets/arrow-back-white.svg');
+  background-image: url('../../assets/arrow-back--black.svg');
   background-position: 50% 50%;
   background-size: 24px 24px;
   background-repeat: no-repeat;
@@ -221,13 +229,20 @@ a {
 }
 
 .button-next-text {
-  margin-bottom: 2px;
-  font-size: 14px;
-  line-height: 14px;
-  font-weight: 700;
-  letter-spacing: 1.2px;
-  text-transform: uppercase;
-  cursor: pointer;
+  position: absolute;
+  left: auto;
+  top: 35px;
+  right: 0;
+  bottom: auto;
+  margin-right: 24px;
+  padding: 12px 42px 12px 24px;
+  border-radius: 4px;
+  background-color: #fc6f77;
+  background-image: url('../../assets/navigate-next.svg');
+  background-position: 63px 50%;
+  background-size: 24px 24px;
+  background-repeat: no-repeat;
+  text-align: center;
 }
 
 @media (max-width: 991px) {

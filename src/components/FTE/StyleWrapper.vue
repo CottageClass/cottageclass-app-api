@@ -3,15 +3,20 @@
     <slot></slot>
   </span>
 </template>
-
+ 
 <script>
 export default {
   name: 'StyleWrapper',
-  props: ['styleIs']
+  props: ['styleIs'] 
 }
 </script>
 
-<style lang="scss">
+<style lang="scss"> 
+
+.w-inline-block {
+  max-width: 100%;
+  display: inline-block;
+}
 
 .onb-error-text a.error-link {
   color: #c96168;
@@ -1003,9 +1008,7 @@ export default {
   }
 
   .onb-body {
-    overflow: visible;
-    padding-bottom: 0px;
-    background-color: #0d73c7;
+    background-color: #f6f6f6;
   }
 
   .onb-top-content-container {
@@ -1603,13 +1606,20 @@ export default {
   }
 
   .content-wrapper {
-    width: 720px;
-    min-height: 100vh;
-    margin-right: auto;
-    margin-left: auto;
-    padding-top: 50px;
-    padding-bottom: 50px;
-    background-color: #1c8be7;
+  position: relative;
+  left: 0%;
+  top: 40px;
+  right: 0%;
+  bottom: auto;
+  z-index: 1000;
+  display: flex;
+  width: 876px;
+  min-height: 500px;
+  margin: 0 auto 100px;
+  flex-direction: column;
+  border-radius: 4px;
+  background-color: #fff;
+  box-shadow: 1px 1px 35px 0 rgba(0, 0, 0, 0.2);
   }
 
   .title-bar {
@@ -1831,7 +1841,9 @@ export default {
 
   @media (max-width: 991px) {
     .content-wrapper {
-      width: 670px;
+        width: auto;
+        margin-right: 32px;
+        margin-left: 32px;
     }
 
     .title-bar {
@@ -1840,11 +1852,7 @@ export default {
   }
 
   @media (max-width: 767px) {
-    .content-wrapper {
-      width: 100%;
-      margin-top: 0px;
-      margin-bottom: 0px;
-    }
+
   }
 
   @media (max-width: 479px) {
@@ -1853,6 +1861,10 @@ export default {
       -webkit-align-items: center;
       -ms-flex-align: center;
       align-items: center;
+    }
+
+    .content-wrapper {
+    margin-top: 28px;
     }
 
     .content-container {
