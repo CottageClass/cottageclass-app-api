@@ -1,5 +1,9 @@
 <template>
   <div>
+    <DeleteEventConfirmationModal
+      v-if="showDeleteConfirmationModal"
+      v-on:closeModal="showDeleteConfirmationModal = false"
+      :eventId="eventId"/>
     <MainNav />
     <LightBoxStyleWrapper>
       <LightBox
@@ -145,7 +149,6 @@
 
 <script>
 import LightBox from 'vue-image-lightbox'
-
 import RSVPCard from '@/components/base/RSVPCard'
 import SearchListCardActions from '@/components/search/SearchListCardActions'
 import AvatarImage from '@/components/base/AvatarImage'
@@ -162,19 +165,22 @@ import petsImage from '@/assets/pets.svg'
 import { mapGetters } from 'vuex'
 import { fetchUpcomingEvents, fetchEvent } from '@/utils/api'
 import { item, maps, rsvp } from '@/mixins'
+import DeleteEventConfirmationModal from '@/components/DeleteEventConfirmationModal.vue'
 
 export default {
   name: 'EventPage',
-  components: { MainNav, Images, LoadingSpinner, AvatarImage, SearchListCardActions, Attendee, OtherEvent, RSVPCard, LightBox, LightBoxStyleWrapper },
+  components: { MainNav, Images, LoadingSpinner, AvatarImage, SearchListCardActions, Attendee, OtherEvent, RSVPCard, LightBox, LightBoxStyleWrapper, DeleteEventConfirmationModal },
   mixins: [item, maps, rsvp],
   data () {
     return {
+      eventId: this.$route.params.id,
       event: null,
       mapOptions: {
         'disableDefaultUI': true, // turns off map controls
         'gestureHandling': 'none' // prevents any kind of scrolling
       },
-      otherEvents: null
+      otherEvents: null,
+      showDeleteConfirmationModal: true
     }
   },
   computed: {

@@ -250,10 +250,7 @@ export default {
       this.$router.push({ name: 'ContactUserForm', params: { userId: this.user.id } })
     },
     cancelClick () {
-      deleteEvent(this.event.id, () => {
-        this.$emit('event-deleted', this.event.id)
-        this.showBriefAllert('Your event has been deleted', 'success')
-      })
+      this.$router.push({ name: 'EventPage', params: { id: this.event.id }, props: { showDeleteConfirmationModal: true }})
     },
     shareClick () {
       this.$router.push({ name: 'SocialEventInvite', params: { id: this.event.id, context: 'searchItem' } })
