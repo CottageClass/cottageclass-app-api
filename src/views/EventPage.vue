@@ -2,7 +2,7 @@
   <div>
     <DeleteEventConfirmationModal
       v-if="showDeleteConfirmationModal"
-      v-on:closeModal="closeModal"
+      v-on:closeModal="closeModalClick"
       :eventId="eventId"/>
     <MainNav />
     <LightBoxStyleWrapper>
@@ -210,8 +210,7 @@ export default {
   },
   methods: {
     closeModalClick () {
-      this.$router.push({ name: 'EventPage', params: { id: this.event.id, showDeleteConfirmationModal: false } })
-    },
+      this.$router.push({ name: 'EventPage', params: { id: 5, showDeleteConfirmationModal: false } })    },
     handleImageClick (payload) {
       this.debug('handle')
       this.$refs.lightbox.showImage(payload)
