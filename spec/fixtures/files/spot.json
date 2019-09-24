@@ -1,0 +1,325 @@
+{
+  "html_attributions": [],
+  "result": {
+    "address_components": [
+      {
+        "long_name": "2947",
+        "short_name": "2947",
+        "types": [
+          "street_number"
+        ]
+      },
+      {
+        "long_name": "Church Street",
+        "short_name": "Church St",
+        "types": [
+          "route"
+        ]
+      },
+      {
+        "long_name": "Pine Plains",
+        "short_name": "Pine Plains",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Pine Plains",
+        "short_name": "Pine Plains",
+        "types": [
+          "administrative_area_level_3",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Dutchess County",
+        "short_name": "Dutchess County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "New York",
+        "short_name": "NY",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "12567",
+        "short_name": "12567",
+        "types": [
+          "postal_code"
+        ]
+      },
+      {
+        "long_name": "5547",
+        "short_name": "5547",
+        "types": [
+          "postal_code_suffix"
+        ]
+      }
+    ],
+    "adr_address": "<span class=\"street-address\">2947 Church St</span>, <span class=\"locality\">Pine Plains</span>, <span class=\"region\">NY</span> <span class=\"postal-code\">12567-5547</span>, <span class=\"country-name\">USA</span>",
+    "formatted_address": "2947 Church St, Pine Plains, NY 12567, USA",
+    "formatted_phone_number": "(518) 398-7800",
+    "geometry": {
+      "location": {
+        "lat": 41.9800829,
+        "lng": -73.65715949999999
+      },
+      "viewport": {
+        "northeast": {
+          "lat": 41.9813329802915,
+          "lng": -73.6558486197085
+        },
+        "southwest": {
+          "lat": 41.97863501970851,
+          "lng": -73.6585465802915
+        }
+      }
+    },
+    "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png",
+    "id": "91d48a302a0521a71adae02beef0a17182a4fcc1",
+    "international_phone_number": "+1 518-398-7800",
+    "name": "Tower Pizza",
+    "opening_hours": {
+      "open_now": false,
+      "periods": [
+        {
+          "close": {
+            "day": 1,
+            "time": "2100"
+          },
+          "open": {
+            "day": 1,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 2,
+            "time": "2100"
+          },
+          "open": {
+            "day": 2,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "2100"
+          },
+          "open": {
+            "day": 3,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "2100"
+          },
+          "open": {
+            "day": 4,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "2100"
+          },
+          "open": {
+            "day": 5,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "2100"
+          },
+          "open": {
+            "day": 6,
+            "time": "1100"
+          }
+        }
+      ],
+      "weekday_text": [
+        "Monday: 11:00 AM – 9:00 PM",
+        "Tuesday: 11:00 AM – 9:00 PM",
+        "Wednesday: 11:00 AM – 9:00 PM",
+        "Thursday: 11:00 AM – 9:00 PM",
+        "Friday: 11:00 AM – 9:00 PM",
+        "Saturday: 11:00 AM – 9:00 PM",
+        "Sunday: Closed"
+      ]
+    },
+    "photos": [
+      {
+        "height": 3024,
+        "html_attributions": [
+          "<a href=\"https://maps.google.com/maps/contrib/117421340766045504353/photos\">Aniko Magyar</a>"
+        ],
+        "photo_reference": "CmRaAAAAbidOCd5DzdZH9dUHpId7UIlOAIL90gtAjI75jj7elH5t8uIpeTEcffe5wlFPoNYbcJhFeCbk3J_VBTLhijY-il1D_JvfLzZIUg6V7ED4APMgQqtl9ZDUVCoMrj5CmFGnEhDdVxFtaB47OtLPQs_ziBQKGhSQXvkUy2U1ahfnFviR7ILQf4zdjQ",
+        "width": 4032
+      },
+      {
+        "height": 4032,
+        "html_attributions": [
+          "<a href=\"https://maps.google.com/maps/contrib/106466877561829111588/photos\">Michael</a>"
+        ],
+        "photo_reference": "CmRaAAAAtJOqPzlsmzqVHKq1edzkmUi9R7NAkjopfQn7-YGDTaReOftH2vls4KGfz3gINkE2vck2upmQ7EQxLYVRoIelDn219RdJqAguzbBzQ2cDaXeCCRhpA_7D98XxS6IMcn1_EhBe2KH4dVr-u2BbZVSmRDUqGhSyV6AAxsyDAI1IlujUUHj-yk3kEQ",
+        "width": 3024
+      },
+      {
+        "height": 3024,
+        "html_attributions": [
+          "<a href=\"https://maps.google.com/maps/contrib/117421340766045504353/photos\">Aniko Magyar</a>"
+        ],
+        "photo_reference": "CmRaAAAAy7vZDqdGG7K_L_v9jc30fwjf4As7X_N7XSuQ76QWnryuhyCb7BTAOW5hbjJj2BCkfen-V40MKYSTSeqnmwC6Ugv1PEdhpRX8_MC3d6biu-IxwfySIHa43uKF8Kxa1yj3EhBKLvlgs_0nsX7iOdP1PLUCGhRGjSc-CA6zP-l-QPin9n69dfkdWw",
+        "width": 4032
+      },
+      {
+        "height": 3024,
+        "html_attributions": [
+          "<a href=\"https://maps.google.com/maps/contrib/117421340766045504353/photos\">Aniko Magyar</a>"
+        ],
+        "photo_reference": "CmRaAAAAfQvybM1TeoctaL9W7eNDnU_YEzmqJJk0HCrLCrZEpdYHC0Rrbeox5N86RAjLpVW4HASOi_-OMkxQ8DFBB4oDsMP0lbCOGaVK9s5zHacvoQ7Re5AoHeRf-YvUE4bIju32EhD-QqaeMlYyvnzb_SkZbJBpGhRRdcOIDv0ZAwPvdAFxw4oMQru6-Q",
+        "width": 4032
+      },
+      {
+        "height": 4032,
+        "html_attributions": [
+          "<a href=\"https://maps.google.com/maps/contrib/117421340766045504353/photos\">Aniko Magyar</a>"
+        ],
+        "photo_reference": "CmRaAAAA_TWn149D23UjrhQHGq9Qept2umxnkOyyQnnSwHGLl7Ho5sVrvViPTIpFPu97FPKyKsfw5mT_i_VTR-oG4tf_A7vNGcEGuzMAPF5aZkXsdD732NJ8rtEANR04OuB_5E-kEhAPwLO0GTXsmPB_a6L1mzoyGhTN5ZNIsf-ZqhTX52SUIyiloQo2GA",
+        "width": 3024
+      },
+      {
+        "height": 3024,
+        "html_attributions": [
+          "<a href=\"https://maps.google.com/maps/contrib/117421340766045504353/photos\">Aniko Magyar</a>"
+        ],
+        "photo_reference": "CmRaAAAA8H4z1raIbzYDuzVXbW0gxGobwxnBDI80DN_xqBa1ruleoVnu6xZ6pj_X_p3rT3L1oGsxbrUxaCHsA28mu_GMUQG16__N-l1mx2IhrmnrOxBB9fyAXTRSU5rALWksoXj3EhAy-Vg6jc7y60eVe7WS1T8GGhRj6rp69YsdE7DjA-gVAduIOoTZ0Q",
+        "width": 4032
+      },
+      {
+        "height": 4160,
+        "html_attributions": [
+          "<a href=\"https://maps.google.com/maps/contrib/101900663754046621669/photos\">Heidi Ho</a>"
+        ],
+        "photo_reference": "CmRaAAAAU7TFtDireVVG4sjRz0hhahEUeJ-LgPgkvyUhNpIm7v3JSwRVuUyIy2oghiz1D9j5aUWq-sTLqk3di-ESL60oefPC12PB7mhRPwCPNC_WID7dLXAcJa-_OqiCa6wg24ArEhA89wKa2Wg--4OZ2T_0W8x1GhSTge5mY2_D5msQc0TBH1lGUY8q1A",
+        "width": 2340
+      },
+      {
+        "height": 3024,
+        "html_attributions": [
+          "<a href=\"https://maps.google.com/maps/contrib/100003611763845866613/photos\">Marlon Muñoz</a>"
+        ],
+        "photo_reference": "CmRaAAAAwDZotY7feVDMkxx3WxXsD23TzkInpxlK3pFtFDppFtZ8tPsXDpoAP7Bog1FOm3gfZKHdcY3lcFPds0cm38-tN01mYL5Y8Zm2pntWDzpgodW6Psw7bU1dwTm-lWmUXal0EhCzDI0gLv-eP1w8SJWJcyNAGhRy7Y5vRbtF-lHFY-0Tb-Gr14zQ_A",
+        "width": 4032
+      },
+      {
+        "height": 2340,
+        "html_attributions": [
+          "<a href=\"https://maps.google.com/maps/contrib/101900663754046621669/photos\">Heidi Ho</a>"
+        ],
+        "photo_reference": "CmRaAAAAEPTu8iBOuIyurFDl2sSWb4njNKe426TMD8ebWV2F2V_ZaiYQeBf0pMs63Vp-YqSEO7Tq0RkGcVq68zRw8luGYNSKAAqJB_ImYUqICCjOaPGSpSr4eE8a44YH1EnXlAxKEhAqRLOBBk-ezwfytwQMZCnkGhR94i_goSgTN7JgKAfUN3VoBkKa5A",
+        "width": 4160
+      },
+      {
+        "height": 3024,
+        "html_attributions": [
+          "<a href=\"https://maps.google.com/maps/contrib/106063670282736256918/photos\">Anthony Marthaler</a>"
+        ],
+        "photo_reference": "CmRaAAAAsCVhvE_Yc9-OyWI0CfJFrIAsKAvzaJeaJFGa9ei7pGhtMPXg3Pr3iVK3bNK8SOu_uuU_c1ZfKuUGe1RX-KQNwPwKcDhFWtS6AYRgjtNSkgvUXyI994eb9nvtdhxY4WJMEhAuNuW2F9c31ky2m1wwnI1tGhRwO2SJX--mO286yoGEnS-G63QC-g",
+        "width": 4032
+      }
+    ],
+    "place_id": "ChIJjdHl5PR33YkRFyhbJCMFqpk",
+    "plus_code": {
+      "compound_code": "X8JV+24 Pine Plains, NY, United States",
+      "global_code": "87H8X8JV+24"
+    },
+    "rating": 4.2,
+    "reference": "ChIJjdHl5PR33YkRFyhbJCMFqpk",
+    "reviews": [
+      {
+        "author_name": "Jamie Pelkey",
+        "author_url": "https://www.google.com/maps/contrib/110091598033980265569/reviews",
+        "language": "en",
+        "profile_photo_url": "https://lh6.ggpht.com/-aw-RCg-mwqc/AAAAAAAAAAI/AAAAAAAAAAA/ZGura-RLDJI/s128-c0x00000000-cc-rp-mo/photo.jpg",
+        "rating": 5,
+        "relative_time_description": "a month ago",
+        "text": "Best pizza hands down excellent  staff thank you",
+        "time": 1565459439
+      },
+      {
+        "author_name": "Sam A",
+        "author_url": "https://www.google.com/maps/contrib/107422293075641950661/reviews",
+        "language": "en",
+        "profile_photo_url": "https://lh3.ggpht.com/-QGeYJEdSbMc/AAAAAAAAAAI/AAAAAAAAAAA/f6qlJWpr-w0/s128-c0x00000000-cc-rp-mo-ba3/photo.jpg",
+        "rating": 3,
+        "relative_time_description": "3 months ago",
+        "text": "Food is pretty good depending on which cook is there. A philly cheese steak on Monday wont be the same on Saturday per example. Prices are a but high so we dont order here much at all.",
+        "time": 1560803848
+      },
+      {
+        "author_name": "Stevan Van Keuren",
+        "author_url": "https://www.google.com/maps/contrib/105945523951671594559/reviews",
+        "language": "en",
+        "profile_photo_url": "https://lh5.ggpht.com/-1xsi0KIH7hA/AAAAAAAAAAI/AAAAAAAAAAA/eIpccqnk8PU/s128-c0x00000000-cc-rp-mo/photo.jpg",
+        "rating": 3,
+        "relative_time_description": "in the last week",
+        "text": "Service was slow. Bartender  was rude.",
+        "time": 1569064022
+      },
+      {
+        "author_name": "Aniko Magyar",
+        "author_url": "https://www.google.com/maps/contrib/117421340766045504353/reviews",
+        "language": "en",
+        "profile_photo_url": "https://lh3.ggpht.com/-L6W6osROFZY/AAAAAAAAAAI/AAAAAAAAAAA/Rs5t29AsdQQ/s128-c0x00000000-cc-rp-mo-ba6/photo.jpg",
+        "rating": 5,
+        "relative_time_description": "10 months ago",
+        "text": "Review just for THE CABIN, as Tower Pizza (the restaurant/pizzeria half) was closed (two separate establishments, Google!) The Cabin bar is cozy, with very friendly locals. Taxidermed animals decorate the inside.  Four beers on tap; three domestic, one import. Full bar, with at least one liquor or every type. Very friendly bartender/proprietor.",
+        "time": 1543179983
+      },
+      {
+        "author_name": "Paul Laibach",
+        "author_url": "https://www.google.com/maps/contrib/118160369111092137745/reviews",
+        "language": "en",
+        "profile_photo_url": "https://lh3.ggpht.com/-68tSIvlt5Wg/AAAAAAAAAAI/AAAAAAAAAAA/txE7HdSqs2I/s128-c0x00000000-cc-rp-mo-ba3/photo.jpg",
+        "rating": 5,
+        "relative_time_description": "4 months ago",
+        "text": "Great food and fast, efficient service!",
+        "time": 1558310714
+      }
+    ],
+    "scope": "GOOGLE",
+    "types": [
+      "restaurant",
+      "food",
+      "point_of_interest",
+      "establishment"
+    ],
+    "url": "https://maps.google.com/?cid=11072668282335733783",
+    "user_ratings_total": 102,
+    "utc_offset": -240,
+    "vicinity": "2947 Church Street, Pine Plains"
+  },
+  "status": "OK"
+}
