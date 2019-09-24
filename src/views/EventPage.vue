@@ -171,7 +171,7 @@ export default {
   name: 'EventPage',
   components: { MainNav, Images, LoadingSpinner, AvatarImage, SearchListCardActions, Attendee, OtherEvent, RSVPCard, LightBox, LightBoxStyleWrapper, DeleteEventConfirmationModal },
   mixins: [item, maps, rsvp],
-  props: { showDeleteConfirmationModal: {default: false } },
+  props: { showDeleteConfirmationModal: { default: false } },
   data () {
     return {
       eventId: this.$route.params.id,
