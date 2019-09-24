@@ -250,7 +250,7 @@ export default {
       this.$router.push({ name: 'ContactUserForm', params: { userId: this.user.id } })
     },
     cancelClick () {
-      this.$router.push({ name: 'EventPage', params: { id: this.event.id }, props: { showDeleteConfirmationModal: true }})
+      this.$router.push({ name: 'EventPage', params: { id: this.event.id, showDeleteConfirmationModal: true }})
     },
     shareClick () {
       this.$router.push({ name: 'SocialEventInvite', params: { id: this.event.id, context: 'searchItem' } })
