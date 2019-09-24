@@ -7,7 +7,7 @@ import { redirect } from '@/mixins'
 import rsvp from '@/mixins/rsvp'
 import stars from '@/mixins/stars'
 import waves from '@/mixins/waves'
-import { fetchEvent, deleteEvent, fetchUpcomingEvents } from '@/utils/api'
+import { fetchEvent, fetchUpcomingEvents } from '@/utils/api'
 
 export default {
   mixins: [ redirect, rsvp, waves, stars ],
@@ -250,7 +250,7 @@ export default {
       this.$router.push({ name: 'ContactUserForm', params: { userId: this.user.id } })
     },
     cancelClick () {
-      this.$router.push({ name: 'EventPage', params: { id: this.event.id, showDeleteConfirmationModal: true }})
+      this.$router.push({ name: 'EventPage', params: { id: this.event.id, showDeleteConfirmationModal: true } })
     },
     shareClick () {
       this.$router.push({ name: 'SocialEventInvite', params: { id: this.event.id, context: 'searchItem' } })

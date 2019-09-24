@@ -209,8 +209,8 @@ export default {
     ...mapGetters(['isRsvpDeclined'])
   },
   methods: {
-    closeModal (){
-      this.$router.push({ path: 'EventPage'})
+    closeModal () {
+      this.$router.push({ path: 'EventPage' })
     },
     handleImageClick (payload) {
       this.debug('handle')
