@@ -15,7 +15,7 @@ class Place < ApplicationRecord
   geocoded_by :full_address
 
   def retrieve_details
-    @client = GooglePlaces::Client.new(ENV['GOOGLE_MAPS_API_KEY'])
+    @client = GooglePlaces::Client.new(ENV['GOOGLE_API_KEY'])
     if google_id.present? && @latitude.blank?
       req = @client.spot(google_id)
       self.latitude = req.lat
