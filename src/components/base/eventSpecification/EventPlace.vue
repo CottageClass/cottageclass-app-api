@@ -6,8 +6,9 @@
       <vue-google-autocomplete
         v-if="googleMapsIsLoaded"
         id="map"
+        types=""
         classname="w-input location-text-field"
-        placeholder="Enter an address or a place, e.g. a business name"
+        placeholder="e.g. 10 Main St. or Elm Library"
         v-on:placechanged="getAddressData"
       >
       </vue-google-autocomplete>
@@ -36,7 +37,7 @@ export default {
     const that = this
     GoogleMapsLoader.load(function () {
       that.googleMapsIsLoaded = true
-    })      
+    })
   },
   methods: {
     getAddressData: function (addressData, placeResultData, id) {
