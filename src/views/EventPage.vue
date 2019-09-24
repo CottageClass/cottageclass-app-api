@@ -158,6 +158,7 @@ import LoadingSpinner from '@/components/LoadingSpinner'
 import Attendee from '@/components/Attendee'
 import OtherEvent from '@/components/OtherEvent'
 import LightBoxStyleWrapper from '@/components/LightBoxStyleWrapper'
+import DeleteEventConfirmationModal from '@/components/DeleteEventConfirmationModal.vue'
 
 import houseRulesImage from '@/assets/house-rules.svg'
 import petsImage from '@/assets/pets.svg'
@@ -165,7 +166,6 @@ import petsImage from '@/assets/pets.svg'
 import { mapGetters } from 'vuex'
 import { fetchUpcomingEvents, fetchEvent } from '@/utils/api'
 import { item, maps, rsvp } from '@/mixins'
-import DeleteEventConfirmationModal from '@/components/DeleteEventConfirmationModal.vue'
 
 export default {
   name: 'EventPage',
@@ -209,8 +209,8 @@ export default {
     ...mapGetters(['isRsvpDeclined'])
   },
   methods: {
-    closeModal () {
-      this.$router.push({ path: 'EventPage' })
+    closeModalClick () {
+      this.$router.push({ name: 'EventPage', params: { id: this.event.id, showDeleteConfirmationModal: false } })
     },
     handleImageClick (payload) {
       this.debug('handle')

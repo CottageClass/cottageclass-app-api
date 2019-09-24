@@ -108,8 +108,7 @@ export default {
   props: {
     doNotShowCancel: { default: false },
     item: { required: true },
-    mapCenter: {},
-    showDeleteConfirmationModal: { default: false }
+    mapCenter: {}
   },
   mixins: [item, screen],
   components: { AvatarImage, HouseholdImages, SearchListCardActions, SearchListCardActionsOverlay },
