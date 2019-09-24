@@ -2,7 +2,7 @@
   <div>
     <DeleteEventConfirmationModal
       v-if="showDeleteConfirmationModal"
-      v-on:closeModal="showDeleteConfirmationModal = false"
+      v-on:closeModal="closeModal"
       :eventId="eventId"/>
     <MainNav />
     <LightBoxStyleWrapper>
@@ -171,6 +171,7 @@ export default {
   name: 'EventPage',
   components: { MainNav, Images, LoadingSpinner, AvatarImage, SearchListCardActions, Attendee, OtherEvent, RSVPCard, LightBox, LightBoxStyleWrapper, DeleteEventConfirmationModal },
   mixins: [item, maps, rsvp],
+  props: { showDeleteConfirmationModal: false },
   data () {
     return {
       eventId: this.$route.params.id,
@@ -179,8 +180,7 @@ export default {
         'disableDefaultUI': true, // turns off map controls
         'gestureHandling': 'none' // prevents any kind of scrolling
       },
-      otherEvents: null,
-      showDeleteConfirmationModal: false
+      otherEvents: null
     }
   },
   computed: {
@@ -209,6 +209,9 @@ export default {
     ...mapGetters(['isRsvpDeclined'])
   },
   methods: {
+    closeModal (){
+      this.$router.push({ path: 'EventPage'})
+    },
     handleImageClick (payload) {
       this.debug('handle')
       this.$refs.lightbox.showImage(payload)
