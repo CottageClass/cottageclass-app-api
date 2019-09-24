@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_23_142802) do
+ActiveRecord::Schema.define(version: 2019_09_24_130013) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -154,8 +154,10 @@ ActiveRecord::Schema.define(version: 2019_09_23_142802) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.float "recency_score"
+    t.bigint "place_id"
     t.index ["event_series_id"], name: "index_events_on_event_series_id"
     t.index ["latitude", "longitude"], name: "index_events_on_latitude_and_longitude"
+    t.index ["place_id"], name: "index_events_on_place_id"
   end
 
   create_table "key_values", force: :cascade do |t|
@@ -211,6 +213,35 @@ ActiveRecord::Schema.define(version: 2019_09_23_142802) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["participable_type", "participable_id", "user_id"], name: "index_participants_on_participable_type_participable_id_user_id", unique: true
+  end
+
+  create_table "places", force: :cascade do |t|
+    t.string "google_id", null: false
+    t.float "latitude", null: false
+    t.float "longitude", null: false
+    t.string "full_address", null: false
+    t.boolean "public", null: false
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.decimal "fuzzy_latitude"
+    t.decimal "fuzzy_longitude"
+    t.string "street_number"
+    t.string "route"
+    t.string "locality"
+    t.string "sublocality"
+    t.string "neighborhood"
+    t.string "admin_area_level_1"
+    t.string "admin_area_level_2"
+    t.string "postal_code"
+    t.string "phone_area_code"
+    t.string "phone_number"
+    t.string "apartment_number"
+    t.string "country", default: "United States"
+    t.string "phone_country_code", default: "1"
+    t.index ["google_id"], name: "index_places_on_google_id", unique: true
+    t.index ["latitude", "longitude"], name: "index_places_on_latitude_and_longitude"
+    t.index ["user_id"], name: "index_places_on_user_id"
   end
 
   create_table "rpush_apps", force: :cascade do |t|
@@ -433,9 +464,11 @@ ActiveRecord::Schema.define(version: 2019_09_23_142802) do
   add_foreign_key "dark_stars", "users", column: "giver_id"
   add_foreign_key "dark_stars", "users", column: "recipient_id"
   add_foreign_key "devices", "users"
+  add_foreign_key "events", "places"
   add_foreign_key "messages", "twilio_sessions", column: "cc_twilio_session_id"
   add_foreign_key "messages", "users", column: "receiver_id"
   add_foreign_key "messages", "users", column: "sender_id"
+  add_foreign_key "places", "users"
   add_foreign_key "search_list_items", "users"
   add_foreign_key "stars", "users", column: "giver_id"
   add_foreign_key "twilio_sessions", "users", column: "receiver_id"

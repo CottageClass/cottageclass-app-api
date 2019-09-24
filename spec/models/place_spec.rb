@@ -1,0 +1,22 @@
+require 'rails_helper'
+
+RSpec.describe Place, type: :model do
+  let(:user) { build :user }
+  let(:subject) { build :place, user: user }
+
+  context 'validations' do
+    it { is_expected.to validate_presence_of(:user).with_message(:required) }
+    it { is_expected.to validate_presence_of(:google_id) }
+    it { is_expected.to validate_uniqueness_of(:google_id) }
+  end
+
+  context 'associations' do
+    it { is_expected.to have_many(:events).inverse_of(:place) }
+  end
+
+  context 'detachable' do
+    it 'persists when its user is destroyed' do
+      expect { user.destroy }.not_to change(subject, :nil?)
+    end
+  end
+end
