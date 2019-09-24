@@ -60,7 +60,7 @@ export default {
     return {
       submissionPending: false,
       showError: false,
-      place: { err: null, text: '' },
+      place: { err: null },
       description: { err: null, text: '' },
       availability: { err: null },
       repeatCount: { err: null },
@@ -78,7 +78,8 @@ export default {
     modelForCurrentStep () {
       const models = {
         description: this.description,
-        availability: this.availability
+        availability: this.availability,
+        place: this.place
       }
       return models[this.stepName]
     },
@@ -98,7 +99,8 @@ export default {
             'child_age_minimum': 0,
             'child_age_maximum': 18,
             'repeat_for': this.repeatCount.number || 1,
-            'interval': 1
+            'interval': 1,
+            'place_id': this.place.id
           }
         }
       }

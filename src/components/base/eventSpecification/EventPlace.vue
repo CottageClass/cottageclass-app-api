@@ -28,7 +28,7 @@ export default {
   props: ['value', 'context'],
   data () {
     return {
-      place: this.value.text,
+      placeId: null,
       defaultSubtitle: "Describe a playdate you'd like to host in your home or public space. It can be a one-time event (like a trip to the zoo) or something you can offer on a regular basis, like arts & crafts, indoor play, or a playground hangout!",
       googleMapsIsLoaded: false
     }
@@ -41,21 +41,20 @@ export default {
   },
   methods: {
     getAddressData: function (addressData, placeResultData, id) {
-      console.log(addressData, placeResultData, id)
+      this.placeId = placeResultData.place_id
+      this.emitPlaceId()
+    },
+    emitPlaceId: function () {
+      this.$emit('input', { err: null, id: this.placeId })
     }
   },
   computed: {
     errorMessage () {
-      return (this.place && this.place.length >= 1) ? null : 'Please tell us where your playdate will be'
+      return this.placeId ? null : 'Please tell us where your playdate will be.'
     }
   },
   created () {
-    this.$emit('input', { err: this.errorMessage, text: this.place })
-  },
-  watch: {
-    description: function () {
-      this.$emit('input', { err: this.errorMessage, text: this.place })
-    }
+    this.$emit('input', { err: this.errorMessage })
   }
 }
 </script>
