@@ -180,7 +180,7 @@ export default {
         'gestureHandling': 'none' // prevents any kind of scrolling
       },
       otherEvents: null,
-      showDeleteConfirmationModal: true
+      showDeleteConfirmationModal: false
     }
   },
   computed: {

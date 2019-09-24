@@ -1,9 +1,5 @@
 <template>
   <div class="body__your-playdates">
-    <DeleteEventConfirmationModal
-      v-if="true"
-      v-on:closeModal="showDeleteConfirmationModal = false"
-      :eventId="eventId"/>
     <MainNav />
 
     <div class="your-playdates__container w-container">

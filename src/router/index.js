@@ -148,7 +148,8 @@ export default new Router({
     {
       path: '/event/:id/',
       name: 'EventPage',
-      component: EventPage
+      component: EventPage,
+      props: true
     },
     {
       path: '/faq',
