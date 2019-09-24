@@ -1907,7 +1907,7 @@ background-color: #f6f6f6;
 
 }
 
-.modal {
+.modal-style {
   .question-title {
   margin-top: 0;
   margin-bottom: 10px;
@@ -1938,7 +1938,44 @@ background-color: #f6f6f6;
   color: #fff;
   }
 
+  @media (max-width: 991px) {
+    .content-wrapper__request {
+        width: auto;
+        margin-right: 32px;
+        margin-left: 32px;
+    }
+    .content-wrapper {
+        width: auto;
+        margin-right: 32px;
+        margin-left: 32px;
+    }
 
+    .title-bar {
+      width: auto;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .content-wrapper__request {
+      margin-top: 28px;
+    }
+    .content-wrapper {
+      margin-top: 28px;
+    }
+  }
+
+  @media (max-width: 479px) {
+    .title-bar {
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+      -ms-flex-align: center;
+      align-items: center;
+    }
+
+    .content-container {
+      overflow: visible;
+    }
+  }
 }
 
 .editing {

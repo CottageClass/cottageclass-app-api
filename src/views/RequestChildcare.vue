@@ -1,5 +1,5 @@
 <template>
-  <StyleWrapper styleIs="onboarding modal" >
+  <StyleWrapper class="modal-style">
     <div class="onb-body">
 
       <div class="body__request">
