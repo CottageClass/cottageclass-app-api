@@ -15,12 +15,15 @@ class Place < ApplicationRecord
   geocoded_by :full_address
 
   def retrieve_details
-    @client = GooglePlaces::Client.new(ENV['GOOGLE_MAPS_API_KEY'])
+    @client = GooglePlaces::Client.new(ENV['GOOGLE_API_KEY'])
     if google_id.present? && @latitude.blank?
       req = @client.spot(google_id)
       self.latitude = req.lat
       self.longitude = req.lng
       self.full_address = req.formatted_address
+      self.name = req.name
+      self.locality = req.city
+      self.admin_area_level_1 = req.region
     end
   end
 end

@@ -20,5 +20,6 @@ class PlaceSerializer < BaseSerializer
              :fuzzy_latitude,
              :fuzzy_longitude,
              :postal_code,
-             :country
+             :country,
+             :name
 end
