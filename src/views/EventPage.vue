@@ -181,7 +181,7 @@ export default {
   computed: {
     nameWithPlace () {
       if (this.event.place) {
-        return this.event.name + `<br><br>This Event will be at ${this.event.place.name}<br>${this.event.place.fullAddress}`
+        return this.event.name + `<br><br>This event will be at ${this.event.place.name}<br>${this.event.place.fullAddress}`
       } else {
         return this.event.name + `<br><br>The playdate will be hosted at ${this.event.hostFirstName}'s home.`
       }
