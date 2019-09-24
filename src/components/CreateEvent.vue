@@ -162,7 +162,7 @@ export default {
     },
     async nextStep () {
       // this will not go here ultimately.
-      this.ourPlaceId = await submitGooglePlaceIdAndFetchOurOwn(this.place.id)
+      // this.ourPlaceId = await submitGooglePlaceIdAndFetchOurOwn(this.place.id)
       if (this.nextButtonState === 'skip') {
         this.$emit('skip')
       } else if (this.errorMessage) {
@@ -171,10 +171,10 @@ export default {
         // state is persisted after route update because component is reused
         this.showError = false
         if (this.stepName === 'repeat-count') {
-          //          this.ourPlaceId = await this.getOurPlaceId()
+          await submitGooglePlaceIdAndFetchOurOwn(this.place.id)
           await this.submitAvailabilityEvent()
         } else if (this.stepName === 'time') {
-          //        this.ourPlaceId = await this.getOurPlaceId()
+          await submitGooglePlaceIdAndFetchOurOwn(this.place.id)
           await this.submitSpecificEvent()
         } else {
           this.$router.push({
