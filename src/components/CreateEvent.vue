@@ -129,7 +129,7 @@ export default {
         const timeRange = { start, end }
         await submitEventSeriesData(this.eventSeriesDataForSubmission(timeRange))
       } catch (e) {
-        this.logError('Failed to sumbit event series')
+        this.logError('Failed to submit event series')
         this.logError(e)
         this.showAlert('Sorry, there was a problem submitting your event.  Please try again later', 'failure')
       }
@@ -144,7 +144,7 @@ export default {
           const res = await submitEventSeriesData(this.eventSeriesDataForSubmission(timeRange))
           this.setCreatedEvents({ eventData: res })
         } catch (e) {
-          this.logError('Failed to sumbit event series')
+          this.logError('Failed to submit event series')
           this.logError(e)
           this.showAlert('Sorry, there was a problem submitting your event.  Please try again later', 'failure')
         }
@@ -161,8 +161,8 @@ export default {
         // state is persisted after route update because component is reused
         this.showError = false
         if (this.stepName === 'repeat-count' || this.stepName === 'time') {
-          if (this.homeOrPublic == 'public') {
-            await submitGooglePlaceIdAndFetchOurOwn(this.place.id)
+          if (this.place.id != null) {
+            this.ourPlaceId = await submitGooglePlaceIdAndFetchOurOwn(this.place.id)
           }
         }
         if (this.stepName === 'repeat-count') {
