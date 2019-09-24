@@ -50,6 +50,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-12T21:30:00.000Z",
   },
   Object {
@@ -100,6 +101,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-09T21:30:00.000Z",
   },
   Object {
@@ -150,6 +152,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-07T21:30:00.000Z",
   },
   Object {
@@ -215,6 +218,7 @@ Array [
     "participantsCount": 2,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-10-11T22:30:00.000Z",
   },
   Object {
@@ -280,6 +284,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-31T21:30:00.000Z",
   },
   Object {
@@ -332,6 +337,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-11T22:00:00.000Z",
   },
   Object {
@@ -384,6 +390,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-08T22:00:00.000Z",
   },
   Object {
@@ -439,6 +446,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-27T22:00:00.000Z",
   },
   Object {
@@ -494,6 +502,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-24T22:00:00.000Z",
   },
   Object {
@@ -547,6 +556,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-16T22:00:00.000Z",
   },
   Object {
@@ -600,6 +610,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-13T22:00:00.000Z",
   },
   Object {
@@ -653,6 +664,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-29T22:00:00.000Z",
   },
   Object {
@@ -705,6 +717,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-10T21:30:00.000Z",
   },
   Object {
@@ -757,6 +770,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-07T21:30:00.000Z",
   },
   Object {
@@ -809,6 +823,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "We have a 24-pound poodle, who's also a trained therapy dog.",
+    "place": undefined,
     "startsAt": "2019-05-11T21:00:00.000Z",
   },
   Object {
@@ -861,6 +876,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "We have a 24-pound poodle, who's also a trained therapy dog.",
+    "place": undefined,
     "startsAt": "2019-06-08T21:00:00.000Z",
   },
   Object {
@@ -913,6 +929,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-18T22:00:00.000Z",
   },
   Object {
@@ -965,6 +982,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-15T22:00:00.000Z",
   },
   Object {
@@ -1017,6 +1035,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-01T21:00:00.000Z",
   },
   Object {
@@ -1069,6 +1088,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-29T21:00:00.000Z",
   },
   Object {
@@ -1123,6 +1143,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "dog",
+    "place": undefined,
     "startsAt": "2019-06-01T21:00:00.000Z",
   },
   Object {
@@ -1175,6 +1196,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "One very docile and sweet French bulldog, one very scared cat.",
+    "place": undefined,
     "startsAt": "2019-05-31T21:00:00.000Z",
   },
   Object {
@@ -1227,6 +1249,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "One very docile and sweet French bulldog, one very scared cat.",
+    "place": undefined,
     "startsAt": "2019-06-28T21:00:00.000Z",
   },
   Object {
@@ -1279,6 +1302,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-23T22:00:00.000Z",
   },
   Object {
@@ -1331,6 +1355,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-20T22:00:00.000Z",
   },
   Object {
@@ -1383,6 +1408,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "Very chilled out old french bulldog. Super gentle with everyone.",
+    "place": undefined,
     "startsAt": "2019-05-22T22:30:00.000Z",
   },
   Object {
@@ -1435,6 +1461,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "Very chilled out old french bulldog. Super gentle with everyone.",
+    "place": undefined,
     "startsAt": "2019-06-19T22:30:00.000Z",
   },
   Object {
@@ -1487,6 +1514,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "Very chilled out old french bulldog. Super gentle with everyone.",
+    "place": undefined,
     "startsAt": "2019-07-17T22:30:00.000Z",
   },
   Object {
@@ -1556,6 +1584,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-10T21:00:00.000Z",
   },
   Object {
@@ -1625,6 +1654,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-07T21:00:00.000Z",
   },
   Object {
@@ -1694,6 +1724,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-05T21:00:00.000Z",
   },
   Object {
@@ -1747,6 +1778,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-17T21:00:00.000Z",
   },
   Object {
@@ -1800,6 +1832,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-14T21:00:00.000Z",
   },
   Object {
@@ -1853,6 +1886,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-12T21:00:00.000Z",
   },
   Object {
@@ -1906,6 +1940,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-10T21:00:00.000Z",
   },
   Object {
@@ -1959,6 +1994,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-07T21:00:00.000Z",
   },
   Object {
@@ -2012,6 +2048,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-05T21:00:00.000Z",
   },
   Object {
@@ -2064,6 +2101,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-10T21:00:00.000Z",
   },
   Object {
@@ -2116,6 +2154,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-07T21:00:00.000Z",
   },
   Object {
@@ -2168,6 +2207,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-05T21:00:00.000Z",
   },
   Object {
@@ -2221,6 +2261,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "I have a very quiet 12 year old Shiba Inu dog named Ninja",
+    "place": undefined,
     "startsAt": "2019-05-17T21:00:00.000Z",
   },
   Object {
@@ -2274,6 +2315,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "I have a very quiet 12 year old Shiba Inu dog named Ninja",
+    "place": undefined,
     "startsAt": "2019-06-14T21:00:00.000Z",
   },
   Object {
@@ -2327,6 +2369,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "I have a very quiet 12 year old Shiba Inu dog named Ninja",
+    "place": undefined,
     "startsAt": "2019-07-12T21:00:00.000Z",
   },
   Object {
@@ -2380,6 +2423,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-17T21:00:00.000Z",
   },
   Object {
@@ -2433,6 +2477,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-14T21:00:00.000Z",
   },
   Object {
@@ -2486,6 +2531,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-12T21:00:00.000Z",
   },
   Object {
@@ -2538,6 +2584,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "Pico is a kid-loving lab who isn't great for kids who are afraid of dogs. In most cases, however, she can be kept upstairs, outside of activities. Gus is a highly-tolerant orange cat who's never bitten or swiped (a human anyway ... the dog sometimes gets it...)",
+    "place": undefined,
     "startsAt": "2019-05-11T21:00:00.000Z",
   },
   Object {
@@ -2590,6 +2637,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "we have a guinea pig. he is shy at first.",
+    "place": undefined,
     "startsAt": "2019-05-18T22:00:00.000Z",
   },
   Object {
@@ -2642,6 +2690,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "we have a guinea pig. he is shy at first.",
+    "place": undefined,
     "startsAt": "2019-06-15T22:00:00.000Z",
   },
   Object {
@@ -2694,6 +2743,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "we have a guinea pig. he is shy at first.",
+    "place": undefined,
     "startsAt": "2019-07-13T22:00:00.000Z",
   },
   Object {
@@ -2747,6 +2797,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-10T16:00:00.000Z",
   },
   Object {
@@ -2798,6 +2849,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-07T16:00:00.000Z",
   },
   Object {
@@ -2851,6 +2903,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-05T16:00:00.000Z",
   },
   Object {
@@ -2903,6 +2956,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-11T21:00:00.000Z",
   },
   Object {
@@ -2955,6 +3009,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-08T21:00:00.000Z",
   },
   Object {
@@ -3007,6 +3062,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-06T21:00:00.000Z",
   },
   Object {
@@ -3059,6 +3115,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-18T21:00:00.000Z",
   },
   Object {
@@ -3111,6 +3168,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-15T21:00:00.000Z",
   },
   Object {
@@ -3163,6 +3221,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-13T21:00:00.000Z",
   },
   Object {
@@ -3215,6 +3274,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "we have two pomeranians. They are really friendly and only bark when someone knocks at our door.",
+    "place": undefined,
     "startsAt": "2019-05-18T21:00:00.000Z",
   },
   Object {
@@ -3267,6 +3327,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "we have two pomeranians. They are really friendly and only bark when someone knocks at our door.",
+    "place": undefined,
     "startsAt": "2019-06-15T21:00:00.000Z",
   },
   Object {
@@ -3319,6 +3380,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "we have two pomeranians. They are really friendly and only bark when someone knocks at our door.",
+    "place": undefined,
     "startsAt": "2019-07-13T21:00:00.000Z",
   },
   Object {
@@ -3371,6 +3433,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "Cat, old and friendly",
+    "place": undefined,
     "startsAt": "2019-05-17T21:30:00.000Z",
   },
   Object {
@@ -3423,6 +3486,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "Cat, old and friendly",
+    "place": undefined,
     "startsAt": "2019-06-14T21:30:00.000Z",
   },
   Object {
@@ -3475,6 +3539,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "Cat, old and friendly",
+    "place": undefined,
     "startsAt": "2019-07-12T21:30:00.000Z",
   },
   Object {
@@ -3529,6 +3594,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "Our cat Tomás is shy, so you probable won't see him around much",
+    "place": undefined,
     "startsAt": "2019-05-18T21:00:00.000Z",
   },
   Object {
@@ -3583,6 +3649,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "Our cat Tomás is shy, so you probable won't see him around much",
+    "place": undefined,
     "startsAt": "2019-06-15T21:00:00.000Z",
   },
   Object {
@@ -3637,6 +3704,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "Our cat Tomás is shy, so you probable won't see him around much",
+    "place": undefined,
     "startsAt": "2019-07-13T21:00:00.000Z",
   },
   Object {
@@ -3689,6 +3757,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-18T21:30:00.000Z",
   },
   Object {
@@ -3741,6 +3810,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-15T21:30:00.000Z",
   },
   Object {
@@ -3793,6 +3863,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-13T21:30:00.000Z",
   },
   Object {
@@ -3845,6 +3916,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-18T21:00:00.000Z",
   },
   Object {
@@ -3897,6 +3969,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-15T21:00:00.000Z",
   },
   Object {
@@ -3949,6 +4022,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-13T21:00:00.000Z",
   },
   Object {
@@ -4001,6 +4075,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-11T21:00:00.000Z",
   },
   Object {
@@ -4053,6 +4128,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-08T21:00:00.000Z",
   },
   Object {
@@ -4105,6 +4181,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-06T21:00:00.000Z",
   },
   Object {
@@ -4157,6 +4234,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "We have a cat, 7yo, who is really patient with kids who just leave the room when kids are around.",
+    "place": undefined,
     "startsAt": "2019-05-18T22:00:00.000Z",
   },
   Object {
@@ -4209,6 +4287,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "We have a cat, 7yo, who is really patient with kids who just leave the room when kids are around.",
+    "place": undefined,
     "startsAt": "2019-06-15T22:00:00.000Z",
   },
   Object {
@@ -4261,6 +4340,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "We have a cat, 7yo, who is really patient with kids who just leave the room when kids are around.",
+    "place": undefined,
     "startsAt": "2019-07-13T22:00:00.000Z",
   },
   Object {
@@ -4314,6 +4394,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-18T21:00:00.000Z",
   },
   Object {
@@ -4367,6 +4448,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-15T21:00:00.000Z",
   },
   Object {
@@ -4420,6 +4502,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-13T21:00:00.000Z",
   },
   Object {
@@ -4472,6 +4555,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "Small Yorkie, friendly lap dog that prefers snuggles over fetch.",
+    "place": undefined,
     "startsAt": "2019-05-18T21:00:00.000Z",
   },
   Object {
@@ -4524,6 +4608,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "Small Yorkie, friendly lap dog that prefers snuggles over fetch.",
+    "place": undefined,
     "startsAt": "2019-06-15T21:00:00.000Z",
   },
   Object {
@@ -4576,6 +4661,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "Small Yorkie, friendly lap dog that prefers snuggles over fetch.",
+    "place": undefined,
     "startsAt": "2019-07-13T21:00:00.000Z",
   },
   Object {
@@ -4630,6 +4716,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-11T21:00:00.000Z",
   },
   Object {
@@ -4684,6 +4771,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-08T21:00:00.000Z",
   },
   Object {
@@ -4738,6 +4826,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-06T21:00:00.000Z",
   },
   Object {
@@ -4790,6 +4879,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-01T21:00:00.000Z",
   },
   Object {
@@ -4842,6 +4932,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-29T21:00:00.000Z",
   },
   Object {
@@ -4895,6 +4986,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-17T21:30:00.000Z",
   },
   Object {
@@ -4948,6 +5040,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-14T21:30:00.000Z",
   },
   Object {
@@ -5001,6 +5094,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-12T21:30:00.000Z",
   },
   Object {
@@ -5053,6 +5147,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-17T22:00:00.000Z",
   },
   Object {
@@ -5105,6 +5200,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-14T22:00:00.000Z",
   },
   Object {
@@ -5157,6 +5253,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-12T22:00:00.000Z",
   },
   Object {
@@ -5210,6 +5307,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-19T21:30:00.000Z",
   },
   Object {
@@ -5263,6 +5361,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-16T21:30:00.000Z",
   },
   Object {
@@ -5315,6 +5414,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "1 cat, very sweet, affectionate, and outgoing. Loves to play with kids.",
+    "place": undefined,
     "startsAt": "2019-05-18T21:30:00.000Z",
   },
   Object {
@@ -5367,6 +5467,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "1 cat, very sweet, affectionate, and outgoing. Loves to play with kids.",
+    "place": undefined,
     "startsAt": "2019-06-15T21:30:00.000Z",
   },
   Object {
@@ -5419,6 +5520,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "1 cat, very sweet, affectionate, and outgoing. Loves to play with kids.",
+    "place": undefined,
     "startsAt": "2019-07-13T21:30:00.000Z",
   },
   Object {
@@ -5471,6 +5573,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "1 cat, very sweet, affectionate, and outgoing. Loves to play with kids.",
+    "place": undefined,
     "startsAt": "2019-05-18T21:30:00.000Z",
   },
   Object {
@@ -5523,6 +5626,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "1 cat, very sweet, affectionate, and outgoing. Loves to play with kids.",
+    "place": undefined,
     "startsAt": "2019-06-15T21:30:00.000Z",
   },
   Object {
@@ -5575,6 +5679,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "1 cat, very sweet, affectionate, and outgoing. Loves to play with kids.",
+    "place": undefined,
     "startsAt": "2019-07-13T21:30:00.000Z",
   },
   Object {
@@ -5627,6 +5732,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "A nice cat",
+    "place": undefined,
     "startsAt": "2019-05-18T21:00:00.000Z",
   },
   Object {
@@ -5679,6 +5785,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "A nice cat",
+    "place": undefined,
     "startsAt": "2019-06-15T21:00:00.000Z",
   },
   Object {
@@ -5731,6 +5838,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "A nice cat",
+    "place": undefined,
     "startsAt": "2019-07-13T21:00:00.000Z",
   },
   Object {
@@ -5783,6 +5891,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "We have a lovely cat named Cleo :)",
+    "place": undefined,
     "startsAt": "2019-05-17T21:00:00.000Z",
   },
   Object {
@@ -5835,6 +5944,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "We have a lovely cat named Cleo :)",
+    "place": undefined,
     "startsAt": "2019-06-14T21:00:00.000Z",
   },
   Object {
@@ -5887,6 +5997,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "We have a lovely cat named Cleo :)",
+    "place": undefined,
     "startsAt": "2019-07-12T21:00:00.000Z",
   },
   Object {
@@ -5939,6 +6050,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-18T21:00:00.000Z",
   },
   Object {
@@ -5991,6 +6103,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-15T21:00:00.000Z",
   },
   Object {
@@ -6043,6 +6156,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-13T21:00:00.000Z",
   },
   Object {
@@ -6095,6 +6209,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "One cat that you'll never see because she's pretty skittish.",
+    "place": undefined,
     "startsAt": "2019-06-08T21:00:00.000Z",
   },
   Object {
@@ -6147,6 +6262,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "One cat that you'll never see because she's pretty skittish.",
+    "place": undefined,
     "startsAt": "2019-07-06T21:00:00.000Z",
   },
   Object {
@@ -6200,6 +6316,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "2 Yorkies",
+    "place": undefined,
     "startsAt": "2019-05-11T21:00:00.000Z",
   },
   Object {
@@ -6253,6 +6370,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "2 Yorkies",
+    "place": undefined,
     "startsAt": "2019-06-08T21:00:00.000Z",
   },
   Object {
@@ -6306,6 +6424,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "2 Yorkies",
+    "place": undefined,
     "startsAt": "2019-07-06T21:00:00.000Z",
   },
   Object {
@@ -6358,6 +6477,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-26T21:00:00.000Z",
   },
   Object {
@@ -6410,6 +6530,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-23T21:00:00.000Z",
   },
   Object {
@@ -6462,6 +6583,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-21T21:00:00.000Z",
   },
   Object {
@@ -6516,6 +6638,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "A dog and two cats. One of our cats is shy but they're all great with kids.",
+    "place": undefined,
     "startsAt": "2019-05-10T21:30:00.000Z",
   },
   Object {
@@ -6570,6 +6693,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "A dog and two cats. One of our cats is shy but they're all great with kids.",
+    "place": undefined,
     "startsAt": "2019-06-07T21:30:00.000Z",
   },
   Object {
@@ -6624,6 +6748,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "A dog and two cats. One of our cats is shy but they're all great with kids.",
+    "place": undefined,
     "startsAt": "2019-07-05T21:30:00.000Z",
   },
   Object {
@@ -6676,6 +6801,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-17T21:30:00.000Z",
   },
   Object {
@@ -6728,6 +6854,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-14T21:30:00.000Z",
   },
   Object {
@@ -6780,6 +6907,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-12T21:30:00.000Z",
   },
   Object {
@@ -6832,6 +6960,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "We have two medium sized dogs. Both are very old, and very quiet. One can no longer walk, he is a pug, so he stays on his bed. The other is very aloof but calm and friendly around new guests and children, she is a shiba inu.",
+    "place": undefined,
     "startsAt": "2019-05-17T23:00:00.000Z",
   },
   Object {
@@ -6884,6 +7013,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "We have two medium sized dogs. Both are very old, and very quiet. One can no longer walk, he is a pug, so he stays on his bed. The other is very aloof but calm and friendly around new guests and children, she is a shiba inu.",
+    "place": undefined,
     "startsAt": "2019-06-14T23:00:00.000Z",
   },
   Object {
@@ -6936,6 +7066,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "We have two medium sized dogs. Both are very old, and very quiet. One can no longer walk, he is a pug, so he stays on his bed. The other is very aloof but calm and friendly around new guests and children, she is a shiba inu.",
+    "place": undefined,
     "startsAt": "2019-07-12T23:00:00.000Z",
   },
   Object {
@@ -6989,6 +7120,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-10T21:00:00.000Z",
   },
   Object {
@@ -7042,6 +7174,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-07T21:00:00.000Z",
   },
   Object {
@@ -7095,6 +7228,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-05T21:00:00.000Z",
   },
   Object {
@@ -7147,6 +7281,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "4 dogs (2 yellow labs, 1 chao, and 1 rescue mutt). They will be in the basement when the children play. They are super happy dogs, but for the sake of sanity, we will keep them downstairs during the playdate.",
+    "place": undefined,
     "startsAt": "2019-05-18T21:00:00.000Z",
   },
   Object {
@@ -7199,6 +7334,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "4 dogs (2 yellow labs, 1 chao, and 1 rescue mutt). They will be in the basement when the children play. They are super happy dogs, but for the sake of sanity, we will keep them downstairs during the playdate.",
+    "place": undefined,
     "startsAt": "2019-06-15T21:00:00.000Z",
   },
   Object {
@@ -7251,6 +7387,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "4 dogs (2 yellow labs, 1 chao, and 1 rescue mutt). They will be in the basement when the children play. They are super happy dogs, but for the sake of sanity, we will keep them downstairs during the playdate.",
+    "place": undefined,
     "startsAt": "2019-07-13T21:00:00.000Z",
   },
   Object {
@@ -7303,6 +7440,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-22T21:00:00.000Z",
   },
   Object {
@@ -7355,6 +7493,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-19T21:00:00.000Z",
   },
   Object {
@@ -7407,6 +7546,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-17T21:00:00.000Z",
   },
   Object {
@@ -7459,6 +7599,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-08-14T21:00:00.000Z",
   },
   Object {
@@ -7511,6 +7652,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-09-11T21:00:00.000Z",
   },
   Object {
@@ -7563,6 +7705,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-01T21:00:00.000Z",
   },
   Object {
@@ -7615,6 +7758,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-29T21:00:00.000Z",
   },
   Object {
@@ -7667,6 +7811,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-27T21:00:00.000Z",
   },
   Object {
@@ -7719,6 +7864,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-12T00:00:00.000Z",
   },
   Object {
@@ -7771,6 +7917,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-09T00:00:00.000Z",
   },
   Object {
@@ -7823,6 +7970,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-07T00:00:00.000Z",
   },
   Object {
@@ -7878,6 +8026,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-17T21:00:00.000Z",
   },
   Object {
@@ -7933,6 +8082,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-14T21:00:00.000Z",
   },
   Object {
@@ -7988,6 +8138,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-12T21:00:00.000Z",
   },
   Object {
@@ -8041,6 +8192,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-17T21:00:00.000Z",
   },
   Object {
@@ -8094,6 +8246,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-14T21:00:00.000Z",
   },
   Object {
@@ -8147,6 +8300,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-12T21:00:00.000Z",
   },
   Object {
@@ -8199,6 +8353,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-10T22:00:00.000Z",
   },
   Object {
@@ -8251,6 +8406,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-07T22:00:00.000Z",
   },
   Object {
@@ -8303,6 +8459,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-05T22:00:00.000Z",
   },
   Object {
@@ -8356,6 +8513,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "3 very sweet gerbil brothers who will stay in their cage/tank unless we take them out.",
+    "place": undefined,
     "startsAt": "2019-05-27T21:00:00.000Z",
   },
   Object {
@@ -8409,6 +8567,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "3 very sweet gerbil brothers who will stay in their cage/tank unless we take them out.",
+    "place": undefined,
     "startsAt": "2019-06-24T21:00:00.000Z",
   },
   Object {
@@ -8461,6 +8620,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-11T21:00:00.000Z",
   },
   Object {
@@ -8513,6 +8673,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-08T21:00:00.000Z",
   },
   Object {
@@ -8565,6 +8726,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-06T21:00:00.000Z",
   },
   Object {
@@ -8617,6 +8779,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-25T21:00:00.000Z",
   },
   Object {
@@ -8669,6 +8832,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-22T21:00:00.000Z",
   },
   Object {
@@ -8721,6 +8885,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-20T21:00:00.000Z",
   },
   Object {
@@ -8773,6 +8938,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-11T21:00:00.000Z",
   },
   Object {
@@ -8825,6 +8991,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-08T21:00:00.000Z",
   },
   Object {
@@ -8877,6 +9044,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-06T21:00:00.000Z",
   },
   Object {
@@ -8929,6 +9097,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-11T21:00:00.000Z",
   },
   Object {
@@ -8981,6 +9150,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-08T21:00:00.000Z",
   },
   Object {
@@ -9033,6 +9203,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-06T21:00:00.000Z",
   },
   Object {
@@ -9085,6 +9256,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-10T22:00:00.000Z",
   },
   Object {
@@ -9137,6 +9309,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-07T22:00:00.000Z",
   },
   Object {
@@ -9189,6 +9362,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-05T22:00:00.000Z",
   },
   Object {
@@ -9241,6 +9415,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-18T21:30:00.000Z",
   },
   Object {
@@ -9293,6 +9468,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-15T21:30:00.000Z",
   },
   Object {
@@ -9345,6 +9521,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-13T21:30:00.000Z",
   },
   Object {
@@ -9397,6 +9574,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-11T21:00:00.000Z",
   },
   Object {
@@ -9449,6 +9627,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-08T21:00:00.000Z",
   },
   Object {
@@ -9501,6 +9680,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-06T21:00:00.000Z",
   },
   Object {
@@ -9553,6 +9733,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-08-24T00:30:00.000Z",
   },
   Object {
@@ -9605,6 +9786,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-09-21T00:30:00.000Z",
   },
   Object {
@@ -9657,6 +9839,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "4 short haired cats",
+    "place": undefined,
     "startsAt": "2019-05-25T21:00:00.000Z",
   },
   Object {
@@ -9709,6 +9892,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "4 short haired cats",
+    "place": undefined,
     "startsAt": "2019-06-22T21:00:00.000Z",
   },
   Object {
@@ -9761,6 +9945,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "4 short haired cats",
+    "place": undefined,
     "startsAt": "2019-07-20T21:00:00.000Z",
   },
   Object {
@@ -9813,6 +9998,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-24T21:00:00.000Z",
   },
   Object {
@@ -9865,6 +10051,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-21T21:00:00.000Z",
   },
   Object {
@@ -9917,6 +10104,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-19T21:00:00.000Z",
   },
   Object {
@@ -9969,6 +10157,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-08-16T21:00:00.000Z",
   },
   Object {
@@ -10022,6 +10211,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-11T21:00:00.000Z",
   },
   Object {
@@ -10075,6 +10265,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-08T21:00:00.000Z",
   },
   Object {
@@ -10128,6 +10319,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-06T21:00:00.000Z",
   },
   Object {
@@ -10180,6 +10372,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-25T22:00:00.000Z",
   },
   Object {
@@ -10232,6 +10425,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-22T22:00:00.000Z",
   },
   Object {
@@ -10284,6 +10478,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-20T22:00:00.000Z",
   },
   Object {
@@ -10336,6 +10531,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "Our cat Thunder is sweet, usually keeps to himself. Is aggressive only when taunted/aggravated for an extended period of time which rarely happens as my husband and I are always around to monitor interactions with him.",
+    "place": undefined,
     "startsAt": "2019-05-18T21:00:00.000Z",
   },
   Object {
@@ -10388,6 +10584,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "Our cat Thunder is sweet, usually keeps to himself. Is aggressive only when taunted/aggravated for an extended period of time which rarely happens as my husband and I are always around to monitor interactions with him.",
+    "place": undefined,
     "startsAt": "2019-06-15T21:00:00.000Z",
   },
   Object {
@@ -10440,6 +10637,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "Our cat Thunder is sweet, usually keeps to himself. Is aggressive only when taunted/aggravated for an extended period of time which rarely happens as my husband and I are always around to monitor interactions with him.",
+    "place": undefined,
     "startsAt": "2019-07-13T21:00:00.000Z",
   },
   Object {
@@ -10492,6 +10690,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "I have two cats (generally hide with children who are excited) and a friendly lab mix (who also goes away from kids if there is two much excitement for him).",
+    "place": undefined,
     "startsAt": "2019-05-10T21:00:00.000Z",
   },
   Object {
@@ -10544,6 +10743,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "I have two cats (generally hide with children who are excited) and a friendly lab mix (who also goes away from kids if there is two much excitement for him).",
+    "place": undefined,
     "startsAt": "2019-06-07T21:00:00.000Z",
   },
   Object {
@@ -10596,6 +10796,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "I have two cats (generally hide with children who are excited) and a friendly lab mix (who also goes away from kids if there is two much excitement for him).",
+    "place": undefined,
     "startsAt": "2019-07-05T21:00:00.000Z",
   },
   Object {
@@ -10649,6 +10850,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "2 outdoor cats",
+    "place": undefined,
     "startsAt": "2019-05-24T00:00:00.000Z",
   },
   Object {
@@ -10702,6 +10904,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "2 outdoor cats",
+    "place": undefined,
     "startsAt": "2019-06-21T00:00:00.000Z",
   },
   Object {
@@ -10755,6 +10958,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "2 outdoor cats",
+    "place": undefined,
     "startsAt": "2019-07-19T00:00:00.000Z",
   },
   Object {
@@ -10808,6 +11012,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-16T00:00:00.000Z",
   },
   Object {
@@ -10861,6 +11066,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-14T00:00:00.000Z",
   },
   Object {
@@ -10913,6 +11119,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "A very sweet, usually shy cat.",
+    "place": undefined,
     "startsAt": "2019-05-24T21:30:00.000Z",
   },
   Object {
@@ -10965,6 +11172,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "A very sweet, usually shy cat.",
+    "place": undefined,
     "startsAt": "2019-06-21T21:30:00.000Z",
   },
   Object {
@@ -11017,6 +11225,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "A very sweet, usually shy cat.",
+    "place": undefined,
     "startsAt": "2019-07-19T21:30:00.000Z",
   },
   Object {
@@ -11069,6 +11278,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-18T22:00:00.000Z",
   },
   Object {
@@ -11121,6 +11331,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-15T22:00:00.000Z",
   },
   Object {
@@ -11173,6 +11384,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-13T22:00:00.000Z",
   },
   Object {
@@ -11225,6 +11437,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-11T21:00:00.000Z",
   },
   Object {
@@ -11277,6 +11490,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-08T21:00:00.000Z",
   },
   Object {
@@ -11329,6 +11543,7 @@ Array [
     "participantsCount": 1,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-06T21:00:00.000Z",
   },
   Object {
@@ -11382,6 +11597,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "female cat",
+    "place": undefined,
     "startsAt": "2019-05-18T00:00:00.000Z",
   },
   Object {
@@ -11435,6 +11651,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "female cat",
+    "place": undefined,
     "startsAt": "2019-06-15T00:00:00.000Z",
   },
   Object {
@@ -11488,6 +11705,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "female cat",
+    "place": undefined,
     "startsAt": "2019-07-13T00:00:00.000Z",
   },
   Object {
@@ -11541,6 +11759,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-17T21:00:00.000Z",
   },
   Object {
@@ -11594,6 +11813,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-14T21:00:00.000Z",
   },
   Object {
@@ -11647,6 +11867,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-12T21:00:00.000Z",
   },
   Object {
@@ -11699,6 +11920,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-10T21:00:00.000Z",
   },
   Object {
@@ -11751,6 +11973,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-07T21:00:00.000Z",
   },
   Object {
@@ -11803,6 +12026,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-05T21:00:00.000Z",
   },
   Object {
@@ -11855,6 +12079,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2020-10-28T00:00:00.000Z",
   },
   Object {
@@ -11907,6 +12132,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2020-11-25T01:00:00.000Z",
   },
   Object {
@@ -11959,6 +12185,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2020-12-23T01:00:00.000Z",
   },
   Object {
@@ -12011,6 +12238,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2021-01-20T01:00:00.000Z",
   },
   Object {
@@ -12063,6 +12291,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2021-02-17T01:00:00.000Z",
   },
   Object {
@@ -12115,6 +12344,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2021-03-17T00:00:00.000Z",
   },
   Object {
@@ -12167,6 +12397,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-18T21:00:00.000Z",
   },
   Object {
@@ -12219,6 +12450,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-15T21:00:00.000Z",
   },
   Object {
@@ -12271,6 +12503,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-13T21:00:00.000Z",
   },
   Object {
@@ -12323,6 +12556,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "We have two cats and a dog. All are friendly.",
+    "place": undefined,
     "startsAt": "2019-05-25T22:30:00.000Z",
   },
   Object {
@@ -12375,6 +12609,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "We have two cats and a dog. All are friendly.",
+    "place": undefined,
     "startsAt": "2019-06-22T22:30:00.000Z",
   },
   Object {
@@ -12427,6 +12662,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "We have two cats and a dog. All are friendly.",
+    "place": undefined,
     "startsAt": "2019-07-20T22:30:00.000Z",
   },
   Object {
@@ -12479,6 +12715,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-18T21:00:00.000Z",
   },
   Object {
@@ -12531,6 +12768,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-15T21:00:00.000Z",
   },
   Object {
@@ -12583,6 +12821,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-13T21:00:00.000Z",
   },
   Object {
@@ -12636,6 +12875,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-17T21:30:00.000Z",
   },
   Object {
@@ -12689,6 +12929,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-14T21:30:00.000Z",
   },
   Object {
@@ -12742,6 +12983,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-12T21:30:00.000Z",
   },
   Object {
@@ -12794,6 +13036,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-13T21:00:00.000Z",
   },
   Object {
@@ -12846,6 +13089,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-10T21:00:00.000Z",
   },
   Object {
@@ -12898,6 +13142,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-08T21:00:00.000Z",
   },
   Object {
@@ -12950,6 +13195,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-08-05T21:00:00.000Z",
   },
   Object {
@@ -13002,6 +13248,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-10T21:00:00.000Z",
   },
   Object {
@@ -13054,6 +13301,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-07T21:00:00.000Z",
   },
   Object {
@@ -13106,6 +13354,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-05T21:00:00.000Z",
   },
   Object {
@@ -13159,6 +13408,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-01T21:00:00.000Z",
   },
   Object {
@@ -13212,6 +13462,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-29T21:00:00.000Z",
   },
   Object {
@@ -13265,6 +13516,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-27T21:00:00.000Z",
   },
   Object {
@@ -13319,6 +13571,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "Our dog Maggie is very sweet. She will bark when someone new comes over because she is very excited to meet you, but she settles down quickly. During play dates, she will probably get to enjoy our bedroom so everyone can enjoy their food in peace (without Swiper trying to get it)!",
+    "place": undefined,
     "startsAt": "2019-05-17T21:00:00.000Z",
   },
   Object {
@@ -13373,6 +13626,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "Our dog Maggie is very sweet. She will bark when someone new comes over because she is very excited to meet you, but she settles down quickly. During play dates, she will probably get to enjoy our bedroom so everyone can enjoy their food in peace (without Swiper trying to get it)!",
+    "place": undefined,
     "startsAt": "2019-06-14T21:00:00.000Z",
   },
   Object {
@@ -13427,6 +13681,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "Our dog Maggie is very sweet. She will bark when someone new comes over because she is very excited to meet you, but she settles down quickly. During play dates, she will probably get to enjoy our bedroom so everyone can enjoy their food in peace (without Swiper trying to get it)!",
+    "place": undefined,
     "startsAt": "2019-07-12T21:00:00.000Z",
   },
   Object {
@@ -13479,6 +13734,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-18T22:00:00.000Z",
   },
   Object {
@@ -13531,6 +13787,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-15T22:00:00.000Z",
   },
   Object {
@@ -13583,6 +13840,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-13T22:00:00.000Z",
   },
   Object {
@@ -13639,6 +13897,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-10T21:00:00.000Z",
   },
   Object {
@@ -13695,6 +13954,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-07T21:00:00.000Z",
   },
   Object {
@@ -13751,6 +14011,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-05T21:00:00.000Z",
   },
   Object {
@@ -13804,6 +14065,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-17T21:00:00.000Z",
   },
   Object {
@@ -13857,6 +14119,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-14T21:00:00.000Z",
   },
   Object {
@@ -13910,6 +14173,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-12T21:00:00.000Z",
   },
   Object {
@@ -13964,6 +14228,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "A dog she's 7 years old she is very friendly Ioves children. If need be I can always put her in my bedroom",
+    "place": undefined,
     "startsAt": "2019-05-18T21:00:00.000Z",
   },
   Object {
@@ -14018,6 +14283,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "A dog she's 7 years old she is very friendly Ioves children. If need be I can always put her in my bedroom",
+    "place": undefined,
     "startsAt": "2019-06-15T21:00:00.000Z",
   },
   Object {
@@ -14072,6 +14338,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "A dog she's 7 years old she is very friendly Ioves children. If need be I can always put her in my bedroom",
+    "place": undefined,
     "startsAt": "2019-07-13T21:00:00.000Z",
   },
   Object {
@@ -14126,6 +14393,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "A dog she's 7 years old she is very friendly Ioves children. If need be I can always put her in my bedroom",
+    "place": undefined,
     "startsAt": "2019-08-10T21:00:00.000Z",
   },
   Object {
@@ -14178,6 +14446,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-17T21:00:00.000Z",
   },
   Object {
@@ -14230,6 +14499,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-14T21:00:00.000Z",
   },
   Object {
@@ -14282,6 +14552,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-12T21:00:00.000Z",
   },
   Object {
@@ -14334,6 +14605,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "We have two dogs but keep them out of the gated living room/play area.",
+    "place": undefined,
     "startsAt": "2019-05-19T21:00:00.000Z",
   },
   Object {
@@ -14386,6 +14658,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "We have two dogs but keep them out of the gated living room/play area.",
+    "place": undefined,
     "startsAt": "2019-06-16T21:00:00.000Z",
   },
   Object {
@@ -14438,6 +14711,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "We have two dogs but keep them out of the gated living room/play area.",
+    "place": undefined,
     "startsAt": "2019-07-14T21:00:00.000Z",
   },
   Object {
@@ -14492,6 +14766,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "We have a 16 year old Silky Terrier (human hair/hypoallergenic for most). He's got doggy Alzheimers and wears diapers, and sleeps most of the time.",
+    "place": undefined,
     "startsAt": "2019-05-20T22:00:00.000Z",
   },
   Object {
@@ -14546,6 +14821,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "We have a 16 year old Silky Terrier (human hair/hypoallergenic for most). He's got doggy Alzheimers and wears diapers, and sleeps most of the time.",
+    "place": undefined,
     "startsAt": "2019-06-17T22:00:00.000Z",
   },
   Object {
@@ -14600,6 +14876,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "We have a 16 year old Silky Terrier (human hair/hypoallergenic for most). He's got doggy Alzheimers and wears diapers, and sleeps most of the time.",
+    "place": undefined,
     "startsAt": "2019-07-15T22:00:00.000Z",
   },
   Object {
@@ -14652,6 +14929,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-01T21:00:00.000Z",
   },
   Object {
@@ -14704,6 +14982,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-29T21:00:00.000Z",
   },
   Object {
@@ -14756,6 +15035,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-27T21:00:00.000Z",
   },
   Object {
@@ -14808,6 +15088,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-31T22:00:00.000Z",
   },
   Object {
@@ -14860,6 +15141,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-28T22:00:00.000Z",
   },
   Object {
@@ -14912,6 +15194,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-26T22:00:00.000Z",
   },
   Object {
@@ -14965,6 +15248,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "Friendly cat",
+    "place": undefined,
     "startsAt": "2019-05-18T21:00:00.000Z",
   },
   Object {
@@ -15018,6 +15302,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "Friendly cat",
+    "place": undefined,
     "startsAt": "2019-06-15T21:00:00.000Z",
   },
   Object {
@@ -15071,6 +15356,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "Friendly cat",
+    "place": undefined,
     "startsAt": "2019-07-13T21:00:00.000Z",
   },
   Object {
@@ -15123,6 +15409,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "1 cat patient with kids",
+    "place": undefined,
     "startsAt": "2019-05-25T21:00:00.000Z",
   },
   Object {
@@ -15175,6 +15462,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "1 cat patient with kids",
+    "place": undefined,
     "startsAt": "2019-06-22T21:00:00.000Z",
   },
   Object {
@@ -15227,6 +15515,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "1 cat patient with kids",
+    "place": undefined,
     "startsAt": "2019-07-20T21:00:00.000Z",
   },
   Object {
@@ -15280,6 +15569,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-10T22:30:00.000Z",
   },
   Object {
@@ -15333,6 +15623,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-07T22:30:00.000Z",
   },
   Object {
@@ -15386,6 +15677,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-05T22:30:00.000Z",
   },
   Object {
@@ -15439,6 +15731,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-08-02T22:30:00.000Z",
   },
   Object {
@@ -15492,6 +15785,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-18T23:00:00.000Z",
   },
   Object {
@@ -15545,6 +15839,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-24T22:00:00.000Z",
   },
   Object {
@@ -15598,6 +15893,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-21T22:00:00.000Z",
   },
   Object {
@@ -15651,6 +15947,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-19T22:00:00.000Z",
   },
   Object {
@@ -15703,6 +16000,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-31T21:00:00.000Z",
   },
   Object {
@@ -15755,6 +16053,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-26T21:00:00.000Z",
   },
   Object {
@@ -15808,6 +16107,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "2 cats. They’ll hide the whole time.",
+    "place": undefined,
     "startsAt": "2019-05-17T21:30:00.000Z",
   },
   Object {
@@ -15861,6 +16161,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "2 cats. They’ll hide the whole time.",
+    "place": undefined,
     "startsAt": "2019-06-14T21:30:00.000Z",
   },
   Object {
@@ -15914,6 +16215,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "2 cats. They’ll hide the whole time.",
+    "place": undefined,
     "startsAt": "2019-07-12T21:30:00.000Z",
   },
   Object {
@@ -15967,6 +16269,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "We have a large friendly Shepard-mix. Her name is Bella and she’s 10 years old. She is very gentle and sweet. She has never bitten anyone but she does like to steal people’s food if they aren’t careful.",
+    "place": undefined,
     "startsAt": "2019-05-11T21:30:00.000Z",
   },
   Object {
@@ -16020,6 +16323,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "We have a large friendly Shepard-mix. Her name is Bella and she’s 10 years old. She is very gentle and sweet. She has never bitten anyone but she does like to steal people’s food if they aren’t careful.",
+    "place": undefined,
     "startsAt": "2019-06-08T21:30:00.000Z",
   },
   Object {
@@ -16073,6 +16377,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "We have a large friendly Shepard-mix. Her name is Bella and she’s 10 years old. She is very gentle and sweet. She has never bitten anyone but she does like to steal people’s food if they aren’t careful.",
+    "place": undefined,
     "startsAt": "2019-07-06T21:30:00.000Z",
   },
   Object {
@@ -16125,6 +16430,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-15T22:00:00.000Z",
   },
   Object {
@@ -16177,6 +16483,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-12T22:00:00.000Z",
   },
   Object {
@@ -16229,6 +16536,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-10T22:00:00.000Z",
   },
   Object {
@@ -16282,6 +16590,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-20T22:30:00.000Z",
   },
   Object {
@@ -16335,6 +16644,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-17T22:30:00.000Z",
   },
   Object {
@@ -16388,6 +16698,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-15T22:30:00.000Z",
   },
   Object {
@@ -16442,6 +16753,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-31T21:30:00.000Z",
   },
   Object {
@@ -16496,6 +16808,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-28T21:30:00.000Z",
   },
   Object {
@@ -16550,6 +16863,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-26T21:30:00.000Z",
   },
   Object {
@@ -16602,6 +16916,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-01T00:00:00.000Z",
   },
   Object {
@@ -16654,6 +16969,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-29T00:00:00.000Z",
   },
   Object {
@@ -16706,6 +17022,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-27T00:00:00.000Z",
   },
   Object {
@@ -16760,6 +17077,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "One sweet kitty",
+    "place": undefined,
     "startsAt": "2019-05-10T23:30:00.000Z",
   },
   Object {
@@ -16814,6 +17132,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "One sweet kitty",
+    "place": undefined,
     "startsAt": "2019-06-07T23:30:00.000Z",
   },
   Object {
@@ -16868,6 +17187,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "One sweet kitty",
+    "place": undefined,
     "startsAt": "2019-07-05T23:30:00.000Z",
   },
   Object {
@@ -16920,6 +17240,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-24T23:00:00.000Z",
   },
   Object {
@@ -16972,6 +17293,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-21T23:00:00.000Z",
   },
   Object {
@@ -17024,6 +17346,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-19T23:00:00.000Z",
   },
   Object {
@@ -17077,6 +17400,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "6 year old boxer whose energetic and will bark but great with all kids!",
+    "place": undefined,
     "startsAt": "2019-05-18T00:00:00.000Z",
   },
   Object {
@@ -17130,6 +17454,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "6 year old boxer whose energetic and will bark but great with all kids!",
+    "place": undefined,
     "startsAt": "2019-06-15T00:00:00.000Z",
   },
   Object {
@@ -17183,6 +17508,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "6 year old boxer whose energetic and will bark but great with all kids!",
+    "place": undefined,
     "startsAt": "2019-07-13T00:00:00.000Z",
   },
   Object {
@@ -17235,6 +17561,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "Darwin, the American Eskimo, small, sweet and fluffy",
+    "place": undefined,
     "startsAt": "2019-05-18T21:00:00.000Z",
   },
   Object {
@@ -17287,6 +17614,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "Darwin, the American Eskimo, small, sweet and fluffy",
+    "place": undefined,
     "startsAt": "2019-06-15T21:00:00.000Z",
   },
   Object {
@@ -17339,6 +17667,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "Darwin, the American Eskimo, small, sweet and fluffy",
+    "place": undefined,
     "startsAt": "2019-07-13T21:00:00.000Z",
   },
   Object {
@@ -17392,6 +17721,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-17T21:30:00.000Z",
   },
   Object {
@@ -17445,6 +17775,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-14T21:30:00.000Z",
   },
   Object {
@@ -17498,6 +17829,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-12T21:30:00.000Z",
   },
   Object {
@@ -17553,6 +17885,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-26T21:00:00.000Z",
   },
   Object {
@@ -17608,6 +17941,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-23T21:00:00.000Z",
   },
   Object {
@@ -17663,6 +17997,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-21T21:00:00.000Z",
   },
   Object {
@@ -17718,6 +18053,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-26T21:00:00.000Z",
   },
   Object {
@@ -17773,6 +18109,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-23T21:00:00.000Z",
   },
   Object {
@@ -17828,6 +18165,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-21T21:00:00.000Z",
   },
   Object {
@@ -17880,6 +18218,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-26T00:30:00.000Z",
   },
   Object {
@@ -17932,6 +18271,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-23T00:30:00.000Z",
   },
   Object {
@@ -17984,6 +18324,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-21T00:30:00.000Z",
   },
   Object {
@@ -18036,6 +18377,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-12T00:00:00.000Z",
   },
   Object {
@@ -18088,6 +18430,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-09T00:00:00.000Z",
   },
   Object {
@@ -18140,6 +18483,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-07T00:00:00.000Z",
   },
   Object {
@@ -18192,6 +18536,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "We have one middle-aged male black-and-white cat, Lyle Farringdon, who is fairly shy with groups of people. He'll probably be hiding initially but may emerge for a while later on in the date.",
+    "place": undefined,
     "startsAt": "2019-06-01T21:00:00.000Z",
   },
   Object {
@@ -18244,6 +18589,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "We have one middle-aged male black-and-white cat, Lyle Farringdon, who is fairly shy with groups of people. He'll probably be hiding initially but may emerge for a while later on in the date.",
+    "place": undefined,
     "startsAt": "2019-06-29T21:00:00.000Z",
   },
   Object {
@@ -18296,6 +18642,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "We have one middle-aged male black-and-white cat, Lyle Farringdon, who is fairly shy with groups of people. He'll probably be hiding initially but may emerge for a while later on in the date.",
+    "place": undefined,
     "startsAt": "2019-07-27T21:00:00.000Z",
   },
   Object {
@@ -18348,6 +18695,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "Relatively large dog (30 lbs). She loves kids, but she does bark when someone comes to the door. 1 cat who will likely just sit on laps. 1 aquarium and 3 terrariums with reptiles.",
+    "place": undefined,
     "startsAt": "2019-05-24T22:00:00.000Z",
   },
   Object {
@@ -18400,6 +18748,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "Relatively large dog (30 lbs). She loves kids, but she does bark when someone comes to the door. 1 cat who will likely just sit on laps. 1 aquarium and 3 terrariums with reptiles.",
+    "place": undefined,
     "startsAt": "2019-06-21T22:00:00.000Z",
   },
   Object {
@@ -18452,6 +18801,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "Relatively large dog (30 lbs). She loves kids, but she does bark when someone comes to the door. 1 cat who will likely just sit on laps. 1 aquarium and 3 terrariums with reptiles.",
+    "place": undefined,
     "startsAt": "2019-07-19T22:00:00.000Z",
   },
   Object {
@@ -18504,6 +18854,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-24T21:00:00.000Z",
   },
   Object {
@@ -18556,6 +18907,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-21T21:00:00.000Z",
   },
   Object {
@@ -18608,6 +18960,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-19T21:00:00.000Z",
   },
   Object {
@@ -18660,6 +19013,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-01T21:00:00.000Z",
   },
   Object {
@@ -18712,6 +19066,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-29T21:00:00.000Z",
   },
   Object {
@@ -18764,6 +19119,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-27T21:00:00.000Z",
   },
   Object {
@@ -18818,6 +19174,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-25T21:00:00.000Z",
   },
   Object {
@@ -18872,6 +19229,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-22T21:00:00.000Z",
   },
   Object {
@@ -18926,6 +19284,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-20T21:00:00.000Z",
   },
   Object {
@@ -18978,6 +19337,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-10T22:00:00.000Z",
   },
   Object {
@@ -19030,6 +19390,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-05T22:00:00.000Z",
   },
   Object {
@@ -19082,6 +19443,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "We have a very sweet and loving 8 month old Irish Doodle, named Annie. Her coat is 99% hypoallergenic.",
+    "place": undefined,
     "startsAt": "2019-05-18T21:30:00.000Z",
   },
   Object {
@@ -19134,6 +19496,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "We have a very sweet and loving 8 month old Irish Doodle, named Annie. Her coat is 99% hypoallergenic.",
+    "place": undefined,
     "startsAt": "2019-06-15T21:30:00.000Z",
   },
   Object {
@@ -19186,6 +19549,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "We have a very sweet and loving 8 month old Irish Doodle, named Annie. Her coat is 99% hypoallergenic.",
+    "place": undefined,
     "startsAt": "2019-07-13T21:30:00.000Z",
   },
   Object {
@@ -19238,6 +19602,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-18T23:00:00.000Z",
   },
   Object {
@@ -19290,6 +19655,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-15T23:00:00.000Z",
   },
   Object {
@@ -19342,6 +19708,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-13T23:00:00.000Z",
   },
   Object {
@@ -19395,6 +19762,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "We have a mini golden doodle, Penny, who is super gentle and perfect with kids, and a cat, Mrs. Jones who will mostly hide and sleep the whole time.",
+    "place": undefined,
     "startsAt": "2019-05-10T22:00:00.000Z",
   },
   Object {
@@ -19448,6 +19816,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "We have a mini golden doodle, Penny, who is super gentle and perfect with kids, and a cat, Mrs. Jones who will mostly hide and sleep the whole time.",
+    "place": undefined,
     "startsAt": "2019-06-07T22:00:00.000Z",
   },
   Object {
@@ -19501,6 +19870,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "We have a mini golden doodle, Penny, who is super gentle and perfect with kids, and a cat, Mrs. Jones who will mostly hide and sleep the whole time.",
+    "place": undefined,
     "startsAt": "2019-07-05T22:00:00.000Z",
   },
   Object {
@@ -19554,6 +19924,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "We have a mini golden doodle, Penny, who is super gentle and perfect with kids, and a cat, Mrs. Jones who will mostly hide and sleep the whole time.",
+    "place": undefined,
     "startsAt": "2019-08-09T22:00:00.000Z",
   },
   Object {
@@ -19606,6 +19977,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-23T21:00:00.000Z",
   },
   Object {
@@ -19658,6 +20030,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-20T21:00:00.000Z",
   },
   Object {
@@ -19710,6 +20083,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-18T21:00:00.000Z",
   },
   Object {
@@ -19762,6 +20136,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "27 lb dog, 11 years old friendly ans calm. A cat who does her own thing. They are great with my 3 year-old",
+    "place": undefined,
     "startsAt": "2019-05-18T21:00:00.000Z",
   },
   Object {
@@ -19814,6 +20189,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "27 lb dog, 11 years old friendly ans calm. A cat who does her own thing. They are great with my 3 year-old",
+    "place": undefined,
     "startsAt": "2019-06-15T21:00:00.000Z",
   },
   Object {
@@ -19866,6 +20242,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "27 lb dog, 11 years old friendly ans calm. A cat who does her own thing. They are great with my 3 year-old",
+    "place": undefined,
     "startsAt": "2019-07-13T21:00:00.000Z",
   },
   Object {
@@ -19919,6 +20296,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-25T23:00:00.000Z",
   },
   Object {
@@ -19972,6 +20350,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-22T23:00:00.000Z",
   },
   Object {
@@ -20025,6 +20404,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-20T23:00:00.000Z",
   },
   Object {
@@ -20077,6 +20457,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-28T21:00:00.000Z",
   },
   Object {
@@ -20129,6 +20510,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-25T21:00:00.000Z",
   },
   Object {
@@ -20181,6 +20563,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-23T21:00:00.000Z",
   },
   Object {
@@ -20233,6 +20616,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-09-19T21:00:00.000Z",
   },
   Object {
@@ -20285,6 +20669,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-10-17T21:00:00.000Z",
   },
   Object {
@@ -20337,6 +20722,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-11-14T22:00:00.000Z",
   },
   Object {
@@ -20389,6 +20775,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-12-12T22:00:00.000Z",
   },
   Object {
@@ -20441,6 +20828,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2020-01-09T22:00:00.000Z",
   },
   Object {
@@ -20493,6 +20881,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2020-02-06T22:00:00.000Z",
   },
   Object {
@@ -20545,6 +20934,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "leapord gheco, Dog, Bird",
+    "place": undefined,
     "startsAt": "2019-05-10T22:00:00.000Z",
   },
   Object {
@@ -20597,6 +20987,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "leapord gheco, Dog, Bird",
+    "place": undefined,
     "startsAt": "2019-06-07T22:00:00.000Z",
   },
   Object {
@@ -20649,6 +21040,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "leapord gheco, Dog, Bird",
+    "place": undefined,
     "startsAt": "2019-07-05T22:00:00.000Z",
   },
   Object {
@@ -20703,6 +21095,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-24T21:00:00.000Z",
   },
   Object {
@@ -20757,6 +21150,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-21T21:00:00.000Z",
   },
   Object {
@@ -20811,6 +21205,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-19T21:00:00.000Z",
   },
   Object {
@@ -20865,6 +21260,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-08-16T21:00:00.000Z",
   },
   Object {
@@ -20917,6 +21313,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "One cat, ignores children.",
+    "place": undefined,
     "startsAt": "2019-05-18T21:00:00.000Z",
   },
   Object {
@@ -20969,6 +21366,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "One cat, ignores children.",
+    "place": undefined,
     "startsAt": "2019-06-15T21:00:00.000Z",
   },
   Object {
@@ -21021,6 +21419,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "One cat, ignores children.",
+    "place": undefined,
     "startsAt": "2019-07-13T21:00:00.000Z",
   },
   Object {
@@ -21073,6 +21472,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "One cat, ignores children.",
+    "place": undefined,
     "startsAt": "2019-08-10T21:00:00.000Z",
   },
   Object {
@@ -21125,6 +21525,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "Our english bulldog Oliver gets excited sometimes when people come over, but always warms up. He can be put in his crate if needed.",
+    "place": undefined,
     "startsAt": "2019-09-26T21:00:00.000Z",
   },
   Object {
@@ -21177,6 +21578,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "Our english bulldog Oliver gets excited sometimes when people come over, but always warms up. He can be put in his crate if needed.",
+    "place": undefined,
     "startsAt": "2019-10-24T21:00:00.000Z",
   },
   Object {
@@ -21229,6 +21631,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "Our english bulldog Oliver gets excited sometimes when people come over, but always warms up. He can be put in his crate if needed.",
+    "place": undefined,
     "startsAt": "2019-11-21T22:00:00.000Z",
   },
   Object {
@@ -21281,6 +21684,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "Our english bulldog Oliver gets excited sometimes when people come over, but always warms up. He can be put in his crate if needed.",
+    "place": undefined,
     "startsAt": "2019-12-19T22:00:00.000Z",
   },
   Object {
@@ -21334,6 +21738,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "2 cats",
+    "place": undefined,
     "startsAt": "2019-05-11T22:00:00.000Z",
   },
   Object {
@@ -21387,6 +21792,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "2 cats",
+    "place": undefined,
     "startsAt": "2019-06-08T22:00:00.000Z",
   },
   Object {
@@ -21440,6 +21846,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "2 cats",
+    "place": undefined,
     "startsAt": "2019-07-06T22:00:00.000Z",
   },
   Object {
@@ -21493,6 +21900,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "2 cats",
+    "place": undefined,
     "startsAt": "2019-08-03T22:00:00.000Z",
   },
   Object {
@@ -21546,6 +21954,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-13T21:30:00.000Z",
   },
   Object {
@@ -21599,6 +22008,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-10T21:30:00.000Z",
   },
   Object {
@@ -21652,6 +22062,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-08T21:30:00.000Z",
   },
   Object {
@@ -21705,6 +22116,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-08-05T21:30:00.000Z",
   },
   Object {
@@ -21757,6 +22169,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-10T21:30:00.000Z",
   },
   Object {
@@ -21809,6 +22222,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-07T21:30:00.000Z",
   },
   Object {
@@ -21861,6 +22275,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-05T21:30:00.000Z",
   },
   Object {
@@ -21913,6 +22328,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-08-02T21:30:00.000Z",
   },
   Object {
@@ -21965,6 +22381,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "I have a small Papillon who is quiet and a little afraid of kids. He will try to run away from kids and kids need to let him alone because he could snap if he is cornered and scared.",
+    "place": undefined,
     "startsAt": "2019-05-18T21:00:00.000Z",
   },
   Object {
@@ -22017,6 +22434,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "I have a small Papillon who is quiet and a little afraid of kids. He will try to run away from kids and kids need to let him alone because he could snap if he is cornered and scared.",
+    "place": undefined,
     "startsAt": "2019-06-15T21:00:00.000Z",
   },
   Object {
@@ -22069,6 +22487,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "I have a small Papillon who is quiet and a little afraid of kids. He will try to run away from kids and kids need to let him alone because he could snap if he is cornered and scared.",
+    "place": undefined,
     "startsAt": "2019-07-13T21:00:00.000Z",
   },
   Object {
@@ -22121,6 +22540,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "I have a small Papillon who is quiet and a little afraid of kids. He will try to run away from kids and kids need to let him alone because he could snap if he is cornered and scared.",
+    "place": undefined,
     "startsAt": "2019-08-10T21:00:00.000Z",
   },
   Object {
@@ -22174,6 +22594,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-25T21:00:00.000Z",
   },
   Object {
@@ -22227,6 +22648,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-22T21:00:00.000Z",
   },
   Object {
@@ -22280,6 +22702,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-20T21:00:00.000Z",
   },
   Object {
@@ -22333,6 +22756,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-08-17T21:00:00.000Z",
   },
   Object {
@@ -22385,6 +22809,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "We have a friendly puggle named Oliver",
+    "place": undefined,
     "startsAt": "2019-05-11T21:00:00.000Z",
   },
   Object {
@@ -22437,6 +22862,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "We have a friendly puggle named Oliver",
+    "place": undefined,
     "startsAt": "2019-06-08T21:00:00.000Z",
   },
   Object {
@@ -22489,6 +22915,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "We have a friendly puggle named Oliver",
+    "place": undefined,
     "startsAt": "2019-07-06T21:00:00.000Z",
   },
   Object {
@@ -22541,6 +22968,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "We have a friendly puggle named Oliver",
+    "place": undefined,
     "startsAt": "2019-08-03T21:00:00.000Z",
   },
   Object {
@@ -22594,6 +23022,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-17T22:00:00.000Z",
   },
   Object {
@@ -22647,6 +23076,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-14T22:00:00.000Z",
   },
   Object {
@@ -22700,6 +23130,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-12T22:00:00.000Z",
   },
   Object {
@@ -22753,6 +23184,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-08-09T22:00:00.000Z",
   },
   Object {
@@ -22805,6 +23237,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-25T00:00:00.000Z",
   },
   Object {
@@ -22857,6 +23290,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-22T00:00:00.000Z",
   },
   Object {
@@ -22909,6 +23343,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-20T00:00:00.000Z",
   },
   Object {
@@ -22961,6 +23396,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-08-17T00:00:00.000Z",
   },
   Object {
@@ -23013,6 +23449,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-24T21:00:00.000Z",
   },
   Object {
@@ -23065,6 +23502,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-21T21:00:00.000Z",
   },
   Object {
@@ -23117,6 +23555,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-19T21:00:00.000Z",
   },
   Object {
@@ -23169,6 +23608,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-08-16T21:00:00.000Z",
   },
   Object {
@@ -23222,6 +23662,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-18T21:00:00.000Z",
   },
   Object {
@@ -23275,6 +23716,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-15T21:00:00.000Z",
   },
   Object {
@@ -23328,6 +23770,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-13T21:00:00.000Z",
   },
   Object {
@@ -23381,6 +23824,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-08-10T21:00:00.000Z",
   },
   Object {
@@ -23440,6 +23884,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-17T21:00:00.000Z",
   },
   Object {
@@ -23499,6 +23944,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-14T21:00:00.000Z",
   },
   Object {
@@ -23558,6 +24004,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-12T21:00:00.000Z",
   },
   Object {
@@ -23617,6 +24064,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-08-09T21:00:00.000Z",
   },
   Object {
@@ -23669,6 +24117,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-18T21:00:00.000Z",
   },
   Object {
@@ -23721,6 +24170,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-15T21:00:00.000Z",
   },
   Object {
@@ -23773,6 +24223,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-13T21:00:00.000Z",
   },
   Object {
@@ -23825,6 +24276,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-08-10T21:00:00.000Z",
   },
   Object {
@@ -23878,6 +24330,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-25T21:30:00.000Z",
   },
   Object {
@@ -23931,6 +24384,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-22T21:30:00.000Z",
   },
   Object {
@@ -23984,6 +24438,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-20T21:30:00.000Z",
   },
   Object {
@@ -24037,6 +24492,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-08-17T21:30:00.000Z",
   },
   Object {
@@ -24090,6 +24546,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "We have a cat, Explorer. She's older and friendly, though usually goes upstairs when we get visitors.",
+    "place": undefined,
     "startsAt": "2019-05-11T00:00:00.000Z",
   },
   Object {
@@ -24143,6 +24600,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "We have a cat, Explorer. She's older and friendly, though usually goes upstairs when we get visitors.",
+    "place": undefined,
     "startsAt": "2019-06-08T00:00:00.000Z",
   },
   Object {
@@ -24196,6 +24654,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "We have a cat, Explorer. She's older and friendly, though usually goes upstairs when we get visitors.",
+    "place": undefined,
     "startsAt": "2019-07-06T00:00:00.000Z",
   },
   Object {
@@ -24249,6 +24708,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "We have a cat, Explorer. She's older and friendly, though usually goes upstairs when we get visitors.",
+    "place": undefined,
     "startsAt": "2019-08-03T00:00:00.000Z",
   },
   Object {
@@ -24302,6 +24762,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "We have a cat, Explorer. She's older and friendly, though usually goes upstairs when we get visitors.",
+    "place": undefined,
     "startsAt": "2019-08-31T00:00:00.000Z",
   },
   Object {
@@ -24354,6 +24815,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-08T21:00:00.000Z",
   },
   Object {
@@ -24406,6 +24868,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-05T21:00:00.000Z",
   },
   Object {
@@ -24458,6 +24921,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-03T21:00:00.000Z",
   },
   Object {
@@ -24510,6 +24974,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-31T21:00:00.000Z",
   },
   Object {
@@ -24566,6 +25031,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-17T22:30:00.000Z",
   },
   Object {
@@ -24622,6 +25088,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-14T22:30:00.000Z",
   },
   Object {
@@ -24678,6 +25145,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-12T22:30:00.000Z",
   },
   Object {
@@ -24734,6 +25202,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-08-09T22:30:00.000Z",
   },
   Object {
@@ -24787,6 +25256,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "Outdoor cat",
+    "place": undefined,
     "startsAt": "2019-06-01T21:00:00.000Z",
   },
   Object {
@@ -24840,6 +25310,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "Outdoor cat",
+    "place": undefined,
     "startsAt": "2019-06-29T21:00:00.000Z",
   },
   Object {
@@ -24893,6 +25364,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "Outdoor cat",
+    "place": undefined,
     "startsAt": "2019-07-27T21:00:00.000Z",
   },
   Object {
@@ -24946,6 +25418,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "Outdoor cat",
+    "place": undefined,
     "startsAt": "2019-08-24T21:00:00.000Z",
   },
   Object {
@@ -24999,6 +25472,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-25T21:00:00.000Z",
   },
   Object {
@@ -25052,6 +25526,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-22T21:00:00.000Z",
   },
   Object {
@@ -25105,6 +25580,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-20T21:00:00.000Z",
   },
   Object {
@@ -25158,6 +25634,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-08-17T21:00:00.000Z",
   },
   Object {
@@ -25210,6 +25687,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-25T19:00:00.000Z",
   },
   Object {
@@ -25262,6 +25740,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-22T19:00:00.000Z",
   },
   Object {
@@ -25314,6 +25793,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-20T19:00:00.000Z",
   },
   Object {
@@ -25366,6 +25846,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-08-17T19:00:00.000Z",
   },
   Object {
@@ -25419,6 +25900,7 @@ Array [
     "participantsCount": 1,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-01T22:30:00.000Z",
   },
   Object {
@@ -25472,6 +25954,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-29T22:30:00.000Z",
   },
   Object {
@@ -25525,6 +26008,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-27T22:30:00.000Z",
   },
   Object {
@@ -25578,6 +26062,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-08-24T22:30:00.000Z",
   },
   Object {
@@ -25632,6 +26117,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "One dog not scary very friendly loves kids and to guinea pigs",
+    "place": undefined,
     "startsAt": "2019-05-24T21:00:00.000Z",
   },
   Object {
@@ -25686,6 +26172,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "One dog not scary very friendly loves kids and to guinea pigs",
+    "place": undefined,
     "startsAt": "2019-06-21T21:00:00.000Z",
   },
   Object {
@@ -25740,6 +26227,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "One dog not scary very friendly loves kids and to guinea pigs",
+    "place": undefined,
     "startsAt": "2019-07-19T21:00:00.000Z",
   },
   Object {
@@ -25794,6 +26282,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "One dog not scary very friendly loves kids and to guinea pigs",
+    "place": undefined,
     "startsAt": "2019-08-16T21:00:00.000Z",
   },
   Object {
@@ -25848,6 +26337,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "One dog not scary very friendly loves kids and to guinea pigs",
+    "place": undefined,
     "startsAt": "2019-09-13T21:00:00.000Z",
   },
   Object {
@@ -25902,6 +26392,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "One dog not scary very friendly loves kids and to guinea pigs",
+    "place": undefined,
     "startsAt": "2019-10-11T21:00:00.000Z",
   },
   Object {
@@ -25954,6 +26445,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "Our cats \\"Sky\\" is somewhat shy but okay with the kids",
+    "place": undefined,
     "startsAt": "2019-05-11T22:00:00.000Z",
   },
   Object {
@@ -26006,6 +26498,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "Our cats \\"Sky\\" is somewhat shy but okay with the kids",
+    "place": undefined,
     "startsAt": "2019-06-08T22:00:00.000Z",
   },
   Object {
@@ -26058,6 +26551,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "Our cats \\"Sky\\" is somewhat shy but okay with the kids",
+    "place": undefined,
     "startsAt": "2019-07-06T22:00:00.000Z",
   },
   Object {
@@ -26110,6 +26604,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "Our cats \\"Sky\\" is somewhat shy but okay with the kids",
+    "place": undefined,
     "startsAt": "2019-08-03T22:00:00.000Z",
   },
   Object {
@@ -26162,6 +26657,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "Our cats \\"Sky\\" is somewhat shy but okay with the kids",
+    "place": undefined,
     "startsAt": "2019-08-31T22:00:00.000Z",
   },
   Object {
@@ -26214,6 +26710,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-10T22:00:00.000Z",
   },
   Object {
@@ -26266,6 +26763,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-07T22:00:00.000Z",
   },
   Object {
@@ -26318,6 +26816,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-05T22:00:00.000Z",
   },
   Object {
@@ -26370,6 +26869,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-08-02T22:00:00.000Z",
   },
   Object {
@@ -26422,6 +26922,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-08-30T22:00:00.000Z",
   },
   Object {
@@ -26474,6 +26975,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-01T23:00:00.000Z",
   },
   Object {
@@ -26526,6 +27028,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-29T23:00:00.000Z",
   },
   Object {
@@ -26578,6 +27081,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-27T23:00:00.000Z",
   },
   Object {
@@ -26630,6 +27134,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-08-24T23:00:00.000Z",
   },
   Object {
@@ -26682,6 +27187,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-10T21:00:00.000Z",
   },
   Object {
@@ -26734,6 +27240,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-07T21:00:00.000Z",
   },
   Object {
@@ -26786,6 +27293,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-05T21:00:00.000Z",
   },
   Object {
@@ -26838,6 +27346,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-08-02T21:00:00.000Z",
   },
   Object {
@@ -26890,6 +27399,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-08-30T21:00:00.000Z",
   },
   Object {
@@ -26943,6 +27453,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "We have two cats (Zora & Frida). They are friendly but usually hide when guests are over.",
+    "place": undefined,
     "startsAt": "2019-05-10T21:30:00.000Z",
   },
   Object {
@@ -26996,6 +27507,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "We have two cats (Zora & Frida). They are friendly but usually hide when guests are over.",
+    "place": undefined,
     "startsAt": "2019-06-07T21:30:00.000Z",
   },
   Object {
@@ -27049,6 +27561,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "We have two cats (Zora & Frida). They are friendly but usually hide when guests are over.",
+    "place": undefined,
     "startsAt": "2019-07-05T21:30:00.000Z",
   },
   Object {
@@ -27102,6 +27615,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "We have two cats (Zora & Frida). They are friendly but usually hide when guests are over.",
+    "place": undefined,
     "startsAt": "2019-08-02T21:30:00.000Z",
   },
   Object {
@@ -27155,6 +27669,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "We have two cats (Zora & Frida). They are friendly but usually hide when guests are over.",
+    "place": undefined,
     "startsAt": "2019-08-30T21:30:00.000Z",
   },
   Object {
@@ -27207,6 +27722,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "Large boxer mix. Mabel can stay in our upstairs - away from kids - when we're providing child care. Mabel has never been aggressive toward cats, kids, babies, or any human. We also have two cats - Marty and Little Miss - who usually stay away from kids, and can also be kept upstairs.",
+    "place": undefined,
     "startsAt": "2019-05-11T22:30:00.000Z",
   },
   Object {
@@ -27259,6 +27775,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "Large boxer mix. Mabel can stay in our upstairs - away from kids - when we're providing child care. Mabel has never been aggressive toward cats, kids, babies, or any human. We also have two cats - Marty and Little Miss - who usually stay away from kids, and can also be kept upstairs.",
+    "place": undefined,
     "startsAt": "2019-06-08T22:30:00.000Z",
   },
   Object {
@@ -27311,6 +27828,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "Large boxer mix. Mabel can stay in our upstairs - away from kids - when we're providing child care. Mabel has never been aggressive toward cats, kids, babies, or any human. We also have two cats - Marty and Little Miss - who usually stay away from kids, and can also be kept upstairs.",
+    "place": undefined,
     "startsAt": "2019-07-06T22:30:00.000Z",
   },
   Object {
@@ -27363,6 +27881,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "Large boxer mix. Mabel can stay in our upstairs - away from kids - when we're providing child care. Mabel has never been aggressive toward cats, kids, babies, or any human. We also have two cats - Marty and Little Miss - who usually stay away from kids, and can also be kept upstairs.",
+    "place": undefined,
     "startsAt": "2019-08-03T22:30:00.000Z",
   },
   Object {
@@ -27415,6 +27934,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": "Large boxer mix. Mabel can stay in our upstairs - away from kids - when we're providing child care. Mabel has never been aggressive toward cats, kids, babies, or any human. We also have two cats - Marty and Little Miss - who usually stay away from kids, and can also be kept upstairs.",
+    "place": undefined,
     "startsAt": "2019-08-31T22:30:00.000Z",
   },
   Object {
@@ -27467,6 +27987,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-12-01T22:00:00.000Z",
   },
   Object {
@@ -27519,6 +28040,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-12-29T22:00:00.000Z",
   },
   Object {
@@ -27571,6 +28093,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2020-01-26T22:00:00.000Z",
   },
   Object {
@@ -27623,6 +28146,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2020-02-23T22:00:00.000Z",
   },
   Object {
@@ -27675,6 +28199,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2020-03-22T21:00:00.000Z",
   },
   Object {
@@ -27727,6 +28252,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2020-04-19T21:00:00.000Z",
   },
   Object {
@@ -27779,6 +28305,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-17T22:00:00.000Z",
   },
   Object {
@@ -27831,6 +28358,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-14T22:00:00.000Z",
   },
   Object {
@@ -27883,6 +28411,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-12T22:00:00.000Z",
   },
   Object {
@@ -27935,6 +28464,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-08-09T22:00:00.000Z",
   },
   Object {
@@ -27987,6 +28517,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-09-06T22:00:00.000Z",
   },
   Object {
@@ -28039,6 +28570,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-24T22:00:00.000Z",
   },
   Object {
@@ -28091,6 +28623,7 @@ Array [
     "participantsCount": 1,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-21T22:00:00.000Z",
   },
   Object {
@@ -28143,6 +28676,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-19T22:00:00.000Z",
   },
   Object {
@@ -28195,6 +28729,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-08-16T22:00:00.000Z",
   },
   Object {
@@ -28247,6 +28782,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-09-13T22:00:00.000Z",
   },
   Object {
@@ -28299,6 +28835,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-18T21:00:00.000Z",
   },
   Object {
@@ -28351,6 +28888,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-15T21:00:00.000Z",
   },
   Object {
@@ -28403,6 +28941,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-13T21:00:00.000Z",
   },
   Object {
@@ -28455,6 +28994,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-08-10T21:00:00.000Z",
   },
   Object {
@@ -28507,6 +29047,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-09-07T21:00:00.000Z",
   },
   Object {
@@ -28559,6 +29100,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-18T21:00:00.000Z",
   },
   Object {
@@ -28611,6 +29153,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-15T21:00:00.000Z",
   },
   Object {
@@ -28663,6 +29206,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-13T21:00:00.000Z",
   },
   Object {
@@ -28715,6 +29259,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-08-10T21:00:00.000Z",
   },
   Object {
@@ -28767,6 +29312,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-09-07T21:00:00.000Z",
   },
   Object {
@@ -28819,6 +29365,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-17T15:00:00.000Z",
   },
   Object {
@@ -28871,6 +29418,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-14T15:00:00.000Z",
   },
   Object {
@@ -28923,6 +29471,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-12T15:00:00.000Z",
   },
   Object {
@@ -28975,6 +29524,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-08-09T15:00:00.000Z",
   },
   Object {
@@ -29027,6 +29577,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-09-06T15:00:00.000Z",
   },
   Object {
@@ -29087,6 +29638,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-25T19:00:00.000Z",
   },
   Object {
@@ -29147,6 +29699,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-22T19:00:00.000Z",
   },
   Object {
@@ -29207,6 +29760,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-20T19:00:00.000Z",
   },
   Object {
@@ -29267,6 +29821,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-08-17T19:00:00.000Z",
   },
   Object {
@@ -29327,6 +29882,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-09-14T19:00:00.000Z",
   },
   Object {
@@ -29379,6 +29935,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-01T20:00:00.000Z",
   },
   Object {
@@ -29431,6 +29988,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-29T20:00:00.000Z",
   },
   Object {
@@ -29483,6 +30041,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-27T20:00:00.000Z",
   },
   Object {
@@ -29535,6 +30094,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-08-24T20:00:00.000Z",
   },
   Object {
@@ -29587,6 +30147,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-09-21T20:00:00.000Z",
   },
   Object {
@@ -29639,6 +30200,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-31T19:00:00.000Z",
   },
   Object {
@@ -29691,6 +30253,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-28T19:00:00.000Z",
   },
   Object {
@@ -29743,6 +30306,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-26T19:00:00.000Z",
   },
   Object {
@@ -29795,6 +30359,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-08-23T19:00:00.000Z",
   },
   Object {
@@ -29847,6 +30412,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-09-20T19:00:00.000Z",
   },
   Object {
@@ -29899,6 +30465,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-25T15:00:00.000Z",
   },
   Object {
@@ -29951,6 +30518,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-22T15:00:00.000Z",
   },
   Object {
@@ -30003,6 +30571,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-20T15:00:00.000Z",
   },
   Object {
@@ -30055,6 +30624,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-08-17T15:00:00.000Z",
   },
   Object {
@@ -30107,6 +30677,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-09-14T15:00:00.000Z",
   },
   Object {
@@ -30160,6 +30731,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-02T18:00:00.000Z",
   },
   Object {
@@ -30213,6 +30785,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-30T18:00:00.000Z",
   },
   Object {
@@ -30266,6 +30839,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-28T18:00:00.000Z",
   },
   Object {
@@ -30319,6 +30893,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-08-25T18:00:00.000Z",
   },
   Object {
@@ -30372,6 +30947,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-09-22T18:00:00.000Z",
   },
   Object {
@@ -30425,6 +31001,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-25T15:00:00.000Z",
   },
   Object {
@@ -30478,6 +31055,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-22T15:00:00.000Z",
   },
   Object {
@@ -30531,6 +31109,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-20T15:00:00.000Z",
   },
   Object {
@@ -30584,6 +31163,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-08-17T15:00:00.000Z",
   },
   Object {
@@ -30637,6 +31217,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-09-14T15:00:00.000Z",
   },
   Object {
@@ -30689,6 +31270,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-26T19:00:00.000Z",
   },
   Object {
@@ -30741,6 +31323,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-23T19:00:00.000Z",
   },
   Object {
@@ -30793,6 +31376,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-21T19:00:00.000Z",
   },
   Object {
@@ -30845,6 +31429,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-08-18T19:00:00.000Z",
   },
   Object {
@@ -30897,6 +31482,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-09-15T19:00:00.000Z",
   },
   Object {
@@ -30949,6 +31535,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-25T19:00:00.000Z",
   },
   Object {
@@ -31001,6 +31588,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-22T19:00:00.000Z",
   },
   Object {
@@ -31053,6 +31641,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-20T19:00:00.000Z",
   },
   Object {
@@ -31105,6 +31694,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-08-17T19:00:00.000Z",
   },
   Object {
@@ -31157,6 +31747,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-09-14T19:00:00.000Z",
   },
   Object {
@@ -31209,6 +31800,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-31T18:00:00.000Z",
   },
   Object {
@@ -31261,6 +31853,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-28T18:00:00.000Z",
   },
   Object {
@@ -31313,6 +31906,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-26T18:00:00.000Z",
   },
   Object {
@@ -31365,6 +31959,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-08-23T18:00:00.000Z",
   },
   Object {
@@ -31417,6 +32012,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-09-20T18:00:00.000Z",
   },
   Object {
@@ -31469,6 +32065,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-31T15:00:00.000Z",
   },
   Object {
@@ -31521,6 +32118,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-28T15:00:00.000Z",
   },
   Object {
@@ -31573,6 +32171,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-26T15:00:00.000Z",
   },
   Object {
@@ -31625,6 +32224,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-08-23T15:00:00.000Z",
   },
   Object {
@@ -31677,6 +32277,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-09-20T15:00:00.000Z",
   },
   Object {
@@ -31730,6 +32331,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-31T13:00:00.000Z",
   },
   Object {
@@ -31783,6 +32385,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-28T13:00:00.000Z",
   },
   Object {
@@ -31836,6 +32439,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-26T13:00:00.000Z",
   },
   Object {
@@ -31889,6 +32493,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-08-23T13:00:00.000Z",
   },
   Object {
@@ -31942,6 +32547,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-09-20T13:00:00.000Z",
   },
   Object {
@@ -31994,6 +32600,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-10T18:00:00.000Z",
   },
   Object {
@@ -32046,6 +32653,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-07T18:00:00.000Z",
   },
   Object {
@@ -32098,6 +32706,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-05T18:00:00.000Z",
   },
   Object {
@@ -32150,6 +32759,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-08-02T18:00:00.000Z",
   },
   Object {
@@ -32202,6 +32812,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-08-30T18:00:00.000Z",
   },
   Object {
@@ -32254,6 +32865,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-09-27T18:00:00.000Z",
   },
   Object {
@@ -32304,6 +32916,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-12T18:00:00.000Z",
   },
   Object {
@@ -32354,6 +32967,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-09T18:00:00.000Z",
   },
   Object {
@@ -32404,6 +33018,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-07T18:00:00.000Z",
   },
   Object {
@@ -32454,6 +33069,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-08-04T18:00:00.000Z",
   },
   Object {
@@ -32504,6 +33120,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-09-01T18:00:00.000Z",
   },
   Object {
@@ -32554,6 +33171,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-09-29T18:00:00.000Z",
   },
   Object {
@@ -32606,6 +33224,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-10T18:00:00.000Z",
   },
   Object {
@@ -32658,6 +33277,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-07T18:00:00.000Z",
   },
   Object {
@@ -32710,6 +33330,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-05T18:00:00.000Z",
   },
   Object {
@@ -32762,6 +33383,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-08-02T18:00:00.000Z",
   },
   Object {
@@ -32814,6 +33436,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-08-30T18:00:00.000Z",
   },
   Object {
@@ -32866,6 +33489,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-09-27T18:00:00.000Z",
   },
   Object {
@@ -32919,6 +33543,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-11T16:00:00.000Z",
   },
   Object {
@@ -32972,6 +33597,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-08T19:00:00.000Z",
   },
   Object {
@@ -33025,6 +33651,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-06T19:00:00.000Z",
   },
   Object {
@@ -33078,6 +33705,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-08-03T19:00:00.000Z",
   },
   Object {
@@ -33131,6 +33759,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-08-31T19:00:00.000Z",
   },
   Object {
@@ -33184,6 +33813,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-09-28T19:00:00.000Z",
   },
   Object {
@@ -33235,6 +33865,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-11T15:00:00.000Z",
   },
   Object {
@@ -33286,6 +33917,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-08T15:00:00.000Z",
   },
   Object {
@@ -33337,6 +33969,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-06T15:00:00.000Z",
   },
   Object {
@@ -33388,6 +34021,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-08-03T15:00:00.000Z",
   },
   Object {
@@ -33439,6 +34073,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-08-31T15:00:00.000Z",
   },
   Object {
@@ -33490,6 +34125,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-09-28T15:00:00.000Z",
   },
   Object {
@@ -33540,6 +34176,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-12T18:00:00.000Z",
   },
   Object {
@@ -33590,6 +34227,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-09T18:00:00.000Z",
   },
   Object {
@@ -33640,6 +34278,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-07T18:00:00.000Z",
   },
   Object {
@@ -33690,6 +34329,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-08-04T18:00:00.000Z",
   },
   Object {
@@ -33740,6 +34380,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-09-01T18:00:00.000Z",
   },
   Object {
@@ -33790,6 +34431,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-09-29T18:00:00.000Z",
   },
   Object {
@@ -33840,6 +34482,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-17T13:00:00.000Z",
   },
   Object {
@@ -33890,6 +34533,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-14T13:00:00.000Z",
   },
   Object {
@@ -33940,6 +34584,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-12T13:00:00.000Z",
   },
   Object {
@@ -33990,6 +34635,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-08-09T13:00:00.000Z",
   },
   Object {
@@ -34040,6 +34686,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-09-06T13:00:00.000Z",
   },
   Object {
@@ -34090,6 +34737,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-10-04T13:00:00.000Z",
   },
   Object {
@@ -34140,6 +34788,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-11T13:00:00.000Z",
   },
   Object {
@@ -34190,6 +34839,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-08T13:00:00.000Z",
   },
   Object {
@@ -34240,6 +34890,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-06T13:00:00.000Z",
   },
   Object {
@@ -34290,6 +34941,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-08-03T13:00:00.000Z",
   },
   Object {
@@ -34340,6 +34992,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-08-31T13:00:00.000Z",
   },
   Object {
@@ -34390,6 +35043,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-09-28T13:00:00.000Z",
   },
   Object {
@@ -34440,6 +35094,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-12T19:00:00.000Z",
   },
   Object {
@@ -34490,6 +35145,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-09T19:00:00.000Z",
   },
   Object {
@@ -34540,6 +35196,7 @@ Array [
     "participantsCount": 1,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-07T19:00:00.000Z",
   },
   Object {
@@ -34590,6 +35247,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-08-04T19:00:00.000Z",
   },
   Object {
@@ -34640,6 +35298,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-09-01T19:00:00.000Z",
   },
   Object {
@@ -34690,6 +35349,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-09-29T19:00:00.000Z",
   },
   Object {
@@ -34740,6 +35400,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-05-18T19:00:00.000Z",
   },
   Object {
@@ -34790,6 +35451,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-06-15T19:00:00.000Z",
   },
   Object {
@@ -34840,6 +35502,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-07-13T19:00:00.000Z",
   },
   Object {
@@ -34890,6 +35553,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-08-10T19:00:00.000Z",
   },
   Object {
@@ -34940,6 +35604,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-09-07T19:00:00.000Z",
   },
   Object {
@@ -34990,6 +35655,7 @@ Array [
     "participantsCount": 0,
     "participatingParents": Array [],
     "petDescription": null,
+    "place": undefined,
     "startsAt": "2019-10-05T19:00:00.000Z",
   },
 ]
