@@ -21,6 +21,9 @@ class Place < ApplicationRecord
       self.latitude = req.lat
       self.longitude = req.lng
       self.full_address = req.formatted_address
+      self.name = req.name
+      self.locality = req.city
+      self.admin_area_level_1 = req.region
     end
   end
 end
