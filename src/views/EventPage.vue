@@ -23,7 +23,8 @@
           <div v-if="distance" class="user-action-card__header__distance">{{distance}}</div>
         </div>
         <div class="user-action-card__description">
-          <div class="user-action-card__description-text">{{this.event.name}}</div>
+          <div class="user-action-card__description-text"
+               v-html="nameWithPlace" />
         </div>
         <div class="user-action-card__footer">
           <div class="user-action-card__footer__user-summary">
@@ -178,6 +179,13 @@ export default {
     }
   },
   computed: {
+    nameWithPlace () {
+      if (this.event.place) {
+        return this.event.name + `<br><br>This event will be at ${this.event.place.name}<br>${this.event.place.fullAddress}`
+      } else {
+        return this.event.name + `<br><br>The playdate will be hosted at ${this.event.hostFirstName}'s home.`
+      }
+    },
     lightboxImages () {
       return this.images.map(i => {
         return {
