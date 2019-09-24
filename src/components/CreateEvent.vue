@@ -29,7 +29,6 @@
       v-else-if="stepName==='repeat-count'"
       v-model="repeatCount"
     />
-
   </div>
 </template>
 
@@ -116,15 +115,8 @@ export default {
     ...mapGetters([ 'currentUser', 'wipEvent', 'firstCreatedEvent', 'wipEventContiguousTimeBlocks' ])
   },
   methods: {
-    async getOurPlaceId () {
-      try {
-        console.log('submitting place to API with google place ID ' + this.place.id)
-        await submitGooglePlaceIdAndFetchOurOwn()
-      } catch (e) {
-        this.logError('Failed to submit place')
-        this.logError(e)
-        this.showAlert('Sorry, there was a problem submitting your event location. Please try again later')
-      }
+    finished: function () {
+      this.ourPlaceId == null ? this.$emit('finishedHomeEvent') : this.$emit('finishedPublicEvent')
     },
     selectDateAndTime () {
       this.$router.push({ params: { stepName: 'date' } })
@@ -142,7 +134,7 @@ export default {
         this.showAlert('Sorry, there was a problem submitting your event.  Please try again later', 'failure')
       }
       this.resetWipEvent()
-      this.$emit('finished')
+      this.finished()
     },
     async submitAvailabilityEvent () {
       this.submissionPending = true
@@ -158,11 +150,9 @@ export default {
         }
       }
       this.resetWipEvent()
-      this.$emit('finished')
+      this.finished()
     },
     async nextStep () {
-      // this will not go here ultimately.
-      // this.ourPlaceId = await submitGooglePlaceIdAndFetchOurOwn(this.place.id)
       if (this.nextButtonState === 'skip') {
         this.$emit('skip')
       } else if (this.errorMessage) {
@@ -170,11 +160,14 @@ export default {
       } else {
         // state is persisted after route update because component is reused
         this.showError = false
+        if (this.stepName === 'repeat-count' || this.stepName === 'time') {
+          if (this.homeOrPublic == 'public') {
+            await submitGooglePlaceIdAndFetchOurOwn(this.place.id)
+          }
+        }
         if (this.stepName === 'repeat-count') {
-          await submitGooglePlaceIdAndFetchOurOwn(this.place.id)
           await this.submitAvailabilityEvent()
         } else if (this.stepName === 'time') {
-          await submitGooglePlaceIdAndFetchOurOwn(this.place.id)
           await this.submitSpecificEvent()
         } else {
           this.$router.push({

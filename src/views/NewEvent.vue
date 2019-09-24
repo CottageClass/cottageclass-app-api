@@ -4,7 +4,8 @@
       <StyleWrapper styleIs="onboarding">
         <CreateEvent v-if="section==='event'"
                      :stepName="stepName"
-                     @finished="completeCreation"
+                     @finishedHomeEvent="completeCreationForHomeEvents"
+                     @finishedPublicEvent="proceed"
                      context="new-event"
         />
         <HouseInformation v-if="section==='homeInfo'"
@@ -44,7 +45,7 @@ export default {
         this.$router.push({ name: 'Search' })
       }
     },
-    completeCreation () {
+    completeCreationForHomeEvents () {
       if (this.currentUser.houseRules === null) {
         this.section = 'homeInfo'
       } else {
