@@ -191,7 +191,7 @@ export default new Router({
     },
     {
       path: '/my', // short link for SMS prompts
-      redirect: '/events/new/description'
+      redirect: '/events/new/'
     },
     {
       path: '*',

@@ -7,10 +7,12 @@
     />
     <ErrorMessage v-if="errorMessage && showError" :text="errorMessage" />
     <LoadingSpinner v-if="submissionPending" />
+    <EventPlace
+      v-else-if="stepName==='place'"
+      v-model="place" />
     <EventDescription
       v-else-if="stepName==='description'"
-      v-model="description"
-      :context="context" />
+      v-model="description" />
     <EventDatePicker
       v-else-if="stepName==='date'"
       v-model="date" />
@@ -38,6 +40,7 @@ import RepeatCount from '@/components/base/eventSpecification/RepeatCount'
 import EventDatePicker from '@/components/base/eventSpecification/EventDatePicker'
 import EventTime from '@/components/base/eventSpecification/EventTime'
 import EventDescription from '@/components/base/eventSpecification/EventDescription'
+import EventPlace from '@/components/base/eventSpecification/EventPlace'
 import MultipleTimeSelector from '@/components/base/eventSpecification/MultipleTimeSelector.vue'
 import Nav from '@/components/FTE/Nav'
 
@@ -50,13 +53,14 @@ import { stepNavigation, alerts } from '@/mixins'
 
 export default {
   name: 'CreateEvent',
-  components: { EventDescription, Nav, MultipleTimeSelector, ErrorMessage, EventDatePicker, EventTime, RepeatCount, LoadingSpinner },
+  components: { EventDescription, EventPlace, Nav, MultipleTimeSelector, ErrorMessage, EventDatePicker, EventTime, RepeatCount, LoadingSpinner },
   mixins: [stepNavigation, alerts],
   props: ['stepName', 'context'],
   data () {
     return {
       submissionPending: false,
       showError: false,
+      place: { err: null, text: '' },
       description: { err: null, text: '' },
       availability: { err: null },
       repeatCount: { err: null },
@@ -65,20 +69,8 @@ export default {
     }
   },
   computed: {
-    nextButtonState () { // overriding the mixin
-      if ((this.context === 'onboarding' || this.context === 'request-childcare') &&
-        this.stepName === 'description' &&
-        this.description.text.length === 0) {
-        return 'skip'
-      } else if (this.errorMessage ||
-        (this.context === 'new-event' && this.description.text.length === 0)) {
-        return 'inactive'
-      } else {
-        return 'next'
-      }
-    },
     stepSequence () {
-      return ['description', 'availability', 'repeat-count', 'date', 'time']
+      return ['place', 'description', 'availability', 'repeat-count', 'date', 'time']
     },
     scheduleStart () {
       return moment()
