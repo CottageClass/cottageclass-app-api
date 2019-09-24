@@ -16,6 +16,10 @@ class Event < ApplicationRecord
   after_destroy :update_user_showcase
 
   belongs_to :event_series, inverse_of: :events
+  belongs_to :place,
+             inverse_of: :events,
+             optional: true,
+             dependent: :destroy
   has_one :user, through: :event_series, inverse_of: :events
   has_one :search_list_item, as: :itemable, class_name: 'SearchListItem', dependent: :destroy
   has_many :notifications, as: :notifiable, dependent: :nullify
