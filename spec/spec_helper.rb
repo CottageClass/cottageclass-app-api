@@ -3,7 +3,7 @@ WebMock.disable_net_connect!(allow_localhost: true)
 
 RSpec.configure do |config|
   config.before do
-    stub_request(:get, 'https://maps.googleapis.com/maps/api/place/details/json?extensions=&fields=&key=AIzaSyCoBSr4XUclHwldQ5WloiZcNQUus77cqCo&language=&placeid=unique_some_long_google_string')
+    stub_request(:get, 'https://maps.googleapis.com/maps/api/place/details/json?extensions=&fields=&key=AIzaSyCAxZ4ERhmcq87C5HK91ujxDLl7gQ_k_-c&language=&placeid=unique_some_long_google_string')
       .with(
         headers: {
           'Accept' => '*/*',
@@ -12,7 +12,7 @@ RSpec.configure do |config|
         }
       )
       .to_return(status: 200, body: JSON.dump(json_data(filename: 'spot')), headers: {})
-    stub_request(:get, 'https://maps.googleapis.com/maps/api/place/details/json?extensions=&fields=&key=AIzaSyCoBSr4XUclHwldQ5WloiZcNQUus77cqCo&language=&placeid=UNIQUE_SOME_LONG_GOOGLE_STRING')
+    stub_request(:get, 'https://maps.googleapis.com/maps/api/place/details/json?extensions=&fields=&key=AIzaSyCAxZ4ERhmcq87C5HK91ujxDLl7gQ_k_-c&language=&placeid=UNIQUE_SOME_LONG_GOOGLE_STRING')
       .with(
         headers: {
           'Accept' => '*/*',

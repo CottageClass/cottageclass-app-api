@@ -5,7 +5,6 @@ RSpec.describe Place, type: :model do
   let(:subject) { build :place, user: user }
 
   context 'validations' do
-    it { is_expected.to validate_presence_of(:user).with_message(:required) }
     it { is_expected.to validate_presence_of(:google_id) }
     it { is_expected.to validate_uniqueness_of(:google_id) }
   end

@@ -181,9 +181,9 @@ export default {
   computed: {
     nameWithPlace () {
       if (this.event.place) {
-        return this.event.name
+        return this.event.name + `<br><br>This Event will be at ${this.event.place.name}`
       } else {
-        return this.event.name + `<br><br>This Event will be hosted at ${this.event.hostFirstName}'s home.`
+        return this.event.name + `<br><br>The playdate will be hosted at ${this.event.hostFirstName}'s home.`
       }
     },
     lightboxImages () {
