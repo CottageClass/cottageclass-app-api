@@ -44,7 +44,7 @@ import EventPlace from '@/components/base/eventSpecification/EventPlace'
 import MultipleTimeSelector from '@/components/base/eventSpecification/MultipleTimeSelector.vue'
 import Nav from '@/components/FTE/Nav'
 
-import { submitEventSeriesData } from '@/utils/api'
+import { submitEventSeriesData, submitGooglePlaceIdAndFetchOurOwn } from '@/utils/api'
 import moment from 'moment'
 import { localWeekHourToMoment } from '@/utils/time'
 import { mapGetters, mapMutations } from 'vuex'
@@ -65,7 +65,8 @@ export default {
       availability: { err: null },
       repeatCount: { err: null },
       date: { err: null },
-      time: { err: null }
+      time: { err: null },
+      ourPlaceId: null
     }
   },
   computed: {
@@ -100,7 +101,7 @@ export default {
             'child_age_maximum': 18,
             'repeat_for': this.repeatCount.number || 1,
             'interval': 1,
-            'place_id': this.place.id
+            'place_id': this.ourPlaceId
           }
         }
       }
@@ -115,6 +116,16 @@ export default {
     ...mapGetters([ 'currentUser', 'wipEvent', 'firstCreatedEvent', 'wipEventContiguousTimeBlocks' ])
   },
   methods: {
+    async getOurPlaceId () {
+      try {
+        console.log('submitting place to API with google place ID ' + this.place.id)
+        await submitGooglePlaceIdAndFetchOurOwn()
+      } catch (e) {
+        this.logError('Failed to submit place')
+        this.logError(e)
+        this.showAlert('Sorry, there was a problem submitting your event location. Please try again later')
+      }
+    },
     selectDateAndTime () {
       this.$router.push({ params: { stepName: 'date' } })
     },
@@ -150,6 +161,8 @@ export default {
       this.$emit('finished')
     },
     async nextStep () {
+      // this will not go here ultimately.
+      this.ourPlaceId = await submitGooglePlaceIdAndFetchOurOwn(this.place.id)
       if (this.nextButtonState === 'skip') {
         this.$emit('skip')
       } else if (this.errorMessage) {
@@ -158,8 +171,10 @@ export default {
         // state is persisted after route update because component is reused
         this.showError = false
         if (this.stepName === 'repeat-count') {
+          //          this.ourPlaceId = await this.getOurPlaceId()
           await this.submitAvailabilityEvent()
         } else if (this.stepName === 'time') {
+          //        this.ourPlaceId = await this.getOurPlaceId()
           await this.submitSpecificEvent()
         } else {
           this.$router.push({
