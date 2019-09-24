@@ -25,7 +25,7 @@ export default {
   },
   computed: {
     errorMessage () {
-      return (this.description && this.description.length >= 1) ? null : 'Please enter a description of your playdate'
+      return (this.description && this.description.length >= 1) ? null : 'Please enter a description of your playdate.'
     }
   },
   created () {

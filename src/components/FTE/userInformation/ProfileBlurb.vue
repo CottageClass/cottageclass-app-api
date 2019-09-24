@@ -6,7 +6,7 @@
       v-model="profileBlurb"
       placeholder="e.g. 'We love parks and playgrounds, and we're looking for playdates on the weekend!'"
       rows="4"
-      />
+    />
   </Question>
 </template>
 
@@ -26,7 +26,7 @@ export default {
   },
   computed: {
     errorMessage () {
-      return (this.profileBlurb && this.profileBlurb.length >= 1) ? null : 'Please tell us a little about yourself'
+      return (this.profileBlurb && this.profileBlurb.length >= 1) ? null : 'Please tell us a little about yourself.'
     }
   },
   created () {
