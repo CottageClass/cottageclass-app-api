@@ -7,19 +7,19 @@
       :hidePrevious="stepIndex===0"
     />
     <ErrorMessage v-if="errorMessage && showError" :text="errorMessage" />
-    <QuestionNewStyle v-if="stepName==='description'"
-                      title="Describe your childcare request"
-                      subtitle="Parents near you will see your request and reply by text message. What are you looking for? For what times? What kinds of needs does your child have? (Note: if you do swap childcare with a parent, we strongly recommend meeting them for a playdate first.)">
+    <Question v-if="stepName==='description'"
+              title="Describe your childcare request"
+              subtitle="Parents near you will see your request and reply by text message. What are you looking for? For what times? What kinds of needs does your child have? (Note: if you do swap childcare with a parent, we strongly recommend meeting them for a playdate first.)">
       <FormWithTextArea
         placeholder="e.g. 'Can anyone recommend a great sitter?' or 'Seeking a childcare swap to cover Tuesday mornings in September.'"
         v-model="description.text" />
-    </QuestionNewStyle>
+    </Question>
   </div>
 </template>
 
 <script>
 import NavUpdated from '@/components/FTE/NavUpdated.vue'
-import QuestionNewStyle from '@/components/base/QuestionNewStyle.vue'
+import Question from '@/components/base/Question.vue'
 import FormWithTextArea from '@/components/base/FormWithTextArea.vue'
 import ErrorMessage from '@/components/base/ErrorMessage.vue'
 import { stepNavigation, alerts } from '@/mixins'
@@ -27,7 +27,7 @@ import { submitChildcareRequest } from '@/utils/api'
 
 export default {
   name: 'CreateChildcareRequest',
-  components: { QuestionNewStyle, FormWithTextArea, NavUpdated, ErrorMessage },
+  components: { Question, FormWithTextArea, NavUpdated, ErrorMessage },
   props: ['stepName'],
   mixins: [stepNavigation, alerts],
   data () {
