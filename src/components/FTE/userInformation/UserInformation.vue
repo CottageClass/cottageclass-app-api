@@ -36,6 +36,9 @@
     <MaxDistanceSetting
       v-if="stepName==='distance'"
       v-model="maxDistance" />
+    <AvatarUpload
+      v-if="stepName==='avatar'"
+      v-model="avatar" />
   </div>
 </template>
 
@@ -49,6 +52,7 @@ import FacebookImageSelection from '@/components/FTE/userInformation/FacebookIma
 import ErrorMessage from '@/components/base/ErrorMessage.vue'
 import ProfileBlurb from '@/components/FTE/userInformation/ProfileBlurb.vue'
 import MaxDistanceSetting from '@/components/FTE/userInformation/MaxDistanceSetting'
+import AvatarUpload from '@/components/FTE/userInformation/AvatarUpload'
 
 import normalize from 'json-api-normalizer'
 import { createUser } from '@/utils//createUser'
@@ -58,7 +62,7 @@ import { stepNavigation } from '@/mixins'
 export default {
   name: 'UserInformation',
   props: ['stepName'],
-  components: { Nav, Phone, Location, Children, Employment, FacebookImageSelection, ErrorMessage, ProfileBlurb, MaxDistanceSetting },
+  components: { Nav, Phone, Location, Children, Employment, FacebookImageSelection, ErrorMessage, ProfileBlurb, MaxDistanceSetting, AvatarUpload },
   mixins: [stepNavigation],
   data () {
     return {
@@ -70,6 +74,7 @@ export default {
       facebookImages: { err: null },
       profileBlurb: { err: null },
       maxDistance: { err: null },
+      avatar: { err: null },
       showError: false
     }
   },
@@ -82,6 +87,7 @@ export default {
         'employment',
         'bio',
         'distance',
+        'avatar',
         'images'
       ]
     },
@@ -93,7 +99,9 @@ export default {
         children: this.children,
         employment: this.employment,
         images: this.images,
-        distance: this.maxDistance
+        distance: this.maxDistance,
+        avatar: this.avatar
+
       }
       return models[this.stepName]
     },
@@ -130,6 +138,9 @@ export default {
           break
         case 'distance':
           params = { settingMaxDistance: this.maxDistance }
+          break
+        case 'avatar':
+          params = { avatar: this.avatar.avatar }
           break
         default:
           return // no data to submit
