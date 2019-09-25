@@ -10,7 +10,7 @@ RSpec.describe Place, type: :model do
   end
 
   context 'associations' do
-    it { is_expected.to have_many(:events).inverse_of(:place) }
+    it { is_expected.to have_many(:event_series).inverse_of(:place) }
   end
 
   context 'detachable' do

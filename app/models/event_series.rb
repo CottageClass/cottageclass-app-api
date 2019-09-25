@@ -6,6 +6,7 @@ class EventSeries < ApplicationRecord
   validates :interval, presence: true, numericality: { only_integer: true, greater_than: 0 }
 
   belongs_to :user, inverse_of: :event_series
+  belongs_to :place, inverse_of: :event_series, optional: true
   has_many :events, inverse_of: :event_series, dependent: :destroy
 
   before_validation :cleanup
