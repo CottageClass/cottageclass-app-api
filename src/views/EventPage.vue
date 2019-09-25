@@ -1,5 +1,9 @@
 <template>
   <div>
+    <DeleteEventConfirmationModal
+      v-if="showDeleteConfirmationModal"
+      v-on:closeModal="closeModalClick"
+      :eventId="eventId"/>
     <MainNav />
     <LightBoxStyleWrapper>
       <LightBox
@@ -146,7 +150,6 @@
 
 <script>
 import LightBox from 'vue-image-lightbox'
-
 import RSVPCard from '@/components/base/RSVPCard'
 import SearchListCardActions from '@/components/search/SearchListCardActions'
 import AvatarImage from '@/components/base/AvatarImage'
@@ -156,6 +159,7 @@ import LoadingSpinner from '@/components/LoadingSpinner'
 import Attendee from '@/components/Attendee'
 import OtherEvent from '@/components/OtherEvent'
 import LightBoxStyleWrapper from '@/components/LightBoxStyleWrapper'
+import DeleteEventConfirmationModal from '@/components/DeleteEventConfirmationModal.vue'
 
 import houseRulesImage from '@/assets/house-rules.svg'
 import petsImage from '@/assets/pets.svg'
@@ -166,10 +170,12 @@ import { item, maps, rsvp } from '@/mixins'
 
 export default {
   name: 'EventPage',
-  components: { MainNav, Images, LoadingSpinner, AvatarImage, SearchListCardActions, Attendee, OtherEvent, RSVPCard, LightBox, LightBoxStyleWrapper },
+  components: { MainNav, Images, LoadingSpinner, AvatarImage, SearchListCardActions, Attendee, OtherEvent, RSVPCard, LightBox, LightBoxStyleWrapper, DeleteEventConfirmationModal },
   mixins: [item, maps, rsvp],
+  props: { showDeleteConfirmationModal: { default: false } },
   data () {
     return {
+      eventId: this.$route.params.id,
       event: null,
       mapOptions: {
         'disableDefaultUI': true, // turns off map controls
@@ -224,6 +230,9 @@ export default {
     ...mapGetters(['isRsvpDeclined'])
   },
   methods: {
+    closeModalClick () {
+      this.$router.push({ name: 'EventPage', params: { id: 5, showDeleteConfirmationModal: false } })
+    },
     handleImageClick (payload) {
       this.debug('handle')
       this.$refs.lightbox.showImage(payload)
