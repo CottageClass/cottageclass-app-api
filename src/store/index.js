@@ -4,6 +4,7 @@ import auth from './auth'
 import rsvp from './rsvp'
 import eventCreation from './eventCreation'
 import waves from './waves'
+import feed from './feed'
 import createPersistedState from 'vuex-persistedstate'
 
 Vue.use(Vuex)
@@ -11,15 +12,11 @@ Vue.use(Vuex)
 export default new Vuex.Store(
   {
     plugins: [createPersistedState()],
-    modules: { auth, eventCreation, rsvp, waves },
+    modules: { auth, eventCreation, rsvp, waves, feed },
     state: {
       alert: null,
       createdEvents: null,
-      redirectRoute: null,
-      mapArea: {
-        center: { lat: 40.688309, lng: -73.994639 }, // BoCoCa
-        maxDistance: 5
-      }
+      redirectRoute: null
     },
     mutations: {
       resetRedirectRoute: (state) => {
@@ -46,11 +43,6 @@ export default new Vuex.Store(
       },
       setCreatedEvents: (state, payload) => {
         state.createdEvents = payload.eventData
-      },
-      setMapArea: (state, payload) => {
-        // this can be accomplished with Object.assign ?
-        state.mapArea.center = payload.center || state.mapArea.center
-        state.mapArea.maxDistance = payload.maxDistance || state.mapArea.maxDistance
       }
     },
     actions: {
@@ -68,7 +60,6 @@ export default new Vuex.Store(
     },
     getters: {
       alert: state => state.alert,
-      mapArea: state => state.mapArea,
       redirectRoute: state => state.redirectRoute
     }
   }
