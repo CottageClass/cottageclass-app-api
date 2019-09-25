@@ -103,7 +103,7 @@ import LocationFilterButton from '@/components/filters/LocationFilterButton'
 
 import { messaging, alerts, screen } from '@/mixins'
 import { fetchFeed } from '@/utils/api'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   name: 'Search',
@@ -125,8 +125,6 @@ export default {
       showAllButtonText: 'Show all playdates',
       showShowAllButton: false,
       noItemsMessage: 'Sorry, there are no upcoming playdates in this area',
-      items: null,
-      lastPage: 0,
       showFetchMoreButton: true,
       showTrailblazerMessage: true,
       ageRange: { error: null, data: { min: -1, max: -1 } },
@@ -139,23 +137,13 @@ export default {
     ageRangeActive () {
       return this.ageRange.data.min >= 0 || this.ageRange.data.max >= 0
     },
-    ...mapGetters(['currentUser', 'isAuthenticated', 'alert', 'mapArea'])
+    ...mapGetters(['currentUser', 'isAuthenticated', 'alert', 'mapArea', 'items', 'lastPage'])
   },
   methods: {
     handleMapClick () {
       if (this.isMobile) {
         this.detailView = true
       }
-    },
-    updateUser (user) {
-      const userItems = this.items.filter(i => i.user.id === user.id)
-      for (const item of userItems) {
-        item.user = user
-      }
-    },
-    updateEvent (event) {
-      const eventIndex = this.items.findIndex(i => i.event.id === event.id)
-      this.items[eventIndex].event = event
     },
     offerPlaydate () {
       this.$router.push({ name: 'NewEvent' })
@@ -180,8 +168,8 @@ export default {
           this.showFetchMoreButton = false
         }
         // if items is null, set it to the incoming items, otherwise add them
-        this.items = !this.items ? newItems : this.items.concat(newItems)
-        this.lastPage = this.lastPage + 1
+        this.addItems({ items: newItems })
+        this.incrementLastPage()
       } catch (e) {
         this.logError('problem loading more items')
         this.logError(e)
@@ -202,18 +190,25 @@ export default {
     },
     updateMapArea: async function (e) {
       const center = e.center ? { lat: e.center.lat(), lng: e.center.lng() } : null
-      this.$store.commit('setMapArea', {
+      this.setMapArea({
         center,
         maxDistance: e.miles
       })
       this.fetch()
     },
     fetch: async function () {
-      this.items = null
-      this.lastPage = 0
+      this.resetItems()
       this.showFetchMoreButton = true
       this.fetchMoreItems()
-    }
+    },
+    ...mapMutations([
+      'incrementLastPage',
+      'addItems',
+      'updateUser',
+      'updateEvent',
+      'setMapArea',
+      'resetItems'
+    ])
   },
   watch: {
     ageRange: {
