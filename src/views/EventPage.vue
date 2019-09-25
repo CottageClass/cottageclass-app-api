@@ -210,7 +210,8 @@ export default {
   },
   methods: {
     closeModalClick () {
-      this.$router.push({ name: 'EventPage', params: { id: 5, showDeleteConfirmationModal: false } })    },
+      this.$router.push({ name: 'EventPage', params: { id: 5, showDeleteConfirmationModal: false } })
+    },
     handleImageClick (payload) {
       this.debug('handle')
       this.$refs.lightbox.showImage(payload)
