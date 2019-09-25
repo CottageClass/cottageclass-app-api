@@ -3,7 +3,7 @@
     <div class="location-heading-2">Find parents and playdates near you.</div>
     <div class="formblock-location">
       <div class="form-location">
-    <vue-google-autocomplete
+        <vue-google-autocomplete
           v-if="googleMapsIsLoaded"
           ref="address"
           id="map field-4"
@@ -11,8 +11,8 @@
           :placeholder="placeholder"
           v-on:placechanged="submitAddress"
           country="us" />
-          </div>
-     </div>
+      </div>
+    </div>
   </div>
 </template>
 

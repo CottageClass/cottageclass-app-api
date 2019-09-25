@@ -7,7 +7,7 @@
              @primaryClick="primaryClickHandler"
              @secondaryClick="secondaryClickHandler"
              @closeButtonClick="hideModal"
-             />
+  />
 </template>
 
 <script>

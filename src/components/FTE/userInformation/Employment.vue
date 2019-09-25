@@ -1,4 +1,4 @@
- <template>
+<template>
   <Question
     title="What do you do for a living?"
     subtitle="Tell other families a bit about what you do for work.">
@@ -6,12 +6,12 @@
       placeholder="Your employer (optional)"
       label="Where do you work?"
       v-model="internalData.employer"
-      />
+    />
     <FormFieldAndLabel
       placeholder="Your title or role"
       label="What do you do?"
       v-model="internalData.jobPosition"
-      />
+    />
   </Question>
 </template>
 

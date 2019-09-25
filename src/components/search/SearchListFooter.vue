@@ -1,10 +1,10 @@
 <template>
-<li class="events-list__view-more">
-  <a v-if="!awaiting"
-     @click="$emit('fetch-more-click')"
-     class="event-list__view-more-link">View more</a>
-  <LoadingSpinner v-else class="compact"/>
-</li>
+  <li class="events-list__view-more">
+    <a v-if="!awaiting"
+       @click="$emit('fetch-more-click')"
+       class="event-list__view-more-link">View more</a>
+    <LoadingSpinner v-else class="compact"/>
+  </li>
 </template>
 
 <script>

@@ -65,9 +65,9 @@ export default {
   },
   computed: {
     errorMessage () {
-      if (this.homeOrPublic === 'public' && this.placeId == null) {
+      if (this.homeOrPublic === 'public' && this.placeId === null) {
         return 'Please enter an address or place for your playdate.'
-      } else if (this.homeOrPublic == null) {
+      } else if (this.homeOrPublic === null) {
         return 'Please tell us where your playdate will be.'
       } else {
         return null
