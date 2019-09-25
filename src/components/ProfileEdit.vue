@@ -159,11 +159,11 @@ export default {
         let data = Object.assign(this.currentUser, this.employment, {})
         data.children = this.children.list
         data.profileBlurb = this.profileBlurb.text
+        data.avatar = this.avatar.avatar
         const settingMaxDistance = this.maxDistance
         const settingEmailNotifications = this.weeklyEmails.isTrue
         const { phone, location, availability } = this
         data = Object.assign(data, { phone, location, availability, settingEmailNotifications, settingMaxDistance })
-        console.log({ data })
         try {
           const res = await api.submitUserInfo(this.currentUser.id, data)
           this.saveButtonText = ' \u2714 Saved'
@@ -179,6 +179,24 @@ export default {
       } else {
         this.showError = true
         VueScrollTo.scrollTo('#top-of-form')
+      }
+    }
+  },
+  watch: {
+    avatar: {
+      async handler (newValue, oldValue) {
+        if (newValue.avatar !== this.currentUser.avatar) {
+          this.debug({ newValue })
+          try {
+            const res = await api.submitUserInfo(this.currentUser.id, { avatar: this.avatar.avatar })
+            this.$store.dispatch('updateCurrentUserFromServer')
+            this.log('user update SUCCESS')
+            this.log(res)
+          } catch (e) {
+            this.logError('Error saving')
+            this.logError(e)
+          }
+        }
       }
     }
   }
