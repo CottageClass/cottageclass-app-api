@@ -56,7 +56,6 @@ import TextMessageLink from '@/components/TextMessageLink.vue'
 import Nav from '@/components/FTE/Nav.vue'
 import { fetchEvent } from '@/utils/api'
 import StyleWrapper from '@/components/FTE/StyleWrapper.vue'
-import { mapGetters } from 'vuex'
 
 export default {
   name: 'SocialInvite',
