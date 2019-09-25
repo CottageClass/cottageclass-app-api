@@ -228,7 +228,9 @@ export default {
       this.$router.push({ name: 'ProfileCollection' })
     } else {
       this.settlePendingWaves()
-      this.fetch()
+      if (!this.items) {
+        this.fetch()
+      }
     }
   }
 }
