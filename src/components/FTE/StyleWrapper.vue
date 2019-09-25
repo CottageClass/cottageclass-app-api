@@ -27,6 +27,44 @@ export default {
 .onboarding {
   font-family: soleil, sans-serif;
 
+  .profile-photo {
+    margin-bottom: 16px;
+    border-radius: 50%;
+  }
+
+  .auth-wrapper {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    width: 300px;
+    box-sizing: content;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .button-3 {
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgba(0, 0, 0, .15);
+    border-radius: 4px;
+    background-color: #fff;
+    color: #000;
+  }
+  .profile-photo-wrapper {
+    width: 100%;
+    background-color: #fff;
+    display: flex;
+    margin-bottom: 10px;
+    padding: 16px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgba(0, 0, 0, .15);
+    border-radius: 4px;
+  }
+
   .question-title {
     font-size: 20px;
     color: #fff;
@@ -1444,6 +1482,9 @@ export default {
   }
 
   @media (max-width: 479px) {
+    .auth-wrapper {
+      width: 100%;
+    }
     .list-item-1-container {
       padding: 16px;
     }
