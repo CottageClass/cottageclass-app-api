@@ -13,6 +13,7 @@ RSpec.resource 'EventSeries' do
       parameter :start_date, 'Start Date', required: true
       parameter :starts_at, 'Start Time', required: true
       parameter :ends_at, 'End Time', required: true
+      parameter :place, 'Place'
       parameter :maximum_children, 'Maximum number of children allowed. Default: 0 (no limit)'
       parameter :child_age_minimum, 'Minimum age of child. Default: 0 (no limit)'
       parameter :child_age_maximum, 'Maximum age of child. Default: 0 (no limit)'
@@ -28,6 +29,7 @@ RSpec.resource 'EventSeries' do
       child_age_maximum
       repeat_for
       interval
+      place
     ].each do |attribute|
       let(attribute) { subject.send attribute }
     end
