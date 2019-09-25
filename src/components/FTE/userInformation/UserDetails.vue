@@ -108,11 +108,11 @@ export default {
     },
     nextStep () {
       if (!this.errorMessage) {
+        this.submitUserData()
+        this.trackStep('user-details')
         if (this.stepIndex === this.stepSequence.length - 1) {
           this.$emit('finished')
         } else {
-          this.submitUserData()
-          this.trackStep('user-details')
           this.$router.push({
             params: { stepName: this.stepSequence[this.stepIndex + 1] }
           })
