@@ -63,7 +63,6 @@ export default {
   data () {
     return {
       copyButtonText: 'copy link',
-      prefix: 'https://',
       emailSubject: 'Sharing%20childcare%20(we%20should%20do%20this!)',
       // the content for tweets and emails depends on whether we are sharing a specific event or just the Lilypad site.
       tweetTextWithEvent: 'Would anyone like to join me for this?',
@@ -115,22 +114,19 @@ export default {
       }
     },
     textMessage: function () {
-      return (this.eventId ? this.textMessageWithEvent : this.textMessageWithoutEvent) + ' ' + this.link
-    },
-    link: function () {
-      return this.prefix + this.shareUrl
+      return (this.eventId ? this.textMessageWithEvent : this.textMessageWithoutEvent) + ' ' + this.shareUrl
     },
     fbMessengerLink: function () {
-      return 'fb-messenger://share/?link=' + this.link
+      return 'fb-messenger://share/?link=' + this.shareUrl
     },
     fbLink: function () {
-      return 'https://www.facebook.com/sharer/sharer.php?u=' + this.link
+      return 'https://www.facebook.com/sharer/sharer.php?u=' + this.shareUrl
     },
     tweetLink: function () {
-      return 'https://twitter.com/intent/tweet?text=' + (this.eventId ? this.tweetTextWithEvent : this.tweetTextWithoutEvent) + ' ' + this.link
+      return 'https://twitter.com/intent/tweet?text=' + (this.eventId ? this.tweetTextWithEvent : this.tweetTextWithoutEvent) + ' ' + this.shareUrl
     },
     emailLink: function () {
-      return 'mailto:?subject=' + this.emailSubject + '&body=' + (this.eventId ? this.emailBodyWithEvent : this.emailBodyWithoutEvent) + 'https%3A%2F%2F' + this.shareUrl + '%2F%0A%0AThanks!%0A%3C3'
+      return 'mailto:?subject=' + this.emailSubject + '&body=' + (this.eventId ? this.emailBodyWithEvent : this.emailBodyWithoutEvent) + this.shareUrl + '%2F%0A%0AThanks!%0A%3C3'
     }
   },
   methods: {
