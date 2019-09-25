@@ -8,7 +8,7 @@
                            @finished="collectUserDetails" />
           <UserDetails v-if="section==='user-details'"
                        :stepName="stepName"
-                       @finished="finsishOnboarding" />
+                       @finished="finishOnboarding" />
         </StyleWrapper>
       </div>
     </div>
@@ -28,7 +28,7 @@ export default {
   components: { StyleWrapper, UserInformation, UserDetails },
   computed: mapGetters([ 'redirectRoute', 'firstCreatedEvent' ]),
   methods: {
-    finsishOnboarding () {
+    finishOnboarding () {
       if (this.redirectRoute) {
         this.$router.push(this.redirectRoute)
       } else {
