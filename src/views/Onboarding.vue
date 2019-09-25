@@ -26,7 +26,7 @@ export default {
   name: 'Onboarding',
   props: ['stepName', 'section'],
   components: { StyleWrapper, UserInformation, UserDetails },
-  computed: mapGetters([ 'redirectRoute', 'firstCreatedEvent' ]),
+  computed: mapGetters([ 'redirectRoute' ]),
   methods: {
     finishOnboarding () {
       if (this.redirectRoute) {

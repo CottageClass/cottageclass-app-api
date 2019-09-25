@@ -76,7 +76,8 @@ export default {
       isMobileDevice: typeof window.orientation !== 'undefined',
       sharingPromptWithEvent: "Invite a few friends to attend this activity. When they join, they'll be prompted to offer their own activities and invite a few more friends. Before you know it, you'll have a thriving community of parents sharing activities and childcare!",
       sharingPromptWithoutEvent: "Invite a few friends to join Lilypad. As they join, they'll be prompted to start a profile and invite more friends. Before you know it, you'll have a thriving community of parents sharing activities and childcare!",
-      fetchedEvent: null
+      fetchedEvent: null,
+      eventId: this.$route.params.id
     }
   },
   created () {
@@ -91,14 +92,6 @@ export default {
         user: this.eventToShare.host
       }
     },
-    eventId: function () {
-      if (this.$route.params.id) {
-        return this.$route.params.id
-      } else if (this.firstCreatedEvent && this.firstCreatedEvent.id) {
-        return this.firstCreatedEvent.id
-      }
-      return null
-    },
     shareUrl: function () {
       if (this.eventId) {
         return `${window.location.origin}/event/` + this.eventId
@@ -107,13 +100,7 @@ export default {
       }
     },
     eventToShare: function () {
-      if (this.$route.params.id) {
-        return this.fetchedEvent
-      } else if (this.firstCreatedEvent) {
-        return this.firstCreatedEvent
-      } else {
-        return this.fetchedEvent
-      }
+      return this.fetchedEvent
     },
     titleText () {
       return this.$route.params.context === 'spontaneous' ? 'Offer posted! Share it?' : 'Build your village'
@@ -145,8 +132,7 @@ export default {
     },
     emailLink: function () {
       return 'mailto:?subject=' + this.emailSubject + '&body=' + (this.eventId ? this.emailBodyWithEvent : this.emailBodyWithoutEvent) + 'https%3A%2F%2F' + this.shareUrl + '%2F%0A%0AThanks!%0A%3C3'
-    },
-    ...mapGetters([ 'firstCreatedEvent' ])
+    }
   },
   methods: {
     async updateUser (user) {
