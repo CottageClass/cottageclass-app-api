@@ -116,7 +116,7 @@ export default {
   },
   methods: {
     finished: function () {
-      this.ourPlaceId == null ? this.$emit('finishedHomeEvent') : this.$emit('finishedPublicEvent')
+      this.ourPlaceId === null ? this.$emit('finishedHomeEvent') : this.$emit('finishedPublicEvent')
     },
     selectDateAndTime () {
       this.$router.push({ params: { stepName: 'date' } })
@@ -161,7 +161,7 @@ export default {
         // state is persisted after route update because component is reused
         this.showError = false
         if (this.stepName === 'repeat-count' || this.stepName === 'time') {
-          if (this.place.id != null) {
+          if (this.place.id !== null) {
             this.ourPlaceId = await submitGooglePlaceIdAndFetchOurOwn(this.place.id)
           }
         }
