@@ -8,6 +8,7 @@ RSpec.describe User, type: :model do
     it { is_expected.to have_many(:childcare_requests).inverse_of(:user) }
     it { is_expected.to have_many(:events).through(:event_series) }
     it { is_expected.to have_many(:devices) }
+    it { is_expected.to have_many(:places) }
     it { is_expected.to have_many(:participants).inverse_of(:user).dependent(:destroy) }
     it { is_expected.to have_many(:notifications).inverse_of(:recipient).dependent(:destroy) }
   end
@@ -31,7 +32,6 @@ RSpec.describe User, type: :model do
     end
 
     it { expect { subject.save }.to change(Notification.user_creation, :count).from(0).to(1) }
-    it { expect { subject.save }.to change(subject, :settings).to(User::DEFAULT_SETTINGS) }
   end
 
   context 'create' do

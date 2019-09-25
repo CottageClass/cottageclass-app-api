@@ -8,7 +8,7 @@
       v-model="children"
       addAndRemove="true"
     />
-    </Question>
+  </Question>
 </template>
 
 <script>

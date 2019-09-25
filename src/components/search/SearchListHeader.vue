@@ -1,15 +1,15 @@
 <template>
-<div class="events__actions">
-  <ul class="events__actions__button-list">
-    <li v-if="isAuthenticated"
-        class="events__actions__button-item">
-      <a @click="$emit('request-childcare-click')" class="events__actions__button request-childcare w-button">Request Care</a>
-    </li>
-    <li class="events__actions__button-item">
-      <a @click="$emit('offer-playdate-click')" class="events__actions__button offer-playdate w-button">Offer Playdate</a>
-    </li>
-  </ul>
-</div>
+  <div class="events__actions">
+    <ul class="events__actions__button-list">
+      <li v-if="isAuthenticated"
+          class="events__actions__button-item">
+        <a @click="$emit('request-childcare-click')" class="events__actions__button request-childcare w-button">Request Care</a>
+      </li>
+      <li class="events__actions__button-item">
+        <a @click="$emit('offer-playdate-click')" class="events__actions__button offer-playdate w-button">Offer Playdate</a>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>

@@ -20,7 +20,8 @@ class CurrentUserSerializer < BaseSerializer
              :phone,
              :postal_code,
              :school,
-             :settings,
+             :setting_email_notifications,
+             :setting_max_distance,
              :street_number
 
   attribute :date_created, &:created_at

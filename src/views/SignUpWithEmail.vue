@@ -59,25 +59,6 @@
                       class="input-field w-input"
                     >
                   </div>
-                  <div class="profile-photo-wrapper"
-                       @click="handlePhotoClick">
-                    <img v-if="previewAvatarUrl"
-                         :src="previewAvatarUrl"
-                         class="profile-photo"
-                         height="80"
-                         @load="avatarImageLoaded"
-                    >
-                    <img
-                      v-else
-                      src="@/assets/profile-photo-placeholder.svg"
-                      class="profile-photo"
-                    >
-                    <a class="button-3 w-button" :class="{'invalid': avatarLoading || errors.has('avatar') }">
-                      <span v-if="avatarLoading">Uploading...</span>
-                      <span v-else-if="!avatar_url">Add profile photo</span>
-                      <span v-else>Replace photo</span>
-                    </a>
-                  </div>
                 </fieldset>
                 <input type="submit" value="Sign up" class="submit-button w-button">
               </form>
@@ -100,7 +81,6 @@ import Footer from '@/components/Footer.vue'
 import StyleWrapper from '@/components/FTE/StyleWrapper.vue'
 import FacebookButton from '@/components/base/FacebookButton'
 import ErrorMessage from '@/components/base/ErrorMessage.vue'
-import { createWidget, avatarUrl } from '@/utils/vendor/cloudinary'
 
 export default {
   name: 'SignUpWithEmail',
@@ -108,17 +88,13 @@ export default {
   mixins: [providerAuthentication, alerts],
   data: function () {
     return {
-      cloudinaryUploadWidget: null,
       disableForm: false,
       first_name: '',
       last_name: '',
       email: '',
       password: '',
-      avatar_url: null,
       showError: false,
-      avatarLoading: false,
-      showFacebookLogin: !this.hideFacebookLogin(),
-      previewAvatarUrl: null
+      showFacebookLogin: !this.hideFacebookLogin()
     }
   },
   computed: {
@@ -136,7 +112,7 @@ export default {
       }
     },
     button: function () {
-      if (this.first_name && this.last_name && this.email && this.password && this.avatar_url && this.errors.items.length === 0) {
+      if (this.first_name && this.last_name && this.email && this.password && this.errors.items.length === 0) {
         return 'next'
       } else {
         return 'inactive'
@@ -160,42 +136,17 @@ export default {
         },
         password: {
           required: 'Please choose a password.'
-        },
-        avatar: {
-          required: 'You must add a profile photo, below.'
         }
       }
     }
     // Override and merge the dictionaries
     this.$validator.localize('en', dict)
   },
-  created () {
-    this.cloudinaryUploadWidget = createWidget(this.cloudinaryEventHandler)
-  },
   methods: {
-    cloudinaryEventHandler (error, result) {
-      if (!error && result && result.event === 'success') {
-        let transformation = ''
-        if (result.info.coordinates.custom) {
-          transformation = 'c_thumb,g_custom/'
-        }
-        this.avatar_url = 'https://res.cloudinary.com/' + process.env.CLOUDINARY_CLOUD_NAME + '/image/upload/' + transformation + result.info.path
-        this.previewAvatarUrl = avatarUrl(this.avatar_url, 80)
-        this.disableForm = false
-      }
-    },
-    handlePhotoClick () {
-      this.avatarLoading = true
-      this.disableForm = true
-      this.cloudinaryUploadWidget.open()
-    },
     hideFacebookLogin: () => {
       return ['(iPhone|iPod|iPad)(?!.*Safari)'].every(expression => {
         return !!navigator.userAgent.match(new RegExp(`(${expression})`, 'ig'))
       })
-    },
-    avatarImageLoaded () {
-      this.avatarLoading = false
     },
     async signup () {
       let validationResult, registrationResult, signInResult
@@ -212,10 +163,9 @@ export default {
         let last_name = this.last_name && this.last_name.trim()
         let email = this.email && this.email.trim().toLowerCase()
         let password = this.password && this.password.trim()
-        let avatar = this.avatar_url && this.avatar_url.trim()
 
         try {
-          registrationResult = await register({ first_name, last_name, email, password, avatar })
+          registrationResult = await register({ first_name, last_name, email, password })
           this.log('signup success:')
           this.log(registrationResult)
         } catch (e) {
@@ -621,69 +571,12 @@ a {
   font-size: 13px;
 }
 
-.auth-wrapper {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  width: 300px;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.profile-photo-wrapper {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  margin-bottom: 10px;
-  padding: 16px;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
-  border-style: solid;
-  border-width: 1px;
-  border-color: rgba(0, 0, 0, .15);
-  border-radius: 4px;
-}
-
-.button-3 {
-  border-style: solid;
-  border-width: 1px;
-  border-color: rgba(0, 0, 0, .15);
-  border-radius: 4px;
-  background-color: #fff;
-  color: #000;
-}
-
 .div-block-40 {
   max-height: 80px;
   max-width: 80px;
   min-height: 80px;
   min-width: 80px;
   margin-bottom: 16px;
-}
-
-.profile-photo {
-  margin-bottom: 16px;
-  border-radius: 50%;
 }
 
 @media (max-width: 991px) {
@@ -875,10 +768,6 @@ a {
   .auth-heading {
     font-size: 28px;
     line-height: 26px;
-  }
-
-  .auth-wrapper {
-    width: 100%;
   }
 }
 </style>

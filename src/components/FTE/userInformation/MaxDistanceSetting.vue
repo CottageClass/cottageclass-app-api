@@ -1,7 +1,7 @@
 <template>
   <Question
     title="How far can you travel?"
-    subtitle="What is the maximum distance that you would like to get recommendations from us?">
+    subtitle="What's the most you would travel to meet another parent for a playdate?">
     <RadioButtons
       v-model="miles"
       :choices="choices"
@@ -32,18 +32,18 @@ export default {
   },
   computed: {
     choices () {
-      return ['0.5', '1', '2', '3', '5', '8', '13', '20']
+      return ['0.5', '1.0', '2.0', '3.0', '5.0', '8.0', '13.0', '20.0']
     },
     labels () {
       return [
         ['0.5', '0.5 miles'],
-        ['1', '1 mile'],
-        ['2', '2 miles'],
-        ['3', '3 miles'],
-        ['5', '5 miles'],
-        ['8', '8 miles'],
-        ['13', '13 miles'],
-        ['20', '20 miles']
+        ['1.0', '1 mile'],
+        ['2.0', '2 miles'],
+        ['3.0', '3 miles'],
+        ['5.0', '5 miles'],
+        ['8.0', '8 miles'],
+        ['13.0', '13 miles'],
+        ['20.0', '20 miles']
       ]
     },
     ...mapGetters([])

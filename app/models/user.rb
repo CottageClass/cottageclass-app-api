@@ -1,10 +1,5 @@
 class User < ApplicationRecord
   STORED_MATCHES = 20
-  # change these when new settings are added, they will only effect new users
-  DEFAULT_SETTINGS = {
-    'email' => { 'receive_weekly_email' => true },
-    'matching' => { 'max_distance' => 2 }
-  }.freeze
 
   include Devise::JWT::RevocationStrategies::JTIMatcher
   include LegacyPassword
@@ -37,7 +32,6 @@ class User < ApplicationRecord
     (instance.latitude_changed? || instance.longitude_changed? || instance.children.any?(&:changed?))
   }
   before_create do
-    set_default_settings
     populate_full_name!
     populate_fname_from_name!
     populate_lname_from_name!
@@ -57,7 +51,8 @@ class User < ApplicationRecord
             uniqueness: true,
             format: { with: /\A.+@.+\..+\z/, message: 'Please provide a valid email' }
 
-  has_many :devices
+  has_many :places, dependent: :nullify
+  has_many :devices, dependent: :nullify
   has_many :children,
            class_name: 'Child',
            foreign_key: :parent_id,
@@ -147,7 +142,7 @@ class User < ApplicationRecord
   end
 
   def find_matches
-    miles = settings.dig('matching', 'max_distance') || DEFAULT_SETTINGS['matching']['max_distance']
+    miles = setting_max_distance
 
     if (latitude.present? && latitude.nonzero?) &&
        (longitude.present? && longitude.nonzero?) &&
@@ -270,7 +265,7 @@ class User < ApplicationRecord
   end
 
   def notify_user_suggestion
-    return unless settings['email']['receive_weekly_email']
+    return unless setting_email_notifications
 
     suggestion = nil
     matched_users.each do |matched_user|
@@ -283,21 +278,21 @@ class User < ApplicationRecord
   end
 
   def notify_event_creation_starrer(host)
-    return unless settings['email']['receive_weekly_email']
+    return unless setting_email_notifications
 
     puts "sending a starrer message to #{id} about #{host.id}"
     notifications.event_creation_starrer.create(notifiable: host)
   end
 
   def notify_event_creation_match(host)
-    return unless settings['email']['receive_weekly_email']
+    return unless setting_email_notifications
 
     puts "sending a match message to #{id} about #{host.id}"
     notifications.event_creation_match.create(notifiable: host)
   end
 
   def notify_event_suggestion
-    return unless settings['email']['receive_weekly_email']
+    return unless setting_email_notifications
 
     suggestion = nil
     matched_users.includes(:events).each do |matched_user|
@@ -318,10 +313,6 @@ class User < ApplicationRecord
   end
 
   private
-
-  def set_default_settings
-    self.settings = User::DEFAULT_SETTINGS
-  end
 
   def cleanup
     self.email = email.to_s.downcase

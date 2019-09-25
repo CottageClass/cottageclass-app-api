@@ -38,7 +38,7 @@ export default {
         return circleLatLngs
       }
     },
-    marker () {
+    userMarker () {
       return function (user) {
         var MarkerClass = Vue.extend(Marker)
         var instance = new MarkerClass({
@@ -75,9 +75,19 @@ export default {
         return placeholder
       }
     },
+    async addLilypadPin (position) {
+      const MarkerClass = Vue.extend(Marker)
+      const instance = new MarkerClass({
+        propsData: { avatarUrl: 'https://joinlilypad.com/icons/android-chrome-192x192.png' }
+      })
+      instance.$mount()
+      return this.addPin(instance.$el, position)
+    },
     async addUserPin (user, position) {
-      const res = new UserPin(position, await this.map, this.marker(user).$el)
-      return res
+      return this.addPin(this.userMarker(user).$el, position)
+    },
+    async addPin (el, position) {
+      return new UserPin(position, await this.map, el)
     },
     async addCircle (center, radius) {
       await this.map

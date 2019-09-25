@@ -7,7 +7,7 @@ const logger = Logger('api:users')
 
 export async function submitUserInfo (userId, data) {
   if (!data) { return }
-  let { phone, location, availability, settings, firebaseToken } = data
+  let { phone, location, availability, settingEmailNotifications, settingMaxDistance, firebaseToken } = data
   let postData = {}
   if (location && location.fullAddress) {
     let address = location.fullAddress
@@ -76,9 +76,9 @@ export async function submitUserInfo (userId, data) {
     postData = { ...postData, firebaseToken }
   }
   const { employer, jobPosition, profileBlurb, images, activities } = data
-  const { languages, hasPet, houseRules, petDescription } = data
+  const { avatar, languages, hasPet, houseRules, petDescription } = data
   postData = { ...postData, employer, jobPosition, profileBlurb, images, activities }
-  postData = { ...postData, languages, hasPet, houseRules, petDescription, settings }
+  postData = { ...postData, avatar, languages, hasPet, houseRules, petDescription, settingEmailNotifications, settingMaxDistance }
 
   try {
     const res = await axios.put(`/api/users/${userId}`, postData)

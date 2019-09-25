@@ -68,13 +68,6 @@ export default new Vuex.Store(
     },
     getters: {
       alert: state => state.alert,
-      firstCreatedEvent: (state, getters) => {
-        if (state.createdEvents) {
-          return state.createdEvents[0]
-        } else {
-          return null
-        }
-      },
       mapArea: state => state.mapArea,
       redirectRoute: state => state.redirectRoute
     }

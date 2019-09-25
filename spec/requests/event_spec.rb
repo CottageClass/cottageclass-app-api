@@ -5,10 +5,11 @@ RSpec.resource 'Event' do
   include_context 'json headers'
 
   let(:user) { create :user, :with_children }
+  let(:place) { create :place }
 
   context 'index' do
     before do
-      event_series = create_list :event_series, 5, user: user
+      event_series = create_list :event_series, 5, user: user, place: place
       create_list(:user, 3, :with_children).each do |user|
         Event.where(event_series: event_series).find_each do |event|
           create :participant, :with_participant_children, participable: event, user: user
@@ -116,7 +117,7 @@ RSpec.resource 'Event' do
     get '/api/users/:user_id/events/participated/:skope/page/:page/page_size/:page_size', format: :json do
       before do
         another_user = create :user
-        event_series = create_list :event_series, 5, user: another_user
+        event_series = create_list :event_series, 5, user: another_user, place: place
         Event.where(event_series: event_series).find_each do |event|
           create :participant, :with_participant_children, participable: event, user: user
         end

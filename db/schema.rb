@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_17_131529) do
+ActiveRecord::Schema.define(version: 2019_09_24_233225) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -135,6 +135,8 @@ ActiveRecord::Schema.define(version: 2019_09_17_131529) do
     t.json "meta"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.bigint "place_id"
+    t.index ["place_id"], name: "index_event_series_on_place_id"
     t.index ["user_id"], name: "index_event_series_on_user_id"
   end
 
@@ -211,6 +213,36 @@ ActiveRecord::Schema.define(version: 2019_09_17_131529) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["participable_type", "participable_id", "user_id"], name: "index_participants_on_participable_type_participable_id_user_id", unique: true
+  end
+
+  create_table "places", force: :cascade do |t|
+    t.string "google_id", null: false
+    t.float "latitude", null: false
+    t.float "longitude", null: false
+    t.string "full_address", null: false
+    t.boolean "public", null: false
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.decimal "fuzzy_latitude"
+    t.decimal "fuzzy_longitude"
+    t.string "street_number"
+    t.string "route"
+    t.string "locality"
+    t.string "sublocality"
+    t.string "neighborhood"
+    t.string "admin_area_level_1"
+    t.string "admin_area_level_2"
+    t.string "postal_code"
+    t.string "phone_area_code"
+    t.string "phone_number"
+    t.string "apartment_number"
+    t.string "country", default: "United States"
+    t.string "phone_country_code", default: "1"
+    t.string "name"
+    t.index ["google_id"], name: "index_places_on_google_id", unique: true
+    t.index ["latitude", "longitude"], name: "index_places_on_latitude_and_longitude"
+    t.index ["user_id"], name: "index_places_on_user_id"
   end
 
   create_table "rpush_apps", force: :cascade do |t|
@@ -412,7 +444,8 @@ ActiveRecord::Schema.define(version: 2019_09_17_131529) do
     t.text "house_rules"
     t.bigint "showcase_event_id"
     t.boolean "internally_cleared", default: false, null: false
-    t.jsonb "settings", default: {}
+    t.decimal "setting_max_distance", default: "2.0"
+    t.boolean "setting_email_notifications", default: true
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email"
     t.index ["fuzzy_latitude", "fuzzy_longitude"], name: "index_users_on_fuzzy_latitude_and_fuzzy_longitude"
@@ -432,9 +465,11 @@ ActiveRecord::Schema.define(version: 2019_09_17_131529) do
   add_foreign_key "dark_stars", "users", column: "giver_id"
   add_foreign_key "dark_stars", "users", column: "recipient_id"
   add_foreign_key "devices", "users"
+  add_foreign_key "event_series", "places"
   add_foreign_key "messages", "twilio_sessions", column: "cc_twilio_session_id"
   add_foreign_key "messages", "users", column: "receiver_id"
   add_foreign_key "messages", "users", column: "sender_id"
+  add_foreign_key "places", "users"
   add_foreign_key "search_list_items", "users"
   add_foreign_key "stars", "users", column: "giver_id"
   add_foreign_key "twilio_sessions", "users", column: "receiver_id"
