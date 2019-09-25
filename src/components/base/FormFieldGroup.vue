@@ -6,7 +6,7 @@
         v-if="showRemoveButton"
         @click="$emit('remove')"
         class="onb-button-delete-child w-inline-block">
-      <img src="@/assets/remove.svg" width="24" height="24" alt="" class="image-6"></a>
+        <img src="@/assets/remove.svg" width="24" height="24" alt="" class="image-6"></a>
     </div>
     <FormFieldAndLabel
       v-for="fieldGroup in fieldGroups"

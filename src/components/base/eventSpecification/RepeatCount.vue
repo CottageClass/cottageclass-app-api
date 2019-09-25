@@ -1,8 +1,8 @@
 <template>
   <Question
-  title="For how many weeks?"
-  subtitle="How many weeks should the times you just provided repeat for? If your schedule is very predictable, repeat for several weeks. If not, don't repeat at all—it's up to you!">
-  <div class="dropdown-container">
+    title="For how many weeks?"
+    subtitle="How many weeks should the times you just provided repeat for? If your schedule is very predictable, repeat for several weeks. If not, don't repeat at all—it's up to you!">
+    <div class="dropdown-container">
       <div>
         <select class="lp-select" v-model="repeatCount">
           <option>1</option>

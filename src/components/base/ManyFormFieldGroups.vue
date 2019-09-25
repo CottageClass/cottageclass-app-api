@@ -1,28 +1,28 @@
 <template>
   <span>
-      <form v-on:submit.prevent id="email-form-2" name="email-form-2" data-name="Email Form 2" class="form-2">
-        <div
+    <form v-on:submit.prevent id="email-form-2" name="email-form-2" data-name="Email Form 2" class="form-2">
+      <div
         v-for="(object, index) in objects"
         class="onb-child-group-2">
-          <FormFieldGroup
-            :fieldGroups="fieldGroups"
-            :key="object.key"
-            :heading="headingWord ? headingWord + ' ' + (index + 1) : headings ? headings[index] : ''"
-            v-model="objects[index]"
-            @remove="removeGroup(object.key)"
-            :showRemoveButton="addAndRemove"
-          />
-        </div>
-      </form>
-      <a
+        <FormFieldGroup
+          :fieldGroups="fieldGroups"
+          :key="object.key"
+          :heading="headingWord ? headingWord + ' ' + (index + 1) : headings ? headings[index] : ''"
+          v-model="objects[index]"
+          @remove="removeGroup(object.key)"
+          :showRemoveButton="addAndRemove"
+        />
+      </div>
+    </form>
+    <a
       v-if="addAndRemove"
       @click="add"
       class="onb-button-add-group w-inline-block">
-        <img src="@/assets/add.svg" alt="" class="image-7">
-        <div class="onb-button-add-group-text">Add Another {{ headingWord }}</div>
-      </a>
-    </span>
- </template>
+      <img src="@/assets/add.svg" alt="" class="image-7">
+      <div class="onb-button-add-group-text">Add Another {{ headingWord }}</div>
+    </a>
+  </span>
+</template>
 <script>
 /*
  * This component is for when you need multiple forms that collect identical information, like child info, or emergency contacts. It lets you determine the number of forms, or (if addAndRemove === true) it lets the user add them ad hoc depending on, say, how many kids they have or contacts they want to add.

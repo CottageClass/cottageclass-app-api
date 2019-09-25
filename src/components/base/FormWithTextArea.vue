@@ -2,7 +2,7 @@
   <div class="form-describe-need w-form">
     <form
       v-on:submit.prevent id="email-form-2"
-      >
+    >
       <textarea
         v-model="text"
         id="field"
@@ -12,7 +12,7 @@
         :maxlength="maxLength || 5000"
         class="text-area-decribe-need w-input"
         :rows="rows"
-        >
+      >
       </textarea>
     </form>
   </div>

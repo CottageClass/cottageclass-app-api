@@ -1,35 +1,35 @@
 <template>
-<div class="filter-btn-container-alt">
-  <div class="filter-button w-button"
-       :class="active ? 'active' : ''"
-       @click="openSelector">
-    <slot name="buttonContents" />
-  </div>
-  <div v-if="state.open"
+  <div class="filter-btn-container-alt">
+    <div class="filter-button w-button"
+         :class="active ? 'active' : ''"
+         @click="openSelector">
+      <slot name="buttonContents" />
+    </div>
+    <div v-if="state.open"
          class="modal-background"
          @click="closeSelector"
          @touchmove="preventTouchMove">
-  </div>
-  <div v-if="state.open" class="selector-box-container"
-        @click.stop
-        @touchmove="selectorTouchMove">
-    <div class="selector-top-bar">
-      <div @click="closeSelector" class="mob-selector-close w-inline-block">
-        <img src="@/assets/close-x-black.svg" alt="" />
+    </div>
+    <div v-if="state.open" class="selector-box-container"
+         @click.stop
+         @touchmove="selectorTouchMove">
+      <div class="selector-top-bar">
+        <div @click="closeSelector" class="mob-selector-close w-inline-block">
+          <img src="@/assets/close-x-black.svg" alt="" />
+        </div>
+        <div class="mob-selector-title">{{ title }}</div>
+        <div class="mob-selector-clear-all" v-if="showClear">
+          <div class="mob-selector-clear-all-link"
+               @click="$emit('clearFilterClicked')">Clear</div>
+        </div>
       </div>
-      <div class="mob-selector-title">{{ title }}</div>
-      <div class="mob-selector-clear-all" v-if="showClear">
-        <div class="mob-selector-clear-all-link"
-              @click="$emit('clearFilterClicked')">Clear</div>
+      <div class="selector-top">
+        <div class="selector-content-container">
+          <slot name="selectorContents"></slot>
+        </div>
       </div>
     </div>
-    <div class="selector-top">
-      <div class="selector-content-container">
-        <slot name="selectorContents"></slot>
-      </div>
-    </div>
   </div>
-</div>
 </template>
 
 <script>

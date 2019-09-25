@@ -2,11 +2,11 @@
   <Question
     title="Pick a date"
     subtitle="When would you like to offer this playdate?">
-  <div class="picker-container" >
-  <v-date-picker class="date-picker"
-    :allowedDates="allowedDates"
-    v-model="dateSelected" />
-  </div>
+    <div class="picker-container" >
+      <v-date-picker class="date-picker"
+                     :allowedDates="allowedDates"
+                     v-model="dateSelected" />
+    </div>
   </Question>
 </template>
 
