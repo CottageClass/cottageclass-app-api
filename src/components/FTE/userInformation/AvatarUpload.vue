@@ -46,6 +46,9 @@ export default {
   },
   created () {
     this.cloudinaryUploadWidget = createWidget(this.cloudinaryEventHandler)
+    if (this.avatar) {
+      this.previewAvatarUrl = avatarUrl(this.avatar, 80)
+    }
   },
   computed: {
     err: function () {

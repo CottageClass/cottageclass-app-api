@@ -9,12 +9,14 @@
         <ErrorMessage v-if="showError && hasError && employment.err" :text="employment.err" />
         <ErrorMessage v-if="showError" :text="location.err" />
         <ErrorMessage v-if="showError" :text="children.err" />
+        <ErrorMessage v-if="showError" :text="avatar.err" />
         <Question
           title="Got any photos you'd like to share?"
           subtitle="Adding photos to your profile helps give other members a sense of your family."
         >
           <MultipleImageUpload v-model="currentUser.images" />
         </Question>
+        <AvatarUpload v-model="avatar"/>
         <Employment v-model="employment"/>
         <ProfileBlurb v-model="profileBlurb" />
         <Activities v-model="currentUser.activities" />
@@ -65,6 +67,7 @@ import ErrorMessage from '@/components/base/ErrorMessage.vue'
 import Activities from '@/components/FTE/userInformation/Activities.vue'
 import YesOrNo from '@/components/base/YesOrNo'
 import MaxDistanceSetting from '@/components/FTE/userInformation/MaxDistanceSetting'
+import AvatarUpload from '@/components/FTE/userInformation/AvatarUpload'
 
 import * as api from '@/utils/api'
 import { redirect, screen } from '@/mixins'
@@ -76,6 +79,7 @@ export default {
   name: 'ProfileEdit',
   mixins: [redirect, screen],
   components: {
+    AvatarUpload,
     Location,
     Phone,
     Employment,
@@ -95,6 +99,7 @@ export default {
   },
   data () {
     return {
+      avatar: {},
       weeklyEmails: {},
       maxDistance: {},
       location: {},
@@ -109,6 +114,7 @@ export default {
   },
   created: function () {
     if (this.redirectToSignupIfNotAuthenticated()) { return }
+    this.avatar = { avatar: this.currentUser.avatar, err: null }
     this.weeklyEmails = { isTrue: this.currentUser.settingEmailNotifications }
     this.maxDistance = this.currentUser.settingMaxDistance || '2'
     this.availability = {
@@ -153,11 +159,11 @@ export default {
         let data = Object.assign(this.currentUser, this.employment, {})
         data.children = this.children.list
         data.profileBlurb = this.profileBlurb.text
+        data.avatar = this.avatar.avatar
         const settingMaxDistance = this.maxDistance
         const settingEmailNotifications = this.weeklyEmails.isTrue
         const { phone, location, availability } = this
         data = Object.assign(data, { phone, location, availability, settingEmailNotifications, settingMaxDistance })
-        console.log({ data })
         try {
           const res = await api.submitUserInfo(this.currentUser.id, data)
           this.saveButtonText = ' \u2714 Saved'
@@ -173,6 +179,24 @@ export default {
       } else {
         this.showError = true
         VueScrollTo.scrollTo('#top-of-form')
+      }
+    }
+  },
+  watch: {
+    avatar: {
+      async handler (newValue, oldValue) {
+        if (newValue.avatar !== this.currentUser.avatar) {
+          this.debug({ newValue })
+          try {
+            const res = await api.submitUserInfo(this.currentUser.id, { avatar: this.avatar.avatar })
+            this.$store.dispatch('updateCurrentUserFromServer')
+            this.log('user update SUCCESS')
+            this.log(res)
+          } catch (e) {
+            this.logError('Error saving')
+            this.logError(e)
+          }
+        }
       }
     }
   }
