@@ -36,14 +36,10 @@ export default {
       section: 'event'
     }
   },
-  computed: mapGetters(['firstCreatedEvent', 'currentUser', 'pendingWaves']),
+  computed: mapGetters(['currentUser', 'pendingWaves']),
   methods: {
     proceed () {
-      if (this.firstCreatedEvent && this.pendingWaves.length === 0) {
-        this.$router.push({ name: 'SocialEventInvite', params: { id: this.firstCreatedEvent.id, context: 'spontaneous' } })
-      } else {
-        this.$router.push({ name: 'Search' })
-      }
+      this.$router.push({ name: 'Search' })
     },
     completeCreationForHomeEvents () {
       if (this.currentUser.houseRules === null) {

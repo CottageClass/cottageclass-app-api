@@ -16,10 +16,6 @@
     <Availability
       v-if="stepName==='availability'"
       v-model=availability />
-    <LanguagesSpoken
-      v-if="stepName==='languages'"
-      v-model="languages"
-      :showChoicesImmediately="true"/>
     <Activities
       v-if="stepName==='activities'"
       v-model="activities" />
@@ -34,20 +30,18 @@ import { submitUserInfo } from '@/utils/api'
 import { mapGetters } from 'vuex'
 import { stepNavigation } from '@/mixins'
 
-import LanguagesSpoken from '@/components/FTE/userInformation/LanguagesSpoken.vue'
 import Activities from '@/components/FTE/userInformation/Activities.vue'
 import Availability from '@/components/FTE/userInformation/Availability.vue'
 
 export default {
   name: 'UserDetails',
   props: ['stepName'],
-  components: { Nav, ErrorMessage, Activities, LanguagesSpoken, Availability },
+  components: { Nav, ErrorMessage, Activities, Availability },
   mixins: [stepNavigation],
   data () {
     return {
       context: 'onboarding',
       availability: {},
-      languages: [],
       activities: [],
       showError: false
     }
@@ -66,15 +60,13 @@ export default {
     stepSequence () {
       return [
         'availability',
-        'languages',
         'activities'
       ]
     },
     modelForCurrentStep () {
       const models = {
         availability: this.availability,
-        activities: this.activities,
-        languages: this.languages
+        activities: this.activities
       }
       return models[this.stepName]
     },
@@ -87,9 +79,6 @@ export default {
       switch (this.stepName) {
         case 'availability':
           params = { availability: this.availability }
-          break
-        case 'languages':
-          params = { languages: this.languages }
           break
         case 'activities':
           params = { activities: this.activities }
@@ -108,11 +97,11 @@ export default {
     },
     nextStep () {
       if (!this.errorMessage) {
+        this.submitUserData()
+        this.trackStep('user-details')
         if (this.stepIndex === this.stepSequence.length - 1) {
           this.$emit('finished')
         } else {
-          this.submitUserData()
-          this.trackStep('user-details')
           this.$router.push({
             params: { stepName: this.stepSequence[this.stepIndex + 1] }
           })
