@@ -25,14 +25,13 @@
 
 <script>
 import Question from '@/components/base/Question.vue'
-import FormWithTextArea from '@/components/base/FormWithTextArea.vue'
 import GoogleMapsLoader from 'google-maps'
 import VueGoogleAutocomplete from 'vue-google-autocomplete'
 import RadioButtons from '@/components/base/RadioButtons.vue'
 
 export default {
   name: 'EventPlace',
-  components: { Question, FormWithTextArea, VueGoogleAutocomplete, RadioButtons },
+  components: { Question, VueGoogleAutocomplete, RadioButtons },
   props: ['value', 'context'],
   data () {
     return {
@@ -66,7 +65,7 @@ export default {
   },
   computed: {
     errorMessage () {
-      if (this.homeOrPublic == 'public' && this.placeId == null) {
+      if (this.homeOrPublic === 'public' && this.placeId == null) {
         return 'Please enter an address or place for your playdate.'
       } else if (this.homeOrPublic == null) {
         return 'Please tell us where your playdate will be.'
