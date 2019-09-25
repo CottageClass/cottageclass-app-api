@@ -117,7 +117,7 @@ RSpec.resource 'Event' do
     get '/api/users/:user_id/events/participated/:skope/page/:page/page_size/:page_size', format: :json do
       before do
         another_user = create :user
-        event_series = create_list :event_series, 5, user: another_user
+        event_series = create_list :event_series, 5, user: another_user, place: place
         Event.where(event_series: event_series).find_each do |event|
           create :participant, :with_participant_children, participable: event, user: user
         end
