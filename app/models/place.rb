@@ -1,6 +1,7 @@
 class Place < ApplicationRecord
   belongs_to :user, inverse_of: :places
-  has_many :events, inverse_of: :place
+  has_many :event_series, inverse_of: :place, dependent: :destroy
+  has_many :events, through: :event_series, inverse_of: :place
 
   before_validation :retrieve_details
 
