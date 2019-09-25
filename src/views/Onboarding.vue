@@ -29,6 +29,7 @@ export default {
   computed: mapGetters([ 'redirectRoute' ]),
   methods: {
     finishOnboarding () {
+      this.$store.dispatch('updateCurrentUserFromServer')
       if (this.redirectRoute) {
         this.$router.push(this.redirectRoute)
       } else {
