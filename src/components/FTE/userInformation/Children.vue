@@ -28,13 +28,19 @@ export default {
           name: 'firstName',
           label: 'First Name (or nickname)',
           placeholder: 'First Name',
-          type: 'text'
+          type: 'text',
         },
         {
-          name: 'birthday',
-          label: 'Birthday (approximate is okay)',
-          placeholder: 'MM / DD / YYYY',
-          type: 'date'
+          name: 'month',
+          label: 'Birth Month',
+          placeholder: 'MM',
+          type: 'month'
+        },
+        {
+          name: 'year',
+          label: 'Birth Year',
+          placeholder: 'YYYY',
+          type: 'year'
         },
         {
           name: 'schoolName',
@@ -50,9 +56,11 @@ export default {
       // child has name and birthday
       let childValidates = function (child) {
         return (
-          child.birthday &&
+          child.month &&
+          child.year &&
           child.firstName &&
-          child.birthday.length > 0 &&
+          child.month.length > 0 &&
+          child.year.length > 0 &&
           child.firstName.length > 0
         )
       }
