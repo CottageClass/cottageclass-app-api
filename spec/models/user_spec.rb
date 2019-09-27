@@ -97,4 +97,23 @@ RSpec.describe User, type: :model do
       expect { subject.destroy }.to change(User, :count).from(2).to(1)
     end
   end
+
+  context 'notification' do
+    let(:subject) { build :user, :with_matched_user, :with_children }
+
+    it 'sends a user suggestion notification' do
+      expect { subject.notify_user_suggestion }.to change(subject.notifications.user_suggestion, :count)
+        .from(0)
+        .to(1)
+    end
+    it 'does not send the same user suggestion notification twice' do
+      subject.notify_user_suggestion
+      expect { subject.notify_user_suggestion }.not_to change(subject.notifications.user_suggestion, :count)
+    end
+    it 'sends a event suggestion notification' do
+      expect { subject.notify_event_suggestion }.to change(subject.notifications.event_suggestion, :count)
+        .from(0)
+        .to(1)
+    end
+  end
 end
