@@ -39,7 +39,7 @@ export default {
       'headingWord', // e.g. 'Child' which will become 'Child 1', 'Child 2', etc
       'headings', // a list of headings e.g. Mary, Alice
       'addAndRemove', // if true, the user can add and remove field groups.
-      'fieldGroups' // an array of objects { name: '', label: '', placeholder: '', type: ''}
+      'fieldGroups' // an array of objects { name: '', label: '', placeholder: '', type: '', selectData: ''}
     ],
   data () {
     return {

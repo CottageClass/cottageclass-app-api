@@ -23,26 +23,6 @@ export default {
     return {
       children: this.value.list || [],
       errorMesg: 'Please enter a first name (or nickname) and birthdate for each child.',
-      fieldGroups: [
-        {
-          name: 'firstName',
-          label: 'First Name (or nickname)',
-          placeholder: 'First Name',
-          type: 'text'
-        },
-        {
-          name: 'birthday',
-          label: 'Birthday (approximate is okay)',
-          placeholder: 'MM / DD / YYYY',
-          type: 'date'
-        },
-        {
-          name: 'schoolName',
-          label: 'School Name (optional)',
-          placeholder: 'Name of School',
-          type: 'text'
-        }
-      ]
     }
   },
   computed: {
@@ -70,6 +50,56 @@ export default {
       } else {
         return this.errorMesg
       }
+    },
+    listOfYears: function(){
+           const year = new Date().getFullYear()
+           return Array.from({length: 20}, (value, index) => year - index)
+    },
+    fieldGroups: function(){
+      return [
+        {
+          name: 'firstName',
+          label: 'First Name (or nickname)',
+          placeholder: 'First Name',
+          type: 'text'
+        },
+        {
+          name: "birthMonth",
+          label: 'Select Birth Month',
+          placeholder: 'MM',
+          type: 'select',
+          selectData: [
+            { text: 'January', value: '1' },
+            { text: 'February', value: '2' },
+            { text: 'March', value: '3' },
+            { text: 'April', value: '4' },
+            { text: 'May', value: '5' },
+            { text: 'June', value: '6' },
+            { text: 'July', value: '7' },
+            { text: 'August', value: '8' },
+            { text: 'September', value: '9' },
+            { text: 'October', value: '10' },
+            { text: 'November', value: '11' },
+            { text: 'December', value: '12' }
+          ]
+        },
+        {
+          name: 'birthYear',
+          label: 'Select Birth Year',
+          placeholder: 'YYYY',
+          type: 'select',
+          selectData: this.listOfYears.map(x => {
+              return {text: x, value: x}
+            }
+          )
+        },
+        {
+          name: 'schoolName',
+          label: 'School Name (optional)',
+          placeholder: 'Name of School',
+          type: 'text'
+        }
+      ]
     }
   },
   mounted: function () {
@@ -78,6 +108,7 @@ export default {
       err: this.err
     })
   },
+ 
   watch: {
     children: {
       handler: function () {
@@ -87,7 +118,7 @@ export default {
         })
       },
       deep: true
-    }
+  }
   }
 }
 </script>
