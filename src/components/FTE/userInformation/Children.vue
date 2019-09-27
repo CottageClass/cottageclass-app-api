@@ -33,8 +33,9 @@ export default {
         {
           name: 'birthday',
           label: 'Birthday (approximate is okay)',
-          placeholder: 'MM / DD / YYYY',
-          type: 'date'
+          placeholder: 'MM YYYY',
+          type: 'select',
+          selectData: 'February'
         },
         {
           name: 'schoolName',
