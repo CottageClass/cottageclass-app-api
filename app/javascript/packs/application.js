@@ -5,7 +5,7 @@ import VeeValidate from 'vee-validate'
 import VueClipboard from 'vue-clipboard2'
 import VueScrollTo from 'vue-scrollto'
 import Vuetify from 'vuetify'
-import Antd from 'ant-design-vue'
+import { TimePicker } from 'ant-design-vue'
 
 import '@babel/polyfill'
 
@@ -73,7 +73,7 @@ if (isAuthWindow) {
   })
 } else {
   // Load all the Vue plugins
-  Vue.use(Antd)
+  Vue.use(TimePicker)
   Vue.use(TurbolinksAdapter)
   Vue.use(VueLazyLoad)
   Vue.mixin(logger)
