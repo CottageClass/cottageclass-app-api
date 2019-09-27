@@ -1,7 +1,7 @@
 <template>
   <Question
-    title="How about a picture"
-    explanation="Please upload a file">
+    title="Your profile picture"
+    subtitle="To build a safe and uplifting space, we ask everyone to provide a profile picture, if possible a simple picture of you!">
     <div class="auth-wrapper">
       <div class="profile-photo-wrapper"
            @click="handlePhotoClick">
