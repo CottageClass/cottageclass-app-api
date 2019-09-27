@@ -2014,6 +2014,11 @@ background-color: #f6f6f6;
 }
 
 .editing {
+
+  .w-button {
+    background-color: white;
+  }
+
   body {
     font-family: soleil;
     color: #333;
