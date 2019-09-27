@@ -1,8 +1,9 @@
 <template>
   <div class="onb-body">
-    <StyleWrapper styleIs="onboarding">
+    
       <div class="body">
         <div class="content-wrapper">
+          <StyleWrapper styleIs="onboarding">
           <Nav
             :button="nextButtonState"
             @next="send"
@@ -16,9 +17,10 @@
               v-model="questionText"
               :placeholder="placeholderText" />
           </Question>
+          </StyleWrapper>
         </div>
       </div>
-    </StyleWrapper>
+    
   </div>
 </template>
 
