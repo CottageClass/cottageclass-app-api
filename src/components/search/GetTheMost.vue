@@ -1,16 +1,16 @@
 <template>
-<div class="container-3 w-container">
-  <div class="primary-action__card--alt-2">
-    <div class="primary-action__positioning-alt-2">
-      <div class="primary-action__title-text--alt-2">Get the most out of Lilypad!</div>
-      <div class="primary-action__btns-container--alt-2">
-        <div class="primary-action__btn-group--alt-2"><a @click="$emit('offer-playdate-click')" class="btn__primary-action--alt-2 w-button">Offer playdate</a>
-          <div class="utility-spacer-16px"></div><a @click="$emit('request-childcare-click')" class="btn__sec-action--alt-2 w-button">Request playdate</a>
+  <div class="container-3 w-container">
+    <div class="primary-action__card--alt-2">
+      <div class="primary-action__positioning-alt-2">
+        <div class="primary-action__title-text--alt-2">Get the most out of Lilypad!</div>
+        <div class="primary-action__btns-container--alt-2">
+          <div class="primary-action__btn-group--alt-2"><a @click="$emit('offer-playdate-click')" class="btn__primary-action--alt-2 w-button">Offer playdate</a>
+            <div class="utility-spacer-16px"></div><a @click="$emit('request-childcare-click')" class="btn__sec-action--alt-2 w-button">Request playdate</a>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 </template>
 
 <script>
@@ -114,18 +114,17 @@ a {
   .btn__sec-action--alt-2:hover {
     background-image: none;
   }
-  
+
   .btn__primary-action--alt-2:hover {
     background-image: none;
   }
-  
+
   .primary-action__btn-group--alt-2 {
     display: flex;
     justify-content: flex-start;
     align-items: center;
   }
-  
-  
+
 }
 
 @media (max-width: 767px){
@@ -135,31 +134,31 @@ a {
     padding-bottom: 5px;
     flex: 1;
   }
-  
+
   .btn__primary-action--alt-2 {
     min-width: auto;
     padding-top: 5px;
     padding-bottom: 5px;
     flex: 1;
   }
-  
+
   .primary-action__btn-group--alt-2 {
     width: 100%;
   }
-  
+
   .primary-action__btns-container--alt-2 {
     flex-direction: column;
     justify-content: center;
     flex-wrap: wrap;
     align-items: center;
   }
-  
+
   .primary-action__title-text--alt-2 {
     margin-bottom: 10px;
     font-size: 14px;
     line-height: 18px;
   }
-  
+
   .primary-action__card--alt-2 {
     position: fixed;
     left: 0%;
@@ -171,12 +170,11 @@ a {
     border-radius: 0;
     box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.08);
   }
-  
+
   .container-3 {
     margin-top: 0;
   }
-  
-  
+
 }
 
 @media (max-width: 479px){
@@ -187,7 +185,7 @@ a {
     font-size: 13px;
     line-height: 15px;
   }
-  
+
   .btn__primary-action--alt-2 {
     display: flex;
     min-width: auto;
@@ -198,17 +196,16 @@ a {
     font-size: 13px;
     line-height: 15px;
   }
-  
+
   .primary-action__btn-group--alt-2 {
     width: 100%;
     justify-content: center;
     align-items: stretch;
   }
-  
+
   .primary-action__btns-container--alt-2 {
     flex-direction: column;
   }
-  
-  
+
 }
 </style>

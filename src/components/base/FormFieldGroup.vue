@@ -6,7 +6,7 @@
         v-if="showRemoveButton"
         @click="$emit('remove')"
         class="onb-button-delete-child w-inline-block">
-      <img src="@/assets/remove.svg" width="24" height="24" alt="" class="image-6"></a>
+        <img src="@/assets/remove.svg" width="24" height="24" alt="" class="image-6"></a>
     </div>
     <FormFieldAndLabel
       v-for="fieldGroup in fieldGroups"
@@ -15,6 +15,7 @@
       :placeholder="fieldGroup.placeholder"
       :key="fieldGroup.name"
       :type="fieldGroup.type"
+      :selectData="fieldGroup.selectData"
     />
   </span>
 </template>
@@ -32,7 +33,8 @@ export default {
     'placeholders', // an array of corresponding form placeholder text
     'heading', // the heading of the group of fields
     'types', // and array of input types for each field
-    'showRemoveButton' // show a remove button on each item
+    'showRemoveButton', // show a remove button on each item
+    'selectData' // an array of options for select questions
   ],
   data () {
     return {

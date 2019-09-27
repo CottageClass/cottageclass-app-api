@@ -8,6 +8,7 @@ RSpec.describe User, type: :model do
     it { is_expected.to have_many(:childcare_requests).inverse_of(:user) }
     it { is_expected.to have_many(:events).through(:event_series) }
     it { is_expected.to have_many(:devices) }
+    it { is_expected.to have_many(:places) }
     it { is_expected.to have_many(:participants).inverse_of(:user).dependent(:destroy) }
     it { is_expected.to have_many(:notifications).inverse_of(:recipient).dependent(:destroy) }
   end
@@ -94,6 +95,20 @@ RSpec.describe User, type: :model do
       subject.find_matches
 
       expect { subject.destroy }.to change(User, :count).from(2).to(1)
+    end
+  end
+
+  context 'notification' do
+    let(:subject) { build :user, :with_matched_user, :with_children }
+
+    it 'sends a user suggestion notification' do
+      expect { subject.notify_user_suggestion }.to change(subject.notifications.user_suggestion, :count)
+        .from(0)
+        .to(1)
+    end
+    it 'does not send the same user suggestion notification twice' do
+      subject.notify_user_suggestion
+      expect { subject.notify_user_suggestion }.not_to change(subject.notifications.user_suggestion, :count)
     end
   end
 end

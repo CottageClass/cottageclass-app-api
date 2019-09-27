@@ -7,10 +7,12 @@
     />
     <ErrorMessage v-if="errorMessage && showError" :text="errorMessage" />
     <LoadingSpinner v-if="submissionPending" />
+    <EventPlace
+      v-else-if="stepName==='place'"
+      v-model="place" />
     <EventDescription
       v-else-if="stepName==='description'"
-      v-model="description"
-      :context="context" />
+      v-model="description" />
     <EventDatePicker
       v-else-if="stepName==='date'"
       v-model="date" />
@@ -27,7 +29,6 @@
       v-else-if="stepName==='repeat-count'"
       v-model="repeatCount"
     />
-
   </div>
 </template>
 
@@ -38,10 +39,11 @@ import RepeatCount from '@/components/base/eventSpecification/RepeatCount'
 import EventDatePicker from '@/components/base/eventSpecification/EventDatePicker'
 import EventTime from '@/components/base/eventSpecification/EventTime'
 import EventDescription from '@/components/base/eventSpecification/EventDescription'
+import EventPlace from '@/components/base/eventSpecification/EventPlace'
 import MultipleTimeSelector from '@/components/base/eventSpecification/MultipleTimeSelector.vue'
 import Nav from '@/components/FTE/Nav'
 
-import { submitEventSeriesData } from '@/utils/api'
+import { submitEventSeriesData, submitGooglePlaceIdAndFetchOurOwn } from '@/utils/api'
 import moment from 'moment'
 import { localWeekHourToMoment } from '@/utils/time'
 import { mapGetters, mapMutations } from 'vuex'
@@ -50,35 +52,25 @@ import { stepNavigation, alerts } from '@/mixins'
 
 export default {
   name: 'CreateEvent',
-  components: { EventDescription, Nav, MultipleTimeSelector, ErrorMessage, EventDatePicker, EventTime, RepeatCount, LoadingSpinner },
+  components: { EventDescription, EventPlace, Nav, MultipleTimeSelector, ErrorMessage, EventDatePicker, EventTime, RepeatCount, LoadingSpinner },
   mixins: [stepNavigation, alerts],
   props: ['stepName', 'context'],
   data () {
     return {
       submissionPending: false,
       showError: false,
+      place: { err: null },
       description: { err: null, text: '' },
       availability: { err: null },
       repeatCount: { err: null },
       date: { err: null },
-      time: { err: null }
+      time: { err: null },
+      ourPlaceId: null
     }
   },
   computed: {
-    nextButtonState () { // overriding the mixin
-      if ((this.context === 'onboarding' || this.context === 'request-childcare') &&
-        this.stepName === 'description' &&
-        this.description.text.length === 0) {
-        return 'skip'
-      } else if (this.errorMessage ||
-        (this.context === 'new-event' && this.description.text.length === 0)) {
-        return 'inactive'
-      } else {
-        return 'next'
-      }
-    },
     stepSequence () {
-      return ['description', 'availability', 'repeat-count', 'date', 'time']
+      return ['place', 'description', 'availability', 'repeat-count', 'date', 'time']
     },
     scheduleStart () {
       return moment()
@@ -86,7 +78,10 @@ export default {
     modelForCurrentStep () {
       const models = {
         description: this.description,
-        availability: this.availability
+        availability: this.availability,
+        place: this.place,
+        date: this.date,
+        time: this.time
       }
       return models[this.stepName]
     },
@@ -106,7 +101,8 @@ export default {
             'child_age_minimum': 0,
             'child_age_maximum': 18,
             'repeat_for': this.repeatCount.number || 1,
-            'interval': 1
+            'interval': 1,
+            'place_id': this.ourPlaceId
           }
         }
       }
@@ -121,6 +117,9 @@ export default {
     ...mapGetters([ 'currentUser', 'wipEvent', 'firstCreatedEvent', 'wipEventContiguousTimeBlocks' ])
   },
   methods: {
+    finished: function () {
+      this.ourPlaceId === null ? this.$emit('finishedHomeEvent') : this.$emit('finishedPublicEvent')
+    },
     selectDateAndTime () {
       this.$router.push({ params: { stepName: 'date' } })
     },
@@ -132,12 +131,12 @@ export default {
         const timeRange = { start, end }
         await submitEventSeriesData(this.eventSeriesDataForSubmission(timeRange))
       } catch (e) {
-        this.logError('Failed to sumbit event series')
+        this.logError('Failed to submit event series')
         this.logError(e)
         this.showAlert('Sorry, there was a problem submitting your event.  Please try again later', 'failure')
       }
       this.resetWipEvent()
-      this.$emit('finished')
+      this.finished()
     },
     async submitAvailabilityEvent () {
       this.submissionPending = true
@@ -147,13 +146,13 @@ export default {
           const res = await submitEventSeriesData(this.eventSeriesDataForSubmission(timeRange))
           this.setCreatedEvents({ eventData: res })
         } catch (e) {
-          this.logError('Failed to sumbit event series')
+          this.logError('Failed to submit event series')
           this.logError(e)
           this.showAlert('Sorry, there was a problem submitting your event.  Please try again later', 'failure')
         }
       }
       this.resetWipEvent()
-      this.$emit('finished')
+      this.finished()
     },
     async nextStep () {
       if (this.nextButtonState === 'skip') {
@@ -163,6 +162,11 @@ export default {
       } else {
         // state is persisted after route update because component is reused
         this.showError = false
+        if (this.stepName === 'repeat-count' || this.stepName === 'time') {
+          if (this.place.id !== null) {
+            this.ourPlaceId = await submitGooglePlaceIdAndFetchOurOwn(this.place.id)
+          }
+        }
         if (this.stepName === 'repeat-count') {
           await this.submitAvailabilityEvent()
         } else if (this.stepName === 'time') {

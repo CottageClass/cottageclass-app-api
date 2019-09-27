@@ -4,17 +4,17 @@
       title="When could you host this playdate?"
       subtitle="Parents can only book playdates at the times you offer. So the more availability you offer, the easier it is to schedule fun playdates! (It's okay if your schedule changes—you can always cancel if necessary.)" >
       <div @click="$emit('datetimeClicked')"
-          class="date-time-button">
+           class="date-time-button">
         other dates &amp; times
       </div>
       <div v-for="(dow, dayIndex) of shiftedDayIndices">
         <MultipleTimeSelectorDay
-           class="day-of-week"
-           :title="dayTitle(dayIndex)"
-           :firstStartTime="firstTime(dayIndex)"
-           :lastStartTime="lastTime(dayIndex)"
-           :value="value.availability[dow]"
-           />
+          class="day-of-week"
+          :title="dayTitle(dayIndex)"
+          :firstStartTime="firstTime(dayIndex)"
+          :lastStartTime="lastTime(dayIndex)"
+          :value="value.availability[dow]"
+        />
       </div>
     </Question>
   </div>
@@ -100,7 +100,7 @@ export default {
       if (someTimeSelected) {
         return null
       } else {
-        return 'Please select at least one time slot'
+        return 'Please select at least one time slot.'
       }
     },
     availability () {

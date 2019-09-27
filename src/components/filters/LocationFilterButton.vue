@@ -1,6 +1,6 @@
 <template>
   <div class="contents">
-    {{ shortDescription || 'Location'}}
+    {{ shortDescription || 'Distance'}}
   </div>
 </template>
 

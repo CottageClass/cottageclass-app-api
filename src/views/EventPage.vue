@@ -1,5 +1,9 @@
 <template>
   <div>
+    <DeleteEventConfirmationModal
+      v-if="showDeleteConfirmationModal"
+      v-on:closeModal="closeModalClick"
+      :eventId="eventId"/>
     <MainNav />
     <LightBoxStyleWrapper>
       <LightBox
@@ -23,7 +27,8 @@
           <div v-if="distance" class="user-action-card__header__distance">{{distance}}</div>
         </div>
         <div class="user-action-card__description">
-          <div class="user-action-card__description-text">{{this.event.name}}</div>
+          <div class="user-action-card__description-text"
+               v-html="nameWithPlace" />
         </div>
         <div class="user-action-card__footer">
           <div class="user-action-card__footer__user-summary">
@@ -145,7 +150,6 @@
 
 <script>
 import LightBox from 'vue-image-lightbox'
-
 import RSVPCard from '@/components/base/RSVPCard'
 import SearchListCardActions from '@/components/search/SearchListCardActions'
 import AvatarImage from '@/components/base/AvatarImage'
@@ -155,6 +159,7 @@ import LoadingSpinner from '@/components/LoadingSpinner'
 import Attendee from '@/components/Attendee'
 import OtherEvent from '@/components/OtherEvent'
 import LightBoxStyleWrapper from '@/components/LightBoxStyleWrapper'
+import DeleteEventConfirmationModal from '@/components/DeleteEventConfirmationModal.vue'
 
 import houseRulesImage from '@/assets/house-rules.svg'
 import petsImage from '@/assets/pets.svg'
@@ -165,10 +170,12 @@ import { item, maps, rsvp } from '@/mixins'
 
 export default {
   name: 'EventPage',
-  components: { MainNav, Images, LoadingSpinner, AvatarImage, SearchListCardActions, Attendee, OtherEvent, RSVPCard, LightBox, LightBoxStyleWrapper },
+  components: { MainNav, Images, LoadingSpinner, AvatarImage, SearchListCardActions, Attendee, OtherEvent, RSVPCard, LightBox, LightBoxStyleWrapper, DeleteEventConfirmationModal },
   mixins: [item, maps, rsvp],
+  props: { showDeleteConfirmationModal: { default: false } },
   data () {
     return {
+      eventId: this.$route.params.id,
       event: null,
       mapOptions: {
         'disableDefaultUI': true, // turns off map controls
@@ -178,6 +185,26 @@ export default {
     }
   },
   computed: {
+    mapCenter () {
+      if (this.event.place) {
+        return {
+          lat: this.event.place.latitude,
+          lng: this.event.place.longitude
+        }
+      } else {
+        return {
+          lat: this.event.hostFuzzyLatitude,
+          lng: this.event.hostFuzzyLongitude
+        }
+      }
+    },
+    nameWithPlace () {
+      if (this.event.place) {
+        return this.event.name + `<br><br>This event will be at ${this.event.place.name}<br>${this.event.place.fullAddress}`
+      } else {
+        return this.event.name + `<br><br>The playdate will be hosted at ${this.event.hostFirstName}'s home.`
+      }
+    },
     lightboxImages () {
       return this.images.map(i => {
         return {
@@ -203,6 +230,9 @@ export default {
     ...mapGetters(['isRsvpDeclined'])
   },
   methods: {
+    closeModalClick () {
+      this.$router.push({ name: 'EventPage', params: { id: 5, showDeleteConfirmationModal: false } })
+    },
     handleImageClick (payload) {
       this.debug('handle')
       this.$refs.lightbox.showImage(payload)
@@ -221,12 +251,18 @@ export default {
       this.$nextTick(async function () {
         await this.createMap(this.$refs.map, {
           zoom: 13,
-          center: { lat: this.event.hostFuzzyLatitude, lng: this.event.hostFuzzyLongitude },
+          center: this.mapCenter,
           disableDefaultUI: true,
           options: this.mapOptions,
           style: 'width: 100px; height: 230px;'
         })
-        await this.addCircle({ lat: this.event.hostFuzzyLatitude, lng: this.event.hostFuzzyLongitude }, 0.2)
+        if (this.event.place) {
+          this.addLilypadPin(
+            { lat: this.event.place.latitude, lng: this.event.place.longitude }
+          )
+        } else {
+          await this.addCircle({ lat: this.event.hostFuzzyLatitude, lng: this.event.hostFuzzyLongitude }, 0.2)
+        }
       })
     }
   },

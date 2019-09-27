@@ -15,6 +15,7 @@ RSpec.describe EventSeries, type: :model do
     it { is_expected.to validate_numericality_of(:child_age_maximum).is_greater_than_or_equal_to(0).only_integer }
     it { is_expected.to validate_numericality_of(:repeat_for).is_greater_than(0).only_integer }
     it { is_expected.to validate_numericality_of(:interval).is_greater_than(0).only_integer }
+    it { is_expected.to belong_to(:place).inverse_of(:event_series).optional }
   end
 
   context 'associations' do

@@ -57,6 +57,7 @@ export const createEvents = (data, sortFunction) => {
 */
 function cleanEvent (attributes) {
   const res = Object.assign({}, (attributes))
+  res.place = res.place && res.place.data && res.place.data.attributes
   res.hostId = attributes.hostId.toString()
   res.startsAt = moment(attributes.startsAt)
   res.endsAt = moment(attributes.endsAt)

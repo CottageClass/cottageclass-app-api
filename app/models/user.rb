@@ -51,7 +51,8 @@ class User < ApplicationRecord
             uniqueness: true,
             format: { with: /\A.+@.+\..+\z/, message: 'Please provide a valid email' }
 
-  has_many :devices
+  has_many :places, dependent: :nullify
+  has_many :devices, dependent: :nullify
   has_many :children,
            class_name: 'Child',
            foreign_key: :parent_id,
@@ -263,12 +264,21 @@ class User < ApplicationRecord
     false
   end
 
+  def already_suggested_user?(other_user)
+    notifications.user_suggestion.exists? notifiable: other_user
+  end
+
+  def already_suggested_event?(event)
+    notifications.event_suggestion.exists? notifiable: event
+  end
+
   def notify_user_suggestion
     return unless setting_email_notifications
 
     suggestion = nil
     matched_users.each do |matched_user|
       next if either_dark_star? matched_user
+      next if already_suggested_user? matched_user
 
       suggestion = matched_user
       break
@@ -298,6 +308,8 @@ class User < ApplicationRecord
       next if either_dark_star? matched_user
 
       first_event = matched_user.events.upcoming.order(:starts_at).first
+      next if already_suggested_event? first_event
+
       next unless first_event.present? && !participated_events.exists?(first_event.id)
 
       suggestion = first_event

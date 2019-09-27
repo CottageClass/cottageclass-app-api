@@ -1,7 +1,7 @@
 <template>
   <Question
-    title="How far can you travel?"
-    subtitle="What is the maximum distance that you would like to get recommendations from us?">
+    title="How far would you travel for a playdate?"
+    subtitle="Tell us the most you would travel, and we'll let you know when there are playdates nearby!">
     <RadioButtons
       v-model="miles"
       :choices="choices"

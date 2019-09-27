@@ -7,7 +7,7 @@
       v-if="!choicesAreHidden"
       v-model="languageCodesChosen"
       :labels="labelsAndOrder"
-      />
+    />
   </Question>
 </template>
 

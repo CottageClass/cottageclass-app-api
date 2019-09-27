@@ -1,28 +1,28 @@
 <template>
-<div>
-  <LoadingSpinner v-if="loading" />
-  <Question v-else
-    title="Choose Profile Photos"
-    subtitle="Choose the photos that best represent you, your family, or any activities you’d like to share.">
-    <div class="image-wrapper">
-      <div v-for="(imageUrl, index) in facebookThumbs"
-          class="image-container"
-          @click="toggleImageSelection(index)">
-        <img class="facebook-thumb" :src=imageUrl>
-        <div v-if="isChecked(index)" class="selection-container selected">
-          <img src="@/assets/check-green.svg">
+  <div>
+    <LoadingSpinner v-if="loading" />
+    <Question v-else
+              title="Choose Profile Photos"
+              subtitle="Choose the photos that best represent you, your family, or any activities you’d like to share.">
+      <div class="image-wrapper">
+        <div v-for="(imageUrl, index) in facebookThumbs"
+             class="image-container"
+             @click="toggleImageSelection(index)">
+          <img class="facebook-thumb" :src=imageUrl>
+          <div v-if="isChecked(index)" class="selection-container selected">
+            <img src="@/assets/check-green.svg">
+          </div>
+          <div v-else class="selection-container unselected" />
         </div>
-        <div v-else class="selection-container unselected" />
+        <!-- these are here to bad the flex display.  The last line is awkward if we don't have them -->
+        <div class="facebook-thumb blank"></div>
+        <div class="facebook-thumb blank"></div>
+        <div class="facebook-thumb blank"></div>
+        <div class="facebook-thumb blank"></div>
+        <div class="facebook-thumb blank"></div>
+        <div class="facebook-thumb blank"></div>
       </div>
-      <!-- these are here to bad the flex display.  The last line is awkward if we don't have them -->
-      <div class="facebook-thumb blank"></div>
-      <div class="facebook-thumb blank"></div>
-      <div class="facebook-thumb blank"></div>
-      <div class="facebook-thumb blank"></div>
-      <div class="facebook-thumb blank"></div>
-      <div class="facebook-thumb blank"></div>
-    </div>
-  </Question>
+    </Question>
   </div>
 </template>
 

@@ -4,12 +4,12 @@
       <slot></slot>
     </label>
     <input
-    type="file"
-    style="visibility:hidden;"
-    id="photoUploadInput"
-    name="photoUploadInput"
-    v-on:change="upload"
-    accept="image/*"
+      type="file"
+      style="visibility:hidden;"
+      id="photoUploadInput"
+      name="photoUploadInput"
+      v-on:change="upload"
+      accept="image/*"
     >
   </span>
 </template>

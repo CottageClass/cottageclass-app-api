@@ -1,9 +1,9 @@
 <template>
   <span>
     <ImageUploadToCloudinary
-    @startedUploading="toggleUploadingState"
-    @imageUpload="addImage"
-    @uploadError="uploadError">
+      @startedUploading="toggleUploadingState"
+      @imageUpload="addImage"
+      @uploadError="uploadError">
       <a class="image-upload-photo-link">{{ buttonText }}</a>
     </ImageUploadToCloudinary>
     <div class="scrolling-wrapper">

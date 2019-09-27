@@ -148,7 +148,8 @@ export default new Router({
     {
       path: '/event/:id/',
       name: 'EventPage',
-      component: EventPage
+      component: EventPage,
+      props: true
     },
     {
       path: '/faq',
@@ -191,7 +192,7 @@ export default new Router({
     },
     {
       path: '/my', // short link for SMS prompts
-      redirect: '/events/new/description'
+      redirect: '/events/new/'
     },
     {
       path: '*',

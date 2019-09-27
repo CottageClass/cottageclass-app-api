@@ -1,10 +1,10 @@
 <template>
-<a class="event-action-button"
-   :class="meetStatus"
-   @click.stop="meetButtonClick">
+  <a class="event-action-button"
+     :class="meetStatus"
+     @click.stop="meetButtonClick">
     <img v-if="icon" :src="icon" class="action-button-icon" />
     <div class="label-text">{{meetButtonText}}</div>
-</a>
+  </a>
 </template>
 
 <script>

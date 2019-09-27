@@ -2,9 +2,11 @@
   <div class="nav-links-expanded">
     <ul class="unordered-list-2 w-list-unstyled">
       <li>
-        <a href="/events/new" class="link-block w-inline-block">
+        <router-link
+          to="/events/new"
+          class="link-block w-inline-block">
           <div class="text-block">Offer a playdate</div>
-        </a>
+        </router-link>
       </li>
       <li>
         <router-link
