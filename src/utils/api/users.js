@@ -62,7 +62,7 @@ export async function submitUserInfo (userId, data) {
       return {
         ...childAttrs,
         parentId: userId,
-        birthday: childAttrs.birthYear + "-" + childAttrs.birthMonth + "-15"
+        birthday: childAttrs.birthYear + '-' + childAttrs.birthMonth + '-15'
       }
     })
   }

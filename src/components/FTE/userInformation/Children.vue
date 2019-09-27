@@ -22,7 +22,7 @@ export default {
   data () {
     return {
       children: this.value.list || [],
-      errorMesg: 'Please enter a first name (or nickname) and birthdate for each child.',
+      errorMesg: 'Please enter a first name (or nickname) and birthdate for each child.'
     }
   },
   computed: {
@@ -51,11 +51,11 @@ export default {
         return this.errorMesg
       }
     },
-    listOfYears: function(){
+    listOfYears: function () {
       const year = new Date().getFullYear()
-      return Array.from({length: 20}, (value, index) => year - index)
+      return Array.from({ length: 20 }, (value, index) => year - index)
     },
-    fieldGroups: function(){
+    fieldGroups: function () {
       return [
         {
           name: 'firstName',
@@ -89,8 +89,8 @@ export default {
           placeholder: 'YYYY',
           type: 'select',
           selectData: this.listOfYears.map(x => {
-              return {text: x, value: x}
-            }
+            return { text: x, value: x }
+          }
           )
         },
         {
@@ -108,7 +108,7 @@ export default {
       err: this.err
     })
   },
- 
+
   watch: {
     children: {
       handler: function () {
@@ -118,7 +118,7 @@ export default {
         })
       },
       deep: true
-  }
+    }
   }
 }
 </script>
