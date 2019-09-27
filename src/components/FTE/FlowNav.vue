@@ -9,7 +9,7 @@
         v-if="button !== 'none'"
         @click="$emit('next')"
         :class="classObject">
-      <div class="button-next-text w-button">{{ text }}</div>
+        <div class="button-next-text w-button">{{ text }}</div>
       </a>
     </div>
   </div>

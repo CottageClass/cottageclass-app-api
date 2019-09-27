@@ -3,15 +3,15 @@
     <slot></slot>
   </span>
 </template>
- 
+
 <script>
 export default {
   name: 'StyleWrapper',
-  props: ['styleIs'] 
+  props: ['styleIs']
 }
 </script>
 
-<style lang="scss"> 
+<style lang="scss">
 .content-wrapper__request{
   position: relative;
   left: 0%;
@@ -32,7 +32,6 @@ export default {
 .body__request{
 background-color: #f6f6f6;
 }
-
 
 .onb-error-text a.error-link {
   color: #c96168;
@@ -94,7 +93,6 @@ background-color: #f6f6f6;
     line-height: 34px;
     margin-top: 0;
   }
-
 
   .event-heading {
     color: #333;
@@ -1827,8 +1825,6 @@ background-color: #f6f6f6;
     color: #fff;
   }
 
-
-
   .title-container {
     margin-bottom: 32px;
     color: #fff;
@@ -1839,8 +1835,6 @@ background-color: #f6f6f6;
     padding: 32px;
     background-color: #1d8be7;
   }
-
-
 
   .text-area-decribe-need {
     min-height: 120px;
@@ -1956,7 +1950,7 @@ background-color: #f6f6f6;
   font-size: 24px;
   line-height: 34px;
   text-align: center;
-  letter-spacing: -.3px; 
+  letter-spacing: -.3px;
   }
 
   .onb-paragraph-subheading-2 {
