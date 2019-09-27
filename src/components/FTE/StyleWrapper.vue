@@ -2015,7 +2015,7 @@ background-color: #f6f6f6;
 
 .editing {
 
-  .w-button {
+  .avatar-upload-button {
     background-color: white;
   }
 
