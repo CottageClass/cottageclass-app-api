@@ -110,10 +110,5 @@ RSpec.describe User, type: :model do
       subject.notify_user_suggestion
       expect { subject.notify_user_suggestion }.not_to change(subject.notifications.user_suggestion, :count)
     end
-    it 'sends a event suggestion notification' do
-      expect { subject.notify_event_suggestion }.to change(subject.notifications.event_suggestion, :count)
-        .from(0)
-        .to(1)
-    end
   end
 end
