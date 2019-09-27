@@ -5,6 +5,7 @@ import VeeValidate from 'vee-validate'
 import VueClipboard from 'vue-clipboard2'
 import VueScrollTo from 'vue-scrollto'
 import Vuetify from 'vuetify'
+import Antd from 'ant-design-vue'
 
 import '@babel/polyfill'
 
@@ -22,6 +23,7 @@ import { logger } from '@/mixins'
 import TurbolinksAdapter from 'vue-turbolinks'
 
 import 'vuetify/dist/vuetify.min.css' // Ensure you are using css-loader
+import 'ant-design-vue/dist/antd.css'
 import 'vue-image-lightbox/dist/vue-image-lightbox.min.css'
 
 import VueLazyLoad from 'vue-lazyload'
@@ -71,6 +73,7 @@ if (isAuthWindow) {
   })
 } else {
   // Load all the Vue plugins
+  Vue.use(Antd)
   Vue.use(TurbolinksAdapter)
   Vue.use(VueLazyLoad)
   Vue.mixin(logger)
