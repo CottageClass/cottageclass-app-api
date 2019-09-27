@@ -16,7 +16,7 @@
           src="@/assets/profile-photo-placeholder.svg"
           class="profile-photo"
         >
-        <a class="button-3 w-button" :class="{'invalid': avatarLoading || errors.has('avatar') }">
+        <a class="button-3" :class="{'invalid': avatarLoading || errors.has('avatar') }">
           <span v-if="avatarLoading">Uploading...</span>
           <span v-else-if="!avatar">Add profile photo</span>
           <span v-else>Replace photo</span>
