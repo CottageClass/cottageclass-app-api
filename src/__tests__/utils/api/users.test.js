@@ -19,9 +19,6 @@ describe('users', () => {
       [{ languages: 'lang' }, { languages: 'lang' }],
       [{ hasPet: 'hpet' }, { hasPet: 'hpet' }],
       [{ houseRules: 'hrules' }, { houseRules: 'hrules' }],
-      [{ children: [{ age: '2', name: 'Chuck' }, { name: 'Ahh', age: '4' }] },
-        { childrenAttributes: [{ age: '2', name: 'Chuck', parentId: '1230' },
-          { age: '4', name: 'Ahh', parentId: '1230' }] }],
       [{ location: {
         lat: '432',
         lng: '978',
