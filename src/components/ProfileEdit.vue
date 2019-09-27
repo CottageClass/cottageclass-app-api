@@ -123,7 +123,12 @@ export default {
       availableEvenings: !!this.currentUser.availableEvenings,
       availableWeekends: !!this.currentUser.availableWeekends
     }
-    this.children = { 'list': this.currentUser.children || [] }
+    this.children = { 'list': this.currentUser.children.map(child => {
+      return {...child, 
+      birthMonth: child.birthday.split("-")[1],
+      birthYear: child.birthday.split("-")[0]
+      }
+    } ) || [] }
     this.employment = {
       jobPosition: this.currentUser.jobPosition,
       employer: this.currentUser.employer,
