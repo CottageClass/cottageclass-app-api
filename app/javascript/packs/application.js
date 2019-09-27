@@ -22,9 +22,13 @@ import { logger } from '@/mixins'
 
 import TurbolinksAdapter from 'vue-turbolinks'
 
+import 'ant-design-vue/lib/time-picker/style/css'
 import 'vuetify/dist/vuetify.min.css' // Ensure you are using css-loader
-import 'ant-design-vue/dist/antd.css'
+// import 'ant-design-vue/dist/antd.css'
 import 'vue-image-lightbox/dist/vue-image-lightbox.min.css'
+
+import '../../../src/assets/css/webflow.css'
+import '../../../src/assets/css/normalize.css'
 
 import VueLazyLoad from 'vue-lazyload'
 import { registerIOSEventLIstener } from '@/utils/iosAdapter.js'

@@ -10,6 +10,7 @@
                     :minuteStep="15"
                     placeholder="start"
                     size="large"
+                    :defaultOpenValue="beginningOfToday"
       />
       <a-timePicker class="date-picker"
                     v-model="endTime"
@@ -18,6 +19,7 @@
                     :minuteStep="15"
                     placeholder="end"
                     size="large"
+                    :defaultOpenValue="beginningOfToday"
       />
     </div>
   </Question>
@@ -25,6 +27,7 @@
 
 <script>
 import Question from '@/components/base/Question.vue'
+import moment from 'moment'
 
 export default {
   name: 'EventTime',
@@ -41,6 +44,9 @@ export default {
     this.emitData()
   },
   computed: {
+    beginningOfToday () {
+      return moment().startOf('day')
+    },
     titleText () {
       return 'What times are you available?'
     },
