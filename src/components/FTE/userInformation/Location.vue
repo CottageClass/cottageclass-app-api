@@ -61,37 +61,21 @@ export default {
     toggleApartmentField: function () {
       this.showApartmentField = true
     },
-    getAddressData: function (addressData, placeResultData, id) {
-      let placeResultObject = {}
-      placeResultData.address_components.forEach(e =>
-        e.types.forEach(type => (placeResultObject[type] = e.long_name))
-      )
-      this.address = { ...addressData, ...placeResultObject }
-      if (!this.address.locality) {
-        this.address.locality = ''
-      }
-      this.emitAddress()
-    },
-    emitAddress: function () {
-      this.log('emitting address')
-      if (this.address.latitude) {
+    emitPlace: function () {
+      if (this.err) {
         this.$emit('input', {
-          fullAddress: this.address,
-          lat: this.address.latitude,
-          lng: this.address.longitude,
-          apartmentNumber: this.apartmentNumber,
-          err: this.err
-        })
-      } else if (this.apartmentNumber) {
-        this.$emit('input', {
-          apartmentNumber: this.apartmentNumber,
           err: this.err
         })
       } else {
-        this.$emit('input', {
-          err: this.err
+        this.$emit('input', { err: null,
+          id: this.placeId,
+          apartmentNumber: this.apartmentNumber
         })
       }
+    },
+    getAddressData: function (addressData, placeResultData, id) {
+      this.placeId = placeResultData.place_id
+      this.emitPlace()
     }
   },
   computed: {
@@ -105,10 +89,10 @@ export default {
   },
   watch: {
     apartmentNumber: function () {
-      this.emitAddress()
+      this.emitPlace()
     },
     err: function () {
-      this.emitAddress()
+      this.emitPlace()
     }
   }
 }
