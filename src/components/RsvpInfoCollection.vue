@@ -1,11 +1,11 @@
 <template>
-  <StyleWrapper styleIs="onboarding">
 
-    <!-- wrapper for desktop screens -->
+  <!-- wrapper for desktop screens -->
 
-    <div class="onb-body">
-      <div class="body">
-        <div class="content-wrapper">
+  <div class="onb-body">
+    <div class="body">
+      <div class="content-wrapper">
+        <StyleWrapper styleIs="onboarding">
           <Nav
             :button="nextButtonState"
             @next="nextStep"
@@ -21,10 +21,11 @@
               v-model="childrenSelected"
               :labels="labelsAndOrder"/>
           </Question>
-        </div>
+        </StyleWrapper>
       </div>
     </div>
-  </StyleWrapper>
+  </div>
+
 </template>
 
 <script>
