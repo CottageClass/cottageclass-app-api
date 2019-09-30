@@ -151,7 +151,7 @@ export default {
       })
     },
     async signup () {
-      let validationResult, registrationResult, signInResult
+      let validationResult
       try {
         validationResult = await this.$validator.validateAll()
       } catch (e) {
@@ -161,32 +161,36 @@ export default {
       if (validationResult) {
         this.disableForm = true
 
-        let first_name = this.first_name && this.first_name.trim()
-        let last_name = this.last_name && this.last_name.trim()
-        let email = this.email && this.email.trim().toLowerCase()
-        let password = this.password && this.password.trim()
+        const first_name = this.first_name && this.first_name.trim()
+        const last_name = this.last_name && this.last_name.trim()
+        const email = this.email && this.email.trim().toLowerCase()
+        const password = this.password && this.password.trim()
 
         try {
-          registrationResult = await register({ first_name, last_name, email, password })
+          const registrationResult = await register({ first_name, last_name, email, password })
           this.log('signup success:')
           this.log(registrationResult)
+          try {
+            signIn(email, password)
+            const signInResult = await signIn({ email, password })
+            this.$store.dispatch('establishUser', { JWT: signInResult.data[0] })
+            this.$router.push({ name: 'Onboarding' })
+          } catch (e) {
+            this.logError(e)
+          }
         } catch (e) {
           this.logError('signup failure:')
           this.logError(e)
-          this.showError = true
-          this.showAlert('Sorry, there was a problem creating your account. Did you already create an account with this email address directly or via Facebook?', 'failure')
-        } finally {
-          this.disableForm = false
-        }
-        try {
-          signInResult = await signIn({ email, password })
-          this.log('auth success:')
-          this.log(signInResult)
-          this.$store.dispatch('establishUser', { JWT: signInResult.data[0] })
-          return this.$router.push({ name: 'Onboarding' })
-        } catch (e) {
-          this.logError('auth FAILURE')
-          this.logError(e)
+          try {
+            // try to log in with existing credentials
+            const signInResult = await signIn({ email, password })
+            this.$store.dispatch('establishUser', { JWT: signInResult.data[0] })
+            this.$router.push({ name: 'Search' })
+          } catch (e) {
+            this.showError = true
+            this.showAlert('Sorry, there was a problem creating your account. Did you already create an account with this email address directly or via Facebook?', 'failure')
+            this.disableForm = false
+          }
         }
       } else {
         this.$scrollTo('#top')
