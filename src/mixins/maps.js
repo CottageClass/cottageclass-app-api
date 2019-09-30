@@ -87,6 +87,7 @@ export default {
       return this.addPin(this.userMarker(user).$el, position)
     },
     async addPin (el, position) {
+      await this.google
       return new UserPin(position, await this.map, el)
     },
     async addCircle (center, radius) {
@@ -129,7 +130,7 @@ export default {
     },
     setZoomLevelForRadius: async function (radius) {
       const map = await this.map
-      map.setZoom(this.zoomLevelForRadius(radius))
+      map.setZoom(await this.zoomLevelForRadius(radius))
     }
   },
   mounted () {
