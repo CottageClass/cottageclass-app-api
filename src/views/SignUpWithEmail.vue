@@ -196,6 +196,21 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+.auth-wrapper {
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  width: 300px;
+  box-sizing: content;
+  flex-direction: column;
+  align-items: center;
+}
+
 .body {
   font-family: soleil, sans-serif;
   color: #333;
@@ -693,6 +708,9 @@ a {
 }
 
 @media (max-width: 479px) {
+  .auth-wrapper {
+    width: 100%;
+  }
   .body {
     padding-bottom: 110px;
   }
