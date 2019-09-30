@@ -179,14 +179,13 @@ export default {
       if (this.mapArea.maxDistance) {
         zoom = await this.zoomLevelForRadius(this.mapArea.maxDistance)
       }
-      this.debug({ zoom })
+
       await this.createMap(this.$refs.map, {
         zoom,
         center: center,
         ...this.mapOptions
       },
       this.idleHandler.bind(this))
-      this.setZoomLevelForRadius(2)
     })
     if (this.users && this.users.length) {
       this.updateMarkers()
