@@ -20,7 +20,8 @@
               </div>
               <div>Sign up with your email</div>
             </span>
-            <div class="form-block w-form">
+            <LoadingSpinner v-if="disableForm" />
+            <div v-else class="form-block w-form">
               <form v-on:submit.prevent="signup" id="email-form">
                 <fieldset :disabled="disableForm === true">
                   <div class="onb-child-group-2">
@@ -81,10 +82,11 @@ import Footer from '@/components/Footer.vue'
 import StyleWrapper from '@/components/FTE/StyleWrapper.vue'
 import FacebookButton from '@/components/base/FacebookButton'
 import ErrorMessage from '@/components/base/ErrorMessage.vue'
+import LoadingSpinner from '@/components/LoadingSpinner'
 
 export default {
   name: 'SignUpWithEmail',
-  components: { ErrorMessage, MainNav, Footer, StyleWrapper, FacebookButton },
+  components: { ErrorMessage, MainNav, Footer, StyleWrapper, FacebookButton, LoadingSpinner },
   mixins: [providerAuthentication, alerts],
   data: function () {
     return {
