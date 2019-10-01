@@ -27,13 +27,13 @@
           <div v-if="distance" class="user-action-card__header__distance">{{distance}}</div>
         </div>
         <div class="user-action-card__description-text"
-               v-html="this.event.name" />
+             v-html="this.event.name" />
         <div class="event-summary-card__location">
           <div class="location-card__text-group">
             <div class="location-card__place-name-text line-clamp--1"
-              v-html="playdateLocationName"></div>
+                 v-html="playdateLocationName"></div>
             <div class="location-card__address-text line-clamp--1"
-              v-html="playdateAddress"></div>
+                 v-html="playdateAddress"></div>
           </div>
           <div class="location-icon"><img src="@/assets/circle-location.svg" alt="" class="image-5 photo-fit" /></div>
         </div>
@@ -216,7 +216,7 @@ export default {
       if (this.event.place) {
         return `${this.event.place.fullAddress}`
       } else {
-        return ""
+        return ''
       }
     },
     lightboxImages () {
