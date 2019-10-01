@@ -30,6 +30,7 @@
 import GoogleMapsLoader from 'google-maps'
 import VueGoogleAutocomplete from 'vue-google-autocomplete'
 import Question from '@/components/base/Question.vue'
+import { submitGooglePlaceIdAndFetchOurOwn } from '@/utils/api'
 
 export default {
   name: 'Location',
@@ -42,6 +43,8 @@ export default {
       apartmentNumber: this.currentApartment || '',
       placeholder: this.currentAddress || 'Street address (not apt #)',
       address: {},
+      placeId: null,
+      latlng: null,
       googleMapsIsLoaded: false
     }
   },
@@ -61,26 +64,34 @@ export default {
     toggleApartmentField: function () {
       this.showApartmentField = true
     },
-    emitPlace: function () {
+    async emitPlace () {
       if (this.err) {
         this.$emit('input', {
           err: this.err
         })
       } else {
+        if (this.placeId === null) { return }
+        const ourPlaceId = await submitGooglePlaceIdAndFetchOurOwn(this.placeId)
+
         this.$emit('input', { err: null,
-          id: this.placeId,
+          id: ourPlaceId,
+          latlng: this.latlng,
           apartmentNumber: this.apartmentNumber
         })
       }
     },
     getAddressData: function (addressData, placeResultData, id) {
+      this.latlng = {
+        lat: addressData.latitude,
+        lng: addressData.longitude
+      }
       this.placeId = placeResultData.place_id
       this.emitPlace()
     }
   },
   computed: {
     err: function () {
-      if (this.required && (isNaN(this.address.latitude) || isNaN(this.address.longitude))) {
+      if (this.required && (isNaN(this.latlng.lat) || isNaN(this.latlng.lng))) {
         return 'There was a problem processing your street address. Try again?'
       } else {
         return false
