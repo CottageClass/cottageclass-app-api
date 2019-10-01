@@ -14,7 +14,7 @@ export const createUsers = (data) => {
     const childIds = data.user[id].relationships.children.data.map(e => e.id)
     let event = null
     const children = childIds.map(id => parseChildData(includedChildren[id])).filter(c => !!c)
-    const hasAllRequiredFields = !!(p.phone && p.latitude && p.longitude)
+    const hasAllRequiredFields = !!(p.phone && place)
     const activities = (p.activities || []).map(activity => activity.replace(/_/g, ' '))
     const location = {
       lat: parseFloat(p.fuzzyLatitude),
