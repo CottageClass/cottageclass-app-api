@@ -47,6 +47,7 @@ class API::EventsController < API::BaseController
     serializer = EventSerializer.new @event, include: %i[ participants
                                                           participants.participant_children
                                                           user
+                                                          place
                                                           user.children],
                                              params: { current_user: current_user }
     render json: serializer.serializable_hash, status: :ok
