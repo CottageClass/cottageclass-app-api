@@ -31,11 +31,13 @@ class API::UsersController < API::BaseController
   end
 
   def show
+    ap current_user && current_user.id
+    ap @user.id
     serializer = if current_user && current_user.id == @user.id
-                   CurrentUserSerializer.new @user, include: %i[children]
+                   CurrentUserSerializer.new @user, include: %i[children place]
                  else
                    PublicUserSerializer.new @user,
-                                            include: %i[children],
+                                            include: %i[children place],
                                             params: { current_user: current_user }
                  end
     render json: serializer.serializable_hash, status: :ok
