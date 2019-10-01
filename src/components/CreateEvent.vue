@@ -79,7 +79,9 @@ export default {
       const models = {
         description: this.description,
         availability: this.availability,
-        place: this.place
+        place: this.place,
+        date: this.date,
+        time: this.time
       }
       return models[this.stepName]
     },

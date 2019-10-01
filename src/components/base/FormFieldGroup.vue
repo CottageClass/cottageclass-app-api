@@ -34,7 +34,7 @@ export default {
     'heading', // the heading of the group of fields
     'types', // and array of input types for each field
     'showRemoveButton', // show a remove button on each item
-    'selectData' // an array of ptions for select field
+    'selectData' // an array of options for select questions
   ],
   data () {
     return {

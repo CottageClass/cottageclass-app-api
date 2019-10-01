@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Nav
+    <FlowNav
       :button="nextButtonState"
       @next="nextStep"
       @prev="prevStep"
@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import Nav from '@/components/FTE/Nav'
+import FlowNav from '@/components/FTE/FlowNav.vue'
 import Question from '@/components/base/Question.vue'
 import FormWithTextArea from '@/components/base/FormWithTextArea.vue'
 import ErrorMessage from '@/components/base/ErrorMessage.vue'
@@ -27,7 +27,7 @@ import { submitChildcareRequest } from '@/utils/api'
 
 export default {
   name: 'CreateChildcareRequest',
-  components: { Question, FormWithTextArea, Nav, ErrorMessage },
+  components: { Question, FormWithTextArea, FlowNav, ErrorMessage },
   props: ['stepName'],
   mixins: [stepNavigation, alerts],
   data () {
