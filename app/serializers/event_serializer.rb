@@ -14,6 +14,7 @@ class EventSerializer
   end
 
   has_one :place
+  has_one :user, serializer: PublicUserSerializer, include: %i[children place]
 
   attribute :host do |instance, params|
     serializer = PublicUserSerializer.new instance.user,
