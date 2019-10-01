@@ -4,9 +4,9 @@ FactoryBot.define do
     latitude { 42.123 }
     longitude { -71.234 }
     full_address { 'some kind of string' }
+    association :creator, factory: :user
 
     public { true }
 
-    user
   end
 end
