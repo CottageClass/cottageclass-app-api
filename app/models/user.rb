@@ -101,6 +101,7 @@ class User < ApplicationRecord
   has_many :childcare_requests, inverse_of: :user, dependent: :destroy
 
   belongs_to :showcase_event, class_name: 'Event', optional: true
+  belongs_to :place, inverse_of: :users, optional: true
 
   accepts_nested_attributes_for :children, allow_destroy: true, reject_if: :child_with_same_name_exists?
 
@@ -126,7 +127,7 @@ class User < ApplicationRecord
   }
 
   def jwt_payload
-    super.merge('user' => CurrentUserSerializer.json_for(self, include: %i[children]))
+    super.merge('user' => CurrentUserSerializer.json_for(self, include: %i[children place]))
   end
 
   def create_search_list_item
