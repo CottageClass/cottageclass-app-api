@@ -145,6 +145,7 @@ class API::UsersController < API::BaseController
                                  :referrer,
                                  :setting_email_notifications,
                                  :setting_max_distance,
+                                 :place_id,
                                  source_tags: [],
                                  activities: [],
                                  images: [],
