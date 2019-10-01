@@ -20,7 +20,7 @@ class API::SearchListItemsController < API::BaseController
       return
     end
     events = SearchListItem.near(location.map(&:to_f), miles)
-    events = events.includes(:itemable, user: { children: :emergency_contacts })
+    events = events.includes(:itemable,  user: [:place, { children: :emergency_contacts }])
 
     events = events.where itemable_type: :Event
     events = events.child_age_range(min_age, max_age)
@@ -60,6 +60,7 @@ class API::SearchListItemsController < API::BaseController
     unseen_users = unseen_users.joins(:user).near(location.map(&:to_f), miles)
     unseen_users = unseen_users.child_age_range(min_age, max_age)
     unseen_users = unseen_users.where.not(user_id: current_user.id) if current_user.present?
+    unseen_users = unseen_users.includes user: :place
     unseen_users = unseen_users.to_a
 
     # reduce to one per user.  the last created
@@ -91,7 +92,7 @@ class API::SearchListItemsController < API::BaseController
       links[:next] = path.call(page: items.next_page, page_size: page_size) unless items.last_page?
     end
 
-    serializer = SearchListItemSerializer.new items, include: %i[itemable user.children.emergency_contacts],
+    serializer = SearchListItemSerializer.new items, include: %i[itemable user.children.emergency_contacts user.place itemable.place],
                                                      links: links,
                                                      meta: meta,
                                                      params: { current_user: current_user }
