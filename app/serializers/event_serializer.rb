@@ -12,17 +12,12 @@ class EventSerializer
   attribute :participated, if: proc { |_, params| params.dig(:current_user).present? } do |instance, params|
     instance.participated? params[:current_user]
   end
-  attribute :place do |instance, _params|
-    if instance.place.nil?
-      nil
-    else
-      serializer = PlaceSerializer.new instance.place
-      serializer.serializable_hash
-    end
-  end
+
+  has_one :place, serializer: PlaceSerializer, params: { current_users_place: false }
+
   attribute :host do |instance, params|
     serializer = PublicUserSerializer.new instance.user,
-                                          include: %i[children],
+                                          include: %i[children place],
                                           params: { current_user: params[:current_user] }
     serializer.serializable_hash
   end
