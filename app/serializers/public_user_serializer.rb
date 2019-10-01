@@ -2,6 +2,8 @@ class PublicUserSerializer < BaseSerializer
   set_type :user
   has_many :children, serializer: ChildSerializer
   has_one :showcase_event, record_type: :event, serializer: EventSerializer
+  belongs_to :place, serializer: PlaceSerializer,
+                     params: { current_users_place: false }
 
   attributes(*User::PUBLIC_ATTRIBUTES)
   attribute :last_initial do |user|

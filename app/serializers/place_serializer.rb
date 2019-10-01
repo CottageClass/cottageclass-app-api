@@ -1,15 +1,19 @@
 class PlaceSerializer < BaseSerializer
+  full_information = proc { |record, params|
+    record.public || params[:current_users_place]
+  }
+
   # private aspects of place
-  attribute :google_id, if: proc { |record| record.public }
-  attribute :apartment_number, if: proc { |record| record.public }
-  attribute :full_address, if: proc { |record| record.public }
-  attribute :latitude, if: proc { |record| record.public }
-  attribute :longitude, if: proc { |record| record.public }
-  attribute :route, if: proc { |record| record.public }
-  attribute :phone_area_code, if: proc { |record| record.public }
-  attribute :phone_country_code, if: proc { |record| record.public }
-  attribute :phone_number, if: proc { |record| record.public }
-  attribute :street_number, if: proc { |record| record.public }
+  attribute :google_id, if: full_information
+  attribute :apartment_number, if: full_information
+  attribute :full_address, if: full_information
+  attribute :latitude, if: full_information
+  attribute :longitude, if: full_information
+  attribute :route, if: full_information
+  attribute :phone_area_code, if: full_information
+  attribute :phone_country_code, if: full_information
+  attribute :phone_number, if: full_information
+  attribute :street_number, if: full_information
 
   # public aspects of place
   attributes :locality,
