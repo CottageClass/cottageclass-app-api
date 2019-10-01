@@ -127,7 +127,9 @@ class User < ApplicationRecord
   }
 
   def jwt_payload
-    super.merge('user' => CurrentUserSerializer.json_for(self, include: %i[children place]))
+    super.merge('user' => CurrentUserSerializer.json_for(self,
+                                                         include: %i[children place],
+                                                         params: { current_users_place: true }))
   end
 
   def create_search_list_item

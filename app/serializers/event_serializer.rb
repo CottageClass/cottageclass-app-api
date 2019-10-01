@@ -13,7 +13,7 @@ class EventSerializer
     instance.participated? params[:current_user]
   end
 
-  has_one :place, serializer: PlaceSerializer, params: { current_users_place: false }
+  has_one :place
 
   attribute :host do |instance, params|
     serializer = PublicUserSerializer.new instance.user,

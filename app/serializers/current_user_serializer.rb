@@ -2,8 +2,7 @@ class CurrentUserSerializer < BaseSerializer
   set_type :user
 
   has_many :children, serializer: ChildUnrestrictedSerializer
-  belongs_to :place, serializer: PlaceSerializer,
-                     params: { current_users_place: true }
+  belongs_to :place
 
   attributes(*User::PUBLIC_ATTRIBUTES)
 
