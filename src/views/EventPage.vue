@@ -26,9 +26,6 @@
           <div class="user-action-card__header__date">{{timeHeader}}</div>
           <div v-if="distance" class="user-action-card__header__distance">{{distance}}</div>
         </div>
-        <div class="user-action-card__description">
-          <div class="user-action-card__description-text"
-               v-html="nameWithPlace" />
         <div class="user-action-card__description-text"
                v-html="this.event.name" />
         <div class="event-summary-card__location">
