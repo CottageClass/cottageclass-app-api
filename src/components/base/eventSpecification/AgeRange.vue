@@ -1,4 +1,4 @@
-<template>
+t<template>
   <Question title="What ages are welcome?" subtitle="Select the youngest and oldest children you can host. Try to be as flexible as possible.">
     <form class="form">
       <Dropdown v-model="minimum" :choices="choices" />
@@ -47,6 +47,9 @@ export default {
       this.emitData()
     },
     maximum: function () {
+      this.emitData()
+    },
+    choices: function (){
       this.emitData()
     }
   }

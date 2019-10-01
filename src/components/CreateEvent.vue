@@ -7,6 +7,10 @@
     />
     <ErrorMessage v-if="errorMessage && showError" :text="errorMessage" />
     <LoadingSpinner v-if="submissionPending" />
+    <AgeRange 
+      v-else-if="stepName==='age-range'"
+      v-model="ageRange"
+       />
     <EventPlace
       v-else-if="stepName==='place'"
       v-model="place" />
@@ -29,6 +33,7 @@
       v-else-if="stepName==='repeat-count'"
       v-model="repeatCount"
     />
+
   </div>
 </template>
 
@@ -42,6 +47,7 @@ import EventDescription from '@/components/base/eventSpecification/EventDescript
 import EventPlace from '@/components/base/eventSpecification/EventPlace'
 import MultipleTimeSelector from '@/components/base/eventSpecification/MultipleTimeSelector.vue'
 import Nav from '@/components/FTE/Nav'
+import AgeRange from '@/components/base/eventSpecification/AgeRange.vue'
 
 import { submitEventSeriesData, submitGooglePlaceIdAndFetchOurOwn } from '@/utils/api'
 import moment from 'moment'
@@ -52,7 +58,7 @@ import { stepNavigation, alerts } from '@/mixins'
 
 export default {
   name: 'CreateEvent',
-  components: { EventDescription, EventPlace, Nav, MultipleTimeSelector, ErrorMessage, EventDatePicker, EventTime, RepeatCount, LoadingSpinner },
+  components: { EventDescription, EventPlace, Nav, MultipleTimeSelector, ErrorMessage, EventDatePicker, EventTime, RepeatCount, LoadingSpinner, AgeRange },
   mixins: [stepNavigation, alerts],
   props: ['stepName', 'context'],
   data () {
@@ -65,12 +71,13 @@ export default {
       repeatCount: { err: null },
       date: { err: null },
       time: { err: null },
-      ourPlaceId: null
+      ourPlaceId: null,
+      ageRange: { minimum: 0, maximum: 18 }
     }
   },
   computed: {
     stepSequence () {
-      return ['place', 'description', 'availability', 'repeat-count', 'date', 'time']
+      return ['age-range', 'place', 'description', 'availability', 'repeat-count', 'date', 'time' ]
     },
     scheduleStart () {
       return moment()
@@ -98,8 +105,8 @@ export default {
             'house_rules': '',
             'pet_description': '',
             'maximum_children': 4,
-            'child_age_minimum': 0,
-            'child_age_maximum': 18,
+            'child_age_minimum': this.ageRange.minimum,
+            'child_age_maximum': this.ageRange.maximum,
             'repeat_for': this.repeatCount.number || 1,
             'interval': 1,
             'place_id': this.ourPlaceId
