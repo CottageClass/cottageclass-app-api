@@ -2,7 +2,7 @@ class API::PlacesController < API::BaseController
   before_action :authenticate_user!
 
   def create
-    place = current_user.places.build safe_params
+    place = current_user.created_places.build safe_params
     existing_record = Place.find_by google_id: place.google_id
     if existing_record.nil?
       if place.save!

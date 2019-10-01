@@ -51,7 +51,7 @@ class User < ApplicationRecord
             uniqueness: true,
             format: { with: /\A.+@.+\..+\z/, message: 'Please provide a valid email' }
 
-  has_many :places, dependent: :nullify
+  has_many :created_places, inverse_of: :creator, class_name: 'Place', foreign_key: :user_id
   has_many :devices, dependent: :nullify
   has_many :children,
            class_name: 'Child',
