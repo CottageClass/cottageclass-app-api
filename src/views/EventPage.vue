@@ -247,7 +247,7 @@ export default {
         this.logError(e)
         this.$router.push({ name: 'NotFound' })
       }
-      this.otherEvents = (await fetchUpcomingEvents(this.event.hostId)).filter(e => (e.id !== this.$route.params.id))
+      this.otherEvents = (await fetchUpcomingEvents(this.event.host.id)).filter(e => (e.id !== this.$route.params.id))
       this.$nextTick(async function () {
         await this.createMap(this.$refs.map, {
           zoom: 13,
