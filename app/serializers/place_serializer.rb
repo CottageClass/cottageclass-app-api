@@ -4,6 +4,7 @@ class PlaceSerializer < BaseSerializer
   }
 
   # private aspects of place
+  attribute :id, if: full_information
   attribute :google_id, if: full_information
   attribute :apartment_number, if: full_information
   attribute :full_address, if: full_information
