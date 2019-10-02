@@ -13,7 +13,7 @@ export const createEvents = (data, sortFunction) => {
     let participatingParents, place, user
     if (data.participant) {
       participatingParents = e.relationships.participants.data.map(p => {
-        return cleanPerson(data.participant[p.id])
+        return data.participant[p.id]
       })
     } else {
       participatingParents = []
@@ -21,7 +21,7 @@ export const createEvents = (data, sortFunction) => {
     if (data.user) {
       const userId = e.relationships.user.data.id
       console.log({ userId })
-      user = cleanPerson(data.user[userId].attributes)
+      user = data.user[userId].attributes
     }
 
     if (data.place) {
@@ -55,13 +55,5 @@ function cleanEvent (attributes) {
   const res = Object.assign({}, (attributes))
   res.startsAt = moment(attributes.startsAt)
   res.endsAt = moment(attributes.endsAt)
-  return res
-}
-
-function cleanPerson (attributes) {
-  const res = Object.assign({}, (attributes))
-  res.userFuzzyLatitude = parseFloat(attributes.userFuzzyLatitude)
-  res.userFuzzyLongitude = parseFloat(attributes.userFuzzyLongitude)
-  res.userFirstName = capitalize(attributes.userFirstName)
   return res
 }

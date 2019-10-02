@@ -15,6 +15,7 @@ describe('SearchListCard', () => {
       propsData: {
         item: {
           user: {
+            place: { latitude: 42.27, longitude: -71.78 },
             id: 12,
             firstName: 'Foo',
             lastInitial: 'B',
@@ -68,10 +69,10 @@ describe('SearchListCard', () => {
       propsData: {
         item: {
           user: {
+            place: { latitude: 42.27, longitude: -71.78 },
             id: 22,
             facebookUid: '563930223',
             childAgesInMonths: [1],
-            location: { lat: 42.27, lng: -71.78 },
             images: []
           }
         },

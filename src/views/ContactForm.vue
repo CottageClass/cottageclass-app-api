@@ -97,7 +97,7 @@ export default {
   },
   computed: {
     recipientFirstName () {
-      return capitalize((this.event && this.event.hostFirstName) || (this.user && this.user.firstName))
+      return capitalize((this.event && this.event.user.firstName) || (this.user && this.user.firstName))
     },
     nextButtonState () {
       return (this.questionText === '') ? 'inactive' : 'next'
@@ -106,7 +106,7 @@ export default {
       return `Enter your message here ...`
     },
     hostId: function () {
-      return (this.event && this.event.hostId) || (this.user && this.user.id)
+      return (this.event && this.event.user && this.event.user.id) || (this.user && this.user.id)
     },
     fullMessageText () {
       const childText = childAgeText({

@@ -193,23 +193,16 @@ export default {
   },
   computed: {
     mapCenter () {
-      if (this.event.place) {
-        return {
-          lat: this.event.place.latitude,
-          lng: this.event.place.longitude
-        }
-      } else {
-        return {
-          lat: this.event.fuzzyLatitude,
-          lng: this.event.fuzzyLongitude
-        }
+      return {
+        lat: this.place.latitude,
+        lng: this.place.longitude
       }
     },
     playdateLocationName () {
       if (this.event.place) {
         return `${this.event.place.name}`
       } else {
-        return `The playdate will be hosted at ${this.event.hostFirstName}'s home.`
+        return `The playdate will be hosted at ${this.event.user.firstName}'s home.`
       }
     },
     playdateAddress () {
