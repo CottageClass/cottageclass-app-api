@@ -49,7 +49,7 @@ export default {
     maximum: function () {
       this.emitData()
     },
-    choices: function (){
+    choices: function () {
       this.emitData()
     }
   }

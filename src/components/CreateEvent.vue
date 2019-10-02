@@ -13,7 +13,7 @@
     <EventDescription
       v-else-if="stepName==='description'"
       v-model="description" />
-    <AgeRange 
+    <AgeRange
       v-else-if="stepName==='age-range'"
       v-model="ageRange"
     />
@@ -76,7 +76,7 @@ export default {
   },
   computed: {
     stepSequence () {
-      return ['place', 'description', 'age-range', 'availability', 'repeat-count', 'date', 'time' ]
+      return [ 'place', 'description', 'age-range', 'availability', 'repeat-count', 'date', 'time' ]
     },
     scheduleStart () {
       return moment()
