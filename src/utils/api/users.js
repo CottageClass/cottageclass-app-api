@@ -7,42 +7,18 @@ const logger = Logger('api:users')
 
 export async function submitUserInfo (userId, data) {
   if (!data) { return }
-  let { phone, location, availability, settingEmailNotifications, settingMaxDistance, firebaseToken } = data
+  let { phone, availability, settingEmailNotifications, settingMaxDistance, firebaseToken } = data
   let postData = {}
-  if (location && location.fullAddress) {
-    let address = location.fullAddress
-    let {
-      street_number,
-      route,
-      locality,
-      administrative_area_level_1,
-      administrative_area_level_2,
-      sublocality,
-      neighborhood,
-      country,
-      postal_code
-    } = address
 
-    postData = {
-      streetNumber: street_number,
-      route: route,
-      locality: locality,
-      // snake_case key name is ugly but necessary for backend to recognize attr with trailing 1
-      admin_area_level_1: administrative_area_level_1,
-      admin_area_level_2: administrative_area_level_2,
-      sublocality,
-      neighborhood,
-      country: country,
-      postalCode: postal_code,
-      latitude: location.lat,
-      longitude: location.lng
-    }
-  }
-
-  if (location && location.apartmentNumber) {
-    postData = {
-      ...postData,
-      apartmentNumber: location.apartmentNumber
+  if (data.place) {
+    if (data.place.id) {
+      postData = { ...postData, placeID: data.place.id }
+      if (data.place.apartmentNumber) {
+        postData = {
+          ...postData,
+          apartmentNumber: data.place.apartmentNumber
+        }
+      }
     }
   }
 
