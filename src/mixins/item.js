@@ -24,7 +24,7 @@ export default {
       if (this.user) {
         return this.user.images
       }
-      return this.event && this.event.hostImages
+      return this.event && this.event.user.images
     },
     joinedDateFormatted: function () {
       return moment(this.user.createdAt).format('MMMM, YYYY')
@@ -60,7 +60,7 @@ export default {
       return this.event &&
         !this.timePast &&
         (!this.currentUser ||
-        (this.event.host.id.toString() !== this.currentUser.id.toString()))
+        (this.event.user.id.toString() !== this.currentUser.id.toString()))
     },
     showInterestedButton () {
       return !this.childcareRequest && // don't show for childcare requests
@@ -74,7 +74,7 @@ export default {
     showCancelButton () {
       return this.event &&
         !this.timePast &&
-        (this.event.host.id.toString() === this.currentUser.id.toString())
+        (this.event.user.id.toString() === this.currentUser.id.toString())
     },
     showMeetButton () {
       return !this.childcareRequest && // don't show for childcare requests
@@ -97,8 +97,8 @@ export default {
       if (!center) { return null }
       if (this.event) {
         return distanceHaversine(
-          this.event.hostFuzzyLatitude,
-          this.event.hostFuzzyLongitude,
+          this.event.place.fuzzyLatitude,
+          this.event.place.fuzzyLongitude,
           center.lat,
           center.lng) + ' mi'
       }
@@ -175,10 +175,10 @@ export default {
       return 'Children ages ' + andJoin(ages.map((e, i) => this.ageString(i)))
     },
     userFirstName () {
-      return (this.event && this.event.hostFirstName) || (this.user && this.user.firstName)
+      return (this.event && this.event.user.firstName) || (this.user && this.user.firstName)
     },
     userLastInitial () {
-      return (this.event && this.event.host.lastInitial) ||
+      return (this.event && this.event.user.lastInitial) ||
         (this.user && this.user.lastInitial) || (this.user && this.user.lastName && this.user.lastName[0])
     },
     userName () {
