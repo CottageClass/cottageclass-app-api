@@ -7,16 +7,16 @@
     />
     <ErrorMessage v-if="errorMessage && showError" :text="errorMessage" />
     <LoadingSpinner v-if="submissionPending" />
-    <AgeRange 
-      v-else-if="stepName==='age-range'"
-      v-model="ageRange"
-       />
     <EventPlace
       v-else-if="stepName==='place'"
       v-model="place" />
     <EventDescription
       v-else-if="stepName==='description'"
       v-model="description" />
+    <AgeRange 
+      v-else-if="stepName==='age-range'"
+      v-model="ageRange"
+    />
     <EventDatePicker
       v-else-if="stepName==='date'"
       v-model="date" />
@@ -33,7 +33,6 @@
       v-else-if="stepName==='repeat-count'"
       v-model="repeatCount"
     />
-
   </div>
 </template>
 
@@ -77,7 +76,7 @@ export default {
   },
   computed: {
     stepSequence () {
-      return ['age-range', 'place', 'description', 'availability', 'repeat-count', 'date', 'time' ]
+      return ['place', 'description', 'age-range', 'availability', 'repeat-count', 'date', 'time' ]
     },
     scheduleStart () {
       return moment()
