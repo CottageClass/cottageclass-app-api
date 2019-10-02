@@ -175,13 +175,17 @@ export default {
   mounted: async function () {
     this.$nextTick(async function () {
       const center = await this.latlng(this.mapArea.center.lat, this.mapArea.center.lng)
+      let zoom = 13
+      if (this.mapArea.maxDistance) {
+        zoom = await this.zoomLevelForRadius(this.mapArea.maxDistance)
+      }
+
       await this.createMap(this.$refs.map, {
-        zoom: 13,
+        zoom,
         center: center,
         ...this.mapOptions
       },
       this.idleHandler.bind(this))
-      this.setZoomLevelForRadius(2)
     })
     if (this.users && this.users.length) {
       this.updateMarkers()
