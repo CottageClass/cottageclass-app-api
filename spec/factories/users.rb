@@ -30,8 +30,14 @@ FactoryBot.define do
 
     after(:build) { |instance, _| instance.skip_confirmation! if User.confirmable? }
 
+    trait :with_place do
+      after(:build) do |user|
+        user.place = build :place, creator: user
+      end
+    end
+
     trait :with_matched_user do
-      transient { other_user { build :user, :with_children } }
+      transient { other_user { build :user, :with_children, :with_place } }
       after(:build) do |instance, evaluator|
         UserMatch.create user: instance, matched_user: evaluator.other_user
       end
@@ -39,8 +45,9 @@ FactoryBot.define do
 
     trait :with_children do
       transient { children_count { 2 } }
-
-      after(:build) { |instance, evaluator| instance.children = build_list :child, evaluator.children_count }
+      after(:build) do |instance, evaluator|
+        instance.children = build_list :child, evaluator.children_count
+      end
     end
   end
 end

@@ -39,10 +39,10 @@
         </div>
         <div class="user-action-card__footer">
           <div class="user-action-card__footer__user-summary">
-            <router-link :to="{name:'UserPage', params:{id: event.hostId}}"
+            <router-link :to="{name:'UserPage', params:{id: event.user.id}}"
                          class="avatar-container">
               <AvatarImage className="user-action-card__photo"
-                           :person="{facebookUid: event.hostFacebookUid, avatar: event.hostAvatar}"
+                           :person="{facebookUid: event.user.facebookUid, avatar: event.user.avatar}"
                            imageSize="100"/>
               <div v-if="verified" class="badge-verified">
                 <div class="unicode-character">✓</div>
@@ -51,7 +51,7 @@
             </router-link>
             <div class="user-action-card__user-info--container">
               <div class="user-action-card__user-info_list">
-                <router-link :to="{name:'UserPage', params:{id: event.hostId}}"
+                <router-link :to="{name:'UserPage', params:{id: event.user.id}}"
                              class="user-action-card__user-info__name">
                   {{ userName }}</router-link>
                 <div class="user-action-card__user-info__occupation truncate">{{occupation}}</div>
@@ -62,7 +62,7 @@
           <div class="user-action-card__footer__actions">
             <SearchListCardActions
               class="column-list"
-              :user="event.host"
+              :user="event.user"
               :event="event"
               @user-updated="updateUser"
               @interested-click="interestedClickWithPrompts('card')"
@@ -141,7 +141,7 @@
         <div v-if="otherEvents" class="event-detail__column-right w-col w-col-4 w-col-stack">
           <ul class="other-events__list">
             <li class="other-events__title-bar">
-              <div class="other-events__title-text truncate">{{userFirstName}}'s offers</div>
+              <div class="other-events__title-text truncate">{{user.firstName}}'s offers</div>
             </li>
             <OtherEvent v-for="otherEvent of otherEvents"
                         :key="otherEvent.id"
@@ -193,30 +193,23 @@ export default {
   },
   computed: {
     mapCenter () {
-      if (this.event.place) {
-        return {
-          lat: this.event.place.latitude,
-          lng: this.event.place.longitude
-        }
-      } else {
-        return {
-          lat: this.event.hostFuzzyLatitude,
-          lng: this.event.hostFuzzyLongitude
-        }
+      return {
+        lat: this.place.latitude,
+        lng: this.place.longitude
       }
     },
     playdateLocationName () {
       if (this.event.place) {
         return `${this.event.place.name}`
       } else {
-        return `The playdate will be hosted at ${this.event.hostFirstName}'s home.`
+        return `The playdate will be hosted at ${this.event.user.firstName}'s home.`
       }
     },
     playdateAddress () {
       if (this.event.place) {
         return `${this.event.place.fullAddress}`
       } else {
-        return ''
+        return this.event.name + `<br><br>The playdate will be hosted at ${this.event.user.firstName}'s home.`
       }
     },
     lightboxImages () {
@@ -230,14 +223,14 @@ export default {
     showRsvpCard () {
       if (!this.event || this.timePast) { return false }
       if (this.currentUser) {
-        return (this.event.host.id.toString() !== this.currentUser.id.toString()) &&
+        return (this.event.user.id.toString() !== this.currentUser.id.toString()) &&
                !this.event.participated &&
                !this.isRsvpDeclined(this.event.id)
       }
       return true
     },
     user () {
-      return this.event && this.event.host
+      return this.event && this.event.user
     },
     houseRulesImage: () => houseRulesImage,
     petsImage: () => petsImage,
@@ -252,7 +245,7 @@ export default {
       this.$refs.lightbox.showImage(payload)
     },
     updateUser (user) {
-      this.event.host = user
+      this.event.user = user
     },
     fetchEvent: async function () {
       try {
@@ -261,7 +254,7 @@ export default {
         this.logError(e)
         this.$router.push({ name: 'NotFound' })
       }
-      this.otherEvents = (await fetchUpcomingEvents(this.event.hostId)).filter(e => (e.id !== this.$route.params.id))
+      this.otherEvents = (await fetchUpcomingEvents(this.event.user.id)).filter(e => (e.id !== this.$route.params.id))
       this.$nextTick(async function () {
         await this.createMap(this.$refs.map, {
           zoom: 13,
@@ -270,12 +263,12 @@ export default {
           options: this.mapOptions,
           style: 'width: 100px; height: 230px;'
         })
-        if (this.event.place) {
+        if (this.event.place.latitude && this.event.place.longitude) {
           this.addLilypadPin(
             { lat: this.event.place.latitude, lng: this.event.place.longitude }
           )
         } else {
-          await this.addCircle({ lat: this.event.hostFuzzyLatitude, lng: this.event.hostFuzzyLongitude }, 0.2)
+          await this.addCircle({ lat: this.event.place.fuzzyLatitude, lng: this.event.place.fuzzyLongitude }, 0.2)
         }
       })
     }

@@ -47,6 +47,7 @@ class API::EventsController < API::BaseController
     serializer = EventSerializer.new @event, include: %i[ participants
                                                           participants.participant_children
                                                           user
+                                                          place
                                                           user.children],
                                              params: { current_user: current_user }
     render json: serializer.serializable_hash, status: :ok
@@ -100,7 +101,7 @@ class API::EventsController < API::BaseController
     if miles.positive?
       location = []
       location = [latitude, longitude] if [latitude, longitude].all?(&:present?)
-      location = [current_user.latitude, current_user.longitude] if location.blank? && current_user.present?
+      location = [current_user.place.latitude, current_user.place.longitude] if location.blank? && current_user.present?
       events = events.near(location.map(&:to_f), miles) if location.all?(&:present?)
     end
 
@@ -126,7 +127,9 @@ class API::EventsController < API::BaseController
     end
 
     serializer = EventSerializer.new events, include: %i[participants
-                                                         participants.participant_children],
+                                                         participants.participant_children
+                                                         user
+                                                         place],
                                              params: { current_user: current_user },
                                              links: links,
                                              meta: meta
