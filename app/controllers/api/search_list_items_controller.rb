@@ -19,19 +19,23 @@ class API::SearchListItemsController < API::BaseController
       render status: 400
       return
     end
-    events = SearchListItem.near(location.map(&:to_f), miles)
-    events = events.includes(:itemable,  user: [:place, { children: :emergency_contacts }])
+    places = Place.near(location.map(&:to_f), miles)
+    place_ids = places.to_a.pluck :id
 
-    events = events.where itemable_type: :Event
+    events_in_places = Event.joins(:place).where(place: place_ids)
+    events_in_places_id = events_in_places.to_a.pluck :id
+    events = SearchListItem.where(itemable_type: 'Event').where(itemable_id: events_in_places_id)
+    events = events.includes(:itemable, user: [:place, { children: :emergency_contacts }])
     events = events.child_age_range(min_age, max_age)
     events = events.where.not(user_id: current_user.id) if current_user.present?
     events = events.merge(Event.upcoming)
     events = events.joins('INNER JOIN events ON events.id = itemable_id')
 
-    childcare_requests = SearchListItem.near(location.map(&:to_f), miles)
+    ccrs_in_places = ChildcareRequest.joins(:place).where('places.id IN (?)', place_ids)
+    ccrs_in_places_id = ccrs_in_places.to_a.pluck :id
+    childcare_requests = SearchListItem.where(itemable_type: :ChildcareRequest).where(itemable_id: ccrs_in_places_id)
     childcare_requests = childcare_requests.includes(user: :children)
     childcare_requests = childcare_requests.child_age_range(min_age, max_age)
-    childcare_requests = childcare_requests.where itemable_type: :ChildcareRequest
     childcare_requests = childcare_requests.where.not(user_id: current_user.id) if current_user.present?
 
     # convert to array to perform application level logic
@@ -52,12 +56,14 @@ class API::SearchListItemsController < API::BaseController
 
     # byebug
     # find all users that have no eligible events or childcare_requests
-    event_users = event_array.map { |s| s.user.id }
-    childcare_request_users = childcare_request_array.map { |s| s.user.id }
+    event_users = (event_array.map { |s| s.user.id }).uniq
+    childcare_request_users = (childcare_request_array.map { |s| s.user.id }).uniq
     seen_users = event_users | childcare_request_users
 
-    unseen_users = SearchListItem.where(itemable_id: nil).where.not(user_id: seen_users)
-    unseen_users = unseen_users.joins(:user).near(location.map(&:to_f), miles)
+    users_in_places = User.joins(:place).where(place: place_ids).where.not(id: seen_users)
+    users_in_places_ids = users_in_places.pluck :id
+
+    unseen_users = SearchListItem.where(itemable_id: nil).where(user_id: users_in_places_ids)
     unseen_users = unseen_users.child_age_range(min_age, max_age)
     unseen_users = unseen_users.where.not(user_id: current_user.id) if current_user.present?
     unseen_users = unseen_users.includes user: :place
