@@ -1,7 +1,6 @@
 import axios from 'axios'
 import normalize from 'json-api-normalizer'
 
-import { capitalize } from '@/utils/utils'
 import { createEvent, createEvents } from '../createEvent'
 import Logger from '@/utils/logger'
 

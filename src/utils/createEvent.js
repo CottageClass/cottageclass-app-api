@@ -1,5 +1,4 @@
 import moment from 'moment'
-import { capitalize } from './utils'
 
 export const createEvent = (data) => {
   return createEvents(data)[0]
