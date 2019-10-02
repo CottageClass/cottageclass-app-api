@@ -1,7 +1,7 @@
 <template>
   <Question
     title="Child Information"
-    subtitle="Only the hosts of playdates you attend will see names, and birthdays are private. (We only collect them so we can show correct ages for each family's children, to help you find friends!)">
+    subtitle="To match parents with kids of similar ages, we need to know the year and month each child was born. Ages are visible on the site, but names (and school, if you enter one) are private. If you're expecting (yay!) you can enter a due date.">
     <ManyFormFieldGroups
       :fieldGroups="fieldGroups"
       headingWord="Child"
@@ -64,8 +64,18 @@ export default {
           type: 'text'
         },
         {
+          name: 'birthYear',
+          label: 'Birth Year',
+          placeholder: 'YYYY',
+          type: 'select',
+          selectData: this.listOfYears.map(x => {
+            return { text: x, value: x }
+          }
+          )
+        },
+        {
           name: 'birthMonth',
-          label: 'Select Birth Month',
+          label: 'Birth Month',
           placeholder: 'MM',
           type: 'select',
           selectData: [
@@ -82,16 +92,6 @@ export default {
             { text: 'November', value: '11' },
             { text: 'December', value: '12' }
           ]
-        },
-        {
-          name: 'birthYear',
-          label: 'Select Birth Year',
-          placeholder: 'YYYY',
-          type: 'select',
-          selectData: this.listOfYears.map(x => {
-            return { text: x, value: x }
-          }
-          )
         },
         {
           name: 'schoolName',
