@@ -16,21 +16,6 @@ RSpec.describe User, type: :model do
   context 'save' do
     it { expect { subject.save }.to change(subject, :jti).from(nil) }
 
-    it 'obfuscates location' do
-      expect(subject.fuzzy_latitude).to be_blank
-      expect(subject.fuzzy_longitude).to be_blank
-
-      subject.save
-
-      expect(subject.fuzzy_latitude).not_to be_blank
-      expect(subject.fuzzy_longitude).not_to be_blank
-    end
-
-    it 'generates time zone' do
-      subject.time_zone = nil
-      expect { subject.save }.to change(subject, :time_zone).from(nil)
-    end
-
     it { expect { subject.save }.to change(Notification.user_creation, :count).from(0).to(1) }
   end
 
@@ -46,30 +31,9 @@ RSpec.describe User, type: :model do
   context 'update' do
     before { subject.save }
 
-    let(:new_latitude) { 37.773972 }
-    let(:new_longitude) { -122.431297 }
-
     it 'sends sms' do
       expect { subject.update_attribute(:phone_number, '6092164398') }
         .to change(Notification.user_sms_welcome.reload, :count).from(0).to(1)
-    end
-
-    it 'updates dependent events' do
-      create :event_series, user: subject
-
-      subject.events.reload.each do |event|
-        expect(event.latitude).to eq(subject.latitude)
-        expect(event.latitude).not_to eq(new_latitude)
-        expect(event.longitude).to eq(subject.longitude)
-        expect(event.longitude).not_to eq(new_longitude)
-      end
-
-      subject.update latitude: new_latitude, longitude: new_longitude
-
-      subject.events.reload.each do |event|
-        expect(event.latitude).to eq(new_latitude)
-        expect(event.longitude).to eq(new_longitude)
-      end
     end
   end
 
