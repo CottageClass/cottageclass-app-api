@@ -37,9 +37,11 @@ const actions = {
     } else {
       const currentUser = createUser(normalize(getters.parsedJWT.user))
       commit('setCurrentUser', { user: currentUser })
-      commit('setMapArea', {
-        center: { lat: currentUser.place.latitude, lng: currentUser.place.longitude }
-      })
+      if (currentUser.place) {
+        commit('setMapArea', {
+          center: { lat: currentUser.place.latitude, lng: currentUser.place.longitude }
+        })
+      }
     }
   }
 }

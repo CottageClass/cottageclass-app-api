@@ -12,8 +12,8 @@ export const createUsers = (data) => {
   return ids.map(id => {
     const p = data.user[id].attributes
     const childIds = data.user[id].relationships.children.data.map(e => e.id)
-    const placeId = data.user[id].relationships.place.data.id
-    const place = data.place[placeId].attributes
+    const placeId = data.user[id].relationships.place.data && data.user[id].relationships.place.data.id
+    const place = placeId && data.place[placeId].attributes
     let event = null
     const children = childIds.map(id => parseChildData(includedChildren[id])).filter(c => !!c)
     const hasAllRequiredFields = !!(p.phone && place)
