@@ -25,7 +25,6 @@ class EventSeries < ApplicationRecord
       maximum_children
       child_age_minimum
       child_age_maximum
-      time_zone
     ].each { |attribute| event.send format('%s=', attribute), send(attribute) }
     event.save
   end

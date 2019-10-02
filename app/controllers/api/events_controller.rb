@@ -127,7 +127,9 @@ class API::EventsController < API::BaseController
     end
 
     serializer = EventSerializer.new events, include: %i[participants
-                                                         participants.participant_children],
+                                                         participants.participant_children
+                                                         user
+                                                         place],
                                              params: { current_user: current_user },
                                              links: links,
                                              meta: meta
