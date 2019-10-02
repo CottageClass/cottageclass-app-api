@@ -10,9 +10,15 @@ class EventSeries < ApplicationRecord
   has_many :events, inverse_of: :event_series, dependent: :destroy
 
   before_validation :cleanup
-  after_create :create_events
+  after_create :set_users_home
+  after_save :create_events
 
   private
+
+  def set_users_home
+    # if no place has been set, use the creators home
+    place ||= user.place
+  end
 
   def create_events
     0.step(by: interval).take(repeat_for).each { |number| create_event new_date: number.weeks.since(start_date) }
