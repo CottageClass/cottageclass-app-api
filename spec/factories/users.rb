@@ -37,6 +37,8 @@ FactoryBot.define do
       end
     end
 
+    after(:build) { |instance, _evaluator| instance.place = build :place, creator: instance }
+
     trait :with_children do
       transient { children_count { 2 } }
 
