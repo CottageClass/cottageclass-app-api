@@ -43,6 +43,12 @@ class Place < ApplicationRecord
 
   private
 
+  def generate_time_zone
+    self.time_zone = if (latitude.present? && latitude.nonzero?) && (longitude.present? && longitude.nonzero?)
+                       Locator.time_zone_for latitude: latitude, longitude: longitude
+                     end
+  end
+
   def retrieve_details
     @client = GooglePlaces::Client.new(ENV['GOOGLE_API_KEY'])
     if google_id.present? && @latitude.blank?

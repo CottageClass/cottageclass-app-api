@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_30_182613) do
+ActiveRecord::Schema.define(version: 2019_10_01_210602) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -240,6 +240,7 @@ ActiveRecord::Schema.define(version: 2019_09_30_182613) do
     t.string "country", default: "United States"
     t.string "phone_country_code", default: "1"
     t.string "name"
+    t.string "time_zone"
     t.index ["google_id"], name: "index_places_on_google_id", unique: true
     t.index ["latitude", "longitude"], name: "index_places_on_latitude_and_longitude"
     t.index ["user_id"], name: "index_places_on_user_id"
