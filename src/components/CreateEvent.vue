@@ -102,7 +102,7 @@ export default {
             'child_age_maximum': 18,
             'repeat_for': this.repeatCount.number || 1,
             'interval': 1,
-            'place_id': this.ourPlaceId
+            'place_id': this.ourPlaceId || this.currentUser.place.id
           }
         }
       }
