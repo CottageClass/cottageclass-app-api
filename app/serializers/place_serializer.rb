@@ -16,7 +16,8 @@ class PlaceSerializer < BaseSerializer
   attribute :street_number, if: full_information
 
   # public aspects of place
-  attributes :locality,
+  attributes :public,
+             :locality,
              :sublocality,
              :neighborhood,
              :admin_area_level_1,
