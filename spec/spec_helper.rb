@@ -6,7 +6,7 @@ RSpec.configure do |config|
     Place.skip_callback(:validation, :before, :retrieve_details)
   end
   config.after(:all) do
-    Place.set_callback(:validate, :before, :retreive_details)
+    Place.set_callback(:validation, :before, :retrieve_details)
   end
 
   def json_data(filename:)
