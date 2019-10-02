@@ -1,9 +1,8 @@
 <template>
-
-  <div class="onb-body">
-    <div class="body">
-      <div class="content-wrapper">
-        <StyleWrapper styleIs="onboarding">
+  <StyleWrapper styleIs="onboarding">
+    <div class="onb-body">
+      <div class="body">
+        <div class="content-wrapper">
           <Nav button="done" @next="nextStep" hidePrevious="true" />
           <div class="onb-content-container">
             <div class="onb-top-content-container">
@@ -44,11 +43,10 @@
               :item="item"
               @user-updated="updateUser"/>
           </div>
-        </StyleWrapper>
+        </div>
       </div>
     </div>
-  </div>
-
+  </StyleWrapper>
 </template>
 
 <script>

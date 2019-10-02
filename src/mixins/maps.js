@@ -87,7 +87,6 @@ export default {
       return this.addPin(this.userMarker(user).$el, position)
     },
     async addPin (el, position) {
-      await this.google
       return new UserPin(position, await this.map, el)
     },
     async addCircle (center, radius) {
@@ -103,7 +102,8 @@ export default {
       return new google.maps.Polygon(polygonOptions)
     },
     async zoomLevelForScale (metersPerPixel) {
-      const lat = this.mapArea.center.lat
+      const map = await this.map
+      const lat = map.center.lat()
       return Math.log2(GMAPS_ZOOM_FACTOR * Math.cos(lat * Math.PI / 180) / metersPerPixel)
     },
     async scaleForZoomLevel (zoomLevel) {
@@ -121,16 +121,14 @@ export default {
       const scale = await this.scaleForZoomLevel(map.zoom) // in meters per pixel
       return halfDiagonal * scale / METERS_PER_MILE
     },
-    zoomLevelForRadius: async function (radius) {
+    setZoomLevelForRadius: async function (radius) {
+      const map = await this.map
       const mapEl = document.querySelector('.map-container')
       const halfDiagonal = Math.hypot(mapEl.clientHeight, mapEl.clientWidth) / 2
       const desiredMetersPerPixel = radius * METERS_PER_MILE / halfDiagonal
-      let zoom = Math.floor(await this.zoomLevelForScale(desiredMetersPerPixel))
-      return Math.min(Math.max(zoom, 0), 20) // ensure it's in the range of acceptable zooms
-    },
-    setZoomLevelForRadius: async function (radius) {
-      const map = await this.map
-      map.setZoom(await this.zoomLevelForRadius(radius))
+      let zoom = Math.floor(await this.zoomLevelForScale(desiredMetersPerPixel, map))
+      zoom = Math.min(Math.max(zoom, 0), 20) // ensure it's in the range of acceptable zooms
+      map.setZoom(zoom)
     }
   },
   mounted () {

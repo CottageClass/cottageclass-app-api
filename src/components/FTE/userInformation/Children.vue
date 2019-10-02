@@ -22,28 +22,7 @@ export default {
   data () {
     return {
       children: this.value.list || [],
-      errorMesg: 'Please enter a first name (or nickname) and birthdate for each child.',
-      fieldGroups: [
-        {
-          name: 'firstName',
-          label: 'First Name (or nickname)',
-          placeholder: 'First Name',
-          type: 'text'
-        },
-        {
-          name: 'birthday',
-          label: 'Birthday (approximate is okay)',
-          placeholder: 'MM YYYY',
-          type: 'select',
-          selectData: 'February'
-        },
-        {
-          name: 'schoolName',
-          label: 'School Name (optional)',
-          placeholder: 'Name of School',
-          type: 'text'
-        }
-      ]
+      errorMesg: 'Please enter a first name (or nickname) and birthdate for each child.'
     }
   },
   computed: {

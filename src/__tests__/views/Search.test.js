@@ -20,8 +20,6 @@ describe('Search', () => {
           pendingWaves: () => [],
           currentUser () { return null },
           isAuthenticated () { return false },
-          items () { return [] },
-          lastPage () { return 0 },
           mapArea () {
             return {
               center: {

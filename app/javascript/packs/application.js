@@ -5,7 +5,6 @@ import VeeValidate from 'vee-validate'
 import VueClipboard from 'vue-clipboard2'
 import VueScrollTo from 'vue-scrollto'
 import Vuetify from 'vuetify'
-import { TimePicker } from 'ant-design-vue'
 
 import '@babel/polyfill'
 
@@ -22,13 +21,8 @@ import { logger } from '@/mixins'
 
 import TurbolinksAdapter from 'vue-turbolinks'
 
-import 'ant-design-vue/lib/time-picker/style/css'
 import 'vuetify/dist/vuetify.min.css' // Ensure you are using css-loader
-// import 'ant-design-vue/dist/antd.css'
 import 'vue-image-lightbox/dist/vue-image-lightbox.min.css'
-
-import '../../../src/assets/css/webflow.css'
-import '../../../src/assets/css/normalize.css'
 
 import VueLazyLoad from 'vue-lazyload'
 import { registerIOSEventLIstener } from '@/utils/iosAdapter.js'
@@ -77,7 +71,6 @@ if (isAuthWindow) {
   })
 } else {
   // Load all the Vue plugins
-  Vue.use(TimePicker)
   Vue.use(TurbolinksAdapter)
   Vue.use(VueLazyLoad)
   Vue.mixin(logger)

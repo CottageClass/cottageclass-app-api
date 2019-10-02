@@ -79,9 +79,7 @@ export default {
       const models = {
         description: this.description,
         availability: this.availability,
-        place: this.place,
-        date: this.date,
-        time: this.time
+        place: this.place
       }
       return models[this.stepName]
     },

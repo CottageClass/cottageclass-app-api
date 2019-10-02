@@ -1,7 +1,7 @@
 <template>
   <Question
-    title="Your profile picture"
-    subtitle="To build a safe and uplifting space, we ask everyone to provide a profile picture, if possible a simple picture of you!">
+    title="How about a picture"
+    explanation="Please upload a file">
     <div class="auth-wrapper">
       <div class="profile-photo-wrapper"
            @click="handlePhotoClick">
@@ -16,7 +16,7 @@
           src="@/assets/profile-photo-placeholder.svg"
           class="profile-photo"
         >
-        <a class="button-3 avatar-upload-button" :class="{'invalid': avatarLoading || errors.has('avatar') }">
+        <a class="button-3 w-button" :class="{'invalid': avatarLoading || errors.has('avatar') }">
           <span v-if="avatarLoading">Uploading...</span>
           <span v-else-if="!avatar">Add profile photo</span>
           <span v-else>Replace photo</span>

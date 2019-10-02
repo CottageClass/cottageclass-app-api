@@ -38,7 +38,8 @@ const actions = {
       const currentUser = createUser(normalize(getters.parsedJWT.user))
       commit('setCurrentUser', { user: currentUser })
       commit('setMapArea', {
-        center: { lat: currentUser.latitude, lng: currentUser.longitude }
+        center: { lat: currentUser.latitude, lng: currentUser.longitude },
+        maxDistance: 5
       })
     }
   }

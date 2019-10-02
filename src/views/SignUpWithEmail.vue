@@ -20,8 +20,7 @@
               </div>
               <div>Sign up with your email</div>
             </span>
-            <LoadingSpinner v-if="disableForm" />
-            <div v-else class="form-block w-form">
+            <div class="form-block w-form">
               <form v-on:submit.prevent="signup" id="email-form">
                 <fieldset :disabled="disableForm === true">
                   <div class="onb-child-group-2">
@@ -82,11 +81,10 @@ import Footer from '@/components/Footer.vue'
 import StyleWrapper from '@/components/FTE/StyleWrapper.vue'
 import FacebookButton from '@/components/base/FacebookButton'
 import ErrorMessage from '@/components/base/ErrorMessage.vue'
-import LoadingSpinner from '@/components/LoadingSpinner'
 
 export default {
   name: 'SignUpWithEmail',
-  components: { ErrorMessage, MainNav, Footer, StyleWrapper, FacebookButton, LoadingSpinner },
+  components: { ErrorMessage, MainNav, Footer, StyleWrapper, FacebookButton },
   mixins: [providerAuthentication, alerts],
   data: function () {
     return {
@@ -151,7 +149,7 @@ export default {
       })
     },
     async signup () {
-      let validationResult
+      let validationResult, registrationResult, signInResult
       try {
         validationResult = await this.$validator.validateAll()
       } catch (e) {
@@ -161,36 +159,32 @@ export default {
       if (validationResult) {
         this.disableForm = true
 
-        const first_name = this.first_name && this.first_name.trim()
-        const last_name = this.last_name && this.last_name.trim()
-        const email = this.email && this.email.trim().toLowerCase()
-        const password = this.password && this.password.trim()
+        let first_name = this.first_name && this.first_name.trim()
+        let last_name = this.last_name && this.last_name.trim()
+        let email = this.email && this.email.trim().toLowerCase()
+        let password = this.password && this.password.trim()
 
         try {
-          const registrationResult = await register({ first_name, last_name, email, password })
+          registrationResult = await register({ first_name, last_name, email, password })
           this.log('signup success:')
           this.log(registrationResult)
-          try {
-            signIn(email, password)
-            const signInResult = await signIn({ email, password })
-            this.$store.dispatch('establishUser', { JWT: signInResult.data[0] })
-            this.$router.push({ name: 'Onboarding' })
-          } catch (e) {
-            this.logError(e)
-          }
         } catch (e) {
           this.logError('signup failure:')
           this.logError(e)
-          try {
-            // try to log in with existing credentials
-            const signInResult = await signIn({ email, password })
-            this.$store.dispatch('establishUser', { JWT: signInResult.data[0] })
-            this.$router.push({ name: 'Search' })
-          } catch (e) {
-            this.showError = true
-            this.showAlert('Sorry, there was a problem creating your account. Did you already create an account with this email address directly or via Facebook?', 'failure')
-            this.disableForm = false
-          }
+          this.showError = true
+          this.showAlert('Sorry, there was a problem creating your account. Did you already create an account with this email address directly or via Facebook?', 'failure')
+        } finally {
+          this.disableForm = false
+        }
+        try {
+          signInResult = await signIn({ email, password })
+          this.log('auth success:')
+          this.log(signInResult)
+          this.$store.dispatch('establishUser', { JWT: signInResult.data[0] })
+          return this.$router.push({ name: 'Onboarding' })
+        } catch (e) {
+          this.logError('auth FAILURE')
+          this.logError(e)
         }
       } else {
         this.$scrollTo('#top')
@@ -202,21 +196,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-fieldset {
-  border: 0;
-  margin: 0;
-  padding: 0;
-}
-.auth-wrapper {
-  display: flex;
-  margin-left: auto;
-  margin-right: auto;
-  width: 300px;
-  box-sizing: content;
-  flex-direction: column;
-  align-items: center;
-}
-
 .body {
   font-family: soleil, sans-serif;
   color: #333;
@@ -714,9 +693,6 @@ a {
 }
 
 @media (max-width: 479px) {
-  .auth-wrapper {
-    width: 100%;
-  }
   .body {
     padding-bottom: 110px;
   }
