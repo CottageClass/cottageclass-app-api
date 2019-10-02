@@ -146,7 +146,8 @@ class User < ApplicationRecord
   def find_matches
     miles = setting_max_distance
 
-    if (place.latitude.present? && place.latitude.nonzero?) &&
+    if place &&
+       (place.latitude.present? && place.latitude.nonzero?) &&
        (place.longitude.present? && place.longitude.nonzero?) &&
        (child_ages_in_months.present? && child_ages_in_months.count.positive?)
       location = [place.latitude, place.longitude]
