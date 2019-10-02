@@ -26,9 +26,16 @@
           <div class="user-action-card__header__date">{{timeHeader}}</div>
           <div v-if="distance" class="user-action-card__header__distance">{{distance}}</div>
         </div>
-        <div class="user-action-card__description">
-          <div class="user-action-card__description-text"
-               v-html="nameWithPlace" />
+        <div class="user-action-card__description-text"
+             v-html="this.event.name" />
+        <div class="event-summary-card__location">
+          <div class="location-card__text-group">
+            <div class="location-card__place-name-text line-clamp--1"
+                 v-html="playdateLocationName"></div>
+            <div class="location-card__address-text line-clamp--1"
+                 v-html="playdateAddress"></div>
+          </div>
+          <div class="location-icon"><img src="@/assets/circle-location.svg" alt="" class="image-5 photo-fit" /></div>
         </div>
         <div class="user-action-card__footer">
           <div class="user-action-card__footer__user-summary">
@@ -198,9 +205,16 @@ export default {
         }
       }
     },
-    nameWithPlace () {
+    playdateLocationName () {
       if (this.event.place) {
-        return this.event.name + `<br><br>This event will be at ${this.event.place.name}<br>${this.event.place.fullAddress}`
+        return `${this.event.place.name}`
+      } else {
+        return `The playdate will be hosted at ${this.event.hostFirstName}'s home.`
+      }
+    },
+    playdateAddress () {
+      if (this.event.place) {
+        return `${this.event.place.fullAddress}`
       } else {
         return this.event.name + `<br><br>The playdate will be hosted at ${this.event.user.firstName}'s home.`
       }
@@ -786,6 +800,73 @@ a {
   padding-left: 0;
   flex-wrap: wrap;
   align-items: flex-start;
+}
+
+.event-summary-card__location {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  margin-bottom: 16px;
+  padding: 12px 0;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #ebebeb;
+  border-radius: 4px;
+  background-color: #fff;
+  background-image: none;
+  box-shadow: none;
+}
+
+.location-card__place-name-text {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 2px;
+  font-weight: 700;
+}
+
+.location-card__place-name-text.line-clamp--1 {
+  font-weight: 400;
+}
+
+.location-card__address-text {
+  position: relative;
+  z-index: 1;
+  color: rgba(51, 51, 51, 0.6);
+  font-size: 12px;
+}
+
+.location-icon {
+  position: absolute;
+  left: auto;
+  top: auto;
+  right: 16px;
+  bottom: auto;
+  z-index: 1;
+  overflow: hidden;
+  width: 32px;
+  height: 32px;
+}
+
+.image-5 {
+  width: 48px;
+  height: 48px;
+}
+
+.image-5.photo-fit {
+  width: 32px;
+  height: 32px;
+}
+
+.location-card__text-group {
+  margin-right: 80px;
+  margin-left: 16px;
+}
+
+.photo-fit {
+      object-fit: cover;
 }
 
 @media (max-width: 991px){
