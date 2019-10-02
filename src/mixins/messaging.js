@@ -14,7 +14,7 @@ export default {
     meetMessage () {
       return (targetUser) => {
         if (!targetUser) { return '' }
-        return `${this.currentUser.firstName} (${window.location.origin}/users/${this.currentUser.id}) waved at you!` +
+        return `${this.currentUser.firstName} ${window.location.origin}/users/${this.currentUser.id} waved at you!` +
           ` They live ${this.distanceBetweenUsers(targetUser)} mi. away${this.messageChildAgeString}.` +
           ` If you're interested in a playdate, reply here!`
       }
@@ -23,7 +23,7 @@ export default {
       return (targetUser) => {
         if (!targetUser) { return '' }
         return `We just sent your wave to ${targetUser.firstName}` +
-          ` (${window.location.origin}/users/${targetUser.id}).` +
+          ` ${window.location.origin}/users/${targetUser.id} ` +
           ` Reply here to introduce yourself and schedule your first playdate!`
       }
     },
