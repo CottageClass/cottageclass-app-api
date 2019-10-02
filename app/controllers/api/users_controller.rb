@@ -31,8 +31,6 @@ class API::UsersController < API::BaseController
   end
 
   def show
-    ap current_user && current_user.id
-    ap @user.id
     serializer = if current_user && current_user.id == @user.id
                    CurrentUserSerializer.new @user, include: %i[children place]
                  else
