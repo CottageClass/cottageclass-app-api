@@ -6,7 +6,6 @@ class Event < ApplicationRecord
 
   geocoded_by :host_full_address
 
-  before_validation :cleanup
   after_validation :geocode, if: lambda { |instance|
     instance.host_full_address.present? && (instance.latitude.blank? || instance.longitude.blank?)
   }
@@ -38,6 +37,7 @@ class Event < ApplicationRecord
       .or(Event.arel_table[:starts_at].between(1.hour.ago(Time.current)..1.week.since(Time.current)))
     ).order starts_at: :asc
   }
+  delegate :latitude, :longitude, to: :place
 
   def self.ransackable_scopes(_auth_object = nil)
     %i[has_participants upcoming]
@@ -198,10 +198,5 @@ class Event < ApplicationRecord
         participant.user.notifications.event_destruction.where(notifiable: self).first_or_create
       end
     end
-  end
-
-  def cleanup
-    self.latitude = user.try(:latitude) unless latitude.present? && latitude.nonzero?
-    self.longitude = user.try(:longitude) unless longitude.present? && longitude.nonzero?
   end
 end
