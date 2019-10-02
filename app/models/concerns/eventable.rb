@@ -29,8 +29,8 @@ module Eventable
   end
 
   def generate_time_zone
-    self.time_zone ||= if user.latitude.present? && user.longitude.present?
-                         Locator.time_zone_for latitude: user.latitude, longitude: user.longitude
+    self.time_zone ||= if user.place.latitude.present? && user.place.longitude.present?
+                         Locator.time_zone_for latitude: user.place.latitude, longitude: user.placj.longitude
                        end
   end
 end

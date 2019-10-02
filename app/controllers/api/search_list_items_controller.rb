@@ -13,7 +13,7 @@ class API::SearchListItemsController < API::BaseController
     miles = miles.to_f
     location = []
     location = [latitude, longitude] if [latitude, longitude].all?(&:present?)
-    location = [current_user.latitude, current_user.longitude] if location.blank? && current_user.present?
+    location = [current_user.place.latitude, current_user.place.longitude] if location.blank? && current_user.present?
 
     unless miles.positive? && location.all?(&:present?)
       render status: 400

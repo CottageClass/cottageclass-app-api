@@ -1,5 +1,5 @@
 class SearchListItem < ApplicationRecord
-  reverse_geocoded_by 'users.latitude', 'users.longitude'
+  reverse_geocoded_by 'users.place.latitude', 'users.place.longitude'
   user_attributes = User::PUBLIC_ATTRIBUTES.reject { |a| a == :id }
   delegate(*user_attributes, to: :user, allow_nil: true)
 

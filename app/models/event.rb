@@ -7,7 +7,7 @@ class Event < ApplicationRecord
   geocoded_by :host_full_address
 
   after_validation :geocode, if: lambda { |instance|
-    instance.host_full_address.present? && (instance.latitude.blank? || instance.longitude.blank?)
+    instance.host_full_address.present? && (instance.place.latitude.blank? || instance.place.longitude.blank?)
   }
   after_create :post_create
   before_destroy :notify_participants_destruction
@@ -28,7 +28,7 @@ class Event < ApplicationRecord
 
   scope :has_participants, -> { joins(:participants) }
   scope :eager, -> { includes participants: %i[user participant_children] }
-  scope :nearest, ->(user) { where.not(id: user.events).near([user.latitude, user.longitude], 100) }
+  scope :nearest, ->(user) { where.not(id: user.events).near([user.place.latitude, user.place.longitude], 100) }
   scope :past, -> { where(Event.arel_table[:starts_at].lt(Time.current)).order starts_at: :desc }
   scope :upcoming, -> { where(Event.arel_table[:starts_at].gteq(1.hour.ago(Time.current))).order starts_at: :asc }
   scope :notifiable, lambda {
@@ -109,7 +109,7 @@ class Event < ApplicationRecord
 
         nearby_users = users_with_distance
           .from(users_with_distance, :users)
-          .near([host.latitude, host.longitude], :setting_max_distance)
+          .near([host.place.latitude, host.place.longitude], :setting_max_distance)
           .where.not(id: host.id)
 
         recipients = []

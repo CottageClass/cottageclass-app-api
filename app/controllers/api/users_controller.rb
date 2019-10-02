@@ -76,7 +76,7 @@ class API::UsersController < API::BaseController
     if miles.positive?
       location = []
       location = [latitude, longitude] if [latitude, longitude].all?(&:present?)
-      location = [current_user.latitude, current_user.longitude] if location.blank? && current_user.present?
+      location = [current_user.place.latitude, current_user.place.longitude] if location.blank? && current_user.present?
       if location.all?(&:present?)
         users = users.near(location.map(&:to_f), miles)
         users = users.joins 'LEFT JOIN events ON users.showcase_event_id = events.id'

@@ -101,7 +101,7 @@ class API::EventsController < API::BaseController
     if miles.positive?
       location = []
       location = [latitude, longitude] if [latitude, longitude].all?(&:present?)
-      location = [current_user.latitude, current_user.longitude] if location.blank? && current_user.present?
+      location = [current_user.place.latitude, current_user.place.longitude] if location.blank? && current_user.present?
       events = events.near(location.map(&:to_f), miles) if location.all?(&:present?)
     end
 
