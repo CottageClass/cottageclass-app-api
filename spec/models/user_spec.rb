@@ -50,7 +50,7 @@ RSpec.describe User, type: :model do
   end
 
   context 'destroy' do
-    let(:subject) { build :user, :with_children }
+    let(:subject) { build :user, :with_children, :with_place }
     let(:other) { build :user, :with_children, latitude: subject.latitude, longitude: subject.longitude }
 
     it 'can be destroyed with some associations' do
@@ -63,7 +63,7 @@ RSpec.describe User, type: :model do
   end
 
   context 'notification' do
-    let(:subject) { build :user, :with_matched_user, :with_children }
+    let(:subject) { build :user, :with_children, :with_place, :with_matched_user }
 
     it 'sends a user suggestion notification' do
       expect { subject.notify_user_suggestion }.to change(subject.notifications.user_suggestion, :count)
