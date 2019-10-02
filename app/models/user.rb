@@ -21,6 +21,7 @@ class User < ApplicationRecord
   ].freeze
 
   after_update :sms_notify
+  delegate :latitude, :longitude, to: :place
 
   before_validation :cleanup
   after_validation :geocode, if: lambda { |instance|
