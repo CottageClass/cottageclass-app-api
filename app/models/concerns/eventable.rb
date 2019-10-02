@@ -4,7 +4,7 @@ module Eventable
   extend ActiveSupport::Concern
 
   included do
-    before_validation :common_cleanup, :generate_time_zone
+    before_validation :common_cleanup
 
     validates :name, presence: true
     validates :starts_at, presence: true
@@ -26,11 +26,5 @@ module Eventable
     self.maximum_children ||= 0
     self.child_age_minimum ||= 0
     self.child_age_maximum ||= 0
-  end
-
-  def generate_time_zone
-    self.time_zone ||= if user.place.latitude.present? && user.place.longitude.present?
-                         Locator.time_zone_for latitude: user.place.latitude, longitude: user.placj.longitude
-                       end
   end
 end
