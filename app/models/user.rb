@@ -148,10 +148,10 @@ class User < ApplicationRecord
   def find_matches
     miles = setting_max_distance
 
-    if (latitude.present? && latitude.nonzero?) &&
-       (longitude.present? && longitude.nonzero?) &&
+    if (place.latitude.present? && place.latitude.nonzero?) &&
+       (place.longitude.present? && place.longitude.nonzero?) &&
        (child_ages_in_months.present? && child_ages_in_months.count.positive?)
-      location = [latitude, longitude]
+      location = [place.latitude, place.longitude]
       # narrow down the candidates
       others = User.near(location.map(&:to_f), miles).includes(:children)
       others = others.where.not(id: id)
@@ -193,7 +193,7 @@ class User < ApplicationRecord
       difference = (closeest_child_ages[0] - closeest_child_ages[1]).abs
       return nil if difference > 24
 
-      difference + 6 * distance_to(other_user)
+      difference + 6 * place.distance_to(other_user.place)
     else
       1_000_000
     end
