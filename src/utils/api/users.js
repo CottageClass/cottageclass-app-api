@@ -37,7 +37,8 @@ export async function submitUserInfo (userId, data) {
     postData.childrenAttributes = data.children.map(function (childAttrs) {
       return {
         ...childAttrs,
-        parentId: userId
+        parentId: userId,
+        birthday: childAttrs.birthYear + '-' + childAttrs.birthMonth + '-15'
       }
     })
   }
