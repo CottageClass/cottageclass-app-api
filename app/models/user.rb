@@ -24,13 +24,8 @@ class User < ApplicationRecord
   delegate :latitude, :longitude, to: :place
 
   before_validation :cleanup
-  after_validation :geocode, if: lambda { |instance|
-    instance.full_address.present? && (instance.latitude.blank? || instance.longitude.blank?)
-  }
-  before_save :obfuscate_location, :generate_time_zone,
-              if: proc { |instance| instance.latitude_changed? || instance.longitude_changed? }
   after_save :find_matches, if: lambda { |instance|
-    (instance.latitude_changed? || instance.longitude_changed? || instance.children.any?(&:changed?))
+    (instance.place_id_changed? || instance.children.any?(&:changed?))
   }
   before_create do
     populate_full_name!
@@ -52,7 +47,11 @@ class User < ApplicationRecord
             uniqueness: true,
             format: { with: /\A.+@.+\..+\z/, message: 'Please provide a valid email' }
 
-  has_many :created_places, inverse_of: :creator, class_name: 'Place', foreign_key: :user_id
+  has_many :created_places,
+           inverse_of: :creator,
+           class_name: 'Place',
+           foreign_key: :user_id,
+           dependent: :nullify
   has_many :devices, dependent: :nullify
   has_many :children,
            class_name: 'Child',
@@ -340,24 +339,6 @@ class User < ApplicationRecord
 
   def notify
     notifications.user_creation.first_or_create
-  end
-
-  def obfuscate_location
-    location = if (latitude.present? && latitude.nonzero?) && (longitude.present? && longitude.nonzero?)
-                 # update dependent events
-                 events.update_all latitude: latitude, longitude: longitude
-
-                 Locator.obfuscate latitude: latitude, longitude: longitude
-               else
-                 { fuzzy_latitude: nil, fuzzy_longitude: nil }
-               end
-    assign_attributes location
-  end
-
-  def generate_time_zone
-    self.time_zone = if (latitude.present? && latitude.nonzero?) && (longitude.present? && longitude.nonzero?)
-                       Locator.time_zone_for latitude: latitude, longitude: longitude
-                     end
   end
 
   def child_with_same_name_exists?(child_attributes)
