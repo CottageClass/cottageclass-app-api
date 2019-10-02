@@ -54,10 +54,8 @@ describe('MeetButton', () => {
 
     it('displays correct information', () => {
       const meetButton = wrapper.find('.event-action-button')
-      const requestMessage = `Natasha (http://localhost/users/987654321) waved at you! They live 4.2 mi. away with 3 kids age 9 mos, 4 & 8. If you're interested in a playdate, reply here!`
-
       expect(meetButton.text()).toEqual('Invite')
-      expect(wrapper.vm.meetMessage(targetUser)).toEqual(requestMessage)
+      expect(wrapper.vm.meetMessage(targetUser)).toMatchSnapshot()
     })
 
     it('initiates sending sequence', done => {
@@ -122,10 +120,9 @@ describe('MeetButton', () => {
         }
       })
       const meetButton = wrapper.find('.event-action-button')
-      const requestMessage = `Natasha (http://localhost/users/987654321) waved at you! They live 4.2 mi. away with 3 kids age 2 mos, 2 mos & 9. If you're interested in a playdate, reply here!`
 
       expect(meetButton.text()).toEqual('Say Hi')
-      expect(wrapper.vm.meetMessage(targetUser)).toEqual(requestMessage)
+      expect(wrapper.vm.meetMessage(targetUser)).toMatchSnapshot()
     })
   })
 
@@ -180,10 +177,8 @@ describe('MeetButton', () => {
 
     it('displays correct information', () => {
       const meetButton = wrapper.find('.event-action-button')
-      const requestMessage = `Natasha (http://localhost/users/987654321) waved at you! They live 4.2 mi. away. If you're interested in a playdate, reply here!`
-
       expect(meetButton.text()).toEqual('Wave')
-      expect(wrapper.vm.meetMessage(targetUser)).toEqual(requestMessage)
+      expect(wrapper.vm.meetMessage(targetUser)).toMatchSnapshot()
     })
 
     it('initiates sending sequence', done => {

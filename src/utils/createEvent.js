@@ -1,26 +1,7 @@
 import moment from 'moment'
-import { capitalize } from './utils'
 
 export const createEvent = (data) => {
-  const id = Object.keys(data.event)[0]
-  const event = data.event[id]
-  const attributes = cleanEvent(event.attributes)
-
-  const participatingChildren = event.relationships.participants.data.map(e => e.id)
-  let participatingParents
-  if (data.participant) {
-    participatingParents = Object.values(data.participant).map(p => cleanPerson(p.attributes))
-  } else {
-    participatingParents = []
-  }
-
-  return {
-    data,
-    id,
-    ...attributes,
-    participatingChildren,
-    participatingParents
-  }
+  return createEvents(data)[0]
 }
 
 export const createEvents = (data, sortFunction) => {
@@ -28,19 +9,33 @@ export const createEvents = (data, sortFunction) => {
     return []
   }
   const all = Object.values(data.event).map(e => {
-    let participatingParents
+    let participatingParents, place, user
     if (data.participant) {
       participatingParents = e.relationships.participants.data.map(p => {
-        return cleanPerson(data.participant[p.id])
+        return data.participant[p.id]
       })
     } else {
       participatingParents = []
     }
-    return {
+    if (data.user) {
+      const userId = e.relationships.user.data.id
+      console.log({ userId })
+      user = data.user[userId].attributes
+    }
+
+    if (data.place) {
+      const placeId = e.relationships.place.data.id
+      place = data.place[placeId].attributes
+    }
+    console.log({ user })
+    const res = {
+      user,
+      place,
       id: e.id,
       participatingParents,
       ...cleanEvent(e.attributes)
     }
+    return res
   })
 
   // if no sort method is given, sort by id ascending (use int value, not lexiacal)
@@ -57,27 +52,7 @@ export const createEvents = (data, sortFunction) => {
 */
 function cleanEvent (attributes) {
   const res = Object.assign({}, (attributes))
-  res.place = res.place && res.place.data && res.place.data.attributes
-  res.hostId = attributes.hostId.toString()
   res.startsAt = moment(attributes.startsAt)
   res.endsAt = moment(attributes.endsAt)
-  res.hostFirstName = capitalize(attributes.hostFirstName)
-  res.hostFuzzyLatitude = parseFloat(attributes.hostFuzzyLatitude)
-  res.hostFuzzyLongitude = parseFloat(attributes.hostFuzzyLongitude)
-  if (attributes.host && attributes.host.data) {
-    res.host = attributes.host.data.attributes
-    res.host.location = {
-      lat: parseFloat(attributes.hostFuzzyLatitude),
-      lng: parseFloat(attributes.hostFuzzyLongitude)
-    }
-  }
-  return res
-}
-
-function cleanPerson (attributes) {
-  const res = Object.assign({}, (attributes))
-  res.userFuzzyLatitude = parseFloat(attributes.userFuzzyLatitude)
-  res.userFuzzyLongitude = parseFloat(attributes.userFuzzyLongitude)
-  res.userFirstName = capitalize(attributes.userFirstName)
   return res
 }

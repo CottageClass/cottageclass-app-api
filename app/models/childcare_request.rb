@@ -5,6 +5,7 @@ class ChildcareRequest < ApplicationRecord
   attribute :content
 
   has_one :search_list_item, as: :itemable, class_name: 'SearchListItem', dependent: :destroy
+  has_one :place, through: :user
 
   def create_search_list_item
     SearchListItem.create(user: user, itemable: self)

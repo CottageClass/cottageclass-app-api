@@ -23,13 +23,8 @@ class User < ApplicationRecord
   after_update :sms_notify
 
   before_validation :cleanup
-  after_validation :geocode, if: lambda { |instance|
-    instance.full_address.present? && (instance.latitude.blank? || instance.longitude.blank?)
-  }
-  before_save :obfuscate_location, :generate_time_zone,
-              if: proc { |instance| instance.latitude_changed? || instance.longitude_changed? }
   after_save :find_matches, if: lambda { |instance|
-    (instance.latitude_changed? || instance.longitude_changed? || instance.children.any?(&:changed?))
+    (instance.place_id_changed? || instance.children.any?(&:changed?))
   }
   before_create do
     populate_full_name!
@@ -51,7 +46,11 @@ class User < ApplicationRecord
             uniqueness: true,
             format: { with: /\A.+@.+\..+\z/, message: 'Please provide a valid email' }
 
-  has_many :places, dependent: :nullify
+  has_many :created_places,
+           inverse_of: :creator,
+           class_name: 'Place',
+           foreign_key: :user_id,
+           dependent: :nullify
   has_many :devices, dependent: :nullify
   has_many :children,
            class_name: 'Child',
@@ -101,6 +100,7 @@ class User < ApplicationRecord
   has_many :childcare_requests, inverse_of: :user, dependent: :destroy
 
   belongs_to :showcase_event, class_name: 'Event', optional: true
+  belongs_to :place, inverse_of: :users, optional: true
 
   accepts_nested_attributes_for :children, allow_destroy: true, reject_if: :child_with_same_name_exists?
 
@@ -126,7 +126,9 @@ class User < ApplicationRecord
   }
 
   def jwt_payload
-    super.merge('user' => CurrentUserSerializer.json_for(self, include: %i[children]))
+    super.merge('user' => CurrentUserSerializer.json_for(self,
+                                                         include: %i[children place],
+                                                         params: { current_users_place: true }))
   end
 
   def create_search_list_item
@@ -144,10 +146,11 @@ class User < ApplicationRecord
   def find_matches
     miles = setting_max_distance
 
-    if (latitude.present? && latitude.nonzero?) &&
-       (longitude.present? && longitude.nonzero?) &&
+    if place &&
+       (place.latitude.present? && place.latitude.nonzero?) &&
+       (place.longitude.present? && place.longitude.nonzero?) &&
        (child_ages_in_months.present? && child_ages_in_months.count.positive?)
-      location = [latitude, longitude]
+      location = [place.latitude, place.longitude]
       # narrow down the candidates
       others = User.near(location.map(&:to_f), miles).includes(:children)
       others = others.where.not(id: id)
@@ -189,7 +192,7 @@ class User < ApplicationRecord
       difference = (closeest_child_ages[0] - closeest_child_ages[1]).abs
       return nil if difference > 24
 
-      difference + 6 * distance_to(other_user)
+      difference + 6 * place.distance_to(other_user.place)
     else
       1_000_000
     end
@@ -336,24 +339,6 @@ class User < ApplicationRecord
 
   def notify
     notifications.user_creation.first_or_create
-  end
-
-  def obfuscate_location
-    location = if (latitude.present? && latitude.nonzero?) && (longitude.present? && longitude.nonzero?)
-                 # update dependent events
-                 events.update_all latitude: latitude, longitude: longitude
-
-                 Locator.obfuscate latitude: latitude, longitude: longitude
-               else
-                 { fuzzy_latitude: nil, fuzzy_longitude: nil }
-               end
-    assign_attributes location
-  end
-
-  def generate_time_zone
-    self.time_zone = if (latitude.present? && latitude.nonzero?) && (longitude.present? && longitude.nonzero?)
-                       Locator.time_zone_for latitude: latitude, longitude: longitude
-                     end
   end
 
   def child_with_same_name_exists?(child_attributes)

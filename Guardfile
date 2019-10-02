@@ -45,7 +45,6 @@ guard :rspec,
   dsl.watch_spec_files_for(rails.views)
 
   watch(rails.controllers) do |m|
-  pp m[1]
     [
       rspec.spec.call("routing/#{m[1]}_routing"),
       rspec.spec.call("controllers/#{m[1]}_controller"),

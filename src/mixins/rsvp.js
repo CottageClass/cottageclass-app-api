@@ -13,18 +13,15 @@ export default {
     participantFirstName () {
       return this.currentUser.firstName
     },
-    hostFirstName () {
-      return this.event.host.firstName
-    },
     messageToHost () {
-      return `Hi ${this.hostFirstName}, ${this.participantFirstName} ` +
+      return `Hi ${this.event.user.firstName}, ${this.participantFirstName} ` +
         `just booked a playdate with you on ` +
         this.formattedDateTime +
         `. Reply to this message to say hi! ` +
         `Or cancel here: ${window.location.origin}/event/${this.event.id}`
     },
     messageToParticipant () {
-      return `Hi ${this.participantFirstName}, meet ${this.hostFirstName}! ` +
+      return `Hi ${this.participantFirstName}, meet ${this.event.user.firstName}! ` +
         `We've sent them your request for a playdate ` +
         this.formattedDateTime +
         `. Reply to this message to introduce yourself or ask a question!`
@@ -43,7 +40,7 @@ export default {
       const data = {
         'Event ID': this.eventId,
         'Event title': this.event.name,
-        'Event host': this.event.hostFirstName,
+        'Event host': this.event.user.firstName,
         'Event date': this.event.startsAt,
         'Date submitted': moment(Date()).format('L'),
         'Parent first name': this.currentUser.firstName,
@@ -66,7 +63,7 @@ export default {
           'Event ID': this.eventId,
           'Reason for cancelation': this.reason,
           'Event title': this.event.name,
-          'Event host': this.event.hostFirstName,
+          'Event host': this.event.user.firstName,
           'Event date': this.event.startsAt.toString(),
           'Parent first name': this.currentUser.firstName,
           'Parent last name': this.currentUser.lastInitial,
@@ -91,7 +88,7 @@ export default {
         trackEvent('rsvp_affirmative', { eventId: eventId })
         this.showAlertOnNextRoute(`Playdate request sent for ${this.formattedDateTime}. ` +
             'We\'re texting you now, to introduce you to ' +
-            `${this.hostFirstName}!`, 'success'
+            `${this.event.user.firstName}!`, 'success'
         )
         this.$ga.event('RSVP', 'sent', eventId)
         this.initProxyConversation()
@@ -105,7 +102,7 @@ export default {
     initProxyConversation () {
       initProxySession(
         this.currentUser.id,
-        this.event.hostId,
+        this.event.user.id,
         this.messageToHost,
         this.messageToParticipant
       )

@@ -8,28 +8,13 @@ RSpec.describe User, type: :model do
     it { is_expected.to have_many(:childcare_requests).inverse_of(:user) }
     it { is_expected.to have_many(:events).through(:event_series) }
     it { is_expected.to have_many(:devices) }
-    it { is_expected.to have_many(:places) }
+    it { is_expected.to have_many(:created_places) }
     it { is_expected.to have_many(:participants).inverse_of(:user).dependent(:destroy) }
     it { is_expected.to have_many(:notifications).inverse_of(:recipient).dependent(:destroy) }
   end
 
   context 'save' do
     it { expect { subject.save }.to change(subject, :jti).from(nil) }
-
-    it 'obfuscates location' do
-      expect(subject.fuzzy_latitude).to be_blank
-      expect(subject.fuzzy_longitude).to be_blank
-
-      subject.save
-
-      expect(subject.fuzzy_latitude).not_to be_blank
-      expect(subject.fuzzy_longitude).not_to be_blank
-    end
-
-    it 'generates time zone' do
-      subject.time_zone = nil
-      expect { subject.save }.to change(subject, :time_zone).from(nil)
-    end
 
     it { expect { subject.save }.to change(Notification.user_creation, :count).from(0).to(1) }
   end
@@ -46,30 +31,9 @@ RSpec.describe User, type: :model do
   context 'update' do
     before { subject.save }
 
-    let(:new_latitude) { 37.773972 }
-    let(:new_longitude) { -122.431297 }
-
     it 'sends sms' do
       expect { subject.update_attribute(:phone_number, '6092164398') }
         .to change(Notification.user_sms_welcome.reload, :count).from(0).to(1)
-    end
-
-    it 'updates dependent events' do
-      create :event_series, user: subject
-
-      subject.events.reload.each do |event|
-        expect(event.latitude).to eq(subject.latitude)
-        expect(event.latitude).not_to eq(new_latitude)
-        expect(event.longitude).to eq(subject.longitude)
-        expect(event.longitude).not_to eq(new_longitude)
-      end
-
-      subject.update latitude: new_latitude, longitude: new_longitude
-
-      subject.events.reload.each do |event|
-        expect(event.latitude).to eq(new_latitude)
-        expect(event.longitude).to eq(new_longitude)
-      end
     end
   end
 
@@ -86,7 +50,7 @@ RSpec.describe User, type: :model do
   end
 
   context 'destroy' do
-    let(:subject) { build :user, :with_children }
+    let(:subject) { build :user, :with_children, :with_place }
     let(:other) { build :user, :with_children, latitude: subject.latitude, longitude: subject.longitude }
 
     it 'can be destroyed with some associations' do
@@ -99,7 +63,7 @@ RSpec.describe User, type: :model do
   end
 
   context 'notification' do
-    let(:subject) { build :user, :with_matched_user, :with_children }
+    let(:subject) { build :user, :with_children, :with_place, :with_matched_user }
 
     it 'sends a user suggestion notification' do
       expect { subject.notify_user_suggestion }.to change(subject.notifications.user_suggestion, :count)

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Place, type: :model do
   let(:user) { build :user }
-  let(:subject) { build :place, user: user }
+  let(:subject) { build :place, creator: user }
 
   context 'validations' do
     it { is_expected.to validate_presence_of(:google_id) }
