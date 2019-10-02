@@ -128,7 +128,7 @@ RSpec.resource 'User' do
         parameter :children_attributes, 'Array of children. Set _destroy to 1 to remove a child. Supply id to update.'
       end
 
-      let(:user) { create :user, :with_children }
+      let(:user) { create :user, :with_children, :with_place }
       let(:id) { user.id }
       let(:user_data) { build :user, :with_children }
 
