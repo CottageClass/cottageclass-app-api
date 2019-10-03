@@ -194,8 +194,8 @@ export default {
   computed: {
     mapCenter () {
       return {
-        lat: this.place.latitude,
-        lng: this.place.longitude
+        lat: this.place.latitude || this.place.fuzzyLatitude,
+        lng: this.place.longitude || this.place.fuzzyLongitude
       }
     },
     playdateLocationName () {
@@ -264,11 +264,9 @@ export default {
           style: 'width: 100px; height: 230px;'
         })
         if (this.event.place.latitude && this.event.place.longitude) {
-          this.addLilypadPin(
-            { lat: this.event.place.latitude, lng: this.event.place.longitude }
-          )
+          this.addLilypadPin(this.mapCenter)
         } else {
-          await this.addCircle({ lat: this.event.place.fuzzyLatitude, lng: this.event.place.fuzzyLongitude }, 0.2)
+          await this.addCircle(this.mapCenter, 0.2)
         }
       })
     }
