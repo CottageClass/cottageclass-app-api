@@ -1997,7 +1997,13 @@ background-color: #f6f6f6;
 
   @media (max-width: 767px) {
     .content-wrapper__request {
-      margin-top: 28px;
+    position: relative;
+    top: 0;
+    width: auto;
+    margin-right: 0px;
+    margin-left: 0px;
+    border-radius: 0px;
+    box-shadow: none;
     }
     .content-wrapper {
       margin-top: 28px;
