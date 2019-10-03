@@ -173,6 +173,9 @@ export default {
       }
       return 'Children ages ' + andJoin(ages.map((e, i) => this.ageString(i)))
     },
+    user () {
+      return this.item.user
+    },
     userFirstName () {
       return this.user && this.user.firstName
     },
@@ -302,7 +305,7 @@ export default {
       } else {
         res = await this.starUser(this.user.id, context)
       }
-      this.$emit('user-updated', res)
+      this.$emit('user-updated', { user: res })
       return res
     },
     goToItem () {
