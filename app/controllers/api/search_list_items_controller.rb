@@ -22,14 +22,14 @@ class API::SearchListItemsController < API::BaseController
     places = Place.near(location.map(&:to_f), miles)
     place_ids = places.to_a.pluck :id
 
-    events_in_places = Event.joins(:place).where(place: place_ids)
+    events_in_places = Event.joins(:event_series).where(event_series: { place: place_ids })
     events_in_places_id = events_in_places.to_a.pluck :id
-    events = SearchListItem.where(itemable_type: 'Event').where(itemable_id: events_in_places_id)
+    events = SearchListItem.joins('INNER JOIN events ON events.id = itemable_id').where(itemable_type: 'Event')
+    events = events.where(itemable_id: events_in_places_id)
+    events = events.merge(Event.upcoming)
     events = events.includes(:itemable, user: [:place, { children: :emergency_contacts }])
     events = events.child_age_range(min_age, max_age)
     events = events.where.not(user_id: current_user.id) if current_user.present?
-    events = events.merge(Event.upcoming)
-    events = events.joins('INNER JOIN events ON events.id = itemable_id')
 
     ccrs_in_places = ChildcareRequest.joins(:place).where('places.id IN (?)', place_ids)
     ccrs_in_places_id = ccrs_in_places.to_a.pluck :id
