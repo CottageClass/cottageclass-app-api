@@ -29,9 +29,10 @@
             </ul>
             <div class="onb-copy-link-container">
               <div class="onb-copy-link-form-block w-form">
-                <form id="email-form" name="email-form" data-name="Email Form" class="onb-copy-link-form"><input type="text" class="copy-text-link-field w-input" maxlength="256" name="name" data-name="Name" :placeholder="shareUrl" id="name">
+                <form id="email-form" name="email-form" data-name="Email Form" class="onb-copy-link-form">
+                  <input type="text" class="copy-text-link-field w-input" maxlength="256" name="name" data-name="Name" :placeholder="shareUrl" id="name">
                   <a
-                    v-clipboard:copy="link"
+                    v-clipboard:copy="shareUrl"
                     v-clipboard:success="onCopy"
                     class="onb-button-copy-link w-button"
                   >{{ copyButtonText }}</a>
