@@ -264,6 +264,7 @@ a {
 
 @media (max-width: 479px) {
   .title-bar {
+    display: flex;
     align-items: center;
   }
 }
