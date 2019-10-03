@@ -125,7 +125,6 @@ export default {
       showAllButtonText: 'Show all playdates',
       showShowAllButton: false,
       noItemsMessage: 'Sorry, there are no upcoming playdates in this area',
-      showFetchMoreButton: true,
       showTrailblazerMessage: true,
       ageRange: { error: null, data: { min: -1, max: -1 } },
       detailView: false,
@@ -137,7 +136,7 @@ export default {
     ageRangeActive () {
       return this.ageRange.data.min >= 0 || this.ageRange.data.max >= 0
     },
-    ...mapGetters(['currentUser', 'isAuthenticated', 'alert', 'mapArea', 'items', 'lastPage'])
+    ...mapGetters(['currentUser', 'isAuthenticated', 'alert', 'mapArea', 'items', 'lastPage', 'showFetchMoreButton'])
   },
   methods: {
     handleMapClick () {
@@ -164,9 +163,7 @@ export default {
         }
         this.awaiting = true
         let newItems = await fetchFeed(params)
-        if (newItems.length < params.pageSize) {
-          this.showFetchMoreButton = false
-        }
+        this.setShowFetchMoreButton({ show: newItems.length === params.pageSize })
         // if items is null, set it to the incoming items, otherwise add them
         this.addItems({ items: newItems })
         this.incrementLastPage()
@@ -198,10 +195,11 @@ export default {
     },
     fetch: async function () {
       this.resetItems()
-      this.showFetchMoreButton = true
+      this.setShowFetchMoreButton(true)
       this.fetchMoreItems()
     },
     ...mapMutations([
+      'setShowFetchMoreButton',
       'incrementLastPage',
       'addItems',
       'updateUser',

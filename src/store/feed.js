@@ -4,6 +4,7 @@ import Vue from 'vue'
 const state = {
   items: null,
   lastPage: 0,
+  showFetchMoreButton: false,
   mapArea: {
     center: { lat: 40.688309, lng: -73.994639 }, // BoCoCa
     maxDistance: 5
@@ -14,6 +15,7 @@ const mutations = {
   resetItems (state) {
     state.items = null
     state.lastPage = 0
+    state.showFetchMoreButton = false
   },
   setMapArea (state, payload) {
     if (payload.center) {
@@ -28,7 +30,8 @@ const mutations = {
   resetFeed (state) {
     state = {
       items: null,
-      lastPage: 0
+      lastPage: 0,
+      showFetchMoreButton: false
     }
   },
   addItems (state, payload) {
@@ -40,6 +43,9 @@ const mutations = {
   },
   incrementLastPage (state) {
     state.lastPage = state.lastPage + 1
+  },
+  setShowFetchMoreButton (state, payload) {
+    state.showFetchMoreButton = payload.show
   },
   updateUser (state, payload) {
     const user = payload.user
@@ -61,7 +67,8 @@ const actions = {
 const getters = {
   mapArea: state => state.mapArea,
   items: state => state.items,
-  lastPage: state => state.lastPage
+  lastPage: state => state.lastPage,
+  showFetchMoreButton: state => state.showFetchMoreButton
 }
 
 export default {
