@@ -10,7 +10,7 @@ class CrawlerEventsController < ActionController::Base
       image: 'https://storage.googleapis.com/cottageclass-prod/images/lilypad-youre-invited-to-a-playdate.png',
       url: crawler_event_url,
       description: @event.name,
-      title: "#{@event.host_first_name} is hosting a playdate #{month} #{date} @ #{time}. Can you come?"
+      title: "#{@event.user.first_name} is hosting a playdate #{month} #{date} @ #{time}. Can you come?"
     }
   end
 end

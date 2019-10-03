@@ -33,6 +33,7 @@
             <div class="location-card__place-name-text line-clamp--1"
                  v-html="playdateLocationName"></div>
             <div class="location-card__address-text line-clamp--1"
+                 v-if="playdateAddress"
                  v-html="playdateAddress"></div>
           </div>
           <div class="location-icon"><img src="@/assets/circle-location.svg" alt="" class="image-5 photo-fit" /></div>
@@ -194,22 +195,22 @@ export default {
   computed: {
     mapCenter () {
       return {
-        lat: this.place.latitude,
-        lng: this.place.longitude
+        lat: this.place.latitude || this.place.fuzzyLatitude,
+        lng: this.place.longitude || this.place.fuzzyLongitude
       }
     },
     playdateLocationName () {
-      if (this.event.place) {
-        return `${this.event.place.name}`
+      if (this.place.public) {
+        return this.event.place.name
       } else {
         return `The playdate will be hosted at ${this.event.user.firstName}'s home.`
       }
     },
     playdateAddress () {
-      if (this.event.place) {
-        return `${this.event.place.fullAddress}`
+      if (this.place.public) {
+        return this.event.place.fullAddress
       } else {
-        return this.event.name + `<br><br>The playdate will be hosted at ${this.event.user.firstName}'s home.`
+        return null
       }
     },
     lightboxImages () {
@@ -264,11 +265,9 @@ export default {
           style: 'width: 100px; height: 230px;'
         })
         if (this.event.place.latitude && this.event.place.longitude) {
-          this.addLilypadPin(
-            { lat: this.event.place.latitude, lng: this.event.place.longitude }
-          )
+          this.addLilypadPin(this.mapCenter)
         } else {
-          await this.addCircle({ lat: this.event.place.fuzzyLatitude, lng: this.event.place.fuzzyLongitude }, 0.2)
+          await this.addCircle(this.mapCenter, 0.2)
         }
       })
     }

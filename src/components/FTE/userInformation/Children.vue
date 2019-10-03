@@ -66,7 +66,7 @@ export default {
         {
           name: 'birthYear',
           label: 'Birth Year',
-          placeholder: 'YYYY',
+          placeholder: 'Select',
           type: 'select',
           selectData: this.listOfYears.map(x => {
             return { text: x, value: x }
@@ -76,7 +76,7 @@ export default {
         {
           name: 'birthMonth',
           label: 'Birth Month',
-          placeholder: 'MM',
+          placeholder: 'Select',
           type: 'select',
           selectData: [
             { text: 'January', value: '01' },

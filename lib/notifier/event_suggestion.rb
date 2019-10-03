@@ -30,7 +30,7 @@ class Notifier::EventSuggestion < Notifier::Base
                       time_range: @event.time_range,
                       start_time: @event.start_time,
                       end_time: @event.end_time,
-                      host_first_name: @event.host_first_name
+                      host_first_name: @event.user.first_name
 
     params = super.update event: event_hash
     family_members = ['you'] + @user.children.pluck(:first_name)

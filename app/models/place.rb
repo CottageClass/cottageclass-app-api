@@ -34,16 +34,6 @@ class Place < ApplicationRecord
     assign_attributes location
   end
 
-  def full_address
-    [
-      [street_number, route].compact.map(&:squish).select(&:present?).join(' '),
-      locality,
-      admin_area_level_1,
-      admin_area_level_2,
-      [country, postal_code].compact.map(&:squish).select(&:present?).join(' ')
-    ].compact.map(&:squish).select(&:present?).join(', ')
-  end
-
   private
 
   def generate_time_zone

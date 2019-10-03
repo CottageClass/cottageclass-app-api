@@ -22,6 +22,7 @@ class API::UsersController < API::BaseController
     if user.update(user_params)
       render json: CurrentUserSerializer.json_for(user, include: %i[
                                                     children
+                                                    place
                                                     children.emergency_contacts
                                                   ]),
              status: 200

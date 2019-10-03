@@ -53,7 +53,7 @@ export function fetchUpcomingParticipatingEvents (userId, pageSize = 100) {
       }
       const events = Object.values(normedData.event).map(parseEventData)
       return events.map(e => {
-        return { event: e, user: e.host }
+        return { event: e, user: e.user }
       })
     }).catch(err => {
       logger.logError('GET PARTICIPATING EVENTS FAILURE')

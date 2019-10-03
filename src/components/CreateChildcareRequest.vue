@@ -6,7 +6,7 @@
       @prev="prevStep"
       :hidePrevious="stepIndex===0"
     />
-    <ErrorMessage v-if="errorMessage && showError" :text="errorMessage" />
+    <ErrorMessage class="childcare-request-error" v-if="errorMessage && showError" :text="errorMessage" />
     <Question v-if="stepName==='description'"
               title="Describe your childcare request"
               subtitle="Parents near you will see your request and reply by text message. What are you looking for? For what times? What kinds of needs does your child have? (Note: if you do swap childcare with a parent, we strongly recommend meeting them for a playdate first.)">
@@ -92,3 +92,13 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.childcare-request-error {
+  &.onb-error-container {
+    padding: 16px 16px 18px;
+    background-color: #ffbebe;
+    color: #c73200;
+  }
+}
+</style>

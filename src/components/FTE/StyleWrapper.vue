@@ -47,6 +47,11 @@ background-color: #f6f6f6;
 .onboarding {
   font-family: soleil, sans-serif;
 
+  .avatar-upload-button {
+    background-color: white;
+    padding: 10px 50px;
+  }
+
   .profile-photo {
     margin-bottom: 16px;
     border-radius: 50%;

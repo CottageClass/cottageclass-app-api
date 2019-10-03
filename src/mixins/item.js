@@ -54,7 +54,7 @@ export default {
       return !!this.user.facebookUid
     },
     isCurrentUser () {
-      return this.user.id.toString() === this.currentUser.id.toString()
+      return this.user && this.currentUser && this.user.id.toString() === this.currentUser.id.toString()
     },
     showGoingButton () {
       return this.event &&
@@ -97,7 +97,12 @@ export default {
       return this.user.place
     },
     distance () {
-      const center = this.mapCenter || (this.currentUser && this.currentUser.location)
+      const currentUserCenter = this.currentUser &&
+        {
+          lat: this.currentUser.place.latitude,
+          lng: this.currentUser.place.longitude
+        }
+      const center = this.mapCenter || currentUserCenter
       if (!center) { return null }
       return distanceHaversine(
         this.place.latitude || this.place.fuzzyLatitude,
