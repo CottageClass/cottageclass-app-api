@@ -176,8 +176,8 @@ export default {
       this.user = await fetchUser(this.childcareRequest.userId)
       this.events = (await fetchUpcomingEvents(this.user.id))
       const center = {
-        lat: parseFloat(this.user.fuzzyLatitude),
-        lng: parseFloat(this.user.fuzzyLongitude)
+        lat: parseFloat(this.place.fuzzyLatitude),
+        lng: parseFloat(this.place.fuzzyLongitude)
       }
       this.$nextTick(async function () {
         await this.createMap(this.$refs.map, {
