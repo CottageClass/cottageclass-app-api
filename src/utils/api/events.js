@@ -51,7 +51,7 @@ export function fetchUpcomingParticipatingEvents (userId, pageSize = 100) {
       if (!normedData.event) {
         return []
       }
-      const events = Object.values(normedData.event).map(parseEventData)
+      const events = createEvents(normedData)
       return events.map(e => {
         return { event: e, user: e.user }
       })
