@@ -1,8 +1,9 @@
 <template>
-  <StyleWrapper styleIs="onboarding">
-    <div class="onb-body">
-      <div class="body">
-        <div class="content-wrapper">
+
+  <div class="onb-body">
+    <div class="body">
+      <div class="content-wrapper">
+        <StyleWrapper styleIs="onboarding">
           <Nav button="skip" @next="$router.push({name:'Search'})" hidePrevious="true" />
           <div class="onb-content-container">
             <div class="onb-top-content-container">
@@ -18,10 +19,10 @@
               {{waveButtonText}}
             </a>
           </div>
-        </div>
+        </StyleWrapper>
       </div>
     </div>
-  </StyleWrapper>
+  </div>
 </template>
 
 <script>
