@@ -251,6 +251,17 @@ a {
   }
 }
 
+@media (max-width: 767px) {
+  .title-bar {
+    min-height: 60px;
+    background-image: url('../../assets/lilypad__logo-abbr.svg');
+    background-position: 50% 50%;
+    background-size: 36px;
+    background-repeat: no-repeat;
+  }
+}
+
+
 @media (max-width: 479px) {
   .title-bar {
     align-items: center;
