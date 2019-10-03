@@ -158,7 +158,7 @@ class User < ApplicationRecord
       # calculate scores and attach
       scored_users = others.map do |other|
         score = match_score other
-        { user: other, score: score } if score.present?
+        { user: other, score: score } if score.present? && !score.to_f.nan?
       end
       scored_users = scored_users.compact
       # sort by score
