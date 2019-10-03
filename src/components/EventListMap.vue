@@ -102,7 +102,7 @@ export default {
         for (let user of latUsers) {
           const pin = await that.addUserPin(
             user,
-            { lat: user.place.latitude, lng: user.place.longitude }
+            { lat: user.place.fuzzyLatitude, lng: user.place.fuzzyLongitude }
           )
           if (pin) {
             that.userPins.push(pin)
@@ -186,10 +186,10 @@ export default {
         ...this.mapOptions
       },
       this.idleHandler.bind(this))
+      if (this.users && this.users.length) {
+        this.updateMarkers()
+      }
     })
-    if (this.users && this.users.length) {
-      this.updateMarkers()
-    }
   }
 }
 </script>
