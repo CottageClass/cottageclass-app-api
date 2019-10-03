@@ -20,7 +20,6 @@ export const createEvents = (data, sortFunction) => {
     }
     if (data.user) {
       const userId = e.relationships.user.data.id
-      console.log({ userId })
       user = data.user[userId].attributes
     }
 
@@ -28,7 +27,6 @@ export const createEvents = (data, sortFunction) => {
       const placeId = e.relationships.place.data.id
       place = parsePlace(data.place[placeId].attributes)
     }
-    console.log({ user })
     const res = {
       user,
       place,
