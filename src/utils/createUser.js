@@ -1,4 +1,5 @@
 import { capitalize } from '@/utils/utils'
+import { parsePlace } from '@/utils/parsePlace'
 
 export const createUser = (data) => {
   return createUsers(data)[0]
@@ -13,7 +14,7 @@ export const createUsers = (data) => {
     const p = data.user[id].attributes
     const childIds = data.user[id].relationships.children.data.map(e => e.id)
     const placeId = data.user[id].relationships.place.data && data.user[id].relationships.place.data.id
-    const place = placeId && data.place && data.place[placeId].attributes
+    const place = placeId && data.place && parsePlace(data.place[placeId].attributes)
     let event = null
     const children = childIds.map(id => parseChildData(includedChildren[id])).filter(c => !!c)
     const hasAllRequiredFields = !!(p.phone && place)

@@ -1,4 +1,5 @@
 import moment from 'moment'
+import { parsePlace } from '@/utils/parsePlace'
 
 export const createEvent = (data) => {
   return createEvents(data)[0]
@@ -25,7 +26,7 @@ export const createEvents = (data, sortFunction) => {
 
     if (data.place) {
       const placeId = e.relationships.place.data.id
-      place = data.place[placeId].attributes
+      place = parsePlace(data.place[placeId].attributes)
     }
     console.log({ user })
     const res = {
