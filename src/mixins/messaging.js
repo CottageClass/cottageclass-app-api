@@ -29,8 +29,8 @@ export default {
     },
     distanceBetweenUsers () {
       return function (targetUser) {
-        const targetLocation = targetUser.location
-        return this.distanceFromCurrentUser(targetLocation.lat, targetLocation.lng)
+        const targetLocation = targetUser.place
+        return this.distanceFromCurrentUser(targetUser.place.fuzzyLatitude, targetUser.place.fuzzyLongitude)
       }
     },
     ...mapGetters([ 'currentUser', 'pendingWaves', 'distanceFromCurrentUser' ])

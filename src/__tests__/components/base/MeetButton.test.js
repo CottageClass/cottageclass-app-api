@@ -10,9 +10,9 @@ describe('MeetButton', () => {
       firstName: 'Chuck',
       lastInitial: 'D',
       childAgesInMonths: [1, 15, 99],
-      location: {
-        lat: 41.969880,
-        lng: -73.651964 },
+      place: {
+        latitude: 41.969880,
+        longitude: -73.651964 },
       employer: 'Lockheed',
       jobPosition: 'engineer'
     }
@@ -31,9 +31,9 @@ describe('MeetButton', () => {
             firstName: 'Natasha',
             childAgesInMonths: [9, 100, 54],
             locality: 'Nashville',
-            location: {
-              lat: 41.9,
-              lng: -73.6 }
+            place: {
+              latitude: 41.9,
+              longitude: -73.6 }
           },
           distanceFromCurrentUser () {
             return 4.2
@@ -85,9 +85,9 @@ describe('MeetButton', () => {
             firstName: 'Natasha',
             childAgesInMonths: [111, 2, 2],
             locality: '',
-            location: {
-              lat: 41.9,
-              lng: -73.6 }
+            place: {
+              latitude: 41.9,
+              longitude: -73.6 }
           },
           distanceFromCurrentUser () {
             return 4.2
@@ -103,9 +103,9 @@ describe('MeetButton', () => {
         firstName: 'Chuck',
         lastInitial: 'D',
         childAgesInMonths: [1, 2, 3],
-        location: {
-          lat: 41.969880,
-          lng: -73.651964 },
+        place: {
+          latitude: 41.969880,
+          longitude: -73.651964 },
         employer: 'Lockheed',
         jobPosition: 'engineer'
       }
@@ -132,9 +132,9 @@ describe('MeetButton', () => {
       firstName: 'Chuck',
       lastInitial: 'D',
       childAgesInMonths: [1, 2, 3],
-      location: {
-        lat: 41.969880,
-        lng: -73.651964 },
+      place: {
+        latitude: 41.969880,
+        longitude: -73.651964 },
       employer: 'Lockheed',
       jobPosition: 'engineer'
     }
@@ -151,9 +151,9 @@ describe('MeetButton', () => {
             firstName: 'Natasha',
             childAgesInMonths: [-1],
             locality: 'Nashville',
-            location: {
-              lat: 41.9,
-              lng: -73.6 }
+            place: {
+              latitude: 41.9,
+              longitude: -73.6 }
           },
           distanceFromCurrentUser () {
             return 4.2

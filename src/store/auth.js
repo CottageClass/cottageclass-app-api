@@ -62,7 +62,7 @@ const getters = {
   },
   distanceFromCurrentUser: (state) => (lat, lon) => {
     if (state.currentUser) {
-      return distanceHaversine(lat, lon, state.currentUser.latitude, state.currentUser.longitude)
+      return distanceHaversine(lat, lon, state.currentUser.place.latitude, state.currentUser.place.longitude)
     } else {
       return null
     }
