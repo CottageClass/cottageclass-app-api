@@ -33,6 +33,7 @@
             <div class="location-card__place-name-text line-clamp--1"
                  v-html="playdateLocationName"></div>
             <div class="location-card__address-text line-clamp--1"
+                 v-if="playdateAddress"
                  v-html="playdateAddress"></div>
           </div>
           <div class="location-icon"><img src="@/assets/circle-location.svg" alt="" class="image-5 photo-fit" /></div>
@@ -199,17 +200,17 @@ export default {
       }
     },
     playdateLocationName () {
-      if (this.event.place) {
-        return `${this.event.place.name}`
+      if (this.place.public) {
+        return this.event.place.name
       } else {
         return `The playdate will be hosted at ${this.event.user.firstName}'s home.`
       }
     },
     playdateAddress () {
-      if (this.event.place) {
-        return `${this.event.place.fullAddress}`
+      if (this.place.public) {
+        return this.event.place.fullAddress
       } else {
-        return this.event.name + `<br><br>The playdate will be hosted at ${this.event.user.firstName}'s home.`
+        return null
       }
     },
     lightboxImages () {
