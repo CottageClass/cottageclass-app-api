@@ -96,13 +96,13 @@ export default {
       // sort users by latitude when adding pins so the z index is right on the map
       if (this.users) {
         const latUsers = this.users.concat().sort((a, b) => {
-          return b.location.lat - a.location.lat
+          return b.place.latitude - a.place.latitude
         })
 
         for (let user of latUsers) {
           const pin = await that.addUserPin(
             user,
-            { lat: user.location.lat, lng: user.location.lng }
+            { lat: user.place.latitude, lng: user.place.longitude }
           )
           if (pin) {
             that.userPins.push(pin)
