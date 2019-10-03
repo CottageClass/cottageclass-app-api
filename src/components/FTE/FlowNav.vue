@@ -8,8 +8,8 @@
       <a
         v-if="button !== 'none'"
         @click="$emit('next')"
-        :class="classObject">
-        <div class="button-next-text w-button">{{ text }}</div>
+        :class="classObject"
+        class="button-next-text w-button">{{ text }}
       </a>
     </div>
   </div>
@@ -84,7 +84,7 @@ export default {
   border-radius: 4px;
   background-color: #fff;
   box-shadow: none;
-  color: #64426b;
+  color: #fff;
 }
 
 .title-bar-next-button:active {
@@ -146,7 +146,6 @@ export default {
   border-radius: 4px;
   background-color: hsla(0, 0%, 100%, .3);
   box-shadow: none;
-  color: rgba(1, 1, 1, .2);
 }
 
 /* EXISTING WORK FROM WEBFLOW MOCK */
@@ -252,6 +251,14 @@ a {
 }
 
 @media (max-width: 767px) {
+  .button-next-text {
+    top: 10px;
+    min-width: auto;
+    margin-right: 16px;
+    padding-bottom: 13px;
+    line-height: 14px;
+  }
+
   .title-bar {
     min-height: 60px;
     background-image: url('../../assets/lilypad__logo-abbr.svg');

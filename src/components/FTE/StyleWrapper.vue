@@ -1842,6 +1842,7 @@ background-color: #f6f6f6;
   }
 
   .text-area-decribe-need {
+    height: 200px;
     min-height: 120px;
     padding-top: 16px;
     padding-bottom: 16px;
@@ -1974,8 +1975,11 @@ background-color: #f6f6f6;
 
   .title-container {
   margin-bottom: 0;
-  padding: 32px;
   color: #fff;
+  }
+
+  .text-area-decribe-need {
+    height: 200px;
   }
 
   @media (max-width: 991px) {
