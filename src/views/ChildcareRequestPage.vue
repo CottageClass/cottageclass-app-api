@@ -116,6 +116,7 @@
             <OtherEvent v-for="otherEvent of otherEvents"
                         :key="otherEvent.id"
                         :event="otherEvent"
+                        @item-click="$router.push({ name: 'EventPage', params: { id: otherEvent.id } })"
                         class="other-events__title-bar"/>
           </ul>
         </div>
