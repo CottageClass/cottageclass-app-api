@@ -90,7 +90,7 @@ export default {
     item () {
       return {
         event: this.eventToShare,
-        user: this.eventToShare.host
+        user: this.eventToShare.user
       }
     },
     shareUrl: function () {
