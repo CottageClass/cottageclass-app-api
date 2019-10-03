@@ -164,7 +164,7 @@ export default {
         this.showError = false
         if (this.stepName === 'repeat-count' || this.stepName === 'time') {
           if (this.place.id !== null) {
-            this.ourPlaceId = await submitGooglePlaceIdAndFetchOurOwn(this.place.id)
+            this.ourPlaceId = await submitGooglePlaceIdAndFetchOurOwn(this.place.id, this.place.public)
           }
         }
         if (this.stepName === 'repeat-count') {

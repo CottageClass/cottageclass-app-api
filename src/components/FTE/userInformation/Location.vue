@@ -71,7 +71,7 @@ export default {
         })
       } else {
         if (this.placeId === null) { return }
-        const ourPlaceId = await submitGooglePlaceIdAndFetchOurOwn(this.placeId)
+        const ourPlaceId = await submitGooglePlaceIdAndFetchOurOwn(this.placeId, false)
 
         this.$emit('input', { err: null,
           id: ourPlaceId,
