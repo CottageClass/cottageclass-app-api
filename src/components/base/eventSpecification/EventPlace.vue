@@ -8,7 +8,7 @@
       :labels="labels" />
     <div
       class="w-form"
-      v-if="homeOrPublic == 'public'">
+      v-if="isPublic">
       <p class="describe-label">Where will it be?</p>
       <vue-google-autocomplete
         v-if="googleMapsIsLoaded"
@@ -55,7 +55,7 @@ export default {
       this.emitPlaceId()
     },
     emitPlaceId: function () {
-      this.$emit('input', { err: null, id: this.placeId })
+      this.$emit('input', { err: null, id: this.placeId, public: this.public })
     }
   },
   watch: {
@@ -64,6 +64,9 @@ export default {
     }
   },
   computed: {
+    isPublic () {
+      return this.homeOrPublic === 'public'
+    },
     errorMessage () {
       if (this.homeOrPublic === 'public' && this.placeId === null) {
         return 'Please enter an address or place for your playdate.'

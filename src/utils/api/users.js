@@ -12,7 +12,7 @@ export async function submitUserInfo (userId, data) {
 
   if (data.place) {
     if (data.place.id) {
-      postData = { ...postData, placeID: data.place.id, public: false }
+      postData = { ...postData, placeID: data.place.id }
       if (data.place.apartmentNumber) {
         postData = {
           ...postData,

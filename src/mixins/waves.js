@@ -5,11 +5,6 @@ import { initProxySession } from '@/utils/api'
 
 export default {
   mixins: [ alerts, messaging ],
-  data () {
-    return {
-      currentUserEvents: null
-    }
-  },
   computed: {
     async currentUserHasEvents () {
       return this.currentUser && this.currentUser.upcomingEventsCount > 0

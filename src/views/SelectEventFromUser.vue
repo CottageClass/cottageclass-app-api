@@ -9,7 +9,7 @@
             <div class="onb-top-content-container">
               <h1 class="onb-heading-large">{{ titleText }}</h1>
             </div>
-            <LoadingSpinner v-if="!currentUserEvents || !events" />
+            <LoadingSpinner v-if="!events" />
             <div v-else v-for="event in events">
               <OtherEvent :event="event"
                           @item-click="processRSVP(event)"/>
