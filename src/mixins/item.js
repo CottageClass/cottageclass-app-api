@@ -102,7 +102,7 @@ export default {
           lat: this.currentUser.place.latitude,
           lng: this.currentUser.place.longitude
         }
-      const center = this.mapCenter || currentUserCenter
+      const center = this.distanceCenter || currentUserCenter
       if (!center) { return null }
       return distanceHaversine(
         this.place.latitude || this.place.fuzzyLatitude,
