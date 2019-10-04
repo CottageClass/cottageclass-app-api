@@ -6,6 +6,6 @@ echo "Running $0"
 
 bundle exec rake db:migrate
 
-bundle exec rake users:create_user_places
+bundle exec rake places:update_place_details
 
 # add any scripts here that should be run on deploy
