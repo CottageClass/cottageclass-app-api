@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_04_165650) do
+ActiveRecord::Schema.define(version: 2019_10_04_190619) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -118,6 +118,20 @@ ActiveRecord::Schema.define(version: 2019_10_04_165650) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["contactable_type", "contactable_id"], name: "index_emergency_contacts_on_contactable_type_and_contactable_id"
+  end
+
+  create_table "event_collection_memberships", force: :cascade do |t|
+    t.bigint "event_id"
+    t.bigint "event_collection_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_collection_id"], name: "index_event_collection_memberships_on_event_collection_id"
+    t.index ["event_id"], name: "index_event_collection_memberships_on_event_id"
+  end
+
+  create_table "event_collections", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "event_series", force: :cascade do |t|
@@ -470,6 +484,8 @@ ActiveRecord::Schema.define(version: 2019_10_04_165650) do
   add_foreign_key "dark_stars", "users", column: "giver_id"
   add_foreign_key "dark_stars", "users", column: "recipient_id"
   add_foreign_key "devices", "users"
+  add_foreign_key "event_collection_memberships", "event_collections"
+  add_foreign_key "event_collection_memberships", "events"
   add_foreign_key "event_series", "places"
   add_foreign_key "messages", "twilio_sessions", column: "cc_twilio_session_id"
   add_foreign_key "messages", "users", column: "receiver_id"
