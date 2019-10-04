@@ -55,7 +55,7 @@ export default {
       this.emitPlaceId()
     },
     emitPlaceId: function () {
-      this.$emit('input', { err: null, id: this.placeId, public: this.public })
+      this.$emit('input', { err: null, id: this.placeId, public: this.isPublic })
     }
   },
   watch: {
