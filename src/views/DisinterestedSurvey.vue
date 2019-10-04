@@ -69,8 +69,8 @@ export default {
         otherUserId: this.userId,
         otherUserAgesInMonths: this.otherUser.childAgesInMonths,
         distanceBetweenUsers: this.distanceFromCurrentUser(
-          this.otherUser.location.lat,
-          this.otherUser.location.lng
+          this.otherUser.place.latitude,
+          this.otherUser.place.longitude
         ),
         reasons: this.reasons,
         otherText: this.otherText }, 'darkStars')

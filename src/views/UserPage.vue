@@ -233,15 +233,19 @@ export default {
       }
       this.events = (await fetchUpcomingEvents(this.$route.params.id))
       this.$nextTick(async function () {
+        const center = {
+          lat: parseFloat(this.user.place.fuzzyLatitude),
+          lng: parseFloat(this.user.place.fuzzyLongitude)
+        }
+
         await this.createMap(this.$refs.map, {
           zoom: 13,
-          center: { lat: parseFloat(this.user.fuzzyLatitude),
-            lng: parseFloat(this.user.fuzzyLongitude) },
+          center,
           disableDefaultUI: true,
           options: this.mapOptions,
           style: 'width: 100px; height: 230px;'
         })
-        await this.addCircle({ lat: this.user.fuzzyLatitude, lng: this.user.fuzzyLongitude }, 0.2)
+        await this.addCircle(center, 0.2)
       })
     },
     updateUser (user) {

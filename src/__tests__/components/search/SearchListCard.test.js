@@ -5,7 +5,10 @@ describe('SearchListCard', () => {
   const $store = {
     getters: {
       waveHasBeenSent: () => false,
-      currentUser: { id: 100000 },
+      currentUser: {
+        id: 100000,
+        place: { latitude: 20, longitude: 10 }
+      },
       isAuthenticated: false
     }
   }
@@ -15,6 +18,7 @@ describe('SearchListCard', () => {
       propsData: {
         item: {
           user: {
+            place: { latitude: 42.27, longitude: -71.78 },
             id: 12,
             firstName: 'Foo',
             lastInitial: 'B',
@@ -26,8 +30,6 @@ describe('SearchListCard', () => {
             availableAfternoons: false,
             availableWeekends: true,
             availableEvenings: false,
-            fuzzyLatitude: 42.27,
-            fuzzyLongitude: -71.78,
             images: [
               'https://res.cloudinary.com/cottageclass2/image/upload/v1559762128/user_images/2012-04-06_21.02.13_egjide.png',
               'https://res.cloudinary.com/cottageclass2/image/upload/v1559762128/user_images/2012-04-06_21.02.13_egjide.png',
@@ -68,10 +70,10 @@ describe('SearchListCard', () => {
       propsData: {
         item: {
           user: {
+            place: { latitude: 42.27, longitude: -71.78 },
             id: 22,
             facebookUid: '563930223',
             childAgesInMonths: [1],
-            location: { lat: 42.27, lng: -71.78 },
             images: []
           }
         },
@@ -91,15 +93,17 @@ describe('SearchListCard', () => {
 
   it('allows no center', () => {
     const wrapper = mount(SearchListCard, {
-      mocks: { $store },
+      mocks: { $store: {
+        getters: {
+          currentUser: null,
+          waveHasBeenSent: () => false,
+          isAuthenticated: false
+        } } },
       propsData: {
         item: {
           user: {
-            id: 22
-          // facebookUid: '563930223',
-          // childAgesInMonths: [1],
-          // location: { lat: 42.27, lng: -71.78 },
-          // images: []
+            id: 22,
+            place: { latitude: 1, longitude: 2 }
           }
         }
       }

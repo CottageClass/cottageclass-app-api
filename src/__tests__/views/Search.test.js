@@ -19,6 +19,7 @@ describe('Search', () => {
         getters: {
           pendingWaves: () => [],
           currentUser () { return null },
+          showFetchMoreButton () { return false },
           isAuthenticated () { return false },
           items () { return [] },
           lastPage () { return 0 },

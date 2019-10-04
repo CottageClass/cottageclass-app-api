@@ -37,9 +37,11 @@ const actions = {
     } else {
       const currentUser = createUser(normalize(getters.parsedJWT.user))
       commit('setCurrentUser', { user: currentUser })
-      commit('setMapArea', {
-        center: { lat: currentUser.latitude, lng: currentUser.longitude }
-      })
+      if (currentUser.place) {
+        commit('setMapArea', {
+          center: { lat: currentUser.place.latitude, lng: currentUser.place.longitude }
+        })
+      }
     }
   }
 }
@@ -60,7 +62,7 @@ const getters = {
   },
   distanceFromCurrentUser: (state) => (lat, lon) => {
     if (state.currentUser) {
-      return distanceHaversine(lat, lon, state.currentUser.latitude, state.currentUser.longitude)
+      return distanceHaversine(lat, lon, state.currentUser.place.latitude, state.currentUser.place.longitude)
     } else {
       return null
     }

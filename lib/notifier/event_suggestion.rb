@@ -6,7 +6,6 @@ class Notifier::EventSuggestion < Notifier::Base
 
   def email
     dump_mail_template_parameters name: 'EventSuggestion.json'
-    pp mail_template_parameters.deep_stringify_keys
     response = @sendgrid_client.send_mail to: [@user],
                                           from: @sender_email,
                                           template_id: ENV.fetch('SENDGRID_TEMPLATE_EVENT_SUGGESTION'),
@@ -31,7 +30,7 @@ class Notifier::EventSuggestion < Notifier::Base
                       time_range: @event.time_range,
                       start_time: @event.start_time,
                       end_time: @event.end_time,
-                      host_first_name: @event.host_first_name
+                      host_first_name: @event.user.first_name
 
     params = super.update event: event_hash
     family_members = ['you'] + @user.children.pluck(:first_name)

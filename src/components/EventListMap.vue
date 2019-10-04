@@ -96,13 +96,13 @@ export default {
       // sort users by latitude when adding pins so the z index is right on the map
       if (this.users) {
         const latUsers = this.users.concat().sort((a, b) => {
-          return b.location.lat - a.location.lat
+          return b.place.latitude - a.place.latitude
         })
 
         for (let user of latUsers) {
           const pin = await that.addUserPin(
             user,
-            { lat: user.location.lat, lng: user.location.lng }
+            { lat: user.place.fuzzyLatitude, lng: user.place.fuzzyLongitude }
           )
           if (pin) {
             that.userPins.push(pin)
@@ -186,10 +186,10 @@ export default {
         ...this.mapOptions
       },
       this.idleHandler.bind(this))
+      if (this.users && this.users.length) {
+        this.updateMarkers()
+      }
     })
-    if (this.users && this.users.length) {
-      this.updateMarkers()
-    }
   }
 }
 </script>

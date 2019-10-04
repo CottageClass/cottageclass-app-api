@@ -14,7 +14,7 @@
       required="true" />
     <Location
       v-if="stepName==='location'"
-      v-model="location"
+      v-model="place"
       @pressedEnter="nextStep"
       required="true"/>
     <Children
@@ -68,7 +68,7 @@ export default {
     return {
       context: 'onboarding',
       phone: { err: null },
-      location: { err: null },
+      place: { err: null },
       children: { err: null },
       employment: { err: null },
       facebookImages: { err: null },
@@ -95,7 +95,7 @@ export default {
       const models = {
         bio: this.profileBlurb,
         phone: this.phone,
-        location: this.location,
+        location: this.place,
         children: this.children,
         employment: this.employment,
         images: this.images,
@@ -131,7 +131,7 @@ export default {
           params = { phone: this.phone }
           break
         case 'location':
-          params = { location: this.location }
+          params = { place: this.place }
           break
         case 'children':
           params = { children: this.children.list }
@@ -162,7 +162,7 @@ export default {
         } else {
           if (this.stepName === 'location') {
             this.$store.commit('setMapArea', {
-              center: { lat: this.location.lat, lng: this.location.lng },
+              center: this.place.latlng,
               maxDistance: 5
             })
           }
@@ -170,7 +170,6 @@ export default {
           this.trackStep('user-info')
 
           const nextStepName = this.stepSequence[this.stepIndex + 1]
-          this.debug({ nextStepName })
 
           if (nextStepName === 'images' && !this.currentUser.facebookUid) {
             this.$emit('finished')

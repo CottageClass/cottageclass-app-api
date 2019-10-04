@@ -4,12 +4,11 @@ module Eventable
   extend ActiveSupport::Concern
 
   included do
-    before_validation :common_cleanup, :generate_time_zone
+    before_validation :common_cleanup
 
     validates :name, presence: true
     validates :starts_at, presence: true
     validates :ends_at, presence: true
-    validates :time_zone, presence: true
     validates :maximum_children, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
     validates :child_age_minimum, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
     validates :child_age_maximum, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
@@ -18,7 +17,7 @@ module Eventable
   end
 
   def in_instance_time_zone(time)
-    time_zone.present? ? time.in_time_zone(time_zone) : time
+    place.present? && place.time_zone.present? ? time.in_time_zone(place.time_zone) : time
   end
 
   def common_cleanup
@@ -26,11 +25,5 @@ module Eventable
     self.maximum_children ||= 0
     self.child_age_minimum ||= 0
     self.child_age_maximum ||= 0
-  end
-
-  def generate_time_zone
-    self.time_zone ||= if user.latitude.present? && user.longitude.present?
-                         Locator.time_zone_for latitude: user.latitude, longitude: user.longitude
-                       end
   end
 end

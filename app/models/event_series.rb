@@ -10,9 +10,15 @@ class EventSeries < ApplicationRecord
   has_many :events, inverse_of: :event_series, dependent: :destroy
 
   before_validation :cleanup
-  after_create :create_events
+  after_create :set_users_home
+  after_save :create_events
 
   private
+
+  def set_users_home
+    # if no place has been set, use the creators home
+    place ||= user.place
+  end
 
   def create_events
     0.step(by: interval).take(repeat_for).each { |number| create_event new_date: number.weeks.since(start_date) }
@@ -25,14 +31,13 @@ class EventSeries < ApplicationRecord
       maximum_children
       child_age_minimum
       child_age_maximum
-      time_zone
     ].each { |attribute| event.send format('%s=', attribute), send(attribute) }
     event.save
   end
 
   def date_time(date, time)
-    if time_zone.present?
-      Time.use_zone(time_zone) { Time.zone.parse format('%s %s', date.strftime('%F'), time.strftime('%T')) }
+    if place&.time_zone.present?
+      Time.use_zone(place.time_zone) { Time.zone.parse format('%s %s', date.strftime('%F'), time.strftime('%T')) }
     end
   end
 

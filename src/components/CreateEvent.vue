@@ -102,7 +102,7 @@ export default {
             'child_age_maximum': 18,
             'repeat_for': this.repeatCount.number || 1,
             'interval': 1,
-            'place_id': this.ourPlaceId
+            'place_id': this.ourPlaceId || this.currentUser.place.id
           }
         }
       }
@@ -164,7 +164,7 @@ export default {
         this.showError = false
         if (this.stepName === 'repeat-count' || this.stepName === 'time') {
           if (this.place.id !== null) {
-            this.ourPlaceId = await submitGooglePlaceIdAndFetchOurOwn(this.place.id)
+            this.ourPlaceId = await submitGooglePlaceIdAndFetchOurOwn(this.place.id, this.place.public)
           }
         }
         if (this.stepName === 'repeat-count') {

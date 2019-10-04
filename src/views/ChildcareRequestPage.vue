@@ -116,6 +116,7 @@
             <OtherEvent v-for="otherEvent of otherEvents"
                         :key="otherEvent.id"
                         :event="otherEvent"
+                        @item-click="$router.push({ name: 'EventPage', params: { id: otherEvent.id } })"
                         class="other-events__title-bar"/>
           </ul>
         </div>
@@ -175,16 +176,19 @@ export default {
     fetchUser: async function () {
       this.user = await fetchUser(this.childcareRequest.userId)
       this.events = (await fetchUpcomingEvents(this.user.id))
+      const center = {
+        lat: parseFloat(this.place.fuzzyLatitude),
+        lng: parseFloat(this.place.fuzzyLongitude)
+      }
       this.$nextTick(async function () {
         await this.createMap(this.$refs.map, {
           zoom: 13,
-          center: { lat: parseFloat(this.user.fuzzyLatitude),
-            lng: parseFloat(this.user.fuzzyLongitude) },
+          center,
           disableDefaultUI: true,
           options: this.mapOptions,
           style: 'width: 100px; height: 230px;'
         })
-        await this.addCircle({ lat: this.user.fuzzyLatitude, lng: this.user.fuzzyLongitude }, 0.2)
+        await this.addCircle(center, 0.2)
       })
       this.otherEvents = (await fetchUpcomingEvents(this.user.id))
     },

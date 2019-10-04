@@ -23,11 +23,6 @@ RSpec.describe Event, type: :model do
   end
 
   context 'create' do
-    it 'generates time zone' do
-      subject.time_zone = nil
-      expect { subject.save }.to change(subject, :time_zone).from(nil)
-    end
-
     context 'search_list_items' do
       it {
         subject.save

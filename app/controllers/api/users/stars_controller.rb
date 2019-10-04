@@ -22,7 +22,7 @@ class API::Users::StarsController < API::StarsController
   def render_starable(status:)
     user = User.find(params[:user_id])
     serializer = PublicUserSerializer.new user,
-                                          include: %i[children],
+                                          include: %i[children place],
                                           params: { current_user: current_user }
     render json: serializer.serializable_hash, status: status
   end

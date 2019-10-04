@@ -30,6 +30,7 @@
 import GoogleMapsLoader from 'google-maps'
 import VueGoogleAutocomplete from 'vue-google-autocomplete'
 import Question from '@/components/base/Question.vue'
+import { submitGooglePlaceIdAndFetchOurOwn } from '@/utils/api'
 
 export default {
   name: 'Location',
@@ -42,6 +43,8 @@ export default {
       apartmentNumber: this.currentApartment || '',
       placeholder: this.currentAddress || 'Street address (not apt #)',
       address: {},
+      placeId: null,
+      latlng: null,
       googleMapsIsLoaded: false
     }
   },
@@ -61,42 +64,34 @@ export default {
     toggleApartmentField: function () {
       this.showApartmentField = true
     },
-    getAddressData: function (addressData, placeResultData, id) {
-      let placeResultObject = {}
-      placeResultData.address_components.forEach(e =>
-        e.types.forEach(type => (placeResultObject[type] = e.long_name))
-      )
-      this.address = { ...addressData, ...placeResultObject }
-      if (!this.address.locality) {
-        this.address.locality = ''
-      }
-      this.emitAddress()
-    },
-    emitAddress: function () {
-      this.log('emitting address')
-      if (this.address.latitude) {
+    async emitPlace () {
+      if (this.err) {
         this.$emit('input', {
-          fullAddress: this.address,
-          lat: this.address.latitude,
-          lng: this.address.longitude,
-          apartmentNumber: this.apartmentNumber,
-          err: this.err
-        })
-      } else if (this.apartmentNumber) {
-        this.$emit('input', {
-          apartmentNumber: this.apartmentNumber,
           err: this.err
         })
       } else {
-        this.$emit('input', {
-          err: this.err
+        if (this.placeId === null) { return }
+        const ourPlaceId = await submitGooglePlaceIdAndFetchOurOwn(this.placeId, false)
+
+        this.$emit('input', { err: null,
+          id: ourPlaceId,
+          latlng: this.latlng,
+          apartmentNumber: this.apartmentNumber
         })
       }
+    },
+    getAddressData: function (addressData, placeResultData, id) {
+      this.latlng = {
+        lat: addressData.latitude,
+        lng: addressData.longitude
+      }
+      this.placeId = placeResultData.place_id
+      this.emitPlace()
     }
   },
   computed: {
     err: function () {
-      if (this.required && (isNaN(this.address.latitude) || isNaN(this.address.longitude))) {
+      if (this.required && (isNaN(this.latlng.lat) || isNaN(this.latlng.lng))) {
         return 'There was a problem processing your street address. Try again?'
       } else {
         return false
@@ -105,10 +100,10 @@ export default {
   },
   watch: {
     apartmentNumber: function () {
-      this.emitAddress()
+      this.emitPlace()
     },
     err: function () {
-      this.emitAddress()
+      this.emitPlace()
     }
   }
 }

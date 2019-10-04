@@ -14,14 +14,6 @@ RSpec.resource 'Place' do
       parameter :google_id, 'Google Places Id', required: true
       parameter :public, 'Reveal details to all users', required: true
     end
-
-    post '/api/places', format: :json do
-      let(:google_id) { 'UNIQUE_SOME_LONG_GOOGLE_STRING' }
-      let(:public) { true }
-      example_request 'update:success' do
-        expect(response_status).to eq(201)
-      end
-    end
   end
 
   context 'unauthorized' do

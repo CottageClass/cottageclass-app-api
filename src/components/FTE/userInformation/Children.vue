@@ -1,7 +1,7 @@
 <template>
   <Question
     title="Child Information"
-    subtitle="Only the hosts of playdates you attend will see names, and birthdays are private. (We only collect them so we can show correct ages for each family's children, to help you find friends!)">
+    subtitle="To match parents with kids of similar ages, we need to know the year and month each child was born. Ages are visible on the site, but names (and school, if you enter one) are private. If you're expecting (yay!) you can enter a due date.">
     <ManyFormFieldGroups
       :fieldGroups="fieldGroups"
       headingWord="Child"
@@ -22,28 +22,7 @@ export default {
   data () {
     return {
       children: this.value.list || [],
-      errorMesg: 'Please enter a first name (or nickname) and birthdate for each child.',
-      fieldGroups: [
-        {
-          name: 'firstName',
-          label: 'First Name (or nickname)',
-          placeholder: 'First Name',
-          type: 'text'
-        },
-        {
-          name: 'birthday',
-          label: 'Birthday (approximate is okay)',
-          placeholder: 'MM YYYY',
-          type: 'select',
-          selectData: 'February'
-        },
-        {
-          name: 'schoolName',
-          label: 'School Name (optional)',
-          placeholder: 'Name of School',
-          type: 'text'
-        }
-      ]
+      errorMesg: 'Please enter a first name (or nickname) and birthdate for each child.'
     }
   },
   computed: {
@@ -51,9 +30,9 @@ export default {
       // child has name and birthday
       let childValidates = function (child) {
         return (
-          child.birthday &&
+          child.birthMonth &&
+          child.birthYear &&
           child.firstName &&
-          child.birthday.length > 0 &&
           child.firstName.length > 0
         )
       }
@@ -71,6 +50,56 @@ export default {
       } else {
         return this.errorMesg
       }
+    },
+    listOfYears: function () {
+      const year = new Date().getFullYear()
+      return Array.from({ length: 20 }, (value, index) => year - index)
+    },
+    fieldGroups: function () {
+      return [
+        {
+          name: 'firstName',
+          label: 'First Name (or nickname)',
+          placeholder: 'First Name',
+          type: 'text'
+        },
+        {
+          name: 'birthYear',
+          label: 'Birth Year',
+          placeholder: 'Select',
+          type: 'select',
+          selectData: this.listOfYears.map(x => {
+            return { text: x, value: x }
+          }
+          )
+        },
+        {
+          name: 'birthMonth',
+          label: 'Birth Month',
+          placeholder: 'Select',
+          type: 'select',
+          selectData: [
+            { text: 'January', value: '01' },
+            { text: 'February', value: '02' },
+            { text: 'March', value: '03' },
+            { text: 'April', value: '04' },
+            { text: 'May', value: '05' },
+            { text: 'June', value: '06' },
+            { text: 'July', value: '07' },
+            { text: 'August', value: '08' },
+            { text: 'September', value: '09' },
+            { text: 'October', value: '10' },
+            { text: 'November', value: '11' },
+            { text: 'December', value: '12' }
+          ]
+        },
+        {
+          name: 'schoolName',
+          label: 'School Name (optional)',
+          placeholder: 'Name of School',
+          type: 'text'
+        }
+      ]
     }
   },
   mounted: function () {
@@ -79,6 +108,7 @@ export default {
       err: this.err
     })
   },
+
   watch: {
     children: {
       handler: function () {

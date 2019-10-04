@@ -1,14 +1,15 @@
 <template>
-  <StyleWrapper styleIs="onboarding">
-    <div class="onb-body">
-      <div class="body">
-        <div class="content-wrapper">
+
+  <div class="onb-body">
+    <div class="body">
+      <div class="content-wrapper">
+        <StyleWrapper styleIs="onboarding">
           <Nav button="skip" @next="$router.push({name:'Search'})" hidePrevious="true" />
           <div class="onb-content-container">
             <div class="onb-top-content-container">
               <h1 class="onb-heading-large">{{ titleText }}</h1>
             </div>
-            <LoadingSpinner v-if="!currentUserEvents || !events" />
+            <LoadingSpinner v-if="!events" />
             <div v-else v-for="event in events">
               <OtherEvent :event="event"
                           @item-click="processRSVP(event)"/>
@@ -18,10 +19,10 @@
               {{waveButtonText}}
             </a>
           </div>
-        </div>
+        </StyleWrapper>
       </div>
     </div>
-  </StyleWrapper>
+  </div>
 </template>
 
 <script>
