@@ -31,7 +31,7 @@ storiesOf('SearchListCard', module)
           profileBlurb: text('blurb', 'Let me tell you all about me!  I am a super fast runner and I can bake cookies')
         }
       },
-      mapCenter: {
+      distanceCenter: {
         default: {
           lat: number('map lattitude', 43.1),
           lng: number('map longitude', -71.1)

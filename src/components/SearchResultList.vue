@@ -4,7 +4,7 @@
       <div v-for="item in (items || [])">
         <SearchListCard
           :item="item"
-          :mapCenter="mapArea.center"
+          :distanceCenter="mapArea.center"
           :key="item.id"
           @user-updated="$emit('user-updated', $event)"
           @event-deleted="$emit('event-deleted', id)"

@@ -199,6 +199,14 @@ export default {
         lng: this.place.longitude || this.place.fuzzyLongitude
       }
     },
+    distanceCenter () {
+      if (!this.currentUser) { return null }
+      const place = this.currentUser.place
+      return {
+        lat: place.latitude || place.fuzzyLatitude,
+        lng: place.longitude || place.fuzzyLongitude
+      }
+    },
     playdateLocationName () {
       if (this.place.public) {
         return this.event.place.name

@@ -102,7 +102,7 @@ export default {
           lat: this.currentUser.place.latitude,
           lng: this.currentUser.place.longitude
         }
-      const center = this.mapCenter || currentUserCenter
+      const center = this.distanceCenter || currentUserCenter
       if (!center) { return null }
       return distanceHaversine(
         this.place.latitude || this.place.fuzzyLatitude,
@@ -173,9 +173,6 @@ export default {
       }
       return 'Children ages ' + andJoin(ages.map((e, i) => this.ageString(i)))
     },
-    user () {
-      return this.item.user
-    },
     userFirstName () {
       return this.user && this.user.firstName
     },
@@ -205,23 +202,10 @@ export default {
       return this.user.petDescription || (this.event && this.event.petDescription)
     },
     localArea () {
-      var neighborhood = this.user.neighborhood
-      var sublocality = ''
-      if (this.user.locality) {
-        sublocality = this.user.locality
-      } else {
-        sublocality = this.user.sublocality
-      }
-      var stateName = this.user.adminAreaLevel1
-      if (neighborhood && sublocality && stateName) {
-        return neighborhood + ', ' + sublocality + ', ' + stateName
-      } else if (neighborhood && stateName) {
-        return neighborhood + ', ' + stateName
-      } else if (sublocality && stateName) {
-        return sublocality && stateName
-      } else if (stateName) {
-        return stateName
-      }
+      const neighborhood = this.place.neighborhood
+      const cityOrBoro = this.place.locality || this.place.vicinity
+      const state = this.place.adminAreaLevel1
+      return [neighborhood, cityOrBoro, state].filter(e => !!e).join(', ')
     },
     occupation () {
       const position = capitalize(this.user.jobPosition)

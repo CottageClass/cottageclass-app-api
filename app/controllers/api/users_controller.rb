@@ -24,7 +24,8 @@ class API::UsersController < API::BaseController
                                                     children
                                                     place
                                                     children.emergency_contacts
-                                                  ]),
+                                                  ],
+                                                        params: { current_users_place: true }),
              status: 200
     else
       render json: { errors: user.errors.full_messages }, status: 400

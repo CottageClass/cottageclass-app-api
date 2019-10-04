@@ -19,6 +19,7 @@ class PlaceSerializer < BaseSerializer
   # public aspects of place
   attributes :public,
              :locality,
+             :vicinity,
              :sublocality,
              :neighborhood,
              :admin_area_level_1,
