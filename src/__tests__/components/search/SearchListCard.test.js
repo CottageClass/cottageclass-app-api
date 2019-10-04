@@ -40,7 +40,7 @@ describe('SearchListCard', () => {
             ]
           }
         },
-        mapCenter: { lat: 42.2798695, lng: -71.7898409 }
+        distanceCenter: { lat: 42.2798695, lng: -71.7898409 }
       }
     })
     const userName = wrapper.find('.user-info__name')
