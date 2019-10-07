@@ -1,4 +1,4 @@
-t<template>
+<template>
   <Question title="What ages are welcome?" subtitle="Select the youngest and oldest children you can host. Try to be as flexible as possible.">
     <form class="form">
       <Dropdown v-model="minimum" :choices="choices" />
