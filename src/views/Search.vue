@@ -21,7 +21,6 @@
         <div class="divider-2px"></div>
         <GetTheMost
           @offer-playdate-click="offerPlaydate"
-          @request-childcare-click="requestChildcare"
         />
         <div class="main-container w-container">
 

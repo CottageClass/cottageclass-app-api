@@ -63,7 +63,6 @@
         :showMeetButton="showMeetButton"
         :showShareButton="showShareButton"
         :showInterestedButton="showInterestedButton"
-        :showContactButton="showContactButton"
         :showCancelButton="!doNotShowCancel && showCancelButton"
         :allowWaveUndo="true"/>
       <SearchListCardActionsOverlay
@@ -82,7 +81,6 @@
         :showGoingButton="showGoingButton"
         :showMeetButton="showMeetButton"
         :showShareButton="showShareButton"
-        :showContactButton="showContactButton"
         :showInterestedButton="showInterestedButton"
         :showCancelButton="!doNotShowCancel && showCancelButton"
         :allowWaveUndo="true"/>

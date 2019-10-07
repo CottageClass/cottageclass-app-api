@@ -86,9 +86,6 @@ a {
     &.offer-playdate {
       background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.03), rgba(0, 0, 0, 0.03)), url('../../assets/heart__blue.svg');
     }
-    &.request-chilcdare{
-      background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.03), rgba(0, 0, 0, 0.03)), url('../../assets/megaphone__blue.svg');
-    }
   }
 
 }

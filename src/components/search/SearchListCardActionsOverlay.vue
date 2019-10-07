@@ -19,7 +19,6 @@
         :showGoingButton="showGoingButton"
         :showMeetButton="showMeetButton"
         :showCancelButton="showCancelButton"
-        :showContactButton="showContactButton"
         :showShareButton="showShareButton"
         :showInterestedButton="showInterestedButton"
         :allowWaveUndo="allowWaveUndo"/>
@@ -36,7 +35,6 @@ export default {
     showInterestedButton: { default: false },
     showMeetButton: { default: false },
     showCancelButton: { default: false },
-    showContactButton: { default: false },
     user: { required: true },
     allowWaveUndo: { default: false },
     event: {}

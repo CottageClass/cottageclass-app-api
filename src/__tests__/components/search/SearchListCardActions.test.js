@@ -19,7 +19,6 @@ describe('SearchListCardActions', () => {
           showGoingButton: true,
           showCancelButton: true,
           showShareButton: true,
-          showContactButton: true,
           showInterestedButton: true,
           event,
           user
