@@ -29,11 +29,7 @@
       v-else-if="stepName==='repeat-count'"
       v-model="repeatCount"
     />
-    <SocialInvite
-      v-else-if="stepName==='social-invite'"
-      v-model="socialInvite"
-    />
-  </div> 
+  </div>
 </template>
 
 <script>
@@ -45,7 +41,6 @@ import EventTime from '@/components/base/eventSpecification/EventTime'
 import EventDescription from '@/components/base/eventSpecification/EventDescription'
 import EventPlace from '@/components/base/eventSpecification/EventPlace'
 import MultipleTimeSelector from '@/components/base/eventSpecification/MultipleTimeSelector.vue'
-import SocialInvite from '../views/SocialInvite.vue'
 import Nav from '@/components/FTE/Nav'
 
 import { submitEventSeriesData, submitGooglePlaceIdAndFetchOurOwn } from '@/utils/api'
@@ -57,7 +52,7 @@ import { stepNavigation, alerts } from '@/mixins'
 
 export default {
   name: 'CreateEvent',
-  components: { EventDescription, EventPlace, Nav, MultipleTimeSelector, ErrorMessage, EventDatePicker, EventTime, RepeatCount, LoadingSpinner, SocialInvite },
+  components: { EventDescription, EventPlace, Nav, MultipleTimeSelector, ErrorMessage, EventDatePicker, EventTime, RepeatCount, LoadingSpinner },
   mixins: [stepNavigation, alerts],
   props: ['stepName', 'context'],
   data () {
@@ -75,7 +70,7 @@ export default {
   },
   computed: {
     stepSequence () {
-      return ['place', 'description', 'availability', 'repeat-count', 'date', 'time', 'social-invite']
+      return ['place', 'description', 'availability', 'repeat-count', 'date', 'time']
     },
     scheduleStart () {
       return moment()
