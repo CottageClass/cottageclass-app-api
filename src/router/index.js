@@ -95,7 +95,7 @@ export default new Router({
       name: 'Parents',
       component: Search,
       props: {
-        itemType: 'user'
+        itemType: 'all'
       }
     },
     {
