@@ -21,7 +21,6 @@
         <div class="divider-2px"></div>
         <GetTheMost
           @offer-playdate-click="offerPlaydate"
-          @request-childcare-click="requestChildcare"
         />
         <div class="main-container w-container">
 
@@ -146,9 +145,6 @@ export default {
     },
     offerPlaydate () {
       this.$router.push({ name: 'NewEvent' })
-    },
-    requestChildcare () {
-      this.$router.push({ name: 'RequestChildcare' })
     },
     async fetchMoreItems () {
       try {

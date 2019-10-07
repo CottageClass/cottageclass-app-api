@@ -97,7 +97,6 @@ class User < ApplicationRecord
            inverse_of: :recipient,
            dependent: :destroy
 
-  has_many :childcare_requests, inverse_of: :user, dependent: :destroy
 
   belongs_to :showcase_event, class_name: 'Event', optional: true
   belongs_to :place, inverse_of: :users, optional: true

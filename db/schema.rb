@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_04_190619) do
+ActiveRecord::Schema.define(version: 2019_10_07_172333) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,13 +69,6 @@ ActiveRecord::Schema.define(version: 2019_10_04_190619) do
     t.datetime "started_at"
     t.index ["user_id"], name: "index_ahoy_visits_on_user_id"
     t.index ["visit_token"], name: "index_ahoy_visits_on_visit_token", unique: true
-  end
-
-  create_table "childcare_requests", force: :cascade do |t|
-    t.bigint "user_id"
-    t.text "content"
-    t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
-    t.index ["user_id"], name: "index_childcare_requests_on_user_id"
   end
 
   create_table "children", force: :cascade do |t|
@@ -479,7 +472,6 @@ ActiveRecord::Schema.define(version: 2019_10_04_190619) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
-  add_foreign_key "childcare_requests", "users"
   add_foreign_key "children", "users", column: "parent_id"
   add_foreign_key "dark_stars", "users", column: "giver_id"
   add_foreign_key "dark_stars", "users", column: "recipient_id"
