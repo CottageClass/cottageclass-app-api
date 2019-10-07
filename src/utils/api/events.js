@@ -1,7 +1,6 @@
 import axios from 'axios'
 import normalize from 'json-api-normalizer'
 
-import { capitalize } from '@/utils/utils'
 import { createEvent, createEvents } from '../createEvent'
 import Logger from '@/utils/logger'
 
@@ -52,9 +51,9 @@ export function fetchUpcomingParticipatingEvents (userId, pageSize = 100) {
       if (!normedData.event) {
         return []
       }
-      const events = Object.values(normedData.event).map(parseEventData)
+      const events = createEvents(normedData)
       return events.map(e => {
-        return { event: e, user: e.host }
+        return { event: e, user: e.user }
       })
     }).catch(err => {
       logger.logError('GET PARTICIPATING EVENTS FAILURE')
@@ -132,11 +131,5 @@ function parseEventData (obj) {
   var e = obj.attributes
   e.participants = obj.relationships.participants.data
   e['id'] = obj.id
-  e.hostFirstName = capitalize(e.hostFirstName)
-  e.hostFuzzyLatitude = parseFloat(e.hostFuzzyLatitude)
-  e.hostFuzzyLongitude = parseFloat(e.hostFuzzyLongitude)
-  if (e.host && e.host.data) {
-    e.host = e.host.data.attributes
-  }
   return e
 }

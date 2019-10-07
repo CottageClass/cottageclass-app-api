@@ -26,16 +26,24 @@
           <div class="user-action-card__header__date">{{timeHeader}}</div>
           <div v-if="distance" class="user-action-card__header__distance">{{distance}}</div>
         </div>
-        <div class="user-action-card__description">
-          <div class="user-action-card__description-text"
-               v-html="nameWithPlace" />
+        <div class="user-action-card__description-text"
+             v-html="this.event.name" />
+        <div class="event-summary-card__location">
+          <div class="location-card__text-group">
+            <div class="location-card__place-name-text line-clamp--1"
+                 v-html="playdateLocationName"></div>
+            <div class="location-card__address-text line-clamp--1"
+                 v-if="playdateAddress"
+                 v-html="playdateAddress"></div>
+          </div>
+          <div class="location-icon"><img src="@/assets/circle-location.svg" alt="" class="image-5 photo-fit" /></div>
         </div>
         <div class="user-action-card__footer">
           <div class="user-action-card__footer__user-summary">
-            <router-link :to="{name:'UserPage', params:{id: event.hostId}}"
+            <router-link :to="{name:'UserPage', params:{id: event.user.id}}"
                          class="avatar-container">
               <AvatarImage className="user-action-card__photo"
-                           :person="{facebookUid: event.hostFacebookUid, avatar: event.hostAvatar}"
+                           :person="{facebookUid: event.user.facebookUid, avatar: event.user.avatar}"
                            imageSize="100"/>
               <div v-if="verified" class="badge-verified">
                 <div class="unicode-character">✓</div>
@@ -44,7 +52,7 @@
             </router-link>
             <div class="user-action-card__user-info--container">
               <div class="user-action-card__user-info_list">
-                <router-link :to="{name:'UserPage', params:{id: event.hostId}}"
+                <router-link :to="{name:'UserPage', params:{id: event.user.id}}"
                              class="user-action-card__user-info__name">
                   {{ userName }}</router-link>
                 <div class="user-action-card__user-info__occupation truncate">{{occupation}}</div>
@@ -55,7 +63,7 @@
           <div class="user-action-card__footer__actions">
             <SearchListCardActions
               class="column-list"
-              :user="event.host"
+              :user="event.user"
               :event="event"
               @user-updated="updateUser"
               @interested-click="interestedClickWithPrompts('card')"
@@ -134,7 +142,7 @@
         <div v-if="otherEvents" class="event-detail__column-right w-col w-col-4 w-col-stack">
           <ul class="other-events__list">
             <li class="other-events__title-bar">
-              <div class="other-events__title-text truncate">{{userFirstName}}'s offers</div>
+              <div class="other-events__title-text truncate">{{user.firstName}}'s offers</div>
             </li>
             <OtherEvent v-for="otherEvent of otherEvents"
                         :key="otherEvent.id"
@@ -186,23 +194,31 @@ export default {
   },
   computed: {
     mapCenter () {
-      if (this.event.place) {
-        return {
-          lat: this.event.place.latitude,
-          lng: this.event.place.longitude
-        }
-      } else {
-        return {
-          lat: this.event.hostFuzzyLatitude,
-          lng: this.event.hostFuzzyLongitude
-        }
+      return {
+        lat: this.place.latitude || this.place.fuzzyLatitude,
+        lng: this.place.longitude || this.place.fuzzyLongitude
       }
     },
-    nameWithPlace () {
-      if (this.event.place) {
-        return this.event.name + `<br><br>This event will be at ${this.event.place.name}<br>${this.event.place.fullAddress}`
+    distanceCenter () {
+      if (!this.currentUser) { return null }
+      const place = this.currentUser.place
+      return {
+        lat: place.latitude || place.fuzzyLatitude,
+        lng: place.longitude || place.fuzzyLongitude
+      }
+    },
+    playdateLocationName () {
+      if (this.place.public) {
+        return this.event.place.name
       } else {
-        return this.event.name + `<br><br>The playdate will be hosted at ${this.event.hostFirstName}'s home.`
+        return `The playdate will be hosted at ${this.event.user.firstName}'s home.`
+      }
+    },
+    playdateAddress () {
+      if (this.place.public) {
+        return this.event.place.fullAddress
+      } else {
+        return null
       }
     },
     lightboxImages () {
@@ -216,14 +232,14 @@ export default {
     showRsvpCard () {
       if (!this.event || this.timePast) { return false }
       if (this.currentUser) {
-        return (this.event.host.id.toString() !== this.currentUser.id.toString()) &&
+        return (this.event.user.id.toString() !== this.currentUser.id.toString()) &&
                !this.event.participated &&
                !this.isRsvpDeclined(this.event.id)
       }
       return true
     },
     user () {
-      return this.event && this.event.host
+      return this.event && this.event.user
     },
     houseRulesImage: () => houseRulesImage,
     petsImage: () => petsImage,
@@ -238,7 +254,7 @@ export default {
       this.$refs.lightbox.showImage(payload)
     },
     updateUser (user) {
-      this.event.host = user
+      this.event.user = user
     },
     fetchEvent: async function () {
       try {
@@ -247,7 +263,7 @@ export default {
         this.logError(e)
         this.$router.push({ name: 'NotFound' })
       }
-      this.otherEvents = (await fetchUpcomingEvents(this.event.hostId)).filter(e => (e.id !== this.$route.params.id))
+      this.otherEvents = (await fetchUpcomingEvents(this.event.user.id)).filter(e => (e.id !== this.$route.params.id))
       this.$nextTick(async function () {
         await this.createMap(this.$refs.map, {
           zoom: 13,
@@ -256,12 +272,10 @@ export default {
           options: this.mapOptions,
           style: 'width: 100px; height: 230px;'
         })
-        if (this.event.place) {
-          this.addLilypadPin(
-            { lat: this.event.place.latitude, lng: this.event.place.longitude }
-          )
+        if (this.event.place.latitude && this.event.place.longitude) {
+          this.addLilypadPin(this.mapCenter)
         } else {
-          await this.addCircle({ lat: this.event.hostFuzzyLatitude, lng: this.event.hostFuzzyLongitude }, 0.2)
+          await this.addCircle(this.mapCenter, 0.2)
         }
       })
     }
@@ -786,6 +800,73 @@ a {
   padding-left: 0;
   flex-wrap: wrap;
   align-items: flex-start;
+}
+
+.event-summary-card__location {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  margin-bottom: 16px;
+  padding: 12px 0;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #ebebeb;
+  border-radius: 4px;
+  background-color: #fff;
+  background-image: none;
+  box-shadow: none;
+}
+
+.location-card__place-name-text {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 2px;
+  font-weight: 700;
+}
+
+.location-card__place-name-text.line-clamp--1 {
+  font-weight: 400;
+}
+
+.location-card__address-text {
+  position: relative;
+  z-index: 1;
+  color: rgba(51, 51, 51, 0.6);
+  font-size: 12px;
+}
+
+.location-icon {
+  position: absolute;
+  left: auto;
+  top: auto;
+  right: 16px;
+  bottom: auto;
+  z-index: 1;
+  overflow: hidden;
+  width: 32px;
+  height: 32px;
+}
+
+.image-5 {
+  width: 48px;
+  height: 48px;
+}
+
+.image-5.photo-fit {
+  width: 32px;
+  height: 32px;
+}
+
+.location-card__text-group {
+  margin-right: 80px;
+  margin-left: 16px;
+}
+
+.photo-fit {
+      object-fit: cover;
 }
 
 @media (max-width: 991px){

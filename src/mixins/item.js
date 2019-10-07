@@ -24,7 +24,7 @@ export default {
       if (this.user) {
         return this.user.images
       }
-      return this.event && this.event.hostImages
+      return this.event && this.event.user.images
     },
     joinedDateFormatted: function () {
       return moment(this.user.createdAt).format('MMMM, YYYY')
@@ -54,13 +54,13 @@ export default {
       return !!this.user.facebookUid
     },
     isCurrentUser () {
-      return this.user.id.toString() === this.currentUser.id.toString()
+      return this.user && this.currentUser && this.user.id.toString() === this.currentUser.id.toString()
     },
     showGoingButton () {
       return this.event &&
         !this.timePast &&
         (!this.currentUser ||
-        (this.event.host.id.toString() !== this.currentUser.id.toString()))
+        (this.event.user.id.toString() !== this.currentUser.id.toString()))
     },
     showInterestedButton () {
       return !this.childcareRequest && // don't show for childcare requests
@@ -74,7 +74,7 @@ export default {
     showCancelButton () {
       return this.event &&
         !this.timePast &&
-        (this.event.host.id.toString() === this.currentUser.id.toString())
+        (this.event.user.id.toString() === this.currentUser.id.toString())
     },
     showMeetButton () {
       return !this.childcareRequest && // don't show for childcare requests
@@ -92,24 +92,23 @@ export default {
     isStarred () {
       return this.user.starred
     },
+    place () {
+      if (this.event) { return this.event.place }
+      return this.user.place
+    },
     distance () {
-      const center = this.mapCenter || (this.currentUser && this.currentUser.location)
+      const currentUserCenter = this.currentUser &&
+        {
+          lat: this.currentUser.place.latitude,
+          lng: this.currentUser.place.longitude
+        }
+      const center = this.distanceCenter || currentUserCenter
       if (!center) { return null }
-      if (this.event) {
-        return distanceHaversine(
-          this.event.hostFuzzyLatitude,
-          this.event.hostFuzzyLongitude,
-          center.lat,
-          center.lng) + ' mi'
-      }
-      if (this.user) {
-        return distanceHaversine(
-          this.user.fuzzyLatitude,
-          this.user.fuzzyLongitude,
-          center.lat,
-          center.lng) + ' mi'
-      }
-      return null
+      return distanceHaversine(
+        this.place.latitude || this.place.fuzzyLatitude,
+        this.place.longitude || this.place.fuzzyLongitude,
+        center.lat,
+        center.lng) + ' mi'
     },
     availableTimes () {
       if (this.user) {
@@ -175,10 +174,10 @@ export default {
       return 'Children ages ' + andJoin(ages.map((e, i) => this.ageString(i)))
     },
     userFirstName () {
-      return (this.event && this.event.hostFirstName) || (this.user && this.user.firstName)
+      return this.user && this.user.firstName
     },
     userLastInitial () {
-      return (this.event && this.event.host.lastInitial) ||
+      return (this.event && this.event.user.lastInitial) ||
         (this.user && this.user.lastInitial) || (this.user && this.user.lastName && this.user.lastName[0])
     },
     userName () {
@@ -203,23 +202,10 @@ export default {
       return this.user.petDescription || (this.event && this.event.petDescription)
     },
     localArea () {
-      var neighborhood = this.user.neighborhood
-      var sublocality = ''
-      if (this.user.locality) {
-        sublocality = this.user.locality
-      } else {
-        sublocality = this.user.sublocality
-      }
-      var stateName = this.user.adminAreaLevel1
-      if (neighborhood && sublocality && stateName) {
-        return neighborhood + ', ' + sublocality + ', ' + stateName
-      } else if (neighborhood && stateName) {
-        return neighborhood + ', ' + stateName
-      } else if (sublocality && stateName) {
-        return sublocality && stateName
-      } else if (stateName) {
-        return stateName
-      }
+      const neighborhood = this.place.neighborhood
+      const cityOrBoro = this.place.locality || this.place.vicinity
+      const state = this.place.adminAreaLevel1
+      return [neighborhood, cityOrBoro, state].filter(e => !!e).join(', ')
     },
     occupation () {
       const position = capitalize(this.user.jobPosition)
@@ -303,7 +289,7 @@ export default {
       } else {
         res = await this.starUser(this.user.id, context)
       }
-      this.$emit('user-updated', res)
+      this.$emit('user-updated', { user: res })
       return res
     },
     goToItem () {

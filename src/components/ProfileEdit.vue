@@ -7,7 +7,7 @@
         <ErrorMessage v-if="showError && hasError" text="Your form has errors. Please fix them to continue..." />
         <ErrorMessage v-if="showError && hasError && phone.err" :text="phone.err" />
         <ErrorMessage v-if="showError && hasError && employment.err" :text="employment.err" />
-        <ErrorMessage v-if="showError" :text="location.err" />
+        <ErrorMessage v-if="showError" :text="place.err" />
         <ErrorMessage v-if="showError" :text="children.err" />
         <ErrorMessage v-if="showError" :text="avatar.err" />
         <Question
@@ -24,9 +24,9 @@
         <Children v-model="children" :required="false" />
         <Phone v-model="phone" :currentPhone="currentUser.phone" :required="false" />
         <Location
-          :currentAddress="currentUser.fullAddress"
+          :currentAddress="currentUser.place && currentUser.place.fullAddress"
           :currentApartment="currentUser.apartmentNumber"
-          v-model="location"
+          v-model="place"
         />
         <LanguagesSpoken v-model="currentUser.languages" :showChoicesImmediately="false"/>
         <MaxDistanceSetting v-model="maxDistance" />
@@ -102,7 +102,7 @@ export default {
       avatar: {},
       weeklyEmails: {},
       maxDistance: {},
-      location: {},
+      place: {},
       phone: {},
       employment: {},
       availability: {},
@@ -123,7 +123,12 @@ export default {
       availableEvenings: !!this.currentUser.availableEvenings,
       availableWeekends: !!this.currentUser.availableWeekends
     }
-    this.children = { 'list': this.currentUser.children || [] }
+    this.children = { 'list': this.currentUser.children.map(child => {
+      return { ...child,
+        birthMonth: child.birthday.split('-')[1],
+        birthYear: child.birthday.split('-')[0]
+      }
+    }) || [] }
     this.employment = {
       jobPosition: this.currentUser.jobPosition,
       employer: this.currentUser.employer,
@@ -136,7 +141,7 @@ export default {
   },
   computed: {
     hasError: function () {
-      if (!!this.phone.err || !!this.location.err || !!this.children.err || this.employment.err) {
+      if (!!this.phone.err || !!this.place.err || !!this.children.err || this.employment.err) {
         return true
       } else {
         return false
@@ -162,8 +167,8 @@ export default {
         data.avatar = this.avatar.avatar
         const settingMaxDistance = this.maxDistance
         const settingEmailNotifications = this.weeklyEmails.isTrue
-        const { phone, location, availability } = this
-        data = Object.assign(data, { phone, location, availability, settingEmailNotifications, settingMaxDistance })
+        const { phone, place, availability } = this
+        data = Object.assign(data, { phone, place, availability, settingEmailNotifications, settingMaxDistance })
         try {
           const res = await api.submitUserInfo(this.currentUser.id, data)
           this.saveButtonText = ' \u2714 Saved'

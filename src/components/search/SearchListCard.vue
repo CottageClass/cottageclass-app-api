@@ -108,7 +108,7 @@ export default {
   props: {
     doNotShowCancel: { default: false },
     item: { required: true },
-    mapCenter: {}
+    distanceCenter: {}
   },
   mixins: [item, screen],
   components: { AvatarImage, HouseholdImages, SearchListCardActions, SearchListCardActionsOverlay },

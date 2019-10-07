@@ -1,5 +1,5 @@
 class SearchListItem < ApplicationRecord
-  reverse_geocoded_by 'users.latitude', 'users.longitude'
+  reverse_geocoded_by :latitude, :longitude
   user_attributes = User::PUBLIC_ATTRIBUTES.reject { |a| a == :id }
   delegate(*user_attributes, to: :user, allow_nil: true)
 
@@ -15,4 +15,19 @@ class SearchListItem < ApplicationRecord
   scope :child_age_range, lambda { |min_age, max_age|
     joins(:user).merge(User.child_age_range(min_age, max_age))
   }
+  def longitude
+    if itemable.present? && itemable.place.present?
+      itemable.place.longitude
+    elsif user.place.present?
+      user.place.longitude
+    end
+  end
+
+  def latitude
+    if itemable.present? && itemable.place.present?
+      itemable.place.latitude
+    elsif user.place.present?
+      user.place.latitude
+    end
+  end
 end

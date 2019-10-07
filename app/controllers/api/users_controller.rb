@@ -22,8 +22,10 @@ class API::UsersController < API::BaseController
     if user.update(user_params)
       render json: CurrentUserSerializer.json_for(user, include: %i[
                                                     children
+                                                    place
                                                     children.emergency_contacts
-                                                  ]),
+                                                  ],
+                                                        params: { current_users_place: true }),
              status: 200
     else
       render json: { errors: user.errors.full_messages }, status: 400
@@ -32,10 +34,10 @@ class API::UsersController < API::BaseController
 
   def show
     serializer = if current_user && current_user.id == @user.id
-                   CurrentUserSerializer.new @user, include: %i[children]
+                   CurrentUserSerializer.new @user, include: %i[children place]
                  else
                    PublicUserSerializer.new @user,
-                                            include: %i[children],
+                                            include: %i[children place],
                                             params: { current_user: current_user }
                  end
     render json: serializer.serializable_hash, status: :ok
@@ -74,7 +76,7 @@ class API::UsersController < API::BaseController
     if miles.positive?
       location = []
       location = [latitude, longitude] if [latitude, longitude].all?(&:present?)
-      location = [current_user.latitude, current_user.longitude] if location.blank? && current_user.present?
+      location = [current_user.place.latitude, current_user.place.longitude] if location.blank? && current_user.present?
       if location.all?(&:present?)
         users = users.near(location.map(&:to_f), miles)
         users = users.joins 'LEFT JOIN events ON users.showcase_event_id = events.id'
@@ -145,6 +147,7 @@ class API::UsersController < API::BaseController
                                  :referrer,
                                  :setting_email_notifications,
                                  :setting_max_distance,
+                                 :place_id,
                                  source_tags: [],
                                  activities: [],
                                  images: [],

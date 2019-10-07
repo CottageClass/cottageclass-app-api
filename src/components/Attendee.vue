@@ -4,7 +4,7 @@
       :to="{name: 'UserPage', params: {id: user.userId}}"
       class="attendee__link-wrapper w-inline-block">
       <AvatarImage className="attendee__photo"
-                   :person="{facebookUid: user.userFacebookUid, avatar: user.userAvatar}"
+                   :person="{facebookUid: user.userFacebookUid, avatar: user.attributes.userAvatar}"
                    imageSize="100"/>
       <img :src="goingIcon" width="24" height="24" alt="" class="attendees__going-icon-medium" />
       <div class="attendee__user-name truncate">{{ firstName }}</div>
@@ -23,7 +23,7 @@ export default {
   props: { user: { required: true } },
   computed: {
     goingIcon: () => goingIcon,
-    firstName: function () { return capitalize(this.user.userFirstName) }
+    firstName: function () { return capitalize(this.user.attributes.userFirstName) }
   }
 }
 </script>

@@ -10,9 +10,9 @@ describe('MeetButton', () => {
       firstName: 'Chuck',
       lastInitial: 'D',
       childAgesInMonths: [1, 15, 99],
-      location: {
-        lat: 41.969880,
-        lng: -73.651964 },
+      place: {
+        latitude: 41.969880,
+        longitude: -73.651964 },
       employer: 'Lockheed',
       jobPosition: 'engineer'
     }
@@ -31,9 +31,9 @@ describe('MeetButton', () => {
             firstName: 'Natasha',
             childAgesInMonths: [9, 100, 54],
             locality: 'Nashville',
-            location: {
-              lat: 41.9,
-              lng: -73.6 }
+            place: {
+              latitude: 41.9,
+              longitude: -73.6 }
           },
           distanceFromCurrentUser () {
             return 4.2
@@ -54,10 +54,8 @@ describe('MeetButton', () => {
 
     it('displays correct information', () => {
       const meetButton = wrapper.find('.event-action-button')
-      const requestMessage = `Natasha (http://localhost/users/987654321) waved at you! They live 4.2 mi. away with 3 kids age 9 mos, 4 & 8. If you're interested in a playdate, reply here!`
-
       expect(meetButton.text()).toEqual('Invite')
-      expect(wrapper.vm.meetMessage(targetUser)).toEqual(requestMessage)
+      expect(wrapper.vm.meetMessage(targetUser)).toMatchSnapshot()
     })
 
     it('initiates sending sequence', done => {
@@ -87,9 +85,9 @@ describe('MeetButton', () => {
             firstName: 'Natasha',
             childAgesInMonths: [111, 2, 2],
             locality: '',
-            location: {
-              lat: 41.9,
-              lng: -73.6 }
+            place: {
+              latitude: 41.9,
+              longitude: -73.6 }
           },
           distanceFromCurrentUser () {
             return 4.2
@@ -105,9 +103,9 @@ describe('MeetButton', () => {
         firstName: 'Chuck',
         lastInitial: 'D',
         childAgesInMonths: [1, 2, 3],
-        location: {
-          lat: 41.969880,
-          lng: -73.651964 },
+        place: {
+          latitude: 41.969880,
+          longitude: -73.651964 },
         employer: 'Lockheed',
         jobPosition: 'engineer'
       }
@@ -122,10 +120,9 @@ describe('MeetButton', () => {
         }
       })
       const meetButton = wrapper.find('.event-action-button')
-      const requestMessage = `Natasha (http://localhost/users/987654321) waved at you! They live 4.2 mi. away with 3 kids age 2 mos, 2 mos & 9. If you're interested in a playdate, reply here!`
 
       expect(meetButton.text()).toEqual('Say Hi')
-      expect(wrapper.vm.meetMessage(targetUser)).toEqual(requestMessage)
+      expect(wrapper.vm.meetMessage(targetUser)).toMatchSnapshot()
     })
   })
 
@@ -135,9 +132,9 @@ describe('MeetButton', () => {
       firstName: 'Chuck',
       lastInitial: 'D',
       childAgesInMonths: [1, 2, 3],
-      location: {
-        lat: 41.969880,
-        lng: -73.651964 },
+      place: {
+        latitude: 41.969880,
+        longitude: -73.651964 },
       employer: 'Lockheed',
       jobPosition: 'engineer'
     }
@@ -154,9 +151,9 @@ describe('MeetButton', () => {
             firstName: 'Natasha',
             childAgesInMonths: [-1],
             locality: 'Nashville',
-            location: {
-              lat: 41.9,
-              lng: -73.6 }
+            place: {
+              latitude: 41.9,
+              longitude: -73.6 }
           },
           distanceFromCurrentUser () {
             return 4.2
@@ -180,10 +177,8 @@ describe('MeetButton', () => {
 
     it('displays correct information', () => {
       const meetButton = wrapper.find('.event-action-button')
-      const requestMessage = `Natasha (http://localhost/users/987654321) waved at you! They live 4.2 mi. away. If you're interested in a playdate, reply here!`
-
       expect(meetButton.text()).toEqual('Wave')
-      expect(wrapper.vm.meetMessage(targetUser)).toEqual(requestMessage)
+      expect(wrapper.vm.meetMessage(targetUser)).toMatchSnapshot()
     })
 
     it('initiates sending sequence', done => {

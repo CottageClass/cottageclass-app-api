@@ -2,25 +2,11 @@ require 'webmock/rspec'
 WebMock.disable_net_connect!(allow_localhost: true)
 
 RSpec.configure do |config|
-  config.before do
-    stub_request(:get, 'https://maps.googleapis.com/maps/api/place/details/json?extensions=&fields=&key=AIzaSyCAxZ4ERhmcq87C5HK91ujxDLl7gQ_k_-c&language=&placeid=unique_some_long_google_string')
-      .with(
-        headers: {
-          'Accept' => '*/*',
-          'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
-          'User-Agent' => 'Ruby'
-        }
-      )
-      .to_return(status: 200, body: JSON.dump(json_data(filename: 'spot')), headers: {})
-    stub_request(:get, 'https://maps.googleapis.com/maps/api/place/details/json?extensions=&fields=&key=AIzaSyCAxZ4ERhmcq87C5HK91ujxDLl7gQ_k_-c&language=&placeid=UNIQUE_SOME_LONG_GOOGLE_STRING')
-      .with(
-        headers: {
-          'Accept' => '*/*',
-          'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
-          'User-Agent' => 'Ruby'
-        }
-      )
-      .to_return(status: 200, body: JSON.dump(json_data(filename: 'spot')), headers: {})
+  config.before(:all) do
+    Place.skip_callback(:validation, :before, :retrieve_details)
+  end
+  config.after(:all) do
+    Place.set_callback(:validation, :before, :retrieve_details)
   end
 
   def json_data(filename:)

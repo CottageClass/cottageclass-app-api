@@ -28,12 +28,10 @@ storiesOf('SearchListCard', module)
             'https://res.cloudinary.com/cottageclass2/image/upload/v1559762152/user_images/2012-09-06_19.16.29_gehvr5.png'
           ],
           employer: text('employer', ''),
-          profileBlurb: text('blurb', 'Let me tell you all about me!  I am a super fast runner and I can bake cookies'),
-          fuzzyLatitude: number('lattitude', 43),
-          fuzzyLongitude: number('longitude', -71)
+          profileBlurb: text('blurb', 'Let me tell you all about me!  I am a super fast runner and I can bake cookies')
         }
       },
-      mapCenter: {
+      distanceCenter: {
         default: {
           lat: number('map lattitude', 43.1),
           lng: number('map longitude', -71.1)

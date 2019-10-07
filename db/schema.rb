@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_24_233225) do
+ActiveRecord::Schema.define(version: 2019_10_04_165650) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -240,6 +240,9 @@ ActiveRecord::Schema.define(version: 2019_09_24_233225) do
     t.string "country", default: "United States"
     t.string "phone_country_code", default: "1"
     t.string "name"
+    t.string "time_zone"
+    t.jsonb "full_result_object"
+    t.string "vicinity"
     t.index ["google_id"], name: "index_places_on_google_id", unique: true
     t.index ["latitude", "longitude"], name: "index_places_on_latitude_and_longitude"
     t.index ["user_id"], name: "index_places_on_user_id"
@@ -446,6 +449,7 @@ ActiveRecord::Schema.define(version: 2019_09_24_233225) do
     t.boolean "internally_cleared", default: false, null: false
     t.decimal "setting_max_distance", default: "2.0"
     t.boolean "setting_email_notifications", default: true
+    t.bigint "place_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email"
     t.index ["fuzzy_latitude", "fuzzy_longitude"], name: "index_users_on_fuzzy_latitude_and_fuzzy_longitude"
@@ -454,6 +458,7 @@ ActiveRecord::Schema.define(version: 2019_09_24_233225) do
     t.index ["invited_by_type", "invited_by_id"], name: "index_users_on_invited_by_type_and_invited_by_id"
     t.index ["jti"], name: "index_users_on_jti", unique: true
     t.index ["latitude", "longitude"], name: "index_users_on_latitude_and_longitude"
+    t.index ["place_id"], name: "index_users_on_place_id"
     t.index ["provider", "uid"], name: "index_users_on_provider_and_uid"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["showcase_event_id"], name: "index_users_on_showcase_event_id"
@@ -477,4 +482,5 @@ ActiveRecord::Schema.define(version: 2019_09_24_233225) do
   add_foreign_key "user_matches", "users"
   add_foreign_key "user_matches", "users", column: "matched_user_id"
   add_foreign_key "users", "events", column: "showcase_event_id"
+  add_foreign_key "users", "places"
 end

@@ -38,13 +38,13 @@ class Notification < ApplicationRecord
                  when :event_reminder_previous_day_participant
                    self.body = I18n.t 'messages.event_reminder_previous_day_participant',
                                       participant_first_name: recipient.first_name,
-                                      host_first_name: notifiable.host_first_name,
+                                      host_first_name: notifiable.user.first_name,
                                       event_time_range: notifiable.time_range
                    Notifier::Base.new user: recipient, body: body
                  when :event_reminder_same_day_participant
                    self.body = I18n.t 'messages.event_reminder_same_day_participant',
                                       participant_first_name: recipient.first_name,
-                                      host_first_name: notifiable.host_first_name,
+                                      host_first_name: notifiable.user.first_name,
                                       event_time_range: notifiable.time_range
                    Notifier::Base.new user: recipient, body: body
                  when :event_feedback_participant
@@ -59,7 +59,7 @@ class Notification < ApplicationRecord
                    Notifier::Base.new user: recipient, body: body
                  when :event_reminder_previous_day_host
                    self.body = I18n.t 'messages.event_reminder_previous_day_host',
-                                      host_first_name: notifiable.host_first_name,
+                                      host_first_name: notifiable.user.first_name,
                                       event_time_range: notifiable.time_range
                    Notifier::EventReminderPreviousDayHost.new user: recipient, event: notifiable, body: body
                  when :password_reset_request
@@ -87,7 +87,7 @@ class Notification < ApplicationRecord
                  when :event_destruction
                    self.body = I18n.t 'messages.event_destruction',
                                       participant_first_name: recipient.first_name,
-                                      host_first_name: notifiable.host_first_name,
+                                      host_first_name: notifiable.user.first_name,
                                       event_start_date: notifiable.start_date,
                                       event_time_range: notifiable.time_range
                    Notifier::Base.new user: recipient, body: body

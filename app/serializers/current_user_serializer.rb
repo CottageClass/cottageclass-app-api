@@ -2,6 +2,7 @@ class CurrentUserSerializer < BaseSerializer
   set_type :user
 
   has_many :children, serializer: ChildUnrestrictedSerializer
+  belongs_to :place
 
   attributes(*User::PUBLIC_ATTRIBUTES)
 
@@ -10,19 +11,14 @@ class CurrentUserSerializer < BaseSerializer
              :created_at,
              :email,
              :facebook_access_token,
-             :full_address,
              :last_name,
-             :latitude,
-             :longitude, :route,
              :phone_area_code,
              :phone_country_code,
              :phone_number,
              :phone,
-             :postal_code,
              :school,
              :setting_email_notifications,
-             :setting_max_distance,
-             :street_number
+             :setting_max_distance
 
   attribute :date_created, &:created_at
   attribute(:hosted_events_count) { |instance, _| instance.events.past.count }

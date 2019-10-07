@@ -124,8 +124,8 @@ export default {
     async fetchMyEvents () {
       const allMyEvents = await fetchUpcomingEvents(this.currentUser.id, e => e.starts_at)
       this.debug({ allMyEvents })
-      this.hostingItems = allMyEvents.filter(i => i.participatingParents.length > 0).map(e => ({ event: e, user: e.host }))
-      this.yourOffersItems = allMyEvents.filter(i => i.participatingParents.length === 0).map(e => ({ event: e, user: e.host }))
+      this.hostingItems = allMyEvents.filter(i => i.participatingParents.length > 0).map(e => ({ event: e, user: e.user }))
+      this.yourOffersItems = allMyEvents.filter(i => i.participatingParents.length === 0).map(e => ({ event: e, user: e.user }))
     }
   },
   created () {

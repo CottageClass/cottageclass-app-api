@@ -47,6 +47,11 @@ background-color: #f6f6f6;
 .onboarding {
   font-family: soleil, sans-serif;
 
+  .avatar-upload-button {
+    background-color: white;
+    padding: 10px 50px;
+  }
+
   .profile-photo {
     margin-bottom: 16px;
     border-radius: 50%;
@@ -1837,6 +1842,7 @@ background-color: #f6f6f6;
   }
 
   .text-area-decribe-need {
+    height: 200px;
     min-height: 120px;
     padding-top: 16px;
     padding-bottom: 16px;
@@ -1969,8 +1975,11 @@ background-color: #f6f6f6;
 
   .title-container {
   margin-bottom: 0;
-  padding: 32px;
   color: #fff;
+  }
+
+  .text-area-decribe-need {
+    height: 200px;
   }
 
   @media (max-width: 991px) {
@@ -1992,7 +2001,13 @@ background-color: #f6f6f6;
 
   @media (max-width: 767px) {
     .content-wrapper__request {
-      margin-top: 28px;
+    position: relative;
+    top: 0;
+    width: auto;
+    margin-right: 0px;
+    margin-left: 0px;
+    border-radius: 0px;
+    box-shadow: none;
     }
     .content-wrapper {
       margin-top: 28px;
