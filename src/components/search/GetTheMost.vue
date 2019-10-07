@@ -47,7 +47,7 @@ a {
 }
 
 .btn__primary-action--alt-2 {
-  min-width: 180px;
+  width: 100%;
   border-style: solid;
   border-width: 1px;
   border-color: #fc6f77;
@@ -66,6 +66,7 @@ a {
 }
 
 .primary-action__btn-group--alt-2 {
+  width: 100%;
   display: flex;
 }
 

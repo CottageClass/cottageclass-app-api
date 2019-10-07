@@ -28,7 +28,6 @@ describe('SearchListCardActions', () => {
     it.each([
       [ '.going-button', 'going-click' ],
       [ '.interested-button', 'interested-click' ],
-      [ '.contact-button', 'contact-click' ],
       [ '.share-button', 'share-click' ],
       [ '.cancel-button', 'cancel-click' ]
     ])('%s button emits %s event', (selector, event) => {
