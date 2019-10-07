@@ -71,7 +71,7 @@ class Event < ApplicationRecord
   end
 
   def time_range
-    [in_instance_time_zone(starts_at).strftime('%l:%M'), in_instance_time_zone(ends_at).strftime('%l:%M %p')]
+    [in_instance_time_zone(starts_at).strftime('%l:%M %p'), in_instance_time_zone(ends_at).strftime('%l:%M %p')]
       .join(' - ').try :squish
   end
 
