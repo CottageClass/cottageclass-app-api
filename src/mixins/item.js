@@ -131,7 +131,7 @@ export default {
     },
     timeHeader () {
       if (this.event) {
-        return moment(this.event.startsAt).format('ddd, MMMM D ha') + '-' + moment(this.event.endsAt).format('ha')
+        return moment(this.event.startsAt).format('ddd, MMMM D h:mma') + '-' + moment(this.event.endsAt).format('h:mma')
       }
       if (this.childcareRequest) {
         return 'CHILDCARE REQUESTED'
