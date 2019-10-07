@@ -1,10 +1,6 @@
 <template>
   <div class="events__actions">
     <ul class="events__actions__button-list">
-      <li v-if="isAuthenticated"
-          class="events__actions__button-item">
-        <a @click="$emit('request-childcare-click')" class="events__actions__button request-childcare w-button">Request Care</a>
-      </li>
       <li class="events__actions__button-item">
         <a @click="$emit('offer-playdate-click')" class="events__actions__button offer-playdate w-button">Offer Playdate</a>
       </li>
@@ -59,12 +55,6 @@ a {
       background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('../../assets/heart__blue.svg');
     }
   }
-  &.request-childcare{
-    background-image: url('../../assets/megaphone__blue.svg');
-    &:hover {
-      background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('../../assets/megaphone__blue.svg');
-    }
-  }
   margin-right: 0;
   padding: 4px 10px 5px 26px;
   border-style: solid;
@@ -95,9 +85,6 @@ a {
     background-repeat: repeat, no-repeat;
     &.offer-playdate {
       background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.03), rgba(0, 0, 0, 0.03)), url('../../assets/heart__blue.svg');
-    }
-    &.request-chilcdare{
-      background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.03), rgba(0, 0, 0, 0.03)), url('../../assets/megaphone__blue.svg');
     }
   }
 

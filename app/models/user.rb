@@ -97,7 +97,6 @@ class User < ApplicationRecord
            inverse_of: :recipient,
            dependent: :destroy
 
-  has_many :childcare_requests, inverse_of: :user, dependent: :destroy
 
   belongs_to :showcase_event, class_name: 'Event', optional: true
   belongs_to :place, inverse_of: :users, optional: true
@@ -301,6 +300,23 @@ class User < ApplicationRecord
 
     puts "sending a match message to #{id} about #{host.id}"
     notifications.event_creation_match.create(notifiable: host)
+  end
+
+  def notify_daily_digest
+    return unless setting_email_notifications
+
+    miles = setting_max_distance || 10
+
+    nearby_place_ids = Place.near(place, miles).to_a.pluck :id
+    events = Event.joins(:event_series).next_day.where('event_series.place_id IN (?)', nearby_place_ids)
+    events = events.where('event_series.user_id <> ?', id)
+    return if events.empty?
+
+    notifiable_event_collection = EventCollection.create
+    notifiable_event_collection.events = events
+    notifiable_event_collection.save
+
+    notifications.daily_digest.where(notifiable: notifiable_event_collection).create
   end
 
   def notify_event_suggestion

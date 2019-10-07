@@ -21,6 +21,11 @@ namespace :cottage_class do
       User.all.each(&:notify_event_suggestion)
     end
 
+    desc 'Send daily digest email to all users'
+    task notify_daily_digest: :environment do
+      User.all.each(&:notify_daily_digest)
+    end
+
     desc 'Send user suggestion emails to all users that have a suggestable user'
     task notify_suggested_users: :environment do
       puts 'Sending user suggestions for users: ' + User.count.to_s

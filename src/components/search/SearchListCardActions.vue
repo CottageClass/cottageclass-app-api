@@ -22,13 +22,6 @@
         :targetUser="user"
         :allowUndo="allowWaveUndo"/>
     </li>
-    <li v-if="showContactButton">
-      <IconButton
-        class="contact-button"
-        label="Respond"
-        :icon="contactIcon"
-        @click="$emit('contact-click')"/>
-    </li>
     <li v-if="showCancelButton">
       <IconButton
         class="cancel-button"
@@ -65,7 +58,6 @@ export default {
     user: {},
     event: {},
     timePast: {},
-    showContactButton: { default: false },
     showShareButton: { default: false },
     showGoingButton: { default: false },
     showInterestedButton: { default: false },

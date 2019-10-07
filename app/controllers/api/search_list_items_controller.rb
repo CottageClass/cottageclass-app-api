@@ -31,16 +31,8 @@ class API::SearchListItemsController < API::BaseController
     events = events.child_age_range(min_age, max_age)
     events = events.where.not(user_id: current_user.id) if current_user.present?
 
-    ccrs_in_places = ChildcareRequest.joins(:place).where('places.id IN (?)', place_ids)
-    ccrs_in_places_id = ccrs_in_places.to_a.pluck :id
-    childcare_requests = SearchListItem.where(itemable_type: :ChildcareRequest).where(itemable_id: ccrs_in_places_id)
-    childcare_requests = childcare_requests.includes(user: :children)
-    childcare_requests = childcare_requests.child_age_range(min_age, max_age)
-    childcare_requests = childcare_requests.where.not(user_id: current_user.id) if current_user.present?
-
     # convert to array to perform application level logic
     event_array = events.to_a
-    childcare_request_array = childcare_requests.to_a
 
     preloader = ActiveRecord::Associations::Preloader.new
     if current_user.present?
@@ -57,8 +49,7 @@ class API::SearchListItemsController < API::BaseController
     # byebug
     # find all users that have no eligible events or childcare_requests
     event_users = (event_array.map { |s| s.user.id }).uniq
-    childcare_request_users = (childcare_request_array.map { |s| s.user.id }).uniq
-    seen_users = event_users | childcare_request_users
+    seen_users = event_users
 
     users_in_places = User.joins(:place).where(place: place_ids).where.not(id: seen_users)
     users_in_places_ids = users_in_places.pluck :id
@@ -69,16 +60,11 @@ class API::SearchListItemsController < API::BaseController
     unseen_users = unseen_users.includes user: :place
     unseen_users = unseen_users.to_a
 
-    # reduce to one per user.  the last created
-    childcare_request_array = childcare_request_array.sort_by(&:created_at)
-    childcare_request_array.reverse!
-    childcare_request_array = childcare_request_array.uniq { |i| i.user.id }
-
     event_array = event_array.sort_by(&:created_at)
     event_array.reverse!
     event_array = event_array.uniq { |i| i.user.id }
 
-    items = childcare_request_array + event_array
+    items = event_array
     items = items.sort_by do |i|
       (current_user&.match_score(i.user)) || 1_000_000
     end

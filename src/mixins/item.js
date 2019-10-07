@@ -63,13 +63,9 @@ export default {
         (this.event.user.id.toString() !== this.currentUser.id.toString()))
     },
     showInterestedButton () {
-      return !this.childcareRequest && // don't show for childcare requests
-        this.isAuthenticated &&
+      return this.isAuthenticated &&
         this.currentUser &&
         (this.user.id.toString() !== this.currentUser.id.toString())
-    },
-    showContactButton () {
-      return !!this.childcareRequest // only show for childcare requests
     },
     showCancelButton () {
       return this.event &&
@@ -77,8 +73,7 @@ export default {
         (this.event.user.id.toString() === this.currentUser.id.toString())
     },
     showMeetButton () {
-      return !this.childcareRequest && // don't show for childcare requests
-       (!this.currentUser || (this.user.id.toString() !== this.currentUser.id.toString()))
+      return (!this.currentUser || (this.user.id.toString() !== this.currentUser.id.toString()))
     },
     showShareButton () {
       return this.event && this.$route.name !== 'SocialEventInvite'
@@ -131,10 +126,7 @@ export default {
     },
     timeHeader () {
       if (this.event) {
-        return moment(this.event.startsAt).format('ddd, MMMM D ha') + '-' + moment(this.event.endsAt).format('ha')
-      }
-      if (this.childcareRequest) {
-        return 'CHILDCARE REQUESTED'
+        return moment(this.event.startsAt).format('ddd, MMMM D h:mma') + '-' + moment(this.event.endsAt).format('h:mma')
       }
       const availabilityStrings = []
       if (this.user.availableMornings) {
@@ -186,9 +178,6 @@ export default {
     description () {
       if (this.event) {
         return this.event.name
-      }
-      if (this.childcareRequest) {
-        return this.childcareRequest.content
       }
       return this.user.profileBlurb
     },
@@ -295,8 +284,6 @@ export default {
     goToItem () {
       if (this.event) {
         this.$router.push({ name: 'EventPage', params: { id: this.event.id } })
-      } else if (this.childcareRequest) {
-        this.$router.push({ name: 'ChildcareRequestPage', params: { id: this.childcareRequest.id } })
       } else if (this.user) {
         this.$router.push({ name: 'UserPage', params: { id: this.user.id } })
       } else {
