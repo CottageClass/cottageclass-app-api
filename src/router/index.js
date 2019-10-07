@@ -21,8 +21,6 @@ import Onboarding from '@/views/Onboarding.vue'
 import ProfileCollection from '@/views/ProfileCollection.vue'
 import DeclineRSVP from '@/views/DeclineRSVP.vue'
 import DisinterestedSurvey from '@/views/DisinterestedSurvey.vue'
-import RequestChildcare from '@/views/RequestChildcare.vue'
-import ChildcareRequestPage from '@/views/ChildcareRequestPage.vue'
 import DeleteAccountConfirmation from '@/views/DeleteAccountConfirmation'
 import SelectEventFromUser from '@/views/SelectEventFromUser'
 import AddOffersPrompt from '@/views/AddOffersPrompt'
@@ -49,18 +47,6 @@ export default new Router({
       path: '/delete-account',
       name: 'DeleteAccountConfirmation',
       component: DeleteAccountConfirmation
-    },
-    {
-      path: '/childcare-request/:id',
-      name: 'ChildcareRequestPage',
-      component: ChildcareRequestPage,
-      props: true
-    },
-    {
-      path: '/request-childcare/:section?/:stepName?',
-      name: 'RequestChildcare',
-      component: RequestChildcare,
-      props: true
     },
     {
       path: '/users/:userId/decline',

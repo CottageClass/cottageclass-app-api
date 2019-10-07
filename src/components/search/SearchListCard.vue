@@ -3,8 +3,7 @@
       @click.stop="goToItem">
     <div class="header">
       <div class="header__date"
-           :class="{'time-past': timePast,
-                    'childcare-request': item && item.childcareRequest}" >
+           :class="{'time-past': timePast}" >
         {{timeHeader}}
       </div>
       <div v-if="distance && !isCurrentUser" class="header__distance">{{distance}}</div>
@@ -39,10 +38,9 @@
         </div>
       </div>
       <div class="footer__actions--mobile">
-        <a  v-if="!childcareRequest"
-            class="event-action__icon-button__star w-inline-block"
-            :class="isStarred?'active':''"
-            @click.stop="interestedClick('card')"></a>
+        <a class="event-action__icon-button__star w-inline-block"
+           :class="isStarred?'active':''"
+           @click.stop="interestedClick('card')"></a>
         <div class="other-events-card__footer-actions__more-wrapper">
           <a class="event-action__icon-button__more w-inline-block"
              @click.stop="overlayOpen=true"></a>
@@ -52,7 +50,6 @@
         v-if="!isPhone"
         :user="item.user"
         :event="item.event"
-        :childcareRequest="item.childcareRequest"
         @user-updated="$emit('user-updated', $event)"
         @event-updated="$emit('event-updated', $event)"
         @event-deleted="$emit('event-deleted', id)"
@@ -73,7 +70,6 @@
         v-if="showOverlay"
         :user="item.user"
         :event="item.event"
-        :childcareRequest="item.childcareRequest"
         @user-updated="$emit('user-updated', $event)"
         @event-updated="$emit('event-updated', $event)"
         @event-deleted="$emit('event-deleted', id)"
@@ -118,9 +114,6 @@ export default {
     },
     event () {
       return this.item && this.item.event
-    },
-    childcareRequest () {
-      return this.item && this.item.childcareRequest
     }
   }
 }
@@ -272,10 +265,6 @@ a {
   &.time-past {
     -webkit-text-fill-color: #aaaaaa;  // keep for safari
     color: #aaaaaa;
-  }
-  &.childcare-request {
-    -webkit-text-fill-color: #FD6F77;  // keep for safari
-    color: #FD6F77;
   }
   color: #1f88e9;
   -webkit-text-fill-color: #1f88e9;  // keep for safari

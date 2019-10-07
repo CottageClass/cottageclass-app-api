@@ -147,9 +147,6 @@ export default {
     offerPlaydate () {
       this.$router.push({ name: 'NewEvent' })
     },
-    requestChildcare () {
-      this.$router.push({ name: 'RequestChildcare' })
-    },
     async fetchMoreItems () {
       try {
         const params = {
