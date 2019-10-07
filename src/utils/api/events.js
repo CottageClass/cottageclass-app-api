@@ -2,6 +2,7 @@ import axios from 'axios'
 import normalize from 'json-api-normalizer'
 
 import { createEvent, createEvents } from '../createEvent'
+import { createItemsFromEvents } from '../createItem'
 import Logger from '@/utils/logger'
 
 const logger = Logger('api:events')
@@ -13,13 +14,20 @@ export function submitEventSeriesData (data) {
     return Object.values(normalize(res.data).event).map(parseEventData)
   })
 }
-
-export const fetchEvents = async (params, sortBy) => {
-  const url = `/api/events/${params || ''}`
+export const fetchEvents = async ({ miles, lat, lng, minAge, maxAge, pageSize = 20, page = 1 }) => {
+  let url = `/api/events/upcoming/miles/${miles}/latitude/${lat}/longitude/${lng}/`
+  if (minAge !== null && typeof minAge !== 'undefined') {
+    url += `min_age/${minAge}/`
+  }
+  if (maxAge !== null && typeof minAge !== 'undefined') {
+    url += `max_age/${maxAge}/`
+  }
+  url += 'sort/chronological/'
+  url += `page/${page}/page_size/${pageSize}`
   return axios.get(url).then(res => {
     logger.log('FETCH SUCCESS -- ', url)
     logger.log(res.data)
-    return createEvents(normalize(res.data), sortBy)
+    return createItemsFromEvents(normalize(res.data, { endpoint: 'event' }))
   }).catch(err => {
     logger.logError('FETCH FAILURE -- ', url)
     logger.logError(err.errors)
