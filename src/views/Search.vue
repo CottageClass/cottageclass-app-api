@@ -222,6 +222,11 @@ export default {
         this.fetch()
       },
       deep: true
+    },
+    '$route': {
+      handler () {
+        this.fetch()
+      }
     }
   },
   created: async function () {
