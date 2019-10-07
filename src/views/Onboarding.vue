@@ -33,7 +33,7 @@ export default {
       if (this.redirectRoute) {
         this.$router.push(this.redirectRoute)
       } else {
-        this.$router.push({ name: 'Search' })
+        this.$router.push({ name: 'Events' })
       }
     },
     collectUserDetails () {

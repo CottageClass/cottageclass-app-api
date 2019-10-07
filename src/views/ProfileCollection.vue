@@ -61,7 +61,7 @@ export default {
         } catch (e) {
           this.logError(e)
         }
-        this.$router.push({ name: 'Search' })
+        this.$router.push({ name: 'Events' })
       }
     },
     ...mapMutations([ 'setCurrentUser' ])
@@ -71,7 +71,7 @@ export default {
   },
   created () {
     if (!this.currentUser) {
-      this.$router.push({ name: 'Search' })
+      this.$router.push({ name: 'Events' })
     }
   }
 }

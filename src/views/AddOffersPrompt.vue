@@ -59,7 +59,7 @@ export default {
       } catch (e) {
         this.logError(e)
       } finally {
-        this.$router.push({ name: 'Search' })
+        this.$router.push({ name: 'Events' })
       }
     }
   },

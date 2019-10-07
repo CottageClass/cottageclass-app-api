@@ -14,7 +14,7 @@
       <LoggedOutNav v-if="!isAuthenticated" />
       <ul v-if="isAuthenticated" class="navigation__links-list w-list-unstyled">
         <li class="navigation__link-item">
-          <router-link :to="{name: 'Search'}"
+          <router-link :to="{name: 'Events'}"
                        class="navigation__button w-inline-block"
                        :class="{'selected-nav-item': isSearchPage}"
           >
@@ -89,7 +89,7 @@ export default {
       return this.$route.name === 'YourPlaydates'
     },
     isSearchPage () {
-      return this.$route.name === 'Search'
+      return this.$route.name === 'Events'
     },
     ...mapGetters(['currentUser', 'isAuthenticated'])
   },

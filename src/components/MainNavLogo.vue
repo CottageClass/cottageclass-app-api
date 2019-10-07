@@ -17,7 +17,7 @@ export default {
   methods: {
     goToLink () {
       if (this.isAuthenticated) {
-        this.$router.push({ name: 'Search' })
+        this.$router.push({ name: 'Events' })
       } else {
         this.$router.push({ name: 'SplashPage' })
       }

@@ -91,7 +91,7 @@ export default {
   mounted: function () {
     if (this.isAuthenticated) {
       if (this.currentUser.hasAllRequiredFields) {
-        this.$router.push({ name: 'Search' })
+        this.$router.push({ name: 'Events' })
       } else if (this.currentUser.id) {
         this.$router.push({ name: 'Onboarding' })
       } else {

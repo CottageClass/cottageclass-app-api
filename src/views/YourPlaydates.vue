@@ -7,7 +7,7 @@
                    :emptyOptions="hostingEmptyOptions"
                    :items="hostingItems"
                    @empty-card-button-click="$router.push({ name: 'NewEvent' })"
-                   @empty-card-additional-link-click="$router.push({ name: 'Search' })"
+                   @empty-card-additional-link-click="$router.push({ name: 'Events' })"
                    @event-updated="fetchMyEvents"
                    @event-deleted="fetchMyEvents"
       />
@@ -15,7 +15,7 @@
                    :emptyOptions="goingEmptyOptions"
                    :items="goingItems"
                    @user-updated="fetchGoing"
-                   @empty-card-button-click="$router.push({ name: 'Search' })"
+                   @empty-card-button-click="$router.push({ name: 'Events' })"
       />
       <ListSection title="Your offers"
                    buttonText="Offer Playdate"
@@ -23,7 +23,7 @@
                    :items="yourOffersItems"
                    @header-button-click="$router.push({ name: 'NewEvent' })"
                    @empty-card-button-click="$router.push({ name: 'NewEvent' })"
-                   @empty-card-additional-link-click="$router.push({ name: 'Search' })"
+                   @empty-card-additional-link-click="$router.push({ name: 'Events' })"
                    @event-updated="fetchMyEvents"
                    @event-deleted="fetchMyEvents"
       />
