@@ -20,7 +20,8 @@ class Notification < ApplicationRecord
     event_suggestion: 16,
     user_suggestion: 17,
     event_creation_starrer: 18,
-    event_creation_match: 19
+    event_creation_match: 19,
+    daily_digest: 20
   }
 
   belongs_to :recipient, class_name: 'User', inverse_of: :notifications
@@ -117,6 +118,11 @@ class Notification < ApplicationRecord
                    Notifier::EventCreationMatch.new user: recipient,
                                                     event_creator: notifiable,
                                                     body: body
+                 when :daily_digest
+                   self.body = 'messages.daily_digest'
+                   Notifier::DailyDigest.new user: recipient,
+                                             event_collection: notifiable,
+                                             body: body
                  end
 
       if notifier.present?
