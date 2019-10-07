@@ -16,19 +16,19 @@
         <li class="navigation__link-item">
           <router-link :to="{name: 'Events'}"
                        class="navigation__button w-inline-block"
-                       :class="{'selected-nav-item': isSearchPage}"
+                       :class="{'selected-nav-item': isPlaydatesPage}"
           >
-            <img src="@/assets/house.svg" alt="" class="navigation__icon" />
-            <div class="navigation__button-label">Nearby Parents</div>
+            <img src="@/assets/calendar.svg" alt="" class="navigation__icon" />
+            <div class="navigation__button-label">Playdates</div>
           </router-link>
         </li>
         <li class="navigation__link-item">
-          <router-link :to="{name: 'YourPlaydates'}"
+          <router-link :to="{name: 'Parents'}"
                        class="navigation__button w-inline-block"
-                       :class="{'selected-nav-item': isYourPlaydatesPage}"
+                       :class="{'selected-nav-item': isParentsPage}"
           >
-            <img src="@/assets/calendar.svg" alt="" class="navigation__icon" />
-            <div class="navigation__button-label">Your Playdates</div>
+            <img src="@/assets/house.svg" alt="" class="navigation__icon" />
+            <div class="navigation__button-label">Parents</div>
             <div v-if="false" class="global__badge TODO">
               <div class="badge__text">99+</div>
             </div>
@@ -85,10 +85,10 @@ export default {
         closeCallback: this.closeCallback
       }
     },
-    isYourPlaydatesPage () {
-      return this.$route.name === 'YourPlaydates'
+    isParentsPage () {
+      return this.$route.name === 'Parents'
     },
-    isSearchPage () {
+    isPlaydatesPage () {
       return this.$route.name === 'Events'
     },
     ...mapGetters(['currentUser', 'isAuthenticated'])
