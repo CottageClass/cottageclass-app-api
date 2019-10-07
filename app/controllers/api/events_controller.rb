@@ -102,12 +102,15 @@ class API::EventsController < API::BaseController
       location = []
       location = [latitude, longitude] if [latitude, longitude].all?(&:present?)
       location = [current_user.place.latitude, current_user.place.longitude] if location.blank? && current_user.present?
-      events = events.near(location.map(&:to_f), miles) if location.all?(&:present?)
+      places = Place.near(location.map(&:to_f), miles) if location.all?(&:present?)
+      place_ids = places.to_a.pluck :id
+      events = events.where(place: place_ids)
     end
 
     if %w[chronological].include?(sort)
       events = events.reorder starts_at: :asc
     elsif miles.positive?
+      ##### WARNING THIS WONT WORK
       events = events.reorder 'distance ASC'
     end
 
