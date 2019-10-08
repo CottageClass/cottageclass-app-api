@@ -10,7 +10,7 @@ class API::EventsController < API::BaseController
       events = events.joins(:event_series)
       events = events.where('event_series.user_id <> ?', current_user.id)
     end
-    events_index events: events,
+    events_index events: events.joins(:event_series),
                  skope: params[:skope],
                  miles: params[:miles],
                  latitude: params[:latitude],
@@ -24,7 +24,7 @@ class API::EventsController < API::BaseController
   end
 
   def created
-    events_index events: @user.events,
+    events_index events: @user.events.joins(:event_series),
                  skope: params[:skope],
                  miles: params[:miles],
                  latitude: params[:latitude],
@@ -36,7 +36,7 @@ class API::EventsController < API::BaseController
   end
 
   def participated
-    events_index events: @user.participated_events,
+    events_index events: @user.participated_events.joins(:event_series),
                  skope: params[:skope],
                  miles: params[:miles],
                  latitude: params[:latitude],
@@ -116,7 +116,7 @@ class API::EventsController < API::BaseController
       events = events.reorder starts_at: :asc
     elsif miles.positive?
       ##### WARNING THIS WONT WORK
-      events = events.reorder 'distance ASC'
+      # events = events.reorder 'distance ASC'
     end
 
     links = {}
