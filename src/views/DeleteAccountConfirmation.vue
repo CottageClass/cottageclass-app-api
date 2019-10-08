@@ -79,7 +79,7 @@ export default {
           status: 'success'
         }
       })
-      this.$router.push({ name: 'Search' })
+      this.$router.push({ name: 'Events' })
     },
     async confirm () {
       try {

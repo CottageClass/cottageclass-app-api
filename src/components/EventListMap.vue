@@ -52,9 +52,11 @@ This is the map view or the list view of events
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 import { maps, screen } from '@/mixins'
 import SearchResultList from '@/components/SearchResultList.vue'
-import { mapGetters } from 'vuex'
+import { itemPlace, itemRoute } from '@/utils/items.js'
 
 export default {
   name: 'EventListMap',
@@ -65,7 +67,7 @@ export default {
     return {
       map: null,
       type: 'map',
-      userPins: [],
+      itemPins: [],
       mapHasChanged: false,
       noIdlesYet: true
     }
@@ -82,28 +84,25 @@ export default {
     },
     updateMarkers: async function () {
       await this.map
-      for (let pin of this.userPins) {
+      for (let pin of this.itemPins) {
         pin.setMap(null)
       }
       this.eventCircles = []
-      this.userPins = []
+      this.itemPins = []
 
       const that = this
       // sort users by latitude when adding pins so the z index is right on the map
-      if (this.users) {
-        const latUsers = this.users.concat().sort((a, b) => {
-          return b.place.latitude - a.place.latitude
+      if (this.items) {
+        const latItems = this.items.concat().sort((a, b) => {
+          return itemPlace(b).latitude - itemPlace(a).latitude
         })
 
-        for (let user of latUsers) {
-          const pin = await that.addUserPin(
-            user,
-            { lat: user.place.fuzzyLatitude, lng: user.place.fuzzyLongitude }
-          )
+        for (let item of latItems) {
+          const pin = await that.addItemPin(item)
           if (pin) {
-            that.userPins.push(pin)
+            that.itemPins.push(pin)
             pin.addListener('click', function () {
-              that.$router.push({ name: 'UserPage', params: { id: user.id } })
+              that.$router.push(itemRoute(item))
             })
           }
         }

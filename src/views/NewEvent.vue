@@ -39,7 +39,7 @@ export default {
   computed: mapGetters(['currentUser', 'pendingWaves']),
   methods: {
     proceed () {
-      this.$router.push({ name: 'Search' })
+      this.$router.push({ name: 'Events' })
     },
     completeCreationForHomeEvents () {
       if (this.currentUser.houseRules === null) {

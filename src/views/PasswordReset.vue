@@ -85,7 +85,7 @@ export default {
         await this.$store.dispatch('establishUser', { JWT })
         await signIn({ email, password })
         this.showAlertOnNextRoute('Your password has been reset', 'success')
-        this.$router.push({ name: 'Search' })
+        this.$router.push({ name: 'Events' })
       } catch (err) {
         this.logError(err)
         this.showAlertOnNextRoute('Something went wrong.  Please contact us at contact@joinlilypad.com.', 'failure')

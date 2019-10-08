@@ -4,7 +4,7 @@
     <div class="body">
       <div class="content-wrapper">
         <StyleWrapper styleIs="onboarding">
-          <Nav button="skip" @next="$router.push({name:'Search'})" hidePrevious="true" />
+          <Nav button="skip" @next="$router.push({name:'Events'})" hidePrevious="true" />
           <div class="onb-content-container">
             <div class="onb-top-content-container">
               <h1 class="onb-heading-large">{{ titleText }}</h1>

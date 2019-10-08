@@ -83,9 +83,20 @@ export default new Router({
       component: SplashPage
     },
     {
-      path: '/home',
-      name: 'Search',
-      component: Search
+      path: '/playdates',
+      name: 'Events',
+      component: Search,
+      props: {
+        itemType: 'event'
+      }
+    },
+    {
+      path: '/parents',
+      name: 'Parents',
+      component: Search,
+      props: {
+        itemType: 'all'
+      }
     },
     {
       path: '/password-reset/:token',

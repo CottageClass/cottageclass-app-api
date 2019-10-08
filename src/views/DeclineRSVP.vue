@@ -68,7 +68,7 @@ export default {
       this.showAlertOnNextRoute('Thanks for your feedback! Here are some other options you might like...', 'success')
       this.declineRsvp({ eventId: this.eventId })
       trackEvent('rsvp_decline', { eventId: this.eventId })
-      this.$router.push({ name: 'Search' })
+      this.$router.push({ name: 'Events' })
     },
     ...mapMutations(['declineRsvp'])
   }

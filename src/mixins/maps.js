@@ -4,6 +4,8 @@ import placeholder from '@/assets/avatar-placeholder.png'
 import UserPinFactory from '@/utils/UserPinFactory'
 import Marker from '@/components/base/UserPinMapMarker'
 
+import { itemPosition } from '@/utils/items.js'
+
 import Vue from 'vue'
 
 let UserPin
@@ -82,6 +84,9 @@ export default {
       })
       instance.$mount()
       return this.addPin(instance.$el, position)
+    },
+    async addItemPin (item) {
+      return this.addPin(this.userMarker(item.user).$el, itemPosition(item))
     },
     async addUserPin (user, position) {
       return this.addPin(this.userMarker(user).$el, position)
