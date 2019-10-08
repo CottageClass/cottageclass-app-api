@@ -33,8 +33,6 @@ class User < ApplicationRecord
 
   after_create :notify, :create_search_list_item
 
-  geocoded_by :full_address
-
   with_options if: proc { |instance| instance.direct == true } do
     validates :password, presence: true
     validates :first_name, presence: true
@@ -149,8 +147,9 @@ class User < ApplicationRecord
        (child_ages_in_months.present? && child_ages_in_months.count.positive?)
       location = [place.latitude, place.longitude]
       # narrow down the candidates
-      others = User.near(location.map(&:to_f), miles).includes(:children)
-      others = others.where.not(id: id)
+      other_users_places = Place.near(location.map(&:to_f), miles)
+      place_ids = other_users_places.pluck :id
+      others = User.joins(:place).where('place_id IN(?)', place_ids).where.not(id: id)
 
       # calculate scores and attach
       scored_users = others.map do |other|
@@ -217,16 +216,6 @@ class User < ApplicationRecord
 
   def nearest_upcoming_event
     Event.upcoming.nearest(self).reorder('distance ASC').order(starts_at: :asc).first
-  end
-
-  def full_address
-    [
-      [street_number, route].compact.map(&:squish).select(&:present?).join(' '),
-      locality,
-      admin_area_level_1,
-      admin_area_level_2,
-      [country, postal_code].compact.map(&:squish).select(&:present?).join(' ')
-    ].compact.map(&:squish).select(&:present?).join(', ')
   end
 
   class << self

@@ -24,9 +24,6 @@ class Place < ApplicationRecord
 
   def obfuscate_location
     location = if (latitude.present? && latitude.nonzero?) && (longitude.present? && longitude.nonzero?)
-                 # update dependent events
-                 events.update_all latitude: latitude, longitude: longitude
-
                  Locator.obfuscate latitude: latitude, longitude: longitude
                else
                  { fuzzy_latitude: nil, fuzzy_longitude: nil }

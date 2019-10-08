@@ -82,7 +82,6 @@ ActiveAdmin.register Event do
         verified
         neighborhood
         sublocality
-        apartment_number
         images
         languages
         job_position

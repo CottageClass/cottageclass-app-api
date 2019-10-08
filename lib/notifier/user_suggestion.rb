@@ -60,7 +60,7 @@ class Notifier::UserSuggestion < Notifier::Base
       short_distance: distance + ' mi',
       kids_ages_standalone_string: kids_ages_standalone_string,
       kids_ages_sentence_string: kids_ages_sentence_string,
-      neighborhood: @suggested_user.neighborhood,
+      neighborhood: @suggested_user.place.neighborhood,
       bio: truncated_bio,
       bio_truncated: bio_truncated,
       avatar: @suggested_user.avatar,
