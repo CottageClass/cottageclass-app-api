@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_07_172333) do
+ActiveRecord::Schema.define(version: 2019_10_08_174524) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -143,6 +143,7 @@ ActiveRecord::Schema.define(version: 2019_10_07_172333) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.bigint "place_id"
+    t.text "description"
     t.index ["place_id"], name: "index_event_series_on_place_id"
     t.index ["user_id"], name: "index_event_series_on_user_id"
   end
@@ -163,6 +164,7 @@ ActiveRecord::Schema.define(version: 2019_10_07_172333) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.float "recency_score"
+    t.text "description"
     t.index ["event_series_id"], name: "index_events_on_event_series_id"
     t.index ["latitude", "longitude"], name: "index_events_on_latitude_and_longitude"
   end

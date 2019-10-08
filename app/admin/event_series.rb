@@ -4,8 +4,8 @@ ActiveAdmin.register EventSeries do
 
   actions :index, :new, :create, :edit, :update, :destroy
 
-  permit_params :name, :start_date, :starts_at, :ends_at, :repeat_for, :interval, :maximum_children, :child_age_minimum,
-                :child_age_maximum
+  permit_params :name, :description, :start_date, :starts_at, :ends_at, :repeat_for, :interval,
+                :maximum_children, :child_age_minimum, :child_age_maximum
 
   filter :name
   filter :start_date
@@ -16,6 +16,7 @@ ActiveAdmin.register EventSeries do
     selectable_column
     column :id
     column :name
+    column :description
     column :user
     column :start_date
     column(:starts_at) { |instance| instance.starts_at.strftime('%T') }

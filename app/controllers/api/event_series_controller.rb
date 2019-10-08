@@ -37,6 +37,6 @@ class API::EventSeriesController < API::BaseController
   def safe_params
     params.require(:event_series).permit :name, :start_date, :starts_at, :ends_at, :interval,
                                          :maximum_children, :child_age_minimum, :child_age_maximum,
-                                         :repeat_for, :place_id
+                                         :repeat_for, :place_id, :description
   end
 end
