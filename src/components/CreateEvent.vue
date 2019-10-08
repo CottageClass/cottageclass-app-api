@@ -65,7 +65,7 @@ export default {
       submissionPending: false,
       showError: false,
       place: { err: null },
-      description: { err: null, text: '' },
+      description: { err: null, name: '', description: '' },
       availability: { err: null },
       repeatCount: { err: null },
       date: { err: null },
@@ -95,14 +95,11 @@ export default {
       return (timeRange) => {
         return {
           'event_series': {
-            'name': this.description.text,
+            'name': this.description.name,
+            'description': this.description.description,
             'start_date': timeRange.start.format('YYYY-MM-DD'),
             'starts_at': timeRange.start.format('HH:mm'),
             'ends_at': timeRange.end.format('HH:mm'),
-            'has_pet': false,
-            'activity_names': [],
-            'house_rules': '',
-            'pet_description': '',
             'maximum_children': 4,
             'child_age_minimum': this.ageRange.minimum,
             'child_age_maximum': this.ageRange.maximum,
