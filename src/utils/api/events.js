@@ -10,7 +10,7 @@ export function submitEventSeriesData (data) {
   return axios.post(
     `/api/event_series`, data
   ).then(res => {
-    return Object.values(normalize(res.data).event).map(parseEventData)
+    return Object.values(normalize(res.data).eventSeries)[0].relationships.events.data
   })
 }
 
