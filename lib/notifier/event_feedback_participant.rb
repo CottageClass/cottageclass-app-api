@@ -29,18 +29,9 @@ class Notifier::EventFeedbackParticipant < Notifier::Base
       :avatar,
       :first_name,
       :verified,
-      :fuzzy_latitude,
-      :fuzzy_longitude,
-      :latitude,
-      :longitude,
-      :locality,
-      :sublocality,
-      :neighborhood,
-      :admin_area_level_1,
-      :admin_area_level_2,
       :child_ages
     )
-    host_hash.update full_address: @event.user.full_address
+    host_hash.update full_address: @event.place.full_address
 
     event_hash.update start_date: @event.start_date,
                       time_range: @event.time_range,

@@ -3,19 +3,10 @@ FactoryBot.define do
     email { Faker::Internet.unique.safe_email }
     name { Faker::FunnyName.unique.name }
     password { Faker::Internet.password 8, 16 }
-    time_zone { Faker::Address.time_zone }
     phone_number { Faker::PhoneNumber.phone_number }
     phone_area_code { Faker::PhoneNumber.area_code }
     facebook_uid { Faker::Omniauth.facebook[:uid] }
     avatar { Faker::Avatar.image Faker::Internet.slug(name, '-'), '300x300', 'png' }
-    locality { Faker::Address.city }
-    admin_area_level_1 { Faker::Address.state }
-    admin_area_level_2 { Faker::Address.street_name }
-    apartment_number { Faker::Address.building_number }
-    neighborhood { Faker::Address.street_name }
-    sublocality { Faker::Address.community }
-    latitude { 40.730610 }
-    longitude { -73.935242 }
     images { Array.new(2).map { Faker::LoremPixel.image } }
     languages { %w[en fr de] }
     job_position { Faker::Job.title }

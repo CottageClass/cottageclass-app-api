@@ -4,7 +4,7 @@ require 'rspec_api_documentation/dsl'
 RSpec.resource 'Event' do
   include_context 'json headers'
 
-  let(:user) { create :user, :with_children }
+  let(:user) { create :user, :with_children, :with_place }
   let(:place) { create :place }
 
   context 'index' do
@@ -20,8 +20,8 @@ RSpec.resource 'Event' do
     get '/api/events/:skope/miles/:miles/latitude/:latitude/longitude/:longitude/sort/:sort', format: :json do
       let(:skope) { nil }
       let(:miles) { 10 }
-      let(:latitude) { user.latitude }
-      let(:longitude) { user.longitude }
+      let(:latitude) { user.place.latitude }
+      let(:longitude) { user.place.longitude }
       let(:sort) { 'chronological' }
 
       [nil, 'past', 'upcoming'].each do |skope|
@@ -55,8 +55,8 @@ RSpec.resource 'Event' do
     get '/api/events/:skope/miles/:miles/latitude/:latitude/longitude/:longitude', format: :json do
       let(:skope) { nil }
       let(:miles) { 10 }
-      let(:latitude) { user.latitude }
-      let(:longitude) { user.longitude }
+      let(:latitude) { user.place.latitude }
+      let(:longitude) { user.place.longitude }
 
       [nil, 'past', 'upcoming'].each do |skope|
         name = skope || 'all'
