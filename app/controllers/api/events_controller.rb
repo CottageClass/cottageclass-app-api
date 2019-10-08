@@ -5,7 +5,12 @@ class API::EventsController < API::BaseController
   before_action :requires_event_owner, only: %i[update destroy]
 
   def index
-    events_index events: Event.includes(:user, participant_children: :child, user: :children),
+    events = Event.includes(:user, participant_children: :child, user: :children)
+    if current_user.present?
+      events = events.joins(:event_series)
+      events = events.where('event_series.user_id <> ?', current_user.id)
+    end
+    events_index events: events,
                  skope: params[:skope],
                  miles: params[:miles],
                  latitude: params[:latitude],
