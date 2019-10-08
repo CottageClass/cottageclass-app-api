@@ -34,8 +34,7 @@ export default {
   props: ['stepName'],
   data () {
     return {
-      section: 'event',
-      upcomingEventId: ''
+      section: 'event'
     }
   },
   computed: mapGetters(['currentUser', 'pendingWaves']),
