@@ -28,6 +28,7 @@ class EventSeries < ApplicationRecord
     event = events.build starts_at: date_time(new_date, starts_at), ends_at: date_time(new_date, ends_at)
     %i[
       name
+      description
       maximum_children
       child_age_minimum
       child_age_maximum

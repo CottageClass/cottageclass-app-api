@@ -1,8 +1,6 @@
 <template>
   <div class="form-describe-need w-form">
-    <form
-      v-on:submit.prevent id="email-form-2"
-    >
+    <form v-on:submit.prevent id="email-form-2">
       <textarea
         v-model="text"
         id="field"
@@ -10,7 +8,7 @@
         name="field"
         :placeholder="placeholder"
         :maxlength="maxLength || 5000"
-        class="text-area-decribe-need w-input"
+        class="w-input"
         :rows="rows"
       >
       </textarea>
