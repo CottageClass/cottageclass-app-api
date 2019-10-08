@@ -4,7 +4,7 @@
       <StyleWrapper styleIs="onboarding">
         <CreateEvent v-if="section==='event'"
                      :stepName="stepName"
-                     v-on:seriesOfEvents="findUpcomingEvent"
+                     v-on:submission-complete="findUpcomingEvent"
                      @finishedHomeEvent="completeCreationForHomeEvents"
                      @finishedPublicEvent="proceed"
                      context="new-event"
