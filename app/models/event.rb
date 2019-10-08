@@ -64,10 +64,6 @@ class Event < ApplicationRecord
     in_instance_time_zone(starts_at).strftime('%e').try :squish
   end
 
-  def start_time_hour
-    in_instance_time_zone(starts_at).strftime('%l%p').try :squish
-  end
-
   def start_date
     in_instance_time_zone(starts_at).strftime('%B %e, %Y').try :squish
   end

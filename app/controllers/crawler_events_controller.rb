@@ -4,7 +4,7 @@ class CrawlerEventsController < ActionController::Base
     @event = Event.eager.find_by id: params[:id]
     month = @event.month_abbreviated
     date = @event.day_of_month
-    time = @event.start_time_hour
+    time = @event.start_time
 
     set_meta_tags og: {
       image: 'https://storage.googleapis.com/cottageclass-prod/images/lilypad-youre-invited-to-a-playdate.png',
