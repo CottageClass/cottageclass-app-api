@@ -126,10 +126,3 @@ export const fetchUpcomingEvents = async (userId, sortBy) => {
     throw err
   })
 }
-
-// function parseEventData (obj) {
-//   var e = obj.attributes
-//   e.participants = obj.relationships.participants.data
-//   e['id'] = obj.id
-//   return e
-// }
