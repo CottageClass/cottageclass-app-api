@@ -1,42 +1,50 @@
 <template>
   <li class="events-list__event-summary-card"
       @click.stop="goToItem">
-    <div class="header">
-      <div class="header__date"
-           :class="{'time-past': timePast}" >
-        {{timeHeader}}
+    <router-link
+      :to="link"
+      @click.native="$event.stopImmediatePropagation()">
+      <div class="header">
+        <div class="header__date"
+             :class="{'time-past': timePast}" >
+          {{timeHeader}}
+        </div>
+        <div v-if="distance && !isCurrentUser" class="header__distance">{{distance}}</div>
       </div>
-      <div v-if="distance && !isCurrentUser" class="header__distance">{{distance}}</div>
-    </div>
-    <div class="description">
-      <div class="description-text line-clamp--2">{{description}}</div>
-    </div>
+      <div class="description">
+        <div class="description-text line-clamp--2">{{description}}</div>
+      </div>
+    </router-link>
     <div class="footer">
-      <div class="footer__user-summary">
-        <div class="photo-wrapper">
-          <AvatarImage
-            className="photo"
-            :person="user"
-            imageSize="85"
-          />
-          <div class="badge-verified" v-if="user.facebookUid">
-            <div class="unicode-character">✓</div>
-            <div class="badge-text">Verified</div>
-          </div>
-        </div>
-        <div class="user-info--container">
-          <div class="user-info_list">
-            <div class="user-info__name">{{userName}}</div>
-            <div v-if="occupation"
-                 class="user-info__occupation lp-truncate">
-              {{occupation}}<br />
+      <router-link
+        :to="link"
+        @click.native="$event.stopImmediatePropagation()">
+        <div class="footer__user-summary">
+          <div class="photo-wrapper">
+            <AvatarImage
+              className="photo"
+              :person="user"
+              imageSize="85"
+            />
+            <div class="badge-verified" v-if="user.facebookUid">
+              <div class="unicode-character">✓</div>
+              <div class="badge-text">Verified</div>
             </div>
-            <div class="user-info__kids lp-truncate">{{kidsAges}}</div>
-            <div v-if="neighborhood" class="user-info__kids lp-truncate">{{neighborhood}}</div>
-            <HouseholdImages :user="user" />
+          </div>
+          <div class="user-info--container">
+            <div class="user-info_list">
+              <div class="user-info__name">{{userName}}</div>
+              <div v-if="occupation"
+                   class="user-info__occupation lp-truncate">
+                {{occupation}}<br />
+              </div>
+              <div class="user-info__kids lp-truncate">{{kidsAges}}</div>
+              <div v-if="neighborhood" class="user-info__kids lp-truncate">{{neighborhood}}</div>
+              <HouseholdImages :user="user" />
+            </div>
           </div>
         </div>
-      </div>
+      </router-link>
       <div class="footer__actions--mobile">
         <a class="event-action__icon-button__star w-inline-block"
            :class="isStarred?'active':''"
@@ -112,6 +120,16 @@ export default {
     },
     event () {
       return this.item && this.item.event
+    },
+    link () {
+      if (this.user) {
+        return { name: 'UserPage', params: { id: this.user.id } }
+      } else if (this.event) {
+        return { name: 'EventPage', params: { id: this.event.id } }
+      } else {
+        console.log('item is neither a user nor an event')
+        return null
+      }
     }
   }
 }
