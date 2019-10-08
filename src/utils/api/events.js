@@ -11,7 +11,7 @@ export function submitEventSeriesData (data) {
   return axios.post(
     `/api/event_series`, data
   ).then(res => {
-    return Object.values(normalize(res.data).event).map(parseEventData)
+    return Object.values(normalize(res.data).eventSeries)[0].relationships.events.data
   })
 }
 export const fetchEvents = async ({ miles, lat, lng, minAge, maxAge, pageSize = 20, page = 1 }) => {
@@ -133,11 +133,4 @@ export const fetchUpcomingEvents = async (userId, sortBy) => {
     logger.logError(err.errors)
     throw err
   })
-}
-
-function parseEventData (obj) {
-  var e = obj.attributes
-  e.participants = obj.relationships.participants.data
-  e['id'] = obj.id
-  return e
 }

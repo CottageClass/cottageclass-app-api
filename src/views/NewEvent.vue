@@ -4,6 +4,7 @@
       <StyleWrapper styleIs="onboarding">
         <CreateEvent v-if="section==='event'"
                      :stepName="stepName"
+                     v-on:submission-complete="findUpcomingEvent"
                      @finishedHomeEvent="completeCreationForHomeEvents"
                      @finishedPublicEvent="proceed"
                      context="new-event"
@@ -39,7 +40,7 @@ export default {
   computed: mapGetters(['currentUser', 'pendingWaves']),
   methods: {
     proceed () {
-      this.$router.push({ name: 'Events' })
+      this.$router.push({ name: 'SocialEventInvite', params: { id: this.upcomingEvent.id, context: 'spontaneous' } })
     },
     completeCreationForHomeEvents () {
       if (this.currentUser.houseRules === null) {
@@ -47,6 +48,9 @@ export default {
       } else {
         this.proceed()
       }
+    },
+    findUpcomingEvent (value) {
+      this.upcomingEvent = value[0]
     }
   },
   created () {
