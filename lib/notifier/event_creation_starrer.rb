@@ -30,7 +30,9 @@ class Notifier::EventCreationStarrer < Notifier::Base
   end
 
   def mail_template_parameters
-    distance = @user.distance_to(@event_creator).round(1).to_s
+    return if @user.place.nil? || @event_creator.place.nil?
+
+    distance = @user.place.distance_to(@event_creator.place).round(1).to_s
     full_bio = @event_creator.profile_blurb
     if full_bio
       truncated_bio = full_bio.truncate(260, seperator: /\s/) if full_bio
