@@ -135,7 +135,8 @@ export default {
         const start = moment(this.date.selected + 'T' + this.time.start)
         const end = moment(this.date.selected + 'T' + this.time.end)
         const timeRange = { start, end }
-        await submitEventSeriesData(this.eventSeriesDataForSubmission(timeRange))
+        const res = await submitEventSeriesData(this.eventSeriesDataForSubmission(timeRange))
+        this.$emit('seriesOfEvents', res)
       } catch (e) {
         this.logError('Failed to submit event series')
         this.logError(e)
@@ -150,6 +151,7 @@ export default {
         try {
           const timeRange = this.timeRangeForBlock(contiguousTimeBlock)
           const res = await submitEventSeriesData(this.eventSeriesDataForSubmission(timeRange))
+          this.$emit('seriesOfEvents', res)
           this.setCreatedEvents({ eventData: res })
         } catch (e) {
           this.logError('Failed to submit event series')
