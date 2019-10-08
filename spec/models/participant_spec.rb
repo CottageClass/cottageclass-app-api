@@ -27,14 +27,5 @@ RSpec.describe Participant, type: :model do
       user.children.each { |child| child.emergency_contacts = build_list :emergency_contact, 2, contactable: nil }
       expect { subject.save }.to change(Notification.participant_creation_host, :count).from(0).to(1)
     }
-
-    it 'participant_creation_next_day' do
-      subject.save
-
-      expect { subject.next_day_notify }.not_to change(Notification.participant_creation_next_day, :count)
-      Timecop.freeze(1.day.since(subject.created_at)) do
-        expect { subject.next_day_notify }.to change(Notification.participant_creation_next_day, :count).by(1)
-      end
-    end
   end
 end
