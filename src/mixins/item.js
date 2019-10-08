@@ -178,8 +178,8 @@ export default {
     description () {
       if (this.event) {
         const regex = /\.*$/
-        const trimmedName = this.event.name.trim().replace(regex, '')
-        return trimmedName + '. ' + this.event.description
+        const trimmedName = this.event.name && this.event.name.trim().replace(regex, '')
+        return trimmedName + '. ' + (this.event.description || '')
       }
       return this.user.profileBlurb
     },
