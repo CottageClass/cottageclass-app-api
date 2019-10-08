@@ -41,7 +41,7 @@ export default {
   computed: mapGetters(['currentUser', 'pendingWaves']),
   methods: {
     proceed () {
-      this.$router.push({ name: 'SocialEventInvite', params: { id: this.upcomingEvent.id, context: 'spontaneous' }})
+      this.$router.push({ name: 'SocialEventInvite', params: { id: this.upcomingEvent.id, context: 'spontaneous' } })
     },
     completeCreationForHomeEvents () {
       if (this.currentUser.houseRules === null) {
@@ -50,7 +50,7 @@ export default {
         this.proceed()
       }
     },
-    findUpcomingEvent(value) {
+    findUpcomingEvent (value) {
       this.upcomingEvent = value[0]
     }
   },

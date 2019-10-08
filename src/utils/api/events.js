@@ -127,9 +127,9 @@ export const fetchUpcomingEvents = async (userId, sortBy) => {
   })
 }
 
-function parseEventData (obj) {
-  var e = obj.attributes
-  e.participants = obj.relationships.participants.data
-  e['id'] = obj.id
-  return e
-}
+// function parseEventData (obj) {
+//   var e = obj.attributes
+//   e.participants = obj.relationships.participants.data
+//   e['id'] = obj.id
+//   return e
+// }
