@@ -15,6 +15,7 @@ describe('SearchListCard', () => {
   it('mounts with just user info', () => {
     const wrapper = mount(SearchListCard, {
       mocks: { $store },
+      stubs: ['router-link'],
       propsData: {
         item: {
           user: {
@@ -67,6 +68,7 @@ describe('SearchListCard', () => {
   it('some alternative cases on the data', () => {
     const wrapper = mount(SearchListCard, {
       mocks: { $store },
+      stubs: ['router-link'],
       propsData: {
         item: {
           user: {
@@ -99,6 +101,7 @@ describe('SearchListCard', () => {
           waveHasBeenSent: () => false,
           isAuthenticated: false
         } } },
+      stubs: ['router-link'],
       propsData: {
         item: {
           user: {
