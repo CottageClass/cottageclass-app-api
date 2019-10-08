@@ -89,6 +89,8 @@
 </template>
 
 <script>
+import { mapGetters, mapMutations } from 'vuex'
+
 import GetTheMost from '@/components/search/GetTheMost.vue'
 import SearchResultList from '@/components/SearchResultList.vue'
 import MainNav from '@/components/MainNav.vue'
@@ -101,12 +103,14 @@ import LocationFilterSelector from '@/components/filters/LocationFilterSelector'
 import LocationFilterButton from '@/components/filters/LocationFilterButton'
 
 import { messaging, alerts, screen } from '@/mixins'
-import { fetchFeed } from '@/utils/api'
-import { mapGetters, mapMutations } from 'vuex'
+import { fetchFeed, fetchEvents } from '@/utils/api'
 
 export default {
   name: 'Search',
   mixins: [messaging, alerts, screen],
+  props: {
+    itemType: { default: 'event' }
+  },
   components: {
     GetTheMost,
     SearchResultList,
@@ -158,7 +162,15 @@ export default {
           page: this.lastPage + 1
         }
         this.awaiting = true
-        let newItems = await fetchFeed(params)
+        let newItems
+        switch (this.itemType) {
+          case 'event':
+            newItems = await fetchEvents(params)
+            break
+          case 'all':
+            newItems = await fetchFeed(params)
+            break
+        }
         this.setShowFetchMoreButton({ show: newItems.length === params.pageSize })
         // if items is null, set it to the incoming items, otherwise add them
         this.addItems({ items: newItems })
@@ -210,6 +222,11 @@ export default {
         this.fetch()
       },
       deep: true
+    },
+    '$route': {
+      handler () {
+        this.fetch()
+      }
     }
   },
   created: async function () {

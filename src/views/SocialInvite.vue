@@ -140,7 +140,7 @@ export default {
       this.fetchedEvent = await fetchEvent(this.eventId)
     },
     nextStep () {
-      this.$router.push({ name: 'Search' })
+      this.$router.push({ name: 'Events' })
     },
     onCopy: function () {
       this.copyButtonText = 'copied!'

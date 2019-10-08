@@ -5,6 +5,22 @@ export const createItem = (data) => {
   return createItems(data)[0]
 }
 
+export const createItemsFromEvents = (data) => {
+  if (!data.event) {
+    return []
+  }
+  const events = createEvents(data)
+
+  const items = events.map(event => {
+    return { event, user: event.user }
+  })
+  if (data.meta.event) {
+    const order = data.meta.event.data.map(u => u.id)
+    return order.map(id => items.find(i => i.event.id === id))
+  }
+  return items
+}
+
 export const createItems = (data) => {
   if (!data.searchListItem || data.searchListItem.length === 0) {
     return []

@@ -5,7 +5,12 @@ class API::EventsController < API::BaseController
   before_action :requires_event_owner, only: %i[update destroy]
 
   def index
-    events_index events: Event.includes(:user, participant_children: :child, user: :children),
+    events = Event.includes(:user, :place, participant_children: :child, user: :children)
+    if current_user.present?
+      events = events.joins(:event_series)
+      events = events.where('event_series.user_id <> ?', current_user.id)
+    end
+    events_index events: events.joins(:event_series),
                  skope: params[:skope],
                  miles: params[:miles],
                  latitude: params[:latitude],
@@ -19,7 +24,7 @@ class API::EventsController < API::BaseController
   end
 
   def created
-    events_index events: @user.events,
+    events_index events: @user.events.joins(:event_series),
                  skope: params[:skope],
                  miles: params[:miles],
                  latitude: params[:latitude],
@@ -31,7 +36,7 @@ class API::EventsController < API::BaseController
   end
 
   def participated
-    events_index events: @user.participated_events,
+    events_index events: @user.participated_events.joins(:event_series),
                  skope: params[:skope],
                  miles: params[:miles],
                  latitude: params[:latitude],
@@ -102,13 +107,16 @@ class API::EventsController < API::BaseController
       location = []
       location = [latitude, longitude] if [latitude, longitude].all?(&:present?)
       location = [current_user.place.latitude, current_user.place.longitude] if location.blank? && current_user.present?
-      events = events.near(location.map(&:to_f), miles) if location.all?(&:present?)
+      places = Place.near(location.map(&:to_f), miles) if location.all?(&:present?)
+      place_ids = places.to_a.pluck :id
+      events = events.where('event_series.place_id IN (?)', place_ids)
     end
 
     if %w[chronological].include?(sort)
       events = events.reorder starts_at: :asc
     elsif miles.positive?
-      events = events.reorder 'distance ASC'
+      ##### WARNING THIS WONT WORK
+      # events = events.reorder 'distance ASC'
     end
 
     links = {}

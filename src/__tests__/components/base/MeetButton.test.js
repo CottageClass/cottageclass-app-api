@@ -18,7 +18,7 @@ describe('MeetButton', () => {
     }
     beforeAll(async () => {
       const $route = {
-        name: 'Search'
+        name: 'Events'
       }
       const $router = { push: jest.fn() }
       const $store = {
@@ -95,7 +95,7 @@ describe('MeetButton', () => {
         }
       }
       const $route = {
-        name: 'Search'
+        name: 'Events'
       }
 
       const targetUser = {
@@ -161,7 +161,7 @@ describe('MeetButton', () => {
         }
       }
       const $route = {
-        name: 'Search'
+        name: 'Events'
       }
       wrapper = mount(MeetButton, {
         mocks: { $router, $store, $route },

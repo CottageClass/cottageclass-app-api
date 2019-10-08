@@ -75,7 +75,7 @@ export default {
         reasons: this.reasons,
         otherText: this.otherText }, 'darkStars')
       this.showAlertOnNextRoute('Thank you for your feedback.', 'success')
-      this.$router.push({ name: 'Search' })
+      this.$router.push({ name: 'Events' })
     }
   }
 }

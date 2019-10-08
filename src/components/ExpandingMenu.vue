@@ -10,6 +10,13 @@
       </li>
       <li>
         <router-link
+          :to="{name:'YourPlaydates'}"
+          class="link-block w-inline-block">
+          <div class="text-block">Your playdates</div>
+        </router-link>
+      </li>
+      <li>
+        <router-link
           :to="{name:'ProfileEdit'}"
           class="link-block w-inline-block">
           <div class="text-block">Edit profile</div>

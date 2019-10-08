@@ -185,7 +185,7 @@ export default {
             // try to log in with existing credentials
             const signInResult = await signIn({ email, password })
             this.$store.dispatch('establishUser', { JWT: signInResult.data[0] })
-            this.$router.push({ name: 'Search' })
+            this.$router.push({ name: 'Events' })
           } catch (e) {
             this.showError = true
             this.showAlert('Sorry, there was a problem creating your account. Did you already create an account with this email address directly or via Facebook?', 'failure')
