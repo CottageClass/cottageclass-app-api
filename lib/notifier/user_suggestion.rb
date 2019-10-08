@@ -30,7 +30,9 @@ class Notifier::UserSuggestion < Notifier::Base
   end
 
   def mail_template_parameters
-    distance = @user.distance_to(@suggested_user).round(1).to_s
+    return if @user.place.nil? || @suggested_user.place.nil?
+
+    distance = @user.place.distance_to(@suggested_user.place).round(1).to_s
     full_bio = @suggested_user.profile_blurb
     if full_bio
       truncated_bio = full_bio.truncate(260, seperator: /\s/) if full_bio
