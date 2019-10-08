@@ -36,7 +36,7 @@ namespace :cottage_class do
     desc 'Perform once hourly batched event tasks'
     task batch_event_job: :environment do
       last_run_time = KeyValue['last_batch_event_job_timestamp']
-      now = Time.current
+      KeyValue['last_batch_event_job_timestamp'] = Time.current
       if last_run_time.present?
         puts "Performing batch event job.  Last run at #{last_run_time}."
         Event.batch_event_job last_run_time
@@ -44,7 +44,6 @@ namespace :cottage_class do
       else
         puts 'Never run before.  Skipping.'
       end
-      KeyValue['last_batch_event_job_timestamp'] = now
     end
   end
 end
