@@ -5,7 +5,7 @@ class API::EventsController < API::BaseController
   before_action :requires_event_owner, only: %i[update destroy]
 
   def index
-    events = Event.includes(:user, participant_children: :child, user: :children)
+    events = Event.includes(:user, :place, participant_children: :child, user: :children)
     if current_user.present?
       events = events.joins(:event_series)
       events = events.where('event_series.user_id <> ?', current_user.id)
@@ -109,7 +109,7 @@ class API::EventsController < API::BaseController
       location = [current_user.place.latitude, current_user.place.longitude] if location.blank? && current_user.present?
       places = Place.near(location.map(&:to_f), miles) if location.all?(&:present?)
       place_ids = places.to_a.pluck :id
-      events = events.where(place: place_ids)
+      events = events.where('event_series.place_id IN (?)', place_ids)
     end
 
     if %w[chronological].include?(sort)
