@@ -1841,9 +1841,14 @@ background-color: #f6f6f6;
     background-color: #1d8be7;
   }
 
-  .text-area-decribe-need {
+  .tall textarea {
     height: 200px;
-    min-height: 120px;
+  }
+  .short textarea {
+    height: 75;
+  }
+
+  textarea {
     padding-top: 16px;
     padding-bottom: 16px;
     padding-left: 18px;
@@ -1851,30 +1856,21 @@ background-color: #f6f6f6;
     border-radius: 4px;
     background-color: hsla(0, 0%, 100%, .7);
     font-size: 16px;
-  }
 
-  .text-area-decribe-need:active {
-    background-color: #fff;
-  }
+    &.text-area-decribe-need {
+      height: 200px;
+    }
 
-  .text-area-decribe-need:focus {
-    background-color: #fff;
-  }
+    &:active {
+      background-color: #fff;
+    }
+    &:focus {
+      background-color: #fff;
+    }
 
-  .text-area-decribe-need::-webkit-input-placeholder {
-    color: rgba(0, 0, 0, .3);
-  }
-
-  .text-area-decribe-need:-ms-input-placeholder {
-    color: rgba(0, 0, 0, .3);
-  }
-
-  .text-area-decribe-need::-ms-input-placeholder {
-    color: rgba(0, 0, 0, .3);
-  }
-
-  .text-area-decribe-need::placeholder {
-    color: rgba(0, 0, 0, .3);
+    &::placeholder {
+      color: rgba(0, 0, 0, .3);
+    }
   }
 
   .radio-button-field, .checkbox-field-extra-space {
