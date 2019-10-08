@@ -148,7 +148,7 @@ class User < ApplicationRecord
       location = [place.latitude, place.longitude]
       # narrow down the candidates
       other_users_places = Place.near(location.map(&:to_f), miles)
-      place_ids = other_users_places.pluck :id
+      place_ids = other_users_places.to_a.pluck :id
       others = User.joins(:place).where('place_id IN(?)', place_ids).where.not(id: id)
 
       # calculate scores and attach

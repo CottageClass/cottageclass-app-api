@@ -4,8 +4,8 @@ require 'rspec_api_documentation/dsl'
 RSpec.resource 'User' do
   include_context 'json headers'
 
-  let(:user) { build :user, :with_children }
-  let(:other_user) { build :user, :with_children }
+  let(:user) { build :user, :with_children, :with_place }
+  let(:other_user) { build :user, :with_children, :with_place }
 
   context 'read operations' do
     before { user.save }
@@ -20,8 +20,8 @@ RSpec.resource 'User' do
       include_context 'authorization token'
 
       let(:miles) { 10 }
-      let(:latitude) { user.latitude }
-      let(:longitude) { user.longitude }
+      let(:latitude) { user.place.latitude }
+      let(:longitude) { user.place.longitude }
       let(:page) { 1 }
       let(:min_age) { 3 }
       let(:max_age) { 5 }
