@@ -31,10 +31,6 @@ ActiveAdmin.register EventSeries do
     f.semantic_errors(*f.object.errors.keys)
     f.inputs 'Data' do
       f.input :name
-      f.li do
-        f.label :time_zone
-        f.span f.object.time_zone
-      end
       f.input :start_date
       f.input :starts_at
       f.input :ends_at
