@@ -122,10 +122,10 @@ export default {
       return this.item && this.item.event
     },
     link () {
-      if (this.user) {
-        return { name: 'UserPage', params: { id: this.user.id } }
-      } else if (this.event) {
+      if (this.event) {
         return { name: 'EventPage', params: { id: this.event.id } }
+      } else if (this.user) {
+        return { name: 'UserPage', params: { id: this.user.id } }
       } else {
         console.log('item is neither a user nor an event')
         return null
