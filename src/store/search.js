@@ -61,16 +61,19 @@ const mutations = {
     if (!data) {
       Vue.set(state.data, state.itemType, baseData())
     }
+  },
+  setFetchLock (state, payload) {
+    Vue.set(state.data[state.itemType], 'fetchLock', payload.lock)
   }
 }
 
 const actions = {
   async fetchItems ({ state, commit, dispatch }) {
-    if (state.data[state.itemType].alreadyFetching) { return }
+    if (state.data[state.itemType].fetchLock) { return }
     commit('resetSearch')
-    Vue.set(state.data[state.itemType], 'alreadyFetching', true)
+    commit('setFetchLock', { lock: true })
     const results = await dispatch('fetchMoreItems')
-    Vue.delete(state.data[state.itemType], 'alreadyFetching')
+    commit('setFetchLock', { lock: false })
     return results
   },
 
