@@ -5,7 +5,7 @@
         :center="mapArea.center"
         @searchAreaSet="updateMapAreaFromMap"
         :showFetchMoreButton="showFetchMoreButton"
-        :items="items(itemType)"
+        :items="items"
         :noItemsMessage="noItemsMessage"
         :showTrailblazerMessage="showTrailblazerMessage"
         @fetch-more-click="fetchMoreItems"
@@ -15,16 +15,29 @@
         @back-click="detailView=false"
       />
     </div>
+
     <div v-else class="page-wrapper">
       <MainNav />
-      <div class="content-section">
-        <div class="divider-2px"></div>
-        <GetTheMost
-          @offer-playdate-click="offerPlaydate"
-        />
-        <div class="main-container w-container">
+      <div class="events__container w-container">
+        <div class="events__column-left">
+          <GetTheMost @offer-playdate-click="offerPlaydate"/>
+          <div class="list-container w-container">
+            <FilterSelectorBank />
+            <SearchResultList
+              :awaiting="awaiting"
+              :showFetchMoreButton="showFetchMoreButton"
+              class="list"
+              :items="items"
+              :noItemsMessage="noItemsMessage"
+              :showTrailblazerMessage="showTrailblazerMessage"
+              @fetch-more-click="fetchMoreItems"
+              @user-updated="updateUser"
+              @event-updated="updateEvent"/>
+          </div>
 
-          <div class="map-list-container">
+        </div>
+        <div class="events__column-right">
+          <div class="map-container">
             <EventListMap
               class="map"
               :items="items"
@@ -32,25 +45,12 @@
               @searchAreaSet="updateMapAreaFromMap"
               :isFullScreen="false"
             />
-            <div class="list-container w-container">
-              <FilterSelectorBank />
-              <SearchResultList
-                :awaiting="awaiting"
-                :showFetchMoreButton="showFetchMoreButton"
-                class="list"
-                :items="items"
-                :noItemsMessage="noItemsMessage"
-                :showTrailblazerMessage="showTrailblazerMessage"
-                @fetch-more-click="fetchMoreItems"
-                @user-updated="updateUser"
-                @event-updated="updateEvent"/>
-            </div>
           </div>
         </div>
-        <Footer
-          :hideOnMobile = true
-        />
       </div>
+      <Footer
+        :hideOnMobile = true
+      />
     </div>
   </div>
 </template>
@@ -153,128 +153,109 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
-.detail-wrapper {
-  height: 100vh;
-  width: 100%;
-}
-
-.page-wrapper {
-  all: unset;
-  font-family: soleil, sans-serif;
-  color: #333;
-  font-size: 14px;
-  line-height: 20px;
-  background-color: #fff;
-  overflow: visible;
-  background-color: #fff;
-}
-
-.map-list-container {
+.events__container {
+  position: relative;
   display: flex;
-  flex-direction: row-reverse;
-  margin-right: auto;
-  margin-left: auto;
-}
-
-h2 {
-  margin-top: 20px;
-  margin-bottom: 10px;
-  font-size: 32px;
-  line-height: 36px;
-  font-weight: bold;
-}
-
-a {
-  color: #000;
-  text-decoration: none;
-}
-
-.content-section {
-  display: block;
-  margin-top: 0px;
-  align-items: center;
-  background-color: #f6f6f6;
-}
-
-.divider-2px {
-  width: 100%;
-  height: 2px;
-  background-color: #f3f3f3;
-}
-
-.list-container {
-  display: flex;
-  width: 555px;
-  min-height: 100px;
+  margin-top: 32px;
   padding-right: 32px;
-  flex-direction: column;
+  padding-bottom: 0;
+  padding-left: 32px;
   align-items: flex-start;
-  background-color: transparent;
+}
+
+.events__column-left {
+  width: 50%;
+  min-height: 100px;
+  margin-right: 32px;
+  padding-bottom: 80px;
+}
+
+.events__column-right {
+  position: sticky;
+  top: 0;
+  width: 50%;
 }
 
 .map {
-  position: sticky;
-  top: 146px;
-  display: block;
-  width: 320px;
-  height:438px;
-  clear: none;
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
-}
-
-.top-container {
-  position: relative;
   display: flex;
-  padding-right: 32px;
-  padding-bottom: 24px;
-  padding-left: 32px;
-  flex-direction: column;
-}
-
-.main-container {
-  position: relative;
-  min-height: 800px;
-  display: flex;
-  margin-bottom: 100px;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 40px 32px;
-  flex-direction: row;
-  justify-content: flex-start;
+  min-height: 100vh;
+  min-width: 320px;
+  justify-content: center;
   align-items: flex-start;
+  background-position: 50% 50%;
+  background-size: auto;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
 }
 
-@media (max-width: 991px) {
+.map-container {
+  height: 100vh;
+  min-height: 300px;
+  min-width: 320px;
+}
+
+@media (max-width: 991px){
+  .events__container {
+    margin-top: 24px;
+    flex-direction: column-reverse;
+  }
+
+  .events__column-left {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 0;
+  }
+
+  .events__column-right {
+    position: static;
+    display: block;
+    width: 100%;
+    margin-bottom: 0;
+  }
+
   .map {
-    position: relative;
-    top: 0;
-    width: 100%;
-    height: 200px;
-    cursor:s-resize;
+    min-height: 240px;
+    min-width: 100%;
+    background-position: 50% 50%;
+    background-size: auto;
   }
-  .list-container {
-    width:100%;
-    padding-top: 0px;
-    padding-right: 0px;
-    padding-bottom: 128px;
+
+  .map-container {
+    height: auto;
+    max-width: 100%;
+    min-height: 240px;
+    min-width: auto;
   }
-  .map-list-container {
-    width: 100%;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-  }
-  .main-container {
-    padding: 0px 32px 80px;
-    margin-top: 0px;
-  }
+
 }
 
 @media (max-width: 767px){
-  .main-container {
-    padding: 0px;
+  .events__container {
+    position: static;
+    margin-top: 0;
+    padding-right: 0;
+    padding-left: 0;
+    flex-direction: column-reverse;
   }
+
+  .events__column-left {
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  .events__column-right {
+    margin-bottom: 0;
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  .map {
+    min-height: 200px;
+  }
+
+  .map-container {
+    min-height: 200px;
+  }
+
 }
 </style>
