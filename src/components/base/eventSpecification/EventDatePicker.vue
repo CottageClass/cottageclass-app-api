@@ -21,8 +21,7 @@ export default {
   data () {
     return {
       dateSelected: '',
-      errorMesg: 'Please choose a day for your activity.',
-      otherDate: null
+      errorMesg: 'Please choose a day for your activity.'
     }
   },
   mounted: function () {
@@ -31,24 +30,8 @@ export default {
     })
   },
   computed: {
-    firstDate: function () {
-      return moment().startOf('week').add(3, 'weeks').add(5, 'days')
-    },
-    datesAsMoments: function () {
-      return [
-        this.firstDate,
-        this.firstDate.clone().add(1, 'days'),
-        this.firstDate.clone().add(2, 'days'),
-        this.firstDate.clone().add(1, 'weeks'),
-        this.firstDate.clone().add(1, 'weeks').add(1, 'days'),
-        this.firstDate.clone().add(1, 'weeks').add(2, 'days')
-      ]
-    },
-    dates: function () {
-      return [...this.datesAsMoments.map(date => date.format('YYYY-MM-DD')), 'Other']
-    },
     err: function () {
-      if (!this.dateSelected || (this.dateSelected === 'Other' && !this.dateIsValid(this.otherDate))) {
+      if (!this.dateSelected) {
         return this.errorMesg
       } else {
         return false
@@ -63,7 +46,8 @@ export default {
   methods: {
     allowedDates (date) {
       const yearFromNow = moment(new Date()).add(1, 'years')
-      return moment(date).isAfter(new Date()) && moment(date).isBefore(yearFromNow)
+      const yesterday = moment(new Date()).add(-1, 'days')
+      return moment(date).isAfter(yesterday) && moment(date).isBefore(yearFromNow)
     },
     emitDate: function () {
       this.$emit('input', {
@@ -74,9 +58,6 @@ export default {
     dateIsValid: function (date) {
     // for now we just make them enter something
       return !!date
-    },
-    displayDate: function (date) {
-      return moment(date).format('dddd, MMMM Do')
     }
   }
 }
