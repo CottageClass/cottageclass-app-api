@@ -12,28 +12,16 @@ const mutations = {
     state.itemType = payload.itemType
     const data = state.data[state.itemType]
     if (!data) {
-      Vue.set(state.data, state.itemType, {
-        items: null,
-        lastPage: 0,
-        moreAvailable: false
-      })
+      Vue.set(state.data, state.itemType)
     }
   },
   resetSearch (state) {
-    Vue.set(state.data, state.itemType, {
-      items: null,
-      lastPage: 0,
-      moreAvailable: false
-    })
+    Vue.set(state.data, state.itemType, baseData())
   },
   addItems (state, payload) {
     const items = payload.items
     if (!state.data[state.itemType]) {
-      Vue.set(state.data, state.itemType, {
-        items: null,
-        lastPage: 0,
-        moreAvailable: false
-      })
+      Vue.set(state.data, state.itemType, baseData())
     }
     if (!state.data[state.itemType].items) {
       Vue.set(state.data[state.itemType], 'items', [])
@@ -71,19 +59,19 @@ const mutations = {
   ensureState (state) {
     const data = state.data[state.itemType]
     if (!data) {
-      Vue.set(state.data, state.itemType, {
-        items: null,
-        lastPage: 0,
-        moreAvailable: false
-      })
+      Vue.set(state.data, state.itemType, baseData())
     }
   }
 }
 
 const actions = {
-  async fetchItems ({ commit, dispatch }) {
+  async fetchItems ({ state, commit, dispatch }) {
+    if (state.data[state.itemType].alreadyFetching) { return }
     commit('resetSearch')
-    return dispatch('fetchMoreItems')
+    Vue.set(state.data[state.itemType], 'alreadyFetching', true)
+    const results = await dispatch('fetchMoreItems')
+    Vue.delete(state.data[state.itemType], 'alreadyFetching')
+    return results
   },
 
   async fetchMoreItems ({ state, commit, getters }) {
@@ -108,6 +96,7 @@ const actions = {
         items = await fetchFeed(params)
         break
     }
+    commit('incrementLastPage')
     commit('setMoreAvailable', { moreAvailable: items.length >= params.pageSize })
     commit('addItems', { items })
   }
@@ -125,4 +114,11 @@ const modules = { filter }
 
 export default {
   state, mutations, actions, getters, modules
+}
+
+function baseData () {
+  return {
+    lastPage: 0,
+    moreAvailable: false
+  }
 }
