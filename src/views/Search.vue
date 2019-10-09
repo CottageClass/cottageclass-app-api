@@ -5,7 +5,7 @@
         :center="mapArea.center"
         @searchAreaSet="updateMapAreaFromMap"
         :showFetchMoreButton="showFetchMoreButton"
-        :items="items"
+        :items="items(itemType)"
         :noItemsMessage="noItemsMessage"
         :showTrailblazerMessage="showTrailblazerMessage"
         @fetch-more-click="fetchMoreItems"
@@ -17,7 +17,7 @@
     </div>
     <div v-else class="page-wrapper">
       <MainNav />
-      <div class="content-section background-01">
+      <div class="content-section">
         <div class="divider-2px"></div>
         <GetTheMost
           @offer-playdate-click="offerPlaydate"
@@ -33,40 +33,7 @@
               :isFullScreen="false"
             />
             <div class="list-container w-container">
-              <li class="events-list__title-bar">
-                <div class="other-events__title-text">Nearby Parents</div>
-                <div class="selectors-group">
-                  <FilterSelector title="Distance"
-                                  :showClear="false"
-                                  :active="shortDescription" >
-                    <template v-slot:buttonContents>
-                      <LocationFilterButton :shortDescription="shortDescription" />
-                    </template>
-                    <template v-slot:selectorContents>
-                      <LocationFilterSelector
-                        @locationUpdated="updateMapAreaFromFilter"
-                        :searchRadius="mapArea.maxDistance"
-                      />
-                    </template>
-                  </FilterSelector>
-
-                  <div class="utility-spacer-16px"></div>
-
-                  <FilterSelector title="Child Age"
-                                  :showClear="true"
-                                  @clearFilterClicked="resetAgeRange"
-                                  :active="ageRangeActive" >
-                    <template v-slot:buttonContents>
-                      <AgeRangeFilterButton :range="ageRange" />
-                    </template>
-                    <template v-slot:selectorContents>
-                      <AgeRangeFilterSelector
-                        v-model="ageRange"
-                      />
-                    </template>
-                  </FilterSelector>
-                </div>
-              </li>
+              <FilterSelectorBank />
               <SearchResultList
                 :awaiting="awaiting"
                 :showFetchMoreButton="showFetchMoreButton"
@@ -89,27 +56,22 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex'
+import { mapGetters, mapMutations, mapActions } from 'vuex'
 
-import GetTheMost from '@/components/search/GetTheMost.vue'
-import SearchResultList from '@/components/SearchResultList.vue'
-import MainNav from '@/components/MainNav.vue'
-import Footer from '@/components/Footer.vue'
-import EventListMap from '@/components/EventListMap.vue'
-import FilterSelector from '@/components/filters/FilterSelector'
-import AgeRangeFilterButton from '@/components/filters/AgeRangeFilterButton'
-import AgeRangeFilterSelector from '@/components/filters/AgeRangeFilterSelector'
-import LocationFilterSelector from '@/components/filters/LocationFilterSelector'
-import LocationFilterButton from '@/components/filters/LocationFilterButton'
+import GetTheMost from '@/components/search/GetTheMost'
+import SearchResultList from '@/components/SearchResultList'
+import MainNav from '@/components/MainNav'
+import Footer from '@/components/Footer'
+import EventListMap from '@/components/EventListMap'
+import FilterSelectorBank from '@/components/filters/FilterSelectorBank'
 
 import { messaging, alerts, screen } from '@/mixins'
-import { fetchFeed, fetchEvents } from '@/utils/api'
 
 export default {
   name: 'Search',
   mixins: [messaging, alerts, screen],
   props: {
-    itemType: { default: 'event' }
+    itemType: { default: 'Events' }
   },
   components: {
     GetTheMost,
@@ -117,11 +79,7 @@ export default {
     MainNav,
     Footer,
     EventListMap,
-    FilterSelector,
-    AgeRangeFilterSelector,
-    AgeRangeFilterButton,
-    LocationFilterSelector,
-    LocationFilterButton
+    FilterSelectorBank
   },
   data () {
     return {
@@ -129,17 +87,12 @@ export default {
       showShowAllButton: false,
       noItemsMessage: 'Sorry, there are no upcoming playdates in this area',
       showTrailblazerMessage: true,
-      ageRange: { error: null, data: { min: -1, max: -1 } },
       detailView: false,
-      awaiting: false,
-      shortDescription: null
+      awaiting: false
     }
   },
   computed: {
-    ageRangeActive () {
-      return this.ageRange.data.min >= 0 || this.ageRange.data.max >= 0
-    },
-    ...mapGetters(['currentUser', 'isAuthenticated', 'alert', 'mapArea', 'items', 'lastPage', 'showFetchMoreButton'])
+    ...mapGetters(['currentUser', 'isAuthenticated', 'alert', 'mapArea', 'items', 'showFetchMoreButton'])
   },
   methods: {
     handleMapClick () {
@@ -152,29 +105,8 @@ export default {
     },
     async fetchMoreItems () {
       try {
-        const params = {
-          miles: this.mapArea.maxDistance,
-          lat: this.mapArea.center.lat,
-          lng: this.mapArea.center.lng,
-          pageSize: 10,
-          minAge: this.ageRange.data.min >= 0 ? this.ageRange.data.min : null,
-          maxAge: this.ageRange.data.max >= 0 ? this.ageRange.data.max : null,
-          page: this.lastPage + 1
-        }
         this.awaiting = true
-        let newItems
-        switch (this.itemType) {
-          case 'event':
-            newItems = await fetchEvents(params)
-            break
-          case 'all':
-            newItems = await fetchFeed(params)
-            break
-        }
-        this.setShowFetchMoreButton({ show: newItems.length === params.pageSize })
-        // if items is null, set it to the incoming items, otherwise add them
-        this.addItems({ items: newItems })
-        this.incrementLastPage()
+        await this.fetchMoreItems()
       } catch (e) {
         this.logError('problem loading more items')
         this.logError(e)
@@ -182,50 +114,28 @@ export default {
         this.awaiting = false
       }
     },
-    resetAgeRange () {
-      this.ageRange = { error: null, data: { min: -1, max: -1 } }
-    },
     updateMapAreaFromMap: async function (e) {
-      this.updateMapArea(e)
-      this.shortDescription = null
-    },
-    updateMapAreaFromFilter: async function (e) {
-      this.updateMapArea(e)
-      this.shortDescription = e.shortDescription
-    },
-    updateMapArea: async function (e) {
       const center = e.center ? { lat: e.center.lat(), lng: e.center.lng() } : null
       this.setMapArea({
         center,
         maxDistance: e.miles
       })
-      this.fetch()
+      this.fetchItems()
     },
-    fetch: async function () {
-      this.resetItems()
-      this.setShowFetchMoreButton(true)
-      this.fetchMoreItems()
-    },
-    ...mapMutations([
-      'setShowFetchMoreButton',
-      'incrementLastPage',
-      'addItems',
-      'updateUser',
-      'updateEvent',
-      'setMapArea',
-      'resetItems'
-    ])
+    ...mapActions(['fetchMoreItems', 'fetchItems', 'setMapArea']),
+    ...mapMutations(['updateUser', 'updateEvent', 'setItemType'])
   },
   watch: {
     ageRange: {
       handler: function () {
-        this.fetch()
+        this.fetchItems()
       },
       deep: true
     },
     '$route': {
       handler () {
-        this.fetch()
+        this.setItemType({ itemType: this.$route.name })
+        this.fetchItems()
       }
     }
   },
@@ -235,7 +145,7 @@ export default {
     } else {
       this.settlePendingWaves()
       if (!this.items) {
-        this.fetch()
+        this.fetchItems()
       }
     }
   }
@@ -243,93 +153,12 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.events-list__title-bar {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  width: 100%;
-  margin-top: 0px;
-  padding: 16px 20px 18px;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
-  border-bottom: 1px solid #f5f5f5;
-  background-color: #fff;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.08);
-  list-style-type: none;
-}
-
-.other-events__title-text {
-  overflow: hidden;
-  margin-right: 16px;
-  font-size: 16px;
-  line-height: 24px;
-}
-
-.selectors-group {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-box-pack: end;
-  -webkit-justify-content: flex-end;
-  -ms-flex-pack: end;
-  justify-content: flex-end;
-  -webkit-box-align: start;
-  -webkit-align-items: flex-start;
-  -ms-flex-align: start;
-  align-items: flex-start;
-}
-
-.filter-btn-container-alt {
-  margin-bottom: 0px;
-  -webkit-box-flex: 0;
-  -webkit-flex: 0 0 auto;
-  -ms-flex: 0 0 auto;
-  flex: 0 0 auto;
-}
-
-.utility-spacer-16px {
-  padding: 0px 8px;
-}
-
-.btn-filter {
-  margin-right: 0px;
-  padding: 4px 10px 5px;
-  border: 1px solid #1f88e9;
-  border-radius: 4px;
-  background-color: transparent;
-  color: #1f88e9;
-  font-size: 13px;
-}
 
 .detail-wrapper {
   height: 100vh;
   width: 100%;
 }
-.filter-container {
-  display: flex;
-  flex-direction: row;
-  & > div{
-    margin-right:10px;
-  }
-}
+
 .page-wrapper {
   all: unset;
   font-family: soleil, sans-serif;
@@ -339,11 +168,6 @@ export default {
   background-color: #fff;
   overflow: visible;
   background-color: #fff;
-}
-
-.page-subtitle {
-  font-size: 15px;
-  line-height: 19px;
 }
 
 .map-list-container {
@@ -370,10 +194,6 @@ a {
   display: block;
   margin-top: 0px;
   align-items: center;
-  background-color: #fff;
-}
-
-.content-section.background-01 {
   background-color: #f6f6f6;
 }
 
@@ -426,10 +246,6 @@ a {
   align-items: flex-start;
 }
 
-.event-page-title {
-  margin-bottom: 11px;
-}
-
 @media (max-width: 991px) {
   .map {
     position: relative;
@@ -454,35 +270,11 @@ a {
     padding: 0px 32px 80px;
     margin-top: 0px;
   }
-  .event-page-title {
-    font-size: 32px;
-    line-height: 42px;
-  }
 }
+
 @media (max-width: 767px){
-  .events-list__title-bar {
-    padding: 16px;
-    border-radius: 0px;
-  }
-
-  .other-events__title-text {
-    font-size: 14px;
-    line-height: 18px;
-  }
-
   .main-container {
     padding: 0px;
   }
-  .event-page-title {
-      font-size: 28px;
-      line-height: 34px;
-  }
 }
-@media (max-width: 479px) {
-  .event-page-title {
-    font-size: 24px;
-    line-height: 31.200000000000003px;
-  }
-}
-
 </style>
