@@ -64,8 +64,7 @@ export default {
       date: { err: null },
       time: { err: null },
       ourPlaceId: null,
-      ageRange: { minimum: 0, maximum: 18 },
-      lastTimeChosen: null
+      ageRange: { minimum: 0, maximum: 18 }
     }
   },
   computed: {
@@ -142,23 +141,6 @@ export default {
       this.resetWipEvent()
       this.finished()
     },
-    async submitAvailabilityEvent () {
-      this.submissionPending = true
-      for (let contiguousTimeBlock of this.wipEventContiguousTimeBlocks.reverse()) {
-        try {
-          const timeRange = this.timeRangeForBlock(contiguousTimeBlock)
-          const res = await submitEventSeriesData(this.eventSeriesDataForSubmission(timeRange))
-          this.$emit('submission-complete', res)
-          this.setCreatedEvents({ eventData: res })
-        } catch (e) {
-          this.logError('Failed to submit event series')
-          this.logError(e)
-          this.showAlert('Sorry, there was a problem submitting your event.  Please try again later', 'failure')
-        }
-      }
-      this.resetWipEvent()
-      this.finished()
-    },
     async nextStep () {
       if (this.nextButtonState === 'skip') {
         this.$emit('skip')
@@ -171,11 +153,7 @@ export default {
           if (this.place.id !== null) {
             this.ourPlaceId = await submitGooglePlaceIdAndFetchOurOwn(this.place.id, this.place.public)
           }
-          if (this.lastTimeChosen === 'availability') {
-            await this.submitAvailabilityEvent()
-          } else if (this.lastTimeChosen === 'specific') {
-            await this.submitSpecificEvent()
-          }
+          await this.submitSpecificEvent()
         } else {
           this.$router.push({
             params: { stepName: this.stepSequence[this.stepIndex + 1] }
