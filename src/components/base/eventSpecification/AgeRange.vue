@@ -1,9 +1,9 @@
 <template>
   <Question title="What ages are welcome?" subtitle="Select the youngest and oldest children you can host. Try to be as flexible as possible.">
-    <form class="form">
-      <Dropdown v-model="minimum" :choices="choices" />
+    <form class="age-range-form">
+      <Dropdown v-model="minimum" :choices="choices"/>
       <div class="en-dash-container">
-        <div>–</div>
+        <div>-</div>
       </div>
       <Dropdown v-model="maximum" :choices="choices"/>
     </form>
@@ -19,14 +19,14 @@ export default {
   components: { Question, Dropdown },
   data () {
     return {
-      minimum: this.value.minimum,
-      maximum: this.value.maximum,
+      minimum: 0,
+      maximum: 12,
       choices: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
     }
   },
   computed: {
     err: function () {
-      if (parseInt(this.minimum) > parseInt(this.maximum)) {
+      if (parseInt(this.value.minimum) > parseInt(this.value.maximum)) {
         return 'Oops, the minimum age is greater than the maximum age!'
       } else {
         return false
