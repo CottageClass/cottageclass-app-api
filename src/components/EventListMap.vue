@@ -203,7 +203,7 @@ select {
 }
 
 .map-wrapper {
-  height: 412px;
+  height: 100vh;
   min-width: 100%;
   background-position: 50% 50%;
   background-size: cover;
