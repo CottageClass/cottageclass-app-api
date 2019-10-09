@@ -71,12 +71,19 @@ export default {
       date: { err: null },
       time: { err: null },
       ourPlaceId: null,
-      ageRange: { minimum: 0, maximum: 18 }
+      ageRange: { minimum: 0, maximum: 18 },
+      lastTimeChosen: null
     }
   },
   computed: {
+    isOnLastStep () {
+      return this.stepName === this.lastStep
+    },
+    lastStep () {
+      return this.stepSequence[this.stepSequence.length - 1]
+    },
     stepSequence () {
-      return [ 'place', 'description', 'age-range', 'availability', 'repeat-count', 'date', 'time' ]
+      return [ 'place', 'date', 'time', 'repeat-count', 'description', 'age-range' ]
     },
     scheduleStart () {
       return moment()
@@ -167,15 +174,15 @@ export default {
       } else {
         // state is persisted after route update because component is reused
         this.showError = false
-        if (this.stepName === 'repeat-count' || this.stepName === 'time') {
+        if (this.isOnLastStep) {
           if (this.place.id !== null) {
             this.ourPlaceId = await submitGooglePlaceIdAndFetchOurOwn(this.place.id, this.place.public)
           }
-        }
-        if (this.stepName === 'repeat-count') {
-          await this.submitAvailabilityEvent()
-        } else if (this.stepName === 'time') {
-          await this.submitSpecificEvent()
+          if (this.lastTimeChosen === 'availability') {
+            await this.submitAvailabilityEvent()
+          } else if (this.lastTimeChosen === 'specific') {
+            await this.submitSpecificEvent()
+          }
         } else {
           this.$router.push({
             params: { stepName: this.stepSequence[this.stepIndex + 1] }
@@ -197,6 +204,13 @@ export default {
     availability: {
       handler () {
         this.setWipEvent({ event: { availability: this.availability, description: this.description } })
+        this.lastTimeChosen = 'availability'
+      },
+      deep: true
+    },
+    time: {
+      handler () {
+        this.lastTimeChosen = 'specific'
       },
       deep: true
     }
