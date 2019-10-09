@@ -1,5 +1,4 @@
 import Vue from 'vue'
-
 import { fetchFeed, fetchEvents } from '@/utils/api'
 import filter from './filter'
 
@@ -51,9 +50,9 @@ const mutations = {
   },
   updateUser (state, payload) {
     const user = payload.user
-    for (let key in state) {
+    for (let key in state.data) {
       const data = state.data[key]
-      const userItems = data.items.filter(i => i.user.id === user.id)
+      const userItems = data.items.filter(i => i.user.id.toString() === user.id.toString())
       for (const item of userItems) {
         Vue.set(item, 'user', user)
       }
@@ -109,6 +108,7 @@ const actions = {
         items = await fetchFeed(params)
         break
     }
+    commit('setMoreAvailable', { moreAvailable: items.length >= params.pageSize })
     commit('addItems', { items })
   }
 }
@@ -118,7 +118,7 @@ const getters = {
   items: state => {
     try { return state.data[state.itemType].items } catch (e) { return null }
   },
-  showFetchMoreButton: state => state.data[state.itemType].showFetchMoreButton
+  showFetchMoreButton: state => state.data[state.itemType].moreAvailable
 }
 
 const modules = { filter }
