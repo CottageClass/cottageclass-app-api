@@ -111,6 +111,7 @@ export default {
     searchButtonClick: async function () {
       const map = await this.map
       this.mapHasChanged = false
+      this.noIdlesYet = true
       const radius = await this.radiusFromMap()
       this.$emit('searchAreaSet', { center: map.center, miles: radius })
     },

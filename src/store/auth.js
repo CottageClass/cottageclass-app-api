@@ -29,7 +29,7 @@ const actions = {
       console.log(e)
     }
   },
-  establishUser: ({ commit, state, getters }, payload) => {
+  establishUser: ({ dispatch, commit, state, getters }, payload) => {
     commit('setJWT', payload)
     if (!state.JWT) {
       commit('setCurrentUser', { user: null })
@@ -38,7 +38,7 @@ const actions = {
       const currentUser = createUser(normalize(getters.parsedJWT.user))
       commit('setCurrentUser', { user: currentUser })
       if (currentUser.place) {
-        commit('setMapArea', {
+        dispatch('setMapArea', {
           center: { lat: currentUser.place.latitude, lng: currentUser.place.longitude }
         })
       }
