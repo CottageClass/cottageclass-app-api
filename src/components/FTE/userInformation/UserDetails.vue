@@ -16,9 +16,6 @@
     <Availability
       v-if="stepName==='availability'"
       v-model=availability />
-    <Activities
-      v-if="stepName==='activities'"
-      v-model="activities" />
   </div>
 </template>
 
@@ -30,19 +27,17 @@ import { submitUserInfo } from '@/utils/api'
 import { mapGetters } from 'vuex'
 import { stepNavigation } from '@/mixins'
 
-import Activities from '@/components/FTE/userInformation/Activities.vue'
 import Availability from '@/components/FTE/userInformation/Availability.vue'
 
 export default {
   name: 'UserDetails',
   props: ['stepName'],
-  components: { Nav, ErrorMessage, Activities, Availability },
+  components: { Nav, ErrorMessage, Availability },
   mixins: [stepNavigation],
   data () {
     return {
       context: 'onboarding',
       availability: {},
-      activities: [],
       showError: false
     }
   },
@@ -59,29 +54,24 @@ export default {
     },
     stepSequence () {
       return [
-        'availability',
-        'activities'
+        'availability'
       ]
     },
     modelForCurrentStep () {
       const models = {
-        availability: this.availability,
-        activities: this.activities
+        availability: this.availability
       }
       return models[this.stepName]
     },
     ...mapGetters(['currentUser'])
   },
   methods: {
-    submitUserData () {
+    submitUserData: async function () {
       let params = {}
       const userId = this.currentUser.id
       switch (this.stepName) {
         case 'availability':
           params = { availability: this.availability }
-          break
-        case 'activities':
-          params = { activities: this.activities }
           break
         default:
           return // no data to submit
@@ -93,6 +83,8 @@ export default {
         console.log(e)
         this.stepIndex = this.stepSequence.length - 1
         this.modelForCurrentStep.err = 'Sorry, there was a problem saving your information. Try again?'
+      } finally {
+        this.$store.dispatch('updateCurrentUserFromServer')
       }
     },
     nextStep () {
