@@ -105,9 +105,6 @@ a {
   position: sticky;
   top: 0;
   z-index: 3001;
-  margin-top: 32px;
-  padding-right: 32px;
-  padding-left: 32px;
 }
 
 @media (max-width: 991px){
