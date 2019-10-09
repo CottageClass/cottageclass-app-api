@@ -23,12 +23,6 @@
     <EventTime
       v-else-if="stepName==='time'"
       v-model="time" />
-    <MultipleTimeSelector
-      v-else-if="stepName==='availability'"
-      :scheduleStartTime="scheduleStart"
-      :value="availability"
-      @datetimeClicked="selectDateAndTime"
-    />
     <RepeatCount
       v-else-if="stepName==='repeat-count'"
       v-model="repeatCount"
@@ -44,7 +38,6 @@ import EventDatePicker from '@/components/base/eventSpecification/EventDatePicke
 import EventTime from '@/components/base/eventSpecification/EventTime'
 import EventDescription from '@/components/base/eventSpecification/EventDescription'
 import EventPlace from '@/components/base/eventSpecification/EventPlace'
-import MultipleTimeSelector from '@/components/base/eventSpecification/MultipleTimeSelector.vue'
 import Nav from '@/components/FTE/Nav'
 import AgeRange from '@/components/base/eventSpecification/AgeRange.vue'
 
@@ -57,7 +50,7 @@ import { stepNavigation, alerts } from '@/mixins'
 
 export default {
   name: 'CreateEvent',
-  components: { EventDescription, EventPlace, Nav, MultipleTimeSelector, ErrorMessage, EventDatePicker, EventTime, RepeatCount, LoadingSpinner, AgeRange },
+  components: { EventDescription, EventPlace, Nav, ErrorMessage, EventDatePicker, EventTime, RepeatCount, LoadingSpinner, AgeRange },
   mixins: [stepNavigation, alerts],
   props: ['stepName', 'context'],
   data () {
