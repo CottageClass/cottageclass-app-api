@@ -58,7 +58,7 @@ export default {
   },
   computed: {
     noItems: function () {
-      return this.items !== null && this.items.length === 0
+      return this.items && this.items.length === 0
     },
     ...mapGetters(['currentUser', 'distanceFromCurrentUser', 'isAuthenticated', 'mapArea'])
   }

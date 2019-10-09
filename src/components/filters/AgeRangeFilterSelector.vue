@@ -17,24 +17,24 @@ export default {
   data () {
     return {
       err: null,
-      range: [this.value.data.min, this.value.data.max]
+      range: [this.value.min, this.value.max]
     }
   },
   methods: {
     update () {
-      this.value.data.min = this.range[0]
-      this.value.data.max = this.range[1]
+      this.value.min = this.range[0]
+      this.value.max = this.range[1]
       this.$emit('input', this.value)
     }
   },
   created () {
-    this.range = [this.value.data.min >= 0 ? this.value.data.min : 0,
-      this.value.data.max >= 0 ? this.value.data.max : 11]
+    this.range = [this.value.min >= 0 ? this.value.min : 0,
+      this.value.max >= 0 ? this.value.max : 11]
   },
   watch: {
     value () {
-      this.range = [this.value.data.min >= 0 ? this.value.data.min : 0,
-        this.value.data.max >= 0 ? this.value.data.max : 11]
+      this.range = [this.value.min ? this.value.min : 0,
+        this.value.max ? this.value.max : 11]
     }
   }
 }
