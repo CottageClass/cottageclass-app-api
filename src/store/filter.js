@@ -28,13 +28,8 @@ const mutations = {
     }
   },
   mutateAgeRange (state, payload) {
-    if (!payload.min && !payload.max) { return }
-    if (payload.min) {
-      Vue.set(state.ageRange, 'min', parseFloat(payload.min))
-    }
-    if (payload.max) {
-      Vue.set(state.ageRange, 'max', parseFloat(payload.max))
-    }
+    Vue.set(state.ageRange, 'min', parseFloat(payload.min))
+    Vue.set(state.ageRange, 'max', parseFloat(payload.max))
   }
 }
 

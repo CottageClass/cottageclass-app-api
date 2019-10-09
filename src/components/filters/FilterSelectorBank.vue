@@ -52,11 +52,6 @@ export default {
     LocationFilterSelector,
     LocationFilterButton
   },
-  mixins: [],
-  data () {
-    return {
-    }
-  },
   computed: {
     ageRangeActive () {
       return this.ageRange.min || this.ageRange.max
