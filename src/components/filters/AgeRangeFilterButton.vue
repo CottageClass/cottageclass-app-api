@@ -10,10 +10,10 @@ export default {
   props: ['range'],
   computed: {
     buttonText () {
-      if (!this.range.data) {
+      if (!this.range) {
         return 'Ages 0-11'
       }
-      let { min, max } = this.range.data
+      let { min, max } = this.range
       if (min < 0) {
         min = null
       } else {
