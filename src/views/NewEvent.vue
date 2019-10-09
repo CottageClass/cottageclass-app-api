@@ -55,6 +55,7 @@ export default {
   },
   created () {
     this.redirectToSignupIfNotAuthenticated()
+    this.$store.dispatch('updateCurrentUserFromServer')
   }
 }
 </script>
