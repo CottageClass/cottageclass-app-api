@@ -1,6 +1,5 @@
 <template>
   <li class="events-list__title-bar">
-    <div class="other-events__title-text">Nearby Parents</div>
     <div class="selectors-group">
       <FilterSelector title="Distance" :showClear="false" :active="shortDescription" >
         <template v-slot:buttonContents>
