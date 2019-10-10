@@ -98,6 +98,7 @@ class User < ApplicationRecord
   belongs_to :place, inverse_of: :users, optional: true
 
   accepts_nested_attributes_for :children, allow_destroy: true, reject_if: :child_with_same_name_exists?
+  accepts_nested_attributes_for :place
 
   scope :child_age_range, lambda { |min_age, max_age|
     if min_age.present? || max_age.present?

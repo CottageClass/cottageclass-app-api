@@ -10,18 +10,6 @@ export async function submitUserInfo (userId, data) {
   let { phone, availability, settingEmailNotifications, settingMaxDistance, firebaseToken } = data
   let postData = {}
 
-  if (data.place) {
-    if (data.place.id) {
-      postData = { ...postData, placeID: data.place.id }
-      if (data.place.apartmentNumber) {
-        postData = {
-          ...postData,
-          apartmentNumber: data.place.apartmentNumber
-        }
-      }
-    }
-  }
-
   if (phone && phone.number) {
     let phoneAreaCode = phone.number.match(/(\(\d+\))/)[0].replace(/[^\d]/g, '')
     let phoneNumber = phone.number.match(/\d{3}-\d{4}/)[0].replace(/[^\d]/g, '')
@@ -29,6 +17,15 @@ export async function submitUserInfo (userId, data) {
       ...postData,
       phoneAreaCode: phoneAreaCode,
       phoneNumber: phoneNumber
+    }
+  }
+
+  if (data.place) {
+    postData.placeAttributes = {
+      googleId: data.place.googleId,
+      apartmentNumber: data.place.apartmentNumber,
+      creatorId: userId,
+      public: false
     }
   }
 

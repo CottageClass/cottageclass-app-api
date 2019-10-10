@@ -7,6 +7,8 @@ class Place < ApplicationRecord
   has_many :events, through: :event_series, inverse_of: :place
   has_many :users, inverse_of: :place
 
+  alias_attribute :creator_id, :user_id
+
   before_validation :retrieve_details
 
   validates :apartment_number, uniqueness: { scope: :google_id }

@@ -30,7 +30,6 @@
 import GoogleMapsLoader from 'google-maps'
 import VueGoogleAutocomplete from 'vue-google-autocomplete'
 import Question from '@/components/base/Question.vue'
-import { submitGooglePlaceIdAndFetchOurOwn } from '@/utils/api'
 
 export default {
   name: 'Location',
@@ -43,7 +42,7 @@ export default {
       apartmentNumber: this.currentApartment || '',
       placeholder: this.currentAddress || 'Street address (not apt #)',
       address: {},
-      placeId: null,
+      googlePlaceId: null,
       latlng: null,
       googleMapsIsLoaded: false
     }
@@ -70,12 +69,9 @@ export default {
           err: this.err
         })
       } else {
-        if (this.placeId === null) { return }
-        const ourPlaceId = await submitGooglePlaceIdAndFetchOurOwn(this.placeId, false)
-
+        if (this.googlePlaceId === null) { return }
         this.$emit('input', { err: null,
-          id: ourPlaceId,
-          latlng: this.latlng,
+          googleId: this.googlePlaceId,
           apartmentNumber: this.apartmentNumber
         })
       }
@@ -85,13 +81,13 @@ export default {
         lat: addressData.latitude,
         lng: addressData.longitude
       }
-      this.placeId = placeResultData.place_id
+      this.googlePlaceId = placeResultData.place_id
       this.emitPlace()
     }
   },
   computed: {
     err: function () {
-      if (this.required && (isNaN(this.latlng.lat) || isNaN(this.latlng.lng))) {
+      if (this.required && !this.googlePlaceId) {
         return 'There was a problem processing your street address. Try again?'
       } else {
         return false
