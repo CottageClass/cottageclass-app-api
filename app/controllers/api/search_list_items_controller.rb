@@ -58,7 +58,7 @@ class API::SearchListItemsController < API::BaseController
     unseen_users = unseen_users.child_age_range(min_age, max_age)
     unseen_users = unseen_users.where.not(user_id: current_user.id) if current_user.present?
     unseen_users = unseen_users.includes user: :place
-    unseen_users = unseen_users.to_a
+    unseen_users = unseen_users.to_a.uniq
 
     event_array = event_array.sort_by(&:created_at)
     event_array.reverse!

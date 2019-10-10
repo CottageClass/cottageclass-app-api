@@ -26,6 +26,7 @@ export const createEvents = (data, sortFunction) => {
     if (data.place) {
       const placeId = e.relationships.place.data.id
       place = parsePlace(data.place[placeId].attributes)
+      place.id = placeId
     }
     const res = {
       user,

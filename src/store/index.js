@@ -4,7 +4,8 @@ import auth from './auth'
 import rsvp from './rsvp'
 import eventCreation from './eventCreation'
 import waves from './waves'
-import feed from './feed'
+import search from './search'
+
 import createPersistedState from 'vuex-persistedstate'
 
 Vue.use(Vuex)
@@ -12,7 +13,7 @@ Vue.use(Vuex)
 export default new Vuex.Store(
   {
     plugins: [createPersistedState()],
-    modules: { auth, eventCreation, rsvp, waves, feed },
+    modules: { auth, eventCreation, rsvp, waves, search },
     state: {
       alert: null,
       createdEvents: null,

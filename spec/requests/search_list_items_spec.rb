@@ -3,7 +3,7 @@ require 'rspec_api_documentation/dsl'
 
 RSpec.resource 'User' do
   include_context 'json headers'
-  let(:user) { create :user }
+  let(:user) { create :user, :with_place }
 
   get '/api/feed//miles/:miles/latitude/:latitude/longitude/:longitude', format: :json do
     parameter :miles, 'distance from centerpoint', required: true
@@ -11,8 +11,8 @@ RSpec.resource 'User' do
     parameter :longitude, 'longitude of centerpoint', required: true
 
     let(:miles) { 10 }
-    let(:latitude) { user.latitude }
-    let(:longitude) { user.longitude }
+    let(:latitude) { user.place.latitude }
+    let(:longitude) { user.place.longitude }
     example_request 'feed:success' do
       expect(response_status).to eq(200)
     end
@@ -28,8 +28,8 @@ RSpec.resource 'User' do
     parameter :page_size, 'items per page', required: false
 
     let(:miles) { 10 }
-    let(:latitude) { user.latitude }
-    let(:longitude) { user.longitude }
+    let(:latitude) { user.place.latitude }
+    let(:longitude) { user.place.longitude }
     let(:min_age) { 2 }
     let(:max_age) { 9 }
     let(:page) { 1 }

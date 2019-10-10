@@ -7,7 +7,6 @@ class CurrentUserSerializer < BaseSerializer
   attributes(*User::PUBLIC_ATTRIBUTES)
 
   attributes :agree_tos,
-             :apartment_number,
              :created_at,
              :email,
              :facebook_access_token,

@@ -50,7 +50,7 @@ RSpec.describe User, type: :model do
 
   context 'destroy' do
     let(:subject) { build :user, :with_children, :with_place }
-    let(:other) { build :user, :with_children, latitude: subject.latitude, longitude: subject.longitude }
+    let(:other) { build :user, :with_children, :with_place }
 
     it 'can be destroyed with some associations' do
       subject.save

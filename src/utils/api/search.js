@@ -7,10 +7,10 @@ const logger = Logger('api:search')
 export async function fetchFeed ({ miles, lat, lng, minAge, maxAge, pageSize = 20, page = 1 }) {
   try {
     let url = `/api/feed/miles/${miles}/latitude/${lat}/longitude/${lng}/`
-    if (minAge !== null && typeof minAge !== 'undefined') {
+    if (minAge) {
       url += `min_age/${minAge}/`
     }
-    if (maxAge !== null && typeof minAge !== 'undefined') {
+    if (maxAge) {
       url += `max_age/${maxAge}/`
     }
     url += `page/${page}/page_size/${pageSize}`

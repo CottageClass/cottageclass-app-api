@@ -177,7 +177,13 @@ export default {
     },
     description () {
       if (this.event) {
-        return this.event.name
+        if (this.event.description) {
+          const regex = /\.*$/
+          const trimmedName = this.event.name && this.event.name.trim().replace(regex, '')
+          return trimmedName + '. ' + (this.event.description || '')
+        } else {
+          return this.event.name
+        }
       }
       return this.user.profileBlurb
     },

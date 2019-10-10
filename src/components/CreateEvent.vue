@@ -23,12 +23,6 @@
     <EventTime
       v-else-if="stepName==='time'"
       v-model="time" />
-    <MultipleTimeSelector
-      v-else-if="stepName==='availability'"
-      :scheduleStartTime="scheduleStart"
-      :value="availability"
-      @datetimeClicked="selectDateAndTime"
-    />
     <RepeatCount
       v-else-if="stepName==='repeat-count'"
       v-model="repeatCount"
@@ -44,7 +38,6 @@ import EventDatePicker from '@/components/base/eventSpecification/EventDatePicke
 import EventTime from '@/components/base/eventSpecification/EventTime'
 import EventDescription from '@/components/base/eventSpecification/EventDescription'
 import EventPlace from '@/components/base/eventSpecification/EventPlace'
-import MultipleTimeSelector from '@/components/base/eventSpecification/MultipleTimeSelector.vue'
 import Nav from '@/components/FTE/Nav'
 import AgeRange from '@/components/base/eventSpecification/AgeRange.vue'
 
@@ -57,7 +50,7 @@ import { stepNavigation, alerts } from '@/mixins'
 
 export default {
   name: 'CreateEvent',
-  components: { EventDescription, EventPlace, Nav, MultipleTimeSelector, ErrorMessage, EventDatePicker, EventTime, RepeatCount, LoadingSpinner, AgeRange },
+  components: { EventDescription, EventPlace, Nav, ErrorMessage, EventDatePicker, EventTime, RepeatCount, LoadingSpinner, AgeRange },
   mixins: [stepNavigation, alerts],
   props: ['stepName', 'context'],
   data () {
@@ -65,7 +58,7 @@ export default {
       submissionPending: false,
       showError: false,
       place: { err: null },
-      description: { err: null, text: '' },
+      description: { err: null, name: '', description: '' },
       availability: { err: null },
       repeatCount: { err: null },
       date: { err: null },
@@ -75,8 +68,14 @@ export default {
     }
   },
   computed: {
+    isOnLastStep () {
+      return this.stepName === this.lastStep
+    },
+    lastStep () {
+      return this.stepSequence[this.stepSequence.length - 1]
+    },
     stepSequence () {
-      return [ 'place', 'description', 'age-range', 'availability', 'repeat-count', 'date', 'time' ]
+      return [ 'place', 'date', 'time', 'repeat-count', 'description', 'age-range' ]
     },
     scheduleStart () {
       return moment()
@@ -95,14 +94,11 @@ export default {
       return (timeRange) => {
         return {
           'event_series': {
-            'name': this.description.text,
+            'name': this.description.name,
+            'description': this.description.description,
             'start_date': timeRange.start.format('YYYY-MM-DD'),
             'starts_at': timeRange.start.format('HH:mm'),
             'ends_at': timeRange.end.format('HH:mm'),
-            'has_pet': false,
-            'activity_names': [],
-            'house_rules': '',
-            'pet_description': '',
             'maximum_children': 4,
             'child_age_minimum': this.ageRange.minimum,
             'child_age_maximum': this.ageRange.maximum,
@@ -136,28 +132,11 @@ export default {
         const end = moment(this.date.selected + 'T' + this.time.end)
         const timeRange = { start, end }
         const res = await submitEventSeriesData(this.eventSeriesDataForSubmission(timeRange))
-        this.$emit('seriesOfEvents', res)
+        this.$emit('submission-complete', res)
       } catch (e) {
         this.logError('Failed to submit event series')
         this.logError(e)
         this.showAlert('Sorry, there was a problem submitting your event.  Please try again later', 'failure')
-      }
-      this.resetWipEvent()
-      this.finished()
-    },
-    async submitAvailabilityEvent () {
-      this.submissionPending = true
-      for (let contiguousTimeBlock of this.wipEventContiguousTimeBlocks.reverse()) {
-        try {
-          const timeRange = this.timeRangeForBlock(contiguousTimeBlock)
-          const res = await submitEventSeriesData(this.eventSeriesDataForSubmission(timeRange))
-          this.$emit('seriesOfEvents', res)
-          this.setCreatedEvents({ eventData: res })
-        } catch (e) {
-          this.logError('Failed to submit event series')
-          this.logError(e)
-          this.showAlert('Sorry, there was a problem submitting your event.  Please try again later', 'failure')
-        }
       }
       this.resetWipEvent()
       this.finished()
@@ -170,14 +149,10 @@ export default {
       } else {
         // state is persisted after route update because component is reused
         this.showError = false
-        if (this.stepName === 'repeat-count' || this.stepName === 'time') {
+        if (this.isOnLastStep) {
           if (this.place.id !== null) {
             this.ourPlaceId = await submitGooglePlaceIdAndFetchOurOwn(this.place.id, this.place.public)
           }
-        }
-        if (this.stepName === 'repeat-count') {
-          await this.submitAvailabilityEvent()
-        } else if (this.stepName === 'time') {
           await this.submitSpecificEvent()
         } else {
           this.$router.push({
@@ -200,6 +175,13 @@ export default {
     availability: {
       handler () {
         this.setWipEvent({ event: { availability: this.availability, description: this.description } })
+        this.lastTimeChosen = 'availability'
+      },
+      deep: true
+    },
+    time: {
+      handler () {
+        this.lastTimeChosen = 'specific'
       },
       deep: true
     }

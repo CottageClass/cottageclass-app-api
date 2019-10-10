@@ -14,10 +14,9 @@ class User < ApplicationRecord
   attr_accessor :direct, :token
 
   PUBLIC_ATTRIBUTES = %i[
-    id avatar first_name verified fuzzy_latitude fuzzy_longitude locality sublocality neighborhood admin_area_level_1
-    admin_area_level_2 images languages job_position employer highest_education school facebook_uid instagram_user
+    id avatar first_name verified images languages job_position employer highest_education school facebook_uid
     twitter_user linkedin_user created_at child_ages_in_months profile_blurb activities available_mornings
-    available_afternoons available_evenings available_weekends house_rules has_pet pet_description
+    available_afternoons available_evenings available_weekends house_rules has_pet pet_description instagram_user
   ].freeze
 
   after_update :sms_notify
@@ -33,8 +32,6 @@ class User < ApplicationRecord
   end
 
   after_create :notify, :create_search_list_item
-
-  geocoded_by :full_address
 
   with_options if: proc { |instance| instance.direct == true } do
     validates :password, presence: true
@@ -97,7 +94,6 @@ class User < ApplicationRecord
            inverse_of: :recipient,
            dependent: :destroy
 
-
   belongs_to :showcase_event, class_name: 'Event', optional: true
   belongs_to :place, inverse_of: :users, optional: true
 
@@ -151,8 +147,9 @@ class User < ApplicationRecord
        (child_ages_in_months.present? && child_ages_in_months.count.positive?)
       location = [place.latitude, place.longitude]
       # narrow down the candidates
-      others = User.near(location.map(&:to_f), miles).includes(:children)
-      others = others.where.not(id: id)
+      other_users_places = Place.near(location.map(&:to_f), miles)
+      place_ids = other_users_places.to_a.pluck :id
+      others = User.joins(:place).where('place_id IN(?)', place_ids).where.not(id: id)
 
       # calculate scores and attach
       scored_users = others.map do |other|
@@ -219,16 +216,6 @@ class User < ApplicationRecord
 
   def nearest_upcoming_event
     Event.upcoming.nearest(self).reorder('distance ASC').order(starts_at: :asc).first
-  end
-
-  def full_address
-    [
-      [street_number, route].compact.map(&:squish).select(&:present?).join(' '),
-      locality,
-      admin_area_level_1,
-      admin_area_level_2,
-      [country, postal_code].compact.map(&:squish).select(&:present?).join(' ')
-    ].compact.map(&:squish).select(&:present?).join(', ')
   end
 
   class << self

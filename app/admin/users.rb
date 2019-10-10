@@ -5,7 +5,7 @@ ActiveAdmin.register User do
   includes :children
 
   permit_params :email, :facebook_uid, :internally_cleared, :verified, :first_name, :last_name, :name, :profile_blurb,
-                :apartment_number, :referrer, :setting_email_notifications, :setting_max_distance, source_tags: []
+                :referrer, :setting_email_notifications, :setting_max_distance, source_tags: []
 
   filter :name
   filter :first_name
@@ -39,13 +39,6 @@ ActiveAdmin.register User do
       first_name
       last_name
       name
-      full_address
-      street_number
-      route
-      locality
-      admin_area_level_1
-      admin_area_level_2
-      country
       postal_code
       phone
       phone_area_code
@@ -59,18 +52,12 @@ ActiveAdmin.register User do
       profile_blurb
       onboarding_care_type
       avatar
-      latitude
-      longitude
-      fuzzy_latitude
-      fuzzy_longitude
       has_pet
       pet_description
       house_rules
-      time_zone
       verified
       neighborhood
       sublocality
-      apartment_number
       images
       languages
       job_position

@@ -43,6 +43,9 @@
 </template>
 
 <script>
+import normalize from 'json-api-normalizer'
+import { mapGetters, mapMutations, mapActions } from 'vuex'
+
 import Nav from '@/components/FTE/Nav'
 import Phone from '@/components/FTE/userInformation/Phone.vue'
 import Location from '@/components/FTE/userInformation/Location.vue'
@@ -54,10 +57,8 @@ import ProfileBlurb from '@/components/FTE/userInformation/ProfileBlurb.vue'
 import MaxDistanceSetting from '@/components/FTE/userInformation/MaxDistanceSetting'
 import AvatarUpload from '@/components/FTE/userInformation/AvatarUpload'
 
-import normalize from 'json-api-normalizer'
 import { createUser } from '@/utils//createUser'
 import { submitUserInfo } from '@/utils/api'
-import { mapGetters, mapMutations } from 'vuex'
 import { stepNavigation } from '@/mixins'
 export default {
   name: 'UserInformation',
@@ -161,7 +162,7 @@ export default {
           this.$emit('finished')
         } else {
           if (this.stepName === 'location') {
-            this.$store.commit('setMapArea', {
+            this.setMapArea({
               center: this.place.latlng,
               maxDistance: 5
             })
@@ -199,7 +200,8 @@ export default {
       }
       window.scrollTo(0, 0)
     },
-    ...mapMutations([ 'setCurrentUser' ])
+    ...mapMutations([ 'setCurrentUser' ]),
+    ...mapActions([ 'setMapArea' ])
   }
 }
 </script>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_07_172333) do
+ActiveRecord::Schema.define(version: 2019_10_08_200754) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -130,7 +130,6 @@ ActiveRecord::Schema.define(version: 2019_10_07_172333) do
   create_table "event_series", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "name", null: false
-    t.string "time_zone"
     t.date "start_date", null: false
     t.time "starts_at", null: false
     t.time "ends_at", null: false
@@ -143,6 +142,7 @@ ActiveRecord::Schema.define(version: 2019_10_07_172333) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.bigint "place_id"
+    t.text "description"
     t.index ["place_id"], name: "index_event_series_on_place_id"
     t.index ["user_id"], name: "index_event_series_on_user_id"
   end
@@ -150,7 +150,6 @@ ActiveRecord::Schema.define(version: 2019_10_07_172333) do
   create_table "events", force: :cascade do |t|
     t.bigint "event_series_id", null: false
     t.string "name", null: false
-    t.string "time_zone"
     t.datetime "starts_at", null: false
     t.datetime "ends_at", null: false
     t.integer "maximum_children", default: 0
@@ -158,13 +157,11 @@ ActiveRecord::Schema.define(version: 2019_10_07_172333) do
     t.integer "child_age_maximum", default: 0
     t.boolean "modified", default: false
     t.json "meta"
-    t.decimal "latitude"
-    t.decimal "longitude"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.float "recency_score"
+    t.text "description"
     t.index ["event_series_id"], name: "index_events_on_event_series_id"
-    t.index ["latitude", "longitude"], name: "index_events_on_latitude_and_longitude"
   end
 
   create_table "key_values", force: :cascade do |t|
@@ -375,13 +372,7 @@ ActiveRecord::Schema.define(version: 2019_10_07_172333) do
     t.string "email", null: false
     t.string "avatar"
     t.string "referrer"
-    t.decimal "fuzzy_latitude"
-    t.decimal "fuzzy_longitude"
     t.string "legacy_password_digest"
-    t.string "apartment_number"
-    t.string "neighborhood"
-    t.string "sublocality"
-    t.string "time_zone"
     t.text "source_tags", default: [], array: true
     t.boolean "verified", default: false
     t.datetime "created_at", null: false
@@ -391,17 +382,9 @@ ActiveRecord::Schema.define(version: 2019_10_07_172333) do
     t.string "last_name"
     t.string "name"
     t.boolean "agree_tos", default: false
-    t.decimal "latitude"
-    t.decimal "longitude"
-    t.string "street_number"
-    t.string "route"
-    t.string "locality"
-    t.string "admin_area_level_1"
-    t.string "admin_area_level_2"
     t.string "postal_code"
     t.string "phone_area_code"
     t.string "phone_number"
-    t.string "country", default: "United States"
     t.string "phone_country_code", default: "1"
     t.text "activities", default: [], array: true
     t.boolean "available_mornings"
@@ -459,12 +442,10 @@ ActiveRecord::Schema.define(version: 2019_10_07_172333) do
     t.bigint "place_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email"
-    t.index ["fuzzy_latitude", "fuzzy_longitude"], name: "index_users_on_fuzzy_latitude_and_fuzzy_longitude"
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
     t.index ["invitations_count"], name: "index_users_on_invitations_count"
     t.index ["invited_by_type", "invited_by_id"], name: "index_users_on_invited_by_type_and_invited_by_id"
     t.index ["jti"], name: "index_users_on_jti", unique: true
-    t.index ["latitude", "longitude"], name: "index_users_on_latitude_and_longitude"
     t.index ["place_id"], name: "index_users_on_place_id"
     t.index ["provider", "uid"], name: "index_users_on_provider_and_uid"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
