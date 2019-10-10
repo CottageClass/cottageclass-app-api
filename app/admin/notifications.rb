@@ -7,6 +7,7 @@ ActiveAdmin.register Notification do
   actions :index, :destroy
 
   filter :created_at
+  filter :kind, as: :select, collection: notification.kinds
 
   index do
     selectable_column
