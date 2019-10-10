@@ -137,8 +137,6 @@ export default {
 
 <style scoped lang="scss">
 a {
-  color: #000;
-  -webkit-text-fill-color: #000;  // keep for safari
   text-decoration: none;
 }
 
@@ -273,6 +271,7 @@ a {
 .header {
   position: relative;
   display: flex;
+  width: 100%;
   min-height: 12px;
   margin-bottom: 12px;
   justify-content: space-between;
@@ -284,10 +283,11 @@ a {
     -webkit-text-fill-color: #aaaaaa;  // keep for safari
     color: #aaaaaa;
   }
-  color: #1f88e9;
-  -webkit-text-fill-color: #1f88e9;  // keep for safari
-  font-size: 12px;
+  color: #fc6f77;
+  font-size: 13px;
   line-height: 12px;
+  font-weight: 600;
+  letter-spacing: .7px;
   text-transform: uppercase;
 }
 
