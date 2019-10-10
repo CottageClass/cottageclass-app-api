@@ -23,7 +23,7 @@ export async function submitUserInfo (userId, data) {
   if (data.place) {
     postData.placeAttributes = {
       googleId: data.place.googleId,
-      apartmentNumber: data.place.apartmentNumber,
+      apartmentNumber: data.place.apartmentNumber || null,
       creatorId: userId,
       public: false
     }
