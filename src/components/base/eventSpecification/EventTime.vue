@@ -1,7 +1,7 @@
 <template>
   <Question
-    :title="titleText"
-    :subtitle="subtitleText">
+    title="What time will it be?"
+    subtitle="Please choose a start and end time for your playdate.">
     <div class="time-picker-container">
       <a-timePicker class="date-picker"
                     v-model="startTime"
@@ -37,7 +37,7 @@ export default {
     return {
       startTime: null,
       endTime: null,
-      errorMesg: 'Please choose a time when you are available.'
+      errorMesg: 'Please choose a time for your playdate.'
     }
   },
   mounted: function () {
@@ -46,12 +46,6 @@ export default {
   computed: {
     beginningOfToday () {
       return moment().startOf('day')
-    },
-    titleText () {
-      return 'What times are you available?'
-    },
-    subtitleText () {
-      return 'Choose a time range below. The playdate can be any time in this range.'
     },
     err: function () {
       if (!this.startTime || !this.endTime) {
