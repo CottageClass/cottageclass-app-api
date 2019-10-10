@@ -49,7 +49,8 @@
         </a>
       </div>
       <ExpandingMenu v-if="showMenu"
-                     v-on-clickaway="clickedAway"
+                     @close-me="closeMenu"
+                     v-on-clickaway="closeMenu"
       />
     </div>
   </div>
@@ -97,7 +98,7 @@ export default {
     toggleMenu: function () {
       this.showMenu = !this.showMenu
     },
-    clickedAway: function () {
+    closeMenu: function () {
       this.showMenu = false
     },
     closeCallback () {

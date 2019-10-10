@@ -22,7 +22,7 @@
           <div class="text-block">Edit profile</div>
         </router-link>
       </li>
-      <li>
+      <li @click="$emit('close-me')">
         <router-link
           :to="'/users/' + currentUser.id"
           class="link-block w-inline-block">
