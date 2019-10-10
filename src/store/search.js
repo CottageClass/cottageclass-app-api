@@ -73,8 +73,12 @@ const actions = {
     if (state.data[state.itemType].fetchLock) { return }
     commit('resetSearch')
     commit('setFetchLock', { lock: true })
-    const results = await dispatch('fetchMoreItems')
-    commit('setFetchLock', { lock: false })
+    let results
+    try {
+      results = await dispatch('fetchMoreItems')
+    } finally {
+      commit('setFetchLock', { lock: false })
+    }
     return results
   },
 
