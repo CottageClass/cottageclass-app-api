@@ -50,6 +50,9 @@ export default {
   watch: {
     description: function () {
       this.emitData()
+    },
+    name: function () {
+      this.emitData()
     }
   }
 }

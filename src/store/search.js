@@ -69,6 +69,7 @@ const mutations = {
 
 const actions = {
   async fetchItems ({ state, commit, dispatch }) {
+    commit('ensureState')
     if (state.data[state.itemType].fetchLock) { return }
     commit('resetSearch')
     commit('setFetchLock', { lock: true })
@@ -110,7 +111,10 @@ const getters = {
   items: state => {
     try { return state.data[state.itemType].items } catch (e) { return null }
   },
-  showFetchMoreButton: state => state.data[state.itemType].moreAvailable
+  showFetchMoreButton: state => {
+    try { return state.data[state.itemType].moreAvailable } catch (e) { return false }
+  }
+
 }
 
 const modules = { filter }
