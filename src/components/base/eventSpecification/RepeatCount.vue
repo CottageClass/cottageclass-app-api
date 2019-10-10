@@ -30,7 +30,7 @@ export default {
   props: ['value'],
   data () {
     return {
-      repeatCount: this.value.number || 2
+      repeatCount: this.value.number || 1
     }
   },
   mounted: function () {
