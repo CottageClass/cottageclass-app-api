@@ -48,9 +48,6 @@
           </div>
         </div>
       </div>
-      <Footer
-        :hideOnMobile = true
-      />
     </div>
   </div>
 </template>
@@ -61,7 +58,6 @@ import { mapGetters, mapMutations, mapActions } from 'vuex'
 import GetTheMost from '@/components/search/GetTheMost'
 import SearchResultList from '@/components/SearchResultList'
 import MainNav from '@/components/MainNav'
-import Footer from '@/components/Footer'
 import EventListMap from '@/components/EventListMap'
 import FilterSelectorBank from '@/components/filters/FilterSelectorBank'
 
@@ -77,7 +73,6 @@ export default {
     GetTheMost,
     SearchResultList,
     MainNav,
-    Footer,
     EventListMap,
     FilterSelectorBank
   },
