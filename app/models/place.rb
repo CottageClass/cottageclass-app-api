@@ -9,7 +9,8 @@ class Place < ApplicationRecord
 
   before_validation :retrieve_details
 
-  validates :google_id, presence: true, uniqueness: { case_sensitive: true }
+  validates :apartment_number, uniqueness: { scope: :google_id }
+  validates :google_id, presence: true
   validates :full_address, presence: true
   validates :latitude, presence: true
   validates :longitude, presence: true
