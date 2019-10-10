@@ -292,11 +292,11 @@ a {
 }
 
 .header__distance {
-  position: absolute;
+  position: static;
   right: 0;
-  color: #64426b;
-  -webkit-text-fill-color: #64426b;  // keep for safari
-  font-size: 12px;
+  color: grey;
+  -webkit-text-fill-color: grey;  // keep for safari
+  font-size: 13px;
   line-height: 12px;
   text-transform: uppercase;
 }
