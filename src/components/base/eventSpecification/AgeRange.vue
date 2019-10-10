@@ -1,5 +1,7 @@
 <template>
-  <Question title="What ages are welcome?" subtitle="Select the youngest and oldest children you can host. Try to be as flexible as possible.">
+  <Question
+    title="What ages are welcome?"
+    subtitle="Who is this playdate for? Select the minimum and maximum ages that would be compatible with this playdate.">
     <form class="age-range-form">
       <Dropdown v-model="minimum" :choices="choices"/>
       <div class="en-dash-container">
