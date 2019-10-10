@@ -24,6 +24,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import Question from '@/components/base/Question.vue'
 import GoogleMapsLoader from 'google-maps'
 import VueGoogleAutocomplete from 'vue-google-autocomplete'
@@ -55,12 +56,14 @@ export default {
       this.emitPlaceId()
     },
     emitPlaceId: function () {
-      this.$emit('input', { err: null, id: this.placeId, public: this.isPublic })
+      const err = this.errorMessage
+      const id = this.isPublic ? this.placeId : this.currentUser.place.googleId
+      this.$emit('input', { err, id, public: this.isPublic })
     }
   },
   watch: {
     homeOrPublic: function () {
-      this.$emit('input', { err: this.errorMessage, id: null })
+      this.emitPlaceId()
     }
   },
   computed: {
@@ -75,10 +78,11 @@ export default {
       } else {
         return null
       }
-    }
+    },
+    ...mapGetters(['currentUser'])
   },
   created () {
-    this.$emit('input', { err: this.errorMessage, id: null })
+    this.emitPlaceId()
   }
 }
 </script>
