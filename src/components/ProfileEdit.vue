@@ -25,7 +25,7 @@
         <Phone v-model="phone" :currentPhone="currentUser.phone" :required="false" />
         <Location
           :currentAddress="currentUser.place && currentUser.place.name + ', ' + currentUser.place.locality + ', ' + currentUser.place.adminAreaLevel1 "
-          :currentApartment="currentUser.apartmentNumber"
+          :currentApartment="currentUser.place.apartmentNumber"
           v-model="place"
         />
         <LanguagesSpoken v-model="currentUser.languages" :showChoicesImmediately="false"/>
