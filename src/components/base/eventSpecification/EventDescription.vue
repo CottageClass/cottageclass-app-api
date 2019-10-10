@@ -9,7 +9,7 @@
       v-model="name" />
     <FormWithTextArea
       class="tall"
-      maxLength="30,000"
+      maxLength="30000"
       placeholder="Description, e.g. 'We have been here several times and it's lots of fun!'"
       v-model="description" />
   </Question>
