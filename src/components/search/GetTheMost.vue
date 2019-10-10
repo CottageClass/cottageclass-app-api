@@ -88,7 +88,7 @@ a {
 }
 
 .primary-action__card--alt-2 {
-  z-index: 4000;
+  z-index: 900;
   display: flex;
   width: 100%;
   margin-bottom: 0;
@@ -104,7 +104,7 @@ a {
 .container-3 {
   position: sticky;
   top: 0;
-  z-index: 3001;
+  z-index: 800;
 }
 
 @media (max-width: 991px){

@@ -3,11 +3,11 @@
     title="What ages are welcome?"
     subtitle="Who is this playdate for? Select the minimum and maximum ages that would be compatible with this playdate.">
     <form class="age-range-form">
-      <Dropdown v-model="minimum" :choices="choices"/>
+      <Dropdown v-model="minimum" :choices="minChoices"/>
       <div class="en-dash-container">
         <div>-</div>
       </div>
-      <Dropdown v-model="maximum" :choices="choices"/>
+      <Dropdown v-model="maximum" :choices="maxChoices"/>
     </form>
   </Question>
 </template>
@@ -22,11 +22,16 @@ export default {
   data () {
     return {
       minimum: 0,
-      maximum: 12,
-      choices: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+      maximum: 12
     }
   },
   computed: {
+    minChoices () {
+      return range(0, this.maximum + 1)
+    },
+    maxChoices () {
+      return range(this.minimum, 13)
+    },
     err: function () {
       if (parseInt(this.value.minimum) > parseInt(this.value.maximum)) {
         return 'Oops, the minimum age is greater than the maximum age!'
@@ -53,4 +58,18 @@ export default {
     }
   }
 }
+
+function range (min, max) {
+  const res = []
+  for (let i = min; i < max; i++) {
+    res.push(i)
+  }
+  return res
+}
 </script>
+
+<style lang="scss">
+select.select-field {
+  width: 50px;
+}
+</style>

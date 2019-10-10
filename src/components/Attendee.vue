@@ -1,7 +1,7 @@
 <template>
   <li class="attendee__list-item">
     <router-link
-      :to="{name: 'UserPage', params: {id: user.userId}}"
+      :to="{name: 'UserPage', params: {id: user.attributes.userId}}"
       class="attendee__link-wrapper w-inline-block">
       <AvatarImage className="attendee__photo"
                    :person="{facebookUid: user.userFacebookUid, avatar: user.attributes.userAvatar}"

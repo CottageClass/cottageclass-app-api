@@ -26,8 +26,9 @@
 </template>
 
 <script>
-import Question from '@/components/base/Question.vue'
 import moment from 'moment'
+
+import Question from '@/components/base/Question.vue'
 
 export default {
   name: 'EventTime',
@@ -36,8 +37,7 @@ export default {
   data () {
     return {
       startTime: null,
-      endTime: null,
-      errorMesg: 'Please choose a time for your playdate.'
+      endTime: null
     }
   },
   mounted: function () {
@@ -49,7 +49,9 @@ export default {
     },
     err: function () {
       if (!this.startTime || !this.endTime) {
-        return this.errorMesg
+        return 'Please choose a start and end time for your event'
+      } else if (moment(this.startTime) >= moment(this.endTime)) {
+        return 'Your start time must be before your end time.'
       } else {
         return false
       }
