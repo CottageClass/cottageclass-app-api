@@ -53,7 +53,7 @@ export default {
   },
   computed: {
     ageRangeActive () {
-      return this.ageRange.min || this.ageRange.max
+      return this.ageRange.min !== 0 || this.ageRange.max !== 11
     },
     shortDescription () {
       return this.mapArea.shortDescription
