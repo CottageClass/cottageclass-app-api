@@ -34,7 +34,9 @@ class API::UsersController < API::BaseController
 
   def show
     serializer = if current_user && current_user.id == @user.id
-                   CurrentUserSerializer.new @user, include: %i[children place]
+                   CurrentUserSerializer.new @user,
+                                             include: %i[children place],
+                                             params: { current_users_place: true }
                  else
                    PublicUserSerializer.new @user,
                                             include: %i[children place],
