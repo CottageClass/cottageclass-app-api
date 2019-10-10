@@ -1,7 +1,7 @@
 <template>
   <Question
-    title="For how many weeks?"
-    subtitle="How many weeks should the times you just provided repeat for? If your schedule is very predictable, repeat for several weeks. If not, don't repeat at all—it's up to you!">
+    title="How many weeks will it repeat for?"
+    subtitle="How many weeks should this playdate repeat for? If the schedule is very predictable, repeat for several weeks. If not, just choose 1 week—it's up to you!">
     <div class="dropdown-container">
       <div>
         <select class="lp-select" v-model="repeatCount">
@@ -30,7 +30,7 @@ export default {
   props: ['value'],
   data () {
     return {
-      repeatCount: this.value.number || 2
+      repeatCount: this.value.number || 1
     }
   },
   mounted: function () {
