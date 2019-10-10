@@ -18,7 +18,7 @@
                   <div class="onb-button-social-text">Facebook Messenger</div>
                 </a>
               </li>
-              <li v-if="true" class="onb-button-social-list-item">
+              <li class="onb-button-social-list-item">
                 <a :href="fbLink" target="_blank" class="onb-button-social w-inline-block">
                   <img src="@/assets/facebook-hover.svg" width="32" height="32" alt="">
                   <div class="onb-button-social-text">Facebook</div>
