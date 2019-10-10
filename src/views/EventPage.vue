@@ -22,59 +22,61 @@
                 :otherText="currentUser ? 'Say hi and suggest another time': null"
       />
       <div class="user-action-card__container">
-        <div class="user-action-card__header">
-          <div class="user-action-card__header__date">{{timeHeader}}</div>
-          <div v-if="distance" class="user-action-card__header__distance">{{distance}}</div>
-        </div>
-        <div class="user-action-card__description-text"
-             v-html="this.description" />
-        <div class="event-summary-card__location">
-          <div class="location-card__text-group">
-            <div class="location-card__place-name-text line-clamp--1"
-                 v-html="playdateLocationName"></div>
-            <div class="location-card__address-text line-clamp--1"
-                 v-if="playdateAddress"
-                 v-html="playdateAddress"></div>
+        <div class="user-action-card__subcontainer">
+          <div class="user-action-card__header">
+            <div class="user-action-card__header__date">{{timeHeader}}</div>
+            <div v-if="distance" class="user-action-card__header__distance">{{distance}}</div>
           </div>
-          <div class="location-icon"><img src="@/assets/circle-location.svg" alt="" class="image-5 photo-fit" /></div>
-        </div>
-        <div class="user-action-card__footer">
-          <div class="user-action-card__footer__user-summary">
-            <router-link :to="{name:'UserPage', params:{id: event.user.id}}"
-                         class="avatar-container">
-              <AvatarImage className="user-action-card__photo"
-                           :person="{facebookUid: event.user.facebookUid, avatar: event.user.avatar}"
-                           imageSize="100"/>
-              <div v-if="verified" class="badge-verified">
-                <div class="unicode-character">✓</div>
-                <div class="badge-text">Verified</div>
-              </div>
-            </router-link>
-            <div class="user-action-card__user-info--container">
-              <div class="user-action-card__user-info_list">
-                <router-link :to="{name:'UserPage', params:{id: event.user.id}}"
-                             class="user-action-card__user-info__name">
-                  {{ userName }}</router-link>
-                <div class="user-action-card__user-info__occupation truncate">{{occupation}}</div>
-                <div class="user-action-card__user-info__kids truncate">{{kidsAges}}</div>
+          <div class="user-action-card__description-text"
+               v-html="this.description" />
+          <div class="event-summary-card__location">
+            <div class="location-card__text-group">
+              <div class="location-card__place-name-text line-clamp--1"
+                   v-html="playdateLocationName"></div>
+              <div class="location-card__address-text line-clamp--1"
+                   v-if="playdateAddress"
+                   v-html="playdateAddress"></div>
+            </div>
+            <div class="location-icon"><img src="@/assets/circle-location.svg" alt="" class="image-5 photo-fit" /></div>
+          </div>
+          <div class="user-action-card__footer">
+            <div class="user-action-card__footer__user-summary">
+              <router-link :to="{name:'UserPage', params:{id: event.user.id}}"
+                           class="avatar-container">
+                <AvatarImage className="user-action-card__photo"
+                             :person="{facebookUid: event.user.facebookUid, avatar: event.user.avatar}"
+                             imageSize="100"/>
+                <div v-if="verified" class="badge-verified">
+                  <div class="unicode-character">✓</div>
+                  <div class="badge-text">Verified</div>
+                </div>
+              </router-link>
+              <div class="user-action-card__user-info--container">
+                <div class="user-action-card__user-info_list">
+                  <router-link :to="{name:'UserPage', params:{id: event.user.id}}"
+                               class="user-action-card__user-info__name">
+                    {{ userName }}</router-link>
+                  <div class="user-action-card__user-info__occupation truncate">{{occupation}}</div>
+                  <div class="user-action-card__user-info__kids truncate">{{kidsAges}}</div>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="user-action-card__footer__actions">
-            <SearchListCardActions
-              class="column-list"
-              :user="event.user"
-              :event="event"
-              @user-updated="updateUser"
-              @interested-click="interestedClickWithPrompts('card')"
-              @going-click="goingClick"
-              @share-click="shareClick"
-              :timePast="timePast"
-              :showShareButton="showShareButton"
-              :showInterestedButton="showInterestedButton"
-              :showMeetButton="showMeetButton"
-              :showGoingButton="showGoingButton"
-              :allowWaveUndo="false"/>
+            <div class="user-action-card__footer__actions">
+              <SearchListCardActions
+                class="column-list"
+                :user="event.user"
+                :event="event"
+                @user-updated="updateUser"
+                @interested-click="interestedClickWithPrompts('card')"
+                @going-click="goingClick"
+                @share-click="shareClick"
+                :timePast="timePast"
+                :showShareButton="showShareButton"
+                :showInterestedButton="showInterestedButton"
+                :showMeetButton="showMeetButton"
+                :showGoingButton="showGoingButton"
+                :allowWaveUndo="false"/>
+            </div>
           </div>
         </div>
       </div>
@@ -298,6 +300,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
+
 a {
   color: #000;
   text-decoration: none;
@@ -365,6 +368,10 @@ a {
   margin-top: 32px;
   padding-right: 32px;
   padding-left: 32px;
+}
+
+.user-action-card__subcontainer {
+  max-width: 624px; /* temporary fix */
 }
 
 .user-action-card__container {
