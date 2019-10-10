@@ -5,7 +5,7 @@
         <div class="primary-action__title-text--alt-2">Get the most out of Lilypad!</div>
         <div class="primary-action__btns-container--alt-2">
           <div class="primary-action__btn-group--alt-2">
-            <a @click="$emit('offer-playdate-click')" class="btn__primary-action--alt-2 w-button">Offer playdate</a>
+            <a @click="$emit('offer-playdate-click')" class="btn__primary-action--alt-2 w-button">Offer a playdate</a>
           </div>
         </div>
       </div>

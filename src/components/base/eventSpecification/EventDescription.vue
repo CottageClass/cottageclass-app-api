@@ -5,12 +5,12 @@
     <FormWithTextArea
       class="short"
       maxLength="255"
-      placeholder="What is your playdate's name e.g. 'Storytime at the Brooklyn Public library'"
+      placeholder="Title, e.g. 'Storytime at the Brooklyn Public library.'"
       v-model="name" />
     <FormWithTextArea
       class="tall"
       maxLength="30,000"
-      placeholder="Describe your playdate here, e.g. 'We have been here several times and it's lots of fun!'"
+      placeholder="Description, e.g. 'We have been here several times and it's lots of fun!'"
       v-model="description" />
   </Question>
 </template>
