@@ -252,6 +252,13 @@ export default {
       this.user = user
     }
   },
+  watch: {
+    '$route': {
+      handler () {
+        this.fetchUser()
+      }
+    }
+  },
   async created () {
     await this.fetchUser()
     if (this.$route.query && this.$route.query.interested) {
