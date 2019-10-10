@@ -14,7 +14,8 @@
           title="Got any photos you'd like to share?"
           subtitle="Adding photos to your profile helps give other members a sense of your family."
         >
-          <MultipleImageUpload v-model="currentUser.images" />
+          <MultipleImageUpload v-model="currentUser.images"
+                               @image-upload="submitPhotoUpload"/>
         </Question>
         <AvatarUpload v-model="avatar"/>
         <Employment v-model="employment"/>
@@ -174,6 +175,33 @@ export default {
           this.saveButtonText = ' \u2714 Saved'
           this.$store.dispatch('updateCurrentUserFromServer')
           this.toToProfilePage()
+          this.log('user update SUCCESS')
+          this.log(res)
+        } catch (e) {
+          this.logError('Error saving')
+          this.logError(e)
+          this.saveButtonText = 'Problem saving. Click to try again.'
+        }
+      } else {
+        this.showError = true
+        VueScrollTo.scrollTo('#top-of-form')
+      }
+    },
+    submitPhotoUpload: async function () {
+      if (!this.hasError) {
+        this.saveButtonText = 'Saving...'
+        let data = Object.assign(this.currentUser, this.employment, {})
+        data.children = this.children.list
+        data.profileBlurb = this.profileBlurb.text
+        data.avatar = this.avatar.avatar
+        const settingMaxDistance = this.maxDistance
+        const settingEmailNotifications = this.weeklyEmails.isTrue
+        const { phone, place, availability } = this
+        data = Object.assign(data, { phone, place, availability, settingEmailNotifications, settingMaxDistance })
+        try {
+          const res = await api.submitUserInfo(this.currentUser.id, data)
+          this.saveButtonText = ' \u2714 Saved'
+          this.$store.dispatch('updateCurrentUserFromServer')
           this.log('user update SUCCESS')
           this.log(res)
         } catch (e) {
