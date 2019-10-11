@@ -57,8 +57,8 @@ export default {
     },
     emitPlaceId: function () {
       const err = this.errorMessage
-      const googleId = this.isPublic ? this.googlePlaceId : this.currentUser.place.googleId
-      this.$emit('input', { err, googleId, public: this.isPublic })
+      const payload = this.isPublic ? { err, googleId: this.googlePlaceId, public: this.isPublic } : this.currentUser.place
+      this.$emit('input', payload)
     }
   },
   watch: {

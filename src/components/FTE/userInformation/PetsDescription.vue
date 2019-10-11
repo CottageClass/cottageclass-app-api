@@ -24,7 +24,7 @@ export default {
   components: { Question },
   data () {
     return {
-      blurb: this.value || '',
+      blurb: { err: this.value.err, text: this.value.text } || { err: 'Please list your pets, including any key details.', text: '' },
       charLimit: 288,
       noTextErrorMsg: 'Please list your pets, including any key details.'
     }
@@ -47,7 +47,7 @@ export default {
         } else {
           this.blurb.err = this.noTextErrorMsg
         }
-        this.emitData('input', { err: this.blurb.err, text: this.blurb.text })
+        this.emitData({ err: this.blurb.err, text: this.blurb.text })
       },
       deep: true
     }
