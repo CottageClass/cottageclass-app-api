@@ -8,7 +8,7 @@ class Notifier::EventSuggestion < Notifier::Base
     dump_mail_template_parameters name: 'EventSuggestion.json'
     response = @sendgrid_client.send_mail to: [@user],
                                           from: @sender_email,
-                                          template_id: ENV.fetch('SENDGRID_TEMPLATE_EVENT_SUGGESTION'),
+                                          template_id: sendgrid_template[:event_suggestion],
                                           parameters: mail_template_parameters.deep_stringify_keys
 
     (response.try(:headers) || {}).dig('x-message-id').try :first

@@ -69,27 +69,6 @@
     "SENDGRID_API_KEY": {
       "required": true
     },
-    "SENDGRID_TEMPLATE_EVENT_FEEDBACK_HOST": {
-      "required": true
-    },
-    "SENDGRID_TEMPLATE_EVENT_FEEDBACK_PARTICIPANT": {
-      "required": true
-    },
-    "SENDGRID_TEMPLATE_EVENT_REMINDER_PREVIOUS_DAY_HOST": {
-      "required": true
-    },
-    "SENDGRID_TEMPLATE_PARTICIPANT_CREATION": {
-      "required": true
-    },
-    "SENDGRID_TEMPLATE_PARTICIPANT_CREATION_HOST": {
-      "required": true
-    },
-    "SENDGRID_TEMPLATE_PARTICIPANT_CREATION_NEXT_DAY": {
-      "required": true
-    },
-    "SENDGRID_TEMPLATE_USER_CREATION": {
-      "required": true
-    },
     "TWILIO_ACCOUNT_SID": {
       "required": true
     },
