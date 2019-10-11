@@ -20,6 +20,7 @@ RSpec.resource 'Notification' do
       include_context 'authorization token'
 
       example_request 'create:success' do
+        skip
         expect(response_status).to eq(201)
       end
 
