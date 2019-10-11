@@ -134,6 +134,7 @@ export default {
       employer: this.currentUser.employer,
       err: null
     }
+    this.place = this.currentUser.place
     this.profileBlurb = {
       text: this.currentUser.profileBlurb,
       err: null
