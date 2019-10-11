@@ -11,6 +11,7 @@
                     placeholder="start"
                     size="large"
                     :defaultOpenValue="beginningOfToday"
+                    inputReadOnly="true"
       />
       <a-timePicker class="date-picker"
                     v-model="endTime"
@@ -20,6 +21,8 @@
                     placeholder="end"
                     size="large"
                     :defaultOpenValue="beginningOfToday"
+                    inputReadOnly="true"
+
       />
     </div>
   </Question>
