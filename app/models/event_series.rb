@@ -13,7 +13,17 @@ class EventSeries < ApplicationRecord
   after_create :set_users_home
   after_save :create_events
 
+  accepts_nested_attributes_for :place
+
   private
+
+  def validate_associated_records_for_place
+    return if place.blank?
+
+    if new_place = Place.find_by(google_id: place.google_id, apartment_number: place.apartment_number)
+      self.place = new_place
+    end
+  end
 
   def set_users_home
     # if no place has been set, use the creators home

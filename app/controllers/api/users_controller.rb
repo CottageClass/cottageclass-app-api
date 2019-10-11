@@ -19,7 +19,7 @@ class API::UsersController < API::BaseController
 
   def update
     user = current_user
-    if user.update(user_params)
+    if user.update!(user_params)
       render json: CurrentUserSerializer.json_for(user, include: %i[
                                                     children
                                                     place
@@ -143,6 +143,12 @@ class API::UsersController < API::BaseController
                                  activities: [],
                                  images: [],
                                  languages: [],
+                                 place_attributes: %i[
+                                   public
+                                   creator_id
+                                   google_id
+                                   apartment_number
+                                 ],
                                  children_attributes: [
                                    :id,
                                    :first_name,

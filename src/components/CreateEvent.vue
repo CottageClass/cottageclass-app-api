@@ -41,7 +41,7 @@ import EventPlace from '@/components/base/eventSpecification/EventPlace'
 import Nav from '@/components/FTE/Nav'
 import AgeRange from '@/components/base/eventSpecification/AgeRange.vue'
 
-import { submitEventSeriesData, submitGooglePlaceIdAndFetchOurOwn } from '@/utils/api'
+import { submitEventSeriesData } from '@/utils/api'
 import moment from 'moment'
 import { localWeekHourToMoment } from '@/utils/time'
 import { mapGetters, mapMutations } from 'vuex'
@@ -63,7 +63,6 @@ export default {
       repeatCount: { err: null },
       date: { err: null },
       time: { err: null },
-      ourPlaceId: null,
       ageRange: { minimum: 0, maximum: 18 }
     }
   },
@@ -104,7 +103,7 @@ export default {
             'child_age_maximum': this.ageRange.maximum,
             'repeat_for': this.repeatCount.number || 1,
             'interval': 1,
-            'place_id': this.ourPlaceId || this.currentUser.place.id
+            'placeAttributes': this.place
           }
         }
       }
@@ -120,7 +119,11 @@ export default {
   },
   methods: {
     finished: function () {
-      this.ourPlaceId === null ? this.$emit('finishedHomeEvent') : this.$emit('finishedPublicEvent')
+      if (this.place.public) {
+        this.$emit('finishedPublicEvent')
+      } else {
+        this.$emit('finishedHomeEvent')
+      }
     },
     selectDateAndTime () {
       this.$router.push({ params: { stepName: 'date' } })
@@ -150,9 +153,6 @@ export default {
         // state is persisted after route update because component is reused
         this.showError = false
         if (this.isOnLastStep) {
-          if (this.place.id !== null) {
-            this.ourPlaceId = await submitGooglePlaceIdAndFetchOurOwn(this.place.id, this.place.public)
-          }
           await this.submitSpecificEvent()
         } else {
           this.$router.push({

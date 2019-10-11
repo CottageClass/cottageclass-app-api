@@ -6,7 +6,7 @@ RSpec.describe Place, type: :model do
 
   context 'validations' do
     it { is_expected.to validate_presence_of(:google_id) }
-    it { is_expected.to validate_uniqueness_of(:google_id) }
+    it { is_expected.to validate_uniqueness_of(:apartment_number).scoped_to(:google_id) }
   end
 
   context 'associations' do

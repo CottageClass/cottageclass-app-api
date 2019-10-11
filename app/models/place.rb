@@ -7,9 +7,12 @@ class Place < ApplicationRecord
   has_many :events, through: :event_series, inverse_of: :place
   has_many :users, inverse_of: :place
 
+  alias_attribute :creator_id, :user_id
+
   before_validation :retrieve_details
 
-  validates :google_id, presence: true, uniqueness: { case_sensitive: true }
+  validates :apartment_number, uniqueness: { scope: :google_id }
+  validates :google_id, presence: true
   validates :full_address, presence: true
   validates :latitude, presence: true
   validates :longitude, presence: true

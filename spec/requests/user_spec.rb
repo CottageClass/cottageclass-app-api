@@ -129,7 +129,7 @@ RSpec.resource 'User' do
 
       let(:user) { create :user, :with_children, :with_place }
       let(:id) { user.id }
-      let(:user_data) { build :user, :with_children }
+      let(:user_data) { build :user, :with_children, :with_place }
 
       let(:avatar) { user_data.avatar }
       let(:images) { user_data.images }

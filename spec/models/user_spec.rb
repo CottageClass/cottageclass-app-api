@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  let(:subject) { build :user }
+  let(:subject) { build :user, :with_place }
 
   context 'associations' do
     it { is_expected.to have_many(:event_series).inverse_of(:user) }
@@ -10,6 +10,15 @@ RSpec.describe User, type: :model do
     it { is_expected.to have_many(:created_places) }
     it { is_expected.to have_many(:participants).inverse_of(:user).dependent(:destroy) }
     it { is_expected.to have_many(:notifications).inverse_of(:recipient).dependent(:destroy) }
+  end
+
+  context 'autosave_records' do
+    it {
+      expect { subject.save }.to change(subject.place, :new_record?).from(true).to(false)
+      # verify that autosave only applies to new records
+      subject.place.apartment_number = '4c'
+      expect { subject.save }.not_to change(subject.place, :apartment_number)
+    }
   end
 
   context 'save' do

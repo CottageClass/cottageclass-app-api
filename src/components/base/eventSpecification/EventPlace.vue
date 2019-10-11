@@ -39,7 +39,7 @@ export default {
       choices: ['home', 'public'],
       labels: [['home', 'At my home'], ['public', 'In a public place']],
       homeOrPublic: 'home',
-      placeId: null,
+      googlePlaceId: null,
       defaultSubtitle: "Describe a playdate you'd like to host in your home or public space. It can be a one-time event (like a trip to the zoo) or something you can offer on a regular basis, like arts & crafts, indoor play, or a playground hangout!",
       googleMapsIsLoaded: false
     }
@@ -52,13 +52,13 @@ export default {
   },
   methods: {
     getAddressData: function (addressData, placeResultData, id) {
-      this.placeId = placeResultData.place_id
+      this.googlePlaceId = placeResultData.place_id
       this.emitPlaceId()
     },
     emitPlaceId: function () {
       const err = this.errorMessage
-      const id = this.isPublic ? this.placeId : this.currentUser.place.googleId
-      this.$emit('input', { err, id, public: this.isPublic })
+      const payload = this.isPublic ? { err, googleId: this.googlePlaceId, public: this.isPublic } : this.currentUser.place
+      this.$emit('input', payload)
     }
   },
   watch: {
@@ -71,7 +71,7 @@ export default {
       return this.homeOrPublic === 'public'
     },
     errorMessage () {
-      if (this.homeOrPublic === 'public' && this.placeId === null) {
+      if (this.homeOrPublic === 'public' && this.googlePlaceId === null) {
         return 'Please enter an address or place for your playdate.'
       } else if (this.homeOrPublic === null) {
         return 'Please tell us where your playdate will be.'
