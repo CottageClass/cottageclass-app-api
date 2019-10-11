@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   let(:subject) { build :user, :with_place }
-  # let(:subject) { build :user, :with_place }
 
   context 'associations' do
     it { is_expected.to have_many(:event_series).inverse_of(:user) }

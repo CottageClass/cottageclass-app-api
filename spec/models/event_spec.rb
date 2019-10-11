@@ -32,17 +32,17 @@ RSpec.describe Event, type: :model do
   end
 
   context 'destroy' do
+    let(:participants_count) { 2 }
+
     before do
       subject.save
       participants_count.times do
-        user_with_children = create :user, :with_children
+        user_with_children = create :user, :with_children, :with_phone_number
         create :participant, :with_participant_children, participable: subject, user: user_with_children
       end
     end
 
-    let(:participants_count) { 2 }
-
-    it { expect { subject.destroy }.to change(Notification.event_destruction, :count).by(participants_count) }
+    it { expect { subject.destroy }.to change(Notification.event_destruction, :count).from(0).to(participants_count) }
   end
 
   context 'notify' do

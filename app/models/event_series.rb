@@ -18,6 +18,8 @@ class EventSeries < ApplicationRecord
   private
 
   def validate_associated_records_for_place
+    return if place.blank?
+
     if new_place = Place.find_by(google_id: place.google_id, apartment_number: place.apartment_number)
       self.place = new_place
     end

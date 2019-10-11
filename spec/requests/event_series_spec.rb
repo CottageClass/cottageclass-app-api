@@ -29,10 +29,10 @@ RSpec.resource 'EventSeries' do
       child_age_maximum
       repeat_for
       interval
-      place
     ].each do |attribute|
       let(attribute) { subject.send attribute }
     end
+
     %i[starts_at ends_at].each { |attribute| let(attribute) { subject.send(attribute).to_s :time } }
 
     post api_event_series_index_path, format: :json do
