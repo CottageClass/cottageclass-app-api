@@ -37,7 +37,6 @@ export default {
       this.imageUrls.push(imageUrl)
       this.$emit('input', this.imageUrls)
       this.toggleUploadingState()
-      this.$emit('image-upload')
     },
     toggleUploadingState: function () {
       this.uploading ? this.uploading = false : this.uploading = true
