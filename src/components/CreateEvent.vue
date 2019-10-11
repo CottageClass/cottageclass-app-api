@@ -75,7 +75,7 @@ export default {
       return this.stepSequence[this.stepSequence.length - 1]
     },
     stepSequence () {
-      return [ 'place', 'date', 'time', 'repeat-count', 'description', 'age-range' ]
+      return [ 'place', 'date', 'time', 'age-range', 'repeat-count', 'description' ]
     },
     scheduleStart () {
       return moment()
