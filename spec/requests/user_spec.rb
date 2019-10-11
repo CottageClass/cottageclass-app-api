@@ -125,6 +125,7 @@ RSpec.resource 'User' do
         parameter :referrer, 'Referrer'
         parameter :source_tags, 'Source tags'
         parameter :children_attributes, 'Array of children. Set _destroy to 1 to remove a child. Supply id to update.'
+        parameter :place_attributes, 'google_id, apartment_number and public'
       end
 
       let(:user) { create :user, :with_children, :with_place }
@@ -143,6 +144,11 @@ RSpec.resource 'User' do
       let(:linkedin_user) { user_data.linkedin_user }
       let(:referrer) { user_data.referrer }
       let(:source_tags) { user_data.source_tags }
+      let(:place_attributes) do
+        user_data.place.attributes.with_indifferent_access.slice :google_id,
+                                                                 :public,
+                                                                 :apartment_number
+      end
       let :children_attributes do
         (user.children + user_data.children).map.with_index do |child, index|
           child_attributes = child.attributes.with_indifferent_access.slice :first_name,

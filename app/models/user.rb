@@ -333,6 +333,8 @@ class User < ApplicationRecord
   private
 
   def validate_associated_records_for_place
+    return if place.blank?
+
     new_place = Place.where(google_id: place.google_id).find_by(apartment_number: place.apartment_number)
     if new_place
       self.place = new_place

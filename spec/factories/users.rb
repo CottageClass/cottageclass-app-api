@@ -3,8 +3,6 @@ FactoryBot.define do
     email { Faker::Internet.unique.safe_email }
     name { Faker::FunnyName.unique.name }
     password { Faker::Internet.password 8, 16 }
-    phone_number { Faker::PhoneNumber.phone_number }
-    phone_area_code { Faker::PhoneNumber.area_code }
     facebook_uid { Faker::Omniauth.facebook[:uid] }
     avatar { Faker::Avatar.image Faker::Internet.slug(name, '-'), '300x300', 'png' }
     images { Array.new(2).map { Faker::LoremPixel.image } }
@@ -20,6 +18,11 @@ FactoryBot.define do
     source_tags { Faker::Books::Lovecraft.words }
 
     after(:build) { |instance, _| instance.skip_confirmation! if User.confirmable? }
+
+    trait :with_phone_number do
+      phone_number { Faker::PhoneNumber.phone_number }
+      phone_area_code { Faker::PhoneNumber.area_code }
+    end
 
     trait :with_place do
       after(:build) do |user|
