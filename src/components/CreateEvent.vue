@@ -63,7 +63,6 @@ export default {
       repeatCount: { err: null },
       date: { err: null },
       time: { err: null },
-      ourPlaceId: null,
       ageRange: { minimum: 0, maximum: 18 }
     }
   },
@@ -104,7 +103,7 @@ export default {
             'child_age_maximum': this.ageRange.maximum,
             'repeat_for': this.repeatCount.number || 1,
             'interval': 1,
-            'place_id': this.ourPlaceId || this.currentUser.place.id
+            'placeAttributes': this.place
           }
         }
       }
