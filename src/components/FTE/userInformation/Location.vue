@@ -42,7 +42,7 @@ export default {
       apartmentNumber: this.currentApartment || '',
       placeholder: this.currentAddress || 'Street address (not apt #)',
       address: {},
-      googlePlaceId: null,
+      googlePlaceId: this.value.googleId,
       latlng: null,
       googleMapsIsLoaded: false
     }
