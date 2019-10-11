@@ -8,7 +8,7 @@ class Notifier::EventFeedbackParticipant < Notifier::Base
     dump_mail_template_parameters name: 'EventFeedbackParticipant.json'
     response = @sendgrid_client.send_mail to: [@user],
                                           from: @sender_email,
-                                          template_id: ENV.fetch('SENDGRID_TEMPLATE_EVENT_FEEDBACK_PARTICIPANT'),
+                                          template_id: sendgrid_template[:event_feedback_participant],
                                           parameters: mail_template_parameters.deep_stringify_keys
 
     (response.try(:headers) || {}).dig('x-message-id').try :first

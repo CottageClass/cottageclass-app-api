@@ -8,7 +8,7 @@ class Notifier::UserSuggestion < Notifier::Base
     dump_mail_template_parameters name: 'UserSuggestion.json'
     response = @sendgrid_client.send_mail to: [@user],
                                           from: @sender_email,
-                                          template_id: ENV.fetch('SENDGRID_TEMPLATE_USER_SUGGESTION'),
+                                          template_id: sendgrid_template[:user_suggestion],
                                           parameters: mail_template_parameters.deep_stringify_keys
 
     (response.try(:headers) || {}).dig('x-message-id').try :first
