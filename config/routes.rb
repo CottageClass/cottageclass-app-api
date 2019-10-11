@@ -60,7 +60,6 @@ Rails.application.routes.draw do
                                                                          as: :participated
         end
       end
-      resources :notifications, only: %i[create]
     end
     resource :user, only: %i[] do
       resources :children, only: %i[update]
