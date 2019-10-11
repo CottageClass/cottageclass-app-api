@@ -189,7 +189,7 @@ export default {
     submitImageUpload: async function () {
       if (!this.hasError) {
         let data = {}
-        data = {images: this.currentUser.images}
+        data = { images: this.currentUser.images }
         try {
           const res = await api.submitUserInfo(this.currentUser.id, data)
           this.$store.dispatch('updateCurrentUserFromServer')
@@ -204,7 +204,7 @@ export default {
         this.showError = true
         VueScrollTo.scrollTo('#top-of-form')
       }
-    },
+    }
   },
   watch: {
     avatar: {
