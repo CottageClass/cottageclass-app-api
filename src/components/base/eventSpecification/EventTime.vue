@@ -1,6 +1,6 @@
 <template>
   <Question
-    title="What time will it be?"
+    title="What time?"
     subtitle="Please choose a start and end time for your playdate.">
     <div class="time-picker-container">
       <a-timePicker class="date-picker"
@@ -8,7 +8,7 @@
                     use12Hours
                     format="h:mm a"
                     :minuteStep="15"
-                    placeholder="start"
+                    placeholder="Start time"
                     size="large"
                     :defaultOpenValue="beginningOfToday"
                     inputReadOnly="true"
@@ -18,11 +18,10 @@
                     use12Hours
                     format="h:mm a"
                     :minuteStep="15"
-                    placeholder="end"
+                    placeholder="End time"
                     size="large"
                     :defaultOpenValue="beginningOfToday"
                     inputReadOnly="true"
-
       />
     </div>
   </Question>
@@ -82,9 +81,14 @@ export default {
 }
 </script>
 <style scoped lang="scss">
+
+.date-picker {
+  margin: 0 24px 0 24px;
+}
+
 .time-picker-container {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: center;
 }
 </style>
