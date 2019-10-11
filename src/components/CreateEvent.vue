@@ -16,6 +16,7 @@
     <AgeRange
       v-else-if="stepName==='age-range'"
       v-model="ageRange"
+      :childAgesInMonths="currentUser.childAgesInMonths"
     />
     <EventDatePicker
       v-else-if="stepName==='date'"
