@@ -15,7 +15,7 @@ export default {
       }
 
       let { min, max } = this.range
-      if (!min && !max) { return '0 - 11' }
+      if (!min && !max) { return '0-11' }
       if (min < 0) {
         min = null
       } else {
@@ -28,7 +28,7 @@ export default {
       }
 
       if (min && max) {
-        return min + ' - ' + max
+        return 'Ages ' + min + '-' + max
       }
       if (min && !max) {
         return min + ' and up'
