@@ -14,7 +14,7 @@
           title="Got any photos you'd like to share?"
           subtitle="Adding photos to your profile helps give other members a sense of your family."
         >
-          <MultipleImageUpload v-model="currentUser.images" />
+          <MultipleImageUpload v-model="currentUser.images" @input="submitImageUpload"/>
         </Question>
         <AvatarUpload v-model="avatar"/>
         <Employment v-model="employment"/>
@@ -175,6 +175,24 @@ export default {
           this.saveButtonText = ' \u2714 Saved'
           this.$store.dispatch('updateCurrentUserFromServer')
           this.toToProfilePage()
+          this.log('user update SUCCESS')
+          this.log(res)
+        } catch (e) {
+          this.logError('Error saving')
+          this.logError(e)
+          this.saveButtonText = 'Problem saving. Click to try again.'
+        }
+      } else {
+        this.showError = true
+        VueScrollTo.scrollTo('#top-of-form')
+      }
+    },
+    submitImageUpload: async function () {
+      if (!this.hasError) {
+        const data = { images: this.currentUser.images }
+        try {
+          const res = await api.submitUserInfo(this.currentUser.id, data)
+          this.$store.dispatch('updateCurrentUserFromServer')
           this.log('user update SUCCESS')
           this.log(res)
         } catch (e) {
