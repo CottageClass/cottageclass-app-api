@@ -687,7 +687,7 @@ a {
 }
 
 .profile-detail__content-columns {
-  min-width: 100%;
+  width: 100%;
   margin-top: 16px;
   padding-bottom: 16px;
 }

@@ -95,9 +95,10 @@ class User < ApplicationRecord
            dependent: :destroy
 
   belongs_to :showcase_event, class_name: 'Event', optional: true
-  belongs_to :place, inverse_of: :users, optional: true
+  belongs_to :place, inverse_of: :users, optional: true, autosave: true
 
   accepts_nested_attributes_for :children, allow_destroy: true, reject_if: :child_with_same_name_exists?
+  accepts_nested_attributes_for :place
 
   scope :child_age_range, lambda { |min_age, max_age|
     if min_age.present? || max_age.present?
@@ -330,6 +331,17 @@ class User < ApplicationRecord
   end
 
   private
+
+  def validate_associated_records_for_place
+    return if place.blank?
+
+    new_place = Place.where(google_id: place.google_id).find_by(apartment_number: place.apartment_number)
+    if new_place
+      self.place = new_place
+    else
+      place.save!
+    end
+  end
 
   def cleanup
     self.email = email.to_s.downcase

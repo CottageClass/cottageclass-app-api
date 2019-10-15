@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :notification do
     body { Faker::Lorem.sentence }
-    association :recipient, factory: :user
+    recipient { build :user, :with_phone_number }
     association :notifiable, factory: :event
 
     trait :sent do

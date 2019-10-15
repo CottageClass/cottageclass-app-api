@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :participant do
     association :participable, factory: :event
-    association :user, :with_children
+    association :user, :with_children, :with_phone_number
 
     trait :with_participant_children do
       after :build do |instance, _|

@@ -9,7 +9,6 @@ Rails.application.routes.draw do
              }
 
   namespace :api, defaults: { format: :json } do
-    resources :places, only: %i[create]
     resources :devices, only: %i[create]
     resources :event_series, only: %i[index show create update]
     resources :childcare_requests, only: %i[show create update destroy]
@@ -60,7 +59,6 @@ Rails.application.routes.draw do
                                                                          as: :participated
         end
       end
-      resources :notifications, only: %i[create]
     end
     resource :user, only: %i[] do
       resources :children, only: %i[update]
