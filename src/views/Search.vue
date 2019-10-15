@@ -24,6 +24,7 @@
           <div class="list-container w-container">
             <FilterSelectorBank />
             <SearchResultList
+              :itemType="itemType"
               :awaiting="awaiting"
               :showFetchMoreButton="showFetchMoreButton"
               class="list"
@@ -83,7 +84,8 @@ export default {
       noItemsMessage: 'Sorry, there are no upcoming playdates in this area',
       showTrailblazerMessage: true,
       detailView: false,
-      awaiting: false
+      awaiting: false,
+      itemType: this.itemType,
     }
   },
   computed: {
