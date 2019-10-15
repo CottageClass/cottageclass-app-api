@@ -176,16 +176,14 @@ export default {
       return this.userFirstName + ' ' + this.userLastInitial + '.'
     },
     description () {
-      if (this.event) {
-        if (this.event.description) {
-          const regex = /\.*$/
-          const trimmedName = this.event.name && this.event.name.trim().replace(regex, '')
-          return trimmedName + '. ' + (this.event.description || '')
-        } else {
-          return this.event.name
-        }
+      if (this.event.description) {
+        return this.event.description
       }
-      return this.user.profileBlurb
+    },
+    name () {
+      if (this.event) {
+        return this.event.name
+      }
     },
     profileBlurb () {
       return this.user.profileBlurb
