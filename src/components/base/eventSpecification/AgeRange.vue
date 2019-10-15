@@ -50,11 +50,11 @@ export default {
     },
     minChildAge () {
       let minAgeInYearsRoundedDown = Math.floor(Math.min(this.childAgesInMonths) / 12 - 1)
-      return minAgeInYearsRoundedDown > 0 ? minAgeInYearsRoundedDown : 0
+      return Math.max(minAgeInYearsRoundedDown, 0)
     },
     maxChildAge () {
       let maxAgeInYearsRounded = Math.round(Math.max(this.childAgesInMonths) / 12) + 1
-      return maxAgeInYearsRounded < 13 ? maxAgeInYearsRounded : 13
+      return Math.min(maxAgeInYearsRounded, 13)
     }
   },
   watch: {
