@@ -1,5 +1,6 @@
 import Vue from 'vue'
 // Vuex module to handle waves
+const radiusSequence = [5, 10, 20]
 
 const state = {
   mapArea: {
@@ -34,11 +35,20 @@ const mutations = {
 }
 
 const actions = {
-  async setMapArea ({ state, commit, dispatch }, payload) {
+  async autoExpandSearchRadius ({ state, commit, dispatch }) {
+    const currentRadius = state.mapArea.maxDistance
+    for (let radius of radiusSequence) {
+      if (radius > currentRadius) {
+        commit('mutateMapArea', { maxDistance: radius })
+        return dispatch('fetchItems')
+      }
+    }
+  },
+  async setMapArea ({ commit, dispatch }, payload) {
     commit('mutateMapArea', payload)
     return dispatch('fetchItems')
   },
-  async setAgeRange ({ state, commit, dispatch }, payload) {
+  async setAgeRange ({ commit, dispatch }, payload) {
     commit('mutateAgeRange', payload)
     return dispatch('fetchItems')
   }

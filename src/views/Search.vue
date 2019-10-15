@@ -115,18 +115,11 @@ export default {
         center,
         maxDistance: e.miles
       })
-      this.fetchItems()
     },
     ...mapActions(['fetchMoreItems', 'fetchItems', 'setMapArea']),
     ...mapMutations(['updateUser', 'updateEvent', 'setItemType'])
   },
   watch: {
-    ageRange: {
-      handler: function () {
-        this.fetchItems()
-      },
-      deep: true
-    },
     '$route': {
       handler () {
         this.setItemType({ itemType: this.$route.name })
