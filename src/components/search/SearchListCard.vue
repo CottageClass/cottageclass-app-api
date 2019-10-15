@@ -137,7 +137,9 @@ export default {
 
 <style scoped lang="scss">
 a {
-  text-decoration: none;
+  color: #000;
+  -webkit-text-fill-color: #000;  // keep for safari
+  text-decoration: none
 }
 
 .badge-verified {
@@ -256,22 +258,19 @@ a {
   position: relative;
   display: flex;
   width: 100%;
-  margin-top: 16px;
-  margin-bottom: 16px;
+  margin-top: 0;
   padding: 20px 20px 28px;
   flex-direction: column;
   justify-content: flex-start;
   align-items: stretch;
   border-bottom: 1px solid #f5f5f5;
-  border-radius: 8px;
   background-color: #fff;
-  box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.08);
 }
 
 .header {
   position: relative;
   display: flex;
-  width: 100%;
   min-height: 12px;
   margin-bottom: 12px;
   justify-content: space-between;
@@ -279,24 +278,19 @@ a {
 }
 
 .header__date {
-  &.time-past {
-    -webkit-text-fill-color: #aaaaaa;  // keep for safari
-    color: #aaaaaa;
-  }
-  color: #fc6f77;
-  font-size: 13px;
+  color: #1f88e9;
+  -webkit-text-fill-color: #1f88e9;  // keep for safari
+  font-size: 12px;
   line-height: 12px;
-  font-weight: 600;
-  letter-spacing: .7px;
   text-transform: uppercase;
 }
 
 .header__distance {
-  position: static;
+  position: absolute;
   right: 0;
-  color: grey;
-  -webkit-text-fill-color: grey;  // keep for safari
-  font-size: 13px;
+  color: #64426b;
+  -webkit-text-fill-color: #64426b;  // keep for safari
+  font-size: 12px;
   line-height: 12px;
   text-transform: uppercase;
 }
@@ -525,11 +519,8 @@ a {
   }
 
   .events-list__event-summary-card {
-    width: auto;
-    margin-right: 16px;
-    margin-left: 16px;
     padding: 16px 16px 24px;
-    align-items: flex-start;
+    border-radius: 0;
   }
 
   .footer__user-summary {
