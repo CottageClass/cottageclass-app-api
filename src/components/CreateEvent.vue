@@ -95,6 +95,7 @@ export default {
           'event_series': {
             'name': this.description.name,
             'description': this.description.description,
+            'images': this.description.images,
             'start_date': timeRange.start.format('YYYY-MM-DD'),
             'starts_at': timeRange.start.format('HH:mm'),
             'ends_at': timeRange.end.format('HH:mm'),
