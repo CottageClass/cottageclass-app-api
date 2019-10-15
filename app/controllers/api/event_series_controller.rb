@@ -38,6 +38,7 @@ class API::EventSeriesController < API::BaseController
     params.require(:event_series).permit :name, :start_date, :starts_at, :ends_at, :interval,
                                          :maximum_children, :child_age_minimum, :child_age_maximum,
                                          :repeat_for, :place_id, :description,
+                                         images: [],
                                          place_attributes: %i[
                                            public
                                            creator_id
