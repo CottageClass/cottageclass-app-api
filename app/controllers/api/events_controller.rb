@@ -6,10 +6,6 @@ class API::EventsController < API::BaseController
 
   def index
     events = Event.includes(:user, :place, participant_children: :child, user: :children)
-    if current_user.present?
-      events = events.joins(:event_series)
-      events = events.where('event_series.user_id <> ?', current_user.id)
-    end
     events_index events: events.joins(:event_series),
                  skope: params[:skope],
                  miles: params[:miles],
