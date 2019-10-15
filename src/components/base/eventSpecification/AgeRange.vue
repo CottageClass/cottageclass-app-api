@@ -17,12 +17,12 @@ import Question from '@/components/base/Question.vue'
 import Dropdown from '@/components/Dropdown.vue'
 export default {
   name: 'AgeRange',
-  props: ['value'],
+  props: ['value', 'childAgesInMonths'],
   components: { Question, Dropdown },
   data () {
     return {
-      minimum: 0,
-      maximum: 12
+      minimum: this.minChildAge(),
+      maximum: this.maxChildAge()
     }
   },
   computed: {
@@ -47,6 +47,14 @@ export default {
         maximum: this.maximum,
         err: this.err
       })
+    },
+    minChildAge () {
+      let minAgeInYearsRoundedDown = Math.floor(Math.min(this.childAgesInMonths) / 12 - 1)
+      return Math.max(minAgeInYearsRoundedDown, 0)
+    },
+    maxChildAge () {
+      let maxAgeInYearsRounded = Math.round(Math.max(this.childAgesInMonths) / 12) + 1
+      return Math.min(maxAgeInYearsRounded, 13)
     }
   },
   watch: {
