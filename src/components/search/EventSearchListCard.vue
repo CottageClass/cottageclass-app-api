@@ -106,7 +106,7 @@ import SearchListCardActionsOverlay from '@/components/search/SearchListCardActi
 import { item, screen } from '@/mixins'
 
 export default {
-  name: 'SearchListCard',
+  name: 'EventSearchListCard',
   props: {
     doNotShowCancel: { default: false },
     item: { required: true },

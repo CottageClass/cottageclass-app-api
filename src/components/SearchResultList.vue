@@ -1,9 +1,16 @@
 <template>
   <div class="list-wrapper">
     <div class="event-list">
-      <div>
-      <UserOrEventCard />
-      </div>
+      <div v-for="item in (items || [])">
+      <UserOrEventCard 
+          :item="item" 
+          :distanceCenter="mapArea.center"
+          :key="item.id"
+          :itemType="itemType"
+          @user-updated="$emit('user-updated', $event)"
+          @event-deleted="$emit('event-deleted', id)"
+          @event-updated="$emit('event-updated', $event)"/>
+      </div> 
       <SearchListFooter v-if="showFetchMoreButton"
                         :awaiting="awaiting"
                         @fetch-more-click="$emit('fetch-more-click')"
