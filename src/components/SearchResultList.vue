@@ -1,7 +1,7 @@
 <template>
   <div class="list-wrapper">
     <div class="event-list">
-      <div v-for="item in (items || [])">
+      <div>
       <UserOrEventCard />
       </div>
       <SearchListFooter v-if="showFetchMoreButton"
@@ -21,17 +21,17 @@
 </template>
 
 <script>
-import TrailblazerCard from '@/components/TrailblazerCard'
-import SearchListCard from '@/components/search/SearchListCard'
+import TrailblazerCard from '@/components/TrailblazerCard' 
 import SearchListFooter from '@/components/search/SearchListFooter'
-import { mapGetters } from 'vuex'
+import UserOrEventCard from '@/components/search/UserOrEventCard'
+import { mapGetters } from 'vuex' 
 
 export default {
   name: 'SearchResultList',
-  components: { SearchListCard, TrailblazerCard, SearchListFooter },
-  props: {
+  components: { TrailblazerCard, SearchListFooter, UserOrEventCard },
+  props: { 
     awaiting: {
-      type: Boolean,
+      type: Boolean,  
       default: false
     },
     noEventsMessage: {},
@@ -49,7 +49,8 @@ export default {
       default: true
     },
     itemType: {
-      type: String
+      type: String,
+      required: true
     }
   },
   computed: {
