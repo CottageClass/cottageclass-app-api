@@ -258,19 +258,22 @@ a {
   position: relative;
   display: flex;
   width: 100%;
-  margin-top: 0;
+  margin-top: 16px;
+  margin-bottom: 16px;
   padding: 20px 20px 28px;
   flex-direction: column;
   justify-content: flex-start;
   align-items: stretch;
   border-bottom: 1px solid #f5f5f5;
+  border-radius: 8px;
   background-color: #fff;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.2);
 }
 
 .header {
   position: relative;
   display: flex;
+  width: 100%;
   min-height: 12px;
   margin-bottom: 12px;
   justify-content: space-between;
@@ -278,19 +281,21 @@ a {
 }
 
 .header__date {
-  color: #1f88e9;
-  -webkit-text-fill-color: #1f88e9;  // keep for safari
-  font-size: 12px;
+  color: #fc6f77;
+  -webkit-text-fill-color:#fc6f77;;  // keep for safari
+  font-size: 13px;
   line-height: 12px;
+  font-weight: 600;
+  letter-spacing: .7px;
   text-transform: uppercase;
 }
 
 .header__distance {
-  position: absolute;
+  color: grey;
+  -webkit-text-fill-color: grey;  // keep for safari
+  position: static;
   right: 0;
-  color: #64426b;
-  -webkit-text-fill-color: #64426b;  // keep for safari
-  font-size: 12px;
+  font-size: 13px;
   line-height: 12px;
   text-transform: uppercase;
 }

@@ -258,14 +258,16 @@ a {
   position: relative;
   display: flex;
   width: 100%;
-  margin-top: 0;
+  margin-top: 16px;
+  margin-bottom: 16px;
   padding: 20px 20px 28px;
   flex-direction: column;
   justify-content: flex-start;
   align-items: stretch;
   border-bottom: 1px solid #f5f5f5;
+  border-radius: 8px;
   background-color: #fff;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.2);
 }
 
 .header {
