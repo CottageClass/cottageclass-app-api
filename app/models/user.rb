@@ -5,6 +5,7 @@ class User < ApplicationRecord
   include LegacyPassword
   include Starable
   include CriticalMass
+  include Locatable
 
   # Include devise modules. Others available are:
   # :timeoutable, :confirmable, :invitable, :lockable
