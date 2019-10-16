@@ -30,7 +30,7 @@ export default {
       return range(0, this.maximum + 1)
     },
     maxChoices () {
-      return range(this.minimum, 13)
+      return range(this.minimum, 18)
     },
     err: function () {
       if (parseInt(this.value.minimum) > parseInt(this.value.maximum)) {
@@ -49,12 +49,12 @@ export default {
       })
     },
     minChildAge () {
-      let minAgeInYearsRoundedDown = Math.floor(Math.min(this.childAgesInMonths) / 12 - 1)
+      let minAgeInYearsRoundedDown = Math.floor(Math.min(...this.childAgesInMonths) / 12 - 1)
       return Math.max(minAgeInYearsRoundedDown, 0)
     },
     maxChildAge () {
-      let maxAgeInYearsRounded = Math.round(Math.max(this.childAgesInMonths) / 12) + 1
-      return Math.min(maxAgeInYearsRounded, 13)
+      let maxAgeInYearsRounded = Math.round(Math.max(...this.childAgesInMonths) / 12) + 1
+      return Math.min(maxAgeInYearsRounded, 18)
     }
   },
   watch: {
