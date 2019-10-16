@@ -128,6 +128,9 @@ export default {
     }
   },
   created: async function () {
+    if (this.currentUser && !this.currentUser.place) {
+      await this.$store.dispatch('updateCurrentUserFromServer')
+    }
     if (this.currentUser && !this.currentUser.profileBlurb) {
       this.$router.push({ name: 'ProfileCollection' })
     } else {
