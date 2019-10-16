@@ -67,9 +67,7 @@ import { messaging, alerts, screen } from '@/mixins'
 export default {
   name: 'Search',
   mixins: [messaging, alerts, screen],
-  props: {
-    itemType: { default: 'Events' }
-  },
+  props: ['itemType'],
   components: {
     GetTheMost,
     SearchResultList,
@@ -84,8 +82,7 @@ export default {
       noItemsMessage: 'Sorry, there are no upcoming playdates in this area',
       showTrailblazerMessage: true,
       detailView: false,
-      awaiting: false,
-      itemType: this.itemType,
+      awaiting: false
     }
   },
   computed: {
