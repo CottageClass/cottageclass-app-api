@@ -2,15 +2,15 @@
   <div class="list-wrapper">
     <div class="event-list">
       <div v-for="item in (items || [])">
-      <UserOrEventCard 
-          :item="item" 
+        <UserOrEventCard
+          :item="item"
           :distanceCenter="mapArea.center"
           :key="item.id"
           :itemType="itemType"
           @user-updated="$emit('user-updated', $event)"
           @event-deleted="$emit('event-deleted', id)"
           @event-updated="$emit('event-updated', $event)"/>
-      </div> 
+      </div>
       <SearchListFooter v-if="showFetchMoreButton"
                         :awaiting="awaiting"
                         @fetch-more-click="$emit('fetch-more-click')"
@@ -28,17 +28,17 @@
 </template>
 
 <script>
-import TrailblazerCard from '@/components/TrailblazerCard' 
+import TrailblazerCard from '@/components/TrailblazerCard'
 import SearchListFooter from '@/components/search/SearchListFooter'
 import UserOrEventCard from '@/components/search/UserOrEventCard'
-import { mapGetters } from 'vuex' 
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'SearchResultList',
   components: { TrailblazerCard, SearchListFooter, UserOrEventCard },
-  props: { 
+  props: {
     awaiting: {
-      type: Boolean,  
+      type: Boolean,
       default: false
     },
     noEventsMessage: {},
