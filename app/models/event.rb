@@ -1,10 +1,9 @@
 class Event < ApplicationRecord
   include Eventable
   include Starable
+  include Locatable
 
   PAST_PENALTY = 31_557_600 # seconds in a year
-
-  geocoded_by :host_full_address
 
   after_create :post_create
   before_destroy :notify_participants_destruction

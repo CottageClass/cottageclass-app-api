@@ -1,5 +1,6 @@
 class EventSeries < ApplicationRecord
   include Eventable
+  include Locatable
 
   validates :start_date, presence: true
   validates :repeat_for, presence: true, numericality: { only_integer: true, greater_than: 0 }
