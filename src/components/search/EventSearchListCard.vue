@@ -55,7 +55,6 @@
 
 <script>
 import AvatarImage from '@/components/base/AvatarImage'
-import HouseholdImages from '@/components/search/HouseholdImages'
 import SearchListCardActions from '@/components/search/SearchListCardActions'
 
 // most of the functionality is in the itemActions mixin
