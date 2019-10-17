@@ -34,6 +34,7 @@ export default {
   props: ['stepName'],
   data () {
     return {
+      upcomingEvent: null,
       section: 'event'
     }
   },

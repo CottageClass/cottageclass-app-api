@@ -1,5 +1,6 @@
 class EventSeries < ApplicationRecord
   include Eventable
+  include Locatable
 
   validates :start_date, presence: true
   validates :repeat_for, presence: true, numericality: { only_integer: true, greater_than: 0 }
@@ -22,6 +23,8 @@ class EventSeries < ApplicationRecord
 
     if new_place = Place.find_by(google_id: place.google_id, apartment_number: place.apartment_number)
       self.place = new_place
+    else
+      place.save!
     end
   end
 
@@ -38,6 +41,7 @@ class EventSeries < ApplicationRecord
     event = events.build starts_at: date_time(new_date, starts_at), ends_at: date_time(new_date, ends_at)
     %i[
       name
+      images
       description
       maximum_children
       child_age_minimum

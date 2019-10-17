@@ -15,9 +15,6 @@ const mutations = {
       Vue.set(state.data, state.itemType)
     }
   },
-  resetSearch (state) {
-    Vue.set(state.data, state.itemType, baseData())
-  },
   addItems (state, payload) {
     const items = payload.items
     if (!state.data[state.itemType]) {
@@ -60,7 +57,11 @@ const mutations = {
     const data = state.data[state.itemType]
     if (!data) {
       Vue.set(state.data, state.itemType, baseData())
+      Vue.set(state.data[state.itemType], 'searchHasSucceeded', false)
     }
+  },
+  setSearchHasSucceeded (state, payload) {
+    Vue.set(state.data[state.itemType], 'searchHasSucceeded', payload.succeeded)
   },
   setFetchLock (state, payload) {
     Vue.set(state.data[state.itemType], 'fetchLock', payload.lock)
@@ -68,21 +69,22 @@ const mutations = {
 }
 
 const actions = {
+  async resetToBaseState ({ state, commit, dispatch }) {
+    const searchHasSucceeded = state.data[state.itemType].searchHasSucceeded
+    Vue.set(state.data, state.itemType, baseData())
+    Vue.set(state.data[state.itemType], 'searchHasSucceeded', searchHasSucceeded)
+  },
   async fetchItems ({ state, commit, dispatch }) {
     commit('ensureState')
-    if (state.data[state.itemType].fetchLock) { return }
-    commit('resetSearch')
-    commit('setFetchLock', { lock: true })
+    dispatch('resetToBaseState')
     let results
-    try {
-      results = await dispatch('fetchMoreItems')
-    } finally {
-      commit('setFetchLock', { lock: false })
-    }
+    results = await dispatch('fetchMoreItems')
     return results
   },
 
-  async fetchMoreItems ({ state, commit, getters }) {
+  async fetchMoreItems ({ state, commit, getters, dispatch }) {
+    if (state.data[state.itemType].fetchLock) { return }
+    commit('setFetchLock', { lock: true })
     const data = state.data[state.itemType]
     const params = {
       pageSize: 10,
@@ -96,17 +98,30 @@ const actions = {
 
     commit('ensureState')
     let items
-    switch (state.itemType) {
-      case 'Events':
-        items = await fetchEvents(params)
-        break
-      case 'Parents':
-        items = await fetchFeed(params)
-        break
+    try {
+      switch (state.itemType) {
+        case 'Events':
+          items = await fetchEvents(params)
+          break
+        case 'Parents':
+          items = await fetchFeed(params)
+          break
+      }
+    } finally {
+      commit('setFetchLock', { lock: false })
     }
     commit('incrementLastPage')
     commit('setMoreAvailable', { moreAvailable: items.length >= params.pageSize })
+    if (items.length > 0) {
+      commit('setSearchHasSucceeded', { succeeded: true })
+    } else if (!state.data[state.itemType].searchHasSucceeded) {
+      dispatch('expandRadiusAndFetchAgain')
+    }
     commit('addItems', { items })
+  },
+
+  async expandRadiusAndFetchAgain ({ dispatch }) {
+    dispatch('autoExpandSearchRadius')
   }
 }
 

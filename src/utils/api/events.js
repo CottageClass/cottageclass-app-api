@@ -16,10 +16,10 @@ export function submitEventSeriesData (data) {
 }
 export const fetchEvents = async ({ miles, lat, lng, minAge, maxAge, pageSize = 20, page = 1 }) => {
   let url = `/api/events/upcoming/miles/${miles}/latitude/${lat}/longitude/${lng}/`
-  if (minAge !== null && typeof minAge !== 'undefined') {
+  if (minAge || minAge === 0) {
     url += `min_age/${minAge}/`
   }
-  if (maxAge !== null && typeof minAge !== 'undefined') {
+  if (maxAge || maxAge === 0) {
     url += `max_age/${maxAge}/`
   }
   url += 'sort/chronological/'

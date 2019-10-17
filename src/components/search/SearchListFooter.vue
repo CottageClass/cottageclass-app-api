@@ -12,7 +12,25 @@ import LoadingSpinner from '@/components/LoadingSpinner'
 export default {
   name: 'SearchListFooter',
   props: ['awaiting'],
-  components: { LoadingSpinner }
+  data () {
+    return {
+      observer: null,
+      observationTarget: null
+    }
+  },
+  components: { LoadingSpinner },
+  mounted () {
+    this.observationTarget = document.querySelector('.event-list__view-more-link')
+    if (this.observationTarget) {
+      this.observer = new IntersectionObserver((entries) => {
+        this.$emit('fetch-more-click')
+      })
+      this.observer.observe(this.observationTarget)
+    }
+  },
+  destroyed () {
+    this.observer.unobserve(this.observationTarget)
+  }
 }
 </script>
 

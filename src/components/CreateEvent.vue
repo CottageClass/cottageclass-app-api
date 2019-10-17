@@ -16,6 +16,7 @@
     <AgeRange
       v-else-if="stepName==='age-range'"
       v-model="ageRange"
+      :childAgesInMonths="currentUser.childAgesInMonths"
     />
     <EventDatePicker
       v-else-if="stepName==='date'"
@@ -74,7 +75,7 @@ export default {
       return this.stepSequence[this.stepSequence.length - 1]
     },
     stepSequence () {
-      return [ 'place', 'date', 'time', 'repeat-count', 'description', 'age-range' ]
+      return [ 'place', 'date', 'time', 'age-range', 'repeat-count', 'description' ]
     },
     scheduleStart () {
       return moment()
@@ -95,6 +96,7 @@ export default {
           'event_series': {
             'name': this.description.name,
             'description': this.description.description,
+            'images': this.description.images,
             'start_date': timeRange.start.format('YYYY-MM-DD'),
             'starts_at': timeRange.start.format('HH:mm'),
             'ends_at': timeRange.end.format('HH:mm'),

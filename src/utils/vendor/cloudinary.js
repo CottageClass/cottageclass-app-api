@@ -30,7 +30,6 @@ export function imageUrl (rawUrl, options) {
 
 export function createWidget (callback, options) {
   const widgetOptions = {
-    croppingAspectRatio: 1,
     cloudName: process.env.CLOUDINARY_CLOUD_NAME,
     uploadPreset: 'user_images',
     cropping: true,

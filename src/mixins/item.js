@@ -21,10 +21,12 @@ export default {
       return this.user && this.user.neighborhood
     },
     images () {
+      if (this.event && this.event.images) {
+        return [...this.event.images, ...this.user.images]
+      }
       if (this.user) {
         return this.user.images
       }
-      return this.event && this.event.user.images
     },
     joinedDateFormatted: function () {
       return moment(this.user.createdAt).format('MMMM, YYYY')

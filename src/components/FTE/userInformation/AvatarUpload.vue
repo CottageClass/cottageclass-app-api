@@ -45,7 +45,10 @@ export default {
     }
   },
   created () {
-    this.cloudinaryUploadWidget = createWidget(this.cloudinaryEventHandler)
+    this.cloudinaryUploadWidget = createWidget(this.cloudinaryEventHandler, {
+      croppingAspectRatio: 1,
+      multiple: false
+    })
     if (this.avatar) {
       this.previewAvatarUrl = avatarUrl(this.avatar, 80)
     }
@@ -61,8 +64,6 @@ export default {
   },
   methods: {
     cloudinaryEventHandler (error, result) {
-      this.debug({ result })
-
       if (!error && result && result.event === 'abort') {
         this.avatarLoading = false
       }
