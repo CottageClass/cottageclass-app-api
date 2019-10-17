@@ -23,6 +23,8 @@ class EventSeries < ApplicationRecord
 
     if new_place = Place.find_by(google_id: place.google_id, apartment_number: place.apartment_number)
       self.place = new_place
+    else
+      place.save!
     end
   end
 

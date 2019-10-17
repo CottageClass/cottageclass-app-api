@@ -57,7 +57,9 @@ export default {
     },
     emitPlaceId: function () {
       const err = this.errorMessage
-      const payload = this.isPublic ? { err, googleId: this.googlePlaceId, public: this.isPublic } : this.currentUser.place
+      const payload = this.isPublic ? {
+        err, googleId: this.googlePlaceId, public: this.isPublic, creatorId: this.currentUser.id
+      } : this.currentUser.place
       this.$emit('input', payload)
     }
   },
