@@ -12,7 +12,7 @@
         <div v-if="distance && !isCurrentUser" class="header__distance">{{distance}}</div>
       </div>
       <div class="description">
-        <div class="description-text line-clamp--2">{{description}}</div>
+        <div class="description-text line-clamp--2">{{ blurbOrDescription }}</div>
       </div>
     </router-link>
     <div class="footer">

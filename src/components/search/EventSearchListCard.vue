@@ -11,39 +11,25 @@
         </div>
         <div v-if="distance && !isCurrentUser" class="header__distance">{{distance}}</div>
       </div>
-      <div class="description">
-        <div class="description-text line-clamp--2">{{description}}</div>
-      </div>
+        <div class="event-summary-card__title line-clamp--1">{{name}}</div>
     </router-link>
-    <div class="footer">
       <router-link
         :to="link"
         @click.native="$event.stopImmediatePropagation()">
-        <div class="footer__user-summary">
-          <div class="photo-wrapper">
-            <AvatarImage
-              className="photo"
-              :person="user"
-              imageSize="85"
-            />
-            <div class="badge-verified" v-if="user.facebookUid">
-              <div class="unicode-character">✓</div>
-              <div class="badge-text">Verified</div>
-            </div>
-          </div>
-          <div class="user-info--container">
-            <div class="user-info_list">
-              <div class="user-info__name">{{userName}}</div>
-              <div v-if="occupation"
-                   class="user-info__occupation lp-truncate">
-                {{occupation}}<br />
-              </div>
-              <div class="user-info__kids lp-truncate">{{kidsAges}}</div>
-              <div v-if="neighborhood" class="user-info__kids lp-truncate">{{neighborhood}}</div>
-              <HouseholdImages :user="user" />
-            </div>
-          </div>
+
+      <div class="event-summary-card__info">
+        <div class="event-summary-card__text">
+         <div class="event-summary-card__loca-desc"><span class="place-name">{{playdateLocationNameWithPeriod}}</span>{{description}}</div>
         </div>
+        <div class="event-summary-card__image">            
+          <AvatarImage
+            className="photo"
+            :person="user"
+            imageSize="85"
+          />
+        </div>
+      </div>
+ 
       </router-link>
       <div class="footer__actions--mobile">
         <a class="event-action__icon-button__star w-inline-block"
@@ -92,7 +78,6 @@
         :showInterestedButton="showInterestedButton"
         :showCancelButton="!doNotShowCancel && showCancelButton"
         :allowWaveUndo="true"/>
-    </div>
   </li>
 </template>
 
@@ -270,6 +255,49 @@ a {
   box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.2);
 }
 
+.event-summary-card__title {
+  margin-bottom: 8px;
+  font-size: 18px;
+  line-height: 26px;
+  font-weight: 700;
+}
+
+.event-summary-card__title.line-clamp--1 {
+  margin-bottom: 8px;
+}
+
+.event-summary-card__info {
+  display: flex;
+  margin-bottom: 12px;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.event-summary-card__loca-desc {
+  color: grey;
+  -webkit-text-fill-color: grey;
+  font-weight: 400;
+}
+
+.event-summary-card__text {
+  width: 100%;
+  margin-right: 16px;
+}
+
+.event-summary-card__image {
+  overflow: hidden;
+  width: 80px;
+  height: 80px;
+  min-height: 80px;
+  min-width: 80px;
+  margin-top: 4px;
+  border-radius: 8px;
+}
+
+.place-name {
+  font-weight: 700;
+}
+
 .header {
   position: relative;
   display: flex;
@@ -334,19 +362,11 @@ a {
   line-height: 22px;
 }
 
-.photo-wrapper {
-  position: relative;
-  height: 100%;
-}
-
 .photo {
-  position: static;
-  max-height: 85px;
-  max-width: 85px;
-  min-height: 85px;
-  min-width: 85px;
-  margin: 0 1px 1px 0;
-  border-radius: 4px;
+  width: 80px;
+  height: 80px;
+  min-height: 80px;
+  min-width: 80px;
 }
 
 .footer__list-item {
@@ -541,13 +561,6 @@ a {
     line-height: 19.5px;
   }
 
-  .photo {
-    max-height: 75px;
-    max-width: 75px;
-    min-height: 75px;
-    min-width: 75px;
-  }
-
   .user-info__occupation {
     width: 320px;
   }
@@ -597,17 +610,6 @@ a {
 
   .footer__actions {
     width: 100%;
-  }
-
-  .photo-wrapper {
-    max-height: 77px;
-  }
-
-  .photo {
-    max-height: 65px;
-    max-width: 65px;
-    min-height: 65px;
-    min-width: 65px;
   }
 
   .footer__list-item {

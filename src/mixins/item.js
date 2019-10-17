@@ -177,7 +177,7 @@ export default {
     userName () {
       return this.userFirstName + ' ' + this.userLastInitial + '.'
     },
-    description () {
+    blurbOrDescription () {
       if (this.event) {
         if (this.event.description) {
           const regex = /\.*$/
@@ -192,6 +192,25 @@ export default {
     name () {
       if (this.event) {
         return this.event.name
+      }
+    },
+    description () {
+      if (this.event.description) {
+        return this.event.description
+      }
+    },
+    playdateLocationName () {
+      if (this.place.public) {
+        return this.event.place.name
+      } else {
+        return `The playdate will be hosted at ${this.event.user.firstName}'s home.`
+      }
+    },
+    playdateLocationNameWithPeriod () {
+      if (this.playdateLocationName && this.place.public) {
+        return `${this.event.place.name}. `
+      } else {
+        return this.playdateLocationName
       }
     },
     profileBlurb () {
