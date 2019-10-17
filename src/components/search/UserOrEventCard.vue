@@ -2,11 +2,17 @@
 <template>
   <div v-if="eventView" >
     <EventSearchListCard
-      v-bind="$props" />
+      v-bind="$props"
+                @user-updated="$emit('user-updated', $event)"
+          @event-deleted="$emit('event-deleted', id)"
+          @event-updated="$emit('event-updated', $event)" />
   </div>
   <div v-else>
     <UserSearchListCard
-      v-bind="$props" />
+      v-bind="$props"
+                @user-updated="$emit('user-updated', $event)"
+          @event-deleted="$emit('event-deleted', id)"
+          @event-updated="$emit('event-updated', $event)" />
   </div>
 </template>
 
