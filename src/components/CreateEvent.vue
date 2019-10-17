@@ -45,7 +45,7 @@ import AgeRange from '@/components/base/eventSpecification/AgeRange.vue'
 import { submitEventSeriesData } from '@/utils/api'
 import moment from 'moment'
 import { localWeekHourToMoment } from '@/utils/time'
-import { mapGetters, mapMutations } from 'vuex'
+import { mapGetters } from 'vuex'
 
 import { stepNavigation, alerts } from '@/mixins'
 
@@ -60,7 +60,6 @@ export default {
       showError: false,
       place: { err: null },
       description: { err: null, name: '', description: '' },
-      availability: { err: null },
       repeatCount: { err: null },
       date: { err: null },
       time: { err: null },
@@ -83,7 +82,6 @@ export default {
     modelForCurrentStep () {
       const models = {
         description: this.description,
-        availability: this.availability,
         place: this.place,
         date: this.date,
         time: this.time
@@ -117,7 +115,7 @@ export default {
         return { start, end }
       }
     },
-    ...mapGetters([ 'currentUser', 'wipEvent', 'firstCreatedEvent', 'wipEventContiguousTimeBlocks' ])
+    ...mapGetters([ 'currentUser', 'firstCreatedEvent' ])
   },
   methods: {
     finished: function () {
@@ -143,7 +141,6 @@ export default {
         this.logError(e)
         this.showAlert('Sorry, there was a problem submitting your event.  Please try again later', 'failure')
       }
-      this.resetWipEvent()
       this.finished()
     },
     async nextStep () {
@@ -170,17 +167,9 @@ export default {
       } else {
         this.$router.go(-1)
       }
-    },
-    ...mapMutations([ 'setWipEvent', 'resetWipEvent', 'setCreatedEvents' ])
+    }
   },
   watch: {
-    availability: {
-      handler () {
-        this.setWipEvent({ event: { availability: this.availability, description: this.description } })
-        this.lastTimeChosen = 'availability'
-      },
-      deep: true
-    },
     time: {
       handler () {
         this.lastTimeChosen = 'specific'
@@ -190,16 +179,6 @@ export default {
   },
   created () {
     this.event = this.wipEvent
-    if (!this.availability.availability) {
-      this.$set(this.availability, 'availability', [])
-      for (let day = 0; day < 7; day++) {
-        const row = []
-        for (let hour = 0; hour < 24; hour++) {
-          row.push(false)
-        }
-        this.availability.availability.push(row)
-      }
-    }
   }
 }
 </script>
