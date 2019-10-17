@@ -5,7 +5,7 @@
         <div class="other-events-card__header__date">{{timeHeader}}</div>
         <div class="other-events-card__header__distance">{{distance}}</div>
       </div>
-      <div class="other-events-card__description-text lp-truncate">{{description}}</div>
+      <div class="other-events-card__description-text lp-truncate">{{blurbOrDescription}}</div>
       <div class="other-events-card__footer">
         <div v-if="event.participatingParents.length" class="other-events-card__footer__attendees">
           <AvatarImage v-for="participant of displayedParticipants"
