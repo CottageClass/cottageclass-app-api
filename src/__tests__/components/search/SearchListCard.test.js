@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils'
-import SearchListCard from '@/components/search/SearchListCard'
+import EventSearchListCard from '@/components/search/EventSearchListCard'
 
-describe('SearchListCard', () => {
+describe('EventSearchListCard', () => {
   const $store = {
     getters: {
       waveHasBeenSent: () => false,
@@ -13,7 +13,7 @@ describe('SearchListCard', () => {
     }
   }
   it('mounts with just user info', () => {
-    const wrapper = mount(SearchListCard, {
+    const wrapper = mount(EventSearchListCard, {
       mocks: { $store },
       stubs: ['router-link'],
       propsData: {
@@ -66,7 +66,7 @@ describe('SearchListCard', () => {
   })
 
   it('some alternative cases on the data', () => {
-    const wrapper = mount(SearchListCard, {
+    const wrapper = mount(EventSearchListCard, {
       mocks: { $store },
       stubs: ['router-link'],
       propsData: {
@@ -94,7 +94,7 @@ describe('SearchListCard', () => {
   })
 
   it('allows no center', () => {
-    const wrapper = mount(SearchListCard, {
+    const wrapper = mount(EventSearchListCard, {
       mocks: { $store: {
         getters: {
           currentUser: null,
