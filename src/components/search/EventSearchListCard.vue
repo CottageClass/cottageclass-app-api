@@ -31,17 +31,9 @@
       </div>
  
       </router-link>
-      <div class="footer__actions--mobile">
-        <a class="event-action__icon-button__star w-inline-block"
-           :class="isStarred?'active':''"
-           @click.stop="interestedClick('card')"></a>
-        <div class="other-events-card__footer-actions__more-wrapper">
-          <a class="event-action__icon-button__more w-inline-block"
-             @click.stop="overlayOpen=true"></a>
-        </div>
-      </div>
+      <div class='event-summary-card__actions-avatars'>
+      <div class='event-summary-card__actions'>
       <SearchListCardActions
-        v-if="!isPhone"
         :user="item.user"
         :event="item.event"
         @user-updated="$emit('user-updated', $event)"
@@ -50,34 +42,14 @@
         @going-click="goingClick"
         @cancel-click="cancelClick"
         @interested-click="interestedClick('card')"
-        @share-click="shareClick"
-        @contact-click="contactClick"
         :timePast="timePast"
         :showGoingButton="showGoingButton"
-        :showMeetButton="showMeetButton"
-        :showShareButton="showShareButton"
         :showInterestedButton="showInterestedButton"
         :showCancelButton="!doNotShowCancel && showCancelButton"
         :allowWaveUndo="true"/>
-      <SearchListCardActionsOverlay
-        v-if="showOverlay"
-        :user="item.user"
-        :event="item.event"
-        @user-updated="$emit('user-updated', $event)"
-        @event-updated="$emit('event-updated', $event)"
-        @event-deleted="$emit('event-deleted', id)"
-        @clickaway="overlayOpen=false"
-        @going-click="goingClick"
-        @cancel-click="cancelClick"
-        @interested-click="interestedClick('card')"
-        @share-click="shareClick"
-        @contact-click="contactClick"
-        :showGoingButton="showGoingButton"
-        :showMeetButton="showMeetButton"
-        :showShareButton="showShareButton"
-        :showInterestedButton="showInterestedButton"
-        :showCancelButton="!doNotShowCancel && showCancelButton"
-        :allowWaveUndo="true"/>
+        </div>
+        </div>
+
   </li>
 </template>
 
@@ -294,6 +266,22 @@ a {
   border-radius: 8px;
 }
 
+.event-summary-card__actions {
+  display: flex;
+  width: auto;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  flex: 0 0 auto;
+}
+
+.event-summary-card__actions-avatars {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+
 .place-name {
   font-weight: 700;
 }
@@ -472,20 +460,16 @@ a {
   overflow: hidden;
 }
 
+.event-action-button {
+  margin-right: 8px;
+}
+
 @media (max-width: 991px){
   .event-action-button:hover {
     background-image: linear-gradient(180deg, transparent, transparent);
   }
-
+  
   .event-action-button:active {
-    background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.03), rgba(0, 0, 0, 0.03));
-  }
-
-  .event-action-button--selected:hover {
-    background-image: linear-gradient(180deg, transparent, transparent);
-  }
-
-  .event-action-button--selected:active {
     background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.03), rgba(0, 0, 0, 0.03));
   }
 
@@ -532,7 +516,7 @@ a {
   .event-action__icon-button__star {
     min-height: 40px;
     min-width: 40px;
-    margin-right: 0;
+    margin-right: 8px;
   }
 
   .event-action__icon-button__star:hover {
@@ -598,10 +582,6 @@ a {
   .badge-verified {
     left: 6px;
     right: 6px;
-  }
-
-  .event-action-button {
-    width: 100%;
   }
 
   .event-action-button--selected {
