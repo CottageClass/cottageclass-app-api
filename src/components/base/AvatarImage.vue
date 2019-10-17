@@ -21,11 +21,11 @@ export default {
       return parseInt(this.imageSize)
     },
     url: function () {
-      if (this.event){
-        if (this.event.images.length > 0){
+      if (this.event) {
+        if (this.event.images.length > 0) {
           return avatarUrl(this.event.images[0], this.physicalSize)
-          }
-        } 
+        }
+      }
       if (this.person) {
         if (this.person.avatar) {
           return avatarUrl(this.person.avatar, this.physicalSize)
