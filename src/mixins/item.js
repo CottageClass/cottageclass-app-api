@@ -148,6 +148,13 @@ export default {
       }
       return 'contact for availability'
     },
+
+    eventTimeHeader () {
+      if (this.event) {
+        return moment(this.event.startsAt).format('ddd, MMM D') + ' at ' + moment(this.event.startsAt).format('h:mm a')
+      }
+    },
+
     ageString () {
       return (i) => {
         const ageInMonths = this.user.childAgesInMonths[i]

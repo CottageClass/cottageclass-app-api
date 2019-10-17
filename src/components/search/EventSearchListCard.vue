@@ -7,7 +7,7 @@
       <div class="header">
         <div class="header__date"
              :class="{'time-past': timePast}" >
-          {{timeHeader}}
+          {{eventTimeHeader}}
         </div>
         <div v-if="distance && !isCurrentUser" class="header__distance">{{distance}}</div>
       </div>
