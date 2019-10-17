@@ -19,7 +19,7 @@
 
       <div class="event-summary-card__info">
         <div class="event-summary-card__text">
-          <div class="event-summary-card__loca-desc"><span class="place-name">{{playdateLocationNameWithPeriod}}</span>{{description}}</div>
+          <div class="event-summary-card__loca-desc"><span class="place-name">{{playdateLocationNameListItem}}</span>{{description}}</div>
         </div>
         <div class="event-summary-card__image">
           <AvatarImage
@@ -41,12 +41,10 @@
           @event-updated="$emit('event-updated', $event)"
           @event-deleted="$emit('event-deleted', id)"
           @going-click="goingClick"
-          @cancel-click="cancelClick"
           @interested-click="interestedClick('card')"
           :timePast="timePast"
           :showGoingButton="showGoingButton"
           :showInterestedButton="showInterestedButton"
-          :showCancelButton="!doNotShowCancel && showCancelButton"
           :allowWaveUndo="true"/>
       </div>
     </div>
@@ -64,7 +62,6 @@ import { item, screen } from '@/mixins'
 export default {
   name: 'EventSearchListCard',
   props: {
-    doNotShowCancel: { default: false },
     item: { required: true },
     distanceCenter: {}
   },

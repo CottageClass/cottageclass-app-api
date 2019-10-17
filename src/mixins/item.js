@@ -213,11 +213,11 @@ export default {
         return `The playdate will be hosted at ${this.event.user.firstName}'s home. `
       }
     },
-    playdateLocationNameWithPeriod () {
+    playdateLocationNameListItem () {
       if (this.playdateLocationName && this.place.public) {
         return `${this.event.place.name}. `
       } else {
-        return this.playdateLocationName
+        return ''
       }
     },
     profileBlurb () {
