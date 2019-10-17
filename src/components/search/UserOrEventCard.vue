@@ -26,7 +26,7 @@ export default {
   components: { EventSearchListCard, UserSearchListCard },
   computed: {
     eventView: function () {
-      if (this.itemType === 'event') { return true } else if (this.itemType === 'all') { return false }
+      if (this.itemType === 'event') { return true } else { return false }
     }
   }
 }
