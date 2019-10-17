@@ -24,7 +24,7 @@
         <div class="event-summary-card__image">
           <AvatarImage
             className="photo"
-            :person="user"
+            :event="event"
             imageSize="85"
           />
         </div>
