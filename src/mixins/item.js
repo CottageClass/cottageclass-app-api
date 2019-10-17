@@ -203,7 +203,7 @@ export default {
       if (this.place.public) {
         return this.event.place.name
       } else {
-        return `The playdate will be hosted at ${this.event.user.firstName}'s home.`
+        return `The playdate will be hosted at ${this.event.user.firstName}'s home. `
       }
     },
     playdateLocationNameWithPeriod () {
