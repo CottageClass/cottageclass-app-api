@@ -20,14 +20,12 @@ export default {
   components: { Question },
   data () {
     return {
-      dateSelected: '',
+      dateSelected: this.value.selected || '',
       errorMesg: 'Please choose a day for your activity.'
     }
   },
   mounted: function () {
-    this.$emit('input', {
-      err: this.errorMesg
-    })
+    this.emitDate()
   },
   computed: {
     err: function () {
