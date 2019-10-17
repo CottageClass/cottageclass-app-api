@@ -25,6 +25,7 @@
           <AvatarImage
             className="photo"
             :event="event"
+            :person="user"
             imageSize="85"
           />
         </div>
