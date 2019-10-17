@@ -63,7 +63,7 @@ export default {
       repeatCount: { err: null },
       date: { err: null },
       time: { err: null },
-      ageRange: { minimum: 0, maximum: 18 }
+      ageRange: {}
     }
   },
   computed: {

@@ -35,7 +35,7 @@ export default {
   data () {
     return {
       name: this.value.name,
-      images: [],
+      images: this.value.images || [],
       description: this.value.description,
       cloudinaryUploadWidget: null,
       defaultSubtitle: "Describe a playdate you'd like to host in your home or public space. It can be a one-time event (like a trip to the zoo) or something you can offer on a regular basis, like arts & crafts, indoor play, or a playground hangout!"
