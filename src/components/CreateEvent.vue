@@ -10,24 +10,24 @@
     <EventPlace
       v-else-if="stepName==='place'"
       v-model="place" />
-    <EventDescription
-      v-else-if="stepName==='description'"
-      v-model="description" />
-    <AgeRange
-      v-else-if="stepName==='age-range'"
-      v-model="ageRange"
-      :childAgesInMonths="currentUser.childAgesInMonths"
-    />
     <EventDatePicker
       v-else-if="stepName==='date'"
       v-model="date" />
     <EventTime
       v-else-if="stepName==='time'"
       v-model="time" />
+    <AgeRange
+      v-else-if="stepName==='age-range'"
+      v-model="ageRange"
+      :childAgesInMonths="currentUser.childAgesInMonths"
+    />
     <RepeatCount
       v-else-if="stepName==='repeat-count'"
       v-model="repeatCount"
     />
+    <EventDescription
+      v-else-if="stepName==='description'"
+      v-model="description" />
   </div>
 </template>
 
