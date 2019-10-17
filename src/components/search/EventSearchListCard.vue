@@ -11,17 +11,17 @@
         </div>
         <div v-if="distance && !isCurrentUser" class="header__distance">{{distance}}</div>
       </div>
-        <div class="event-summary-card__title line-clamp--1">{{name}}</div>
+      <div class="event-summary-card__title line-clamp--1">{{name}}</div>
     </router-link>
-      <router-link
-        :to="link"
-        @click.native="$event.stopImmediatePropagation()">
+    <router-link
+      :to="link"
+      @click.native="$event.stopImmediatePropagation()">
 
       <div class="event-summary-card__info">
         <div class="event-summary-card__text">
-         <div class="event-summary-card__loca-desc"><span class="place-name">{{playdateLocationNameWithPeriod}}</span>{{description}}</div>
+          <div class="event-summary-card__loca-desc"><span class="place-name">{{playdateLocationNameWithPeriod}}</span>{{description}}</div>
         </div>
-        <div class="event-summary-card__image">            
+        <div class="event-summary-card__image">
           <AvatarImage
             className="photo"
             :person="user"
@@ -29,26 +29,26 @@
           />
         </div>
       </div>
- 
-      </router-link>
-      <div class='event-summary-card__actions-avatars'>
+
+    </router-link>
+    <div class='event-summary-card__actions-avatars'>
       <div class='event-summary-card__actions'>
-      <SearchListCardActions
-        :user="item.user"
-        :event="item.event"
-        @user-updated="$emit('user-updated', $event)"
-        @event-updated="$emit('event-updated', $event)"
-        @event-deleted="$emit('event-deleted', id)"
-        @going-click="goingClick"
-        @cancel-click="cancelClick"
-        @interested-click="interestedClick('card')"
-        :timePast="timePast"
-        :showGoingButton="showGoingButton"
-        :showInterestedButton="showInterestedButton"
-        :showCancelButton="!doNotShowCancel && showCancelButton"
-        :allowWaveUndo="true"/>
-        </div>
-        </div>
+        <SearchListCardActions
+          :user="item.user"
+          :event="item.event"
+          @user-updated="$emit('user-updated', $event)"
+          @event-updated="$emit('event-updated', $event)"
+          @event-deleted="$emit('event-deleted', id)"
+          @going-click="goingClick"
+          @cancel-click="cancelClick"
+          @interested-click="interestedClick('card')"
+          :timePast="timePast"
+          :showGoingButton="showGoingButton"
+          :showInterestedButton="showInterestedButton"
+          :showCancelButton="!doNotShowCancel && showCancelButton"
+          :allowWaveUndo="true"/>
+      </div>
+    </div>
 
   </li>
 </template>
@@ -57,7 +57,6 @@
 import AvatarImage from '@/components/base/AvatarImage'
 import HouseholdImages from '@/components/search/HouseholdImages'
 import SearchListCardActions from '@/components/search/SearchListCardActions'
-import SearchListCardActionsOverlay from '@/components/search/SearchListCardActionsOverlay'
 
 // most of the functionality is in the itemActions mixin
 import { item, screen } from '@/mixins'
@@ -70,7 +69,7 @@ export default {
     distanceCenter: {}
   },
   mixins: [item, screen],
-  components: { AvatarImage, HouseholdImages, SearchListCardActions, SearchListCardActionsOverlay },
+  components: { AvatarImage, SearchListCardActions },
   computed: {
     user () {
       return this.item && this.item.user
@@ -281,7 +280,6 @@ a {
   align-items: center;
 }
 
-
 .place-name {
   font-weight: 700;
 }
@@ -468,7 +466,7 @@ a {
   .event-action-button:hover {
     background-image: linear-gradient(180deg, transparent, transparent);
   }
-  
+
   .event-action-button:active {
     background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.03), rgba(0, 0, 0, 0.03));
   }
