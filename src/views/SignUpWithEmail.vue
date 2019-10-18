@@ -70,7 +70,6 @@
         </div>
       </div>
     </div>
-    <Footer />
   </span>
 </template>
 
@@ -78,7 +77,6 @@
 import { providerAuthentication, alerts } from '@/mixins'
 import { register, signIn } from '@/utils/api'
 import MainNav from '@/components/MainNav.vue'
-import Footer from '@/components/Footer.vue'
 import StyleWrapper from '@/components/FTE/StyleWrapper.vue'
 import FacebookButton from '@/components/base/FacebookButton'
 import ErrorMessage from '@/components/base/ErrorMessage.vue'
@@ -86,7 +84,7 @@ import LoadingSpinner from '@/components/LoadingSpinner'
 
 export default {
   name: 'SignUpWithEmail',
-  components: { ErrorMessage, MainNav, Footer, StyleWrapper, FacebookButton, LoadingSpinner },
+  components: { ErrorMessage, MainNav, StyleWrapper, FacebookButton, LoadingSpinner },
   mixins: [providerAuthentication, alerts],
   data: function () {
     return {

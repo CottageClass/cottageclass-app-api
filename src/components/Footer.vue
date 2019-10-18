@@ -1,5 +1,5 @@
 <template>
-  <div v-bind:class="{ hideOnMobile: hideOnMobile }">
+  <div class="hideOnMobile">
     <div class="footer">
       <div class="divider-2px"></div>
       <div class="footer-container w-container">
@@ -31,8 +31,7 @@
 
 <script>
 export default {
-  name: 'Footer',
-  props: [ 'hideOnMobile' ]
+  name: 'Footer'
 }
 </script>
 

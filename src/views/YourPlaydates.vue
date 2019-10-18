@@ -47,9 +47,7 @@
                               :options="availabilityEmptyOptions"/>
       </ListSection>
     </div>
-    <Footer
-      :hideOnMobile = true
-    />
+    <Footer />
   </div>
 </template>
 

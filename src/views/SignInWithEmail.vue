@@ -61,7 +61,6 @@
         </div>
       </div>
     </div>
-    <Footer />
   </span>
 </template>
 
@@ -69,7 +68,6 @@
 import ErrorMessage from '@/components/base/ErrorMessage.vue'
 import StyleWrapper from '@/components/FTE/StyleWrapper.vue'
 import FacebookButton from '@/components/base/FacebookButton'
-import Footer from '@/components/Footer.vue'
 import MainNav from '@/components/MainNav.vue'
 import { providerAuthentication } from '@/mixins'
 import { mapGetters } from 'vuex'
@@ -77,7 +75,7 @@ import { signIn } from '@/utils/api'
 
 export default {
   name: 'SignInWithEmail',
-  components: { ErrorMessage, StyleWrapper, MainNav, Footer, FacebookButton },
+  components: { ErrorMessage, StyleWrapper, MainNav, FacebookButton },
   mixins: [ providerAuthentication ],
   data: function () {
     return {
