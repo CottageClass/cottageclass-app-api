@@ -175,7 +175,7 @@ import houseRulesImage from '@/assets/house-rules.svg'
 import petsImage from '@/assets/pets.svg'
 
 import { mapGetters } from 'vuex'
-import { fetchUpcomingEvents, fetchEvent } from '@/utils/api'
+import { fetchEventsByPlace, fetchEvent } from '@/utils/api'
 import { item, maps, rsvp } from '@/mixins'
 
 export default {
@@ -265,7 +265,7 @@ export default {
         this.logError(e)
         this.$router.push({ name: 'NotFound' })
       }
-      this.otherEvents = (await fetchUpcomingEvents(this.event.user.id)).filter(e => (e.id !== this.$route.params.id))
+      this.otherEvents = (await fetchEventsByPlace(this.event.place.id)).filter(e => (e.id !== this.$route.params.id))
       this.$nextTick(async function () {
         await this.createMap(this.$refs.map, {
           zoom: 13,

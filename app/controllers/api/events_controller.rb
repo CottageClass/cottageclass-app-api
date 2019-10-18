@@ -44,8 +44,7 @@ class API::EventsController < API::BaseController
   end
 
   def place
-    @place = Event.eager.find_by id: params[:id]
-    events = Event.where(place: @place)
+    events = Event.joins(:event_series).where('event_series.place_id = ?', params[:place_id])
     events_index events: events.joins(:event_series),
                  skope: params[:skope],
                  page: params[:page],
