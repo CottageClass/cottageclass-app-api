@@ -118,12 +118,7 @@ class API::EventsController < API::BaseController
       events = events.where('event_series.place_id IN (?)', place_ids)
     end
 
-    if %w[chronological].include?(sort)
-      events = events.reorder starts_at: :asc
-    elsif miles.positive?
-      ##### WARNING THIS WONT WORK
-      # events = events.reorder 'distance ASC'
-    end
+    events = events.reorder starts_at: :asc
 
     links = {}
     meta = { events_count: events.count(:all) }
