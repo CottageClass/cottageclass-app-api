@@ -99,7 +99,10 @@ class API::EventsController < API::BaseController
       participating_subquery = ParticipantChild.joins(:child).where('children.birthday' => time_range)
 
       # all eventSeries hosted by parents of children in range
-      event_series_belonging_to_users_that_have_children_in_the_age_range = EventSeries.joins(user: :children).where(users: { children: { 'birthday' => time_range } })
+      event_series_belonging_to_users_that_have_children_in_the_age_range = EventSeries
+        .select(:id).distinct
+        .joins(user: :children)
+        .where(users: { children: { 'birthday' => time_range } })
 
       events = events.joins("LEFT JOIN (#{participating_subquery.to_sql}) sub ON sub.participable_id = events.id")
         .joins("LEFT JOIN (#{event_series_belonging_to_users_that_have_children_in_the_age_range.to_sql}) hsub ON hsub.id = events.event_series_id")
