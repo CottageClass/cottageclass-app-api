@@ -144,7 +144,8 @@
         <div v-if="otherEvents" class="event-detail__column-right w-col w-col-4 w-col-stack">
           <ul class="other-events__list">
             <li class="other-events__title-bar">
-              <div class="other-events__title-text truncate">{{user.firstName}}'s offers</div>
+              <div class="other-events__title-text truncate"
+                   v-html="otherEventsColumnTitle"></div>
             </li>
             <OtherEvent v-for="otherEvent of otherEvents"
                         :key="otherEvent.id"
@@ -195,6 +196,13 @@ export default {
     }
   },
   computed: {
+    otherEventsColumnTitle () {
+      if (this.event.place.public) {
+        return `Other events at ${this.event.place.name}`
+      } else {
+        return `Other events at ${this.user.firstName}'s home`
+      }
+    },
     mapCenter () {
       return {
         lat: this.place.latitude || this.place.fuzzyLatitude,
