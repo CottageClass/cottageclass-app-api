@@ -73,6 +73,16 @@ Rails.application.routes.draw do
                                                                               as: :participated_events
       end
     end
+    resources :place, only: %i[] do
+      resource :events, only: %i[] do
+        collection do
+          get '(/:skope)(/page/:page/page_size/:page_size)', to: 'events#place',
+                                                             skope: /upcoming|past/i,
+                                                             defaults: { skope: 'all' },
+                                                             as: :place_events
+        end
+      end
+    end
   end
   get '/api/feed//miles/:miles/latitude/:latitude/longitude/:longitude(/min_age/:min_age)(/max_age/:max_age)(/page/:page/page_size/:page_size)',
       to: 'api/search_list_items#index',
