@@ -1,19 +1,11 @@
 
 <template>
-  <div v-if="eventView" >
-    <EventSearchListCard
+    <component
+      v-bind:is="itemCardType"
       v-bind="$props"
       @user-updated="$emit('user-updated', $event)"
       @event-deleted="$emit('event-deleted', id)"
       @event-updated="$emit('event-updated', $event)" />
-  </div>
-  <div v-else>
-    <UserSearchListCard
-      v-bind="$props"
-      @user-updated="$emit('user-updated', $event)"
-      @event-deleted="$emit('event-deleted', id)"
-      @event-updated="$emit('event-updated', $event)" />
-  </div>
 </template>
 
 <script>
@@ -25,8 +17,8 @@ export default {
   props: ['itemType', 'item', 'mapArea'],
   components: { EventSearchListCard, UserSearchListCard },
   computed: {
-    eventView: function () {
-      if (this.itemType === 'event') { return true } else { return false }
+    itemCardType: function () {
+      if (this.itemType === 'event') { return EventSearchListCard } else { return UserSearchListCard }
     }
   }
 }
