@@ -17,6 +17,28 @@ RSpec.resource 'Event' do
       end
     end
 
+    get '/api/place/:place_id/events/:skope/page/:page/page_size/:page_size', format: :json do
+      let(:place_idj) { place.id }
+      let(:skope) { nil }
+      let(:sort) { 'chronological' }
+      [nil, 'past', 'upcoming'].each do |skope|
+        name = skope || 'all'
+        context name do
+          let(:skope) { skope }
+
+          example format('%s:success', name) do
+            explanation 'returns events at a specific place with place_id'\
+            ' :skope is optional '\
+            ' :page and :page_size are optional parameters.'\
+            ' If :page is omitted, the endpoint returns all records for the scope. Default value for :page_size is 10.'\
+            ' Place is not optional'
+            do_request
+            expect(response_status).to eq(200)
+          end
+        end
+      end
+    end
+
     get '/api/events/:skope/miles/:miles/latitude/:latitude/longitude/:longitude/sort/:sort', format: :json do
       let(:skope) { nil }
       let(:miles) { 10 }
@@ -30,9 +52,7 @@ RSpec.resource 'Event' do
           let(:skope) { skope }
 
           example format('%s:success', name) do
-            explanation ':page and :page_size are optional parameters.'\
-            ' If :page is omitted, the endpoint returns all records for the scope. Default value for :page_size is 10.'\
-            ' :miles, :latitude, :longitude and :sort are optional parameters.'\
+            explanation ' :miles, :latitude, :longitude and :sort are optional parameters.'\
             ' If :miles is available, but :latitude or :longitude are not, tries using authenticated user\'s location.'\
             ' If :sort is chronological, results are sorted chronologically. Otherwise, results are sorted by distance.'
             do_request

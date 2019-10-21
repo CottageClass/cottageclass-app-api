@@ -43,6 +43,15 @@ class API::EventsController < API::BaseController
                  path: proc { |**parameters| participated_events_api_user_path parameters }
   end
 
+  def place
+    events = Event.joins(:event_series).where('event_series.place_id = ?', params[:id])
+    events_index events: events.joins(:event_series),
+                 skope: params[:skope],
+                 page: params[:page],
+                 page_size: params[:page_size],
+                 path: proc { |**parameters| place_events_api_place_events_path parameters }
+  end
+
   def show
     @event = Event.eager.find_by id: params[:id]
     serializer = EventSerializer.new @event, include: %i[ participants
@@ -73,7 +82,7 @@ class API::EventsController < API::BaseController
 
   private
 
-  def events_index(events:, skope:, miles:, latitude:, longitude:, min_age: nil, max_age: nil, sort: nil, page:, page_size:, path:)
+  def events_index(events:, skope:, miles: nil, latitude: nil, longitude: nil, min_age: nil, max_age: nil, sort: nil, page:, page_size:, path:)
     skope ||= 'all'
     events = events.send(skope).includes user: %i[children]
 
@@ -90,7 +99,10 @@ class API::EventsController < API::BaseController
       participating_subquery = ParticipantChild.joins(:child).where('children.birthday' => time_range)
 
       # all eventSeries hosted by parents of children in range
-      event_series_belonging_to_users_that_have_children_in_the_age_range = EventSeries.joins(user: :children).where(users: { children: { 'birthday' => time_range } })
+      event_series_belonging_to_users_that_have_children_in_the_age_range = EventSeries
+        .select(:id).distinct
+        .joins(user: :children)
+        .where(users: { children: { 'birthday' => time_range } })
 
       events = events.joins("LEFT JOIN (#{participating_subquery.to_sql}) sub ON sub.participable_id = events.id")
         .joins("LEFT JOIN (#{event_series_belonging_to_users_that_have_children_in_the_age_range.to_sql}) hsub ON hsub.id = events.event_series_id")
@@ -108,12 +120,7 @@ class API::EventsController < API::BaseController
       events = events.where('event_series.place_id IN (?)', place_ids)
     end
 
-    if %w[chronological].include?(sort)
-      events = events.reorder starts_at: :asc
-    elsif miles.positive?
-      ##### WARNING THIS WONT WORK
-      # events = events.reorder 'distance ASC'
-    end
+    events = events.reorder starts_at: :asc
 
     links = {}
     meta = { events_count: events.count(:all) }
@@ -159,6 +166,11 @@ class API::EventsController < API::BaseController
   end
 
   def safe_params
-    params.require(:event).permit :name, :starts_at, :ends_at, :maximum_children, :child_age_minimum, :child_age_maximum
+    params.require(:event).permit :name,
+                                  :starts_at,
+                                  :ends_at,
+                                  :maximum_children,
+                                  :child_age_minimum,
+                                  :child_age_maximum
   end
 end

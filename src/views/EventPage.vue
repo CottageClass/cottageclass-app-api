@@ -144,7 +144,8 @@
         <div v-if="otherEvents" class="event-detail__column-right w-col w-col-4 w-col-stack">
           <ul class="other-events__list">
             <li class="other-events__title-bar">
-              <div class="other-events__title-text truncate">{{user.firstName}}'s offers</div>
+              <div class="other-events__title-text truncate"
+                   v-html="otherEventsColumnTitle"></div>
             </li>
             <OtherEvent v-for="otherEvent of otherEvents"
                         :key="otherEvent.id"
@@ -175,7 +176,7 @@ import houseRulesImage from '@/assets/house-rules.svg'
 import petsImage from '@/assets/pets.svg'
 
 import { mapGetters } from 'vuex'
-import { fetchUpcomingEvents, fetchEvent } from '@/utils/api'
+import { fetchEventsByPlace, fetchEvent } from '@/utils/api'
 import { item, maps, rsvp } from '@/mixins'
 
 export default {
@@ -195,6 +196,13 @@ export default {
     }
   },
   computed: {
+    otherEventsColumnTitle () {
+      if (this.event.place.public) {
+        return `Other events at ${this.event.place.name}`
+      } else {
+        return `Other events at ${this.user.firstName}'s home`
+      }
+    },
     mapCenter () {
       return {
         lat: this.place.latitude || this.place.fuzzyLatitude,
@@ -258,7 +266,7 @@ export default {
         this.logError(e)
         this.$router.push({ name: 'NotFound' })
       }
-      this.otherEvents = (await fetchUpcomingEvents(this.event.user.id)).filter(e => (e.id !== this.$route.params.id))
+      this.otherEvents = (await fetchEventsByPlace(this.event.place.id)).filter(e => (e.id !== this.$route.params.id))
       this.$nextTick(async function () {
         await this.createMap(this.$refs.map, {
           zoom: 13,

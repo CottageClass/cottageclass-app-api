@@ -21,8 +21,8 @@ export default {
   components: { Question, Dropdown },
   data () {
     return {
-      minimum: this.minChildAge(),
-      maximum: this.maxChildAge()
+      minimum: this.value.minimum || this.minChildAge(),
+      maximum: this.value.maximum || this.maxChildAge()
     }
   },
   computed: {
@@ -30,7 +30,7 @@ export default {
       return range(0, this.maximum + 1)
     },
     maxChoices () {
-      return range(this.minimum, 18)
+      return range(this.minimum, 19)
     },
     err: function () {
       if (parseInt(this.value.minimum) > parseInt(this.value.maximum)) {

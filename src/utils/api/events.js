@@ -35,6 +35,21 @@ export const fetchEvents = async ({ miles, lat, lng, minAge, maxAge, pageSize = 
   })
 }
 
+export const fetchEventsByPlace = async (placeId) => {
+  placeId = placeId.toString()
+  try {
+    const res = await axios.get(`/api/place/${placeId}/events/upcoming`)
+    if (res) {
+      return createEvents(normalize(res.data))
+    } else {
+      throw Error('failed to fetch events')
+    }
+  } catch (e) {
+    logger.logError(e)
+    throw e
+  }
+}
+
 export const fetchEvent = async (id) => {
   id = id.toString()
   try {

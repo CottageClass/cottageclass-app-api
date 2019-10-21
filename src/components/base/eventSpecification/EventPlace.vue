@@ -15,7 +15,7 @@
         id="map"
         types=""
         classname="w-input location-text-field"
-        placeholder="Enter an address or place."
+        :placeholder=addressPlaceholder
         v-on:placechanged="getAddressData"
       >
       </vue-google-autocomplete>
@@ -38,8 +38,9 @@ export default {
     return {
       choices: ['home', 'public'],
       labels: [['home', 'At my home'], ['public', 'In a public place']],
-      homeOrPublic: 'home',
-      googlePlaceId: null,
+      homeOrPublic: this.value.public ? 'public' : 'home',
+      googlePlaceId: this.value.googleId,
+      formattedAddress: this.value.formattedAddress,
       defaultSubtitle: "Describe a playdate you'd like to host in your home or public space. It can be a one-time event (like a trip to the zoo) or something you can offer on a regular basis, like arts & crafts, indoor play, or a playground hangout!",
       googleMapsIsLoaded: false
     }
@@ -49,16 +50,23 @@ export default {
     GoogleMapsLoader.load(function () {
       that.googleMapsIsLoaded = true
     })
+    this.emitPlaceId()
   },
   methods: {
     getAddressData: function (addressData, placeResultData, id) {
       this.googlePlaceId = placeResultData.place_id
+      this.formattedAddress = placeResultData.formatted_address
+
       this.emitPlaceId()
     },
     emitPlaceId: function () {
       const err = this.errorMessage
       const payload = this.isPublic ? {
-        err, googleId: this.googlePlaceId, public: this.isPublic, creatorId: this.currentUser.id
+        err,
+        googleId: this.googlePlaceId,
+        public: this.isPublic,
+        creatorId: this.currentUser.id,
+        formattedAddress: this.isPublic ? this.formattedAddress : null
       } : this.currentUser.place
       this.$emit('input', payload)
     }
@@ -69,6 +77,13 @@ export default {
     }
   },
   computed: {
+    addressPlaceholder () {
+      if (this.isPublic) {
+        return this.value.formattedAddress || 'Enter an address or place.'
+      } else {
+        return 'Enter an address or place.'
+      }
+    },
     isPublic () {
       return this.homeOrPublic === 'public'
     },
@@ -82,9 +97,6 @@ export default {
       }
     },
     ...mapGetters(['currentUser'])
-  },
-  created () {
-    this.emitPlaceId()
   }
 }
 </script>

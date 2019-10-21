@@ -38,8 +38,8 @@ export default {
   components: { Question },
   data () {
     return {
-      startTime: null,
-      endTime: null
+      startTime: this.value.start ? moment(this.value.start, 'HH:mm') : null,
+      endTime: this.value.end ? moment(this.value.end, 'HH:mm') : null
     }
   },
   mounted: function () {
