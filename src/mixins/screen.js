@@ -1,4 +1,12 @@
 export default {
+  data () {
+    return {
+      size: {
+        innerWidth: window.innerWidth,
+        innerHeight: window.innerHeight
+      }
+    }
+  },
   computed: {
     // https://stackoverflow.com/questions/19689715/what-is-the-best-way-to-detect-retina-support-on-a-device-using-javascript
     isRetina () {
@@ -15,14 +23,6 @@ export default {
     },
     isMobile () {
       return this.isPhone || this.isTablet
-    }
-  },
-  data () {
-    return {
-      size: {
-        innerWidth: window.innerWidth,
-        innerHeight: window.innerHeight
-      }
     }
   },
   methods: {
