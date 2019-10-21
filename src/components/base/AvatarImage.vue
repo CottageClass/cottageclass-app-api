@@ -22,7 +22,7 @@ export default {
     },
     url: function () {
       if (this.event && this.event.images.length > 0) {
-          return avatarUrl(this.event.images[0], this.physicalSize)
+        return avatarUrl(this.event.images[0], this.physicalSize)
       }
       if (this.person) {
         if (this.person.avatar) {

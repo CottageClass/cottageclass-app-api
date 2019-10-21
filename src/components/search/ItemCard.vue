@@ -1,11 +1,11 @@
 
 <template>
-    <component
-      v-bind:is="itemCardType"
-      v-bind="$props"
-      @user-updated="$emit('user-updated', $event)"
-      @event-deleted="$emit('event-deleted', id)"
-      @event-updated="$emit('event-updated', $event)" />
+  <component
+    v-bind:is="itemCardType"
+    v-bind="$props"
+    @user-updated="$emit('user-updated', $event)"
+    @event-deleted="$emit('event-deleted', id)"
+    @event-updated="$emit('event-updated', $event)" />
 </template>
 
 <script>
