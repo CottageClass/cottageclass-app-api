@@ -184,7 +184,7 @@ export default {
     userName () {
       return this.userFirstName + ' ' + this.userLastInitial + '.'
     },
-    blurbOrDescription () {
+    mainTitle () {
       if (this.event) {
         if (this.event.description) {
           const regex = /\.*$/
