@@ -2,7 +2,7 @@
   <div class="list-wrapper">
     <div class="event-list">
       <div v-for="item in (items || [])">
-        <UserOrEventCard
+        <ItemCard
           :item="item"
           :distanceCenter="mapArea.center"
           :key="item.id"
@@ -30,12 +30,12 @@
 <script>
 import TrailblazerCard from '@/components/TrailblazerCard'
 import SearchListFooter from '@/components/search/SearchListFooter'
-import UserOrEventCard from '@/components/search/UserOrEventCard'
+import ItemCard from '@/components/search/ItemCard'
 import { mapGetters } from 'vuex'
 
 export default {
   name: 'SearchResultList',
-  components: { TrailblazerCard, SearchListFooter, UserOrEventCard },
+  components: { TrailblazerCard, SearchListFooter, ItemCard },
   props: {
     awaiting: {
       type: Boolean,
