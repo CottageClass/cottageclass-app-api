@@ -28,7 +28,7 @@
             <div v-if="distance" class="user-action-card__header__distance">{{distance}}</div>
           </div>
           <div class="user-action-card__description-text"
-               v-html="this.description" />
+               v-html="this.mainTitle" />
           <div class="event-summary-card__location">
             <div class="location-card__text-group">
               <div class="location-card__place-name-text line-clamp--1"
@@ -215,13 +215,6 @@ export default {
       return {
         lat: place.latitude || place.fuzzyLatitude,
         lng: place.longitude || place.fuzzyLongitude
-      }
-    },
-    playdateLocationName () {
-      if (this.place.public) {
-        return this.event.place.name
-      } else {
-        return `The playdate will be hosted at ${this.event.user.firstName}'s home.`
       }
     },
     playdateAddress () {

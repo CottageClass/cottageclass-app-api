@@ -24,6 +24,7 @@
           <div class="list-container w-container">
             <FilterSelectorBank />
             <SearchResultList
+              :itemType="itemType"
               :awaiting="awaiting"
               :showFetchMoreButton="showFetchMoreButton"
               class="list"
@@ -66,9 +67,7 @@ import { messaging, alerts, screen } from '@/mixins'
 export default {
   name: 'Search',
   mixins: [messaging, alerts, screen],
-  props: {
-    itemType: { default: 'Events' }
-  },
+  props: ['itemType'],
   components: {
     GetTheMost,
     SearchResultList,

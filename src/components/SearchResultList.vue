@@ -2,10 +2,11 @@
   <div class="list-wrapper">
     <div class="event-list">
       <div v-for="item in (items || [])">
-        <SearchListCard
+        <ItemCard
           :item="item"
           :distanceCenter="mapArea.center"
           :key="item.id"
+          :itemType="itemType"
           @user-updated="$emit('user-updated', $event)"
           @event-deleted="$emit('event-deleted', id)"
           @event-updated="$emit('event-updated', $event)"/>
@@ -28,14 +29,13 @@
 
 <script>
 import TrailblazerCard from '@/components/TrailblazerCard'
-import SearchListCard from '@/components/search/SearchListCard'
 import SearchListFooter from '@/components/search/SearchListFooter'
+import ItemCard from '@/components/search/ItemCard'
 import { mapGetters } from 'vuex'
 
 export default {
   name: 'SearchResultList',
-  components: { SearchListCard, TrailblazerCard, SearchListFooter },
-
+  components: { TrailblazerCard, SearchListFooter, ItemCard },
   props: {
     awaiting: {
       type: Boolean,
@@ -54,6 +54,10 @@ export default {
     showHeader: {
       type: Boolean,
       default: true
+    },
+    itemType: {
+      type: String,
+      required: true
     }
   },
   computed: {

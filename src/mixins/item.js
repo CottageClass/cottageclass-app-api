@@ -148,6 +148,13 @@ export default {
       }
       return 'contact for availability'
     },
+
+    eventTimeHeader () {
+      if (this.event) {
+        return moment(this.event.startsAt).format('ddd, MMM D') + ' at ' + moment(this.event.startsAt).format('h:mm a')
+      }
+    },
+
     ageString () {
       return (i) => {
         const ageInMonths = this.user.childAgesInMonths[i]
@@ -177,7 +184,7 @@ export default {
     userName () {
       return this.userFirstName + ' ' + this.userLastInitial + '.'
     },
-    description () {
+    mainTitle () {
       if (this.event) {
         if (this.event.description) {
           const regex = /\.*$/
@@ -188,6 +195,30 @@ export default {
         }
       }
       return this.user.profileBlurb
+    },
+    name () {
+      if (this.event) {
+        return this.event.name
+      }
+    },
+    description () {
+      if (this.event.description) {
+        return this.event.description
+      }
+    },
+    playdateLocationName () {
+      if (this.place.public) {
+        return this.event.place.name
+      } else {
+        return `The playdate will be hosted at ${this.event.user.firstName}'s home. `
+      }
+    },
+    playdateLocationNameListItem () {
+      if (this.playdateLocationName && this.place.public) {
+        return `${this.event.place.name}. `
+      } else {
+        return ''
+      }
     },
     profileBlurb () {
       return this.user.profileBlurb

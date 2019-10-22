@@ -7,113 +7,66 @@
       <div class="header">
         <div class="header__date"
              :class="{'time-past': timePast}" >
-          {{timeHeader}}
+          {{eventTimeHeader}}
         </div>
         <div v-if="distance && !isCurrentUser" class="header__distance">{{distance}}</div>
       </div>
-      <div class="description">
-        <div class="description-text line-clamp--2">{{description}}</div>
-      </div>
+      <div class="event-summary-card__title line-clamp--1">{{name}}</div>
     </router-link>
-    <div class="footer">
-      <router-link
-        :to="link"
-        @click.native="$event.stopImmediatePropagation()">
-        <div class="footer__user-summary">
-          <div class="photo-wrapper">
-            <AvatarImage
-              className="photo"
-              :person="user"
-              imageSize="85"
-            />
-            <div class="badge-verified" v-if="user.facebookUid">
-              <div class="unicode-character">✓</div>
-              <div class="badge-text">Verified</div>
-            </div>
-          </div>
-          <div class="user-info--container">
-            <div class="user-info_list">
-              <div class="user-info__name">{{userName}}</div>
-              <div v-if="occupation"
-                   class="user-info__occupation lp-truncate">
-                {{occupation}}<br />
-              </div>
-              <div class="user-info__kids lp-truncate">{{kidsAges}}</div>
-              <div v-if="neighborhood" class="user-info__kids lp-truncate">{{neighborhood}}</div>
-              <HouseholdImages :user="user" />
-            </div>
-          </div>
+    <router-link
+      :to="link"
+      @click.native="$event.stopImmediatePropagation()">
+
+      <div class="event-summary-card__info">
+        <div class="event-summary-card__text">
+          <div class="event-summary-card__loca-desc"><span class="place-name">{{playdateLocationNameListItem}}</span>{{description}}</div>
         </div>
-      </router-link>
-      <div class="footer__actions--mobile">
-        <a class="event-action__icon-button__star w-inline-block"
-           :class="isStarred?'active':''"
-           @click.stop="interestedClick('card')"></a>
-        <div class="other-events-card__footer-actions__more-wrapper">
-          <a class="event-action__icon-button__more w-inline-block"
-             @click.stop="overlayOpen=true"></a>
+        <div class="event-summary-card__image">
+          <AvatarImage
+            className="photo"
+            :event="event"
+            :person="user"
+            imageSize="85"
+          />
         </div>
       </div>
-      <SearchListCardActions
-        v-if="!isPhone"
-        :user="item.user"
-        :event="item.event"
-        @user-updated="$emit('user-updated', $event)"
-        @event-updated="$emit('event-updated', $event)"
-        @event-deleted="$emit('event-deleted', id)"
-        @going-click="goingClick"
-        @cancel-click="cancelClick"
-        @interested-click="interestedClick('card')"
-        @share-click="shareClick"
-        @contact-click="contactClick"
-        :timePast="timePast"
-        :showGoingButton="showGoingButton"
-        :showMeetButton="showMeetButton"
-        :showShareButton="showShareButton"
-        :showInterestedButton="showInterestedButton"
-        :showCancelButton="!doNotShowCancel && showCancelButton"
-        :allowWaveUndo="true"/>
-      <SearchListCardActionsOverlay
-        v-if="showOverlay"
-        :user="item.user"
-        :event="item.event"
-        @user-updated="$emit('user-updated', $event)"
-        @event-updated="$emit('event-updated', $event)"
-        @event-deleted="$emit('event-deleted', id)"
-        @clickaway="overlayOpen=false"
-        @going-click="goingClick"
-        @cancel-click="cancelClick"
-        @interested-click="interestedClick('card')"
-        @share-click="shareClick"
-        @contact-click="contactClick"
-        :showGoingButton="showGoingButton"
-        :showMeetButton="showMeetButton"
-        :showShareButton="showShareButton"
-        :showInterestedButton="showInterestedButton"
-        :showCancelButton="!doNotShowCancel && showCancelButton"
-        :allowWaveUndo="true"/>
+
+    </router-link>
+    <div class='event-summary-card__actions-avatars'>
+      <div class='event-summary-card__actions'>
+        <SearchListCardActions
+          :user="item.user"
+          :event="item.event"
+          @user-updated="$emit('user-updated', $event)"
+          @event-updated="$emit('event-updated', $event)"
+          @event-deleted="$emit('event-deleted', id)"
+          @going-click="goingClick"
+          @interested-click="interestedClick('card')"
+          :timePast="timePast"
+          :showGoingButton="showGoingButton"
+          :showInterestedButton="showInterestedButton"
+          :allowWaveUndo="true"/>
+      </div>
     </div>
+
   </li>
 </template>
 
 <script>
 import AvatarImage from '@/components/base/AvatarImage'
-import HouseholdImages from '@/components/search/HouseholdImages'
 import SearchListCardActions from '@/components/search/SearchListCardActions'
-import SearchListCardActionsOverlay from '@/components/search/SearchListCardActionsOverlay'
 
 // most of the functionality is in the itemActions mixin
 import { item, screen } from '@/mixins'
 
 export default {
-  name: 'SearchListCard',
+  name: 'EventSearchListCard',
   props: {
-    doNotShowCancel: { default: false },
     item: { required: true },
     distanceCenter: {}
   },
   mixins: [item, screen],
-  components: { AvatarImage, HouseholdImages, SearchListCardActions, SearchListCardActionsOverlay },
+  components: { AvatarImage, SearchListCardActions },
   computed: {
     user () {
       return this.item && this.item.user
@@ -258,19 +211,80 @@ a {
   position: relative;
   display: flex;
   width: 100%;
-  margin-top: 0;
+  margin-top: 16px;
+  margin-bottom: 16px;
   padding: 20px 20px 28px;
   flex-direction: column;
   justify-content: flex-start;
   align-items: stretch;
   border-bottom: 1px solid #f5f5f5;
+  border-radius: 8px;
   background-color: #fff;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.2);
+}
+
+.event-summary-card__title {
+  margin-bottom: 8px;
+  font-size: 18px;
+  line-height: 26px;
+  font-weight: 700;
+}
+
+.event-summary-card__title.line-clamp--1 {
+  margin-bottom: 8px;
+}
+
+.event-summary-card__info {
+  display: flex;
+  margin-bottom: 12px;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.event-summary-card__loca-desc {
+  color: grey;
+  -webkit-text-fill-color: grey;
+  font-weight: 400;
+}
+
+.event-summary-card__text {
+  width: 100%;
+  margin-right: 16px;
+}
+
+.event-summary-card__image {
+  overflow: hidden;
+  width: 80px;
+  height: 80px;
+  min-height: 80px;
+  min-width: 80px;
+  margin-top: 4px;
+  border-radius: 8px;
+}
+
+.event-summary-card__actions {
+  display: flex;
+  width: auto;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  flex: 0 0 auto;
+}
+
+.event-summary-card__actions-avatars {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.place-name {
+  font-weight: 700;
 }
 
 .header {
   position: relative;
   display: flex;
+  width: 100%;
   min-height: 12px;
   margin-bottom: 12px;
   justify-content: space-between;
@@ -278,19 +292,21 @@ a {
 }
 
 .header__date {
-  color: #1f88e9;
-  -webkit-text-fill-color: #1f88e9;  // keep for safari
-  font-size: 12px;
+  color: #fc6f77;
+  -webkit-text-fill-color:#fc6f77;;  // keep for safari
+  font-size: 13px;
   line-height: 12px;
+  font-weight: 600;
+  letter-spacing: .7px;
   text-transform: uppercase;
 }
 
 .header__distance {
-  position: absolute;
+  color: grey;
+  -webkit-text-fill-color: grey;  // keep for safari
+  position: static;
   right: 0;
-  color: #64426b;
-  -webkit-text-fill-color: #64426b;  // keep for safari
-  font-size: 12px;
+  font-size: 13px;
   line-height: 12px;
   text-transform: uppercase;
 }
@@ -329,19 +345,11 @@ a {
   line-height: 22px;
 }
 
-.photo-wrapper {
-  position: relative;
-  height: 100%;
-}
-
 .photo {
-  position: static;
-  max-height: 85px;
-  max-width: 85px;
-  min-height: 85px;
-  min-width: 85px;
-  margin: 0 1px 1px 0;
-  border-radius: 4px;
+  width: 80px;
+  height: 80px;
+  min-height: 80px;
+  min-width: 80px;
 }
 
 .footer__list-item {
@@ -447,20 +455,16 @@ a {
   overflow: hidden;
 }
 
+.event-action-button {
+  margin-right: 8px;
+}
+
 @media (max-width: 991px){
   .event-action-button:hover {
     background-image: linear-gradient(180deg, transparent, transparent);
   }
 
   .event-action-button:active {
-    background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.03), rgba(0, 0, 0, 0.03));
-  }
-
-  .event-action-button--selected:hover {
-    background-image: linear-gradient(180deg, transparent, transparent);
-  }
-
-  .event-action-button--selected:active {
     background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.03), rgba(0, 0, 0, 0.03));
   }
 
@@ -507,7 +511,7 @@ a {
   .event-action__icon-button__star {
     min-height: 40px;
     min-width: 40px;
-    margin-right: 0;
+    margin-right: 8px;
   }
 
   .event-action__icon-button__star:hover {
@@ -534,13 +538,6 @@ a {
   .description-text {
     font-size: 13px;
     line-height: 19.5px;
-  }
-
-  .photo {
-    max-height: 75px;
-    max-width: 75px;
-    min-height: 75px;
-    min-width: 75px;
   }
 
   .user-info__occupation {
@@ -582,27 +579,12 @@ a {
     right: 6px;
   }
 
-  .event-action-button {
-    width: 100%;
-  }
-
   .event-action-button--selected {
     width: 100%;
   }
 
   .footer__actions {
     width: 100%;
-  }
-
-  .photo-wrapper {
-    max-height: 77px;
-  }
-
-  .photo {
-    max-height: 65px;
-    max-width: 65px;
-    min-height: 65px;
-    min-width: 65px;
   }
 
   .footer__list-item {
