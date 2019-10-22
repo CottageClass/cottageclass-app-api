@@ -102,7 +102,7 @@ a {
 }
 
 .container-3 {
-  position: sticky;
+  position: fixed;
   top: 0;
   z-index: 800;
 }

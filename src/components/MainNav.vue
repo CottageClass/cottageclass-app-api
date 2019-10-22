@@ -1,5 +1,5 @@
 <template>
-  <div class="main-nav">
+  <div class="main-nav" :class="{native: isNative}">
     <Alert />
     <PureModal v-if="showNameChangeModal"
                :title="nameChangeModalOptions.title"
@@ -67,6 +67,8 @@ import Alert from '@/components/Alert.vue'
 import PureModal from '@/components/base/PureModal'
 import ExpandingMenu from '@/components/ExpandingMenu'
 
+import { isNative } from '@/utils/platform'
+
 export default {
   name: 'MainNav',
   data () {
@@ -78,6 +80,9 @@ export default {
   components: { AvatarImage, Alert, ExpandingMenu, LoggedOutNav, MainNavLogo, PureModal },
   mixins: [ clickaway ],
   computed: {
+    isNative () {
+      return isNative()
+    },
     nameChangeModalOptions () {
       return {
         title: `Our name is now Lilypad!`,
@@ -126,6 +131,14 @@ a {
   color: #333;
   font-size: 14px;
   line-height: 20px;
+  &.native {
+    padding-top: 35px;
+    position: sticky;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 999;
+  }
 }
 .image {
   max-height: 40px;
