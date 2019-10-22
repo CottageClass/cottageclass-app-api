@@ -69,8 +69,7 @@ import Alert from '@/components/Alert.vue'
 import PureModal from '@/components/base/PureModal'
 import ExpandingMenu from '@/components/ExpandingMenu'
 
-import { isNative, isIPhoneX } from '@/utils/platform'
-import { navigation } from '@/mixins'
+import { navigation, platform } from '@/mixins'
 
 export default {
   name: 'MainNav',
@@ -87,14 +86,8 @@ export default {
     }
   },
   components: { AvatarImage, Alert, ExpandingMenu, LoggedOutNav, MainNavLogo, PureModal, MainNavBackButton },
-  mixins: [ clickaway, navigation ],
+  mixins: [ clickaway, navigation, platform ],
   computed: {
-    isNative () {
-      return isNative()
-    },
-    isIPhoneX () {
-      return isIPhoneX()
-    },
     nameChangeModalOptions () {
       return {
         title: `Our name is now Lilypad!`,

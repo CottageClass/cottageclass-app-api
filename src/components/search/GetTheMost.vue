@@ -14,15 +14,11 @@
 </template>
 
 <script>
-import { isNative } from '@/utils/platform'
+import { platform } from '@/mixins'
 
 export default {
   name: 'GetTheMost',
-  computed: {
-    isNative () {
-      return isNative()
-    }
-  }
+  mixins: [platform]
 }
 </script>
 
