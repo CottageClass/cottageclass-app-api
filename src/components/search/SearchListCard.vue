@@ -139,7 +139,7 @@ export default {
 a {
   color: #000;
   -webkit-text-fill-color: #000;  // keep for safari
-  text-decoration: none
+  text-decoration: none;
 }
 
 .badge-verified {
