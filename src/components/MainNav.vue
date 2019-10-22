@@ -1,5 +1,5 @@
 <template>
-  <div class="main-nav" :class="{native: isNative}">
+  <div class="main-nav" :class="{native: isNative, accomodateNotch: isIPhoneX}">
     <Alert />
     <PureModal v-if="showNameChangeModal"
                :title="nameChangeModalOptions.title"
@@ -10,7 +10,8 @@
     />
 
     <div class="navigation__container w-container">
-      <MainNavLogo />
+      <MainNavBackButton v-if="showBackButtonInMainNav"/>
+      <MainNavLogo v-else/>
       <LoggedOutNav v-if="!isAuthenticated" />
       <ul v-if="isAuthenticated" class="navigation__links-list w-list-unstyled">
         <li class="navigation__link-item">
@@ -61,27 +62,38 @@ import { mapGetters } from 'vuex'
 import { mixin as clickaway } from 'vue-clickaway'
 
 import MainNavLogo from '@/components/MainNavLogo'
+import MainNavBackButton from '@/components/MainNavBackButton'
 import AvatarImage from '@/components/base/AvatarImage'
 import LoggedOutNav from '@/components/LoggedOutNav'
 import Alert from '@/components/Alert.vue'
 import PureModal from '@/components/base/PureModal'
 import ExpandingMenu from '@/components/ExpandingMenu'
 
-import { isNative } from '@/utils/platform'
+import { isNative, isIPhoneX } from '@/utils/platform'
+import { navigation } from '@/mixins'
 
 export default {
   name: 'MainNav',
+  props: {
+    showBackButton: {
+      default: false,
+      type: Boolean
+    }
+  },
   data () {
     return {
       showMenu: false,
       showNameChangeModal: false
     }
   },
-  components: { AvatarImage, Alert, ExpandingMenu, LoggedOutNav, MainNavLogo, PureModal },
-  mixins: [ clickaway ],
+  components: { AvatarImage, Alert, ExpandingMenu, LoggedOutNav, MainNavLogo, PureModal, MainNavBackButton },
+  mixins: [ clickaway, navigation ],
   computed: {
     isNative () {
       return isNative()
+    },
+    isIPhoneX () {
+      return isIPhoneX()
     },
     nameChangeModalOptions () {
       return {
@@ -132,12 +144,14 @@ a {
   font-size: 14px;
   line-height: 20px;
   &.native {
-    padding-top: 35px;
     position: sticky;
     left: 0;
     right: 0;
     top: 0;
     z-index: 999;
+    &.accomodateNotch {
+      padding-top: 35px;
+    }
   }
 }
 .image {
