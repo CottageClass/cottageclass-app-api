@@ -1,32 +1,21 @@
 <template>
-  <div class="onb-body">
-    <Nav
-      button="done"
-      @next="submit"
-      :hidePrevious="true"
-    />
-    <div class="content-wrapper">
-      <StyleWrapper styleIs="onboarding">
-        <Question
-          :title="`Why aren't you interested in a playdate with ${this.otherUser.firstName}?`"
-          subtitle="Your feedback is private and helps us do a better job of matching parents and playdates!" >
-          <Checkboxes
-            v-model="reasons"
-            :labels="labelsAndOrder"/>
-          <FormWithTextArea
-            placeholder="Other reasons? Any notes to add?"
-            v-model="otherText" />
-        </Question>
-      </StyleWrapper>
-    </div>
+  <div>
+    <Question
+      :title="`Why aren't you interested in a playdate with ${this.otherUser.firstName}?`"
+      subtitle="Your feedback is private and helps us do a better job of matching parents and playdates!" >
+      <Checkboxes
+        v-model="reasons"
+        :labels="labelsAndOrder"/>
+      <FormWithTextArea
+        placeholder="Other reasons? Any notes to add?"
+        v-model="otherText" />
+    </Question>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
 
-import Nav from '@/components/FTE/Nav'
-import StyleWrapper from '@/components/FTE/StyleWrapper'
 import Checkboxes from '@/components/base/Checkboxes.vue'
 import Question from '@/components/base/Question.vue'
 import FormWithTextArea from '@/components/base/FormWithTextArea.vue'
@@ -37,7 +26,7 @@ import { fetchUser } from '@/utils/api'
 
 export default {
   name: 'DisinterestedSurvey',
-  components: { StyleWrapper, Nav, Checkboxes, Question, FormWithTextArea },
+  components: { Checkboxes, Question, FormWithTextArea },
   data () {
     return {
       otherUser: null,
@@ -59,6 +48,11 @@ export default {
     ...mapGetters(['currentUser', 'distanceFromCurrentUser'])
   },
   async created () {
+    this.$emit('setNavProps', {
+      button: 'done',
+      nextButotnHandler: this.submit.bind(this),
+      hidePrevious: true
+    })
     this.otherUser = await fetchUser(this.userId)
   },
   methods: {

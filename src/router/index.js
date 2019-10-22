@@ -20,17 +20,31 @@ import ContactForm from '@/views/ContactForm.vue'
 import Onboarding from '@/views/Onboarding.vue'
 import ProfileCollection from '@/views/ProfileCollection.vue'
 import DeclineRSVP from '@/views/DeclineRSVP.vue'
-import DisinterestedSurvey from '@/views/DisinterestedSurvey.vue'
 import DeleteAccountConfirmation from '@/views/DeleteAccountConfirmation'
 import SelectEventFromUser from '@/views/SelectEventFromUser'
 import AddOffersPrompt from '@/views/AddOffersPrompt'
 import ErrorPage from '@/views/ErrorPage'
+
+import FlowPage from '@/views/FlowPage.vue'
+import DisinterestedSurvey from '@/views/DisinterestedSurvey.vue'
 
 Vue.use(Router)
 
 export default new Router({
   mode: 'history',
   routes: [
+    {
+      path: 'not used',
+      component: FlowPage,
+      children: [
+        {
+          path: '/users/:userId/decline',
+          name: 'DisinterestedSurvey',
+          component: DisinterestedSurvey,
+          props: true
+        }
+      ]
+    },
     {
       path: '/add-offers/:userId',
       name: 'AddOffersPrompt',
@@ -47,12 +61,6 @@ export default new Router({
       path: '/delete-account',
       name: 'DeleteAccountConfirmation',
       component: DeleteAccountConfirmation
-    },
-    {
-      path: '/users/:userId/decline',
-      name: 'DisinterestedSurvey',
-      component: DisinterestedSurvey,
-      props: true
     },
     {
       path: '/rsvp/:eventId/decline',
