@@ -1,5 +1,3 @@
-import { mapGetters } from 'vuex'
-
 import { isIOSNativeApp, isNative } from '@/utils/platform'
 
 export default {
