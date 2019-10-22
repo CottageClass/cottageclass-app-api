@@ -90,7 +90,7 @@ if (isAuthWindow) {
   Vue.config.productionTip = false
 
   router.beforeEach((to, from, next) => {
-    store.dispatch('newRoute')
+    store.dispatch('newRoute', { to, from })
     trackEvent('page_view', { to: to.fullPath, from: from.fullPath })
     if (to.name === 'SplashPage' && store.getters.isAuthenticated) {
       next({ name: 'Events' })

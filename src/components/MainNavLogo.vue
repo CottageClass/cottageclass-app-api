@@ -1,5 +1,5 @@
 <template>
-  <div class="navigation__logo-wrapper">
+  <div>
     <a @click="goToLink"
        class="navigation__logo-block w-inline-block"
        :class="isAuthenticated? 'logged-in' : 'logged-out'"

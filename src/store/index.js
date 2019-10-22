@@ -14,6 +14,7 @@ export default new Vuex.Store(
     plugins: [createPersistedState()],
     modules: { auth, rsvp, waves, search },
     state: {
+      previousPath: null,
       alert: null,
       createdEvents: null,
       redirectRoute: null
@@ -43,12 +44,19 @@ export default new Vuex.Store(
       },
       setCreatedEvents: (state, payload) => {
         state.createdEvents = payload.eventData
+      },
+      setPreviousPath: (state, payload) => {
+        state.previousPath = payload.path
       }
     },
     actions: {
-      newRoute: ({ commit, state }) => {
-        // this method manages the showing of alerts when you enter a new route
-        // TODO these should be committed with mutations
+      newRoute: ({ commit, state }, payload) => {
+        console.log({ payload })
+        if (payload.from && payload.from.path !== '/') {
+          commit('setPreviousPath', { path: payload.from.path })
+        } else {
+          commit('setPreviousPath', { path: null })
+        }
         if (state.alert) {
           if (state.alert.preshow) {
             commit('showAlertFromPreshow')
@@ -59,6 +67,7 @@ export default new Vuex.Store(
       }
     },
     getters: {
+      previousPath: state => state.previousPath,
       alert: state => state.alert,
       redirectRoute: state => state.redirectRoute
     }

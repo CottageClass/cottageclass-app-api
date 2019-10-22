@@ -1,7 +1,7 @@
 <template>
   <div class="container-3 w-container">
     <div class="primary-action__card--alt-2">
-      <div class="primary-action__positioning-alt-2">
+      <div class="primary-action__positioning-alt-2" :class="{native: isNative}">
         <div class="primary-action__title-text--alt-2">Get the most out of Lilypad!</div>
         <div class="primary-action__btns-container--alt-2">
           <div class="primary-action__btn-group--alt-2">
@@ -14,8 +14,11 @@
 </template>
 
 <script>
+import { platform } from '@/mixins'
+
 export default {
-  name: 'GetTheMost'
+  name: 'GetTheMost',
+  mixins: [platform]
 }
 </script>
 
@@ -82,6 +85,9 @@ a {
 }
 
 .primary-action__positioning-alt-2 {
+  &.native {
+    padding-bottom: 30px;
+  }
   position: relative;
   width: 100%;
   padding: 16px 20px 18px;
