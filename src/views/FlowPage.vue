@@ -4,7 +4,7 @@
          :hidePrevious="hidePrevious"
          @next="nextButotnHandler"
     />
-    <router-view class="content-wrapper"
+    <router-view class="content-container"
                  @setNavProps="setNavProps"
     />
   </div>
@@ -31,9 +31,17 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
   .onb-body {
-    background-color: #f6f6f6;
+    background-color: #0d73c7;
+  }
+  .content-container {
+    width: 720px;
+    min-height: 100vh;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: #1c8be7;
+    margin-bottom: 0px;
+    padding: 32px 32px 72px;
   }
 </style>

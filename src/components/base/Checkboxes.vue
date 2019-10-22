@@ -70,8 +70,60 @@ export default {
 
 <style lang="scss" scoped>
 
-.onb-checkbox {
-    margin-top: 22px;
+.flow {
+  .onb-checkbox-label {
+    width: 100%;
+    padding-top: 18px;
+    padding-bottom: 18px;
+    padding-left: 6px;
+    color: #1d8ae7;
+  }
+  .checkbox-field {
+    display: block;
+  }
+  .active-checkbox {
+    background-color: #fff !important;
+  }
+  .onb-checkbox {
+    margin-top: 22px !important;
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
+
+  .onb-checkbox {
+      margin-top: 22px;
+  }
+
+  .onb-form-checkbox-list {
+    color: transparent;
+  }
+
+  .checkbox-field-extra-space {
+    display: block;
+    margin-bottom: 8px;
+    padding-left: 35px;
+    border-radius: 4px;
+    background-color: hsla(0, 0%, 100%, .7);
+  }
+
+  .checkbox-field-extra-space:active {
+    background-color: #fff;
+  }
+
+  .checkbox-field-extra-space:focus {
+    background-color: #fff;
+  }
+
+  .radio-form-block, .onb-form-block-checkbox-list {
+    width: 100%;
+    margin-bottom: 32px;
+  }
+
+  .label-checkbox, .onb-checkbox-label {
+    width: 100%;
+    padding: 18px 16px 18px 6px;
+    color: #fff;
+  }
 }
 
 </style>
