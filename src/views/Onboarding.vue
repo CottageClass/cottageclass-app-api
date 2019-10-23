@@ -1,22 +1,16 @@
 <template>
   <div class="onb-body">
-    <div class="body">
-      <div class="content-wrapper">
-        <StyleWrapper styleIs="onboarding">
-          <UserInformation v-if="section==='user-info'"
-                           :stepName="stepName"
-                           @finished="collectUserDetails" />
-          <UserDetails v-if="section==='user-details'"
-                       :stepName="stepName"
-                       @finished="finishOnboarding" />
-        </StyleWrapper>
-      </div>
-    </div>
+    <UserInformation v-if="section==='user-info'"
+                     @set-nav-props="$emit('set-nav-props', $event)"
+                     :stepName="stepName"
+                     @finished="collectUserDetails" />
+    <UserDetails v-if="section==='user-details'"
+                 :stepName="stepName"
+                 @finished="finishOnboarding" />
   </div>
 </template>
 
 <script>
-import StyleWrapper from '@/components/FTE/StyleWrapper'
 import UserInformation from '@/components/FTE/userInformation/UserInformation'
 import UserDetails from '@/components/FTE/userInformation/UserDetails'
 
@@ -25,7 +19,7 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'Onboarding',
   props: ['stepName', 'section'],
-  components: { StyleWrapper, UserInformation, UserDetails },
+  components: { UserInformation, UserDetails },
   computed: mapGetters([ 'redirectRoute' ]),
   methods: {
     finishOnboarding () {

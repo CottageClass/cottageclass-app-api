@@ -19,6 +19,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.flow {
   .onb-paragraph-subheading-2 {
     margin-bottom: 8px;
     color: #fff;
@@ -40,9 +41,19 @@ export default {
     color: #fff;
   }
 
+  .paragraph-small-50 {
+    margin-bottom: 8px;
+    color: hsla(0, 0%, 100%, .5);
+    font-size: 11px;
+    line-height: 19px;
+    text-align: center;
+    letter-spacing: 0.2px;
+  }
+
   @media (max-width: 479px) {
     .title-bar {
       align-items: center;
     }
   }
+}
 </style>

@@ -1,12 +1,5 @@
 <template>
   <div>
-    <Nav
-      :button="nextButtonState"
-      @next="nextStep"
-      @prev="prevStep"
-      :hidePrevious="stepIndex===0"
-    />
-    <ErrorMessage v-if="errorMessage && this.showError" :text="errorMessage" />
     <Phone
       v-if="stepName==='phone'"
       @pressedEnter="nextStep"
@@ -46,13 +39,11 @@
 import normalize from 'json-api-normalizer'
 import { mapGetters, mapMutations, mapActions } from 'vuex'
 
-import Nav from '@/components/FTE/Nav'
 import Phone from '@/components/FTE/userInformation/Phone.vue'
 import Location from '@/components/FTE/userInformation/Location.vue'
 import Children from '@/components/FTE/userInformation/Children.vue'
 import Employment from '@/components/FTE/userInformation/Employment'
 import FacebookImageSelection from '@/components/FTE/userInformation/FacebookImageSelection.vue'
-import ErrorMessage from '@/components/base/ErrorMessage.vue'
 import ProfileBlurb from '@/components/FTE/userInformation/ProfileBlurb.vue'
 import MaxDistanceSetting from '@/components/FTE/userInformation/MaxDistanceSetting'
 import AvatarUpload from '@/components/FTE/userInformation/AvatarUpload'
@@ -63,7 +54,7 @@ import { stepNavigation } from '@/mixins'
 export default {
   name: 'UserInformation',
   props: ['stepName'],
-  components: { Nav, Phone, Location, Children, Employment, FacebookImageSelection, ErrorMessage, ProfileBlurb, MaxDistanceSetting, AvatarUpload },
+  components: { Phone, Location, Children, Employment, FacebookImageSelection, ProfileBlurb, MaxDistanceSetting, AvatarUpload },
   mixins: [stepNavigation],
   data () {
     return {
@@ -107,6 +98,13 @@ export default {
       return models[this.stepName]
     },
     ...mapGetters(['currentUser'])
+  },
+  created () {
+    this.$emit('set-nav-props', {
+      nextButtonHandler: this.nextStep,
+      prevButtonHandler: this.prevStep
+
+    })
   },
   methods: {
     async submitUserData () {
@@ -157,7 +155,7 @@ export default {
       }
     },
     nextStep () {
-      if (!this.errorMessage) {
+      if (!this.validationError) {
         if (this.stepName === this.stepSequence[this.stepSequence.length - 1]) {
           this.$emit('finished')
         } else {

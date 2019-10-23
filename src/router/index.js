@@ -12,11 +12,11 @@ import SignInWithEmail from '@/views/SignInWithEmail.vue'
 import SignUpWithEmail from '@/views/SignUpWithEmail.vue'
 import PasswordResetRequest from '@/views/PasswordResetRequest.vue'
 import PasswordReset from '@/views/PasswordReset.vue'
-import ProfileCollection from '@/views/ProfileCollection.vue'
 import ErrorPage from '@/views/ErrorPage'
 
 // FlowPage components
 import FlowPage from '@/views/FlowPage.vue'
+import ProfileCollection from '@/views/ProfileCollection.vue'
 import NewEvent from '@/views/NewEvent.vue'
 import CancelRSVP from '@/components/CancelRSVP.vue'
 import SocialInvite from '@/views/SocialInvite.vue'
@@ -32,7 +32,7 @@ export default new Router({
   mode: 'history',
   routes: [
     {
-      path: 'not used',
+      path: 'NOT USED.  THESE ARE PAGES THAT USE THE FlowPage AS A WRAPPER',
       component: FlowPage,
       children: [
         {
@@ -82,20 +82,19 @@ export default new Router({
           name: 'NewEvent',
           component: NewEvent,
           props: true
+        },
+        {
+          path: '/profile',
+          name: 'ProfileCollection',
+          component: ProfileCollection
+        },
+        {
+          path: '/welcome/:section?/:stepName?',
+          name: 'Onboarding',
+          component: Onboarding,
+          props: true
         }
       ]
-    },
-    {
-      path: '/welcome/:section?/:stepName?',
-      name: 'Onboarding',
-      component: Onboarding,
-      props: true
-    },
-    /// ///////////   above this line in blue/flow
-    {
-      path: '/profile',
-      name: 'ProfileCollection',
-      component: ProfileCollection
     },
     {
       path: '/',

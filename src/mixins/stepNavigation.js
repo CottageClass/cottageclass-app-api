@@ -26,7 +26,7 @@ export default {
         section })
     },
     nextStep () {
-
+      // overrride me
     },
     prevStep () {
       if (this.stepIndex > 0) {
@@ -38,6 +38,14 @@ export default {
     }
   },
   watch: {
+    stepIndex: {
+      handler: function () {
+        this.$emit('set-nav-props', {
+          hidePrevious: this.stepIndex === 0
+        })
+      },
+      immediate: true
+    },
     nextButtonState: {
       handler: function () {
         this.$emit('set-nav-props', {
