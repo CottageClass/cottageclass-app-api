@@ -60,6 +60,19 @@ export default new Router({
           name: 'DeclineRSVP',
           component: DeclineRSVP,
           props: true
+        },
+        {
+          path: '/share',
+          name: 'SocialInvite',
+          component: SocialInvite
+        },
+        {
+          path: '/event/:id/share',
+          name: 'SocialEventInvite',
+          component: SocialInvite,
+          props: {
+            context: true
+          }
         }
       ]
     },
@@ -86,19 +99,6 @@ export default new Router({
       name: 'NewEvent',
       component: NewEvent,
       props: true
-    },
-    {
-      path: '/share',
-      name: 'SocialInvite',
-      component: SocialInvite
-    },
-    {
-      path: '/event/:id/share',
-      name: 'SocialEventInvite',
-      component: SocialInvite,
-      props: {
-        context: true
-      }
     },
     {
       path: '/rsvp/:eventId/cancel',
