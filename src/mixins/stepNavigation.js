@@ -8,7 +8,7 @@ export default {
       return this.modelForCurrentStep && this.modelForCurrentStep.err
     },
     nextButtonState () {
-      if (this.errorMessage) {
+      if (this.validationError) {
         return 'inactive'
       } else {
         return 'next'
@@ -39,7 +39,7 @@ export default {
   },
   watch: {
     nextButtonState: {
-      handler: () => {
+      handler: function () {
         this.$emit('set-nav-props', {
           button: this.nextButtonState
         })

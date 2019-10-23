@@ -21,7 +21,7 @@ export default {
   data () {
     return {
       dateSelected: this.value.selected || '',
-      errorMesg: 'Please choose a day for your activity.'
+      errorMessage: 'Please choose a day for your activity.'
     }
   },
   mounted: function () {
@@ -30,7 +30,7 @@ export default {
   computed: {
     err: function () {
       if (!this.dateSelected) {
-        return this.errorMesg
+        return this.errorMessage
       } else {
         return false
       }
@@ -61,23 +61,12 @@ export default {
 }
 </script>
 
-<style scoped>
-
-p {
-  color: white;
+<style scoped lang="scss">
+.flow {
+  .picker-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 }
-
-.describe-label {
-  color: white;
-  padding-top: 16px;
-}
-
-textarea {
-  height: 96px;
-}
-
-.onb-content-container {
-  min-height: 130vh;
-}
-
 </style>
