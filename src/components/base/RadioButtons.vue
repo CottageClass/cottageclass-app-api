@@ -60,3 +60,40 @@ export default {
   }
 }
 </script>
+<style lang="scss" scoped>
+.flow {
+  .checkbox-field-extra-space {
+    display: block;
+    margin-bottom: 8px;
+    padding-left: 35px;
+    border-radius: 4px;
+    background-color: hsla(0, 0%, 100%, .7);
+  }
+
+  .checkbox-field-extra-space:active {
+    background-color: #fff;
+  }
+
+  .checkbox-field-extra-space:focus {
+    background-color: #fff;
+  }
+  .onb-form-checkbox-list {
+    color: transparent;
+  }
+  .onb-checkbox-label {
+    width: 100%;
+    padding-top: 18px;
+    padding-bottom: 18px;
+    padding-left: 6px;
+    color: #1d8ae7;
+  }
+  .active-checkbox {
+    background-color: #fff !important;
+  }
+  .onb-checkbox {
+    margin-top: 22px !important;
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
+}
+</style>
