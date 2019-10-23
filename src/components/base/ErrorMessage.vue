@@ -16,3 +16,30 @@ export default {
   name: 'ErrorMessage'
 }
 </script>
+
+<style lang="scss" scoped>
+
+.flow {
+  .onb-error-text a.error-link {
+    color: #c96168;
+    text-decoration: underline;
+  }
+
+  .onb-error-container {
+    display: flex;
+    width: 100%;
+    min-height: 60px;
+    margin-bottom: 24px;
+    padding: 16px 16px 18px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    background-color: #ffbebe;
+    color: #c73200;
+  }
+
+  .onb-error-text {
+    font-size: 13px;
+  }
+}
+</style>

@@ -1,24 +1,31 @@
 <template>
-  <div class="page-container">
-    <Nav :button="button"
-         :hidePrevious="hidePrevious"
-         @next="nextButotnHandler"
-         @prev="prevButotnHandler"
-    />
-    <router-view class="content-container flow"
-                 @setNavProps="setNavProps"
-    />
+  <div class="page-container flow">
+    <div class="column-container">
+      <Nav :button="button"
+           :hidePrevious="hidePrevious"
+           @next="nextClick"
+           @prev="prevButotnHandler"
+      />
+      <ErrorMessage v-if="errorMessage && showErrorMessage"
+                    :text="errorMessage" />
+      <router-view class="content-container"
+                   @setNavProps="setNavProps"
+      />
+    </div>
   </div>
 </template>
 
 <script>
 import Nav from '@/components/FTE/Nav'
+import ErrorMessage from '@/components/base/ErrorMessage.vue'
 
 export default {
   name: 'FlowPage',
-  components: { Nav },
+  components: { Nav, ErrorMessage },
   data () {
     return {
+      errorMessage: null,
+      showErrorMessage: false,
       prevButotnHandler: () => {},
       nextButotnHandler: () => {},
       hidePrevious: false,
@@ -26,8 +33,16 @@ export default {
     }
   },
   methods: {
+    nextClick () {
+      this.nextButotnHandler()
+      this.showErrorMessage = !!this.errorMessage
+    },
     setNavProps (e) {
       Object.assign(this, e)
+      if (this.errorMessage) {
+        // reset showErrorMessage if all errors have been cleared
+        this.showErrorMessage = false
+      }
     }
   }
 }
@@ -35,31 +50,33 @@ export default {
 
 <style scoped lang="scss">
   .page-container {
-    display: flex;
-    flex-direction: column;
     background-color: #0d73c7;
     min-height: 100vh;
   }
 
-  .content-container {
-    flex: 1;
-    width: 720px;
+  .column-container {
     margin-right: auto;
     margin-left: auto;
+    display: flex;
+    flex-direction: column;
+    width: 720px;
+    min-height: 100vh;
     background-color: #1c8be7;
+  }
+
+  .content-container {
     margin-bottom: 0px;
     padding: 32px 32px 72px;
-    min-height: 100%;
   }
 
   @media (max-width: 991px) {
-    .content-container {
+    .column-container {
       width: 670px;
     }
   }
 
   @media (max-width: 767px) {
-    .content-container {
+    .column-container {
       width: 100%;
       margin-top: 0px;
       margin-bottom: 0px;
