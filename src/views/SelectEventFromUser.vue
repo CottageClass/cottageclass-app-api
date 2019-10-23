@@ -4,7 +4,7 @@
     <div class="body">
       <div class="content-wrapper">
         <StyleWrapper styleIs="onboarding">
-          <Nav button="skip" @next="$router.push({name:'Events'})" hidePrevious="true" />
+          <Nav button="skip" @next="goHome()" hidePrevious="true" />
           <div class="onb-content-container">
             <div class="onb-top-content-container">
               <h1 class="onb-heading-large">{{ titleText }}</h1>
@@ -34,13 +34,13 @@ import LoadingSpinner from '@/components/LoadingSpinner'
 import OtherEvent from '@/components/OtherEvent'
 
 import { fetchUser, fetchUpcomingEvents } from '@/utils/api'
-import { rsvp, waves } from '@/mixins'
+import { rsvp, waves, goHome } from '@/mixins'
 
 export default {
   name: 'SelectEventFromUser',
   props: ['userId'],
   components: { Nav, StyleWrapper, LoadingSpinner, OtherEvent },
-  mixins: [ rsvp, waves ],
+  mixins: [ rsvp, waves, goHome ],
   data () {
     return {
       events: null,

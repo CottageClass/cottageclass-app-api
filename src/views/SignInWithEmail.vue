@@ -69,14 +69,14 @@ import ErrorMessage from '@/components/base/ErrorMessage.vue'
 import StyleWrapper from '@/components/FTE/StyleWrapper.vue'
 import FacebookButton from '@/components/base/FacebookButton'
 import MainNav from '@/components/MainNav.vue'
-import { providerAuthentication } from '@/mixins'
+import { providerAuthentication, goHome } from '@/mixins'
 import { mapGetters } from 'vuex'
 import { signIn } from '@/utils/api'
 
 export default {
   name: 'SignInWithEmail',
   components: { ErrorMessage, StyleWrapper, MainNav, FacebookButton },
-  mixins: [ providerAuthentication ],
+  mixins: [ providerAuthentication, goHome ],
   data: function () {
     return {
       email: '',
@@ -89,7 +89,7 @@ export default {
   mounted: function () {
     if (this.isAuthenticated) {
       if (this.currentUser.hasAllRequiredFields) {
-        this.$router.push({ name: 'Events' })
+        this.goHome()
       } else if (this.currentUser.id) {
         this.$router.push({ name: 'Onboarding' })
       } else {

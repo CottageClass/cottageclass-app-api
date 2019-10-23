@@ -21,11 +21,13 @@ import UserInformation from '@/components/FTE/userInformation/UserInformation'
 import UserDetails from '@/components/FTE/userInformation/UserDetails'
 
 import { mapGetters } from 'vuex'
+import { goHome } from '@/mixins'
 
 export default {
   name: 'Onboarding',
   props: ['stepName', 'section'],
   components: { StyleWrapper, UserInformation, UserDetails },
+  mixins: { goHome },
   computed: mapGetters([ 'redirectRoute' ]),
   methods: {
     finishOnboarding () {
@@ -33,7 +35,7 @@ export default {
       if (this.redirectRoute) {
         this.$router.push(this.redirectRoute)
       } else {
-        this.$router.push({ name: 'Parents' })
+        this.goHome()
       }
     },
     collectUserDetails () {
