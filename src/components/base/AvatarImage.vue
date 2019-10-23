@@ -11,7 +11,7 @@ import { screen } from '@/mixins'
 
 export default {
   name: 'AvatarImage',
-  props: ['person', 'className', 'imageSize'],
+  props: ['person', 'event', 'className', 'imageSize'],
   mixins: [screen],
   computed: {
     physicalSize () {
@@ -21,6 +21,9 @@ export default {
       return parseInt(this.imageSize)
     },
     url: function () {
+      if (this.event && this.event.images.length > 0) {
+        return avatarUrl(this.event.images[0], this.physicalSize)
+      }
       if (this.person) {
         if (this.person.avatar) {
           return avatarUrl(this.person.avatar, this.physicalSize)

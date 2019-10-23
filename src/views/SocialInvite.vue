@@ -39,7 +39,7 @@
                 </form>
               </div>
             </div>
-            <SearchListCard
+            <EventSearchListCard
               v-if="eventToShare"
               :doNotShowCancel="true"
               :item="item"
@@ -54,7 +54,7 @@
 
 <script>
 
-import SearchListCard from '@/components/search/SearchListCard'
+import EventSearchListCard from '@/components/search/EventSearchListCard.vue'
 import TextMessageLink from '@/components/TextMessageLink.vue'
 import Nav from '@/components/FTE/Nav.vue'
 import { fetchEvent } from '@/utils/api'
@@ -62,7 +62,7 @@ import StyleWrapper from '@/components/FTE/StyleWrapper.vue'
 
 export default {
   name: 'SocialInvite',
-  components: { TextMessageLink, Nav, StyleWrapper, SearchListCard },
+  components: { TextMessageLink, Nav, StyleWrapper, EventSearchListCard },
   data () {
     return {
       copyButtonText: 'copy link',
