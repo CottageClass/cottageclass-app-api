@@ -88,7 +88,7 @@ export default {
       return this.homeOrPublic === 'public'
     },
     errorMessage () {
-      if (this.homeOrPublic === 'public' && this.googlePlaceId === null) {
+      if (this.homeOrPublic === 'public' && !this.googlePlaceId) {
         return 'Please enter an address or place for your playdate.'
       } else if (this.homeOrPublic === null) {
         return 'Please tell us where your playdate will be.'

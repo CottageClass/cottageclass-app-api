@@ -103,12 +103,6 @@ export default {
       } else {
         this.showError = true
       }
-    },
-    prevStep () {
-      this.$router.replace({ params: {
-        stepName: this.stepSequence[this.stepIndex - 1]
-      } })
-      window.scrollTo(0, 0)
     }
   }
 }

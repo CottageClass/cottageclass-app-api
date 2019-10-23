@@ -34,8 +34,12 @@ export default {
   },
   methods: {
     nextClick () {
-      this.nextButtonHandler()
-      this.showErrorMessage = !!this.errorMessage
+      if (this.errorMessage) {
+        this.showErrorMessage = true
+      } else {
+        this.showErrorMessage = !!this.errorMessage
+        this.nextButtonHandler()
+      }
     },
     setNavProps (e) {
       Object.assign(this, e)

@@ -1,11 +1,5 @@
 <template>
   <div>
-    <Nav
-      :button="nextButtonState"
-      @next="nextStep"
-      @prev="prevStep"
-    />
-    <ErrorMessage v-if="errorMessage && showError" :text="errorMessage" />
     <LoadingSpinner v-if="submissionPending" />
     <EventPlace
       v-else-if="stepName==='place'"
@@ -33,13 +27,11 @@
 
 <script>
 import LoadingSpinner from '@/components/LoadingSpinner'
-import ErrorMessage from '@/components/base/ErrorMessage.vue'
 import RepeatCount from '@/components/base/eventSpecification/RepeatCount'
 import EventDatePicker from '@/components/base/eventSpecification/EventDatePicker'
 import EventTime from '@/components/base/eventSpecification/EventTime'
 import EventDescription from '@/components/base/eventSpecification/EventDescription'
 import EventPlace from '@/components/base/eventSpecification/EventPlace'
-import Nav from '@/components/FTE/Nav'
 import AgeRange from '@/components/base/eventSpecification/AgeRange.vue'
 
 import { submitEventSeriesData } from '@/utils/api'
@@ -51,13 +43,12 @@ import { stepNavigation, alerts } from '@/mixins'
 
 export default {
   name: 'CreateEvent',
-  components: { EventDescription, EventPlace, Nav, ErrorMessage, EventDatePicker, EventTime, RepeatCount, LoadingSpinner, AgeRange },
+  components: { EventDescription, EventPlace, EventDatePicker, EventTime, RepeatCount, LoadingSpinner, AgeRange },
   mixins: [stepNavigation, alerts],
   props: ['stepName', 'context'],
   data () {
     return {
       submissionPending: false,
-      showError: false,
       place: { err: null },
       description: { err: null, name: '', description: '' },
       repeatCount: { err: null },
@@ -146,11 +137,8 @@ export default {
     async nextStep () {
       if (this.nextButtonState === 'skip') {
         this.$emit('skip')
-      } else if (this.errorMessage) {
-        this.showError = true
       } else {
         // state is persisted after route update because component is reused
-        this.showError = false
         if (this.isOnLastStep) {
           await this.submitSpecificEvent()
         } else {
@@ -159,13 +147,6 @@ export default {
           })
         }
         this.trackStep('offering')
-      }
-    },
-    prevStep () {
-      if (this.stepIndex > 0) {
-        this.$router.replace({ params: { stepName: this.stepSequence[this.stepIndex - 1] } })
-      } else {
-        this.$router.go(-1)
       }
     }
   },

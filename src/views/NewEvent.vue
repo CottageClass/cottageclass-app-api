@@ -1,26 +1,22 @@
 <template>
   <div class="onb-body">
-    <div class="content-wrapper">
-      <StyleWrapper styleIs="onboarding">
-        <CreateEvent v-if="section==='event'"
-                     :stepName="stepName"
-                     v-on:submission-complete="findUpcomingEvent"
-                     @finishedHomeEvent="completeCreationForHomeEvents"
-                     @finishedPublicEvent="proceed"
-                     context="new-event"
-        />
-        <HouseInformation v-if="section==='homeInfo'"
-                          :stepName="stepName"
-                          @finished="proceed"
-                          context="new-event"
-        />
-      </StyleWrapper>
-    </div>
+    <CreateEvent v-if="section==='event'"
+                 :stepName="stepName"
+                 v-on:submission-complete="findUpcomingEvent"
+                 @finishedHomeEvent="completeCreationForHomeEvents"
+                 @finishedPublicEvent="proceed"
+                 @set-nav-props="$emit('set-nav-props', $event)"
+                 context="new-event"
+    />
+    <HouseInformation v-if="section==='homeInfo'"
+                      :stepName="stepName"
+                      @finished="proceed"
+                      context="new-event"
+    />
   </div>
 </template>
 
 <script>
-import StyleWrapper from '@/components/FTE/StyleWrapper'
 import CreateEvent from '@/components/CreateEvent'
 import HouseInformation from '@/components/FTE/userInformation/HouseInformation'
 
@@ -29,7 +25,7 @@ import { redirect } from '@/mixins'
 
 export default {
   name: 'NewEvent',
-  components: { StyleWrapper, CreateEvent, HouseInformation },
+  components: { CreateEvent, HouseInformation },
   mixins: [redirect],
   props: ['stepName'],
   data () {
@@ -62,10 +58,6 @@ export default {
 </script>
 
 <style scoped>
-
-.onb-body {
-  background-color: #0d73c7;
-}
 
 .content-wrapper {
   width: 720px;

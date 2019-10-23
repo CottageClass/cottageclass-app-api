@@ -18,7 +18,7 @@ import { mapGetters } from 'vuex'
 
 import { fetchEvent } from '@/utils/api'
 import * as utils from '@/utils/utils.js'
-import { redirect, rsvp, validationErrors } from '@/mixins'
+import { redirect, rsvp, validationError } from '@/mixins'
 
 import Question from '@/components/base/Question.vue'
 import Checkboxes from '@/components/base/Checkboxes.vue'
@@ -29,7 +29,7 @@ var moment = require('moment')
 export default {
   name: 'RsvpInfoCollection',
   components: { LoadingSpinner, Checkboxes, Question },
-  mixins: [ redirect, rsvp, validationErrors ],
+  mixins: [ redirect, rsvp, validationError ],
   data () {
     return {
       childrenSelected: [],

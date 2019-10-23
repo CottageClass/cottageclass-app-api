@@ -7,7 +7,7 @@ import { redirect } from '@/mixins'
 import rsvp from '@/mixins/rsvp'
 import stars from '@/mixins/stars'
 import waves from '@/mixins/waves'
-import { fetchEvent, fetchUpcomingEvents } from '@/utils/api'
+import { fetchEvent } from '@/utils/api'
 
 export default {
   mixins: [ redirect, rsvp, waves, stars ],
