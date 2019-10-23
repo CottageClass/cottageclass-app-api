@@ -47,3 +47,10 @@ export default {
 }
 
 </script>
+<style lang="scss" scoped>
+  .dropdown-container {
+    text-align: center;
+    font-size: 24px;
+    padding: 0 0 16px 0;
+  }
+</style>
