@@ -20,7 +20,6 @@ import Onboarding from '@/views/Onboarding.vue'
 import ProfileCollection from '@/views/ProfileCollection.vue'
 import DeclineRSVP from '@/views/DeclineRSVP.vue'
 import DeleteAccountConfirmation from '@/views/DeleteAccountConfirmation'
-import SelectEventFromUser from '@/views/SelectEventFromUser'
 import ErrorPage from '@/views/ErrorPage'
 
 // FlowPage components
@@ -80,12 +79,6 @@ export default new Router({
           props: true
         }
       ]
-    },
-    {
-      path: '/pick-a-time/:userId',
-      name: 'SelectEventFromUser',
-      component: SelectEventFromUser,
-      props: true
     },
     {
       path: '/welcome/:section?/:stepName?',

@@ -285,31 +285,6 @@ export default {
         }
       }
     },
-    async interestedClickWithPrompts (context) {
-      let res
-      if (!this.redirectToSignupIfNotAuthenticated({
-        name: 'SelectEventFromUser',
-        params: { userId: this.user.id },
-        query: { interested: 'yes' }
-      })) {
-        if (this.user.starred) {
-          res = await this.unstarUser(this.user.id, context)
-        } else {
-          res = await this.starUser(this.user.id, context)
-          const events = await fetchUpcomingEvents(this.user.id)
-          if (events.length > 0) {
-            if (events.filter(e => !e.participated).length > 0) {
-              this.$router.push({ name: 'SelectEventFromUser', params: { userId: this.user.id } })
-            }
-          } else {
-            this.checkAuthenticationAndInitiateMessageSending()
-          }
-          res = await this.starUser(this.user.id)
-        }
-        this.updateUser(res)
-      }
-      return res
-    },
     async interestedClick (context) {
       let res
       if (this.user.starred) {
