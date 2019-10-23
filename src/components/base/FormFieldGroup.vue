@@ -48,3 +48,26 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.flow {
+  .onb-child-group-heading {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-size: 16px;
+    line-height: 16px;
+    font-weight: 400;
+    color: #fff;
+  }
+  .onb-group-header {
+    display: flex;
+    height: 50px;
+    margin-bottom: 24px;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .image-6 {
+    opacity: 0.7;
+  }
+}
+</style>

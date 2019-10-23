@@ -96,3 +96,50 @@ export default {
   }
 }
 </script>
+<style lang="scss" scoped>
+.flow {
+  .profile-photo {
+    margin-bottom: 16px;
+    border-radius: 50%;
+  }
+
+  .avatar-upload-button {
+    background-color: white;
+    padding: 10px 50px;
+  }
+
+  .button-3 {
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgba(0, 0, 0, .15);
+    border-radius: 4px;
+    background-color: #fff;
+    color: #000;
+  }
+
+  .auth-wrapper {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    width: 300px;
+    box-sizing: content;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .profile-photo-wrapper {
+    width: 100%;
+    background-color: #fff;
+    display: flex;
+    margin-bottom: 10px;
+    padding: 16px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgba(0, 0, 0, .15);
+    border-radius: 4px;
+  }
+}
+</style>

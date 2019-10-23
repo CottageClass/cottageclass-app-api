@@ -43,11 +43,45 @@ export default {
 </script>
 
 <style scoped lang="scss">
-select {
-  color: black;
-}
+.flow {
+  .name-text-field {
+    height: 56px;
+    padding-top: 8px;
+    padding-left: 18px;
+    border: 1px none #000;
+    border-radius: 4px;
+    background-color: hsla(0, 0%, 100%, .7);
+    font-size: 16px;
+  }
 
-select:invalid {
-  color: #aaa;
+  .name-text-field:focus {
+    background-color: #fff;
+  }
+
+  .name-text-field::-webkit-input-placeholder {
+    color: rgba(0, 0, 0, .3);
+  }
+
+  .name-text-field:-ms-input-placeholder {
+    color: rgba(0, 0, 0, .3);
+  }
+
+  .name-text-field::placeholder {
+    color: rgba(0, 0, 0, .3);
+  }
+
+  .onb-field-label {
+    margin-top: 24px;
+    margin-bottom: 8px;
+    color: #fff;
+    font-weight: 700;
+  }
+  select {
+    color: black;
+  }
+
+  select:invalid {
+    color: #aaa;
+  }
 }
 </style>
