@@ -5,19 +5,19 @@
       title="Delete your account"
       subtitle="We really appreciate your feedback! Why are you leaving?"
     >
-      <div class="form-describe-need w-form">
+      <div class="w-form">
         <form v-on:submit.prevent id="email-form-2">
-          <p class="describe-label">{{ charsLeft }} characters left...</p>
+          <p>{{ charsLeft }} characters left...</p>
           <textarea v-model="reason"
                     id="field"
                     name="field"
                     placeholder="e.g. 'I am moving to an island with no internet.  Forever....'"
-                    class="text-area-decribe-need w-input"
+                    class="w-input"
           />
         </form>
         <div class="action-bar">
-          <button class="button feedback-button" @click="feedback">Just send feedback</button>
-          <button class="button delete-button" @click="confirm">Delete account</button>
+          <button class="button" @click="feedback">Just send feedback</button>
+          <button class="button" @click="confirm">Delete account</button>
         </div>
       </div>
     </Question>
@@ -114,19 +114,10 @@ export default {
 }
 
 .action-bar {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   width: 100%;
   margin-top: 24px;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
   justify-content: space-between;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
   align-items: center;
 }
 
@@ -143,14 +134,6 @@ export default {
   letter-spacing: 1.2px;
   text-decoration: none;
   text-transform: uppercase;
-}
-
-.nevermind-button {
-  margin-left: 0px;
-}
-
-.cancel-button {
-  margin-right: 0px;
 }
 
 .button:hover {
@@ -182,29 +165,4 @@ export default {
     rgba(0, 0, 0, 0.1)
   );
 }
-
-.content-wrapper {
-  width: 720px;
-  min-height: 100vh;
-  margin-right: auto;
-  margin-left: auto;
-  padding-top: 50px;
-  padding-bottom: 50px;
-  background-color: #1c8be7;
-}
-
-@media (max-width: 991px) {
-  .content-wrapper {
-    width: 670px;
-  }
-}
-
-@media (max-width: 767px) {
-  .content-wrapper {
-    width: 100%;
-    margin-top: 0px;
-    margin-bottom: 0px;
-  }
-}
-
 </style>
