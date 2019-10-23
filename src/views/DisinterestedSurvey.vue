@@ -32,7 +32,7 @@ import Question from '@/components/base/Question.vue'
 import FormWithTextArea from '@/components/base/FormWithTextArea.vue'
 
 import { submitToSheetsu } from '@/utils/vendor/sheetsu'
-import { alerts } from '@/mixins'
+import { alerts, goHome } from '@/mixins'
 import { fetchUser } from '@/utils/api'
 
 export default {
@@ -45,7 +45,7 @@ export default {
       reasons: []
     }
   },
-  mixins: [alerts],
+  mixins: [ alerts, goHome ],
   props: ['userId'],
   computed: {
     labelsAndOrder () {
@@ -75,7 +75,7 @@ export default {
         reasons: this.reasons,
         otherText: this.otherText }, 'darkStars')
       this.showAlertOnNextRoute('Thank you for your feedback.', 'success')
-      this.$router.push({ name: 'Events' })
+      this.goHome()
     }
   }
 }

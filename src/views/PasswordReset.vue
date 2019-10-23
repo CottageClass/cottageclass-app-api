@@ -43,13 +43,13 @@ import StyleWrapper from '@/components/FTE/StyleWrapper.vue'
 import MainNav from '@/components/MainNav.vue'
 import Footer from '@/components/Footer.vue'
 
-import { alerts } from '@/mixins'
+import { alerts, goHome } from '@/mixins'
 import { submitNewPassword, signIn } from '@/utils/api'
 
 export default {
   name: 'PasswordReset',
   components: { ErrorMessage, StyleWrapper, MainNav, Footer },
-  mixins: [ alerts ],
+  mixins: [ alerts, goHome ],
   data: function () {
     return {
       password: '',
@@ -85,7 +85,7 @@ export default {
         await this.$store.dispatch('establishUser', { JWT })
         await signIn({ email, password })
         this.showAlertOnNextRoute('Your password has been reset', 'success')
-        this.$router.push({ name: 'Events' })
+        this.goHome()
       } catch (err) {
         this.logError(err)
         this.showAlertOnNextRoute('Something went wrong.  Please contact us at contact@joinlilypad.com.', 'failure')

@@ -15,15 +15,6 @@
       <LoggedOutNav v-if="!isAuthenticated" />
       <ul v-if="isAuthenticated" class="navigation__links-list w-list-unstyled">
         <li class="navigation__link-item">
-          <router-link :to="{name: 'Events'}"
-                       class="navigation__button w-inline-block"
-                       :class="{'selected-nav-item': isPlaydatesPage}"
-          >
-            <img src="@/assets/calendar.svg" alt="" class="navigation__icon" />
-            <div class="navigation__button-label">Playdates</div>
-          </router-link>
-        </li>
-        <li class="navigation__link-item">
           <router-link :to="{name: 'Parents'}"
                        class="navigation__button w-inline-block"
                        :class="{'selected-nav-item': isParentsPage}"
@@ -33,6 +24,15 @@
             <div v-if="false" class="global__badge TODO">
               <div class="badge__text">99+</div>
             </div>
+          </router-link>
+        </li>
+        <li class="navigation__link-item">
+          <router-link :to="{name: 'Events'}"
+                       class="navigation__button w-inline-block"
+                       :class="{'selected-nav-item': isPlaydatesPage}"
+          >
+            <img src="@/assets/calendar.svg" alt="" class="navigation__icon" />
+            <div class="navigation__button-label">Playdates</div>
           </router-link>
         </li>
       </ul>

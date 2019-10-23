@@ -29,12 +29,12 @@ import StyleWrapper from '@/components/FTE/StyleWrapper'
 import LoadingSpinner from '@/components/LoadingSpinner'
 
 import { fetchUser } from '@/utils/api'
-import { messaging } from '@/mixins'
+import { messaging, goHome } from '@/mixins'
 
 export default {
   name: 'SelectEventFromUser',
   props: ['userId'],
-  mixins: [ messaging ],
+  mixins: [ messaging, goHome ],
   components: { Nav, StyleWrapper, LoadingSpinner },
   data () {
     return {
@@ -59,7 +59,7 @@ export default {
       } catch (e) {
         this.logError(e)
       } finally {
-        this.$router.push({ name: 'Events' })
+        this.goHome()
       }
     }
   },

@@ -29,11 +29,13 @@ import Question from '@/components/base/Question.vue'
 import { deleteUserAccount } from '@/utils/api'
 import { submitToSheetsu } from '@/utils/vendor'
 import { mapGetters } from 'vuex'
+import { goHome } from '@/mixins'
 
 export default {
   name: 'DeleteAccountConfirmation',
   components: { Question, StyleWrapper },
   props: ['eventId'],
+  mixins: [ goHome ],
   data: () => {
     return {
       reason: '',
@@ -79,7 +81,7 @@ export default {
           status: 'success'
         }
       })
-      this.$router.push({ name: 'Events' })
+      this.goHome()
     },
     async confirm () {
       try {

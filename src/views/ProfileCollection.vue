@@ -26,10 +26,12 @@ import normalize from 'json-api-normalizer'
 import { submitUserInfo } from '@/utils/api'
 import { createUser } from '@/utils//createUser'
 import { mapGetters, mapMutations } from 'vuex'
+import { goHome } from '@/mixins'
 
 export default {
   name: 'ProfileCollection',
   components: { StyleWrapper, Nav, ProfileBlurb, ErrorMessage },
+  mixins: [ goHome ],
   data () {
     return {
       showError: false,
@@ -61,7 +63,7 @@ export default {
         } catch (e) {
           this.logError(e)
         }
-        this.$router.push({ name: 'Events' })
+        this.goHome()
       }
     },
     ...mapMutations([ 'setCurrentUser' ])
@@ -71,7 +73,7 @@ export default {
   },
   created () {
     if (!this.currentUser) {
-      this.$router.push({ name: 'Events' })
+      this.goHome()
     }
   }
 }

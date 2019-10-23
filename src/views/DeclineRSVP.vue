@@ -32,7 +32,7 @@ import FormWithTextArea from '@/components/base/FormWithTextArea.vue'
 import { trackEvent } from '@/utils/ahoy'
 import { submitToSheetsu } from '@/utils/vendor/sheetsu'
 import { mapGetters, mapMutations } from 'vuex'
-import { alerts } from '@/mixins'
+import { alerts, goHome } from '@/mixins'
 
 export default {
   name: 'DeclineRSVP',
@@ -43,7 +43,7 @@ export default {
       reasons: []
     }
   },
-  mixins: [alerts],
+  mixins: [ alerts, goHome ],
   props: ['eventId'],
   computed: {
     labelsAndOrder () {
@@ -68,7 +68,7 @@ export default {
       this.showAlertOnNextRoute('Thanks for your feedback! Here are some other options you might like...', 'success')
       this.declineRsvp({ eventId: this.eventId })
       trackEvent('rsvp_decline', { eventId: this.eventId })
-      this.$router.push({ name: 'Events' })
+      this.goHome()
     },
     ...mapMutations(['declineRsvp'])
   }

@@ -59,10 +59,12 @@ import TextMessageLink from '@/components/TextMessageLink.vue'
 import Nav from '@/components/FTE/Nav.vue'
 import { fetchEvent } from '@/utils/api'
 import StyleWrapper from '@/components/FTE/StyleWrapper.vue'
+import { goHome } from '@/mixins'
 
 export default {
   name: 'SocialInvite',
   components: { TextMessageLink, Nav, StyleWrapper, EventSearchListCard },
+  mixins: [ goHome ],
   data () {
     return {
       copyButtonText: 'copy link',
@@ -140,7 +142,7 @@ export default {
       this.fetchedEvent = await fetchEvent(this.eventId)
     },
     nextStep () {
-      this.$router.push({ name: 'Events' })
+      this.goHome()
     },
     onCopy: function () {
       this.copyButtonText = 'copied!'

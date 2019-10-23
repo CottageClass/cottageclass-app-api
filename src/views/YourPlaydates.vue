@@ -7,7 +7,7 @@
                    :emptyOptions="hostingEmptyOptions"
                    :items="hostingItems"
                    @empty-card-button-click="$router.push({ name: 'NewEvent' })"
-                   @empty-card-additional-link-click="$router.push({ name: 'Events' })"
+                   @empty-card-additional-link-click="goHome()"
                    @event-updated="fetchMyEvents"
                    @event-deleted="fetchMyEvents"
       />
@@ -15,7 +15,7 @@
                    :emptyOptions="goingEmptyOptions"
                    :items="goingItems"
                    @user-updated="fetchGoing"
-                   @empty-card-button-click="$router.push({ name: 'Events' })"
+                   @empty-card-button-click="goHome()"
       />
       <ListSection title="Your offers"
                    buttonText="Offer Playdate"
@@ -23,7 +23,7 @@
                    :items="yourOffersItems"
                    @header-button-click="$router.push({ name: 'NewEvent' })"
                    @empty-card-button-click="$router.push({ name: 'NewEvent' })"
-                   @empty-card-additional-link-click="$router.push({ name: 'Events' })"
+                   @empty-card-additional-link-click="goHome()"
                    @event-updated="fetchMyEvents"
                    @event-deleted="fetchMyEvents"
       />
@@ -63,13 +63,13 @@ import heartDoor2 from '@/assets/heart-door-2.svg'
 import playdates2 from '@/assets/playdates-2.svg'
 import availability2 from '@/assets/availability-2.svg'
 
-import { item, redirect } from '@/mixins'
+import { item, redirect, goHome } from '@/mixins'
 import { fetchUpcomingParticipatingEvents, fetchUpcomingEvents } from '@/utils/api'
 
 export default {
   name: 'YourPlaydates',
   components: { ListSection, MainNav, Footer, ListSectionEmptyCard },
-  mixins: [ item, redirect ],
+  mixins: [ item, redirect, goHome ],
   data () {
     return {
       goingItems: null,
