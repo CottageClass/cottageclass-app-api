@@ -45,7 +45,7 @@ export default {
       reasons: []
     }
   },
-  mixins: [ alerts, goHome],
+  mixins: [ alerts, goHome ],
   props: ['userId'],
   computed: {
     labelsAndOrder () {
