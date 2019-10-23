@@ -14,7 +14,6 @@
         @cancel-click="$emit('cancel-click')"
         @interested-click="$emit('interested-click')"
         @share-click="$emit('share-click')"
-        @contact-click="$emit('contact-click')"
         class="other-events-card__action-selector__button-list"
         :showGoingButton="showGoingButton"
         :showMeetButton="showMeetButton"

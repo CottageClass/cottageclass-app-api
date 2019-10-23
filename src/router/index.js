@@ -15,7 +15,6 @@ import SignInWithEmail from '@/views/SignInWithEmail.vue'
 import SignUpWithEmail from '@/views/SignUpWithEmail.vue'
 import PasswordResetRequest from '@/views/PasswordResetRequest.vue'
 import PasswordReset from '@/views/PasswordReset.vue'
-import ContactForm from '@/views/ContactForm.vue'
 import Onboarding from '@/views/Onboarding.vue'
 import ProfileCollection from '@/views/ProfileCollection.vue'
 import DeclineRSVP from '@/views/DeclineRSVP.vue'
@@ -90,18 +89,6 @@ export default new Router({
       path: '/events/new/:stepName?',
       name: 'NewEvent',
       component: NewEvent,
-      props: true
-    },
-    {
-      path: '/contact/event/:eventId',
-      name: 'ContactEventForm',
-      component: ContactForm,
-      props: true
-    },
-    {
-      path: '/contact/user/:userId',
-      name: 'ContactUserForm',
-      component: ContactForm,
       props: true
     },
     /// ///////////   above this line in blue/flow

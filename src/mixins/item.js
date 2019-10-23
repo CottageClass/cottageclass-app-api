@@ -260,9 +260,6 @@ export default {
     ...mapGetters([ 'currentUser', 'isAuthenticated' ])
   },
   methods: {
-    contactClick () {
-      this.$router.push({ name: 'ContactUserForm', params: { userId: this.user.id } })
-    },
     cancelClick () {
       this.$router.push({ name: 'EventPage', params: { id: this.event.id, showDeleteConfirmationModal: true } })
     },
