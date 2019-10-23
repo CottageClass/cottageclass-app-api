@@ -18,7 +18,7 @@ import { mapGetters } from 'vuex'
 
 import { fetchEvent } from '@/utils/api'
 import * as utils from '@/utils/utils.js'
-import { redirect, rsvp } from '@/mixins'
+import { redirect, rsvp, validationErrors } from '@/mixins'
 
 import Question from '@/components/base/Question.vue'
 import Checkboxes from '@/components/base/Checkboxes.vue'
@@ -29,7 +29,7 @@ var moment = require('moment')
 export default {
   name: 'RsvpInfoCollection',
   components: { LoadingSpinner, Checkboxes, Question },
-  mixins: [ redirect, rsvp ],
+  mixins: [ redirect, rsvp, validationErrors ],
   data () {
     return {
       childrenSelected: [],
@@ -41,8 +41,7 @@ export default {
     this.$emit('set-nav-props', {
       nextButtonHandler: this.nextStep,
       prevButtonHandler: () => { this.$router.go(-1) },
-      button: this.nextButtonState,
-      errorMessage: this.err
+      button: this.nextButtonState
     })
     if (this.redirectToSignupIfNotAuthenticated()) { return }
     this.redirectToOnboardingIfNotOnboarded()
@@ -53,14 +52,6 @@ export default {
     this.fetchEventInformation()
   },
   watch: {
-    err: {
-      handler () {
-        this.$emit('set-nav-props', {
-          errorMessage: this.err
-        })
-      },
-      immediate: true
-    },
     nextButtonState () {
       this.$emit('set-nav-props', {
         button: this.nextButtonState
@@ -68,7 +59,7 @@ export default {
     }
   },
   computed: {
-    err () {
+    validationError () {
       if (!this.children || this.children.length === 0) {
         return 'Sorry, but we cannot retrieve your children\'s information. Are you sure you have signed in? To resolve this, please email us at: contact@joinlilypad.com.'
       }
@@ -136,7 +127,7 @@ export default {
       }
     },
     async nextStep () {
-      if (this.err) { return }
+      if (this.validationError) { return }
       if (this.event.participated) {
         this.$router.push({ name: 'EventPage', params: { id: this.event.id } })
       } else {
