@@ -3,6 +3,7 @@
     <Nav :button="button"
          :hidePrevious="hidePrevious"
          @next="nextButotnHandler"
+         @prev="prevButotnHandler"
     />
     <router-view class="content-container flow"
                  @setNavProps="setNavProps"
@@ -18,6 +19,7 @@ export default {
   components: { Nav },
   data () {
     return {
+      prevButotnHandler: () => {},
       nextButotnHandler: () => {},
       hidePrevious: false,
       button: 'next'

@@ -5,7 +5,6 @@ import SplashPage from '@/views/SplashPage.vue'
 import EventPage from '@/views/EventPage.vue'
 import Search from '@/views/Search.vue'
 import NewEvent from '@/views/NewEvent.vue'
-import RsvpInfoCollection from '@/components/RsvpInfoCollection.vue'
 import CancelRSVP from '@/components/CancelRSVP.vue'
 import Faq from '@/components/Faq.vue'
 import YourPlaydates from '@/views/YourPlaydates.vue'
@@ -25,7 +24,9 @@ import SelectEventFromUser from '@/views/SelectEventFromUser'
 import AddOffersPrompt from '@/views/AddOffersPrompt'
 import ErrorPage from '@/views/ErrorPage'
 
+// FlowPage components
 import FlowPage from '@/views/FlowPage.vue'
+import RsvpInfoCollection from '@/components/RsvpInfoCollection.vue'
 import DisinterestedSurvey from '@/views/DisinterestedSurvey.vue'
 
 Vue.use(Router)
@@ -37,6 +38,12 @@ export default new Router({
       path: 'not used',
       component: FlowPage,
       children: [
+        {
+          path: '/rsvp/:eventId',
+          name: 'RsvpInfoCollection',
+          component: RsvpInfoCollection,
+          props: true
+        },
         {
           path: '/users/:userId/decline',
           name: 'DisinterestedSurvey',
@@ -171,11 +178,6 @@ export default new Router({
       name: 'CancelRSVP',
       component: CancelRSVP,
       props: true
-    },
-    {
-      path: '/rsvp/:eventId',
-      name: 'RsvpInfoCollection',
-      component: RsvpInfoCollection
     },
     {
       path: '/password-reset-request',

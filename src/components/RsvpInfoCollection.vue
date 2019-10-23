@@ -1,31 +1,17 @@
 <template>
-
-  <!-- wrapper for desktop screens -->
-
-  <div class="onb-body">
-    <div class="body">
-      <div class="content-wrapper">
-        <StyleWrapper styleIs="onboarding">
-          <Nav
-            :button="nextButtonState"
-            @next="nextStep"
-            @prev="$router.go(-1)" />
-          <ErrorMessage v-if="err" :text="err" />
-          <LoadingSpinner v-if="!allInformationLoaded"/>
-          <Question
-            v-if="allInformationLoaded"
-            title="Which children are going?"
-            :subtitle="spotsRemainingPhrase"
-          >
-            <Checkboxes
-              v-model="childrenSelected"
-              :labels="labelsAndOrder"/>
-          </Question>
-        </StyleWrapper>
-      </div>
-    </div>
+  <div>
+    <ErrorMessage v-if="err" :text="err" />
+    <LoadingSpinner v-if="!allInformationLoaded"/>
+    <Question
+      v-if="allInformationLoaded"
+      title="Which children are going?"
+      :subtitle="spotsRemainingPhrase"
+    >
+      <Checkboxes
+        v-model="childrenSelected"
+        :labels="labelsAndOrder"/>
+    </Question>
   </div>
-
 </template>
 
 <script>
@@ -35,18 +21,16 @@ import { fetchEvent } from '@/utils/api'
 import * as utils from '@/utils/utils.js'
 import { redirect, rsvp } from '@/mixins'
 
-import Nav from '@/components/FTE/Nav.vue'
 import ErrorMessage from '@/components/base/ErrorMessage.vue'
 import Question from '@/components/base/Question.vue'
 import Checkboxes from '@/components/base/Checkboxes.vue'
-import StyleWrapper from '@/components/FTE/StyleWrapper.vue'
 import LoadingSpinner from '@/components/LoadingSpinner.vue'
 
 var moment = require('moment')
 
 export default {
   name: 'RsvpInfoCollection',
-  components: { Nav, LoadingSpinner, ErrorMessage, Checkboxes, StyleWrapper, Question },
+  components: { LoadingSpinner, ErrorMessage, Checkboxes, Question },
   mixins: [ redirect, rsvp ],
   data () {
     return {
@@ -57,6 +41,11 @@ export default {
     }
   },
   async created () {
+    this.$emit('setNavProps', {
+      nextButotnHandler: this.nextStep,
+      prevButotnHandler: () => { this.$router.go(-1) },
+      button: this.nextButtonState
+    })
     if (this.redirectToSignupIfNotAuthenticated()) { return }
     this.redirectToOnboardingIfNotOnboarded()
     this.showErrorIfUserHasNoChildren()
@@ -65,6 +54,13 @@ export default {
   mounted: function () {
     // get data about the current event to determine max attendees.
     this.fetchEventInformation()
+  },
+  watch: {
+    nextButtonState () {
+      this.$emit('setNavProps', {
+        button: this.nextButtonState
+      })
+    }
   },
   computed: {
     spotsRemainingPhrase: function () {
@@ -148,17 +144,6 @@ export default {
         this.$router.push({ name: 'EventPage', params: { id: this.event.id } })
       } else {
         await this.submitRsvp(this.childrenSelected)
-      }
-    },
-    isSelected: function (id) {
-      return this.childrenSelected.includes(id)
-    },
-    toggleSelected: function (id) {
-      this.err = ''
-      if (this.isSelected(id)) {
-        this.childrenSelected = this.childrenSelected.filter((aChildId) => aChildId !== id)
-      } else {
-        this.childrenSelected.push(id)
       }
     }
   }
