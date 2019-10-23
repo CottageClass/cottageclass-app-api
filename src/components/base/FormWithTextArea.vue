@@ -33,3 +33,15 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.flow {
+  .tall textarea {
+    height: 200px;
+  }
+
+  .short textarea {
+    height: 75px;
+  }
+}
+</style>

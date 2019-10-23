@@ -2,7 +2,7 @@
   <Question
     title="Describe your playdate"
     subtitle="Be sure to include a short description of what you'd like to do or, if you're meeting in a public place, what the plan will be."
-    class="container">
+    class="unpadded">
     <FormWithTextArea
       class="short"
       maxLength="255"
@@ -92,17 +92,24 @@ export default {
   }
 }
 </script>
-<style>
-.images-button {
-  display: block;
-  width: 50%;
-  padding: 13px 16px;
-  border-radius: 4px;
-  background-color: hsla(0, 0%, 100%, .7);
-  cursor: pointer;
-  color: #1d8ae7;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
+
+<style lang="scss" scoped>
+.flow {
+  .images-button {
+    display: block;
+    width: 50%;
+    padding: 13px 16px;
+    border-radius: 4px;
+    background-color: hsla(0, 0%, 100%, .7);
+    cursor: pointer;
+    color: #1d8ae7;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+
+  .unpadded {
+    padding: 0;
+  }
 }
 </style>

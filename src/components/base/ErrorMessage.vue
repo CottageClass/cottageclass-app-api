@@ -26,10 +26,9 @@ export default {
   }
 
   .onb-error-container {
+    width: 720px;
     display: flex;
-    width: 100%;
     min-height: 60px;
-    margin-bottom: 24px;
     padding: 16px 16px 18px;
     flex-direction: column;
     justify-content: center;
@@ -40,6 +39,17 @@ export default {
 
   .onb-error-text {
     font-size: 13px;
+  }
+
+  @media (max-width: 991px) {
+    .onb-error-container {
+      width: 670px;
+    }
+  }
+  @media (max-width: 767px) {
+    .onb-error-container {
+      width: 100%;
+    }
   }
 }
 </style>
