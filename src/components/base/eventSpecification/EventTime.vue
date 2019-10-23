@@ -83,7 +83,8 @@ export default {
 <style scoped lang="scss">
 
 .date-picker {
-  margin: 0 24px 0 24px;
+  margin: 0 4px;
+  width: 150px;
 }
 
 .time-picker-container {
