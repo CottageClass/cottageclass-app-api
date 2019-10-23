@@ -65,6 +65,7 @@ export default {
   }
 
   .content-container {
+    flex: 1;
     width: 720px;
     margin-bottom: 0px;
     padding: 32px 32px 72px;

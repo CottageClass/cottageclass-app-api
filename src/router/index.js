@@ -73,6 +73,12 @@ export default new Router({
           props: {
             context: true
           }
+        },
+        {
+          path: '/rsvp/:eventId/cancel',
+          name: 'CancelRSVP',
+          component: CancelRSVP,
+          props: true
         }
       ]
     },
@@ -98,12 +104,6 @@ export default new Router({
       path: '/events/new/:stepName?',
       name: 'NewEvent',
       component: NewEvent,
-      props: true
-    },
-    {
-      path: '/rsvp/:eventId/cancel',
-      name: 'CancelRSVP',
-      component: CancelRSVP,
       props: true
     },
     {

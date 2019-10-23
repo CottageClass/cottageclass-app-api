@@ -1,30 +1,25 @@
 <template>
-  <div class="body">
-    <div class="content-wrapper">
-      <StyleWrapper styleIs="onboarding">
-        <Question
-          class='rsvp-cancel-reason'
-          title="Cancel your RSVP."
-          subtitle="Please let us know in a few words why you won't be attending."
-        >
-          <div class="form-describe-need w-form">
-            <form v-on:submit.prevent id="email-form-2">
-              <p class="describe-label">{{ charsLeft }} characters left...</p>
-              <textarea v-model="reason" id="field" name="field" placeholder="e.g. 'We had a change of plan and don't need care that afternoon.'" class="text-area-decribe-need w-input"></textarea>
-            </form>
-            <div class="action-bar">
-              <button class="button nevermind-button" @click="nevermind">Nevermind</button>
-              <button class="button cancel-button" @click="confirm">Cancel RSVP</button>
-            </div>
-          </div>
-        </Question>
-      </StyleWrapper>
-    </div>
+  <div>
+    <Question
+      class='rsvp-cancel-reason'
+      title="Cancel your RSVP."
+      subtitle="Please let us know in a few words why you won't be attending."
+    >
+      <div class="form-describe-need w-form">
+        <form v-on:submit.prevent id="email-form-2">
+          <p class="describe-label">{{ charsLeft }} characters left...</p>
+          <textarea v-model="reason" id="field" name="field" placeholder="e.g. 'We had a change of plan and don't need care that afternoon.'" class="text-area-decribe-need w-input"></textarea>
+        </form>
+        <div class="action-bar">
+          <button class="button nevermind-button" @click="nevermind">Nevermind</button>
+          <button class="button cancel-button" @click="confirm">Cancel RSVP</button>
+        </div>
+      </div>
+    </Question>
   </div>
 </template>
 
 <script>
-import StyleWrapper from '@/components/FTE/StyleWrapper.vue'
 import Question from '@/components/base/Question.vue'
 import { fetchEvent } from '@/utils/api'
 import { rsvp } from '@/mixins'
@@ -32,7 +27,7 @@ import { mapGetters } from 'vuex'
 
 export default {
   name: 'CancelRSVP',
-  components: { Question, StyleWrapper },
+  components: { Question },
   props: ['eventId'],
   mixins: [rsvp],
   data: () => {
@@ -59,6 +54,12 @@ export default {
       }
     },
     ...mapGetters([ 'currentUser' ])
+  },
+  created () {
+    this.$emit('setNavProps', {
+      button: 'none',
+      hidePrevious: true
+    })
   },
   methods: {
     nevermind: function () {
