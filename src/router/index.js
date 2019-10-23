@@ -54,6 +54,12 @@ export default new Router({
           path: '/delete-account',
           name: 'DeleteAccountConfirmation',
           component: DeleteAccountConfirmation
+        },
+        {
+          path: '/rsvp/:eventId/decline',
+          name: 'DeclineRSVP',
+          component: DeclineRSVP,
+          props: true
         }
       ]
     },
@@ -67,12 +73,6 @@ export default new Router({
       path: '/pick-a-time/:userId',
       name: 'SelectEventFromUser',
       component: SelectEventFromUser,
-      props: true
-    },
-    {
-      path: '/rsvp/:eventId/decline',
-      name: 'DeclineRSVP',
-      component: DeclineRSVP,
       props: true
     },
     {
