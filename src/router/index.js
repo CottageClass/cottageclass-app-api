@@ -49,6 +49,11 @@ export default new Router({
           name: 'DisinterestedSurvey',
           component: DisinterestedSurvey,
           props: true
+        },
+        {
+          path: '/delete-account',
+          name: 'DeleteAccountConfirmation',
+          component: DeleteAccountConfirmation
         }
       ]
     },
@@ -65,20 +70,10 @@ export default new Router({
       props: true
     },
     {
-      path: '/delete-account',
-      name: 'DeleteAccountConfirmation',
-      component: DeleteAccountConfirmation
-    },
-    {
       path: '/rsvp/:eventId/decline',
       name: 'DeclineRSVP',
       component: DeclineRSVP,
       props: true
-    },
-    {
-      path: '/profile',
-      name: 'ProfileCollection',
-      component: ProfileCollection
     },
     {
       path: '/welcome/:section?/:stepName?',
@@ -91,6 +86,43 @@ export default new Router({
       name: 'NewEvent',
       component: NewEvent,
       props: true
+    },
+    {
+      path: '/share',
+      name: 'SocialInvite',
+      component: SocialInvite
+    },
+    {
+      path: '/event/:id/share',
+      name: 'SocialEventInvite',
+      component: SocialInvite,
+      props: {
+        context: true
+      }
+    },
+    {
+      path: '/rsvp/:eventId/cancel',
+      name: 'CancelRSVP',
+      component: CancelRSVP,
+      props: true
+    },
+    {
+      path: '/contact/event/:eventId',
+      name: 'ContactEventForm',
+      component: ContactForm,
+      props: true
+    },
+    {
+      path: '/contact/user/:userId',
+      name: 'ContactUserForm',
+      component: ContactForm,
+      props: true
+    },
+    /// ///////////   above this line in blue/flow
+    {
+      path: '/profile',
+      name: 'ProfileCollection',
+      component: ProfileCollection
     },
     {
       path: '/',
@@ -140,19 +172,6 @@ export default new Router({
       props: true
     },
     {
-      path: '/share',
-      name: 'SocialInvite',
-      component: SocialInvite
-    },
-    {
-      path: '/event/:id/share',
-      name: 'SocialEventInvite',
-      component: SocialInvite,
-      props: {
-        context: true
-      }
-    },
-    {
       path: '/event/:id/edit',
       name: 'EventEdit',
       component: EventEdit
@@ -174,27 +193,9 @@ export default new Router({
       component: YourPlaydates
     },
     {
-      path: '/rsvp/:eventId/cancel',
-      name: 'CancelRSVP',
-      component: CancelRSVP,
-      props: true
-    },
-    {
       path: '/password-reset-request',
       name: 'PasswordResetRequest',
       component: PasswordResetRequest,
-      props: true
-    },
-    {
-      path: '/contact/event/:eventId',
-      name: 'ContactEventForm',
-      component: ContactForm,
-      props: true
-    },
-    {
-      path: '/contact/user/:userId',
-      name: 'ContactUserForm',
-      component: ContactForm,
       props: true
     },
     {

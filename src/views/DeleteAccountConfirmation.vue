@@ -1,30 +1,30 @@
 <template>
-  <div class="body">
-    <div class="content-wrapper">
-      <StyleWrapper styleIs="onboarding">
-        <Question
-          class='rsvp-cancel-reason'
-          title="Delete your account"
-          subtitle="We really appreciate your feedback! Why are you leaving?"
-        >
-          <div class="form-describe-need w-form">
-            <form v-on:submit.prevent id="email-form-2">
-              <p class="describe-label">{{ charsLeft }} characters left...</p>
-              <textarea v-model="reason" id="field" name="field" placeholder="e.g. 'I am moving to an island with no internet.  Forever....'" class="text-area-decribe-need w-input"></textarea>
-            </form>
-            <div class="action-bar">
-              <button class="button feedback-button" @click="feedback">Just send feedback</button>
-              <button class="button delete-button" @click="confirm">Delete account</button>
-            </div>
-          </div>
-        </Question>
-      </StyleWrapper>
-    </div>
+  <div>
+    <Question
+      class='rsvp-cancel-reason'
+      title="Delete your account"
+      subtitle="We really appreciate your feedback! Why are you leaving?"
+    >
+      <div class="form-describe-need w-form">
+        <form v-on:submit.prevent id="email-form-2">
+          <p class="describe-label">{{ charsLeft }} characters left...</p>
+          <textarea v-model="reason"
+                    id="field"
+                    name="field"
+                    placeholder="e.g. 'I am moving to an island with no internet.  Forever....'"
+                    class="text-area-decribe-need w-input"
+          />
+        </form>
+        <div class="action-bar">
+          <button class="button feedback-button" @click="feedback">Just send feedback</button>
+          <button class="button delete-button" @click="confirm">Delete account</button>
+        </div>
+      </div>
+    </Question>
   </div>
 </template>
 
 <script>
-import StyleWrapper from '@/components/FTE/StyleWrapper.vue'
 import Question from '@/components/base/Question.vue'
 import { deleteUserAccount } from '@/utils/api'
 import { submitToSheetsu } from '@/utils/vendor'
@@ -32,14 +32,19 @@ import { mapGetters } from 'vuex'
 
 export default {
   name: 'DeleteAccountConfirmation',
-  components: { Question, StyleWrapper },
-  props: ['eventId'],
+  components: { Question },
   data: () => {
     return {
       reason: '',
       charLimit: 288,
       event: null
     }
+  },
+  created () {
+    this.$emit('setNavProps', {
+      button: 'none',
+      hidePrevious: true
+    })
   },
   watch: {
     reason: function () {
@@ -127,7 +132,7 @@ export default {
 
 .button {
   width: 50%;
-  padding: 12px 32px;
+  padding: 12px 20px;
   margin: 10px;
   border-radius: 4px;
   background-color: #fff;
