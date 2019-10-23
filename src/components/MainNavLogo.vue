@@ -11,13 +11,16 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import { goHome } from '@/mixins'
+
 export default {
   name: 'MainNavLogo',
   computed: mapGetters(['isAuthenticated']),
+  mixins: [ goHome ],
   methods: {
     goToLink () {
       if (this.isAuthenticated) {
-        this.$router.push({ name: 'Events' })
+        this.goHome()
       } else {
         this.$router.push({ name: 'SplashPage' })
       }
