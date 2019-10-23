@@ -4,27 +4,27 @@ import UserPage from '@/views/UserPage.vue'
 import SplashPage from '@/views/SplashPage.vue'
 import EventPage from '@/views/EventPage.vue'
 import Search from '@/views/Search.vue'
-import NewEvent from '@/views/NewEvent.vue'
-import CancelRSVP from '@/components/CancelRSVP.vue'
 import Faq from '@/components/Faq.vue'
 import YourPlaydates from '@/views/YourPlaydates.vue'
-import SocialInvite from '@/views/SocialInvite.vue'
 import EventEdit from '@/components/EventEdit.vue'
 import ProfileEdit from '@/components/ProfileEdit.vue'
 import SignInWithEmail from '@/views/SignInWithEmail.vue'
 import SignUpWithEmail from '@/views/SignUpWithEmail.vue'
 import PasswordResetRequest from '@/views/PasswordResetRequest.vue'
 import PasswordReset from '@/views/PasswordReset.vue'
-import Onboarding from '@/views/Onboarding.vue'
 import ProfileCollection from '@/views/ProfileCollection.vue'
-import DeclineRSVP from '@/views/DeclineRSVP.vue'
-import DeleteAccountConfirmation from '@/views/DeleteAccountConfirmation'
 import ErrorPage from '@/views/ErrorPage'
 
 // FlowPage components
 import FlowPage from '@/views/FlowPage.vue'
+import NewEvent from '@/views/NewEvent.vue'
+import CancelRSVP from '@/components/CancelRSVP.vue'
+import SocialInvite from '@/views/SocialInvite.vue'
+import Onboarding from '@/views/Onboarding.vue'
 import RsvpInfoCollection from '@/components/RsvpInfoCollection.vue'
 import DisinterestedSurvey from '@/views/DisinterestedSurvey.vue'
+import DeclineRSVP from '@/views/DeclineRSVP.vue'
+import DeleteAccountConfirmation from '@/views/DeleteAccountConfirmation'
 
 Vue.use(Router)
 
@@ -76,6 +76,12 @@ export default new Router({
           name: 'CancelRSVP',
           component: CancelRSVP,
           props: true
+        },
+        {
+          path: '/events/new/:stepName?',
+          name: 'NewEvent',
+          component: NewEvent,
+          props: true
         }
       ]
     },
@@ -83,12 +89,6 @@ export default new Router({
       path: '/welcome/:section?/:stepName?',
       name: 'Onboarding',
       component: Onboarding,
-      props: true
-    },
-    {
-      path: '/events/new/:stepName?',
-      name: 'NewEvent',
-      component: NewEvent,
       props: true
     },
     /// ///////////   above this line in blue/flow
