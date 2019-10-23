@@ -24,7 +24,7 @@
         <Children v-model="children" :required="false" />
         <Phone v-model="phone" :currentPhone="currentUser.phone" :required="false" />
         <Location
-          :currentAddress="currentUser.place && currentUser.place.name + ', ' + currentUser.place.locality + ', ' + currentUser.place.adminAreaLevel1 "
+          :currentAddress="currentUser.place.fullAddress"
           :currentApartment="currentUser.place.apartmentNumber"
           v-model="place"
         />

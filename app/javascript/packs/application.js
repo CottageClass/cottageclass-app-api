@@ -93,7 +93,7 @@ if (isAuthWindow) {
     store.dispatch('newRoute', { to, from })
     trackEvent('page_view', { to: to.fullPath, from: from.fullPath })
     if (to.name === 'SplashPage' && store.getters.isAuthenticated) {
-      next({ name: 'Events' })
+      next({ name: 'Parents' })
     } else {
       next()
     }

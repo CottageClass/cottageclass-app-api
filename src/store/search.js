@@ -3,7 +3,7 @@ import { fetchFeed, fetchEvents } from '@/utils/api'
 import filter from './filter'
 
 const state = {
-  itemType: 'Events',
+  itemType: 'Playdates',
   data: {}
 }
 
@@ -132,8 +132,8 @@ const getters = {
   },
   showFetchMoreButton: state => {
     try { return state.data[state.itemType].moreAvailable } catch (e) { return false }
-  }
-
+  },
+  itemType: state => state.itemType
 }
 
 const modules = { filter }

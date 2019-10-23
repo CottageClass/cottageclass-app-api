@@ -12,12 +12,13 @@ import ProfileBlurb from '@/components/FTE/userInformation/ProfileBlurb.vue'
 
 import { submitUserInfo } from '@/utils/api'
 import { createUser } from '@/utils//createUser'
-import { validationError } from '@/mixins'
+
+import { goHome, validationError } from '@/mixins'
 
 export default {
   name: 'ProfileCollection',
+  mixins: [ goHome, validationError ],
   components: { ProfileBlurb },
-  mixins: [validationError],
   data () {
     return {
       showError: false,
@@ -49,7 +50,7 @@ export default {
         } catch (e) {
           this.logError(e)
         }
-        this.$router.push({ name: 'Events' })
+        this.goHome()
       }
     },
     ...mapMutations([ 'setCurrentUser' ])
@@ -73,7 +74,7 @@ export default {
       hidePrevious: true
     })
     if (!this.currentUser) {
-      this.$router.push({ name: 'Events' })
+      this.goHome()
     }
   }
 }

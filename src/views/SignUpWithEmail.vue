@@ -74,7 +74,7 @@
 </template>
 
 <script>
-import { providerAuthentication, alerts } from '@/mixins'
+import { providerAuthentication, alerts, goHome } from '@/mixins'
 import { register, signIn } from '@/utils/api'
 import MainNav from '@/components/MainNav.vue'
 import StyleWrapper from '@/components/FTE/StyleWrapper.vue'
@@ -85,7 +85,7 @@ import LoadingSpinner from '@/components/LoadingSpinner'
 export default {
   name: 'SignUpWithEmail',
   components: { ErrorMessage, MainNav, StyleWrapper, FacebookButton, LoadingSpinner },
-  mixins: [providerAuthentication, alerts],
+  mixins: [ providerAuthentication, alerts, goHome ],
   data: function () {
     return {
       disableForm: false,
@@ -183,7 +183,7 @@ export default {
             // try to log in with existing credentials
             const signInResult = await signIn({ email, password })
             this.$store.dispatch('establishUser', { JWT: signInResult.data[0] })
-            this.$router.push({ name: 'Events' })
+            this.goHome()
           } catch (e) {
             this.showError = true
             this.showAlert('Sorry, there was a problem creating your account. Did you already create an account with this email address directly or via Facebook?', 'failure')
