@@ -3,29 +3,23 @@
     <CreateEvent v-if="section==='event'"
                  :stepName="stepName"
                  v-on:submission-complete="findUpcomingEvent"
-                 @finishedHomeEvent="completeCreationForHomeEvents"
+                 @finishedHomeEvent="proceed"
                  @finishedPublicEvent="proceed"
                  @set-nav-props="$emit('set-nav-props', $event)"
                  context="new-event"
-    />
-    <HouseInformation v-if="section==='homeInfo'"
-                      :stepName="stepName"
-                      @finished="proceed"
-                      context="new-event"
     />
   </div>
 </template>
 
 <script>
 import CreateEvent from '@/components/CreateEvent'
-import HouseInformation from '@/components/FTE/userInformation/HouseInformation'
 
 import { mapGetters } from 'vuex'
 import { redirect } from '@/mixins'
 
 export default {
   name: 'NewEvent',
-  components: { CreateEvent, HouseInformation },
+  components: { CreateEvent },
   mixins: [redirect],
   props: ['stepName'],
   data () {
@@ -38,13 +32,6 @@ export default {
   methods: {
     proceed () {
       this.$router.push({ name: 'SocialEventInvite', params: { id: this.upcomingEvent.id, context: 'spontaneous' } })
-    },
-    completeCreationForHomeEvents () {
-      if (this.currentUser.houseRules === null) {
-        this.section = 'homeInfo'
-      } else {
-        this.proceed()
-      }
     },
     findUpcomingEvent (value) {
       this.upcomingEvent = value[0]
