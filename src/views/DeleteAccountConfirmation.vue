@@ -41,7 +41,7 @@ export default {
     }
   },
   created () {
-    this.$emit('setNavProps', {
+    this.$emit('set-nav-props', {
       button: 'none',
       hidePrevious: true
     })

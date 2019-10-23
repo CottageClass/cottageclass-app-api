@@ -56,7 +56,7 @@ export default {
     ...mapGetters([ 'currentUser' ])
   },
   created () {
-    this.$emit('setNavProps', {
+    this.$emit('set-nav-props', {
       button: 'none',
       hidePrevious: true
     })

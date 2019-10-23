@@ -48,7 +48,7 @@ export default {
     ...mapGetters(['currentUser', 'distanceFromCurrentUser'])
   },
   async created () {
-    this.$emit('setNavProps', {
+    this.$emit('set-nav-props', {
       button: 'done',
       nextButtonHandler: this.submit.bind(this),
       hidePrevious: true

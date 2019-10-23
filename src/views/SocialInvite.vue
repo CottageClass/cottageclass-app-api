@@ -94,7 +94,7 @@ export default {
     }
   },
   created () {
-    this.$emit('setNavProps', {
+    this.$emit('set-nav-props', {
       nextButtonHandler: this.nextStep,
       hidePrevious: true,
       button: 'done'

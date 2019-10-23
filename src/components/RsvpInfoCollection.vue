@@ -38,7 +38,7 @@ export default {
     }
   },
   async created () {
-    this.$emit('setNavProps', {
+    this.$emit('set-nav-props', {
       nextButtonHandler: this.nextStep,
       prevButtonHandler: () => { this.$router.go(-1) },
       button: this.nextButtonState,
@@ -55,14 +55,14 @@ export default {
   watch: {
     err: {
       handler () {
-        this.$emit('setNavProps', {
+        this.$emit('set-nav-props', {
           errorMessage: this.err
         })
       },
       immediate: true
     },
     nextButtonState () {
-      this.$emit('setNavProps', {
+      this.$emit('set-nav-props', {
         button: this.nextButtonState
       })
     }

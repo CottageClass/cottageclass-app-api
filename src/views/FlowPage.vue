@@ -9,7 +9,7 @@
       <ErrorMessage v-if="errorMessage && showErrorMessage"
                     :text="errorMessage" />
       <router-view class="content-container"
-                   @setNavProps="setNavProps"
+                   @set-nav-props="setNavProps"
       />
     </div>
   </div>
