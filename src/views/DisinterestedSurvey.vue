@@ -1,5 +1,5 @@
 <template>
-  <div class="flow">
+  <div>
     <Question
       :title="`Why aren't you interested in a playdate with ${this.otherUser.firstName}?`"
       subtitle="Your feedback is private and helps us do a better job of matching parents and playdates!" >
@@ -74,32 +74,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-
-.onb-body {
-  background-color: #0d73c7;
-}
-
-.content-wrapper {
-  width: 720px;
-  min-height: 100vh;
-  margin-right: auto;
-  margin-left: auto;
-  padding-bottom: 50px;
-  background-color: #1c8be7;
-}
-@media (max-width: 991px) {
-  .content-wrapper {
-    width: 670px;
-  }
-}
-
-@media (max-width: 767px) {
-  .content-wrapper {
-    width: 100%;
-    margin-top: 0px;
-    margin-bottom: 0px;
-  }
-}
-</style>

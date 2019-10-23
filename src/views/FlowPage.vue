@@ -1,10 +1,10 @@
 <template>
-  <div class="onb-body">
+  <div class="page-container">
     <Nav :button="button"
          :hidePrevious="hidePrevious"
          @next="nextButotnHandler"
     />
-    <router-view class="content-container"
+    <router-view class="content-container flow"
                  @setNavProps="setNavProps"
     />
   </div>
@@ -32,16 +32,63 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  .onb-body {
+  .page-container {
+    display: flex;
+    flex-direction: column;
     background-color: #0d73c7;
-  }
-  .content-container {
-    width: 720px;
     min-height: 100vh;
+  }
+
+  .content-container {
+    flex: 1;
+    width: 720px;
     margin-right: auto;
     margin-left: auto;
     background-color: #1c8be7;
     margin-bottom: 0px;
     padding: 32px 32px 72px;
+    min-height: 100%;
   }
+
+  @media (max-width: 991px) {
+    .content-container {
+      width: 670px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .content-container {
+      width: 100%;
+      margin-top: 0px;
+      margin-bottom: 0px;
+    }
+  }
+</style>
+
+<style lang="scss">
+  .flow textarea {
+    padding-top: 16px;
+    padding-bottom: 16px;
+    padding-left: 18px;
+    border: 1px none #000;
+    border-radius: 4px;
+    background-color: hsla(0, 0%, 100%, .7);
+    font-size: 16px;
+
+    &.text-area-decribe-need {
+      height: 200px;
+    }
+
+    &:active {
+      background-color: #fff;
+    }
+    &:focus {
+      background-color: #fff;
+    }
+
+    &::placeholder {
+      color: rgba(0, 0, 0, .3);
+    }
+  }
+
 </style>

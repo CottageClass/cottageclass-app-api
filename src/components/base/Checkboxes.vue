@@ -72,10 +72,8 @@ export default {
 
 .flow {
   .onb-checkbox-label {
+    padding: 18px 16px 18px 6px;
     width: 100%;
-    padding-top: 18px;
-    padding-bottom: 18px;
-    padding-left: 6px;
     color: #1d8ae7;
   }
   .checkbox-field {
@@ -117,12 +115,6 @@ export default {
   .radio-form-block, .onb-form-block-checkbox-list {
     width: 100%;
     margin-bottom: 32px;
-  }
-
-  .label-checkbox, .onb-checkbox-label {
-    width: 100%;
-    padding: 18px 16px 18px 6px;
-    color: #fff;
   }
 }
 
