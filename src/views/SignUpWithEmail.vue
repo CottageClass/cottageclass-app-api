@@ -85,7 +85,7 @@ import LoadingSpinner from '@/components/LoadingSpinner'
 export default {
   name: 'SignUpWithEmail',
   components: { ErrorMessage, MainNav, StyleWrapper, FacebookButton, LoadingSpinner },
-  mixins: [providerAuthentication, alerts, goHome],
+  mixins: [ providerAuthentication, alerts, goHome ],
   data: function () {
     return {
       disableForm: false,

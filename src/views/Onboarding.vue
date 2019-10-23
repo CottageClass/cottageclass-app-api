@@ -27,7 +27,7 @@ export default {
   name: 'Onboarding',
   props: ['stepName', 'section'],
   components: { StyleWrapper, UserInformation, UserDetails },
-  mixins: { goHome },
+  mixins: [ goHome ],
   computed: mapGetters([ 'redirectRoute' ]),
   methods: {
     finishOnboarding () {

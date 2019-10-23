@@ -64,7 +64,7 @@ import { goHome } from '@/mixins'
 export default {
   name: 'SocialInvite',
   components: { TextMessageLink, Nav, StyleWrapper, EventSearchListCard },
-  mixins: { goHome },
+  mixins: [ goHome ],
   data () {
     return {
       copyButtonText: 'copy link',
