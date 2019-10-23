@@ -50,7 +50,7 @@ export default {
   async created () {
     this.$emit('setNavProps', {
       button: 'done',
-      nextButotnHandler: this.submit.bind(this),
+      nextButtonHandler: this.submit.bind(this),
       hidePrevious: true
     })
     this.otherUser = await fetchUser(this.userId)

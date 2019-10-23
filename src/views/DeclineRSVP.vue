@@ -47,7 +47,7 @@ export default {
   },
   created () {
     this.$emit('setNavProps', {
-      nextButotnHandler: this.submit,
+      nextButtonHandler: this.submit,
       button: 'done',
       hidePrevious: true
     })

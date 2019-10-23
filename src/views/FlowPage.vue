@@ -4,7 +4,7 @@
       <Nav :button="button"
            :hidePrevious="hidePrevious"
            @next="nextClick"
-           @prev="prevButotnHandler"
+           @prev="prevButtonHandler"
       />
       <ErrorMessage v-if="errorMessage && showErrorMessage"
                     :text="errorMessage" />
@@ -26,15 +26,15 @@ export default {
     return {
       errorMessage: null,
       showErrorMessage: false,
-      prevButotnHandler: () => {},
-      nextButotnHandler: () => {},
+      prevButtonHandler: () => {},
+      nextButtonHandler: () => {},
       hidePrevious: false,
       button: 'next'
     }
   },
   methods: {
     nextClick () {
-      this.nextButotnHandler()
+      this.nextButtonHandler()
       this.showErrorMessage = !!this.errorMessage
     },
     setNavProps (e) {
