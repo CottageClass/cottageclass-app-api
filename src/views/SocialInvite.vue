@@ -167,7 +167,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.flow {
 
+  .onb-heading-large {
+    margin-top: 0px;
+    margin-bottom: 10px;
+    color: #fff;
+    font-size: 24px;
+    line-height: 34px;
+    text-align: center;
+    letter-spacing: -0.3px;
+  }
 .onb-content-container {
   margin-bottom: 0px;
   padding: 0 32px 72px;
@@ -325,5 +335,6 @@ html {
     padding: 0 0 72px;
     font-family: soleil;
   }
+}
 }
 </style>
