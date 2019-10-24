@@ -44,7 +44,7 @@ a {
   width: 32%;
   margin: 2px;
   padding-top: 33%;
-  background-color: #d59191;
+  background-color: #888;
 }
 
 .hh-photos__image {
