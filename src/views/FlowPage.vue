@@ -26,8 +26,8 @@ export default {
     return {
       errorMessage: null,
       showErrorMessage: false,
-      prevButtonHandler: () => {},
-      nextButtonHandler: () => {},
+      prevButtonHandler: null,
+      nextButtonHandler: null,
       hidePrevious: false,
       button: 'next'
     }
@@ -45,7 +45,7 @@ export default {
         this.showErrorMessage = true
       } else {
         this.showErrorMessage = !!this.errorMessage
-        this.nextButtonHandler()
+        this.nextButtonHandler && this.nextButtonHandler()
       }
     },
     setNavProps (e) {
