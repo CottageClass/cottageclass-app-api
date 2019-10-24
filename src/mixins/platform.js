@@ -20,6 +20,12 @@ export default {
         height: window.screen.height * ratio
       }
       return (iOS && screen.width === 1125 && screen.height === 2436)
+    },
+    accomodateNotch () {
+      return isNative() && this.isIPhoneX
+    },
+    accomodateStatusBar () {
+      return isNative() && !this.isIPhoneX && this.isIOSNativeApp
     }
   }
 }

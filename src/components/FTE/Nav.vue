@@ -1,6 +1,9 @@
 <template>
-  <div class="nav-container">
-    <div class="title-bar">
+  <div class="nav-container" >
+    <div class="title-bar"
+         :class="{'accomodateNotch': accomodateNotch,
+                  'accomodateStatusBar': accomodateStatusBar}"
+    >
       <a
         @click="$emit('prev')"
         v-bind:class="['button-back', 'w-inline-block', {'button-hidden': hidePrevious}]">
@@ -18,9 +21,11 @@
 <script>
 
 // states are: skip, next, none, inactive
+import { platform } from '@/mixins'
 
 export default {
   name: 'Nav',
+  mixins: [platform],
   props: {
     button: {},
     hidePrevious: {
@@ -49,17 +54,23 @@ export default {
 
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .nav-container {
   position: sticky;
   width: 720px;
   top: 0;
   left: 0;
   right: 0;
-  background-color: #0d73c7;
+  background-color: rgba(108, 200, 255, .93);
 }
 
 .title-bar {
+  &.accomodateNotch {
+    margin-top: 40px;
+  }
+  &.accomodateStatusBar {
+    margin-top: 20px;
+  }
   left: 0px;
   top: 0px;
   right: 0px;
@@ -73,7 +84,6 @@ export default {
   border-style: none;
   border-width: 1px;
   border-color: hsla(0, 0%, 100%, .1);
-  background-color: rgba(108, 200, 255, .93);
   background-image: url('../../assets/cclogo-house-blue-bf44c260.svg');
   background-position: 50% 13px;
   background-size: 24px 24px;
