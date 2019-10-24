@@ -9,6 +9,7 @@
       <ErrorMessage v-if="showError" :text="place.err" />
       <ErrorMessage v-if="showError" :text="children.err" />
       <ErrorMessage v-if="showError" :text="avatar.err" />
+      <ErrorMessage v-if="showError" :text="profileBlurb.err" />
       <Question
         title="Got any photos you'd like to share?"
         subtitle="Adding photos to your profile helps give other members a sense of your family."
@@ -60,7 +61,6 @@ import Phone from '@/components/FTE/userInformation/Phone.vue'
 import Availability from '@/components/FTE/userInformation/Availability.vue'
 import MainNav from '@/components/MainNav.vue'
 import PageActionsFooter from '@/components/PageActionsFooter.vue'
-import StyleWrapper from '@/components/FTE/StyleWrapper.vue'
 import ErrorMessage from '@/components/base/ErrorMessage.vue'
 import Activities from '@/components/FTE/userInformation/Activities.vue'
 import YesOrNo from '@/components/base/YesOrNo'
@@ -83,7 +83,6 @@ export default {
     Employment,
     Availability,
     MainNav,
-    StyleWrapper,
     PageActionsFooter,
     ErrorMessage,
     Children,
@@ -140,7 +139,7 @@ export default {
   },
   computed: {
     hasError: function () {
-      if (!!this.phone.err || !!this.place.err || !!this.children.err || this.employment.err) {
+      if (!!this.phone.err || !!this.place.err || !!this.children.err || this.employment.err || this.profileBlurb.err) {
         return true
       } else {
         return false
