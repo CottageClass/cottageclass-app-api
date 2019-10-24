@@ -101,8 +101,8 @@ export default {
 }
 </script>
 
+<style lang="scss" scoped src="@/assets/style/scss/flow.scss"></style>
 <style lang="scss" scoped>
-
   .location-text-field {
     height: 56px;
     padding-top: 8px;

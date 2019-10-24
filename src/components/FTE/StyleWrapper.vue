@@ -1841,13 +1841,6 @@ background-color: #f6f6f6;
     margin-top: 22px !important;
   }
 
-  .describe-label {
-    margin-bottom: 8px;
-    color: #fff;
-    line-height: 21px;
-    text-align: left;
-  }
-
   .radio-form-block, .onb-form-block-checkbox-list {
     width: 100%;
     margin-bottom: 32px;
@@ -1972,10 +1965,6 @@ background-color: #f6f6f6;
     margin-left: 0;
     margin-right: 0;
   }
-  .describe-label {
-    color: #3333338f;
-  }
-
   .image-7 {
     display: none;
   }

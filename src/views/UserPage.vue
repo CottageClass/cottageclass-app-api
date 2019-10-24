@@ -13,7 +13,7 @@
     <div class="profile__container w-container" v-else>
       <LikeUserCard v-if="showLikeUserCard"
                     :userFirstName="user.firstName"
-                    @like-user-click="likeUserHandler('top card')"
+                    @like-user-click="interestedClickAndUpdate"
                     @dislike-user-click="dislikeUserHandler('top card')"
       />
       <div class="profile-top-card__container">
@@ -208,9 +208,6 @@ export default {
   methods: {
     handleImageClick (payload) {
       this.$refs.lightbox.showImage(payload)
-    },
-    async likeUserHandler (context) {
-      this.user = await this.interestedClickAndUpdate(context)
     },
     async dislikeUserHandler (context) {
       if (!this.redirectToSignupIfNotAuthenticated({

@@ -18,15 +18,10 @@ export default {
 }
 </script>
 
+<style lang="scss" scoped src="@/assets/style/scss/flow.scss"></style>
+
 <style lang="scss" scoped>
 .flow {
-  .onb-paragraph-subheading-2 {
-    margin-bottom: 8px;
-    color: #fff;
-    font-size: 13px;
-    line-height: 21px;
-    text-align: center;
-  }
   .question-title {
     font-size: 20px;
     color: #fff;

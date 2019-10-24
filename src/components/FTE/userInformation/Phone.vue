@@ -80,7 +80,5 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-@import '@/assets/style/scss/editing.scss';
-@import "@/assets/style/scss/flow.scss";
-</style>
+<style lang="scss" scoped src="@/assets/style/scss/flow.scss"></style>
+<style lang="scss" scoped src="@/assets/style/scss/editing.scss"></style>
