@@ -80,7 +80,6 @@ a {
 @media (max-width: 479px){
   .event-action-button {
     min-height: 38px;
-    width: 100%;
     margin-top: 0;
     margin-bottom: 8px;
   }
