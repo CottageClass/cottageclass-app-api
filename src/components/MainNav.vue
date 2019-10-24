@@ -1,5 +1,8 @@
 <template>
-  <div class="main-nav" :class="{native: isNative, accomodateNotch: isIPhoneX}">
+  <div class="main-nav"
+       :class="{native: isNative,
+                accomodateNotch: accomodateNotch,
+                accomodateStatusBar: accomodateStatusBar}" >
     <Alert />
     <PureModal v-if="showNameChangeModal"
                :title="nameChangeModalOptions.title"
@@ -144,6 +147,9 @@ a {
     z-index: 999;
     &.accomodateNotch {
       padding-top: 35px;
+    }
+    &.accomodateStatusBar {
+      padding-top: 10px;
     }
   }
 }
