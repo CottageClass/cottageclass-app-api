@@ -3,7 +3,7 @@ import { fetchFeed, fetchEvents } from '@/utils/api'
 import filter from './filter'
 
 const state = {
-  itemType: 'Playdates',
+  itemType: 'Events',
   data: {}
 }
 
