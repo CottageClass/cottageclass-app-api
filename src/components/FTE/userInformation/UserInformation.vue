@@ -32,6 +32,9 @@
     <AvatarUpload
       v-if="stepName==='avatar'"
       v-model="avatar" />
+    <Availability
+      v-if="stepName==='availability'"
+      v-model=availability />
   </div>
 </template>
 
@@ -39,6 +42,7 @@
 import normalize from 'json-api-normalizer'
 import { mapGetters, mapMutations, mapActions } from 'vuex'
 
+import Availability from '@/components/FTE/userInformation/Availability.vue'
 import Phone from '@/components/FTE/userInformation/Phone.vue'
 import Location from '@/components/FTE/userInformation/Location.vue'
 import Children from '@/components/FTE/userInformation/Children.vue'
@@ -54,10 +58,21 @@ import { stepNavigation } from '@/mixins'
 export default {
   name: 'UserInformation',
   props: ['stepName'],
-  components: { Phone, Location, Children, Employment, FacebookImageSelection, ProfileBlurb, MaxDistanceSetting, AvatarUpload },
+  components: {
+    Phone,
+    Location,
+    Children,
+    Employment,
+    FacebookImageSelection,
+    ProfileBlurb,
+    MaxDistanceSetting,
+    AvatarUpload,
+    Availability
+  },
   mixins: [stepNavigation],
   data () {
     return {
+      availability: {},
       context: 'onboarding',
       phone: { err: null },
       place: { err: null },
@@ -80,6 +95,7 @@ export default {
         'bio',
         'distance',
         'avatar',
+        'availability',
         'images'
       ]
     },
@@ -92,8 +108,8 @@ export default {
         employment: this.employment,
         images: this.images,
         distance: this.maxDistance,
-        avatar: this.avatar
-
+        avatar: this.avatar,
+        availability: this.availability
       }
       return models[this.stepName]
     },
@@ -140,6 +156,9 @@ export default {
           break
         case 'avatar':
           params = { avatar: this.avatar.avatar }
+          break
+        case 'availability':
+          params = { availability: this.availability }
           break
         default:
           return // no data to submit
