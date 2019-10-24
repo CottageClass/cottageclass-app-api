@@ -1,0 +1,45 @@
+.editing{
+  .text-field, .w-input {
+    width: 100%;
+    padding-top: 6px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, .04);
+    font-size: 16px;
+    font-weight: 400;
+  }
+
+  .text-field:focus {
+    background-color: hsla(0, 0%, 100%, .04);
+  }
+
+  .radio-button-field, .checkbox-field-extra-space {
+    margin-bottom: 8px;
+    padding-left: 35px;
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, .04);
+  }
+
+  .onb-checkbox {
+    margin-top: 22px !important;
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
+
+  .radio-button-field, .checkbox-field-extra-space:active {
+    background-color: rgba(0, 0, 0, .08);
+  }
+
+  .radio-button {
+    margin-top: 22px;
+  }
+
+  .radio-button-label, .onb-checkbox-label {
+    width: 100%;
+    padding-top: 18px;
+    padding-bottom: 18px;
+    padding-left: 6px;
+    color: #000;
+    font-weight: 400;
+  }
+}

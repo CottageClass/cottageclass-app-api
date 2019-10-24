@@ -69,47 +69,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '@/assets/style/scss/editing.scss';
+@import '@/assets/style/scss/flow.scss';
 
 .flow {
-  .onb-checkbox-label {
-    padding: 18px 16px 18px 6px;
-    width: 100%;
-    color: #1d8ae7;
-  }
   .checkbox-field {
     display: block;
   }
-  .active-checkbox {
-    background-color: #fff !important;
-  }
-  .onb-checkbox {
-    margin-top: 22px !important;
-    padding-top: 0px;
-    padding-bottom: 0px;
-  }
-
   .onb-checkbox {
       margin-top: 22px;
-  }
-
-  .onb-form-checkbox-list {
-    color: transparent;
-  }
-
-  .checkbox-field-extra-space {
-    display: block;
-    margin-bottom: 8px;
-    padding-left: 35px;
-    border-radius: 4px;
-    background-color: hsla(0, 0%, 100%, .7);
-  }
-
-  .checkbox-field-extra-space:active {
-    background-color: #fff;
-  }
-
-  .checkbox-field-extra-space:focus {
-    background-color: #fff;
   }
 
   .radio-form-block, .onb-form-block-checkbox-list {

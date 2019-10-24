@@ -105,6 +105,8 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+@import '@/assets/style/scss/editing.scss';
+@import "@/assets/style/scss/flow.scss";
 .flow {
   .onb-button-add-group {
     display: flex;

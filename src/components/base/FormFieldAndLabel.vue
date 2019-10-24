@@ -43,6 +43,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '@/assets/style/scss/editing.scss';
+
 .flow {
   .name-text-field {
     height: 56px;

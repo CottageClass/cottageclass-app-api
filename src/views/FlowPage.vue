@@ -53,37 +53,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.flow {
-  & /deep/ .location-text-field {
-    height: 56px;
-    padding-top: 8px;
-    padding-left: 18px;
-    border: 1px none #000;
-    border-radius: 4px;
-    background-color: hsla(0, 0%, 100%, .7);
-    font-size: 16px;
-  }
-
-  & /deep/ .location-text-field:active {
-    background-color: #fff;
-  }
-
-  & /deep/ .location-text-field:focus {
-    background-color: #fff;
-  }
-
-  & /deep/ .location-text-field::-webkit-input-placeholder {
-    color: rgba(0, 0, 0, .3);
-  }
-
-  & /deep/ .location-text-field:-ms-input-placeholder {
-    color: rgba(0, 0, 0, .3);
-  }
-
-  & /deep/ .location-text-field::placeholder {
-    color: rgba(0, 0, 0, .3);
-  }
-}
   .page-container {
     min-height: 100vh;
   }

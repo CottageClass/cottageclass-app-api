@@ -50,6 +50,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.editing {
+  .onb-child-group-heading {
+    margin-bottom: 8px;
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 24px;
+  }
+}
+
 .flow {
   .onb-child-group-heading {
     margin-top: 0px;

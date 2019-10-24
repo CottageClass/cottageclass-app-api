@@ -4,12 +4,11 @@
     <div class="body body-2">
       <div class="content-container w-container">
         <div class="primary-container">
-          <StyleWrapper styleIs="onboarding">
-            <ErrorMessage
-              v-if="showError && (errors.first('email') || errors.first('password')) || errorMessage"
-              :messages="errorMessages"
-            />
-          </StyleWrapper>
+          <ErrorMessage
+            v-if="showError && (errors.first('email') || errors.first('password')) || errorMessage"
+            :messages="errorMessages"
+            class="onboarding"
+          />
           <h1 class="auth-heading">Log In</h1>
           <div class="auth-wrapper">
             <FacebookButton v-if="false" />
@@ -66,7 +65,6 @@
 
 <script>
 import ErrorMessage from '@/components/base/ErrorMessage.vue'
-import StyleWrapper from '@/components/FTE/StyleWrapper.vue'
 import FacebookButton from '@/components/base/FacebookButton'
 import MainNav from '@/components/MainNav.vue'
 import { providerAuthentication, goHome } from '@/mixins'
@@ -75,7 +73,7 @@ import { signIn } from '@/utils/api'
 
 export default {
   name: 'SignInWithEmail',
-  components: { ErrorMessage, StyleWrapper, MainNav, FacebookButton },
+  components: { ErrorMessage, MainNav, FacebookButton },
   mixins: [ providerAuthentication, goHome ],
   data: function () {
     return {

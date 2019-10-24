@@ -58,6 +58,12 @@ export default {
 }
 
 .editing {
+  .location-search-container{
+    width: 100%;
+  }
+  .question-title {
+    font-size: 17px;
+  }
   .question-content {
     display: flex;
     flex-wrap: wrap;

@@ -11,7 +11,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 
 .content-wrapper__request{
   position: relative;
@@ -89,15 +89,6 @@ background-color: #f6f6f6;
     border-width: 1px;
     border-color: rgba(0, 0, 0, .15);
     border-radius: 4px;
-  }
-
-  .question-title {
-    font-size: 20px;
-    color: #fff;
-    text-align: center;
-    font-weight: bold;
-    line-height: 34px;
-    margin-top: 0;
   }
 
   .event-heading {
@@ -1172,10 +1163,6 @@ background-color: #f6f6f6;
     margin-bottom: 4px;
   }
 
-  .onb-location-search-container {
-    width: 100%;
-  }
-
   .location-text-field {
     height: 56px;
     padding-top: 8px;
@@ -1915,21 +1902,6 @@ background-color: #f6f6f6;
     }
   }
 
-  .radio-button-field, .checkbox-field-extra-space {
-    margin-bottom: 8px;
-    padding-left: 35px;
-    border-radius: 4px;
-    background-color: hsla(0, 0%, 100%, .7);
-  }
-
-  .radio-button-field, .checkbox-field-extra-space:active {
-    background-color: #fff;
-  }
-
-  .radio-button-field, .checkbox-field-extra-space:focus {
-    background-color: #fff;
-  }
-
   .radio-button-label, .onb-checkbox-label {
     width: 100%;
     padding-top: 18px;
@@ -1985,89 +1957,7 @@ background-color: #f6f6f6;
   }
 
 }
-
-.modal-style {
-  .question-title {
-  margin-top: 0;
-  margin-bottom: 10px;
-  color: #333;
-  font-size: 24px;
-  line-height: 34px;
-  text-align: center;
-  letter-spacing: -.3px;
-  }
-
-  .onb-paragraph-subheading-2 {
-  margin-bottom: 8px;
-  color: #333;
-  font-size: 13px;
-  line-height: 21px;
-  text-align: center;
-  }
-
-  .content-container {
-  margin-bottom: 0;
-  padding: 32px;
-  color: #fff;
-  }
-
-  .title-container {
-  margin-bottom: 0;
-  color: #fff;
-  }
-
-  .text-area-decribe-need {
-    height: 200px;
-  }
-
-  @media (max-width: 991px) {
-    .content-wrapper__request {
-        width: auto;
-        margin-right: 32px;
-        margin-left: 32px;
-    }
-    .content-wrapper {
-        width: auto;
-        margin-right: 32px;
-        margin-left: 32px;
-    }
-
-    .title-bar {
-      width: auto;
-    }
-  }
-
-  @media (max-width: 767px) {
-    .content-wrapper__request {
-    position: relative;
-    top: 0;
-    width: auto;
-    margin-right: 0px;
-    margin-left: 0px;
-    border-radius: 0px;
-    box-shadow: none;
-    }
-    .content-wrapper {
-      margin-top: 28px;
-    }
-  }
-
-  @media (max-width: 479px) {
-    .title-bar {
-      -webkit-box-align: center;
-      -webkit-align-items: center;
-      -ms-flex-align: center;
-      align-items: center;
-    }
-
-    .content-container {
-      overflow: visible;
-    }
-  }
-}
-
 .editing {
-
   .avatar-upload-button {
     background-color: white;
   }
@@ -2152,23 +2042,8 @@ background-color: #f6f6f6;
     width: 100%;
   }
 
-  .question-title {
-    font-size: 17px;
-  }
-
-  .card-title, .title, .onb-heading-large, .onb-child-group-heading {
-    margin-bottom: 8px;
-    font-size: 17px;
-    font-weight: 700;
-    line-height: 24px;
-  }
-
   .w-input {
     width: 100%
-  }
-
-  .location-search-container {
-    width: 100%;
   }
 
   .onb-error-text {
@@ -2189,30 +2064,6 @@ background-color: #f6f6f6;
 
   .radio-form, .w-form {
     margin-top: 8px;
-  }
-
-  .radio-button-field, .checkbox-field-extra-space {
-    margin-bottom: 8px;
-    padding-left: 35px;
-    border-radius: 4px;
-    background-color: rgba(0, 0, 0, .04);
-  }
-
-  .radio-button-field, .checkbox-field-extra-space:active {
-    background-color: rgba(0, 0, 0, .08);
-  }
-
-  .radio-button {
-    margin-top: 22px;
-  }
-
-  .radio-button-label, .onb-checkbox-label {
-    width: 100%;
-    padding-top: 18px;
-    padding-bottom: 18px;
-    padding-left: 6px;
-    color: #000;
-    font-weight: 400;
   }
 
   .text-field-label {
@@ -2251,21 +2102,6 @@ background-color: #f6f6f6;
     -ms-flex-align: start;
     align-items: flex-start;
   }
-
-  .text-field, .w-input {
-    width: 100%;
-    padding-top: 6px;
-    border: 1px solid transparent;
-    border-radius: 4px;
-    background-color: rgba(0, 0, 0, .04);
-    font-size: 16px;
-    font-weight: 400;
-  }
-
-  .text-field:focus {
-    background-color: hsla(0, 0%, 100%, .04);
-  }
-
   .textarea {
     width: 100%;
     min-height: 100px;
