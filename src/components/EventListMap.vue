@@ -4,9 +4,12 @@ This is the map view or the list view of events
 
 <template>
   <div class="lp-container">
-    <div v-if="isFullScreen" class="top-container">
+    <div v-if="isFullScreen"
+         class="top-container"
+         :class="{native: isNative,
+                  accomodateNotch: accomodateNotch,
+                  accomodateStatusBar: accomodateStatusBar}" >
       <a
-        v-if="isFullScreen"
         @click="$emit('back-click')"
         class="back-button w-inline-block">
         <img src="../assets/arrow-back-black.svg">
@@ -54,14 +57,14 @@ This is the map view or the list view of events
 <script>
 import { mapGetters } from 'vuex'
 
-import { maps, screen } from '@/mixins'
+import { maps, screen, platform } from '@/mixins'
 import SearchResultList from '@/components/SearchResultList.vue'
 import { itemPlace, itemRoute } from '@/utils/items.js'
 
 export default {
   name: 'EventListMap',
   props: [ 'items', 'showFetchMoreButton', 'noItemsMessage', 'showTrailblazerMessage', 'isFullScreen' ],
-  mixins: [ maps, screen ],
+  mixins: [ maps, screen, platform ],
   components: { SearchResultList },
   data () {
     return {
@@ -273,6 +276,14 @@ select {
     justify-content: space-between;
     align-items: center;
     background-color: white;
+    &.accomodateNotch {
+      padding-top: 35px;
+      height: 83px;
+    }
+    &.accomodateStatusBar {
+      padding-top: 10px;
+      height: 58px;
+    }
   }
 
   .back-button {
