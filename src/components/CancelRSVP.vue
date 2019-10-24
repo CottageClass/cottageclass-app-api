@@ -96,25 +96,17 @@ export default {
 
 </script>
 
-<style scoped>
+<style lang="scss" scoped src="@/assets/style/scss/flow.scss"></style>
+<style lang="scss" scoped>
 .body {
   background-color: #0d73c7;
 }
 
 .action-bar {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   width: 100%;
   margin-top: 24px;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
   justify-content: space-between;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
   align-items: center;
 }
 
