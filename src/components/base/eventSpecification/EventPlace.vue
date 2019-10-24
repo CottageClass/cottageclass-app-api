@@ -15,6 +15,7 @@
         id="map"
         types=""
         classname="w-input location-text-field"
+        :country="['us']"
         :placeholder=addressPlaceholder
         v-on:placechanged="getAddressData"
       >
