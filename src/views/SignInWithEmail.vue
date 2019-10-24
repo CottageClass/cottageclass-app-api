@@ -7,7 +7,7 @@
           <ErrorMessage
             v-if="showError && (errors.first('email') || errors.first('password')) || errorMessage"
             :messages="errorMessages"
-            class="onboarding"
+            class="editing"
           />
           <h1 class="auth-heading">Log In</h1>
           <div class="auth-wrapper">
