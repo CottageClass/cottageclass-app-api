@@ -11,7 +11,7 @@
           :country="['us']"
           :placeholder="placeholder"
           v-on:placechanged="submitAddress"
-          country="us" />
+        />
       </div>
     </div>
   </div>
