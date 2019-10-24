@@ -4,7 +4,7 @@
       <Nav :button="button"
            :hidePrevious="hidePrevious"
            @next="nextClick"
-           @prev="prevButtonHandler"
+           @prev="prevClick"
       />
       <ErrorMessage v-if="errorMessage && showErrorMessage"
                     :text="errorMessage" />
@@ -33,6 +33,13 @@ export default {
     }
   },
   methods: {
+    prevClick () {
+      if (this.prevButtonHandler) {
+        this.prevButtonHandler()
+      } else {
+        this.$router.go(-1)
+      }
+    },
     nextClick () {
       if (this.errorMessage) {
         this.showErrorMessage = true
