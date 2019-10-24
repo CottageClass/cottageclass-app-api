@@ -1,51 +1,50 @@
 <template>
   <div class="body" id="top-of-form">
     <MainNav />
-    <div class="lp-container w-container">
+    <div class="editing lp-container w-container">
       <h1 class="heading-1">Edit profile</h1>
-      <StyleWrapper styleIs="editing" class="cards" v-if="currentUser">
-        <ErrorMessage v-if="showError && hasError" text="Your form has errors. Please fix them to continue..." />
-        <ErrorMessage v-if="showError && hasError && phone.err" :text="phone.err" />
-        <ErrorMessage v-if="showError && hasError && employment.err" :text="employment.err" />
-        <ErrorMessage v-if="showError" :text="place.err" />
-        <ErrorMessage v-if="showError" :text="children.err" />
-        <ErrorMessage v-if="showError" :text="avatar.err" />
-        <Question
-          title="Got any photos you'd like to share?"
-          subtitle="Adding photos to your profile helps give other members a sense of your family."
-        >
-          <MultipleImageUpload v-model="currentUser.images" @input="submitImageUpload"/>
-        </Question>
-        <AvatarUpload v-model="avatar"/>
-        <Employment v-model="employment"/>
-        <ProfileBlurb v-model="profileBlurb" />
-        <Activities v-model="currentUser.activities" />
-        <Availability id="availability" v-model="availability" :required="false"/>
-        <Children v-model="children" :required="false" />
-        <Phone v-model="phone" :currentPhone="currentUser.phone" :required="false" />
-        <Location
-          :currentAddress="currentUser.place.fullAddress"
-          :currentApartment="currentUser.place.apartmentNumber"
-          v-model="place"
-        />
-        <LanguagesSpoken v-model="currentUser.languages" :showChoicesImmediately="false"/>
-        <MaxDistanceSetting v-model="maxDistance" />
-        <YesOrNo
-          question="Email settings"
-          description="Would you like to receive custom weekly emails with suggestions for nearby playdates"
-          v-model="weeklyEmails"
-        />
-        <Question title="Delete your account"
-                  subtitle="Would you like to leave Lilypad? Deleting your account will remove your profile and cancel any playdates you've booked. This cannot be undone.">
-          <button
-            class="delete-account-button"
-            @click="$router.push({name: 'DeleteAccountConfirmation'})">
-            Delete Account
-          </button>
-        </Question>
-      </StyleWrapper>
-      <PageActionsFooter :buttons="footerButtons" @primary-click="submitUserInformation" />
+      <ErrorMessage v-if="showError && hasError" text="Your form has errors. Please fix them to continue..." />
+      <ErrorMessage v-if="showError && hasError && phone.err" :text="phone.err" />
+      <ErrorMessage v-if="showError && hasError && employment.err" :text="employment.err" />
+      <ErrorMessage v-if="showError" :text="place.err" />
+      <ErrorMessage v-if="showError" :text="children.err" />
+      <ErrorMessage v-if="showError" :text="avatar.err" />
+      <ErrorMessage v-if="showError" :text="profileBlurb.err" />
+      <Question
+        title="Got any photos you'd like to share?"
+        subtitle="Adding photos to your profile helps give other members a sense of your family."
+      >
+        <MultipleImageUpload v-model="currentUser.images" @input="submitImageUpload"/>
+      </Question>
+      <AvatarUpload v-model="avatar"/>
+      <Employment v-model="employment"/>
+      <ProfileBlurb v-model="profileBlurb" />
+      <Activities v-model="currentUser.activities" />
+      <Availability id="availability" v-model="availability" :required="false"/>
+      <Children v-model="children" :required="false" />
+      <Phone v-model="phone" :currentPhone="currentUser.phone" :required="false" />
+      <Location
+        :currentAddress="currentUser.place.fullAddress"
+        :currentApartment="currentUser.place.apartmentNumber"
+        v-model="place"
+      />
+      <LanguagesSpoken v-model="currentUser.languages" :showChoicesImmediately="false"/>
+      <MaxDistanceSetting v-model="maxDistance" />
+      <YesOrNo
+        question="Email settings"
+        description="Would you like to receive custom weekly emails with suggestions for nearby playdates"
+        v-model="weeklyEmails"
+      />
+      <Question title="Delete your account"
+                subtitle="Would you like to leave Lilypad? Deleting your account will remove your profile and cancel any playdates you've booked. This cannot be undone.">
+        <button
+          class="delete-account-button"
+          @click="$router.push({name: 'DeleteAccountConfirmation'})">
+          Delete Account
+        </button>
+      </Question>
     </div>
+    <PageActionsFooter :buttons="footerButtons" @primary-click="submitUserInformation" />
   </div>
 
 </template>
@@ -62,7 +61,6 @@ import Phone from '@/components/FTE/userInformation/Phone.vue'
 import Availability from '@/components/FTE/userInformation/Availability.vue'
 import MainNav from '@/components/MainNav.vue'
 import PageActionsFooter from '@/components/PageActionsFooter.vue'
-import StyleWrapper from '@/components/FTE/StyleWrapper.vue'
 import ErrorMessage from '@/components/base/ErrorMessage.vue'
 import Activities from '@/components/FTE/userInformation/Activities.vue'
 import YesOrNo from '@/components/base/YesOrNo'
@@ -85,7 +83,6 @@ export default {
     Employment,
     Availability,
     MainNav,
-    StyleWrapper,
     PageActionsFooter,
     ErrorMessage,
     Children,
@@ -142,7 +139,7 @@ export default {
   },
   computed: {
     hasError: function () {
-      if (!!this.phone.err || !!this.place.err || !!this.children.err || this.employment.err) {
+      if (!!this.phone.err || !!this.place.err || !!this.children.err || this.employment.err || this.profileBlurb.err) {
         return true
       } else {
         return false

@@ -64,7 +64,7 @@
           class="profile-top-card__footer__button-list"
           :user="user"
           @user-updated="updateUser"
-          @interested-click="interestedClickWithPrompts('card')"
+          @interested-click="interestedClickAndUpdate('card')"
           :showInterestedButton="showInterestedButton"
           :showMeetButton="showMeetButton"
           :showGoingButton="showGoingButton"
@@ -210,7 +210,7 @@ export default {
       this.$refs.lightbox.showImage(payload)
     },
     async likeUserHandler (context) {
-      this.user = await this.interestedClickWithPrompts(context)
+      this.user = await this.interestedClickAndUpdate(context)
     },
     async dislikeUserHandler (context) {
       if (!this.redirectToSignupIfNotAuthenticated({

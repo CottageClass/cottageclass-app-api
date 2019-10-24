@@ -1,5 +1,5 @@
 <template>
-  <div class="onb-body">
+  <div class="nav-container">
     <div class="title-bar">
       <a
         @click="$emit('prev')"
@@ -50,35 +50,46 @@ export default {
 </script>
 
 <style scoped>
-.onb-body {
+.nav-container {
+  position: sticky;
+  width: 720px;
+  top: 0;
+  left: 0;
+  right: 0;
   background-color: #0d73c7;
 }
 
 .title-bar {
+  left: 0px;
+  top: 0px;
+  right: 0px;
+  z-index: 1000;
+  display: flex;
+  overflow: visible;
+  margin-right: auto;
+  margin-left: auto;
+  justify-content: space-between;
+  align-items: center;
+  border-style: none;
+  border-width: 1px;
+  border-color: hsla(0, 0%, 100%, .1);
+  background-color: rgba(108, 200, 255, .93);
+  background-image: url('../../assets/cclogo-house-blue-bf44c260.svg');
+  background-position: 50% 13px;
+  background-size: 24px 24px;
+  background-repeat: no-repeat;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .08);
   font-family: soleil, sans-serif;
 }
 
-/* NEW THINGS, CLEAN UP */
-
 .title-bar-next-button {
-  position: static;
   display: block;
   margin-top: 0px;
   margin-right: 10px;
   margin-bottom: 0px;
   padding: 10px 12px;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
   flex-direction: row;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
   justify-content: center;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
   align-items: center;
   border: 1px none #000;
   border-radius: 4px;
@@ -129,7 +140,6 @@ export default {
 }
 
 .title-bar-next-button-inactive {
-  position: static;
   display: block;
   margin-top: 0px;
   margin-right: 10px;
@@ -143,36 +153,6 @@ export default {
   background-color: hsla(0, 0%, 100%, .3);
   box-shadow: none;
   color: rgba(1, 1, 1, .2);
-}
-
-/* EXISTING WORK FROM WEBFLOW MOCK */
-
-a {
-  text-decoration: none;
-}
-
-.title-bar {
-  position: fixed;
-  left: 0px;
-  top: 0px;
-  right: 0px;
-  z-index: 1000;
-  display: flex;
-  overflow: visible;
-  width: 720px;
-  margin-right: auto;
-  margin-left: auto;
-  justify-content: space-between;
-  align-items: center;
-  border-style: none;
-  border-width: 1px;
-  border-color: hsla(0, 0%, 100%, .1);
-  background-color: rgba(108, 200, 255, .93);
-  background-image: url('../../assets/cclogo-house-blue-bf44c260.svg');
-  background-position: 50% 13px;
-  background-size: 24px 24px;
-  background-repeat: no-repeat;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .08);
 }
 
 .button-back {
@@ -199,7 +179,6 @@ a {
 }
 
 .button-next {
-  position: static;
   display: block;
   margin-top: 0px;
   margin-right: 10px;
@@ -231,13 +210,13 @@ a {
 }
 
 @media (max-width: 991px) {
-  .title-bar {
-    width: auto;
+  .nav-container{
+    width: 100%;
   }
 }
 
 @media (max-width: 479px) {
-  .title-bar {
+  .nav-container{
     align-items: center;
   }
 }

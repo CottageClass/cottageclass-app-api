@@ -67,7 +67,7 @@
                 :user="event.user"
                 :event="event"
                 @user-updated="updateUser"
-                @interested-click="interestedClickWithPrompts('card')"
+                @interested-click="interestedClickAndUpdate('card')"
                 @going-click="goingClick"
                 @share-click="shareClick"
                 :timePast="timePast"
@@ -249,6 +249,9 @@ export default {
     ...mapGetters(['isRsvpDeclined'])
   },
   methods: {
+    async interestedClickAndUpdate () {
+      this.event.user = await this.interestedClick()
+    },
     closeModalClick () {
       this.$router.push({ name: 'EventPage', params: { id: 5, showDeleteConfirmationModal: false } })
     },

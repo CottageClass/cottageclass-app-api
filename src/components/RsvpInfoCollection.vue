@@ -1,31 +1,16 @@
 <template>
-
-  <!-- wrapper for desktop screens -->
-
-  <div class="onb-body">
-    <div class="body">
-      <div class="content-wrapper">
-        <StyleWrapper styleIs="onboarding">
-          <Nav
-            :button="nextButtonState"
-            @next="nextStep"
-            @prev="$router.go(-1)" />
-          <ErrorMessage v-if="err" :text="err" />
-          <LoadingSpinner v-if="!allInformationLoaded"/>
-          <Question
-            v-if="allInformationLoaded"
-            title="Which children are going?"
-            :subtitle="spotsRemainingPhrase"
-          >
-            <Checkboxes
-              v-model="childrenSelected"
-              :labels="labelsAndOrder"/>
-          </Question>
-        </StyleWrapper>
-      </div>
-    </div>
+  <div>
+    <LoadingSpinner v-if="!allInformationLoaded"/>
+    <Question
+      v-if="allInformationLoaded"
+      title="Which children are going?"
+      :subtitle="spotsRemainingPhrase"
+    >
+      <Checkboxes
+        v-model="childrenSelected"
+        :labels="labelsAndOrder"/>
+    </Question>
   </div>
-
 </template>
 
 <script>
@@ -33,40 +18,56 @@ import { mapGetters } from 'vuex'
 
 import { fetchEvent } from '@/utils/api'
 import * as utils from '@/utils/utils.js'
-import { redirect, rsvp } from '@/mixins'
+import { redirect, rsvp, validationError } from '@/mixins'
 
-import Nav from '@/components/FTE/Nav.vue'
-import ErrorMessage from '@/components/base/ErrorMessage.vue'
 import Question from '@/components/base/Question.vue'
 import Checkboxes from '@/components/base/Checkboxes.vue'
-import StyleWrapper from '@/components/FTE/StyleWrapper.vue'
 import LoadingSpinner from '@/components/LoadingSpinner.vue'
 
 var moment = require('moment')
 
 export default {
   name: 'RsvpInfoCollection',
-  components: { Nav, LoadingSpinner, ErrorMessage, Checkboxes, StyleWrapper, Question },
-  mixins: [ redirect, rsvp ],
+  components: { LoadingSpinner, Checkboxes, Question },
+  mixins: [ redirect, rsvp, validationError ],
   data () {
     return {
       childrenSelected: [],
-      err: '',
       eventId: this.$route.params.eventId,
       event: false
     }
   },
   async created () {
+    this.$emit('set-nav-props', {
+      nextButtonHandler: this.nextStep,
+      prevButtonHandler: () => { this.$router.go(-1) },
+      button: this.nextButtonState
+    })
     if (this.redirectToSignupIfNotAuthenticated()) { return }
     this.redirectToOnboardingIfNotOnboarded()
-    this.showErrorIfUserHasNoChildren()
     await this.selectSingleChild()
   },
   mounted: function () {
     // get data about the current event to determine max attendees.
     this.fetchEventInformation()
   },
+  watch: {
+    nextButtonState () {
+      this.$emit('set-nav-props', {
+        button: this.nextButtonState
+      })
+    }
+  },
   computed: {
+    validationError () {
+      if (!this.children || this.children.length === 0) {
+        return 'Sorry, but we cannot retrieve your children\'s information. Are you sure you have signed in? To resolve this, please email us at: contact@joinlilypad.com.'
+      }
+      if (this.childrenSelected.length === 0) {
+        return 'Please choose at least one child to RSVP.'
+      }
+      return null
+    },
     spotsRemainingPhrase: function () {
       return 'There ' + (this.spotsRemaining === 1 ? 'is' : 'are') + ' ' + this.spotsRemaining + ' spot' + (this.spotsRemaining !== 1 ? 's' : '') + ' remaining.'
     },
@@ -76,11 +77,8 @@ export default {
     allInformationLoaded: function () {
       return this.currentUser && this.event
     },
-    tooManyChildren: function () {
-      return this.childrenSelected.length > this.event.maximumChildren - this.event.participantsCount
-    },
     nextButtonState: function () {
-      if (this.tooManyChildren || this.childrenSelected.length === 0) {
+      if (this.childrenSelected.length === 0) {
         return 'inactive'
       } else {
         return 'next'
@@ -108,11 +106,6 @@ export default {
         this.$router.replace({ name: 'EventPage', params: { id: this.event.id } })
       }
     },
-    showErrorIfUserHasNoChildren: function () {
-      if (!this.children || this.children.length === 0) {
-        this.err = 'Sorry, but we cannot retrieve your children\'s information. Are you sure you have signed in? To resolve this, please email us at: contact@joinlilypad.com.'
-      }
-    },
     redirectToOnboardingIfNotOnboarded: function () {
       if (!this.currentUser.hasAllRequiredFields) {
         // send them back to onboarding.
@@ -129,36 +122,16 @@ export default {
     fetchEventInformation: async function () {
       try {
         this.event = await fetchEvent(this.$route.params.eventId)
-        if (this.event.full || this.event.maximumChildren === 0) {
-          this.err = 'We\'re sorry, this event is full!'
-        }
       } catch (err) {
         console.log(err.stack)
-        this.err = 'Sorry, there was a problem retrieving information about the event. Go back and try again?'
       }
     },
     async nextStep () {
-      if (this.tooManyChildren) {
-        let numChildren = this.childrenSelected.length
-        let childrenSingularOrPlural = numChildren === 1 ? 'child' : 'children'
-        this.err = 'Sorry, but there are not enough spots available for ' + numChildren + ' ' + childrenSingularOrPlural + '.'
-      } else if (this.childrenSelected.length === 0) {
-        this.err = 'Please choose at least one child to RSVP.'
-      } else if (this.event.participated) {
+      if (this.validationError) { return }
+      if (this.event.participated) {
         this.$router.push({ name: 'EventPage', params: { id: this.event.id } })
       } else {
         await this.submitRsvp(this.childrenSelected)
-      }
-    },
-    isSelected: function (id) {
-      return this.childrenSelected.includes(id)
-    },
-    toggleSelected: function (id) {
-      this.err = ''
-      if (this.isSelected(id)) {
-        this.childrenSelected = this.childrenSelected.filter((aChildId) => aChildId !== id)
-      } else {
-        this.childrenSelected.push(id)
       }
     }
   }

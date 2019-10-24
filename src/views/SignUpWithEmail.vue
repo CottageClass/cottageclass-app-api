@@ -4,9 +4,9 @@
     <div class="body body-2">
       <div class="content-container w-container">
         <div class="primary-container">
-          <StyleWrapper styleIs="onboarding">
-            <ErrorMessage v-if="showError && (errors.all().length > 0)" :messages="allErrors" />
-          </StyleWrapper>
+          <ErrorMessage v-if="showError && (errors.all().length > 0)"
+                        :messages="allErrors"
+                        class="editing"/>
           <h1 class="auth-heading">Sign Up</h1>
           <div class="auth-wrapper">
             <FacebookButton v-if="false" />
@@ -77,14 +77,13 @@
 import { providerAuthentication, alerts, goHome } from '@/mixins'
 import { register, signIn } from '@/utils/api'
 import MainNav from '@/components/MainNav.vue'
-import StyleWrapper from '@/components/FTE/StyleWrapper.vue'
 import FacebookButton from '@/components/base/FacebookButton'
 import ErrorMessage from '@/components/base/ErrorMessage.vue'
 import LoadingSpinner from '@/components/LoadingSpinner'
 
 export default {
   name: 'SignUpWithEmail',
-  components: { ErrorMessage, MainNav, StyleWrapper, FacebookButton, LoadingSpinner },
+  components: { ErrorMessage, MainNav, FacebookButton, LoadingSpinner },
   mixins: [ providerAuthentication, alerts, goHome ],
   data: function () {
     return {

@@ -1,30 +1,17 @@
 <template>
-  <div class="onb-body">
-    <Nav
-      button="done"
-      @next="submit"
-      :hidePrevious="true"
-    />
-    <div class="content-wrapper">
-      <StyleWrapper styleIs="onboarding">
-        <Question
-          title="Why can't you come to this playdate?"
-          subtitle="Your feedback is private and helps us do a better job of matching parents and playdates!" >
-          <Checkboxes
-            v-model="reasons"
-            :labels="labelsAndOrder"/>
-          <FormWithTextArea
-            placeholder="Other reasons? Any notes to add?"
-            v-model="otherText" />
-        </Question>
-      </StyleWrapper>
-    </div>
-  </div>
+  <Question
+    title="Why can't you come to this playdate?"
+    subtitle="Your feedback is private and helps us do a better job of matching parents and playdates!" >
+    <Checkboxes
+      v-model="reasons"
+      :labels="labelsAndOrder"/>
+    <FormWithTextArea
+      placeholder="Other reasons? Any notes to add?"
+      v-model="otherText" />
+  </Question>
 </template>
 
 <script>
-import Nav from '@/components/FTE/Nav'
-import StyleWrapper from '@/components/FTE/StyleWrapper'
 import Checkboxes from '@/components/base/Checkboxes.vue'
 import Question from '@/components/base/Question.vue'
 import FormWithTextArea from '@/components/base/FormWithTextArea.vue'
@@ -36,7 +23,7 @@ import { alerts, goHome } from '@/mixins'
 
 export default {
   name: 'DeclineRSVP',
-  components: { StyleWrapper, Nav, Checkboxes, Question, FormWithTextArea },
+  components: { Checkboxes, Question, FormWithTextArea },
   data () {
     return {
       otherText: '',
@@ -57,6 +44,13 @@ export default {
       ]
     },
     ...mapGetters(['currentUser'])
+  },
+  created () {
+    this.$emit('set-nav-props', {
+      nextButtonHandler: this.submit,
+      button: 'done',
+      hidePrevious: true
+    })
   },
   methods: {
     submit () {

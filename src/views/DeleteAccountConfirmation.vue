@@ -1,30 +1,30 @@
 <template>
-  <div class="body">
-    <div class="content-wrapper">
-      <StyleWrapper styleIs="onboarding">
-        <Question
-          class='rsvp-cancel-reason'
-          title="Delete your account"
-          subtitle="We really appreciate your feedback! Why are you leaving?"
-        >
-          <div class="form-describe-need w-form">
-            <form v-on:submit.prevent id="email-form-2">
-              <p class="describe-label">{{ charsLeft }} characters left...</p>
-              <textarea v-model="reason" id="field" name="field" placeholder="e.g. 'I am moving to an island with no internet.  Forever....'" class="text-area-decribe-need w-input"></textarea>
-            </form>
-            <div class="action-bar">
-              <button class="button feedback-button" @click="feedback">Just send feedback</button>
-              <button class="button delete-button" @click="confirm">Delete account</button>
-            </div>
-          </div>
-        </Question>
-      </StyleWrapper>
-    </div>
+  <div>
+    <Question
+      class='rsvp-cancel-reason'
+      title="Delete your account"
+      subtitle="We really appreciate your feedback! Why are you leaving?"
+    >
+      <div class="w-form">
+        <form v-on:submit.prevent id="email-form-2">
+          <p>{{ charsLeft }} characters left...</p>
+          <textarea v-model="reason"
+                    id="field"
+                    name="field"
+                    placeholder="e.g. 'I am moving to an island with no internet.  Forever....'"
+                    class="w-input"
+          />
+        </form>
+        <div class="action-bar">
+          <button class="button" @click="feedback">Just send feedback</button>
+          <button class="button" @click="confirm">Delete account</button>
+        </div>
+      </div>
+    </Question>
   </div>
 </template>
 
 <script>
-import StyleWrapper from '@/components/FTE/StyleWrapper.vue'
 import Question from '@/components/base/Question.vue'
 import { deleteUserAccount } from '@/utils/api'
 import { submitToSheetsu } from '@/utils/vendor'
@@ -33,7 +33,7 @@ import { goHome } from '@/mixins'
 
 export default {
   name: 'DeleteAccountConfirmation',
-  components: { Question, StyleWrapper },
+  components: { Question },
   props: ['eventId'],
   mixins: [ goHome ],
   data: () => {
@@ -42,6 +42,12 @@ export default {
       charLimit: 288,
       event: null
     }
+  },
+  created () {
+    this.$emit('set-nav-props', {
+      button: 'none',
+      hidePrevious: true
+    })
   },
   watch: {
     reason: function () {
@@ -111,25 +117,16 @@ export default {
 }
 
 .action-bar {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   width: 100%;
   margin-top: 24px;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
   justify-content: space-between;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
   align-items: center;
 }
 
 .button {
   width: 50%;
-  padding: 12px 32px;
+  padding: 12px 20px;
   margin: 10px;
   border-radius: 4px;
   background-color: #fff;
@@ -140,14 +137,6 @@ export default {
   letter-spacing: 1.2px;
   text-decoration: none;
   text-transform: uppercase;
-}
-
-.nevermind-button {
-  margin-left: 0px;
-}
-
-.cancel-button {
-  margin-right: 0px;
 }
 
 .button:hover {
@@ -179,29 +168,4 @@ export default {
     rgba(0, 0, 0, 0.1)
   );
 }
-
-.content-wrapper {
-  width: 720px;
-  min-height: 100vh;
-  margin-right: auto;
-  margin-left: auto;
-  padding-top: 50px;
-  padding-bottom: 50px;
-  background-color: #1c8be7;
-}
-
-@media (max-width: 991px) {
-  .content-wrapper {
-    width: 670px;
-  }
-}
-
-@media (max-width: 767px) {
-  .content-wrapper {
-    width: 100%;
-    margin-top: 0px;
-    margin-bottom: 0px;
-  }
-}
-
 </style>

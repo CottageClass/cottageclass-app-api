@@ -80,4 +80,22 @@ function range (min, max) {
 select.select-field {
   width: 50px;
 }
+  .age-range-form {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+  .en-dash-container {
+    margin: inherit;
+    display: flex;
+    padding-right: 8px;
+    padding-left: 8px;
+    padding-bottom: 10px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
 </style>

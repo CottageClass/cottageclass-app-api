@@ -1,69 +1,81 @@
 <template>
-
-  <div class="onb-body">
-    <div class="body">
-      <div class="content-wrapper">
-        <StyleWrapper styleIs="onboarding">
-          <Nav button="done" @next="nextStep" hidePrevious="true" />
-          <div class="onb-content-container">
-            <div class="onb-top-content-container">
-              <h1 class="onb-heading-large">{{ titleText }}</h1>
-              <p class="onb-paragraph-subheading-2">{{ sharingPromptText }}</p>
-            </div>
-            <ul class="onb-social-button-list">
-              <li v-if="isMobileDevice" class="onb-button-social-list-item"><TextMessageLink :message="textMessage" number="" class="onb-button-social w-inline-block"><img src="@/assets/mms.svg" width="32" height="32" alt=""><div class="onb-button-social-text">Text message</div></TextMessageLink></li>
-              <li v-if="isMobileDevice" class="onb-button-social-list-item">
-                <a :href="fbMessengerLink" class="onb-button-social w-inline-block">
-                  <img src="@/assets/messenger.svg" width="32" height="32" alt="">
-                  <div class="onb-button-social-text">Facebook Messenger</div>
-                </a>
-              </li>
-              <li class="onb-button-social-list-item">
-                <a :href="fbLink" target="_blank" class="onb-button-social w-inline-block">
-                  <img src="@/assets/facebook-hover.svg" width="32" height="32" alt="">
-                  <div class="onb-button-social-text">Facebook</div>
-                </a>
-              </li>
-              <li v-if="!isMobileDevice" class="onb-button-social-list-item"><a :href="tweetLink" target="_blank" class="onb-button-social w-inline-block"><img src="@/assets/twitter-hover.svg" width="32" height="32" alt=""><div class="onb-button-social-text">Twitter</div></a></li>
-              <li class="onb-button-social-list-item"><a :href="emailLink" class="onb-button-social w-inline-block"><img src="@/assets/email.svg" width="32" height="32" alt=""><div class="onb-button-social-text">Email</div></a></li>
-            </ul>
-            <div class="onb-copy-link-container">
-              <div class="onb-copy-link-form-block w-form">
-                <form id="email-form" name="email-form" data-name="Email Form" class="onb-copy-link-form">
-                  <input type="text" class="copy-text-link-field w-input" maxlength="256" name="name" data-name="Name" :placeholder="shareUrl" id="name">
-                  <a
-                    v-clipboard:copy="shareUrl"
-                    v-clipboard:success="onCopy"
-                    class="onb-button-copy-link w-button"
-                  >{{ copyButtonText }}</a>
-                </form>
-              </div>
-            </div>
-            <EventSearchListCard
-              v-if="eventToShare"
-              :doNotShowCancel="true"
-              :item="item"
-              @user-updated="updateUser"/>
-          </div>
-        </StyleWrapper>
+  <div class="onboarding onb-body">
+    <div class="onb-content-container">
+      <div class="onb-top-content-container">
+        <h1 class="onb-heading-large">{{ titleText }}</h1>
+        <p class="onb-paragraph-subheading-2">{{ sharingPromptText }}</p>
       </div>
+      <ul class="onb-social-button-list">
+        <li v-if="isMobileDevice" class="onb-button-social-list-item">
+          <TextMessageLink :message="textMessage"
+                           number=""
+                           class="onb-button-social w-inline-block">
+            <img src="@/assets/mms.svg" width="32" height="32" alt="">
+            <div class="onb-button-social-text">Text message</div>
+          </TextMessageLink>
+        </li>
+        <li v-if="isMobileDevice" class="onb-button-social-list-item">
+          <a :href="fbMessengerLink" class="onb-button-social w-inline-block">
+            <img src="@/assets/messenger.svg" width="32" height="32" alt="">
+            <div class="onb-button-social-text">Facebook Messenger</div>
+          </a>
+        </li>
+        <li class="onb-button-social-list-item">
+          <a :href="fbLink" target="_blank" class="onb-button-social w-inline-block">
+            <img src="@/assets/facebook-hover.svg" width="32" height="32" alt="">
+            <div class="onb-button-social-text">Facebook</div>
+          </a>
+        </li>
+        <li v-if="!isMobileDevice" class="onb-button-social-list-item">
+          <a :href="tweetLink" target="_blank" class="onb-button-social w-inline-block">
+            <img src="@/assets/twitter-hover.svg" width="32" height="32" alt="">
+            <div class="onb-button-social-text">Twitter</div>
+          </a>
+        </li>
+        <li class="onb-button-social-list-item">
+          <a :href="emailLink" class="onb-button-social w-inline-block">
+            <img src="@/assets/email.svg" width="32" height="32" alt="">
+            <div class="onb-button-social-text">Email</div>
+          </a>
+        </li>
+      </ul>
+      <div class="onb-copy-link-container">
+        <div class="onb-copy-link-form-block w-form">
+          <form id="email-form" name="email-form" data-name="Email Form" class="onb-copy-link-form">
+            <input type="text"
+                   class="copy-text-link-field w-input"
+                   maxlength="256"
+                   name="name"
+                   data-name="Name"
+                   :placeholder="shareUrl"
+                   id="name">
+            <a
+              v-clipboard:copy="shareUrl"
+              v-clipboard:success="onCopy"
+              class="onb-button-copy-link w-button"
+            >{{ copyButtonText }}</a>
+          </form>
+        </div>
+      </div>
+      <EventSearchListCard
+        v-if="eventToShare"
+        :doNotShowCancel="true"
+        :item="item"
+        @user-updated="updateUser"/>
     </div>
   </div>
-
 </template>
 
 <script>
 
 import EventSearchListCard from '@/components/search/EventSearchListCard.vue'
 import TextMessageLink from '@/components/TextMessageLink.vue'
-import Nav from '@/components/FTE/Nav.vue'
 import { fetchEvent } from '@/utils/api'
-import StyleWrapper from '@/components/FTE/StyleWrapper.vue'
 import { goHome } from '@/mixins'
 
 export default {
   name: 'SocialInvite',
-  components: { TextMessageLink, Nav, StyleWrapper, EventSearchListCard },
+  components: { TextMessageLink, EventSearchListCard },
   mixins: [ goHome ],
   data () {
     return {
@@ -84,6 +96,11 @@ export default {
     }
   },
   created () {
+    this.$emit('set-nav-props', {
+      nextButtonHandler: this.nextStep,
+      hidePrevious: true,
+      button: 'done'
+    })
     if (this.eventId) {
       this.fetchEvent()
     }
@@ -152,191 +169,174 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.flow {
 
-.onb-content-container {
-  font-family: soleil;
-}
+  .onb-heading-large {
+    margin-top: 0px;
+    margin-bottom: 10px;
+    color: #fff;
+    font-size: 24px;
+    line-height: 34px;
+    text-align: center;
+    letter-spacing: -0.3px;
+  }
+  .onb-content-container {
+    margin-bottom: 0px;
+    padding: 0 32px 72px;
+    font-family: soleil;
+  }
 
-/* Remove inner shadow from inputs on mobile iOS */
-textarea, input[type="text"] {
--webkit-appearance: none;
-}
-html {
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
-.scrolling-wrapper {
-  overflow-x: auto;
-}
-
-.card {
-  flex: 0 0 auto;
-}
+  /* Remove inner shadow from inputs on mobile iOS */
+  textarea, input[type="text"] {
+  -webkit-appearance: none;
+  }
+  html {
+      -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  }
   .scrolling-wrapper {
-  -webkit-overflow-scrolling: touch;
-}
-.scrolling-wrapper {
-  &::-webkit-scrollbar {
-    display: none;
+    overflow-x: auto;
+  }
+
+  .card {
+    flex: 0 0 auto;
+  }
+    .scrolling-wrapper {
+    -webkit-overflow-scrolling: touch;
+  }
+  .scrolling-wrapper {
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+  .onb-button-social {
+    position: relative;
+    display: flex;
+    width: 100%;
+    padding: 13px 16px;
+    align-items: center;
+    border-radius: 4px;
+    background-color: hsla(0, 0%, 100%, .7);
+    cursor: pointer;
+  }
+
+  .onb-button-social:active {
+    background-color: #fff;
+  }
+
+  .onb-button-social-text {
+    margin-left: 10px;
+    color: #1d8ae7;
+  }
+
+  .onb-social-button-list {
+    width: 100%;
+    margin-bottom: 0px;
+    padding-left: 0px;
+    list-style-type: none;
+  }
+
+  .onb-button-social-list-item {
+    margin-bottom: 8px;
+  }
+
+  .onb-copy-link-container {
+    display: flex;
+    width: 100%;
+    margin-bottom: 8px;
+    margin-top: 24px;
+    align-items: center;
+  }
+
+  .copy-text-link-field {
+    width: 100%;
+    height: 56px;
+    margin-bottom: 0px;
+    padding-top: 8px;
+    padding-left: 18px;
+    border: 1px none #000;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #fff;
+    font-size: 16px;
+  }
+
+  .copy-text-link-field:active {
+    background-color: #fff;
+  }
+
+  .copy-text-link-field:focus {
+    background-color: #fff;
+  }
+
+  .copy-text-link-field::-webkit-input-placeholder {
+    color: #333;
+    font-weight: 700;
+  }
+
+  .copy-text-link-field:-ms-input-placeholder {
+    color: #333;
+    font-weight: 700;
+  }
+
+  .copy-text-link-field::placeholder {
+    color: #333;
+    font-weight: 700;
+  }
+
+  .onb-copy-link-form {
+    position: relative;
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+    align-items: center;
+    color: #333;
+  }
+
+  .onb-copy-link-form-block {
+    display: flex;
+    width: 100%;
+    margin-bottom: 16px;
+    align-items: center;
+  }
+
+  .button-2 {
+    position: absolute;
+    right: -1px;
+  }
+
+  .onb-button-copy-link {
+    position: absolute;
+    right: 0px;
+    display: flex;
+    min-height: 100%;
+    padding-right: 16px;
+    padding-left: 16px;
+    flex-direction: column;
+    justify-content: center;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    background-color: #bbddf7;
+    color: #1d8ae7;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .onb-button-copy-link:active {
+    background-color: #4cb2ff;
+    color: #fff;
+  }
+
+  .onb-button-facebook:active {
+    opacity: 0.8;
+  }
+
+  @media (max-width: 767px) {
+    .onb-content-container {
+      margin-bottom: 0px;
+      padding: 0 0 72px;
+      font-family: soleil;
+    }
   }
 }
-.onb-button-social {
-  position: relative;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  width: 100%;
-  padding: 13px 16px;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
-  border-radius: 4px;
-  background-color: hsla(0, 0%, 100%, .7);
-  cursor: pointer;
-}
-
-.onb-button-social:active {
-  background-color: #fff;
-}
-
-.onb-button-social-text {
-  margin-left: 10px;
-  color: #1d8ae7;
-}
-
-.onb-social-button-list {
-  width: 100%;
-  margin-bottom: 0px;
-  padding-left: 0px;
-  list-style-type: none;
-}
-
-.onb-button-social-list-item {
-  margin-bottom: 8px;
-}
-
-.onb-copy-link-container {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  width: 100%;
-  margin-bottom: 8px;
-  margin-top: 24px;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.copy-text-link-field {
-  width: 100%;
-  height: 56px;
-  margin-bottom: 0px;
-  padding-top: 8px;
-  padding-left: 18px;
-  border: 1px none #000;
-  border-radius: 4px;
-  background-color: #fff;
-  color: #fff;
-  font-size: 16px;
-}
-
-.copy-text-link-field:active {
-  background-color: #fff;
-}
-
-.copy-text-link-field:focus {
-  background-color: #fff;
-}
-
-.copy-text-link-field::-webkit-input-placeholder {
-  color: #333;
-  font-weight: 700;
-}
-
-.copy-text-link-field:-ms-input-placeholder {
-  color: #333;
-  font-weight: 700;
-}
-
-.copy-text-link-field::placeholder {
-  color: #333;
-  font-weight: 700;
-}
-
-.onb-copy-link-form {
-  position: relative;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  width: 100%;
-  -webkit-box-pack: start;
-  -webkit-justify-content: flex-start;
-  -ms-flex-pack: start;
-  justify-content: flex-start;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
-  color: #333;
-}
-
-.onb-copy-link-form-block {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  width: 100%;
-  margin-bottom: 16px;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.button-2 {
-  position: absolute;
-  right: -1px;
-}
-
-.onb-button-copy-link {
-  position: absolute;
-  right: 0px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  min-height: 100%;
-  padding-right: 16px;
-  padding-left: 16px;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  border-top-right-radius: 4px;
-  border-bottom-right-radius: 4px;
-  background-color: #bbddf7;
-  color: #1d8ae7;
-  font-size: 12px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-}
-
-.onb-button-copy-link:active {
-  background-color: #4cb2ff;
-  color: #fff;
-}
-
-.onb-button-facebook:active {
-  opacity: 0.8;
-}
-
 </style>

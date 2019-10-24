@@ -88,7 +88,7 @@ export default {
       return this.homeOrPublic === 'public'
     },
     errorMessage () {
-      if (this.homeOrPublic === 'public' && this.googlePlaceId === null) {
+      if (this.homeOrPublic === 'public' && !this.googlePlaceId) {
         return 'Please enter an address or place for your playdate.'
       } else if (this.homeOrPublic === null) {
         return 'Please tell us where your playdate will be.'
@@ -100,3 +100,36 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+
+  .location-text-field {
+    height: 56px;
+    padding-top: 8px;
+    padding-left: 18px;
+    border: 1px none #000;
+    border-radius: 4px;
+    background-color: hsla(0, 0%, 100%, .7);
+    font-size: 16px;
+  }
+
+  .location-text-field:active {
+    background-color: #fff;
+  }
+
+  .location-text-field:focus {
+    background-color: #fff;
+  }
+
+  .location-text-field::-webkit-input-placeholder {
+    color: rgba(0, 0, 0, .3);
+  }
+
+  .location-text-field:-ms-input-placeholder {
+    color: rgba(0, 0, 0, .3);
+  }
+
+  .location-text-field::placeholder {
+    color: rgba(0, 0, 0, .3);
+  }
+</style>

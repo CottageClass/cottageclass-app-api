@@ -104,3 +104,34 @@ export default {
   }
 }
 </script>
+<style lang="scss" scoped>
+@import '@/assets/style/scss/editing.scss';
+@import "@/assets/style/scss/flow.scss";
+.flow {
+  .onb-button-add-group {
+    display: flex;
+    margin-bottom: 63px;
+    padding: 10px 16px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    background-color: hsla(0, 0%, 100%, 0);
+  }
+
+  .onb-button-add-group:active {
+    border-radius: 4px;
+    background-color: hsla(0, 0%, 100%, .1);
+  }
+
+  .onb-button-add-group-text {
+    padding-left: 8px;
+    color: #fff;
+    line-height: 14px;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+  }
+  .image-7 {
+    opacity: 0.7;
+  }
+}
+</style>

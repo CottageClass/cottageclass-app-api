@@ -4,12 +4,11 @@
     <div class="body body-2">
       <div class="content-container w-container">
         <div class="primary-container">
-          <StyleWrapper styleIs="onboarding">
-            <ErrorMessage
-              v-if="showError && errors.first('password')"
-              :messages="[errors.first('password')]"
-            />
-          </StyleWrapper>
+          <ErrorMessage
+            v-if="showError && errors.first('password')"
+            :messages="[errors.first('password')]"
+            class="editing"
+          />
           <h1 class="auth-heading">Reset Password</h1>
           <div>Please Enter your new password</div>
           <div class="auth-wrapper">
@@ -39,7 +38,6 @@
 
 <script>
 import ErrorMessage from '@/components/base/ErrorMessage.vue'
-import StyleWrapper from '@/components/FTE/StyleWrapper.vue'
 import MainNav from '@/components/MainNav.vue'
 import Footer from '@/components/Footer.vue'
 
@@ -48,7 +46,7 @@ import { submitNewPassword, signIn } from '@/utils/api'
 
 export default {
   name: 'PasswordReset',
-  components: { ErrorMessage, StyleWrapper, MainNav, Footer },
+  components: { ErrorMessage, MainNav, Footer },
   mixins: [ alerts, goHome ],
   data: function () {
     return {

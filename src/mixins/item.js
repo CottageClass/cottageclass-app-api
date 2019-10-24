@@ -7,7 +7,7 @@ import { redirect } from '@/mixins'
 import rsvp from '@/mixins/rsvp'
 import stars from '@/mixins/stars'
 import waves from '@/mixins/waves'
-import { fetchEvent, fetchUpcomingEvents } from '@/utils/api'
+import { fetchEvent } from '@/utils/api'
 
 export default {
   mixins: [ redirect, rsvp, waves, stars ],
@@ -260,9 +260,6 @@ export default {
     ...mapGetters([ 'currentUser', 'isAuthenticated' ])
   },
   methods: {
-    contactClick () {
-      this.$router.push({ name: 'ContactUserForm', params: { userId: this.user.id } })
-    },
     cancelClick () {
       this.$router.push({ name: 'EventPage', params: { id: this.event.id, showDeleteConfirmationModal: true } })
     },
@@ -284,31 +281,6 @@ export default {
           this.$router.push({ name: 'RsvpInfoCollection', params: { eventId: this.event.id } })
         }
       }
-    },
-    async interestedClickWithPrompts (context) {
-      let res
-      if (!this.redirectToSignupIfNotAuthenticated({
-        name: 'SelectEventFromUser',
-        params: { userId: this.user.id },
-        query: { interested: 'yes' }
-      })) {
-        if (this.user.starred) {
-          res = await this.unstarUser(this.user.id, context)
-        } else {
-          res = await this.starUser(this.user.id, context)
-          const events = await fetchUpcomingEvents(this.user.id)
-          if (events.length > 0) {
-            if (events.filter(e => !e.participated).length > 0) {
-              this.$router.push({ name: 'SelectEventFromUser', params: { userId: this.user.id } })
-            }
-          } else {
-            this.checkAuthenticationAndInitiateMessageSending()
-          }
-          res = await this.starUser(this.user.id)
-        }
-        this.updateUser(res)
-      }
-      return res
     },
     async interestedClick (context) {
       let res

@@ -25,19 +25,14 @@ export default {
       }
     },
     async handleWave () {
-      if (this.currentUser && this.currentUserHasEvents) {
-        try {
-          await this.sendMessage()
-          this.showAlertOnNextRoute('Your message has been sent', 'success')
-        } catch (e) {
-          this.logError(e)
-          this.showAlertOnNextRoute('Something went wrong.  Please try again later', 'failure')
-        }
-        this.$router.push({ name: 'UserPage', params: { id: this.targetUser.id } })
-      } else {
-        this.addPendingWave({ targetUser: this.targetUser })
-        this.$router.push({ name: 'AddOffersPrompt', params: { userId: this.targetUser.id } })
+      try {
+        await this.sendMessage()
+        this.showAlertOnNextRoute('Your message has been sent', 'success')
+      } catch (e) {
+        this.logError(e)
+        this.showAlertOnNextRoute('Something went wrong.  Please try again later', 'failure')
       }
+      this.$router.push({ name: 'UserPage', params: { id: this.targetUser.id } })
     },
     sendMessage: async function () {
       try {

@@ -1,37 +1,24 @@
 <template>
   <div class="onb-body">
-    <div class="body">
-      <div class="content-wrapper">
-        <StyleWrapper styleIs="onboarding">
-          <Nav
-            :button="nextButtonState"
-            @next="nextStep"
-            :hidePrevious="true"
-          />
-          <ErrorMessage v-if="errorMessage && showError" :text="errorMessage" />
-          <ProfileBlurb v-if="profileBlurb!==null" v-model="profileBlurb" />
-        </StyleWrapper>
-      </div>
-    </div>
+    <ProfileBlurb v-if="profileBlurb!==null" v-model="profileBlurb" />
   </div>
 </template>
 
 <script>
-import StyleWrapper from '@/components/FTE/StyleWrapper'
-import Nav from '@/components/FTE/Nav'
-import ProfileBlurb from '@/components/FTE/userInformation/ProfileBlurb.vue'
-import ErrorMessage from '@/components/base/ErrorMessage.vue'
-
+import { mapGetters, mapMutations } from 'vuex'
 import normalize from 'json-api-normalizer'
+
+import ProfileBlurb from '@/components/FTE/userInformation/ProfileBlurb.vue'
+
 import { submitUserInfo } from '@/utils/api'
 import { createUser } from '@/utils//createUser'
-import { mapGetters, mapMutations } from 'vuex'
-import { goHome } from '@/mixins'
+
+import { goHome, validationError } from '@/mixins'
 
 export default {
   name: 'ProfileCollection',
-  components: { StyleWrapper, Nav, ProfileBlurb, ErrorMessage },
-  mixins: [ goHome ],
+  mixins: [ goHome, validationError ],
+  components: { ProfileBlurb },
   data () {
     return {
       showError: false,
@@ -46,7 +33,7 @@ export default {
         return 'next'
       }
     },
-    errorMessage () {
+    validationError () {
       return this.profileBlurb && this.profileBlurb.err
     },
     ...mapGetters(['currentUser'])
@@ -71,7 +58,21 @@ export default {
   mounted () {
     this.profileBlurb = { text: this.currentUser.profileBlurb || '' }
   },
+  watch: {
+    nextButtonState: {
+      handler () {
+        this.$emit('set-nav-props', {
+          button: this.nextButtonState
+        })
+      },
+      immediate: true
+    }
+  },
   created () {
+    this.$emit('set-nav-props', {
+      nextButtonHandler: this.nextStep,
+      hidePrevious: true
+    })
     if (!this.currentUser) {
       this.goHome()
     }

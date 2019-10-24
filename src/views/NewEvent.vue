@@ -1,35 +1,25 @@
 <template>
   <div class="onb-body">
-    <div class="content-wrapper">
-      <StyleWrapper styleIs="onboarding">
-        <CreateEvent v-if="section==='event'"
-                     :stepName="stepName"
-                     v-on:submission-complete="findUpcomingEvent"
-                     @finishedHomeEvent="completeCreationForHomeEvents"
-                     @finishedPublicEvent="proceed"
-                     context="new-event"
-        />
-        <HouseInformation v-if="section==='homeInfo'"
-                          :stepName="stepName"
-                          @finished="proceed"
-                          context="new-event"
-        />
-      </StyleWrapper>
-    </div>
+    <CreateEvent v-if="section==='event'"
+                 :stepName="stepName"
+                 v-on:submission-complete="findUpcomingEvent"
+                 @finishedHomeEvent="proceed"
+                 @finishedPublicEvent="proceed"
+                 @set-nav-props="$emit('set-nav-props', $event)"
+                 context="new-event"
+    />
   </div>
 </template>
 
 <script>
-import StyleWrapper from '@/components/FTE/StyleWrapper'
 import CreateEvent from '@/components/CreateEvent'
-import HouseInformation from '@/components/FTE/userInformation/HouseInformation'
 
 import { mapGetters } from 'vuex'
 import { redirect } from '@/mixins'
 
 export default {
   name: 'NewEvent',
-  components: { StyleWrapper, CreateEvent, HouseInformation },
+  components: { CreateEvent },
   mixins: [redirect],
   props: ['stepName'],
   data () {
@@ -43,13 +33,6 @@ export default {
     proceed () {
       this.$router.push({ name: 'SocialEventInvite', params: { id: this.upcomingEvent.id, context: 'spontaneous' } })
     },
-    completeCreationForHomeEvents () {
-      if (this.currentUser.houseRules === null) {
-        this.section = 'homeInfo'
-      } else {
-        this.proceed()
-      }
-    },
     findUpcomingEvent (value) {
       this.upcomingEvent = value[0]
     }
@@ -62,10 +45,6 @@ export default {
 </script>
 
 <style scoped>
-
-.onb-body {
-  background-color: #0d73c7;
-}
 
 .content-wrapper {
   width: 720px;

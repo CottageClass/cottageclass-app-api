@@ -94,3 +94,41 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.flow {
+  .onb-button-add-group {
+    display: flex;
+    margin-bottom: 63px;
+    padding: 10px 16px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    background-color: hsla(0, 0%, 100%, 0);
+  }
+
+  .onb-button-add-group:active {
+    border-radius: 4px;
+    background-color: hsla(0, 0%, 100%, .1);
+  }
+
+  .onb-button-add-group-text {
+    padding-left: 8px;
+    color: #fff;
+    line-height: 14px;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+  }
+
+  .onb-child-group-2 {
+    margin-bottom: 24px;
+    padding: 24px 32px 32px;
+    background-color: hsla(0, 0%, 100%, .1);
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1);
+  }
+
+  .image-7 {
+    opacity: 0.7
+  }
+}
+</style>

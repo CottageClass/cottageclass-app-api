@@ -35,7 +35,8 @@ describe('Search', () => {
       })
       wrapper = shallowMount(Search, {
         mocks: { $store },
-        stubs: [ 'GmapMap', 'GmapMarker' ] // because the are globally registered.  this silences the warning
+        stubs: [ 'GmapMap', 'GmapMarker' ], // because the are globally registered.  this silences the warning
+        propsData: { itemType: 'all' }
       })
     })
 

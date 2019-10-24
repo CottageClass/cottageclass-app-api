@@ -69,9 +69,21 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '@/assets/style/scss/editing.scss';
+@import '@/assets/style/scss/flow.scss';
 
-.onb-checkbox {
-    margin-top: 22px;
+.flow {
+  .checkbox-field {
+    display: block;
+  }
+  .onb-checkbox {
+      margin-top: 22px;
+  }
+
+  .radio-form-block, .onb-form-block-checkbox-list {
+    width: 100%;
+    margin-bottom: 32px;
+  }
 }
 
 </style>
