@@ -8,6 +8,7 @@
         v-if="googleMapsIsLoaded"
         id="map"
         classname="w-input location-text-field"
+        :country="['us']"
         :placeholder="currentAddress"
         v-on:placechanged="getAddressData"
       >
