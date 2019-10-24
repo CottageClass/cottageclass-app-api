@@ -1,7 +1,7 @@
 <template>
   <Question
     title="How many weeks will it repeat for?"
-    subtitle="How many weeks should this playdate repeat for? If the schedule is very predictable, repeat for several weeks. If not, just choose 1 week—it's up to you!">
+    subtitle="How many weeks should this playdate repeat for? If the schedule is very predictable, repeat for several weeks. If not, just choose 1 week—it's up to you! For playdates in public places, it's okay if you aren't going to every session.">
     <div class="dropdown-container">
       <div>
         <select class="lp-select" v-model="repeatCount">
