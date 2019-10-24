@@ -21,7 +21,7 @@ class Event < ApplicationRecord
   has_many :participants, as: :participable, dependent: :destroy
   has_many :participant_children, as: :participable
   has_many :participating_users, through: :participants, source: :user
-  has_many :event_collection_memberships
+  has_many :event_collection_memberships, dependent: :destroy
   has_many :event_collections, through: :event_collection_memberships
 
   scope :has_participants, -> { joins(:participants) }
