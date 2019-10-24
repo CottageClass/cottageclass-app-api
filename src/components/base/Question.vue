@@ -56,4 +56,20 @@ export default {
     }
   }
 }
+
+.editing {
+  .question-content {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-top: 16px;
+    padding: 0 32px 40px 32px;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    border-radius: 4px;
+    background-color: #fff;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .08);
+  }
+}
 </style>
