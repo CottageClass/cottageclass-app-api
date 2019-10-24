@@ -169,6 +169,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+ @import "@/assets/style/scss/flow.scss";
 .flow {
 
   .onb-heading-large {
@@ -186,13 +187,6 @@ export default {
     font-family: soleil;
   }
 
-  /* Remove inner shadow from inputs on mobile iOS */
-  textarea, input[type="text"] {
-  -webkit-appearance: none;
-  }
-  html {
-      -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  }
   .scrolling-wrapper {
     overflow-x: auto;
   }
