@@ -26,6 +26,8 @@ import DisinterestedSurvey from '@/views/DisinterestedSurvey.vue'
 import DeclineRSVP from '@/views/DeclineRSVP.vue'
 import DeleteAccountConfirmation from '@/views/DeleteAccountConfirmation'
 
+import { isNative } from '@/utils/platform'
+
 Vue.use(Router)
 
 export default new Router({
@@ -99,7 +101,14 @@ export default new Router({
     {
       path: '/',
       name: 'SplashPage',
-      component: SplashPage
+      component: SplashPage,
+      beforeEnter (to, from, next) {
+        if (isNative()) {
+          next({ name: 'SignUp' })
+        } else {
+          next()
+        }
+      }
     },
     {
       path: '/playdates',
