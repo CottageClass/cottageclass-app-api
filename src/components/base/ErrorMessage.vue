@@ -19,13 +19,32 @@ export default {
 
 <style lang="scss" scoped>
 
+.onb-error-text a.error-link {
+  color: #c96168;
+  text-decoration: underline;
+}
+
+.editing {
+  .onb-error-text {
+    color: #ff7575;
+    margin-top: 16px;
+  }
+
+  @media (max-width: 767px) {
+    .onb-error-text {
+      margin-right: 24px;
+      margin-left: 24px;
+    }
+  }
+}
+
 .flow {
   .onb-error-text a.error-link {
     color: #c96168;
     text-decoration: underline;
   }
 
-  .onb-error-container {
+  .onb-error-container, &.onb-error-container {
     width: 720px;
     display: flex;
     min-height: 60px;
