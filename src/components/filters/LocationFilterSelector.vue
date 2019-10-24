@@ -14,6 +14,7 @@
     <v-slider
       v-model="distanceIndex"
       min="0"
+      :country="['us']"
       :max="distanceOptions.length - 1"
       @change="update"
     ></v-slider>
