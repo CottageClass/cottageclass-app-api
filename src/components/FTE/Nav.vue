@@ -6,8 +6,8 @@
     >
       <a
         @click="$emit('prev')"
-        v-bind:class="['button-back', 'w-inline-block', {'button-hidden': hidePrevious}]">
-      </a>
+        class="button-back w-inline-block"
+        :class="{'button-hidden': !showPrevButton}" />
       <a
         v-if="button !== 'none'"
         @click="$emit('next')"
@@ -33,6 +33,9 @@ export default {
     }
   },
   computed: {
+    showPrevButton () {
+      return this.isIOSNativeApp || !this.hidePrevious
+    },
     text: function () {
       if (this.button === 'skip') {
         return 'SKIP'
