@@ -14,7 +14,7 @@ const state = {
 
 const mutations = {
   mutateEventTime (state, payload) {
-    state.eventTime = payload.eventTime
+    state.eventTime = payload
   },
   mutateMapArea (state, payload) {
     if (payload.center) {
