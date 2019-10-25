@@ -19,8 +19,10 @@ Rails.application.routes.draw do
         collection { delete :index, to: 'participants#destroy' }
       end
       collection do
-        get '(/:skope)(/miles/:miles(/latitude/:latitude/longitude/:longitude))(/min_age/:min_age)(/max_age/:max_age)(/sort/:sort)'\
-        '(/page/:page/page_size/:page_size)',
+        get '(/:skope)(/miles/:miles(/latitude/:latitude/longitude/:longitude))'\
+          '(/min_age/:min_age)(/max_age/:max_age)'\
+          '(/date/:date)(/weekday/:weekday)'\
+          '(/sort/:sort)(/page/:page/page_size/:page_size)',
             to: 'events#index',
             skope: /upcoming|past/i,
             sort: /chronological|distance/i,
@@ -29,6 +31,8 @@ Rails.application.routes.draw do
             miles: /-?+(?=.??\d)\d*\.?\d*/,  # this allows negatives, which it shouldn't
             min_age: /\d+/,
             max_age: /\d+/,
+            date: /\d\d\d\d-\d\d-\d\d/,
+            weekday: /\d/,
             defaults: { skope: 'all' },
             as: :index
       end
