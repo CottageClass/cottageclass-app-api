@@ -31,7 +31,7 @@ import FormWithTextArea from '@/components/base/FormWithTextArea.vue'
 import { createWidget } from '@/utils/vendor/cloudinary'
 
 export default {
-  name: 'EventDescription',
+  name: 'EventOverview',
   components: { Question, FormWithTextArea, Images },
   props: ['value'],
   data () {

@@ -19,7 +19,7 @@
       v-else-if="stepName==='repeat-count'"
       v-model="repeatCount"
     />
-    <EventDescription
+    <EventOverview
       v-else-if="stepName==='description'"
       v-model="description" />
   </div>
@@ -30,7 +30,7 @@ import LoadingSpinner from '@/components/LoadingSpinner'
 import RepeatCount from '@/components/base/eventSpecification/RepeatCount'
 import EventDatePicker from '@/components/base/eventSpecification/EventDatePicker'
 import EventTime from '@/components/base/eventSpecification/EventTime'
-import EventDescription from '@/components/base/eventSpecification/EventDescription'
+import EventOverview from '@/components/base/eventSpecification/EventOverview'
 import EventPlace from '@/components/base/eventSpecification/EventPlace'
 import AgeRange from '@/components/base/eventSpecification/AgeRange.vue'
 
@@ -43,7 +43,7 @@ import { stepNavigation, alerts } from '@/mixins'
 
 export default {
   name: 'CreateEvent',
-  components: { EventDescription, EventPlace, EventDatePicker, EventTime, RepeatCount, LoadingSpinner, AgeRange },
+  components: { EventOverview, EventPlace, EventDatePicker, EventTime, RepeatCount, LoadingSpinner, AgeRange },
   mixins: [stepNavigation, alerts],
   props: ['stepName', 'context'],
   data () {
