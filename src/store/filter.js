@@ -8,10 +8,14 @@ const state = {
     center: { lat: 40.688309, lng: -73.994639 }, // BoCoCa
     maxDistance: 5
   },
+  eventTime: {},
   ageRange: { min: 0, max: 18 }
 }
 
 const mutations = {
+  mutateEventTime (state, payload) {
+    state.eventTime = payload.eventTime
+  },
   mutateMapArea (state, payload) {
     if (payload.center) {
       const center = {
@@ -44,6 +48,10 @@ const actions = {
       }
     }
   },
+  async setEventTime ({ commit, dispatch }, payload) {
+    commit('mutateEventTime', payload)
+    return dispatch('fetchItems')
+  },
   async setMapArea ({ commit, dispatch }, payload) {
     commit('mutateMapArea', payload)
     return dispatch('fetchItems')
@@ -56,6 +64,7 @@ const actions = {
 
 const getters = {
   mapArea: state => state.mapArea,
+  eventTime: state => state.eventTime,
   ageRange: state => state.ageRange
 }
 

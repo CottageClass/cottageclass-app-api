@@ -161,7 +161,6 @@ body {
 .selector-box-container {
   position: absolute;
   z-index: 1000;
-  width: 280px;
   min-height: 300px;
   margin-top: 4px;
   border-radius: 4px;
@@ -173,10 +172,8 @@ body {
   display: -ms-flexbox;
   display: flex;
   width: 100%;
-  height: 200px;
-  -ms-flex-pack: center;
+  min-height: 200px;
   justify-content: center;
-  -ms-flex-align: start;
   align-items: flex-start;
 }
 

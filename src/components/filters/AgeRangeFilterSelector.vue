@@ -1,6 +1,7 @@
 <template>
   <div class="selector-wrapper">
     <v-range-slider
+      class="slider"
       v-model="range"
       min="0"
       max="18"
@@ -45,6 +46,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.slider {
+  width: 250px;
+}
+
 .selector-wrapper {
   text-align: center;
   padding-top: 16px;

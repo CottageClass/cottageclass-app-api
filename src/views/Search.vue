@@ -22,7 +22,7 @@
         <div class="events__column-left">
           <GetTheMost @offer-playdate-click="offerPlaydate"/>
           <div class="list-container w-container">
-            <FilterSelectorBank />
+            <FilterSelectorBank :showEventTimeFilter="itemType==='event'"/>
             <SearchResultList
               :itemType="itemType"
               :awaiting="awaiting"
