@@ -21,65 +21,15 @@
                 @wave="handleWave"
                 :otherText="currentUser ? 'Say hi and suggest another time': null"
       />
-      <div class="user-action-card__container">
-        <div class="user-action-card__subcontainer">
-          <div class="user-action-card__header">
-            <div class="user-action-card__header__date">{{timeHeader}}</div>
-            <div v-if="distance" class="user-action-card__header__distance">{{distance}}</div>
-          </div>
-          <div class="user-action-card__description-text"
-               v-html="this.mainTitle" />
-          <div class="event-summary-card__location">
-            <div class="location-card__text-group">
-              <div class="location-card__place-name-text line-clamp--1"
-                   v-html="playdateLocationName"></div>
-              <div class="location-card__address-text line-clamp--1"
-                   v-if="playdateAddress"
-                   v-html="playdateAddress"></div>
-            </div>
-            <div class="location-icon"><img src="@/assets/circle-location.svg" alt="" class="image-5 photo-fit" /></div>
-          </div>
-          <div class="user-action-card__footer">
-            <div class="user-action-card__footer__user-summary">
-              <router-link :to="{name:'UserPage', params:{id: event.user.id}}"
-                           class="avatar-container">
-                <AvatarImage className="user-action-card__photo"
-                             :person="{facebookUid: event.user.facebookUid, avatar: event.user.avatar}"
-                             imageSize="100"/>
-                <div v-if="verified" class="badge-verified">
-                  <div class="unicode-character">✓</div>
-                  <div class="badge-text">Verified</div>
-                </div>
-              </router-link>
-              <div class="user-action-card__user-info--container">
-                <div class="user-action-card__user-info_list">
-                  <router-link :to="{name:'UserPage', params:{id: event.user.id}}"
-                               class="user-action-card__user-info__name">
-                    {{ userName }}</router-link>
-                  <div class="user-action-card__user-info__occupation truncate">{{occupation}}</div>
-                  <div class="user-action-card__user-info__kids truncate">{{kidsAges}}</div>
-                </div>
-              </div>
-            </div>
-            <div class="user-action-card__footer__actions">
-              <SearchListCardActions
-                class="column-list"
-                :user="event.user"
-                :event="event"
-                @user-updated="updateUser"
-                @interested-click="interestedClickAndUpdate('card')"
-                @going-click="goingClick"
-                @share-click="shareClick"
-                :timePast="timePast"
-                :showShareButton="showShareButton"
-                :showInterestedButton="showInterestedButton"
-                :showMeetButton="showMeetButton"
-                :showGoingButton="showGoingButton"
-                :allowWaveUndo="false"/>
-            </div>
-          </div>
-        </div>
-      </div>
+
+      <EventSearchListCard
+        :item="{user: event.user, event: event}"
+        :distanceCenter="mapArea.center"
+        @interested-click="interestedClickAndUpdate('card')"
+        @going-click="goingClick"
+        @user-updated="$emit('user-updated', $event)"
+      />
+
       <div class="event-detail__content-columns w-row">
         <div class="event-detail__column-left w-col w-col-8 w-col-stack">
           <div v-if="event.participatingParents && event.participatingParents.length" class="attendees__card">
@@ -162,8 +112,6 @@
 <script>
 import LightBox from 'vue-image-lightbox'
 import RSVPCard from '@/components/base/RSVPCard'
-import SearchListCardActions from '@/components/search/SearchListCardActions'
-import AvatarImage from '@/components/base/AvatarImage'
 import MainNav from '@/components/MainNav'
 import Images from '@/components/Images'
 import LoadingSpinner from '@/components/LoadingSpinner'
@@ -171,6 +119,7 @@ import Attendee from '@/components/Attendee'
 import OtherEvent from '@/components/OtherEvent'
 import LightBoxStyleWrapper from '@/components/LightBoxStyleWrapper'
 import DeleteEventConfirmationModal from '@/components/DeleteEventConfirmationModal.vue'
+import EventSearchListCard from '@/components/search/EventSearchListCard'
 
 import houseRulesImage from '@/assets/house-rules.svg'
 import petsImage from '@/assets/pets.svg'
@@ -181,7 +130,7 @@ import { item, maps, rsvp } from '@/mixins'
 
 export default {
   name: 'EventPage',
-  components: { MainNav, Images, LoadingSpinner, AvatarImage, SearchListCardActions, Attendee, OtherEvent, RSVPCard, LightBox, LightBoxStyleWrapper, DeleteEventConfirmationModal },
+  components: { MainNav, Images, LoadingSpinner, Attendee, OtherEvent, RSVPCard, LightBox, LightBoxStyleWrapper, DeleteEventConfirmationModal, EventSearchListCard },
   mixins: [item, maps, rsvp],
   props: { showDeleteConfirmationModal: { default: false } },
   data () {
@@ -217,13 +166,6 @@ export default {
         lng: place.longitude || place.fuzzyLongitude
       }
     },
-    playdateAddress () {
-      if (this.place.public) {
-        return this.event.place.fullAddress
-      } else {
-        return null
-      }
-    },
     lightboxImages () {
       return this.images.map(i => {
         return {
@@ -246,7 +188,7 @@ export default {
     },
     houseRulesImage: () => houseRulesImage,
     petsImage: () => petsImage,
-    ...mapGetters(['isRsvpDeclined'])
+    ...mapGetters(['isRsvpDeclined', 'items', 'mapArea'])
   },
   methods: {
     async interestedClickAndUpdate () {
@@ -330,176 +272,10 @@ a {
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.08);
 }
 
-.badge-verified {
-  position: absolute;
-  left: 10px;
-  top: auto;
-  right: 10px;
-  bottom: -8px;
-  display: flex;
-  min-height: 19px;
-  min-width: 24px;
-  justify-content: center;
-  align-items: center;
-  border-radius: 1000px;
-  background-color: #0cba52;
-  opacity: 0.92;
-}
-.avatar-container {
-  position: relative;
-}
-
-.badge-text {
-  margin-left: 4px;
-  color: #fff;
-  font-size: 8px;
-  line-height: 12px;
-  text-align: center;
-  letter-spacing: .5px;
-  text-transform: uppercase;
-}
-
-.unicode-character {
-  color: #fff;
-  font-size: 8px;
-  line-height: 12px;
-  text-align: center;
-  letter-spacing: .5px;
-  text-transform: uppercase;
-}
-
 .event-detail__container {
   margin-top: 32px;
   padding-right: 32px;
   padding-left: 32px;
-}
-
-.user-action-card__subcontainer {
-  max-width: 624px; /* temporary fix */
-}
-
-.user-action-card__container {
-  display: flex;
-  width: 100%;
-  margin-top: 0;
-  padding: 24px 20px 33px;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: stretch;
-  border-bottom: 1px solid #f5f5f5;
-  background-color: #fff;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.08);
-}
-
-.user-action-card__photo-wrapper {
-  position: relative;
-}
-
-.user-action-card__header {
-  position: relative;
-  display: flex;
-  min-height: 12px;
-  margin-bottom: 12px;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-.user-action-card__header__date {
-  color: #1f88e9;
-  font-size: 12px;
-  line-height: 12px;
-  text-transform: uppercase;
-}
-
-.user-action-card__header__distance {
-  position: static;
-  right: 0;
-  margin-left: 8px;
-  color: #64426b;
-  font-size: 12px;
-  line-height: 12px;
-  text-transform: uppercase;
-}
-
-.user-action-card__description {
-  display: flex;
-  margin-bottom: 12px;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.user-action-card__description-text {
-  margin-top: 8px;
-  margin-bottom: 16px;
-  font-size: 16px;
-  line-height: 22px;
-}
-
-.user-action-card__photo {
-  position: static;
-  max-height: 85px;
-  max-width: 85px;
-  min-height: 85px;
-  min-width: 85px;
-  margin: 0 1px 1px 0;
-  border-radius: 4px;
-}
-
-.user-action-card__footer__user-summary {
-  display: flex;
-  align-items: center;
-}
-
-.user-action-card__footer {
-  display: flex;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-  align-items: flex-end;
-}
-
-.user-action-card__footer__actions {
-  display: flex;
-  flex-direction: row;
-}
-
-.user-action-card__user-info--container {
-  display: flex;
-  margin-left: 12px;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: center;
-}
-
-.user-action-card__user-info_list {
-  margin-right: 20px;
-  line-height: 20px;
-}
-
-.user-action-card__user-info__name {
-  color: rgba(0, 0, 0, 0.86);
-  font-size: 12px;
-  line-height: 17px;
-  font-weight: 700;
-}
-
-.user-action-card__user-info__name:hover {
-  text-decoration: underline;
-}
-
-.user-action-card__user-info__occupation {
-  overflow: hidden;
-  width: 690px;
-  color: rgba(0, 0, 0, 0.6);
-  font-size: 12px;
-  line-height: 17px;
-}
-
-.user-action-card__user-info__kids {
-  overflow: hidden;
-  width: 690px;
-  color: rgba(0, 0, 0, 0.6);
-  font-size: 12px;
-  line-height: 17px;
 }
 
 .event-detail__column-right {
@@ -813,89 +589,9 @@ a {
   align-items: flex-start;
 }
 
-.event-summary-card__location {
-  position: relative;
-  display: flex;
-  overflow: hidden;
-  margin-bottom: 16px;
-  padding: 12px 0;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  border-style: solid;
-  border-width: 1px;
-  border-color: #ebebeb;
-  border-radius: 4px;
-  background-color: #fff;
-  background-image: none;
-  box-shadow: none;
-}
-
-.location-card__place-name-text {
-  position: relative;
-  z-index: 1;
-  margin-bottom: 2px;
-  font-weight: 700;
-}
-
-.location-card__place-name-text.line-clamp--1 {
-  font-weight: 400;
-}
-
-.location-card__address-text {
-  position: relative;
-  z-index: 1;
-  color: rgba(51, 51, 51, 0.6);
-  font-size: 12px;
-}
-
-.location-icon {
-  position: absolute;
-  left: auto;
-  top: auto;
-  right: 16px;
-  bottom: auto;
-  z-index: 1;
-  overflow: hidden;
-  width: 32px;
-  height: 32px;
-}
-
-.image-5 {
-  width: 48px;
-  height: 48px;
-}
-
-.image-5.photo-fit {
-  width: 32px;
-  height: 32px;
-}
-
-.location-card__text-group {
-  margin-right: 80px;
-  margin-left: 16px;
-}
-
-.photo-fit {
-      object-fit: cover;
-}
-
 @media (max-width: 991px){
   .event-detail__map {
     max-height: 210px;
-  }
-
-  .user-action-card__header {
-    flex-direction: row;
-    justify-content: flex-start;
-  }
-
-  .user-action-card__user-info__occupation {
-    width: 480px;
-  }
-
-  .user-action-card__user-info__kids {
-    width: 480px;
   }
 
   .event-detail__column-right {
@@ -929,43 +625,11 @@ a {
 }
 
 @media (max-width: 767px){
-  .badge-text {
-    margin-left: 0;
-  }
-
-  .unicode-character {
-    display: none;
-  }
 
   .event-detail__container {
     margin-top: 16px;
     padding-right: 0;
     padding-left: 0;
-  }
-
-  .user-action-card__container {
-    padding: 16px 16px 24px;
-    border-radius: 0;
-  }
-
-  .user-action-card__description-text {
-    font-size: 13px;
-    line-height: 19.5px;
-  }
-
-  .user-action-card__photo {
-    max-height: 85px;
-    max-width: 85px;
-    min-height: 85px;
-    min-width: 85px;
-  }
-
-  .user-action-card__user-info__occupation {
-    width: 320px;
-  }
-
-  .user-action-card__user-info__kids {
-    width: 320px;
   }
 
   .event-detail__column-right {
@@ -1067,22 +731,6 @@ a {
   .column-list {
     flex-direction: column;
     width:100%;
-  }
-  .badge-verified {
-    left: 6px;
-    right: 6px;
-  }
-
-  .user-action-card__footer__actions {
-    width: 100%;
-  }
-
-  .user-action-card__user-info__occupation {
-    width: 170px;
-  }
-
-  .user-action-card__user-info__kids {
-    width: 170px;
   }
 
   .other-events__title-text {
