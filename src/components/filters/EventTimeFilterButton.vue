@@ -5,6 +5,8 @@
 </template>
 
 <script>
+import moment from 'moment'
+
 export default {
   name: 'EventTimeFilterButton',
   props: ['eventTime'],
@@ -19,7 +21,7 @@ export default {
       return 'Date'
     },
     dateName () {
-      return this.eventTime.date
+      return this.eventTime.date && moment(this.eventTime.date).format('MMM D')
     },
     weekdayName () {
       const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
