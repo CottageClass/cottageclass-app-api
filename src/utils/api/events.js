@@ -40,6 +40,20 @@ export const fetchEvents = async ({ miles, lat, lng, minAge, maxAge, date, weekd
   })
 }
 
+export const updateEvent = async (eventId, data) => {
+  try {
+    const res = axios.put(`/api/events/${eventId}`, data)
+    if (res) {
+      return createEvent(normalize(res.data))
+    } else {
+      throw Error('failed to update event')
+    }
+  } catch (e) {
+    logger.logError(e)
+    throw e
+  }
+}
+
 export const fetchEventsByPlace = async (placeId) => {
   placeId = placeId.toString()
   try {
