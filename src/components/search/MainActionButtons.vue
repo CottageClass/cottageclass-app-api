@@ -2,10 +2,9 @@
   <div class="container-3 w-container">
     <div class="primary-action__card--alt-2">
       <div class="primary-action__positioning-alt-2" :class="{native: isNative}">
-        <div class="primary-action__title-text--alt-2">Get the most out of Lilypad!</div>
         <div class="primary-action__btns-container--alt-2">
           <div class="primary-action__btn-group--alt-2">
-            <a @click="$emit('offer-playdate-click')" class="btn__primary-action--alt-2 w-button">Offer a playdate</a>
+            <a @click="$emit('offer-playdate-click')" class="btn__primary-action--alt-2 w-button">Suggest a playdate</a>
           </div>
         </div>
       </div>
@@ -17,7 +16,7 @@
 import { platform } from '@/mixins'
 
 export default {
-  name: 'GetTheMost',
+  name: 'MainActionButtons',
   mixins: [platform]
 }
 </script>
