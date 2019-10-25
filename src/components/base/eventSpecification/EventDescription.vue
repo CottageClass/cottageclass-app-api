@@ -1,11 +1,11 @@
 <template>
   <Question
-    title="What is the name of your event?"
-    subtitle="Be sure to give your event a descriptive and appealing title.">
+    title="Please describe your event"
+    subtitle="Be descriptive and try to highlight the funnest parts!">
     <form v-on:submit.prevent>
       <input
         @keyup.enter="$emit('pressedEnter')"
-        v-model="name"
+        v-model="description"
         type="text"
         class="w-input location-text-field"
         maxlength="288">
@@ -17,17 +17,17 @@
 import Question from '@/components/base/Question.vue'
 
 export default {
-  name: 'EventName',
+  name: 'EventDescription',
   props: ['value'],
   components: { Question },
   data () {
     return {
-      name: this.value
+      description: this.value
     }
   },
   watch: {
-    name: function () {
-      this.$emit('input', this.name)
+    description: function () {
+      this.$emit('input', this.description)
     }
   }
 }
