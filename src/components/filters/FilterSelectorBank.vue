@@ -53,7 +53,8 @@ export default {
   },
   computed: {
     ageRangeActive () {
-      return this.ageRange.min !== 0 || this.ageRange.max !== 11
+      return (this.ageRange.min || this.ageRange.min === 0) ||
+        (this.ageRange.max || this.ageRange.max === 0)
     },
     shortDescription () {
       return this.mapArea.shortDescription
@@ -72,8 +73,6 @@ export default {
     },
     ...mapMutations([]),
     ...mapActions(['setAgeRange', 'setMapArea'])
-  },
-  mounted () {
   }
 }
 </script>
