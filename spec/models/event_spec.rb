@@ -22,15 +22,6 @@ RSpec.describe Event, type: :model do
     it { is_expected.to have_many(:participating_users).through(:participants) }
   end
 
-  context 'create' do
-    context 'search_list_items' do
-      it {
-        subject.save
-        expect(SearchListItem.where(itemable: subject, user: subject.user)).to exist
-      }
-    end
-  end
-
   context 'destroy' do
     let(:participants_count) { 2 }
 

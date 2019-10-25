@@ -88,14 +88,6 @@ Rails.application.routes.draw do
       end
     end
   end
-  get '/api/feed//miles/:miles/latitude/:latitude/longitude/:longitude(/min_age/:min_age)(/max_age/:max_age)(/page/:page/page_size/:page_size)',
-      to: 'api/search_list_items#index',
-      latitude: /-?+(?=.??\d)\d*\.?\d*/,
-      longitude: /-?+(?=.??\d)\d*\.?\d*/,
-      miles: /-?+(?=.??\d)\d*\.?\d*/, # this allows negatives, which it shouldn't
-      min_age: /\d+/,
-      max_age: /\d+/,
-      as: :feed
 
   # twilio sessions
   post '/api/users/:id/proxy_sessions' => 'api/twilio_sessions#create', as: 'proxy_sessions'
