@@ -93,6 +93,8 @@ const actions = {
       miles: getters.mapArea.maxDistance,
       lat: getters.mapArea.center.lat,
       lng: getters.mapArea.center.lng,
+      date: getters.eventTime.date,
+      weekday: getters.eventTime.weekday,
       page: data.lastPage + 1
     }
 
