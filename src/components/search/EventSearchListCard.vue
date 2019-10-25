@@ -9,7 +9,7 @@
              :class="{'time-past': timePast}" >
           {{eventTimeHeader}}
         </div>
-        <div v-if="distance && !isCurrentUser" class="header__distance">{{distance}}</div>
+        <div v-if="distance" class="header__distance">{{distance}}</div>
       </div>
       <div class="event-summary-card__title line-clamp--1">{{name}}</div>
     </router-link>
