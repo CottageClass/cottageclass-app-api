@@ -242,6 +242,7 @@ body {
 }
 
 .mob-selector-clear-all-link {
+  cursor: pointer;
   color: #1f88e9;
   font-size: 13px;
 }
