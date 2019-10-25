@@ -7,36 +7,26 @@
 <script>
 export default {
   name: 'EventTimeFilterButton',
-  props: ['range'],
+  props: ['eventTime'],
   computed: {
     buttonText () {
-      if (!this.range) {
-        return 'Ages 0-11'
+      if (this.weekdayName) {
+        return this.weekdayName
       }
-
-      let { min, max } = this.range
-      if (!min && !max) { return '0-11' }
-      if (min < 0) {
-        min = null
-      } else {
-        min = min.toString()
+      if (this.dateName) {
+        return this.dateName
       }
-      if (max < 0) {
-        max = null
-      } else {
-        max = max.toString()
+      return 'Date'
+    },
+    dateName () {
+      return this.eventTime.date
+    },
+    weekdayName () {
+      const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+      if (this.eventTime.weekday || this.eventTime.weekday === 0) {
+        return weekdays[this.eventTime.weekday]
       }
-
-      if (min && max) {
-        return 'Ages ' + min + '-' + max
-      }
-      if (min && !max) {
-        return min + ' and up'
-      }
-      if (!min && max) {
-        return max + ' & under'
-      }
-      return 'Ages 0-11'
+      return null
     }
   }
 }
