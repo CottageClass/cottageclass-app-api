@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { fetchFeed, fetchEvents } from '@/utils/api'
+import { fetchUsers, fetchEvents } from '@/utils/api'
 import filter from './filter'
 
 const state = {
@@ -106,7 +106,7 @@ const actions = {
           items = await fetchEvents(params)
           break
         case 'Parents':
-          items = await fetchFeed(params)
+          items = await fetchUsers(params)
           break
       }
     } finally {

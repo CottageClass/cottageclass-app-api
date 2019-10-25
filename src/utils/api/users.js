@@ -1,4 +1,4 @@
-import { createUser } from '../createUser'
+import { createUsers, createUser } from '../createUser'
 import axios from 'axios'
 import normalize from 'json-api-normalizer'
 
@@ -58,6 +58,25 @@ export async function submitUserInfo (userId, data) {
     const res = await axios.put(`/api/users/${userId}`, postData)
     logger.log('SUBMIT USER SUCCESS', res)
     return res
+  } catch (err) {
+    logger.logError(err)
+    throw err
+  }
+}
+
+export async function fetchUsers ({ miles, lat, lng, minAge, maxAge, pageSize = 20, page = 1 }) {
+  let url = `/api/users/miles/${miles}/latitude/${lat}/longitude/${lng}/`
+  if (minAge || minAge === 0) {
+    url += `min_age/${minAge}/`
+  }
+  if (maxAge || maxAge === 0) {
+    url += `max_age/${maxAge}/`
+  }
+  url += `page/${page}/page_size/${pageSize}`
+  try {
+    const res = await axios.get(url)
+    logger.log('FETCH USER SUCCESS')
+    return createUsers(normalize(res.data)).map(u => { return { user: u } })
   } catch (err) {
     logger.logError(err)
     throw err
