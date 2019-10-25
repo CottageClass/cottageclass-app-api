@@ -20,7 +20,7 @@
       <MainNav />
       <div class="events__container w-container">
         <div class="events__column-left">
-          <GetTheMost @offer-playdate-click="offerPlaydate"/>
+          <MainActionButtons @offer-playdate-click="offerPlaydate"/>
           <div class="list-container w-container">
             <FilterSelectorBank :showEventTimeFilter="itemType==='event'"/>
             <SearchResultList
@@ -56,7 +56,7 @@
 <script>
 import { mapGetters, mapMutations, mapActions } from 'vuex'
 
-import GetTheMost from '@/components/search/GetTheMost'
+import MainActionButtons from '@/components/search/MainActionButtons'
 import SearchResultList from '@/components/SearchResultList'
 import MainNav from '@/components/MainNav'
 import EventListMap from '@/components/EventListMap'
@@ -69,7 +69,7 @@ export default {
   mixins: [messaging, alerts, screen],
   props: ['itemType'],
   components: {
-    GetTheMost,
+    MainActionButtons,
     SearchResultList,
     MainNav,
     EventListMap,
