@@ -46,15 +46,25 @@ export default {
       })
     },
     minChildAge () {
+      if (!this.childAgesInMonths) { return 0 }
       let minAgeInYearsRoundedDown = Math.floor(Math.min(...this.childAgesInMonths) / 12 - 1)
       return Math.max(minAgeInYearsRoundedDown, 0)
     },
     maxChildAge () {
+      if (!this.childAgesInMonths) { return 18 }
       let maxAgeInYearsRounded = Math.round(Math.max(...this.childAgesInMonths) / 12) + 1
       return Math.min(maxAgeInYearsRounded, 18)
     }
   },
   watch: {
+    value: {
+      handler () {
+        this.minimum = this.value.minimum || 0
+        this.maximum = this.value.maximum || (this.value.maximum === 0 ? 0 : 18)
+      },
+      deep: true,
+      immediate: true
+    },
     minimum: function () {
       console.log(this.minimum, this.maximum, Math.max(this.maximum, this.minimum))
       this.maximum = Math.max(this.maximum, this.minimum)
