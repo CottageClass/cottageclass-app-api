@@ -18,18 +18,20 @@
 <script>
 import moment from 'moment'
 
+const WEEKDAYS = ['Su', 'M', 'Tu', 'W', 'Th', 'F', 'Sa']
+
 export default {
   name: 'EventTimeFilterSelector',
   props: ['value'],
   data () {
     return {
       err: null,
-      dateSelected: null,
-      weekdaySelected: null
+      dateSelected: this.value.date,
+      weekdaySelected: WEEKDAYS[this.value.weekday]
     }
   },
   computed: {
-    weekdays: _ => ['Su', 'M', 'Tu', 'W', 'Th', 'F', 'Sa'],
+    weekdays: _ => WEEKDAYS,
     allowedDates () {
       return (date) => {
         const yearFromNow = moment(new Date()).add(1, 'years')
@@ -39,6 +41,13 @@ export default {
     }
   },
   watch: {
+    value: {
+      handler () {
+        this.dateSelected = this.value.date
+        this.weekdaySelected = WEEKDAYS[this.value.weekday]
+      },
+      deep: true
+    },
     dateSelected () {
       if (this.dateSelected) {
         this.weekdaySelected = null
@@ -57,11 +66,9 @@ export default {
       this.update()
     },
     update () {
-      this.debug(this.weekdaySelected)
-      this.debug(this.weekdays.indexOf(this.weekdaySelected))
       this.$emit('input', {
         date: this.dateSelected,
-        weekday: this.weekdaySelected && this.weekdays.indexOf(this.weekdaySelected)
+        weekday: this.weekdaySelected && WEEKDAYS.indexOf(this.weekdaySelected)
       })
     }
   }
