@@ -27,15 +27,6 @@ RSpec.describe User, type: :model do
     it { expect { subject.save }.to change(Notification.user_creation, :count).from(0).to(1) }
   end
 
-  context 'create' do
-    context 'search_list_items' do
-      it {
-        subject.save
-        expect(SearchListItem.where(user: subject)).to exist
-      }
-    end
-  end
-
   context 'update' do
     before { subject.save }
 

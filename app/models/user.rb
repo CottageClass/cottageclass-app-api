@@ -32,7 +32,7 @@ class User < ApplicationRecord
     populate_lname_from_name!
   end
 
-  after_create :notify, :create_search_list_item
+  after_create :notify
 
   with_options if: proc { |instance| instance.direct == true } do
     validates :password, presence: true
@@ -57,7 +57,6 @@ class User < ApplicationRecord
            dependent: :destroy,
            after_add: :child_added,
            before_remove: :child_removed
-  has_many :search_list_items, inverse_of: :user, class_name: 'SearchListItem', dependent: :destroy
 
   has_many :sent_messages, class_name: 'Message', foreign_key: :sender_id, inverse_of: :sender, dependent: :destroy
   has_many :received_messages, class_name: 'Message', foreign_key: :receiver_id, inverse_of: :receiver,
@@ -126,10 +125,6 @@ class User < ApplicationRecord
     super.merge('user' => CurrentUserSerializer.json_for(self,
                                                          include: %i[children place],
                                                          params: { current_users_place: true }))
-  end
-
-  def create_search_list_item
-    SearchListItem.create(user: self)
   end
 
   def child_added(_child)
