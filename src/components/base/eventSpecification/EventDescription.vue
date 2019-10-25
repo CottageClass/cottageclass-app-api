@@ -20,17 +20,19 @@
         Add images
       </button>
     </div>
+    <Images :images="images" />
   </Question>
 </template>
 
 <script>
+import Images from '@/components/Images'
 import Question from '@/components/base/Question.vue'
 import FormWithTextArea from '@/components/base/FormWithTextArea.vue'
 import { createWidget } from '@/utils/vendor/cloudinary'
 
 export default {
   name: 'EventDescription',
-  components: { Question, FormWithTextArea },
+  components: { Question, FormWithTextArea, Images },
   props: ['value'],
   data () {
     return {
