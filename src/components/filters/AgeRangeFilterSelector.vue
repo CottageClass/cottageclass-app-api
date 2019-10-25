@@ -3,7 +3,7 @@
     <v-range-slider
       v-model="range"
       min="0"
-      max="11"
+      max="18"
       @change="update"
     ></v-range-slider>
     <div>Ages : {{range[0]}} - {{ range[1]}}</div>
@@ -17,7 +17,10 @@ export default {
   data () {
     return {
       err: null,
-      range: [this.value.min, this.value.max]
+      range: [
+        this.value.min || 0,
+        (this.value.max || this.value.max === 0) ? this.value.max : 18
+      ]
     }
   },
   methods: {
@@ -27,14 +30,15 @@ export default {
       this.$emit('input', this.value)
     }
   },
-  created () {
-    this.range = [this.value.min >= 0 ? this.value.min : 0,
-      this.value.max >= 0 ? this.value.max : 11]
-  },
   watch: {
-    value () {
-      this.range = [this.value.min ? this.value.min : 0,
-        this.value.max ? this.value.max : 11]
+    value: {
+      handler () {
+        this.range = [
+          this.value.min ? this.value.min : 0,
+          this.value.max ? this.value.max : 18
+        ]
+      },
+      deep: true
     }
   }
 }
