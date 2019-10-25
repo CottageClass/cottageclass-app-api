@@ -75,7 +75,7 @@ export default {
         (this.event.user.id.toString() === this.currentUser.id.toString())
     },
     showMeetButton () {
-      return (!this.currentUser || (this.user.id.toString() !== this.currentUser.id.toString()))
+      return (!this.event && (!this.currentUser || (this.user.id.toString() !== this.currentUser.id.toString())))
     },
     showShareButton () {
       return this.event && this.$route.name !== 'SocialEventInvite'
