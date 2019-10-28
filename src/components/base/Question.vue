@@ -24,7 +24,7 @@ export default {
 .flow {
   .question-title {
     font-size: 20px;
-    color:#333;
+    color: #fff;
     text-align: center;
     font-weight: bold;
     line-height: 34px;
@@ -38,7 +38,7 @@ export default {
 
   .paragraph-small-50 {
     margin-bottom: 8px;
-    color: #333;
+    color: hsla(0, 0%, 100%, .5);
     font-size: 11px;
     line-height: 19px;
     text-align: center;
