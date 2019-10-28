@@ -186,14 +186,18 @@ export default {
 
 @media (max-width: 991px){
   .events__container {
-    margin-top: 24px;
+    margin-top: 0;
     flex-direction: column-reverse;
+    padding-right: 0;
+    padding-left: 0;
   }
 
   .events__column-left {
     width: 100%;
     margin-right: 0;
     margin-bottom: 0;
+    padding-right: 0;
+    padding-left: 0;
   }
 
   .events__column-right {
@@ -201,6 +205,8 @@ export default {
     display: block;
     width: 100%;
     margin-bottom: 0;
+    padding-right: 0;
+    padding-left: 0;
   }
 
   .map {
@@ -222,21 +228,6 @@ export default {
 @media (max-width: 767px){
   .events__container {
     position: static;
-    margin-top: 0;
-    padding-right: 0;
-    padding-left: 0;
-    flex-direction: column-reverse;
-  }
-
-  .events__column-left {
-    padding-right: 0;
-    padding-left: 0;
-  }
-
-  .events__column-right {
-    margin-bottom: 0;
-    padding-right: 0;
-    padding-left: 0;
   }
 
   .map {
