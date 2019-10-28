@@ -12,12 +12,12 @@
                             @additional-link-click="$emit('empty-card-additional-link-click')"
       />
       <slot />
-      <SearchListCard v-for="item in items"
-                      :key="item.id"
-                      :item="item"
-                      @event-deleted="$emit('event-deleted')"
-                      @event-updated="$emit('event-updated')"
-                      @user-updated="$emit('user-updated')"
+      <EventSearchListCard v-for="item in items"
+                           :key="item.id"
+                           :item="item"
+                           @event-deleted="$emit('event-deleted')"
+                           @event-updated="$emit('event-updated')"
+                           @user-updated="$emit('user-updated')"
       />
 
     </ul>
@@ -28,11 +28,11 @@
 import ListSectionHeader from '@/components/ListSectionHeader'
 import ListSectionEmptyCard from '@/components/ListSectionEmptyCard'
 import LoadingSpinner from '@/components/LoadingSpinner'
-import SearchListCard from '@/components/search/SearchListCard'
+import EventSearchListCard from '@/components/search/EventSearchListCard'
 
 export default {
   name: 'ListSection',
-  components: { ListSectionHeader, ListSectionEmptyCard, LoadingSpinner, SearchListCard },
+  components: { ListSectionHeader, ListSectionEmptyCard, LoadingSpinner, EventSearchListCard },
   props: {
     items: {},
     title: { required: true },
