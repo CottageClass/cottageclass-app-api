@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_25_182044) do
+ActiveRecord::Schema.define(version: 2019_10_28_172719) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -180,11 +180,8 @@ ActiveRecord::Schema.define(version: 2019_10_25_182044) do
     t.bigint "sender_id"
     t.bigint "receiver_id"
     t.text "content"
-    t.bigint "cc_twilio_session_id"
-    t.string "twilio_interaction_sid"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["cc_twilio_session_id"], name: "index_messages_on_cc_twilio_session_id"
     t.index ["receiver_id"], name: "index_messages_on_receiver_id"
     t.index ["sender_id"], name: "index_messages_on_sender_id"
   end
@@ -337,22 +334,6 @@ ActiveRecord::Schema.define(version: 2019_10_25_182044) do
     t.index ["starable_type", "starable_id"], name: "index_stars_on_starable_type_and_starable_id"
   end
 
-  create_table "twilio_sessions", force: :cascade do |t|
-    t.string "friendly_name"
-    t.string "twilio_id"
-    t.string "twilio_sid_sender"
-    t.string "twilio_sid_receiver"
-    t.datetime "last_action_at", default: -> { "CURRENT_TIMESTAMP" }
-    t.string "proxy_identifier_sender"
-    t.string "proxy_identifier_receiver"
-    t.bigint "sender_id"
-    t.bigint "receiver_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["receiver_id"], name: "index_twilio_sessions_on_receiver_id"
-    t.index ["sender_id"], name: "index_twilio_sessions_on_sender_id"
-  end
-
   create_table "user_matches", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "matched_user_id"
@@ -458,13 +439,10 @@ ActiveRecord::Schema.define(version: 2019_10_25_182044) do
   add_foreign_key "event_collection_memberships", "event_collections"
   add_foreign_key "event_collection_memberships", "events"
   add_foreign_key "event_series", "places"
-  add_foreign_key "messages", "twilio_sessions", column: "cc_twilio_session_id"
   add_foreign_key "messages", "users", column: "receiver_id"
   add_foreign_key "messages", "users", column: "sender_id"
   add_foreign_key "places", "users"
   add_foreign_key "stars", "users", column: "giver_id"
-  add_foreign_key "twilio_sessions", "users", column: "receiver_id"
-  add_foreign_key "twilio_sessions", "users", column: "sender_id"
   add_foreign_key "user_matches", "users"
   add_foreign_key "user_matches", "users", column: "matched_user_id"
   add_foreign_key "users", "events", column: "showcase_event_id"

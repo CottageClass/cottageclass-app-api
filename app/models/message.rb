@@ -1,7 +1,6 @@
 class Message < ApplicationRecord
   belongs_to :sender, class_name: 'User', inverse_of: :sent_messages
   belongs_to :receiver, class_name: 'User', inverse_of: :received_messages
-  belongs_to :cc_twilio_session, class_name: 'TwilioSession'
 
   scope :with_participants, lambda { |p1_id, p2_id|
     where(
