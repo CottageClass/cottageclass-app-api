@@ -7,7 +7,9 @@
       <div class="header">
         <div class="header__date"
              :class="{'time-past': timePast}" >
-          {{eventTimeHeader}}
+          {{ eventTimeHeader }}
+          <span v-if="eventAgeRange !== ''" class="gray-bullet-text">•</span>
+          {{ eventAgeRange }}
         </div>
         <div v-if="distance && !isCurrentUser" class="header__distance">{{distance}}</div>
       </div>
@@ -136,6 +138,10 @@ a {
   height: 20px;
   margin-right: 6px;
   opacity: 1;
+}
+.gray-bullet-text {
+  color: #f1f1f1;
+  -webkit-text-fill-color: #f1f1f1
 }
 
 .text-block-6 {

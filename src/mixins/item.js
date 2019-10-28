@@ -155,6 +155,16 @@ export default {
       }
     },
 
+    eventAgeRange () {
+      if (this.event) {
+        if (this.event.childAgeMaximum === 0) {
+          return ''
+        } else {
+          return 'Ages ' + this.event.childAgeMinimum + '-' + this.event.childAgeMaximum
+        }
+      }
+    },
+
     ageString () {
       return (i) => {
         const ageInMonths = this.user.childAgesInMonths[i]
