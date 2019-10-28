@@ -16,12 +16,7 @@
       <Question title="When is your event?">
         From...
         <br>
-        <br>
-        <DateTimePicker v-model="event.startsAt" showDate="true" />
-        <br>
         To...
-        <br><br>
-        <DateTimePicker v-model="event.endsAt" showDate="true" />
       </Question>
       <Question
         title="Got any photos you'd like to share?"
@@ -47,7 +42,6 @@ import MultipleImageUpload from '@/components/base/MultipleImageUpload.vue'
 import EventName from '@/components/base/eventSpecification/EventName.vue'
 import EventDescription from '@/components/base/eventSpecification/EventDescription.vue'
 import MainNav from '@/components/MainNav.vue'
-import DateTimePicker from '@/components/DateTimePicker.vue'
 import PageActionsFooter from '@/components/PageActionsFooter.vue'
 import ErrorMessage from '@/components/base/ErrorMessage.vue'
 import Question from '@/components/base/Question.vue'
@@ -67,7 +61,6 @@ export default {
     PageActionsFooter,
     ErrorMessage,
     Question,
-    DateTimePicker,
     EventName,
     EventDescription,
     AgeRange,
