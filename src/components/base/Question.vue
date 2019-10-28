@@ -23,29 +23,34 @@ export default {
 <style lang="scss" scoped>
 .flow {
   .question-title {
-    font-size: 20px;
+    font-size: 24px;
     color:#333;
     text-align: center;
     font-weight: bold;
     line-height: 34px;
     margin-top: 0;
+    margin-bottom: 10px;
   }
 
   .title-container {
-    margin-bottom: 32px;
+    margin-bottom: 0px;
+    padding: 32px;
     color: #fff;
   }
 
   .paragraph-small-50 {
-    margin-bottom: 8px;
-    color: #333;
-    font-size: 11px;
-    line-height: 19px;
-    text-align: center;
-    letter-spacing: 0.2px;
+  margin-bottom: 8px;
+  color: #333;
+  font-size: 13px;
+  line-height: 21px;
+  text-align: center;
   }
 
   @media (max-width: 479px) {
+    .title-container {
+    padding-right: 16px;
+    padding-left: 16px;
+    }
     .title-bar {
       align-items: center;
     }
