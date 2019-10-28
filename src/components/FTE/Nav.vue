@@ -60,7 +60,6 @@ export default {
 <style lang="scss" scoped>
 .nav-container {
   position: sticky;
-  width: 720px;
   top: 0;
   left: 0;
   right: 0;

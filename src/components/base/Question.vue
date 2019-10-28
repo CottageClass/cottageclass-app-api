@@ -22,6 +22,10 @@ export default {
 
 <style lang="scss" scoped>
 .flow {
+  .location-search-container{
+    padding-right: 32px;
+    padding-left: 32px;
+  }
   .question-title {
     font-size: 24px;
     color:#333;
@@ -47,6 +51,10 @@ export default {
   }
 
   @media (max-width: 479px) {
+    .location-search-container{
+      padding-right: 16px;
+      padding-left: 16px;
+    }
     .title-container {
     padding-right: 16px;
     padding-left: 16px;

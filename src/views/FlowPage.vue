@@ -97,9 +97,6 @@ export default {
   }
 
   @media (max-width: 767px) {
-    .content-container {
-    margin-top: 99px;
-    }
 
     .column-container {
     position: relative;
@@ -110,26 +107,32 @@ export default {
     border-radius: 0px;
     box-shadow: none;
     }
+
+    .content-container {
+    margin-top: 99px;
+    }
   }
 
   @media (max-width: 479px) {
-    .content-container {
-      margin-top: 70px;
-    }
     .column-container {
       margin-top: 28px;
+    }
+    .content-container {
+      margin-top: 70px;
     }
   }
 </style>
 
 <style lang="scss">
   .flow textarea {
-    padding-top: 16px;
+    padding-top: 8px;
     padding-bottom: 16px;
     padding-left: 18px;
-    border: 1px none #000;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #e4e4e4;
     border-radius: 4px;
-    background-color: hsla(0, 0%, 100%, .7);
+    background-color: #f0f0f0;
     font-size: 16px;
 
     &.text-area-decribe-need {
@@ -141,6 +144,7 @@ export default {
     }
     &:focus {
       background-color: #fff;
+      border-color: #0dba52;
     }
 
     &::placeholder {
