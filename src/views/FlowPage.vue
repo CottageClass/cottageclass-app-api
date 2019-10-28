@@ -61,30 +61,26 @@ export default {
 
 <style scoped lang="scss">
   .page-container {
-    height: 100%;
-    background-color: #fc6f77;
+    min-height: 100vh;
   }
 
   .column-container {
-  position: relative;
-  left: 0%;
-  top: 40px;
-  right: 0%;
-  bottom: auto;
-  z-index: 1000;
-  display: flex;
-  width: 876px;
-  height: 100%;
-  min-height: 500px;
-  margin: 0 auto 100px;
-  flex-direction: column;
-  border-radius: 4px;
-  background-color: #fff;
-  box-shadow: 1px 1px 35px 0 rgba(0, 0, 0, 0.2);
+    background-color: #0d73c7;
+    margin-right: auto;
+    margin-left: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
   }
 
   .content-container {
-   width: 100%;
+    flex: 1;
+    width: 720px;
+    margin-bottom: 0px;
+    padding: 32px 32px 72px;
+    background-color: #1c8be7;
   }
 
   @media (max-width: 991px) {
