@@ -76,7 +76,7 @@ export default {
   width: 876px;
   height: 100%;
   min-height: 500px;
-  margin: 0 auto 100px;
+  margin: 0 auto;
   flex-direction: column;
   border-radius: 4px;
   background-color: #fff;
@@ -99,7 +99,6 @@ export default {
   @media (max-width: 767px) {
 
     .column-container {
-    position: relative;
     top: -97px;
     width: auto;
     margin-right: 0px;
