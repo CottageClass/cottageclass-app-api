@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_28_172719) do
+ActiveRecord::Schema.define(version: 2019_10_28_234552) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -82,6 +82,18 @@ ActiveRecord::Schema.define(version: 2019_10_28_172719) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["parent_id"], name: "index_children_on_parent_id"
+  end
+
+  create_table "conversations", force: :cascade do |t|
+    t.bigint "initiator_id"
+    t.bigint "recipient_id"
+    t.bigint "last_message_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["initiator_id", "recipient_id"], name: "index_conversations_on_initiator_id_and_recipient_id", unique: true
+    t.index ["initiator_id"], name: "index_conversations_on_initiator_id"
+    t.index ["last_message_id"], name: "index_conversations_on_last_message_id"
+    t.index ["recipient_id"], name: "index_conversations_on_recipient_id"
   end
 
   create_table "dark_stars", force: :cascade do |t|
@@ -433,6 +445,9 @@ ActiveRecord::Schema.define(version: 2019_10_28_172719) do
   end
 
   add_foreign_key "children", "users", column: "parent_id"
+  add_foreign_key "conversations", "messages", column: "last_message_id"
+  add_foreign_key "conversations", "users", column: "initiator_id"
+  add_foreign_key "conversations", "users", column: "recipient_id"
   add_foreign_key "dark_stars", "users", column: "giver_id"
   add_foreign_key "dark_stars", "users", column: "recipient_id"
   add_foreign_key "devices", "users"
