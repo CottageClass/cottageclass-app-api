@@ -20,7 +20,7 @@ class Message < ApplicationRecord
   }
 
   def sms_notification
-    sender.notifications.chat_message_received.create notifiable: self
+    receiver.notifications.chat_message_received.create notifiable: self
   end
 
   private
