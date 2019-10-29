@@ -21,7 +21,7 @@ class Message < ApplicationRecord
   private
 
   def update_conversation
-    convo = Conversation.with_participant(receiver, sender).first_or_create
+    convo = Conversation.with_participants(receiver, sender).first_or_create
     convo.update initiator: sender, recipient: receiver if convo.new_record?
     convo.last_message = self
     convo.save!
