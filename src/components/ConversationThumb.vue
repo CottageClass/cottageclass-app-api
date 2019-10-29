@@ -12,7 +12,9 @@
       <div class="chat-detail--comment line-clamp--2">{{messagePreview}}</div>
       <div class="text-block-12">{{messageTimestamp}}</div>
     </div>
-    <a href="http://kc-playdates-3.webflow.io/chat-detail-1" class="entry__hyperlink w-inline-block"></a>
+    <router-link
+      :to="{name: 'Conversation', params: {userId: partner.id}}"
+      class="entry__hyperlink w-inline-block"/>
   </li>
 </template>
 
