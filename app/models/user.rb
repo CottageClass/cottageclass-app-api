@@ -61,10 +61,6 @@ class User < ApplicationRecord
   has_many :sent_messages, class_name: 'Message', foreign_key: :sender_id, inverse_of: :sender, dependent: :destroy
   has_many :received_messages, class_name: 'Message', foreign_key: :receiver_id, inverse_of: :receiver,
                                dependent: :destroy
-  has_many :initiated_sessions, class_name: 'TwilioSession', foreign_key: :sender_id, inverse_of: :initiator,
-                                dependent: :destroy
-  has_many :client_sessions, class_name: 'TwilioSession', foreign_key: :receiver_id, inverse_of: :client,
-                             dependent: :destroy
   has_many :event_series, inverse_of: :user, dependent: :destroy
   has_many :events, through: :event_series, inverse_of: :user
   has_many :participants, inverse_of: :user, dependent: :destroy
