@@ -113,7 +113,7 @@ export default {
       return this.$route.name === 'Events'
     },
     isChatPage () {
-      return this.$route.name === 'Chats'
+      return this.$route.name === 'Chats' || this.$route.name === 'Conversation'
     },
     ...mapGetters(['currentUser', 'isAuthenticated'])
   },
