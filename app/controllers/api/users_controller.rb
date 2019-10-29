@@ -99,7 +99,7 @@ class API::UsersController < API::BaseController
       links[:next] = path.call(page: users.next_page, page_size: page_size) unless users.last_page?
     end
 
-    serializer = PublicUserSerializer.new users, include: %i[children showcase_event],
+    serializer = PublicUserSerializer.new users, include: %i[children showcase_event place],
                                                  links: links,
                                                  meta: meta,
                                                  params: { current_user: current_user }

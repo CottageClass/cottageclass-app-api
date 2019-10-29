@@ -32,7 +32,7 @@
       <MaxDistanceSetting v-model="maxDistance" />
       <YesOrNo
         question="Email settings"
-        description="Would you like to receive custom weekly emails with suggestions for nearby playdates"
+        description="Would you like to receive custom weekly emails with suggestions for nearby playdates?"
         v-model="weeklyEmails"
       />
       <Question title="Delete your account"
