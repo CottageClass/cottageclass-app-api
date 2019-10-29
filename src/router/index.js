@@ -1,9 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+
 import UserPage from '@/views/UserPage.vue'
 import SplashPage from '@/views/SplashPage.vue'
 import EventPage from '@/views/EventPage.vue'
 import Search from '@/views/Search.vue'
+import Chats from '@/views/Chats.vue'
 import Faq from '@/components/Faq.vue'
 import YourPlaydates from '@/views/YourPlaydates.vue'
 import EventEdit from '@/components/EventEdit.vue'
@@ -109,6 +111,11 @@ export default new Router({
           next()
         }
       }
+    },
+    {
+      path: '/chats',
+      name: 'Chats',
+      component: Chats
     },
     {
       path: '/playdates',
