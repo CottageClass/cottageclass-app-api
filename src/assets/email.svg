@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 52.1 (67048) - http://www.bohemiancoding.com/sketch -->
+    <!-- Generator: Sketch 57.1 (83088) - https://sketch.com -->
     <title>glyphs/social/email </title>
     <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="36.3106864%" y1="97.1592494%" x2="58.0548968%" y2="0%" id="linearGradient-1">
+            <stop stop-color="#FF515B" offset="0%"></stop>
+            <stop stop-color="#FF959B" offset="100%"></stop>
+        </linearGradient>
+    </defs>
     <g id="glyphs/social/email-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <path d="M24,12 L16,17 L8,12 L8,10 L16,15 L24,10 L24,12 Z M24,8 L8,8 C6.9,8 6.01,8.9 6.01,10 L6,22 C6,23.1 6.9,24 8,24 L24,24 C25.1,24 26,23.1 26,22 L26,10 C26,8.9 25.1,8 24,8 Z" id="Page-1" fill="#1F88E9"></path>
+        <circle id="Oval" fill="url(#linearGradient-1)" cx="16" cy="16" r="14"></circle>
+        <path d="M21.7551508,12.7113424 L16,16 L10.2448492,12.7113424 L10.2448492,11.3958794 L16,14.684537 L21.7551508,11.3958794 L21.7551508,12.7113424 Z M21.5249448,10.2448492 L10.4750552,10.2448492 C9.71537532,10.2448492 9.10072521,10.8923037 9.10072521,11.6836369 L9.09381903,20.3163631 C9.09381903,21.1076963 9.71537532,21.7551508 10.4750552,21.7551508 L21.5249448,21.7551508 C22.2846247,21.7551508 22.906181,21.1076963 22.906181,20.3163631 L22.906181,11.6836369 C22.906181,10.8923037 22.2846247,10.2448492 21.5249448,10.2448492 L21.5249448,10.2448492 Z" id="Page-1" fill="#FFFFFF" transform="translate(16.000000, 16.000000) rotate(-13.000000) translate(-16.000000, -16.000000) "></path>
     </g>
 </svg>

@@ -44,10 +44,11 @@ export default {
 
   .paragraph-small-50 {
   margin-bottom: 8px;
-  color: #333;
-  font-size: 13px;
-  line-height: 21px;
+  color: #9c9c9c;
+  font-size: 11px;
+  line-height: 19px;
   text-align: center;
+  letter-spacing: .2px;
   }
 
   @media (max-width: 479px) {
