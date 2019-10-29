@@ -23,4 +23,7 @@ class CurrentUserSerializer < BaseSerializer
   attribute(:hosted_events_count) { |instance, _| instance.events.past.count }
   attribute(:participated_events_count) { |instance, _| instance.participated_events.past.count }
   attribute(:upcomin_events_count) { |instance, _| instance.events.upcoming.count }
+
+  # boolean indicating if the user has sent or recievied any messages
+  attribute(:messages_active) { |instance, _| instance.sent_messages.any? || instance.received_messages.any? }
 end
