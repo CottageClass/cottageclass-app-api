@@ -1,7 +1,6 @@
 import { mapGetters, mapMutations } from 'vuex'
 
 import { alerts, messaging } from '@/mixins'
-import { initProxySession } from '@/utils/api'
 
 export default {
   mixins: [ alerts, messaging ],
@@ -36,10 +35,10 @@ export default {
     },
     sendMessage: async function () {
       try {
-        await initProxySession(this.currentUser.id,
-          this.targetUser.id,
-          this.meetMessage(this.targetUser),
-          this.acknowledgeMessage(this.targetUser))
+        // await initProxySession(this.currentUser.id,
+        //   this.targetUser.id,
+        //   this.meetMessage(this.targetUser),
+        //   this.acknowledgeMessage(this.targetUser))
         this.meetStatus = 'sent'
         this.$store.commit('addSentWave', { targetUserId: this.targetUser.id })
       } catch (e) {
