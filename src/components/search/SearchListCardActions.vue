@@ -1,5 +1,12 @@
 <template>
   <ul class="button-list">
+    <li v-if="showEditButton">
+      <IconButton
+        class="edit-button"
+        label="Edit"
+        :icon="editIcon"
+        @click="$emit('edit-click')"/>
+    </li>
     <li v-if="showInterestedButton">
       <IconButton
         class="interested-button"
@@ -47,6 +54,7 @@ import { rsvp, redirect, alerts } from '@/mixins'
 
 import shareIcon from '@/assets/share-black-outline.svg'
 import contactIcon from '@/assets/contact-black-outline.svg'
+import editIcon from '@/assets/compose.svg'
 import goingIconActive from '@/assets/going__green.svg'
 import goingIconInactive from '@/assets/going-black-outline.svg'
 import starredIconActive from '@/assets/star_2.svg'
@@ -58,6 +66,7 @@ export default {
     user: {},
     event: {},
     timePast: {},
+    showEditButton: { default: false },
     showShareButton: { default: false },
     showGoingButton: { default: false },
     showInterestedButton: { default: false },
@@ -69,6 +78,7 @@ export default {
   components: { IconButton, MeetButton },
   computed: {
     shareIcon () { return shareIcon },
+    editIcon () { return editIcon },
     contactIcon () { return contactIcon },
     goingIcon () {
       return this.event.participated ? goingIconActive : goingIconInactive

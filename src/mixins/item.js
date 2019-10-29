@@ -58,6 +58,9 @@ export default {
     isCurrentUser () {
       return this.user && this.currentUser && this.user.id.toString() === this.currentUser.id.toString()
     },
+    showEditButton () {
+      return this.event && this.currentUser && this.event.user.id.toString() === this.currentUser.id.toString()
+    },
     showGoingButton () {
       return this.event &&
         !this.timePast &&
@@ -275,6 +278,9 @@ export default {
     },
     shareClick () {
       this.$router.push({ name: 'SocialEventInvite', params: { id: this.event.id, context: 'searchItem' } })
+    },
+    async editClick () {
+      this.$router.push({ name: 'EventEdit', params: { id: this.event.id } })
     },
     async goingClick () {
       if (this.redirectToSignupIfNotAuthenticated({
