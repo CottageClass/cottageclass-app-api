@@ -131,6 +131,10 @@ class User < ApplicationRecord
     find_matches if persisted?
   end
 
+  def last_initial
+    last_name.slice(0).upcase
+  end
+
   def find_matches
     miles = setting_max_distance
 

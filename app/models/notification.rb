@@ -21,7 +21,8 @@ class Notification < ApplicationRecord
     user_suggestion: 17,
     event_creation_starrer: 18,
     event_creation_match: 19,
-    daily_digest: 20
+    daily_digest: 20,
+    chat_message_received: 21
   }
 
   belongs_to :recipient, class_name: 'User', inverse_of: :notifications
@@ -123,6 +124,22 @@ class Notification < ApplicationRecord
                    Notifier::DailyDigest.new user: recipient,
                                              event_collection: notifiable,
                                              body: body
+                 when :chat_message_received
+                   ages = notifiable.sender.child_ages_in_months.sort
+                   if ages.length == 1
+                     sender_kids_ages = '1 kid age ' + display_age(ages[0], 'mo')
+                   else
+                     display_ages = ages.map { |age| display_age(age, 'mo') }
+                     and_join_ages = display_ages.slice(0, display_ages.length - 1).join(', ') + ' and ' + display_ages[-1]
+                     sender_kids_ages = ages.count.to_s + ' kids ages ' + and_join_ages
+                   end
+                   self.body = I18n.t 'messages.chat_message_received',
+                                      sender_first_name: notifiable.sender.first_name,
+                                      sender_last_initial: notifiable.sender.last_initial,
+                                      sender_kids_ages: sender_kids_ages,
+                                      message_link: ENV['LINK_HOST'] + '/chat/' + notifiable.sender.id.to_s
+                   Notifier::ChatMessageReceived.new user: recipient,
+                                                     body: body
                  end
 
       if notifier.present?
@@ -146,6 +163,14 @@ class Notification < ApplicationRecord
         errors.add :sms_provider_identifier, :invalid
         raise ActiveRecord::RecordInvalid
       end
+    end
+  end
+
+  def display_age(age_in_months, month_unit)
+    if age_in_months < 24
+      age_in_months.to_s + ' ' + month_unit + (age_in_months > 1 ? 's' : '')
+    else
+      (age_in_months / 12).to_s
     end
   end
 end
