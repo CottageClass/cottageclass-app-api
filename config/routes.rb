@@ -38,6 +38,10 @@ Rails.application.routes.draw do
       end
     end
 
+    resources :users, only: %i[show] do
+      resources :messages, only: %i[index]
+    end
+
     resources :users, only: %i[show destroy update] do
       resource :stars, only: %i[create destroy], module: :users
       resource :dark_stars, only: %i[create destroy], module: :users
