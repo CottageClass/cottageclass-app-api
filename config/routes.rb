@@ -38,6 +38,10 @@ Rails.application.routes.draw do
       end
     end
 
+    resources :users, only: %i[show] do
+      resources :messages, only: %i[index create]
+    end
+
     resources :users, only: %i[show destroy update] do
       resource :stars, only: %i[create destroy], module: :users
       resource :dark_stars, only: %i[create destroy], module: :users
@@ -65,6 +69,8 @@ Rails.application.routes.draw do
       end
     end
     resource :user, only: %i[] do
+      resources :conversations, only: %i[index]
+      resource :stars, only: %i[create destroy], module: :users
       resources :children, only: %i[update]
       collection do
         get 'created_events(/:skope)(/page/:page/page_size/:page_size)', to: 'events#created',
@@ -88,10 +94,6 @@ Rails.application.routes.draw do
       end
     end
   end
-
-  # twilio sessions
-  post '/api/users/:id/proxy_sessions' => 'api/twilio_sessions#create', as: 'proxy_sessions'
-  post '/proxy_callback' => 'api/twilio_sessions#callback'
 
   #############
   # routes for facebook crawler

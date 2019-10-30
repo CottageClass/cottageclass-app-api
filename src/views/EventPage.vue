@@ -18,7 +18,6 @@
       <RSVPCard v-if="showRsvpCard"
                 @rsvp-yes="goingClick"
                 @rsvp-no="initiateDeclineRsvp"
-                @wave="handleWave"
                 :otherText="currentUser ? 'Say hi and suggest another time': null"
       />
 
@@ -26,6 +25,7 @@
         :item="{user: event.user, event: event}"
         :distanceCenter="mapArea.center"
         @interested-click="interestedClickAndUpdate('card')"
+        @contact-click="contactClick"
         @going-click="goingClick"
         @user-updated="$emit('user-updated', $event)"
       />

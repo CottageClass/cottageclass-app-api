@@ -17,7 +17,6 @@ describe('Search', () => {
       const $store = new Vuex.Store({
         actions,
         getters: {
-          pendingWaves: () => [],
           currentUser () { return null },
           showFetchMoreButton () { return false },
           isAuthenticated () { return false },
