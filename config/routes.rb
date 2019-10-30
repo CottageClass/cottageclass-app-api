@@ -39,7 +39,7 @@ Rails.application.routes.draw do
     end
 
     resources :users, only: %i[show] do
-      resources :messages, only: %i[index]
+      resources :messages, only: %i[index create]
     end
 
     resources :users, only: %i[show destroy update] do
