@@ -133,7 +133,6 @@ export default {
     if (this.currentUser && !this.currentUser.profileBlurb) {
       this.$router.push({ name: 'ProfileCollection' })
     } else {
-      this.settlePendingWaves()
       if (!this.items) {
         this.fetchItems()
       }

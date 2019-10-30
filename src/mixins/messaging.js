@@ -10,27 +10,11 @@ export default {
       const childAgesInMonths = this.currentUser.childAgesInMonths
       return childAgeSentenceText({ childAgesInMonths })
     },
-    meetMessage () {
-      return (targetUser) => {
-        if (!targetUser) { return '' }
-        return `${this.currentUser.firstName} (${window.location.origin}/users/${this.currentUser.id} ) waved at you!` +
-          ` They live ${this.distanceBetweenUsers(targetUser)} mi. away${this.messageChildAgeString}.` +
-          ` If you're interested in a playdate, say hi!`
-      }
-    },
-    acknowledgeMessage () {
-      return (targetUser) => {
-        if (!targetUser) { return '' }
-        return `We just sent your wave to ${targetUser.firstName}` +
-          ` (${window.location.origin}/users/${targetUser.id} ).` +
-          ` Reply here to introduce yourself and schedule your first playdate!`
-      }
-    },
     distanceBetweenUsers () {
       return function (targetUser) {
         return this.distanceFromCurrentUser(targetUser.place.fuzzyLatitude, targetUser.place.fuzzyLongitude)
       }
     },
-    ...mapGetters([ 'currentUser', 'pendingWaves', 'distanceFromCurrentUser' ])
+    ...mapGetters([ 'currentUser', 'distanceFromCurrentUser' ])
   }
 }

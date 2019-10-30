@@ -21,13 +21,12 @@
         :icon="goingIcon"
         @click="$emit('going-click')"/>
     </li>
-    <li v-if="showMeetButton">
-      <MeetButton
-        class="meet-button"
-        defaultText="Say hi"
+    <li v-if="showContactButton">
+      <IconButton
+        class="contact-button"
+        label="Contact"
         :icon="contactIcon"
-        :targetUser="user"
-        :allowUndo="allowWaveUndo"/>
+        @click="$emit('contact-click')"/>
     </li>
     <li v-if="showCancelButton">
       <IconButton
@@ -46,7 +45,6 @@
 </template>
 
 <script>
-import MeetButton from '@/components/base/MeetButton'
 import IconButton from '@/components/search/IconButton'
 
 import { mapGetters } from 'vuex'
@@ -70,12 +68,11 @@ export default {
     showShareButton: { default: false },
     showGoingButton: { default: false },
     showInterestedButton: { default: false },
-    showMeetButton: { default: false },
-    showCancelButton: { default: false },
-    allowWaveUndo: { default: false }
+    showContactButton: { default: false },
+    showCancelButton: { default: false }
   },
   mixins: [rsvp, redirect, alerts],
-  components: { IconButton, MeetButton },
+  components: { IconButton },
   computed: {
     shareIcon () { return shareIcon },
     editIcon () { return editIcon },

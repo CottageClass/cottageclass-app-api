@@ -66,9 +66,9 @@
           @user-updated="updateUser"
           @interested-click="interestedClickAndUpdate('card')"
           :showInterestedButton="showInterestedButton"
-          :showMeetButton="showMeetButton"
+          :showContactButton="showContactButton"
           :showGoingButton="showGoingButton"
-          :allowWaveUndo="false"/>
+        />
 
       </div>
       <div class="profile-detail__content-columns w-row">
@@ -265,7 +265,6 @@ export default {
         this.dislikeUserHandler('query parameter')
       }
     }
-    await this.settlePendingWaves()
   }
 }
 </script>
