@@ -43,12 +43,13 @@ class Notifier::EventCreationStarrer < Notifier::Base
     end
 
     ages = @event_creator.child_ages_in_months
-    if ages.length == 1
+    if ages.empty?
+      kids_ages_sentence_string = 'no kids'
+      kids_ages_standalone_string = 'no kids'
+    elsif ages.length == 1
       kids_ages_sentence_string = '1 kid age ' + display_age(ages[0], 'month')
       kids_ages_standalone_string = '1 Kid age ' + display_age(ages[0], 'mo')
     else
-      return '' if ages.empty?
-
       display_ages = ages.map { |age| display_age(age, 'mo') }
       and_join_ages = display_ages.slice(0, display_ages.length - 1).join(', ') + ' and ' + display_ages[-1]
       kids_ages_sentence_string = ages.count.to_s + ' kids ages ' + and_join_ages
