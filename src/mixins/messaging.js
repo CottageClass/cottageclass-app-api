@@ -1,6 +1,5 @@
 import { mapGetters } from 'vuex'
 
-import { initProxySession } from '@/utils/api'
 import { childAgeSentenceText } from '@/utils/utils'
 import { alerts } from '@/mixins'
 
@@ -33,26 +32,5 @@ export default {
       }
     },
     ...mapGetters([ 'currentUser', 'pendingWaves', 'distanceFromCurrentUser' ])
-  },
-  methods: {
-    async settlePendingWaves () {
-      for (let targetUser of this.pendingWaves) {
-        try {
-          await initProxySession(
-            this.currentUser.id,
-            targetUser.id,
-            this.meetMessage(targetUser),
-            this.acknowledgeMessage(targetUser)
-          )
-          this.showAlertOnNextRoute('Message sent! Check your text messages to say hi & schedule a playdate', 'success')
-        } catch (e) {
-          this.logError(e)
-          this.showAlertOnNextRoute('There was a problem sending your message.  Please try again later', 'failure')
-        } finally {
-          // mark the wave as send even if it fails
-          this.$store.commit('removePendingWave', { targetUserId: targetUser.id })
-        }
-      }
-    }
   }
 }

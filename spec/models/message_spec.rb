@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe Message do
   describe 'associations' do
     describe 'first message' do
-      let!(:user_1) { FactoryBot.create(:user) }
-      let!(:user_2) { FactoryBot.create(:user) }
+      let!(:user_1) { FactoryBot.create(:user, :with_children) }
+      let!(:user_2) { FactoryBot.create(:user, :with_children) }
       let!(:message_from_1) do
         FactoryBot.create(:message, sender: user_1, receiver: user_2)
       end
@@ -16,8 +16,8 @@ RSpec.describe Message do
     end
 
     describe 'second message' do
-      let!(:user_1) { FactoryBot.create(:user) }
-      let!(:user_2) { FactoryBot.create(:user) }
+      let!(:user_1) { FactoryBot.create(:user, :with_children) }
+      let!(:user_2) { FactoryBot.create(:user, :with_children) }
       let!(:message_from_1) do
         FactoryBot.create(:message, sender: user_1, receiver: user_2)
       end
@@ -34,8 +34,8 @@ RSpec.describe Message do
 
   describe 'scopes' do
     describe 'with_participants' do
-      let!(:user_1) { FactoryBot.create(:user) }
-      let!(:user_2) { FactoryBot.create(:user) }
+      let!(:user_1) { FactoryBot.create(:user, :with_children) }
+      let!(:user_2) { FactoryBot.create(:user, :with_children) }
       let!(:message_from_1) do
         FactoryBot.create(:message, sender: user_1, receiver: user_2)
       end

@@ -95,10 +95,6 @@ Rails.application.routes.draw do
     end
   end
 
-  # twilio sessions
-  post '/api/users/:id/proxy_sessions' => 'api/twilio_sessions#create', as: 'proxy_sessions'
-  post '/proxy_callback' => 'api/twilio_sessions#callback'
-
   #############
   # routes for facebook crawler
   #############
