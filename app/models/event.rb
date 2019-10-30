@@ -111,9 +111,8 @@ class Event < ApplicationRecord
           starrer.notify_event_creation_starrer host if starrer.id != host.id
         end
 
-        nearby_users = users_with_distance
-          .from(users_with_distance, :users)
-          .near([host.place.latitude, host.place.longitude], :setting_max_distance)
+        nearby_users = User
+          .near(host, :setting_max_distance)
           .where.not(id: host.id)
 
         recipients = []
@@ -123,7 +122,6 @@ class Event < ApplicationRecord
           recipients += eligible_users_for_child.to_a
           recipients = recipients.uniq
         end
-        # User.all.each do |recipient|
         recipients.each do |recipient|
           recipient.notify_event_creation_match host unless starrers.include? recipient
           next if recipient.devices.empty?
