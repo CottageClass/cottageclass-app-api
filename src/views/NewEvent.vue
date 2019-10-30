@@ -28,7 +28,7 @@ export default {
       section: 'event'
     }
   },
-  computed: mapGetters(['currentUser', 'pendingWaves']),
+  computed: mapGetters(['currentUser']),
   methods: {
     proceed () {
       this.$router.push({ name: 'SocialEventInvite', params: { id: this.upcomingEvent.id, context: 'spontaneous' } })

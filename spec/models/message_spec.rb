@@ -1,16 +1,46 @@
 require 'rails_helper'
 
 RSpec.describe Message do
-  describe 'scopes' do
-    describe 'with_participants' do
-      let!(:user_1) { FactoryBot.create(:user) }
-      let!(:user_2) { FactoryBot.create(:user) }
-      let!(:twilio_session) { FactoryBot.create(:twilio_session, initiator: user_1, client: user_2) }
+  describe 'associations' do
+    describe 'first message' do
+      let!(:user_1) { FactoryBot.create(:user, :with_children) }
+      let!(:user_2) { FactoryBot.create(:user, :with_children) }
       let!(:message_from_1) do
-        FactoryBot.create(:message, sender: user_1, receiver: user_2, cc_twilio_session: twilio_session)
+        FactoryBot.create(:message, sender: user_1, receiver: user_2)
+      end
+
+      it 'creates a conversation' do
+        convo = Conversation.where(initiator: user_1, recipient: user_2).first
+        expect(convo.last_message).to eq message_from_1
+      end
+    end
+
+    describe 'second message' do
+      let!(:user_1) { FactoryBot.create(:user, :with_children) }
+      let!(:user_2) { FactoryBot.create(:user, :with_children) }
+      let!(:message_from_1) do
+        FactoryBot.create(:message, sender: user_1, receiver: user_2)
       end
       let!(:message_from_2) do
-        FactoryBot.create(:message, sender: user_2, receiver: user_1, cc_twilio_session: twilio_session)
+        FactoryBot.create(:message, sender: user_2, receiver: user_1)
+      end
+
+      it 'updates a conversation' do
+        convo = Conversation.where(initiator: user_1, recipient: user_2).first
+        expect(convo.last_message).to eq message_from_2
+      end
+    end
+  end
+
+  describe 'scopes' do
+    describe 'with_participants' do
+      let!(:user_1) { FactoryBot.create(:user, :with_children) }
+      let!(:user_2) { FactoryBot.create(:user, :with_children) }
+      let!(:message_from_1) do
+        FactoryBot.create(:message, sender: user_1, receiver: user_2)
+      end
+      let!(:message_from_2) do
+        FactoryBot.create(:message, sender: user_2, receiver: user_1)
       end
 
       it 'returns messages where the user was the sender or the receiver, regardless of the order of participant ids' do

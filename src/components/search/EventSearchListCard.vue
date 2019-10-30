@@ -43,11 +43,14 @@
           @event-updated="$emit('event-updated', $event)"
           @event-deleted="$emit('event-deleted', id)"
           @going-click="goingClick"
+          @contact-click="contactClick"
+          @edit-click="editClick"
           @interested-click="interestedClick('card')"
           :timePast="timePast"
           :showGoingButton="showGoingButton"
+          :showEditButton="showEditButton"
           :showInterestedButton="showInterestedButton"
-          :allowWaveUndo="true"/>
+        />
       </div>
     </div>
 

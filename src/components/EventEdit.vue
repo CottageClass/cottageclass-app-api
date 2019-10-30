@@ -13,16 +13,12 @@
       <ErrorMessage v-if="event.ageRange.err" :text="event.ageRange.err" />
       <AgeRange v-model="event.ageRange" />
       <ErrorMessage v-if="!datesValidate" text="Please enter a valid start and end time for your event." />
-      <Question title="When is your event?">
-        From...
-        <br>
-        <br>
-        <DateTimePicker v-model="event.startsAt" showDate="true" />
-        <br>
-        To...
-        <br><br>
-        <DateTimePicker v-model="event.endsAt" showDate="true" />
-      </Question>
+      <EventDatePicker
+        v-model="date"
+      />
+      <EventTime
+        v-model="time"
+      />
       <Question
         title="Got any photos you'd like to share?"
         subtitle="Adding photos to your event helps give other members a sense of what will be happening."
@@ -47,12 +43,13 @@ import MultipleImageUpload from '@/components/base/MultipleImageUpload.vue'
 import EventName from '@/components/base/eventSpecification/EventName.vue'
 import EventDescription from '@/components/base/eventSpecification/EventDescription.vue'
 import MainNav from '@/components/MainNav.vue'
-import DateTimePicker from '@/components/DateTimePicker.vue'
 import PageActionsFooter from '@/components/PageActionsFooter.vue'
 import ErrorMessage from '@/components/base/ErrorMessage.vue'
 import Question from '@/components/base/Question.vue'
 import DeleteEventConfirmationModal from '@/components/DeleteEventConfirmationModal.vue'
 import AgeRange from '@/components/base/eventSpecification/AgeRange.vue'
+import EventDatePicker from '@/components/base/eventSpecification/EventDatePicker.vue'
+import EventTime from '@/components/base/eventSpecification/EventTime.vue'
 
 import { fetchEvent, updateEvent } from '@/utils/api'
 
@@ -67,8 +64,9 @@ export default {
     PageActionsFooter,
     ErrorMessage,
     Question,
-    DateTimePicker,
     EventName,
+    EventDatePicker,
+    EventTime,
     EventDescription,
     AgeRange,
     DeleteEventConfirmationModal,
@@ -76,6 +74,8 @@ export default {
   },
   data () {
     return {
+      date: '',
+      time: moment(),
       eventId: this.$route.params.id,
       saveButtonText: 'Save',
       eventDataFromAPI: null,
@@ -107,8 +107,8 @@ export default {
       return {
         'event': {
           'name': this.event.name,
-          'starts_at': this.event.startsAt,
-          'ends_at': this.event.endsAt,
+          'starts_at': moment(this.date.selected + 'T' + this.time.start),
+          'ends_at': moment(this.date.selected + 'T' + this.time.end),
           'child_age_minimum': this.event.ageRange.minimum,
           'child_age_maximum': this.event.ageRange.maximum
         }
@@ -131,6 +131,9 @@ export default {
     fetchEvent: async function () {
       this.event = await fetchEvent(this.eventId)
       this.event = this.parseEventDataFromAPI(this.event)
+      this.date = { selected: this.event.startsAt.format('YYYY-MM-DD') }
+      this.time = { start: this.event.startsAt.format('HH:mm'), end: this.event.endsAt.format('HH:mm')
+      }
     },
     parseEventDataFromAPI: function (dataFromAPI) {
       let e = dataFromAPI
@@ -159,7 +162,6 @@ export default {
         this.submitEventData().then(res => {
           this.saveButtonText = ' \u2714 Saved'
           console.log('event update SUCCESS')
-          console.log(res)
           this.fetchEvent()
           return res
         }).catch(err => {

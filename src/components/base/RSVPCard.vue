@@ -4,7 +4,6 @@
     :otherText="otherText"
     @primary-click="$emit('rsvp-yes')"
     @secondary-click="$emit('rsvp-no')"
-    @other-click="$emit('wave')"
   />
 </template>
 

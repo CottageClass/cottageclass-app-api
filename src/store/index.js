@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import auth from './auth'
 import rsvp from './rsvp'
-import waves from './waves'
 import search from './search'
 
 import createPersistedState from 'vuex-persistedstate'
@@ -12,7 +11,7 @@ Vue.use(Vuex)
 export default new Vuex.Store(
   {
     plugins: [createPersistedState()],
-    modules: { auth, rsvp, waves, search },
+    modules: { auth, rsvp, search },
     state: {
       previousPath: null,
       alert: null,
