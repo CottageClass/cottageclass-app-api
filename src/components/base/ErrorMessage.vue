@@ -62,6 +62,12 @@ export default {
 
   @media (max-width: 767px) {
   .onb-error-container {
+    margin-top: 99px;
+  }
+  }
+
+  @media (max-width: 479px) {
+  .onb-error-container {
     margin-top: 70px;
   }
   }
