@@ -62,11 +62,11 @@ import MainNav from '@/components/MainNav'
 import EventListMap from '@/components/EventListMap'
 import FilterSelectorBank from '@/components/filters/FilterSelectorBank'
 
-import { messaging, alerts, screen } from '@/mixins'
+import { alerts, screen } from '@/mixins'
 
 export default {
   name: 'Search',
-  mixins: [messaging, alerts, screen],
+  mixins: [alerts, screen],
   props: ['itemType'],
   components: {
     MainActionButtons,

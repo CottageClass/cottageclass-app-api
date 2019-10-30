@@ -61,7 +61,7 @@
         @user-updated="$emit('user-updated', $event)"
         @event-updated="$emit('event-updated', $event)"
         @event-deleted="$emit('event-deleted', id)"
-        @contact-click="$emit('contact-click')"
+        @contact-click="contactClick"
         @going-click="goingClick"
         @cancel-click="cancelClick"
         @interested-click="interestedClick('card')"
@@ -91,7 +91,7 @@
         :showShareButton="showShareButton"
         :showInterestedButton="showInterestedButton"
         :showCancelButton="!doNotShowCancel && showCancelButton"
-        />
+      />
     </div>
   </li>
 </template>

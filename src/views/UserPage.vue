@@ -164,14 +164,14 @@ import LoadingSpinner from '@/components/LoadingSpinner'
 import OtherEvent from '@/components/OtherEvent'
 import LightBoxStyleWrapper from '@/components/LightBoxStyleWrapper'
 
-import { item, maps, messaging } from '@/mixins'
+import { item, maps } from '@/mixins'
 import { fetchUser, fetchUpcomingEvents } from '@/utils/api'
 import contactIcon from '@/assets/contact-black-outline.svg'
 
 export default {
   name: 'UserPage',
   components: { MainNav, Images, LoadingSpinner, AvatarImage, OtherEvent, SearchListCardActions, LikeUserCard, LightBox, LightBoxStyleWrapper },
-  mixins: [ item, maps, messaging ],
+  mixins: [ item, maps ],
   data () {
     return {
       user: null,

@@ -50,7 +50,7 @@
           :showGoingButton="showGoingButton"
           :showEditButton="showEditButton"
           :showInterestedButton="showInterestedButton"
-          />
+        />
       </div>
     </div>
 
