@@ -33,3 +33,20 @@ export const fetchMessages = async (userId) => {
     throw e
   }
 }
+
+export const submitMessage = async (userId, content) => {
+  try {
+    const res = await axios.post(
+      `/api/users/${userId}/messages`,
+      { content }
+    )
+    if (res) {
+      return createMessages(normalize(res.data))
+    } else {
+      throw Error('failed to submit message')
+    }
+  } catch (e) {
+    logger.logError(e)
+    throw e
+  }
+}
