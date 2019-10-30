@@ -138,11 +138,6 @@ export default {
   text-align: center;
 }
 
-.title-bar-next-button-inactive:hover {
-  background-color: #fc6f77;
-  box-shadow: none;
-}
-
 .button-back {
   position: absolute;
   left: 0%;
@@ -164,6 +159,17 @@ export default {
   background-repeat: no-repeat;
 }
 
+.button-next-text {
+  color: #fff;
+  cursor: pointer;
+}
+
+@media (hover: hover) {
+.title-bar-next-button-inactive:hover {
+  background-color: #fc6f77;
+  box-shadow: none;
+}
+
 .button-back:hover {
   background-image: url('../../assets/arrow-back--black.svg'), linear-gradient(180deg, #f1f1f1, #f1f1f1);
   background-position: 50% 50%, 0 0;
@@ -171,9 +177,6 @@ export default {
   background-repeat: no-repeat, repeat;
 }
 
-.button-next-text {
-  color: #fff;
-  cursor: pointer;
 }
 
 @media (max-width: 991px) {
