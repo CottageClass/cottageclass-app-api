@@ -1,5 +1,4 @@
 import Vue from 'vue'
-// Vuex module to handle waves
 const radiusSequence = [5, 10, 20]
 
 const state = {
