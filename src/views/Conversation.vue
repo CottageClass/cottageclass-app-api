@@ -25,7 +25,9 @@
               <h1 class="chat-heading-text">{{titleText}}</h1>
             </div>
           </div>
-          <div class="chat-content--wrapper">
+          <div class="chat-content--wrapper"
+               v-if="partner && messages"
+          >
             <ConversationMonth
               v-for="(cm) in conversationMonths"
               :key="cm.month"
@@ -37,6 +39,10 @@
           </div>
         </div>
       </div>
+      <MessageSendBox
+        @message-submitted="sendMessage"
+        v-model="newMessage"
+      />
       <div class="chat-input-wrapper">
       </div>
     </div>
@@ -50,14 +56,16 @@ import moment from 'moment'
 import MainNav from '@/components/MainNav'
 import ConversationMonth from '@/components/ConversationMonth'
 import AvatarImage from '@/components/base/AvatarImage'
+import MessageSendBox from '@/components/MessageSendBox'
 
-import { fetchMessages, fetchUser } from '@/utils/api'
+import { fetchMessages, fetchUser, submitMessage } from '@/utils/api'
 
 export default {
   name: 'Conversation',
-  components: { ConversationMonth, AvatarImage, MainNav },
+  components: { ConversationMonth, AvatarImage, MainNav, MessageSendBox },
   data () {
     return {
+      newMessage: null,
       messages: null,
       partner: null
     }
@@ -65,14 +73,26 @@ export default {
   props: {
     userId: { required: true }
   },
+  methods: {
+    async sendMessage (payload) {
+      await submitMessage(this.partner.id, payload.message)
+      this.messages = await fetchMessages(this.userId)
+      this.newMessage = null
+    }
+  },
   computed: {
     titleText () {
-      return 'Chat with ' + this.partnerName
+      if (this.partner) {
+        return 'Chat with ' + this.partnerName
+      } else {
+        return 'loading'
+      }
     },
     partnerName () {
       return this.partner.firstName + ' ' + this.partner.lastInitial + '.'
     },
     conversationMonths () {
+      if (!this.messages) { return [] }
       const monthGroups = this.messages.reduce(function (months, message) {
         const monthKey = moment(message.createdAt).format('YYYY-MM')
         months[monthKey] = months[monthKey] || []
