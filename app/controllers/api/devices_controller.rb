@@ -14,6 +14,6 @@ class API::DevicesController < API::BaseController
   private
 
   def safe_params
-    params.require(:device).permit :token
+    params.require(:device).permit :token, :platform
   end
 end
