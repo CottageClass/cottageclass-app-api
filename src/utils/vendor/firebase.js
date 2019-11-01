@@ -8,7 +8,7 @@ const logger = Logger('firebase')
 
 async function sendTokenToServer (userId, refreshToken) {
   try {
-    await createDevice({ token: refreshToken })
+    await createDevice({ token: refreshToken, platform: 'pwa' })
   } catch (e) {
     logger.logError('Unable to update token on server', e)
   }

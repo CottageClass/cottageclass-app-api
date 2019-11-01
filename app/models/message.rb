@@ -1,5 +1,5 @@
 class Message < ApplicationRecord
-  after_create :update_conversation, :sms_notification
+  after_create :update_conversation, :sms_notification, :push_notification
 
   has_many :notifications, as: :notifiable, dependent: :nullify
   belongs_to :sender, class_name: 'User', inverse_of: :sent_messages
@@ -18,6 +18,10 @@ class Message < ApplicationRecord
       id, id
     )
   }
+
+  def push_notification
+    receiver.push_notify_message_receipt self
+  end
 
   def sms_notification
     receiver.notifications.chat_message_received.create notifiable: self

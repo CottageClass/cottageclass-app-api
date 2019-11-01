@@ -1,7 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`MeetButton locality provided displays correct information 1`] = `"Natasha (http://localhost/users/987654321 ) waved at you! They live 4.2 mi. away with 3 kids age 9 mos, 4 & 8. If you're interested in a playdate, say hi!"`;
-
-exports[`MeetButton negative age kid displays correct information 1`] = `"Natasha (http://localhost/users/987654321 ) waved at you! They live 4.2 mi. away. If you're interested in a playdate, say hi!"`;
-
-exports[`MeetButton no locality provided has the correct data 1`] = `"Natasha (http://localhost/users/987654321 ) waved at you! They live 4.2 mi. away with 3 kids age 2 mos, 2 mos & 9. If you're interested in a playdate, say hi!"`;

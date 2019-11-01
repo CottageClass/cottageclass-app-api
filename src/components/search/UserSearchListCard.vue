@@ -61,17 +61,18 @@
         @user-updated="$emit('user-updated', $event)"
         @event-updated="$emit('event-updated', $event)"
         @event-deleted="$emit('event-deleted', id)"
+        @contact-click="contactClick"
         @going-click="goingClick"
         @cancel-click="cancelClick"
         @interested-click="interestedClick('card')"
         @share-click="shareClick"
         :timePast="timePast"
         :showGoingButton="showGoingButton"
-        :showMeetButton="showMeetButton"
+        :showContactButton="showContactButton"
         :showShareButton="showShareButton"
         :showInterestedButton="showInterestedButton"
         :showCancelButton="!doNotShowCancel && showCancelButton"
-        :allowWaveUndo="true"/>
+      />
       <SearchListCardActionsOverlay
         v-if="showOverlay"
         :user="item.user"
@@ -80,16 +81,17 @@
         @event-updated="$emit('event-updated', $event)"
         @event-deleted="$emit('event-deleted', id)"
         @clickaway="overlayOpen=false"
+        @contact-click="contactClick"
         @going-click="goingClick"
         @cancel-click="cancelClick"
         @interested-click="interestedClick('card')"
         @share-click="shareClick"
         :showGoingButton="showGoingButton"
-        :showMeetButton="showMeetButton"
+        :showContactButton="showContactButton"
         :showShareButton="showShareButton"
         :showInterestedButton="showInterestedButton"
         :showCancelButton="!doNotShowCancel && showCancelButton"
-        :allowWaveUndo="true"/>
+      />
     </div>
   </li>
 </template>

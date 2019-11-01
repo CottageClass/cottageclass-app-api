@@ -184,6 +184,11 @@ export default {
               maxDistance: 5
             })
           }
+          if (this.stepName === 'distance') {
+            this.setMapArea({
+              maxDistance: this.maxDistance
+            })
+          }
           this.submitUserData()
           this.trackStep('user-info')
 
