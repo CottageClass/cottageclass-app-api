@@ -265,7 +265,6 @@ export default {
         this.dislikeUserHandler('query parameter')
       }
     }
-    await this.settlePendingWaves()
   }
 }
 </script>
