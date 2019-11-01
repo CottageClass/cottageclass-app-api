@@ -258,15 +258,24 @@ class User < ApplicationRecord
     notifications.event_suggestion.exists? notifiable: event
   end
 
-  def push_notify_event_creation(event)
+  def push_to_devices(data)
     devices.each do |d|
-      d.send_push(
-        icon: event.user.avatar,
-        url: ENV['LINK_HOST'] + '/event/' + event.id.to_s,
-        title: "#{event.user.first_name.capitalize} has a new offering",
-        body: event.name
-      )
+      d.send_push(data)
     end
+  end
+
+  def push_notify_message_receipt(message)
+    push_to_devices icon: message.sender.avatar,
+                    url: ENV['LINK_HOST'] + '/chat/' + message.sender.id.to_s,
+                    title: "New message from #{message.sender.first_name.capitalize}",
+                    body: 'Tap to read the message and respond'
+  end
+
+  def push_notify_event_creation(event)
+    push_to_devices icon: event.user.avatar,
+                    url: ENV['LINK_HOST'] + '/event/' + event.id.to_s,
+                    title: "#{event.user.first_name.capitalize} has a new offering",
+                    body: event.name
   end
 
   def notify_user_suggestion
