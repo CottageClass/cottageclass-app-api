@@ -97,52 +97,6 @@ class Event < ApplicationRecord
     update_column :recency_score, seconds_since_created + (past ? PAST_PENALTY : 0)
   end
 
-  class << self
-    def batch_event_job(last_run_time)
-      recent_events = Event.joins(:event_series).includes(:user).where('events.created_at > ?', last_run_time).to_a
-
-      hosts = recent_events.map(&:user).uniq
-      hosts.each do |host|
-        # find all the starrers of the hosts an send an email
-        starrers = User
-          .joins('INNER JOIN stars ON users.id = stars.giver_id')
-          .where("stars.starable_type = 'User' AND stars.starable_id = ?", host.id)
-        starrers.each do |starrer|
-          starrer.notify_event_creation_starrer host if starrer.id != host.id
-        end
-
-        nearby_users = users_with_distance
-          .from(users_with_distance, :users)
-          .near([host.place.latitude, host.place.longitude], :setting_max_distance)
-          .where.not(id: host.id)
-
-        recipients = []
-        host.children.each do |child|
-          eligible_users_for_child = nearby_users.child_birthday_range(child.birthday - 2.years.seconds,
-                                                                       child.birthday + 2.years.seconds)
-          recipients += eligible_users_for_child.to_a
-          recipients = recipients.uniq
-        end
-        # User.all.each do |recipient|
-        recipients.each do |recipient|
-          recipient.notify_event_creation_match host unless starrers.include? recipient
-          next if recipient.devices.empty?
-
-          push_notification = Rpush::Gcm::Notification.new
-          push_notification.app = Rpush::Gcm::App.find_by(name: 'lilypad')
-          push_notification.registration_ids = recipient.devices.pluck(:token)
-          push_notification.data = {
-            icon: host.avatar,
-            url: ENV['LINK_HOST'] + '/event/' + recent_events.first.id.to_s,
-            title: "#{host.first_name.capitalize} has a new offering",
-            body: recent_events.first.name
-          }
-          push_notification.save!
-        end
-      end
-    end
-  end
-
   def notify
     if participants.any?
       if ends_at <= Time.current
