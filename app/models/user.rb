@@ -258,6 +258,17 @@ class User < ApplicationRecord
     notifications.event_suggestion.exists? notifiable: event
   end
 
+  def push_notify_event_creation(event)
+    devices.each do |d|
+      d.send_push(
+        icon: event.user.avatar,
+        url: ENV['LINK_HOST'] + '/event/' + event.id.to_s,
+        title: "#{event.user.first_name.capitalize} has a new offering",
+        body: event.name
+      )
+    end
+  end
+
   def notify_user_suggestion
     return unless setting_email_notifications
 
