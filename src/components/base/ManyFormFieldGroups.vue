@@ -14,13 +14,12 @@
         />
       </div>
     </form>
-    <a
+    <div
       v-if="addAndRemove"
       @click="add"
       class="onb-button-add-group w-inline-block">
-      <img src="@/assets/add.svg" alt="" class="image-7">
-      <div class="onb-button-add-group-text">Add Another {{ headingWord }}</div>
-    </a>
+      <a class="onb-button-add-group-text">Add Another {{ headingWord }}</a>
+    </div>
   </span>
 </template>
 <script>
@@ -98,26 +97,25 @@ export default {
 <style lang="scss" scoped>
 .flow {
   .onb-button-add-group {
-    display: flex;
-    margin-bottom: 63px;
-    padding: 10px 16px;
-    justify-content: center;
-    align-items: center;
-    border-radius: 4px;
-    background-color: hsla(0, 0%, 100%, 0);
-  }
-
-  .onb-button-add-group:active {
-    border-radius: 4px;
-    background-color: hsla(0, 0%, 100%, .1);
+  display: flex;
+  margin-top: 24px;
+  margin-bottom: 24px;
+  justify-content: center;
   }
 
   .onb-button-add-group-text {
-    padding-left: 8px;
-    color: #fff;
-    line-height: 14px;
-    letter-spacing: 1.2px;
-    text-transform: uppercase;
+  padding: 3px 10px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #fb6f77;
+  border-radius: 4px;
+  background-color: #fff;
+  color: #fb6f77;
+  font-size: 13px;
+  }
+
+  .onb-button-add-group-text:active {
+  background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0.06));
   }
 
   .onb-child-group-2 {
@@ -125,10 +123,6 @@ export default {
     padding: 24px 32px 32px;
     background-color: hsla(0, 0%, 100%, .1);
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1);
-  }
-
-  .image-7 {
-    opacity: 0.7
   }
 }
 </style>

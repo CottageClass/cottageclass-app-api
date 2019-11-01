@@ -66,7 +66,6 @@ export default {
     font-size: 16px;
     line-height: 16px;
     font-weight: 400;
-    color: #fff;
   }
   .onb-group-header {
     display: flex;

@@ -166,18 +166,14 @@ export default {
 
 <style scoped>
 
-.onb-body {
-  background-color: #0d73c7;
-}
-
 .content-wrapper {
   width: 720px;
   min-height: 100vh;
   margin-right: auto;
   margin-left: auto;
   padding-bottom: 50px;
-  background-color: #1c8be7;
 }
+
 @media (max-width: 991px) {
   .content-wrapper {
     width: 670px;

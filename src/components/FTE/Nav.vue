@@ -38,11 +38,11 @@ export default {
     },
     text: function () {
       if (this.button === 'skip') {
-        return 'SKIP'
+        return 'Skip'
       } else if (this.button === 'done') {
-        return 'DONE'
+        return 'Done'
       } else {
-        return 'NEXT'
+        return 'Next'
       }
     },
     classObject: function () {
@@ -60,11 +60,9 @@ export default {
 <style lang="scss" scoped>
 .nav-container {
   position: sticky;
-  width: 720px;
   top: 0;
   left: 0;
   right: 0;
-  background-color: rgba(108, 200, 255, .93);
 }
 
 .title-bar {
@@ -80,146 +78,105 @@ export default {
   z-index: 1000;
   display: flex;
   overflow: visible;
+  width: 100%;
+  min-height: 120px;
   margin-right: auto;
   margin-left: auto;
   justify-content: space-between;
   align-items: center;
   border-style: none;
   border-width: 1px;
-  border-color: hsla(0, 0%, 100%, .1);
-  background-image: url('../../assets/cclogo-house-blue-bf44c260.svg');
-  background-position: 50% 13px;
-  background-size: 24px 24px;
+  border-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.97);
+  background-image: url('../../assets/lilypad__logo.svg');
+  background-position: 50% 50%;
+  background-size: 125px;
   background-repeat: no-repeat;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .08);
-  font-family: soleil, sans-serif;
 }
 
 .title-bar-next-button {
-  display: block;
-  margin-top: 0px;
-  margin-right: 10px;
-  margin-bottom: 0px;
-  padding: 10px 12px;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  border: 1px none #000;
+  position: absolute;
+  left: auto;
+  top: 35px;
+  right: 0;
+  bottom: auto;
+  margin-right: 24px;
+  padding: 12px 42px 12px 24px;
   border-radius: 4px;
-  background-color: #fff;
+  background-color: #ff5660;
+  background-image: url('../../assets/navigate-next.svg');
+  background-position: 63px 50%;
+  background-size: 24px 24px;
+  background-repeat: no-repeat;
+  text-align: center;
   box-shadow: none;
-  color: #64426b;
-}
-
-.title-bar-next-button:active {
-  background-color: #64426b;
-  color: #fff;
 }
 
 .title-bar-next-button-text {
-  margin-bottom: 2px;
-  font-size: 14px;
-  line-height: 14px;
-  font-weight: 700;
-  letter-spacing: 1.2px;
-  text-transform: uppercase;
-}
-
-.title-bar-back-button {
-  display: flex;
-  margin-top: 7px;
-  margin-bottom: 8px;
-  margin-left: 10px;
-  padding: 18px;
-  justify-content: space-between;
-  align-items: center;
-  border-radius: 4px;
-  background-color: transparent;
-  background-image: url('../../assets/arrow-back-white.svg');
-  background-position: 50% 50%;
-  background-size: 24px 24px;
-  background-repeat: no-repeat;
-  color: #1f88e9;
+  color: #fff;
 }
 
 .button-hidden {
   visibility: hidden;
 }
 
-.title-bar-back-button:active {
-  background-color: hsla(0, 0%, 100%, .2);
-  background-image: url('../../assets/arrow-back-white.svg');
-  background-size: 24px;
-}
-
 .title-bar-next-button-inactive {
-  display: block;
-  margin-top: 0px;
-  margin-right: 10px;
-  margin-bottom: 0px;
-  padding: 10px 12px;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  border: 1px none #000;
+  position: absolute;
+  left: auto;
+  top: 35px;
+  right: 0;
+  bottom: auto;
+  margin-right: 24px;
+  padding: 12px 42px 12px 24px;
   border-radius: 4px;
-  background-color: hsla(0, 0%, 100%, .3);
-  box-shadow: none;
-  color: rgba(1, 1, 1, .2);
+  background-color: #cacaca;
+  background-image: url('../../assets/navigate-next.svg');
+  background-position: 63px 50%;
+  background-size: 24px 24px;
+  background-repeat: no-repeat;
+  text-align: center;
 }
 
 .button-back {
+  position: absolute;
+  left: 0%;
+  top: 30px;
+  right: auto;
+  bottom: auto;
   display: flex;
-  margin-top: 7px;
+  margin-top: 8px;
   margin-bottom: 8px;
-  margin-left: 10px;
-  padding: 18px;
+  margin-left: 16px;
+  padding: 24px;
   justify-content: space-between;
   align-items: center;
-  border-radius: 4px;
+  border-radius: 50%;
   background-color: transparent;
-  background-image: url('../../assets/arrow-back-white.svg');
+  background-image: url('../../assets/arrow-back--black.svg');
   background-position: 50% 50%;
   background-size: 24px 24px;
   background-repeat: no-repeat;
-  color: #1f88e9;
-}
-
-.button-back:active {
-  background-color: hsla(0, 0%, 100%, .2);
-  background-image: url('../../assets/arrow-back-white.svg');
-  background-size: 24px;
-}
-
-.button-next {
-  display: block;
-  margin-top: 0px;
-  margin-right: 10px;
-  margin-bottom: 0px;
-  padding: 10px 12px;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  border: 1px none #000;
-  border-radius: 4px;
-  background-color: #fff;
-  box-shadow: none;
-  color: #64426b;
-}
-
-.button-next:active {
-  background-color: #64426b;
-  color: #fff;
 }
 
 .button-next-text {
-  margin-bottom: 2px;
-  font-size: 14px;
-  line-height: 14px;
-  font-weight: 700;
-  letter-spacing: 1.2px;
-  text-transform: uppercase;
+  color: #fff;
   cursor: pointer;
+}
+
+@media (hover: hover) {
+.title-bar-next-button-inactive:hover {
+  background-color: #fc6f77;
+  box-shadow: none;
+}
+
+.button-back:hover {
+  background-image: url('../../assets/arrow-back--black.svg'), linear-gradient(180deg, #f1f1f1, #f1f1f1);
+  background-position: 50% 50%, 0 0;
+  background-size: 24px 24px, auto;
+  background-repeat: no-repeat, repeat;
+}
+
 }
 
 @media (max-width: 991px) {
@@ -227,10 +184,47 @@ export default {
     width: 100%;
   }
 }
+@media (max-width: 767px) {
+  .title-bar {
+    min-height: 60px;
+    background-image: url('../../assets/lilypad__logo-abbr.svg');
+    background-position: 50% 50%;
+    background-size: 36px;
+    background-repeat: no-repeat;
+  }
+
+  .button-back {
+    top: 0px;
+    margin-top: 0px;
+    margin-left: 0px;
+    padding: 30px;
+    border-radius: 0%;
+    background-position: 50% 50%;
+    background-size: 24px 24px;
+    background-repeat: no-repeat;
+  }
+  .title-bar-next-button {
+    top: 10px;
+    min-width: auto;
+    margin-right: 16px;
+    padding-bottom: 13px;
+    line-height: 14px;
+  }
+  .title-bar-next-button-inactive {
+    top: 10px;
+    min-width: auto;
+    margin-right: 16px;
+    padding-bottom: 13px;
+    line-height: 14px;
+  }
+}
 
 @media (max-width: 479px) {
   .nav-container{
     align-items: center;
+  }
+  .button-back {
+    left: -5px;
   }
 }
 </style>

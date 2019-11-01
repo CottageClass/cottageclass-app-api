@@ -47,17 +47,20 @@ export default {
 <style scoped lang="scss">
 .flow {
   .name-text-field {
-    height: 56px;
-    padding-top: 8px;
-    padding-left: 18px;
-    border: 1px none #000;
-    border-radius: 4px;
-    background-color: hsla(0, 0%, 100%, .7);
-    font-size: 16px;
+  height: 56px;
+  padding-top: 8px;
+  padding-left: 18px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #e4e4e4;
+  border-radius: 4px;
+  background-color: #f0f0f0;
+  font-size: 16px;
   }
 
   .name-text-field:focus {
-    background-color: #fff;
+  border-color: #0dba52;
+  background-color: #fff
   }
 
   .name-text-field::-webkit-input-placeholder {

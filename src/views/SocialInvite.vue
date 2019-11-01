@@ -28,7 +28,7 @@
         </li>
         <li v-if="!isMobileDevice" class="onb-button-social-list-item">
           <a :href="tweetLink" target="_blank" class="onb-button-social w-inline-block">
-            <img src="@/assets/twitter-hover.svg" width="32" height="32" alt="">
+            <img src="@/assets/twitter.svg" width="32" height="32" alt="">
             <div class="onb-button-social-text">Twitter</div>
           </a>
         </li>
@@ -176,15 +176,15 @@ export default {
   .onb-heading-large {
     margin-top: 0px;
     margin-bottom: 10px;
-    color: #fff;
+    color: #333;
     font-size: 24px;
     line-height: 34px;
     text-align: center;
-    letter-spacing: -0.3px;
+    font-weight: bold;
   }
   .onb-content-container {
     margin-bottom: 0px;
-    padding: 0 32px 72px;
+    padding: 32px 32px 72px;
     font-family: soleil;
   }
 
@@ -210,17 +210,17 @@ export default {
     padding: 13px 16px;
     align-items: center;
     border-radius: 4px;
-    background-color: hsla(0, 0%, 100%, .7);
+    background-color: #f0f0f0;
     cursor: pointer;
   }
 
   .onb-button-social:active {
-    background-color: #fff;
+    background-color: #fafafa;
   }
 
   .onb-button-social-text {
     margin-left: 10px;
-    color: #1d8ae7;
+    color: #333;
   }
 
   .onb-social-button-list {
@@ -248,9 +248,9 @@ export default {
     margin-bottom: 0px;
     padding-top: 8px;
     padding-left: 18px;
-    border: 1px none #000;
+    border: 1px solid #e4e4e4;
     border-radius: 4px;
-    background-color: #fff;
+    background-color: #f0f0f0;
     color: #fff;
     font-size: 16px;
   }
@@ -260,6 +260,7 @@ export default {
   }
 
   .copy-text-link-field:focus {
+    border-color: #0dba52;
     background-color: #fff;
   }
 
@@ -300,38 +301,33 @@ export default {
   }
 
   .onb-button-copy-link {
-    position: absolute;
-    right: 0px;
-    display: flex;
-    min-height: 100%;
-    padding-right: 16px;
-    padding-left: 16px;
-    flex-direction: column;
-    justify-content: center;
-    border-top-right-radius: 4px;
-    border-bottom-right-radius: 4px;
-    background-color: #bbddf7;
-    color: #1d8ae7;
-    font-size: 12px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+  position: absolute;
+  right: 0;
+  display: flex;
+  min-height: 100%;
+  padding-right: 16px;
+  padding-left: 16px;
+  flex-direction: column;
+  justify-content: center;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #e4e4e4;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  background-color: #fff;
+  color: #1f88e9;
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
   }
 
   .onb-button-copy-link:active {
-    background-color: #4cb2ff;
-    color: #fff;
+  background-color: #fb6f77;
+  color: #fff;
   }
 
   .onb-button-facebook:active {
     opacity: 0.8;
-  }
-
-  @media (max-width: 767px) {
-    .onb-content-container {
-      margin-bottom: 0px;
-      padding: 0 0 72px;
-      font-family: soleil;
-    }
   }
 }
 </style>
