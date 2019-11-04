@@ -38,11 +38,9 @@
             <div class="navigation__button-label">Playdates</div>
           </router-link>
         </li>
-        <router-link
-          v-if="hasChats"
-          :to="{name: 'Chats'}"
-          class="navigation__button w-inline-block"
-          :class="{'selected-nav-item': isChatPage}"
+        <router-link :to="{name: 'Chats'}"
+                     class="navigation__button w-inline-block"
+                     :class="{'selected-nav-item': isChatPage}"
         >
           <img src="@/assets/chat.svg" alt="" class="navigation__icon" />
           <div class="navigation__button-label">Chats</div>
@@ -72,7 +70,6 @@
 <script>
 import { mapGetters } from 'vuex'
 import { mixin as clickaway } from 'vue-clickaway'
-import { fetchConversations } from '@/utils/api'
 
 import MainNavLogo from '@/components/MainNavLogo'
 import MainNavBackButton from '@/components/MainNavBackButton'
@@ -95,8 +92,7 @@ export default {
   data () {
     return {
       showMenu: false,
-      showNameChangeModal: false,
-      conversations: null
+      showNameChangeModal: false
     }
   },
   components: { AvatarImage, Alert, ExpandingMenu, LoggedOutNav, MainNavLogo, PureModal, MainNavBackButton },
@@ -119,13 +115,6 @@ export default {
     isChatPage () {
       return this.$route.name === 'Chats' || this.$route.name === 'Conversation'
     },
-    hasChats () {
-      const obj = this.conversations
-      for (var key in obj) {
-        if (obj.hasOwnProperty(key)) { return true }
-      }
-      return false
-    },
     ...mapGetters(['currentUser', 'isAuthenticated'])
   },
   methods: {
@@ -144,9 +133,6 @@ export default {
     if (this.$route.query && this.$route.query['welcome-to-the-new-lilypad']) {
       this.showNameChangeModal = true
     }
-  },
-  async created () {
-    this.conversations = await fetchConversations(this.currentUser.id)
   }
 }
 </script>
