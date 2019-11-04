@@ -1,7 +1,8 @@
 <template>
   <div>
     <MainNav />
-    <div class="chat">
+    <LoadingSpinner v-if="!conversations" />
+    <div v-else class="chat">
       <div class="chat-max-width-container">
         <div class="chat-detail--header">
           <h1 class="chats-heading-text">Chats</h1>
@@ -19,8 +20,10 @@
 
 <script>
 import { mapGetters } from 'vuex'
+
 import ConversationThumb from '@/components/ConversationThumb'
 import MainNav from '@/components/MainNav'
+import LoadingSpinner from '@/components/LoadingSpinner'
 
 import { fetchConversations } from '@/utils/api'
 
@@ -31,7 +34,7 @@ export default {
       conversations: null
     }
   },
-  components: { MainNav, ConversationThumb },
+  components: { MainNav, ConversationThumb, LoadingSpinner },
   computed: {
     ...mapGetters(['currentUser'])
   },
