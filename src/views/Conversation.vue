@@ -49,6 +49,7 @@
 </template>
 
 <script>
+import VueScrollTo from 'vue-scrollto'
 import { mapGetters } from 'vuex'
 import moment from 'moment'
 
@@ -80,6 +81,7 @@ export default {
       await submitMessage(this.partner.id, payload.message)
       this.messages = await fetchMessages(this.userId)
       this.newMessage = null
+      VueScrollTo.scrollTo('.page-wrapper')
     }
   },
   computed: {
