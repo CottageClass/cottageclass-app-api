@@ -35,7 +35,7 @@ export default {
       const formattedDay = moment(this.day).format(formatString)
 
       if (today === formattedDay) { return '' }
-      if (yesterday === formattedDay) { return 'yesterday' }
+      if (yesterday === formattedDay) { return 'Yesterday' }
       return formattedDay
     },
     sortedMessages () {
