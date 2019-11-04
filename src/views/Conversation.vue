@@ -28,11 +28,11 @@
           <div class="chat-content--wrapper"
                v-if="partner && messages"
           >
-            <ConversationMonth
-              v-for="(cm) in conversationMonths"
-              :key="cm.month"
-              :month="cm.month"
-              :messages="cm.messages"
+            <ConversationDay
+              v-for="(ca) in conversationDays"
+              :key="ca.day"
+              :day="ca.day"
+              :messages="ca.messages"
               :partner="partner"
             />
 
@@ -54,7 +54,7 @@ import { mapGetters } from 'vuex'
 import moment from 'moment'
 
 import MainNav from '@/components/MainNav'
-import ConversationMonth from '@/components/ConversationMonth'
+import ConversationDay from '@/components/ConversationDay'
 import AvatarImage from '@/components/base/AvatarImage'
 import MessageSendBox from '@/components/MessageSendBox'
 
@@ -62,7 +62,7 @@ import { fetchMessages, fetchUser, submitMessage } from '@/utils/api'
 
 export default {
   name: 'Conversation',
-  components: { ConversationMonth, AvatarImage, MainNav, MessageSendBox },
+  components: { ConversationDay, AvatarImage, MainNav, MessageSendBox },
   data () {
     return {
       newMessage: null,
@@ -91,17 +91,17 @@ export default {
     partnerName () {
       return this.partner.firstName + ' ' + this.partner.lastInitial + '.'
     },
-    conversationMonths () {
+    conversationDays () {
       if (!this.messages) { return [] }
-      const monthGroups = this.messages.reduce(function (months, message) {
-        const monthKey = moment(message.createdAt).format('YYYY-MM')
-        months[monthKey] = months[monthKey] || []
-        months[monthKey].push(message)
-        return months
+      const dayGroups = this.messages.reduce(function (days, message) {
+        const dayKey = moment(message.createdAt).format('YYYY-MM-DD')
+        days[dayKey] = days[dayKey] || []
+        days[dayKey].push(message)
+        return days
       }, {})
-      const orderedMonths = Object.keys(monthGroups).sort().reverse()
-      return orderedMonths.map((month) => {
-        return { month, messages: monthGroups[month] }
+      const ordereddays = Object.keys(dayGroups).sort().reverse()
+      return ordereddays.map((day) => {
+        return { day, messages: dayGroups[day] }
       })
     },
     ...mapGetters(['currentUser'])
