@@ -123,4 +123,10 @@ export default {
 .input-style:focus {
   border-color: silver;
 }
+
+@media (max-width: 991px){
+.form-block-wrapper {
+  max-width: 664px
+}
+}
 </style>
