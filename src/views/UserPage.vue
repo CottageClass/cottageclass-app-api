@@ -64,6 +64,7 @@
           class="profile-top-card__footer__button-list"
           :user="user"
           @user-updated="updateUser"
+          @contact-click="contactClick"
           @interested-click="interestedClickAndUpdate('card')"
           :showInterestedButton="showInterestedButton"
           :showContactButton="showContactButton"
