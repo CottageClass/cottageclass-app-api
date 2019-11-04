@@ -119,13 +119,6 @@
             </ul>
           </div>
           <div class="event-detail__map map" ref="map"></div>
-          <div v-if="houseRules" class="house-rules__card">
-            <div class="house-rulese_title-text">House Rules</div>
-            <div class="card__description-and-icon-container w-clearfix">
-              <img src="https://uploads-ssl.webflow.com/5c6c7d4a75c1e54694ed12d1/5c6c7d4a75c1e5183aed132e_house-rules.svg" width="100" height="100" alt="" class="house__image" />
-              <div class="house-rules__text">{{ houseRules }}</div>
-            </div>
-          </div>
           <div v-if="petDescription" class="pets__card">
             <div class="pets__title-text">Pets</div>
             <div class="card__description-and-icon-container w-clearfix">
@@ -444,34 +437,6 @@ a {
 .pets__text {
   font-size: 13px;
   line-height: 19px;
-}
-
-.house-rulese_title-text {
-  margin-bottom: 16px;
-  font-size: 16px;
-  line-height: 24px;
-}
-
-.house-rules__text {
-  display: block;
-  width: auto;
-  font-size: 13px;
-  line-height: 19px;
-}
-
-.house-rules__card {
-  position: static;
-  display: flex;
-  margin-top: 16px;
-  margin-bottom: 16px;
-  padding: 16px 20px 20px;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  border-bottom: 1px solid #f5f5f5;
-  background-color: #fff;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.08);
-  list-style-type: none;
 }
 
 .card__description-and-icon-container {
@@ -1096,17 +1061,6 @@ a {
   .pets__title-text {
     font-size: 14px;
     line-height: 18px;
-  }
-
-  .house-rulese_title-text {
-    font-size: 14px;
-    line-height: 18px;
-  }
-
-  .house-rules__card {
-    min-height: 170px;
-    padding: 16px 16px 24px;
-    border-radius: 0;
   }
 
   .list {
