@@ -19,12 +19,10 @@
 
 <script>
 import * as api from '@/utils/api'
-import { goHome } from '@/mixins'
 
 export default {
   name: 'DeleteEventConfirmationModal',
   props: [ 'eventId' ],
-  mixins: [ goHome ],
   methods: {
     deleteEvent: function () {
       api.deleteEvent(this.eventId, () => {
@@ -34,7 +32,7 @@ export default {
             status: 'success'
           }
         })
-        this.goHome()
+        this.$router.push({ name: 'YourPlaydates' })
       })
     }
   }
