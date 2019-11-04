@@ -71,7 +71,7 @@ export default {
 .submit-button {
   position: absolute;
   left: auto;
-  top: 8px;
+  top: 12px;
   right: 8px;
   bottom: auto;
   padding-top: 8px;
