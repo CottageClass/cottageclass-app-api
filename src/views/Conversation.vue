@@ -42,9 +42,8 @@
       <MessageSendBox
         @message-submitted="sendMessage"
         v-model="newMessage"
+        :class="{accomodateRoundedCorners: accomodateRoundedCorners }"
       />
-      <div class="chat-input-wrapper">
-      </div>
     </div>
   </div>
 </template>
@@ -58,11 +57,13 @@ import ConversationDay from '@/components/ConversationDay'
 import AvatarImage from '@/components/base/AvatarImage'
 import MessageSendBox from '@/components/MessageSendBox'
 
+import { platform } from '@/mixins'
 import { fetchMessages, fetchUser, submitMessage } from '@/utils/api'
 
 export default {
   name: 'Conversation',
   components: { ConversationDay, AvatarImage, MainNav, MessageSendBox },
+  mixins: [ platform ],
   data () {
     return {
       newMessage: null,
@@ -75,6 +76,7 @@ export default {
   },
   methods: {
     async sendMessage (payload) {
+      console.log(this.accomodateRoundedCorners)
       await submitMessage(this.partner.id, payload.message)
       this.messages = await fetchMessages(this.userId)
       this.newMessage = null
@@ -128,6 +130,9 @@ export default {
   border-width: 2px;
   border-color: #fff;
   border-radius: 50%;
+}
+.accomodateRoundedCorners {
+  padding-bottom: 20px;
 }
 
 .image-8 {
@@ -221,23 +226,6 @@ export default {
 .chat-max-width-container {
   display: flex;
   max-width: 800px;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.chat-input-wrapper {
-  position: fixed;
-  left: 0%;
-  top: auto;
-  right: 0%;
-  bottom: 0;
-  display: flex;
-  width: 100%;
-  margin-bottom: 0;
-  padding-right: 16px;
-  padding-bottom: 0;
-  padding-left: 16px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
