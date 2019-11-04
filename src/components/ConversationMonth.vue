@@ -1,13 +1,15 @@
 <template>
-  <div class="chat-detail--month">
-    <div class="divider"></div>
-    <div class="text-white-background">
-      <div v-if="showDivider" class="chat-detail--month-text">{{monthText}}</div>
-      <Message v-for="message in sortedMessages"
-               :key="message.id"
-               :message="message"
-               :partner="partner"/>
+  <div>
+    <div class="chat-detail--month">
+      <div class="divider"></div>
+      <div class="text-white-background">
+        <div v-if="showDivider" class="chat-detail--month-text">{{monthText}}</div>
+      </div>
     </div>
+    <Message v-for="message in sortedMessages"
+             :key="message.id"
+             :message="message"
+             :partner="partner"/>
   </div>
 </template>
 

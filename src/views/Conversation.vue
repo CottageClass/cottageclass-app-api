@@ -214,11 +214,13 @@ export default {
 }
 
 .chat-content--wrapper {
+  width: 100%;
   margin-top: 32px;
   padding-bottom: 100px;
 }
 
 .chat-max-width-container {
+  width: 100%;
   display: flex;
   max-width: 800px;
   flex-direction: column;

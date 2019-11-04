@@ -71,6 +71,7 @@ export default {
 }
 
 .chat-max-width-container {
+  width: 100%;
   display: flex;
   max-width: 800px;
   flex-direction: column;
