@@ -39,7 +39,7 @@ export const createEvents = (data, sortFunction) => {
     return res
   })
 
-  if (data.meta.event) {
+  if (data.meta && data.meta.event) {
     const order = data.meta.event.data.map(u => u.id)
     return order.map(id => all.find(i => i.id === id))
   }
