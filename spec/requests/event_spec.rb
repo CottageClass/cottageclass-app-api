@@ -18,7 +18,7 @@ RSpec.resource 'Event' do
     end
 
     get '/api/place/:place_id/events/:skope/page/:page/page_size/:page_size', format: :json do
-      let(:place_idj) { place.id }
+      let(:place_id) { place.id }
       let(:skope) { nil }
       let(:sort) { 'chronological' }
       [nil, 'past', 'upcoming'].each do |skope|
