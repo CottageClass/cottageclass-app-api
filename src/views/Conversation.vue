@@ -221,6 +221,9 @@ export default {
 }
 
 .chat-content--wrapper {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
   margin-top: 32px;
   padding-bottom: 100px;
 }
