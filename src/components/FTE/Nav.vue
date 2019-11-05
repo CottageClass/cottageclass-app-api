@@ -59,6 +59,7 @@ export default {
 
 <style lang="scss" scoped>
 .nav-container {
+  background-color: #fff;
   position: sticky;
   top: 0;
   left: 0;
