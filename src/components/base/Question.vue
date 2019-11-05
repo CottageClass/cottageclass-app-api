@@ -22,7 +22,7 @@ export default {
 
 <style lang="scss" scoped>
 .flow {
-  .location-search-container{
+  .location-search-container, .paragraph-small-50{
     padding-right: 32px;
     padding-left: 32px;
   }
