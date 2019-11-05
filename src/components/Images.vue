@@ -10,13 +10,13 @@
 </template>
 
 <script>
-import { imageUrl } from '@/utils/vendor/cloudinary'
+import { householdImageUrl } from '@/utils/vendor/cloudinary'
 export default {
   name: 'Images',
   props: ['images'],
   computed: {
     transformedImages () {
-      return this.images.map(url => imageUrl(url, { height: 200 }))
+      return this.images.map(url => householdImageUrl(url, 200))
     }
   }
 }
