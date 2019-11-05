@@ -8,7 +8,7 @@ class API::EventSeriesController < API::BaseController
 
   def create
     event_series = current_user.event_series.build safe_params
-    if event_series.save!
+    if event_series.save
       render json: EventSeriesSerializer.new(event_series).serializable_hash,
              status: :created
     else
