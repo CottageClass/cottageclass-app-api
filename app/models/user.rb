@@ -265,6 +265,8 @@ class User < ApplicationRecord
   end
 
   def push_notify_message_receipt(message)
+    return unless setting_notify_messages_push
+
     push_to_devices icon: message.sender.avatar,
                     url: ENV['LINK_HOST'] + '/chat/' + message.sender.id.to_s,
                     title: "New message from #{message.sender.first_name.capitalize}",

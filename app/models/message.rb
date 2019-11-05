@@ -24,6 +24,8 @@ class Message < ApplicationRecord
   end
 
   def sms_notification
+    return unless receiver.setting_notify_messages_sms
+
     receiver.notifications.chat_message_received.create notifiable: self
   end
 
