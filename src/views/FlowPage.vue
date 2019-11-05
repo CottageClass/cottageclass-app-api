@@ -63,24 +63,24 @@ export default {
   .page-container {
     height: 100%;
     background-color: #fc6f77;
+    display: flex;
+    flex-direction: column;
   }
 
   .column-container {
-  position: relative;
-  left: 0%;
-  top: 40px;
-  right: 0%;
-  bottom: auto;
-  z-index: 1000;
-  display: flex;
-  width: 876px;
-  height: 100%;
-  min-height: 500px;
-  margin: 0 auto;
-  flex-direction: column;
-  border-radius: 4px;
-  background-color: #fff;
-  box-shadow: 1px 1px 35px 0 rgba(0, 0, 0, 0.2);
+    flex: 1;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 1000;
+    display: flex;
+    width: 876px;
+    height: 100%;
+    min-height: 500px;
+    margin: 40px auto 0;
+    flex-direction: column;
+    border-radius: 4px;
+    background-color: #fff;
+    box-shadow: 1px 1px 35px 0 rgba(0, 0, 0, 0.2);
   }
 
   .content-container {
