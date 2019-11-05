@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_31_173244) do
+ActiveRecord::Schema.define(version: 2019_11_05_124457) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -432,6 +432,9 @@ ActiveRecord::Schema.define(version: 2019_10_31_173244) do
     t.bigint "place_id"
     t.decimal "latitude"
     t.decimal "longitude"
+    t.boolean "setting_notify_messages_push", default: true
+    t.boolean "setting_notify_messages_email", default: true
+    t.boolean "setting_notify_messages_sms", default: true
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email"
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
