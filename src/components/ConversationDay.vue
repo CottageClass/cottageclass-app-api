@@ -1,13 +1,15 @@
 <template>
-  <div class="chat-detail--day">
-    <div class="divider"></div>
-    <div class="text-white-background">
-      <div v-if="showDivider" class="chat-detail--day-text">{{dayText}}</div>
-      <Message v-for="message in sortedMessages"
-               :key="message.id"
-               :message="message"
-               :partner="partner"/>
+  <div>
+    <div class="chat-detail--day">
+      <div class="divider"></div>
+      <div class="text-white-background">
+        <div v-if="showDivider" class="chat-detail--day-text">{{dayText}}</div>
+      </div>
     </div>
+    <Message v-for="message in sortedMessages"
+             :key="message.id"
+             :message="message"
+             :partner="partner"/>
   </div>
 </template>
 

@@ -224,6 +224,7 @@ export default {
   word-wrap: break-word;
   overflow-wrap: break-word;
   word-break: break-word;
+  width: 100%;
   margin-top: 32px;
   padding-bottom: 100px;
 }
@@ -231,6 +232,7 @@ export default {
 .chat-max-width-container {
   display: flex;
   max-width: 800px;
+  width: 100%;
   flex-direction: column;
   justify-content: center;
   align-items: center;
