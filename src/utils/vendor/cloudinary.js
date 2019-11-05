@@ -13,7 +13,7 @@ export function avatarUrl (rawUrl, size) {
 }
 
 export function householdImageUrl (rawUrl, size) {
-  return rawUrl.replace('/upload/', `/upload/c_thumb,h_${size},w_${size}/`)
+  return rawUrl.replace('/upload/', `/upload/c_thumb,g_custom,h_${size},w_${size}/`)
 }
 
 export function imageUrl (rawUrl, options) {
