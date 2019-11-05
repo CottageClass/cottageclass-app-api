@@ -196,9 +196,9 @@ export default {
     updateUser (user) {
       this.event.user = user
     },
-    fetchEvent: async function () {
+    fetchEvent: async function (id = this.$route.params.id) {
       try {
-        this.event = await fetchEvent(this.$route.params.id)
+        this.event = await fetchEvent(id)
       } catch (e) {
         this.logError(e)
         this.$router.push({ name: 'NotFound' })
@@ -231,7 +231,7 @@ export default {
     }
   },
   beforeRouteUpdate (to, from, next) {
-    this.fetchEvent()
+    this.fetchEvent(to.params.id)
     next()
   }
 }
