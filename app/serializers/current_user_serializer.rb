@@ -17,6 +17,9 @@ class CurrentUserSerializer < BaseSerializer
              :phone,
              :school,
              :setting_email_notifications,
+             :setting_notify_messages_sms,
+             :setting_notify_messages_push,
+             :setting_notify_messages_email,
              :setting_max_distance
 
   attribute :date_created, &:created_at
