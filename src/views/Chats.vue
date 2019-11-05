@@ -24,6 +24,7 @@ import { mapGetters } from 'vuex'
 import ConversationThumb from '@/components/ConversationThumb'
 import MainNav from '@/components/MainNav'
 import LoadingSpinner from '@/components/LoadingSpinner'
+import { redirect } from '@/mixins'
 
 import { fetchConversations } from '@/utils/api'
 
@@ -35,10 +36,12 @@ export default {
     }
   },
   components: { MainNav, ConversationThumb, LoadingSpinner },
+  mixins: [ redirect ],
   computed: {
     ...mapGetters(['currentUser'])
   },
   async created () {
+    if (this.redirectToSignupIfNotAuthenticated()) { return }
     this.conversations = await fetchConversations(this.currentUser.id)
   }
 }
