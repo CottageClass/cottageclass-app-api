@@ -1,8 +1,8 @@
 <template>
-  <div class="chat-detail--month">
+  <div class="chat-detail--day">
     <div class="divider"></div>
     <div class="text-white-background">
-      <div v-if="showDivider" class="chat-detail--month-text">{{monthText}}</div>
+      <div v-if="showDivider" class="chat-detail--day-text">{{dayText}}</div>
       <Message v-for="message in sortedMessages"
                :key="message.id"
                :message="message"
@@ -17,19 +17,26 @@ import moment from 'moment'
 import Message from '@/components/Message'
 
 export default {
-  name: 'ConversationMonth',
+  name: 'ConversationDay',
   props: {
     partner: { type: Object, required: true },
-    month: { type: String, required: true },
+    day: { type: String, required: true },
     messages: { type: Array, required: true }
   },
   components: { Message },
   computed: {
     showDivider () {
-      return this.month !== moment().format('YYYY-MM')
+      return this.day !== moment().format('YYYY-MM-DD')
     },
-    monthText () {
-      return moment(this.month).format('MMM YYYY')
+    dayText () {
+      const formatString = 'ddd, MMM D, YYYY'
+      const today = moment().format(formatString)
+      const yesterday = moment().subtract(1, 'days').format(formatString)
+      const formattedDay = moment(this.day).format(formatString)
+
+      if (today === formattedDay) { return '' }
+      if (yesterday === formattedDay) { return 'Yesterday' }
+      return formattedDay
     },
     sortedMessages () {
       return this.messages.concat().sort((a, b) => {
@@ -43,7 +50,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.chat-detail--month {
+.chat-detail--day {
   position: relative;
   display: flex;
   padding-bottom: 12px;
@@ -52,7 +59,7 @@ export default {
   background-color: #fff;
 }
 
-.chat-detail--month-text {
+.chat-detail--day-text {
   position: static;
   top: 108px;
   width: 100%;

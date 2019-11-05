@@ -194,7 +194,13 @@ export default {
   }
 
   .button-back {
-    top: 0px;
+    top: 0;
+    .accomodateNotch & {
+      top: 40px;
+    }
+    .accomodateStatusBar & {
+      top: 20px;
+    }
     margin-top: 0px;
     margin-left: 0px;
     padding: 30px;
@@ -203,14 +209,13 @@ export default {
     background-size: 24px 24px;
     background-repeat: no-repeat;
   }
-  .title-bar-next-button {
-    top: 10px;
-    min-width: auto;
-    margin-right: 16px;
-    padding-bottom: 13px;
-    line-height: 14px;
-  }
-  .title-bar-next-button-inactive {
+  .title-bar-next-button, .title-bar-next-button-inactive  {
+    .accomodateNotch & {
+      top: 50px;
+    }
+    .accomodateStatusBar & {
+      top: 30px;
+    }
     top: 10px;
     min-width: auto;
     margin-right: 16px;

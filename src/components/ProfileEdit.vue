@@ -30,10 +30,9 @@
       />
       <LanguagesSpoken v-model="currentUser.languages" :showChoicesImmediately="false"/>
       <MaxDistanceSetting v-model="maxDistance" />
-      <YesOrNo
-        question="Email settings"
-        description="Would you like to receive custom weekly emails with suggestions for nearby playdates?"
-        v-model="weeklyEmails"
+      <NotificationSettings
+        v-if = "notificationSettings"
+        v-model="notificationSettings"
       />
       <Question title="Delete your account"
                 subtitle="Would you like to leave Lilypad? Deleting your account will remove your profile and cancel any playdates you've booked. This cannot be undone.">
@@ -63,7 +62,7 @@ import MainNav from '@/components/MainNav.vue'
 import PageActionsFooter from '@/components/PageActionsFooter.vue'
 import ErrorMessage from '@/components/base/ErrorMessage.vue'
 import Activities from '@/components/FTE/userInformation/Activities.vue'
-import YesOrNo from '@/components/base/YesOrNo'
+import NotificationSettings from '@/components/base/NotificationSettings'
 import MaxDistanceSetting from '@/components/FTE/userInformation/MaxDistanceSetting'
 import AvatarUpload from '@/components/FTE/userInformation/AvatarUpload'
 
@@ -91,13 +90,13 @@ export default {
     ProfileBlurb,
     LanguagesSpoken,
     Activities,
-    YesOrNo,
+    NotificationSettings,
     MaxDistanceSetting
   },
   data () {
     return {
+      notificationSettings: null,
       avatar: {},
-      weeklyEmails: {},
       maxDistance: {},
       place: {},
       phone: {},
@@ -112,7 +111,14 @@ export default {
   created: function () {
     if (this.redirectToSignupIfNotAuthenticated()) { return }
     this.avatar = { avatar: this.currentUser.avatar, err: null }
-    this.weeklyEmails = { isTrue: this.currentUser.settingEmailNotifications }
+    this.notificationSettings = {
+      settingEmailNotifications: this.currentUser.settingEmailNotifications,
+      media: {
+        settingNotifyMessagesEmail: this.currentUser.settingNotifyMessagesEmail,
+        settingNotifyMessagesSms: this.currentUser.settingNotifyMessagesSms,
+        settingNotifyMessagesPush: this.currentUser.settingNotifyMessagesPush
+      }
+    }
     this.maxDistance = this.currentUser.settingMaxDistance || '2'
     this.availability = {
       availableAfternoons: !!this.currentUser.availableAfternoons,
@@ -164,9 +170,11 @@ export default {
         data.profileBlurb = this.profileBlurb.text
         data.avatar = this.avatar.avatar
         const settingMaxDistance = this.maxDistance
-        const settingEmailNotifications = this.weeklyEmails.isTrue
+        const settingEmailNotifications = this.notificationSettings.settingEmailNotifications
         const { phone, place, availability } = this
-        data = Object.assign(data, { phone, place, availability, settingEmailNotifications, settingMaxDistance })
+        data = Object.assign(data, { phone, place, availability, settingEmailNotifications, settingMaxDistance }, this.notificationSettings.media)
+        this.debug({ data })
+
         try {
           const res = await api.submitUserInfo(this.currentUser.id, data)
           this.saveButtonText = ' \u2714 Saved'

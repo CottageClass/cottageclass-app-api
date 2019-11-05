@@ -46,8 +46,8 @@ class API::EventsController < API::BaseController
   end
 
   def place
-    events = Event.joins(:event_series).where('event_series.place_id = ?', params[:id])
-    events_index events: events.joins(:event_series),
+    events = Event.joins(:event_series).where('event_series.place_id = ?', params[:place_id])
+    events_index events: events.joins(:event_series).includes(:place),
                  skope: params[:skope],
                  page: params[:page],
                  page_size: params[:page_size],

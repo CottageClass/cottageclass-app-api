@@ -6,6 +6,7 @@ export const createEvent = (data) => {
 }
 
 export const createEvents = (data, sortFunction) => {
+  console.log({ data })
   if (!data.event) {
     return []
   }
@@ -38,13 +39,12 @@ export const createEvents = (data, sortFunction) => {
     return res
   })
 
-  // if no sort method is given, sort by id ascending (use int value, not lexiacal)
-  sortFunction = sortFunction || (e => parseInt(e.id))
-  // use this to sort by distance or
-  const sorted = all.sort((a, b) => sortFunction(a) - sortFunction(b))
-  sorted.all = all
+  if (data.meta && data.meta.event) {
+    const order = data.meta.event.data.map(u => u.id)
+    return order.map(id => all.find(i => i.id === id))
+  }
 
-  return sorted
+  return all
 }
 
 /*

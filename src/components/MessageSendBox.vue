@@ -14,6 +14,7 @@
           <input type="submit"
                  @click.prevent="submitMessage"
                  class="submit-button w-button"
+                 value="Send"
           />
         </form>
       </div>
@@ -52,6 +53,7 @@ export default {
 
 <style scoped lang="scss">
 .chat-input-wrapper {
+  background-color: #fff;
   position: fixed;
   left: 0%;
   top: auto;

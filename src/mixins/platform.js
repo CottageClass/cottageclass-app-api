@@ -26,6 +26,9 @@ export default {
     },
     accomodateStatusBar () {
       return isNative() && !this.isIPhoneX && this.isIOSNativeApp
+    },
+    accomodateRoundedCorners () {
+      return isNative() && this.isIPhoneX
     }
   }
 }

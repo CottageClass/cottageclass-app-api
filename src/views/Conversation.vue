@@ -28,11 +28,11 @@
           <div class="chat-content--wrapper"
                v-if="partner && messages"
           >
-            <ConversationMonth
-              v-for="(cm) in conversationMonths"
-              :key="cm.month"
-              :month="cm.month"
-              :messages="cm.messages"
+            <ConversationDay
+              v-for="(ca) in conversationDays"
+              :key="ca.day"
+              :day="ca.day"
+              :messages="ca.messages"
               :partner="partner"
             />
 
@@ -42,27 +42,29 @@
       <MessageSendBox
         @message-submitted="sendMessage"
         v-model="newMessage"
+        :class="{accomodateRoundedCorners: accomodateRoundedCorners }"
       />
-      <div class="chat-input-wrapper">
-      </div>
     </div>
   </div>
 </template>
 
 <script>
+import VueScrollTo from 'vue-scrollto'
 import { mapGetters } from 'vuex'
 import moment from 'moment'
 
 import MainNav from '@/components/MainNav'
-import ConversationMonth from '@/components/ConversationMonth'
+import ConversationDay from '@/components/ConversationDay'
 import AvatarImage from '@/components/base/AvatarImage'
 import MessageSendBox from '@/components/MessageSendBox'
 
+import { platform } from '@/mixins'
 import { fetchMessages, fetchUser, submitMessage } from '@/utils/api'
 
 export default {
   name: 'Conversation',
-  components: { ConversationMonth, AvatarImage, MainNav, MessageSendBox },
+  components: { ConversationDay, AvatarImage, MainNav, MessageSendBox },
+  mixins: [ platform ],
   data () {
     return {
       newMessage: null,
@@ -75,9 +77,11 @@ export default {
   },
   methods: {
     async sendMessage (payload) {
+      console.log(this.accomodateRoundedCorners)
       await submitMessage(this.partner.id, payload.message)
       this.messages = await fetchMessages(this.userId)
       this.newMessage = null
+      VueScrollTo.scrollTo('.page-wrapper')
     }
   },
   computed: {
@@ -91,17 +95,17 @@ export default {
     partnerName () {
       return this.partner.firstName + ' ' + this.partner.lastInitial + '.'
     },
-    conversationMonths () {
+    conversationDays () {
       if (!this.messages) { return [] }
-      const monthGroups = this.messages.reduce(function (months, message) {
-        const monthKey = moment(message.createdAt).format('YYYY-MM')
-        months[monthKey] = months[monthKey] || []
-        months[monthKey].push(message)
-        return months
+      const dayGroups = this.messages.reduce(function (days, message) {
+        const dayKey = moment(message.createdAt).format('YYYY-MM-DD')
+        days[dayKey] = days[dayKey] || []
+        days[dayKey].push(message)
+        return days
       }, {})
-      const orderedMonths = Object.keys(monthGroups).sort().reverse()
-      return orderedMonths.map((month) => {
-        return { month, messages: monthGroups[month] }
+      const ordereddays = Object.keys(dayGroups).sort().reverse()
+      return ordereddays.map((day) => {
+        return { day, messages: dayGroups[day] }
       })
     },
     ...mapGetters(['currentUser'])
@@ -128,6 +132,9 @@ export default {
   border-width: 2px;
   border-color: #fff;
   border-radius: 50%;
+}
+.accomodateRoundedCorners {
+  padding-bottom: 20px;
 }
 
 .image-8 {
@@ -221,23 +228,6 @@ export default {
 .chat-max-width-container {
   display: flex;
   max-width: 800px;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.chat-input-wrapper {
-  position: fixed;
-  left: 0%;
-  top: auto;
-  right: 0%;
-  bottom: 0;
-  display: flex;
-  width: 100%;
-  margin-bottom: 0;
-  padding-right: 16px;
-  padding-bottom: 0;
-  padding-left: 16px;
   flex-direction: column;
   justify-content: center;
   align-items: center;

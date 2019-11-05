@@ -73,7 +73,8 @@ export default {
         if (this.googlePlaceId === null) { return }
         this.$emit('input', { err: null,
           googleId: this.googlePlaceId,
-          apartmentNumber: this.apartmentNumber
+          apartmentNumber: this.apartmentNumber,
+          latlng: this.latlng
         })
       }
     },
