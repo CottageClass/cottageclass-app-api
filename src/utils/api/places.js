@@ -6,7 +6,7 @@ const logger = Logger('api:events')
 
 export const fetchPlace = async (id) => {
   try {
-    const res = await axios.get(`/api/place/${id}`)
+    const res = await axios.get(`/api/places/${id}`)
     if (res) {
       return normalize(res.data)
     } else {
