@@ -179,7 +179,7 @@ export default new Router({
       props: true
     },
     {
-      path: '/place/:id/',
+      path: '/places/:id/',
       name: 'PlacePage',
       component: PlacePage,
       props: true
