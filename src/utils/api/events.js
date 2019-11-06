@@ -57,7 +57,7 @@ export const updateEvent = async (eventId, data) => {
 export const fetchEventsByPlace = async (placeId) => {
   placeId = placeId.toString()
   try {
-    const res = await axios.get(`/api/place/${placeId}/events/upcoming`)
+    const res = await axios.get(`/api/places/${placeId}/events/upcoming`)
     if (res) {
       return createEvents(normalize(res.data))
     } else {
