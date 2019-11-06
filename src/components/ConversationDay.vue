@@ -1,11 +1,9 @@
 <template>
   <div>
-    <div class="chat-detail--day">
-      <div class="divider"></div>
-      <div class="text-white-background">
-        <div v-if="showDivider" class="chat-detail--day-text">{{dayText}}</div>
-      </div>
-    </div>
+    <ConversationDivider
+      v-if="showDivider"
+      :dividerText="dayText"
+    />
     <Message v-for="message in sortedMessages"
              :key="message.id"
              :message="message"
@@ -15,7 +13,7 @@
 
 <script>
 import moment from 'moment'
-
+import ConversationDivider from '@/components/ConversationDivider.vue'
 import Message from '@/components/Message'
 
 export default {
@@ -25,7 +23,7 @@ export default {
     day: { type: String, required: true },
     messages: { type: Array, required: true }
   },
-  components: { Message },
+  components: { Message, ConversationDivider },
   computed: {
     showDivider () {
       return this.day !== moment().format('YYYY-MM-DD')
