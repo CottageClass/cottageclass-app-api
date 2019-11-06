@@ -1,4 +1,4 @@
-import { removeEventParticipant, initProxySession, submitEventParticipant } from '@/utils/api'
+import { removeEventParticipant, submitEventParticipant } from '@/utils/api'
 import { submitToSheetsu } from '@/utils/vendor'
 import { trackEvent } from '@/utils/ahoy'
 import { alerts } from '@/mixins'
@@ -91,21 +91,12 @@ export default {
             `${this.event.user.firstName}!`, 'success'
         )
         this.$ga.event('RSVP', 'sent', eventId)
-        this.initProxyConversation()
         this.$router.push({ name: 'EventPage', params: { id: eventId } })
         return res
       } catch (err) {
         console.log(err)
         this.err = 'Sorry, there was a problem submitting your RSVP. Try again?'
       }
-    },
-    initProxyConversation () {
-      initProxySession(
-        this.currentUser.id,
-        this.event.user.id,
-        this.messageToHost,
-        this.messageToParticipant
-      )
     }
   }
 }

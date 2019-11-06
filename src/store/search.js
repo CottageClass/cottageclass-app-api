@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { fetchFeed, fetchEvents } from '@/utils/api'
+import { fetchUsers, fetchEvents } from '@/utils/api'
 import filter from './filter'
 
 const state = {
@@ -93,6 +93,8 @@ const actions = {
       miles: getters.mapArea.maxDistance,
       lat: getters.mapArea.center.lat,
       lng: getters.mapArea.center.lng,
+      date: getters.eventTime.date,
+      weekday: getters.eventTime.weekday,
       page: data.lastPage + 1
     }
 
@@ -104,7 +106,7 @@ const actions = {
           items = await fetchEvents(params)
           break
         case 'Parents':
-          items = await fetchFeed(params)
+          items = await fetchUsers(params)
           break
       }
     } finally {

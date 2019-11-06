@@ -13,6 +13,8 @@ class API::EventsController < API::BaseController
                  longitude: params[:longitude],
                  min_age: params[:min_age],
                  max_age: params[:max_age],
+                 date: params[:date],
+                 weekday: params[:weekday],
                  sort: params[:sort],
                  page: params[:page],
                  page_size: params[:page_size],
@@ -44,8 +46,8 @@ class API::EventsController < API::BaseController
   end
 
   def place
-    events = Event.joins(:event_series).where('event_series.place_id = ?', params[:id])
-    events_index events: events.joins(:event_series),
+    events = Event.joins(:event_series).where('event_series.place_id = ?', params[:place_id])
+    events_index events: events.joins(:event_series).includes(:place),
                  skope: params[:skope],
                  page: params[:page],
                  page_size: params[:page_size],
@@ -82,7 +84,9 @@ class API::EventsController < API::BaseController
 
   private
 
-  def events_index(events:, skope:, miles: nil, latitude: nil, longitude: nil, min_age: nil, max_age: nil, sort: nil, page:, page_size:, path:)
+  def events_index(events:, skope:, miles: nil, latitude: nil, longitude: nil,
+                   min_age: nil, max_age: nil, sort: nil, page:, page_size:, path:,
+                   date: nil, weekday: nil)
     skope ||= 'all'
     events = events.send(skope).includes user: %i[children]
 
@@ -115,9 +119,13 @@ class API::EventsController < API::BaseController
       location = []
       location = [latitude, longitude] if [latitude, longitude].all?(&:present?)
       location = [current_user.place.latitude, current_user.place.longitude] if location.blank? && current_user.present?
-      places = Place.near(location.map(&:to_f), miles) if location.all?(&:present?)
-      place_ids = places.to_a.pluck :id
-      events = events.where('event_series.place_id IN (?)', place_ids)
+      events = events.near(location.map(&:to_f), miles) if location.all?(&:present?)
+    end
+
+    if date.present?
+      events = events.where(starts_at: date.to_date.all_day)
+    elsif weekday.present?
+      events = events.where('extract(dow from events.starts_at) = ?', weekday)
     end
 
     events = events.reorder starts_at: :asc
@@ -167,10 +175,11 @@ class API::EventsController < API::BaseController
 
   def safe_params
     params.require(:event).permit :name,
+                                  :description,
                                   :starts_at,
                                   :ends_at,
-                                  :maximum_children,
                                   :child_age_minimum,
-                                  :child_age_maximum
+                                  :child_age_maximum,
+                                  images: []
   end
 end

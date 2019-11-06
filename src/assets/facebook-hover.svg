@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 52.1 (67048) - http://www.bohemiancoding.com/sketch -->
+    <!-- Generator: Sketch 57.1 (83088) - https://sketch.com -->
     <title>glyphs/social/facebook hover</title>
     <desc>Created with Sketch.</desc>
     <defs>
-        <polygon id="path-1" points="0 0.000361907959 10.0236441 0.000361907959 10.0236441 19.3017578 0 19.3017578"></polygon>
+        <linearGradient x1="36.3106864%" y1="97.1592494%" x2="58.0548968%" y2="0%" id="linearGradient-1">
+            <stop stop-color="#314D89" offset="0%"></stop>
+            <stop stop-color="#5976B1" offset="100%"></stop>
+        </linearGradient>
+        <polygon id="path-2" points="0 0.000282746038 7.53797912 0.000282746038 7.53797912 15.0797887 0 15.0797887"></polygon>
     </defs>
     <g id="glyphs/social/facebook-hover" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Page-1" transform="translate(11.071381, 5.562012)">
-            <mask id="mask-2" fill="white">
-                <use xlink:href="#path-1"></use>
+        <circle id="Oval" fill="url(#linearGradient-1)" cx="16" cy="16" r="14"></circle>
+        <g id="Page-1" transform="translate(11.863891, 8.187350)">
+            <mask id="mask-3" fill="white">
+                <use xlink:href="#path-2"></use>
             </mask>
             <g id="Clip-2"></g>
-            <path d="M10.024006,3.2044537 L8.20722806,3.20566006 C6.7813107,3.20566006 6.50626065,3.88242795 6.50626065,4.87526212 L6.50626065,7.06601163 L9.90337003,7.06601163 L9.46184232,10.4981054 L6.50626065,10.4981054 L6.50626065,19.3021197 L2.96197537,19.3021197 L2.96197537,10.4981054 L-0.000844451904,10.4981054 L-0.000844451904,7.06601163 L2.96197537,7.06601163 L2.96197537,4.53627499 C2.96197537,1.59878873 4.75703885,0.000361907959 7.37604611,0.000361907959 C8.63066037,0.000361907959 9.70793973,0.0932516174 10.024006,0.135474213 L10.024006,3.2044537 Z" id="Fill-1" fill="#1F88E9" mask="url(#mask-2)"></path>
+            <path d="M7.53825128,2.50352767 L6.17199824,2.50447015 C5.09968011,2.50447015 4.89283702,3.03320524 4.89283702,3.80887187 L4.89283702,5.52042789 L7.44753063,5.52042789 L7.11549304,8.20180281 L4.89283702,8.20180281 L4.89283702,15.0800714 L2.22746421,15.0800714 L2.22746421,8.20180281 L-0.000635044576,8.20180281 L-0.000635044576,5.52042789 L2.22746421,5.52042789 L2.22746421,3.54403308 C2.22746421,1.24907775 3.57738754,0.000282746038 5.54693293,0.000282746038 C6.49042773,0.000282746038 7.30056317,0.072854229 7.53825128,0.105841267 L7.53825128,2.50352767 Z" id="Fill-1" fill="#FFFFFF" mask="url(#mask-3)"></path>
         </g>
     </g>
 </svg>

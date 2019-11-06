@@ -8,6 +8,7 @@
         v-if="googleMapsIsLoaded"
         id="map"
         classname="w-input location-text-field"
+        :country="['us']"
         :placeholder="currentAddress"
         v-on:placechanged="getAddressData"
       >
@@ -72,7 +73,8 @@ export default {
         if (this.googlePlaceId === null) { return }
         this.$emit('input', { err: null,
           googleId: this.googlePlaceId,
-          apartmentNumber: this.apartmentNumber
+          apartmentNumber: this.apartmentNumber,
+          latlng: this.latlng
         })
       }
     },

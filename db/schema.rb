@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_16_190258) do
+ActiveRecord::Schema.define(version: 2019_11_05_124457) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,6 +84,18 @@ ActiveRecord::Schema.define(version: 2019_10_16_190258) do
     t.index ["parent_id"], name: "index_children_on_parent_id"
   end
 
+  create_table "conversations", force: :cascade do |t|
+    t.bigint "initiator_id"
+    t.bigint "recipient_id"
+    t.bigint "last_message_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["initiator_id", "recipient_id"], name: "index_conversations_on_initiator_id_and_recipient_id", unique: true
+    t.index ["initiator_id"], name: "index_conversations_on_initiator_id"
+    t.index ["last_message_id"], name: "index_conversations_on_last_message_id"
+    t.index ["recipient_id"], name: "index_conversations_on_recipient_id"
+  end
+
   create_table "dark_stars", force: :cascade do |t|
     t.bigint "giver_id"
     t.bigint "recipient_id"
@@ -98,6 +110,7 @@ ActiveRecord::Schema.define(version: 2019_10_16_190258) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "platform", default: 0, null: false
     t.index ["token"], name: "index_devices_on_token"
     t.index ["user_id"], name: "index_devices_on_user_id"
   end
@@ -180,11 +193,8 @@ ActiveRecord::Schema.define(version: 2019_10_16_190258) do
     t.bigint "sender_id"
     t.bigint "receiver_id"
     t.text "content"
-    t.bigint "cc_twilio_session_id"
-    t.string "twilio_interaction_sid"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["cc_twilio_session_id"], name: "index_messages_on_cc_twilio_session_id"
     t.index ["receiver_id"], name: "index_messages_on_receiver_id"
     t.index ["sender_id"], name: "index_messages_on_sender_id"
   end
@@ -326,16 +336,6 @@ ActiveRecord::Schema.define(version: 2019_10_16_190258) do
     t.index ["delivered", "failed", "processing", "deliver_after", "created_at"], name: "index_rpush_notifications_multi", where: "((NOT delivered) AND (NOT failed))"
   end
 
-  create_table "search_list_items", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.string "itemable_type"
-    t.bigint "itemable_id"
-    t.index ["itemable_type", "itemable_id"], name: "index_search_list_items_on_itemable_type_and_itemable_id"
-    t.index ["user_id", "itemable_type", "itemable_id"], name: "index_items_on_itemable_type_itemable_id_user_id", unique: true
-    t.index ["user_id"], name: "index_items_on_user_with_null_itemable", unique: true, where: "(itemable_id IS NULL)"
-    t.index ["user_id"], name: "index_search_list_items_on_user_id"
-  end
-
   create_table "stars", force: :cascade do |t|
     t.string "starable_type"
     t.bigint "starable_id"
@@ -345,22 +345,6 @@ ActiveRecord::Schema.define(version: 2019_10_16_190258) do
     t.index ["giver_id", "starable_type", "starable_id"], name: "index_stars_on_starable_type_starable_id_giver_id", unique: true
     t.index ["giver_id"], name: "index_stars_on_giver_id"
     t.index ["starable_type", "starable_id"], name: "index_stars_on_starable_type_and_starable_id"
-  end
-
-  create_table "twilio_sessions", force: :cascade do |t|
-    t.string "friendly_name"
-    t.string "twilio_id"
-    t.string "twilio_sid_sender"
-    t.string "twilio_sid_receiver"
-    t.datetime "last_action_at", default: -> { "CURRENT_TIMESTAMP" }
-    t.string "proxy_identifier_sender"
-    t.string "proxy_identifier_receiver"
-    t.bigint "sender_id"
-    t.bigint "receiver_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["receiver_id"], name: "index_twilio_sessions_on_receiver_id"
-    t.index ["sender_id"], name: "index_twilio_sessions_on_sender_id"
   end
 
   create_table "user_matches", force: :cascade do |t|
@@ -448,6 +432,9 @@ ActiveRecord::Schema.define(version: 2019_10_16_190258) do
     t.bigint "place_id"
     t.decimal "latitude"
     t.decimal "longitude"
+    t.boolean "setting_notify_messages_push", default: true
+    t.boolean "setting_notify_messages_email", default: true
+    t.boolean "setting_notify_messages_sms", default: true
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email"
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
@@ -462,20 +449,19 @@ ActiveRecord::Schema.define(version: 2019_10_16_190258) do
   end
 
   add_foreign_key "children", "users", column: "parent_id"
+  add_foreign_key "conversations", "messages", column: "last_message_id"
+  add_foreign_key "conversations", "users", column: "initiator_id"
+  add_foreign_key "conversations", "users", column: "recipient_id"
   add_foreign_key "dark_stars", "users", column: "giver_id"
   add_foreign_key "dark_stars", "users", column: "recipient_id"
   add_foreign_key "devices", "users"
   add_foreign_key "event_collection_memberships", "event_collections"
   add_foreign_key "event_collection_memberships", "events"
   add_foreign_key "event_series", "places"
-  add_foreign_key "messages", "twilio_sessions", column: "cc_twilio_session_id"
   add_foreign_key "messages", "users", column: "receiver_id"
   add_foreign_key "messages", "users", column: "sender_id"
   add_foreign_key "places", "users"
-  add_foreign_key "search_list_items", "users"
   add_foreign_key "stars", "users", column: "giver_id"
-  add_foreign_key "twilio_sessions", "users", column: "receiver_id"
-  add_foreign_key "twilio_sessions", "users", column: "sender_id"
   add_foreign_key "user_matches", "users"
   add_foreign_key "user_matches", "users", column: "matched_user_id"
   add_foreign_key "users", "events", column: "showcase_event_id"

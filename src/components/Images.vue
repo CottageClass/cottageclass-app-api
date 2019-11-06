@@ -10,13 +10,13 @@
 </template>
 
 <script>
-import { imageUrl } from '@/utils/vendor/cloudinary'
+import { householdImageUrl } from '@/utils/vendor/cloudinary'
 export default {
   name: 'Images',
   props: ['images'],
   computed: {
     transformedImages () {
-      return this.images.map(url => imageUrl(url, { height: 200 }))
+      return this.images.map(url => householdImageUrl(url, 200))
     }
   }
 }
@@ -44,7 +44,7 @@ a {
   width: 32%;
   margin: 2px;
   padding-top: 33%;
-  background-color: #d59191;
+  background-color: #888;
 }
 
 .hh-photos__image {

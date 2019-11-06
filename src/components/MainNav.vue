@@ -22,7 +22,7 @@
                        class="navigation__button w-inline-block"
                        :class="{'selected-nav-item': isParentsPage}"
           >
-            <img src="@/assets/house.svg" alt="" class="navigation__icon" />
+            <img src="@/assets/parents.svg" alt="" class="navigation__icon" />
             <div class="navigation__button-label">Parents</div>
             <div v-if="false" class="global__badge TODO">
               <div class="badge__text">99+</div>
@@ -38,6 +38,14 @@
             <div class="navigation__button-label">Playdates</div>
           </router-link>
         </li>
+        <router-link v-if="currentUser.messagesActive"
+                     :to="{name: 'Chats'}"
+                     class="navigation__button w-inline-block"
+                     :class="{'selected-nav-item': isChatPage}"
+        >
+          <img src="@/assets/chat.svg" alt="" class="navigation__icon" />
+          <div class="navigation__button-label">Chats</div>
+        </router-link>
       </ul>
       <div v-if="isAuthenticated" class="navigation__profile-menu__container">
         <a class="navigation__profile-menu-button w-inline-block"
@@ -104,6 +112,9 @@ export default {
     },
     isPlaydatesPage () {
       return this.$route.name === 'Events'
+    },
+    isChatPage () {
+      return this.$route.name === 'Chats' || this.$route.name === 'Conversation'
     },
     ...mapGetters(['currentUser', 'isAuthenticated'])
   },

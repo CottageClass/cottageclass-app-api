@@ -11,16 +11,17 @@
         @event-deleted="$emit('event-deleted', id)"
         @event-updated="$emit('event-updated', $event)"
         @going-click="$emit('going-click')"
+        @contact-click="$emit('contact-click')"
         @cancel-click="$emit('cancel-click')"
         @interested-click="$emit('interested-click')"
         @share-click="$emit('share-click')"
         class="other-events-card__action-selector__button-list"
         :showGoingButton="showGoingButton"
-        :showMeetButton="showMeetButton"
+        :showContactButton="showContactButton"
         :showCancelButton="showCancelButton"
         :showShareButton="showShareButton"
         :showInterestedButton="showInterestedButton"
-        :allowWaveUndo="allowWaveUndo"/>
+      />
     </div>
   </div>
 </template>
@@ -32,10 +33,9 @@ export default {
   props: {
     showGoingButton: { default: false },
     showInterestedButton: { default: false },
-    showMeetButton: { default: false },
+    showContactButton: { default: false },
     showCancelButton: { default: false },
     user: { required: true },
-    allowWaveUndo: { default: false },
     event: {}
   },
   components: { SearchListCardActions },

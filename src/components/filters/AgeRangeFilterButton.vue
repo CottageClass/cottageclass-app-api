@@ -11,20 +11,20 @@ export default {
   computed: {
     buttonText () {
       if (!this.range) {
-        return 'Ages 0-11'
+        return 'Ages 0-18'
       }
 
       let { min, max } = this.range
-      if (!min && !max) { return '0-11' }
+      if (!min && !max) { return 'Ages 0-18' }
       if (min < 0) {
         min = null
       } else {
-        min = min.toString()
+        min = (min || 0).toString()
       }
       if (max < 0) {
         max = null
       } else {
-        max = max.toString()
+        max = (max || 18).toString()
       }
 
       if (min && max) {
@@ -36,7 +36,7 @@ export default {
       if (!min && max) {
         return max + ' & under'
       }
-      return 'Ages 0-11'
+      return 'Ages 0-18'
     }
   }
 }

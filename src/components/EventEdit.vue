@@ -1,47 +1,37 @@
 <template>
-  <div class="body" id="top-of-form">
+  <div class="page-container editing" id="top-of-form">
     <DeleteEventConfirmationModal
       v-if="showDeleteConfirmationModal"
       v-on:closeModal="showDeleteConfirmationModal = false"
       :eventId="eventId"/>
     <MainNav />
-    <div class="lp-container w-container">
+    <div class="lp-container w-container" v-if="event">
       <h1 class="heading-1">Editing event #{{ eventId }} </h1>
-      <StyleWrapper styleIs="editing" class="cards" v-if="event">
-        <ErrorMessage v-if="showError && error" text="Your entries have errors. Please fix them to continue..." />
-        <EventName v-model="event.name" />
-        <MaxChildren v-model="event.maximumChildren" />
-        <ErrorMessage v-if="event.ageRange.err" :text="event.ageRange.err" />
-        <AgeRange v-model="event.ageRange" />
-        <HouseRules v-model="event.houseRules"/>
-        <YesOrNo
-          question="Do you have pets?"
-          description="This is often very important for parents (and children) to know."
-          v-model="event.hasPet"
-        />
-        <PetsDescription v-model="event.petDescription" />
-        <!-- <edit date & time> -->
-        <ErrorMessage v-if="!datesValidate" text="Please enter a valid start and end time for your event." />
-        <Question title="When is your event?">
-          From...
-          <br>
-          <br>
-          <DateTimePicker v-model="event.startsAt" showDate="true" />
-          <br>
-          To...
-          <br><br>
-          <DateTimePicker v-model="event.endsAt" showDate="true" />
-        </Question>
-        <Question title="Delete this event" subtitle="Are you unable to host this event? This cannot be undone. Your guests will receive a text message informing them that the event has been cancelled.">
-          <button
-            class="delete-event-button"
-            v-on:click="showDeleteConfirmationModal=true">
-            Delete
-          </button>
-        </Question>
-
-      <!-- </edit date & time> -->
-      </StyleWrapper>
+      <ErrorMessage v-if="showError && error" text="Your entries have errors. Please fix them to continue..." />
+      <EventName v-model="event.name" />
+      <EventDescription v-model="event.description" />
+      <ErrorMessage v-if="event.ageRange.err" :text="event.ageRange.err" />
+      <AgeRange v-model="event.ageRange" />
+      <ErrorMessage v-if="!datesValidate" text="Please enter a valid start and end time for your event." />
+      <EventDatePicker
+        v-model="date"
+      />
+      <EventTime
+        v-model="time"
+      />
+      <Question
+        title="Got any photos you'd like to share?"
+        subtitle="Adding photos to your event helps give other members a sense of what will be happening."
+      >
+        <MultipleImageUpload v-model="event.images" @input="submitImageUpload"/>
+      </Question>
+      <Question title="Delete this event" subtitle="Are you unable to host this event? This cannot be undone. Your guests will receive a text message informing them that the event has been cancelled.">
+        <button
+          class="delete-event-button"
+          v-on:click="showDeleteConfirmationModal=true">
+          Delete
+        </button>
+      </Question>
       <PageActionsFooter :buttons="footerButtons" @primary-click="saveEvent" />
     </div>
   </div>
@@ -49,30 +39,43 @@
 </template>
 
 <script>
+import MultipleImageUpload from '@/components/base/MultipleImageUpload.vue'
 import EventName from '@/components/base/eventSpecification/EventName.vue'
-import YesOrNo from '@/components/base/YesOrNo.vue'
+import EventDescription from '@/components/base/eventSpecification/EventDescription.vue'
 import MainNav from '@/components/MainNav.vue'
-import DateTimePicker from '@/components/DateTimePicker.vue'
 import PageActionsFooter from '@/components/PageActionsFooter.vue'
 import ErrorMessage from '@/components/base/ErrorMessage.vue'
-import * as api from '@/utils/api'
-import HouseRules from '@/components/FTE/userInformation/HouseRules.vue'
-import PetsDescription from '@/components/FTE/userInformation/PetsDescription.vue'
-import MaxChildren from '@/components/base/eventSpecification/MaxChildren.vue'
-import StyleWrapper from '@/components/FTE/StyleWrapper.vue'
 import Question from '@/components/base/Question.vue'
 import DeleteEventConfirmationModal from '@/components/DeleteEventConfirmationModal.vue'
-
 import AgeRange from '@/components/base/eventSpecification/AgeRange.vue'
+import EventDatePicker from '@/components/base/eventSpecification/EventDatePicker.vue'
+import EventTime from '@/components/base/eventSpecification/EventTime.vue'
+
+import { fetchEvent, updateEvent } from '@/utils/api'
+
 var moment = require('moment')
 
 var VueScrollTo = require('vue-scrollto')
 
 export default {
   name: 'EventEdit',
-  components: { HouseRules, PetsDescription, MaxChildren, MainNav, StyleWrapper, PageActionsFooter, ErrorMessage, YesOrNo, Question, DateTimePicker, EventName, AgeRange, DeleteEventConfirmationModal },
+  components: {
+    MainNav,
+    PageActionsFooter,
+    ErrorMessage,
+    Question,
+    EventName,
+    EventDatePicker,
+    EventTime,
+    EventDescription,
+    AgeRange,
+    DeleteEventConfirmationModal,
+    MultipleImageUpload
+  },
   data () {
     return {
+      date: '',
+      time: moment(),
       eventId: this.$route.params.id,
       saveButtonText: 'Save',
       eventDataFromAPI: null,
@@ -104,13 +107,8 @@ export default {
       return {
         'event': {
           'name': this.event.name,
-          'starts_at': this.event.startsAt,
-          'ends_at': this.event.endsAt,
-          'has_pet': this.event.hasPet.isTrue,
-          'activity_names': [this.event.activity.selected],
-          'house_rules': this.event.houseRules.text,
-          'pet_description': this.event.petDescription.text,
-          'maximum_children': this.event.maximumChildren,
+          'starts_at': moment(this.date.selected + 'T' + this.time.start),
+          'ends_at': moment(this.date.selected + 'T' + this.time.end),
           'child_age_minimum': this.event.ageRange.minimum,
           'child_age_maximum': this.event.ageRange.maximum
         }
@@ -118,34 +116,42 @@ export default {
     }
   },
   methods: {
+    submitImageUpload: async function () {
+      if (!this.hasError) {
+        const data = { images: this.event.images }
+        try {
+          await updateEvent(this.event.id, data)
+        } catch (e) {
+        }
+      } else {
+        this.showError = true
+        VueScrollTo.scrollTo('#top-of-form')
+      }
+    },
     fetchEvent: async function () {
-      this.event = await api.fetchEvent(this.eventId)
+      this.event = await fetchEvent(this.eventId)
       this.event = this.parseEventDataFromAPI(this.event)
+      this.date = { selected: this.event.startsAt.format('YYYY-MM-DD') }
+      this.time = { start: this.event.startsAt.format('HH:mm'), end: this.event.endsAt.format('HH:mm')
+      }
     },
     parseEventDataFromAPI: function (dataFromAPI) {
       let e = dataFromAPI
       return {
-        name: e.name,
-        startsAt: e.startsAt,
-        endsAt: e.endsAt,
-        hasPet: {
-          isTrue: e.hasPet
-        },
-        houseRules: {
-          text: e.houseRules
-        },
-        petDescription: {
-          text: e.petDescription
-        },
-        maximumChildren: e.maximumChildren,
+        ...e,
         ageRange: {
           maximum: e.childAgeMaximum,
           minimum: e.childAgeMinimum
         }
       }
     },
-    submitEventData: function () {
-      return this.axios.put(`/api/events/${this.eventId}`, this.eventDataForSubmissionToAPI)
+    submitEventData: async function () {
+      try {
+        await updateEvent(this.event.id, this.eventDataForSubmissionToAPI)
+      } catch (e) {
+        this.logError(e)
+        this.saveButtonText = 'Problem saving. Click to try again.'
+      }
     },
     saveEvent: function () {
       if (this.err) {
@@ -156,7 +162,6 @@ export default {
         this.submitEventData().then(res => {
           this.saveButtonText = ' \u2714 Saved'
           console.log('event update SUCCESS')
-          console.log(res)
           this.fetchEvent()
           return res
         }).catch(err => {
@@ -171,7 +176,7 @@ export default {
 
 <style scoped>
 
-.body {
+.page-container {
   font-family: soleil;
   color: #333;
   font-size: 14px;
@@ -206,7 +211,7 @@ export default {
 }
 
 @media (max-width: 991px) {
-  .body {
+  .page-container {
     padding-bottom: 77px;
   }
 
@@ -216,7 +221,7 @@ export default {
 }
 
 @media (max-width: 767px) {
-  .body {
+  .page-container {
     padding-bottom: 50px;
   }
 

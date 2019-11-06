@@ -29,6 +29,24 @@
           />
         </template>
       </FilterSelector>
+
+      <div class="utility-spacer-16px"></div>
+
+      <FilterSelector v-if="showEventTimeFilter"
+                      title="Date"
+                      :showClear="true"
+                      @clearFilterClicked="resetEventTime"
+                      :active="eventTimeActive" >
+        <template v-slot:buttonContents>
+          <EventTimeFilterButton :eventTime="eventTime" />
+        </template>
+        <template v-slot:selectorContents>
+          <EventTimeFilterSelector
+            :value="eventTime"
+            @input="updateEventTime"
+          />
+        </template>
+      </FilterSelector>
     </div>
   </li>
 </template>
@@ -41,24 +59,37 @@ import AgeRangeFilterButton from '@/components/filters/AgeRangeFilterButton'
 import AgeRangeFilterSelector from '@/components/filters/AgeRangeFilterSelector'
 import LocationFilterSelector from '@/components/filters/LocationFilterSelector'
 import LocationFilterButton from '@/components/filters/LocationFilterButton'
+import EventTimeFilterSelector from '@/components/filters/EventTimeFilterSelector'
+import EventTimeFilterButton from '@/components/filters/EventTimeFilterButton'
 
 export default {
   name: 'FilterSelectorBank',
+  props: {
+    showEventTimeFilter: {
+      type: Boolean
+    }
+  },
   components: {
     FilterSelector,
     AgeRangeFilterSelector,
     AgeRangeFilterButton,
     LocationFilterSelector,
-    LocationFilterButton
+    LocationFilterButton,
+    EventTimeFilterSelector,
+    EventTimeFilterButton
   },
   computed: {
+    eventTimeActive () {
+      return (this.eventTime.date || this.eventTime.weekday || this.eventTime.weekday === 0)
+    },
     ageRangeActive () {
-      return this.ageRange.min !== 0 || this.ageRange.max !== 11
+      return (this.ageRange.min || this.ageRange.min === 0) ||
+        (this.ageRange.max || this.ageRange.max === 0)
     },
     shortDescription () {
       return this.mapArea.shortDescription
     },
-    ...mapGetters(['mapArea', 'ageRange'])
+    ...mapGetters(['mapArea', 'ageRange', 'eventTime'])
   },
   methods: {
     updateMapAreaFromFilter (e) {
@@ -67,13 +98,17 @@ export default {
     updateAgeRange (e) {
       this.setAgeRange(e)
     },
+    updateEventTime (e) {
+      this.setEventTime(e)
+    },
+    resetEventTime () {
+      this.setEventTime({})
+    },
     resetAgeRange () {
       this.setAgeRange({ min: null, max: null })
     },
     ...mapMutations([]),
-    ...mapActions(['setAgeRange', 'setMapArea'])
-  },
-  mounted () {
+    ...mapActions(['setAgeRange', 'setMapArea', 'setEventTime'])
   }
 }
 </script>

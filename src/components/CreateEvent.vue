@@ -19,7 +19,7 @@
       v-else-if="stepName==='repeat-count'"
       v-model="repeatCount"
     />
-    <EventDescription
+    <EventOverview
       v-else-if="stepName==='description'"
       v-model="description" />
   </div>
@@ -30,7 +30,7 @@ import LoadingSpinner from '@/components/LoadingSpinner'
 import RepeatCount from '@/components/base/eventSpecification/RepeatCount'
 import EventDatePicker from '@/components/base/eventSpecification/EventDatePicker'
 import EventTime from '@/components/base/eventSpecification/EventTime'
-import EventDescription from '@/components/base/eventSpecification/EventDescription'
+import EventOverview from '@/components/base/eventSpecification/EventOverview'
 import EventPlace from '@/components/base/eventSpecification/EventPlace'
 import AgeRange from '@/components/base/eventSpecification/AgeRange.vue'
 
@@ -43,7 +43,7 @@ import { stepNavigation, alerts } from '@/mixins'
 
 export default {
   name: 'CreateEvent',
-  components: { EventDescription, EventPlace, EventDatePicker, EventTime, RepeatCount, LoadingSpinner, AgeRange },
+  components: { EventOverview, EventPlace, EventDatePicker, EventTime, RepeatCount, LoadingSpinner, AgeRange },
   mixins: [stepNavigation, alerts],
   props: ['stepName', 'context'],
   data () {
@@ -166,18 +166,14 @@ export default {
 
 <style scoped>
 
-.onb-body {
-  background-color: #0d73c7;
-}
-
 .content-wrapper {
   width: 720px;
   min-height: 100vh;
   margin-right: auto;
   margin-left: auto;
   padding-bottom: 50px;
-  background-color: #1c8be7;
 }
+
 @media (max-width: 991px) {
   .content-wrapper {
     width: 670px;

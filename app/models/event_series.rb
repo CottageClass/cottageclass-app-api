@@ -12,7 +12,7 @@ class EventSeries < ApplicationRecord
 
   before_validation :cleanup
   after_create :set_users_home
-  after_save :create_events
+  after_save :create_events, :notify
 
   accepts_nested_attributes_for :place
 
@@ -30,7 +30,35 @@ class EventSeries < ApplicationRecord
 
   def set_users_home
     # if no place has been set, use the creators home
-    place ||= user.place
+    self.place ||= user.place
+  end
+
+  def notify
+    # find all the starrers of the hosts an send an email
+    starrers = User
+      .joins('INNER JOIN stars ON users.id = stars.giver_id')
+      .where("stars.starable_type = 'User' AND stars.starable_id = ?", user.id)
+    starrers.each do |starrer|
+      starrer.notify_event_creation_starrer user if starrer.id != user.id
+      starrer.push_notify_event_creation events.first
+    end
+
+    nearby_users = User
+      .near(user, :setting_max_distance)
+      .where.not(id: user.id)
+
+    recipients = []
+    user.children.each do |child|
+      eligible_users_for_child = nearby_users.child_birthday_range(child.birthday - 2.years.seconds,
+                                                                   child.birthday + 2.years.seconds)
+      recipients += eligible_users_for_child.to_a
+      recipients = recipients.uniq
+    end
+    recipients.each do |recipient|
+      continue if starrers.include? recipient
+      recipient.notify_event_creation_match user
+      recipient.push_notify_event_creation events.first
+    end
   end
 
   def create_events

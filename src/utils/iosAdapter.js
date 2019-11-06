@@ -1,10 +1,13 @@
 import { isIOSNativeApp } from '@/utils/platform'
+import { createDevice } from '@/utils/api'
 
 export function registerIOSEventLIstener () {
   if (isIOSNativeApp()) {
     window.addEventListener('lilyPadIOSNativeEvent', function (e) {
-      console.log(this)
       console.log(e)
+      if (e.detail.name === 'deviceTokenReceived') {
+        createDevice({ token: e.detail.token, platform: 'ios' })
+      }
     })
   }
 }

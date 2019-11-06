@@ -8,9 +8,10 @@
           ref="address"
           id="map field-4"
           classname="form-location-input input-field"
+          :country="['us']"
           :placeholder="placeholder"
           v-on:placechanged="submitAddress"
-          country="us" />
+        />
       </div>
     </div>
   </div>

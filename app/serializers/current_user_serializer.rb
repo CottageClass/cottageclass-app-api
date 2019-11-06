@@ -17,10 +17,16 @@ class CurrentUserSerializer < BaseSerializer
              :phone,
              :school,
              :setting_email_notifications,
+             :setting_notify_messages_sms,
+             :setting_notify_messages_push,
+             :setting_notify_messages_email,
              :setting_max_distance
 
   attribute :date_created, &:created_at
   attribute(:hosted_events_count) { |instance, _| instance.events.past.count }
   attribute(:participated_events_count) { |instance, _| instance.participated_events.past.count }
   attribute(:upcomin_events_count) { |instance, _| instance.events.upcoming.count }
+
+  # boolean indicating if the user has sent or recievied any messages
+  attribute(:messages_active) { |instance, _| instance.sent_messages.any? || instance.received_messages.any? }
 end

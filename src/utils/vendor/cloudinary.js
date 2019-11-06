@@ -9,11 +9,11 @@ export function avatarUrl (rawUrl, size) {
   if (rawUrl.includes('g_custom')) {
     return rawUrl.replace('/upload/', `/upload/c_thumb,g_custom,h_${size},w_${size}/`)
   }
-  return rawUrl.replace('/upload/', `/upload/c_thumb,g_face,z_0.8,h_${size},w_${size}/`)
+  return rawUrl.replace('/upload/', `/upload/c_thumb,z_0.8,h_${size},w_${size}/`)
 }
 
 export function householdImageUrl (rawUrl, size) {
-  return rawUrl.replace('/upload/', `/upload/c_thumb,h_${size},w_${size}/`)
+  return rawUrl.replace('/upload/', `/upload/c_thumb,g_custom,h_${size},w_${size}/`)
 }
 
 export function imageUrl (rawUrl, options) {

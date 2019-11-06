@@ -7,9 +7,11 @@
       <div class="header">
         <div class="header__date"
              :class="{'time-past': timePast}" >
-          {{eventTimeHeader}}
+          {{ eventTimeHeader }}
+          <span v-if="eventAgeRange !== ''" class="gray-bullet-text">•</span>
+          {{ eventAgeRange }}
         </div>
-        <div v-if="distance && !isCurrentUser" class="header__distance">{{distance}}</div>
+        <div v-if="distance" class="header__distance">{{distance}}</div>
       </div>
       <div class="event-summary-card__title line-clamp--1">{{name}}</div>
     </router-link>
@@ -41,11 +43,14 @@
           @event-updated="$emit('event-updated', $event)"
           @event-deleted="$emit('event-deleted', id)"
           @going-click="goingClick"
+          @contact-click="contactClick"
+          @edit-click="editClick"
           @interested-click="interestedClick('card')"
           :timePast="timePast"
           :showGoingButton="showGoingButton"
+          :showEditButton="showEditButton"
           :showInterestedButton="showInterestedButton"
-          :allowWaveUndo="true"/>
+        />
       </div>
     </div>
 
@@ -136,6 +141,10 @@ a {
   height: 20px;
   margin-right: 6px;
   opacity: 1;
+}
+.gray-bullet-text {
+  color: #f1f1f1;
+  -webkit-text-fill-color: #f1f1f1
 }
 
 .text-block-6 {

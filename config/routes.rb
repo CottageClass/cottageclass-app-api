@@ -19,8 +19,10 @@ Rails.application.routes.draw do
         collection { delete :index, to: 'participants#destroy' }
       end
       collection do
-        get '(/:skope)(/miles/:miles(/latitude/:latitude/longitude/:longitude))(/min_age/:min_age)(/max_age/:max_age)(/sort/:sort)'\
-        '(/page/:page/page_size/:page_size)',
+        get '(/:skope)(/miles/:miles(/latitude/:latitude/longitude/:longitude))'\
+          '(/min_age/:min_age)(/max_age/:max_age)'\
+          '(/date/:date)(/weekday/:weekday)'\
+          '(/sort/:sort)(/page/:page/page_size/:page_size)',
             to: 'events#index',
             skope: /upcoming|past/i,
             sort: /chronological|distance/i,
@@ -29,9 +31,15 @@ Rails.application.routes.draw do
             miles: /-?+(?=.??\d)\d*\.?\d*/,  # this allows negatives, which it shouldn't
             min_age: /\d+/,
             max_age: /\d+/,
+            date: /\d\d\d\d-\d\d-\d\d/,
+            weekday: /\d/,
             defaults: { skope: 'all' },
             as: :index
       end
+    end
+
+    resources :users, only: %i[show] do
+      resources :messages, only: %i[index create]
     end
 
     resources :users, only: %i[show destroy update] do
@@ -61,6 +69,8 @@ Rails.application.routes.draw do
       end
     end
     resource :user, only: %i[] do
+      resources :conversations, only: %i[index]
+      resource :stars, only: %i[create destroy], module: :users
       resources :children, only: %i[update]
       collection do
         get 'created_events(/:skope)(/page/:page/page_size/:page_size)', to: 'events#created',
@@ -84,18 +94,6 @@ Rails.application.routes.draw do
       end
     end
   end
-  get '/api/feed//miles/:miles/latitude/:latitude/longitude/:longitude(/min_age/:min_age)(/max_age/:max_age)(/page/:page/page_size/:page_size)',
-      to: 'api/search_list_items#index',
-      latitude: /-?+(?=.??\d)\d*\.?\d*/,
-      longitude: /-?+(?=.??\d)\d*\.?\d*/,
-      miles: /-?+(?=.??\d)\d*\.?\d*/, # this allows negatives, which it shouldn't
-      min_age: /\d+/,
-      max_age: /\d+/,
-      as: :feed
-
-  # twilio sessions
-  post '/api/users/:id/proxy_sessions' => 'api/twilio_sessions#create', as: 'proxy_sessions'
-  post '/proxy_callback' => 'api/twilio_sessions#callback'
 
   #############
   # routes for facebook crawler

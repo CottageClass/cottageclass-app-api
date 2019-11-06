@@ -61,51 +61,77 @@ export default {
 
 <style scoped lang="scss">
   .page-container {
-    min-height: 100vh;
+    height: 100%;
+    background-color: #fc6f77;
+    display: flex;
+    flex-direction: column;
   }
 
   .column-container {
-    background-color: #0d73c7;
-    margin-right: auto;
-    margin-left: auto;
+    flex: 1;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 1000;
     display: flex;
+    width: 876px;
+    height: 100%;
+    min-height: 500px;
+    margin: 40px auto 0;
     flex-direction: column;
-    align-items: center;
-    min-height: 100vh;
-    width: 100%;
+    border-radius: 4px;
+    background-color: #fff;
+    box-shadow: 1px 1px 35px 0 rgba(0, 0, 0, 0.2);
   }
 
   .content-container {
-    flex: 1;
-    width: 720px;
-    margin-bottom: 0px;
-    padding: 32px 32px 72px;
-    background-color: #1c8be7;
+   width: 100%;
   }
 
   @media (max-width: 991px) {
-    .content-container {
-      width: 670px;
+    .column-container {
+      width: auto;
+      margin-right: 32px;
+      margin-left: 32px;
     }
+
   }
 
   @media (max-width: 767px) {
+
+    .column-container {
+    top: -97px;
+    width: auto;
+    margin-right: 0px;
+    margin-left: 0px;
+    border-radius: 0px;
+    box-shadow: none;
+    }
+
     .content-container {
-      width: 100%;
-      margin-top: 0px;
-      margin-bottom: 0px;
+    margin-top: 99px;
+    }
+  }
+
+  @media (max-width: 479px) {
+    .column-container {
+      margin-top: 28px;
+    }
+    .content-container {
+      margin-top: 70px;
     }
   }
 </style>
 
 <style lang="scss">
   .flow textarea {
-    padding-top: 16px;
+    padding-top: 8px;
     padding-bottom: 16px;
     padding-left: 18px;
-    border: 1px none #000;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #e4e4e4;
     border-radius: 4px;
-    background-color: hsla(0, 0%, 100%, .7);
+    background-color: #f0f0f0;
     font-size: 16px;
 
     &.text-area-decribe-need {
@@ -117,6 +143,7 @@ export default {
     }
     &:focus {
       background-color: #fff;
+      border-color: #0dba52;
     }
 
     &::placeholder {

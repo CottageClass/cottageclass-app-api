@@ -6,11 +6,10 @@ import languageList from 'language-list'
 import { redirect } from '@/mixins'
 import rsvp from '@/mixins/rsvp'
 import stars from '@/mixins/stars'
-import waves from '@/mixins/waves'
 import { fetchEvent } from '@/utils/api'
 
 export default {
-  mixins: [ redirect, rsvp, waves, stars ],
+  mixins: [ redirect, rsvp, stars ],
   data () {
     return {
       overlayOpen: false
@@ -58,6 +57,9 @@ export default {
     isCurrentUser () {
       return this.user && this.currentUser && this.user.id.toString() === this.currentUser.id.toString()
     },
+    showEditButton () {
+      return this.event && this.currentUser && this.event.user.id.toString() === this.currentUser.id.toString()
+    },
     showGoingButton () {
       return this.event &&
         !this.timePast &&
@@ -74,7 +76,7 @@ export default {
         !this.timePast &&
         (this.event.user.id.toString() === this.currentUser.id.toString())
     },
-    showMeetButton () {
+    showContactButton () {
       return (!this.currentUser || (this.user.id.toString() !== this.currentUser.id.toString()))
     },
     showShareButton () {
@@ -100,7 +102,7 @@ export default {
           lng: this.currentUser.place.longitude
         }
       const center = this.distanceCenter || currentUserCenter
-      if (!center) { return null }
+      if (!center || !this.place.public) { return null }
       return distanceHaversine(
         this.place.latitude || this.place.fuzzyLatitude,
         this.place.longitude || this.place.fuzzyLongitude,
@@ -152,6 +154,16 @@ export default {
     eventTimeHeader () {
       if (this.event) {
         return moment(this.event.startsAt).format('ddd, MMM D') + ' at ' + moment(this.event.startsAt).format('h:mm a')
+      }
+    },
+
+    eventAgeRange () {
+      if (this.event) {
+        if (this.event.childAgeMaximum === 0) {
+          return ''
+        } else {
+          return 'Ages ' + this.event.childAgeMinimum + '-' + this.event.childAgeMaximum
+        }
       }
     },
 
@@ -265,6 +277,12 @@ export default {
     },
     shareClick () {
       this.$router.push({ name: 'SocialEventInvite', params: { id: this.event.id, context: 'searchItem' } })
+    },
+    async editClick () {
+      this.$router.push({ name: 'EventEdit', params: { id: this.event.id } })
+    },
+    async contactClick () {
+      this.$router.push({ name: 'Conversation', params: { userId: this.user.id } })
     },
     async goingClick () {
       if (this.redirectToSignupIfNotAuthenticated({

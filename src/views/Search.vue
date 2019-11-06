@@ -20,9 +20,9 @@
       <MainNav />
       <div class="events__container w-container">
         <div class="events__column-left">
-          <GetTheMost @offer-playdate-click="offerPlaydate"/>
+          <MainActionButtons @offer-playdate-click="offerPlaydate"/>
           <div class="list-container w-container">
-            <FilterSelectorBank />
+            <FilterSelectorBank :showEventTimeFilter="itemType==='event'"/>
             <SearchResultList
               :itemType="itemType"
               :awaiting="awaiting"
@@ -56,20 +56,20 @@
 <script>
 import { mapGetters, mapMutations, mapActions } from 'vuex'
 
-import GetTheMost from '@/components/search/GetTheMost'
+import MainActionButtons from '@/components/search/MainActionButtons'
 import SearchResultList from '@/components/SearchResultList'
 import MainNav from '@/components/MainNav'
 import EventListMap from '@/components/EventListMap'
 import FilterSelectorBank from '@/components/filters/FilterSelectorBank'
 
-import { messaging, alerts, screen } from '@/mixins'
+import { alerts, screen } from '@/mixins'
 
 export default {
   name: 'Search',
-  mixins: [messaging, alerts, screen],
+  mixins: [alerts, screen],
   props: ['itemType'],
   components: {
-    GetTheMost,
+    MainActionButtons,
     SearchResultList,
     MainNav,
     EventListMap,
@@ -133,7 +133,6 @@ export default {
     if (this.currentUser && !this.currentUser.profileBlurb) {
       this.$router.push({ name: 'ProfileCollection' })
     } else {
-      this.settlePendingWaves()
       if (!this.items) {
         this.fetchItems()
       }
@@ -186,14 +185,18 @@ export default {
 
 @media (max-width: 991px){
   .events__container {
-    margin-top: 24px;
+    margin-top: 0;
     flex-direction: column-reverse;
+    padding-right: 0;
+    padding-left: 0;
   }
 
   .events__column-left {
     width: 100%;
     margin-right: 0;
     margin-bottom: 0;
+    padding-right: 0;
+    padding-left: 0;
   }
 
   .events__column-right {
@@ -201,6 +204,8 @@ export default {
     display: block;
     width: 100%;
     margin-bottom: 0;
+    padding-right: 0;
+    padding-left: 0;
   }
 
   .map {
@@ -222,21 +227,6 @@ export default {
 @media (max-width: 767px){
   .events__container {
     position: static;
-    margin-top: 0;
-    padding-right: 0;
-    padding-left: 0;
-    flex-direction: column-reverse;
-  }
-
-  .events__column-left {
-    padding-right: 0;
-    padding-left: 0;
-  }
-
-  .events__column-right {
-    margin-bottom: 0;
-    padding-right: 0;
-    padding-left: 0;
   }
 
   .map {

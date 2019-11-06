@@ -22,30 +22,44 @@ export default {
 
 <style lang="scss" scoped>
 .flow {
+  .location-search-container, .paragraph-small-50{
+    padding-right: 32px;
+    padding-left: 32px;
+  }
   .question-title {
-    font-size: 20px;
-    color: #fff;
+    font-size: 24px;
+    color:#333;
     text-align: center;
     font-weight: bold;
     line-height: 34px;
     margin-top: 0;
+    margin-bottom: 10px;
   }
 
   .title-container {
-    margin-bottom: 32px;
+    margin-bottom: 0px;
+    padding: 32px;
     color: #fff;
   }
 
   .paragraph-small-50 {
-    margin-bottom: 8px;
-    color: hsla(0, 0%, 100%, .5);
-    font-size: 11px;
-    line-height: 19px;
-    text-align: center;
-    letter-spacing: 0.2px;
+  margin-bottom: 8px;
+  color: #9c9c9c;
+  font-size: 11px;
+  line-height: 19px;
+  text-align: center;
+  letter-spacing: .2px;
   }
 
   @media (max-width: 479px) {
+    .location-search-container{
+      padding-right: 16px;
+      padding-left: 16px;
+    }
+    .title-container {
+    padding-right: 16px;
+    padding-left: 16px;
+    }
     .title-bar {
       align-items: center;
     }

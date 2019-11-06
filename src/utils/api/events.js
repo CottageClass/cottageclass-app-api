@@ -14,13 +14,18 @@ export function submitEventSeriesData (data) {
     return Object.values(normalize(res.data).eventSeries)[0].relationships.events.data
   })
 }
-export const fetchEvents = async ({ miles, lat, lng, minAge, maxAge, pageSize = 20, page = 1 }) => {
+export const fetchEvents = async ({ miles, lat, lng, minAge, maxAge, date, weekday, pageSize = 20, page = 1 }) => {
   let url = `/api/events/upcoming/miles/${miles}/latitude/${lat}/longitude/${lng}/`
   if (minAge || minAge === 0) {
     url += `min_age/${minAge}/`
   }
   if (maxAge || maxAge === 0) {
     url += `max_age/${maxAge}/`
+  }
+  if (date) {
+    url += `date/${date}/`
+  } else if (weekday) {
+    url += `weekday/${weekday}/`
   }
   url += 'sort/chronological/'
   url += `page/${page}/page_size/${pageSize}`
@@ -33,6 +38,20 @@ export const fetchEvents = async ({ miles, lat, lng, minAge, maxAge, pageSize = 
     logger.logError(err.errors)
     throw err
   })
+}
+
+export const updateEvent = async (eventId, data) => {
+  try {
+    const res = axios.put(`/api/events/${eventId}`, data)
+    if (res) {
+      return createEvent(normalize(res.data))
+    } else {
+      throw Error('failed to update event')
+    }
+  } catch (e) {
+    logger.logError(e)
+    throw e
+  }
 }
 
 export const fetchEventsByPlace = async (placeId) => {
