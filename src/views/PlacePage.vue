@@ -30,7 +30,15 @@
 
       <div class="place-photos">
         <div class="place-section-title">Photos</div><a href="#" class="places-links">+ Add a photo</a>
-        <div class="place-photos__grid"><a href="#" class="place-photo__link w-inline-block"><img src="images/Rectangle-11.png" alt="" class="place-photos__image photo-fit" /></a><a href="#" class="place-photo__link w-inline-block"><img src="images/Rectangle-12.png" alt="" class="place-photos__image photo-fit" /></a><a href="#" class="place-photo__link w-inline-block"><img src="images/Rectangle-13_1.png" alt="" class="place-photos__image photo-fit" /></a><a href="#" class="place-photo__link w-inline-block"><img src="images/Rectangle-16_1.png" alt="" class="place-photos__image photo-fit" /></a><a href="#" class="place-photo__link w-inline-block"><img src="images/Rectangle-11.png" alt="" class="place-photos__image photo-fit" /></a><a href="#" class="place-photo__link w-inline-block"><img src="images/Rectangle-12.png" alt="" class="place-photos__image photo-fit" /></a><a href="#" class="place-photo__link w-inline-block"><img src="images/Rectangle-12.png" alt="" class="place-photos__image photo-fit" /></a><a href="#" class="place-photo__link w-inline-block"><img src="images/Rectangle-16_1.png" alt="" class="place-photos__image photo-fit" /></a></div>
+        <div class="place-photos__grid">
+          <a
+            v-for="(image, i) in placeImages"
+            @click="handleImageClick(i)"
+            class="place-photo__link w-inline-block"
+          >
+            <img :src="image" class="place-photos__image photo-fit" />
+          </a>
+        </div>
       </div>
 
       <div class="place-events">
@@ -54,6 +62,7 @@ import LoadingSpinner from '@/components/LoadingSpinner'
 import LightBoxStyleWrapper from '@/components/LightBoxStyleWrapper'
 
 import { fetchPlace } from '@/utils/api'
+import { householdImageUrl } from '@/utils/vendor/cloudinary'
 import { item } from '@/mixins'
 
 export default {
@@ -78,8 +87,11 @@ export default {
       }
       return size
     },
+    placeImages () {
+      return this.place.place[this.placeId].attributes.images.map(url => householdImageUrl(url, 200))
+    },
     lightboxImages () {
-      return this.images.map(i => {
+      return this.place.place[this.placeId].attributes.images.map(i => {
         return {
           thumb: i,
           src: i
