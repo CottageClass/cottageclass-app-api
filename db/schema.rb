@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_05_124457) do
+ActiveRecord::Schema.define(version: 2019_11_06_012736) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -263,6 +263,8 @@ ActiveRecord::Schema.define(version: 2019_11_05_124457) do
     t.string "time_zone"
     t.jsonb "full_result_object"
     t.string "vicinity"
+    t.text "description"
+    t.string "images", default: [], array: true
     t.index ["google_id", "apartment_number"], name: "index_places_google_id_apartment_number", unique: true
     t.index ["latitude", "longitude"], name: "index_places_on_latitude_and_longitude"
     t.index ["user_id"], name: "index_places_on_user_id"
