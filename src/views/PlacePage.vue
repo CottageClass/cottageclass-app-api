@@ -47,6 +47,12 @@
       <div class="place-events">
         <div id="events" class="place-section-title">Events</div><a href="#" class="places-links">+ Add an event</a>
         <ul class="place-events-list">
+          <EventSearchListCard v-for="item in upcomingEvents"
+                               :item="item"
+                               :key="item.id"
+                               @user-updated="$emit('user-updated', $event)"
+                               @event-deleted="$emit('event-deleted', id)"
+                               @event-updated="$emit('event-updated', $event)"/>
         </ul>
       </div>
 
@@ -79,6 +85,9 @@ export default {
     }
   },
   computed: {
+    upcomingEvents () {
+      return null
+    },
     averageRating () {
       return 3
     },
