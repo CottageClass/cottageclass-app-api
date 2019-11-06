@@ -21,7 +21,7 @@
           </a>
         </div>
         <div class="place-event-summary"><a href="#events" class="link-block-2 w-inline-block"><img src="@/assets/mdi_calendar_today.svg" alt="" />
-          <div class="events-link-text">3 events happening</div>
+          <div class="events-link-text">{{numberOfEvents}} events happening</div>
         </a></div>
         <div class="place-event-desc">
           <div class="text-block-13">This roadside attraction features a giant, 35-ft. fork weighing 11 tons emerging from the ground. This roadside attraction features a giant, 35-ft. fork weighing 11 tons emerging from the ground. This roadside attraction features a giant, 35-ft. fork weighing 11 tons emerging from the ground.This roadside attraction features a giant, 35-ft. fork weighing 11 tons emerging from the ground.</div>
