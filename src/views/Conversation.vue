@@ -25,9 +25,13 @@
               <h1 class="chat-heading-text">{{titleText}}</h1>
             </div>
           </div>
-          <div class="chat-content--wrapper"
-               v-if="partner && messages"
-          >
+          <div v-if="messages.length === 0"
+               class="chat-content--wrapper">
+            <ConversationDivider
+              :dividerText="chatStartedText" />
+          </div>
+          <div v-if="partner && messages"
+               class="chat-content--wrapper">
             <ConversationDay
               v-for="(ca) in conversationDays"
               :key="ca.day"
@@ -55,6 +59,7 @@ import moment from 'moment'
 
 import MainNav from '@/components/MainNav'
 import ConversationDay from '@/components/ConversationDay'
+import ConversationDivider from '@/components/ConversationDivider.vue'
 import AvatarImage from '@/components/base/AvatarImage'
 import MessageSendBox from '@/components/MessageSendBox'
 
@@ -63,7 +68,7 @@ import { fetchMessages, fetchUser, submitMessage } from '@/utils/api'
 
 export default {
   name: 'Conversation',
-  components: { ConversationDay, AvatarImage, MainNav, MessageSendBox },
+  components: { ConversationDay, AvatarImage, MainNav, MessageSendBox, ConversationDivider },
   mixins: [ platform ],
   data () {
     return {
@@ -91,6 +96,9 @@ export default {
       } else {
         return 'loading'
       }
+    },
+    chatStartedText () {
+      return 'You just started a new chat. Say hi!'
     },
     partnerName () {
       return this.partner.firstName + ' ' + this.partner.lastInitial + '.'
