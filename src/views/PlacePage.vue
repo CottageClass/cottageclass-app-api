@@ -14,9 +14,12 @@
 
       <div class="place-card">
         <h1 class="place-title">{{ placeName }}</h1>
-        <div class="place-ratings">
+        <div v-if="false" class="place-ratings">
           <a href="#reviews" class="link-block w-inline-block">
-            <div class="rating-stars"><img src="@/assets/Star_3.svg" alt="" /><img src="@/assets/Star_3.svg" alt="" /><img src="@/assets/Star_3.svg" alt="" /><img src="@/assets/Star_3.svg" alt="" /><img src="@/assets/Star--inactive.svg" alt="" /></div>
+            <div class="rating-stars">
+              <img v-for="i in averageRating" src="@/assets/Star_3.svg" alt="" />
+              <img v-for="i in (5 - averageRating)" src="@/assets/Star--inactive.svg" alt="" />
+            </div>
             <div class="ratings-link-text">3 reviews</div>
           </a>
         </div>
@@ -47,7 +50,7 @@
         </ul>
       </div>
 
-      <div class="place-reviews">
+      <div v-if="false" class="place-reviews">
         <div id="reviews" class="place-section-title">Reviews</div><a href="#" class="places-links">+ Add a review</a>
       </div>
 
@@ -76,6 +79,9 @@ export default {
     }
   },
   computed: {
+    averageRating () {
+      return 3
+    },
     placeName () {
       return this.place.place[this.placeId].attributes.name
     },
