@@ -1,9 +1,9 @@
 <template>
   <div>
-    <div class="chat-detail--day">
+    <div class="divider-container">
       <div class="divider"></div>
       <div class="text-white-background">
-        <div class="chat-detail--day-text">{{ dividerText }}</div>
+        <div class="divider-text">{{ dividerText }}</div>
       </div>
     </div>
   </div>
@@ -18,7 +18,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.chat-detail--day {
+.divider-container {
   position: relative;
   display: flex;
   padding-bottom: 12px;
@@ -27,7 +27,7 @@ export default {
   background-color: #fff;
 }
 
-.chat-detail--day-text {
+.divider-text {
   position: static;
   top: 108px;
   width: 100%;
