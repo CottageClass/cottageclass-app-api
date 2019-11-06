@@ -7,7 +7,6 @@ export const createPlaces = (data) => {
   const events = data.event
 
   const places = Object.values(data.place).map(p => {
-    console.log(p)
     const res = Object.assign({}, p.attributes)
     const eventIds = p.relationships.upcomingEvents.data.map(e => e.id)
     const upcomingEvents = eventIds.map(id => events[id].attributes)
