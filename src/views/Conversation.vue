@@ -25,7 +25,7 @@
               <h1 class="chat-heading-text">{{titleText}}</h1>
             </div>
           </div>
-          <div v-if="!(messages.length)"
+          <div v-if="messages.length === 0"
                class="chat-content--wrapper">
             <ConversationDivider
               :dividerText="chatStartedText" />
