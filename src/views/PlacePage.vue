@@ -13,7 +13,7 @@
     <div v-else class="place-detail__container w-container">
 
       <div class="place-card">
-        <h1 class="place-title">World's largest fork</h1>
+        <h1 class="place-title">{{ placeName }}</h1>
         <div class="place-ratings">
           <a href="#reviews" class="link-block w-inline-block">
             <div class="rating-stars"><img src="@/assets/Star_3.svg" alt="" /><img src="@/assets/Star_3.svg" alt="" /><img src="@/assets/Star_3.svg" alt="" /><img src="@/assets/Star_3.svg" alt="" /><img src="@/assets/Star--inactive.svg" alt="" /></div>
@@ -67,6 +67,17 @@ export default {
     }
   },
   computed: {
+    placeName () {
+      return this.place.place[this.placeId].attributes.name
+    },
+    numberOfEvents () {
+      let size = 0
+      const obj = this.place.event
+      for (let key in obj) {
+        if (obj.hasOwnProperty(key)) { size += 1 }
+      }
+      return size
+    },
     lightboxImages () {
       return this.images.map(i => {
         return {
