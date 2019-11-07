@@ -147,7 +147,7 @@ export default {
     },
     submitPlaceData: async function () {
       if (!this.hasError) {
-        const data = { images: this.images }
+        const data = { images: this.place.images }
         try {
           const res = await api.updatePlace(this.placeId, data)
           this.$store.dispatch('updatePlace')
