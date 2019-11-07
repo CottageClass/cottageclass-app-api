@@ -2,13 +2,15 @@ import axios from 'axios'
 import normalize from 'json-api-normalizer'
 
 import Logger from '@/utils/logger'
+import { createPlace } from '@/utils/createPlace'
+
 const logger = Logger('api:events')
 
 export const fetchPlace = async (id) => {
   try {
     const res = await axios.get(`/api/places/${id}`)
     if (res) {
-      return normalize(res.data)
+      return createPlace(normalize(res.data))
     } else {
       throw Error('failed to fetch place')
     }
@@ -25,7 +27,7 @@ export const updatePlace = async (id, data) => {
       data
     )
     if (res) {
-      return normalize(res.data)
+      return createPlace(normalize(res.data))
     } else {
       throw Error('failed to submit message')
     }

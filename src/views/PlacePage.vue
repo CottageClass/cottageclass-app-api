@@ -24,7 +24,7 @@
           </a>
         </div>
         <div class="place-event-summary"><a href="#events" class="link-block-2 w-inline-block"><img src="@/assets/mdi_calendar_today.svg" alt="" />
-          <div class="events-link-text">{{numberOfEvents}} events happening</div>
+          <div class="events-link-text">{{ numberOfEvents }} events happening</div>
         </a></div>
         <div class="place-event-desc">
           <div class="text-block-13">{{ placeDescription }}</div>
@@ -46,7 +46,7 @@
       </div>
 
       <div class="place-events">
-        <div id="events" class="place-section-title">Events</div><button class="places-links">+ Add an event</button>
+        <div id="events" class="place-section-title">Events</div><a @click="offerPlaydate" class="places-links">+ Add an event</a>
         <ul class="place-events-list">
           <EventSearchListCard v-for="item in upcomingEvents"
                                :item="item"
@@ -72,15 +72,16 @@ import VueScrollTo from 'vue-scrollto'
 import MainNav from '@/components/MainNav'
 import LoadingSpinner from '@/components/LoadingSpinner'
 import LightBoxStyleWrapper from '@/components/LightBoxStyleWrapper'
+import EventSearchListCard from '@/components/search/EventSearchListCard'
 
-import { fetchPlace, updatePlace } from '@/utils/api'
+import { fetchPlace, updatePlace, fetchEventsByPlace } from '@/utils/api'
 import * as api from '@/utils/api'
 import { createWidget, householdImageUrl } from '@/utils/vendor/cloudinary'
 import { item } from '@/mixins'
 
 export default {
   name: 'PlacePage',
-  components: { MainNav, LoadingSpinner, LightBox, LightBoxStyleWrapper },
+  components: { MainNav, LoadingSpinner, LightBox, LightBoxStyleWrapper, EventSearchListCard },
   mixins: [ item ],
   data () {
     return {
@@ -92,10 +93,7 @@ export default {
   },
   computed: {
     placeDescription () {
-      return this.attributes.description
-    },
-    upcomingEvents () {
-      return null
+      return this.place.description
     },
     averageRating () {
       return 3
@@ -104,24 +102,21 @@ export default {
       return false
     },
     placeName () {
-      return this.attributes.name
-    },
-    attributes () {
-      return this.place.place[this.placeId].attributes
+      return this.place.name
     },
     numberOfEvents () {
       let size = 0
-      const obj = this.place.event
+      const obj = this.place.upcomingEvents
       for (let key in obj) {
         if (obj.hasOwnProperty(key)) { size += 1 }
       }
       return size
     },
     placeImages () {
-      return this.attributes.images.map(url => householdImageUrl(url, 200))
+      return this.place.images.map(url => householdImageUrl(url, 200))
     },
     lightboxImages () {
-      return this.attributes.images.map(i => {
+      return this.place.images.map(i => {
         return {
           thumb: i,
           src: i
@@ -130,6 +125,9 @@ export default {
     }
   },
   methods: {
+    offerPlaydate () {
+      this.$router.push({ name: 'NewEvent' })
+    },
     cloudinaryEventHandler (error, result) {
       this.debug({ result })
 
@@ -142,14 +140,14 @@ export default {
           transformation = 'c_thumb,g_custom/'
         }
         const imageUrl = 'https://res.cloudinary.com/' + process.env.CLOUDINARY_CLOUD_NAME + '/image/upload/' + transformation + result.info.path
-        this.attributes.images.push(imageUrl)
+        this.images.push(imageUrl)
         this.submitPlaceData()
         this.disableForm = false
       }
     },
     submitPlaceData: async function () {
       if (!this.hasError) {
-        const data = { images: this.attributes.images }
+        const data = { images: this.images }
         try {
           const res = await api.updatePlace(this.placeId, data)
           this.$store.dispatch('updatePlace')
