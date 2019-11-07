@@ -27,7 +27,7 @@
           <div class="events-link-text">{{numberOfEvents}} events happening</div>
         </a></div>
         <div class="place-event-desc">
-          <div class="text-block-13">This roadside attraction features a giant, 35-ft. fork weighing 11 tons emerging from the ground. This roadside attraction features a giant, 35-ft. fork weighing 11 tons emerging from the ground. This roadside attraction features a giant, 35-ft. fork weighing 11 tons emerging from the ground.This roadside attraction features a giant, 35-ft. fork weighing 11 tons emerging from the ground.</div>
+          <div class="text-block-13">{{ placeDescription }}</div>
         </div>
       </div>
 
@@ -91,6 +91,9 @@ export default {
     }
   },
   computed: {
+    placeDescription () {
+      return this.attributes.description
+    },
     upcomingEvents () {
       return null
     },
