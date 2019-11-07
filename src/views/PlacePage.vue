@@ -14,11 +14,11 @@
 
       <div class="place-card">
         <h1 class="place-title">{{ placeName }}</h1>
-        <div v-if="false" class="place-ratings">
+        <div v-if="hasReviews" class="place-ratings">
           <a href="#reviews" class="link-block w-inline-block">
             <div class="rating-stars">
-              <img v-for="i in averageRating" src="@/assets/Star_3.svg" alt="" />
-              <img v-for="i in (5 - averageRating)" src="@/assets/Star--inactive.svg" alt="" />
+              <img v-for="i in averageRating" v-bind:key="i" src="@/assets/Star_3.svg" alt="" />
+              <img v-for="i in (5 - averageRating)" v-bind:key="i" src="@/assets/Star--inactive.svg" alt="" />
             </div>
             <div class="ratings-link-text">3 reviews</div>
           </a>
@@ -32,10 +32,11 @@
       </div>
 
       <div class="place-photos">
-        <div class="place-section-title">Photos</div><a href="#" class="places-links">+ Add a photo</a>
+        <div class="place-section-title">Photos</div>
         <div class="place-photos__grid">
           <a
             v-for="(image, i) in placeImages"
+            v-bind:key="image"
             @click="handleImageClick(i)"
             class="place-photo__link w-inline-block"
           >
@@ -56,7 +57,7 @@
         </ul>
       </div>
 
-      <div v-if="false" class="place-reviews">
+      <div v-if="hasReviews" class="place-reviews">
         <div id="reviews" class="place-section-title">Reviews</div><a href="#" class="places-links">+ Add a review</a>
       </div>
 
@@ -66,11 +67,14 @@
 
 <script>
 import LightBox from 'vue-image-lightbox'
+import VueScrollTo from 'vue-scrollto'
+
 import MainNav from '@/components/MainNav'
 import LoadingSpinner from '@/components/LoadingSpinner'
 import LightBoxStyleWrapper from '@/components/LightBoxStyleWrapper'
+import MultipleImageUpload from '@/components/base/MultipleImageUpload.vue'
 
-import { fetchPlace } from '@/utils/api'
+import { fetchPlace, updatePlace } from '@/utils/api'
 import { householdImageUrl } from '@/utils/vendor/cloudinary'
 import { item } from '@/mixins'
 
@@ -81,7 +85,8 @@ export default {
   data () {
     return {
       placeId: this.$route.params.id,
-      place: null
+      place: null,
+      showError: false
     }
   },
   computed: {
@@ -91,8 +96,14 @@ export default {
     averageRating () {
       return 3
     },
+    hasReviews () {
+      return false
+    },
     placeName () {
-      return this.place.place[this.placeId].attributes.name
+      return this.attributes.name
+    },
+    attributes () {
+      return this.place.place[this.placeId].attributes
     },
     numberOfEvents () {
       let size = 0
@@ -103,10 +114,10 @@ export default {
       return size
     },
     placeImages () {
-      return this.place.place[this.placeId].attributes.images.map(url => householdImageUrl(url, 200))
+      return this.attributes.images.map(url => householdImageUrl(url, 200))
     },
     lightboxImages () {
-      return this.place.place[this.placeId].attributes.images.map(i => {
+      return this.attributes.images.map(i => {
         return {
           thumb: i,
           src: i
