@@ -8,7 +8,7 @@
         :items="items"
         :noItemsMessage="noItemsMessage"
         :showTrailblazerMessage="showTrailblazerMessage"
-        @fetch-more-click="fetchMoreItems"
+        @fetch-more-click="fetchMore"
         @user-updated="updateUser"
         @event-updated="updateEvent"
         :isFullScreen="true"
@@ -31,7 +31,7 @@
               :items="items"
               :noItemsMessage="noItemsMessage"
               :showTrailblazerMessage="showTrailblazerMessage"
-              @fetch-more-click="fetchMoreItems"
+              @fetch-more-click="fetchMore"
               @user-updated="updateUser"
               @event-updated="updateEvent"/>
           </div>
@@ -97,7 +97,7 @@ export default {
     offerPlaydate () {
       this.$router.push({ name: 'NewEvent' })
     },
-    async fetchMoreItems () {
+    async fetchMore () {
       try {
         this.awaiting = true
         await this.fetchMoreItems()
@@ -123,6 +123,13 @@ export default {
       handler () {
         this.setItemType({ itemType: this.$route.name })
         this.fetchItems()
+      }
+    },
+    items: {
+      handler () {
+        if (!this.items) {
+          this.fetchMore()
+        }
       }
     }
   },

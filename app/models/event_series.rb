@@ -55,7 +55,8 @@ class EventSeries < ApplicationRecord
       recipients = recipients.uniq
     end
     recipients.each do |recipient|
-      continue if starrers.include? recipient
+      next if starrers.include? recipient
+
       recipient.notify_event_creation_match user
       recipient.push_notify_event_creation events.first
     end
