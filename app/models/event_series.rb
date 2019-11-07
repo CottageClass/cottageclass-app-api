@@ -11,8 +11,7 @@ class EventSeries < ApplicationRecord
   has_many :events, inverse_of: :event_series, dependent: :destroy
 
   before_validation :cleanup
-  after_create :set_users_home
-  after_save :create_events, :notify
+  after_create :set_users_home, :create_events, :notify
 
   accepts_nested_attributes_for :place
 
