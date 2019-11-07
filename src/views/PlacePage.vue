@@ -32,7 +32,7 @@
       </div>
 
       <div class="place-photos">
-        <div class="place-section-title">Photos</div>
+        <div class="place-section-title">Photos</div><a @click="showCloudinaryWidget" class="places-links">+ Add a photo</a>
         <div class="place-photos__grid">
           <a
             v-for="(image, i) in placeImages"
@@ -46,7 +46,7 @@
       </div>
 
       <div class="place-events">
-        <div id="events" class="place-section-title">Events</div><a href="#" class="places-links">+ Add an event</a>
+        <div id="events" class="place-section-title">Events</div><button class="places-links">+ Add an event</button>
         <ul class="place-events-list">
           <EventSearchListCard v-for="item in upcomingEvents"
                                :item="item"
@@ -72,10 +72,10 @@ import VueScrollTo from 'vue-scrollto'
 import MainNav from '@/components/MainNav'
 import LoadingSpinner from '@/components/LoadingSpinner'
 import LightBoxStyleWrapper from '@/components/LightBoxStyleWrapper'
-import MultipleImageUpload from '@/components/base/MultipleImageUpload.vue'
 
 import { fetchPlace, updatePlace } from '@/utils/api'
-import { householdImageUrl } from '@/utils/vendor/cloudinary'
+import * as api from '@/utils/api'
+import { createWidget, householdImageUrl } from '@/utils/vendor/cloudinary'
 import { item } from '@/mixins'
 
 export default {
@@ -86,6 +86,7 @@ export default {
     return {
       placeId: this.$route.params.id,
       place: null,
+      cloudinaryUploadWidget: null,
       showError: false
     }
   },
@@ -126,6 +127,44 @@ export default {
     }
   },
   methods: {
+    cloudinaryEventHandler (error, result) {
+      this.debug({ result })
+
+      if (!error && result && result.event === 'abort') {
+        this.avatarLoading = false
+      }
+      if (!error && result && result.event === 'success') {
+        let transformation = ''
+        if (result.info.coordinates.custom) {
+          transformation = 'c_thumb,g_custom/'
+        }
+        const imageUrl = 'https://res.cloudinary.com/' + process.env.CLOUDINARY_CLOUD_NAME + '/image/upload/' + transformation + result.info.path
+        this.attributes.images.push(imageUrl)
+        this.submitPlaceData()
+        this.disableForm = false
+      }
+    },
+    submitPlaceData: async function () {
+      if (!this.hasError) {
+        const data = { images: this.attributes.images }
+        try {
+          const res = await api.updatePlace(this.placeId, data)
+          this.$store.dispatch('updatePlace')
+          this.log('place update SUCCESS')
+          this.log(res)
+        } catch (e) {
+          this.logError('Error saving')
+          this.logError(e)
+          this.saveButtonText = 'Problem saving. Click to try again.'
+        }
+      } else {
+        this.showError = true
+        VueScrollTo.scrollTo('#top-of-form')
+      }
+    },
+    showCloudinaryWidget () {
+      this.cloudinaryUploadWidget.open()
+    },
     handleImageClick (payload) {
       this.debug('handle')
       this.$refs.lightbox.showImage(payload)
@@ -141,6 +180,9 @@ export default {
   },
   async created () {
     await this.fetchPlace()
+    this.cloudinaryUploadWidget = createWidget(this.cloudinaryEventHandler, {
+      multiple: true
+    })
   }
 }
 </script>
