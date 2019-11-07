@@ -20,7 +20,7 @@ export const fetchPlace = async (id) => {
 
 export const updatePlace = async (id, data) => {
   try {
-    const res = await axios.post(
+    const res = await axios.put(
       `/api/places/${id}`,
       data
     )
