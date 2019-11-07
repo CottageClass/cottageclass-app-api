@@ -2,7 +2,7 @@ class API::PlacesController < API::BaseController
   def show
     place = Place.find params[:id]
     if place.present?
-      serializer = PlaceSerializer.new place, include: %i[upcoming_events]
+      serializer = PlaceSerializer.new place, include: %i[upcoming_events upcoming_events.user]
       render json: serializer.serializable_hash, status: :ok
     else
       render status: 404
