@@ -17,7 +17,7 @@
                 <input
                   v-validate.immediate="'email'"
                   name="email"
-                  v-model="email"
+                  v-model.trim="email"
                   placeholder="Email"
                   class="input-field w-input"
                 >
