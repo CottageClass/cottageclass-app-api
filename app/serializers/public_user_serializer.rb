@@ -9,7 +9,7 @@ class PublicUserSerializer < BaseSerializer
     user.last_name[0, 1].upcase if user.last_name.present?
   end
   attribute :first_name do |user|
-    user.first_name.slice(0, 1).capitalize + user.first_name.slice(1..-1) if user.first_name.preset?
+    user.first_name.slice(0, 1).capitalize + user.first_name.slice(1..-1) if user.first_name.present?
   end
   attribute :starred do |user, params|
     user.starred? params[:current_user]
