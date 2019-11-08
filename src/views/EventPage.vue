@@ -42,7 +42,7 @@
             </ul>
           </div>
           <div v-if="images && images.length>0" class="household-photos__card">
-            <div class="household-photos__title-text">Household photos</div>
+            <div class="household-photos__title-text">Photos</div>
             <Images
               :images="images"
               @image-click="handleImageClick"
