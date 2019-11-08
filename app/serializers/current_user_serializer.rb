@@ -22,10 +22,10 @@ class CurrentUserSerializer < BaseSerializer
              :setting_max_distance
 
   attribute :first_name do |user|
-    user.first_name.slice(0, 1).capitalize + user.first_name.slice(1..-1)
+    user.first_name.slice(0, 1).capitalize + user.first_name.slice(1..-1) if user.first_name.present?
   end
   attribute :last_name do |user|
-    user.last_name.slice(0, 1).capitalize + user.last_name.slice(1..-1)
+    user.last_name.slice(0, 1).capitalize + user.last_name.slice(1..-1) if user.last_name.present?
   end
   attribute :date_created, &:created_at
   attribute(:hosted_events_count) { |instance, _| instance.events.past.count }
