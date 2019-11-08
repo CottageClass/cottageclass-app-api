@@ -50,7 +50,7 @@
           </div>
           <div class="event-detail__map map" ref="map"/>
           <div class="about-the-host__card">
-            <div class="about-the-host__title-text">About the host</div>
+            <div class="about-the-host__title-text">Suggested by {{userFirstName}}</div>
             <div class="about-the-host__info"></div>
             <ul class="protile-top-card__about-llist">
               <li v-if="verified" class="about-the-host__list-item" >
