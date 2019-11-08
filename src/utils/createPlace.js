@@ -3,13 +3,19 @@ export const createPlace = (data) => {
 }
 
 export const createPlaces = (data) => {
+  console.log(data)
   if (!data.place) { return [] }
   const events = data.event
 
   const places = Object.values(data.place).map(p => {
     const res = Object.assign({}, p.attributes)
     const eventIds = p.relationships.upcomingEvents.data.map(e => e.id)
-    const upcomingEvents = eventIds.map(id => events[id].attributes)
+    const upcomingEvents = eventIds.map(id => {
+      const event = data.event[id]
+      const userId = event.relationships.user.data.id
+      const user = data.user[userId].attributes
+      return { ...events[id].attributes, user }
+    })
     res.id = p.id
     res.upcomingEvents = upcomingEvents
 
