@@ -4,7 +4,7 @@
     <div class="section">
       <div class="lp-container w-container">
         <h1 class="heading-1">Frequently Asked Questions</h1>
-        <p class="intro-paragraph">Welcome to Lilypad! Lilypad is a community of parents who are interested in co-operative childcare. If you’re interested in swapping childcare with other parents, our site helps you find parents near you, schedule playdates with them, get to know them and their children, and build your network. Soon, we’ll be adding more structure for swapping drop-off childcare with other parents.</p>
+        <p class="intro-paragraph">Welcome to Lilypad! Lilypad is a community of parents who are interested in finding fun local events and meeting other nearby families with kids of similar ages. Our site helps you find parents near you, schedule playdates with them, get to know them and their children, and build your network. Soon, we’ll be adding more structure for sharing childcare with other parents as well.</p>
         <ul class="ul-menu">
           <li class="ul-menu-item">
             <a v-scroll-to="'#Community-Rules'" class="w-inline-block">
@@ -38,7 +38,7 @@
       <div class="lp-container w-container">
         <h2 class="heading-2">Community Rules</h2>
         <p class="paragraph">All members are required to abide by our <a href="https://www.cottageclass.com/terms-of-service#">Terms of Service</a>, however, here is a brief summary of some guidelines we’ve put in place to keep our community strong. Above all&mdash;to have the best experience on Lilypad&mdash;be kind and respectful, and treat others as you’d wish to be treated!</p>
-        <div class="question">When attending a playdate:</div>
+        <div class="question">When attending a playdate at someone's home:</div>
         <ul class="unordered-list">
           <li class="ul-item">Don’t bring a sick child. If your child is feeling ill, we can certainly let you choose another date! The same goes for hosting. If your child isn’t feeling well, it’s fine to cancel! We can help your guests get rescheduled for another date.</li>
           <li class="ul-item">Make sure to RSVP every child who is attending. If you bring an extra child that you haven’t signed up, it can put your host in an awkward position.</li>
@@ -61,9 +61,14 @@
     <div id="General-Questions" class="section">
       <div class="lp-container w-container">
         <h2 class="heading-2">General Questions</h2>
-        <div class="question">How does it work? </div>
+        <div class="question">Is Lilypad free? How do you make money?</div>
         <ul class="unordered-list">
-          <li class="ul-item">On Lilypad, making new friends and sharing childcare is free!</li>
+          <li class="ul-item">Right now, Lilypad is completely free to use.</li>
+          <li class="ul-item">We plan to make money from paid events, or possibly paid memberships that offer special features.</li>
+          <li class="ul-item">There is currently no advertising and we don't think there ever will be. (We aren't fans of advertising.)</li>
+        </ul>
+        <div class="question">How do in-home playdates work? </div>
+        <ul class="unordered-list">
           <li class="ul-item">When you plan your first playdate with a family, we strongly encourage you to stay with your child and get to know the family. You can choose to swap childcare whenever you're both comfortable doing so.</li>
           <li class="ul-item">You can edit or change your playdate at any time, though we request 24 hours notice as a courtesy to other families.</li>
           <li class="ul-item">Your playdate can be as simple as playing with toys, or you can go all out and host a creative arts project or a robotics class!</li>
@@ -79,7 +84,7 @@
     </div>
     <div id="Hosting-Playdates" class="section f6f6f6">
       <div class="lp-container w-container">
-        <h2 class="heading-2">Hosting Playdates</h2>
+        <h2 class="heading-2">Hosting Playdates at Your Home</h2>
         <div class="question">How do I set up a playdate?</div>
         <p class="paragraph">First, click "Offer playdate", describe your playdate, and pick some times you are available. Then, either find a scheduled playdate near you, or reach out to some parents with similarly-aged children near you and invite them to your playdate. If you have friends who you might like to swap childcare with, we encourage you to invite them too!</p>
         <div class="question">How do I invite my friends and my child’s classmates to share childcare with me?</div>
@@ -98,7 +103,7 @@
     </div>
     <div id="Attending-Playdates" class="section">
       <div class="lp-container w-container">
-        <h2 class="heading-2">Attending Playdates</h2>
+        <h2 class="heading-2">Attending In-home Playdates</h2>
         <div class="question">How do I book a playdate?</div>
         <p class="paragraph">You book your playdate by clicking "Going" to any of the events on the events page, or by reaching out to a family directly. When you book your playdate, you’ll get an automated text message from the Lilypad team confirming your reservation.</p>
         <div class="question">Can a family decline my request?</div>
@@ -112,8 +117,7 @@
         <h2 class="heading-2">Trust and Safety</h2>
         <div class="question">How do I ensure my child is safe on my playdate?</div>
         <ul class="unordered-list">
-          <li class="ul-item"><strong>Stay with your child until you're comfortable sharing care.</strong> You're always free to stay with your child to get to know a new family, and you should only share childcare once you're both comfortable doing so.</li>
-          <li class="ul-item"><strong>Get a background check through Lilypad.</strong> Parents who have purchased background checks get a “background check” badge on their profile. This is a great way to ensure our community stays safe and by going through a background check yourself, you help other parents make sure their child is safe. Background checks cost $50-100 depending on what state you live in. Email <a href="mailto:contact@joinlilypad.com">contact@joinlilypad.com</a> to inquire about getting a background check.</li>
+          <li class="ul-item"><strong>Stay with your child until you're comfortable sharing care.</strong> Most playdates require that you stay with your child. If you're interested in "drop-off" playdates for sharing childcare with other parents, you're always free to stay with your child to get to know a new family, and you should only share childcare once you're both comfortable doing so.</li>
           <li class="ul-item"><strong>Message new friends.</strong> If you’d like to broaden your friend network, we encourage you to message people you don’t know on the platform and get together for a playdate. You can also propose to get together with your kids in a public place like the library or the park before you start booking care with that person! Approach playdates on Lilypad the way you'd approach playdates with a new classmate, say. First get to know the family, then go from there.</li>
           <li class="ul-item"><strong>Host a mixer.</strong> Have a meetup at the local coffee shop or a potluck and invite parents who live near you.</li>
           <li class="ul-item"><strong>Host a playdate.</strong> Hosting a playdate is a great way to meet new friends that you’d like to book care with down the road.</li>
@@ -124,10 +128,8 @@
         <p class="paragraph">Please reach out to us <strong>immediately</strong> at <a href="mailto:contact@joinlilypad.com">contact@joinlilypad.com</a> if you have any concerns about your host that you don’t feel comfortable voicing publicly. It’s important to us to understand everything that’s going on so we can diplomatically address any concerns with the host. In some cases, if necessary, we may ask people to leave the platform. Likewise, if you have concerns about a member you have hosted or otherwise met on the platform, please reach out to us at any time with private feedback.</p>
         <div class="question">How do I offer suggestions on how to make Lilypad better?</div>
         <p class="paragraph">After your playdate, we will send you a survey to see how things went! We rely on your feedback to improve this experience and make it a truly useful tool for families in the community to share care, so please don’t hold back.</p>
-        <div class="question">How do reviews work?</div>
-        <p class="paragraph">After your playdate, we will also ask you to leave an honest review of your host. Please do sing their praises if the experience was positive. Your review is a great asset to other parents seeking quality care! If a host receives negative feedback, the Lilypad team will review their case and decide whether to keep them on the platform or remove them.</p>
         <div class="question">Is my phone number visible to other users?</div>
-        <p class="paragraph">Not until one of you RSVPs to the other's playdate, at which point we email you each other's phone numbers in case you need them for scheduling or emergencies. Messages sent through the site pass through a proxy that hides each person's real phone number.</p>
+        <p class="paragraph">Not until one of you RSVPs to the other's playdate, at which point we email you each other's phone numbers in case you need them for scheduling or emergencies.</p>
       </div>
     </div>
     <!-- Footer -->
