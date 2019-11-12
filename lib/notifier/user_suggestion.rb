@@ -1,9 +1,4 @@
-class Notifier::UserSuggestion < Notifier::Base
-  def initialize(user:, body:, suggested_user:)
-    super user: user, body: body
-    @suggested_user = suggested_user
-  end
-
+class Notifier::UserSuggestion < Notifier::UserBase
   def email
     dump_mail_template_parameters name: 'UserSuggestion.json'
     response = @sendgrid_client.send_mail to: [@user],
@@ -30,10 +25,10 @@ class Notifier::UserSuggestion < Notifier::Base
   end
 
   def mail_template_parameters
-    return if @user.place.nil? || @suggested_user.place.nil?
+    return if @user.place.nil? || @notifiable_user.place.nil?
 
-    distance = @user.place.distance_to(@suggested_user.place).round(1).to_s
-    full_bio = @suggested_user.profile_blurb
+    distance = @user.place.distance_to(@notifiable_user.place).round(1).to_s
+    full_bio = @notifiable_user.profile_blurb
     if full_bio
       truncated_bio = full_bio.truncate(260, seperator: /\s/) if full_bio
       bio_truncated = full_bio.length != truncated_bio.length
@@ -42,7 +37,7 @@ class Notifier::UserSuggestion < Notifier::Base
       bio_truncated = false
     end
 
-    ages = @suggested_user.child_ages_in_months
+    ages = @notifiable_user.child_ages_in_months
     if ages.length == 1
       kids_ages_standalone_string = 'Child age ' + display_age(ages[0], 'mo')
       kids_ages_sentence_string = 'child is ' + display_age(ages[0], 'month')
@@ -54,19 +49,19 @@ class Notifier::UserSuggestion < Notifier::Base
     end
 
     suggested_user_hash = {
-      first_name: @suggested_user.first_name,
-      last_initial: @suggested_user.last_name[0].capitalize,
+      first_name: @notifiable_user.first_name,
+      last_initial: @notifiable_user.last_name[0].capitalize,
       distance: distance + ' miles',
       short_distance: distance + ' mi',
       kids_ages_standalone_string: kids_ages_standalone_string,
       kids_ages_sentence_string: kids_ages_sentence_string,
-      neighborhood: @suggested_user.place.neighborhood,
+      neighborhood: @notifiable_user.place.neighborhood,
       bio: truncated_bio,
       bio_truncated: bio_truncated,
-      avatar: @suggested_user.avatar,
-      link: ENV['LINK_HOST'] + '/users/' + @suggested_user.id.to_s
+      avatar: @notifiable_user.avatar,
+      link: ENV['LINK_HOST'] + '/users/' + @notifiable_user.id.to_s
     }
 
-    super.update suggested_user: suggested_user_hash
+    super.update notifiable_user: suggested_user_hash
   end
 end

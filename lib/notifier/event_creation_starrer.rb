@@ -1,9 +1,4 @@
-class Notifier::EventCreationStarrer < Notifier::Base
-  def initialize(user:, body:, event_creator:)
-    super user: user, body: body
-    @event_creator = event_creator
-  end
-
+class Notifier::EventCreationStarrer < Notifier::UserBase
   def email
     dump_mail_template_parameters name: 'EventCreationStarrer.json'
     response = @sendgrid_client.send_mail to: [@user],
@@ -30,19 +25,11 @@ class Notifier::EventCreationStarrer < Notifier::Base
   end
 
   def mail_template_parameters
-    return if @user.place.nil? || @event_creator.place.nil?
+    return if @user.place.nil? || @notifiable_user.place.nil?
 
-    distance = @user.place.distance_to(@event_creator.place).round(1).to_s
-    full_bio = @event_creator.profile_blurb
-    if full_bio
-      truncated_bio = full_bio.truncate(260, seperator: /\s/) if full_bio
-      bio_truncated = full_bio.length != truncated_bio.length
-    else
-      truncated_bio = ''
-      bio_truncated = false
-    end
+    distance = @user.place.distance_to(@notifiable_user.place).round(1).to_s
 
-    ages = @event_creator.child_ages_in_months
+    ages = @notifiable_user.child_ages_in_months
     if ages.empty?
       kids_ages_sentence_string = 'no kids'
       kids_ages_standalone_string = 'no kids'
@@ -57,17 +44,17 @@ class Notifier::EventCreationStarrer < Notifier::Base
     end
 
     suggested_user_hash = {
-      first_name: @event_creator.first_name,
-      last_initial: @event_creator.last_name[0].capitalize,
+      first_name: @notifiable_user.first_name,
+      last_initial: @notifiable_user.last_name[0].capitalize,
       distance: distance + ' miles',
       kids_ages_sentence_string: kids_ages_sentence_string,
       kids_ages_standalone_string: kids_ages_standalone_string,
       bio: truncated_bio,
-      bio_truncated: bio_truncated,
-      avatar: @event_creator.avatar,
-      link: ENV['LINK_HOST'] + '/users/' + @event_creator.id.to_s
+      bio_truncated: bio_truncated?,
+      avatar: @notifiable_user.avatar,
+      link: ENV['LINK_HOST'] + '/users/' + @notifiable_user.id.to_s
     }
 
-    super.update event_creator: suggested_user_hash
+    super.update notifiable_user: suggested_user_hash
   end
 end
