@@ -11,7 +11,7 @@
           <span v-if="eventAgeRange !== ''" class="gray-bullet-text">•</span>
           {{ eventAgeRange }}
         </div>
-        <div v-if="distance" class="header__distance">{{distance}}</div>
+        <div v-if="distance" class="header__distance">{{displayDistance}}</div>
       </div>
       <div class="event-summary-card__title line-clamp--1">{{name}}</div>
     </router-link>
@@ -88,6 +88,9 @@ export default {
         console.log('item is neither a user nor an event')
         return null
       }
+    },
+    displayDistance () {
+      if (this.distance === 'NaN mi') { return '0.1 mi' } else { return this.distance }
     }
   }
 }
