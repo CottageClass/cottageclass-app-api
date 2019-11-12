@@ -1,5 +1,6 @@
 import axios from 'axios'
 import Logger from '@/utils/logger'
+import { isIOSNativeApp } from '@/utils/platform'
 
 // use a differnt axios instance so as to not use the authorization interceptor
 const cloudinaryAxios = axios.create()
@@ -29,11 +30,17 @@ export function imageUrl (rawUrl, options) {
 }
 
 export function createWidget (callback, options) {
+  const sources = ['local', 'url']
+  if (!isIOSNativeApp()) {
+    sources.push('camera')
+  }
+
   const widgetOptions = {
     cloudName: process.env.CLOUDINARY_CLOUD_NAME,
     uploadPreset: 'user_images',
     cropping: true,
     showPoweredBy: false, // maybe this will work if we ever pay for cloudinary
+    sources,
     ...options
   }
   return window.cloudinary.createUploadWidget(widgetOptions, callback)
