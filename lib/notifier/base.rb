@@ -49,7 +49,8 @@ class Notifier::Base
       user_suggestion: 'd-ed755252e972415787390de3d327ac55',
       event_creation_starrer: 'd-15acc3f9cf744c4c82726fc05cdea4c4',
       event_creation_match: 'd-28bf6c2184a641669618a5ea0f5ec9de',
-      daily_digest: 'd-107e60c5b4764a8688e0313afab166a0'
+      daily_digest: 'd-107e60c5b4764a8688e0313afab166a0',
+      message_notification_recipient: 'd-53cbfb4b488f436689754cd93ac0b216'
     }
   end
 
