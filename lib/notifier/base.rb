@@ -63,7 +63,6 @@ class Notifier::Base
       recipient: @user.attributes.with_indifferent_access.slice(
         :id,
         :name,
-        :first_name,
         :last_name,
         :avatar,
         :facebook_uid,
@@ -84,7 +83,7 @@ class Notifier::Base
         :linkedin_user,
         :images,
         :languages
-      )
+      ).update(first_name: @user.first_name.capitalize)
     }
   end
 end
