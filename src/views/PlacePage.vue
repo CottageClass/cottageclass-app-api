@@ -48,9 +48,10 @@
       <div class="place-events">
         <div id="events" class="place-section-title">Events</div><a @click="offerPlaydate" class="places-links">+ Add an event</a>
         <ul class="place-events-list">
-          <EventSearchListCard v-for="item in upcomingEvents"
+          <EventSearchListCard v-for="(item, index) in upcomingItems"
                                :item="item"
-                               :key="item.id"
+                               :key="index"
+                               :distanceCenter="placeCenter"
                                @user-updated="$emit('user-updated', $event)"
                                @event-deleted="$emit('event-deleted', id)"
                                @event-updated="$emit('event-updated', $event)"/>
@@ -92,6 +93,9 @@ export default {
     }
   },
   computed: {
+    placeCenter () {
+      return { lat: this.place.fuzzyLatitude, lon: this.place.fuzzyLongitude }
+    },
     placeDescription () {
       return this.place.description
     },
@@ -122,6 +126,16 @@ export default {
           src: i
         }
       })
+    },
+    upcomingItems () {
+      if (!this.place.upcomingEvents) {
+        return []
+      }
+      const events = this.place.upcomingEvents
+      const items = events.map(event => {
+        return { event: event, user: event.user }
+      })
+      return items
     }
   },
   methods: {

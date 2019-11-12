@@ -14,7 +14,9 @@ export const createPlaces = (data) => {
       const event = data.event[id]
       const userId = event.relationships.user.data.id
       const user = data.user[userId].attributes
-      return { ...events[id].attributes, user }
+      const eventAttributes = events[id].attributes
+      eventAttributes.place = { public: true }
+      return { ...eventAttributes, user }
     })
     res.id = p.id
     res.upcomingEvents = upcomingEvents
