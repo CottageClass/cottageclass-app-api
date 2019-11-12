@@ -6,7 +6,10 @@ class PublicUserSerializer < BaseSerializer
 
   attributes(*User::PUBLIC_ATTRIBUTES)
   attribute :last_initial do |user|
-    user.last_name[0, 1]
+    user.last_name[0, 1].upcase if user.last_name.present?
+  end
+  attribute :first_name do |user|
+    user.first_name.slice(0, 1).capitalize + user.first_name.slice(1..-1) if user.first_name.present?
   end
   attribute :starred do |user, params|
     user.starred? params[:current_user]

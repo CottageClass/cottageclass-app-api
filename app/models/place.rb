@@ -39,12 +39,17 @@ class Place < ApplicationRecord
     save
   end
 
+  def time_zone
+    update_columns time_zone: generate_time_zone if self[:time_zone].nil?
+    self[:time_zone]
+  end
+
   private
 
   def generate_time_zone
-    self.time_zone = if (latitude.present? && latitude.nonzero?) && (longitude.present? && longitude.nonzero?)
-                       Locator.time_zone_for latitude: latitude, longitude: longitude
-                     end
+    self[:time_zone] = if (latitude.present? && latitude.nonzero?) && (longitude.present? && longitude.nonzero?)
+                         Locator.time_zone_for latitude: latitude, longitude: longitude
+                       end
   end
 
   def retrieve_details

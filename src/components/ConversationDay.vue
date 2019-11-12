@@ -1,11 +1,9 @@
 <template>
   <div>
-    <div class="chat-detail--day">
-      <div class="divider"></div>
-      <div class="text-white-background">
-        <div v-if="showDivider" class="chat-detail--day-text">{{dayText}}</div>
-      </div>
-    </div>
+    <ConversationDivider
+      v-if="showDivider"
+      :dividerText="dayText"
+    />
     <Message v-for="message in sortedMessages"
              :key="message.id"
              :message="message"
@@ -15,7 +13,7 @@
 
 <script>
 import moment from 'moment'
-
+import ConversationDivider from '@/components/ConversationDivider.vue'
 import Message from '@/components/Message'
 
 export default {
@@ -25,7 +23,7 @@ export default {
     day: { type: String, required: true },
     messages: { type: Array, required: true }
   },
-  components: { Message },
+  components: { Message, ConversationDivider },
   computed: {
     showDivider () {
       return this.day !== moment().format('YYYY-MM-DD')
@@ -52,43 +50,4 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.chat-detail--day {
-  position: relative;
-  display: flex;
-  padding-bottom: 12px;
-  flex-direction: column;
-  align-items: center;
-  background-color: #fff;
-}
-
-.chat-detail--day-text {
-  position: static;
-  top: 108px;
-  width: 100%;
-  background-color: transparent;
-  color: #b3b3b3;
-  text-align: center;
-}
-
-.divider {
-  position: absolute;
-  left: 0%;
-  top: 10px;
-  right: 0%;
-  bottom: auto;
-  z-index: 0;
-  width: 100%;
-  height: 1px;
-  min-height: 1px;
-  background-color: rgba(0, 0, 0, 0.06);
-}
-
-.text-white-background {
-  position: relative;
-  z-index: 0;
-  padding-right: 8px;
-  padding-left: 8px;
-  flex: 0 auto;
-  background-color: #fff;
-}
 </style>

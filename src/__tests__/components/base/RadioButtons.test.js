@@ -1,10 +1,8 @@
 import { mount } from '@vue/test-utils'
 import RadioButtons from '@/components/base/RadioButtons.vue'
 
-const prefix = 'rb-1-'
-
 describe('RadioButtons', () => {
-  let wrapper
+  let wrapper, prefix
   let value = ''
   beforeAll(async () => {
     wrapper = mount(RadioButtons, {
@@ -13,6 +11,7 @@ describe('RadioButtons', () => {
         value
       }
     })
+    prefix = 'rb-' + wrapper.vm._uid + '-'
   })
 
   it('mounts with the correct state', () => {
@@ -20,25 +19,26 @@ describe('RadioButtons', () => {
     for (let s of states) {
       expect(s).toBeFalsy()
     }
+
     expect(wrapper.vm.state).toBe(prefix)
     expect(wrapper.emitted().input).toHaveLength(1)
     expect(wrapper.emitted().input[0][0]).toEqual('')
   })
 
   it('sets the state with a click', () => {
-    const heyInput = wrapper.find('input[value="rb-1-hey"]')
+    const heyInput = wrapper.find('input[value="' + prefix + 'hey"]')
     heyInput.trigger('click')
 
-    expect(wrapper.vm.state).toBe('rb-1-hey')
+    expect(wrapper.vm.state).toBe(prefix + 'hey')
     expect(wrapper.emitted().input).toHaveLength(2)
     expect(wrapper.emitted().input[1][0]).toEqual('hey')
   })
 
   it('sets the state with a click', () => {
-    const helloInput = wrapper.find('input[value="rb-1-hello"]')
+    const helloInput = wrapper.find('input[value="' + prefix + 'hello"]')
     helloInput.trigger('click')
 
-    expect(wrapper.vm.state).toBe('rb-1-hello')
+    expect(wrapper.vm.state).toBe(prefix + 'hello')
     expect(wrapper.emitted().input).toHaveLength(3)
     expect(wrapper.emitted().input[2][0]).toEqual('hello')
   })
