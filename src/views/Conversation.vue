@@ -81,6 +81,9 @@ export default {
     userId: { required: true }
   },
   methods: {
+    async poll () {
+      this.messages = await fetchMessages(this.userId)
+    },
     async sendMessage (payload) {
       console.log(this.accomodateRoundedCorners)
       await submitMessage(this.partner.id, payload.message)
@@ -119,8 +122,12 @@ export default {
     ...mapGetters(['currentUser'])
   },
   async created () {
-    this.messages = await fetchMessages(this.userId)
+    this.poll()
+    this.pollingInterval = setInterval(this.poll, 30000)
     this.partner = await fetchUser(this.userId)
+  },
+  destroyed () {
+    clearInterval(this.pollingInterval)
   }
 }
 </script>
