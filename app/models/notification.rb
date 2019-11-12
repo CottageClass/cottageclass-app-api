@@ -139,6 +139,7 @@ class Notification < ApplicationRecord
                                       sender_kids_ages: sender_kids_ages,
                                       message_link: ENV['LINK_HOST'] + '/chat/' + notifiable.sender.id.to_s
                    Notifier::ChatMessageReceived.new user: recipient,
+                                                     message: notifiable,
                                                      body: body
                  end
 
