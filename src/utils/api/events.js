@@ -24,7 +24,7 @@ export const fetchEvents = async ({ miles, lat, lng, minAge, maxAge, date, weekd
   }
   if (date) {
     url += `date/${date}/`
-  } else if (weekday) {
+  } else if (weekday || weekday === 0) {
     url += `weekday/${weekday}/`
   }
   url += 'sort/chronological/'
