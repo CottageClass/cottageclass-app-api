@@ -679,11 +679,6 @@ a {
     margin-bottom: 0;
   }
 
-  .place-reviews {
-    min-height: 186px;
-    padding: 16px 16px 24px;
-    border-radius: 0;
-  }
 }
 
 @media (max-width: 479px){
