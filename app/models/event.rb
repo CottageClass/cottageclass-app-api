@@ -64,6 +64,20 @@ class Event < ApplicationRecord
     in_instance_time_zone(starts_at).strftime('%B %e, %Y').try :squish
   end
 
+  def start_date_abbreviated_short_month
+    in_instance_time_zone(starts_at).strftime('%b %-e').try :squish
+  end
+
+  def image
+    if images.present?
+      images[0]
+    elsif place.images.present?
+      place.images[0]
+    else
+      user.avatar
+    end
+  end
+
   def start_date_abbreviated
     in_instance_time_zone(starts_at).strftime('%-m/%-e').try :squish
   end
