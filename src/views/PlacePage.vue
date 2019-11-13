@@ -96,7 +96,7 @@ export default {
       return 0
     },
     placeCenter () {
-      return { lat: this.place.fuzzyLatitude, lon: this.place.fuzzyLongitude }
+      return { lat: this.place.fuzzyLatitude, lng: this.place.fuzzyLongitude }
     },
     placeDescription () {
       return this.place.description
