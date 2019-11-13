@@ -77,13 +77,6 @@
               More about this host
             </router-link>
           </div>
-          <div v-if="petDescription" class="pets__card">
-            <div class="pets__title-text">Pets</div>
-            <div class="card__description-and-icon-container w-clearfix">
-              <img :src="petsImage" width="100" height="100" alt="" class="pets__image" />
-              <div class="pets__text">{{petDescription}}</div>
-            </div>
-          </div>
         </div>
         <div v-if="otherEvents" class="event-detail__column-right w-col w-col-4 w-col-stack">
           <ul class="other-events__list">
@@ -114,8 +107,6 @@ import OtherEvent from '@/components/OtherEvent'
 import LightBoxStyleWrapper from '@/components/LightBoxStyleWrapper'
 import DeleteEventConfirmationModal from '@/components/DeleteEventConfirmationModal.vue'
 import EventSearchListCard from '@/components/search/EventSearchListCard'
-
-import petsImage from '@/assets/pets.svg'
 
 import { mapGetters } from 'vuex'
 import { fetchEventsByPlace, fetchEvent } from '@/utils/api'
@@ -179,7 +170,6 @@ export default {
     user () {
       return this.event && this.event.user
     },
-    petsImage: () => petsImage,
     ...mapGetters(['isRsvpDeclined', 'items', 'mapArea'])
   },
   methods: {
@@ -484,52 +474,12 @@ a {
   line-height: 24px;
 }
 
-.pets__card {
-  position: static;
-  display: flex;
-  margin-top: 16px;
-  margin-bottom: 16px;
-  padding: 16px 20px 20px;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  border-bottom: 1px solid #f5f5f5;
-  background-color: #fff;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.08);
-  list-style-type: none;
-}
-
-.pets__title-text {
-  margin-bottom: 16px;
-  font-size: 16px;
-  line-height: 24px;
-}
-
-.pets__text {
-  font-size: 13px;
-  line-height: 19px;
-}
-
 .card__description-and-icon-container {
   position: relative;
   width: 100%;
 }
 
 .house__image {
-  position: static;
-  left: auto;
-  top: 16px;
-  right: 16px;
-  bottom: auto;
-  width: 60px;
-  height: 60px;
-  margin-top: -37px;
-  margin-bottom: 10px;
-  margin-left: 10px;
-  float: right;
-}
-
-.pets__image {
   position: static;
   left: auto;
   top: 16px;
@@ -661,16 +611,6 @@ a {
   }
 
   .attendees__title-text {
-    font-size: 14px;
-    line-height: 18px;
-  }
-
-  .pets__card {
-    padding: 16px 16px 24px;
-    border-radius: 0;
-  }
-
-  .pets__title-text {
     font-size: 14px;
     line-height: 18px;
   }

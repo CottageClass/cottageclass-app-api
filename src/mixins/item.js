@@ -235,12 +235,6 @@ export default {
     profileBlurb () {
       return this.user.profileBlurb
     },
-    houseRules () {
-      return this.user.houseRules || (this.event && this.event.houseRules)
-    },
-    petDescription () {
-      return this.user.petDescription || (this.event && this.event.petDescription)
-    },
     localArea () {
       const neighborhood = this.place.neighborhood
       const cityOrBoro = this.place.locality || this.place.vicinity

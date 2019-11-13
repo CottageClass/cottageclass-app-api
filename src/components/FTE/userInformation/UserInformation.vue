@@ -136,9 +136,6 @@ export default {
             jobPosition: this.employment.jobPosition
           }
           break
-        case 'houseRules' :
-          params = { houseRules: this.houseRules.text }
-          break
         case 'images':
           params = { images: this.images }
           break
