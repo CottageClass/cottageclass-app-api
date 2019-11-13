@@ -129,8 +129,8 @@ export default {
   padding: 12px 20px;
   margin: 10px;
   border-radius: 4px;
-  background-color: #fff;
-  color: #1f88e9;
+  background-color: #fc6f77;
+  color: #f5f5f5;
   font-size: 13px;
   font-weight: 700;
   text-align: center;
