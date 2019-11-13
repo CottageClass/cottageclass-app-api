@@ -148,6 +148,7 @@ function baseData () {
   return {
     lastPage: 0,
     moreAvailable: false,
-    items: null
+    items: null,
+    fetchLock: false
   }
 }
