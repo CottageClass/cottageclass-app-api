@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_05_124457) do
+ActiveRecord::Schema.define(version: 2019_11_13_133349) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -263,6 +263,8 @@ ActiveRecord::Schema.define(version: 2019_11_05_124457) do
     t.string "time_zone"
     t.jsonb "full_result_object"
     t.string "vicinity"
+    t.text "description"
+    t.string "images", default: [], array: true
     t.index ["google_id", "apartment_number"], name: "index_places_google_id_apartment_number", unique: true
     t.index ["latitude", "longitude"], name: "index_places_on_latitude_and_longitude"
     t.index ["user_id"], name: "index_places_on_user_id"
@@ -425,7 +427,6 @@ ActiveRecord::Schema.define(version: 2019_11_05_124457) do
     t.boolean "has_pet"
     t.text "pet_description"
     t.text "house_rules"
-    t.bigint "showcase_event_id"
     t.boolean "internally_cleared", default: false, null: false
     t.decimal "setting_max_distance", default: "2.0"
     t.boolean "setting_email_notifications", default: true
@@ -444,7 +445,6 @@ ActiveRecord::Schema.define(version: 2019_11_05_124457) do
     t.index ["place_id"], name: "index_users_on_place_id"
     t.index ["provider", "uid"], name: "index_users_on_provider_and_uid"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-    t.index ["showcase_event_id"], name: "index_users_on_showcase_event_id"
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
@@ -464,6 +464,5 @@ ActiveRecord::Schema.define(version: 2019_11_05_124457) do
   add_foreign_key "stars", "users", column: "giver_id"
   add_foreign_key "user_matches", "users"
   add_foreign_key "user_matches", "users", column: "matched_user_id"
-  add_foreign_key "users", "events", column: "showcase_event_id"
   add_foreign_key "users", "places"
 end

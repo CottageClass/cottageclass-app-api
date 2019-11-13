@@ -82,8 +82,6 @@ class API::UsersController < API::BaseController
       if location.all?(&:present?)
         place_ids = Place.near(location.map(&:to_f), miles).to_a.pluck :id
         users = users.joins(:place).where('place_id IN (?)', place_ids)
-        users = users.joins 'LEFT JOIN events ON users.showcase_event_id = events.id'
-        users = users.reorder 'events.recency_score ASC NULLS LAST'
       end
     end
 
@@ -99,7 +97,7 @@ class API::UsersController < API::BaseController
       links[:next] = path.call(page: users.next_page, page_size: page_size) unless users.last_page?
     end
 
-    serializer = PublicUserSerializer.new users, include: %i[children showcase_event place],
+    serializer = PublicUserSerializer.new users, include: %i[children place],
                                                  links: links,
                                                  meta: meta,
                                                  params: { current_user: current_user }
