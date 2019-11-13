@@ -63,8 +63,11 @@ export default {
     showGoingButton () {
       return this.event &&
         !this.timePast &&
-        (!this.currentUser ||
-        (this.event.user.id.toString() !== this.currentUser.id.toString()))
+        (
+          !this.currentUser ||
+          this.event.user.id.toString() !== this.currentUser.id.toString() ||
+          this.event.place.public
+        )
     },
     showInterestedButton () {
       return this.isAuthenticated &&
