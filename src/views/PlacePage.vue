@@ -75,8 +75,7 @@ import LoadingSpinner from '@/components/LoadingSpinner'
 import LightBoxStyleWrapper from '@/components/LightBoxStyleWrapper'
 import EventSearchListCard from '@/components/search/EventSearchListCard'
 
-import { fetchPlace, updatePlace, fetchEventsByPlace } from '@/utils/api'
-import * as api from '@/utils/api'
+import { fetchPlace, updatePlace } from '@/utils/api'
 import { createWidget, householdImageUrl } from '@/utils/vendor/cloudinary'
 import { item } from '@/mixins'
 
@@ -163,7 +162,7 @@ export default {
       if (!this.hasError) {
         const data = { images: this.place.images }
         try {
-          const res = await api.updatePlace(this.placeId, data)
+          const res = await updatePlace(this.placeId, data)
           this.$store.dispatch('updatePlace')
           this.log('place update SUCCESS')
           this.log(res)
