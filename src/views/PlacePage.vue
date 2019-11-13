@@ -130,7 +130,7 @@ export default {
     upcomingItems () {
       const events = this.place.upcomingEvents
       if (!events) {
-        return []
+        return {}
       }
       const items = events.map(event => {
         return { event: event, user: event.user }
