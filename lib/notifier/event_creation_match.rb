@@ -17,8 +17,6 @@ class Notifier::EventCreationMatch < Notifier::UserBase
   protected
 
   def mail_template_parameters
-    return if @user.place.nil? || @notifiable_user.place.nil?
-
     suggested_user_hash = {
       first_name: @notifiable_user.first_name.capitalize,
       last_initial: @notifiable_user.last_initial,

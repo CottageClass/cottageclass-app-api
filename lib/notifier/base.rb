@@ -83,7 +83,7 @@ class Notifier::Base
         :linkedin_user,
         :images,
         :languages
-      ).update(first_name: @user.first_name.capitalize)
+      ).update(first_name: @user.first_name&.capitalize)
     }
   end
 end

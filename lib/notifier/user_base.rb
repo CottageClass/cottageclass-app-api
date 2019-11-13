@@ -29,6 +29,8 @@ class Notifier::UserBase < Notifier::Base
   end
 
   def distance
+    return '' if @user.place.nil? || @notifiable_user.place.nil?
+
     @user.place.distance_to(@notifiable_user.place).round(1).to_s
   end
 

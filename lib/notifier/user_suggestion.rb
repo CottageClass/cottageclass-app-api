@@ -17,8 +17,6 @@ class Notifier::UserSuggestion < Notifier::UserBase
   protected
 
   def mail_template_parameters
-    return if @user.place.nil? || @notifiable_user.place.nil?
-
     suggested_user_hash = {
       first_name: @notifiable_user.first_name.capitalize,
       last_initial: @notifiable_user.last_initial,
@@ -26,7 +24,7 @@ class Notifier::UserSuggestion < Notifier::UserBase
       short_distance: distance_with_units_short,
       kids_ages_standalone_string: kids_ages_standalone_string,
       kids_ages_sentence_string: kids_ages_sentence_string,
-      neighborhood: @notifiable_user.place.neighborhood,
+      neighborhood: @notifiable_user.place&.neighborhood || '',
       bio: truncated_bio,
       bio_truncated: bio_truncated?,
       avatar: @notifiable_user.avatar,

@@ -21,8 +21,6 @@ class Notifier::ChatMessageReceived < Notifier::UserBase
   protected
 
   def mail_template_parameters
-    return if @user.place.nil? || @notifiable_user.place.nil?
-
     suggested_user_hash = {
       first_name: @notifiable_user.first_name.capitalize,
       last_initial: @notifiable_user.last_initial,
@@ -31,7 +29,7 @@ class Notifier::ChatMessageReceived < Notifier::UserBase
       kids_ages_standalone_string: kids_ages_count_string,
       bio: truncated_bio,
       bio_truncated: bio_truncated?,
-      neighborhood: @notifiable_user.place.neighborhood,
+      neighborhood: @notifiable_user.place&.neighborhood || '',
       avatar: @notifiable_user.avatar,
       chat_link: chat_link
     }
