@@ -128,10 +128,10 @@ export default {
       })
     },
     upcomingItems () {
-      if (!this.place.upcomingEvents) {
+      const events = this.place.upcomingEvents
+      if (!events) {
         return []
       }
-      const events = this.place.upcomingEvents
       const items = events.map(event => {
         return { event: event, user: event.user }
       })
