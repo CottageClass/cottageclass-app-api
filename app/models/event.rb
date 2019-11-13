@@ -103,12 +103,6 @@ class Event < ApplicationRecord
     in_instance_time_zone(starts_at).strftime('%l:%M %P')
   end
 
-  def update_recency_score
-    seconds_since_created = (Time.current - created_at) / 1.second
-    past = (ends_at < Time.current + 1.hour)
-    update_column :recency_score, seconds_since_created + (past ? PAST_PENALTY : 0)
-  end
-
   def notify
     if participants.any?
       if ends_at <= Time.current
@@ -142,10 +136,6 @@ class Event < ApplicationRecord
   end
 
   private
-
-  def post_create
-    update_recency_score
-  end
 
   def notify_participants_destruction
     past = (ends_at < Time.current + 1.hour)

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_13_133349) do
+ActiveRecord::Schema.define(version: 2019_11_13_184129) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -175,7 +175,6 @@ ActiveRecord::Schema.define(version: 2019_11_13_133349) do
     t.json "meta"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.float "recency_score"
     t.text "description"
     t.text "images", default: [], array: true
     t.decimal "latitude"
