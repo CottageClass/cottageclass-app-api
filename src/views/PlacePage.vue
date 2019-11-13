@@ -20,7 +20,7 @@
               <img v-for="i in averageRating" v-bind:key="i" src="@/assets/Star_3.svg" alt="" />
               <img v-for="i in (5 - averageRating)" v-bind:key="i" src="@/assets/Star--inactive.svg" alt="" />
             </div>
-            <div class="ratings-link-text">3 reviews</div>
+            <div class="ratings-link-text">{{ numberOfReviews }} reviews</div>
           </a>
         </div>
         <div class="place-event-summary"><a href="#events" class="link-block-2 w-inline-block"><img src="@/assets/mdi_calendar_today.svg" alt="" />
@@ -92,6 +92,9 @@ export default {
     }
   },
   computed: {
+    numberOfReviews () {
+      return 0
+    },
     placeCenter () {
       return { lat: this.place.fuzzyLatitude, lon: this.place.fuzzyLongitude }
     },
@@ -99,7 +102,7 @@ export default {
       return this.place.description
     },
     averageRating () {
-      return 3
+      return 5
     },
     hasReviews () {
       return false
