@@ -107,17 +107,17 @@ class Notification < ApplicationRecord
                  when :user_suggestion
                    self.body = 'messages.user_suggestion'
                    Notifier::UserSuggestion.new user: recipient,
-                                                suggested_user: notifiable,
+                                                notifiable_user: notifiable,
                                                 body: body
                  when :event_creation_starrer
                    self.body = 'messages.event_creation_starrer'
                    Notifier::EventCreationStarrer.new user: recipient,
-                                                      event_creator: notifiable,
+                                                      notifiable_user: notifiable,
                                                       body: body
                  when :event_creation_match
                    self.body = 'messages.event_creation_match'
                    Notifier::EventCreationMatch.new user: recipient,
-                                                    event_creator: notifiable,
+                                                    notifiable_user: notifiable,
                                                     body: body
                  when :daily_digest
                    self.body = 'messages.daily_digest'
@@ -139,6 +139,7 @@ class Notification < ApplicationRecord
                                       sender_kids_ages: sender_kids_ages,
                                       message_link: ENV['LINK_HOST'] + '/chat/' + notifiable.sender.id.to_s
                    Notifier::ChatMessageReceived.new user: recipient,
+                                                     message: notifiable,
                                                      body: body
                  end
 
