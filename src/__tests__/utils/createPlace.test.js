@@ -223,6 +223,14 @@ describe('createPlace', () => {
             }
           }
         }
+      },
+      {
+        'id': '78',
+        'type': 'user',
+        'attributes': {
+        },
+        'relationships': {
+        }
       }
     ]
     }
