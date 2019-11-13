@@ -23,22 +23,26 @@ class Notifier::DailyDigest < Notifier::Base
 
   def mail_template_parameters
     events_hash = @events.map do |event|
-      user_hash = event.user.attributes.with_indifferent_access.slice :first_name, :id
+      user_hash = event.user.attributes.with_indifferent_access.slice :first_name, :id, :avatar
       user_hash.update last_initial: event.user.last_name[0].capitalize
 
       event_attributes = %i[id name child_age_minimum child_age_maximum]
       event_hash = event.attributes.with_indifferent_access.slice(*event_attributes)
 
-      place_hash = event.place.attributes.with_indifferent_access.slice :full_address, :name
+      place_hash = event.place.attributes.with_indifferent_access.slice :full_address
       place_hash.update name: place_name(event)
+
       event_hash.update user: user_hash,
                         place: place_hash,
+                        name: event.name,
+                        description: event.description,
                         link: "#{ENV['LINK_HOST']}/event/#{event.id}",
                         distance: event_distance(event),
                         start_time: event.start_time,
                         end_time: event.end_time,
+                        image: event.image,
                         day: event.start_day_abbreviated,
-                        date: event.start_date_abbreviated
+                        date: event.start_date_abbreviated_short_month
     end
     super.update events: events_hash
   end
