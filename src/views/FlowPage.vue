@@ -88,6 +88,9 @@ export default {
   }
 
   @media (max-width: 991px) {
+    .page-container {
+      background-color: #fff
+    }
     .column-container {
       width: auto;
       margin-right: 32px;
