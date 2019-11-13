@@ -1,7 +1,6 @@
 class Participant < ApplicationRecord
   validates_associated :participant_children
   validate do |instance|
-    instance.errors.add :base, :invalid, message: 'must have at least one child' if instance.participant_children.blank?
     if instance.participable.present? &&
        instance.participable.maximum_children.positive? && (
         instance.participable.participant_children.size + instance.participant_children.size
