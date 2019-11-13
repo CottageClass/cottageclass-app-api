@@ -106,7 +106,7 @@ RSpec.describe Event, type: :model do
           subject.notify
 
           expect(subject.notifications.event_reminder_previous_day_participant.count).to eq(participants.size + 1)
-          expect(subject.notifications.count).to eq(participants.size * 2 + 3 + 1)
+          expect(subject.notifications.count).to eq(participants.size * 2 + 2 + 1)
         end
       end
 
@@ -115,7 +115,7 @@ RSpec.describe Event, type: :model do
           subject.notify
 
           expect(subject.notifications.event_reminder_same_day_participant.count).to eq(participants.size + 1)
-          expect(subject.notifications.count).to eq(participants.size * 2 + 3 + 1)
+          expect(subject.notifications.count).to eq(participants.size * 2 + 2 + 1)
         end
       end
 
@@ -124,7 +124,7 @@ RSpec.describe Event, type: :model do
           subject.notify
 
           expect(subject.notifications.event_feedback_participant.count).to eq(participants.size + 1)
-          expect(subject.notifications.count).to eq(participants.size * 2 + 2 + 2)
+          expect(subject.notifications.count).to eq(participants.size * 2 + 1 + 2)
         end
       end
     end
