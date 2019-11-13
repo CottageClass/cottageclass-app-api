@@ -90,7 +90,6 @@ class User < ApplicationRecord
            inverse_of: :recipient,
            dependent: :destroy
 
-  belongs_to :showcase_event, class_name: 'Event', optional: true
   belongs_to :place, inverse_of: :users, optional: true, autosave: true
 
   accepts_nested_attributes_for :children, allow_destroy: true, reject_if: :child_with_same_name_exists?
@@ -193,11 +192,6 @@ class User < ApplicationRecord
 
   def child_ages_in_months
     @child_ages_in_months ||= children.map(&:age_in_months)
-  end
-
-  def update_showcase_event
-    showcase_event = events.upcoming.order('recency_score ASC').first
-    update_column :showcase_event_id, showcase_event.present? ? showcase_event.id : nil
   end
 
   def child_names

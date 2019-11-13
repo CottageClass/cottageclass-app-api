@@ -65,18 +65,19 @@ const mutations = {
   },
   setFetchLock (state, payload) {
     Vue.set(state.data[state.itemType], 'fetchLock', payload.lock)
+  },
+  resetToBaseState (state) {
+    const searchHasSucceeded = state.data[state.itemType].searchHasSucceeded
+    Vue.set(state.data, state.itemType, baseData())
+    Vue.set(state.data[state.itemType], 'searchHasSucceeded', searchHasSucceeded)
   }
 }
 
 const actions = {
-  async resetToBaseState ({ state, commit, dispatch }) {
-    const searchHasSucceeded = state.data[state.itemType].searchHasSucceeded
-    Vue.set(state.data, state.itemType, baseData())
-    Vue.set(state.data[state.itemType], 'searchHasSucceeded', searchHasSucceeded)
-  },
   async fetchItems ({ state, commit, dispatch }) {
+    if (state.data[state.itemType].fetchLock) { return }
     commit('ensureState')
-    dispatch('resetToBaseState')
+    commit('resetToBaseState')
     let results
     results = await dispatch('fetchMoreItems')
     return results
@@ -147,6 +148,8 @@ export default {
 function baseData () {
   return {
     lastPage: 0,
-    moreAvailable: false
+    moreAvailable: false,
+    items: null,
+    fetchLock: false
   }
 }
