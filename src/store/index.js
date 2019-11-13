@@ -50,7 +50,6 @@ export default new Vuex.Store(
     },
     actions: {
       newRoute: ({ commit, state }, payload) => {
-        console.log({ payload })
         if (payload.from && payload.from.path !== '/') {
           commit('setPreviousPath', { path: payload.from.path })
         } else {

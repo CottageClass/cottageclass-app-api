@@ -112,7 +112,7 @@ ActiveAdmin.register Event do
       f.input :name
       f.li do
         f.label :time_zone
-        f.span f.object.time_zone
+        f.span f.object.place.time_zone
       end
       f.input :starts_at, hint: 'This is in UTC'
       f.input :ends_at, hint: 'This is in UTC'

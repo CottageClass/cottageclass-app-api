@@ -40,9 +40,18 @@ export default {
   computed: {
     ...mapGetters(['currentUser'])
   },
+  methods: {
+    async poll () {
+      this.conversations = await fetchConversations(this.currentUser.id)
+    }
+  },
+  destroyed () {
+    clearInterval(this.pollingInterval)
+  },
   async created () {
     if (this.redirectToSignupIfNotAuthenticated()) { return }
     this.conversations = await fetchConversations(this.currentUser.id)
+    this.pollingInterval = setInterval(this.poll, 30000)
   }
 }
 </script>

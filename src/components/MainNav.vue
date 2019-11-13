@@ -128,9 +128,21 @@ export default {
     closeCallback () {
       this.showNameChangeModal = false
       this.$router.push({ query: {} })
+    },
+    poll () {
+      if (this.currentUser.messagesActive) {
+        clearInterval(this.pollingInterval)
+      } else {
+        this.$store.dispatch('updateCurrentUserFromServer')
+      }
     }
   },
+  destroyed () {
+    clearInterval(this.pollingInterval)
+  },
   mounted () {
+    this.pollingInterval = setInterval(this.poll, 30000)
+
     if (this.$route.query && this.$route.query['welcome-to-the-new-lilypad']) {
       this.showNameChangeModal = true
     }

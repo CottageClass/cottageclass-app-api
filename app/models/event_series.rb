@@ -11,8 +11,7 @@ class EventSeries < ApplicationRecord
   has_many :events, inverse_of: :event_series, dependent: :destroy
 
   before_validation :cleanup
-  after_create :set_users_home
-  after_save :create_events, :notify
+  after_create :set_users_home, :create_events, :notify
 
   accepts_nested_attributes_for :place
 
@@ -55,7 +54,8 @@ class EventSeries < ApplicationRecord
       recipients = recipients.uniq
     end
     recipients.each do |recipient|
-      continue if starrers.include? recipient
+      next if starrers.include? recipient
+
       recipient.notify_event_creation_match user
       recipient.push_notify_event_creation events.first
     end
