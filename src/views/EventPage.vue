@@ -678,6 +678,7 @@ a {
   .list {
     margin-bottom: 0;
   }
+
 }
 
 @media (max-width: 479px){

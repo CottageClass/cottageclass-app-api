@@ -4,6 +4,7 @@ import Router from 'vue-router'
 import UserPage from '@/views/UserPage.vue'
 import SplashPage from '@/views/SplashPage.vue'
 import EventPage from '@/views/EventPage.vue'
+import PlacePage from '@/views/PlacePage'
 import Search from '@/views/Search.vue'
 import Chats from '@/views/Chats.vue'
 import Conversation from '@/views/Conversation.vue'
@@ -175,6 +176,12 @@ export default new Router({
       path: '/event/:id/',
       name: 'EventPage',
       component: EventPage,
+      props: true
+    },
+    {
+      path: '/places/:id/',
+      name: 'PlacePage',
+      component: PlacePage,
       props: true
     },
     {
