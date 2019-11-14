@@ -1,10 +1,8 @@
-import Vue from 'vue'
-
 import { isIOSNativeApp } from '@/utils/platform'
 import { createDevice } from '@/utils/api'
 import store from '@/store'
 
-var VueScrollTo = require('vue-scrollto')
+import VueScrollTo from 'vue-scrollto'
 
 export function registerIOSEventLIstener () {
   if (isIOSNativeApp()) {
@@ -16,7 +14,7 @@ export function registerIOSEventLIstener () {
         store.dispatch('resetToBaseState')
       }
       if (e.detail.name === 'keyboardHidden') {
-        VueScrollTo.scrollTo('body', 300, { easing: 'ease-in' })
+        VueScrollTo.scrollTo('body', { duration: 340, easing: 'ease-in' })
       }
     })
   }
