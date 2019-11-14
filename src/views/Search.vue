@@ -116,7 +116,7 @@ export default {
       })
     },
     ...mapActions(['fetchMoreItems', 'fetchItems', 'setMapArea']),
-    ...mapMutations(['updateUser', 'updateEvent', 'setItemType'])
+    ...mapMutations(['updateUser', 'updateEvent', 'setItemType', 'resetFetchLocks'])
   },
   watch: {
     '$route': {
@@ -134,6 +134,7 @@ export default {
     }
   },
   created: async function () {
+    this.resetFetchLocks(false)
     if (this.currentUser && !this.currentUser.place) {
       await this.$store.dispatch('updateCurrentUserFromServer')
     }

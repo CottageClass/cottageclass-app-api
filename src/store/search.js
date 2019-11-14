@@ -63,6 +63,12 @@ const mutations = {
   setSearchHasSucceeded (state, payload) {
     Vue.set(state.data[state.itemType], 'searchHasSucceeded', payload.succeeded)
   },
+  resetFetchLocks (state) {
+    const keys = Object.keys(state.data)
+    keys.forEach(k => {
+      Vue.set(state.data[k], 'fetchLock', false)
+    })
+  },
   setFetchLock (state, payload) {
     Vue.set(state.data[state.itemType], 'fetchLock', payload.lock)
   },
