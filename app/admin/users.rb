@@ -52,9 +52,6 @@ ActiveAdmin.register User do
       profile_blurb
       onboarding_care_type
       avatar
-      has_pet
-      pet_description
-      house_rules
       verified
       neighborhood
       sublocality
