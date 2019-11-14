@@ -75,7 +75,7 @@ const mutations = {
 
 const actions = {
   async fetchItems ({ state, commit, dispatch }) {
-    if (state.data[state.itemType].fetchLock) { return }
+    if (!state.data[state.itemType] || state.data[state.itemType].fetchLock) { return }
     commit('ensureState')
     commit('resetToBaseState')
     let results
