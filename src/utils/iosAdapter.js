@@ -2,6 +2,8 @@ import { isIOSNativeApp } from '@/utils/platform'
 import { createDevice } from '@/utils/api'
 import store from '@/store'
 
+import VueScrollTo from 'vue-scrollto'
+
 export function registerIOSEventLIstener () {
   if (isIOSNativeApp()) {
     window.addEventListener('lilyPadIOSNativeEvent', function (e) {
@@ -10,6 +12,9 @@ export function registerIOSEventLIstener () {
       }
       if (e.detail.name === 'applicationDidEnterForeground') {
         store.dispatch('resetToBaseState')
+      }
+      if (e.detail.name === 'keyboardHidden') {
+        VueScrollTo.scrollTo('body', { duration: 340, easing: 'ease-in' })
       }
     })
   }
