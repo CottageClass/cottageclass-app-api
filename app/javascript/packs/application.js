@@ -113,7 +113,7 @@ if (isAuthWindow) {
 
     if (token) {
       requestPermission()
-      store.dispatch('establishUser', { JWT: token })
+      store.dispatch('establishUser', { JWT: token, skipSearchUpdate: true })
     }
 
     const csrfElement = "meta[name='csrf-token']"
