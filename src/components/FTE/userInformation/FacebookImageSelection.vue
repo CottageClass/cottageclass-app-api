@@ -61,8 +61,8 @@ export default {
     toggleImageSelection (index) {
       // create a copy, alter it and reassign it to selectedIndices.  This will force Vue to react to the change
       const selectedIndicesCopy = this.selectedIndices.concat()
-      if (this.selectedIndices.findIndex(index) >= 0) {
-        selectedIndicesCopy.splice(this.selectedIndices.findIndex(index), 1)
+      if (this.selectedIndices.indexOf(index) >= 0) {
+        selectedIndicesCopy.splice(this.selectedIndices.indexOf(index), 1)
       } else {
         selectedIndicesCopy.push(index)
       }
