@@ -83,10 +83,13 @@ const actions = {
   async fetchItems ({ state, commit, dispatch }) {
     commit('ensureState')
     if (state.data[state.itemType].fetchLock) { return }
-    commit('resetToBaseState')
-    let results
-    results = await dispatch('fetchMoreItems')
-    return results
+    try {
+      commit('setFetchLock', { lock: true })
+      commit('resetToBaseState')
+    } finally {
+      commit('setFetchLock', { lock: false })
+    }
+    return dispatch('fetchMoreItems')
   },
 
   async fetchMoreItems ({ state, commit, getters, dispatch }) {
