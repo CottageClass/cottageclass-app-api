@@ -77,7 +77,7 @@
               <router-link :to="{name: 'UserPage', params: {id: this.user.id}}" class="btn__more-about-host w-button">
                 More about this host
               </router-link>
-              <router-link :to="{name: 'PlacePage', params: {id: this.place.id}}" class="btn__more-about-host w-button">
+              <router-link v-if="this.place.public === true" :to="{name: 'PlacePage', params: {id: this.place.id}}" class="btn__more-about-host w-button">
                 More about this place
               </router-link>
             </div>
