@@ -21,6 +21,7 @@
     />
     <EventOverview
       v-else-if="stepName==='description'"
+      :public="isPublic"
       v-model="description" />
   </div>
 </template>
@@ -58,6 +59,9 @@ export default {
     }
   },
   computed: {
+    isPublic () {
+      if (this.place.public === true) { return true } else { return false }
+    },
     isOnLastStep () {
       return this.stepName === this.lastStep
     },
