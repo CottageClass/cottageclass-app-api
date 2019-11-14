@@ -73,9 +73,14 @@
             <div v-if="profileBlurb" class="about-the-host__bio">
               <div class="about-the-host__bio-text">{{profileBlurb}}</div>
             </div>
-            <router-link :to="{name: 'UserPage', params: {id: this.user.id}}" class="btn__more-about-host w-button">
-              More about this host
-            </router-link>
+            <div class="more-about-buttons">
+              <router-link :to="{name: 'UserPage', params: {id: this.user.id}}" class="btn__more-about-host w-button">
+                More about this host
+              </router-link>
+              <router-link :to="{name: 'PlacePage', params: {id: this.place.id}}" class="btn__more-about-host w-button">
+                More about this place
+              </router-link>
+            </div>
           </div>
         </div>
         <div v-if="otherEvents" class="event-detail__column-right w-col w-col-4 w-col-stack">
@@ -426,7 +431,7 @@ a {
 }
 
 .btn__more-about-host {
-  display: block;
+  display: inline-block;
   margin-right: 10px;
   padding: 4px 16px 5px;
   border: 1px solid transparent;
@@ -622,6 +627,12 @@ a {
 }
 
 @media (max-width: 479px){
+  .more-about-buttons {
+     margin-bottom: -20px
+  }
+  .btn__more-about-host {
+     margin-bottom: 20px
+  }
   .column-list {
     flex-direction: column;
     width:100%;
