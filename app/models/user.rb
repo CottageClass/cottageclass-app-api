@@ -44,6 +44,16 @@ class User < ApplicationRecord
             uniqueness: true,
             format: { with: /\A.+@.+\..+\z/, message: 'Please provide a valid email' }
 
+  has_many :received_conversations,
+           inverse_of: :recipient,
+           class_name: 'Conversation',
+           foreign_key: :recipient_id,
+           dependent: :nullify
+  has_many :initiated_conversations,
+           inverse_of: :initiator,
+           class_name: 'Conversation',
+           foreign_key: :initiator_id,
+           dependent: :nullify
   has_many :created_places,
            inverse_of: :creator,
            class_name: 'Place',
@@ -58,9 +68,9 @@ class User < ApplicationRecord
            after_add: :child_added,
            before_remove: :child_removed
 
-  has_many :sent_messages, class_name: 'Message', foreign_key: :sender_id, inverse_of: :sender, dependent: :destroy
+  has_many :sent_messages, class_name: 'Message', foreign_key: :sender_id, inverse_of: :sender, dependent: :nullify
   has_many :received_messages, class_name: 'Message', foreign_key: :receiver_id, inverse_of: :receiver,
-                               dependent: :destroy
+                               dependent: :nullify
   has_many :event_series, inverse_of: :user, dependent: :destroy
   has_many :events, through: :event_series, inverse_of: :user
   has_many :participants, inverse_of: :user, dependent: :destroy

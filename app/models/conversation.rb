@@ -1,6 +1,6 @@
 class Conversation < ApplicationRecord
-  belongs_to :initiator, class_name: 'User', dependent: :destroy
-  belongs_to :recipient, class_name: 'User', dependent: :destroy
+  belongs_to :initiator, class_name: 'User'
+  belongs_to :recipient, class_name: 'User'
   belongs_to :last_message, class_name: 'Message', dependent: :destroy
 
   validates :recipient, presence: true
