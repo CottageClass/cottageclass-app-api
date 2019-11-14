@@ -175,7 +175,6 @@ ActiveRecord::Schema.define(version: 2019_11_14_165848) do
     t.json "meta"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.float "recency_score"
     t.text "description"
     t.text "images", default: [], array: true
     t.decimal "latitude"
