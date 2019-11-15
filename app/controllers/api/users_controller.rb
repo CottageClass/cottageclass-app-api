@@ -70,8 +70,9 @@ class API::UsersController < API::BaseController
       earliest_birthday = (Time.current - (max_age + 1).year.seconds)
       latest_birthday = (Time.current - min_age.year.seconds)
       time_range = earliest_birthday..latest_birthday
+      parent_ids = Child.where(birthday: time_range).pluck(:parent_id).uniq
 
-      users = users.joins(:children).where('children.birthday' => time_range)
+      users = users.where id: parent_ids
     end
 
     miles = miles.to_f
