@@ -152,8 +152,8 @@ export default {
     }
   },
   methods: {
-    async updateUser (user) {
-      this.eventToShare.host = user
+    async updateUser (payload) {
+      this.eventToShare.host = payload.user
     },
     async fetchEvent () {
       this.fetchedEvent = await fetchEvent(this.eventId)
