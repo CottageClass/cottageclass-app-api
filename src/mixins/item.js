@@ -21,7 +21,7 @@ export default {
     },
     images () {
       if (this.event && this.event.images) {
-        if (this.event.place.public === true) {
+        if (this.event.place.public) {
           return [...this.event.images, ...this.event.place.images]
         } else {
           return [...this.event.images, ...this.user.images]
