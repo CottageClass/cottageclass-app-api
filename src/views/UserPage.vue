@@ -232,8 +232,8 @@ export default {
         await this.addCircle(center, 0.2)
       })
     },
-    updateUser (user) {
-      this.user = user
+    updateUser (payload) {
+      this.user = payload.user
     }
   },
   watch: {
