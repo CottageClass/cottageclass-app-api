@@ -293,7 +293,8 @@ export default {
       } else {
         if (this.currentUser.children.length === 1) {
           await this.submitRsvp(this.currentUser.children.map(c => c.id))
-          this.event = await fetchEvent(this.event.id)
+          this.item.event = await fetchEvent(this.event.id)
+          this.$emit('event-updated', { event: this.item.event })
         } else {
           this.$router.push({ name: 'RsvpInfoCollection', params: { eventId: this.event.id } })
         }

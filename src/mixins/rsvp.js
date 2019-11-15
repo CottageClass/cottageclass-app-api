@@ -54,13 +54,13 @@ export default {
     },
     async cancelRsvp () {
       try {
-        const res = await removeEventParticipant(this.eventId)
-        trackEvent('rsvp_cancel', { eventId: this.eventId })
-        this.$ga.event('RSVP', 'canceled', this.eventId)
+        const res = await removeEventParticipant(this.event.id)
+        trackEvent('rsvp_cancel', { eventId: this.event.id })
+        this.$ga.event('RSVP', 'canceled', this.event.id)
         const data = {
           'User ID': this.currentUser.id,
           'Cancelation Time': moment(Date()).format('LLLL'),
-          'Event ID': this.eventId,
+          'Event ID': this.event.id,
           'Reason for cancelation': this.reason,
           'Event title': this.event.name,
           'Event host': this.event.user.firstName,
@@ -72,6 +72,7 @@ export default {
           'All children': this.currentUser.children
         }
         submitToSheetsu(data, 'RSVPCancelations')
+        this.showAlert('You are no longer attending.  Your presence will be missed.', 'failure')
         return res
       } catch (err) {
         console.log(err)
@@ -86,7 +87,7 @@ export default {
       try {
         const res = await submitEventParticipant(eventId, childIds)
         trackEvent('rsvp_affirmative', { eventId: eventId })
-        this.showAlertOnNextRoute(`Playdate request sent for ${this.formattedDateTime}. ` +
+        this.showAlert(`Playdate request sent for ${this.formattedDateTime}. ` +
             'We\'re texting you now, to introduce you to ' +
             `${this.event.user.firstName}!`, 'success'
         )
