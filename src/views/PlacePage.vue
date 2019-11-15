@@ -23,9 +23,11 @@
             <div class="ratings-link-text">{{ numberOfReviews }} reviews</div>
           </a>
         </div>
-        <div class="place-event-summary"><a href="#events" class="link-block-2 w-inline-block"><img src="@/assets/mdi_calendar_today.svg" alt="" />
-          <div class="events-link-text">{{ numberOfEvents }} events happening</div>
-        </a></div>
+        <div class="place-event-summary">
+          <div class="link-block-2 w-inline-block"><img src="@/assets/mdi_calendar_today.svg" alt="" />
+            <div class="events-link-text">{{ numberOfEvents }} events happening</div>
+          </div>
+        </div>
         <div class="place-event-desc">
           <div class="text-block-13">{{ placeDescription }}</div>
         </div>

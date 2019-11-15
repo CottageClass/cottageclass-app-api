@@ -26,6 +26,7 @@
         :distanceCenter="mapArea.center"
         @interested-click="interestedClickAndUpdate('card')"
         @contact-click="contactClick"
+        @event-updated="updateEvent"
         @going-click="goingClick"
         @user-updated="updateUser"
       />
@@ -178,6 +179,9 @@ export default {
     ...mapGetters(['isRsvpDeclined', 'items', 'mapArea'])
   },
   methods: {
+    updateEvent (e) {
+      this.event = e.event
+    },
     async interestedClickAndUpdate () {
       this.event.user = await this.interestedClick()
     },
