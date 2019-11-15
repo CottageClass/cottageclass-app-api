@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_13_184129) do
+ActiveRecord::Schema.define(version: 2019_11_14_165848) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -423,9 +423,6 @@ ActiveRecord::Schema.define(version: 2019_11_13_184129) do
     t.string "uid"
     t.string "jti", null: false
     t.boolean "terms_of_service", default: false, null: false
-    t.boolean "has_pet"
-    t.text "pet_description"
-    t.text "house_rules"
     t.boolean "internally_cleared", default: false, null: false
     t.decimal "setting_max_distance", default: "2.0"
     t.boolean "setting_email_notifications", default: true

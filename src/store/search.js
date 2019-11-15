@@ -63,6 +63,12 @@ const mutations = {
   setSearchHasSucceeded (state, payload) {
     Vue.set(state.data[state.itemType], 'searchHasSucceeded', payload.succeeded)
   },
+  resetFetchLocks (state) {
+    const keys = Object.keys(state.data)
+    keys.forEach(k => {
+      Vue.set(state.data[k], 'fetchLock', false)
+    })
+  },
   setFetchLock (state, payload) {
     Vue.set(state.data[state.itemType], 'fetchLock', payload.lock)
   },
@@ -75,12 +81,15 @@ const mutations = {
 
 const actions = {
   async fetchItems ({ state, commit, dispatch }) {
-    if (state.data[state.itemType].fetchLock) { return }
     commit('ensureState')
-    commit('resetToBaseState')
-    let results
-    results = await dispatch('fetchMoreItems')
-    return results
+    if (state.data[state.itemType].fetchLock) { return }
+    try {
+      commit('setFetchLock', { lock: true })
+      commit('resetToBaseState')
+    } finally {
+      commit('setFetchLock', { lock: false })
+    }
+    return dispatch('fetchMoreItems')
   },
 
   async fetchMoreItems ({ state, commit, getters, dispatch }) {
