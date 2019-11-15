@@ -33,7 +33,18 @@ RSpec.describe Event, type: :model do
       end
     end
 
-    it { expect { subject.destroy }.to change(Notification.event_destruction, :count).from(0).to(participants_count) }
+    it {
+      expect do
+        subject.destroy
+      end .to change(Notification.event_destruction, :count).from(0).to(participants_count + 1)
+    }
+  end
+
+  context 'host_participant' do
+    before { subject.save }
+
+    it { expect(subject.participants.count).to eq(1) }
+    it { expect(subject.participants[0].user).to eq(subject.user) }
   end
 
   context 'notify' do
@@ -54,7 +65,7 @@ RSpec.describe Event, type: :model do
         Timecop.freeze(1.week.before(subject.starts_at)) do
           subject.notify
 
-          expect(subject.notifications.event_reminder_previous_week_host.count).to eq(0)
+          expect(subject.notifications.event_reminder_previous_week_host.count).to eq(1)
         end
       end
 
@@ -62,7 +73,7 @@ RSpec.describe Event, type: :model do
         Timecop.freeze(24.hours.before(subject.starts_at)) do
           subject.notify
 
-          expect(subject.notifications.event_reminder_previous_day_host.count).to eq(0)
+          expect(subject.notifications.event_reminder_previous_day_host.count).to eq(1)
         end
       end
     end
@@ -94,8 +105,8 @@ RSpec.describe Event, type: :model do
         Timecop.freeze(24.hours.before(subject.starts_at)) do
           subject.notify
 
-          expect(subject.notifications.event_reminder_previous_day_participant.count).to eq(participants.size)
-          expect(subject.notifications.count).to eq(participants.size * 2 + 1 + 1)
+          expect(subject.notifications.event_reminder_previous_day_participant.count).to eq(participants.size + 1)
+          expect(subject.notifications.count).to eq(participants.size * 2 + 2 + 1)
         end
       end
 
@@ -103,8 +114,8 @@ RSpec.describe Event, type: :model do
         Timecop.freeze(2.hours.ago(subject.starts_at)) do
           subject.notify
 
-          expect(subject.notifications.event_reminder_same_day_participant.count).to eq(participants.size)
-          expect(subject.notifications.count).to eq(participants.size * 2 + 1 + 1)
+          expect(subject.notifications.event_reminder_same_day_participant.count).to eq(participants.size + 1)
+          expect(subject.notifications.count).to eq(participants.size * 2 + 2 + 1)
         end
       end
 
@@ -112,8 +123,8 @@ RSpec.describe Event, type: :model do
         Timecop.freeze(30.minutes.since(subject.ends_at)) do
           subject.notify
 
-          expect(subject.notifications.event_feedback_participant.count).to eq(participants.size)
-          expect(subject.notifications.count).to eq(participants.size * 2 + 2)
+          expect(subject.notifications.event_feedback_participant.count).to eq(participants.size + 1)
+          expect(subject.notifications.count).to eq(participants.size * 2 + 1 + 2)
         end
       end
     end

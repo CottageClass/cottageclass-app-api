@@ -22,7 +22,6 @@ import ErrorPage from '@/views/ErrorPage'
 import FlowPage from '@/views/FlowPage.vue'
 import ProfileCollection from '@/views/ProfileCollection.vue'
 import NewEvent from '@/views/NewEvent.vue'
-import CancelRSVP from '@/components/CancelRSVP.vue'
 import SocialInvite from '@/views/SocialInvite.vue'
 import Onboarding from '@/views/Onboarding.vue'
 import RsvpInfoCollection from '@/components/RsvpInfoCollection.vue'
@@ -76,12 +75,6 @@ export default new Router({
           props: {
             context: true
           }
-        },
-        {
-          path: '/rsvp/:eventId/cancel',
-          name: 'CancelRSVP',
-          component: CancelRSVP,
-          props: true
         },
         {
           path: '/events/new/:stepName?',
