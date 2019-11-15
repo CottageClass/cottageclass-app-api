@@ -27,7 +27,7 @@
         @interested-click="interestedClickAndUpdate('card')"
         @contact-click="contactClick"
         @going-click="goingClick"
-        @user-updated="$emit('user-updated', $event)"
+        @user-updated="updateUser"
       />
 
       <div class="event-detail__content-columns w-row">
@@ -188,8 +188,8 @@ export default {
       this.debug('handle')
       this.$refs.lightbox.showImage(payload)
     },
-    updateUser (user) {
-      this.event.user = user
+    updateUser (payload) {
+      this.event.user = payload.user
     },
     fetchEvent: async function (id = this.$route.params.id) {
       try {
