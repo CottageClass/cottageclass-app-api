@@ -156,7 +156,7 @@ export default {
           transformation = 'c_thumb,g_custom/'
         }
         const imageUrl = 'https://res.cloudinary.com/' + process.env.CLOUDINARY_CLOUD_NAME + '/image/upload/' + transformation + result.info.path
-        this.images.push(imageUrl)
+        this.place.images.push(imageUrl)
         this.submitPlaceData()
         this.disableForm = false
       }
