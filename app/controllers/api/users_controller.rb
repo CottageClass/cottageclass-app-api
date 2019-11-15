@@ -79,10 +79,7 @@ class API::UsersController < API::BaseController
       location = []
       location = [latitude, longitude] if [latitude, longitude].all?(&:present?)
       location = [current_user.place.latitude, current_user.place.longitude] if location.blank? && current_user.present?
-      if location.all?(&:present?)
-        place_ids = Place.near(location.map(&:to_f), miles).to_a.pluck :id
-        users = users.joins(:place).where('place_id IN (?)', place_ids)
-      end
+      users = users.near(location.map(&:to_f), miles)
     end
 
     links = {}
