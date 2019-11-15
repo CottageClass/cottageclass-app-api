@@ -21,7 +21,11 @@ export default {
     },
     images () {
       if (this.event && this.event.images) {
-        return [...this.event.images, ...this.user.images]
+        if (this.event.place.public) {
+          return [...this.event.images, ...this.event.place.images]
+        } else {
+          return [...this.event.images, ...this.user.images]
+        }
       }
       if (this.user) {
         return this.user.images
