@@ -287,7 +287,9 @@ export default {
         params: { eventId: this.event.id }
       })) {
       } else if (this.event.participated) {
-        this.$router.push({ name: 'CancelRSVP', params: { eventId: this.event.id } })
+        await this.cancelRsvp()
+        this.item.event = await fetchEvent(this.event.id)
+        this.$emit('event-updated', { event: this.item.event })
       } else {
         if (this.currentUser.children.length === 1) {
           await this.submitRsvp(this.currentUser.children.map(c => c.id))
