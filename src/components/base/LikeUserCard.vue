@@ -1,8 +1,10 @@
 <template>
   <InterestedCard
     :title="`Are you interested in a playdate with ${userFirstName}?`"
-    :showPrimaryStar="true"
-    @primary-click="$emit('like-user-click')"
+    :showPrimaryStar="false"
+    primaryMessage="Send a message!"
+    secondaryMessage="Not right now"
+    @primary-click="$emit('contact-user-click')"
     @secondary-click="$emit('dislike-user-click')"
   />
 </template>

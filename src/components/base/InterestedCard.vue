@@ -6,11 +6,11 @@
         <div class="primary-action__btn-group--alt">
           <a class="btn__primary-action--alt w-button"
              :class="showPrimaryStar ? 'star-background' : ''"
-             @click="$emit('primary-click')">Yes!</a>
+             @click="$emit('primary-click')">{{primaryMessage}}</a>
           <div class="utility-spacer-16px">
           </div>
           <a @click.prevent="$emit('secondary-click')"
-             class="btn__sec-action--alt w-button">No</a>
+             class="btn__sec-action--alt w-button">{{secondaryMessage}}</a>
         </div>
         <a v-if="otherText"
            @click="$emit('other-click')"
@@ -35,6 +35,14 @@ export default {
     showPrimaryStar: {
       type: Boolean,
       default: false
+    },
+    primaryMessage: {
+      type: String,
+      default: 'Yes!'
+    },
+    secondaryMessage: {
+      type: String,
+      default: 'No'
     }
   }
 }
