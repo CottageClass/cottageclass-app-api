@@ -15,11 +15,11 @@ const mutations = {
       Vue.set(state.data, state.itemType)
     }
   },
-  setPageItems (state, payload) {
+  setPageItems (state, { items, page, itemType }) {
     if (!state.data[state.itemType]) {
-      Vue.set(state.data, state.itemType, baseData())
+      Vue.set(state.data, itemType, baseData())
     }
-    Vue.set(state.data[state.itemType].pages, payload.page, payload.items)
+    Vue.set(state.data[itemType].pages, page, items)
   },
   incrementLastPage (state) {
     const data = state.data[state.itemType]
@@ -91,7 +91,8 @@ const actions = {
   async fetchMoreItems ({ state, commit, getters, dispatch }) {
     if (state.data[state.itemType].fetchLock) { return }
     commit('setFetchLock', { lock: true })
-    const data = state.data[state.itemType]
+    const itemType = state.itemType
+    const data = state.data[itemType]
     const page = data.lastPage
     const params = {
       pageSize: 10,
@@ -126,7 +127,7 @@ const actions = {
     } else if (!state.data[state.itemType].searchHasSucceeded) {
       dispatch('expandRadiusAndFetchAgain')
     }
-    commit('setPageItems', { items, page })
+    commit('setPageItems', { items, page, itemType })
   },
 
   async expandRadiusAndFetchAgain ({ dispatch }) {
