@@ -143,7 +143,10 @@ const getters = {
         return null
       }
       return data.pages.reduce((items, page) => {
-        return items.concat(page)
+        if (page) {
+          return items.concat(page)
+        }
+        return items
       }, [])
     } catch (e) {
       return null
