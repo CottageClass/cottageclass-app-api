@@ -1,13 +1,27 @@
 <template>
   <div class="contents">
-    {{ shortDescription || 'Distance'}}
+    {{ buttonText }}
   </div>
 </template>
 
 <script>
 export default {
   name: 'LocationFilterButton',
-  props: ['shortDescription']
+  props: ['shortDescription', 'maxDistance'],
+  computed: {
+    buttonText () {
+      if (this.shortDescription && this.maxDistance) {
+        return `${this.shortDescription} • ${this.maxDistance} mi.`
+      }
+      if (this.shortDescription) {
+        return this.shortDescription
+      }
+      if (this.maxDistance) {
+        return `${this.maxDistance} mi.`
+      }
+      return 'Distance'
+    }
+  }
 }
 </script>
 
