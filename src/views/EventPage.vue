@@ -11,6 +11,7 @@
         ref="lightbox"
         :images="lightboxImages"
         :showLightBox="false"
+        v-on:onOpened="toggleLightBox($event)"
       />
     </LightBoxStyleWrapper>
     <LoadingSpinner v-if="!event" />
@@ -131,6 +132,7 @@ export default {
         'disableDefaultUI': true, // turns off map controls
         'gestureHandling': 'none' // prevents any kind of scrolling
       },
+      showLightBox: false,
       otherEvents: null
     }
   },
@@ -165,7 +167,7 @@ export default {
       })
     },
     showRsvpCard () {
-      if (!this.event || this.timePast) { return false }
+      if (!this.event || this.timePast || this.showLightBox) { return false }
       if (this.currentUser) {
         return (this.event.user.id.toString() !== this.currentUser.id.toString()) &&
                !this.event.participated &&
@@ -179,6 +181,9 @@ export default {
     ...mapGetters(['isRsvpDeclined', 'items', 'mapArea'])
   },
   methods: {
+    toggleLightBox (e) {
+      this.showLightBox = e
+    },
     updateEvent (e) {
       this.event = e.event
     },
