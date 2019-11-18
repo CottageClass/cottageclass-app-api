@@ -78,7 +78,7 @@ export default {
   .onb-field-label {
     margin-top: 24px;
     margin-bottom: 8px;
-    color: #fff;
+    color: #333;
     font-weight: 700;
   }
   select {
