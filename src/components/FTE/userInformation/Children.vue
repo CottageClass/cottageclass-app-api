@@ -1,7 +1,7 @@
 <template>
   <Question
     title="Child Information"
-    subtitle="To match parents with kids of similar ages, we need to know the year and month each child was born. Ages are visible on the site, but names (and school, if you enter one) are private. If you're expecting (yay!) you can enter a due date.">
+    subtitle="To match parents with kids of similar ages, we need to know the year and month each child was born. Ages are visible on the site, but names are private. If you're expecting (yay!) you can enter a due date.">
     <ManyFormFieldGroups
       :fieldGroups="fieldGroups"
       headingWord="Child"
@@ -92,12 +92,6 @@ export default {
             { text: 'November', value: '11' },
             { text: 'December', value: '12' }
           ]
-        },
-        {
-          name: 'schoolName',
-          label: 'School Name (optional)',
-          placeholder: 'Name of School',
-          type: 'text'
         }
       ]
     }
