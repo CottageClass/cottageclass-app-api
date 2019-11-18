@@ -33,6 +33,7 @@ const mutations = {
     const user = payload.user
     for (let key in state.data) {
       const data = state.data[key]
+      if (!data.pages) { continue }
       data.pages.forEach(p => {
         const userItems = p.filter(i => i.user.id.toString() === user.id.toString())
         for (const item of userItems) {
@@ -45,6 +46,7 @@ const mutations = {
     const event = payload.event
     for (let key in state.data) {
       const data = state.data[key]
+      if (!data.pages) { continue }
       data.pages.forEach(p => {
         const eventItems = p.filter(i => i.event && i.event.id === event.id)
         for (const item of eventItems) {
