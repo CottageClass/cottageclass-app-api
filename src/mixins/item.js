@@ -21,7 +21,11 @@ export default {
     },
     images () {
       if (this.event && this.event.images) {
-        return [...this.event.images, ...this.user.images]
+        if (this.event.place.public) {
+          return [...this.event.images, ...this.event.place.images]
+        } else {
+          return [...this.event.images, ...this.user.images]
+        }
       }
       if (this.user) {
         return this.user.images
@@ -63,8 +67,11 @@ export default {
     showGoingButton () {
       return this.event &&
         !this.timePast &&
-        (!this.currentUser ||
-        (this.event.user.id.toString() !== this.currentUser.id.toString()))
+        (
+          !this.currentUser ||
+          this.event.user.id.toString() !== this.currentUser.id.toString() ||
+          this.event.place.public
+        )
     },
     showInterestedButton () {
       return this.isAuthenticated &&
@@ -235,12 +242,6 @@ export default {
     profileBlurb () {
       return this.user.profileBlurb
     },
-    houseRules () {
-      return this.user.houseRules || (this.event && this.event.houseRules)
-    },
-    petDescription () {
-      return this.user.petDescription || (this.event && this.event.petDescription)
-    },
     localArea () {
       const neighborhood = this.place.neighborhood
       const cityOrBoro = this.place.locality || this.place.vicinity
@@ -290,11 +291,14 @@ export default {
         params: { eventId: this.event.id }
       })) {
       } else if (this.event.participated) {
-        this.$router.push({ name: 'CancelRSVP', params: { eventId: this.event.id } })
+        await this.cancelRsvp()
+        this.item.event = await fetchEvent(this.event.id)
+        this.$emit('event-updated', { event: this.item.event })
       } else {
         if (this.currentUser.children.length === 1) {
           await this.submitRsvp(this.currentUser.children.map(c => c.id))
-          this.event = await fetchEvent(this.event.id)
+          this.item.event = await fetchEvent(this.event.id)
+          this.$emit('event-updated', { event: this.item.event })
         } else {
           this.$router.push({ name: 'RsvpInfoCollection', params: { eventId: this.event.id } })
         }

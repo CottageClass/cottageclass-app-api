@@ -5,7 +5,7 @@ class Event < ApplicationRecord
 
   PAST_PENALTY = 31_557_600 # seconds in a year
 
-  after_create :post_create
+  after_create :add_host_participant
   before_destroy :notify_participants_destruction
 
   belongs_to :event_series, inverse_of: :events
@@ -103,12 +103,6 @@ class Event < ApplicationRecord
     in_instance_time_zone(starts_at).strftime('%l:%M %P')
   end
 
-  def update_recency_score
-    seconds_since_created = (Time.current - created_at) / 1.second
-    past = (ends_at < Time.current + 1.hour)
-    update_column :recency_score, seconds_since_created + (past ? PAST_PENALTY : 0)
-  end
-
   def notify
     if participants.any?
       if ends_at <= Time.current
@@ -143,8 +137,11 @@ class Event < ApplicationRecord
 
   private
 
-  def post_create
-    update_recency_score
+  def add_host_participant
+    participant_children = user.children.map { |child| ParticipantChild.create child: child, participable: self }
+    host_participant = participants.build user: user, participant_children: participant_children
+    host_participant.save
+    save!
   end
 
   def notify_participants_destruction
