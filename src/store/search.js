@@ -15,45 +15,45 @@ const mutations = {
       Vue.set(state.data, state.itemType)
     }
   },
-  addItems (state, payload) {
-    const items = payload.items
+  setPageItems (state, { items, page, itemType }) {
     if (!state.data[state.itemType]) {
-      Vue.set(state.data, state.itemType, baseData())
+      Vue.set(state.data, itemType, baseData())
     }
-    if (!state.data[state.itemType].items) {
-      Vue.set(state.data[state.itemType], 'items', [])
-    }
-    Vue.set(state.data[state.itemType], 'items', state.data[state.itemType].items.concat(items))
+    Vue.set(state.data[itemType].pages, page, items)
   },
-  incrementLastPage (state) {
-    const data = state.data[state.itemType]
+  incrementLastPage (state, { itemType }) {
+    const data = state.data[itemType]
     data.lastPage = data.lastPage + 1
   },
   setMoreAvailable (state, payload) {
-    const data = state.data[state.itemType]
+    const data = state.data[payload.itemType]
     data.moreAvailable = payload.moreAvailable
   },
   updateUser (state, payload) {
     const user = payload.user
     for (let key in state.data) {
       const data = state.data[key]
-      const userItems = data.items.filter(i => i.user.id.toString() === user.id.toString())
-      for (const item of userItems) {
-        Vue.set(item, 'user', user)
-      }
+      data.pages.forEach(p => {
+        const userItems = p.filter(i => i.user.id.toString() === user.id.toString())
+        for (const item of userItems) {
+          Vue.set(item, 'user', user)
+        }
+      })
     }
   },
   updateEvent (state, payload) {
     const event = payload.event
-    for (let key in state) {
+    for (let key in state.data) {
       const data = state.data[key]
-      const eventItems = data.items.filter(i => i.event && i.event.id === event.id)
-      for (const item of eventItems) {
-        Vue.set(item, 'event', event)
-      }
+      data.pages.forEach(p => {
+        const eventItems = p.filter(i => i.event && i.event.id === event.id)
+        for (const item of eventItems) {
+          Vue.set(item, 'event', event)
+        }
+      })
     }
   },
-  ensureState (state) {
+  ensureState (state, { itemType }) {
     const data = state.data[state.itemType]
     if (!data) {
       Vue.set(state.data, state.itemType, baseData())
@@ -81,8 +81,9 @@ const mutations = {
 
 const actions = {
   async fetchItems ({ state, commit, dispatch }) {
-    commit('ensureState')
-    if (state.data[state.itemType].fetchLock) { return }
+    const itemType = state.itemType
+    commit('ensureState', { itemType })
+    if (state.data[itemType].fetchLock) { return }
     try {
       commit('setFetchLock', { lock: true })
       commit('resetToBaseState')
@@ -95,7 +96,9 @@ const actions = {
   async fetchMoreItems ({ state, commit, getters, dispatch }) {
     if (state.data[state.itemType].fetchLock) { return }
     commit('setFetchLock', { lock: true })
-    const data = state.data[state.itemType]
+    const itemType = state.itemType
+    const data = state.data[itemType]
+    const page = data.lastPage
     const params = {
       pageSize: 10,
       minAge: getters.ageRange.min,
@@ -105,10 +108,10 @@ const actions = {
       lng: getters.mapArea.center.lng,
       date: getters.eventTime.date,
       weekday: getters.eventTime.weekday,
-      page: data.lastPage + 1
+      page: page + 1 // API is 1-indexed
     }
 
-    commit('ensureState')
+    commit('ensureState', { itemType })
     let items
     try {
       switch (state.itemType) {
@@ -122,14 +125,14 @@ const actions = {
     } finally {
       commit('setFetchLock', { lock: false })
     }
-    commit('incrementLastPage')
-    commit('setMoreAvailable', { moreAvailable: items.length >= params.pageSize })
+    commit('incrementLastPage', { itemType })
+    commit('setMoreAvailable', { moreAvailable: items.length >= params.pageSize, itemType })
     if (items.length > 0) {
       commit('setSearchHasSucceeded', { succeeded: true })
     } else if (!state.data[state.itemType].searchHasSucceeded) {
       dispatch('expandRadiusAndFetchAgain')
     }
-    commit('addItems', { items })
+    commit('setPageItems', { items, page, itemType })
   },
 
   async expandRadiusAndFetchAgain ({ dispatch }) {
@@ -139,8 +142,21 @@ const actions = {
 
 const getters = {
   currentData: state => key => state.data[state.itemType],
-  items: state => {
-    try { return state.data[state.itemType].items } catch (e) { return null }
+  items (state) {
+    const data = state.data[state.itemType]
+    try {
+      if (data.pages.length === 0) {
+        return null
+      }
+      return data.pages.reduce((items, page) => {
+        if (page) {
+          return items.concat(page)
+        }
+        return items
+      }, [])
+    } catch (e) {
+      return null
+    }
   },
   showFetchMoreButton: state => {
     try { return state.data[state.itemType].moreAvailable } catch (e) { return false }
@@ -158,7 +174,7 @@ function baseData () {
   return {
     lastPage: 0,
     moreAvailable: false,
-    items: null,
+    pages: [],
     fetchLock: false
   }
 }

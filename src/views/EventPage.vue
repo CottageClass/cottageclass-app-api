@@ -181,6 +181,7 @@ export default {
   methods: {
     updateEvent (e) {
       this.event = e.event
+      this.$store.commit('updateEvent', { event: this.event })
     },
     async interestedClickAndUpdate () {
       this.event.user = await this.interestedClick()
