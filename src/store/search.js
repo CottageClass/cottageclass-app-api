@@ -21,12 +21,12 @@ const mutations = {
     }
     Vue.set(state.data[itemType].pages, page, items)
   },
-  incrementLastPage (state) {
-    const data = state.data[state.itemType]
+  incrementLastPage (state, { itemType }) {
+    const data = state.data[itemType]
     data.lastPage = data.lastPage + 1
   },
   setMoreAvailable (state, payload) {
-    const data = state.data[state.itemType]
+    const data = state.data[payload.itemType]
     data.moreAvailable = payload.moreAvailable
   },
   updateUser (state, payload) {
@@ -49,7 +49,7 @@ const mutations = {
       }
     }
   },
-  ensureState (state) {
+  ensureState (state, { itemType }) {
     const data = state.data[state.itemType]
     if (!data) {
       Vue.set(state.data, state.itemType, baseData())
@@ -77,8 +77,9 @@ const mutations = {
 
 const actions = {
   async fetchItems ({ state, commit, dispatch }) {
-    commit('ensureState')
-    if (state.data[state.itemType].fetchLock) { return }
+    const itemType = state.itemType
+    commit('ensureState', { itemType })
+    if (state.data[itemType].fetchLock) { return }
     try {
       commit('setFetchLock', { lock: true })
       commit('resetToBaseState')
@@ -106,7 +107,7 @@ const actions = {
       page: page + 1 // API is 1-indexed
     }
 
-    commit('ensureState')
+    commit('ensureState', { itemType })
     let items
     try {
       switch (state.itemType) {
@@ -120,8 +121,8 @@ const actions = {
     } finally {
       commit('setFetchLock', { lock: false })
     }
-    commit('incrementLastPage')
-    commit('setMoreAvailable', { moreAvailable: items.length >= params.pageSize })
+    commit('incrementLastPage', { itemType })
+    commit('setMoreAvailable', { moreAvailable: items.length >= params.pageSize, itemType })
     if (items.length > 0) {
       commit('setSearchHasSucceeded', { succeeded: true })
     } else if (!state.data[state.itemType].searchHasSucceeded) {
