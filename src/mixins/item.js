@@ -109,7 +109,7 @@ export default {
           lng: this.currentUser.place.longitude
         }
       const center = this.distanceCenter || currentUserCenter
-      if (!center || !this.place.public) { return null }
+      if (!center) { return null }
       return distanceHaversine(
         this.place.latitude || this.place.fuzzyLatitude,
         this.place.longitude || this.place.fuzzyLongitude,
