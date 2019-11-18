@@ -1,7 +1,6 @@
 class PublicUserSerializer < BaseSerializer
   set_type :user
   has_many :children, serializer: ChildSerializer
-  has_one :showcase_event, record_type: :event, serializer: EventSerializer
   belongs_to :place
 
   attributes(*User::PUBLIC_ATTRIBUTES)

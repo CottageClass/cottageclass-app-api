@@ -5,10 +5,8 @@ class Event < ApplicationRecord
 
   PAST_PENALTY = 31_557_600 # seconds in a year
 
-  after_create :post_create
+  after_create :add_host_participant
   before_destroy :notify_participants_destruction
-  before_destroy :remove_user_showcase
-  after_destroy :update_user_showcase
 
   belongs_to :event_series, inverse_of: :events
   has_one :place,
@@ -66,6 +64,20 @@ class Event < ApplicationRecord
     in_instance_time_zone(starts_at).strftime('%B %e, %Y').try :squish
   end
 
+  def start_date_abbreviated_short_month
+    in_instance_time_zone(starts_at).strftime('%b %-e').try :squish
+  end
+
+  def image
+    if images.present?
+      images[0]
+    elsif place.images.present?
+      place.images[0]
+    else
+      user.avatar
+    end
+  end
+
   def start_date_abbreviated
     in_instance_time_zone(starts_at).strftime('%-m/%-e').try :squish
   end
@@ -89,12 +101,6 @@ class Event < ApplicationRecord
 
   def start_time
     in_instance_time_zone(starts_at).strftime('%l:%M %P')
-  end
-
-  def update_recency_score
-    seconds_since_created = (Time.current - created_at) / 1.second
-    past = (ends_at < Time.current + 1.hour)
-    update_column :recency_score, seconds_since_created + (past ? PAST_PENALTY : 0)
   end
 
   def notify
@@ -131,17 +137,11 @@ class Event < ApplicationRecord
 
   private
 
-  def remove_user_showcase
-    user.update_column :showcase_event_id, nil if user.showcase_event.try(:id) == id
-  end
-
-  def update_user_showcase
-    user.update_showcase_event
-  end
-
-  def post_create
-    update_recency_score
-    update_user_showcase
+  def add_host_participant
+    participant_children = user.children.map { |child| ParticipantChild.create child: child, participable: self }
+    host_participant = participants.build user: user, participant_children: participant_children
+    host_participant.save
+    save!
   end
 
   def notify_participants_destruction

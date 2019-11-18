@@ -3,7 +3,7 @@
     <div class="selectors-group">
       <FilterSelector title="Distance" :showClear="false" :active="shortDescription" >
         <template v-slot:buttonContents>
-          <LocationFilterButton :shortDescription="shortDescription" />
+          <LocationFilterButton :shortDescription="shortDescription" :maxDistance="maxDistance" />
         </template>
         <template v-slot:selectorContents>
           <LocationFilterSelector
@@ -88,6 +88,9 @@ export default {
     },
     shortDescription () {
       return this.mapArea.shortDescription
+    },
+    maxDistance () {
+      return Math.round(this.mapArea.maxDistance)
     },
     ...mapGetters(['mapArea', 'ageRange', 'eventTime'])
   },

@@ -20,10 +20,12 @@ export default {
   },
   components: { LoadingSpinner },
   mounted () {
-    this.observationTarget = document.querySelector('.event-list__view-more-link')
+    this.observationTarget = document.querySelector('.events-list__view-more')
     if (this.observationTarget) {
-      this.observer = new IntersectionObserver((entries) => {
-        this.$emit('fetch-more-click')
+      this.observer = new IntersectionObserver((entries, observer) => {
+        if (entries[0].isIntersecting && !this.awaiting) {
+          this.$emit('fetch-more-click')
+        }
       })
       this.observer.observe(this.observationTarget)
     }

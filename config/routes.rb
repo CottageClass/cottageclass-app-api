@@ -83,7 +83,7 @@ Rails.application.routes.draw do
                                                                               as: :participated_events
       end
     end
-    resources :place, only: %i[] do
+    resources :places, only: %i[show update] do
       resource :events, only: %i[] do
         collection do
           get '(/:skope)(/page/:page/page_size/:page_size)', to: 'events#place',

@@ -53,7 +53,9 @@ const actions = {
   },
   async setMapArea ({ commit, dispatch }, payload) {
     commit('mutateMapArea', payload)
-    return dispatch('fetchItems')
+    if (!payload.skipSearchUpdate) {
+      return dispatch('fetchItems')
+    }
   },
   async setAgeRange ({ commit, dispatch }, payload) {
     commit('mutateAgeRange', payload)

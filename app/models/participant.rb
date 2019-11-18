@@ -1,7 +1,6 @@
 class Participant < ApplicationRecord
   validates_associated :participant_children
   validate do |instance|
-    instance.errors.add :base, :invalid, message: 'must have at least one child' if instance.participant_children.blank?
     if instance.participable.present? &&
        instance.participable.maximum_children.positive? && (
         instance.participable.participant_children.size + instance.participant_children.size
@@ -28,8 +27,10 @@ class Participant < ApplicationRecord
   after_create :notify
 
   def notify
-    participable.notifications.participant_creation.where(recipient: user).first_or_create
-    participable.notifications.participant_creation_host.where(recipient: participable.user)
-      .first_or_create participant: self
+    participable.notifications.participant_creation.where(recipient: user).first_or_create if user.id != participable.user.id
+    if user.id != participable.user.id
+      participable.notifications.participant_creation_host.where(recipient: participable.user)
+        .first_or_create participant: self
+    end
   end
 end

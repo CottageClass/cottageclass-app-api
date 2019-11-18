@@ -14,8 +14,12 @@ describe('Search', () => {
       const actions = {
         fetchUpcomingEventsWithinDistance: jest.fn()
       }
+      const mutations = {
+        resetFetchLocks: jest.fn()
+      }
       const $store = new Vuex.Store({
         actions,
+        mutations,
         getters: {
           currentUser () { return null },
           showFetchMoreButton () { return false },

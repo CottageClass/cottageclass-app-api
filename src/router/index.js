@@ -4,6 +4,7 @@ import Router from 'vue-router'
 import UserPage from '@/views/UserPage.vue'
 import SplashPage from '@/views/SplashPage.vue'
 import EventPage from '@/views/EventPage.vue'
+import PlacePage from '@/views/PlacePage'
 import Search from '@/views/Search.vue'
 import Chats from '@/views/Chats.vue'
 import Conversation from '@/views/Conversation.vue'
@@ -21,7 +22,6 @@ import ErrorPage from '@/views/ErrorPage'
 import FlowPage from '@/views/FlowPage.vue'
 import ProfileCollection from '@/views/ProfileCollection.vue'
 import NewEvent from '@/views/NewEvent.vue'
-import CancelRSVP from '@/components/CancelRSVP.vue'
 import SocialInvite from '@/views/SocialInvite.vue'
 import Onboarding from '@/views/Onboarding.vue'
 import RsvpInfoCollection from '@/components/RsvpInfoCollection.vue'
@@ -75,12 +75,6 @@ export default new Router({
           props: {
             context: true
           }
-        },
-        {
-          path: '/rsvp/:eventId/cancel',
-          name: 'CancelRSVP',
-          component: CancelRSVP,
-          props: true
         },
         {
           path: '/events/new/:stepName?',
@@ -175,6 +169,12 @@ export default new Router({
       path: '/event/:id/',
       name: 'EventPage',
       component: EventPage,
+      props: true
+    },
+    {
+      path: '/places/:id/',
+      name: 'PlacePage',
+      component: PlacePage,
       props: true
     },
     {

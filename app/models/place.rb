@@ -5,6 +5,10 @@ class Place < ApplicationRecord
              foreign_key: :user_id
   has_many :event_series, inverse_of: :place, dependent: :destroy
   has_many :events, through: :event_series, inverse_of: :place
+  has_many :upcoming_events,
+           -> { upcoming },
+           source: :events,
+           through: :event_series
   has_many :users, inverse_of: :place
 
   alias_attribute :creator_id, :user_id

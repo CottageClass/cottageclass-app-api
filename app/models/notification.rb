@@ -107,17 +107,17 @@ class Notification < ApplicationRecord
                  when :user_suggestion
                    self.body = 'messages.user_suggestion'
                    Notifier::UserSuggestion.new user: recipient,
-                                                suggested_user: notifiable,
+                                                notifiable_user: notifiable,
                                                 body: body
                  when :event_creation_starrer
                    self.body = 'messages.event_creation_starrer'
                    Notifier::EventCreationStarrer.new user: recipient,
-                                                      event_creator: notifiable,
+                                                      notifiable_user: notifiable,
                                                       body: body
                  when :event_creation_match
                    self.body = 'messages.event_creation_match'
                    Notifier::EventCreationMatch.new user: recipient,
-                                                    event_creator: notifiable,
+                                                    notifiable_user: notifiable,
                                                     body: body
                  when :daily_digest
                    self.body = 'messages.daily_digest'
@@ -130,8 +130,10 @@ class Notification < ApplicationRecord
                      sender_kids_ages = '1 kid age ' + display_age(ages[0], 'mo')
                    else
                      display_ages = ages.map { |age| display_age(age, 'mo') }
-                     and_join_ages = display_ages.slice(0, display_ages.length - 1).join(', ') + ' and ' + display_ages[-1]
-                     sender_kids_ages = ages.count.to_s + ' kids ages ' + and_join_ages
+                     if display_ages.present?
+                       and_join_ages = display_ages.slice(0, display_ages.length - 1).join(', ') + ' and ' + display_ages[-1]
+                       sender_kids_ages = ages.count.to_s + ' kids ages ' + and_join_ages
+                     end
                    end
                    self.body = I18n.t 'messages.chat_message_received',
                                       sender_first_name: notifiable.sender.first_name,
@@ -139,6 +141,7 @@ class Notification < ApplicationRecord
                                       sender_kids_ages: sender_kids_ages,
                                       message_link: ENV['LINK_HOST'] + '/chat/' + notifiable.sender.id.to_s
                    Notifier::ChatMessageReceived.new user: recipient,
+                                                     message: notifiable,
                                                      body: body
                  end
 

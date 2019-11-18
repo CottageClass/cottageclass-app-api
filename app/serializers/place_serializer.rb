@@ -2,6 +2,7 @@ class PlaceSerializer < BaseSerializer
   full_information = proc { |record, params|
     record.public || params[:current_users_place]
   }
+  has_many :upcoming_events, serializer: EventSerializer
 
   # private aspects of place
   attribute :id, if: full_information
@@ -28,5 +29,7 @@ class PlaceSerializer < BaseSerializer
              :fuzzy_longitude,
              :postal_code,
              :country,
-             :name
+             :name,
+             :description,
+             :images
 end
