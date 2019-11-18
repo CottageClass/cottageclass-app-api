@@ -7,6 +7,7 @@
         ref="lightbox"
         :images="lightboxImages"
         :showLightBox="false"
+        v-on:onOpened="toggleLightBox($event)"
       />
     </LightBoxStyleWrapper>
     <LoadingSpinner v-if="!user" />
@@ -166,7 +167,8 @@ export default {
       mapOptions: {
         'disableDefaultUI': true, // turns off map controls
         'gestureHandling': 'none' // prevents any kind of scrolling
-      }
+      },
+      showLightBox: false
     }
   },
   computed: {
@@ -182,7 +184,7 @@ export default {
       return this.user
     },
     showLikeUserCard () {
-      if (!this.user) { return false }
+      if (!this.user || this.showLightBox) { return false }
       if (this.currentUser) {
         return (this.user.id !== this.currentUser.id) &&
                !this.isStarred &&

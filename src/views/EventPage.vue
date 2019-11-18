@@ -181,9 +181,6 @@ export default {
     ...mapGetters(['isRsvpDeclined', 'items', 'mapArea'])
   },
   methods: {
-    toggleLightBox (e) {
-      this.showLightBox = e
-    },
     updateEvent (e) {
       this.event = e.event
     },
