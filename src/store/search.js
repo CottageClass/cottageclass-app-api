@@ -15,15 +15,11 @@ const mutations = {
       Vue.set(state.data, state.itemType)
     }
   },
-  addItems (state, payload) {
-    const items = payload.items
+  setPageItems (state, payload) {
     if (!state.data[state.itemType]) {
       Vue.set(state.data, state.itemType, baseData())
     }
-    if (!state.data[state.itemType].items) {
-      Vue.set(state.data[state.itemType], 'items', [])
-    }
-    Vue.set(state.data[state.itemType], 'items', state.data[state.itemType].items.concat(items))
+    Vue.set(state.data[state.itemType].pages, payload.page, payload.items)
   },
   incrementLastPage (state) {
     const data = state.data[state.itemType]
@@ -96,6 +92,7 @@ const actions = {
     if (state.data[state.itemType].fetchLock) { return }
     commit('setFetchLock', { lock: true })
     const data = state.data[state.itemType]
+    const page = data.lastPage
     const params = {
       pageSize: 10,
       minAge: getters.ageRange.min,
@@ -105,7 +102,7 @@ const actions = {
       lng: getters.mapArea.center.lng,
       date: getters.eventTime.date,
       weekday: getters.eventTime.weekday,
-      page: data.lastPage + 1
+      page: page + 1 // API is 1-indexed
     }
 
     commit('ensureState')
@@ -129,7 +126,7 @@ const actions = {
     } else if (!state.data[state.itemType].searchHasSucceeded) {
       dispatch('expandRadiusAndFetchAgain')
     }
-    commit('addItems', { items })
+    commit('setPageItems', { items, page })
   },
 
   async expandRadiusAndFetchAgain ({ dispatch }) {
@@ -139,8 +136,18 @@ const actions = {
 
 const getters = {
   currentData: state => key => state.data[state.itemType],
-  items: state => {
-    try { return state.data[state.itemType].items } catch (e) { return null }
+  items (state) {
+    const data = state.data[state.itemType]
+    try {
+      if (data.pages.length === 0) {
+        return null
+      }
+      return data.pages.reduce((items, page) => {
+        return items.concat(page)
+      }, [])
+    } catch (e) {
+      return null
+    }
   },
   showFetchMoreButton: state => {
     try { return state.data[state.itemType].moreAvailable } catch (e) { return false }
@@ -158,7 +165,7 @@ function baseData () {
   return {
     lastPage: 0,
     moreAvailable: false,
-    items: null,
+    pages: [],
     fetchLock: false
   }
 }
