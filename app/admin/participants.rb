@@ -5,8 +5,6 @@ ActiveAdmin.register Participant do
 
   actions :index, :new, :create, :edit, :update, :destroy
 
-  permit_params participant_children_attributes: %i[id child_id _destroy]
-
   filter :created_at
 
   index do
@@ -35,9 +33,6 @@ ActiveAdmin.register Participant do
       f.li do
         f.label :updated_at
         f.span f.object.updated_at
-      end
-      f.has_many :participant_children, allow_destroy: true do |participant_child_f|
-        participant_child_f.input :child, collection: f.object.user.children
       end
     end
     f.actions
