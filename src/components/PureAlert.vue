@@ -2,7 +2,8 @@
   <div>
     <transition name="slide">
       <div v-if="show"
-           :class="['alert-container', 'alert-' + alertData.status,  state].join(' ')"
+           class="alert-container"
+           :class="`alert-${alertData.status} ${state}${accomodateNotch ? ' accomodateNotch' : ''}${accomodateStatusBar ? ' accomodateStatusBar' : ''}`"
            ref="alertRef">
         <span v-html="alertData.message" />
       </div>
@@ -19,8 +20,11 @@
 </template>
 
 <script>
+import { platform } from '@/mixins'
+
 export default {
   name: 'PureAlert',
+  mixins: [platform],
   props: ['alert'],
   data () {
     return {
@@ -101,16 +105,20 @@ export default {
   justify-content: center;
   align-items: center;
   z-index: 999;  // this is less than the modal index
-}
-
-.alert-success {
-  background-color: #c1ffda;
-  color: rgb(12, 186, 82);
-}
-
-.alert-failure {
-  background-color: #ffbebe;
-  color: #c73200;
+  &.accomodateNotch {
+    padding-top: 35px;
+  }
+  &.accomodateStatusBar {
+    padding-top: 18px;
+  }
+  &.alert-success {
+    background-color: #c1ffda;
+    color: rgb(12, 186, 82);
+  }
+  &.alert-failure {
+    background-color: #ffbebe;
+    color: #c73200;
+  }
 }
 
 @media (max-width: 479px) {
