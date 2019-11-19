@@ -11,6 +11,7 @@
         ref="lightbox"
         :images="lightboxImages"
         :showLightBox="false"
+        v-on:onOpened="setLightBox($event)"
       />
     </LightBoxStyleWrapper>
     <LoadingSpinner v-if="!event" />
@@ -116,12 +117,12 @@ import EventSearchListCard from '@/components/search/EventSearchListCard'
 
 import { mapGetters } from 'vuex'
 import { fetchEventsByPlace, fetchEvent } from '@/utils/api'
-import { item, maps, rsvp } from '@/mixins'
+import { item, maps, rsvp, lightbox } from '@/mixins'
 
 export default {
   name: 'EventPage',
   components: { MainNav, Images, LoadingSpinner, Attendee, OtherEvent, RSVPCard, LightBox, LightBoxStyleWrapper, DeleteEventConfirmationModal, EventSearchListCard },
-  mixins: [item, maps, rsvp],
+  mixins: [item, maps, rsvp, lightbox],
   props: { showDeleteConfirmationModal: { default: false } },
   data () {
     return {
@@ -131,6 +132,7 @@ export default {
         'disableDefaultUI': true, // turns off map controls
         'gestureHandling': 'none' // prevents any kind of scrolling
       },
+      showLightBox: false,
       otherEvents: null
     }
   },
@@ -165,7 +167,7 @@ export default {
       })
     },
     showRsvpCard () {
-      if (!this.event || this.timePast) { return false }
+      if (!this.event || this.timePast || this.showLightBox) { return false }
       if (this.currentUser) {
         return (this.event.user.id.toString() !== this.currentUser.id.toString()) &&
                !this.event.participated &&

@@ -7,6 +7,7 @@
         ref="lightbox"
         :images="lightboxImages"
         :showLightBox="false"
+        v-on:onOpened="setLightBox($event)"
       />
     </LightBoxStyleWrapper>
     <LoadingSpinner v-if="!user" />
@@ -151,14 +152,14 @@ import LoadingSpinner from '@/components/LoadingSpinner'
 import OtherEvent from '@/components/OtherEvent'
 import LightBoxStyleWrapper from '@/components/LightBoxStyleWrapper'
 
-import { item, maps } from '@/mixins'
+import { item, maps, lightbox } from '@/mixins'
 import { fetchUser, fetchUpcomingEvents } from '@/utils/api'
 import contactIcon from '@/assets/contact-black-outline.svg'
 
 export default {
   name: 'UserPage',
   components: { MainNav, Images, LoadingSpinner, AvatarImage, OtherEvent, SearchListCardActions, LikeUserCard, LightBox, LightBoxStyleWrapper },
-  mixins: [ item, maps ],
+  mixins: [ item, maps, lightbox ],
   data () {
     return {
       user: null,
@@ -166,7 +167,8 @@ export default {
       mapOptions: {
         'disableDefaultUI': true, // turns off map controls
         'gestureHandling': 'none' // prevents any kind of scrolling
-      }
+      },
+      showLightBox: false
     }
   },
   computed: {
@@ -182,7 +184,7 @@ export default {
       return this.user
     },
     showLikeUserCard () {
-      if (!this.user) { return false }
+      if (!this.user || this.showLightBox) { return false }
       if (this.currentUser) {
         return (this.user.id !== this.currentUser.id) &&
                !this.isStarred &&
