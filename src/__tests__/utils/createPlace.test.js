@@ -60,7 +60,6 @@ describe('createPlace', () => {
             'https://res.cloudinary.com/cottageclass2/image/upload/v1573008553/uvboncycbu8qd7hntxaa.jpg'
           ],
           'description': '',
-          'maximum_children': 4,
           'child_age_minimum': 0,
           'child_age_maximum': 0,
           'starts_at': '2019-11-07T00:45:00-05:00',
@@ -93,7 +92,6 @@ describe('createPlace', () => {
           'name': 'fff',
           'images': [],
           'description': '',
-          'maximum_children': 4,
           'child_age_minimum': 0,
           'child_age_maximum': 0,
           'starts_at': '2019-11-13T02:00:00-05:00',
@@ -128,7 +126,6 @@ describe('createPlace', () => {
             'https://res.cloudinary.com/cottageclass2/image/upload/v1572902957/zasrziw8guoizwvhrawk.jpg'
           ],
           'description': '',
-          'maximum_children': 4,
           'child_age_minimum': 0,
           'child_age_maximum': 0,
           'starts_at': '2019-11-13T03:00:00-05:00',
@@ -163,7 +160,6 @@ describe('createPlace', () => {
             'https://res.cloudinary.com/cottageclass2/image/upload/c_thumb,g_custom/v1572901855/lcpoc05ty1x6erssgl23.jpg'
           ],
           'description': '',
-          'maximum_children': 4,
           'child_age_minimum': 0,
           'child_age_maximum': 0,
           'starts_at': '2019-11-14T00:00:00-05:00',
