@@ -1,7 +1,7 @@
 <template>
   <Question
     title="Describe your playdate"
-    subtitle="Be sure to include a short description of what you'd like to do or, if you're meeting in a public place, what the plan will be."
+    :subtitle= subtitleText
     class="unpadded">
     <FormWithTextArea
       class="short"
@@ -33,7 +33,7 @@ import { createWidget } from '@/utils/vendor/cloudinary'
 export default {
   name: 'EventOverview',
   components: { Question, FormWithTextArea, Images },
-  props: ['value'],
+  props: ['value', 'public'],
   data () {
     return {
       name: this.value.name,
@@ -41,6 +41,7 @@ export default {
       description: this.value.description,
       cloudinaryUploadWidget: null,
       defaultSubtitle: "Describe a playdate you'd like to host in your home or public space. It can be a one-time event (like a trip to the zoo) or something you can offer on a regular basis, like arts & crafts, indoor play, or a playground hangout!"
+
     }
   },
   methods: {
@@ -76,6 +77,11 @@ export default {
   computed: {
     errorMessage () {
       return (this.name && this.name.length >= 1) ? null : 'Please enter a name for your playdate.'
+    },
+    subtitleText () {
+      let text = "Be sure to include a short description of what you'd like to do or, if you're meeting in a public place, what the plan will be."
+      if (this.public === false) { text += ' If you have any pets, please let parents know in case children have phobias or allergies.' }
+      return text
     }
   },
   created () {

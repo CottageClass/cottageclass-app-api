@@ -39,7 +39,8 @@ const actions = {
       commit('setCurrentUser', { user: currentUser })
       if (currentUser.place) {
         dispatch('setMapArea', {
-          center: { lat: currentUser.place.latitude, lng: currentUser.place.longitude }
+          center: { lat: currentUser.place.latitude, lng: currentUser.place.longitude },
+          skipSearchUpdate: payload.skipSearchUpdate
         })
       }
     }

@@ -70,8 +70,9 @@ class API::UsersController < API::BaseController
       earliest_birthday = (Time.current - (max_age + 1).year.seconds)
       latest_birthday = (Time.current - min_age.year.seconds)
       time_range = earliest_birthday..latest_birthday
+      parent_ids = Child.where(birthday: time_range).pluck(:parent_id).uniq
 
-      users = users.joins(:children).where('children.birthday' => time_range)
+      users = users.where id: parent_ids
     end
 
     miles = miles.to_f
@@ -79,10 +80,7 @@ class API::UsersController < API::BaseController
       location = []
       location = [latitude, longitude] if [latitude, longitude].all?(&:present?)
       location = [current_user.place.latitude, current_user.place.longitude] if location.blank? && current_user.present?
-      if location.all?(&:present?)
-        place_ids = Place.near(location.map(&:to_f), miles).to_a.pluck :id
-        users = users.joins(:place).where('place_id IN (?)', place_ids)
-      end
+      users = users.near(location.map(&:to_f), miles)
     end
 
     links = {}
@@ -114,9 +112,6 @@ class API::UsersController < API::BaseController
                                  :first_name,
                                  :last_name,
                                  :avatar,
-                                 :pet_description,
-                                 :has_pet,
-                                 :house_rules,
                                  :phone_country_code,
                                  :phone_area_code,
                                  :phone_number,

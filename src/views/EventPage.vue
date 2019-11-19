@@ -11,6 +11,7 @@
         ref="lightbox"
         :images="lightboxImages"
         :showLightBox="false"
+        v-on:onOpened="setLightBox($event)"
       />
     </LightBoxStyleWrapper>
     <LoadingSpinner v-if="!event" />
@@ -26,8 +27,9 @@
         :distanceCenter="mapArea.center"
         @interested-click="interestedClickAndUpdate('card')"
         @contact-click="contactClick"
+        @event-updated="updateEvent"
         @going-click="goingClick"
-        @user-updated="$emit('user-updated', $event)"
+        @user-updated="updateUser"
       />
 
       <div class="event-detail__content-columns w-row">
@@ -73,15 +75,13 @@
             <div v-if="profileBlurb" class="about-the-host__bio">
               <div class="about-the-host__bio-text">{{profileBlurb}}</div>
             </div>
-            <router-link :to="{name: 'UserPage', params: {id: this.user.id}}" class="btn__more-about-host w-button">
-              More about this host
-            </router-link>
-          </div>
-          <div v-if="petDescription" class="pets__card">
-            <div class="pets__title-text">Pets</div>
-            <div class="card__description-and-icon-container w-clearfix">
-              <img :src="petsImage" width="100" height="100" alt="" class="pets__image" />
-              <div class="pets__text">{{petDescription}}</div>
+            <div class="more-about-buttons">
+              <router-link :to="{name: 'UserPage', params: {id: this.user.id}}" class="btn__more-about-host w-button">
+                More about this host
+              </router-link>
+              <router-link v-if="this.place.public === true" :to="{name: 'PlacePage', params: {id: this.place.id}}" class="btn__more-about-host w-button">
+                More about this place
+              </router-link>
             </div>
           </div>
         </div>
@@ -115,16 +115,14 @@ import LightBoxStyleWrapper from '@/components/LightBoxStyleWrapper'
 import DeleteEventConfirmationModal from '@/components/DeleteEventConfirmationModal.vue'
 import EventSearchListCard from '@/components/search/EventSearchListCard'
 
-import petsImage from '@/assets/pets.svg'
-
 import { mapGetters } from 'vuex'
 import { fetchEventsByPlace, fetchEvent } from '@/utils/api'
-import { item, maps, rsvp } from '@/mixins'
+import { item, maps, rsvp, lightbox } from '@/mixins'
 
 export default {
   name: 'EventPage',
   components: { MainNav, Images, LoadingSpinner, Attendee, OtherEvent, RSVPCard, LightBox, LightBoxStyleWrapper, DeleteEventConfirmationModal, EventSearchListCard },
-  mixins: [item, maps, rsvp],
+  mixins: [item, maps, rsvp, lightbox],
   props: { showDeleteConfirmationModal: { default: false } },
   data () {
     return {
@@ -134,6 +132,7 @@ export default {
         'disableDefaultUI': true, // turns off map controls
         'gestureHandling': 'none' // prevents any kind of scrolling
       },
+      showLightBox: false,
       otherEvents: null
     }
   },
@@ -168,7 +167,7 @@ export default {
       })
     },
     showRsvpCard () {
-      if (!this.event || this.timePast) { return false }
+      if (!this.event || this.timePast || this.showLightBox) { return false }
       if (this.currentUser) {
         return (this.event.user.id.toString() !== this.currentUser.id.toString()) &&
                !this.event.participated &&
@@ -179,10 +178,13 @@ export default {
     user () {
       return this.event && this.event.user
     },
-    petsImage: () => petsImage,
     ...mapGetters(['isRsvpDeclined', 'items', 'mapArea'])
   },
   methods: {
+    updateEvent (e) {
+      this.event = e.event
+      this.$store.commit('updateEvent', { event: this.event })
+    },
     async interestedClickAndUpdate () {
       this.event.user = await this.interestedClick()
     },
@@ -193,8 +195,8 @@ export default {
       this.debug('handle')
       this.$refs.lightbox.showImage(payload)
     },
-    updateUser (user) {
-      this.event.user = user
+    updateUser (payload) {
+      this.event.user = payload.user
     },
     fetchEvent: async function (id = this.$route.params.id) {
       try {
@@ -436,7 +438,7 @@ a {
 }
 
 .btn__more-about-host {
-  display: block;
+  display: inline-block;
   margin-right: 10px;
   padding: 4px 16px 5px;
   border: 1px solid transparent;
@@ -484,52 +486,12 @@ a {
   line-height: 24px;
 }
 
-.pets__card {
-  position: static;
-  display: flex;
-  margin-top: 16px;
-  margin-bottom: 16px;
-  padding: 16px 20px 20px;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  border-bottom: 1px solid #f5f5f5;
-  background-color: #fff;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.08);
-  list-style-type: none;
-}
-
-.pets__title-text {
-  margin-bottom: 16px;
-  font-size: 16px;
-  line-height: 24px;
-}
-
-.pets__text {
-  font-size: 13px;
-  line-height: 19px;
-}
-
 .card__description-and-icon-container {
   position: relative;
   width: 100%;
 }
 
 .house__image {
-  position: static;
-  left: auto;
-  top: 16px;
-  right: 16px;
-  bottom: auto;
-  width: 60px;
-  height: 60px;
-  margin-top: -37px;
-  margin-bottom: 10px;
-  margin-left: 10px;
-  float: right;
-}
-
-.pets__image {
   position: static;
   left: auto;
   top: 16px;
@@ -665,16 +627,6 @@ a {
     line-height: 18px;
   }
 
-  .pets__card {
-    padding: 16px 16px 24px;
-    border-radius: 0;
-  }
-
-  .pets__title-text {
-    font-size: 14px;
-    line-height: 18px;
-  }
-
   .list {
     margin-bottom: 0;
   }
@@ -682,6 +634,12 @@ a {
 }
 
 @media (max-width: 479px){
+  .more-about-buttons {
+     margin-bottom: -20px
+  }
+  .btn__more-about-host {
+     margin-bottom: 20px
+  }
   .column-list {
     flex-direction: column;
     width:100%;

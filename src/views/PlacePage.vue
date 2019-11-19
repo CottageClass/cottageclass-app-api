@@ -23,9 +23,11 @@
             <div class="ratings-link-text">{{ numberOfReviews }} reviews</div>
           </a>
         </div>
-        <div class="place-event-summary"><a href="#events" class="link-block-2 w-inline-block"><img src="@/assets/mdi_calendar_today.svg" alt="" />
-          <div class="events-link-text">{{ numberOfEvents }} events happening</div>
-        </a></div>
+        <div class="place-event-summary">
+          <div class="link-block-2 w-inline-block"><img src="@/assets/mdi_calendar_today.svg" alt="" />
+            <div class="events-link-text">{{ numberOfEvents }} events happening</div>
+          </div>
+        </div>
         <div class="place-event-desc">
           <div class="text-block-13">{{ placeDescription }}</div>
         </div>
@@ -96,7 +98,7 @@ export default {
       return 0
     },
     placeCenter () {
-      return { lat: this.place.fuzzyLatitude, lon: this.place.fuzzyLongitude }
+      return { lat: this.place.fuzzyLatitude, lng: this.place.fuzzyLongitude }
     },
     placeDescription () {
       return this.place.description
@@ -156,7 +158,7 @@ export default {
           transformation = 'c_thumb,g_custom/'
         }
         const imageUrl = 'https://res.cloudinary.com/' + process.env.CLOUDINARY_CLOUD_NAME + '/image/upload/' + transformation + result.info.path
-        this.images.push(imageUrl)
+        this.place.images.push(imageUrl)
         this.submitPlaceData()
         this.disableForm = false
       }

@@ -7,14 +7,15 @@
         ref="lightbox"
         :images="lightboxImages"
         :showLightBox="false"
+        v-on:onOpened="setLightBox($event)"
       />
     </LightBoxStyleWrapper>
     <LoadingSpinner v-if="!user" />
     <div class="profile__container w-container" v-else>
       <LikeUserCard v-if="showLikeUserCard"
                     :userFirstName="user.firstName"
-                    @like-user-click="interestedClickAndUpdate"
-                    @dislike-user-click="dislikeUserHandler('top card')"
+                    @primary-button-click="contactClick"
+                    @secondary-button-click="dislikeUserHandler('top card')"
       />
       <div class="profile-top-card__container">
         <div class="profile__user-basics-container">
@@ -120,13 +121,6 @@
             </ul>
           </div>
           <div class="event-detail__map map" ref="map"></div>
-          <div v-if="petDescription" class="pets__card">
-            <div class="pets__title-text">Pets</div>
-            <div class="card__description-and-icon-container w-clearfix">
-              <img src="@/assets/pets.svg" width="100" height="100" alt="" class="pets__image" />
-              <div class="pets__text">{{ petDescription }}</div>
-            </div>
-          </div>
         </div>
         <div class="profile-detail__column-right w-col w-col-4 w-col-stack">
           <ul class="other-events__list">
@@ -158,14 +152,14 @@ import LoadingSpinner from '@/components/LoadingSpinner'
 import OtherEvent from '@/components/OtherEvent'
 import LightBoxStyleWrapper from '@/components/LightBoxStyleWrapper'
 
-import { item, maps } from '@/mixins'
+import { item, maps, lightbox } from '@/mixins'
 import { fetchUser, fetchUpcomingEvents } from '@/utils/api'
 import contactIcon from '@/assets/contact-black-outline.svg'
 
 export default {
   name: 'UserPage',
   components: { MainNav, Images, LoadingSpinner, AvatarImage, OtherEvent, SearchListCardActions, LikeUserCard, LightBox, LightBoxStyleWrapper },
-  mixins: [ item, maps ],
+  mixins: [ item, maps, lightbox ],
   data () {
     return {
       user: null,
@@ -173,7 +167,8 @@ export default {
       mapOptions: {
         'disableDefaultUI': true, // turns off map controls
         'gestureHandling': 'none' // prevents any kind of scrolling
-      }
+      },
+      showLightBox: false
     }
   },
   computed: {
@@ -189,7 +184,7 @@ export default {
       return this.user
     },
     showLikeUserCard () {
-      if (!this.user) { return false }
+      if (!this.user || this.showLightBox) { return false }
       if (this.currentUser) {
         return (this.user.id !== this.currentUser.id) &&
                !this.isStarred &&
@@ -239,8 +234,8 @@ export default {
         await this.addCircle(center, 0.2)
       })
     },
-    updateUser (user) {
-      this.user = user
+    updateUser (payload) {
+      this.user = payload.user
     }
   },
   watch: {
@@ -414,52 +409,12 @@ a {
   background-color: rgba(0, 0, 0, 0.03);
 }
 
-.pets__card {
-  position: static;
-  display: flex;
-  margin-top: 16px;
-  margin-bottom: 16px;
-  padding: 16px 20px 20px;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  border-bottom: 1px solid #f5f5f5;
-  background-color: #fff;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.08);
-  list-style-type: none;
-}
-
-.pets__title-text {
-  margin-bottom: 16px;
-  font-size: 16px;
-  line-height: 24px;
-}
-
-.pets__text {
-  font-size: 13px;
-  line-height: 19px;
-}
-
 .card__description-and-icon-container {
   position: relative;
   width: 100%;
 }
 
 .house__image {
-  position: static;
-  left: auto;
-  top: 16px;
-  right: 16px;
-  bottom: auto;
-  width: 60px;
-  height: 60px;
-  margin-top: -37px;
-  margin-bottom: 10px;
-  margin-left: 10px;
-  float: right;
-}
-
-.pets__image {
   position: static;
   left: auto;
   top: 16px;
@@ -1052,16 +1007,6 @@ a {
     -webkit-align-items: flex-start;
     -ms-flex-align: start;
     align-items: flex-start;
-  }
-
-  .pets__card {
-    padding: 16px 16px 24px;
-    border-radius: 0;
-  }
-
-  .pets__title-text {
-    font-size: 14px;
-    line-height: 18px;
   }
 
   .list {

@@ -10,6 +10,7 @@
             id="message"
             name="message"
             class="input-style w-input"
+            ref="keyboard"
           />
           <input type="submit"
                  @click.prevent="submitMessage"
@@ -28,6 +29,9 @@ export default {
   props: { value: { default: null } },
   data () {
     return { message: null }
+  },
+  mounted () {
+    this.$refs.keyboard.focus()
   },
   watch: {
     value: {
