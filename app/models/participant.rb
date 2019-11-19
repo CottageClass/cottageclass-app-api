@@ -2,9 +2,8 @@ class Participant < ApplicationRecord
   validates_associated :participant_children
   validate do |instance|
     if instance.participable.present? &&
-       instance.participable.maximum_children.positive? && (
-        instance.participable.participant_children.size + instance.participant_children.size
-      ) > instance.participable.maximum_children
+       (instance.participable.participant_children.size + instance.participant_children.size) >
+       instance.participable.maximum_children
       instance.errors.add(:base, :invalid, message: 'exceeds maximum number of children')
     end
   end
