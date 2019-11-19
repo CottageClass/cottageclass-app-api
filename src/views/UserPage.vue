@@ -13,8 +13,8 @@
     <div class="profile__container w-container" v-else>
       <LikeUserCard v-if="showLikeUserCard"
                     :userFirstName="user.firstName"
-                    @like-user-click="interestedClickAndUpdate"
-                    @dislike-user-click="dislikeUserHandler('top card')"
+                    @primary-button-click="contactClick"
+                    @secondary-button-click="dislikeUserHandler('top card')"
       />
       <div class="profile-top-card__container">
         <div class="profile__user-basics-container">
