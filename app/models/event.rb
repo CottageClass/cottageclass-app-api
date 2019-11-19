@@ -44,10 +44,6 @@ class Event < ApplicationRecord
   delegate(*User::PUBLIC_ATTRIBUTES, to: :user, prefix: :host, allow_nil: true)
   delegate :first_name, :full_address, to: :user, prefix: :host, allow_nil: true
 
-  def full?
-    maximum_children.positive? && (participant_children.count >= maximum_children)
-  end
-
   def participated?(user)
     user.present? ? participating_users.include?(user) : false
   end

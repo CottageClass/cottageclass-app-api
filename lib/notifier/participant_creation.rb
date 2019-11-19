@@ -24,7 +24,6 @@ class Notifier::ParticipantCreation < Notifier::Base
   def mail_template_parameters
     event_hash = @event.attributes.with_indifferent_access.slice :id,
                                                                  :name,
-                                                                 :maximum_children,
                                                                  :child_age_minimum,
                                                                  :child_age_maximum
 

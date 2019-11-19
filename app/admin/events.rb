@@ -8,7 +8,7 @@ ActiveAdmin.register Event do
 
   actions :index, :new, :create, :edit, :update, :destroy
 
-  permit_params :name, :starts_at, :ends_at, :maximum_children, :child_age_minimum, :child_age_maximum
+  permit_params :name, :starts_at, :ends_at, :child_age_minimum, :child_age_maximum
 
   filter :name
   filter :user_email, as: :string
@@ -38,7 +38,6 @@ ActiveAdmin.register Event do
         starts_at
         ends_at
         modified
-        maximum_children
         child_age_minimum
         child_age_maximum
         time_zone
@@ -116,7 +115,6 @@ ActiveAdmin.register Event do
       end
       f.input :starts_at, hint: 'This is in UTC'
       f.input :ends_at, hint: 'This is in UTC'
-      f.input :maximum_children
       f.input :child_age_minimum
       f.input :child_age_maximum
       f.li do

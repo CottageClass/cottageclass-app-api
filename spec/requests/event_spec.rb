@@ -222,14 +222,12 @@ RSpec.resource 'Event' do
         parameter :name, 'Name', required: true
         parameter :starts_at, 'Start Time', required: true
         parameter :ends_at, 'End Time', required: true
-        parameter :maximum_children, 'Maximum number of children allowed. Default: 0 (no limit)'
         parameter :child_age_minimum, 'Minimum age of child. Default: 0 (no limit)'
         parameter :child_age_maximum, 'Maximum age of child. Default: 0 (no limit)'
       end
 
       %i[
         name
-        maximum_children
         child_age_minimum
         child_age_maximum
       ].each do |attribute|

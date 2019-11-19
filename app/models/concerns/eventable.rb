@@ -9,7 +9,6 @@ module Eventable
     validates :name, presence: true
     validates :starts_at, presence: true
     validates :ends_at, presence: true
-    validates :maximum_children, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
     validates :child_age_minimum, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
     validates :child_age_maximum, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 
@@ -22,7 +21,6 @@ module Eventable
 
   def common_cleanup
     self.name = name.try :squish
-    self.maximum_children ||= 0
     self.child_age_minimum ||= 0
     self.child_age_maximum ||= 0
   end
