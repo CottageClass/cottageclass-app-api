@@ -6,18 +6,12 @@ RSpec.resource 'Participant' do
 
   let(:event) { create :event }
   let(:user) { create :user, :with_children }
-  let(:subject) { build :participant, :with_participant_children, participable: event, user: user }
+  let(:subject) { build :participant, participable: event, user: user }
 
   post '/api/events/:event_id/participants', format: :json do
     parameter :event_id, 'Event Identifier', required: true
-    with_options scope: :participant do
-      parameter :participant_children_attributes, 'Participant children attributes', required: true
-    end
 
     let(:event_id) { event.id }
-    let :participant_children_attributes do
-      user.children.take(1).map { |child| { child_id: child.id } }
-    end
 
     context 'authorized' do
       include_context 'authorization token'

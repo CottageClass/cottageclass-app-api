@@ -16,7 +16,6 @@ RSpec.describe Event, type: :model do
     it { is_expected.to belong_to(:event_series).inverse_of(:events) }
     it { is_expected.to have_one(:place).inverse_of(:events) }
     it { is_expected.to have_many(:participants).dependent(:destroy) }
-    it { is_expected.to have_many(:participant_children) }
     it { is_expected.to have_many(:notifications).dependent(:nullify) }
     it { is_expected.to have_many(:participating_users).through(:participants) }
   end
@@ -28,7 +27,7 @@ RSpec.describe Event, type: :model do
       subject.save
       participants_count.times do
         user_with_children = create :user, :with_children, :with_phone_number
-        create :participant, :with_participant_children, participable: subject, user: user_with_children
+        create :participant, participable: subject, user: user_with_children
       end
     end
 
@@ -50,12 +49,7 @@ RSpec.describe Event, type: :model do
     before { subject.save }
 
     let :participants do
-      participants = create_list :participant, 2, :with_participant_children, participable: subject
-      participants.each do |participant|
-        participant.participant_children.each do |participant_child|
-          participant_child.child.emergency_contacts = build_list :emergency_contact, 2, contactable: nil
-        end
-      end
+      participants = create_list :participant, 2, participable: subject
       participants
     end
 

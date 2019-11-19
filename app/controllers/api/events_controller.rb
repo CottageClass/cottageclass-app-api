@@ -5,7 +5,7 @@ class API::EventsController < API::BaseController
   before_action :requires_event_owner, only: %i[update destroy]
 
   def index
-    events = Event.includes(:user, :place, participant_children: :child, user: :children)
+    events = Event.includes(:user, :place, user: :children)
     events_index events: events.joins(:event_series),
                  skope: params[:skope],
                  miles: params[:miles],
@@ -57,7 +57,6 @@ class API::EventsController < API::BaseController
   def show
     @event = Event.eager.find_by id: params[:id]
     serializer = EventSerializer.new @event, include: %i[ participants
-                                                          participants.participant_children
                                                           user
                                                           place
                                                           user.children],
@@ -146,7 +145,6 @@ class API::EventsController < API::BaseController
     end
 
     serializer = EventSerializer.new events, include: %i[participants
-                                                         participants.participant_children
                                                          user
                                                          place],
                                              params: { current_user: current_user },
