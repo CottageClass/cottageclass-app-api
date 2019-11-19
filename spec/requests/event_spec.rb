@@ -12,7 +12,7 @@ RSpec.resource 'Event' do
       event_series = create_list :event_series, 5, user: user, place: place
       create_list(:user, 3, :with_children).each do |user|
         Event.where(event_series: event_series).find_each do |event|
-          create :participant, :with_participant_children, participable: event, user: user
+          create :participant, participable: event, user: user
         end
       end
     end
@@ -139,7 +139,7 @@ RSpec.resource 'Event' do
         another_user = create :user
         event_series = create_list :event_series, 5, user: another_user, place: place
         Event.where(event_series: event_series).find_each do |event|
-          create :participant, :with_participant_children, participable: event, user: user
+          create :participant, participable: event, user: user
         end
       end
 
@@ -173,7 +173,7 @@ RSpec.resource 'Event' do
 
     before do
       create_list(:user, 3, :with_children).each do |user|
-        create :participant, :with_participant_children, participable: subject, user: user
+        create :participant, participable: subject, user: user
       end
     end
 
@@ -185,7 +185,7 @@ RSpec.resource 'Event' do
       before do
         2.times do
           user_with_children = create :user, :with_children
-          create :participant, :with_participant_children, participable: subject, user: user_with_children
+          create :participant, participable: subject, user: user_with_children
         end
       end
 

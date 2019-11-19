@@ -47,22 +47,7 @@ class Notifier::EventReminderPreviousDayHost < Notifier::Base
                                                                                         :images,
                                                                                         :languages
 
-      participant_user_children_hash_array = participant.participant_children.map do |participant_child|
-        participant_child_hash = participant_child.child.attributes.with_indifferent_access.slice :id,
-                                                                                                  :first_name,
-                                                                                                  :school_name,
-                                                                                                  :allergies,
-                                                                                                  :dietary_restrictions,
-                                                                                                  :special_needs
-
-        emergency_contact_hash_array = participant_child.child.emergency_contacts.map do |emergency_contact|
-          emergency_contact.attributes.with_indifferent_access.slice :id, :name, :phone_number, :relationship
-        end
-        participant_child_hash.update age: participant_child.child.age, emergency_contacts: emergency_contact_hash_array
-      end
-
-      participant_user_hash.update participant_children: participant_user_children_hash_array,
-                                   phone: participant.user.phone
+      participant_user_hash.update phone: participant.user.phone
     end
     event_hash.update start_date: @event.start_date,
                       time_range: @event.time_range,

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_19_204604) do
+ActiveRecord::Schema.define(version: 2019_11_19_220555) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -210,17 +210,6 @@ ActiveRecord::Schema.define(version: 2019_11_19_204604) do
     t.datetime "updated_at"
     t.index ["notifiable_type", "notifiable_id"], name: "index_notifications_on_notifiable_type_and_notifiable_id"
     t.index ["recipient_id"], name: "index_notifications_on_recipient_id"
-  end
-
-  create_table "participant_children", force: :cascade do |t|
-    t.bigint "participant_id", null: false
-    t.string "participable_type", null: false
-    t.bigint "participable_id", null: false
-    t.bigint "child_id", null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.index ["participable_type", "participable_id", "child_id"], name: "idx_participants_on_participable_type_participable_id_child_id", unique: true
-    t.index ["participant_id"], name: "index_participant_children_on_participant_id"
   end
 
   create_table "participants", force: :cascade do |t|

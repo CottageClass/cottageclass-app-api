@@ -3,7 +3,6 @@ class Child < ApplicationRecord
   validates :birthday, presence: true
 
   belongs_to :parent, class_name: 'User', inverse_of: :children
-  has_many :participant_children, inverse_of: :child, dependent: :destroy
   has_many :emergency_contacts, as: :contactable, dependent: :destroy
 
   accepts_nested_attributes_for :emergency_contacts, allow_destroy: true, reject_if: :all_blank
