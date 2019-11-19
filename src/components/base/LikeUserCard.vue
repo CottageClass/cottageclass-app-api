@@ -4,8 +4,8 @@
     :showPrimaryStar="false"
     primaryMessage="Send a message!"
     secondaryMessage="Not right now"
-    @primary-click="$emit('contact-user-click')"
-    @secondary-click="$emit('dislike-user-click')"
+    @primary-click="$emit('primary-button-click')"
+    @secondary-click="$emit('secondary-button-click')"
   />
 </template>
 
