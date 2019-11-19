@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_19_220555) do
+ActiveRecord::Schema.define(version: 2019_11_19_223306) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -113,17 +113,6 @@ ActiveRecord::Schema.define(version: 2019_11_19_220555) do
     t.integer "platform", default: 0, null: false
     t.index ["token"], name: "index_devices_on_token"
     t.index ["user_id"], name: "index_devices_on_user_id"
-  end
-
-  create_table "emergency_contacts", force: :cascade do |t|
-    t.string "contactable_type", null: false
-    t.bigint "contactable_id", null: false
-    t.string "name"
-    t.string "phone_number"
-    t.string "relationship"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.index ["contactable_type", "contactable_id"], name: "index_emergency_contacts_on_contactable_type_and_contactable_id"
   end
 
   create_table "event_collection_memberships", force: :cascade do |t|

@@ -18,7 +18,6 @@ RSpec.describe Participant, type: :model do
   context 'notify' do
     it { expect { subject.save }.to change(Notification.participant_creation, :count).from(0).to(1) }
     it {
-      user.children.each { |child| child.emergency_contacts = build_list :emergency_contact, 2, contactable: nil }
       expect { subject.save }.to change(Notification.participant_creation_host, :count).from(0).to(1)
     }
   end

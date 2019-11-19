@@ -47,7 +47,6 @@ const parseChildData = (c) => {
   attributes.firstName = attributes.firstName && capitalize(attributes.firstName)
   return {
     id: c.id,
-    emergencyContacts: c.relationships.emergencyContacts && c.relationships.emergencyContacts.data.map(e => e.id),
     ...attributes
   }
 }
