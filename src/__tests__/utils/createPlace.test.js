@@ -194,7 +194,6 @@ describe('createPlace', () => {
             'https://res.cloudinary.com/cottageclass2/image/upload/c_thumb,g_custom/v1572986468/iuow1e19ooqojbibzzpa.jpg'
           ],
           'description': '',
-          'maximum_children': 4,
           'child_age_minimum': 0,
           'child_age_maximum': 0,
           'starts_at': '2019-11-19T00:00:00-05:00',
