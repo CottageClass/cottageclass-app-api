@@ -11,7 +11,7 @@
         ref="lightbox"
         :images="lightboxImages"
         :showLightBox="false"
-        v-on:onOpened="toggleLightBox($event)"
+        v-on:onOpened="setLightBox($event)"
       />
     </LightBoxStyleWrapper>
     <LoadingSpinner v-if="!event" />
@@ -117,12 +117,12 @@ import EventSearchListCard from '@/components/search/EventSearchListCard'
 
 import { mapGetters } from 'vuex'
 import { fetchEventsByPlace, fetchEvent } from '@/utils/api'
-import { item, maps, rsvp } from '@/mixins'
+import { item, maps, rsvp, lightbox } from '@/mixins'
 
 export default {
   name: 'EventPage',
   components: { MainNav, Images, LoadingSpinner, Attendee, OtherEvent, RSVPCard, LightBox, LightBoxStyleWrapper, DeleteEventConfirmationModal, EventSearchListCard },
-  mixins: [item, maps, rsvp],
+  mixins: [item, maps, rsvp, lightbox],
   props: { showDeleteConfirmationModal: { default: false } },
   data () {
     return {

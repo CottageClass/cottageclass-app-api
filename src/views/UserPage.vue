@@ -7,7 +7,7 @@
         ref="lightbox"
         :images="lightboxImages"
         :showLightBox="false"
-        v-on:onOpened="toggleLightBox($event)"
+        v-on:onOpened="setLightBox($event)"
       />
     </LightBoxStyleWrapper>
     <LoadingSpinner v-if="!user" />
@@ -152,14 +152,14 @@ import LoadingSpinner from '@/components/LoadingSpinner'
 import OtherEvent from '@/components/OtherEvent'
 import LightBoxStyleWrapper from '@/components/LightBoxStyleWrapper'
 
-import { item, maps } from '@/mixins'
+import { item, maps, lightbox } from '@/mixins'
 import { fetchUser, fetchUpcomingEvents } from '@/utils/api'
 import contactIcon from '@/assets/contact-black-outline.svg'
 
 export default {
   name: 'UserPage',
   components: { MainNav, Images, LoadingSpinner, AvatarImage, OtherEvent, SearchListCardActions, LikeUserCard, LightBox, LightBoxStyleWrapper },
-  mixins: [ item, maps ],
+  mixins: [ item, maps, lightbox ],
   data () {
     return {
       user: null,

@@ -322,9 +322,6 @@ export default {
       } else {
         throw Error('No valid item on this list card')
       }
-    },
-    toggleLightBox (e) {
-      this.showLightBox = e
     }
   }
 }
