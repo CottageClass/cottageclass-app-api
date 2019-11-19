@@ -5,7 +5,7 @@ ActiveAdmin.register EventSeries do
   actions :index, :new, :create, :edit, :update, :destroy
 
   permit_params :name, :description, :start_date, :starts_at, :ends_at, :repeat_for, :interval,
-                :maximum_children, :child_age_minimum, :child_age_maximum
+                :child_age_minimum, :child_age_maximum
 
   filter :name
   filter :start_date
@@ -36,7 +36,6 @@ ActiveAdmin.register EventSeries do
       f.input :ends_at
       f.input :repeat_for
       f.input :interval
-      f.input :maximum_children
       f.input :child_age_minimum
       f.input :child_age_maximum
       f.li do
