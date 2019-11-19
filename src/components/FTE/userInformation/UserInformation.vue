@@ -55,6 +55,8 @@ import AvatarUpload from '@/components/FTE/userInformation/AvatarUpload'
 import { createUser } from '@/utils//createUser'
 import { submitUserInfo } from '@/utils/api'
 import { stepNavigation } from '@/mixins'
+import { uploadImage } from '@/utils/vendor/cloudinary.js'
+
 export default {
   name: 'UserInformation',
   props: ['stepName'],
@@ -82,6 +84,7 @@ export default {
       profileBlurb: { err: null },
       maxDistance: { err: null },
       avatar: { err: null },
+      images: { err: null },
       showError: false
     }
   },
@@ -123,6 +126,7 @@ export default {
     })
   },
   methods: {
+
     async submitUserData () {
       let params = {}
       const userId = this.currentUser.id
@@ -170,8 +174,21 @@ export default {
         this.modelForCurrentStep.err = 'Sorry, there was a problem saving your information. Try again?'
       }
     },
+
+    async setFacebookImages () {
+      for (let i in this.facebookImages) {
+        let uploadedImage = await uploadImage(this.facebookImages[i])
+        this.images[i] = uploadedImage
+      }
+      console.log(this.images)
+      this.submitUserData()
+    },
+
     nextStep () {
       if (!this.validationError) {
+        if (this.stepName === 'images') {
+          this.setFacebookImages()
+        }
         if (this.stepName === this.stepSequence[this.stepSequence.length - 1]) {
           this.$emit('finished')
         } else {

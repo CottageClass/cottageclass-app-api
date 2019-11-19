@@ -6,6 +6,7 @@
               subtitle="Choose the photos that best represent you, your family, or any activities you’d like to share.">
       <div class="image-wrapper">
         <div v-for="(imageUrl, index) in facebookThumbs"
+             v-bind:key="index"
              class="image-container"
              @click="toggleImageSelection(index)">
           <img class="facebook-thumb" :src=imageUrl>
