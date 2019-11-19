@@ -177,6 +177,9 @@ export default {
     ageString () {
       return (i) => {
         const ageInMonths = this.user.childAgesInMonths[i]
+        if (ageInMonths <= 0) {
+          return '0'
+        }
         if (ageInMonths < 24) {
           return ageInMonths + (ageInMonths === 1 ? ' mo' : ' mos')
         }
