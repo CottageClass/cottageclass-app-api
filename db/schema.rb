@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_19_223306) do
+ActiveRecord::Schema.define(version: 2019_11_20_145758) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -82,6 +82,16 @@ ActiveRecord::Schema.define(version: 2019_11_19_223306) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["parent_id"], name: "index_children_on_parent_id"
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.bigint "sender_id"
+    t.bigint "group_id"
+    t.text "conent"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["group_id"], name: "index_comments_on_group_id"
+    t.index ["sender_id"], name: "index_comments_on_sender_id"
   end
 
   create_table "conversations", force: :cascade do |t|
@@ -324,6 +334,21 @@ ActiveRecord::Schema.define(version: 2019_11_19_223306) do
     t.index ["starable_type", "starable_id"], name: "index_stars_on_starable_type_and_starable_id"
   end
 
+  create_table "user_group_memberships", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "user_group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_group_id"], name: "index_user_group_memberships_on_user_group_id"
+    t.index ["user_id"], name: "index_user_group_memberships_on_user_id"
+  end
+
+  create_table "user_groups", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "user_matches", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "matched_user_id"
@@ -434,6 +459,8 @@ ActiveRecord::Schema.define(version: 2019_11_19_223306) do
   add_foreign_key "messages", "users", column: "sender_id"
   add_foreign_key "places", "users"
   add_foreign_key "stars", "users", column: "giver_id"
+  add_foreign_key "user_group_memberships", "user_groups"
+  add_foreign_key "user_group_memberships", "users"
   add_foreign_key "user_matches", "users"
   add_foreign_key "user_matches", "users", column: "matched_user_id"
   add_foreign_key "users", "places"
