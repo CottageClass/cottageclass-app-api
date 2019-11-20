@@ -34,6 +34,7 @@ import LoadingSpinner from '@/components/LoadingSpinner.vue'
 import { fetchFacebookImages } from '@/utils/vendor'
 import { minBy, maxBy } from '@/utils/utils'
 import { mapGetters } from 'vuex'
+import { uploadImage } from '@/utils/vendor/cloudinary.js'
 
 export default {
   name: 'FacebookImageSelection',
@@ -43,7 +44,9 @@ export default {
     return {
       facebookImageData: null,
       state: { },
-      selectedIndices: []
+      selectedIndices: [],
+      cloudinaryImages: [],
+      images: []
     }
   },
   methods: {
@@ -51,6 +54,7 @@ export default {
       if (!this.currentUser.facebookAccessToken) { return }
       try {
         this.facebookImageData = await fetchFacebookImages(this.currentUser.facebookAccessToken)
+        this.uploadToCloudinary()
         if (!this.facebookImageData || this.facebookImageData.length === 0) {
           this.$emit('noImages')
         }
@@ -59,7 +63,14 @@ export default {
         console.log(e)
       }
     },
-    toggleImageSelection (index) {
+    // this uploads images to cloudinary
+    uploadToCloudinary: async function () {
+      for (let i in this.facebookFullSizeImages) {
+        let new_url = await uploadImage(this.facebookFullSizeImages[i])
+        this.cloudinaryImages.push(new_url)
+      }
+    },
+    async toggleImageSelection (index) {
       // create a copy, alter it and reassign it to selectedIndices.  This will force Vue to react to the change
       const selectedIndicesCopy = this.selectedIndices.concat()
       if (this.selectedIndices.indexOf(index) >= 0) {
@@ -72,7 +83,8 @@ export default {
       this.$emit('input', this.state)
     },
     setState () {
-      this.state = this.selectedIndices.map(i => this.facebookFullSizeImages[i])
+      this.state = this.selectedIndices.map(i => this.cloudinaryImages[i])
+      this.images = this.state
     }
   },
   computed: {
@@ -90,6 +102,7 @@ export default {
       })
     },
     facebookFullSizeImages: function () {
+      console.log(this.facebookImageData)
       return this.facebookImageData.map(allSizes => {
         return maxBy(allSizes.images, oneSize => oneSize.width).source
       })

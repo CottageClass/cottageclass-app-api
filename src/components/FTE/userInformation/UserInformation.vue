@@ -18,7 +18,7 @@
       v-model="employment" />
     <FacebookImageSelection
       v-if="stepName==='images'"
-      v-model="facebookImages"
+      v-model="images"
       @pressedEnter="nextStep"
       v-on:noImages="nextStep"
       v-on:noPermissions="nextStep"
@@ -34,7 +34,7 @@
       v-model="avatar" />
     <Availability
       v-if="stepName==='availability'"
-      v-model=availability />
+      v-model="availability" />
   </div>
 </template>
 
@@ -55,7 +55,6 @@ import AvatarUpload from '@/components/FTE/userInformation/AvatarUpload'
 import { createUser } from '@/utils//createUser'
 import { submitUserInfo } from '@/utils/api'
 import { stepNavigation } from '@/mixins'
-import { uploadImage } from '@/utils/vendor/cloudinary.js'
 
 export default {
   name: 'UserInformation',
@@ -80,11 +79,10 @@ export default {
       place: { err: null },
       children: { err: null },
       employment: { err: null },
-      facebookImages: { err: null },
+      images: { err: null },
       profileBlurb: { err: null },
       maxDistance: { err: null },
       avatar: { err: null },
-      images: { err: null },
       showError: false
     }
   },
@@ -175,19 +173,10 @@ export default {
       }
     },
 
-    async setFacebookImages () {
-      for (let i in this.facebookImages) {
-        let uploadedImage = await uploadImage(this.facebookImages[i])
-        this.images[i] = uploadedImage
-      }
-      console.log(this.images)
-      this.submitUserData()
-    },
-
     nextStep () {
       if (!this.validationError) {
         if (this.stepName === 'images') {
-          this.setFacebookImages()
+          this.submitUserData()
         }
         if (this.stepName === this.stepSequence[this.stepSequence.length - 1]) {
           this.$emit('finished')
