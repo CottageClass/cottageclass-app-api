@@ -44,6 +44,17 @@ class User < ApplicationRecord
             uniqueness: true,
             format: { with: /\A.+@.+\..+\z/, message: 'Please provide a valid email' }
 
+  has_many :comments,
+           foreign_key: :sender_id,
+           inverse_of: :sender,
+           dependent: :destroy
+  has_many :user_group_memberships,
+           inverse_of: :user,
+           dependent: :destroy
+  has_many :user_groups,
+           inverse_of: :member,
+           through: :user_group_memberships
+
   has_many :created_places,
            inverse_of: :creator,
            class_name: 'Place',
