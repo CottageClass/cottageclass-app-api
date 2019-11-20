@@ -7,5 +7,7 @@ class UserGroup < ApplicationRecord
            foreign_key: :user_id,
            class_name: 'User',
            inverse_of: :user_groups
-  has_many :comments, inverse_of: :group
+  has_many :comments,
+           inverse_of: :group,
+           foreign_key: :group_id
 end
