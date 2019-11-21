@@ -18,7 +18,7 @@
       v-model="employment" />
     <FacebookImageSelection
       v-if="stepName==='images'"
-      v-model="facebookImages"
+      v-model="images"
       @pressedEnter="nextStep"
       v-on:noImages="nextStep"
       v-on:noPermissions="nextStep"
@@ -34,7 +34,7 @@
       v-model="avatar" />
     <Availability
       v-if="stepName==='availability'"
-      v-model=availability />
+      v-model="availability" />
   </div>
 </template>
 
@@ -55,6 +55,7 @@ import AvatarUpload from '@/components/FTE/userInformation/AvatarUpload'
 import { createUser } from '@/utils//createUser'
 import { submitUserInfo } from '@/utils/api'
 import { stepNavigation } from '@/mixins'
+
 export default {
   name: 'UserInformation',
   props: ['stepName'],
@@ -78,7 +79,7 @@ export default {
       place: { err: null },
       children: { err: null },
       employment: { err: null },
-      facebookImages: { err: null },
+      images: { err: null },
       profileBlurb: { err: null },
       maxDistance: { err: null },
       avatar: { err: null },
@@ -123,6 +124,7 @@ export default {
     })
   },
   methods: {
+
     async submitUserData () {
       let params = {}
       const userId = this.currentUser.id
@@ -137,7 +139,7 @@ export default {
           }
           break
         case 'images':
-          params = { images: this.images }
+          params = { images: this.images.state }
           break
         case 'phone':
           params = { phone: this.phone }
@@ -170,8 +172,12 @@ export default {
         this.modelForCurrentStep.err = 'Sorry, there was a problem saving your information. Try again?'
       }
     },
+
     nextStep () {
       if (!this.validationError) {
+        if (this.stepName === 'images') {
+          this.submitUserData()
+        }
         if (this.stepName === this.stepSequence[this.stepSequence.length - 1]) {
           this.$emit('finished')
         } else {
