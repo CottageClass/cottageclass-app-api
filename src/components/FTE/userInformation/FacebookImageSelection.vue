@@ -46,7 +46,6 @@ export default {
       state: { },
       selectedIndices: [],
       cloudinaryImages: new Array(25).fill(null),
-      images: [],
       errorMesg: 'Your images are uploading, try again in a few seconds'
     }
   },
@@ -63,13 +62,6 @@ export default {
         console.log(e)
       }
     },
-    // this uploads images to cloudinary
-    uploadToCloudinary: async function () {
-      for (let i in this.facebookFullSizeImages) {
-        let new_url = await uploadImage(this.facebookFullSizeImages[i])
-        this.cloudinaryImages.push(new_url)
-      }
-    },
     async toggleImageSelection (index) {
       // create a copy, alter it and reassign it to selectedIndices.  This will force Vue to react to the change
       const selectedIndicesCopy = this.selectedIndices.concat()
@@ -81,14 +73,13 @@ export default {
       this.selectedIndices = selectedIndicesCopy
       if (!this.cloudinaryImages[index]) {
         this.$set(this.cloudinaryImages, index, 'uploading')
-        let new_url = await uploadImage(this.facebookFullSizeImages[index])
+        const new_url = await uploadImage(this.facebookFullSizeImages[index])
         this.$set(this.cloudinaryImages, index, new_url)
       }
       this.setState()
     },
     setState () {
       this.state = this.selectedIndices.map(i => this.cloudinaryImages[i])
-      this.images = this.state
     }
   },
   computed: {
@@ -106,7 +97,6 @@ export default {
       })
     },
     facebookFullSizeImages: function () {
-      console.log(this.facebookImageData)
       return this.facebookImageData.map(allSizes => {
         return maxBy(allSizes.images, oneSize => oneSize.width).source
       })
