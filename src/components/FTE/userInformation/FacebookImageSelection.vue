@@ -45,8 +45,9 @@ export default {
       facebookImageData: null,
       state: { },
       selectedIndices: [],
-      cloudinaryImages: [],
-      images: []
+      cloudinaryImages: new Array(25).fill(null),
+      images: [],
+      errorMesg: 'Your images are uploading, try again in a few seconds'
     }
   },
   methods: {
@@ -54,7 +55,6 @@ export default {
       if (!this.currentUser.facebookAccessToken) { return }
       try {
         this.facebookImageData = await fetchFacebookImages(this.currentUser.facebookAccessToken)
-        this.uploadToCloudinary()
         if (!this.facebookImageData || this.facebookImageData.length === 0) {
           this.$emit('noImages')
         }
@@ -79,6 +79,11 @@ export default {
         selectedIndicesCopy.push(index)
       }
       this.selectedIndices = selectedIndicesCopy
+      if (!this.cloudinaryImages[index]) {
+        this.cloudinaryImages[index] = 'uploading'
+        let new_url = await uploadImage(this.facebookFullSizeImages[index])
+        this.cloudinaryImages[index] = new_url
+      }
       this.setState()
       this.$emit('input', this.state)
     },
@@ -115,6 +120,16 @@ export default {
     loading () {
       return !this.facebookImageData
     },
+    hasUploaded () {
+      return !this.cloudinaryImages.includes('uploading')
+    },
+    err: function () {
+      if (this.hasUploaded) {
+        return false
+      } else {
+        return this.errorMesg
+      }
+    },
     ...mapGetters([ 'currentUser' ])
   },
   watch: {
@@ -123,6 +138,9 @@ export default {
     }
   },
   mounted () {
+    this.$emit('input', {
+      err: this.err
+    })
     this.state = this.value
   },
   created () {
