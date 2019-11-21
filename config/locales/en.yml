@@ -12,3 +12,4 @@ en:
     event_destruction: 'Hi %{participant_first_name}, we’re sorry but %{host_first_name} has cancelled their Lilypad playdate on %{event_start_date} from %{event_time_range}. Please call us at ‭862-294-4859 if you need help finding another playdate!'
     user_sms_welcome: "Welcome to Lilypad! We send some important reminders by text. You can always turn off text notifications here: https://joinlilypad.com/profile/edit ❤️ Thanks!"
     chat_message_received: "%{sender_first_name} %{sender_last_initial}. (%{sender_kids_ages}) just sent you a new message! Read it and reply here: %{message_link}"
+    new_group_message: "%{sender_first_name} %{sender_last_initial}. (%{sender_kids_ages}) just posted a new message in %{group_name}!  Read it here: %{group_message_link}"

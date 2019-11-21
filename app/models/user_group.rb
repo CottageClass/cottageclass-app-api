@@ -5,7 +5,7 @@ class UserGroup < ApplicationRecord
   has_many :members,
            through: :user_group_memberships,
            foreign_key: :user_id,
-           class_name: 'User',
+           source: :user,
            inverse_of: :user_groups
   has_many :comments,
            inverse_of: :group,
