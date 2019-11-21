@@ -18,34 +18,39 @@
 
     <div v-else class="page-wrapper">
       <MainNav />
-      <div class="events__container w-container">
-        <div class="events__column-left">
-          <MainActionButtons @offer-playdate-click="offerPlaydate"/>
-          <div class="list-container w-container">
-            <FilterSelectorBank :showEventTimeFilter="itemType==='event'"/>
-            <SearchResultList
-              :itemType="itemType"
-              :awaiting="awaiting"
-              :showFetchMoreButton="showFetchMoreButton"
-              class="list"
-              :items="items"
-              :noItemsMessage="noItemsMessage"
-              :showTrailblazerMessage="showTrailblazerMessage"
-              @fetch-more-click="fetchMore"
-              @user-updated="updateUser"
-              @event-updated="updateEvent"/>
-          </div>
+      <div class="row-container w-container">
+        <UserGroupChat
+          context="search"
+        />
+        <div class="events__container w-container">
+          <div class="events__column-left">
+            <MainActionButtons @offer-playdate-click="offerPlaydate"/>
+            <div class="list-container w-container">
+              <FilterSelectorBank :showEventTimeFilter="itemType==='event'"/>
+              <SearchResultList
+                :itemType="itemType"
+                :awaiting="awaiting"
+                :showFetchMoreButton="showFetchMoreButton"
+                class="list"
+                :items="items"
+                :noItemsMessage="noItemsMessage"
+                :showTrailblazerMessage="showTrailblazerMessage"
+                @fetch-more-click="fetchMore"
+                @user-updated="updateUser"
+                @event-updated="updateEvent"/>
+            </div>
 
-        </div>
-        <div class="events__column-right">
-          <div class="map-container">
-            <EventListMap
-              class="map"
-              :items="items"
-              @map-click="handleMapClick"
-              @searchAreaSet="updateMapAreaFromMap"
-              :isFullScreen="false"
-            />
+          </div>
+          <div class="events__column-right">
+            <div class="map-container">
+              <EventListMap
+                class="map"
+                :items="items"
+                @map-click="handleMapClick"
+                @searchAreaSet="updateMapAreaFromMap"
+                :isFullScreen="false"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -56,6 +61,7 @@
 <script>
 import { mapGetters, mapMutations, mapActions } from 'vuex'
 
+import UserGroupChat from '@/components/UserGroupChat'
 import MainActionButtons from '@/components/search/MainActionButtons'
 import SearchResultList from '@/components/SearchResultList'
 import MainNav from '@/components/MainNav'
@@ -69,6 +75,7 @@ export default {
   mixins: [alerts, screen],
   props: ['itemType'],
   components: {
+    UserGroupChat,
     MainActionButtons,
     SearchResultList,
     MainNav,
@@ -151,13 +158,15 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.row-container {
+  padding: 0 32px 0;
+  margin-top: 32px;
+}
+
 .events__container {
   position: relative;
   display: flex;
   margin-top: 32px;
-  padding-right: 32px;
-  padding-bottom: 0;
-  padding-left: 32px;
   align-items: flex-start;
 }
 
