@@ -19,7 +19,7 @@ import Message from '@/components/Message'
 export default {
   name: 'ConversationDay',
   props: {
-    partner: { type: Object, required: true },
+    partner: { type: Object },
     day: { type: String, required: true },
     messages: { type: Array, required: true }
   },
