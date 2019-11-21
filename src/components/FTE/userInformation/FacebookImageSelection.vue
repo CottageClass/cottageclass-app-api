@@ -85,7 +85,6 @@ export default {
         this.$set(this.cloudinaryImages, index, new_url)
       }
       this.setState()
-      this.$emit('input', this.state)
     },
     setState () {
       this.state = this.selectedIndices.map(i => this.cloudinaryImages[i])
@@ -141,12 +140,12 @@ export default {
       this.state = this.value
     },
     hasUploaded: function () {
-      this.$emit('input', { err: this.err })
+      this.$emit('input', { state: this.state, err: this.err })
     }
   },
   mounted () {
     this.$emit('input', {
-      err: this.err
+      state: this.state, err: this.err
     })
     this.state = this.value
   },

@@ -139,7 +139,7 @@ export default {
           }
           break
         case 'images':
-          params = { images: this.images }
+          params = { images: this.images.state }
           break
         case 'phone':
           params = { phone: this.phone }
