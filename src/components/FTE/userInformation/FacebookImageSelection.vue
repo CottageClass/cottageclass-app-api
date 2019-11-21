@@ -80,9 +80,9 @@ export default {
       }
       this.selectedIndices = selectedIndicesCopy
       if (!this.cloudinaryImages[index]) {
-        this.cloudinaryImages[index] = 'uploading'
+        this.$set(this.cloudinaryImages, index, 'uploading')
         let new_url = await uploadImage(this.facebookFullSizeImages[index])
-        this.cloudinaryImages[index] = new_url
+        this.$set(this.cloudinaryImages, index, new_url)
       }
       this.setState()
       this.$emit('input', this.state)
@@ -121,7 +121,11 @@ export default {
       return !this.facebookImageData
     },
     hasUploaded () {
-      return !this.cloudinaryImages.includes('uploading')
+      if (this.cloudinaryImages.includes('uploading')) {
+        return false
+      } else {
+        return true
+      }
     },
     err: function () {
       if (this.hasUploaded) {
@@ -135,6 +139,9 @@ export default {
   watch: {
     value: function () {
       this.state = this.value
+    },
+    hasUploaded: function () {
+      this.$emit('input', { err: this.err })
     }
   },
   mounted () {
