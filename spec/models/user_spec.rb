@@ -10,6 +10,9 @@ RSpec.describe User, type: :model do
     it { is_expected.to have_many(:created_places) }
     it { is_expected.to have_many(:participants).inverse_of(:user).dependent(:destroy) }
     it { is_expected.to have_many(:notifications).inverse_of(:recipient).dependent(:destroy) }
+    it { is_expected.to have_many(:comments).inverse_of(:sender).dependent(:destroy) }
+    it { is_expected.to have_many(:user_group_memberships).inverse_of(:user).dependent(:destroy) }
+    it { is_expected.to have_many(:user_groups) }
   end
 
   context 'autosave_records' do

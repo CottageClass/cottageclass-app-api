@@ -1,11 +1,14 @@
 <template>
   <div class="chat-detail--message">
     <div class="chat-detail--avatar">
-      <AvatarImage
-        className="image-9"
-        :person="sender"
-        imageSize="48"
-      />
+      <router-link
+        :to="{name:'UserPage',params:{id:sender.id}}">
+        <AvatarImage
+          className="image-9"
+          :person="sender"
+          imageSize="48"
+        />
+      </router-link>
     </div>
     <div class="chat-detail--text-group">
       <div class="chat-detail--name-time">{{senderName}} <span class="chat-detail--time">{{timeStamp}}</span>
@@ -25,11 +28,14 @@ export default {
   name: 'Message',
   components: { AvatarImage },
   props: {
-    partner: { type: Object, required: true },
+    partner: { type: Object },
     message: { required: true }
   },
   computed: {
     sender () {
+      if (this.message.sender) {
+        return this.message.sender
+      }
       if (this.message.senderId.toString() === this.partner.id.toString()) {
         return this.partner
       } else {
