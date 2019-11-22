@@ -95,7 +95,9 @@ export default {
   },
   computed: {
     showGroupChat () {
-      return this.currentUser && this.currentUser.groups.includes('1')
+      return this.currentUser &&
+        this.currentUser.groups &&
+        this.currentUser.groups.includes('1')
     },
     ...mapGetters(['currentUser', 'isAuthenticated', 'alert', 'mapArea', 'items', 'showFetchMoreButton'])
   },
