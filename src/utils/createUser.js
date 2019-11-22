@@ -16,7 +16,10 @@ export const createUsers = (data) => {
     if (data.user[id].relationships.userGroups) {
       groups = data.user[id].relationships.userGroups.data.map(e => e.id)
     }
-    const childIds = data.user[id].relationships.children.data.map(e => e.id)
+    let childIds = []
+    if (data.user[id].relationships.children) {
+      childIds = data.user[id].relationships.children.data.map(e => e.id)
+    }
     const placeId = data.user[id].relationships.place.data && data.user[id].relationships.place.data.id
     let place = placeId && data.place && parsePlace(data.place[placeId].attributes)
     if (place) {
