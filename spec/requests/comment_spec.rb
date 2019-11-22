@@ -4,7 +4,7 @@ require 'rspec_api_documentation/dsl'
 RSpec.resource 'Comment' do
   include_context 'json headers'
 
-  let(:user) { create :user }
+  let(:user) { create :user, :with_place }
   let(:group) { create :user_group }
   let(:subject) { build :comment, sender: user, group: group }
 
@@ -14,6 +14,13 @@ RSpec.resource 'Comment' do
     let(:user_group_id) { group.id }
 
     context 'authorized' do
+      let(:user) do
+        user = build :user, :with_place
+        user.user_groups << group
+        user.save
+        user
+      end
+
       include_context 'authorization token'
 
       example_request 'index:success' do
@@ -31,6 +38,14 @@ RSpec.resource 'Comment' do
     end
 
     context 'unauthorized' do
+      include_context 'authorization token'
+      example 'authorization:failure', document: false do
+        do_request
+        expect(response_status).to eq(401)
+      end
+    end
+
+    context 'unauthenticated' do
       example 'authentication:failure', document: false do
         do_request
         expect(response_status).to eq(401)
@@ -50,6 +65,12 @@ RSpec.resource 'Comment' do
 
     context 'authorized' do
       include_context 'authorization token'
+      let(:user) do
+        user = build :user, :with_place
+        user.user_groups << group
+        user.save
+        user
+      end
 
       example_request 'create:success' do
         expect(response_status).to eq(201)
@@ -65,8 +86,16 @@ RSpec.resource 'Comment' do
       end
     end
 
-    context 'unauthorized' do
+    context 'unauthenticated' do
       example 'authentication:failure', document: false do
+        do_request
+        expect(response_status).to eq(401)
+      end
+    end
+
+    context 'unauthorized' do
+      include_context 'authorization token'
+      example 'authorization:failure', document: false do
         do_request
         expect(response_status).to eq(401)
       end

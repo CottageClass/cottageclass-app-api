@@ -5,7 +5,7 @@ RSpec.describe UserGroup, type: :model do
 
   context 'associations' do
     it { is_expected.to have_many(:user_group_memberships).inverse_of(:user_group) }
-    it { is_expected.to have_many(:members).through(:user_group_memberships).inverse_of(:user_groups) }
+    it { is_expected.to have_many(:members).through(:user_group_memberships) }
     it { is_expected.to have_many(:comments).inverse_of(:group) }
   end
 

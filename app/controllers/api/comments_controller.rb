@@ -28,7 +28,7 @@ class API::CommentsController < API::BaseController
 
   def reject_nonmember
     if !current_user || !@user_group.members.include?(current_user)
-      render json: { errors: ['You do not have permission to perform this operation'] }, status: 404
+      render json: { errors: ['You do not have permission to perform this operation'] }, status: 401
     end
   end
 end
