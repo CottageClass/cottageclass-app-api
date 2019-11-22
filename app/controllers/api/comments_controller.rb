@@ -1,5 +1,5 @@
 class API::CommentsController < API::BaseController
-  before_action :authenticate_user!, only: %i[create]
+  before_action :authenticate_user!
   before_action :load_user_group
   def index
     serializer = CommentSerializer.new @user_group.comments, include: %i[sender]
