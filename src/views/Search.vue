@@ -20,6 +20,7 @@
       <MainNav />
       <div class="row-container w-container">
         <UserGroupChat
+          v-if="showGroupChat"
           context="search"
         />
         <div class="events__container w-container">
@@ -93,6 +94,9 @@ export default {
     }
   },
   computed: {
+    showGroupChat () {
+      return this.currentUser && this.currentUser.groups.includes('1')
+    },
     ...mapGetters(['currentUser', 'isAuthenticated', 'alert', 'mapArea', 'items', 'showFetchMoreButton'])
   },
   methods: {

@@ -12,6 +12,10 @@ export const createUsers = (data) => {
 
   return ids.map(id => {
     const p = data.user[id].attributes
+    let groups = []
+    if (data.user[id].relationships.userGroups) {
+      groups = data.user[id].relationships.userGroups.data.map(e => e.id)
+    }
     const childIds = data.user[id].relationships.children.data.map(e => e.id)
     const placeId = data.user[id].relationships.place.data && data.user[id].relationships.place.data.id
     let place = placeId && data.place && parsePlace(data.place[placeId].attributes)
@@ -36,7 +40,8 @@ export const createUsers = (data) => {
       facebookMapIcon: 'https://graph.facebook.com/' + p.facebook_uid + '/picture?width=30',
       children,
       event,
-      hasAllRequiredFields
+      hasAllRequiredFields,
+      groups
     }
   })
 }
