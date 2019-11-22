@@ -2,7 +2,9 @@ class API::CommentsController < API::BaseController
   before_action :authenticate_user!, :load_user_group, :reject_nonmember
 
   def index
-    serializer = CommentSerializer.new @user_group.comments, include: %i[sender]
+    serializer = CommentSerializer.new @user_group.comments.includes(%i[sender]),
+                                       include: %i[sender],
+                                       params: { skip_children: true }
     render json: serializer.serializable_hash, status: :ok
   end
 

@@ -1,6 +1,10 @@
 class PublicUserSerializer < BaseSerializer
+  include_children = proc { |_record, params|
+    !params[:skip_children]
+  }
+
   set_type :user
-  has_many :children, serializer: ChildSerializer
+  has_many :children, serializer: ChildSerializer, if: include_children
   belongs_to :place
 
   attributes(*User::PUBLIC_ATTRIBUTES)

@@ -7,8 +7,8 @@ module Locatable
     reverse_geocoded_by :latitude, :longitude
     before_save :update_location, if: lambda { |instance|
       instance.latitude.blank? || instance.longitude.blank? ||
-        (instance.respond_to?(:place_changed) && instance.place_changed?) ||
-        (instance.respond_to?(:place_id_changed) && instance.place_id_changed?)
+        (instance.respond_to?(:place_changed?) && instance.place_changed?) ||
+        (instance.respond_to?(:place_id_changed?) && instance.place_id_changed?)
     }
   end
 

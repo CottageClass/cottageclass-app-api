@@ -25,6 +25,12 @@
           </div>
           <div v-if="comments"
                class="chat-content--wrapper">
+            <div v-if="postPending">
+              <LoadingSpinner
+                size="40px"
+                marginTop="30px"
+              />
+            </div>
             <ConversationDay
               v-for="(ca) in conversationDays"
               :key="ca.day"
@@ -52,6 +58,7 @@ import MainNav from '@/components/MainNav'
 import MessageSendBox from '@/components/MessageSendBox'
 import AvatarImage from '@/components/base/AvatarImage'
 import ConversationDay from '@/components/ConversationDay'
+import LoadingSpinner from '@/components/LoadingSpinner'
 import { postComment, fetchComments } from '@/utils/api'
 import { redirect, platform, alerts } from '@/mixins'
 
@@ -59,6 +66,7 @@ export default {
   name: 'GroupChatPage',
   data () {
     return {
+      postPending: false,
       newMessage: null,
       comments: null
     }
@@ -66,7 +74,7 @@ export default {
   props: {
     groupId: { required: true }
   },
-  components: { MainNav, MessageSendBox, AvatarImage, ConversationDay },
+  components: { MainNav, MessageSendBox, AvatarImage, ConversationDay, LoadingSpinner },
   mixins: [ platform, redirect, alerts ],
   methods: {
     async update () {
@@ -74,10 +82,17 @@ export default {
       this.comments = raw.sort((a, b) => a.created_at > b.created_at)
     },
     async sendMessage () {
-      if (this.newMessage) {
-        await postComment(this.groupId, this.newMessage)
-        this.newMessage = null
-        this.update()
+      if (this.postPending || !this.newMessage) { return }
+      this.postPending = true
+      const pendingMessage = this.newMessage
+      this.newMessage = null
+      try {
+        await postComment(this.groupId, pendingMessage)
+      } catch (e) {
+        this.newMessage = pendingMessage
+      } finally {
+        await this.update()
+        this.postPending = false
       }
     }
   },

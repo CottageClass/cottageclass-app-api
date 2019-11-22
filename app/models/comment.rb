@@ -13,7 +13,7 @@ class Comment < ApplicationRecord
              foreign_key: :sender_id
 
   def notify
-    group.members.each do |m|
+    group.members.includes(:place).each do |m|
       m.notifications.new_group_message.create notifiable: self unless m == sender
     end
   end
