@@ -25,6 +25,12 @@
           </div>
           <div v-if="comments"
                class="chat-content--wrapper">
+            <div v-if="postPending">
+              <LoadingSpinner
+                size="40px"
+                marginTop="30px"
+              />
+            </div>
             <ConversationDay
               v-for="(ca) in conversationDays"
               :key="ca.day"
@@ -52,6 +58,7 @@ import MainNav from '@/components/MainNav'
 import MessageSendBox from '@/components/MessageSendBox'
 import AvatarImage from '@/components/base/AvatarImage'
 import ConversationDay from '@/components/ConversationDay'
+import LoadingSpinner from '@/components/LoadingSpinner'
 import { postComment, fetchComments } from '@/utils/api'
 import { redirect, platform, alerts } from '@/mixins'
 
@@ -67,7 +74,7 @@ export default {
   props: {
     groupId: { required: true }
   },
-  components: { MainNav, MessageSendBox, AvatarImage, ConversationDay },
+  components: { MainNav, MessageSendBox, AvatarImage, ConversationDay, LoadingSpinner },
   mixins: [ platform, redirect, alerts ],
   methods: {
     async update () {
@@ -84,9 +91,9 @@ export default {
       } catch (e) {
         this.newMessage = pendingMessage
       } finally {
+        await this.update()
         this.postPending = false
       }
-      this.update()
     }
   },
   computed: {
