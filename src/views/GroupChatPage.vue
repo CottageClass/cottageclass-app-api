@@ -53,8 +53,7 @@ import MessageSendBox from '@/components/MessageSendBox'
 import AvatarImage from '@/components/base/AvatarImage'
 import ConversationDay from '@/components/ConversationDay'
 import { postComment, fetchComments } from '@/utils/api'
-
-import { platform } from '@/mixins'
+import { redirect, platform, alerts } from '@/mixins'
 
 export default {
   name: 'GroupChatPage',
@@ -68,7 +67,7 @@ export default {
     groupId: { required: true }
   },
   components: { MainNav, MessageSendBox, AvatarImage, ConversationDay },
-  mixins: [ platform ],
+  mixins: [ platform, redirect, alerts ],
   methods: {
     async update () {
       const raw = await fetchComments(this.groupId)
@@ -113,7 +112,14 @@ export default {
     ...mapGetters(['currentUser'])
   },
   async created () {
-    this.update()
+    if (this.redirectToSignupIfNotAuthenticated()) { return }
+    try {
+      await this.update()
+    } catch (e) {
+      this.showAlertOnNextRoute('Sorry, you don\'t have access to that page', 'failure')
+      this.$router.push({ name: 'Parents' })
+      this.logError(e)
+    }
   }
 }
 </script>
