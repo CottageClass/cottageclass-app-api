@@ -1,6 +1,6 @@
 class API::CommentsController < API::BaseController
-  before_action :authenticate_user!
-  before_action :load_user_group
+  before_action :authenticate_user!, :load_user_group, :reject_nonmember
+
   def index
     serializer = CommentSerializer.new @user_group.comments, include: %i[sender]
     render json: serializer.serializable_hash, status: :ok
@@ -24,5 +24,11 @@ class API::CommentsController < API::BaseController
 
   def safe_params
     params.require(:comment).permit(:content)
+  end
+
+  def reject_nonmember
+    if !current_user || !@user_group.members.include?(current_user)
+      render json: { errors: ['You do not have permission to perform this operation'] }, status: 404
+    end
   end
 end
