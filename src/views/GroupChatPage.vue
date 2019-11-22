@@ -59,6 +59,7 @@ export default {
   name: 'GroupChatPage',
   data () {
     return {
+      postPending: false,
       newMessage: null,
       comments: null
     }
@@ -74,11 +75,18 @@ export default {
       this.comments = raw.sort((a, b) => a.created_at > b.created_at)
     },
     async sendMessage () {
-      if (this.newMessage) {
-        await postComment(this.groupId, this.newMessage)
-        this.newMessage = null
-        this.update()
+      if (this.postPending || !this.newMessage) { return }
+      this.postPending = true
+      const pendingMessage = this.newMessage
+      this.newMessage = null
+      try {
+        await postComment(this.groupId, pendingMessage)
+      } catch (e) {
+        this.newMessage = pendingMessage
+      } finally {
+        this.postPending = false
       }
+      this.update()
     }
   },
   computed: {
