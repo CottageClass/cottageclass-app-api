@@ -52,7 +52,6 @@ class User < ApplicationRecord
            inverse_of: :user,
            dependent: :destroy
   has_many :user_groups,
-           inverse_of: :member,
            through: :user_group_memberships
 
   has_many :created_places,
