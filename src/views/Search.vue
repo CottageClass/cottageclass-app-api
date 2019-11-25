@@ -253,6 +253,9 @@ export default {
 }
 
 @media (max-width: 767px){
+  .row-container {
+    margin-top: 0;
+  }
   .events__container {
     position: static;
   }
