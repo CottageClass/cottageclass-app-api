@@ -33,12 +33,15 @@ class Notifier::NewGroupMessage < Notifier::UserBase
       neighborhood: @notifiable_user.place&.neighborhood || '',
       avatar: @notifiable_user.avatar
     }
+    comment_hash = { content: @comment.content }
     group_hash = {
       name: @comment.group.name,
       chat_link: group_chat_link
     }
 
-    super.update suggested_user: suggested_user_hash, group: group_hash
+    super.update suggested_user: suggested_user_hash,
+                 group: group_hash,
+                 comment: comment_hash
   end
 
   def group_chat_link
