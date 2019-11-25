@@ -17,7 +17,7 @@
               </div>
             </div>
             <div class="div-block-14">
-              <h1 class="chat-heading-text">Worcester Parents Group</h1>
+              <h1 class="chat-heading-text">Ideas for today and tomorrow</h1>
             </div>
           </div>
           <div v-if="!comments || comments.length === 0"
