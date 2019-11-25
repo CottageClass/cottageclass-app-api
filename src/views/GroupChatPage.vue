@@ -135,6 +135,10 @@ export default {
       this.$router.push({ name: 'Parents' })
       this.logError(e)
     }
+    this.pollingInterval = setInterval(this.update, 30000)
+  },
+  destroyed () {
+    clearInterval(this.pollingInterval)
   }
 }
 </script>
