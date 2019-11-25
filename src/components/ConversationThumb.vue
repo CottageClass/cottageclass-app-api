@@ -101,7 +101,7 @@ a {
   color: grey;
 }
 .image-9 {
-  width: 80px;
+  width: 48px;
   height: 48px;
   min-height: 48px;
   min-width: 48px;

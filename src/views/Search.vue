@@ -208,6 +208,10 @@ export default {
 }
 
 @media (max-width: 991px){
+  .row-container {
+    padding: 0;
+  }
+
   .events__container {
     margin-top: 0;
     flex-direction: column-reverse;
