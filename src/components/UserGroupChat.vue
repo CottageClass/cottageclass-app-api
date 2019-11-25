@@ -1,6 +1,6 @@
 <template>
   <div class="home-item">
-    <div class="group-chat-title">Worcester Group Chat</div>
+    <div class="group-chat-title">Ideas for today and tomorrow</div>
     <LoadingSpinner v-if="!comments" />
     <div v-else>
       <UserGroupComment

@@ -10,7 +10,7 @@
         @keydown.enter.exact.prevent=""
         @keyup.enter.exact.prevent="submitMessage"
         v-model="content"
-        placeholder="Write a comment..."
+        placeholder="Share an idea..."
         class="input-visual--text"
       />
     </div>
