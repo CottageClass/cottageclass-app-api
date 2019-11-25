@@ -22,7 +22,8 @@ class Notification < ApplicationRecord
     event_creation_starrer: 18,
     event_creation_match: 19,
     daily_digest: 20,
-    chat_message_received: 21
+    chat_message_received: 21,
+    new_group_message: 22
   }
 
   belongs_to :recipient, class_name: 'User', inverse_of: :notifications
@@ -143,6 +144,28 @@ class Notification < ApplicationRecord
                    Notifier::ChatMessageReceived.new user: recipient,
                                                      message: notifiable,
                                                      body: body
+                 when :new_group_message
+                   group_name = notifiable.group.name
+                   ages = notifiable.sender.child_ages_in_months.sort
+                   if ages.length == 1
+                     sender_kids_ages = '1 kid age ' + display_age(ages[0], 'mo')
+                   else
+                     display_ages = ages.map { |age| display_age(age, 'mo') }
+                     if display_ages.present?
+                       and_join_ages = display_ages.slice(0, display_ages.length - 1).join(', ') + ' and ' + display_ages[-1]
+                       sender_kids_ages = ages.count.to_s + ' kids ages ' + and_join_ages
+                     end
+                   end
+                   self.body = I18n.t 'messages.new_group_message',
+                                      sender_first_name: notifiable.sender.first_name,
+                                      sender_last_initial: notifiable.sender.last_initial,
+                                      sender_kids_ages: sender_kids_ages,
+                                      group_name: group_name,
+                                      group_message_link: ENV['LINK_HOST'] + '/group-chat/' + notifiable.group.id.to_s
+                   Notifier::NewGroupMessage.new user: recipient,
+                                                 comment: notifiable,
+                                                 body: body
+
                  end
 
       if notifier.present?

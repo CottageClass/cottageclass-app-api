@@ -71,7 +71,6 @@ class EventSeries < ApplicationRecord
       name
       images
       description
-      maximum_children
       child_age_minimum
       child_age_maximum
     ].each { |attribute| event.send format('%s=', attribute), send(attribute) }

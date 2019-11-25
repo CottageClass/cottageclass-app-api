@@ -1,5 +1,5 @@
 <template>
-  <div class="loading-container">
+  <div class="loading-container" v-bind:style="containerStyle" >
     <div v-bind:style="styles" class="spinner spinner--circle-8">
       <div v-bind:style="innerStyles" class="spinner-inner">
         <div class="ball-container">
@@ -17,11 +17,17 @@
 export default {
   name: 'LoadingSpinner',
   props: {
+    marginTop: {
+      default: '100px'
+    },
     size: {
       default: '50px'
     }
   },
   computed: {
+    containerStyle () {
+      return { 'margin-top': this.marginTop }
+    },
     innerStyles () {
       let size = parseInt(this.size)
       return {

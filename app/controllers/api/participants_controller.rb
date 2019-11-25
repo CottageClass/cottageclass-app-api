@@ -2,9 +2,9 @@ class API::ParticipantsController < API::BaseController
   before_action :authenticate_user!, :load_event
 
   def create
-    participant = @event.participants.build safe_params
+    participant = @event.participants.build
     if participant.update(user: current_user)
-      serializer = ParticipantSerializer.new participant, include: %i[participant_children]
+      serializer = ParticipantSerializer.new participant
       render json: serializer.serializable_hash, status: :created
     else
       render json: { errors: participant.errors.full_messages }, status: :unprocessable_entity
@@ -32,9 +32,5 @@ class API::ParticipantsController < API::BaseController
   def load_event
     @event = Event.find_by id: params[:event_id]
     render(json: {}, status: :not_found) if @event.blank?
-  end
-
-  def safe_params
-    params.require(:participant).permit participant_children_attributes: [:child_id]
   end
 end

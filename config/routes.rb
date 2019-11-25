@@ -9,6 +9,10 @@ Rails.application.routes.draw do
              }
 
   namespace :api, defaults: { format: :json } do
+    resources :user_group, only: %i[] do
+      resources :comments, only: %i[create index]
+    end
+
     resources :devices, only: %i[create]
     resources :event_series, only: %i[index show create update]
     resources :childcare_requests, only: %i[show create update destroy]
@@ -71,7 +75,6 @@ Rails.application.routes.draw do
     resource :user, only: %i[] do
       resources :conversations, only: %i[index]
       resource :stars, only: %i[create destroy], module: :users
-      resources :children, only: %i[update]
       collection do
         get 'created_events(/:skope)(/page/:page/page_size/:page_size)', to: 'events#created',
                                                                          skope: /upcoming|past/i,

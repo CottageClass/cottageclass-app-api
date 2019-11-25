@@ -63,8 +63,7 @@ require 'faker'
       start_date: start_time,
       ends_at: start_time + duration,
       repeat_for: Random.rand(1..1),
-      interval: 1,
-      maximum_children: Random.rand(2..5)
+      interval: 1
     )
     event_series.save
   end

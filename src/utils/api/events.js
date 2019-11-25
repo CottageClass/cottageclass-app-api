@@ -118,18 +118,8 @@ export function removeEventParticipant (eventId) {
     })
 }
 
-export function submitEventParticipant (eventId, participantChildIds) {
-  let createChild = function (childId) {
-    return {
-      'child_id': childId
-    }
-  }
-  let participantData = {
-    'participant': {
-      'participant_children_attributes': participantChildIds.map(createChild)
-    }
-  }
-  return axios.post(`/api/events/${eventId}/participants`, participantData)
+export function submitEventParticipant (eventId) {
+  return axios.post(`/api/events/${eventId}/participants`)
     .then(res => {
       logger.log('SUBMIT EVENT PARTICIPANT SUCCESS')
       logger.log(res)

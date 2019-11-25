@@ -7,6 +7,7 @@ import EventPage from '@/views/EventPage.vue'
 import PlacePage from '@/views/PlacePage'
 import Search from '@/views/Search.vue'
 import Chats from '@/views/Chats.vue'
+import GroupChatPage from '@/views/GroupChatPage.vue'
 import Conversation from '@/views/Conversation.vue'
 import Faq from '@/components/Faq.vue'
 import YourPlaydates from '@/views/YourPlaydates.vue'
@@ -37,7 +38,7 @@ export default new Router({
   mode: 'history',
   routes: [
     {
-      path: 'NOT USED.  THESE ARE PAGES THAT USE THE FlowPage AS A WRAPPER',
+      path: '/NOT USED.  THESE ARE PAGES THAT USE THE FlowPage AS A WRAPPER',
       component: FlowPage,
       children: [
         {
@@ -106,6 +107,12 @@ export default new Router({
           next()
         }
       }
+    },
+    {
+      path: '/group-chat/:groupId',
+      name: 'GroupChatPage',
+      component: GroupChatPage,
+      props: true
     },
     {
       path: '/chat/:userId',
