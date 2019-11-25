@@ -22,6 +22,8 @@
           </div>
           <div v-if="!comments || comments.length === 0"
                class="chat-content--wrapper">
+            <ConversationDivider
+              dividerText="No ideas yet, add yours!" />
           </div>
           <div v-if="comments"
                class="chat-content--wrapper">
@@ -59,6 +61,7 @@ import MessageSendBox from '@/components/MessageSendBox'
 import AvatarImage from '@/components/base/AvatarImage'
 import ConversationDay from '@/components/ConversationDay'
 import LoadingSpinner from '@/components/LoadingSpinner'
+import ConversationDivider from '@/components/ConversationDivider.vue'
 import { postComment, fetchComments } from '@/utils/api'
 import { redirect, platform, alerts } from '@/mixins'
 
@@ -74,7 +77,7 @@ export default {
   props: {
     groupId: { required: true }
   },
-  components: { MainNav, MessageSendBox, AvatarImage, ConversationDay, LoadingSpinner },
+  components: { MainNav, MessageSendBox, AvatarImage, ConversationDay, LoadingSpinner, ConversationDivider },
   mixins: [ platform, redirect, alerts ],
   methods: {
     async update () {
