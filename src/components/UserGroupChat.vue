@@ -98,7 +98,7 @@ export default {
 
 @media (max-width: 767px){
   .home-item {
-    margin-top: 32px;
+    margin-top: 8px;
     margin-bottom: 8px;
     padding: 16px;
     border-radius: 0;
