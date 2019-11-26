@@ -27,18 +27,18 @@
           </div>
           <div v-if="comments"
                class="chat-content--wrapper">
-            <div v-if="postPending">
-              <LoadingSpinner
-                size="40px"
-                marginTop="30px"
-              />
-            </div>
             <ConversationDay
               v-for="(ca) in conversationDays"
               :key="ca.day"
               :day="ca.day"
               :messages="ca.messages"
             />
+            <div v-if="postPending">
+              <LoadingSpinner
+                size="40px"
+                marginTop="30px"
+              />
+            </div>
 
           </div>
         </div>
