@@ -82,7 +82,7 @@ export default {
   components: { MainNav, MessageSendBox, AvatarImage, ConversationDay, LoadingSpinner, ConversationDivider },
   mixins: [ platform, redirect, alerts ],
   methods: {
-    scrollOnTextTick () {
+    scrollOnNextTick () {
       this.$nextTick(() => {
         VueScrollTo.scrollTo('#page-bottom', { duration: 500, easing: 'ease-in' })
       })
@@ -97,7 +97,7 @@ export default {
       this.newMessage = null
       try {
         await postComment(this.groupId, pendingMessage)
-        this.scrollOnTextTick()
+        this.scrollOnNextTick()
       } catch (e) {
         this.newMessage = pendingMessage
       } finally {
@@ -140,7 +140,7 @@ export default {
     if (this.redirectToSignupIfNotAuthenticated()) { return }
     try {
       await this.update()
-      this.scrollOnTextTick()
+      this.scrollOnNextTick()
     } catch (e) {
       this.showAlertOnNextRoute('Sorry, you don\'t have access to that page', 'failure')
       this.$router.push({ name: 'Parents' })
