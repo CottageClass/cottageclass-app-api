@@ -85,7 +85,7 @@ const actions = {
   async fetchItems ({ state, commit, dispatch }) {
     const itemType = state.itemType
     commit('ensureState', { itemType })
-    if (state.data[itemType].fetchLock) { return }
+    if (!state.data[itemType] || state.data[itemType].fetchLock) { return }
     try {
       commit('setFetchLock', { lock: true })
       commit('resetToBaseState')

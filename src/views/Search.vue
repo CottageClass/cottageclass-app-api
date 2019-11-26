@@ -97,7 +97,8 @@ export default {
     showGroupChat () {
       return this.currentUser &&
         this.currentUser.groups &&
-        this.currentUser.groups.includes('1')
+        this.currentUser.groups.includes('1') &&
+        this.itemType === 'event'
     },
     ...mapGetters(['currentUser', 'isAuthenticated', 'alert', 'mapArea', 'items', 'showFetchMoreButton'])
   },
@@ -253,6 +254,9 @@ export default {
 }
 
 @media (max-width: 767px){
+  .row-container {
+    margin-top: 0;
+  }
   .events__container {
     position: static;
   }

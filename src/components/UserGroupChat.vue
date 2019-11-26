@@ -2,7 +2,7 @@
   <div class="home-item">
     <div class="group-chat-title">Ideas for today and tomorrow</div>
     <LoadingSpinner v-if="!comments" />
-    <div v-else>
+    <div>
       <UserGroupComment
         v-for="comment in comments"
         :comment="comment"
@@ -53,14 +53,9 @@ export default {
   methods: {
     async update () {
       const raw = await fetchComments(this.groupId)
-      const sorted = raw.sort((a, b) => a.created_at > b.created_at)
-      if (this.context === 'search') {
-        this.comments = sorted.slice(-4)
-        console.log(sorted.length)
-        this.moreCount = sorted.length - this.comments.length
-      } else if (this.context === 'page') {
-        this.comments = sorted
-      }
+      this.comments = raw.slice(-4)
+      console.log(raw.length)
+      this.moreCount = raw.length - this.comments.length
     }
   },
   computed: {
@@ -77,6 +72,7 @@ export default {
 <style scoped lang="scss">
 .group-chat-title {
   font-size: 16px;
+  font-weight: 700;
   margin-bottom: 16px;
 }
 
@@ -98,11 +94,10 @@ export default {
 
 @media (max-width: 767px){
   .home-item {
-    margin-top: 32px;
+    margin-top: 8px;
     margin-bottom: 8px;
     padding: 16px;
     border-radius: 0;
   }
-
 }
 </style>

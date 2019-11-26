@@ -5,18 +5,22 @@ class Notifier::NewGroupMessage < Notifier::UserBase
   end
 
   def message
-    message = @twilio_client.api.account.messages.create from: @sender_phone, to: @user_phone, body: @body
-    message.sid
+    if @user.setting_notify_messages_sms
+      message = @twilio_client.api.account.messages.create from: @sender_phone, to: @user_phone, body: @body
+      message.sid
+    end
   end
 
   def email
-    dump_mail_template_parameters name: 'MessageNotificationRecipient.json'
-    response = @sendgrid_client.send_mail to: [@user],
-                                          from: @sender_email,
-                                          template_id: sendgrid_template[:group_message_creation],
-                                          parameters: mail_template_parameters.deep_stringify_keys
+    if @user.setting_notify_messages_email
+      dump_mail_template_parameters name: 'MessageNotificationRecipient.json'
+      response = @sendgrid_client.send_mail to: [@user],
+                                            from: @sender_email,
+                                            template_id: sendgrid_template[:group_message_creation],
+                                            parameters: mail_template_parameters.deep_stringify_keys
 
-    (response.try(:headers) || {}).dig('x-message-id').try :first
+      (response.try(:headers) || {}).dig('x-message-id').try :first
+    end
   end
 
   protected
@@ -33,12 +37,15 @@ class Notifier::NewGroupMessage < Notifier::UserBase
       neighborhood: @notifiable_user.place&.neighborhood || '',
       avatar: @notifiable_user.avatar
     }
+    comment_hash = { content: @comment.content }
     group_hash = {
       name: @comment.group.name,
       chat_link: group_chat_link
     }
 
-    super.update suggested_user: suggested_user_hash, group: group_hash
+    super.update suggested_user: suggested_user_hash,
+                 group: group_hash,
+                 comment: comment_hash
   end
 
   def group_chat_link

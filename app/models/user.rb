@@ -48,6 +48,17 @@ class User < ApplicationRecord
             uniqueness: true,
             format: { with: /\A.+@.+\..+\z/, message: 'Please provide a valid email' }
 
+  has_many :received_conversations,
+           inverse_of: :recipient,
+           class_name: 'Conversation',
+           foreign_key: :recipient_id,
+           dependent: :nullify
+  has_many :initiated_conversations,
+           inverse_of: :initiator,
+           class_name: 'Conversation',
+           foreign_key: :initiator_id,
+           dependent: :nullify
+
   has_many :comments,
            foreign_key: :sender_id,
            inverse_of: :sender,
@@ -72,9 +83,9 @@ class User < ApplicationRecord
            after_add: :child_added,
            before_remove: :child_removed
 
-  has_many :sent_messages, class_name: 'Message', foreign_key: :sender_id, inverse_of: :sender, dependent: :destroy
+  has_many :sent_messages, class_name: 'Message', foreign_key: :sender_id, inverse_of: :sender, dependent: :nullify
   has_many :received_messages, class_name: 'Message', foreign_key: :receiver_id, inverse_of: :receiver,
-                               dependent: :destroy
+                               dependent: :nullify
   has_many :event_series, inverse_of: :user, dependent: :destroy
   has_many :events, through: :event_series, inverse_of: :user
   has_many :participants, inverse_of: :user, dependent: :destroy
@@ -270,6 +281,15 @@ class User < ApplicationRecord
     devices.each do |d|
       d.send_push(data)
     end
+  end
+
+  def push_notify_new_group_chat(comment)
+    return unless setting_notify_messages_push
+
+    push_to_devices icon: comment.sender.avatar,
+                    url: ENV['LINK_HOST'] + '/group-chat/' + comment.group.id.to_s,
+                    title: "#{comment.sender.first_name.capitalize} sent a new  message to #{comment.group.name}",
+                    body: 'Tap to read the message and respond'
   end
 
   def push_notify_message_receipt(message)

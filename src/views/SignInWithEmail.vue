@@ -11,7 +11,7 @@
           />
           <h1 class="auth-heading">Log In</h1>
           <div class="auth-wrapper">
-            <FacebookButton v-if="false" />
+            <FacebookButton/>
             <span v-if="false">
               <div class="divider-container">
                 <div class="divider-1px-2"></div>

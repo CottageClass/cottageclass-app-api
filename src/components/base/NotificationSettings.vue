@@ -59,14 +59,14 @@ export default {
     labels () {
       return [
         [ 'settingNotifyMessagesPush', 'Push notifications' ],
-        // [ 'settingNotifyMessagesEmail', 'Email' ],
+        [ 'settingNotifyMessagesEmail', 'Email' ],
         [ 'settingNotifyMessagesSms', 'Text message' ]
       ]
     },
     media () {
       return {
         settingNotifyMessagesPush: this.mediaModel.includes('settingNotifyMessagesPush'),
-        // settingNotifyMessagesEmail: this.mediaModel.includes('settingNotifyMessagesEmail'),
+        settingNotifyMessagesEmail: this.mediaModel.includes('settingNotifyMessagesEmail'),
         settingNotifyMessagesSms: this.mediaModel.includes('settingNotifyMessagesSms')
       }
     }
