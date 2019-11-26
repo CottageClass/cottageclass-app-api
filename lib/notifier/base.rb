@@ -13,9 +13,25 @@ class Notifier::Base
   end
 
   def transmit
+    begin
+      this_message = message
+    rescue => e
+      Rails.logger.error 'Failed to send message.'
+      Rails.logger.error e.message
+      Rails.logger.error e.backtrace.first(5).join("\n")
+      {}
+    end
+    begin
+      this_email = email
+    rescue => e
+      Rails.logger.error 'Failed to send email.'
+      Rails.logger.error e.message
+      Rails.logger.error e.backtrace.first(5).join("\n")
+      {}
+    end
     {
-      message: message,
-      email: email
+      message: this_message,
+      email: this_email
     }
   end
 
