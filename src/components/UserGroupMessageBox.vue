@@ -4,15 +4,10 @@
       :person="currentUser"
       :imageSize="48"
       class="home-item--photo photo-fit" />
-    <div class="home-item--input-visual">
-      <textarea
-        @click="processClick"
-        @keydown.enter.exact.prevent=""
-        @keyup.enter.exact.prevent="submitMessage"
-        v-model="content"
-        placeholder="Share an idea..."
-        class="input-visual--text"
-      />
+    <div class="dummy-text-input"
+         @click="processClick"
+    >
+      Share an idea...
     </div>
   </div>
 </template>
@@ -79,26 +74,20 @@ a {
   min-width: 48px;
 }
 
-.input-visual--text {
+.dummy-text-input {
   &:focus, &::selection {
     outline: 0;
   }
-  color: black;
-  resize: none;
-  padding: 0px 16px 0px 16px;
-  height: 26px;
-  box-sizing: border-box;
+  cursor: text;
+  line-height: 48px;
+  padding-left: 16px;
+  color: gray;
   font-size: 16px;
   font-weight: 400;
   width: 100%;
-}
-
-.home-item--input-visual {
-  display: flex;
-  width: 100%;
   min-height: 48px;
+  max-height: 48px;
   margin-left: 16px;
-  align-items: center;
   border-style: solid;
   border-width: 1px;
   border-color: #d9d9d9;
@@ -120,11 +109,8 @@ a {
     min-width: 36px;
   }
 
-  .input-visual--text {
+  .dummy-text-input {
     font-size: 14px;
-  }
-
-  .home-item--input-visual {
     min-height: 36px;
   }
 
