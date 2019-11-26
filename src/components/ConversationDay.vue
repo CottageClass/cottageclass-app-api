@@ -1,7 +1,6 @@
 <template>
   <div>
     <ConversationDivider
-      v-if="showDivider"
       :dividerText="dayText"
     />
     <Message v-for="message in sortedMessages"
@@ -25,16 +24,13 @@ export default {
   },
   components: { Message, ConversationDivider },
   computed: {
-    showDivider () {
-      return this.day !== moment().format('YYYY-MM-DD')
-    },
     dayText () {
       const formatString = 'ddd, MMM D, YYYY'
       const today = moment().format(formatString)
       const yesterday = moment().subtract(1, 'days').format(formatString)
       const formattedDay = moment(this.day).format(formatString)
 
-      if (today === formattedDay) { return '' }
+      if (today === formattedDay) { return 'Today' }
       if (yesterday === formattedDay) { return 'Yesterday' }
       return formattedDay
     },
@@ -42,7 +38,7 @@ export default {
       return this.messages.concat().sort((a, b) => {
         const date1 = new Date(b.createdAt)
         const date2 = new Date(a.createdAt)
-        return date1 - date2
+        return date2 - date1
       })
     }
   }
