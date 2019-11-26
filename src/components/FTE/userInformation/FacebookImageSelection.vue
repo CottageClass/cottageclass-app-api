@@ -6,6 +6,7 @@
               subtitle="Choose the photos that best represent you, your family, or any activities you’d like to share.">
       <div class="image-wrapper">
         <div v-for="(imageUrl, index) in facebookThumbs"
+             v-bind:key="index"
              class="image-container"
              @click="toggleImageSelection(index)">
           <img class="facebook-thumb" :src=imageUrl>
@@ -33,6 +34,7 @@ import LoadingSpinner from '@/components/LoadingSpinner.vue'
 import { fetchFacebookImages } from '@/utils/vendor'
 import { minBy, maxBy } from '@/utils/utils'
 import { mapGetters } from 'vuex'
+import { uploadImage } from '@/utils/vendor/cloudinary.js'
 
 export default {
   name: 'FacebookImageSelection',
@@ -42,7 +44,9 @@ export default {
     return {
       facebookImageData: null,
       state: { },
-      selectedIndices: []
+      selectedIndices: [],
+      cloudinaryImages: new Array(25).fill(null),
+      errorMesg: 'Your images are uploading, try again in a few seconds'
     }
   },
   methods: {
@@ -58,20 +62,24 @@ export default {
         console.log(e)
       }
     },
-    toggleImageSelection (index) {
+    async toggleImageSelection (index) {
       // create a copy, alter it and reassign it to selectedIndices.  This will force Vue to react to the change
       const selectedIndicesCopy = this.selectedIndices.concat()
-      if (this.selectedIndices.findIndex(index) >= 0) {
-        selectedIndicesCopy.splice(this.selectedIndices.findIndex(index), 1)
+      if (this.selectedIndices.indexOf(index) >= 0) {
+        selectedIndicesCopy.splice(this.selectedIndices.indexOf(index), 1)
       } else {
         selectedIndicesCopy.push(index)
       }
       this.selectedIndices = selectedIndicesCopy
+      if (!this.cloudinaryImages[index]) {
+        this.$set(this.cloudinaryImages, index, 'uploading')
+        const new_url = await uploadImage(this.facebookFullSizeImages[index])
+        this.$set(this.cloudinaryImages, index, new_url)
+      }
       this.setState()
-      this.$emit('input', this.state)
     },
     setState () {
-      this.state = this.selectedIndices.map(i => this.facebookFullSizeImages[i])
+      this.state = this.selectedIndices.map(i => this.cloudinaryImages[i])
     }
   },
   computed: {
@@ -101,14 +109,34 @@ export default {
     loading () {
       return !this.facebookImageData
     },
+    hasUploaded () {
+      if (this.cloudinaryImages.includes('uploading')) {
+        return false
+      } else {
+        return true
+      }
+    },
+    err: function () {
+      if (this.hasUploaded) {
+        return false
+      } else {
+        return this.errorMesg
+      }
+    },
     ...mapGetters([ 'currentUser' ])
   },
   watch: {
     value: function () {
       this.state = this.value
+    },
+    hasUploaded: function () {
+      this.$emit('input', { state: this.state, err: this.err })
     }
   },
   mounted () {
+    this.$emit('input', {
+      state: this.state, err: this.err
+    })
     this.state = this.value
   },
   created () {
