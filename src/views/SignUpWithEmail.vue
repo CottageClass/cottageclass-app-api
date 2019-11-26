@@ -9,7 +9,7 @@
                         class="editing"/>
           <h1 class="auth-heading">Sign Up</h1>
           <div class="auth-wrapper">
-            <FacebookButton />
+            <FacebookButton v-if="!isIOSNativeApp" />
             <span v-if="false">
               <div class="divider-container">
                 <div class="divider-1px-2"></div>
@@ -74,7 +74,7 @@
 </template>
 
 <script>
-import { providerAuthentication, alerts, goHome } from '@/mixins'
+import { providerAuthentication, alerts, goHome, platform } from '@/mixins'
 import { register, signIn } from '@/utils/api'
 import MainNav from '@/components/MainNav.vue'
 import FacebookButton from '@/components/base/FacebookButton'
@@ -84,7 +84,7 @@ import LoadingSpinner from '@/components/LoadingSpinner'
 export default {
   name: 'SignUpWithEmail',
   components: { ErrorMessage, MainNav, FacebookButton, LoadingSpinner },
-  mixins: [ providerAuthentication, alerts, goHome ],
+  mixins: [ providerAuthentication, alerts, goHome, platform ],
   data: function () {
     return {
       disableForm: false,

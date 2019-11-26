@@ -27,18 +27,18 @@
           </div>
           <div v-if="comments"
                class="chat-content--wrapper">
-            <div v-if="postPending">
-              <LoadingSpinner
-                size="40px"
-                marginTop="30px"
-              />
-            </div>
             <ConversationDay
               v-for="(ca) in conversationDays"
               :key="ca.day"
               :day="ca.day"
               :messages="ca.messages"
             />
+            <div v-if="postPending">
+              <LoadingSpinner
+                size="40px"
+                marginTop="30px"
+              />
+            </div>
 
           </div>
         </div>
@@ -82,6 +82,11 @@ export default {
   components: { MainNav, MessageSendBox, AvatarImage, ConversationDay, LoadingSpinner, ConversationDivider },
   mixins: [ platform, redirect, alerts ],
   methods: {
+    scrollOnNextTick () {
+      this.$nextTick(() => {
+        VueScrollTo.scrollTo('#page-bottom', { duration: 500, easing: 'ease-in' })
+      })
+    },
     async update () {
       this.comments = await fetchComments(this.groupId)
     },
@@ -92,6 +97,7 @@ export default {
       this.newMessage = null
       try {
         await postComment(this.groupId, pendingMessage)
+        this.scrollOnNextTick()
       } catch (e) {
         this.newMessage = pendingMessage
       } finally {
@@ -134,9 +140,7 @@ export default {
     if (this.redirectToSignupIfNotAuthenticated()) { return }
     try {
       await this.update()
-      this.$nextTick(() => {
-        VueScrollTo.scrollTo('#page-bottom', { duration: 500, easing: 'ease-in' })
-      })
+      this.scrollOnNextTick()
     } catch (e) {
       this.showAlertOnNextRoute('Sorry, you don\'t have access to that page', 'failure')
       this.$router.push({ name: 'Parents' })

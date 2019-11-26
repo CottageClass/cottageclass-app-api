@@ -11,7 +11,7 @@
           />
           <h1 class="auth-heading">Log In</h1>
           <div class="auth-wrapper">
-            <FacebookButton/>
+            <FacebookButton v-if="!isIOSNativeApp" />
             <span v-if="false">
               <div class="divider-container">
                 <div class="divider-1px-2"></div>
@@ -67,14 +67,14 @@
 import ErrorMessage from '@/components/base/ErrorMessage.vue'
 import FacebookButton from '@/components/base/FacebookButton'
 import MainNav from '@/components/MainNav.vue'
-import { providerAuthentication, goHome } from '@/mixins'
+import { providerAuthentication, goHome, platform } from '@/mixins'
 import { mapGetters } from 'vuex'
 import { signIn } from '@/utils/api'
 
 export default {
   name: 'SignInWithEmail',
   components: { ErrorMessage, MainNav, FacebookButton },
-  mixins: [ providerAuthentication, goHome ],
+  mixins: [ providerAuthentication, goHome, platform ],
   data: function () {
     return {
       email: '',
