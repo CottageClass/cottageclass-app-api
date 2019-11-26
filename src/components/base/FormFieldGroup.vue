@@ -3,10 +3,10 @@
     <div class="onb-group-header">
       <h2 class="onb-child-group-heading">{{ heading }}</h2>
       <a
-        v-if="showRemoveButton"
+        v-if="showRemoveButton && this.value.key > 0"
         @click="$emit('remove')"
-        class="onb-button-delete-child w-inline-block">
-        <img src="@/assets/remove.svg" width="24" height="24" alt="" class="image-6"></a>
+        class="onb-button-remove-group-text w-inline-block">
+        Remove</a>
     </div>
     <FormFieldAndLabel
       v-for="fieldGroup in fieldGroups"
@@ -60,6 +60,20 @@ export default {
 }
 
 .flow {
+  .onb-button-remove-group-text {
+  padding: 3px 10px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #fb6f77;
+  border-radius: 4px;
+  background-color: #fff;
+  color: #fb6f77;
+  font-size: 13px;
+  }
+
+  .onb-button-remove-group-text:active {
+  background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0.06));
+  }
   .onb-child-group-heading {
     margin-top: 0px;
     margin-bottom: 0px;
