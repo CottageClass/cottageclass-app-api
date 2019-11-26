@@ -60,14 +60,9 @@ export default {
   methods: {
     async update () {
       const raw = await fetchComments(this.groupId)
-      const sorted = raw.sort((a, b) => a.created_at > b.created_at)
-      if (this.context === 'search') {
-        this.comments = sorted.slice(-4)
-        console.log(sorted.length)
-        this.moreCount = sorted.length - this.comments.length
-      } else if (this.context === 'page') {
-        this.comments = sorted
-      }
+      this.comments = raw.slice(-4)
+      console.log(raw.length)
+      this.moreCount = raw.length - this.comments.length
     }
   },
   computed: {

@@ -43,6 +43,7 @@
           </div>
         </div>
       </div>
+      <div id="page-bottom" />
       <MessageSendBox
         @message-submitted="sendMessage"
         v-model="newMessage"
@@ -56,6 +57,7 @@
 import moment from 'moment'
 import { mapGetters } from 'vuex'
 
+import VueScrollTo from 'vue-scrollto'
 import MainNav from '@/components/MainNav'
 import MessageSendBox from '@/components/MessageSendBox'
 import AvatarImage from '@/components/base/AvatarImage'
@@ -81,8 +83,7 @@ export default {
   mixins: [ platform, redirect, alerts ],
   methods: {
     async update () {
-      const raw = await fetchComments(this.groupId)
-      this.comments = raw.sort((a, b) => a.created_at > b.created_at)
+      this.comments = await fetchComments(this.groupId)
     },
     async sendMessage () {
       if (this.postPending || !this.newMessage) { return }
@@ -122,7 +123,7 @@ export default {
         days[dayKey].push(comment)
         return days
       }, {})
-      const ordereddays = Object.keys(dayGroups).sort().reverse()
+      const ordereddays = Object.keys(dayGroups).sort()
       return ordereddays.map((day) => {
         return { day, messages: dayGroups[day] }
       })
@@ -133,6 +134,9 @@ export default {
     if (this.redirectToSignupIfNotAuthenticated()) { return }
     try {
       await this.update()
+      this.$nextTick(() => {
+        VueScrollTo.scrollTo('#page-bottom', { duration: 500, easing: 'ease-in' })
+      })
     } catch (e) {
       this.showAlertOnNextRoute('Sorry, you don\'t have access to that page', 'failure')
       this.$router.push({ name: 'Parents' })
