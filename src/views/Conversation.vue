@@ -39,10 +39,17 @@
               :messages="ca.messages"
               :partner="partner"
             />
+            <div v-if="messagePending">
+              <LoadingSpinner
+                size="40px"
+                marginTop="30px"
+              />
+            </div>
 
           </div>
         </div>
       </div>
+      <div id="page-bottom" />
       <MessageSendBox
         @message-submitted="sendMessage"
         v-model="newMessage"
@@ -57,6 +64,7 @@ import VueScrollTo from 'vue-scrollto'
 import { mapGetters } from 'vuex'
 import moment from 'moment'
 
+import LoadingSpinner from '@/components/LoadingSpinner'
 import MainNav from '@/components/MainNav'
 import ConversationDay from '@/components/ConversationDay'
 import ConversationDivider from '@/components/ConversationDivider.vue'
@@ -68,28 +76,45 @@ import { fetchMessages, fetchUser, submitMessage } from '@/utils/api'
 
 export default {
   name: 'Conversation',
-  components: { ConversationDay, AvatarImage, MainNav, MessageSendBox, ConversationDivider },
+  components: { ConversationDay, AvatarImage, MainNav, MessageSendBox, ConversationDivider, LoadingSpinner },
   mixins: [ platform ],
   data () {
     return {
       newMessage: null,
       messages: null,
-      partner: null
+      partner: null,
+      messagePending: false
     }
   },
   props: {
     userId: { required: true }
   },
   methods: {
+    scrollOnNextTick () {
+      this.$nextTick(() => {
+        VueScrollTo.scrollTo('#page-bottom', { duration: 500, easing: 'ease-in' })
+      })
+    },
     async poll () {
       this.messages = await fetchMessages(this.userId)
     },
-    async sendMessage (payload) {
-      console.log(this.accomodateRoundedCorners)
-      await submitMessage(this.partner.id, payload.message)
-      this.messages = await fetchMessages(this.userId)
+    async sendMessage () {
+      if (this.messagePending || !this.newMessage) { return }
+      this.messagePending = true
+      const pendingMessage = this.newMessage
       this.newMessage = null
-      VueScrollTo.scrollTo('.page-wrapper')
+      try {
+        await submitMessage(this.partner.id, pendingMessage)
+        this.scrollOnNextTick()
+      } catch (e) {
+        this.logError(e)
+      } finally {
+        await this.update()
+        this.messagePending = false
+      }
+    },
+    async update () {
+      this.messages = await fetchMessages(this.userId)
     }
   },
   computed: {
@@ -114,7 +139,7 @@ export default {
         days[dayKey].push(message)
         return days
       }, {})
-      const ordereddays = Object.keys(dayGroups).sort().reverse()
+      const ordereddays = Object.keys(dayGroups).sort()
       return ordereddays.map((day) => {
         return { day, messages: dayGroups[day] }
       })
@@ -125,6 +150,7 @@ export default {
     this.poll()
     this.pollingInterval = setInterval(this.poll, 30000)
     this.partner = await fetchUser(this.userId)
+    this.scrollOnNextTick()
   },
   destroyed () {
     clearInterval(this.pollingInterval)
