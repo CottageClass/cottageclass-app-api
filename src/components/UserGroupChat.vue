@@ -2,11 +2,6 @@
   <div class="home-item">
     <div class="group-chat-title">Ideas for today and tomorrow</div>
     <LoadingSpinner v-if="!comments" />
-    <div class="divider-container"
-         v-if="comments.length === 0">
-      <ConversationDivider
-        dividerText="No ideas yet, add yours!" />
-    </div>
     <div>
       <UserGroupComment
         v-for="comment in comments"
@@ -33,7 +28,6 @@ import LoadingSpinner from '@/components/LoadingSpinner'
 import UserGroupComment from '@/components/UserGroupComment'
 import UserGroupMessageBox from '@/components/UserGroupMessageBox'
 import UserGroupMoreCommentsIndicator from '@/components/UserGroupMoreCommentsIndicator'
-import ConversationDivider from '@/components/ConversationDivider.vue'
 
 export default {
   name: 'UserGroupChat',
@@ -41,8 +35,7 @@ export default {
     UserGroupMessageBox,
     LoadingSpinner,
     UserGroupComment,
-    UserGroupMoreCommentsIndicator,
-    ConversationDivider
+    UserGroupMoreCommentsIndicator
   },
   props: {
     context: {
@@ -99,22 +92,12 @@ export default {
   box-shadow: none;
 }
 
-.divider-container {
-  width: 100%;
-  margin-top: 32px;
-  margin-bottom: 32px;
-}
-
 @media (max-width: 767px){
   .home-item {
     margin-top: 8px;
     margin-bottom: 8px;
     padding: 16px;
     border-radius: 0;
-  }
-  .divider-container {
-    margin-top: 16px;
-    margin-bottom: 16px;
   }
 }
 </style>

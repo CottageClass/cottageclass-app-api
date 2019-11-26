@@ -121,7 +121,7 @@ export default {
       return size
     },
     placeImages () {
-      return this.place.images.map(url => householdImageUrl(url, 200))
+      return this.place.images.map(url => householdImageUrl(url, 800))
     },
     lightboxImages () {
       return this.place.images.map(i => {
