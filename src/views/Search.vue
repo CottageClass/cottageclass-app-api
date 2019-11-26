@@ -19,12 +19,12 @@
     <div v-else class="page-wrapper">
       <MainNav />
       <div class="row-container w-container">
-        <UserGroupChat
-          v-if="showGroupChat"
-          context="search"
-        />
         <div class="events__container w-container">
           <div class="events__column-left">
+            <UserGroupChat
+              v-if="showGroupChat"
+              context="search"
+            />
             <MainActionButtons @offer-playdate-click="offerPlaydate"/>
             <div class="list-container w-container">
               <FilterSelectorBank :showEventTimeFilter="itemType==='event'"/>
