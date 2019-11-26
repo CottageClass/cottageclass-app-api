@@ -58,23 +58,6 @@
     "activities":["french"],
     "images": ["manisha-4.jpg", "manisha-6.jpg", "manisha-7.jpg", "manisha-1.jpg", "manisha-3.jpg", "manisha-5.jpg"],
     "backgroundCheck": true,
-    "emergencyContacts": [
-      {
-        "name": "Giseli Vasconcelos",
-        "relationship": "mother",
-        "phone": "617-544-7354"
-      },
-      {
-        "name": "Tiffiniy Cheng",
-        "relationship": "friend",
-        "phone": "413-367-6255"
-      },
-      {
-        "name": "Janet Snoyer",
-        "relationship": "mother",
-        "phone": "607-279-1964"
-      }
-    ],
     "doctors": [
       {
         "name": "Le Quang",
@@ -3684,23 +3667,6 @@
     "activities": ["baking", "biking", "tennis", "running"],
     "blurb": "I'm an activist, a step dad, and now I run a startup, I've been babysitting since I was 11.",
     "backgroundCheck": true,
-    "emergencyContacts": [
-      {
-        "name": "Giseli Vasconcelos",
-        "relationship": "mother",
-        "phone": "617-544-7354"
-      },
-      {
-        "name": "Tiffiniy Cheng",
-        "relationship": "friend",
-        "phone": "413-367-6255"
-      },
-      {
-        "name": "patrick moriarty",
-        "relationship": "roommate",
-        "phone": "508-555-1212"
-      }
-    ],
     "doctors": [
       {
         "name": "Le Quang",

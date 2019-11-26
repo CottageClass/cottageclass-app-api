@@ -4,7 +4,8 @@
       <div class="form-block w-form">
         <form id="email-form" name="email-form" data-name="Email Form" class="form">
           <textarea
-            @keyup.enter="submitMessage"
+            @keyup.enter.exact.prevent="submitMessage"
+            @keydown.enter.exact.prevent=""
             v-model="message"
             placeholder="Type a message" maxlength="5000"
             id="message"

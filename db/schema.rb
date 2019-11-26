@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_14_165848) do
+ActiveRecord::Schema.define(version: 2019_11_20_145758) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,6 +84,16 @@ ActiveRecord::Schema.define(version: 2019_11_14_165848) do
     t.index ["parent_id"], name: "index_children_on_parent_id"
   end
 
+  create_table "comments", force: :cascade do |t|
+    t.bigint "sender_id"
+    t.bigint "group_id"
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["group_id"], name: "index_comments_on_group_id"
+    t.index ["sender_id"], name: "index_comments_on_sender_id"
+  end
+
   create_table "conversations", force: :cascade do |t|
     t.bigint "initiator_id"
     t.bigint "recipient_id"
@@ -115,17 +125,6 @@ ActiveRecord::Schema.define(version: 2019_11_14_165848) do
     t.index ["user_id"], name: "index_devices_on_user_id"
   end
 
-  create_table "emergency_contacts", force: :cascade do |t|
-    t.string "contactable_type", null: false
-    t.bigint "contactable_id", null: false
-    t.string "name"
-    t.string "phone_number"
-    t.string "relationship"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.index ["contactable_type", "contactable_id"], name: "index_emergency_contacts_on_contactable_type_and_contactable_id"
-  end
-
   create_table "event_collection_memberships", force: :cascade do |t|
     t.bigint "event_id"
     t.bigint "event_collection_id"
@@ -148,7 +147,6 @@ ActiveRecord::Schema.define(version: 2019_11_14_165848) do
     t.time "ends_at", null: false
     t.integer "repeat_for", null: false
     t.integer "interval", null: false
-    t.integer "maximum_children", default: 0
     t.integer "child_age_minimum", default: 0
     t.integer "child_age_maximum", default: 0
     t.json "meta"
@@ -168,7 +166,6 @@ ActiveRecord::Schema.define(version: 2019_11_14_165848) do
     t.string "name", null: false
     t.datetime "starts_at", null: false
     t.datetime "ends_at", null: false
-    t.integer "maximum_children", default: 0
     t.integer "child_age_minimum", default: 0
     t.integer "child_age_maximum", default: 0
     t.boolean "modified", default: false
@@ -212,17 +209,6 @@ ActiveRecord::Schema.define(version: 2019_11_14_165848) do
     t.datetime "updated_at"
     t.index ["notifiable_type", "notifiable_id"], name: "index_notifications_on_notifiable_type_and_notifiable_id"
     t.index ["recipient_id"], name: "index_notifications_on_recipient_id"
-  end
-
-  create_table "participant_children", force: :cascade do |t|
-    t.bigint "participant_id", null: false
-    t.string "participable_type", null: false
-    t.bigint "participable_id", null: false
-    t.bigint "child_id", null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.index ["participable_type", "participable_id", "child_id"], name: "idx_participants_on_participable_type_participable_id_child_id", unique: true
-    t.index ["participant_id"], name: "index_participant_children_on_participant_id"
   end
 
   create_table "participants", force: :cascade do |t|
@@ -348,6 +334,21 @@ ActiveRecord::Schema.define(version: 2019_11_14_165848) do
     t.index ["starable_type", "starable_id"], name: "index_stars_on_starable_type_and_starable_id"
   end
 
+  create_table "user_group_memberships", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "user_group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_group_id"], name: "index_user_group_memberships_on_user_group_id"
+    t.index ["user_id"], name: "index_user_group_memberships_on_user_id"
+  end
+
+  create_table "user_groups", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "user_matches", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "matched_user_id"
@@ -458,6 +459,8 @@ ActiveRecord::Schema.define(version: 2019_11_14_165848) do
   add_foreign_key "messages", "users", column: "sender_id"
   add_foreign_key "places", "users"
   add_foreign_key "stars", "users", column: "giver_id"
+  add_foreign_key "user_group_memberships", "user_groups"
+  add_foreign_key "user_group_memberships", "users"
   add_foreign_key "user_matches", "users"
   add_foreign_key "user_matches", "users", column: "matched_user_id"
   add_foreign_key "users", "places"

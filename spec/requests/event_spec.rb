@@ -12,7 +12,7 @@ RSpec.resource 'Event' do
       event_series = create_list :event_series, 5, user: user, place: place
       create_list(:user, 3, :with_children).each do |user|
         Event.where(event_series: event_series).find_each do |event|
-          create :participant, :with_participant_children, participable: event, user: user
+          create :participant, participable: event, user: user
         end
       end
     end
@@ -139,7 +139,7 @@ RSpec.resource 'Event' do
         another_user = create :user
         event_series = create_list :event_series, 5, user: another_user, place: place
         Event.where(event_series: event_series).find_each do |event|
-          create :participant, :with_participant_children, participable: event, user: user
+          create :participant, participable: event, user: user
         end
       end
 
@@ -173,7 +173,7 @@ RSpec.resource 'Event' do
 
     before do
       create_list(:user, 3, :with_children).each do |user|
-        create :participant, :with_participant_children, participable: subject, user: user
+        create :participant, participable: subject, user: user
       end
     end
 
@@ -185,7 +185,7 @@ RSpec.resource 'Event' do
       before do
         2.times do
           user_with_children = create :user, :with_children
-          create :participant, :with_participant_children, participable: subject, user: user_with_children
+          create :participant, participable: subject, user: user_with_children
         end
       end
 
@@ -222,14 +222,12 @@ RSpec.resource 'Event' do
         parameter :name, 'Name', required: true
         parameter :starts_at, 'Start Time', required: true
         parameter :ends_at, 'End Time', required: true
-        parameter :maximum_children, 'Maximum number of children allowed. Default: 0 (no limit)'
         parameter :child_age_minimum, 'Minimum age of child. Default: 0 (no limit)'
         parameter :child_age_maximum, 'Maximum age of child. Default: 0 (no limit)'
       end
 
       %i[
         name
-        maximum_children
         child_age_minimum
         child_age_maximum
       ].each do |attribute|

@@ -93,7 +93,6 @@ export default {
             'start_date': timeRange.start.format('YYYY-MM-DD'),
             'starts_at': timeRange.start.format('HH:mm'),
             'ends_at': timeRange.end.format('HH:mm'),
-            'maximum_children': 4,
             'child_age_minimum': this.ageRange.minimum,
             'child_age_maximum': this.ageRange.maximum,
             'repeat_for': this.repeatCount.number || 1,

@@ -15,7 +15,11 @@ describe('Search', () => {
         fetchUpcomingEventsWithinDistance: jest.fn()
       }
       const mutations = {
+        setItemType: jest.fn(),
         resetFetchLocks: jest.fn()
+      }
+      const $route = {
+        name: 'Parents'
       }
       const $store = new Vuex.Store({
         actions,
@@ -37,7 +41,7 @@ describe('Search', () => {
         }
       })
       wrapper = shallowMount(Search, {
-        mocks: { $store },
+        mocks: { $store, $route },
         stubs: [ 'GmapMap', 'GmapMarker' ], // because the are globally registered.  this silences the warning
         propsData: { itemType: 'all' }
       })

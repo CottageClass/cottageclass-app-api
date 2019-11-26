@@ -16,13 +16,12 @@ class Event < ApplicationRecord
   has_one :user, through: :event_series, inverse_of: :events
   has_many :notifications, as: :notifiable, dependent: :nullify
   has_many :participants, as: :participable, dependent: :destroy
-  has_many :participant_children, as: :participable
   has_many :participating_users, through: :participants, source: :user
   has_many :event_collection_memberships, dependent: :destroy
   has_many :event_collections, through: :event_collection_memberships
 
   scope :has_participants, -> { joins(:participants) }
-  scope :eager, -> { includes participants: %i[user participant_children] }
+  scope :eager, -> { includes participants: %i[user] }
   scope :nearest, ->(user) { where.not(id: user.events).near([user.place.latitude, user.place.longitude], 100) }
   scope :past, -> { where(Event.arel_table[:starts_at].lt(Time.current)).order starts_at: :desc }
   scope :upcoming, -> { where(Event.arel_table[:starts_at].gteq(1.hour.ago(Time.current))).order starts_at: :asc }
@@ -43,10 +42,6 @@ class Event < ApplicationRecord
 
   delegate(*User::PUBLIC_ATTRIBUTES, to: :user, prefix: :host, allow_nil: true)
   delegate :first_name, :full_address, to: :user, prefix: :host, allow_nil: true
-
-  def full?
-    maximum_children.positive? && (participant_children.count >= maximum_children)
-  end
 
   def participated?(user)
     user.present? ? participating_users.include?(user) : false
@@ -138,8 +133,7 @@ class Event < ApplicationRecord
   private
 
   def add_host_participant
-    participant_children = user.children.map { |child| ParticipantChild.create child: child, participable: self }
-    host_participant = participants.build user: user, participant_children: participant_children
+    host_participant = participants.build user: user
     host_participant.save
     save!
   end

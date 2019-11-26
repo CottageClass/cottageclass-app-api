@@ -21,6 +21,10 @@ class User < ApplicationRecord
   ].freeze
 
   after_update :sms_notify
+  before_save :add_to_groups, if: lambda { |instance|
+    (instance.respond_to?(:place_changed?) && instance.place_changed?) ||
+      (instance.respond_to?(:place_id_changed?) && instance.place_id_changed?)
+  }
 
   before_validation :cleanup
   after_save :find_matches, if: lambda { |instance|
@@ -54,6 +58,17 @@ class User < ApplicationRecord
            class_name: 'Conversation',
            foreign_key: :initiator_id,
            dependent: :nullify
+
+  has_many :comments,
+           foreign_key: :sender_id,
+           inverse_of: :sender,
+           dependent: :destroy
+  has_many :user_group_memberships,
+           inverse_of: :user,
+           dependent: :destroy
+  has_many :user_groups,
+           through: :user_group_memberships
+
   has_many :created_places,
            inverse_of: :creator,
            class_name: 'Place',
@@ -353,6 +368,21 @@ class User < ApplicationRecord
   end
 
   private
+
+  def add_to_groups
+    existing_membership = user_group_memberships.find_by(user_group_id: 1)
+
+    worcester = [42.2626, -71.8023]
+    worcester_group = UserGroup.find_by(id: 1)
+    return if worcester_group.nil? || place.nil?
+
+    if (distance_to worcester) <= 20 && existing_membership.nil?
+      user_groups << worcester_group
+      save!
+    end
+
+    existing_membership.destroy if (distance_to worcester) > 20 && existing_membership.present?
+  end
 
   def validate_associated_records_for_place
     return if place.blank?

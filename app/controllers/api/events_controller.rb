@@ -5,7 +5,7 @@ class API::EventsController < API::BaseController
   before_action :requires_event_owner, only: %i[update destroy]
 
   def index
-    events = Event.includes(:user, :place, participant_children: :child, user: :children)
+    events = Event.includes(:user, :place, user: :children)
     events_index events: events.joins(:event_series),
                  skope: params[:skope],
                  miles: params[:miles],
@@ -57,7 +57,6 @@ class API::EventsController < API::BaseController
   def show
     @event = Event.eager.find_by id: params[:id]
     serializer = EventSerializer.new @event, include: %i[ participants
-                                                          participants.participant_children
                                                           user
                                                           place
                                                           user.children],
@@ -95,23 +94,8 @@ class API::EventsController < API::BaseController
       min_age = min_age.to_i
       max_age ||= 17
       max_age = max_age.to_i
-      earliest_birthday = (Time.current - (max_age + 1).year.seconds)
-      latest_birthday = (Time.current - min_age.year.seconds)
-      time_range = earliest_birthday..latest_birthday
 
-      # all participant children in age range
-      participating_subquery = ParticipantChild.joins(:child).where('children.birthday' => time_range)
-
-      # all eventSeries hosted by parents of children in range
-      event_series_belonging_to_users_that_have_children_in_the_age_range = EventSeries
-        .select(:id).distinct
-        .joins(user: :children)
-        .where(users: { children: { 'birthday' => time_range } })
-
-      events = events.joins("LEFT JOIN (#{participating_subquery.to_sql}) sub ON sub.participable_id = events.id")
-        .joins("LEFT JOIN (#{event_series_belonging_to_users_that_have_children_in_the_age_range.to_sql}) hsub ON hsub.id = events.event_series_id")
-        .where('hsub.id IS NOT NULL OR sub.participable_id IS NOT NULL')
-
+      events = events.where('events.child_age_minimum <= ? AND events.child_age_maximum >= ?', max_age, min_age)
     end
 
     miles = miles.to_f
@@ -146,7 +130,6 @@ class API::EventsController < API::BaseController
     end
 
     serializer = EventSerializer.new events, include: %i[participants
-                                                         participants.participant_children
                                                          user
                                                          place],
                                              params: { current_user: current_user },

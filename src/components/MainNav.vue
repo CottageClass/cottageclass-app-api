@@ -38,7 +38,7 @@
             <div class="navigation__button-label">Playdates</div>
           </router-link>
         </li>
-        <router-link v-if="currentUser.messagesActive"
+        <router-link v-if="currentUser && currentUser.messagesActive"
                      :to="{name: 'Chats'}"
                      class="navigation__button w-inline-block"
                      :class="{'selected-nav-item': isChatPage}"

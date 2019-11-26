@@ -23,7 +23,6 @@ class API::UsersController < API::BaseController
       render json: CurrentUserSerializer.json_for(user, include: %i[
                                                     children
                                                     place
-                                                    children.emergency_contacts
                                                   ],
                                                         params: { current_users_place: true }),
              status: 200
