@@ -30,6 +30,7 @@
       v-if="stepName==='distance'"
       v-model="maxDistance" />
     <AvatarUpload
+      :facebookUid="this.currentUser.facebookUid"
       v-if="stepName==='avatar'"
       v-model="avatar" />
     <Availability

@@ -29,11 +29,11 @@
 <script>
 
 import Question from '@/components/base/Question.vue'
-import { createWidget, avatarUrl } from '@/utils/vendor/cloudinary'
+import { createWidget, avatarUrl, uploadImage } from '@/utils/vendor/cloudinary'
 
 export default {
   name: 'AvatarUpload',
-  props: ['value'],
+  props: ['value', 'facebookUid'],
   components: { Question },
   data () {
     return {
@@ -44,13 +44,16 @@ export default {
       previewAvatarUrl: null
     }
   },
-  created () {
+  async created () {
     this.cloudinaryUploadWidget = createWidget(this.cloudinaryEventHandler, {
       croppingAspectRatio: 1,
       multiple: false
     })
     if (this.avatar) {
       this.previewAvatarUrl = avatarUrl(this.avatar, 80)
+    } else if (this.facebookUid) {
+      this.previewAvatarUrl = 'https://graph.facebook.com/' + this.facebookUid + '/picture?width=200'
+      this.avatar = await uploadImage(this.previewAvatarUrl)
     }
   },
   computed: {
