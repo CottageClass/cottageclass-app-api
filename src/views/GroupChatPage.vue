@@ -81,8 +81,7 @@ export default {
   mixins: [ platform, redirect, alerts ],
   methods: {
     async update () {
-      const raw = await fetchComments(this.groupId)
-      this.comments = raw.sort((a, b) => a.created_at > b.created_at)
+      this.comments = await fetchComments(this.groupId)
     },
     async sendMessage () {
       if (this.postPending || !this.newMessage) { return }
@@ -122,7 +121,7 @@ export default {
         days[dayKey].push(comment)
         return days
       }, {})
-      const ordereddays = Object.keys(dayGroups).sort().reverse()
+      const ordereddays = Object.keys(dayGroups).sort()
       return ordereddays.map((day) => {
         return { day, messages: dayGroups[day] }
       })
