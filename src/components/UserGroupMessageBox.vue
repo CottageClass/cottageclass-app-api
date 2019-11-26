@@ -32,7 +32,7 @@ export default {
   computed: mapGetters(['currentUser']),
   methods: {
     processClick () {
-      this.$router.push({ name: 'GroupChatPage', params: { groupId: this.groupId } })
+      this.$router.push({ name: 'GroupChatPage', params: { groupId: this.groupId, openKeyboard: true } })
     },
     async submitMessage () {
       if (!this.content) { return }
