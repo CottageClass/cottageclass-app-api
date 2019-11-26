@@ -43,6 +43,7 @@
           </div>
         </div>
       </div>
+      <div id="page-bottom" />
       <MessageSendBox
         @message-submitted="sendMessage"
         v-model="newMessage"
@@ -56,6 +57,7 @@
 import moment from 'moment'
 import { mapGetters } from 'vuex'
 
+import VueScrollTo from 'vue-scrollto'
 import MainNav from '@/components/MainNav'
 import MessageSendBox from '@/components/MessageSendBox'
 import AvatarImage from '@/components/base/AvatarImage'
@@ -132,6 +134,9 @@ export default {
     if (this.redirectToSignupIfNotAuthenticated()) { return }
     try {
       await this.update()
+      this.$nextTick(() => {
+        VueScrollTo.scrollTo('#page-bottom', { duration: 500, easing: 'ease-in' })
+      })
     } catch (e) {
       this.showAlertOnNextRoute('Sorry, you don\'t have access to that page', 'failure')
       this.$router.push({ name: 'Parents' })
