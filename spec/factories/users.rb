@@ -30,13 +30,6 @@ FactoryBot.define do
       end
     end
 
-    trait :with_matched_user do
-      transient { other_user { build :user, :with_children, :with_place } }
-      after(:build) do |instance, evaluator|
-        UserMatch.create user: instance, matched_user: evaluator.other_user
-      end
-    end
-
     trait :with_children do
       transient { children_count { 2 } }
       after(:build) do |instance, evaluator|

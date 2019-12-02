@@ -1,10 +1,7 @@
 class User < ApplicationRecord
-  STORED_MATCHES = 20
-
   include Devise::JWT::RevocationStrategies::JTIMatcher
   include LegacyPassword
   include Starable
-  include CriticalMass
   include Locatable
 
   # Include devise modules. Others available are:
@@ -27,9 +24,6 @@ class User < ApplicationRecord
   }
 
   before_validation :cleanup
-  after_save :find_matches, if: lambda { |instance|
-    (instance.place_id_changed? || instance.children.any?(&:changed?))
-  }
   before_create do
     populate_full_name!
     populate_fname_from_name!
@@ -79,9 +73,7 @@ class User < ApplicationRecord
            class_name: 'Child',
            foreign_key: :parent_id,
            inverse_of: :parent,
-           dependent: :destroy,
-           after_add: :child_added,
-           before_remove: :child_removed
+           dependent: :destroy
 
   has_many :sent_messages, class_name: 'Message', foreign_key: :sender_id, inverse_of: :sender, dependent: :nullify
   has_many :received_messages, class_name: 'Message', foreign_key: :receiver_id, inverse_of: :receiver,
@@ -91,18 +83,6 @@ class User < ApplicationRecord
   has_many :participants, inverse_of: :user, dependent: :destroy
   has_many :participated_events, through: :participants, source: :participable, source_type: 'Event'
   has_many :notifications, foreign_key: :recipient_id, inverse_of: :recipient, dependent: :destroy
-
-  has_many :active_user_matches, -> { order(:score) },
-           foreign_key: :user_id,
-           class_name: 'UserMatch',
-           dependent: :destroy
-  has_many :passive_user_matches,
-           foreign_key: :matched_user_id,
-           class_name: 'UserMatch',
-           dependent: :destroy
-
-  has_many :matched_users, through: :active_user_matches, source: :matched_user
-  has_many :matching_users, through: :passive_user_matches, source: :user
 
   has_many :stars, class_name: 'Star', foreign_key: :giver_id, inverse_of: :giver, dependent: :destroy
   has_many :dark_stars, class_name: 'DarkStar', foreign_key: :giver_id, inverse_of: :giver, dependent: :destroy
@@ -147,72 +127,8 @@ class User < ApplicationRecord
                                                          params: { current_users_place: true }))
   end
 
-  def child_added(_child)
-    find_matches if persisted?
-  end
-
-  def child_removed(_child)
-    find_matches if persisted?
-  end
-
   def last_initial
     last_name.slice(0).upcase
-  end
-
-  def find_matches
-    miles = setting_max_distance
-
-    if place &&
-       (place.latitude.present? && place.latitude.nonzero?) &&
-       (place.longitude.present? && place.longitude.nonzero?) &&
-       (child_ages_in_months.present? && child_ages_in_months.count.positive?)
-      location = [place.latitude, place.longitude]
-      # narrow down the candidates
-      other_users_places = Place.near(location.map(&:to_f), miles)
-      place_ids = other_users_places.to_a.pluck :id
-      others = User.joins(:place).where('place_id IN(?)', place_ids).where.not(id: id)
-
-      # calculate scores and attach
-      scored_users = others.map do |other|
-        score = match_score other
-        { user: other, score: score } if score.present? && !score.to_f.nan?
-      end
-      scored_users = scored_users.compact
-      # sort by score
-      scored_users = scored_users.sort_by { |scored_user| scored_user[:score] }
-      # add matches for this user
-      active_user_matches.destroy_all
-      scored_users.slice(0, STORED_MATCHES).each do |scored_user|
-        user_match = active_user_matches.build matched_user: scored_user[:user], score: scored_user[:score]
-        user_match.save if user_match.valid?
-      end
-      # add matches for other users
-      scored_users.each do |scored_user|
-        scored_user[:user].insert_match self, scored_user[:score]
-      end
-    end
-  end
-
-  def insert_match(other_user, score)
-    active_user_matches.last.destroy if active_user_matches.count >= STORED_MATCHES && active_user_matches.last.score > score
-    if active_user_matches.count < STORED_MATCHES
-      user_match = active_user_matches.build matched_user: other_user, score: score
-      user_match.save if user_match.valid?
-    end
-  end
-
-  def match_score(other_user)
-    closeest_child_ages = child_ages_in_months.product(other_user.child_ages_in_months).min_by do |ages|
-      (ages[0] - ages[1]).abs
-    end
-    if closeest_child_ages.present?
-      difference = (closeest_child_ages[0] - closeest_child_ages[1]).abs
-      return nil if difference > 24
-
-      difference + 6 * place.distance_to(other_user.place)
-    else
-      1_000_000
-    end
   end
 
   def child_ages_in_months
@@ -269,14 +185,6 @@ class User < ApplicationRecord
     false
   end
 
-  def already_suggested_user?(other_user)
-    notifications.user_suggestion.exists? notifiable: other_user
-  end
-
-  def already_suggested_event?(event)
-    notifications.event_suggestion.exists? notifiable: event
-  end
-
   def push_to_devices(data)
     devices.each do |d|
       d.send_push(data)
@@ -308,32 +216,11 @@ class User < ApplicationRecord
                     body: event.name
   end
 
-  def notify_user_suggestion
-    return unless setting_email_notifications
-
-    suggestion = nil
-    matched_users.each do |matched_user|
-      next if either_dark_star? matched_user
-      next if already_suggested_user? matched_user
-
-      suggestion = matched_user
-      break
-    end
-    notifications.user_suggestion.where(notifiable: suggestion).create if suggestion.present?
-  end
-
   def notify_event_creation_starrer(host)
     return unless setting_email_notifications
 
     puts "sending a starrer message to #{id} about #{host.id}"
     notifications.event_creation_starrer.create(notifiable: host)
-  end
-
-  def notify_event_creation_match(host)
-    return unless setting_email_notifications
-
-    puts "sending a match message to #{id} about #{host.id}"
-    notifications.event_creation_match.create(notifiable: host)
   end
 
   def notify_daily_digest
@@ -351,24 +238,6 @@ class User < ApplicationRecord
     notifiable_event_collection.save
 
     notifications.daily_digest.where(notifiable: notifiable_event_collection).create
-  end
-
-  def notify_event_suggestion
-    return unless setting_email_notifications
-
-    suggestion = nil
-    matched_users.includes(:events).each do |matched_user|
-      next if either_dark_star? matched_user
-
-      first_event = matched_user.events.upcoming.order(:starts_at).first
-      next if already_suggested_event? first_event
-
-      next unless first_event.present? && !participated_events.exists?(first_event.id)
-
-      suggestion = first_event
-      break
-    end
-    notifications.event_suggestion.where(notifiable: suggestion).create if suggestion.present?
   end
 
   def send_reset_password_instructions_notification(token)

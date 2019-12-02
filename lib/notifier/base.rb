@@ -61,10 +61,7 @@ class Notifier::Base
       participant_creation_next_day: 'd-c8f2b65ca5fc46aa81f53cc647be154e',
       user_creation: 'd-dba1e21feb8641069f8594e3bc95b53c',
       password_reset_request: 'd-e417816d71be4f43b079182c6a44a485',
-      event_suggestion: 'd-dc315d0e9164449a870bd6c7d7ee24e0',
-      user_suggestion: 'd-ed755252e972415787390de3d327ac55',
       event_creation_starrer: 'd-15acc3f9cf744c4c82726fc05cdea4c4',
-      event_creation_match: 'd-28bf6c2184a641669618a5ea0f5ec9de',
       daily_digest: 'd-107e60c5b4764a8688e0313afab166a0',
       message_notification_recipient: 'd-53cbfb4b488f436689754cd93ac0b216',
       group_message_creation: 'd-fb0b31a4a0aa4ee298e96488ca9987a1'

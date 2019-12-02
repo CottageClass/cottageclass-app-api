@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_20_145758) do
+ActiveRecord::Schema.define(version: 2019_12_02_204439) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -349,17 +349,6 @@ ActiveRecord::Schema.define(version: 2019_11_20_145758) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "user_matches", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "matched_user_id"
-    t.float "score"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["matched_user_id"], name: "index_user_matches_on_matched_user_id"
-    t.index ["user_id", "matched_user_id"], name: "index_user_matches_on_user_id_matched_user_id", unique: true
-    t.index ["user_id"], name: "index_user_matches_on_user_id"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "email", null: false
     t.string "avatar"
@@ -461,7 +450,5 @@ ActiveRecord::Schema.define(version: 2019_11_20_145758) do
   add_foreign_key "stars", "users", column: "giver_id"
   add_foreign_key "user_group_memberships", "user_groups"
   add_foreign_key "user_group_memberships", "users"
-  add_foreign_key "user_matches", "users"
-  add_foreign_key "user_matches", "users", column: "matched_user_id"
   add_foreign_key "users", "places"
 end
