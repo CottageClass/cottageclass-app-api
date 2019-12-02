@@ -5,6 +5,7 @@ import UserPinFactory from '@/utils/UserPinFactory'
 import Marker from '@/components/base/UserPinMapMarker'
 
 import { itemPosition } from '@/utils/items.js'
+import { avatarUrl } from '@/utils/vendor/cloudinary'
 
 import Vue from 'vue'
 
@@ -65,14 +66,11 @@ export default {
       return this.map
     },
     avatarUrl (user) {
-      if (user) {
-        if (user.avatar) {
-          return user.avatar
-        } else if (user.facebookUid) {
-          return 'https://graph.facebook.com/' + user.facebookUid + '/picture?width=200'
-        } else {
-          return placeholder
-        }
+      const physicalSize = 200
+      if (user.avatar) {
+        return avatarUrl(user.avatar, physicalSize)
+      } else if (user.facebookUid) {
+        return 'https://graph.facebook.com/' + user.facebookUid + `/picture?width=${physicalSize}`
       } else {
         return placeholder
       }
