@@ -39,6 +39,8 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
+
 import MultipleImageUpload from '@/components/base/MultipleImageUpload.vue'
 import EventName from '@/components/base/eventSpecification/EventName.vue'
 import EventDescription from '@/components/base/eventSpecification/EventDescription.vue'
@@ -153,23 +155,26 @@ export default {
         this.saveButtonText = 'Problem saving. Click to try again.'
       }
     },
-    saveEvent: function () {
+    async saveEvent () {
       if (this.err) {
         this.showError = true
         VueScrollTo.scrollTo('#top-of-form')
       } else {
         this.saveButtonText = 'Saving...'
-        this.submitEventData().then(res => {
+        try {
+          const res = await this.submitEventData()
           this.saveButtonText = ' \u2714 Saved'
           console.log('event update SUCCESS')
-          this.fetchEvent()
+          await this.fetchEvent()
+          await this.updateEvent({ event: this.event })
           return res
-        }).catch(err => {
+        } catch (err) {
           console.log('Error saving', err)
           this.saveButtonText = 'Problem saving. Click to try again.'
-        })
+        }
       }
-    }
+    },
+    ...mapMutations(['updateEvent'])
   }
 }
 </script>
