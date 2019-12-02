@@ -12,6 +12,8 @@ class Comment < ApplicationRecord
              class_name: 'User',
              foreign_key: :sender_id
 
+  scope :recent, -> { where('created_at > ?', 48.hours.ago(Time.current)) }
+
   def notify
     group.members.includes(:place).each do |m|
       m.notifications.new_group_message.create notifiable: self unless m == sender
