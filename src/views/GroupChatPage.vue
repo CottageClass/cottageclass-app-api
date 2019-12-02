@@ -6,9 +6,11 @@
         <div class="chat-max-width-container">
           <div class="chat-detail--header">
             <div class="chat-header--images">
-              <div class="chat-neg-marg-group">
+              <div class="chat-neg-marg-group"
+                   v-if="parents"
+              >
                 <div class="parent-going"
-                     v-for="parent in parents">
+                     v-for="parent in displayParents">
                   <AvatarImage
                     :imageSize="32"
                     :person="parent"
@@ -64,7 +66,7 @@ import AvatarImage from '@/components/base/AvatarImage'
 import ConversationDay from '@/components/ConversationDay'
 import LoadingSpinner from '@/components/LoadingSpinner'
 import ConversationDivider from '@/components/ConversationDivider.vue'
-import { postComment, fetchComments } from '@/utils/api'
+import { postComment, fetchGroupMembers, fetchComments } from '@/utils/api'
 import { redirect, platform, alerts } from '@/mixins'
 
 export default {
@@ -73,7 +75,8 @@ export default {
     return {
       postPending: false,
       newMessage: null,
-      comments: null
+      comments: null,
+      parents: null
     }
   },
   props: {
@@ -107,19 +110,8 @@ export default {
     }
   },
   computed: {
-    parents () {
-      const comments = this.comments || []
-      const otherParents = comments.reduce((acc, comment) => {
-        const parent = comment.sender
-        if (typeof acc.find(p => p.id === parent.id) === 'undefined') {
-          if (parent.id.toString() !== this.currentUser.id.toString()) {
-            acc.push(parent)
-          }
-        }
-        return acc
-      }, [])
-      otherParents.push(this.currentUser)
-      return otherParents
+    displayParents () {
+      return this.parents.slice(0, 4).concat([this.currentUser])
     },
     conversationDays () {
       if (!this.comments) { return [] }
@@ -139,6 +131,7 @@ export default {
   async created () {
     if (this.redirectToSignupIfNotAuthenticated()) { return }
     try {
+      this.parents = await fetchGroupMembers(this.groupId)
       await this.update()
       this.scrollOnNextTick()
     } catch (e) {

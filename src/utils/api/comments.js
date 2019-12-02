@@ -8,7 +8,7 @@ const logger = Logger('api:events')
 
 export const fetchComments = async (userGroupId) => {
   try {
-    const res = await axios.get(`/api/user_group/${userGroupId}/comments`)
+    const res = await axios.get(`/api/user_groups/${userGroupId}/comments`)
     if (res) {
       return createComments(normalize(res.data))
     } else {
@@ -22,7 +22,7 @@ export const fetchComments = async (userGroupId) => {
 
 export const postComment = async (userGroupId, content) => {
   try {
-    const res = await axios.post(`/api/user_group/${userGroupId}/comments`, { content })
+    const res = await axios.post(`/api/user_groups/${userGroupId}/comments`, { content })
     if (res) {
       return createComment(normalize(res.data))
     } else {
