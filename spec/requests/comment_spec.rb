@@ -8,7 +8,7 @@ RSpec.resource 'Comment' do
   let(:group) { create :user_group }
   let(:subject) { build :comment, sender: user, group: group }
 
-  get '/api/user_group/:user_group_id/comments', format: :json do
+  get '/api/user_groups/:user_group_id/comments', format: :json do
     parameter :user_group_id, 'Group id', required: true
 
     let(:user_group_id) { group.id }
@@ -53,7 +53,7 @@ RSpec.resource 'Comment' do
     end
   end
 
-  post '/api/user_group/:user_group_id/comments', format: :json do
+  post '/api/user_groups/:user_group_id/comments', format: :json do
     parameter :user_group_id, 'Group id', required: true
     with_options scope: :comment, with_example: true do
       parameter :content, 'Content', required: true
