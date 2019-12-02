@@ -6,7 +6,7 @@
       :eventId="eventId"/>
     <MainNav />
     <div class="lp-container w-container" v-if="event">
-      <h1 class="heading-1">Editing event #{{ eventId }} </h1>
+      <h1 class="heading-1">Editing event</h1>
       <ErrorMessage v-if="showError && error" text="Your entries have errors. Please fix them to continue..." />
       <EventName v-model="event.name" />
       <EventDescription v-model="event.description" />
