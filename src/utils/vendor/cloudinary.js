@@ -39,6 +39,8 @@ export function createWidget (callback, options) {
     cloudName: process.env.CLOUDINARY_CLOUD_NAME,
     uploadPreset: 'user_images',
     cropping: true,
+    showSkipCropButton: false,
+    croppingDefaultSelectionRatio: 0.9,
     showPoweredBy: false, // maybe this will work if we ever pay for cloudinary
     sources,
     ...options
