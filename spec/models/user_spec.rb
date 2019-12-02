@@ -58,23 +58,7 @@ RSpec.describe User, type: :model do
     it 'can be destroyed with some associations' do
       subject.save
       other.save
-      subject.find_matches
-
       expect { subject.destroy }.to change(User, :count).from(2).to(1)
-    end
-  end
-
-  context 'notification' do
-    let(:subject) { build :user, :with_children, :with_place, :with_matched_user }
-
-    it 'sends a user suggestion notification' do
-      expect { subject.notify_user_suggestion }.to change(subject.notifications.user_suggestion, :count)
-        .from(0)
-        .to(1)
-    end
-    it 'does not send the same user suggestion notification twice' do
-      subject.notify_user_suggestion
-      expect { subject.notify_user_suggestion }.not_to change(subject.notifications.user_suggestion, :count)
     end
   end
 end

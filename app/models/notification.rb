@@ -17,10 +17,7 @@ class Notification < ApplicationRecord
     participant_creation_host: 12,
     user_sms_welcome: 14,
     password_reset_request: 15,
-    event_suggestion: 16,
-    user_suggestion: 17,
     event_creation_starrer: 18,
-    event_creation_match: 19,
     daily_digest: 20,
     chat_message_received: 21,
     new_group_message: 22
@@ -100,26 +97,11 @@ class Notification < ApplicationRecord
                                                          event: notifiable,
                                                          participant: participant,
                                                          body: body
-                 when :event_suggestion
-                   self.body = 'messages.event_suggestion'
-                   Notifier::EventSuggestion.new user: recipient,
-                                                 event: notifiable,
-                                                 body: body
-                 when :user_suggestion
-                   self.body = 'messages.user_suggestion'
-                   Notifier::UserSuggestion.new user: recipient,
-                                                notifiable_user: notifiable,
-                                                body: body
                  when :event_creation_starrer
                    self.body = 'messages.event_creation_starrer'
                    Notifier::EventCreationStarrer.new user: recipient,
                                                       notifiable_user: notifiable,
                                                       body: body
-                 when :event_creation_match
-                   self.body = 'messages.event_creation_match'
-                   Notifier::EventCreationMatch.new user: recipient,
-                                                    notifiable_user: notifiable,
-                                                    body: body
                  when :daily_digest
                    self.body = 'messages.daily_digest'
                    Notifier::DailyDigest.new user: recipient,
