@@ -87,10 +87,7 @@ export default {
       try {
         const res = await submitEventParticipant(eventId, childIds)
         trackEvent('rsvp_affirmative', { eventId: eventId })
-        this.showAlert(`Playdate request sent for ${this.formattedDateTime}. ` +
-            'We\'re texting you now, to introduce you to ' +
-            `${this.event.user.firstName}!`, 'success'
-        )
+        this.showAlert(`Attending "${this.event.name}" on ${this.event.startsAt.format('MMM D [at] ha')}`, 'success')
         this.$ga.event('RSVP', 'sent', eventId)
         this.$router.push({ name: 'EventPage', params: { id: eventId } })
         return res
