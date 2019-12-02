@@ -16,6 +16,7 @@ class PlaceSerializer < BaseSerializer
   attribute :phone_country_code, if: full_information
   attribute :phone_number, if: full_information
   attribute :street_number, if: full_information
+  attribute :name, if: full_information
 
   # public aspects of place
   attributes :public,
@@ -29,7 +30,6 @@ class PlaceSerializer < BaseSerializer
              :fuzzy_longitude,
              :postal_code,
              :country,
-             :name,
              :description,
              :images
 end
