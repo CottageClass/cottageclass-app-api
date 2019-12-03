@@ -27,12 +27,14 @@
 <script>
 export default {
   name: 'MessageSendBox',
-  props: { value: { default: null } },
+  props: { value: { default: null }, openKeyboard: { default: false } },
   data () {
     return { message: null }
   },
   mounted () {
-    this.$refs.keyboard.focus()
+    if (this.openKeyboard) {
+      this.$refs.keyboard.focus()
+    }
   },
   watch: {
     value: {

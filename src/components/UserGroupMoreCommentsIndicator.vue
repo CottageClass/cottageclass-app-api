@@ -1,6 +1,6 @@
 <template>
   <router-link
-    :to="{name:'GroupChatPage', params:{groupId }}"
+    :to="{name:'GroupChatPage', params:{ groupId }}"
     class="comments--more"
   >
     {{ count }} more comments

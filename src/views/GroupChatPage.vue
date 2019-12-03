@@ -50,6 +50,7 @@
         @message-submitted="sendMessage"
         v-model="newMessage"
         :class="{accomodateRoundedCorners: accomodateRoundedCorners }"
+        :openKeyboard="openKeyboard"
       />
     </div>
   </div>
@@ -80,7 +81,8 @@ export default {
     }
   },
   props: {
-    groupId: { required: true }
+    groupId: { required: true },
+    openKeyboard: { default: false }
   },
   components: { MainNav, MessageSendBox, AvatarImage, ConversationDay, LoadingSpinner, ConversationDivider },
   mixins: [ platform, redirect, alerts ],
