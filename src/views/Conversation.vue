@@ -49,13 +49,13 @@
           </div>
         </div>
       </div>
-      <div id="page-bottom" />
       <MessageSendBox
         @message-submitted="sendMessage"
         v-model="newMessage"
         :class="{accomodateRoundedCorners: accomodateRoundedCorners }"
       />
     </div>
+    <div id="page-bottom"> </div>
   </div>
 </template>
 
