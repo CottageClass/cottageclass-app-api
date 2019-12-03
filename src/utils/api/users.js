@@ -52,9 +52,11 @@ export async function submitUserInfo (userId, data) {
   const { employer, jobPosition, profileBlurb, images, activities } = data
   const { avatar, languages } = data
   const { settingNotifyMessagesPush, settingNotifyMessagesSms, settingNotifyMessagesEmail } = data
+  const { settingNotifyGroupMessagesPush, settingNotifyGroupMessagesSms, settingNotifyGroupMessagesEmail } = data
   postData = { ...postData, employer, jobPosition, profileBlurb, images, activities }
   postData = { ...postData, avatar, languages, settingEmailNotifications, settingMaxDistance }
   postData = { ...postData, settingNotifyMessagesPush, settingNotifyMessagesSms, settingNotifyMessagesEmail }
+  postData = { ...postData, settingNotifyGroupMessagesPush, settingNotifyGroupMessagesSms, settingNotifyGroupMessagesEmail }
 
   try {
     const res = await axios.put(`/api/users/${userId}`, postData)

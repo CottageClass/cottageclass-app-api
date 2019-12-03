@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_02_204439) do
+ActiveRecord::Schema.define(version: 2019_12_03_163709) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -340,6 +340,7 @@ ActiveRecord::Schema.define(version: 2019_12_02_204439) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_group_id"], name: "index_user_group_memberships_on_user_group_id"
+    t.index ["user_id", "user_group_id"], name: "index_user_group_memberships_on_user_id_and_user_group_id", unique: true
     t.index ["user_id"], name: "index_user_group_memberships_on_user_id"
   end
 
@@ -422,6 +423,9 @@ ActiveRecord::Schema.define(version: 2019_12_02_204439) do
     t.boolean "setting_notify_messages_push", default: true
     t.boolean "setting_notify_messages_email", default: true
     t.boolean "setting_notify_messages_sms", default: true
+    t.boolean "setting_notify_group_messages_push", default: true
+    t.boolean "setting_notify_group_messages_email", default: true
+    t.boolean "setting_notify_group_messages_sms", default: true
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email"
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true

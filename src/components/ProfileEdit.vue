@@ -113,10 +113,15 @@ export default {
     this.avatar = { avatar: this.currentUser.avatar, err: null }
     this.notificationSettings = {
       settingEmailNotifications: this.currentUser.settingEmailNotifications,
-      media: {
+      chatMedia: {
         settingNotifyMessagesEmail: this.currentUser.settingNotifyMessagesEmail,
         settingNotifyMessagesSms: this.currentUser.settingNotifyMessagesSms,
         settingNotifyMessagesPush: this.currentUser.settingNotifyMessagesPush
+      },
+      groupMedia: {
+        settingNotifyGroupMessagesEmail: this.currentUser.settingNotifyGroupMessagesEmail,
+        settingNotifyGroupMessagesSms: this.currentUser.settingNotifyGroupMessagesSms,
+        settingNotifyGroupMessagesPush: this.currentUser.settingNotifyGroupMessagesPush
       }
     }
     this.maxDistance = this.currentUser.settingMaxDistance || '2'
@@ -172,7 +177,10 @@ export default {
         const settingMaxDistance = this.maxDistance
         const settingEmailNotifications = this.notificationSettings.settingEmailNotifications
         const { phone, place, availability } = this
-        data = Object.assign(data, { phone, place, availability, settingEmailNotifications, settingMaxDistance }, this.notificationSettings.media)
+        data = Object.assign(data,
+          { phone, place, availability, settingEmailNotifications, settingMaxDistance },
+          this.notificationSettings.chatMedia,
+          this.notificationSettings.groupMedia)
         this.debug({ data })
 
         try {
