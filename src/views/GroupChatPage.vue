@@ -45,7 +45,6 @@
           </div>
         </div>
       </div>
-      <div id="page-bottom" />
       <MessageSendBox
         @message-submitted="sendMessage"
         v-model="newMessage"
@@ -53,6 +52,7 @@
         :openKeyboard="openKeyboard"
       />
     </div>
+    <div id="page-bottom" />
   </div>
 </template>
 
