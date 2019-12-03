@@ -15,7 +15,7 @@ RSpec.resource 'Comment' do
 
     context 'authorized' do
       let(:user) do
-        user = build :user, :with_place
+        user = create :user, :with_place
         user.user_groups << group
         user.save
         user
@@ -66,7 +66,7 @@ RSpec.resource 'Comment' do
     context 'authorized' do
       include_context 'authorization token'
       let(:user) do
-        user = build :user, :with_place
+        user = create :user, :with_place
         user.user_groups << group
         user.save
         user
