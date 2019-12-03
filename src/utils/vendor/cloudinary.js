@@ -17,6 +17,10 @@ export function householdImageUrl (rawUrl, size) {
   return rawUrl.replace('/upload/', `/upload/c_thumb,g_custom,h_${size},w_${size}/`)
 }
 
+export function lightboxImageUrl (rawUrl) {
+  return rawUrl.replace('/upload/', `/upload/g_custom/`)
+}
+
 export function imageUrl (rawUrl, options) {
   let transformations = ''
 

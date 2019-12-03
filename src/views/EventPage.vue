@@ -118,6 +118,7 @@ import EventSearchListCard from '@/components/search/EventSearchListCard'
 import { mapGetters } from 'vuex'
 import { fetchEventsByPlace, fetchEvent } from '@/utils/api'
 import { item, maps, rsvp, lightbox } from '@/mixins'
+import { lightboxImageUrl } from '@/utils/vendor/cloudinary'
 
 export default {
   name: 'EventPage',
@@ -159,7 +160,8 @@ export default {
       }
     },
     lightboxImages () {
-      return this.images.map(i => {
+      const transformedImages = this.images.map(url => lightboxImageUrl(url))
+      return transformedImages.map(i => {
         return {
           thumb: i,
           src: i
