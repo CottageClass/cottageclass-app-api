@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :user_group_membership do
-    user { nil }
-    user_group { nil }
+    user { build :user }
+    user_group { build :user_group }
   end
 end
