@@ -29,6 +29,7 @@ import RsvpInfoCollection from '@/components/RsvpInfoCollection.vue'
 import DisinterestedSurvey from '@/views/DisinterestedSurvey.vue'
 import DeclineRSVP from '@/views/DeclineRSVP.vue'
 import DeleteAccountConfirmation from '@/views/DeleteAccountConfirmation'
+import LeaveReview from '@/views/LeaveReview'
 
 import { isNative } from '@/utils/platform'
 
@@ -57,6 +58,12 @@ export default new Router({
           path: '/delete-account',
           name: 'DeleteAccountConfirmation',
           component: DeleteAccountConfirmation
+        },
+        {
+          path: '/leave-review/:placeId',
+          name: 'LeaveReview',
+          component: LeaveReview,
+          props: true
         },
         {
           path: '/rsvp/:eventId/decline',
