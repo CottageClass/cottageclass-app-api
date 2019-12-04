@@ -87,6 +87,7 @@ Rails.application.routes.draw do
       end
     end
     resources :places, only: %i[show update] do
+      resources :place_reviews, only: %i[index create]
       resource :events, only: %i[] do
         collection do
           get '(/:skope)(/page/:page/page_size/:page_size)', to: 'events#place',
