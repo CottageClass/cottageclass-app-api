@@ -39,7 +39,7 @@
             <ul class="list">
               <Attendee
                 v-for="attendee of event.participatingParents"
-                :key="'attendee' + attendee.userId"
+                :key="'attendee' + attendee.id"
                 :user="attendee" />
             </ul>
           </div>
