@@ -286,7 +286,12 @@ export default {
       this.$router.push({ name: 'EventEdit', params: { id: this.event.id } })
     },
     async contactClick () {
-      this.$router.push({ name: 'Conversation', params: { userId: this.user.id } })
+      if (!this.redirectToSignupIfNotAuthenticated({
+        name: 'Conversation',
+        params: { userId: this.user.id }
+      })) {
+        this.$router.push({ name: 'Conversation', params: { userId: this.user.id } })
+      }
     },
     async goingClick () {
       if (this.redirectToSignupIfNotAuthenticated({
