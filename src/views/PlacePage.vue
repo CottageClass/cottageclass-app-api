@@ -61,7 +61,8 @@
       </div>
 
       <div v-if="hasReviews" class="place-reviews">
-        <div id="reviews" class="place-section-title">Reviews</div><a href="#" class="places-links">+ Add a review</a>
+        <div id="reviews" class="place-section-title">Reviews</div>
+        <a @click="reviewClick" class="places-links">+ Add a review</a>
       </div>
 
     </div>
@@ -104,10 +105,10 @@ export default {
       return this.place.description
     },
     averageRating () {
-      return 5
+      return 4
     },
     hasReviews () {
-      return false
+      return true
     },
     placeName () {
       return this.place.name
@@ -143,6 +144,9 @@ export default {
     }
   },
   methods: {
+    reviewClick () {
+      this.$router.push({ name: 'LeaveReview', params: { placeId: this.place.placeId, place: this.data.place } })
+    },
     offerPlaydate () {
       this.$router.push({ name: 'NewEvent' })
     },
