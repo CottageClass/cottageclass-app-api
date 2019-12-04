@@ -3,5 +3,5 @@ class PlaceReviewSerializer < BaseSerializer
   belongs_to :user, serializer: :public_user
   belongs_to :place
 
-  attributes :stars, :content
+  attributes :stars, :content, :created_at
 end
