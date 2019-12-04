@@ -22,12 +22,15 @@
               <h1 class="chat-heading-text">Ideas for today and tomorrow</h1>
             </div>
           </div>
-          <div v-if="!comments || comments.length === 0"
+          <div v-if="!comments">
+            <LoadingSpinner />
+          </div>
+          <div v-if="comments && comments.length === 0"
                class="chat-content--wrapper">
             <ConversationDivider
               dividerText="No ideas yet, add yours!" />
           </div>
-          <div v-if="comments"
+          <div v-if="comments && comments.length > 0"
                class="chat-content--wrapper">
             <ConversationDay
               v-for="(ca) in conversationDays"
@@ -183,6 +186,7 @@ export default {
   padding: 32px;
   align-items: flex-start;
   width: 100%;
+  height: 100%;
   flex: 1;
 }
 .page-wrapper {
