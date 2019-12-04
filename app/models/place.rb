@@ -10,6 +10,7 @@ class Place < ApplicationRecord
            source: :events,
            through: :event_series
   has_many :users, inverse_of: :place
+  has_many :place_reviews, inverse_of: :place
 
   alias_attribute :creator_id, :user_id
 

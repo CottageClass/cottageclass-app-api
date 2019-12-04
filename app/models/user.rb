@@ -42,6 +42,9 @@ class User < ApplicationRecord
             uniqueness: true,
             format: { with: /\A.+@.+\..+\z/, message: 'Please provide a valid email' }
 
+  has_many :place_reviews,
+           inverse_of: :user
+
   has_many :received_conversations,
            inverse_of: :recipient,
            class_name: 'Conversation',
