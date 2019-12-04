@@ -13,7 +13,9 @@
                     :person="currentUser"
                     class="image-8" />
                 </div>
-                <div class="parent-going">
+                <div class="parent-going"
+                     @click="goToPartnerPage"
+                >
                   <AvatarImage
                     :imageSize="32"
                     :person="partner"
@@ -90,6 +92,9 @@ export default {
     userId: { required: true }
   },
   methods: {
+    goToPartnerPage () {
+      this.$router.push({ name: 'UserPage', params: { id: this.partner.id } })
+    },
     scrollOnNextTick () {
       this.$nextTick(() => {
         VueScrollTo.scrollTo('#page-bottom', { duration: 500, easing: 'ease-in' })
@@ -160,6 +165,7 @@ export default {
 
 <style scoped lang="scss">
 .parent-going {
+  cursor: pointer;
   display: flex;
   overflow: hidden;
   width: 36px;
