@@ -13,10 +13,18 @@
 import { householdImageUrl } from '@/utils/vendor/cloudinary'
 export default {
   name: 'Images',
-  props: ['images'],
+  props: {
+    images: {
+      required: true,
+      type: Array
+    },
+    size: {
+      default: 200
+    }
+  },
   computed: {
     transformedImages () {
-      return this.images.map(url => householdImageUrl(url, 200))
+      return this.images.map(url => householdImageUrl(url, this.size))
     }
   }
 }

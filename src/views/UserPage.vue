@@ -101,6 +101,7 @@
             <div class="household-photos__title-text">Household photos</div>
             <Images
               :images="images"
+              :size="350"
               @image-click="handleImageClick"
             />
           </div>
