@@ -10,12 +10,14 @@ RSpec.describe UserGroup, type: :model do
   end
 
   context 'notifications' do
-    let(:sender) { build :user }
-    let(:user) { build :user }
+    let(:sender) { create :user }
+    let(:user) { create :user }
 
     it {
+      subject.save
       subject.members << user
       subject.members << sender
+
       subject.save
       expect { subject.comments.create sender: sender }.to change(user.notifications.new_group_message, :count).from(0).to(1)
       expect { subject.comments.create sender: sender }.not_to change(sender.notifications.new_group_message, :count)

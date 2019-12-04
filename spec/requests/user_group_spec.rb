@@ -14,7 +14,7 @@ RSpec.resource 'UserGroup' do
 
     context 'authorized' do
       let(:user) do
-        user = build :user, :with_place
+        user = create :user, :with_place
         user.user_groups << group
         user.save
         user
