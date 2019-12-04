@@ -5,14 +5,14 @@ class Notifier::NewGroupMessage < Notifier::UserBase
   end
 
   def message
-    if @user.setting_notify_messages_sms
+    if @user.setting_notify_group_messages_sms
       message = @twilio_client.api.account.messages.create from: @sender_phone, to: @user_phone, body: @body
       message.sid
     end
   end
 
   def email
-    if @user.setting_notify_messages_email
+    if @user.setting_notify_group_messages_email
       dump_mail_template_parameters name: 'MessageNotificationRecipient.json'
       response = @sendgrid_client.send_mail to: [@user],
                                             from: @sender_email,

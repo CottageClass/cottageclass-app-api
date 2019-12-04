@@ -4,10 +4,15 @@
     <RadioButtons
       v-model="settingEmailNotificationsModel"
       :choices="['yes', 'no']" />
-    <p class="second-heading">How would you like to be notified of new messages from other users?</p>
+    <p class="second-heading">How would you like to be notified of new chat messages from other users?</p>
     <Checkboxes
-      :labels="labels"
-      v-model="mediaModel"
+      :labels="chatLabels"
+      v-model="chatMediaModel"
+    />
+    <p class="second-heading">How would you like to be notified of new group messages?</p>
+    <Checkboxes
+      :labels="groupLabels"
+      v-model="groupMediaModel"
     />
   </Question>
 </template>
@@ -25,7 +30,8 @@ export default {
   },
   data () {
     return {
-      mediaModel: null,
+      chatMediaModel: null,
+      groupMediaModel: null,
       settingEmailNotificationsModel: null
     }
   },
@@ -38,13 +44,22 @@ export default {
   methods: {
     emitData: function () {
       this.$emit('input', {
-        media: this.media,
+        chatMedia: this.chatMedia,
+        groupMedia: this.groupMedia,
         settingEmailNotifications: this.settingEmailNotificationsModel === 'yes'
       })
     },
     initFromValue () {
-      this.mediaModel = Object.keys(this.value.media).reduce((acc, medium) => {
-        if (this.value.media[medium]) {
+      this.chatMediaModel = Object.keys(this.value.chatMedia).reduce((acc, medium) => {
+        if (this.value.chatMedia[medium]) {
+          this.debug(acc)
+          return acc.concat(medium)
+        } else {
+          return acc
+        }
+      }, [])
+      this.groupMediaModel = Object.keys(this.value.groupMedia).reduce((acc, medium) => {
+        if (this.value.groupMedia[medium]) {
           this.debug(acc)
           return acc.concat(medium)
         } else {
@@ -56,26 +71,40 @@ export default {
   },
   computed: {
     title: () => 'Notification settings',
-    labels () {
+    chatLabels () {
       return [
         [ 'settingNotifyMessagesPush', 'Push notifications' ],
         [ 'settingNotifyMessagesEmail', 'Email' ],
         [ 'settingNotifyMessagesSms', 'Text message' ]
       ]
     },
-    media () {
+    groupLabels () {
+      return [
+        [ 'settingNotifyGroupMessagesPush', 'Push notifications' ],
+        [ 'settingNotifyGroupMessagesEmail', 'Email' ],
+        [ 'settingNotifyGroupMessagesSms', 'Text message' ]
+      ]
+    },
+    chatMedia () {
       return {
-        settingNotifyMessagesPush: this.mediaModel.includes('settingNotifyMessagesPush'),
-        settingNotifyMessagesEmail: this.mediaModel.includes('settingNotifyMessagesEmail'),
-        settingNotifyMessagesSms: this.mediaModel.includes('settingNotifyMessagesSms')
+        settingNotifyMessagesPush: this.chatMediaModel.includes('settingNotifyMessagesPush'),
+        settingNotifyMessagesEmail: this.chatMediaModel.includes('settingNotifyMessagesEmail'),
+        settingNotifyMessagesSms: this.chatMediaModel.includes('settingNotifyMessagesSms')
+      }
+    },
+    groupMedia () {
+      return {
+        settingNotifyGroupMessagesPush: this.groupMediaModel.includes('settingNotifyGroupMessagesPush'),
+        settingNotifyGroupMessagesEmail: this.groupMediaModel.includes('settingNotifyGroupMessagesEmail'),
+        settingNotifyGroupMessagesSms: this.groupMediaModel.includes('settingNotifyGroupMessagesSms')
       }
     }
   },
   watch: {
-    // value () {
-    // this.initFromValue()
-    // },
-    mediaModel () {
+    chatMediaModel () {
+      this.emitData()
+    },
+    groupMediaModel () {
       this.emitData()
     },
     settingEmailNotificationsModel () {

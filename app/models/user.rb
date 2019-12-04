@@ -192,7 +192,7 @@ class User < ApplicationRecord
   end
 
   def push_notify_new_group_chat(comment)
-    return unless setting_notify_messages_push
+    return unless setting_notify_group_messages_push
 
     push_to_devices icon: comment.sender.avatar,
                     url: ENV['LINK_HOST'] + '/group-chat/' + comment.group.id.to_s,
