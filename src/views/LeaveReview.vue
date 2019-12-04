@@ -35,7 +35,6 @@ export default {
   mixins: { alerts, goHome },
   data () {
     return {
-      placeId: null,
       place: null,
       stars: { default: null },
       content: ''
@@ -52,7 +51,7 @@ export default {
     },
     postPlaceReview: async function () {
       const res = postPlaceReview({
-        placeId: this.placeId,
+        placeId: this.place.id,
         stars: this.stars,
         content: this.content
       })
@@ -70,9 +69,8 @@ export default {
   },
   async created () {
     await this.fetchPlace()
-    console.log(this.place)
     this.$emit('set-nav-props', {
-      nextButtonHandler: this.postPlaceReview(),
+      nextButtonHandler: this.postPlaceReview,
       button: 'done'
     })
   },
