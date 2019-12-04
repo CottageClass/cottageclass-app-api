@@ -59,7 +59,7 @@ import { mapGetters } from 'vuex'
 
 import { maps, screen, platform } from '@/mixins'
 import SearchResultList from '@/components/SearchResultList.vue'
-import { itemPlace, itemRoute } from '@/utils/items.js'
+import { itemPosition, itemRoute } from '@/utils/items.js'
 
 export default {
   name: 'EventListMap',
@@ -97,7 +97,7 @@ export default {
       // sort users by latitude when adding pins so the z index is right on the map
       if (this.items) {
         const latItems = this.items.concat().sort((a, b) => {
-          return itemPlace(b).latitude - itemPlace(a).latitude
+          return itemPosition(b).lat - itemPosition(a).lat
         })
 
         for (let item of latItems) {
