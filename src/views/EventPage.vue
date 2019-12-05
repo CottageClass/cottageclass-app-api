@@ -195,11 +195,7 @@ export default {
       return this.event && this.event.user
     },
     hasReviews () {
-      if (this.placeReviews && this.placeReviews.length > 0) {
-        return true
-      } else {
-        return false
-      }
+      return this.placeReviews && this.placeReviews.length > 0
     },
     ...mapGetters(['isRsvpDeclined', 'items', 'mapArea'])
   },
