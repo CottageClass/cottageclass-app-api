@@ -79,7 +79,7 @@ export default {
         throw err
       }
     },
-    async submitRsvp (childIds) {
+    async submitRsvp (childIds, goToEventPage = true) {
       this.err = ''
       const eventId = this.event.id || this.$route.params.eventId
       this.submitToSheetsu()
@@ -89,7 +89,9 @@ export default {
         trackEvent('rsvp_affirmative', { eventId: eventId })
         this.showAlert(`Attending "${this.event.name}" on ${this.event.startsAt.format('MMM D [at] ha')}`, 'success')
         this.$ga.event('RSVP', 'sent', eventId)
-        this.$router.push({ name: 'EventPage', params: { id: eventId } })
+        if (goToEventPage) {
+          this.$router.push({ name: 'EventPage', params: { id: eventId } })
+        }
         return res
       } catch (err) {
         console.log(err)
