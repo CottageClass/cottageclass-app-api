@@ -118,12 +118,6 @@ RSpec.resource 'User' do
         parameter :job_position, 'Job Title'
         parameter :employer, 'Employer'
         parameter :highest_education, 'Degree'
-        parameter :school, 'School'
-        parameter :instagram_user, 'Instagram user name'
-        parameter :twitter_user, 'Twitter user name'
-        parameter :linkedin_user, 'LinkedIn user name'
-        parameter :referrer, 'Referrer'
-        parameter :source_tags, 'Source tags'
         parameter :children_attributes, 'Array of children. Set _destroy to 1 to remove a child. Supply id to update.'
       end
 
@@ -137,12 +131,6 @@ RSpec.resource 'User' do
       let(:job_position) { user_data.job_position }
       let(:employer) { user_data.employer }
       let(:highest_education) { user_data.highest_education }
-      let(:school) { user_data.school }
-      let(:instagram_user) { user_data.instagram_user }
-      let(:twitter_user) { user_data.twitter_user }
-      let(:linkedin_user) { user_data.linkedin_user }
-      let(:referrer) { user_data.referrer }
-      let(:source_tags) { user_data.source_tags }
       let :children_attributes do
         (user.children + user_data.children).map.with_index do |child, index|
           child_attributes = child.attributes.with_indifferent_access.slice :first_name,
