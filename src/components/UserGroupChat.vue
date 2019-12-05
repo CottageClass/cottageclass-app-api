@@ -54,7 +54,6 @@ export default {
     async update () {
       const raw = await fetchComments(this.groupId)
       this.comments = raw.slice(-4)
-      console.log(raw.length)
       this.moreCount = raw.length - this.comments.length
     }
   },

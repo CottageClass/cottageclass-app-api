@@ -12,7 +12,7 @@ class Comment < ApplicationRecord
              class_name: 'User',
              foreign_key: :sender_id
 
-  scope :recent, -> { where('created_at > ?', 48.hours.ago(Time.current)) }
+  scope :recent, -> { where('created_at > ?', 48.hours.ago(Time.current)).order(created_at: :desc) }
 
   def notify
     group.members.includes(:place).each do |m|
