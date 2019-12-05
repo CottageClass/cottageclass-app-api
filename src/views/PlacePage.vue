@@ -16,13 +16,6 @@
         <h1 class="place-title">{{ placeName }}</h1>
         <div v-if="hasReviews" class="place-ratings">
           <AverageRating :averagePercentage= averagePercentage />
-          <!-- <a href="#reviews" class="link-block w-inline-block">
-            <div class="rating-stars">
-              <img v-for="i in averageRating" v-bind:key="i" src="@/assets/Star_3.svg" alt="" />
-              <img v-for="i in (5 - averageRating)" v-bind:key="i" src="@/assets/Star--inactive.svg" alt="" />
-            </div>
-            <div class="ratings-link-text">{{ numberOfReviews }} reviews</div>
-          </a> -->
         </div>
         <div class="place-event-summary">
           <div class="link-block-2 w-inline-block"><img src="@/assets/mdi_calendar_today.svg" alt="" />
