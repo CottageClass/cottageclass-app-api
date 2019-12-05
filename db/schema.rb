@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_05_190946) do
+ActiveRecord::Schema.define(version: 2019_12_05_193503) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -176,12 +176,6 @@ ActiveRecord::Schema.define(version: 2019_12_05_190946) do
     t.index ["event_series_id"], name: "index_events_on_event_series_id"
   end
 
-  create_table "key_values", force: :cascade do |t|
-    t.string "key", null: false
-    t.text "value", null: false
-    t.index ["key"], name: "index_key_values_on_key", unique: true
-  end
-
   create_table "messages", force: :cascade do |t|
     t.bigint "sender_id"
     t.bigint "receiver_id"
@@ -215,6 +209,17 @@ ActiveRecord::Schema.define(version: 2019_12_05_190946) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["participable_type", "participable_id", "user_id"], name: "index_participants_on_participable_type_participable_id_user_id", unique: true
+  end
+
+  create_table "place_reviews", force: :cascade do |t|
+    t.bigint "place_id"
+    t.bigint "user_id"
+    t.integer "stars"
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["place_id"], name: "index_place_reviews_on_place_id"
+    t.index ["user_id"], name: "index_place_reviews_on_user_id"
   end
 
   create_table "places", force: :cascade do |t|
@@ -432,6 +437,8 @@ ActiveRecord::Schema.define(version: 2019_12_05_190946) do
   add_foreign_key "event_series", "places"
   add_foreign_key "messages", "users", column: "receiver_id"
   add_foreign_key "messages", "users", column: "sender_id"
+  add_foreign_key "place_reviews", "places"
+  add_foreign_key "place_reviews", "users"
   add_foreign_key "places", "users"
   add_foreign_key "stars", "users", column: "giver_id"
   add_foreign_key "user_group_memberships", "user_groups"

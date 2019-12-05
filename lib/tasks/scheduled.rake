@@ -1,5 +1,3 @@
-require 'key_value'
-
 namespace :cottage_class do
   namespace :scheduled do
     desc 'Event Notifier'
