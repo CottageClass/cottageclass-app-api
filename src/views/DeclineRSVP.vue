@@ -17,7 +17,6 @@ import Question from '@/components/base/Question.vue'
 import FormWithTextArea from '@/components/base/FormWithTextArea.vue'
 
 import { trackEvent } from '@/utils/ahoy'
-import { submitToSheetsu } from '@/utils/vendor/sheetsu'
 import { mapGetters, mapMutations } from 'vuex'
 import { alerts, goHome } from '@/mixins'
 
@@ -54,11 +53,6 @@ export default {
   },
   methods: {
     submit () {
-      submitToSheetsu({
-        userId: this.currentUser.id,
-        eventId: this.eventId,
-        reasons: this.reasons,
-        otherText: this.otherText }, 'noRsvp')
       this.showAlertOnNextRoute('Thanks for your feedback! Here are some other options you might like...', 'success')
       this.declineRsvp({ eventId: this.eventId })
       trackEvent('rsvp_decline', { eventId: this.eventId })

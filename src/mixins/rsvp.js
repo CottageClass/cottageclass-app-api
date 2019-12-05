@@ -1,5 +1,4 @@
 import { removeEventParticipant, submitEventParticipant } from '@/utils/api'
-import { submitToSheetsu } from '@/utils/vendor'
 import { trackEvent } from '@/utils/ahoy'
 import { alerts } from '@/mixins'
 import moment from 'moment'
@@ -36,42 +35,11 @@ export default {
         this.$router.push({ name: 'DeclineRSVP', params: { eventId: this.event.id } })
       }
     },
-    submitToSheetsu: function () {
-      const data = {
-        'Event ID': this.eventId,
-        'Event title': this.event.name,
-        'Event host': this.event.user.firstName,
-        'Event date': this.event.startsAt,
-        'Date submitted': moment(Date()).format('L'),
-        'Parent first name': this.currentUser.firstName,
-        'Parent last name': this.currentUser.lastInitial,
-        'Parent phone': this.currentUser.phone,
-        'Parent email': this.currentUser.email,
-        'IDs of RSVPed children': this.childrenSelected,
-        'All children': this.currentUser.children
-      }
-      submitToSheetsu(data, 'RSVPs')
-    },
     async cancelRsvp () {
       try {
         const res = await removeEventParticipant(this.event.id)
         trackEvent('rsvp_cancel', { eventId: this.event.id })
         this.$ga.event('RSVP', 'canceled', this.event.id)
-        const data = {
-          'User ID': this.currentUser.id,
-          'Cancelation Time': moment(Date()).format('LLLL'),
-          'Event ID': this.event.id,
-          'Reason for cancelation': this.reason,
-          'Event title': this.event.name,
-          'Event host': this.event.user.firstName,
-          'Event date': this.event.startsAt.toString(),
-          'Parent first name': this.currentUser.firstName,
-          'Parent last name': this.currentUser.lastInitial,
-          'Parent phone': this.currentUser.phone,
-          'Parent email': this.currentUser.email,
-          'All children': this.currentUser.children
-        }
-        submitToSheetsu(data, 'RSVPCancelations')
         this.showAlert('You are no longer attending.  Your presence will be missed.', 'failure')
         return res
       } catch (err) {
@@ -82,8 +50,6 @@ export default {
     async submitRsvp (childIds) {
       this.err = ''
       const eventId = this.event.id || this.$route.params.eventId
-      this.submitToSheetsu()
-
       try {
         const res = await submitEventParticipant(eventId, childIds)
         trackEvent('rsvp_affirmative', { eventId: eventId })
