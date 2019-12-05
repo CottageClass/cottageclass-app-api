@@ -44,7 +44,7 @@
             </ul>
           </div>
           <div v-if="images && images.length>0" class="household-photos__card">
-            <div class="household-photos__title-text">Photos of {{this.place.name}}</div>
+            <div class="household-photos__title-text">{{ photoText }}</div>
             <Images
               :images="images"
               :size="350"
@@ -139,6 +139,13 @@ export default {
     }
   },
   computed: {
+    photoText () {
+      if (this.event.place.public) {
+        return `Photos of ${this.place.name}`
+      } else {
+        return 'Household Photos'
+      }
+    },
     otherEventsColumnTitle () {
       if (this.event.place.public) {
         return `Other events at ${this.event.place.name}`

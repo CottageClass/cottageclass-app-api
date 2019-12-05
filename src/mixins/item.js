@@ -20,11 +20,11 @@ export default {
       return this.user && this.user.neighborhood
     },
     images () {
-      if (this.event && this.event.images) {
+      if (this.event) {
         if (this.event.place.public) {
-          return [...this.event.images, ...this.event.place.images]
+          return this.event.place.images
         } else {
-          return [...this.event.images, ...this.user.images]
+          return this.user.images
         }
       }
       if (this.user) {
