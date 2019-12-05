@@ -1,15 +1,15 @@
 <template>
   <div>
     <MainNav />
-    <LoadingSpinner v-if="!conversations" />
+    <LoadingSpinner v-if="!chats" />
     <div v-else class="chat">
       <div class="chat-max-width-container">
         <div class="chat-detail--header">
           <h1 class="chats-heading-text">Chats</h1>
         </div>
-        <div v-if="conversations"
+        <div v-if="chats"
              class="chat-content--wrapper">
-          <ConversationThumb v-for="conversation in conversations"
+          <ConversationThumb v-for="conversation in chats"
                              :conversation="conversation"
                              :key="`chat-teaser-${conversation.partner.id}`"/>
         </div>
@@ -26,13 +26,13 @@ import MainNav from '@/components/MainNav'
 import LoadingSpinner from '@/components/LoadingSpinner'
 import { redirect } from '@/mixins'
 
-import { fetchConversations } from '@/utils/api'
+import { fetchConversations, fetchComments } from '@/utils/api'
 
 export default {
   name: 'Chats',
   data () {
     return {
-      conversations: null
+      chats: null
     }
   },
   components: { MainNav, ConversationThumb, LoadingSpinner },
@@ -41,8 +41,34 @@ export default {
     ...mapGetters(['currentUser'])
   },
   methods: {
+    async fetchChats () {
+      this.chats = await fetchConversations(this.currentUser.id)
+      for (let groupId of this.currentUser.groups) {
+        const groupComments = await fetchComments(groupId)
+        if (groupComments && groupComments.length > 0) {
+          const lastComment = groupComments[0]
+          const mockChat = {
+            groupId,
+            partner: {
+              ...lastComment.sender,
+              groupName: 'Ideas for today and tomorrow'
+            },
+            message: {
+              content: lastComment.content,
+              createdAt: lastComment.createdAt
+            }
+          }
+          this.chats.push(mockChat)
+        }
+      }
+      this.chats.sort((a, b) => {
+        const date1 = new Date(a.message.createdAt)
+        const date2 = new Date(b.message.createdAt)
+        return date2 - date1
+      })
+    },
     async poll () {
-      this.conversations = await fetchConversations(this.currentUser.id)
+      await this.fetchChats()
     }
   },
   destroyed () {
@@ -50,7 +76,7 @@ export default {
   },
   async created () {
     if (this.redirectToSignupIfNotAuthenticated()) { return }
-    this.conversations = await fetchConversations(this.currentUser.id)
+    await this.fetchChats()
     this.pollingInterval = setInterval(this.poll, 30000)
   }
 }

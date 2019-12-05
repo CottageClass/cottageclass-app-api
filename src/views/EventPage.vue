@@ -39,7 +39,7 @@
             <ul class="list">
               <Attendee
                 v-for="attendee of event.participatingParents"
-                :key="'attendee' + attendee.userId"
+                :key="'attendee' + attendee.id"
                 :user="attendee" />
             </ul>
           </div>
@@ -47,6 +47,7 @@
             <div class="household-photos__title-text">Photos of {{this.place.name}}</div>
             <Images
               :images="images"
+              :size="350"
               @image-click="handleImageClick"
             />
           </div>

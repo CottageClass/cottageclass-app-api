@@ -25,7 +25,6 @@ import ProfileCollection from '@/views/ProfileCollection.vue'
 import NewEvent from '@/views/NewEvent.vue'
 import SocialInvite from '@/views/SocialInvite.vue'
 import Onboarding from '@/views/Onboarding.vue'
-import RsvpInfoCollection from '@/components/RsvpInfoCollection.vue'
 import DisinterestedSurvey from '@/views/DisinterestedSurvey.vue'
 import DeclineRSVP from '@/views/DeclineRSVP.vue'
 import DeleteAccountConfirmation from '@/views/DeleteAccountConfirmation'
@@ -41,12 +40,6 @@ export default new Router({
       path: '/NOT USED.  THESE ARE PAGES THAT USE THE FlowPage AS A WRAPPER',
       component: FlowPage,
       children: [
-        {
-          path: '/rsvp/:eventId',
-          name: 'RsvpInfoCollection',
-          component: RsvpInfoCollection,
-          props: true
-        },
         {
           path: '/users/:userId/decline',
           name: 'DisinterestedSurvey',

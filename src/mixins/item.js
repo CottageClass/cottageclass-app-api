@@ -286,24 +286,23 @@ export default {
       this.$router.push({ name: 'EventEdit', params: { id: this.event.id } })
     },
     async contactClick () {
-      this.$router.push({ name: 'Conversation', params: { userId: this.user.id } })
+      if (!this.redirectToSignupIfNotAuthenticated({
+        name: 'Conversation',
+        params: { userId: this.user.id }
+      })) {
+        this.$router.push({ name: 'Conversation', params: { userId: this.user.id } })
+      }
     },
     async goingClick () {
-      if (this.redirectToSignupIfNotAuthenticated({
-        name: 'RsvpInfoCollection',
-        params: { eventId: this.event.id }
-      })) {
-      } else if (this.event.participated) {
-        await this.cancelRsvp()
-        this.item.event = await fetchEvent(this.event.id)
-        this.$emit('event-updated', { event: this.item.event })
-      } else {
-        if (this.currentUser.children.length === 1) {
-          await this.submitRsvp(this.currentUser.children.map(c => c.id))
+      if (!this.redirectToSignupIfNotAuthenticated()) {
+        if (this.event.participated) {
+          await this.cancelRsvp()
           this.item.event = await fetchEvent(this.event.id)
           this.$emit('event-updated', { event: this.item.event })
         } else {
-          this.$router.push({ name: 'RsvpInfoCollection', params: { eventId: this.event.id } })
+          await this.submitRsvp(this.currentUser.children.map(c => c.id), false)
+          this.item.event = await fetchEvent(this.event.id)
+          this.$emit('event-updated', { event: this.item.event })
         }
       }
     },
