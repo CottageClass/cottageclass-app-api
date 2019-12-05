@@ -13,6 +13,11 @@
       <div class="text-block-12">{{messageTimestamp}}</div>
     </div>
     <router-link
+      v-if="conversation.groupId"
+      :to="{name: 'GroupChatPage', params: {groupId: conversation.groupId}}"
+      class="entry__hyperlink w-inline-block"/>
+    <router-link
+      v-else
       :to="{name: 'Conversation', params: {userId: partner.id}}"
       class="entry__hyperlink w-inline-block"/>
   </li>
@@ -36,7 +41,7 @@ export default {
       return this.conversation.message
     },
     partnerName () {
-      return this.partner.firstName + ' ' + this.partner.lastInitial + '.'
+      return this.partner.groupName || this.partner.firstName + ' ' + this.partner.lastInitial + '.'
     },
     messagePreview () {
       return this.message.content
