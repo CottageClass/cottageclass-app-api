@@ -26,13 +26,12 @@ import Question from '@/components/base/Question.vue'
 import { fetchPlace } from '@/utils/api'
 import { postPlaceReview } from '@/utils/api/placeReviews'
 import FormWithTextArea from '@/components/base/FormWithTextArea.vue'
-import { alerts, goHome } from '@/mixins/'
-import { mapGetters } from 'vuex'
+import { alerts } from '@/mixins'
 
 export default {
   name: 'LeaveReview',
   components: { Question, FormWithTextArea },
-  mixins: { alerts, goHome },
+  mixins: { alerts },
   data () {
     return {
       place: null,
@@ -56,7 +55,7 @@ export default {
         content: this.content
       })
       console.log(res)
-      this.goHome()
+      this.$router.push({ name: 'PlacePage', params: { id: this.place.id } })
     }
   },
   computed: {

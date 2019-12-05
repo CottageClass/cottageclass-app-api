@@ -15,13 +15,14 @@
       <div class="place-card">
         <h1 class="place-title">{{ placeName }}</h1>
         <div v-if="hasReviews" class="place-ratings">
-          <a href="#reviews" class="link-block w-inline-block">
+          <AverageRating :averagePercentage= averagePercentage />
+          <!-- <a href="#reviews" class="link-block w-inline-block">
             <div class="rating-stars">
               <img v-for="i in averageRating" v-bind:key="i" src="@/assets/Star_3.svg" alt="" />
               <img v-for="i in (5 - averageRating)" v-bind:key="i" src="@/assets/Star--inactive.svg" alt="" />
             </div>
             <div class="ratings-link-text">{{ numberOfReviews }} reviews</div>
-          </a>
+          </a> -->
         </div>
         <div class="place-event-summary">
           <div class="link-block-2 w-inline-block"><img src="@/assets/mdi_calendar_today.svg" alt="" />
@@ -48,7 +49,8 @@
       </div>
 
       <div class="place-events">
-        <div id="events" class="place-section-title">Events</div><a @click="offerPlaydate" class="places-links">+ Add an event</a>
+        <div id="events" class="place-section-title">Events</div>
+        <a @click="offerPlaydate" class="places-links">+ Add an event</a>
         <ul class="place-events-list">
           <EventSearchListCard v-for="(item, index) in upcomingItems"
                                :item="item"
@@ -63,6 +65,12 @@
       <div v-if="hasReviews" class="place-reviews">
         <div id="reviews" class="place-section-title">Reviews</div>
         <a @click="reviewClick" class="places-links">+ Add a review</a>
+        <ul>
+          <ReviewCard v-for="(review, index) in reviews"
+                      :review="review"
+                      :key="index"
+          />
+        </ul>
       </div>
 
     </div>
@@ -77,19 +85,24 @@ import MainNav from '@/components/MainNav'
 import LoadingSpinner from '@/components/LoadingSpinner'
 import LightBoxStyleWrapper from '@/components/LightBoxStyleWrapper'
 import EventSearchListCard from '@/components/search/EventSearchListCard'
+import AverageRating from '@/components/AverageRating.vue'
+import ReviewCard from '@/components/ReviewCard.vue'
 
+import { fetchPlaceReviews } from '@/utils/api/placeReviews.js'
 import { fetchPlace, updatePlace } from '@/utils/api'
 import { createWidget, householdImageUrl } from '@/utils/vendor/cloudinary'
 import { item } from '@/mixins'
 
 export default {
   name: 'PlacePage',
-  components: { MainNav, LoadingSpinner, LightBox, LightBoxStyleWrapper, EventSearchListCard },
+  components: { MainNav, LoadingSpinner, LightBox, LightBoxStyleWrapper, EventSearchListCard, AverageRating, ReviewCard },
   mixins: [ item ],
   data () {
     return {
       placeId: this.$route.params.id,
       place: null,
+      reviews: null,
+      averagePercentage: null,
       cloudinaryUploadWidget: null,
       showError: false
     }
@@ -103,9 +116,6 @@ export default {
     },
     placeDescription () {
       return this.place.description
-    },
-    averageRating () {
-      return 4
     },
     hasReviews () {
       return true
@@ -144,8 +154,18 @@ export default {
     }
   },
   methods: {
+    async getRatings () {
+      this.reviews = await fetchPlaceReviews(this.placeId)
+      console.log(this.reviews)
+    },
+    async getAverageRating () {
+      let totalRating = this.reviews.reduce(function (accumulator, curValue) {
+        return accumulator + curValue.stars
+      }, 0)
+      this.averagePercentage = totalRating / this.reviews.length * 20
+    },
     reviewClick () {
-      this.$router.push({ name: 'LeaveReview', params: { placeId: this.place.placeId, place: this.data.place } })
+      this.$router.push({ name: 'LeaveReview', params: { placeId: this.placeId, place: this.place } })
     },
     offerPlaydate () {
       this.$router.push({ name: 'NewEvent' })
@@ -203,6 +223,8 @@ export default {
   },
   async created () {
     await this.fetchPlace()
+    await this.getRatings()
+    await this.getAverageRating()
     this.cloudinaryUploadWidget = createWidget(this.cloudinaryEventHandler, {
       multiple: true
     })
@@ -248,11 +270,10 @@ a {
 
 .place-ratings {
   display: flex;
-  width: 100%;
-  margin-bottom: 8px;
+  margin-bottom: 16px;
   padding-top: 0;
   padding-bottom: 0;
-  align-items: center;
+  align-items: left;
 }
 
 .place-event-summary {
