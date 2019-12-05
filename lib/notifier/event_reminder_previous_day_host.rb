@@ -40,10 +40,6 @@ class Notifier::EventReminderPreviousDayHost < Notifier::Base
                                                                                         :job_position,
                                                                                         :employer,
                                                                                         :highest_education,
-                                                                                        :school,
-                                                                                        :instagram_user,
-                                                                                        :twitter_user,
-                                                                                        :linkedin_user,
                                                                                         :images,
                                                                                         :languages
 

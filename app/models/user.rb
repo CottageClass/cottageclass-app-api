@@ -12,9 +12,9 @@ class User < ApplicationRecord
   attr_accessor :direct, :token
 
   PUBLIC_ATTRIBUTES = %i[
-    id avatar first_name verified images languages job_position employer highest_education school facebook_uid
-    twitter_user linkedin_user created_at child_ages_in_months profile_blurb activities available_mornings
-    available_afternoons available_evenings available_weekends instagram_user
+    id avatar first_name verified images languages job_position employer highest_education facebook_uid
+    created_at child_ages_in_months profile_blurb activities available_mornings
+    available_afternoons available_evenings available_weekends
   ].freeze
 
   after_update :sms_notify

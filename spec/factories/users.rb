@@ -10,12 +10,6 @@ FactoryBot.define do
     job_position { Faker::Job.title }
     employer { Faker::Company.name }
     highest_education { Faker::Demographic.educational_attainment }
-    school { Faker::Educator.university }
-    instagram_user { Faker::Internet.user_name }
-    twitter_user { Faker::Internet.user_name }
-    linkedin_user { Faker::Internet.user_name }
-    referrer { Faker::Books::Lovecraft.word }
-    source_tags { Faker::Books::Lovecraft.words }
 
     after(:build) { |instance, _| instance.skip_confirmation! if User.confirmable? }
 

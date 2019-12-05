@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_03_163709) do
+ActiveRecord::Schema.define(version: 2019_12_05_190946) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,9 +76,6 @@ ActiveRecord::Schema.define(version: 2019_12_03_163709) do
     t.string "school_name"
     t.datetime "birthday"
     t.bigint "parent_id"
-    t.text "allergies", default: [], array: true
-    t.text "dietary_restrictions", default: [], array: true
-    t.text "special_needs"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["parent_id"], name: "index_children_on_parent_id"
@@ -231,16 +228,9 @@ ActiveRecord::Schema.define(version: 2019_12_03_163709) do
     t.datetime "updated_at", null: false
     t.decimal "fuzzy_latitude"
     t.decimal "fuzzy_longitude"
-    t.string "street_number"
-    t.string "route"
     t.string "locality"
-    t.string "sublocality"
     t.string "neighborhood"
     t.string "admin_area_level_1"
-    t.string "admin_area_level_2"
-    t.string "postal_code"
-    t.string "phone_area_code"
-    t.string "phone_number"
     t.string "apartment_number"
     t.string "country", default: "United States"
     t.string "phone_country_code", default: "1"
@@ -248,7 +238,6 @@ ActiveRecord::Schema.define(version: 2019_12_03_163709) do
     t.string "time_zone"
     t.jsonb "full_result_object"
     t.string "vicinity"
-    t.text "description"
     t.string "images", default: [], array: true
     t.index ["google_id", "apartment_number"], name: "index_places_google_id_apartment_number", unique: true
     t.index ["latitude", "longitude"], name: "index_places_on_latitude_and_longitude"
@@ -353,9 +342,7 @@ ActiveRecord::Schema.define(version: 2019_12_03_163709) do
   create_table "users", force: :cascade do |t|
     t.string "email", null: false
     t.string "avatar"
-    t.string "referrer"
     t.string "legacy_password_digest"
-    t.text "source_tags", default: [], array: true
     t.boolean "verified", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -363,7 +350,6 @@ ActiveRecord::Schema.define(version: 2019_12_03_163709) do
     t.string "first_name"
     t.string "last_name"
     t.string "name"
-    t.boolean "agree_tos", default: false
     t.string "postal_code"
     t.string "phone_area_code"
     t.string "phone_number"
@@ -382,10 +368,6 @@ ActiveRecord::Schema.define(version: 2019_12_03_163709) do
     t.string "job_position"
     t.string "employer"
     t.string "highest_education"
-    t.string "school"
-    t.string "instagram_user"
-    t.string "twitter_user"
-    t.string "linkedin_user"
     t.string "encrypted_password", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"

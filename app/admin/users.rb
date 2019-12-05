@@ -61,10 +61,6 @@ ActiveAdmin.register User do
       employer
       highest_education
       school
-      instagram_user
-      twitter_user
-      linkedin_user
-      referrer
       source_tags
       child_ages_in_months
       child_names

@@ -92,9 +92,6 @@ class Notifier::Base
         :employer,
         :highest_education,
         :school,
-        :instagram_user,
-        :twitter_user,
-        :linkedin_user,
         :images,
         :languages
       ).update(first_name: @user.first_name&.capitalize)
