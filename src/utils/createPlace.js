@@ -3,7 +3,6 @@ export const createPlace = (data) => {
 }
 
 export const createPlaces = (data) => {
-  console.log(data)
   if (!data.place) { return [] }
   const events = data.event
 

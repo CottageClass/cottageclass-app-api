@@ -8,6 +8,9 @@ class PublicUserSerializer < BaseSerializer
   belongs_to :place
 
   attributes(*User::PUBLIC_ATTRIBUTES)
+  attribute :place_review_count do |user|
+    user.place_reviews.count
+  end
   attribute :last_initial do |user|
     user.last_name[0, 1].upcase if user.last_name.present?
   end
