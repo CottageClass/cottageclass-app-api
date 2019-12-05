@@ -111,7 +111,7 @@ export default {
       return this.place.description
     },
     hasReviews () {
-      return true
+      return this.reviews && this.reviews.length > 0
     },
     placeName () {
       return this.place.name

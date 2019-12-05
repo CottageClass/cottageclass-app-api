@@ -51,6 +51,16 @@
               @image-click="handleImageClick"
             />
           </div>
+          <div v-if="hasReviews" class="place-reviews">
+            <div id="reviews" class="place-section-title">Reviews</div>
+            <a @click="reviewClick" class="places-links">+ Write a review</a>
+            <ul>
+              <ReviewCard v-for="(review, index) in placeReviews"
+                          :review="review"
+                          :key="index"
+              />
+            </ul>
+          </div>
           <div class="event-detail__map map" ref="map"/>
           <div class="about-the-host__card">
             <div class="about-the-host__title-text">Suggested by {{userFirstName}}</div>
@@ -115,15 +125,17 @@ import OtherEvent from '@/components/OtherEvent'
 import LightBoxStyleWrapper from '@/components/LightBoxStyleWrapper'
 import DeleteEventConfirmationModal from '@/components/DeleteEventConfirmationModal.vue'
 import EventSearchListCard from '@/components/search/EventSearchListCard'
+import ReviewCard from '@/components/ReviewCard.vue'
 
 import { mapGetters } from 'vuex'
 import { fetchEventsByPlace, fetchEvent } from '@/utils/api'
 import { item, maps, rsvp, lightbox } from '@/mixins'
 import { lightboxImageUrl } from '@/utils/vendor/cloudinary'
+import { fetchPlaceReviews } from '@/utils/api/placeReviews.js'
 
 export default {
   name: 'EventPage',
-  components: { MainNav, Images, LoadingSpinner, Attendee, OtherEvent, RSVPCard, LightBox, LightBoxStyleWrapper, DeleteEventConfirmationModal, EventSearchListCard },
+  components: { MainNav, Images, LoadingSpinner, Attendee, OtherEvent, RSVPCard, LightBox, LightBoxStyleWrapper, DeleteEventConfirmationModal, EventSearchListCard, ReviewCard },
   mixins: [item, maps, rsvp, lightbox],
   props: { showDeleteConfirmationModal: { default: false } },
   data () {
@@ -135,7 +147,8 @@ export default {
         'gestureHandling': 'none' // prevents any kind of scrolling
       },
       showLightBox: false,
-      otherEvents: null
+      otherEvents: null,
+      placeReviews: null
     }
   },
   computed: {
@@ -188,9 +201,15 @@ export default {
     user () {
       return this.event && this.event.user
     },
+    hasReviews () {
+      return this.placeReviews && this.placeReviews.length > 0
+    },
     ...mapGetters(['isRsvpDeclined', 'items', 'mapArea'])
   },
   methods: {
+    reviewClick () {
+      this.$router.push({ name: 'LeaveReview', params: { placeId: this.place.id, place: this.place } })
+    },
     updateEvent (e) {
       this.event = e.event
       this.$store.commit('updateEvent', { event: this.event })
@@ -234,6 +253,8 @@ export default {
   },
   async created () {
     await this.fetchEvent()
+    this.placeReviews = await fetchPlaceReviews(this.place.id)
+
     if (this.$route.query && this.$route.query.interested) {
       if (this.$route.query.interested === 'yes') {
         this.goingClick()
@@ -523,6 +544,41 @@ a {
   padding-left: 0;
   flex-wrap: wrap;
   align-items: flex-start;
+}
+
+.place-reviews {
+  position: relative;
+  display: flex;
+  width: 100%;
+  min-height: 201px;
+  margin-top: 0;
+  margin-bottom: 18px;
+  padding: 16px 20px 18px;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  border-bottom: 1px solid #f5f5f5;
+  background-color: #fff;
+  box-shadow: none;
+  list-style-type: none;
+}
+
+.place-section-title {
+  margin-bottom: 6px;
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 700;
+}
+
+.places-links {
+  padding-top: 4px;
+  padding-bottom: 4px;
+  align-self: flex-start;
+  color: #1f88e9;
+}
+
+.places-links:hover {
+  background-color: rgba(0, 0, 0, 0.06);
 }
 
 @media (max-width: 991px){
