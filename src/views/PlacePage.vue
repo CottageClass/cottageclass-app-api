@@ -57,7 +57,7 @@
 
       <div v-if="hasReviews" class="place-reviews">
         <div id="reviews" class="place-section-title">Reviews</div>
-        <a @click="reviewClick" class="places-links">+ Add a review</a>
+        <a @click="reviewClick" class="places-links">+ Write a review</a>
         <ul>
           <ReviewCard v-for="(review, index) in reviews"
                       :review="review"
