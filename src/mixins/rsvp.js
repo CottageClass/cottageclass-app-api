@@ -1,7 +1,6 @@
 import { removeEventParticipant, submitEventParticipant } from '@/utils/api'
 import { trackEvent } from '@/utils/ahoy'
 import { alerts } from '@/mixins'
-import moment from 'moment'
 
 export default {
   mixins: [alerts],
