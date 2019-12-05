@@ -96,7 +96,7 @@ RSpec.resource 'User' do
         example_request 'unauthenticated get' do
           expect(response_status).to eq(200)
           expect(json_body.dig('data', 'attributes').deep_symbolize_keys.keys).to \
-            contain_exactly(*User::PUBLIC_ATTRIBUTES + %i[last_initial starred dark_starred])
+            contain_exactly(*User::PUBLIC_ATTRIBUTES + %i[last_initial starred dark_starred place_review_count])
         end
       end
       delete '/api/users/:id', format: :json do
