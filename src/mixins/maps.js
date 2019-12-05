@@ -41,11 +41,21 @@ export default {
         return circleLatLngs
       }
     },
-    userMarker () {
-      return function (user) {
+    itemMarker () {
+      return function (item) {
         var MarkerClass = Vue.extend(Marker)
-        var instance = new MarkerClass({
-          propsData: { avatarUrl: this.avatarUrl(user) }
+        let avatarUrl
+        if (item.event) {
+          if (item.event.images.length > 0) {
+            avatarUrl = this.pinUrl(item.event.images[0])
+          } else if (item.event.place.images.length > 0) {
+            avatarUrl = this.pinUrl(item.event.place.images[0])
+          } else {
+            avatarUrl = this.avatarUrl(item.user)
+          }
+        }
+        const instance = new MarkerClass({
+          propsData: { avatarUrl }
         })
         instance.$mount()
         return instance
@@ -64,6 +74,10 @@ export default {
         google.maps.event.addListener(await this.map, 'idle', idleHandler)
       }
       return this.map
+    },
+    pinUrl (imageUrl) {
+      const physicalSize = 200
+      return avatarUrl(imageUrl, physicalSize)
     },
     avatarUrl (user) {
       const physicalSize = 200
@@ -84,7 +98,7 @@ export default {
       return this.addPin(instance.$el, position)
     },
     async addItemPin (item) {
-      return this.addPin(this.userMarker(item.user).$el, itemPosition(item))
+      return this.addPin(this.itemMarker(item).$el, itemPosition(item))
     },
     async addUserPin (user, position) {
       return this.addPin(this.userMarker(user).$el, position)

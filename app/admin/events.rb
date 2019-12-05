@@ -87,9 +87,6 @@ ActiveAdmin.register Event do
         employer
         highest_education
         school
-        instagram_user
-        twitter_user
-        linkedin_user
         child_ages_in_months
         child_names
       ]

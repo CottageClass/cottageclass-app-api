@@ -6,7 +6,6 @@ export const createEvent = (data) => {
 }
 
 export const createEvents = (data, sortFunction) => {
-  console.log({ data })
   if (!data.event) {
     return []
   }

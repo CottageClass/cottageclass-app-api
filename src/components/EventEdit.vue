@@ -109,6 +109,7 @@ export default {
       return {
         'event': {
           'name': this.event.name,
+          'description': this.event.description,
           'starts_at': moment(this.date.selected + 'T' + this.time.start),
           'ends_at': moment(this.date.selected + 'T' + this.time.end),
           'child_age_minimum': this.event.ageRange.minimum,

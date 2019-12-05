@@ -107,8 +107,7 @@ class API::UsersController < API::BaseController
   end
 
   def user_params
-    params.require(:user).permit :agree_tos,
-                                 :first_name,
+    params.require(:user).permit :first_name,
                                  :last_name,
                                  :avatar,
                                  :phone_country_code,
@@ -123,11 +122,6 @@ class API::UsersController < API::BaseController
                                  :job_position,
                                  :employer,
                                  :highest_education,
-                                 :school,
-                                 :instagram_user,
-                                 :twitter_user,
-                                 :linkedin_user,
-                                 :referrer,
                                  :setting_email_notifications,
                                  :setting_max_distance,
                                  :setting_notify_messages_email,
@@ -147,15 +141,12 @@ class API::UsersController < API::BaseController
                                    google_id
                                    apartment_number
                                  ],
-                                 children_attributes: [
-                                   :id,
-                                   :first_name,
-                                   :birthday,
-                                   :school_name,
-                                   { allergies: [] },
-                                   { dietary_restrictions: [] },
-                                   :special_needs,
-                                   :_destroy
+                                 children_attributes: %i[
+                                   id
+                                   first_name
+                                   birthday
+                                   school_name
+                                   _destroy
                                  ]
   end
 end

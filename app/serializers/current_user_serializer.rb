@@ -7,15 +7,13 @@ class CurrentUserSerializer < BaseSerializer
 
   attributes(*User::PUBLIC_ATTRIBUTES)
 
-  attributes :agree_tos,
-             :created_at,
+  attributes :created_at,
              :email,
              :facebook_access_token,
              :phone_area_code,
              :phone_country_code,
              :phone_number,
              :phone,
-             :school,
              :setting_email_notifications,
              :setting_notify_messages_sms,
              :setting_notify_messages_push,

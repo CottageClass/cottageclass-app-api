@@ -27,7 +27,6 @@
 <script>
 import Question from '@/components/base/Question.vue'
 import { deleteUserAccount } from '@/utils/api'
-import { submitToSheetsu } from '@/utils/vendor'
 import { mapGetters } from 'vuex'
 import { goHome } from '@/mixins'
 
@@ -65,22 +64,10 @@ export default {
         return this.charLimit
       }
     },
-    sheetsuData () {
-      return {
-        'User ID': this.currentUser.id,
-        'Reason for deletion': this.reason,
-        'First name': this.currentUser.firstName,
-        'Last name': this.currentUser.lastName,
-        'Parent phone': this.currentUser.phone,
-        'Parent email': this.currentUser.email
-      }
-    },
     ...mapGetters([ 'currentUser' ])
   },
   methods: {
     feedback () {
-      const data = { type: 'Feedback Only', ...this.sheetsuData }
-      submitToSheetsu(data, 'AccountDeletion')
       this.$store.commit('showAlertOnNextRoute', {
         alert: {
           message: 'Your feedback has been submitted.  Thank you',
@@ -92,7 +79,6 @@ export default {
     async confirm () {
       try {
         deleteUserAccount({ id: this.currentUser.id })
-        submitToSheetsu({ type: 'Full Deletion', ...this.sheetsuData }, 'AccountDeletion')
         this.$store.commit('showAlertOnNextRoute', {
           alert: {
             message: 'Your account has been deleted.  Thanks for using Lilypad',

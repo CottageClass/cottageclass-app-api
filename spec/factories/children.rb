@@ -3,8 +3,5 @@ FactoryBot.define do
     first_name { Faker::Name.unique.first_name }
     birthday { Faker::Date.unique.between 6.years.ago, 2.years.ago }
     school_name { Faker::Educator.unique.secondary_school }
-    allergies { Faker::Lorem.words 2 }
-    dietary_restrictions { Faker::Lorem.words 2 }
-    special_needs { Faker::Lorem.sentence }
   end
 end

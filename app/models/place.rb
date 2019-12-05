@@ -2,7 +2,8 @@ class Place < ApplicationRecord
   belongs_to :creator,
              inverse_of: :created_places,
              class_name: 'User',
-             foreign_key: :user_id
+             foreign_key: :user_id,
+             optional: true
   has_many :event_series, inverse_of: :place, dependent: :destroy
   has_many :events, through: :event_series, inverse_of: :place
   has_many :upcoming_events,

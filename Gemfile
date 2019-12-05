@@ -14,8 +14,6 @@ gem 'fast_jsonapi'
 gem 'geocoder'
 gem 'google_places'
 gem 'inherited_resources', github: 'activeadmin/inherited_resources', ref: 'db6eb312b7cac6baf0023f720cf6785a9849fa85'
-gem 'key_value', require: false # so migrations do not fail because of missing table
-gem 'koala'
 gem 'omniauth-facebook'
 gem 'pg'
 gem 'phony'
@@ -42,9 +40,7 @@ end
 group :production do
   gem 'airbrake'
   gem 'airbrake-ruby'
-  gem 'lograge'
   gem 'puma-heroku'
-  gem 'rails_12factor'
   gem 'uglifier'
 end
 
@@ -58,19 +54,16 @@ group :development, :test do
   gem 'brakeman', require: false
   gem 'bullet'
   gem 'byebug'
-  gem 'climate_control'
   gem 'database_cleaner'
   gem 'dotenv-rails'
   gem 'guard-rspec', require: false
   gem 'httplog'
-  gem 'mry', require: false
   gem 'rspec-rails'
   gem 'rspec_api_documentation'
   gem 'rubocop', require: false
   gem 'rubocop-rspec', require: false
   gem 'ruby-prof'
   gem 'shoulda-matchers'
-  gem 'therubyracer', platforms: :ruby
   gem 'timecop'
   gem 'webmock'
 end

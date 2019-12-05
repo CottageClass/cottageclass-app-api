@@ -20,7 +20,6 @@ import Checkboxes from '@/components/base/Checkboxes.vue'
 import Question from '@/components/base/Question.vue'
 import FormWithTextArea from '@/components/base/FormWithTextArea.vue'
 
-import { submitToSheetsu } from '@/utils/vendor/sheetsu'
 import { alerts, goHome } from '@/mixins'
 import { fetchUser } from '@/utils/api'
 
@@ -57,17 +56,6 @@ export default {
   },
   methods: {
     submit () {
-      submitToSheetsu({
-        respondantId: this.currentUser.id,
-        respondantAgesInMonths: this.currentUser.childAgesInMonths,
-        otherUserId: this.userId,
-        otherUserAgesInMonths: this.otherUser.childAgesInMonths,
-        distanceBetweenUsers: this.distanceFromCurrentUser(
-          this.otherUser.place.latitude,
-          this.otherUser.place.longitude
-        ),
-        reasons: this.reasons,
-        otherText: this.otherText }, 'darkStars')
       this.showAlertOnNextRoute('Thank you for your feedback.', 'success')
       this.goHome()
     }
