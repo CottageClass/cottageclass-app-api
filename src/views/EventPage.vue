@@ -19,7 +19,6 @@
       <RSVPCard v-if="showRsvpCard"
                 @rsvp-yes="goingClick"
                 @rsvp-no="initiateDeclineRsvp"
-                :otherText="currentUser ? 'Say hi and suggest another time': null"
       />
 
       <EventSearchListCard
