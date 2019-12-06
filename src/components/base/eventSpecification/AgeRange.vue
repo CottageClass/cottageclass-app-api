@@ -21,8 +21,26 @@ export default {
   components: { Question, Dropdown },
   data () {
     return {
-      minimum: this.value.minimum || this.minChildAge(),
-      maximum: this.value.maximum || this.maxChildAge()
+      minimum: null,
+      maximum: null
+    }
+  },
+  created () {
+    if (!this.value.minimum && this.value.minimum !== 0) {
+      if (!this.childAgesInMonths) {
+        this.minimum = 0
+      } else {
+        let minAgeInYearsRoundedDown = Math.floor(Math.min(...this.childAgesInMonths) / 12 - 1)
+        this.minimum = Math.max(minAgeInYearsRoundedDown, 0)
+      }
+    }
+    if (!this.value.maximum && this.value.maximum !== 0) {
+      if (!this.childAgesInMonths) {
+        this.maximum = 0
+      } else {
+        let maxAgeInYearsRounded = Math.round(Math.max(...this.childAgesInMonths) / 12) + 1
+        this.maximum = Math.min(maxAgeInYearsRounded, 18)
+      }
     }
   },
   computed: {
@@ -44,16 +62,6 @@ export default {
         maximum: this.maximum,
         err: this.err
       })
-    },
-    minChildAge () {
-      if (!this.childAgesInMonths) { return 0 }
-      let minAgeInYearsRoundedDown = Math.floor(Math.min(...this.childAgesInMonths) / 12 - 1)
-      return Math.max(minAgeInYearsRoundedDown, 0)
-    },
-    maxChildAge () {
-      if (!this.childAgesInMonths) { return 18 }
-      let maxAgeInYearsRounded = Math.round(Math.max(...this.childAgesInMonths) / 12) + 1
-      return Math.min(maxAgeInYearsRounded, 18)
     }
   },
   watch: {

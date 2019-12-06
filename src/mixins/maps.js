@@ -50,9 +50,9 @@ export default {
             avatarUrl = this.pinUrl(item.event.images[0])
           } else if (item.event.place.images.length > 0) {
             avatarUrl = this.pinUrl(item.event.place.images[0])
-          } else {
-            avatarUrl = this.avatarUrl(item.user)
           }
+        } else {
+          avatarUrl = this.avatarUrl(item.user)
         }
         const instance = new MarkerClass({
           propsData: { avatarUrl }
@@ -99,9 +99,6 @@ export default {
     },
     async addItemPin (item) {
       return this.addPin(this.itemMarker(item).$el, itemPosition(item))
-    },
-    async addUserPin (user, position) {
-      return this.addPin(this.userMarker(user).$el, position)
     },
     async addPin (el, position) {
       await this.google
