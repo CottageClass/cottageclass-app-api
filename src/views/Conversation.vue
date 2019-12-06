@@ -44,13 +44,6 @@
             <Message v-if="tempMessage"
                      :message="tempMessage"
                      :partner="partner"/>
-            <div v-if="messagePending">
-              <LoadingSpinner
-                size="40px"
-                marginTop="30px"
-              />
-            </div>
-
           </div>
         </div>
       </div>
@@ -69,7 +62,6 @@ import VueScrollTo from 'vue-scrollto'
 import { mapGetters } from 'vuex'
 import moment from 'moment'
 
-import LoadingSpinner from '@/components/LoadingSpinner'
 import MainNav from '@/components/MainNav'
 import ConversationDay from '@/components/ConversationDay'
 import ConversationDivider from '@/components/ConversationDivider.vue'
@@ -82,7 +74,7 @@ import { fetchMessages, fetchUser, submitMessage } from '@/utils/api'
 
 export default {
   name: 'Conversation',
-  components: { ConversationDay, AvatarImage, MainNav, MessageSendBox, ConversationDivider, LoadingSpinner, Message },
+  components: { ConversationDay, AvatarImage, MainNav, MessageSendBox, ConversationDivider, Message },
   mixins: [ platform, alerts ],
   data () {
     return {
@@ -127,19 +119,25 @@ export default {
       this.newMessage = null
       await this.showTempMessage(this.partner.id, pendingMessage)
       try {
-        await submitMessage(this.partner.id, pendingMessage)
         this.scrollOnNextTick()
+        await submitMessage(this.partner.id, pendingMessage)
       } catch (e) {
         this.logError(e)
         this.showAlert('There was an error submitting your chat.  Try again later', 'failure')
+        this.newMessage = pendingMessage
       } finally {
         await this.update()
         this.messagePending = false
       }
     },
     async update () {
-      this.messages = await fetchMessages(this.userId)
-      this.removeTempMessage()
+      try {
+        this.messages = await fetchMessages(this.userId)
+      } catch (e) {
+        this.logError(e)
+      } finally {
+        this.removeTempMessage()
+      }
     }
   },
   computed: {

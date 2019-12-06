@@ -40,14 +40,7 @@
             />
             <Message v-if="tempMessage"
                      :message="tempMessage"
-                     :partner="partner"/>
-            <div v-if="postPending">
-              <LoadingSpinner
-                size="40px"
-                marginTop="30px"
-              />
-            </div>
-
+                     :partner="null"/>
           </div>
         </div>
       </div>
@@ -96,7 +89,7 @@ export default {
   components: { MainNav, MessageSendBox, AvatarImage, ConversationDay, LoadingSpinner, ConversationDivider, Message },
   mixins: [ platform, redirect, alerts ],
   methods: {
-    async showTempMessage (userId, content) {
+    showTempMessage (userId, content) {
       this.tempMessage = {
         content: content,
         createdAt: 'Just Now',
@@ -112,18 +105,23 @@ export default {
       })
     },
     async update () {
-      this.comments = await fetchComments(this.groupId)
-      this.removeTempMessage()
+      try {
+        this.comments = await fetchComments(this.groupId)
+      } catch (e) {
+        this.logError(e)
+      } finally {
+        this.removeTempMessage()
+      }
     },
     async sendMessage () {
       if (this.postPending || !this.newMessage) { return }
       this.postPending = true
       const pendingMessage = this.newMessage
       this.newMessage = null
-      await this.showTempMessage(this.groupId, pendingMessage)
+      this.showTempMessage(this.groupId, pendingMessage)
       try {
-        await postComment(this.groupId, pendingMessage)
         this.scrollOnNextTick()
+        await postComment(this.groupId, pendingMessage)
       } catch (e) {
         this.logError(e)
         this.showAlert('There was an error submitting your chat.  Try again later', 'failure')
