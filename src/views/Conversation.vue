@@ -41,13 +41,9 @@
               :messages="ca.messages"
               :partner="partner"
             />
-            <div v-if="messagePending">
-              <LoadingSpinner
-                size="40px"
-                marginTop="30px"
-              />
-            </div>
-
+            <Message v-if="tempMessage"
+                     :message="tempMessage"
+                     :partner="partner"/>
           </div>
         </div>
       </div>
@@ -66,25 +62,26 @@ import VueScrollTo from 'vue-scrollto'
 import { mapGetters } from 'vuex'
 import moment from 'moment'
 
-import LoadingSpinner from '@/components/LoadingSpinner'
 import MainNav from '@/components/MainNav'
 import ConversationDay from '@/components/ConversationDay'
 import ConversationDivider from '@/components/ConversationDivider.vue'
 import AvatarImage from '@/components/base/AvatarImage'
 import MessageSendBox from '@/components/MessageSendBox'
+import Message from '@/components/Message'
 
-import { platform } from '@/mixins'
+import { platform, alerts } from '@/mixins'
 import { fetchMessages, fetchUser, submitMessage } from '@/utils/api'
 
 export default {
   name: 'Conversation',
-  components: { ConversationDay, AvatarImage, MainNav, MessageSendBox, ConversationDivider, LoadingSpinner },
-  mixins: [ platform ],
+  components: { ConversationDay, AvatarImage, MainNav, MessageSendBox, ConversationDivider, Message },
+  mixins: [ platform, alerts ],
   data () {
     return {
       newMessage: null,
       messages: null,
       partner: null,
+      tempMessage: null,
       messagePending: false
     }
   },
@@ -102,24 +99,45 @@ export default {
     },
     async poll () {
       this.messages = await fetchMessages(this.userId)
+      this.removeTempMessage()
+    },
+    async showTempMessage (userId, content) {
+      this.tempMessage = {
+        content: content,
+        createdAt: 'Just Now',
+        receiverId: userId,
+        senderId: this.currentUser.id
+      }
+    },
+    removeTempMessage () {
+      this.tempMessage = null
     },
     async sendMessage () {
       if (this.messagePending || !this.newMessage) { return }
       this.messagePending = true
       const pendingMessage = this.newMessage
       this.newMessage = null
+      await this.showTempMessage(this.partner.id, pendingMessage)
       try {
-        await submitMessage(this.partner.id, pendingMessage)
         this.scrollOnNextTick()
+        await submitMessage(this.partner.id, pendingMessage)
       } catch (e) {
         this.logError(e)
+        this.showAlert('There was an error submitting your chat.  Try again later', 'failure')
+        this.newMessage = pendingMessage
       } finally {
         await this.update()
         this.messagePending = false
       }
     },
     async update () {
-      this.messages = await fetchMessages(this.userId)
+      try {
+        this.messages = await fetchMessages(this.userId)
+      } catch (e) {
+        this.logError(e)
+      } finally {
+        this.removeTempMessage()
+      }
     }
   },
   computed: {

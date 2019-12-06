@@ -46,7 +46,9 @@ export default {
       return this.sender.firstName + ' ' + this.sender.lastInitial + '.'
     },
     timeStamp () {
-      return moment(this.message.createdAt).format('h:mma')
+      if (this.message.createdAt === 'Just Now') {
+        return this.message.createdAt
+      } else { return moment(this.message.createdAt).format('h:mma') }
     },
     ...mapGetters(['currentUser'])
   }
