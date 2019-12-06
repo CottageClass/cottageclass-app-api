@@ -83,7 +83,7 @@ import { fetchMessages, fetchUser, submitMessage } from '@/utils/api'
 export default {
   name: 'Conversation',
   components: { ConversationDay, AvatarImage, MainNav, MessageSendBox, ConversationDivider, LoadingSpinner, Message },
-  mixins: [ platform ],
+  mixins: [ platform, alerts ],
   data () {
     return {
       newMessage: null,
