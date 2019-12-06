@@ -46,13 +46,7 @@ class EventSeries < ApplicationRecord
       .near(user, :setting_max_distance)
       .where.not(id: user.id)
 
-    recipients = []
-    user.children.each do |child|
-      eligible_users_for_child = nearby_users.child_birthday_range(child.birthday - 2.years.seconds,
-                                                                   child.birthday + 2.years.seconds)
-      recipients += eligible_users_for_child.to_a
-      recipients = recipients.uniq
-    end
+    recipients = nearby_users.child_age_range(child_age_minimum, child_age_maximum).to_a.uniq
     recipients.each do |recipient|
       next if starrers.include? recipient
 
