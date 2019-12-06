@@ -38,6 +38,9 @@
               :day="ca.day"
               :messages="ca.messages"
             />
+            <Message v-if="tempMessage"
+                     :message="tempMessage"
+                     :partner="partner"/>
             <div v-if="postPending">
               <LoadingSpinner
                 size="40px"
@@ -70,6 +73,8 @@ import AvatarImage from '@/components/base/AvatarImage'
 import ConversationDay from '@/components/ConversationDay'
 import LoadingSpinner from '@/components/LoadingSpinner'
 import ConversationDivider from '@/components/ConversationDivider.vue'
+import Message from '@/components/Message'
+
 import { postComment, fetchGroupMembers, fetchComments } from '@/utils/api'
 import { redirect, platform, alerts } from '@/mixins'
 
@@ -80,16 +85,27 @@ export default {
       postPending: false,
       newMessage: null,
       comments: null,
-      parents: null
+      parents: null,
+      tempMessage: null
     }
   },
   props: {
     groupId: { required: true },
     openKeyboard: { default: false }
   },
-  components: { MainNav, MessageSendBox, AvatarImage, ConversationDay, LoadingSpinner, ConversationDivider },
+  components: { MainNav, MessageSendBox, AvatarImage, ConversationDay, LoadingSpinner, ConversationDivider, Message },
   mixins: [ platform, redirect, alerts ],
   methods: {
+    async showTempMessage (userId, content) {
+      this.tempMessage = {
+        content: content,
+        createdAt: 'Just Now',
+        sender: this.currentUser
+      }
+    },
+    removeTempMessage () {
+      this.tempMessage = null
+    },
     scrollOnNextTick () {
       this.$nextTick(() => {
         VueScrollTo.scrollTo('#page-bottom', { duration: 500, easing: 'ease-in' })
@@ -97,16 +113,20 @@ export default {
     },
     async update () {
       this.comments = await fetchComments(this.groupId)
+      this.removeTempMessage()
     },
     async sendMessage () {
       if (this.postPending || !this.newMessage) { return }
       this.postPending = true
       const pendingMessage = this.newMessage
       this.newMessage = null
+      await this.showTempMessage(this.groupId, pendingMessage)
       try {
         await postComment(this.groupId, pendingMessage)
         this.scrollOnNextTick()
       } catch (e) {
+        this.logError(e)
+        this.showAlert('There was an error submitting your chat.  Try again later', 'failure')
         this.newMessage = pendingMessage
       } finally {
         await this.update()

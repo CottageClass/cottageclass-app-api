@@ -77,7 +77,7 @@ import AvatarImage from '@/components/base/AvatarImage'
 import MessageSendBox from '@/components/MessageSendBox'
 import Message from '@/components/Message'
 
-import { platform } from '@/mixins'
+import { platform, alerts } from '@/mixins'
 import { fetchMessages, fetchUser, submitMessage } from '@/utils/api'
 
 export default {
@@ -131,6 +131,7 @@ export default {
         this.scrollOnNextTick()
       } catch (e) {
         this.logError(e)
+        this.showAlert('There was an error submitting your chat.  Try again later', 'failure')
       } finally {
         await this.update()
         this.messagePending = false
