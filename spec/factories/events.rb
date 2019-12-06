@@ -6,5 +6,11 @@ FactoryBot.define do
     ends_at { 3.hours.since starts_at }
     child_age_minimum { 0 }
     child_age_maximum { 0 }
+
+    trait :with_place do
+      after(:build) do |event|
+        event.place = build :place
+      end
+    end
   end
 end

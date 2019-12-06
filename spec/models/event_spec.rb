@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Event, type: :model do
-  let(:subject) { build :event }
+  let(:subject) { build :event, :with_place }
 
   context 'validations' do
     it { is_expected.to validate_presence_of(:event_series).with_message(:required) }
@@ -53,40 +53,79 @@ RSpec.describe Event, type: :model do
       participants
     end
 
-    context 'host: without participants' do
-      it 'event_reminder_previous_week_host' do
-        Timecop.freeze(1.week.before(subject.starts_at)) do
-          subject.notify
+    context 'private place' do
+      before { subject.place.update public: false }
 
-          expect(subject.notifications.event_reminder_previous_week_host.count).to eq(1)
+      context 'host: without participants' do
+        it 'event_reminder_previous_week_host' do
+          Timecop.freeze(1.week.before(subject.starts_at)) do
+            subject.notify
+            expect(subject.notifications.event_reminder_previous_week_host.count).to eq(0)
+          end
+        end
+
+        it 'event_reminder_previous_day_host' do
+          Timecop.freeze(24.hours.before(subject.starts_at)) do
+            subject.notify
+            expect(subject.notifications.event_reminder_previous_day_host.count).to eq(0)
+          end
         end
       end
 
-      it 'event_reminder_previous_day_host' do
-        Timecop.freeze(24.hours.before(subject.starts_at)) do
-          subject.notify
+      context 'host: with participants' do
+        before { participants }
 
-          expect(subject.notifications.event_reminder_previous_day_host.count).to eq(1)
+        it 'event_reminder_previous_week_host' do
+          Timecop.freeze(1.week.before(subject.starts_at)) do
+            subject.notify
+            expect(subject.notifications.event_reminder_previous_week_host.count).to eq(1)
+          end
+        end
+
+        it 'event_reminder_previous_day_host' do
+          Timecop.freeze(24.hours.before(subject.starts_at)) do
+            subject.notify
+            expect(subject.notifications.event_reminder_previous_day_host.reload.count).to eq(1)
+          end
         end
       end
     end
 
-    context 'host: with participants' do
-      before { participants }
+    context 'public place' do
+      before { subject.place.update public: true }
 
-      it 'event_reminder_previous_week_host' do
-        Timecop.freeze(1.week.before(subject.starts_at)) do
-          subject.notify
+      context 'host: without participants' do
+        it 'event_reminder_previous_week_host' do
+          Timecop.freeze(1.week.before(subject.starts_at)) do
+            subject.notify
+            expect(subject.notifications.event_reminder_previous_week_host.count).to eq(0)
+          end
+        end
 
-          expect(subject.notifications.event_reminder_previous_week_host.count).to eq(1)
+        it 'event_reminder_previous_day_host' do
+          Timecop.freeze(24.hours.before(subject.starts_at)) do
+            subject.notify
+            expect(subject.notifications.event_reminder_previous_day_host.count).to eq(0)
+          end
         end
       end
 
-      it 'event_reminder_previous_day_host' do
-        Timecop.freeze(24.hours.before(subject.starts_at)) do
-          subject.notify
+      context 'host: with participants' do
+        before { participants }
 
-          expect(subject.notifications.event_reminder_previous_day_host.reload.count).to eq(1)
+        it 'event_reminder_previous_week_host' do
+          Timecop.freeze(1.week.before(subject.starts_at)) do
+            subject.notify
+            expect(subject.notifications.event_reminder_previous_week_host.count).to eq(0)
+          end
+        end
+
+        it 'event_reminder_previous_day_host' do
+          Timecop.freeze(24.hours.before(subject.starts_at)) do
+            subject.notify
+
+            expect(subject.notifications.event_reminder_previous_day_host.reload.count).to eq(0)
+          end
         end
       end
     end
@@ -97,9 +136,9 @@ RSpec.describe Event, type: :model do
       it 'event_reminder_previous_day_participant' do
         Timecop.freeze(24.hours.before(subject.starts_at)) do
           subject.notify
-
-          expect(subject.notifications.event_reminder_previous_day_participant.count).to eq(participants.size + 1)
-          expect(subject.notifications.count).to eq(participants.size * 2 + 2 + 1)
+          expect(subject.notifications.event_reminder_previous_day_participant.count).to eq(participants.size)
+          expect(subject.notifications.participant_creation.count).to eq(participants.size)
+          expect(subject.notifications.participant_creation_host.count).to eq(participants.size)
         end
       end
 
@@ -107,8 +146,9 @@ RSpec.describe Event, type: :model do
         Timecop.freeze(2.hours.ago(subject.starts_at)) do
           subject.notify
 
-          expect(subject.notifications.event_reminder_same_day_participant.count).to eq(participants.size + 1)
-          expect(subject.notifications.count).to eq(participants.size * 2 + 2 + 1)
+          expect(subject.notifications.event_reminder_same_day_participant.count).to eq(participants.size)
+          expect(subject.notifications.participant_creation.count).to eq(participants.size)
+          expect(subject.notifications.participant_creation_host.count).to eq(participants.size)
         end
       end
 
@@ -116,8 +156,9 @@ RSpec.describe Event, type: :model do
         Timecop.freeze(30.minutes.since(subject.ends_at)) do
           subject.notify
 
-          expect(subject.notifications.event_feedback_participant.count).to eq(participants.size + 1)
-          expect(subject.notifications.count).to eq(participants.size * 2 + 1 + 2)
+          expect(subject.notifications.event_feedback_participant.count).to eq(participants.size)
+          expect(subject.notifications.participant_creation.count).to eq(participants.size)
+          expect(subject.notifications.participant_creation_host.count).to eq(participants.size)
         end
       end
     end
