@@ -219,6 +219,13 @@ class User < ApplicationRecord
                     body: event.name
   end
 
+  def notify_event_creation_match(host)
+    return unless setting_email_notifications
+
+    today_notifications = notifications.event_creation_match.where created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day
+    notifications.event_creation_match.create(notifiable: host) if today_notifications.empty?
+  end
+
   def notify_event_creation_starrer(host)
     return unless setting_email_notifications
 
