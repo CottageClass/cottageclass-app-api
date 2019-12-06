@@ -41,6 +41,9 @@
               :messages="ca.messages"
               :partner="partner"
             />
+            <Message v-if="tempMessage"
+                     :message="tempMessage"
+                     :partner="partner"/>
             <div v-if="messagePending">
               <LoadingSpinner
                 size="40px"
@@ -72,19 +75,21 @@ import ConversationDay from '@/components/ConversationDay'
 import ConversationDivider from '@/components/ConversationDivider.vue'
 import AvatarImage from '@/components/base/AvatarImage'
 import MessageSendBox from '@/components/MessageSendBox'
+import Message from '@/components/Message'
 
 import { platform } from '@/mixins'
 import { fetchMessages, fetchUser, submitMessage } from '@/utils/api'
 
 export default {
   name: 'Conversation',
-  components: { ConversationDay, AvatarImage, MainNav, MessageSendBox, ConversationDivider, LoadingSpinner },
+  components: { ConversationDay, AvatarImage, MainNav, MessageSendBox, ConversationDivider, LoadingSpinner, Message },
   mixins: [ platform ],
   data () {
     return {
       newMessage: null,
       messages: null,
       partner: null,
+      tempMessage: null,
       messagePending: false
     }
   },
@@ -102,12 +107,25 @@ export default {
     },
     async poll () {
       this.messages = await fetchMessages(this.userId)
+      this.removeTempMessage()
+    },
+    async showTempMessage (userId, content) {
+      this.tempMessage = {
+        content: content,
+        createdAt: 'Just Now',
+        receiverId: userId,
+        senderId: this.currentUser.id
+      }
+    },
+    removeTempMessage () {
+      this.tempMessage = null
     },
     async sendMessage () {
       if (this.messagePending || !this.newMessage) { return }
       this.messagePending = true
       const pendingMessage = this.newMessage
       this.newMessage = null
+      await this.showTempMessage(this.partner.id, pendingMessage)
       try {
         await submitMessage(this.partner.id, pendingMessage)
         this.scrollOnNextTick()
@@ -120,6 +138,7 @@ export default {
     },
     async update () {
       this.messages = await fetchMessages(this.userId)
+      this.removeTempMessage()
     }
   },
   computed: {
