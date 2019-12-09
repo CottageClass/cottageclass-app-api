@@ -14,11 +14,12 @@ Rails.application.routes.draw do
     end
 
     resources :devices, only: %i[create]
-    resources :event_series, only: %i[index show create update]
+    resources :event_series, only: %i[index show create update] do
+      resource :stars, only: %i[create destroy], module: :event_series
+      resources :stars, only: %i[index], module: :event_series
+    end
     resources :childcare_requests, only: %i[show create update destroy]
     resources :events, only: %i[show update destroy] do
-      resource :stars, only: %i[create destroy], module: :events
-      resources :stars, only: %i[index], module: :events
       resources :participants, only: %i[create] do
         collection { delete :index, to: 'participants#destroy' }
       end
@@ -47,7 +48,6 @@ Rails.application.routes.draw do
     end
 
     resources :users, only: %i[show destroy update] do
-      resource :stars, only: %i[create destroy], module: :users
       resource :dark_stars, only: %i[create destroy], module: :users
       collection do
         get '/miles/:miles/latitude/:latitude/longitude/:longitude(/min_age/:min_age)(/max_age/:max_age)(/page/:page/page_size/:page_size)',
@@ -74,7 +74,6 @@ Rails.application.routes.draw do
     end
     resource :user, only: %i[] do
       resources :conversations, only: %i[index]
-      resource :stars, only: %i[create destroy], module: :users
       collection do
         get 'created_events(/:skope)(/page/:page/page_size/:page_size)', to: 'events#created',
                                                                          skope: /upcoming|past/i,

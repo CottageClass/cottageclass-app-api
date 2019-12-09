@@ -83,4 +83,38 @@ RSpec.resource 'EventSeries' do
       end
     end
   end
+
+  context 'stars' do
+    before { subject.save }
+
+    parameter :event_series_id, 'Unique Identifier', required: true
+    let(:event_series_id) { subject.id }
+
+    context 'unauthenticated' do
+      post '/api/event_series/:event_series_id/stars', format: :json do
+        example_request 'authenticated stars' do
+          expect(response_status).to eq(401)
+        end
+      end
+      delete '/api/event_series/:event_series_id/stars', format: :json do
+        example_request 'authenticated stars' do
+          expect(response_status).to eq(401)
+        end
+      end
+    end
+
+    context 'authenticated' do
+      include_context 'authorization token'
+      post '/api/event_series/:event_series_id/stars', format: :json do
+        example_request 'authenticated stars' do
+          expect(response_status).to eq(201)
+        end
+      end
+      delete '/api/event_series/:event_series_id/stars', format: :json do
+        example_request 'authenticated stars' do
+          expect(response_status).to eq(404)
+        end
+      end
+    end
+  end
 end

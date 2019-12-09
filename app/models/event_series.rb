@@ -1,5 +1,6 @@
 class EventSeries < ApplicationRecord
   include Eventable
+  include Starable
   include Locatable
 
   validates :start_date, presence: true

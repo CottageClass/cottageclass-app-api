@@ -10,6 +10,9 @@ class EventSerializer
   attribute :participated, if: proc { |_, params| params.dig(:current_user).present? } do |instance, params|
     instance.participated? params[:current_user]
   end
+  attribute :starred, if: proc { |_, params| params.dig(:current_user).present? } do |instance, params|
+    instance.event_series.starred? params[:current_user]
+  end
 
   has_one :place
   has_one :user, serializer: PublicUserSerializer, include: %i[children place]
