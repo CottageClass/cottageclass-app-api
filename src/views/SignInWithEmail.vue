@@ -123,9 +123,7 @@ export default {
   },
   methods: {
     hideFacebookLogin: () => {
-      return ['(iPhone|iPod|iPad)(?!.*Safari)'].every(expression => {
-        return !!navigator.userAgent.match(new RegExp(`(${expression})`, 'ig'))
-      })
+      return false
     },
     async signIn (event) {
       event.preventDefault()
