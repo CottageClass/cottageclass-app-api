@@ -39,6 +39,7 @@
                 {{occupation}}<br />
               </div>
               <div class="user-info__kids lp-truncate">{{kidsAges}}</div>
+              <div v-if="lastContactedText" class="user-info__kids lp-truncate">{{lastContactedText}}</div>
               <div v-if="neighborhood" class="user-info__kids lp-truncate">{{neighborhood}}</div>
               <HouseholdImages :user="user" />
             </div>
@@ -101,16 +102,20 @@ import AvatarImage from '@/components/base/AvatarImage'
 import HouseholdImages from '@/components/search/HouseholdImages'
 import SearchListCardActions from '@/components/search/SearchListCardActions'
 import SearchListCardActionsOverlay from '@/components/search/SearchListCardActionsOverlay'
+import { fetchConversations } from '@/utils/api'
 
 // most of the functionality is in the itemActions mixin
 import { item, screen } from '@/mixins'
+import moment from 'moment'
 
 export default {
   name: 'UserSearchListCard',
   props: {
     doNotShowCancel: { default: false },
     item: { required: true },
-    distanceCenter: {}
+    distanceCenter: {},
+    contactedTimeStamp: { default: null },
+    conversations: { default: null }
   },
   mixins: [item, screen],
   components: { AvatarImage, HouseholdImages, SearchListCardActions, SearchListCardActionsOverlay },
@@ -130,7 +135,29 @@ export default {
         console.log('item is neither a user nor an event')
         return null
       }
+    },
+    lastContactedText () {
+      if (this.contactedTimeStamp) {
+        const dateContacted = moment(this.contactedTimeStamp).format('MMM D')
+        return `Contacted ${dateContacted}`
+      }
+      return null
     }
+  },
+  methods: {
+    async fetchContactedTimeStamp () {
+      this.conversations = await fetchConversations()
+      for (let item in this.conversations) {
+        let curConversation = this.conversations[item]
+        if (curConversation.partner.id === parseInt(this.item.user.id)) {
+          return curConversation.message.createdAt
+        }
+        return null
+      }
+    }
+  },
+  async created () {
+    this.contactedTimeStamp = await this.fetchContactedTimeStamp()
   }
 }
 </script>
