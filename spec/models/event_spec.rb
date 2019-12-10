@@ -56,6 +56,49 @@ RSpec.describe Event, type: :model do
     context 'private place' do
       before { subject.place.update public: false }
 
+      context 'participants' do
+        before { participants }
+
+        it 'event_reminder_previous_day_participant' do
+          Timecop.freeze(24.hours.before(subject.starts_at)) do
+            subject.notify
+            expect(subject.notifications.event_reminder_previous_day_participant.count).to eq(participants.size)
+            expect(subject.notifications.participant_creation.count).to eq(participants.size)
+            expect(subject.notifications.participant_creation_host.count).to eq(participants.size)
+          end
+        end
+
+        it 'event_reminder_same_day_participant' do
+          Timecop.freeze(2.hours.ago(subject.starts_at)) do
+            subject.notify
+
+            expect(subject.notifications.event_reminder_same_day_participant.count).to eq(participants.size)
+            expect(subject.notifications.participant_creation.count).to eq(participants.size)
+            expect(subject.notifications.participant_creation_host.count).to eq(participants.size)
+          end
+        end
+
+        it 'event_feedback_participant' do
+          Timecop.freeze(30.minutes.since(subject.ends_at)) do
+            subject.notify
+
+            expect(subject.notifications.event_feedback_participant.count).to eq(participants.size)
+            expect(subject.notifications.participant_creation.count).to eq(participants.size)
+            expect(subject.notifications.participant_creation_host.count).to eq(participants.size)
+          end
+        end
+
+        it 'event_feedback_host' do
+          Timecop.freeze(30.minutes.since(subject.ends_at)) do
+            subject.notify
+
+            expect(subject.notifications.event_feedback_host.count).to eq(1)
+            expect(subject.notifications.participant_creation.count).to eq(participants.size)
+            expect(subject.notifications.participant_creation_host.count).to eq(participants.size)
+          end
+        end
+      end
+
       context 'host: without participants' do
         it 'event_reminder_previous_week_host' do
           Timecop.freeze(1.week.before(subject.starts_at)) do
@@ -94,6 +137,48 @@ RSpec.describe Event, type: :model do
     context 'public place' do
       before { subject.place.update public: true }
 
+      context 'participants' do
+        before { participants }
+
+        it 'event_reminder_previous_day_participant' do
+          Timecop.freeze(24.hours.before(subject.starts_at)) do
+            subject.notify
+            expect(subject.notifications.event_reminder_previous_day_participant.count).to eq(participants.size)
+            expect(subject.notifications.participant_creation.count).to eq(participants.size)
+            expect(subject.notifications.participant_creation_host.count).to eq(participants.size)
+          end
+        end
+
+        it 'event_reminder_same_day_participant' do
+          Timecop.freeze(2.hours.ago(subject.starts_at)) do
+            subject.notify
+
+            expect(subject.notifications.event_reminder_same_day_participant.count).to eq(participants.size)
+            expect(subject.notifications.participant_creation.count).to eq(participants.size)
+            expect(subject.notifications.participant_creation_host.count).to eq(participants.size)
+          end
+        end
+
+        it 'event_feedback_participant' do
+          Timecop.freeze(30.minutes.since(subject.ends_at)) do
+            subject.notify
+
+            expect(subject.notifications.event_feedback_participant.count).to eq(participants.size)
+            expect(subject.notifications.participant_creation.count).to eq(participants.size)
+            expect(subject.notifications.participant_creation_host.count).to eq(participants.size)
+          end
+        end
+        it 'event_feedback_host' do
+          Timecop.freeze(30.minutes.since(subject.ends_at)) do
+            subject.notify
+
+            expect(subject.notifications.event_feedback_host.count).to eq(0)
+            expect(subject.notifications.participant_creation.count).to eq(participants.size)
+            expect(subject.notifications.participant_creation_host.count).to eq(participants.size)
+          end
+        end
+      end
+
       context 'host: without participants' do
         it 'event_reminder_previous_week_host' do
           Timecop.freeze(1.week.before(subject.starts_at)) do
@@ -126,39 +211,6 @@ RSpec.describe Event, type: :model do
 
             expect(subject.notifications.event_reminder_previous_day_host.reload.count).to eq(0)
           end
-        end
-      end
-    end
-
-    context 'participants' do
-      before { participants }
-
-      it 'event_reminder_previous_day_participant' do
-        Timecop.freeze(24.hours.before(subject.starts_at)) do
-          subject.notify
-          expect(subject.notifications.event_reminder_previous_day_participant.count).to eq(participants.size)
-          expect(subject.notifications.participant_creation.count).to eq(participants.size)
-          expect(subject.notifications.participant_creation_host.count).to eq(participants.size)
-        end
-      end
-
-      it 'event_reminder_same_day_participant' do
-        Timecop.freeze(2.hours.ago(subject.starts_at)) do
-          subject.notify
-
-          expect(subject.notifications.event_reminder_same_day_participant.count).to eq(participants.size)
-          expect(subject.notifications.participant_creation.count).to eq(participants.size)
-          expect(subject.notifications.participant_creation_host.count).to eq(participants.size)
-        end
-      end
-
-      it 'event_feedback_participant' do
-        Timecop.freeze(30.minutes.since(subject.ends_at)) do
-          subject.notify
-
-          expect(subject.notifications.event_feedback_participant.count).to eq(participants.size)
-          expect(subject.notifications.participant_creation.count).to eq(participants.size)
-          expect(subject.notifications.participant_creation_host.count).to eq(participants.size)
         end
       end
     end
