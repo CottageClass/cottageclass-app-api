@@ -42,6 +42,19 @@ const mutations = {
       })
     }
   },
+  updateEventSeries (state, eventSeries) {
+    for (let key in state.data) {
+      const data = state.data[key]
+      if (!data.pages) { continue }
+      data.pages.forEach(p => {
+        const eventItems = p.filter(i => i.event &&
+          i.event.eventSeriesId.toString() === eventSeries.eventSeriesId.toString())
+        for (const item of eventItems) {
+          Vue.set(item.event, 'starred', eventSeries.starred)
+        }
+      })
+    }
+  },
   updateEvent (state, payload) {
     const event = payload.event
     for (let key in state.data) {

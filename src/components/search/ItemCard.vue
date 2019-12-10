@@ -5,6 +5,7 @@
     @user-updated="$emit('user-updated', $event)"
     @event-deleted="$emit('event-deleted', id)"
     @event-updated="$emit('event-updated', $event)"
+    @event-series-updated="$emit('event-series-updated', $event)"
   />
 </template>
 

@@ -9,12 +9,15 @@
                    @empty-card-button-click="$router.push({ name: 'NewEvent' })"
                    @empty-card-additional-link-click="goHome()"
                    @event-updated="fetchMyEvents"
+                   @event-series-updated="fetchAll"
                    @event-deleted="fetchMyEvents"
       />
       <ListSection title="Going"
                    :emptyOptions="goingEmptyOptions"
                    :items="goingItems"
                    @user-updated="fetchGoing"
+                   @event-updated="fetchMyEvents"
+                   @event-series-updated="fetchAll"
                    @empty-card-button-click="goHome()"
       />
       <ListSection title="Your offers"
@@ -25,6 +28,7 @@
                    @empty-card-button-click="$router.push({ name: 'NewEvent' })"
                    @empty-card-additional-link-click="goHome()"
                    @event-updated="fetchMyEvents"
+                   @event-series-updated="fetchAll"
                    @event-deleted="fetchMyEvents"
       />
       <ListSection title="Availability"
@@ -52,7 +56,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 
 import ListSection from '@/components/ListSection'
 import MainNav from '@/components/MainNav.vue'
@@ -116,15 +120,22 @@ export default {
     goToAvailability () {
       this.$router.push({ name: 'ProfileEdit', hash: '#availability' })
     },
+    async fetchAll () {
+      await this.fetchGoing()
+      await this.fetchMyEvents()
+    },
     async fetchGoing () {
       this.goingItems = await fetchUpcomingParticipatingEvents(this.currentUser.id)
     },
     async fetchMyEvents () {
       const allMyEvents = await fetchUpcomingEvents(this.currentUser.id, e => e.starts_at)
       this.debug({ allMyEvents })
-      this.hostingItems = allMyEvents.filter(i => i.participatingParents.length > 0).map(e => ({ event: e, user: e.user }))
-      this.yourOffersItems = allMyEvents.filter(i => i.participatingParents.length === 0).map(e => ({ event: e, user: e.user }))
-    }
+      this.hostingItems = allMyEvents.filter(i => i.participatingParents.length > 0)
+        .map(e => ({ event: e, user: e.user }))
+      this.yourOffersItems = allMyEvents.filter(i => i.participatingParents.length === 0)
+        .map(e => ({ event: e, user: e.user }))
+    },
+    ...mapMutations(['updateEventSeries'])
   },
   created () {
     if (this.redirectToSignupIfNotAuthenticated()) { return }
