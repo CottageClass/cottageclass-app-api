@@ -8,6 +8,9 @@ class API::EventSeries::StarsController < API::StarsController
   end
 
   def render_starable(status:)
-    render status: status
+    event_series = EventSeries.find params[:event_series_id]
+    serializer = EventSeriesSerializer.new event_series,
+                                           params: { current_user: current_user }
+    render json: serializer.serializable_hash, status: status
   end
 end
