@@ -96,7 +96,11 @@ export default {
       return this.user.darkStarred
     },
     isStarred () {
-      return this.user.starred
+      if (this.event) {
+        return this.event.starred
+      } else {
+        return this.user.starred
+      }
     },
     place () {
       if (this.event) { return this.event.place }
@@ -308,12 +312,18 @@ export default {
     },
     async interestedClick (context) {
       let res
-      if (this.user.starred) {
-        res = await this.unstarUser(this.user.id, context)
+      if (this.event.starred) {
+        res = await this.unstarEventSeries(this.event.eventSeriesId, context)
       } else {
-        res = await this.starUser(this.user.id, context)
+        res = await this.starEventSeries(this.event.eventSeriesId, context)
       }
-      this.$emit('user-updated', { user: res })
+      const seriesAttributes = Object.values(res.eventSeries)[0].attributes
+      const eventSeries = {
+        eventSeriesId: seriesAttributes.id,
+        starred: seriesAttributes.starred
+      }
+
+      this.$emit('event-series-updated', eventSeries)
       return res
     },
     goToItem () {

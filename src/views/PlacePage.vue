@@ -51,6 +51,7 @@
                                :distanceCenter="placeCenter"
                                @user-updated="$emit('user-updated', $event)"
                                @event-deleted="$emit('event-deleted', id)"
+                               @event-series-updated="$emit('event-series-updated', $event)"
                                @event-updated="$emit('event-updated', $event)"/>
         </ul>
       </div>

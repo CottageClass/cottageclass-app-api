@@ -11,6 +11,7 @@
         @fetch-more-click="fetchMore"
         @user-updated="updateUser"
         @event-updated="updateEvent"
+        @event-series-updated="updateEventSeries"
         :isFullScreen="true"
         @back-click="detailView=false"
       />
@@ -38,6 +39,7 @@
                 :showTrailblazerMessage="showTrailblazerMessage"
                 @fetch-more-click="fetchMore"
                 @user-updated="updateUser"
+                @event-series-updated="updateEventSeries"
                 @event-updated="updateEvent"/>
             </div>
 
@@ -130,7 +132,7 @@ export default {
       })
     },
     ...mapActions(['fetchMoreItems', 'fetchItems', 'setMapArea']),
-    ...mapMutations(['updateUser', 'updateEvent', 'setItemType', 'resetFetchLocks'])
+    ...mapMutations(['updateUser', 'updateEvent', 'updateEventSeries', 'setItemType', 'resetFetchLocks'])
   },
   watch: {
     '$route': {

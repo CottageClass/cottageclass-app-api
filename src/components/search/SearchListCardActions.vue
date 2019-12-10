@@ -81,7 +81,7 @@ export default {
       return this.event.participated ? goingIconActive : goingIconInactive
     },
     starIcon () {
-      return this.user.starred ? starredIconActive : starredIconInactive
+      return this.item.starred ? starredIconActive : starredIconInactive
     },
     item () {
       if (this.event) { return this.event }

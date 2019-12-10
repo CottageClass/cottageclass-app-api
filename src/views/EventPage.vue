@@ -27,6 +27,7 @@
         @interested-click="interestedClickAndUpdate('card')"
         @contact-click="contactClick"
         @event-updated="updateEvent"
+        @event-series-updated="updateThisEventSeries"
         @going-click="goingClick"
         @user-updated="updateUser"
       />
@@ -126,7 +127,7 @@ import DeleteEventConfirmationModal from '@/components/DeleteEventConfirmationMo
 import EventSearchListCard from '@/components/search/EventSearchListCard'
 import ReviewCard from '@/components/ReviewCard.vue'
 
-import { mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 import { fetchEventsByPlace, fetchEvent } from '@/utils/api'
 import { item, maps, rsvp, lightbox } from '@/mixins'
 import { lightboxImageUrl } from '@/utils/vendor/cloudinary'
@@ -206,6 +207,11 @@ export default {
     ...mapGetters(['isRsvpDeclined', 'items', 'mapArea'])
   },
   methods: {
+    ...mapMutations(['updateEventSeries']),
+    updateThisEventSeries (payload) {
+      this.$set(this.event, 'starred', payload.starred)
+      this.updateEventSeries(payload)
+    },
     reviewClick () {
       this.$router.push({ name: 'LeaveReview', params: { placeId: this.place.id, place: this.place } })
     },

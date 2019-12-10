@@ -44,9 +44,6 @@ export default {
     content () {
       return this.review.content
     }
-  },
-  async created () {
-    console.log('START')
   }
 }
 </script>

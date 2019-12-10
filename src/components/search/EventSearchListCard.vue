@@ -40,6 +40,7 @@
           :user="item.user"
           :event="item.event"
           @user-updated="$emit('user-updated', $event)"
+          @event-series-updated="$emit('event-series-updated', $event)"
           @event-updated="$emit('event-updated', $event)"
           @event-deleted="$emit('event-deleted', id)"
           @going-click="goingClick"
