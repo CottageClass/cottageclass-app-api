@@ -2,6 +2,7 @@ class EventSerializer
   include FastJsonapi::ObjectSerializer
 
   has_many :participants
+  belongs_to :event_series, record_type: :event_series, serializer: :event_series
 
   attributes :name, :images, :description, :child_age_minimum, :child_age_maximum
   attribute(:starts_at) { |instance| (instance.in_instance_time_zone instance.starts_at).to_s :iso8601 }
