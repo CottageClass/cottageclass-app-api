@@ -19,7 +19,7 @@
         </div>
         <div class="place-event-summary">
           <div class="link-block-2 w-inline-block"><img src="@/assets/mdi_calendar_today.svg" alt="" />
-            <div class="events-link-text">{{ numberOfEvents }} events happening</div>
+            <a v-scroll-to="'#events'" class="events-link-text" >{{ numberOfEvents }} events happening</a>
           </div>
         </div>
         <div class="place-event-desc">
