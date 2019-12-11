@@ -14,7 +14,7 @@ class Participant < ApplicationRecord
   def notify
     participable.notifications.participant_creation.where(recipient: user).first_or_create if user.id != participable.user.id
     if user.id != participable.user.id
-      participable.notifications.participant_creation_host.where(recipient: participable.user)
+      participable.notifications.participant_creation_host.where(recipient: participable.user, notifiable: self)
         .first_or_create participant: self
     end
   end
