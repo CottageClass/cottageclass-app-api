@@ -101,9 +101,17 @@ Rails.application.routes.draw do
   #############
   # routes for facebook crawler
   #############
-  get '/event/:id', to: 'crawler_events#show', constraints: lambda { |request|
+  get '/event/:id', to: 'crawler/events#show', constraints: lambda { |request|
     request.user_agent && (request.user_agent.include? 'facebookexternalhit')
   }, as: 'crawler_event'
+
+  get '/users/:id', to: 'crawler/users#show', constraints: lambda { |request|
+    request.user_agent && (request.user_agent.include? 'facebookexternalhit')
+  }, as: 'crawler_user'
+
+  get '/places/:id', to: 'crawler/places#show', constraints: lambda { |request|
+    request.user_agent && (request.user_agent.include? 'facebookexternalhit')
+  }, as: 'crawler_place'
 
   #############
   # fallbacks
