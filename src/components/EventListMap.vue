@@ -59,7 +59,7 @@ import { mapGetters } from 'vuex'
 
 import { maps, screen, platform } from '@/mixins'
 import SearchResultList from '@/components/SearchResultList.vue'
-import { itemPosition, itemRoute } from '@/utils/items.js'
+import { itemPosition, itemRouteFromMap } from '@/utils/items.js'
 
 export default {
   name: 'EventListMap',
@@ -105,7 +105,7 @@ export default {
           if (pin) {
             that.itemPins.push(pin)
             pin.addListener('click', function () {
-              that.$router.push(itemRoute(item))
+              that.$router.push(itemRouteFromMap(item))
             })
           }
         }

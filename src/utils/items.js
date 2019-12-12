@@ -8,11 +8,11 @@ export const itemPosition = (item) => {
   return { lat, lng }
 }
 
-export const itemRoute = (item) => {
+export const itemRouteFromMap = (item) => {
   let name, id
-  if (item.event) {
-    name = 'EventPage'
-    id = item.event.id
+  if (item.event && item.event.place.public) {
+    name = 'PlacePage'
+    id = item.event.place.id
   } else {
     name = 'UserPage'
     id = item.user.id
