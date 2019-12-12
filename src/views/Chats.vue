@@ -42,7 +42,7 @@ export default {
   },
   methods: {
     async fetchChats () {
-      this.chats = await fetchConversations(this.currentUser.id)
+      this.chats = await fetchConversations()
       for (let groupId of this.currentUser.groups) {
         const groupComments = await fetchComments(groupId)
         if (groupComments && groupComments.length > 0) {
