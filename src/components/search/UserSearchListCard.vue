@@ -110,12 +110,16 @@ import moment from 'moment'
 
 export default {
   name: 'UserSearchListCard',
+  data () {
+    return {
+      contactedTimeStamp: { default: null },
+      conversations: { default: null }
+    }
+  },
   props: {
     doNotShowCancel: { default: false },
     item: { required: true },
-    distanceCenter: {},
-    contactedTimeStamp: { default: null },
-    conversations: { default: null }
+    distanceCenter: {}
   },
   mixins: [item, screen],
   components: { AvatarImage, HouseholdImages, SearchListCardActions, SearchListCardActionsOverlay },
@@ -152,7 +156,6 @@ export default {
         if (curConversation.partner.id === parseInt(this.item.user.id)) {
           return curConversation.message.createdAt
         }
-        return null
       }
     }
   },
