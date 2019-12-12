@@ -16,10 +16,11 @@
         <h1 class="place-title">{{ placeName }}</h1>
         <div v-if="hasReviews" class="place-ratings">
           <AverageRating :averagePercentage= averagePercentage />
+          <a v-scroll-to="'#reviews'" class="events-link-text" >{{ numberOfReviews }} reviews</a>
         </div>
         <div class="place-event-summary">
           <div class="link-block-2 w-inline-block"><img src="@/assets/mdi_calendar_today.svg" alt="" />
-            <div class="events-link-text">{{ numberOfEvents }} events happening</div>
+            <a v-scroll-to="'#events'" class="events-link-text" >{{ numberOfEvents }} events happening</a>
           </div>
         </div>
         <div class="place-event-desc">
@@ -103,7 +104,7 @@ export default {
   },
   computed: {
     numberOfReviews () {
-      return 0
+      return this.reviews.length
     },
     placeCenter () {
       return { lat: this.place.fuzzyLatitude, lng: this.place.fuzzyLongitude }
@@ -112,7 +113,7 @@ export default {
       return this.place.description
     },
     hasReviews () {
-      return this.reviews && this.reviews.length > 0
+      return this.reviews && this.numberOfReviews > 0
     },
     placeName () {
       return this.place.name
