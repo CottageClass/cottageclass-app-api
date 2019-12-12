@@ -11,13 +11,4 @@ RSpec.describe 'static assets', type: :request do
     get '/event/' + event.id.to_s
     expect(response.body).to_not include event.name
   end
-
-  it 'returns the rendered pages with metadata for the facebook crawler' do
-    event = create :event
-    headers = {
-      'HTTP_USER_AGENT' => 'facebookexternalhit/1.1'
-    }
-    get '/event/' + event.id.to_s, headers: headers
-    expect(response.body).to include event.name
-  end
 end
