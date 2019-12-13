@@ -76,6 +76,7 @@ export default {
     showInterestedButton () {
       return this.isAuthenticated &&
         this.currentUser &&
+        this.event &&
         (this.user.id.toString() !== this.currentUser.id.toString())
     },
     showCancelButton () {
