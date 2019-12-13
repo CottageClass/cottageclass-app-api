@@ -2,6 +2,7 @@ class User < ApplicationRecord
   include Devise::JWT::RevocationStrategies::JTIMatcher
   include LegacyPassword
   include Starable
+  include PushNotifications
   include Locatable
 
   # Include devise modules. Others available are:
@@ -71,7 +72,6 @@ class User < ApplicationRecord
            class_name: 'Place',
            foreign_key: :user_id,
            dependent: :nullify
-  has_many :devices, dependent: :nullify
   has_many :children,
            class_name: 'Child',
            foreign_key: :parent_id,
@@ -186,37 +186,6 @@ class User < ApplicationRecord
     return true if dark_star.count > 0
 
     false
-  end
-
-  def push_to_devices(data)
-    devices.each do |d|
-      d.send_push(data)
-    end
-  end
-
-  def push_notify_new_group_chat(comment)
-    return unless setting_notify_group_messages_push
-
-    push_to_devices icon: comment.sender.avatar,
-                    url: ENV['LINK_HOST'] + '/group-chat/' + comment.group.id.to_s,
-                    title: "#{comment.sender.first_name.capitalize} sent a new  message to #{comment.group.name}",
-                    body: 'Tap to read the message and respond'
-  end
-
-  def push_notify_message_receipt(message)
-    return unless setting_notify_messages_push
-
-    push_to_devices icon: message.sender.avatar,
-                    url: ENV['LINK_HOST'] + '/chat/' + message.sender.id.to_s,
-                    title: "New message from #{message.sender.first_name.capitalize}",
-                    body: 'Tap to read the message and respond'
-  end
-
-  def push_notify_event_creation(event)
-    push_to_devices icon: event.user.avatar,
-                    url: ENV['LINK_HOST'] + '/event/' + event.id.to_s,
-                    title: "#{event.user.first_name.capitalize} has a new offering",
-                    body: event.name
   end
 
   def notify_event_creation_match(host)

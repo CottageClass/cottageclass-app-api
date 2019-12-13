@@ -21,6 +21,9 @@ class CurrentUserSerializer < BaseSerializer
              :setting_notify_group_messages_sms,
              :setting_notify_group_messages_push,
              :setting_notify_group_messages_email,
+             :setting_notify_event_reminder_email,
+             :setting_notify_event_reminder_sms,
+             :setting_notify_event_reminder_push,
              :setting_max_distance
 
   attribute :first_name do |user|
