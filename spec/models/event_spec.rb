@@ -137,6 +137,48 @@ RSpec.describe Event, type: :model do
     context 'public place' do
       before { subject.place.update public: true }
 
+      before { participants }
+
+      context 'settings' do
+        context 'participant' do
+          it 'event_reminder_previous_day_participant' do
+            participants.first.user.update setting_notify_event_reminder_sms: false
+
+            Timecop.freeze(24.hours.before(subject.starts_at)) do
+              subject.notify
+              expect(subject.notifications.event_reminder_previous_day_participant.count).to eq(participants.size - 1)
+            end
+          end
+
+          it 'event_reminder_same_day_participant' do
+            participants.first.user.update setting_notify_event_reminder_sms: false
+
+            Timecop.freeze(2.hours.ago(subject.starts_at)) do
+              subject.notify
+              expect(subject.notifications.event_reminder_same_day_participant.count).to eq(participants.size - 1)
+            end
+          end
+        end
+
+        context 'host' do
+          it 'event_reminder_previous_week_host' do
+            subject.user.update setting_notify_event_reminder_sms: false
+            subject.user.update setting_notify_event_reminder_email: false
+            Timecop.freeze(1.week.before(subject.starts_at)) do
+              subject.notify
+              expect(subject.notifications.event_reminder_previous_week_host.count).to eq(0)
+            end
+          end
+
+          it 'event_reminder_previous_day_host' do
+            Timecop.freeze(24.hours.before(subject.starts_at)) do
+              subject.notify
+              expect(subject.notifications.event_reminder_previous_day_host.reload.count).to eq(0)
+            end
+          end
+        end
+      end
+
       context 'participants' do
         before { participants }
 
