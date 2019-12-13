@@ -14,6 +14,11 @@
       :labels="groupLabels"
       v-model="groupMediaModel"
     />
+    <p class="second-heading">How would you like to be reminded of your upcoming events?</p>
+    <Checkboxes
+      :labels="reminderLabels"
+      v-model="reminderMediaModel"
+    />
   </Question>
 </template>
 
@@ -32,6 +37,7 @@ export default {
     return {
       chatMediaModel: null,
       groupMediaModel: null,
+      reminderMediaModel: null,
       settingEmailNotificationsModel: null
     }
   },
@@ -46,13 +52,13 @@ export default {
       this.$emit('input', {
         chatMedia: this.chatMedia,
         groupMedia: this.groupMedia,
+        reminderMedia: this.reminderMedia,
         settingEmailNotifications: this.settingEmailNotificationsModel === 'yes'
       })
     },
     initFromValue () {
       this.chatMediaModel = Object.keys(this.value.chatMedia).reduce((acc, medium) => {
         if (this.value.chatMedia[medium]) {
-          this.debug(acc)
           return acc.concat(medium)
         } else {
           return acc
@@ -60,7 +66,13 @@ export default {
       }, [])
       this.groupMediaModel = Object.keys(this.value.groupMedia).reduce((acc, medium) => {
         if (this.value.groupMedia[medium]) {
-          this.debug(acc)
+          return acc.concat(medium)
+        } else {
+          return acc
+        }
+      }, [])
+      this.reminderMediaModel = Object.keys(this.value.reminderMedia).reduce((acc, medium) => {
+        if (this.value.reminderMedia[medium]) {
           return acc.concat(medium)
         } else {
           return acc
@@ -85,6 +97,13 @@ export default {
         [ 'settingNotifyGroupMessagesSms', 'Text message' ]
       ]
     },
+    reminderLabels () {
+      return [
+        [ 'settingNotifyEventReminderPush', 'Push notifications' ],
+        [ 'settingNotifyEventReminderEmail', 'Email' ],
+        [ 'settingNotifyEventReminderSms', 'Text message' ]
+      ]
+    },
     chatMedia () {
       return {
         settingNotifyMessagesPush: this.chatMediaModel.includes('settingNotifyMessagesPush'),
@@ -98,6 +117,13 @@ export default {
         settingNotifyGroupMessagesEmail: this.groupMediaModel.includes('settingNotifyGroupMessagesEmail'),
         settingNotifyGroupMessagesSms: this.groupMediaModel.includes('settingNotifyGroupMessagesSms')
       }
+    },
+    reminderMedia () {
+      return {
+        settingNotifyEventReminderPush: this.reminderMediaModel.includes('settingNotifyEventReminderPush'),
+        settingNotifyEventReminderEmail: this.reminderMediaModel.includes('settingNotifyEventReminderEmail'),
+        settingNotifyEventReminderSms: this.reminderMediaModel.includes('settingNotifyEventReminderSms')
+      }
     }
   },
   watch: {
@@ -105,6 +131,9 @@ export default {
       this.emitData()
     },
     groupMediaModel () {
+      this.emitData()
+    },
+    reminderMediaModel () {
       this.emitData()
     },
     settingEmailNotificationsModel () {

@@ -122,6 +122,11 @@ export default {
         settingNotifyGroupMessagesEmail: this.currentUser.settingNotifyGroupMessagesEmail,
         settingNotifyGroupMessagesSms: this.currentUser.settingNotifyGroupMessagesSms,
         settingNotifyGroupMessagesPush: this.currentUser.settingNotifyGroupMessagesPush
+      },
+      reminderMedia: {
+        settingNotifyEventReminderEmail: this.currentUser.settingNotifyEventReminderEmail,
+        settingNotifyEventReminderSms: this.currentUser.settingNotifyEventReminderSms,
+        settingNotifyEventReminderPush: this.currentUser.settingNotifyEventReminderPush
       }
     }
     this.maxDistance = this.currentUser.settingMaxDistance || '2'
@@ -180,6 +185,7 @@ export default {
         data = Object.assign(data,
           { phone, place, availability, settingEmailNotifications, settingMaxDistance },
           this.notificationSettings.chatMedia,
+          this.notificationSettings.reminderMedia,
           this.notificationSettings.groupMedia)
         this.debug({ data })
 
