@@ -49,13 +49,13 @@ export async function submitUserInfo (userId, data) {
   if (data.firebaseToken) {
     postData = { ...postData, firebaseToken }
   }
-  const { employer, jobPosition, profileBlurb, images, activities } = data
-  const { avatar, languages } = data
+  const { employer, jobPosition, profileBlurb, images } = data
+  const { avatar } = data
   const { settingNotifyMessagesPush, settingNotifyMessagesSms, settingNotifyMessagesEmail } = data
   const { settingNotifyGroupMessagesPush, settingNotifyGroupMessagesSms, settingNotifyGroupMessagesEmail } = data
   const { settingNotifyEventReminderPush, settingNotifyEventReminderSms, settingNotifyEventReminderEmail } = data
-  postData = { ...postData, employer, jobPosition, profileBlurb, images, activities }
-  postData = { ...postData, avatar, languages, settingEmailNotifications, settingMaxDistance }
+  postData = { ...postData, employer, jobPosition, profileBlurb, images }
+  postData = { ...postData, avatar, settingEmailNotifications, settingMaxDistance }
   postData = { ...postData, settingNotifyMessagesPush, settingNotifyMessagesSms, settingNotifyMessagesEmail }
   postData = { ...postData, settingNotifyGroupMessagesPush, settingNotifyGroupMessagesSms, settingNotifyGroupMessagesEmail }
   postData = { ...postData, settingNotifyEventReminderPush, settingNotifyEventReminderSms, settingNotifyEventReminderEmail

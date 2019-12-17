@@ -19,7 +19,6 @@
       <AvatarUpload v-model="avatar"/>
       <Employment v-model="employment"/>
       <ProfileBlurb v-model="profileBlurb" />
-      <Activities v-model="currentUser.activities" />
       <Availability id="availability" v-model="availability" :required="false"/>
       <Children v-model="children" :required="false" />
       <Phone v-model="phone" :currentPhone="currentUser.phone" :required="false" />
@@ -28,7 +27,6 @@
         :currentApartment="currentUser.place.apartmentNumber"
         v-model="place"
       />
-      <LanguagesSpoken v-model="currentUser.languages" :showChoicesImmediately="false"/>
       <MaxDistanceSetting v-model="maxDistance" />
       <NotificationSettings
         v-if = "notificationSettings"
@@ -54,14 +52,12 @@ import MultipleImageUpload from '@/components/base/MultipleImageUpload.vue'
 import Location from '@/components/FTE/userInformation/Location.vue'
 import ProfileBlurb from '@/components/FTE/userInformation/ProfileBlurb.vue'
 import Employment from '@/components/FTE/userInformation/Employment.vue'
-import LanguagesSpoken from '@/components/FTE/userInformation/LanguagesSpoken.vue'
 import Children from '@/components/FTE/userInformation/Children.vue'
 import Phone from '@/components/FTE/userInformation/Phone.vue'
 import Availability from '@/components/FTE/userInformation/Availability.vue'
 import MainNav from '@/components/MainNav.vue'
 import PageActionsFooter from '@/components/PageActionsFooter.vue'
 import ErrorMessage from '@/components/base/ErrorMessage.vue'
-import Activities from '@/components/FTE/userInformation/Activities.vue'
 import NotificationSettings from '@/components/base/NotificationSettings'
 import MaxDistanceSetting from '@/components/FTE/userInformation/MaxDistanceSetting'
 import AvatarUpload from '@/components/FTE/userInformation/AvatarUpload'
@@ -88,8 +84,6 @@ export default {
     Question,
     MultipleImageUpload,
     ProfileBlurb,
-    LanguagesSpoken,
-    Activities,
     NotificationSettings,
     MaxDistanceSetting
   },
