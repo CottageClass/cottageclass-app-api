@@ -3,10 +3,10 @@
     <MainNav />
 
     <div class="your-playdates__container w-container">
-      <ListSection title="Hosting"
-                   :emptyOptions="hostingEmptyOptions"
-                   :items="hostingItems"
-                   @empty-card-button-click="$router.push({ name: 'NewEvent' })"
+      <ListSection title="Interested"
+                   :emptyOptions="interestedEmptyOptions"
+                   :items="interestedItems"
+                   @empty-card-button-click="goHome()"
                    @empty-card-additional-link-click="goHome()"
                    @event-updated="fetchMyEvents"
                    @event-series-updated="fetchAll"
@@ -20,7 +20,7 @@
                    @event-series-updated="fetchAll"
                    @empty-card-button-click="goHome()"
       />
-      <ListSection title="Your offers"
+      <ListSection title="Your Suggestions"
                    buttonText="Offer Playdate"
                    :emptyOptions="yourOffersEmptyOptions"
                    :items="yourOffersItems"
@@ -77,7 +77,7 @@ export default {
   data () {
     return {
       goingItems: null,
-      hostingItems: null,
+      interestedItems: null,
       yourOffersItems: null
     }
   },
@@ -91,12 +91,11 @@ export default {
         buttonText: 'Edit Availability'
       }
     },
-    hostingEmptyOptions () {
+    interestedEmptyOptions () {
       return {
         image: heartDoor2,
-        title: 'You aren\'t scheduled to host anyone yet.',
-        buttonText: 'Offer More Playdates',
-        additionalLinkText: 'Find playdates near you'
+        title: 'You haven\'t starred any playdates yet',
+        buttonText: 'Find playdates near you'
       }
     },
     goingEmptyOptions () {
@@ -109,7 +108,7 @@ export default {
     yourOffersEmptyOptions () {
       return {
         image: availability2,
-        title: 'You aren\'t currently offering any playdates.',
+        title: 'You haven\'t suggested any playdates yet.',
         buttonText: 'Offer some playdates',
         additionalLinkText: 'Find playdates near you'
       }
@@ -130,8 +129,7 @@ export default {
     async fetchMyEvents () {
       const allMyEvents = await fetchUpcomingEvents(this.currentUser.id, e => e.starts_at)
       this.debug({ allMyEvents })
-      this.hostingItems = allMyEvents.filter(i => i.participatingParents.length > 0)
-        .map(e => ({ event: e, user: e.user }))
+      this.interestedItems = null
       this.yourOffersItems = allMyEvents.filter(i => i.participatingParents.length === 0)
         .map(e => ({ event: e, user: e.user }))
     },
