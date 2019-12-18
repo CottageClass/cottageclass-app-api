@@ -166,6 +166,33 @@ RSpec.resource 'Event' do
         end
       end
     end
+
+    get '/api/events/starred', format: :json do
+      let(:event_series) { create :event_series }
+      let(:other_event_series) { create :event_series }
+      before do
+        other_event_series
+        user.stars.create starable: event_series
+      end
+
+      context 'authorized' do
+        include_context 'authorization token'
+
+        example 'starred_events:success' do
+          explanation 'Events in series that have been starred by current user'
+          do_request
+          expect(response_status).to eq(200)
+          expect(json_body.fetch('data', []).size).to eq(event_series.events.upcoming.count)
+        end
+      end
+
+      context 'unauthorized' do
+        example 'starred_events:unauthenticated', document: false do
+          do_request
+          expect(response_status).to eq(401)
+        end
+      end
+    end
   end
 
   context 'member operations' do
