@@ -24,6 +24,8 @@ Rails.application.routes.draw do
         collection { delete :index, to: 'participants#destroy' }
       end
       collection do
+        get '/starred',
+            to: 'events#starred'
         get '(/:skope)(/miles/:miles(/latitude/:latitude/longitude/:longitude))'\
           '(/min_age/:min_age)(/max_age/:max_age)'\
           '(/date/:date)(/weekday/:weekday)'\
