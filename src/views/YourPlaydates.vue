@@ -68,7 +68,7 @@ import playdates2 from '@/assets/playdates-2.svg'
 import availability2 from '@/assets/availability-2.svg'
 
 import { item, redirect, goHome } from '@/mixins'
-import { fetchUpcomingParticipatingEvents, fetchUpcomingEvents } from '@/utils/api'
+import { fetchUpcomingParticipatingEvents, fetchUpcomingEvents, fetchStarredEvents } from '@/utils/api'
 
 export default {
   name: 'YourPlaydates',
@@ -126,10 +126,12 @@ export default {
     async fetchGoing () {
       this.goingItems = await fetchUpcomingParticipatingEvents(this.currentUser.id)
     },
+    async fetchInterestedEvents () {
+      this.interestedItems = await fetchStarredEvents(this.currentUser.id)
+    },
     async fetchMyEvents () {
       const allMyEvents = await fetchUpcomingEvents(this.currentUser.id, e => e.starts_at)
       this.debug({ allMyEvents })
-      this.interestedItems = null
       this.yourOffersItems = allMyEvents.filter(i => i.participatingParents.length === 0)
         .map(e => ({ event: e, user: e.user }))
     },
@@ -138,6 +140,7 @@ export default {
   created () {
     if (this.redirectToSignupIfNotAuthenticated()) { return }
     this.fetchGoing()
+    this.fetchInterestedEvents()
     this.fetchMyEvents()
   }
 }

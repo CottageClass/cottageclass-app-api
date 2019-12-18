@@ -104,6 +104,26 @@ export function fetchUpcomingParticipatingEvents (userId, pageSize = 100) {
     })
 }
 
+export async function fetchStarredEvents () {
+  return axios.get(`/api/events/starred`)
+    .then(res => {
+      logger.log('GET STARRED EVENTS SUCCESS')
+      logger.log(res)
+      const normedData = normalize(res.data)
+      if (!normedData.event) {
+        return []
+      }
+      const events = createEvents(normedData)
+      return events.map(e => {
+        return { event: e, user: e.user }
+      })
+    }).catch(err => {
+      logger.logError('GET STARRED EVENTS FAILURE')
+      logger.logError(err)
+      throw err
+    })
+}
+
 export function removeEventParticipant (eventId) {
   return axios.delete(`/api/events/${eventId}/participants`)
     .then(res => {
