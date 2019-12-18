@@ -34,12 +34,6 @@ export default {
     joinedDateFormatted: function () {
       return moment(this.user.createdAt).format('MMMM, YYYY')
     },
-    interests () {
-      if (this.user && this.user.activities) {
-        return this.user.activities.length && this.user.activities
-      }
-      return null
-    },
     languageText: function () {
       const languageCodes = this.user.languages
       const languages = languageCodes.map(languageList().getLanguageName)
