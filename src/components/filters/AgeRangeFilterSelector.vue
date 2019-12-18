@@ -5,7 +5,6 @@
       v-model="range"
       min="0"
       max="18"
-
       @change="update"
     ></v-range-slider>
     <div>Ages : {{range[0]}} - {{ range[1]}}</div>
