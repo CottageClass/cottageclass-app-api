@@ -1,8 +1,23 @@
 class API::EventsController < API::BaseController
-  before_action :authenticate_user!, only: %i[participated update destroy]
+  before_action :authenticate_user!, only: %i[participated update destroy starred]
   before_action :load_user, only: %i[created participated]
   before_action :load_event, only: %i[show update destroy]
   before_action :requires_event_owner, only: %i[update destroy]
+
+  def starred
+    events = Event.upcoming.joins(:event_series)
+      .joins('JOIN stars ON stars.starable_id = event_series.id')
+      .where('starable_type =?', 'EventSeries')
+      .where('stars.giver_id = ?', current_user.id)
+      .includes(%i[participants user place event_series])
+
+    serializer = EventSerializer.new events, include: %i[participants
+                                                         user
+                                                         place
+                                                         event_series],
+                                             params: { current_user: current_user }
+    render json: serializer.serializable_hash, status: :ok
+  end
 
   def index
     events = Event.includes(:user, :place, user: :children)

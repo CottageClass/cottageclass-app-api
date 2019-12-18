@@ -182,7 +182,7 @@ RSpec.resource 'Event' do
           explanation 'Events in series that have been starred by current user'
           do_request
           expect(response_status).to eq(200)
-          expect(json_body.fetch('data', []).size).to eq(event_series.events.count)
+          expect(json_body.fetch('data', []).size).to eq(event_series.events.upcoming.count)
         end
       end
 
