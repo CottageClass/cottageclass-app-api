@@ -7,16 +7,10 @@
                    :emptyOptions="interestedEmptyOptions"
                    :items="interestedItems"
                    @empty-card-button-click="goHome()"
-                   @event-updated="fetchMyEvents"
-                   @event-series-updated="fetchAll"
-                   @event-deleted="fetchMyEvents"
       />
       <ListSection title="Going"
                    :emptyOptions="goingEmptyOptions"
                    :items="goingItems"
-                   @user-updated="fetchGoing"
-                   @event-updated="fetchMyEvents"
-                   @event-series-updated="fetchAll"
                    @empty-card-button-click="goHome()"
       />
       <ListSection title="Offers"
@@ -26,9 +20,6 @@
                    @header-button-click="$router.push({ name: 'NewEvent' })"
                    @empty-card-button-click="$router.push({ name: 'NewEvent' })"
                    @empty-card-additional-link-click="goHome()"
-                   @event-updated="fetchMyEvents"
-                   @event-series-updated="fetchAll"
-                   @event-deleted="fetchMyEvents"
       />
       <ListSection title="Availability"
                    buttonText="Edit"
@@ -120,6 +111,7 @@ export default {
     },
     async fetchAll () {
       await this.fetchGoing()
+      await this.fetchInterestedEvents()
       await this.fetchMyEvents()
     },
     async fetchGoing () {
@@ -129,18 +121,13 @@ export default {
       this.interestedItems = await fetchStarredEvents(this.currentUser.id)
     },
     async fetchMyEvents () {
-      const allMyEvents = await fetchUpcomingEvents(this.currentUser.id, e => e.starts_at)
-      this.debug({ allMyEvents })
-      this.yourOffersItems = allMyEvents.filter(i => i.participatingParents.length === 0)
-        .map(e => ({ event: e, user: e.user }))
+      this.yourOffersItems = await fetchUpcomingEvents(this.currentUser.id, e => e.starts_at)
     },
     ...mapMutations(['updateEventSeries'])
   },
   created () {
     if (this.redirectToSignupIfNotAuthenticated()) { return }
-    this.fetchGoing()
-    this.fetchInterestedEvents()
-    this.fetchMyEvents()
+    this.fetchAll()
   }
 }
 </script>
