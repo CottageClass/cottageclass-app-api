@@ -1,0 +1,18 @@
+{
+  "webcredentials": {
+    "apps": [
+      "H2N26DZ69G.com.joinlilypad.lilypad"
+    ]
+  },
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "H2N26DZ69G.com.joinlilypad.lilypad",
+        "paths": [
+          "/*"
+        ]
+      }
+    ]
+  }
+}
