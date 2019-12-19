@@ -121,7 +121,9 @@ export default {
       this.interestedItems = await fetchStarredEvents(this.currentUser.id)
     },
     async fetchMyEvents () {
-      this.yourOffersItems = await fetchUpcomingEvents(this.currentUser.id, e => e.starts_at)
+      const allMyEvents = await fetchUpcomingEvents(this.currentUser.id, e => e.starts_at)
+      this.debug({ allMyEvents })
+      this.yourOffersItems = allMyEvents.map(e => ({ event: e, user: e.user }))
     },
     ...mapMutations(['updateEventSeries'])
   },
