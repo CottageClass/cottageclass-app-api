@@ -20,7 +20,7 @@
                    @event-series-updated="fetchAll"
                    @empty-card-button-click="goHome()"
       />
-      <ListSection title="Your Suggestions"
+      <ListSection title="Offers"
                    buttonText="Offer Playdate"
                    :emptyOptions="yourOffersEmptyOptions"
                    :items="yourOffersItems"
