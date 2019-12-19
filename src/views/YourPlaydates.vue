@@ -6,17 +6,26 @@
       <ListSection title="Interested"
                    :emptyOptions="interestedEmptyOptions"
                    :items="interestedItems"
+                   @event-updated="fetchAll"
+                   @event-series-updated="fetchAll"
+                   @event-deleted="fetchAll"
                    @empty-card-button-click="goHome()"
       />
       <ListSection title="Going"
                    :emptyOptions="goingEmptyOptions"
                    :items="goingItems"
+                   @event-updated="fetchAll"
+                   @event-series-updated="fetchAll"
+                   @event-deleted="fetchAll"
                    @empty-card-button-click="goHome()"
       />
       <ListSection title="Offers"
                    buttonText="Offer Playdate"
                    :emptyOptions="yourOffersEmptyOptions"
                    :items="yourOffersItems"
+                   @event-updated="fetchAll"
+                   @event-series-updated="fetchAll"
+                   @event-deleted="fetchAll"
                    @header-button-click="$router.push({ name: 'NewEvent' })"
                    @empty-card-button-click="$router.push({ name: 'NewEvent' })"
                    @empty-card-additional-link-click="goHome()"
@@ -110,15 +119,15 @@ export default {
       this.$router.push({ name: 'ProfileEdit', hash: '#availability' })
     },
     async fetchAll () {
-      await this.fetchGoing()
       await this.fetchInterestedEvents()
+      await this.fetchGoing()
       await this.fetchMyEvents()
-    },
-    async fetchGoing () {
-      this.goingItems = await fetchUpcomingParticipatingEvents(this.currentUser.id)
     },
     async fetchInterestedEvents () {
       this.interestedItems = await fetchStarredEvents(this.currentUser.id)
+    },
+    async fetchGoing () {
+      this.goingItems = await fetchUpcomingParticipatingEvents(this.currentUser.id)
     },
     async fetchMyEvents () {
       const allMyEvents = await fetchUpcomingEvents(this.currentUser.id, e => e.starts_at)
