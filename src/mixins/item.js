@@ -296,13 +296,11 @@ export default {
       if (!this.redirectToSignupIfNotAuthenticated()) {
         if (this.event.participated) {
           await this.cancelRsvp()
-          this.item.event = await fetchEvent(this.event.id)
-          this.$emit('event-updated', { event: this.item.event })
         } else {
           await this.submitRsvp(this.currentUser.children.map(c => c.id), false)
-          this.item.event = await fetchEvent(this.event.id)
-          this.$emit('event-updated', { event: this.item.event })
         }
+        this.item.event = await fetchEvent(this.event.id)
+        this.$emit('event-updated', { event: this.item.event })
       }
     },
     async interestedClick (context) {
@@ -317,7 +315,7 @@ export default {
         eventSeriesId: seriesAttributes.id,
         starred: seriesAttributes.starred
       }
-
+      this.item.event = await fetchEvent(this.event.id)
       this.$emit('event-series-updated', eventSeries)
       return res
     },

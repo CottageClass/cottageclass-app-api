@@ -3,33 +3,32 @@
     <MainNav />
 
     <div class="your-playdates__container w-container">
-      <ListSection title="Hosting"
-                   :emptyOptions="hostingEmptyOptions"
-                   :items="hostingItems"
-                   @empty-card-button-click="$router.push({ name: 'NewEvent' })"
-                   @empty-card-additional-link-click="goHome()"
-                   @event-updated="fetchMyEvents"
+      <ListSection title="Interested"
+                   :emptyOptions="interestedEmptyOptions"
+                   :items="interestedItems"
+                   @event-updated="fetchAll"
                    @event-series-updated="fetchAll"
-                   @event-deleted="fetchMyEvents"
+                   @event-deleted="fetchAll"
+                   @empty-card-button-click="goHome()"
       />
       <ListSection title="Going"
                    :emptyOptions="goingEmptyOptions"
                    :items="goingItems"
-                   @user-updated="fetchGoing"
-                   @event-updated="fetchMyEvents"
+                   @event-updated="fetchAll"
                    @event-series-updated="fetchAll"
+                   @event-deleted="fetchAll"
                    @empty-card-button-click="goHome()"
       />
-      <ListSection title="Your offers"
+      <ListSection title="Offers"
                    buttonText="Offer Playdate"
                    :emptyOptions="yourOffersEmptyOptions"
                    :items="yourOffersItems"
+                   @event-updated="fetchAll"
+                   @event-series-updated="fetchAll"
+                   @event-deleted="fetchAll"
                    @header-button-click="$router.push({ name: 'NewEvent' })"
                    @empty-card-button-click="$router.push({ name: 'NewEvent' })"
                    @empty-card-additional-link-click="goHome()"
-                   @event-updated="fetchMyEvents"
-                   @event-series-updated="fetchAll"
-                   @event-deleted="fetchMyEvents"
       />
       <ListSection title="Availability"
                    buttonText="Edit"
@@ -68,7 +67,7 @@ import playdates2 from '@/assets/playdates-2.svg'
 import availability2 from '@/assets/availability-2.svg'
 
 import { item, redirect, goHome } from '@/mixins'
-import { fetchUpcomingParticipatingEvents, fetchUpcomingEvents } from '@/utils/api'
+import { fetchUpcomingParticipatingEvents, fetchUpcomingEvents, fetchStarredEvents } from '@/utils/api'
 
 export default {
   name: 'YourPlaydates',
@@ -77,7 +76,7 @@ export default {
   data () {
     return {
       goingItems: null,
-      hostingItems: null,
+      interestedItems: null,
       yourOffersItems: null
     }
   },
@@ -91,12 +90,11 @@ export default {
         buttonText: 'Edit Availability'
       }
     },
-    hostingEmptyOptions () {
+    interestedEmptyOptions () {
       return {
         image: heartDoor2,
-        title: 'You aren\'t scheduled to host anyone yet.',
-        buttonText: 'Offer More Playdates',
-        additionalLinkText: 'Find playdates near you'
+        title: 'You haven\'t starred any playdates yet',
+        buttonText: 'Find playdates near you'
       }
     },
     goingEmptyOptions () {
@@ -109,7 +107,7 @@ export default {
     yourOffersEmptyOptions () {
       return {
         image: availability2,
-        title: 'You aren\'t currently offering any playdates.',
+        title: 'You haven\'t suggested any playdates yet.',
         buttonText: 'Offer some playdates',
         additionalLinkText: 'Find playdates near you'
       }
@@ -121,8 +119,12 @@ export default {
       this.$router.push({ name: 'ProfileEdit', hash: '#availability' })
     },
     async fetchAll () {
+      await this.fetchInterestedEvents()
       await this.fetchGoing()
       await this.fetchMyEvents()
+    },
+    async fetchInterestedEvents () {
+      this.interestedItems = await fetchStarredEvents(this.currentUser.id)
     },
     async fetchGoing () {
       this.goingItems = await fetchUpcomingParticipatingEvents(this.currentUser.id)
@@ -130,17 +132,13 @@ export default {
     async fetchMyEvents () {
       const allMyEvents = await fetchUpcomingEvents(this.currentUser.id, e => e.starts_at)
       this.debug({ allMyEvents })
-      this.hostingItems = allMyEvents.filter(i => i.participatingParents.length > 0)
-        .map(e => ({ event: e, user: e.user }))
-      this.yourOffersItems = allMyEvents.filter(i => i.participatingParents.length === 0)
-        .map(e => ({ event: e, user: e.user }))
+      this.yourOffersItems = allMyEvents.map(e => ({ event: e, user: e.user }))
     },
     ...mapMutations(['updateEventSeries'])
   },
   created () {
     if (this.redirectToSignupIfNotAuthenticated()) { return }
-    this.fetchGoing()
-    this.fetchMyEvents()
+    this.fetchAll()
   }
 }
 </script>
