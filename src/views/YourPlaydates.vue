@@ -7,7 +7,6 @@
                    :emptyOptions="interestedEmptyOptions"
                    :items="interestedItems"
                    @empty-card-button-click="goHome()"
-                   @empty-card-additional-link-click="goHome()"
                    @event-updated="fetchMyEvents"
                    @event-series-updated="fetchAll"
                    @event-deleted="fetchMyEvents"
