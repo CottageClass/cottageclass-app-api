@@ -4,6 +4,7 @@ import VueAxios from 'vue-axios'
 import VeeValidate from 'vee-validate'
 import VueClipboard from 'vue-clipboard2'
 import VueScrollTo from 'vue-scrollto'
+import VueSlider from 'vue-slider-component'
 import Vuetify from 'vuetify'
 import { TimePicker } from 'ant-design-vue'
 
@@ -82,6 +83,7 @@ if (isAuthWindow) {
   Vue.use(VueLazyLoad)
   Vue.mixin(logger)
   Vue.use(VueScrollTo)
+  Vue.use(VueSlider)
   Vue.use(VueAxios, axios)
   Vue.use(VeeValidate)
   Vue.use(VueClipboard)
