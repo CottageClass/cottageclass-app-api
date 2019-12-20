@@ -27,7 +27,7 @@
               <h1 class="chat-heading-text">{{titleText}}</h1>
             </div>
           </div>
-          <div v-if="!messages || messages.length === 0"
+          <div v-if="showDivider"
                class="chat-content--wrapper">
             <ConversationDivider
               :dividerText="chatStartedText" />
@@ -141,6 +141,9 @@ export default {
     }
   },
   computed: {
+    showDivider () {
+      return ((!this.messages || this.messages.length === 0) && (!this.tempMessage))
+    },
     titleText () {
       if (this.partner) {
         return 'Chat with ' + this.partnerName
