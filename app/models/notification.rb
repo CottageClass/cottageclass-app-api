@@ -48,10 +48,6 @@ class Notification < ApplicationRecord
                                       host_first_name: notifiable.user.first_name,
                                       event_time_range: notifiable.time_range
                    Notifier::Base.new user: recipient, body: body
-                 when :event_feedback_participant
-                   self.body = I18n.t 'messages.event_feedback_participant',
-                                      participant_first_name: recipient.first_name
-                   Notifier::EventFeedbackParticipant.new user: recipient, event: notifiable, body: body
                  when :event_reminder_previous_week_host
                    self.body = I18n.t 'messages.event_reminder_previous_week_host',
                                       host_first_name: recipient.first_name,
@@ -70,9 +66,6 @@ class Notification < ApplicationRecord
                                                         token: recipient.token,
                                                         body: body
                    end
-                 when :event_feedback_host
-                   self.body = I18n.t 'messages.event_feedback_host'
-                   Notifier::EventFeedbackHost.new user: recipient, event: notifiable, body: body
                  when :participant_creation
                    self.body = 'placeholder for body'
                    Notifier::ParticipantCreation.new user: recipient, event: notifiable, body: body

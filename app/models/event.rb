@@ -103,11 +103,7 @@ class Event < ApplicationRecord
       p.user == user
     end
     if non_hosts.any? && !place.public
-      if ends_at <= Time.current && user.setting_notify_event_reminder_sms
-        # after event has ended
-
-        notifications.event_feedback_host.where(recipient: user).first_or_create
-      elsif starts_at <= 1.day.since(Time.current) && user.setting_notify_event_reminder_email
+      if starts_at <= 1.day.since(Time.current) && user.setting_notify_event_reminder_email
         # 24 hours before event will start
 
         notifications.event_reminder_previous_day_host.where(recipient: user).first_or_create
@@ -118,12 +114,7 @@ class Event < ApplicationRecord
       end
     end
 
-    if 30.minutes.since(ends_at) <= Time.current
-      # 30 minutes after event has ended
-      non_hosts.each do |participant|
-        notifications.event_feedback_participant.where(recipient: participant.user).first_or_create
-      end
-    elsif starts_at <= 2.hours.since(Time.current)
+    if starts_at <= 2.hours.since(Time.current)
       # 2 hours before event will start
       non_hosts.each do |participant|
         next unless participant.user.setting_notify_event_reminder_sms

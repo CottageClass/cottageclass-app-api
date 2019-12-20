@@ -77,26 +77,6 @@ RSpec.describe Event, type: :model do
             expect(subject.notifications.participant_creation_host.count).to eq(participants.size)
           end
         end
-
-        it 'event_feedback_participant' do
-          Timecop.freeze(30.minutes.since(subject.ends_at)) do
-            subject.notify
-
-            expect(subject.notifications.event_feedback_participant.count).to eq(participants.size)
-            expect(subject.notifications.participant_creation.count).to eq(participants.size)
-            expect(subject.notifications.participant_creation_host.count).to eq(participants.size)
-          end
-        end
-
-        it 'event_feedback_host' do
-          Timecop.freeze(30.minutes.since(subject.ends_at)) do
-            subject.notify
-
-            expect(subject.notifications.event_feedback_host.count).to eq(1)
-            expect(subject.notifications.participant_creation.count).to eq(participants.size)
-            expect(subject.notifications.participant_creation_host.count).to eq(participants.size)
-          end
-        end
       end
 
       context 'host: without participants' do
@@ -196,25 +176,6 @@ RSpec.describe Event, type: :model do
             subject.notify
 
             expect(subject.notifications.event_reminder_same_day_participant.count).to eq(participants.size)
-            expect(subject.notifications.participant_creation.count).to eq(participants.size)
-            expect(subject.notifications.participant_creation_host.count).to eq(participants.size)
-          end
-        end
-
-        it 'event_feedback_participant' do
-          Timecop.freeze(30.minutes.since(subject.ends_at)) do
-            subject.notify
-
-            expect(subject.notifications.event_feedback_participant.count).to eq(participants.size)
-            expect(subject.notifications.participant_creation.count).to eq(participants.size)
-            expect(subject.notifications.participant_creation_host.count).to eq(participants.size)
-          end
-        end
-        it 'event_feedback_host' do
-          Timecop.freeze(30.minutes.since(subject.ends_at)) do
-            subject.notify
-
-            expect(subject.notifications.event_feedback_host.count).to eq(0)
             expect(subject.notifications.participant_creation.count).to eq(participants.size)
             expect(subject.notifications.participant_creation_host.count).to eq(participants.size)
           end
