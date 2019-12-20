@@ -1,5 +1,7 @@
 import { redirect } from '@/mixins'
 import { mapGetters } from 'vuex'
+import { isIOSNativeApp } from '@/utils/platform'
+import { postMessage } from '@/utils/iosAdapter'
 
 export default {
   mixins: [ redirect ],
@@ -25,19 +27,32 @@ export default {
       )
     },
     authenticateFacebook: function () {
-      const component = this
-      this.authenticate('facebook', function (data) {
-        if (data.err) {
-          // TODO handle this error with an alert
-          console.log('error in authentication : ', data.err)
-          component.$router.push({ name: 'Events' })
-        } else {
-          // determine where the user should go next
-          console.log('Facebook authentication successful')
-          component.$store.dispatch('establishUser', { JWT: data.token })
-          component.redirectOrProceed()
+      console.log('authenticating via facebook')
+      const iosAuthentication = isIOSNativeApp()
+      if (iosAuthentication) {
+        try {
+          const messageContents = {
+            title: 'facebookLoginAttempt'
+          }
+          postMessage(messageContents) // post a message to ios to request push
+        } catch (e) {
+          this.logErro(e)
         }
-      })
+      } else {
+        const component = this
+        this.authenticate('facebook', function (data) {
+          if (data.err) {
+          // TODO handle this error with an alert
+            console.log('error in authentication : ', data.err)
+            component.$router.push({ name: 'Events' })
+          } else {
+          // determine where the user should go next
+            console.log('Facebook authentication successful')
+            component.$store.dispatch('establishUser', { JWT: data.token })
+            component.redirectOrProceed()
+          }
+        })
+      }
     }
   },
   computed: mapGetters(['currentUser', 'redirectRoute'])

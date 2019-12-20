@@ -9,7 +9,7 @@
                         class="editing"/>
           <h1 class="auth-heading">Sign Up</h1>
           <div class="auth-wrapper">
-            <FacebookButton v-if="!isIOSNativeApp" />
+            <FacebookButton/>
             <span v-if="false">
               <div class="divider-container">
                 <div class="divider-1px-2"></div>

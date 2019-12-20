@@ -16,6 +16,9 @@ export function registerIOSEventLIstener () {
       if (e.detail.name === 'keyboardHidden') {
         VueScrollTo.scrollTo('body', { duration: 340, easing: 'ease-in' })
       }
+      if (e.detail.name === 'facebookAccessTokenRecieved') {
+        loginToFacebookWithAccessToken(e.detail.token)
+      }
     })
   }
 }

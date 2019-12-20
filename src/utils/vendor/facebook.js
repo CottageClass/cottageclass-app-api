@@ -13,3 +13,7 @@ export async function fetchFacebookImages (facebookAccessToken) {
     return null
   }
 }
+
+export async function facebookAccessTokenRecieved (facebookAccessToken) {
+
+}
