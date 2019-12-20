@@ -155,7 +155,9 @@ export default {
     if (this.currentUser && !this.currentUser.place) {
       await this.$store.dispatch('updateCurrentUserFromServer')
     }
-    if (this.currentUser && !this.currentUser.profileBlurb) {
+    if (this.currentUser && !this.currentUser.hasAllRequiredFields) {
+      this.$router.push({ name: 'Onboarding' })
+    } else if (this.currentUser && !this.currentUser.profileBlurb) {
       this.$router.push({ name: 'ProfileCollection' })
     } else {
       if (!this.items) {
