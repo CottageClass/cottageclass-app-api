@@ -20,7 +20,7 @@
         </div>
         <div class="place-event-summary">
           <div class="link-block-2 w-inline-block"><img src="@/assets/mdi_calendar_today.svg" alt="" />
-            <a v-scroll-to="'#events'" class="events-link-text" >{{ numberOfEvents }} events happening</a>
+            <a v-scroll-to="'#events'" class="events-link-text" >{{ numberOfEventsText }}</a>
           </div>
         </div>
         <div class="place-event-desc">
@@ -122,6 +122,13 @@ export default {
         if (obj.hasOwnProperty(key)) { size += 1 }
       }
       return size
+    },
+    numberOfEventsText () {
+      if (this.numberOfEvents === 1) {
+        return `${this.numberOfEvents} event happening`
+      } else {
+        return `${this.numberOfEvents} events happening`
+      }
     },
     placeImages () {
       return this.place.images.map(url => householdImageUrl(url, 800))
