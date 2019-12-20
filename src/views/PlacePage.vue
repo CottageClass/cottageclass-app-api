@@ -57,7 +57,7 @@
         </ul>
       </div>
 
-      <div v-if="hasReviews" class="place-reviews">
+      <div class="place-reviews">
         <div id="reviews" class="place-section-title">Reviews</div>
         <a @click="reviewClick" class="places-links">+ Write a review</a>
         <ul>
@@ -111,9 +111,6 @@ export default {
     },
     placeDescription () {
       return this.place.description
-    },
-    hasReviews () {
-      return this.reviews && this.numberOfReviews > 0
     },
     placeName () {
       return this.place.name
