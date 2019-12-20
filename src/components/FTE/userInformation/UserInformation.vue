@@ -9,7 +9,9 @@
       v-if="stepName==='location'"
       v-model="place"
       @pressedEnter="nextStep"
-      required="true"/>
+      required="true"
+      :currentAddress="currentUser.place && currentUser.place.fullAddress"
+    />
     <Children
       v-if="stepName==='children'"
       v-model="children" />
@@ -118,6 +120,12 @@ export default {
     ...mapGetters(['currentUser'])
   },
   created () {
+    if (this.currentUser.phone) {
+      this.phone.number = this.currentUser.phone
+    }
+    if (this.currentUser.place) {
+      this.place = this.currentUser.place
+    }
     this.$emit('set-nav-props', {
       nextButtonHandler: this.nextStep,
       prevButtonHandler: this.prevStep
