@@ -27,7 +27,7 @@ export const createUsers = (data) => {
     }
     let event = null
     const children = childIds.map(id => parseChildData(includedChildren[id])).filter(c => !!c)
-    const hasAllRequiredFields = !!(p.phone && place)
+    const hasAllRequiredFields = !!(p.phone && place && children && children.length > 0)
 
     const firstName = p.firstName && capitalize(p.firstName)
     return {
