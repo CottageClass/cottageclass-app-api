@@ -3,7 +3,7 @@
     :to="{name:'GroupChatPage', params:{ groupId }}"
     class="comments--more"
   >
-    {{ count }} more comments
+    {{ prevCommentsText }}
   </router-link>
 </template>
 
@@ -13,6 +13,15 @@ export default {
   props: {
     count: { required: true, type: Number },
     groupId: { required: true }
+  },
+  computed: {
+    prevCommentsText () {
+      if (this.count === 1) {
+        return `${this.count} previous comment`
+      } else {
+        return `${this.count} previous comments`
+      }
+    }
   }
 }
 </script>

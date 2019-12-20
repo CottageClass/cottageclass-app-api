@@ -53,8 +53,6 @@ class Notifier::Base
 
   def sendgrid_template
     {
-      event_feedback_host: 'd-ec884606ecb042a2b3d5e2ef91453b95',
-      event_feedback_participant: 'd-fb820124579246478ff946d6e9fd5876',
       event_reminder_previous_day_host: 'd-95832f343ba9477398ab411d810e4962',
       participant_creation: 'd-34fb7920b0e5459296a4712917b61498',
       participant_creation_host: 'd-068997c1fdf04ec1a3255f0260c66ba2',
